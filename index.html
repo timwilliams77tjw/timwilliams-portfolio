@@ -2,23 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <title>Tim Williams | IT Transformation Leader</title>
 
+  <!-- SEO -->
+  <meta name="description" content="Tim Williams – Senior IT Programme Manager specialising in cyber security, cloud transformation, and enterprise infrastructure modernisation.">
+  <meta property="og:title" content="Tim Williams | IT Transformation Leader">
+  <meta property="og:description" content="Senior IT Programme Manager delivering cyber security, cloud and workplace transformation programmes across global organisations.">
+  <meta property="og:type" content="website">
+
   <!-- iPhone & iPad Home Screen Icon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
   <!-- Android / Chrome -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/icons/android-chrome-512x512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/android-chrome-512x512.png">
 
   <!-- Standard Favicons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
 
   <!-- Web App Manifest -->
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
 
   <!-- iOS Web App Mode -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,10 +32,11 @@
 
   <style>
     body {
-      font-family: "Segoe UI", Arial;
+      font-family: "Segoe UI", Arial, sans-serif;
       margin: 0;
       background: #f5f7fa;
       color: #333;
+      line-height: 1.6;
     }
 
     header {
@@ -40,13 +47,25 @@
     }
 
     header h1 {
-      font-size: 48px;
+      font-size: clamp(32px, 6vw, 48px);
       margin-bottom: 10px;
     }
 
     header p {
-      font-size: 20px;
+      font-size: clamp(16px, 3.5vw, 20px);
       opacity: 0.9;
+      margin: 8px 0;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #0a2540;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-top: 20px;
+      font-weight: 600;
     }
 
     .container {
@@ -57,7 +76,9 @@
 
     h2 {
       color: #0a2540;
+      margin-top: 60px;
       margin-bottom: 20px;
+      font-size: 28px;
     }
 
     .grid {
@@ -71,16 +92,11 @@
       padding: 25px;
       border-radius: 10px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
     }
 
-    .button {
-      display: inline-block;
-      padding: 12px 20px;
-      background: #0a2540;
-      color: white;
-      border-radius: 6px;
-      text-decoration: none;
-      margin-top: 15px;
+    .card:hover {
+      transform: translateY(-4px);
     }
 
     .badge {
@@ -97,6 +113,7 @@
       color: white;
       text-align: center;
       padding: 40px;
+      margin-top: 60px;
     }
   </style>
 </head>
@@ -115,10 +132,19 @@
   <h2>Executive Profile</h2>
   <div class="card">
     <p>
-      Senior IT Programme and Transformation leader delivering complex digital programmes across global organisations.
-      Specialising in cyber security uplift programmes, cloud adoption strategies, enterprise infrastructure modernisation and workplace transformation.
-      Delivered programmes impacting over 120,000 users across organisations including NHS England, financial services, defence and global law firms.
+      Senior IT Programme & Transformation Leader delivering complex digital programmes across global organisations.
+      Specialist in cyber security uplift, cloud adoption, enterprise infrastructure modernisation and workplace transformation.
+      Delivered programmes impacting over 120,000 users across NHS England, financial services, defence and global law firms.
     </p>
+  </div>
+
+  <h2>Key Achievements</h2>
+  <div class="card">
+    <ul>
+      <li>Delivered £40M cyber security uplift programme for NHS England, improving CAF maturity across all domains.</li>
+      <li>Led global Windows 10/11 transformation for 126,000 devices across 42 countries.</li>
+      <li>Delivered Azure and AWS cloud adoption programmes improving resilience and reducing operational cost by 18%.</li>
+    </ul>
   </div>
 
   <h2>Consulting Expertise</h2>
@@ -131,14 +157,36 @@
 
   <h2>Programme Case Studies</h2>
   <div class="grid">
-    <div class="card"><h3>NHS England Cyber Security Programme</h3><p>Delivered CAF aligned cyber security uplift implementing MFA, CyberArk, Splunk, Azure security controls and secure backup infrastructure.</p><p><b>Outcome:</b> Strengthened organisational cyber resilience and improved operational security posture.</p></div>
-    <div class="card"><h3>Global Workplace Transformation</h3><p>Led Windows 10 and Windows 11 transformation programmes affecting up to 126,000 devices.</p><p><b>Outcome:</b> Enabled modern secure workplace environments across distributed global workforces.</p></div>
-    <div class="card"><h3>Enterprise Cloud Deployments</h3><p>Delivered Azure, AWS and enterprise infrastructure programmes for major global organisations.</p><p><b>Outcome:</b> Improved scalability, resilience and operational performance.</p></div>
+    <div class="card">
+      <h3>NHS England Cyber Security Programme</h3>
+      <p>Delivered CAF-aligned cyber security uplift implementing MFA, CyberArk, Splunk, Azure security controls and secure backup infrastructure.</p>
+      <p><b>Outcome:</b> Strengthened organisational cyber resilience and improved operational security posture.</p>
+    </div>
+
+    <div class="card">
+      <h3>Global Workplace Transformation</h3>
+      <p>Led Windows 10 and Windows 11 transformation programmes affecting up to 126,000 devices.</p>
+      <p><b>Outcome:</b> Enabled modern secure workplace environments across distributed global workforces.</p>
+    </div>
+
+    <div class="card">
+      <h3>Enterprise Cloud Deployments</h3>
+      <p>Delivered Azure, AWS and enterprise infrastructure programmes for major global organisations.</p>
+      <p><b>Outcome:</b> Improved scalability, resilience and operational performance.</p>
+    </div>
   </div>
 
   <h2>Certifications</h2>
   <div class="card">
-    <span class="badge">APM PMQ</span> <span class="badge">PRINCE2 Practitioner</span> <span class="badge">PRINCE2 Agile</span> <span class="badge">P3O Practitioner</span> <span class="badge">ITIL</span> <span class="badge">NIST Cyber Framework</span> <span class="badge">Six Sigma Green Belt</span> <span class="badge">MCSE</span> <span class="badge">ServiceNow IT Leadership</span>
+    <span class="badge">APM PMQ</span>
+    <span class="badge">PRINCE2 Practitioner</span>
+    <span class="badge">PRINCE2 Agile</span>
+    <span class="badge">P3O Practitioner</span>
+    <span class="badge">ITIL</span>
+    <span class="badge">NIST Cyber Framework</span>
+    <span class="badge">Six Sigma Green Belt</span>
+    <span class="badge">MCSE</span>
+    <span class="badge">ServiceNow IT Leadership</span>
   </div>
 
   <h2>Industry Contribution</h2>

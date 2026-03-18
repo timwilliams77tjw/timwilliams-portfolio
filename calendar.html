@@ -4,15 +4,18 @@
 <script src="https://elfsightcdn.com/platform.js" async></script>
 
 <style>
-/* Remove the big blue block (header background) */
-.elfsight-app-2d2fdea0-7347-4582-b631-9f3f0436ef0d .eapps-widget-header {
+/* Remove the big blue block in the appointment widget */
+.elfsight-app-2d2fdea0-7347-4582-b631-9f3f0436ef0d [class*="header"],
+.elfsight-app-2d2fdea0-7347-4582-b631-9f3f0436ef0d [class*="Header"],
+.elfsight-app-2d2fdea0-7347-4582-b631-9f3f0436ef0d [class*="top"] {
     background: transparent !important;
     box-shadow: none !important;
+    border: none !important;
 }
 
-/* Optional: tighten spacing */
-.elfsight-app-2d2fdea0-7347-4582-b631-9f3f0436ef0d .eapps-widget-header-inner {
-    padding: 0 !important;
+/* Optional: remove extra spacing left behind */
+.elfsight-app-2d2fdea0-7347-4582-b631-9f3f0436ef0d [class*="header"] * {
+    background: transparent !important;
 }
 </style>
 

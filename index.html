@@ -296,6 +296,28 @@ footer {
   cursor: default;
   pointer-events: none;
 }
+.popup-menu {
+  position: absolute;
+  background: white;
+  border: 2px solid #0A1A2F;
+  border-radius: 8px;
+  padding: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 99999;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.popup-menu a {
+  color: #0A1A2F;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.popup-menu a:hover {
+  color: #0078FF;
+}
 
   </style>
 
@@ -319,10 +341,10 @@ footer {
 
       <div class="button-group">
         <a href="index.html" class="brand-btn active">Home</a>
-        <a href="Tim_Williams_CV.pdf" class="brand-btn">CV</a>
+<a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
         <a href="certifications.html" class="brand-btn">Certifications</a>
         <a href="recommendations.html" class="brand-btn">Recommendations</a>
-        <a href="portfolio_presentation.pdf" class="brand-btn">Portfolio</a>
+<a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
         <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
       </div>
     </div>
@@ -332,6 +354,8 @@ footer {
 
   </div>
 </header>
+
+
 
 
 
@@ -451,6 +475,49 @@ footer {
 </footer>
 
 <a href="calendar.html" class="floating-booking-btn">Make a Booking</a>
+<!-- CV Popup -->
+<div id="cvMenu" class="popup-menu">
+  <a href="Tim_Williams_CV.pdf" target="_blank">View Online</a>
+  <a href="Tim_Williams_CV.pdf" download>Download PDF</a>
+</div>
+
+<!-- Portfolio Popup -->
+<div id="portfolioMenu" class="popup-menu">
+  <a href="portfolio_presentation.pdf" target="_blank">View Online</a>
+  <a href="portfolio_presentation.pdf" download>Download PDF</a>
+</div>
+<script>
+function openCVMenu(e) {
+  e.preventDefault();
+  positionMenu(e.target, document.getElementById("cvMenu"));
+}
+
+function openPortfolioMenu(e) {
+  e.preventDefault();
+  positionMenu(e.target, document.getElementById("portfolioMenu"));
+}
+
+function positionMenu(button, menu) {
+  // Close any open menus
+  document.getElementById("cvMenu").style.display = "none";
+  document.getElementById("portfolioMenu").style.display = "none";
+
+  // Position menu under the clicked button
+  const rect = button.getBoundingClientRect();
+  menu.style.top = rect.bottom + window.scrollY + "px";
+  menu.style.left = rect.left + "px";
+
+  menu.style.display = "flex";
+}
+
+// Close menus when clicking outside
+document.addEventListener("click", function(e) {
+  if (!e.target.closest(".popup-menu") && !e.target.closest(".brand-btn")) {
+    document.getElementById("cvMenu").style.display = "none";
+    document.getElementById("portfolioMenu").style.display = "none";
+  }
+});
+</script>
 
 </body>
 </html>

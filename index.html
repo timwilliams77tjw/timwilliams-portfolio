@@ -318,6 +318,18 @@ footer {
 .popup-menu a:hover {
   color: #0078FF;
 }
+.popup-menu {
+  position: absolute;
+  background: white;
+  border: 2px solid #0A1A2F;
+  border-radius: 8px;
+  padding: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999999; /* ← increase this */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
 
   </style>
 
@@ -502,7 +514,6 @@ function positionMenu(button, menu) {
   document.getElementById("cvMenu").style.display = "none";
   document.getElementById("portfolioMenu").style.display = "none";
 
-  // Position menu under the clicked button
   const rect = button.getBoundingClientRect();
   menu.style.top = rect.bottom + window.scrollY + "px";
   menu.style.left = rect.left + "px";
@@ -512,12 +523,13 @@ function positionMenu(button, menu) {
 
 // Close menus when clicking outside
 document.addEventListener("click", function(e) {
-  if (!e.target.closest(".popup-menu") && !e.target.closest(".brand-btn")) {
+  if (!e.target.closest(".popup-menu") && !e.target.closest("[onclick]")) {
     document.getElementById("cvMenu").style.display = "none";
     document.getElementById("portfolioMenu").style.display = "none";
   }
 });
 </script>
+
 
 </body>
 </html>

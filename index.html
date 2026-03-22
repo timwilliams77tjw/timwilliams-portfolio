@@ -330,6 +330,38 @@ footer {
   z-index: 9999999; /* ← increase this */
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 220px;
+  background-color: #0A1A2F;
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+
+  /* Position */
+  position: absolute;
+  z-index: 10000000;
+  bottom: -5px;
+  left: 105%;
+  transform: translateY(-50%);
+
+  /* Animation */
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
 
   </style>
 
@@ -355,18 +387,31 @@ footer {
   <a href="index.html" class="brand-btn active">Home</a>
 
   <!-- CV popup trigger -->
-  <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
+<div id="cvMenu" class="popup-menu">
+  <a href="Tim_Williams_CV.pdf" target="_blank">View Online</a>
 
-  <a href="certifications.html" class="brand-btn">Certifications</a>
-  <a href="recommendations.html" class="brand-btn">Recommendations</a>
-
-  <!-- Portfolio popup trigger -->
-  <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
-
-  <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
+  <div class="tooltip">
+    <a href="Tim_Williams_CV.download">Download PDF</a>
+    <span class="tooltip-text">
+      This file downloads as .download.  
+      After saving, rename it to .zip to open the PDF.
+    </span>
+  </div>
 </div>
 
-    </div>
+
+  <!-- Portfolio popup trigger -->
+<div id="portfolioMenu" class="popup-menu">
+  <a href="portfolio_presentation.pdf" target="_blank">View Online</a>
+
+  <div class="tooltip">
+    <a href="portfolio_presentation.download">Download PDF</a>
+    <span class="tooltip-text">
+      This file downloads as .download.  
+      After saving, rename it to .zip to open the PDF.
+    </span>
+  </div>
+</div>
 
     <!-- RIGHT: PROFILE PHOTO -->
     <img src="profile.jpg" alt="Tim Williams Photo" class="header-img profile">

@@ -205,16 +205,29 @@ footer {
   z-index: 9999;
 }
 
-/* iPad / tablet: keep header in row, profile on same line */@media (min-width: 769px) and (max-width: 1180px) {
-  .button-group {
-    flex-wrap: nowrap;   /* prevents wrapping */
+/* FIX FOR iPAD / TABLET LAYOUT */
+@media (min-width: 769px) and (max-width: 1180px) {
+
+  .header-layout {
     justify-content: center;
+    gap: 20px;
   }
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+
+  .header-text {
+    flex: 0 1 500px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .header-img.profile {
+    margin-left: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 }
 
 /* iPhone / Mobile */

@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
 <title>Tim Williams | IT Transformation Leader</title>
 
 <!-- SEO -->
@@ -19,12 +20,28 @@
 <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
 <link rel="manifest" href="/manifest-v2.json?v=10">
 
+<!-- iOS Web App Mode -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 <style>
+.libutton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 7px;
+  text-align: center;
+  outline: none;
+  text-decoration: none !important;
+  color: #ffffff !important;
+  width: 200px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: #0A66C2;
+  font-family: "SF Pro Text", Helvetica, sans-serif;
+}
 
-/* ---------------- HEADER LAYOUT ---------------- */
+/* HEADER LAYOUT */
 
 .header-layout {
   display: flex;
@@ -44,7 +61,7 @@
 .header-img.profile {
   border-radius: 8px;
   flex-shrink: 0;
-  margin-left: 20px; /* FINAL FIXED VALUE */
+  margin-left: 20px; /* balanced spacing */
 }
 
 .header-text {
@@ -60,7 +77,7 @@
   justify-content: center;
 }
 
-/* ---------------- BUTTONS ---------------- */
+/* BUTTONS */
 
 .brand-btn {
   background: #0A1A2F;
@@ -79,6 +96,7 @@
   background: #FFFFFF;
   color: #0A1A2F;
   border-color: #0078FF;
+  cursor: pointer;
 }
 
 .brand-btn.active {
@@ -89,7 +107,7 @@
   pointer-events: none;
 }
 
-/* ---------------- BODY ---------------- */
+/* BODY */
 
 body {
   font-family: "Segoe UI", Arial, sans-serif;
@@ -116,7 +134,7 @@ header p {
   margin: 8px 0;
 }
 
-/* ---------------- CARDS & GRID ---------------- */
+/* LAYOUT / CARDS / GRID */
 
 .container {
   width: 100%;
@@ -128,7 +146,7 @@ header p {
 .grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
 }
 
@@ -154,7 +172,7 @@ header p {
   font-size: 13px;
 }
 
-/* ---------------- FOOTER ---------------- */
+/* FOOTER */
 
 footer {
   background: #0a2540;
@@ -165,14 +183,146 @@ footer {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.footer-left {
+  font-weight: 600;
+}
+
+.footer-linkedin {
+  color: #FFFFFF;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  flex: 1;
+}
+
+.footer-qr {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .footer-qr img {
   width: 60px;
+  height: auto;
   opacity: 0.9;
 }
 
-/* ---------------- POPUP MENUS ---------------- */
+/* Floating Make a Booking button */
+
+.floating-booking-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0A1A2F;
+  color: #FFFFFF;
+  padding: 14px 22px;
+  border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  z-index: 9999;
+}
+
+/* iPAD / TABLET */
+
+@media (min-width: 769px) and (max-width: 1180px) {
+  .header-layout {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .header-text {
+    flex: 0 1 500px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .header-img.profile {
+    margin-left: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: none;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+/* iPHONE / MOBILE */
+
+@media (max-width: 768px) {
+  .header-layout {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .header-img.profile {
+    margin: 0 auto !important;
+  }
+
+  .header-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .header-text {
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .brand-btn {
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  footer {
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .footer-left,
+  .footer-linkedin {
+    font-size: 14px;
+  }
+
+  .footer-qr img {
+    width: 50px;
+  }
+}
+
+/* Remove LinkedIn header + Received/Given tabs inside SociableKIT widget */
+
+.sk-ww-linkedin-recommendations .sk-header,
+.sk-ww-linkedin-recommendations .sk-tabs,
+.sk-ww-linkedin-recommendations .sk-profile,
+.sk-ww-linkedin-recommendations .sk-title,
+.sk-ww-linkedin-recommendations .sk-subtitle {
+  display: none !important;
+}
+
+/* POPUP MENUS */
 
 .popup-menu {
   position: absolute;
@@ -197,7 +347,7 @@ footer {
   color: #0078FF;
 }
 
-/* ---------------- TOOLTIP ---------------- */
+/* TOOLTIP */
 
 .tooltip {
   position: relative;
@@ -210,6 +360,7 @@ footer {
   font-size: 15px;
   color: #0A1A2F;
   cursor: pointer;
+  user-select: none;
 }
 
 .tooltip-text {
@@ -218,16 +369,17 @@ footer {
   width: 260px;
   background-color: #0A1A2F;
   color: #fff;
+  text-align: left;
   padding: 12px 14px;
   border-radius: 6px;
   font-size: 13px;
   line-height: 1.4;
   position: absolute;
+  z-index: 10000000;
   top: 50%;
   right: 110%;
   transform: translateY(-50%);
   transition: opacity 0.25s ease;
-  z-index: 10000000;
 }
 
 .tooltip-text::after {
@@ -246,87 +398,160 @@ footer {
   visibility: visible;
   opacity: 1;
 }
-
-/* ---------------- MOBILE ---------------- */
-
-@media (max-width: 768px) {
-  .header-layout {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
-  }
-
-  .header-img.profile {
-    margin: 0 auto !important;
-  }
-
-  .button-group {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .brand-btn {
-    width: 100%;
-    max-width: 260px;
-    margin: 0 auto;
-  }
-}
-
 </style>
+
 </head>
 
 <body>
 
 <header>
-<div class="header-layout">
+  <div class="header-layout">
 
-<a href="https://twc-ltd.my.canva.site/">
-  <img src="logo.jpg" class="header-img" alt="Logo">
-</a>
+    <!-- LEFT: LOGO -->
+    <a href="https://twc-ltd.my.canva.site/">
+      <img src="logo.jpg" alt="Tim Williams Logo" class="header-img">
+    </a>
 
-<div class="header-text">
-  <h1>Tim Williams</h1>
-  <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-  <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
+    <!-- CENTRE: TEXT + BUTTONS -->
+    <div class="header-text">
+      <h1>Tim Williams</h1>
+      <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
+      <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
 
-  <div class="button-group">
-    <a href="index.html" class="brand-btn active">Home</a>
-    <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
-    <a href="certifications.html" class="brand-btn">Certifications</a>
-    <a href="recommendations.html" class="brand-btn">Recommendations</a>
-    <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
-    <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
+      <div class="button-group">
+        <a href="index.html" class="brand-btn active">Home</a>
+        <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
+        <a href="certifications.html" class="brand-btn">Certifications</a>
+        <a href="recommendations.html" class="brand-btn">Recommendations</a>
+        <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
+        <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: PROFILE PHOTO -->
+    <img src="profile.jpg" alt="Tim Williams Photo" class="header-img profile">
+
   </div>
-</div>
-
-<img src="profile.jpg" class="header-img profile" alt="Profile Photo">
-
-</div>
 </header>
 
 <div class="container">
 
-<h2>Executive Profile</h2>
-<div class="card">
-<p>SC Cleared Senior IT Programme & Transformation Leader delivering complex digital programmes across global organisations...</p>
-</div>
+  <h2>Executive Profile</h2>
+  <div class="card">
+    <p>
+      SC Cleared Senior IT Programme & Transformation Leader delivering complex digital programmes across global organisations.
+      Specialist in cyber security uplift, cloud adoption, enterprise infrastructure modernisation and workplace transformation.
+      Delivered programmes impacting over 120,000 users across Defence, NHS England, financial services and global law firms.
+    </p>
+  </div>
 
-<h2>Key Achievements</h2>
-<div class="card">
-<ul>
-<li>Delivered £40M cyber security uplift programme...</li>
-<li>Led global Windows 10/11 transformation...</li>
-<li>Delivered Azure and AWS cloud adoption programmes...</li>
-</ul>
-</div>
+  <h2>Key Achievements</h2>
+  <div class="card">
+    <ul>
+      <li>Delivered £40M cyber security uplift programme for NHS England, improving CAF maturity across all domains.</li>
+      <li>Led global Windows 10/11 transformation for 126,000 devices across 42 countries.</li>
+      <li>Delivered Azure and AWS cloud adoption programmes improving resilience and reducing operational cost by 18%.</li>
+    </ul>
+  </div>
 
-<!-- (Your remaining sections unchanged) -->
+  <h2>Consulting Expertise</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Cyber Security Programmes</h3>
+      <p>CAF, IAM, MFA, CyberArk, Splunk, identity security platforms.</p>
+    </div>
+    <div class="card">
+      <h3>Cloud Transformation</h3>
+      <p>Azure, AWS, Entra, Intune and enterprise cloud adoption frameworks.</p>
+    </div>
+    <div class="card">
+      <h3>Workplace Modernisation</h3>
+      <p>Windows 10/11 migration, Teams Rooms, global device estate transformation.</p>
+    </div>
+    <div class="card">
+      <h3>Programme Governance</h3>
+      <p>PMO leadership, financial governance, RAID management and delivery assurance within ISO regulated environments and adhering to ITIL frameworks.</p>
+    </div>
+    <div class="card">
+      <h3>Service Transition & BAU Readiness</h3>
+      <p>Structured service transition ensuring global services were operationally ready from day one. Delivered seamless onboarding for 25,000 users, integrated Salesforce into BAU, and stabilised major programmes through complete documentation, readiness governance and support alignment.</p>
+    </div>
+    <div class="card">
+      <h3>Pre‑Sales</h3>
+      <p>Supported major bids with solution design, tender responses and commercial modelling. Ensured proposals were deliverable, accurately costed and aligned to operational capability, strengthening win probability and delivery confidence.</p>
+    </div>
+  </div>
+
+  <h2>Programme Case Studies</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>NHS England Cyber Security Programme</h3>
+      <p>Delivered CAF-aligned cyber security uplift implementing MFA, CyberArk, Splunk, Azure security controls and secure backup infrastructure.</p>
+      <p><b>Outcome:</b> Strengthened organisational cyber resilience and improved operational security posture.</p>
+    </div>
+    <div class="card">
+      <h3>Global Workplace Transformation</h3>
+      <p>Led Windows 10 and Windows 11 transformation programmes affecting up to 126,000 devices.</p>
+      <p><b>Outcome:</b> Enabled modern secure workplace environments across distributed global workforces.</p>
+    </div>
+    <div class="card">
+      <h3>Enterprise Cloud Deployments</h3>
+      <p>Delivered Azure, AWS and enterprise infrastructure programmes for major global organisations.</p>
+      <p><b>Outcome:</b> Improved scalability, resilience and operational performance.</p>
+    </div>
+  </div>
+
+  <h2>Certifications</h2>
+  <div class="card">
+    <span class="badge">APM PMQ</span>
+    <span class="badge">PRINCE2 Practitioner</span>
+    <span class="badge">PRINCE2 Agile</span>
+    <span class="badge">P3O Practitioner</span>
+    <span class="badge">ITIL</span>
+    <span class="badge">NIST Cyber Framework</span>
+    <span class="badge">Six Sigma Green Belt</span>
+    <span class="badge">MCSE</span>
+    <span class="badge">ServiceNow IT Leadership</span>
+  </div>
+
+  <h2>Industry Contribution</h2>
+  <div class="card">
+    <ul>
+      <li>STEM Ambassador supporting technology education</li>
+      <li>APM Mentor and research advisor</li>
+      <li>Career fair speaker supporting students entering technology careers</li>
+      <li>Volunteer interview mentor for early career professionals</li>
+      <li>UK Employee Forum Rep - Computacenter</li>
+    </ul>
+  </div>
+
+  <h2>Contact</h2>
+  <div class="card">
+    <p>Email: timwilliams07@outlook.com</p>
+    <p>Phone: 07801 453322</p>
+    <p>
+      <a href="https://www.linkedin.com/in/timwilliams77" target="_blank"
+         style="text-decoration:none; color:#0A66C2; font-weight:600;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+             style="vertical-align:middle; margin-right:6px;">
+          <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+          <path fill="#FFFFFF" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v16h-4V8zm7.5 0h3.8v2.2h.1c.5-1 1.8-2.2 3.9-2.2 4.2 0 5 2.8 5 6.5V24h-4v-8.2c0-2 0-4.5-2.8-4.5-2.8 0-3.2 2.2-3.2 4.3V24h-4V8z"
+                transform="translate(4 0) scale(0.7)"/>
+        </svg>
+        Tim Williams
+      </a>
+    </p>
+  </div>
 
 </div>
 
 <footer>
-  <div class="footer-left">© Tim Williams | IT Transformation Portfolio</div>
-  <div class="footer-qr"><img src="qr.png" alt="QR"></div>
+  <div class="footer-left">
+    © Tim Williams | IT Transformation Portfolio
+  </div>
+  <div class="footer-qr">
+    <img src="qr.png" alt="QR Code">
+  </div>
 </footer>
 
 <a href="calendar.html" class="floating-booking-btn">Make a Booking</a>
@@ -337,7 +562,10 @@ footer {
   <div class="tooltip">
     <a href="Tim_Williams_CV.download">Download PDF</a>
     <span class="tooltip-icon">ⓘ</span>
-    <span class="tooltip-text">This file downloads as “.download”. After saving, rename it to “.zip”.</span>
+    <span class="tooltip-text">
+      This file downloads as “.download”.
+      After saving, rename it to “.zip” to open the PDF.
+    </span>
   </div>
 </div>
 
@@ -347,7 +575,10 @@ footer {
   <div class="tooltip">
     <a href="portfolio_presentation.download">Download PDF</a>
     <span class="tooltip-icon">ⓘ</span>
-    <span class="tooltip-text">This file downloads as “.download”. After saving, rename it to “.zip”.</span>
+    <span class="tooltip-text">
+      This file downloads as “.download”.
+      After saving, rename it to “.zip” to open the PDF.
+    </span>
   </div>
 </div>
 
@@ -363,6 +594,7 @@ function openPortfolioMenu(e) {
 }
 
 function positionMenu(button, menu) {
+  // Close any open menus
   document.getElementById("cvMenu").style.display = "none";
   document.getElementById("portfolioMenu").style.display = "none";
 
@@ -372,6 +604,7 @@ function positionMenu(button, menu) {
   menu.style.display = "flex";
 }
 
+// Close menus when clicking outside
 document.addEventListener("click", function(e) {
   if (!e.target.closest(".popup-menu") && !e.target.closest("[onclick]")) {
     document.getElementById("cvMenu").style.display = "none";
@@ -381,17 +614,23 @@ document.addEventListener("click", function(e) {
 </script>
 
 <script>
+// Tooltip tap support for mobile
 document.querySelectorAll('.tooltip-icon').forEach(icon => {
   icon.addEventListener('click', function (e) {
     e.stopPropagation();
     const tooltip = this.closest('.tooltip');
+
+    // Close all other tooltips
     document.querySelectorAll('.tooltip').forEach(t => {
       if (t !== tooltip) t.classList.remove('tap-active');
     });
+
+    // Toggle this one
     tooltip.classList.toggle('tap-active');
   });
 });
 
+// Close tooltip when tapping outside
 document.addEventListener('click', () => {
   document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
 });

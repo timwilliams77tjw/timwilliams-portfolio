@@ -371,6 +371,55 @@ footer {
   visibility: visible;
   opacity: 1;
 }
+/* Tooltip wrapper */
+.tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Info icon */
+.tooltip-icon {
+  font-size: 15px;
+  color: #0A1A2F;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Tooltip bubble */
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 240px;
+  background-color: #0A1A2F;
+  color: #fff;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+
+  position: absolute;
+  z-index: 10000000;
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
+
+  transition: opacity 0.25s ease;
+}
+
+/* Desktop hover */
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Mobile tap support */
+.tooltip.tap-active .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
 
   </style>
 
@@ -538,12 +587,14 @@ footer {
 
   <div class="tooltip">
     <a href="Tim_Williams_CV.download">Download PDF</a>
+    <span class="tooltip-icon">ⓘ</span>
     <span class="tooltip-text">
       This file downloads as “.download”.  
       After saving, rename it to “.zip” to open the PDF.
     </span>
   </div>
 </div>
+
 
 <!-- Portfolio Popup -->
 <div id="portfolioMenu" class="popup-menu">
@@ -551,12 +602,14 @@ footer {
 
   <div class="tooltip">
     <a href="portfolio_presentation.download">Download PDF</a>
+    <span class="tooltip-icon">ⓘ</span>
     <span class="tooltip-text">
       This file downloads as “.download”.  
       After saving, rename it to “.zip” to open the PDF.
     </span>
   </div>
 </div>
+
 
 <script>
 function openCVMenu(e) {
@@ -587,6 +640,28 @@ document.addEventListener("click", function(e) {
     document.getElementById("cvMenu").style.display = "none";
     document.getElementById("portfolioMenu").style.display = "none";
   }
+});
+</script>
+<script>
+document.querySelectorAll('.tooltip-icon').forEach(icon => {
+  icon.addEventListener('click', function (e) {
+    e.stopPropagation();
+
+    const tooltip = this.closest('.tooltip');
+
+    // Close all other tooltips
+    document.querySelectorAll('.tooltip').forEach(t => {
+      if (t !== tooltip) t.classList.remove('tap-active');
+    });
+
+    // Toggle this one
+    tooltip.classList.toggle('tap-active');
+  });
+});
+
+// Close tooltip when tapping anywhere else
+document.addEventListener('click', () => {
+  document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
 });
 </script>
 

@@ -339,38 +339,6 @@ footer {
   z-index: 9999999; /* ← increase this */
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltip-text {
-  visibility: hidden;
-  width: 220px;
-  background-color: #0A1A2F;
-  color: #fff;
-  text-align: left;
-  padding: 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  line-height: 1.4;
-
-  /* Position */
-  position: absolute;
-  z-index: 10000000;
-  bottom: -5px;
-  left: 105%;
-  transform: translateY(-50%);
-
-  /* Animation */
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
 /* Tooltip wrapper */
 .tooltip {
   position: relative;
@@ -391,22 +359,37 @@ footer {
 .tooltip-text {
   visibility: hidden;
   opacity: 0;
-  width: 240px;
+  width: 260px;
   background-color: #0A1A2F;
   color: #fff;
   text-align: left;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 6px;
   font-size: 13px;
   line-height: 1.4;
 
   position: absolute;
   z-index: 10000000;
+
+  /* Position tooltip to the LEFT of the icon */
   top: 50%;
-  left: 110%;
+  right: 110%;
   transform: translateY(-50%);
 
+  /* Fade-in animation */
   transition: opacity 0.25s ease;
+}
+
+/* Tooltip arrow */
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent #0A1A2F;
 }
 
 /* Desktop hover */
@@ -420,6 +403,7 @@ footer {
   visibility: visible;
   opacity: 1;
 }
+
 
   </style>
 
@@ -596,6 +580,7 @@ footer {
 </div>
 
 
+
 <!-- Portfolio Popup -->
 <div id="portfolioMenu" class="popup-menu">
   <a href="portfolio_presentation.pdf" target="_blank">View Online</a>
@@ -609,6 +594,7 @@ footer {
     </span>
   </div>
 </div>
+
 
 
 <script>
@@ -664,6 +650,27 @@ document.addEventListener('click', () => {
   document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
 });
 </script>
+// Tooltip tap support for mobile
+document.querySelectorAll('.tooltip-icon').forEach(icon => {
+  icon.addEventListener('click', function (e) {
+    e.stopPropagation();
+
+    const tooltip = this.closest('.tooltip');
+
+    // Close all other tooltips
+    document.querySelectorAll('.tooltip').forEach(t => {
+      if (t !== tooltip) t.classList.remove('tap-active');
+    });
+
+    // Toggle this one
+    tooltip.classList.toggle('tap-active');
+  });
+});
+
+// Close tooltip when tapping outside
+document.addEventListener('click', () => {
+  document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
+});
 
 
 </body>

@@ -300,10 +300,13 @@ footer {
       <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
 <div class="button-group">
   <a href="index.html" class="brand-btn">Home</a>
-  <a href="Tim_Williams_CV.pdf" class="brand-btn">CV</a>
+  <!-- CV Button -->
+  <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
   <a class="brand-btn active">Certifications</a>
   <a href="recommendations.html" class="brand-btn">Recommendations</a>
-  <a href="portfolio_presentation.pdf" class="brand-btn">Portfolio</a>
+<!-- Portfolio Button -->
+  <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
+
   <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
 </div>
 
@@ -451,4 +454,78 @@ footer {
 <a href="calendar.html" class="floating-booking-btn">Make a Booking</a>
 
 </body>
+   <!-- CV Popup -->
+<div id="cvMenu" class="popup-menu">
+  <a href="Tim_Williams_CV.pdf" target="_blank">View Online</a>
+
+  <div class="tooltip">
+    <a href="Tim_Williams_CV.download">Download PDF</a>
+    <span class="tooltip-icon">ⓘ</span>
+    <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
+  </div>
+</div>
+
+<!-- Portfolio Popup -->
+<div id="portfolioMenu" class="popup-menu">
+  <a href="portfolio_presentation.pdf" target="_blank">View Online</a>
+
+  <div class="tooltip">
+    <a href="portfolio_presentation.download">Download PDF</a>
+    <span class="tooltip-icon">ⓘ</span>
+    <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
+  </div>
+</div>
+
+   <script>
+function openCVMenu(e) {
+  e.preventDefault();
+  positionMenu(e.target, document.getElementById("cvMenu"));
+}
+
+function openPortfolioMenu(e) {
+  e.preventDefault();
+  positionMenu(e.target, document.getElementById("portfolioMenu"));
+}
+
+function positionMenu(button, menu) {
+  // Close both menus first
+  document.getElementById("cvMenu").style.display = "none";
+  document.getElementById("portfolioMenu").style.display = "none";
+
+  const rect = button.getBoundingClientRect();
+  menu.style.top = rect.bottom + window.scrollY + "px";
+  menu.style.left = rect.left + "px";
+  menu.style.display = "flex";
+}
+
+// Close menus when clicking outside
+document.addEventListener("click", function(e) {
+  if (!e.target.closest(".popup-menu") && !e.target.closest("[onclick]")) {
+    document.getElementById("cvMenu").style.display = "none";
+    document.getElementById("portfolioMenu").style.display = "none";
+  }
+});
+
+// Tooltip tap/click behaviour
+document.querySelectorAll('.tooltip-icon').forEach(icon => {
+  icon.addEventListener('click', function (e) {
+    e.stopPropagation();
+    const tooltip = this.closest('.tooltip');
+
+    // Close all other tooltips
+    document.querySelectorAll('.tooltip').forEach(t => {
+      if (t !== tooltip) t.classList.remove('tap-active');
+    });
+
+    // Toggle this one
+    tooltip.classList.toggle('tap-active');
+  });
+});
+
+// Close tooltip when tapping/clicking outside
+document.addEventListener('click', () => {
+  document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
+});
+</script>
+
 </html>

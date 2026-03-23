@@ -40,9 +40,8 @@ body {
 header {
   background: linear-gradient(120deg, #0a2540, #1f4e79);
   color: white;
-  padding: 40px 40px; /* was 40px 20px */
+  padding: 40px 60px; /* FINAL FIX: equal left/right spacing */
 }
-
 
 .header-layout {
   display: flex;
@@ -51,8 +50,6 @@ header {
   gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
-  padding-right: 20px; /* NEW */
-  padding-left: 20px;  /* matches logo side */
 }
 
 .header-img {
@@ -65,11 +62,7 @@ header {
   border-radius: 8px;
   flex-shrink: 0;
   margin-left: 20px;
-  padding-right: 20px; /* NEW – this is the real fix */
-  box-sizing: content-box; /* ensures padding adds visible space */
 }
-
-
 
 .header-text {
   flex: 0 1 600px;
@@ -169,7 +162,7 @@ footer {
   opacity: 0.9;
 }
 
-/* ---------------- FLOATING BUTTON (BOTTOM-CENTRE) ---------------- */
+/* ---------------- FLOATING BUTTON ---------------- */
 
 .floating-booking-btn {
   position: fixed;
@@ -287,11 +280,6 @@ footer {
     margin: 0 auto;
   }
 }
-.profile-wrapper {
-  padding-right: 20px; /* creates the missing breathing room */
-  display: flex;
-  align-items: center;
-}
 
 </style>
 </head>
@@ -315,14 +303,11 @@ footer {
         <a href="certifications.html" class="brand-btn">Certifications</a>
         <a href="recommendations.html" class="brand-btn">Recommendations</a>
         <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
-        <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
+        <a href="httpsc://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
       </div>
     </div>
 
-<div class="profile-wrapper">
-  <img src="profile.jpg" class="header-img profile" alt="Profile Photo">
-</div>
-
+    <img src="profile.jpg" class="header-img profile" alt="Profile Photo">
 
   </div>
 </header>

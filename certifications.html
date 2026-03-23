@@ -283,6 +283,34 @@ footer {
     transform: translateX(-50%);
     right: auto;
 }
+/* POPUP MENUS */
+.popup-menu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    background: #FFFFFF;
+    border: 2px solid #0078FF;
+    border-radius: 8px;
+    padding: 12px 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    z-index: 9999;
+    min-width: 200px;
+}
+
+.popup-menu a {
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #0A1A2F;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.popup-menu a:hover {
+    background: #E8F2FF;
+    color: #0078FF;
+}
 
 </style>
 </head>
@@ -300,11 +328,11 @@ footer {
 <div class="button-group">
   <a href="index.html" class="brand-btn">Home</a>
   <!-- CV Button -->
-  <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
+<a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
   <a class="brand-btn active">Certifications</a>
   <a href="recommendations.html" class="brand-btn">Recommendations</a>
 <!-- Portfolio Button -->
-  <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
+<a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
 
   <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
 </div>
@@ -452,15 +480,17 @@ footer {
 
 <a href="calendar.html" class="floating-booking-btn">Make a Booking</a>
 
-<!-- CV Popup -->
 <div id="cvMenu" class="popup-menu">
-    …
+    <a href="cv.html">View CV</a>
+    <a href="Tim-Williams-CV.pdf" download>Download CV (PDF)</a>
 </div>
 
-<!-- Portfolio Popup -->
+
 <div id="portfolioMenu" class="popup-menu">
-    …
+    <a href="portfolio.html">View Portfolio</a>
+    <a href="Tim-Williams-Portfolio.pdf" download>Download Portfolio (PDF)</a>
 </div>
+
    <script>
 function openCVMenu(e) {
   e.preventDefault();
@@ -473,14 +503,15 @@ function openPortfolioMenu(e) {
 }
 
 function positionMenu(button, menu) {
-  // Close both menus first
-  document.getElementById("cvMenu").style.display = "none";
-  document.getElementById("portfolioMenu").style.display = "none";
+    // Close both menus first
+    document.getElementById("cvMenu").style.display = "none";
+    document.getElementById("portfolioMenu").style.display = "none";
 
-  const rect = button.getBoundingClientRect();
-  menu.style.top = rect.bottom + window.scrollY + "px";
-  menu.style.left = rect.left + "px";
-  menu.style.display = "flex";
+    const rect = button.getBoundingClientRect();
+
+    menu.style.top = rect.bottom + window.scrollY + "px";
+    menu.style.left = rect.left + "px";
+    menu.style.display = "flex";
 }
 
 // Close menus when clicking outside

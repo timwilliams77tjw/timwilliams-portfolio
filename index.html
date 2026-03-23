@@ -40,7 +40,7 @@ body {
 header {
   background: linear-gradient(120deg, #0a2540, #1f4e79);
   color: white;
-  padding: 40px 60px; /* FINAL FIX: equal left/right spacing */
+  padding: 40px 60px;
 }
 
 .header-layout {
@@ -50,6 +50,7 @@ header {
   gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
+  padding-right: 20px; /* NEW — creates real breathing room for profile photo */
 }
 
 .header-img {
@@ -59,8 +60,10 @@ header {
 }
 
 .header-img.profile {
+  border-radius: 8px;
+  flex-shrink: 0;
   margin-left: 20px;
-  margin-right: 20px; /* NEW */
+  margin-right: 20px; /* NEW — balances logo whitespace */
 }
 
 .header-text {
@@ -257,13 +260,16 @@ footer {
 
 /* ---------------- MOBILE ---------------- */
 
-@media (max-width: 768px) {
+/* NEW — earlier stacking to prevent iPhone drift */
+@media (max-width: 900px) {
   .header-layout {
     flex-direction: column;
     text-align: center;
     gap: 20px;
   }
+}
 
+@media (max-width: 768px) {
   .header-img.profile {
     margin: 0 auto !important;
   }

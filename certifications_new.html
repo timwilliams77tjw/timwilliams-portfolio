@@ -360,6 +360,56 @@ footer {
     visibility: visible;
     opacity: 1;
 }
+.cert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cert-entry {
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  padding: 16px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: 0.25s ease;
+}
+
+.section:nth-of-type(even) .cert-entry {
+  background: var(--light-grey);
+}
+
+.cert-entry:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.cert-icon {
+  font-size: 32px;
+  margin-right: 16px;
+}
+
+.cert-info h4 {
+  margin: 0;
+  font-size: 18px;
+  font-family: var(--heading-font);
+}
+
+.cert-info p {
+  margin: 2px 0 0 0;
+  color: var(--muted-grey);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .cert-entry {
+    padding: 14px 16px;
+  }
+  .cert-icon {
+    font-size: 28px;
+  }
+}
 
 </style>
 </head>
@@ -399,7 +449,7 @@ footer {
   <div class="section">
     <h3>Core Certifications</h3>
     <div class="accent"></div>
-    <div class="card">
+<div class="card cert-card-container" data-section="Core Certifications"></div>
       <p>PRINCE2® Practitioner — QA Ltd</p>
       <p>P3O Practitioner — QA Ltd</p>
       <p>APM Project Management Qualification (APMP) — APM</p>
@@ -413,7 +463,7 @@ footer {
   <div class="section">
     <h3>Agile, Scrum & Delivery Frameworks</h3>
     <div class="accent"></div>
-    <div class="card">
+<div class="card cert-card-container" data-section="Agile, Scrum & Delivery Frameworks"></div>
       <div class="columns">
         <div>
           <p>Agile Project Management — Management Project Mar</p>
@@ -435,7 +485,7 @@ footer {
   <div class="section">
     <h3>Cloud, Automation & AI</h3>
     <div class="accent"></div>
-    <div class="card">
+<div class="card cert-card-container" data-section="Cloud, Automation & AI"></div>
       <p>AI for Project Management — Management Project Mar</p>
       <p>AI in Project Management — LinkedIn</p>
       <p>Program Management with AI — LinkedIn</p>
@@ -450,7 +500,7 @@ footer {
   <div class="section">
     <h3>Microsoft Technical Certifications</h3>
     <div class="accent"></div>
-    <div class="card">
+<div class="card cert-card-container" data-section=Microsoft Technical Certifications"></div>
       <div class="columns">
         <div>
           <p>Microsoft Certified Technician</p>
@@ -473,7 +523,7 @@ footer {
   <div class="section">
     <h3>Infrastructure, Security & Virtualisation</h3>
     <div class="accent"></div>
-    <div class="card">
+<div class="card cert-card-container" data-section="Infrastructure, Security & Virtualisation"></div>
       <p>VMware ESXi Administrator — VMware (Feb‑11 → Dec‑35)</p>
       <p>IT Infrastructure — CompTIA</p>
       <p>PointSec Administration — Pointsec Mobile Technologies</p>
@@ -485,7 +535,7 @@ footer {
   <div class="section">
     <h3>Service Management & Governance</h3>
     <div class="accent"></div>
-    <div class="card">
+<div class="card cert-card-container" data-section="Service Management & Governance"></div>
       <p>ServiceNow Training — ServiceNow</p>
       <p>ServiceNow IT Leadership — ServiceNow</p>
       <p>Data Protection — Access LMS</p>
@@ -498,7 +548,7 @@ footer {
   <div class="section">
     <h3>Professional Development & Leadership</h3>
     <div class="accent"></div>
-    <div class="card">
+<div class="card cert-card-container" data-section="Professional Development & Leadership"></div>
       <div class="columns">
         <div>
           <p>Lead a Successful PMO — PMI</p>
@@ -604,6 +654,42 @@ document.addEventListener('click', () => {
   document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
 });
 </script>
+   <script>
+async function loadCertifications() {
+  const response = await fetch("certifications.json");
+  const data = await response.json();
+
+  document.querySelectorAll(".cert-card-container").forEach(container => {
+    const sectionName = container.dataset.section;
+    const items = data[sectionName];
+
+    if (!items) return;
+
+    const list = document.createElement("div");
+    list.className = "cert-list";
+
+    items.forEach(cert => {
+      const card = document.createElement("div");
+      card.className = "cert-entry";
+
+      card.innerHTML = `
+        <div class="cert-icon">${cert.icon}</div>
+        <div class="cert-info">
+          <h4>${cert.title}</h4>
+          <p>${cert.issuer}</p>
+        </div>
+      `;
+
+      list.appendChild(card);
+    });
+
+    container.appendChild(list);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", loadCertifications);
+</script>
+
 </body>
 
 

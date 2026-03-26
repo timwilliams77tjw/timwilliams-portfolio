@@ -183,8 +183,8 @@
 
         <!-- Utility buttons -->
         <button id="collapseAllBtn" class="filter-btn">Collapse All</button>
-        <button id="printModeBtn" class="filter-btn">Print Mode</button>
-
+<button id="printModeBtn" class="filter-btn">Print Mode</button>
+    <button id="exportPdfBtn" class="filter-btn">Export PDF</button>
     </div>
 
     <!-- Certifications container -->
@@ -594,18 +594,23 @@
                     "category": "Leadership"
                 },
                 {
-                    "title": "UK Employee Forum Rep",
-                    "issuer": "Computacenter",
-"icon": "🇬🇧",                {
-                    "title": "APM Volunteer Programme",
-                    "issuer": "APMP",
-                    "icon": "🎓",
-                    "year": 2021,
-                    "details": "Participation in APM volunteer initiatives supporting project management development.",
-                    "url": "https://www.apm.org.uk",
-                    "category": "Leadership"
-                },
-                {
+  "title": "UK Employee Forum Rep",
+  "issuer": "Computacenter",
+  "icon": "🇬🇧",
+  "year": 2021,
+  "details": "Employee representation role supporting organisational engagement and workforce advocacy.",
+  "url": "https://www.computacenter.com",
+  "category": "Leadership"
+},
+{
+  "title": "APM Volunteer Programme",
+  "issuer": "APMP",
+  "icon": "🎓",
+  "year": 2021,
+  "details": "Participation in APM volunteer initiatives supporting project management development.",
+  "url": "https://www.apm.org.uk",
+  "category": "Leadership"
+},                {
                     "title": "APM Student Programme",
                     "issuer": "Association",
                     "icon": "🎓",
@@ -660,16 +665,15 @@ document.addEventListener("DOMContentLoaded", () => {
             card.className = "cert-card";
             card.dataset.category = item.category;
 
-            card.innerHTML = `
-                <div class="cert-main">
-                    <strong>${item.icon} ${item.title}</strong> — ${item.issuer} (${item.year})
-                </div>
-                <div class="cert-extra">
-                    <p>${item.details}</p>
-                    <a href="${item.url}" target="_blank">View certification</a>
-                </div>
-            `;
-
+card.innerHTML = `
+<div class="cert-main">
+  <strong>${item.icon} ${item.title}</strong> — ${item.issuer} (${item.year})
+</div>
+<div class="cert-extra">
+  <p>${item.details}</p>
+  <a href="${item.url}" target="_blank">View certification</a>
+</div>
+`;
             section.appendChild(card);
         });
 
@@ -857,8 +861,60 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     enablePrintMode();
+/* ------------------------------
+   EXPORT TO PDF
+------------------------------ */
+function enableExportPDF() {
+  const btn = document.getElementById("exportPdfBtn");
 
+  btn.addEventListener("click", () => {
+    // Expand all cards for PDF
+    document.querySelectorAll(".cert-extra").forEach(e => {
+      e.style.display = "block";
+    });
+
+    // Disable sticky bar for clean PDF
+    const sticky = document.querySelector(".sticky-bar");
+    const originalPosition = sticky.style.position;
+    sticky.style.position = "static";
+
+    // Trigger browser PDF export
+    window.print();
+
+    // Restore sticky bar after printing
+    sticky.style.position = originalPosition;
+  });
+}
+
+enableExportPDF();
 });
+/* ------------------------------
+   EXPORT TO PDF
+------------------------------ */
+function enableExportPDF() {
+    const btn = document.getElementById("exportPdfBtn");
+
+    btn.addEventListener("click", () => {
+
+        // Expand all cards for PDF
+        document.querySelectorAll(".cert-extra").forEach(e => {
+            e.style.display = "block";
+        });
+
+        // Disable sticky bar for clean PDF
+        const sticky = document.querySelector(".sticky-bar");
+        const originalPosition = sticky.style.position;
+        sticky.style.position = "static";
+
+        // Trigger browser PDF export
+        window.print();
+
+        // Restore sticky bar after printing
+        sticky.style.position = originalPosition;
+    });
+}
+
+enableExportPDF();
 </script>
 </body>
 </html>

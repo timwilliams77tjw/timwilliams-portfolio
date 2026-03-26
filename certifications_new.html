@@ -1,899 +1,864 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Tim Williams – Certification Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications</title>
 
 <style>
-/* ------------------------------
-BRAND COLOURS & TYPOGRAPHY
---------------------------------*/
-:root {
-  --navy: #0A1A2F;
-  --charcoal: #1F1F1F;
-  --electric: #0078FF;
-  --soft-blue: #E8F2FF;
-  --light-grey: #F5F7FA;
-  --white: #FFFFFF;
-  --muted-grey: #6A6A6A;
-  --heading-font: 'Montserrat', sans-serif;
-  --body-font: 'Inter', 'Segoe UI', sans-serif;
-}
-
-/* ------------------------------
-GLOBAL LAYOUT
---------------------------------*/
-body {
-  margin: 0;
-  padding: 0;
-  background: var(--white);
-  font-family: var(--body-font);
-  color: var(--charcoal);
-  line-height: 1.6;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 80px;
-}
-
-/* ------------------------------
-HERO HEADER
---------------------------------*/
-.hero-banner {
-  background: linear-gradient(120deg, #0a2540, #1f4e79);
-  padding: 48px 80px;
-  color: var(--white);
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.hero-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 40px;
-}
-
-.hero-photo {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 3px solid white;
-}
-
-.hero-text {
-  flex: 1;
-}
-
-.hero-text h1 {
-  font-family: var(--heading-font);
-  font-size: 48px;
-  margin: 0 0 8px 0;
-}
-
-.hero-text p {
-  font-size: 18px;
-  margin: 4px 0;
-  color: var(--white);
-}
-
-/* ------------------------------
-SECTION HEADERS
---------------------------------*/
-.section {
-  margin-top: 48px;
-}
-
-.section h3 {
-  font-family: var(--heading-font);
-  font-size: 26px;
-  font-weight: 600;
-  margin: 0 0 12px 0;
-}
-
-.section .accent {
-  width: 64px;
-  height: 4px;
-  background: var(--electric);
-  border-radius: 2px;
-  margin-bottom: 24px;
-}
-
-/* ------------------------------
-AUTOMATIC ALTERNATING CARDS
---------------------------------*/
-.card {
-  padding: 32px;
-  border-radius: 8px;
-}
-
-.section:nth-of-type(odd) .card {
-  background: var(--white);
-}
-
-.section:nth-of-type(even) .card {
-  background: var(--light-grey);
-}
-
-/* ------------------------------
-TWO-COLUMN GRID
---------------------------------*/
-.columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-}
-
-/* ------------------------------
-HEADER BUTTONS
---------------------------------*/
-.button-group {
-  display: flex;
-  gap: 16px;
-  margin-top: 24px;
-  justify-content: center;
-}
-
-.brand-btn {
-  background: #0A1A2F;
-  color: #FFFFFF;
-  padding: 14px 28px;
-  border-radius: 8px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: 0.25s ease;
-  border: 2px solid #0A1A2F;
-}
-
-.brand-btn:hover {
-  background: #FFFFFF;
-  color: #0A1A2F;
-  border-color: #0078FF;
-  cursor: pointer;
-}
-
-/* ACTIVE BUTTON */
-.brand-btn.active {
-  background: #FFFFFF;
-  color: #0A1A2F;
-  border-color: #0078FF;
-  cursor: default;
-  pointer-events: none;
-}
-
-/* ------------------------------
-FOOTER
---------------------------------*/
-footer {
-  background: #0a2540;
-  color: white;
-  padding: 40px;
-  margin-top: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.footer-left {
-  font-weight: 600;
-}
-
-.footer-qr img {
-  width: 60px;
-  height: auto;
-  opacity: 0.9;
-}
-
-/* ------------------------------
-FLOATING BOOKING BUTTON
---------------------------------*/
-.floating-booking-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: #0A1A2F;
-  color: #FFFFFF;
-  padding: 14px 22px;
-  border-radius: 50px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-  z-index: 9999;
-}
-
-/* ------------------------------
-MOBILE FIXES
---------------------------------*/
-@media (max-width: 768px) {
-  .container {
-    padding: 0 20px;
-  }
-
-  .hero-banner {
-    padding: 32px 20px;
-  }
-
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-text h1 {
-    font-size: 32px;
-  }
-
-  .hero-text p {
-    font-size: 16px;
-  }
-
-  .hero-photo {
-    width: 140px;
-    height: 140px;
-  }
-
-  .columns {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .button-group {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .brand-btn {
-    width: 100%;
-    max-width: 260px;
-    margin: 0 auto;
-  }
-
-  footer {
-    flex-wrap: nowrap;
-    gap: 10px;
-  }
-
-  .footer-left {
-    font-size: 14px;
-  }
-
-  .footer-qr img {
-    width: 50px;
-  }
-}
-
-.page-certifications .floating-booking-btn {
-  left: 50%;
-  transform: translateX(-50%);
-  right: auto;
-}
-
-/* POPUP MENUS */
-.popup-menu {
-  position: absolute;
-  display: none;
-  flex-direction: column;
-  background: #FFFFFF;
-  border: 2px solid #0078FF;
-  border-radius: 8px;
-  padding: 12px 0;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  z-index: 9999;
-  min-width: 200px;
-}
-
-.popup-menu a {
-  padding: 12px 20px;
-  text-decoration: none;
-  color: #0A1A2F;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  transition: 0.25s ease;
-}
-
-.popup-menu a:hover {
-  background: #E8F2FF;
-  color: #0078FF;
-}
-
-/* ---------------- TOOLTIP ---------------- */
-.tooltip {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.tooltip-icon {
-  font-size: 15px;
-  color: #0A1A2F;
-  cursor: pointer;
-}
-
-.tooltip-text {
-  visibility: hidden;
-  opacity: 0;
-  width: 260px;
-  background-color: #0A1A2F;
-  color: #fff;
-  padding: 12px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  line-height: 1.4;
-  position: absolute;
-  top: 50%;
-  right: 110%;
-  transform: translateY(-50%);
-  transition: opacity 0.25s ease;
-  z-index: 10000000;
-}
-
-.tooltip-text::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translateY(-50%);
-  border-width: 6px;
-  border-style: solid;
-  border-color: transparent transparent transparent #0A1A2F;
-}
-
-.tooltip:hover .tooltip-text,
-.tooltip.tap-active .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* ============================================================
-STICKY FILTER BAR
-============================================================ */
-.cert-filter-bar {
-  position: sticky;
-  top: 0;
-  z-index: 9998;
-  display: flex;
-  gap: 12px;
-  padding: 16px 0;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--light-grey);
-  transition: padding 0.25s ease, box-shadow 0.25s ease;
-}
-
-.cert-filter-bar.shrink {
-  padding: 8px 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.filter-btn {
-  padding: 8px 18px;
-  border-radius: 20px;
-  border: 1px solid var(--navy);
-  background: transparent;
-  color: var(--navy);
-  font-family: var(--heading-font);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.25s ease;
-}
-
-.filter-btn:hover {
-  border-color: var(--electric);
-  color: var(--electric);
-}
-
-.filter-btn.active {
-  border-color: var(--electric);
-  color: var(--electric);
-  background: var(--soft-blue);
-}
-
-/* ============================================================
-CERTIFICATION CARDS
-============================================================ */
-.cert-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.cert-entry {
-  display: flex;
-  flex-direction: column;
-  background: var(--white);
-  padding: 20px 24px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  transition: 0.25s ease;
-  cursor: pointer;
-  border-left: 4px solid transparent;
-
-  /* animation */
-  opacity: 0;
-  transform: translateY(10px);
-  animation: certFadeIn 0.4s ease forwards;
-}
-
-.section:nth-of-type(even) .cert-entry {
-  background: var(--light-grey);
-}
-
-.cert-entry:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  border-left-color: var(--electric);
-}
-
-/* ============================================================
-CARD HEADER (ICON + TITLE + BADGE)
-============================================================ */
-.cert-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.cert-icon {
-  font-size: 32px;
-  flex-shrink: 0;
-}
-
-.cert-title-block {
-  flex: 1;
-}
-
-.cert-title-block h4 {
-  margin: 0;
-  font-size: 18px;
-  font-family: var(--heading-font);
-}
-
-.cert-title-block p {
-  margin: 2px 0 0 0;
-  color: var(--muted-grey);
-  font-size: 14px;
-}
-
-/* ============================================================
-OUTLINE CATEGORY BADGE
-============================================================ */
-.cert-badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
-  border: 1px solid var(--electric);
-  color: var(--electric);
-  font-size: 12px;
-  font-weight: 600;
-  font-family: var(--heading-font);
-  margin-top: 6px;
-  width: fit-content;
-}
-
-/* ============================================================
-EXPANDABLE DETAILS
-============================================================ */
-.cert-extra {
-  display: none;
-  padding-left: 48px;
-  padding-right: 12px;
-  color: var(--muted-grey);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.cert-entry.open .cert-extra {
-  display: block;
-  margin-top: 12px;
-}
-
-/* animation keyframes */
-@keyframes certFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ============================================================
-CREDENTIAL LINK
-============================================================ */
-.cert-link {
-  display: inline-block;
-  margin-top: 10px;
-  color: var(--electric);
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.cert-link:hover {
-  text-decoration: underline;
-}
-
-/* ============================================================
-MOBILE RESPONSIVENESS
-============================================================ */
-@media (max-width: 768px) {
-  .cert-entry {
-    padding: 16px 18px;
-  }
-
-  .cert-icon {
-    font-size: 28px;
-  }
-
-  .cert-filter-bar {
-    overflow-x: auto;
-    padding: 12px 0;
-  }
-
-  .cert-filter-bar.shrink {
-    padding: 6px 0;
-  }
-}
-  .back-to-top {
-  position: fixed;
-  bottom: 90px;
-  right: 24px;
-  padding: 10px 18px;
-  border-radius: 20px;
-  border: none;
-  background: var(--navy);
-  color: var(--white);
-  font-family: var(--heading-font);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  z-index: 9999;
-}
-
-.back-to-top:hover {
-  transform: translateY(-2px);
-}
-
-</style>
-
-</head>
-
-<body class="page-certifications">
-
-<!-- HERO -->
-<div class="hero-banner">
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1>Tim Williams</h1>
-      <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-      <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
-
-      <div class="button-group">
-        <a href="index.html" class="brand-btn">Home</a>
-        <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
-        <a class="brand-btn active">Certifications</a>
-        <a href="recommendations.html" class="brand-btn">Recommendations</a>
-        <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
-        <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
-      </div>
-    </div>
-
-    <img src="profile2.jpg" alt="Tim Williams" class="hero-photo">
-  </div>
-</div>
-
-<!-- STICKY FILTER BAR -->
-<div class="cert-filter-bar">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="Core">Core</button>
-  <button class="filter-btn" data-filter="Agile">Agile</button>
-  <button class="filter-btn" data-filter="Cloud">Cloud</button>
-  <button class="filter-btn" data-filter="Microsoft">Microsoft</button>
-  <button class="filter-btn" data-filter="Infrastructure">Infrastructure</button>
-  <button class="filter-btn" data-filter="Governance">Governance</button>
-  <button class="filter-btn" data-filter="Leadership">Leadership</button>
-</div>
-
-<div class="container">
-
-  <!-- CORE CERTIFICATIONS -->
-  <div class="section">
-    <h3>Core Certifications</h3>
-    <div class="accent"></div>
-    <div class="card cert-card-container" data-section="Core Certifications"></div>
-  </div>
-
-  <!-- AGILE & SCRUM -->
-  <div class="section">
-    <h3>Agile, Scrum & Delivery Frameworks</h3>
-    <div class="accent"></div>
-    <div class="card cert-card-container" data-section="Agile, Scrum & Delivery Frameworks"></div>
-  </div>
-
-  <!-- CLOUD & AI -->
-  <div class="section">
-    <h3>Cloud, Automation & AI</h3>
-    <div class="accent"></div>
-    <div class="card cert-card-container" data-section="Cloud, Automation & AI"></div>
-  </div>
-
-  <!-- MICROSOFT TECHNICAL -->
-  <div class="section">
-    <h3>Microsoft Technical Certifications</h3>
-    <div class="accent"></div>
-    <div class="card cert-card-container" data-section="Microsoft Technical Certifications"></div>
-  </div>
-
-  <!-- INFRASTRUCTURE -->
-  <div class="section">
-    <h3>Infrastructure, Security & Virtualisation</h3>
-    <div class="accent"></div>
-    <div class="card cert-card-container" data-section="Infrastructure, Security & Virtualisation"></div>
-  </div>
-
-  <!-- SERVICE MANAGEMENT -->
-  <div class="section">
-    <h3>Service Management & Governance</h3>
-    <div class="accent"></div>
-    <div class="card cert-card-container" data-section="Service Management & Governance"></div>
-  </div>
-
-  <!-- LEADERSHIP -->
-  <div class="section">
-    <h3>Professional Development & Leadership</h3>
-    <div class="accent"></div>
-    <div class="card cert-card-container" data-section="Professional Development & Leadership"></div>
-  </div>
-
-</div> <!-- END CONTAINER -->
-
-<footer>
-  <div class="footer-left">
-    © Tim Williams | IT Transformation Portfolio
-  </div>
-  <div class="footer-qr">
-    <img src="qr.png" alt="QR Code">
-  </div>
-</footer>
-
-<a href="calendar.html" class="floating-booking-btn">Make a Booking</a>
-
-<!-- CV MENU -->
-<div id="cvMenu" class="popup-menu">
-  <a href="Tim_Williams_CV.pdf" target="_blank">View CV</a>
-  <div class="tooltip">
-    <a href="Tim_Williams_CV.download">Download PDF</a>
-    <span class="tooltip-icon">ⓘ</span>
-    <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
-  </div>
-</div>
-
-<!-- PORTFOLIO MENU -->
-<div id="portfolioMenu" class="popup-menu">
-  <a href="portfolio_presentation.pdf" target="_blank">View Portfolio</a>
-  <div class="tooltip">
-    <a href="portfolio_presentation.download">Download PDF</a>
-    <span class="tooltip-icon">ⓘ</span>
-    <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
-  </div>
-</div>
-
-<script>
-function openCVMenu(e) {
-  e.preventDefault();
-  positionMenu(e.target, document.getElementById("cvMenu"));
-}
-
-function openPortfolioMenu(e) {
-  e.preventDefault();
-  positionMenu(e.target, document.getElementById("portfolioMenu"));
-}
-
-function positionMenu(button, menu) {
-  // Close both menus first
-  document.getElementById("cvMenu").style.display = "none";
-  document.getElementById("portfolioMenu").style.display = "none";
-
-  const rect = button.getBoundingClientRect();
-  menu.style.top = rect.bottom + window.scrollY + "px";
-  menu.style.left = rect.left + "px";
-  menu.style.display = "flex";
-}
-
-// Close menus when clicking outside
-document.addEventListener("click", function(e) {
-  if (!e.target.closest(".popup-menu") && !e.target.closest("[onclick]")) {
-    document.getElementById("cvMenu").style.display = "none";
-    document.getElementById("portfolioMenu").style.display = "none";
-  }
-});
-
-// Tooltip tap/click behaviour
-document.querySelectorAll('.tooltip-icon').forEach(icon => {
-  icon.addEventListener('click', function (e) {
-    e.stopPropagation();
-    const tooltip = this.closest('.tooltip');
-
-    // Close all other tooltips
-    document.querySelectorAll('.tooltip').forEach(t => {
-      if (t !== tooltip) t.classList.remove('tap-active');
-    });
-
-    // Toggle this one
-    tooltip.classList.toggle('tap-active');
-  });
-});
-
-// Close tooltip when tapping/clicking outside
-document.addEventListener('click', () => {
-  document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
-});
-</script>
-
-<script>
-/* ============================================================
-LOAD CERTIFICATIONS FROM JSON
-============================================================ */
-async function loadCertifications() {
-  const response = await fetch("certifications.json");
-  const data = await response.json();
-
-  document.querySelectorAll(".cert-card-container").forEach(container => {
-    const sectionName = container.dataset.section;
-    const items = data[sectionName];
-    if (!items) return;
-
-    // Sort newest → oldest
-    items.sort((a, b) => (b.year || 0) - (a.year || 0));
-
-    const list = document.createElement("div");
-    list.className = "cert-list";
-
-    items.forEach((cert, index) => {
-      const card = document.createElement("div");
-      card.className = "cert-entry";
-      card.dataset.category = cert.category;
-
-      // staggered animation
-      card.style.animationDelay = `${index * 0.05}s`;
-
-      card.innerHTML = `
-        <div class="cert-header">
-          <div class="cert-icon">${cert.icon}</div>
-          <div class="cert-title-block">
-            <h4>${cert.title}</h4>
-            <p>${cert.issuer} • ${cert.year}</p>
-            <span class="cert-badge">${cert.category}</span>
-          </div>
-        </div>
-
-<div class="cert-extra">
-  <p>${cert.details}</p>
-  ${cert.url ? `<a href="${cert.url}" target="_blank" class="cert-link">View Credential</a>` : ""}
-</div>
-
-      `;
-
-      // Expand/collapse behaviour with auto-collapse of others
-      card.addEventListener("click", () => {
-        document.querySelectorAll(".cert-entry.open").forEach(openCard => {
-          if (openCard !== card) openCard.classList.remove("open");
-        });
-        card.classList.toggle("open");
-      });
-
-      list.appendChild(card);
-    });
-
-    container.appendChild(list);
-  });
-}
-
-document.addEventListener("DOMContentLoaded", loadCertifications);
-
-
-/* ============================================================
-FILTER BAR LOGIC
-============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
-  const filterButtons = document.querySelectorAll(".filter-btn");
-
-  filterButtons.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-
-      // Update active state
-      filterButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      const filter = btn.dataset.filter;
-
-      // Filter cards
-      const cards = document.querySelectorAll(".cert-entry");
-      cards.forEach(entry => {
-        const category = entry.dataset.category;
-        entry.style.display =
-          filter === "all" || category === filter ? "flex" : "none";
-      });
-
-      // Scroll to first visible card
-      const firstVisible = [...cards].find(c => c.style.display !== "none");
-      if (firstVisible) {
-        firstVisible.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  });
-});
-
-
-/* ============================================================
-STICKY FILTER BAR SCROLL BEHAVIOUR
-============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
-  const filterBar = document.querySelector(".cert-filter-bar");
-  if (!filterBar) return;
-
-  let lastScroll = 0;
-
-  window.addEventListener("scroll", () => {
-    const currentScroll = window.scrollY;
-
-    if (currentScroll > lastScroll && currentScroll > 50) {
-      filterBar.classList.add("shrink");
-    } else {
-      filterBar.classList.remove("shrink");
+    body {
+        font-family: Inter, sans-serif;
+        margin: 0;
+        background: #f7f9fc;
+        color: #222;
     }
 
-    lastScroll = currentScroll;
-  });
-});
+    h2 {
+        font-family: Montserrat, sans-serif;
+        margin-top: 40px;
+        margin-bottom: 16px;
+        font-size: 22px;
+        color: #222;
+    }
 
+    /* Sticky filter/search bar container */
+    .sticky-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #fff;
+        padding: 12px 16px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 
-/* ============================================================
-BACK TO TOP BUTTON
-============================================================ */
+    /* Search bar */
+    .search-container {
+        display: flex;
+        align-items: center;
+        background: #f0f2f5;
+        padding: 6px 10px;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+
+    .search-container input {
+        border: none;
+        background: transparent;
+        outline: none;
+        font-size: 14px;
+        margin-left: 6px;
+        width: 160px;
+    }
+
+    /* Filter buttons */
+    .filter-btn {
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        flex-shrink: 0;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .filter-btn:hover {
+        background: #e8f0ff;
+    }
+
+    .filter-btn.active {
+        background: #0056d6;
+        color: #fff;
+        border-color: #0056d6;
+    }
+
+    /* Section container */
+    .cert-section {
+        margin: 30px 16px;
+    }
+
+    /* Card */
+    .cert-card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 14px;
+        border: 1px solid #e0e0e0;
+        cursor: pointer;
+        transition: box-shadow 0.2s ease, transform 0.15s ease;
+    }
+
+    .cert-card:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transform: translateY(-1px);
+    }
+
+    .cert-main {
+        font-size: 16px;
+        font-weight: 600;
+        color: #222;
+    }
+
+    .cert-extra {
+        display: none;
+        margin-top: 10px;
+        color: #444;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .cert-extra a {
+        color: #0056d6;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .cert-extra a:hover {
+        text-decoration: underline;
+    }
+
+    /* Back to top */
+    #backToTop {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: #0056d6;
+        color: #fff;
+        padding: 12px 14px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        font-size: 18px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: background 0.2s ease;
+    }
+
+    #backToTop:hover {
+        background: #003f9e;
+    }
+
+    /* Print mode adjustments */
+    @media print {
+        .sticky-bar,
+        #backToTop {
+            display: none !important;
+        }
+
+        .cert-extra {
+            display: block !important;
+        }
+
+        body {
+            background: #fff;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+    <!-- Sticky Search + Filter Bar -->
+    <div class="sticky-bar">
+
+        <!-- Search -->
+        <div class="search-container">
+            <span>🔍</span>
+            <input id="searchInput" type="text" placeholder="Search certifications…">
+        </div>
+
+        <!-- Filter buttons -->
+        <button class="filter-btn active" data-category="All">All</button>
+        <button class="filter-btn" data-category="Core">Core</button>
+        <button class="filter-btn" data-category="Agile">Agile</button>
+        <button class="filter-btn" data-category="Cloud">Cloud</button>
+        <button class="filter-btn" data-category="Microsoft">Microsoft</button>
+        <button class="filter-btn" data-category="Infrastructure">Infrastructure</button>
+        <button class="filter-btn" data-category="Governance">Governance</button>
+        <button class="filter-btn" data-category="Leadership">Leadership</button>
+
+        <!-- Utility buttons -->
+        <button id="collapseAllBtn" class="filter-btn">Collapse All</button>
+        <button id="printModeBtn" class="filter-btn">Print Mode</button>
+
+    </div>
+
+    <!-- Certifications container -->
+    <div id="certificationsContainer"></div>
+
+    <!-- Back to top -->
+    <div id="backToTop">↑</div>
+
+    <!-- Embedded JSON (your real data) -->
+    <script id="cert-data" type="application/json">
+        {
+            "Core Certifications": [
+                {
+                    "title": "PRINCE2® Practitioner",
+                    "issuer": "QA Ltd",
+                    "icon": "🎖️",
+                    "year": 2024,
+                    "details": "Advanced practitioner-level certification demonstrating structured project management expertise using the PRINCE2 methodology.",
+                    "url": "https://www.axelos.com/certifications/prince2",
+                    "category": "Core"
+                },
+                {
+                    "title": "P3O Practitioner",
+                    "issuer": "QA Ltd",
+                    "icon": "📘",
+                    "year": 2023,
+                    "details": "Certification covering Portfolio, Programme and Project Offices, focusing on governance and organisational delivery structures.",
+                    "url": "https://www.axelos.com/certifications/p3o",
+                    "category": "Core"
+                },
+                {
+                    "title": "APM Project Management Qualification (APMP)",
+                    "issuer": "APM",
+                    "icon": "🏅",
+                    "year": 2022,
+                    "details": "Comprehensive qualification covering all aspects of project management aligned to the APM Body of Knowledge.",
+                    "url": "https://www.apm.org.uk/qualifications-and-training/project-management-qualification",
+                    "category": "Core"
+                },
+                {
+                    "title": "ITIL Certification",
+                    "issuer": "QA Ltd",
+                    "icon": "🧭",
+                    "year": 2021,
+                    "details": "Certification in IT service management best practices, focusing on service lifecycle and operational excellence.",
+                    "url": "https://www.axelos.com/certifications/itil",
+                    "category": "Core"
+                },
+                {
+                    "title": "Certified Risk Manager",
+                    "issuer": "QA Ltd",
+                    "icon": "⚠️",
+                    "year": 2020,
+                    "details": "Professional certification covering enterprise risk management, mitigation strategies, and governance frameworks.",
+                    "url": "https://www.qaltd.com",
+                    "category": "Core"
+                },
+                {
+                    "title": "Programme Management",
+                    "issuer": "CompTIA",
+                    "icon": "📊",
+                    "year": 2019,
+                    "details": "Programme-level certification covering multi‑project coordination, benefits management, and strategic alignment.",
+                    "url": "https://www.comptia.org",
+                    "category": "Core"
+                }
+            ],
+
+            "Agile, Scrum & Delivery Frameworks": [
+                {
+                    "title": "Agile Project Management",
+                    "issuer": "Management Project Mar",
+                    "icon": "⚡",
+                    "year": 2024,
+                    "details": "Training covering Agile delivery principles, iterative planning, and adaptive project leadership.",
+                    "url": "https://www.agilebusiness.org",
+                    "category": "Agile"
+                },
+                {
+                    "title": "Agile Foundations",
+                    "issuer": "LinkedIn",
+                    "icon": "📘",
+                    "year": 2023,
+                    "details": "Foundational Agile course covering Scrum, Kanban, and iterative delivery fundamentals.",
+                    "url": "https://www.linkedin.com/learning",
+                    "category": "Agile"
+                },
+                {
+                    "title": "Agile Delivery & Essentials",
+                    "issuer": "LinkedIn",
+                    "icon": "📘",
+                    "year": 2023,
+                    "details": "Practical Agile delivery training focusing on ceremonies, backlog management, and team collaboration.",
+                    "url": "https://www.linkedin.com/learning",
+                    "category": "Agile"
+                },
+                {
+                    "title": "Scrum: Essentials",
+                    "issuer": "LinkedIn",
+                    "icon": "📘",
+                    "year": 2022,
+                    "details": "Core Scrum training covering roles, events, and artefacts for effective Agile delivery.",
+                    "url": "https://www.linkedin.com/learning",
+                    "category": "Agile"
+                },
+                {
+                    "title": "Scrum: Basics",
+                    "issuer": "Project Mar",
+                    "icon": "📗",
+                    "year": 2022,
+                    "details": "Introductory Scrum course covering team roles, sprint planning, and iterative improvement.",
+                    "url": "https://www.scrum.org",
+                    "category": "Agile"
+                },
+                {
+                    "title": "Disciplined Agile",
+                    "issuer": "LinkedIn / Project Mar",
+                    "icon": "📘",
+                    "year": 2021,
+                    "details": "Training in Disciplined Agile Delivery (DAD), focusing on hybrid Agile frameworks and enterprise scaling.",
+                    "url": "https://www.pmi.org/disciplined-agile",
+                    "category": "Agile"
+                },
+                {
+                    "title": "Atlassian Agile & Project Management",
+                    "issuer": "Atlassian",
+                    "icon": "🌀",
+                    "year": 2021,
+                    "details": "Training in Jira, Confluence, and Agile workflows for enterprise delivery teams.",
+                    "url": "https://university.atlassian.com",
+                    "category": "Agile"
+                },
+                {
+                    "title": "Mistakes in Agile Projects",
+                    "issuer": "PMI",
+                    "icon": "⚠️",
+                    "year": 2020,
+                    "details": "PMI course covering common Agile pitfalls and strategies for improving delivery outcomes.",
+                    "url": "https://www.pmi.org",
+                    "category": "Agile"
+                }
+            ],
+
+            "Cloud, Automation & AI": [
+                {
+                    "title": "AI for Project Management",
+                    "issuer": "Management Project Mar",
+                    "icon": "🤖",
+                    "year": 2024,
+                    "details": "Training on applying AI tools and automation to project planning, reporting, and delivery.",
+                    "url": "https://www.pmi.org/learning",
+                    "category": "Cloud"
+                },
+                {
+                    "title": "AI in Project Management",
+                    "issuer": "LinkedIn",
+                    "icon": "🤖",
+                    "year": 2023,
+                    "details": "LinkedIn Learning course covering AI‑driven insights, automation, and predictive analytics.",
+                    "url": "https://www.linkedin.com/learning",
+                    "category": "Cloud"
+                },
+                {
+                    "title": "Program Management with AI",
+                    "issuer": "LinkedIn",
+                    "icon": "🤖",
+                    "year": 2023,
+                    "details": "Course exploring AI‑enabled programme governance, risk forecasting, and delivery optimisation.",
+                    "url": "https://www.linkedin.com/learning",
+                    "category": "Cloud"
+                },
+                {
+                    "title": "Microsoft AI Fundamentals",
+                    "issuer": "Microsoft",
+                    "icon": "🧠",
+                    "year": 2022,
+                    "details": "Microsoft certification covering AI concepts, machine learning, and responsible AI principles.",
+                    "url": "https://learn.microsoft.com/certifications/ai-fundamentals",
+                    "category": "Cloud"
+                },
+                {
+                    "title": "Build an Agent with Copilot",
+                    "issuer": "Microsoft",
+                    "icon": "⚙️",
+                    "year": 2022,
+                    "details": "Hands‑on training in building AI agents using Microsoft Copilot Studio.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Cloud"
+                },
+                {
+                    "title": "Power Automate Solutions",
+                    "issuer": "Microsoft",
+                    "icon": "🔄",
+                    "year": 2021,
+                    "details": "Training in building automated workflows using Microsoft Power Automate.",
+                    "url": "https://learn.microsoft.com/power-automate",
+                    "category": "Cloud"
+                },
+                {
+                    "title": "Cloud Infrastructure Fundamentals",
+                    "issuer": "Microsoft",
+                    "icon": "☁️",
+                    "year": 2021,
+                    "details": "Fundamentals of cloud computing, virtualisation, and Azure infrastructure services.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Cloud"
+                }
+            ],
+
+            "Microsoft Technical Certifications": [
+                {
+                    "title": "Microsoft Certified Technician",
+                    "issuer": "Microsoft",
+                    "icon": "💻",
+                    "year": 2018,
+                    "details": "Technical certification covering Microsoft operating systems, troubleshooting, and support.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Microsoft"
+                },
+                {
+                    "title": "Microsoft Certified IT Professional",
+                    "issuer": "Microsoft",
+                    "icon": "💼",
+                    "year": 2017,
+                    "details": "Professional‑level certification in Microsoft enterprise technologies and infrastructure.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Microsoft"
+                },
+                {
+                    "title": "Microsoft Certified Professional",
+                    "issuer": "Microsoft",
+                    "icon": "📘",
+                    "year": 2017,
+                    "details": "Core Microsoft certification validating technical expertise across Microsoft platforms.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Microsoft"
+                },
+                {
+                    "title": "MCTS: Windows Server (multiple)",
+                    "issuer": "Microsoft",
+                    "icon": "🖥️",
+                    "year": 2016,
+                    "details": "Technical specialist certification for Windows Server administration and configuration.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Microsoft"
+                },
+                {
+                    "title": "MCTS: Exchange Server",
+                    "issuer": "Microsoft",
+                    "icon": "📨",
+                    "year": 2016,
+                    "details": "Certification in Microsoft Exchange Server installation, configuration, and management.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Microsoft"
+                },
+                {
+                    "title": "MCITP Virtualisation Administrator",
+                    "issuer": "Microsoft",
+                    "icon": "🧩",
+                    "year": 2015,
+                    "details": "Certification covering Hyper‑V, virtualisation management, and enterprise VM solutions.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Microsoft"
+                },
+                {
+                    "title": "Hyper‑V in Windows Server",
+                    "issuer": "Microsoft",
+                    "icon": "🖧",
+                    "year": 2015,
+                    "details": "Training in Hyper‑V virtualisation, clustering, and VM lifecycle management.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Microsoft"
+                },
+                {
+                    "title": "System Centre Virtual Machine Manager",
+                    "issuer": "Microsoft",
+                    "icon": "🗄️",
+                    "year": 2014,
+                    "details": "Training in SCVMM for managing enterprise virtualisation environments.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Microsoft"
+                },
+                {
+                    "title": "Terminal Services in Windows",
+                    "issuer": "Microsoft",
+                    "icon": "🖱️",
+                    "year": 2014,
+                    "details": "Training in Windows Remote Desktop Services and terminal server administration.",
+                    "url": "https://learn.microsoft.com",
+                    "category": "Microsoft"
+                }
+            ],
+
+            "Infrastructure, Security & Virtualisation": [
+                {
+                    "title": "VMware ESXi Administrator",
+                    "issuer": "VMware",
+                    "icon": "🛡️",
+                    "year": 2019,
+                    "details": "Training in VMware ESXi hypervisor administration, VM provisioning, and virtualisation security.",
+                    "url": "https://www.vmware.com/education-services",
+                    "category": "Infrastructure"
+                },
+                {
+                    "title": "IT Infrastructure",
+                    "issuer": "CompTIA",
+                    "icon": "🏗️",
+                    "year": 2018,
+                    "details": "Certification covering core IT infrastructure concepts including networking, servers, and storage.",
+                    "url": "https://www.comptia.org",
+                    "category": "Infrastructure"
+                },
+                {
+                    "title": "PointSec Administration",
+                    "issuer": "Pointsec Mobile Technologies",
+                    "icon": "🔐",
+                    "year": 2017,
+                    "details": "Training in PointSec encryption technologies and endpoint security management.",
+                    "url": "https://www.checkpoint.com",
+                    "category": "Infrastructure"
+                },
+                {
+                    "title": "ISO Awareness",
+                    "issuer": "Roc Technologies",
+                    "icon": "📜",
+                    "year": 2016,
+                    "details": "Awareness training covering ISO standards including ISO 27001 and ISO 9001.",
+                    "url": "https://www.iso.org",
+                    "category": "Infrastructure"
+                }
+            ],
+
+            "Service Management & Governance": [
+                {
+                    "title": "ServiceNow Training",
+                    "issuer": "ServiceNow",
+                    "icon": "🛠️",
+                    "year": 2023,
+                    "details": "Training in ServiceNow platform fundamentals, workflows, and ITSM modules.",
+                    "url": "https://nowlearning.servicenow.com",
+                    "category": "Governance"
+                },
+                {
+                    "title": "ServiceNow IT Leadership",
+                    "issuer": "ServiceNow",
+                    "icon": "🏛️",
+                    "year": 2022,
+                    "details": "Leadership‑focused training covering IT governance, service strategy, and digital transformation.",
+                    "url": "https://nowlearning.servicenow.com",
+                    "category": "Governance"
+                },
+                {
+                    "title": "Data Protection",
+                    "issuer": "Access LMS",
+                    "icon": "🔒",
+                    "year": 2021,
+                    "details": "Training covering GDPR, data handling, and organisational compliance requirements.",
+                    "url": "https://www.accessgroup.com",
+                    "category": "Governance"
+                },
+                {
+                    "title": "Modern Slavery Awareness",
+                    "issuer": "Access LMS",
+                    "icon": "⚖️",
+                    "year": 2021,
+                    "details": "Awareness training covering UK Modern Slavery Act obligations and ethical supply chain practices.",
+                    "url": "https://www.accessgroup.com",
+                    "category": "Governance"
+                },
+                {
+                    "title": "How to Support Yourself",
+                    "issuer": "Access LMS",
+                    "icon": "💬",
+                    "year": 2020,
+                    "details": "Training focused on wellbeing, resilience, and workplace mental health awareness.",
+                    "url": "https://www.accessgroup.com",
+                    "category": "Governance"
+                }
+            ],
+
+            "Professional Development & Leadership": [
+                {
+                    "title": "Lead a Successful PMO",
+                    "issuer": "PMI",
+                    "icon": "📈",
+                    "year": 2024,
+                    "details": "PMI course covering PMO leadership, governance, and enterprise delivery frameworks.",
+                    "url": "https://www.pmi.org",
+                    "category": "Leadership"
+                },
+                {
+                    "title": "Project Leadership in the Modern Era",
+                    "issuer": "PMI",
+                    "icon": "🌍",
+                    "year": 2023,
+                    "details": "Training in modern leadership approaches, stakeholder engagement, and adaptive delivery.",
+                    "url": "https://www.pmi.org",
+                    "category": "Leadership"
+                },
+                {
+                    "title": "APM Volunteer Contribution",
+                    "issuer": "Project Mar",
+                    "icon": "🤝",
+                    "year": 2022,
+                    "details": "Recognition of volunteer contributions supporting APM community initiatives.",
+                    "url": "https://www.apm.org.uk",
+                    "category": "Leadership"
+                },
+                {
+                    "title": "UK Employee Forum Rep",
+                    "issuer": "Computacenter",
+"icon": "🇬🇧",                {
+                    "title": "APM Volunteer Programme",
+                    "issuer": "APMP",
+                    "icon": "🎓",
+                    "year": 2021,
+                    "details": "Participation in APM volunteer initiatives supporting project management development.",
+                    "url": "https://www.apm.org.uk",
+                    "category": "Leadership"
+                },
+                {
+                    "title": "APM Student Programme",
+                    "issuer": "Association",
+                    "icon": "🎓",
+                    "year": 2020,
+                    "details": "APM student programme participation supporting early‑career project management development.",
+                    "url": "https://www.apm.org.uk",
+                    "category": "Leadership"
+                },
+                {
+                    "title": "Creating Your Professional Brand",
+                    "issuer": "LinkedIn",
+                    "icon": "💡",
+                    "year": 2020,
+                    "details": "LinkedIn Learning course covering personal branding, professional storytelling, and online presence.",
+                    "url": "https://www.linkedin.com/learning",
+                    "category": "Leadership"
+                },
+                {
+                    "title": "Succeeding in Your Career",
+                    "issuer": "LinkedIn",
+                    "icon": "🚀",
+                    "year": 2019,
+                    "details": "Career development course covering progression strategies, communication, and leadership skills.",
+                    "url": "https://www.linkedin.com/learning",
+                    "category": "Leadership"
+                }
+            ]
+        }
+    </script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
-  const backToTop = document.getElementById("backToTop");
-  if (!backToTop) return;
 
-  window.addEventListener("scroll", () => {
-    backToTop.style.opacity = window.scrollY > 400 ? "1" : "0";
-    backToTop.style.pointerEvents = window.scrollY > 400 ? "auto" : "none";
-  });
+    /* ------------------------------
+       LOAD JSON + RENDER SECTIONS
+    ------------------------------ */
+    const jsonData = JSON.parse(
+        document.getElementById("cert-data").textContent
+    );
 
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+    const container = document.getElementById("certificationsContainer");
+
+    Object.entries(jsonData).forEach(([sectionName, items]) => {
+        const section = document.createElement("div");
+        section.className = "cert-section";
+
+        const heading = document.createElement("h2");
+        heading.textContent = sectionName;
+        section.appendChild(heading);
+
+        items.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "cert-card";
+            card.dataset.category = item.category;
+
+            card.innerHTML = `
+                <div class="cert-main">
+                    <strong>${item.icon} ${item.title}</strong> — ${item.issuer} (${item.year})
+                </div>
+                <div class="cert-extra">
+                    <p>${item.details}</p>
+                    <a href="${item.url}" target="_blank">View certification</a>
+                </div>
+            `;
+
+            section.appendChild(card);
+        });
+
+        container.appendChild(section);
+    });
+
+
+    /* ------------------------------
+       EXPAND / COLLAPSE CARDS
+    ------------------------------ */
+    function enableCardToggles() {
+        const cards = document.querySelectorAll(".cert-card");
+
+        cards.forEach(card => {
+            const extra = card.querySelector(".cert-extra");
+            extra.style.display = "none";
+
+            card.addEventListener("click", () => {
+                const isOpen = extra.style.display === "block";
+
+                // Collapse all
+                document.querySelectorAll(".cert-extra").forEach(e => {
+                    e.style.display = "none";
+                });
+
+                // Toggle this one
+                if (!isOpen) {
+                    extra.style.display = "block";
+                }
+            });
+        });
+    }
+    enableCardToggles();
+
+
+    /* ------------------------------
+       CATEGORY FILTERING
+    ------------------------------ */
+    function enableCategoryFilters() {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const cards = document.querySelectorAll(".cert-card");
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const category = btn.dataset.category;
+
+                // Update active state
+                filterButtons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                // Collapse all
+                document.querySelectorAll(".cert-extra").forEach(e => {
+                    e.style.display = "none";
+                });
+
+                // Show/hide cards
+                cards.forEach(card => {
+                    const cardCategory = card.dataset.category;
+
+                    if (category === "All" || cardCategory === category) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+
+                // Scroll to first visible card
+                const firstVisible = Array.from(cards).find(
+                    c => c.style.display !== "none"
+                );
+                if (firstVisible) {
+                    firstVisible.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+        });
+    }
+    enableCategoryFilters();
+
+
+    /* ------------------------------
+       SMART SEARCH
+    ------------------------------ */
+    function enableSearch() {
+        const searchInput = document.getElementById("searchInput");
+        const cards = document.querySelectorAll(".cert-card");
+
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase().trim();
+            const activeCategory = document.querySelector(".filter-btn.active").dataset.category;
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                const cardCategory = card.dataset.category;
+
+                const matchesSearch = text.includes(query);
+                const matchesCategory = activeCategory === "All" || cardCategory === activeCategory;
+
+                card.style.display = (matchesSearch && matchesCategory) ? "block" : "none";
+
+                // Collapse all
+                card.querySelector(".cert-extra").style.display = "none";
+            });
+
+            // Scroll to first visible card
+            const firstVisible = Array.from(cards).find(
+                c => c.style.display !== "none"
+            );
+            if (firstVisible) {
+                firstVisible.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        });
+    }
+    enableSearch();
+
+
+    /* ------------------------------
+       BACK TO TOP BUTTON
+    ------------------------------ */
+    function enableBackToTop() {
+        const btn = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+            btn.style.display = window.scrollY > 300 ? "block" : "none";
+        });
+
+        btn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+    enableBackToTop();
+
+
+    /* ------------------------------
+       COLLAPSE ALL BUTTON
+    ------------------------------ */
+    function enableCollapseAll() {
+        const btn = document.getElementById("collapseAllBtn");
+
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".cert-extra").forEach(e => {
+                e.style.display = "none";
+            });
+
+            const firstCard = document.querySelector(".cert-card");
+            if (firstCard) {
+                firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        });
+    }
+    enableCollapseAll();
+
+
+    /* ------------------------------
+       PRINT MODE
+    ------------------------------ */
+    function enablePrintMode() {
+        const btn = document.getElementById("printModeBtn");
+        let printMode = false;
+
+        btn.addEventListener("click", () => {
+            printMode = !printMode;
+
+            if (printMode) {
+                btn.textContent = "Exit Print Mode";
+
+                // Expand all
+                document.querySelectorAll(".cert-extra").forEach(e => {
+                    e.style.display = "block";
+                });
+
+                // Disable sticky bar
+                document.querySelector(".sticky-bar").style.position = "static";
+
+            } else {
+                btn.textContent = "Print Mode";
+
+                // Collapse all
+                document.querySelectorAll(".cert-extra").forEach(e => {
+                    e.style.display = "none";
+                });
+
+                // Restore sticky bar
+                document.querySelector(".sticky-bar").style.position = "sticky";
+            }
+        });
+    }
+    enablePrintMode();
+
 });
 </script>
-
-
-<button id="backToTop" class="back-to-top">Back to top</button>
-
 </body>
 </html>

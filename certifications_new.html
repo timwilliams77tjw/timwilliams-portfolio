@@ -724,11 +724,9 @@ async function loadCertifications() {
   const response = await fetch("certifications.json");
   const data = await response.json();
 
-  // Render each section
   document.querySelectorAll(".cert-card-container").forEach(container => {
     const sectionName = container.dataset.section;
     const items = data[sectionName];
-
     if (!items) return;
 
     // Sort newest → oldest
@@ -745,7 +743,6 @@ async function loadCertifications() {
       card.innerHTML = `
         <div class="cert-header">
           <div class="cert-icon">${cert.icon}</div>
-
           <div class="cert-title-block">
             <h4>${cert.title}</h4>
             <p>${cert.issuer} • ${cert.year}</p>
@@ -773,6 +770,7 @@ async function loadCertifications() {
 
 document.addEventListener("DOMContentLoaded", loadCertifications);
 
+
 /* ============================================================
 FILTER BAR LOGIC
 ============================================================ */
@@ -781,7 +779,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   filterButtons.forEach(btn => {
     btn.addEventListener("click", (e) => {
-      e.stopPropagation(); // don’t toggle cards when tapping filter
+      e.stopPropagation();
 
       // Update active state
       filterButtons.forEach(b => b.classList.remove("active"));
@@ -790,14 +788,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const filter = btn.dataset.filter;
 
       // Filter cards
-      document.querySelectorAll(".cert-entry").forEach(entry => {
+      const cards = document.querySelectorAll(".cert-entry");
+      cards.forEach(entry => {
         const category = entry.dataset.category;
         entry.style.display =
           filter === "all" || category === filter ? "flex" : "none";
       });
+
+      // Scroll to first visible card
+      const firstVisible = [...cards].find(c => c.style.display !== "none");
+      if (firstVisible) {
+        firstVisible.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     });
   });
 });
+
 
 /* ============================================================
 STICKY FILTER BAR SCROLL BEHAVIOUR
@@ -811,7 +817,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", () => {
     const currentScroll = window.scrollY;
 
-    // Shrink when scrolling down
     if (currentScroll > lastScroll && currentScroll > 50) {
       filterBar.classList.add("shrink");
     } else {

@@ -873,7 +873,117 @@ async function loadCertifications() {
 }
 
 document.addEventListener("DOMContentLoaded", loadCertifications);
+   </script>
+      <script>
+/* ============================================================
+   LOAD CERTIFICATIONS FROM JSON
+   ============================================================ */
+
+async function loadCertifications() {
+  const response = await fetch("certifications.json");
+  const data = await response.json();
+
+  // Render each section
+  document.querySelectorAll(".cert-card-container").forEach(container => {
+    const sectionName = container.dataset.section;
+    const items = data[sectionName];
+
+    if (!items) return;
+
+    // Sort newest → oldest
+    items.sort((a, b) => (b.year || 0) - (a.year || 0));
+
+    const list = document.createElement("div");
+    list.className = "cert-list";
+
+    items.forEach(cert => {
+      const card = document.createElement("div");
+      card.className = "cert-entry";
+      card.dataset.category = cert.category;
+
+      card.innerHTML = `
+        <div class="cert-header">
+          <div class="cert-icon">${cert.icon}</div>
+
+          <div class="cert-title-block">
+            <h4>${cert.title}</h4>
+            <p>${cert.issuer} • ${cert.year}</p>
+            <span class="cert-badge">${cert.category}</span>
+          </div>
+        </div>
+
+        <div class="cert-extra">
+          <p>${cert.details}</p>
+          ${cert.url ? `<a href="${cert.url}" target="_blank" class="cert-link">View Credential</a>` : ""}
+        </div>
+      `;
+
+      // Expand/collapse behaviour
+      card.addEventListener("click", () => {
+        card.classList.toggle("open");
+      });
+
+      list.appendChild(card);
+    });
+
+    container.appendChild(list);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", loadCertifications);
+
+
+/* ============================================================
+   FILTER BAR LOGIC
+   ============================================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      // Update active state
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filter = btn.dataset.filter;
+
+      // Filter cards
+      document.querySelectorAll(".cert-entry").forEach(entry => {
+        const category = entry.dataset.category;
+        entry.style.display =
+          filter === "all" || category === filter ? "flex" : "none";
+      });
+    });
+  });
+});
+
+
+/* ============================================================
+   STICKY FILTER BAR SCROLL BEHAVIOUR
+   ============================================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const filterBar = document.querySelector(".cert-filter-bar");
+  if (!filterBar) return;
+
+  let lastScroll = 0;
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    // Shrink when scrolling down
+    if (currentScroll > lastScroll && currentScroll > 50) {
+      filterBar.classList.add("shrink");
+    } else {
+      filterBar.classList.remove("shrink");
+    }
+
+    lastScroll = currentScroll;
+  });
+});
 </script>
+
 
 </body>
 

@@ -410,6 +410,191 @@ footer {
     font-size: 28px;
   }
 }
+/* ============================================================
+   STICKY FILTER BAR
+   ============================================================ */
+
+.cert-filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 9998;
+  display: flex;
+  gap: 12px;
+  padding: 16px 0;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--light-grey);
+  transition: padding 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cert-filter-bar.shrink {
+  padding: 8px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--navy);
+  background: transparent;
+  color: var(--navy);
+  font-family: var(--heading-font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--electric);
+  color: var(--electric);
+}
+
+.filter-btn.active {
+  border-color: var(--electric);
+  color: var(--electric);
+  background: var(--soft-blue);
+}
+
+/* ============================================================
+   CERTIFICATION CARDS
+   ============================================================ */
+
+.cert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cert-entry {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  padding: 20px 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: 0.25s ease;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+}
+
+.section:nth-of-type(even) .cert-entry {
+  background: var(--light-grey);
+}
+
+.cert-entry:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  border-left-color: var(--electric);
+}
+
+/* ============================================================
+   CARD HEADER (ICON + TITLE + BADGE)
+   ============================================================ */
+
+.cert-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cert-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.cert-title-block {
+  flex: 1;
+}
+
+.cert-title-block h4 {
+  margin: 0;
+  font-size: 18px;
+  font-family: var(--heading-font);
+}
+
+.cert-title-block p {
+  margin: 2px 0 0 0;
+  color: var(--muted-grey);
+  font-size: 14px;
+}
+
+/* ============================================================
+   OUTLINE CATEGORY BADGE
+   ============================================================ */
+
+.cert-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--electric);
+  color: var(--electric);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--heading-font);
+  margin-top: 6px;
+  width: fit-content;
+}
+
+/* ============================================================
+   EXPANDABLE DETAILS
+   ============================================================ */
+
+.cert-extra {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  padding-left: 48px;
+  padding-right: 12px;
+  color: var(--muted-grey);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cert-entry.open .cert-extra {
+  max-height: 300px;
+  margin-top: 12px;
+}
+
+/* ============================================================
+   CREDENTIAL LINK
+   ============================================================ */
+
+.cert-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--electric);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.cert-link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   MOBILE RESPONSIVENESS
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .cert-entry {
+    padding: 16px 18px;
+  }
+
+  .cert-icon {
+    font-size: 28px;
+  }
+
+  .cert-filter-bar {
+    overflow-x: auto;
+    padding: 12px 0;
+  }
+
+  .cert-filter-bar.shrink {
+    padding: 6px 0;
+  }
+}
 
 </style>
 </head>

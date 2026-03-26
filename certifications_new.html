@@ -426,6 +426,11 @@ CERTIFICATION CARDS
   transition: 0.25s ease;
   cursor: pointer;
   border-left: 4px solid transparent;
+
+  /* animation */
+  opacity: 0;
+  transform: translateY(10px);
+  animation: certFadeIn 0.4s ease forwards;
 }
 
 .section:nth-of-type(even) .cert-entry {
@@ -488,9 +493,7 @@ OUTLINE CATEGORY BADGE
 EXPANDABLE DETAILS
 ============================================================ */
 .cert-extra {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease;
+  display: none;
   padding-left: 48px;
   padding-right: 12px;
   color: var(--muted-grey);
@@ -499,8 +502,20 @@ EXPANDABLE DETAILS
 }
 
 .cert-entry.open .cert-extra {
-  max-height: 300px;
+  display: block;
   margin-top: 12px;
+}
+
+/* animation keyframes */
+@keyframes certFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============================================================
@@ -540,6 +555,30 @@ MOBILE RESPONSIVENESS
     padding: 6px 0;
   }
 }
+  .back-to-top {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: none;
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--heading-font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9999;
+}
+
+.back-to-top:hover {
+  transform: translateY(-2px);
+}
+
 </style>
 
 </head>
@@ -735,10 +774,13 @@ async function loadCertifications() {
     const list = document.createElement("div");
     list.className = "cert-list";
 
-    items.forEach(cert => {
+    items.forEach((cert, index) => {
       const card = document.createElement("div");
       card.className = "cert-entry";
       card.dataset.category = cert.category;
+
+      // staggered animation
+      card.style.animationDelay = `${index * 0.05}s`;
 
       card.innerHTML = `
         <div class="cert-header">
@@ -756,8 +798,11 @@ async function loadCertifications() {
         </div>
       `;
 
-      // Expand/collapse behaviour
+      // Expand/collapse behaviour with auto-collapse of others
       card.addEventListener("click", () => {
+        document.querySelectorAll(".cert-entry.open").forEach(openCard => {
+          if (openCard !== card) openCard.classList.remove("open");
+        });
         card.classList.toggle("open");
       });
 
@@ -826,8 +871,28 @@ document.addEventListener("DOMContentLoaded", () => {
     lastScroll = currentScroll;
   });
 });
+
+
+/* ============================================================
+BACK TO TOP BUTTON
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  const backToTop = document.getElementById("backToTop");
+  if (!backToTop) return;
+
+  window.addEventListener("scroll", () => {
+    backToTop.style.opacity = window.scrollY > 400 ? "1" : "0";
+    backToTop.style.pointerEvents = window.scrollY > 400 ? "auto" : "none";
+  });
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
 </script>
 
+
+<button id="backToTop" class="back-to-top">Back to top</button>
 
 </body>
 </html>

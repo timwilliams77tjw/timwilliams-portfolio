@@ -109,28 +109,29 @@ function buildCertifications() {
 function wireFilters() {
   const buttons = document.querySelectorAll('.filter-btn');
 
-  console.log("Found filter buttons:", buttons.length);
+  debug("Found filter buttons: " + buttons.length);
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
 
-      console.log("Clicked filter:", btn.dataset.filter);
+      debug("Clicked filter: " + btn.dataset.filter);
 
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const filter = normalise(btn.dataset.filter);
-      console.log("Normalised filter:", filter);
+      debug("Normalised filter: " + filter);
 
       document.querySelectorAll('.category-section').forEach(sec => {
         const cat = normalise(sec.dataset.category);
-        console.log("Comparing:", filter, "vs", cat);
+        debug("Comparing: " + filter + " vs " + cat);
 
         sec.style.display = (filter === 'all' || filter === cat) ? '' : 'none';
       });
     });
   });
 }
+
 
 
 // -----------------------------
@@ -165,6 +166,29 @@ function wireTooltips() {
   document.addEventListener('click', () => {
     document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
   });
+}
+// -----------------------------
+// DEBUG PANEL (temporary)
+// -----------------------------
+function debug(msg) {
+  let box = document.getElementById('debugBox');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'debugBox';
+    box.style.position = 'fixed';
+    box.style.bottom = '0';
+    box.style.left = '0';
+    box.style.width = '100%';
+    box.style.maxHeight = '40vh';
+    box.style.overflowY = 'auto';
+    box.style.background = 'rgba(0,0,0,0.85)';
+    box.style.color = 'lime';
+    box.style.fontSize = '14px';
+    box.style.padding = '10px';
+    box.style.zIndex = '999999';
+    document.body.appendChild(box);
+  }
+  box.innerHTML += msg + '<br>';
 }
 
 // -----------------------------

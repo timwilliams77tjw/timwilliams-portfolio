@@ -98,7 +98,7 @@ function wireFilters() {
         });
       }
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // No auto scroll to header – stay near cards
     });
   });
 }
@@ -106,15 +106,36 @@ function wireFilters() {
 // Floating buttons
 function wireFloatingButtons() {
   const fab = document.getElementById('fab');
-  const bookingFab = document.getElementById('bookingFab');
 
   if (fab) {
     fab.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+  // bookingFab is just a link to the booking section
+}
 
-  // bookingFab is just a link; no JS needed for scroll
+// Tooltip tap behaviour (for touch devices)
+function wireTooltips() {
+  const icons = document.querySelectorAll('.tooltip-icon');
+
+  icons.forEach(icon => {
+    icon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const text = icon.nextElementSibling;
+      if (!text) return;
+
+      const isVisible = text.classList.contains('visible');
+      document.querySelectorAll('.tooltip-text').forEach(t => t.classList.remove('visible'));
+      if (!isVisible) {
+        text.classList.add('visible');
+      }
+    });
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.tooltip-text').forEach(t => t.classList.remove('visible'));
+  });
 }
 
 // Popup menus
@@ -148,4 +169,5 @@ document.addEventListener('DOMContentLoaded', () => {
   buildCertifications();
   wireFilters();
   wireFloatingButtons();
+  wireTooltips();
 });

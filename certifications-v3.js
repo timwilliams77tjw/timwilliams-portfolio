@@ -1,3 +1,9 @@
+document.body.insertAdjacentHTML(
+  "afterbegin",
+  "<div style='background:red;color:white;padding:10px;font-size:18px;'>DEBUG: JS v2 LOADED</div>"
+);
+
+
 /* LOAD JSON */
 function loadCertData() {
     return JSON.parse(document.getElementById("cert-data").textContent);

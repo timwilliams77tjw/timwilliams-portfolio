@@ -1,140 +1,144 @@
-/* DEBUG */
-document.body.insertAdjacentHTML(
-  "afterbegin",
-  "<div style='background:red;color:white;padding:10px;font-size:18px;'>DEBUG: JS v3 LOADED</div>"
-);
+// certifications-v3.js
 
-/* LOAD JSON */
-function loadCertData() {
-    return JSON.parse(document.getElementById("cert-data").textContent);
+function getCertData() {
+  const script = document.getElementById('cert-data');
+  if (!script) return {};
+  try {
+    return JSON.parse(script.textContent.trim());
+  } catch (e) {
+    console.error('Error parsing cert JSON', e);
+    return {};
+  }
 }
 
-/* RENDER CARDS */
-function renderSections() {
-    const data = loadCertData();
-    const container = document.getElementById("certificationsContainer");
+function buildCertifications() {
+  const data = getCertData();
+  const container = document.getElementById('certificationsContainer');
+  if (!container) return;
 
-    Object.keys(data).forEach(category => {
-        const section = document.createElement("div");
-        section.className = "section";
-        section.id = category;
+  container.innerHTML = '';
 
-        section.innerHTML = `
-            <h2>${category} Certifications</h2>
-            <div class="accent"></div>
-        `;
+  Object.keys(data).forEach(category => {
+    const section = document.createElement('section');
+    section.className = 'category-section';
+    section.dataset.category = category;
 
-        data[category].forEach(cert => {
-            const card = document.createElement("div");
-            card.className = "cert-card";
+    // Header with plus/minus
+    const header = document.createElement('div');
+    header.className = 'category-header';
 
-            card.innerHTML = `
-                <div class="cert-header">
-                    <span><span class="cert-icon">${cert.icon}</span>${cert.title} — ${cert.issuer} (${cert.year})</span>
-                    <span class="expand-symbol">+</span>
-                </div>
-                <div class="cert-body">
-                    <p><strong>Issuer:</strong> ${cert.issuer}</p>
-                    <p><strong>Year:</strong> ${cert.year}</p>
-                </div>
-            `;
+    const title = document.createElement('div');
+    title.className = 'category-title';
+    title.textContent = category;
 
-            section.appendChild(card);
+    const toggle = document.createElement('div');
+    toggle.className = 'category-toggle';
+    toggle.textContent = '−'; // start expanded
+
+    header.appendChild(title);
+    header.appendChild(toggle);
+    section.appendChild(header);
+
+    // Card list
+    const list = document.createElement('div');
+    list.className = 'card-list';
+
+    data[category].forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'cert-card';
+
+      const icon = document.createElement('div');
+      icon.className = 'cert-icon';
+      icon.textContent = item.icon || '📜';
+
+      const titleEl = document.createElement('div');
+      titleEl.className = 'cert-title';
+      titleEl.textContent = item.title;
+
+      const issuer = document.createElement('div');
+      issuer.className = 'cert-issuer';
+      issuer.textContent = item.issuer;
+
+      const year = document.createElement('div');
+      year.className = 'cert-year';
+      year.textContent = item.year || '—';
+
+      row.appendChild(icon);
+      row.appendChild(titleEl);
+      row.appendChild(issuer);
+      row.appendChild(year);
+
+      list.appendChild(row);
+    });
+
+    section.appendChild(list);
+    container.appendChild(section);
+
+    // Expand/collapse behaviour
+    header.addEventListener('click', () => {
+      const isHidden = list.style.display === 'none';
+      list.style.display = isHidden ? '' : 'none';
+      toggle.textContent = isHidden ? '−' : '+';
+    });
+  });
+}
+
+function wireFilters() {
+  const buttons = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.category-section');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const target = btn.dataset.target;
+      if (target === 'all') {
+        sections.forEach(sec => sec.style.display = '');
+      } else {
+        sections.forEach(sec => {
+          sec.style.display = (sec.dataset.category === target) ? '' : 'none';
         });
-
-        container.appendChild(section);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-
-    setupCardBehaviour();
+  });
 }
 
-/* CARD EXPAND/COLLAPSE (ACCORDION MODE) */
-function setupCardBehaviour() {
-    const headers = document.querySelectorAll(".cert-header");
+function wireFloatingButtons() {
+  const floating = document.getElementById('floatingToggle');
+  const backToTop = document.getElementById('backToTop');
 
-    headers.forEach(header => {
-        header.addEventListener("click", () => {
-            const body = header.nextElementSibling;
-            const symbol = header.querySelector(".expand-symbol");
-
-            // Close all other cards
-            document.querySelectorAll(".cert-body").forEach(b => {
-                if (b !== body) b.style.display = "none";
-            });
-            document.querySelectorAll(".expand-symbol").forEach(s => {
-                if (s !== symbol) s.textContent = "+";
-            });
-
-            // Toggle this card
-            const isOpen = body.style.display === "block";
-            body.style.display = isOpen ? "none" : "block";
-            symbol.textContent = isOpen ? "+" : "–";
-
-            if (!isOpen) {
-                header.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-        });
+  if (floating) {
+    floating.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-}
+  }
 
-/* FILTER BUTTONS */
-function setupFilters() {
-    const buttons = document.querySelectorAll(".filter-btn");
-
-    buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            buttons.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-
-            const target = btn.dataset.target;
-
-            if (target === "all") {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            } else {
-                const section = document.getElementById(target);
-                if (section) {
-                    section.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
-            }
-        });
+  if (backToTop) {
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  }
 }
 
-/* FLOATING BUTTON */
-function setupFloatingButton() {
-    const fab = document.getElementById("fab");
-
-    fab.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+// Dummy stubs so your existing onclicks don’t break
+function openCVMenu(event) {
+  event.preventDefault();
+  const menu = document.getElementById('cvMenu');
+  if (!menu) return;
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
-/* POPUP MENUS */
-function openCVMenu(e) {
-    e.preventDefault();
-    togglePopup("cvMenu", e.target);
+function openPortfolioMenu(event) {
+  event.preventDefault();
+  const menu = document.getElementById('portfolioMenu');
+  if (!menu) return;
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
-function openPortfolioMenu(e) {
-    e.preventDefault();
-    togglePopup("portfolioMenu", e.target);
-}
-
-function togglePopup(id, anchor) {
-    const menu = document.getElementById(id);
-    const rect = anchor.getBoundingClientRect();
-
-    menu.style.top = rect.bottom + window.scrollY + "px";
-    menu.style.left = rect.left + "px";
-
-    const visible = menu.style.display === "flex";
-    document.querySelectorAll(".popup-menu").forEach(m => m.style.display = "none");
-    menu.style.display = visible ? "none" : "flex";
-}
-
-/* INIT */
-document.addEventListener("DOMContentLoaded", () => {
-    renderSections();
-    setupFilters();
-    setupFloatingButton();
+document.addEventListener('DOMContentLoaded', () => {
+  buildCertifications();
+  wireFilters();
+  wireFloatingButtons();
 });

@@ -48,10 +48,10 @@ function buildCertifications() {
       row.className = 'cert-card';
 
       row.innerHTML = `
-        <div class="cert-icon">${item.icon}</div>
+        <div class="cert-icon">${item.icon || '📜'}</div>
         <div class="cert-title">${item.title}</div>
         <div class="cert-issuer">${item.issuer}</div>
-        <div class="cert-year">${item.year}</div>
+        <div class="cert-year">${item.year || '—'}</div>
       `;
 
       list.appendChild(row);
@@ -62,11 +62,19 @@ function buildCertifications() {
 
     // Toggle behaviour
     header.addEventListener('click', () => {
-      const isHidden = list.style.display === 'none' || list.style.display === '';
+      const isHidden = list.style.display === 'none';
       list.style.display = isHidden ? 'block' : 'none';
       toggle.textContent = isHidden ? '−' : '+';
     });
   });
+
+  // Open first category by default
+  const firstList = container.querySelector('.card-list');
+  const firstToggle = container.querySelector('.category-toggle');
+  if (firstList && firstToggle) {
+    firstList.style.display = 'block';
+    firstToggle.textContent = '−';
+  }
 }
 
 // Filters
@@ -81,7 +89,9 @@ function wireFilters() {
       const target = btn.dataset.target;
 
       if (target === 'all') {
-        document.querySelectorAll('.category-section').forEach(sec => sec.style.display = '');
+        document.querySelectorAll('.category-section').forEach(sec => {
+          sec.style.display = '';
+        });
       } else {
         document.querySelectorAll('.category-section').forEach(sec => {
           sec.style.display = sec.dataset.category === target ? '' : 'none';
@@ -93,14 +103,18 @@ function wireFilters() {
   });
 }
 
-// Floating button
-function wireFloatingButton() {
+// Floating buttons
+function wireFloatingButtons() {
   const fab = document.getElementById('fab');
-  if (!fab) return;
+  const bookingFab = document.getElementById('bookingFab');
 
-  fab.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  if (fab) {
+    fab.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // bookingFab is just a link; no JS needed for scroll
 }
 
 // Popup menus
@@ -116,14 +130,22 @@ function openPortfolioMenu(event) {
 
 function togglePopup(id, anchor) {
   const menu = document.getElementById(id);
-  const rect = anchor.getBoundingClientRect();
+  if (!menu) return;
 
+  const rect = anchor.getBoundingClientRect();
   menu.style.top = rect.bottom + window.scrollY + 'px';
   menu.style.left = rect.left + 'px';
 
   const visible = menu.style.display === 'flex';
-  document.querySelectorAll('.popup-menu').forEach(m => m.style.display = 'none');
+  document.querySelectorAll('.popup-menu').forEach(m => {
+    m.style.display = 'none';
+  });
   menu.style.display = visible ? 'none' : 'flex';
 }
 
-//
+// INIT
+document.addEventListener('DOMContentLoaded', () => {
+  buildCertifications();
+  wireFilters();
+  wireFloatingButtons();
+});

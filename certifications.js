@@ -112,7 +112,8 @@ function wireFilters() {
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      const filter = normalise(btn.dataset.target);
+const filter = normalise(btn.dataset.filter);
+
 
       document.querySelectorAll('.category-section').forEach(sec => {
         const cat = normalise(sec.dataset.category);

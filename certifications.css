@@ -194,11 +194,12 @@ body {
 }
 
 .tooltip-icon {
-  cursor: default;
+  cursor: pointer;
 }
 
 .tooltip-text {
   visibility: hidden;
+  opacity: 0;
   background: #0a2540;
   color: white;
   padding: 6px 10px;
@@ -209,10 +210,12 @@ body {
   transform: translateX(-50%);
   white-space: nowrap;
   z-index: 9999;
+  transition: opacity 0.15s ease;
 }
 
-.tooltip:hover .tooltip-text {
+.tooltip-text.visible {
   visibility: visible;
+  opacity: 1;
 }
 
 /* FOOTER */

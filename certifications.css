@@ -251,3 +251,50 @@ footer {
     text-align: left;
   }
 }
+/* MATCH INDEX.HTML TOOLTIP STYLING */
+.tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tooltip-icon {
+    font-size: 15px;
+    color: #0A1A2F;
+    cursor: pointer;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    width: 260px;
+    background-color: #0A1A2F;
+    color: #fff;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    position: absolute;
+    top: 50%;
+    right: 110%;
+    transform: translateY(-50%);
+    transition: opacity 0.25s ease;
+    z-index: 10000000;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #0A1A2F;
+}
+
+.tooltip.tap-active .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

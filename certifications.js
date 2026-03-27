@@ -164,5 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
   buildCertifications();
   wireFilters();
   wireFloatingButtons();
+  document.querySelector('.sticky-bar').addEventListener('click', e => {
+  e.stopPropagation();
+});
+}
   wireTooltips();
 });

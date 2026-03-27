@@ -1,3 +1,5 @@
+alert("JS loaded");
+
 // -----------------------------
 // Load JSON from <script id="cert-data">
 // -----------------------------

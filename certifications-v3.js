@@ -1,5 +1,4 @@
-// certifications-v3.js
-
+// Load JSON
 function getCertData() {
   const script = document.getElementById('cert-data');
   if (!script) return {};
@@ -11,6 +10,7 @@ function getCertData() {
   }
 }
 
+// Build sections
 function buildCertifications() {
   const data = getCertData();
   const container = document.getElementById('certificationsContainer');
@@ -23,7 +23,7 @@ function buildCertifications() {
     section.className = 'category-section';
     section.dataset.category = category;
 
-    // Header with plus/minus
+    // Header
     const header = document.createElement('div');
     header.className = 'category-header';
 
@@ -33,13 +33,13 @@ function buildCertifications() {
 
     const toggle = document.createElement('div');
     toggle.className = 'category-toggle';
-    toggle.textContent = '−'; // start expanded
+    toggle.textContent = '+'; // collapsed by default
 
     header.appendChild(title);
     header.appendChild(toggle);
     section.appendChild(header);
 
-    // Card list
+    // List
     const list = document.createElement('div');
     list.className = 'card-list';
 
@@ -47,26 +47,12 @@ function buildCertifications() {
       const row = document.createElement('div');
       row.className = 'cert-card';
 
-      const icon = document.createElement('div');
-      icon.className = 'cert-icon';
-      icon.textContent = item.icon || '📜';
-
-      const titleEl = document.createElement('div');
-      titleEl.className = 'cert-title';
-      titleEl.textContent = item.title;
-
-      const issuer = document.createElement('div');
-      issuer.className = 'cert-issuer';
-      issuer.textContent = item.issuer;
-
-      const year = document.createElement('div');
-      year.className = 'cert-year';
-      year.textContent = item.year || '—';
-
-      row.appendChild(icon);
-      row.appendChild(titleEl);
-      row.appendChild(issuer);
-      row.appendChild(year);
+      row.innerHTML = `
+        <div class="cert-icon">${item.icon}</div>
+        <div class="cert-title">${item.title}</div>
+        <div class="cert-issuer">${item.issuer}</div>
+        <div class="cert-year">${item.year}</div>
+      `;
 
       list.appendChild(row);
     });
@@ -74,18 +60,18 @@ function buildCertifications() {
     section.appendChild(list);
     container.appendChild(section);
 
-    // Expand/collapse behaviour
+    // Toggle behaviour
     header.addEventListener('click', () => {
-      const isHidden = list.style.display === 'none';
-      list.style.display = isHidden ? '' : 'none';
+      const isHidden = list.style.display === 'none' || list.style.display === '';
+      list.style.display = isHidden ? 'block' : 'none';
       toggle.textContent = isHidden ? '−' : '+';
     });
   });
 }
 
+// Filters
 function wireFilters() {
   const buttons = document.querySelectorAll('.filter-btn');
-  const sections = document.querySelectorAll('.category-section');
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -93,52 +79,51 @@ function wireFilters() {
       btn.classList.add('active');
 
       const target = btn.dataset.target;
+
       if (target === 'all') {
-        sections.forEach(sec => sec.style.display = '');
+        document.querySelectorAll('.category-section').forEach(sec => sec.style.display = '');
       } else {
-        sections.forEach(sec => {
-          sec.style.display = (sec.dataset.category === target) ? '' : 'none';
+        document.querySelectorAll('.category-section').forEach(sec => {
+          sec.style.display = sec.dataset.category === target ? '' : 'none';
         });
       }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
 }
 
-function wireFloatingButtons() {
-  const floating = document.getElementById('floatingToggle');
-  const backToTop = document.getElementById('backToTop');
+// Floating button
+function wireFloatingButton() {
+  const fab = document.getElementById('fab');
+  if (!fab) return;
 
-  if (floating) {
-    floating.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  if (backToTop) {
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
+  fab.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }
 
-// Dummy stubs so your existing onclicks don’t break
+// Popup menus
 function openCVMenu(event) {
   event.preventDefault();
-  const menu = document.getElementById('cvMenu');
-  if (!menu) return;
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  togglePopup('cvMenu', event.target);
 }
 
 function openPortfolioMenu(event) {
   event.preventDefault();
-  const menu = document.getElementById('portfolioMenu');
-  if (!menu) return;
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  togglePopup('portfolioMenu', event.target);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  buildCertifications();
-  wireFilters();
-  wireFloatingButtons();
-});
+function togglePopup(id, anchor) {
+  const menu = document.getElementById(id);
+  const rect = anchor.getBoundingClientRect();
+
+  menu.style.top = rect.bottom + window.scrollY + 'px';
+  menu.style.left = rect.left + 'px';
+
+  const visible = menu.style.display === 'flex';
+  document.querySelectorAll('.popup-menu').forEach(m => m.style.display = 'none');
+  menu.style.display = visible ? 'none' : 'flex';
+}
+
+//

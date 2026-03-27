@@ -5,21 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tim Williams – Certification Portfolio</title>
 
-    <!-- External CSS -->
     <link rel="stylesheet" href="certifications.css">
-
-    <!-- External JS -->
     <script src="certifications.js" defer></script>
 </head>
 
 <body class="page-certifications">
 
-<!-- ============================
-     HERO BANNER
-============================= -->
+<!-- HERO -->
 <div class="hero-banner">
     <div class="hero-content">
-
         <div class="hero-text">
             <h1>Tim Williams</h1>
             <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
@@ -27,163 +21,107 @@
 
             <div class="button-group">
                 <a href="index.html" class="brand-btn">Home</a>
-
-                <!-- CV Menu -->
                 <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
-
                 <a class="brand-btn active">Certifications</a>
-
                 <a href="recommendations.html" class="brand-btn">Recommendations</a>
-
-                <!-- Portfolio Menu -->
                 <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
-
                 <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
             </div>
         </div>
 
-        <img src="profile2.jpg" alt="Tim Williams" class="hero-photo">
+        <img src="profile2.jpg" class="hero-photo" alt="Tim Williams">
     </div>
 </div>
 
-<!-- ============================
-     STICKY FILTER / SEARCH BAR
-============================= -->
+<!-- FILTER BAR -->
 <div class="sticky-bar">
-
-    <div class="search-container">
-        <span class="search-icon">🔍</span>
-        <input id="searchInput" type="text" placeholder="Search certifications…">
-    </div>
-
-    <button class="filter-btn active" data-category="All">All</button>
-    <button class="filter-btn" data-category="Core">Core</button>
-    <button class="filter-btn" data-category="Agile">Agile</button>
-    <button class="filter-btn" data-category="Cloud">Cloud</button>
-    <button class="filter-btn" data-category="Microsoft">Microsoft</button>
-    <button class="filter-btn" data-category="Infrastructure">Infrastructure</button>
-    <button class="filter-btn" data-category="Governance">Governance</button>
-    <button class="filter-btn" data-category="Leadership">Leadership</button>
-
-    <button id="collapseAllBtn" class="filter-btn">Collapse All</button>
-    <button id="printModeBtn" class="filter-btn">Print Mode</button>
-    <button id="exportPdfBtn" class="filter-btn">Export PDF</button>
+    <button class="filter-btn active" data-target="all">All</button>
+    <button class="filter-btn" data-target="Core">Core</button>
+    <button class="filter-btn" data-target="Agile">Agile</button>
+    <button class="filter-btn" data-target="Cloud">Cloud</button>
+    <button class="filter-btn" data-target="Microsoft">Microsoft</button>
+    <button class="filter-btn" data-target="Infrastructure">Infrastructure</button>
+    <button class="filter-btn" data-target="Governance">Governance</button>
+    <button class="filter-btn" data-target="Leadership">Leadership</button>
 </div>
 
-<!-- ============================
-     CERTIFICATIONS CONTAINER
-============================= -->
+<!-- CERTIFICATIONS -->
 <div id="certificationsContainer" class="container"></div>
 
-<!-- ============================
-     FOOTER
-============================= -->
+<!-- FOOTER -->
 <footer>
     <div class="footer-left">© Tim Williams | IT Transformation Portfolio</div>
-    <div class="footer-qr">
-        <img src="qr.png" alt="QR Code">
-    </div>
+    <div class="footer-qr"><img src="qr.png" alt="QR Code"></div>
 </footer>
 
-<!-- ============================
-     FLOATING BOOKING BUTTON
-============================= -->
-<a href="calendar.html" class="floating-booking-btn">Make a Booking</a>
-
-<!-- ============================
-     POPUP MENUS
-============================= -->
+<!-- POPUP MENUS -->
 <div id="cvMenu" class="popup-menu">
     <a href="Tim_Williams_CV.pdf" target="_blank">View CV</a>
-
-    <div class="tooltip">
-        <a href="Tim_Williams_CV.download">Download PDF</a>
+    <span class="tooltip">
         <span class="tooltip-icon">ⓘ</span>
         <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
-    </div>
+    </span>
 </div>
 
 <div id="portfolioMenu" class="popup-menu">
     <a href="portfolio_presentation.pdf" target="_blank">View Portfolio</a>
-
-    <div class="tooltip">
-        <a href="portfolio_presentation.download">Download PDF</a>
+    <span class="tooltip">
         <span class="tooltip-icon">ⓘ</span>
         <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
-    </div>
+    </span>
 </div>
 
-<!-- ============================
-     JSON DATA (DYNAMIC CONTENT)
-============================= -->
+<!-- JSON DATA -->
 <script id="cert-data" type="application/json">
 {
-    "Core Certifications": [
-        { "title": "PRINCE2® Practitioner", "issuer": "QA Ltd", "year": "—", "category": "Core", "details": "PRINCE2 practitioner-level certification.", "url": "#" },
-        { "title": "P3O Practitioner", "issuer": "QA Ltd", "year": "—", "category": "Core", "details": "Portfolio, Programme and Project Offices certification.", "url": "#" },
-        { "title": "APM Project Management Qualification (APMP)", "issuer": "APM", "year": "—", "category": "Core", "details": "APM PMQ certification.", "url": "#" },
-        { "title": "ITIL Certification", "issuer": "QA Ltd", "year": "—", "category": "Core", "details": "ITIL service management certification.", "url": "#" },
-        { "title": "Certified Risk Manager", "issuer": "QA Ltd", "year": "—", "category": "Core", "details": "Risk management certification.", "url": "#" },
-        { "title": "Programme Management", "issuer": "CompTIA", "year": "Nov‑25 → Jan‑35", "category": "Core", "details": "Programme management certification.", "url": "#" }
+    "Core": [
+        { "icon": "🏅", "title": "PRINCE2® Practitioner", "issuer": "QA Ltd", "year": "2024" },
+        { "icon": "📘", "title": "P3O Practitioner", "issuer": "QA Ltd", "year": "2023" },
+        { "icon": "🥇", "title": "APM PMQ", "issuer": "APM", "year": "2022" },
+        { "icon": "⚙️", "title": "ITIL Certification", "issuer": "QA Ltd", "year": "2021" },
+        { "icon": "⚠️", "title": "Certified Risk Manager", "issuer": "QA Ltd", "year": "2020" },
+        { "icon": "📊", "title": "Programme Management", "issuer": "CompTIA", "year": "2019" }
     ],
 
-    "Agile, Scrum & Delivery Frameworks": [
-        { "title": "Agile Project Management", "issuer": "Management Project Mar", "year": "—", "category": "Agile", "details": "Agile PM certification.", "url": "#" },
-        { "title": "Agile Foundations", "issuer": "LinkedIn", "year": "—", "category": "Agile", "details": "Agile foundations course.", "url": "#" },
-        { "title": "Agile Delivery & Essentials", "issuer": "LinkedIn", "year": "—", "category": "Agile", "details": "Agile delivery essentials.", "url": "#" },
-        { "title": "Scrum: Essentials", "issuer": "LinkedIn", "year": "—", "category": "Agile", "details": "Scrum essentials course.", "url": "#" },
-        { "title": "Scrum: Basics", "issuer": "Project Mar", "year": "—", "category": "Agile", "details": "Scrum basics training.", "url": "#" },
-        { "title": "Disciplined Agile", "issuer": "LinkedIn / Project Mar", "year": "—", "category": "Agile", "details": "Disciplined Agile training.", "url": "#" },
-        { "title": "Atlassian Agile & Project Management", "issuer": "Atlassian", "year": "—", "category": "Agile", "details": "Atlassian Agile certification.", "url": "#" },
-        { "title": "Mistakes in Agile Projects", "issuer": "PMI", "year": "—", "category": "Agile", "details": "PMI Agile mistakes course.", "url": "#" }
+    "Agile": [
+        { "icon": "⚡", "title": "Agile Project Management", "issuer": "Management Project Mar", "year": "—" },
+        { "icon": "🔁", "title": "Agile Foundations", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "🌀", "title": "Agile Delivery & Essentials", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "📈", "title": "Scrum: Essentials", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "📚", "title": "Scrum: Basics", "issuer": "Project Mar", "year": "—" },
+        { "icon": "⚡", "title": "Disciplined Agile", "issuer": "LinkedIn / Project Mar", "year": "—" },
+        { "icon": "🔁", "title": "Atlassian Agile & PM", "issuer": "Atlassian", "year": "—" }
     ],
 
-    "Cloud, Automation & AI": [
-        { "title": "AI for Project Management", "issuer": "Management Project Mar", "year": "—", "category": "Cloud", "details": "AI in PM training.", "url": "#" },
-        { "title": "AI in Project Management", "issuer": "LinkedIn", "year": "—", "category": "Cloud", "details": "AI PM course.", "url": "#" },
-        { "title": "Program Management with AI", "issuer": "LinkedIn", "year": "—", "category": "Cloud", "details": "AI for programme management.", "url": "#" },
-        { "title": "Microsoft AI Fundamentals", "issuer": "Microsoft", "year": "—", "category": "Cloud", "details": "AI fundamentals certification.", "url": "#" },
-        { "title": "Build an Agent with Copilot", "issuer": "Microsoft", "year": "—", "category": "Cloud", "details": "Copilot agent building.", "url": "#" },
-        { "title": "Power Automate Solutions", "issuer": "Microsoft", "year": "—", "category": "Cloud", "details": "Power Automate certification.", "url": "#" },
-        { "title": "Cloud Infrastructure Fundamentals", "issuer": "Microsoft", "year": "—", "category": "Cloud", "details": "Cloud infrastructure fundamentals.", "url": "#" }
+    "Cloud": [
+        { "icon": "☁️", "title": "AI for Project Management", "issuer": "Management Project Mar", "year": "—" },
+        { "icon": "🤖", "title": "AI in Project Management", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "🧠", "title": "Program Management with AI", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "⚙️", "title": "Microsoft AI Fundamentals", "issuer": "Microsoft", "year": "—" }
     ],
 
-    "Microsoft Technical Certifications": [
-        { "title": "Microsoft Certified Technician", "issuer": "Microsoft", "year": "—", "category": "Microsoft", "details": "Technical certification.", "url": "#" },
-        { "title": "Microsoft Certified IT Professional", "issuer": "Microsoft", "year": "—", "category": "Microsoft", "details": "IT professional certification.", "url": "#" },
-        { "title": "Microsoft Certified Professional", "issuer": "Microsoft", "year": "—", "category": "Microsoft", "details": "MCP certification.", "url": "#" },
-        { "title": "MCTS: Windows Server (multiple)", "issuer": "Microsoft", "year": "—", "category": "Microsoft", "details": "Windows Server MCTS.", "url": "#" },
-        { "title": "MCTS: Exchange Server", "issuer": "Microsoft", "year": "—", "category": "Microsoft", "details": "Exchange Server MCTS.", "url": "#" },
-        { "title": "MCITP Virtualisation Administrator", "issuer": "Microsoft", "year": "—", "category": "Microsoft", "details": "Virtualisation admin certification.", "url": "#" },
-        { "title": "Hyper‑V in Windows Server", "issuer": "Microsoft", "year": "—", "category": "Microsoft", "details": "Hyper‑V certification.", "url": "#" },
-        { "title": "System Centre Virtual Machine Manager", "issuer": "Microsoft", "year": "—", "category": "Microsoft", "details": "SCVMM certification.", "url": "#" },
-        { "title": "Terminal Services in Windows", "issuer": "Microsoft", "year": "—", "category": "Microsoft", "details": "Terminal Services training.", "url": "#" }
+    "Microsoft": [
+        { "icon": "🪟", "title": "Microsoft Certified Technician", "issuer": "Microsoft", "year": "—" },
+        { "icon": "💻", "title": "Microsoft Certified IT Professional", "issuer": "Microsoft", "year": "—" },
+        { "icon": "🖥️", "title": "Microsoft Certified Professional", "issuer": "Microsoft", "year": "—" }
     ],
 
-    "Infrastructure, Security & Virtualisation": [
-        { "title": "VMware ESXi Administrator", "issuer": "VMware", "year": "Feb‑11 → Dec‑35", "category": "Infrastructure", "details": "VMware ESXi admin certification.", "url": "#" },
-        { "title": "IT Infrastructure", "issuer": "CompTIA", "year": "—", "category": "Infrastructure", "details": "IT infrastructure certification.", "url": "#" },
-        { "title": "PointSec Administration", "issuer": "Pointsec Mobile Technologies", "year": "—", "category": "Infrastructure", "details": "PointSec admin training.", "url": "#" },
-        { "title": "ISO Awareness", "issuer": "Roc Technologies", "year": "—", "category": "Infrastructure", "details": "ISO awareness course.", "url": "#" }
+    "Infrastructure": [
+        { "icon": "🔐", "title": "VMware ESXi Administrator", "issuer": "VMware", "year": "2011" },
+        { "icon": "🖧", "title": "IT Infrastructure", "issuer": "CompTIA", "year": "—" },
+        { "icon": "🛡️", "title": "PointSec Administration", "issuer": "Pointsec Mobile Technologies", "year": "—" }
     ],
 
-    "Service Management & Governance": [
-        { "title": "ServiceNow Training", "issuer": "ServiceNow", "year": "—", "category": "Governance", "details": "ServiceNow training.", "url": "#" },
-        { "title": "ServiceNow IT Leadership", "issuer": "ServiceNow", "year": "—", "category": "Governance", "details": "ServiceNow leadership course.", "url": "#" },
-        { "title": "Data Protection", "issuer": "Access LMS", "year": "—", "category": "Governance", "details": "Data protection training.", "url": "#" },
-        { "title": "Modern Slavery Awareness", "issuer": "Access LMS", "year": "—", "category": "Governance", "details": "Modern slavery awareness.", "url": "#" },
-        { "title": "How to Support Yourself", "issuer": "Access LMS", "year": "—", "category": "Governance", "details": "Self-support training.", "url": "#" }
+    "Governance": [
+        { "icon": "📋", "title": "ServiceNow Training", "issuer": "ServiceNow", "year": "—" },
+        { "icon": "🏛️", "title": "ServiceNow IT Leadership", "issuer": "ServiceNow", "year": "—" },
+        { "icon": "🧭", "title": "Data Protection", "issuer": "Access LMS", "year": "—" }
     ],
 
-    "Professional Development & Leadership": [
-        { "title": "Lead a Successful PMO", "issuer": "PMI", "year": "—", "category": "Leadership", "details": "PMO leadership course.", "url": "#" },
-        { "title": "Project Leadership in the Modern Era", "issuer": "PMI", "year": "—", "category": "Leadership", "details": "Modern leadership training.", "url": "#" },
-        { "title": "APM Volunteer Contribution", "issuer": "Project Mar", "year": "—", "category": "Leadership", "details": "APM volunteer contribution.", "url": "#" },
-        { "title": "UK Employee Forum Rep - Computacenter", "issuer": "Computacenter", "year": "—", "category": "Leadership", "details": "Employee forum representation.", "url": "#" },
-        { "title": "APM Volunteer Programme", "issuer": "APMP", "year": "—", "category": "Leadership", "details": "APM volunteer programme.", "url": "#" },
-        { "title": "APM Student Programme", "issuer": "Association", "year": "—", "category": "Leadership", "details": "APM student programme.", "url": "#" },
-        { "title": "Creating Your Professional Brand", "issuer": "LinkedIn", "year": "—", "category": "Leadership", "details": "Brand creation course.", "url": "#" },
-        { "title": "Succeeding in Your Career", "issuer": "LinkedIn", "year": "—", "category": "Leadership", "details": "Career success course.", "url": "#" }
+    "Leadership": [
+        { "icon": "⭐", "title": "Lead a Successful PMO", "issuer": "PMI", "year": "—" },
+        { "icon": "🎯", "title": "Project Leadership in the Modern Era", "issuer": "PMI", "year": "—" },
+        { "icon": "🧑‍💼", "title": "Creating Your Professional Brand", "issuer": "LinkedIn", "year": "—" }
     ]
 }
 </script>

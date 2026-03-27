@@ -1,15 +1,15 @@
+/* DEBUG */
 document.body.insertAdjacentHTML(
   "afterbegin",
-  "<div style='background:red;color:white;padding:10px;font-size:18px;'>DEBUG: JS v2 LOADED</div>"
+  "<div style='background:red;color:white;padding:10px;font-size:18px;'>DEBUG: JS v3 LOADED</div>"
 );
-
 
 /* LOAD JSON */
 function loadCertData() {
     return JSON.parse(document.getElementById("cert-data").textContent);
 }
 
-/* RENDER SECTIONS */
+/* RENDER CARDS */
 function renderSections() {
     const data = loadCertData();
     const container = document.getElementById("certificationsContainer");
@@ -25,18 +25,55 @@ function renderSections() {
         `;
 
         data[category].forEach(cert => {
-            const row = document.createElement("div");
-            row.className = "cert-row";
+            const card = document.createElement("div");
+            card.className = "cert-card";
 
-            row.innerHTML = `
-                <span class="cert-icon">${cert.icon}</span>
-                <span>${cert.title} — ${cert.issuer} (${cert.year})</span>
+            card.innerHTML = `
+                <div class="cert-header">
+                    <span><span class="cert-icon">${cert.icon}</span>${cert.title} — ${cert.issuer} (${cert.year})</span>
+                    <span class="expand-symbol">+</span>
+                </div>
+                <div class="cert-body">
+                    <p><strong>Issuer:</strong> ${cert.issuer}</p>
+                    <p><strong>Year:</strong> ${cert.year}</p>
+                </div>
             `;
 
-            section.appendChild(row);
+            section.appendChild(card);
         });
 
         container.appendChild(section);
+    });
+
+    setupCardBehaviour();
+}
+
+/* CARD EXPAND/COLLAPSE (ACCORDION MODE) */
+function setupCardBehaviour() {
+    const headers = document.querySelectorAll(".cert-header");
+
+    headers.forEach(header => {
+        header.addEventListener("click", () => {
+            const body = header.nextElementSibling;
+            const symbol = header.querySelector(".expand-symbol");
+
+            // Close all other cards
+            document.querySelectorAll(".cert-body").forEach(b => {
+                if (b !== body) b.style.display = "none";
+            });
+            document.querySelectorAll(".expand-symbol").forEach(s => {
+                if (s !== symbol) s.textContent = "+";
+            });
+
+            // Toggle this card
+            const isOpen = body.style.display === "block";
+            body.style.display = isOpen ? "none" : "block";
+            symbol.textContent = isOpen ? "+" : "–";
+
+            if (!isOpen) {
+                header.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        });
     });
 }
 
@@ -60,6 +97,15 @@ function setupFilters() {
                 }
             }
         });
+    });
+}
+
+/* FLOATING BUTTON */
+function setupFloatingButton() {
+    const fab = document.getElementById("fab");
+
+    fab.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
 
@@ -90,4 +136,5 @@ function togglePopup(id, anchor) {
 document.addEventListener("DOMContentLoaded", () => {
     renderSections();
     setupFilters();
+    setupFloatingButton();
 });

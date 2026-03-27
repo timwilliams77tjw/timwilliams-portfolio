@@ -1,450 +1,172 @@
-/* =========================================
-   BRAND COLOURS & TYPOGRAPHY
-========================================= */
+/* BRAND */
 :root {
     --navy: #0A1A2F;
-    --charcoal: #1F1F1F;
     --electric: #0078FF;
-    --soft-blue: #E8F2FF;
     --light-grey: #F5F7FA;
     --white: #FFFFFF;
     --muted-grey: #6A6A6A;
 
     --heading-font: 'Montserrat', sans-serif;
-    --body-font: 'Inter', 'Segoe UI', sans-serif;
+    --body-font: 'Inter', sans-serif;
 }
 
-/* =========================================
-   GLOBAL
-========================================= */
+/* GLOBAL */
 body {
     margin: 0;
-    padding: 0;
-    background: var(--white);
     font-family: var(--body-font);
-    color: var(--charcoal);
-    line-height: 1.6;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
+    color: var(--navy);
+    background: var(--white);
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 80px;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-/* =========================================
-   HERO BANNER
-========================================= */
+/* HERO */
 .hero-banner {
     background: linear-gradient(120deg, #0a2540, #1f4e79);
-    padding: 48px 80px;
+    padding: 48px 20px;
     color: var(--white);
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .hero-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 40px;
+    gap: 30px;
 }
 
 .hero-photo {
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
+    width: 160px;
+    height: 160px;
     border-radius: 12px;
+    object-fit: cover;
     border: 3px solid white;
 }
 
-.hero-text h1 {
-    font-family: var(--heading-font);
-    font-size: 48px;
-    margin: 0 0 8px 0;
-}
-
-.hero-text p {
-    font-size: 18px;
-    margin: 4px 0;
-    color: var(--white);
-}
-
-/* =========================================
-   NAV BUTTONS
-========================================= */
+/* BUTTONS */
 .button-group {
     display: flex;
-    gap: 16px;
-    margin-top: 24px;
     flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
 }
 
 .brand-btn {
     background: var(--navy);
-    color: var(--white);
-    padding: 14px 28px;
+    color: white;
+    padding: 12px 22px;
     border-radius: 8px;
     font-family: var(--heading-font);
-    font-size: 16px;
-    font-weight: 600;
     text-decoration: none;
-    transition: 0.25s ease;
+    font-weight: 600;
     border: 2px solid var(--navy);
 }
 
-.brand-btn:hover {
-    background: var(--white);
-    color: var(--navy);
-    border-color: var(--electric);
-    cursor: pointer;
-}
-
 .brand-btn.active {
-    background: var(--white);
+    background: white;
     color: var(--navy);
-    border-color: var(--electric);
-    cursor: default;
-    pointer-events: none;
 }
 
-/* =========================================
-   STICKY FILTER / SEARCH BAR
-========================================= */
+/* STICKY FILTER BAR */
 .sticky-bar {
     position: sticky;
     top: 0;
-    z-index: 999;
-    background: var(--white);
-    padding: 16px 20px;
+    background: white;
+    padding: 12px 20px;
     border-bottom: 2px solid var(--light-grey);
     display: flex;
+    gap: 10px;
     flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    background: var(--light-grey);
-    padding: 10px 14px;
-    border-radius: 8px;
-    flex: 1;
-    min-width: 260px;
-}
-
-.search-container input {
-    border: none;
-    background: transparent;
-    font-size: 15px;
-    margin-left: 8px;
-    width: 100%;
-    outline: none;
+    z-index: 999;
 }
 
 .filter-btn {
     background: var(--navy);
-    color: var(--white);
-    padding: 10px 18px;
+    color: white;
+    padding: 8px 16px;
     border-radius: 6px;
+    border: 2px solid var(--navy);
     font-family: var(--heading-font);
     font-size: 14px;
     font-weight: 600;
-    border: 2px solid var(--navy);
-    transition: 0.25s ease;
-}
-
-.filter-btn:hover {
-    background: var(--white);
-    color: var(--navy);
-    border-color: var(--electric);
 }
 
 .filter-btn.active {
-    background: var(--white);
+    background: white;
     color: var(--navy);
     border-color: var(--electric);
 }
 
-/* =========================================
-   SECTION HEADERS
-========================================= */
+/* SECTION HEADERS */
 .section {
-    margin-top: 48px;
+    margin-top: 40px;
 }
 
-.section h3 {
+.section h2 {
     font-family: var(--heading-font);
-    font-size: 26px;
-    font-weight: 600;
-    margin: 0 0 12px 0;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
 .accent {
-    width: 64px;
+    width: 60px;
     height: 4px;
     background: var(--electric);
     border-radius: 2px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
-/* =========================================
-   ALTERNATING CARDS
-========================================= */
-.card {
-    padding: 32px;
-    border-radius: 8px;
-}
-
-.section:nth-of-type(odd) .card {
-    background: var(--white);
-}
-
-.section:nth-of-type(even) .card {
-    background: var(--light-grey);
-}
-
-/* =========================================
-   CERTIFICATION ITEMS (EXPAND/COLLAPSE)
-========================================= */
-.cert-item {
-    padding: 14px 0;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-}
-
-.cert-item:last-child {
-    border-bottom: none;
-}
-
-.cert-title {
-    font-weight: 600;
-    font-size: 17px;
+/* CERT ROWS */
+.cert-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--light-grey);
+    font-size: 16px;
+}
+
+.cert-icon {
+    font-size: 22px;
+    margin-right: 12px;
 }
 
 .cert-meta {
-    font-size: 14px;
     color: var(--muted-grey);
+    margin-left: auto;
 }
 
-.cert-details {
-    display: none;
-    margin-top: 10px;
-    padding-left: 4px;
-    font-size: 14px;
-    color: var(--charcoal);
-}
-
-.cert-item.open .cert-details {
-    display: block;
-}
-
-/* =========================================
-   POPUP MENUS
-========================================= */
-.popup-menu {
-    position: absolute;
-    display: none;
-    flex-direction: column;
-    background: var(--white);
-    border: 2px solid var(--electric);
-    border-radius: 8px;
-    padding: 12px 0;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    z-index: 9999;
-    min-width: 200px;
-}
-
-.popup-menu a {
-    padding: 12px 20px;
-    text-decoration: none;
-    color: var(--navy);
-    font-family: var(--heading-font);
-    font-size: 15px;
-    font-weight: 600;
-    transition: 0.25s ease;
-}
-
-.popup-menu a:hover {
-    background: var(--soft-blue);
-    color: var(--electric);
-}
-
-/* =========================================
-   TOOLTIP
-========================================= */
-.tooltip {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.tooltip-icon {
-    font-size: 15px;
-    color: var(--navy);
-    cursor: pointer;
-}
-
-.tooltip-text {
-    visibility: hidden;
-    opacity: 0;
-    width: 260px;
-    background-color: var(--navy);
-    color: #fff;
-    padding: 12px 14px;
-    border-radius: 6px;
-    font-size: 13px;
-    line-height: 1.4;
-    position: absolute;
-    top: 50%;
-    right: 110%;
-    transform: translateY(-50%);
-    transition: opacity 0.25s ease;
-    z-index: 10000000;
-}
-
-.tooltip-text::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-    border-width: 6px;
-    border-style: solid;
-    border-color: transparent transparent transparent var(--navy);
-}
-
-.tooltip:hover .tooltip-text,
-.tooltip.tap-active .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* =========================================
-   FOOTER
-========================================= */
+/* FOOTER */
 footer {
     background: #0a2540;
     color: white;
-    padding: 40px;
+    padding: 30px;
     margin-top: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
-}
-
-.footer-left {
-    font-weight: 600;
 }
 
 .footer-qr img {
     width: 60px;
-    height: auto;
-    opacity: 0.9;
 }
 
-/* =========================================
-   FLOATING BOOKING BUTTON
-========================================= */
-.floating-booking-btn {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: var(--navy);
-    color: var(--white);
-    padding: 14px 22px;
-    border-radius: 50px;
-    font-family: var(--heading-font);
-    font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-    z-index: 9999;
-}
-
-/* =========================================
-   PRINT MODE
-========================================= */
-@media print {
-    .sticky-bar,
-    .button-group,
-    .floating-booking-btn,
-    .popup-menu {
-        display: none !important;
-    }
-
-    body {
-        background: white !important;
-    }
-
-    .hero-banner {
-        box-shadow: none !important;
-    }
-}
-
-/* =========================================
-   MOBILE RESPONSIVE
-========================================= */
+/* MOBILE */
 @media (max-width: 768px) {
-
-    .container {
-        padding: 0 20px;
-    }
-
-    .hero-banner {
-        padding: 32px 20px;
-    }
-
     .hero-content {
         flex-direction: column;
         text-align: center;
     }
 
-    .hero-text h1 {
-        font-size: 32px;
-    }
-
-    .hero-text p {
-        font-size: 16px;
-    }
-
-    .hero-photo {
-        width: 140px;
-        height: 140px;
-    }
-
-    .sticky-bar {
+    .cert-row {
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-start;
     }
 
-    .filter-btn {
-        width: 100%;
-    }
-
-    footer {
-        flex-wrap: nowrap;
-        gap: 10px;
-    }
-
-    .footer-left {
-        font-size: 14px;
-    }
-
-    .footer-qr img {
-        width: 50px;
+    .cert-meta {
+        margin-left: 0;
+        margin-top: 4px;
     }
 }

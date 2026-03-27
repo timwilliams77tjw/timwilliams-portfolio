@@ -1,3 +1,11 @@
+function logDebug(msg) {
+  const box = document.getElementById('debug');
+  if (box) {
+    box.innerHTML += msg + "<br>";
+    box.scrollTop = box.scrollHeight;
+  }
+}
+
 alert("JS loaded");
 
 // -----------------------------

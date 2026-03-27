@@ -115,28 +115,26 @@ function wireFloatingButtons() {
   // bookingFab is just a link to the booking section
 }
 
-// Tooltip tap behaviour (for touch devices)
-function wireTooltips() {
-  const icons = document.querySelectorAll('.tooltip-icon');
+// Tooltip tap/click behaviour
+document.querySelectorAll('.tooltip-icon').forEach(icon => {
+    icon.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const tooltip = this.closest('.tooltip');
 
-  icons.forEach(icon => {
-    icon.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const text = icon.nextElementSibling;
-      if (!text) return;
+        // Close all other tooltips
+        document.querySelectorAll('.tooltip').forEach(t => {
+            if (t !== tooltip) t.classList.remove('tap-active');
+        });
 
-      const isVisible = text.classList.contains('visible');
-      document.querySelectorAll('.tooltip-text').forEach(t => t.classList.remove('visible'));
-      if (!isVisible) {
-        text.classList.add('visible');
-      }
+        // Toggle this one
+        tooltip.classList.toggle('tap-active');
     });
-  });
+});
 
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.tooltip-text').forEach(t => t.classList.remove('visible'));
-  });
-}
+// Close tooltip when tapping/clicking outside
+document.addEventListener('click', () => {
+    document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
+});
 
 // Popup menus
 function openCVMenu(event) {

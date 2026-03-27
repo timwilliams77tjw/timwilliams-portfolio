@@ -201,16 +201,15 @@ function debug(msg) {
   box.innerHTML += msg + '<br>';
 }
 
-// -----------------------------
-// INIT
-// -----------------------------
 document.addEventListener('DOMContentLoaded', () => {
   buildCertifications();
   wireFilters();
   wireFloatingButtons();
-  document.querySelector('.sticky-bar').addEventListener('click', e => {
-  e.stopPropagation();
-});
-}
+
+  // REMOVE THIS — it breaks everything
+  // document.querySelector('.sticky-bar').addEventListener('click', e => {
+  //   e.stopPropagation();
+  // });
+
   wireTooltips();
 });

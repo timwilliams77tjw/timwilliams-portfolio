@@ -1,14 +1,3 @@
-alert("JS loaded");
-function logDebug(msg) {
-  const box = document.getElementById('debug');
-  if (box) {
-    box.innerHTML += msg + "<br>";
-    box.scrollTop = box.scrollHeight;
-  }
-}
-
-
-
 // -----------------------------
 // Load JSON from <script id="cert-data">
 // -----------------------------
@@ -176,29 +165,6 @@ function wireTooltips() {
   document.addEventListener('click', () => {
     document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
   });
-}
-// -----------------------------
-// DEBUG PANEL (temporary)
-// -----------------------------
-function debug(msg) {
-  let box = document.getElementById('debugBox');
-  if (!box) {
-    box = document.createElement('div');
-    box.id = 'debugBox';
-    box.style.position = 'fixed';
-    box.style.bottom = '0';
-    box.style.left = '0';
-    box.style.width = '100%';
-    box.style.maxHeight = '40vh';
-    box.style.overflowY = 'auto';
-    box.style.background = 'rgba(0,0,0,0.85)';
-    box.style.color = 'lime';
-    box.style.fontSize = '14px';
-    box.style.padding = '10px';
-    box.style.zIndex = '999999';
-    document.body.appendChild(box);
-  }
-  box.innerHTML += msg + '<br>';
 }
 
 document.addEventListener('DOMContentLoaded', () => {

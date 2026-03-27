@@ -108,29 +108,30 @@ function buildCertifications() {
 // -----------------------------
 function wireFilters() {
   const buttons = document.querySelectorAll('.filter-btn');
-
-  debug("Found filter buttons: " + buttons.length);
+  logDebug("Found filter buttons: " + buttons.length);
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
+      logDebug("Clicked filter button: " + btn.textContent);
 
-      debug("Clicked filter: " + btn.dataset.filter);
+      const raw = btn.dataset.filter;
+      const filter = normalise(raw);
 
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = normalise(btn.dataset.filter);
-      debug("Normalised filter: " + filter);
+      logDebug("Raw filter: " + raw);
+      logDebug("Normalised filter: " + filter);
 
       document.querySelectorAll('.category-section').forEach(sec => {
-        const cat = normalise(sec.dataset.category);
-        debug("Comparing: " + filter + " vs " + cat);
+        const catRaw = sec.dataset.category;
+        const cat = normalise(catRaw);
+
+        logDebug("Comparing filter '" + filter + "' with category '" + cat + "'");
 
         sec.style.display = (filter === 'all' || filter === cat) ? '' : 'none';
       });
     });
   });
 }
+
 
 
 

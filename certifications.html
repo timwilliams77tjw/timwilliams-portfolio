@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tim Williams – Certification Portfolio</title>
+
+    <link rel="stylesheet" href="certifications.css">
+    <script src="certifications-v3.js" defer></script>
+</head>
+
+<body class="page-certifications">
+
+<!-- HERO -->
+<div class="hero-banner">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>Tim Williams</h1>
+            <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
+            <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
+
+            <div class="button-group">
+                <a href="index.html" class="brand-btn">Home</a>
+                <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
+                <a class="brand-btn active">Certifications</a>
+                <a href="recommendations.html" class="brand-btn">Recommendations</a>
+                <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
+                <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
+            </div>
+        </div>
+
+        <img src="profile2.jpg" class="hero-photo" alt="Tim Williams">
+    </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="sticky-bar">
+    <button class="filter-btn active" data-target="all">All</button>
+    <button class="filter-btn" data-target="Core">Core</button>
+    <button class="filter-btn" data-target="Agile">Agile</button>
+    <button class="filter-btn" data-target="Cloud">Cloud</button>
+    <button class="filter-btn" data-target="Microsoft">Microsoft</button>
+    <button class="filter-btn" data-target="Infrastructure">Infrastructure</button>
+    <button class="filter-btn" data-target="Governance">Governance</button>
+    <button class="filter-btn" data-target="Leadership">Leadership</button>
+</div>
+
+<!-- CERTIFICATIONS -->
+<div id="certificationsContainer" class="container"></div>
+
+<!-- FLOATING BUTTON (only one) -->
+<div id="fab" class="fab">↑</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-left">© Tim Williams | IT Transformation Portfolio</div>
+    <div class="footer-qr"><img src="qr.png" alt="QR Code"></div>
+</footer>
+
+<!-- POPUP MENUS -->
+<div id="cvMenu" class="popup-menu">
+    <a href="Tim_Williams_CV.pdf" target="_blank">View CV</a>
+    <span class="tooltip">
+        <span class="tooltip-icon">ⓘ</span>
+        <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
+    </span>
+</div>
+
+<div id="portfolioMenu" class="popup-menu">
+    <a href="portfolio_presentation.pdf" target="_blank">View Portfolio</a>
+    <span class="tooltip">
+        <span class="tooltip-icon">ⓘ</span>
+        <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
+    </span>
+</div>
+
+<!-- JSON DATA -->
+<script id="cert-data" type="application/json">
+{
+    "Core": [
+        { "icon": "🏅", "title": "PRINCE2® Practitioner", "issuer": "QA Ltd", "year": "2024" },
+        { "icon": "📘", "title": "P3O Practitioner", "issuer": "QA Ltd", "year": "2023" },
+        { "icon": "🥇", "title": "APM PMQ", "issuer": "APM", "year": "2022" },
+        { "icon": "⚙️", "title": "ITIL Certification", "issuer": "QA Ltd", "year": "2021" },
+        { "icon": "⚠️", "title": "Certified Risk Manager", "issuer": "QA Ltd", "year": "2020" },
+        { "icon": "📊", "title": "Programme Management", "issuer": "CompTIA", "year": "2019" }
+    ],
+
+    "Agile": [
+        { "icon": "⚡", "title": "Agile Project Management", "issuer": "Management Project Mar", "year": "—" },
+        { "icon": "🔁", "title": "Agile Foundations", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "🌀", "title": "Agile Delivery & Essentials", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "📈", "title": "Scrum: Essentials", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "📚", "title": "Scrum: Basics", "issuer": "Project Mar", "year": "—" },
+        { "icon": "⚡", "title": "Disciplined Agile", "issuer": "LinkedIn / Project Mar", "year": "—" },
+        { "icon": "🔁", "title": "Atlassian Agile & PM", "issuer": "Atlassian", "year": "—" }
+    ],
+
+    "Cloud": [
+        { "icon": "☁️", "title": "AI for Project Management", "issuer": "Management Project Mar", "year": "—" },
+        { "icon": "🤖", "title": "AI in Project Management", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "🧠", "title": "Program Management with AI", "issuer": "LinkedIn", "year": "—" },
+        { "icon": "⚙️", "title": "Microsoft AI Fundamentals", "issuer": "Microsoft", "year": "—" }
+    ],
+
+    "Microsoft": [
+        { "icon": "🪟", "title": "Microsoft Certified Technician", "issuer": "Microsoft", "year": "—" },
+        { "icon": "💻", "title": "Microsoft Certified IT Professional", "issuer": "Microsoft", "year": "—" },
+        { "icon": "🖥️", "title": "Microsoft Certified Professional", "issuer": "Microsoft", "year": "—" }
+    ],
+
+    "Infrastructure": [
+        { "icon": "🔐", "title": "VMware ESXi Administrator", "issuer": "VMware", "year": "2011" },
+        { "icon": "🖧", "title": "IT Infrastructure", "issuer": "CompTIA", "year": "—" },
+        { "icon": "🛡️", "title": "PointSec Administration", "issuer": "Pointsec Mobile Technologies", "year": "—" }
+    ],
+
+    "Governance": [
+        { "icon": "📋", "title": "ServiceNow Training", "issuer": "ServiceNow", "year": "—" },
+        { "icon": "🏛️", "title": "ServiceNow IT Leadership", "issuer": "ServiceNow", "year": "—" },
+        { "icon": "🧭", "title": "Data Protection", "issuer": "Access LMS", "year": "—" }
+    ],
+
+    "Leadership": [
+        { "icon": "⭐", "title": "Lead a Successful PMO", "issuer": "PMI", "year": "—" },
+        { "icon": "🎯", "title": "Project Leadership in the Modern Era", "issuer": "PMI", "year": "—" },
+        { "icon": "🧑‍💼", "title": "Creating Your Professional Brand", "issuer": "LinkedIn", "year": "—" }
+    ]
+}
+</script>
+
+</body>
+</html>

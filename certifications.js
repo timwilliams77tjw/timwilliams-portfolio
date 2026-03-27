@@ -1,3 +1,4 @@
+alert("JS loaded");
 function logDebug(msg) {
   const box = document.getElementById('debug');
   if (box) {
@@ -6,7 +7,7 @@ function logDebug(msg) {
   }
 }
 
-alert("JS loaded");
+
 
 // -----------------------------
 // Load JSON from <script id="cert-data">

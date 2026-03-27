@@ -107,21 +107,29 @@ function buildCertifications() {
 function wireFilters() {
   const buttons = document.querySelectorAll('.filter-btn');
 
+  console.log("Found filter buttons:", buttons.length);
+
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
+
+      console.log("Clicked filter:", btn.dataset.filter);
+
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-const filter = normalise(btn.dataset.filter);
-
+      const filter = normalise(btn.dataset.filter);
+      console.log("Normalised filter:", filter);
 
       document.querySelectorAll('.category-section').forEach(sec => {
         const cat = normalise(sec.dataset.category);
+        console.log("Comparing:", filter, "vs", cat);
+
         sec.style.display = (filter === 'all' || filter === cat) ? '' : 'none';
       });
     });
   });
 }
+
 
 // -----------------------------
 // Floating button

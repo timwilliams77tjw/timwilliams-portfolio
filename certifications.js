@@ -168,4 +168,26 @@ document.addEventListener('DOMContentLoaded', () => {
   wireFilters();
   wireFloatingButtons();
   wireTooltips();
+
+  // Tooltip tap/click behaviour (MATCHES INDEX.HTML)
+document.querySelectorAll('.tooltip-icon').forEach(icon => {
+    icon.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const tooltip = this.closest('.tooltip');
+
+        // Close all other tooltips
+        document.querySelectorAll('.tooltip').forEach(t => {
+            if (t !== tooltip) t.classList.remove('tap-active');
+        });
+
+        // Toggle this one
+        tooltip.classList.toggle('tap-active');
+    });
+});
+
+// Close tooltip when tapping/clicking outside
+document.addEventListener('click', () => {
+    document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
+});
+
 });

@@ -74,33 +74,7 @@
       <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
     </div>
   </div>
-  <script>
-// Tooltip behaviour (recommendations page only)
-document.addEventListener("DOMContentLoaded", () => {
-  const tooltipIcons = document.querySelectorAll('#cvMenu .tooltip-icon, #portfolioMenu .tooltip-icon');
 
-  tooltipIcons.forEach(icon => {
-    icon.addEventListener('click', function (e) {
-      e.stopPropagation();
-      const tooltip = this.closest('.tooltip');
-
-      // Close other tooltips inside popup menus only
-      document.querySelectorAll('#cvMenu .tooltip, #portfolioMenu .tooltip')
-        .forEach(t => {
-          if (t !== tooltip) t.classList.remove('tap-active');
-        });
-
-      tooltip.classList.toggle('tap-active');
-    });
-  });
-
-  // Close tooltip when clicking outside popup menus
-  document.addEventListener('click', () => {
-    document.querySelectorAll('#cvMenu .tooltip, #portfolioMenu .tooltip')
-      .forEach(t => t.classList.remove('tap-active'));
-  });
-});
-  </script>
   <!-- JS for menus + tooltips -->
   <script src="certifications.js?v=1"></script>
 

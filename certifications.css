@@ -119,32 +119,48 @@ body {
 /* -----------------------------------------------------------
    FILTER BAR
 ----------------------------------------------------------- */
+/* -----------------------------------------------------------
+FILTER BAR — SINGLE LINE WITH HORIZONTAL SCROLL
+----------------------------------------------------------- */
+
 .sticky-bar {
-    position: sticky;
-    top: 0;
-    background: white;
-    padding: 12px 20px;
-    border-bottom: 2px solid #e5e7eb;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    z-index: 999;
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 10px 12px;
+  border-bottom: 2px solid #e5e7eb;
+
+  display: flex;
+  flex-wrap: nowrap;      /* force single line */
+  overflow-x: auto;       /* allow horizontal scroll */
+  white-space: nowrap;
+  gap: 8px;
+
+  z-index: 999;
+  scrollbar-width: none;  /* hide scrollbar (Firefox) */
 }
 
+.sticky-bar::-webkit-scrollbar {
+  display: none;          /* hide scrollbar (Safari/iOS) */
+}
+
+/* Smaller filter buttons */
 .filter-btn {
-    background: #0a2540;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: 2px solid #0a2540;
-    font-size: 14px;
-    font-weight: 600;
+  background: #0a2540;
+  color: white;
+  padding: 6px 12px;      /* smaller */
+  border-radius: 5px;
+  border: 2px solid #0a2540;
+  font-size: 13px;        /* smaller */
+  font-weight: 600;
+  flex-shrink: 0;         /* prevents squashing */
 }
 
-.filter-btn.active {
-    background: white;
-    color: #0a2540;
-    border-color: #0078ff;
+/* Active filter highlight */
+.filter-btn.active-filter {
+  background: white;
+  color: #0a2540;
+  border-color: #0078ff;
 }
 
 /* -----------------------------------------------------------

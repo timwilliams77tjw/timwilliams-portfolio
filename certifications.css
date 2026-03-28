@@ -122,7 +122,6 @@ body {
 /* -----------------------------------------------------------
 FILTER BAR — SINGLE LINE WITH HORIZONTAL SCROLL
 ----------------------------------------------------------- */
-
 .sticky-bar {
   position: sticky;
   top: 0;
@@ -131,18 +130,21 @@ FILTER BAR — SINGLE LINE WITH HORIZONTAL SCROLL
   border-bottom: 2px solid #e5e7eb;
 
   display: flex;
-  flex-wrap: nowrap;      /* force single line */
-  overflow-x: auto;       /* allow horizontal scroll */
+  flex-wrap: nowrap;
+  overflow-x: auto;
   white-space: nowrap;
   gap: 8px;
 
+  justify-content: center;   /* ⭐ NEW: centre the buttons */
+
   z-index: 999;
-  scrollbar-width: none;  /* hide scrollbar (Firefox) */
+  scrollbar-width: none;
 }
 
 .sticky-bar::-webkit-scrollbar {
-  display: none;          /* hide scrollbar (Safari/iOS) */
+  display: none;
 }
+
 
 /* Smaller filter buttons */
 .filter-btn {

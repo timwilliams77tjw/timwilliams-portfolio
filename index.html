@@ -23,7 +23,7 @@ body {
 }
 
 /* -----------------------------------------------------------
-   HEADER — MATCH CERTIFICATIONS + INDEX
+   HEADER
 ----------------------------------------------------------- */
 .hero-banner {
     background: linear-gradient(135deg, #0a2540, #1f4e79);
@@ -74,7 +74,7 @@ body {
 }
 
 /* -----------------------------------------------------------
-   BUTTONS — MATCH SCREENSHOT STYLE
+   BUTTONS
 ----------------------------------------------------------- */
 .button-group {
     display: flex;
@@ -110,7 +110,6 @@ body {
     pointer-events: none;
 }
 
-/* Dropdown arrow */
 .brand-btn .arrow {
     margin-left: 6px;
     font-size: 14px;
@@ -142,50 +141,49 @@ body {
     color: #0078FF;
 }
 
-/* Tooltip */
+/* Tooltip (MATCHES CERTIFICATIONS PAGE) */
 .tooltip {
-    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    position: relative;
 }
 
 .tooltip-icon {
     font-size: 15px;
-    color: #0A1A2F;
     cursor: pointer;
+    color: #0A1A2F;
 }
 
 .tooltip-text {
     visibility: hidden;
     opacity: 0;
-    width: 260px;
-    background-color: #0A1A2F;
-    color: #fff;
-    padding: 12px 14px;
+    background: #0A1A2F;
+    color: white;
+    padding: 10px 14px;
     border-radius: 6px;
     font-size: 13px;
-    line-height: 1.4;
+    width: 240px;
     position: absolute;
+    left: 110%;
     top: 50%;
-    right: 110%;
     transform: translateY(-50%);
     transition: opacity 0.25s ease;
-    z-index: 10000000;
+    z-index: 999999;
 }
 
 .tooltip-text::after {
     content: "";
     position: absolute;
     top: 50%;
-    left: 100%;
+    right: 100%;
     transform: translateY(-50%);
     border-width: 6px;
     border-style: solid;
-    border-color: transparent transparent transparent #0A1A2F;
+    border-color: transparent #0A1A2F transparent transparent;
 }
 
-.tooltip.tap-active .tooltip-text {
+.tooltip:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
 }
@@ -198,22 +196,19 @@ body {
         flex-direction: column;
         text-align: center;
     }
-
     .hero-text {
         text-align: center;
     }
-
     .header-img.profile {
         margin-top: 20px;
     }
-
     .button-group {
         justify-content: center;
     }
 }
 
 /* -----------------------------------------------------------
-   CARD + GRID STYLING
+   CARD + GRID
 ----------------------------------------------------------- */
 .card {
     background: white;
@@ -241,7 +236,7 @@ body {
 }
 
 /* -----------------------------------------------------------
-   FLOATING BUTTONS — MATCH CERTIFICATIONS PAGE
+   FLOATING BUTTONS (MATCH CERTIFICATIONS)
 ----------------------------------------------------------- */
 .fab {
     position: fixed;
@@ -288,7 +283,6 @@ footer {
 </style>
 
 <script>
-// Dropdown toggle
 function toggleMenu(id) {
     document.querySelectorAll('.popup-menu').forEach(menu => {
         if (menu.id !== id) menu.style.display = 'none';
@@ -296,14 +290,10 @@ function toggleMenu(id) {
     const menu = document.getElementById(id);
     menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
 }
-
-// Tooltip toggle (mobile)
-function toggleTooltip(id) {
-    document.getElementById(id).classList.toggle('tap-active');
-}
 </script>
 
 </head>
+
 <body>
 
 <!-- ---------------------------------------------------------
@@ -326,41 +316,39 @@ function toggleTooltip(id) {
                 <!-- HOME -->
                 <a href="index.html" class="brand-btn active">Home</a>
 
-                <!-- CV BUTTON + TOOLTIP -->
+                <!-- CV BUTTON -->
                 <a class="brand-btn" onclick="toggleMenu('cvMenu')">
                     CV <span class="arrow">⌄</span>
                 </a>
-                <div class="tooltip" onclick="toggleTooltip('cvTip')">
-                    <span class="tooltip-icon">ℹ️</span>
-                    <div class="tooltip-text" id="cvTip">
-                        This file will download as a .download file. Please rename it to .zip before opening.
-                    </div>
-                </div>
 
-                <!-- CV DROPDOWN -->
+                <!-- CV DROPDOWN (MATCHES CERTIFICATIONS PAGE) -->
                 <div class="popup-menu" id="cvMenu">
                     <a href="Tim_Williams_CV.pdf">View CV</a>
-                    <a href="Tim_Williams_CV.download">Download CV</a>
+
+                    <div class="tooltip">
+                        <a href="Tim_Williams_CV.download">Download CV</a>
+                        <span class="tooltip-icon">ⓘ</span>
+                        <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
+                    </div>
                 </div>
 
                 <!-- CERTIFICATIONS -->
                 <a href="certifications.html" class="brand-btn">Certifications</a>
 
-                <!-- PORTFOLIO BUTTON + TOOLTIP -->
+                <!-- PORTFOLIO BUTTON -->
                 <a class="brand-btn" onclick="toggleMenu('portMenu')">
                     Portfolio <span class="arrow">⌄</span>
                 </a>
-                <div class="tooltip" onclick="toggleTooltip('portTip')">
-                    <span class="tooltip-icon">ℹ️</span>
-                    <div class="tooltip-text" id="portTip">
-                        This file will download as a .download file. Please rename it to .zip before opening.
-                    </div>
-                </div>
 
-                <!-- PORTFOLIO DROPDOWN -->
+                <!-- PORTFOLIO DROPDOWN (MATCHES CERTIFICATIONS PAGE) -->
                 <div class="popup-menu" id="portMenu">
                     <a href="portfolio_presentation.pdf">View Portfolio</a>
-                    <a href="portfolio_presentation.download">Download Portfolio</a>
+
+                    <div class="tooltip">
+                        <a href="portfolio_presentation.download">Download Portfolio</a>
+                        <span class="tooltip-icon">ⓘ</span>
+                        <span class="tooltip-text">This file downloads as “.download”. Rename to “.zip”.</span>
+                    </div>
                 </div>
 
                 <!-- RECOMMENDATIONS -->
@@ -494,7 +482,6 @@ function toggleTooltip(id) {
         <img src="qr.png" alt="QR Code">
     </div>
 </footer>
-
 
 </body>
 </html>

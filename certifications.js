@@ -98,9 +98,50 @@ function buildCertifications() {
 // -----------------------------
 function wireFilters() {
   const buttons = document.querySelectorAll('.filter-btn');
+  const expandAllBtn = document.getElementById('expandAllBtn');
+  const collapseAllBtn = document.getElementById('collapseAllBtn');
 
+  // Remove active state from all buttons
+  function clearActive() {
+    buttons.forEach(b => b.classList.remove('active-filter'));
+  }
+
+  // Expand All
+  expandAllBtn.addEventListener('click', () => {
+    clearActive();
+    expandAllBtn.classList.add('active-filter');
+
+    document.querySelectorAll('.category-section').forEach(sec => {
+      sec.style.display = '';
+      const list = sec.querySelector('.card-list');
+      const toggle = sec.querySelector('.category-toggle');
+      list.style.display = 'block';
+      toggle.textContent = '−';
+    });
+  });
+
+  // Collapse All
+  collapseAllBtn.addEventListener('click', () => {
+    clearActive();
+    collapseAllBtn.classList.add('active-filter');
+
+    document.querySelectorAll('.category-section').forEach(sec => {
+      sec.style.display = '';
+      const list = sec.querySelector('.card-list');
+      const toggle = sec.querySelector('.category-toggle');
+      list.style.display = 'none';
+      toggle.textContent = '+';
+    });
+  });
+
+  // Category filters
   buttons.forEach(btn => {
+    if (btn.classList.contains('special-btn')) return; // skip expand/collapse buttons
+
     btn.addEventListener('click', () => {
+      clearActive();
+      btn.classList.add('active-filter');
+
       const raw = btn.dataset.filter;
       const filter = normalise(raw);
 
@@ -108,11 +149,11 @@ function wireFilters() {
         const catRaw = sec.dataset.category;
         const cat = normalise(catRaw);
 
-        const match = (filter === 'all' || filter === cat);
+        const match = (filter === cat);
         sec.style.display = match ? '' : 'none';
 
-        // Auto-expand matching category
-        if (filter !== 'all' && filter === cat) {
+        // Auto-expand the matching category
+        if (match) {
           const list = sec.querySelector('.card-list');
           const toggle = sec.querySelector('.category-toggle');
           list.style.display = 'block';
@@ -122,6 +163,7 @@ function wireFilters() {
     });
   });
 }
+
 
 // -----------------------------
 // Floating button

@@ -57,16 +57,15 @@ body {
     line-height: 1.4;
 }
 
-/* LOGO (transparent PNG) */
+/* LOGO */
 .header-img {
     width: 120px;
     height: 120px;
     object-fit: contain;
 }
 
-/* PROFILE PHOTO (circular) */
-.header-img.profile,
-.hero-photo {
+/* PROFILE PHOTO */
+.header-img.profile {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -94,6 +93,7 @@ body {
     text-decoration: none;
     border: 2px solid #ffffff;
     transition: 0.25s ease;
+    position: relative;
 }
 
 .brand-btn:hover {
@@ -110,6 +110,86 @@ body {
     pointer-events: none;
 }
 
+/* Dropdown arrow */
+.brand-btn .arrow {
+    margin-left: 6px;
+    font-size: 14px;
+}
+
+/* -----------------------------------------------------------
+   DROPDOWN MENUS
+----------------------------------------------------------- */
+.popup-menu {
+    position: absolute;
+    background: white;
+    border: 2px solid #0A1A2F;
+    border-radius: 8px;
+    padding: 12px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999999;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.popup-menu a {
+    color: #0A1A2F;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.popup-menu a:hover {
+    color: #0078FF;
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tooltip-icon {
+    font-size: 15px;
+    color: #0A1A2F;
+    cursor: pointer;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    width: 260px;
+    background-color: #0A1A2F;
+    color: #fff;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    position: absolute;
+    top: 50%;
+    right: 110%;
+    transform: translateY(-50%);
+    transition: opacity 0.25s ease;
+    z-index: 10000000;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #0A1A2F;
+}
+
+.tooltip.tap-active .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
 /* -----------------------------------------------------------
    MOBILE HEADER
 ----------------------------------------------------------- */
@@ -123,55 +203,13 @@ body {
         text-align: center;
     }
 
-    .hero-photo {
+    .header-img.profile {
         margin-top: 20px;
     }
 
     .button-group {
         justify-content: center;
     }
-}
-
-/* -----------------------------------------------------------
-   FILTER BAR
------------------------------------------------------------ */
-.sticky-bar {
-  position: sticky;
-  top: 0;
-  background: white;
-  padding: 10px 12px;
-  border-bottom: 2px solid #e5e7eb;
-
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  white-space: nowrap;
-  gap: 8px;
-
-  justify-content: center;
-  z-index: 999;
-  scrollbar-width: none;
-}
-
-.sticky-bar::-webkit-scrollbar {
-  display: none;
-}
-
-.filter-btn {
-  background: #0a2540;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 5px;
-  border: 2px solid #0a2540;
-  font-size: 13px;
-  font-weight: 600;
-  flex-shrink: 0;
-}
-
-.filter-btn.active-filter {
-  background: white;
-  color: #0a2540;
-  border-color: #0078ff;
 }
 
 /* -----------------------------------------------------------
@@ -192,6 +230,33 @@ body {
 }
 
 /* -----------------------------------------------------------
+   FLOATING BUTTONS
+----------------------------------------------------------- */
+.fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #0078ff;
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    z-index: 999;
+}
+
+.fab-booking {
+    bottom: 100px;
+    background: #0a2540;
+    text-decoration: none;
+}
+
+/* -----------------------------------------------------------
    FOOTER
 ----------------------------------------------------------- */
 footer {
@@ -208,6 +273,24 @@ footer {
     width: 60px;
 }
 </style>
+
+<script>
+// Dropdown toggle
+function toggleMenu(id) {
+    document.querySelectorAll('.popup-menu').forEach(menu => {
+        if (menu.id !== id) menu.style.display = 'none';
+    });
+
+    const menu = document.getElementById(id);
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// Tooltip toggle (mobile)
+function toggleTooltip(id) {
+    document.getElementById(id).classList.toggle('tap-active');
+}
+</script>
+
 </head>
 
 <body>
@@ -224,17 +307,58 @@ footer {
             <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
 
             <div class="button-group">
+
+                <!-- HOME -->
                 <a href="index.html" class="brand-btn active">Home</a>
-                <a href="cv.html" class="brand-btn">CV</a>
+
+                <!-- CV DROPDOWN -->
+                <div class="tooltip" onclick="toggleTooltip('cvTip')">
+                    <span class="tooltip-icon">ℹ️</span>
+                    <div class="tooltip-text" id="cvTip">
+                        This file will download as a .download file. Please rename it to .zip before opening.
+                    </div>
+                </div>
+
+                <a class="brand-btn" onclick="toggleMenu('cvMenu')">
+                    CV <span class="arrow">⌄</span>
+                </a>
+
+                <div class="popup-menu" id="cvMenu">
+                    <a href="Tim_Williams_CV.pdf">View CV</a>
+                    <a href="Tim_Williams_CV.download">Download CV</a>
+                </div>
+
+                <!-- CERTIFICATIONS -->
                 <a href="certifications.html" class="brand-btn">Certifications</a>
+
+                <!-- PORTFOLIO DROPDOWN -->
+                <div class="tooltip" onclick="toggleTooltip('portTip')">
+                    <span class="tooltip-icon">ℹ️</span>
+                    <div class="tooltip-text" id="portTip">
+                        This file will download as a .download file. Please rename it to .zip before opening.
+                    </div>
+                </div>
+
+                <a class="brand-btn" onclick="toggleMenu('portMenu')">
+                    Portfolio <span class="arrow">⌄</span>
+                </a>
+
+                <div class="popup-menu" id="portMenu">
+                    <a href="portfolio_presentation.pdf">View Portfolio</a>
+                    <a href="portfolio_presentation.download">Download Portfolio</a>
+                </div>
+
+                <!-- RECOMMENDATIONS -->
                 <a href="recommendations.html" class="brand-btn">Recommendations</a>
-                <a href="portfolio.html" class="brand-btn">Portfolio</a>
+
+                <!-- SERVICES -->
                 <a href="services.html" class="brand-btn">My Services</a>
+
             </div>
         </div>
 
         <!-- PROFILE IMAGE -->
-        <img src="profile3.jpg" class="header-img profile" alt="Profile Photo">
+        <img src="profile.jpg" class="header-img profile" alt="Profile Photo">
 
     </div>
 </div>
@@ -263,6 +387,13 @@ footer {
     </div>
 
 </div>
+
+<!-- ---------------------------------------------------------
+     FLOATING BUTTONS
+---------------------------------------------------------- -->
+<a href="calendar.html" class="fab-booking fab">📅</a>
+
+<div class="fab" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">⬆️</div>
 
 <!-- ---------------------------------------------------------
      FOOTER

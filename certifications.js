@@ -106,32 +106,21 @@ function buildCertifications() {
 // -----------------------------
 function wireFilters() {
   const buttons = document.querySelectorAll('.filter-btn');
-  logDebug("Found filter buttons: " + buttons.length);
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-      logDebug("Clicked filter button: " + btn.textContent);
-
       const raw = btn.dataset.filter;
       const filter = normalise(raw);
-
-      logDebug("Raw filter: " + raw);
-      logDebug("Normalised filter: " + filter);
 
       document.querySelectorAll('.category-section').forEach(sec => {
         const catRaw = sec.dataset.category;
         const cat = normalise(catRaw);
-
-        logDebug("Comparing filter '" + filter + "' with category '" + cat + "'");
 
         sec.style.display = (filter === 'all' || filter === cat) ? '' : 'none';
       });
     });
   });
 }
-
-
-
 
 // -----------------------------
 // Floating button
@@ -167,15 +156,12 @@ function wireTooltips() {
   });
 }
 
+// -----------------------------
+// INIT
+// -----------------------------
 document.addEventListener('DOMContentLoaded', () => {
   buildCertifications();
   wireFilters();
   wireFloatingButtons();
-
-  // REMOVE THIS — it breaks everything
-  // document.querySelector('.sticky-bar').addEventListener('click', e => {
-  //   e.stopPropagation();
-  // });
-
   wireTooltips();
 });

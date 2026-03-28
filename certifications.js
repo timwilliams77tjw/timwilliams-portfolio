@@ -91,14 +91,6 @@ function buildCertifications() {
       toggle.textContent = isOpening ? '−' : '+';
     });
   });
-
-  // Open first category by default
-  const firstSection = container.querySelector('.category-section .card-list');
-  const firstToggle = container.querySelector('.category-section .category-toggle');
-  if (firstSection && firstToggle) {
-    firstSection.style.display = 'block';
-    firstToggle.textContent = '−';
-  }
 }
 
 // -----------------------------
@@ -116,7 +108,16 @@ function wireFilters() {
         const catRaw = sec.dataset.category;
         const cat = normalise(catRaw);
 
-        sec.style.display = (filter === 'all' || filter === cat) ? '' : 'none';
+        const match = (filter === 'all' || filter === cat);
+        sec.style.display = match ? '' : 'none';
+
+        // Auto-expand matching category
+        if (filter !== 'all' && filter === cat) {
+          const list = sec.querySelector('.card-list');
+          const toggle = sec.querySelector('.category-toggle');
+          list.style.display = 'block';
+          toggle.textContent = '−';
+        }
       });
     });
   });
@@ -154,6 +155,25 @@ function wireTooltips() {
   document.addEventListener('click', () => {
     document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('tap-active'));
   });
+}
+
+// -----------------------------
+// CV & Portfolio Menus
+// -----------------------------
+function openCVMenu(event) {
+  event.preventDefault();
+  const menu = document.getElementById('cvMenu');
+  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  menu.style.top = (event.clientY + 10) + 'px';
+  menu.style.left = (event.clientX - 100) + 'px';
+}
+
+function openPortfolioMenu(event) {
+  event.preventDefault();
+  const menu = document.getElementById('portfolioMenu');
+  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  menu.style.top = (event.clientY + 10) + 'px';
+  menu.style.left = (event.clientX - 100) + 'px';
 }
 
 // -----------------------------

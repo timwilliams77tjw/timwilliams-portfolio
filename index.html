@@ -248,6 +248,39 @@ footer {
   visibility: visible;
   opacity: 1;
 }
+/* ---------------- HERO BANNER (matches certifications page) ---------------- */
+
+.hero-banner {
+  background: linear-gradient(120deg, #0a2540, #1f4e79);
+  color: white;
+  padding: 40px 20px;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-left,
+.hero-right {
+  flex: 0 0 auto;
+}
+
+.hero-text {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.hero-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
 
 /* ---------------- MOBILE (iPhone + iPad portrait) ---------------- */
 @media (max-width: 900px) {
@@ -313,34 +346,38 @@ footer {
 </head>
 
 <body>
-<header>
-    <div class="header-layout">
+<header class="hero-banner">
+  <div class="hero-content">
 
-        <!-- LOGO ON THE LEFT -->
-        <a href="https://twc-ltd.my.canva.site/">
-            <img src="logo.jpg" class="header-img" alt="Logo">
-        </a>
-
-        <!-- TEXT + BUTTONS IN THE CENTRE -->
-        <div class="header-text">
-            <h1>Tim Williams</h1>
-            <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-            <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
-
-            <div class="button-group">
-                <a href="index.html" class="brand-btn active">Home</a>
-                <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
-                <a href="certifications.html" class="brand-btn">Certifications</a>
-                <a href="recommendations.html" class="brand-btn">Recommendations</a>
-                <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
-                <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
-            </div>
-        </div>
-
-        <!-- PROFILE PHOTO ON THE RIGHT -->
-        <img src="profile.jpg" class="header-img profile" alt="Profile Photo">
-
+    <!-- LEFT: Logo (unchanged) -->
+    <div class="hero-left">
+      <a href="https://twc-ltd.my.canva.site/">
+        <img src="logo.jpg" class="header-img" alt="Logo">
+      </a>
     </div>
+
+    <!-- CENTRE: Text + Buttons (unchanged) -->
+    <div class="hero-text">
+      <h1>Tim Williams</h1>
+      <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
+      <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
+
+      <div class="button-group">
+        <a href="index.html" class="brand-btn active">Home</a>
+        <a href="#" class="brand-btn" onclick="openCVMenu(event)">CV</a>
+        <a href="certifications.html" class="brand-btn">Certifications</a>
+        <a href="recommendations.html" class="brand-btn">Recommendations</a>
+        <a href="#" class="brand-btn" onclick="openPortfolioMenu(event)">Portfolio</a>
+        <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Profile Photo (unchanged) -->
+    <div class="hero-right">
+      <img src="profile.jpg" class="header-img profile" alt="Profile Photo">
+    </div>
+
+  </div>
 </header>
 
 

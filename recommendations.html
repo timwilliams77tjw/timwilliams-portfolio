@@ -77,6 +77,25 @@
 
   <!-- JS for menus + tooltips -->
   <script src="certifications.js?v=1"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Calendar-page-only tooltip behaviour
+  document.querySelectorAll('#cvMenu .tooltip-icon, #portfolioMenu .tooltip-icon')
+    .forEach(icon => {
+      icon.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const tooltip = this.closest('.tooltip');
 
+        // Close other tooltips inside popup menus only
+        document.querySelectorAll('#cvMenu .tooltip, #portfolioMenu .tooltip')
+          .forEach(t => {
+            if (t !== tooltip) t.classList.remove('tap-active');
+          });
+
+        tooltip.classList.toggle('tap-active');
+      });
+    });
+});
+</script>
 </body>
 </html>

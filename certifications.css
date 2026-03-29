@@ -1,79 +1,5 @@
 /* -----------------------------------------
-   GLOBAL LAYOUT
------------------------------------------ */
-
-.hero-banner {
-  position: relative;
-  width: 100%;
-}
-
-.hero-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.hero-text {
-  max-width: 100%;
-}
-
-/* -----------------------------------------
-   BUTTON GROUP
------------------------------------------ */
-
-.button-group {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 16px;
-  max-width: 100%;
-}
-
-/* -----------------------------------------
-   BUTTONS
------------------------------------------ */
-
-.brand-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 18px;
-  background: #0A1A2F;
-  color: white;
-  border-radius: 30px;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  min-width: 140px;
-  text-align: center;
-  transition: background 0.25s ease;
-}
-
-.brand-btn:hover {
-  background: #0F2A4A;
-}
-
-.brand-btn.active {
-  background: #1C4A7F;
-}
-
-/* Arrow rotation */
-.brand-btn .arrow {
-  display: inline-block;
-  margin-left: 6px;
-  transition: transform 0.25s ease;
-}
-
-.brand-btn.open .arrow {
-  transform: rotate(180deg);
-}
-
-/* -----------------------------------------
-   DROPDOWN MENUS
+   DROPDOWN MENUS (behaviour only)
 ----------------------------------------- */
 
 .popup-menu {
@@ -100,7 +26,7 @@
 }
 
 /* -----------------------------------------
-   TOOLTIP
+   TOOLTIP (behaviour only)
 ----------------------------------------- */
 
 .tooltip {
@@ -138,15 +64,17 @@
 }
 
 /* -----------------------------------------
-   PROFILE IMAGE
+   ARROW ROTATION (behaviour only)
 ----------------------------------------- */
 
-.hero-photo,
-.header-img.profile {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
+.brand-btn .arrow {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 0.25s ease;
+}
+
+.brand-btn.open .arrow {
+  transform: rotate(180deg);
 }
 
 /* -----------------------------------------
@@ -172,18 +100,10 @@
 }
 
 /* -----------------------------------------
-   MOBILE RESPONSIVENESS
+   MOBILE RESPONSIVENESS (tooltip + menu only)
 ----------------------------------------- */
 
 @media (max-width: 600px) {
-  .button-group {
-    gap: 10px;
-  }
-
-  .brand-btn {
-    min-width: 130px;
-  }
-
   .popup-menu {
     width: var(--menu-width, 130px);
   }

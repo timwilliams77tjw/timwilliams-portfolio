@@ -3,14 +3,14 @@
 ----------------------------------------- */
 
 .hero-banner {
-  position: relative; /* anchor for dropdowns */
+  position: relative;
   width: 100%;
 }
 
 .hero-content {
   width: 100%;
   display: flex;
-  justify-content: space-between; /* restores original layout */
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -24,10 +24,10 @@
 ----------------------------------------- */
 
 .button-group {
-  position: relative; /* anchor for dropdowns */
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* center buttons without stretching */
+  justify-content: center;
   gap: 12px;
   margin-top: 16px;
   max-width: 100%;
@@ -48,7 +48,7 @@
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
-  min-width: 140px; /* fixed width for W2 */
+  min-width: 140px;
   text-align: center;
   transition: background 0.25s ease;
 }
@@ -78,10 +78,10 @@
 
 .popup-menu {
   position: absolute;
-  top: calc(100% + 6px); /* small gap */
+  top: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
-  width: var(--menu-width, 140px); /* matches button width */
+  width: var(--menu-width, 140px);
   background: white;
   border: 2px solid #0A1A2F;
   border-radius: 10px;
@@ -129,6 +129,7 @@
   transition: opacity 0.25s ease;
   z-index: 9999999;
   text-align: center;
+  white-space: normal;
 }
 
 .tooltip.tap-active .tooltip-text {
@@ -190,37 +191,4 @@
   .tooltip-text {
     width: 200px;
   }
-}
-/* -----------------------------------------
-   FIXED TOOLTIP (centered, never off-screen)
------------------------------------------ */
-.tooltip-text {
-  left: 50% !important;
-  top: calc(100% + 8px) !important;
-  transform: translateX(-50%) !important;
-  width: 240px;
-  text-align: center;
-  white-space: normal;
-}
-
-/* -----------------------------------------
-   FIXED DROPDOWN (centered under button)
------------------------------------------ */
-.popup-menu {
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  top: calc(100% + 6px) !important;
-  z-index: 9999999;
-}
-
-/* -----------------------------------------
-   ARROW ROTATION
------------------------------------------ */
-.brand-btn .arrow {
-  display: inline-block;
-  transition: transform 0.25s ease;
-}
-
-.brand-btn.open .arrow {
-  transform: rotate(180deg);
 }

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tim Williams – Senior IT Project/PMO Manager</title>
+
+  <style>
+  /* -----------------------------------------------------------
+     GLOBAL
+  ----------------------------------------------------------- */
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: #f5f7fb;
+    color: #0a2540;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  /* -----------------------------------------------------------
+     HERO (classes used by header-index.html)
+  ----------------------------------------------------------- */
+  .hero-banner {
+    background: linear-gradient(135deg, #0a2540, #1f4e79);
+    padding: 50px 30px;
+    color: white;
+  }
+
+  .hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-text {
+    flex: 1;
+    text-align: left;
+  }
+
+  .hero-text h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .hero-text p {
+    margin: 8px 0 0 0;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  /* LOGO */
+  .header-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+  }
+
+  /* PROFILE PHOTO */
+  .header-img.profile {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+  }
+
+  /* -----------------------------------------------------------
+     BUTTONS
+  ----------------------------------------------------------- */
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .brand-btn {
+    background: #ffffff;
+    color: #0a2540;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #ffffff;
+    transition: 0.25s ease;
+    position: relative;
+  }
+
+  .brand-btn:hover {
+    background: transparent;
+    color: white;
+    border-color: white;
+  }
+
+  .brand-btn.active {
+    background: transparent;
+    color: white;
+    border-color: white;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .brand-btn .arrow {
+    margin-left: 6px;
+    font-size: 14px;
+  }
+
+  /* -----------------------------------------------------------
+     DROPDOWN MENUS (used by header-index.html)
+  ----------------------------------------------------------- */
+  .popup-menu {
+    position: absolute;
+    background: white;
+    border: 2px solid #0A1A2F;
+    border-radius: 8px;
+    padding: 12px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999999;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  .popup-menu a {
+    color: #0A1A2F;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .popup-menu a:hover {
+    color: #0078FF;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+  }
+
+  .tooltip-icon {
+    font-size: 15px;
+    cursor: pointer;
+    color: #0A1A2F;
+  }
+
+  .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    background: #0A1A2F;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    width: 240px;
+    position: absolute;
+    left: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 0.25s ease;
+    z-index: 999999;
+  }
+
+  .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent #0A1A2F transparent transparent;
+  }
+
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* -----------------------------------------------------------
+     MOBILE HEADER
+  ----------------------------------------------------------- */
+  @media (max-width: 900px) {
+    .hero-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hero-text {
+      text-align: center;
+    }
+
+    .header-img.profile {
+      margin-top: 20px;
+    }
+
+    .button-group {
+      justify-content: center;
+    }
+  }
+
+  /* -----------------------------------------------------------
+     CARD + GRID
+  ----------------------------------------------------------- */
+  .card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #0a2540;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin: 4px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* -----------------------------------------------------------
+     FLOATING BUTTONS
+  ----------------------------------------------------------- */
+  .fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: white;
+    color: #0a2540;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    cursor: pointer;
+    border: 2px solid #0a2540;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    z-index: 999;
+  }
+
+  .fab-booking {
+    bottom: 100px;
+    background: #0a2540;
+    color: white;
+    border: none;
+  }
+
+  /* -----------------------------------------------------------
+     FOOTER (used by footer.html)
+  ----------------------------------------------------------- */
+  footer {
+    background: #0a2540;
+    color: white;
+    padding: 30px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-qr img {
+    width: 60px;
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER INCLUDE -->
+  <div id="header"></div>
+  <script>
+    fetch("header-index.html")
+      .then(r => r.text())
+      .then(h => document.getElementById("header").innerHTML = h);
+  </script>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+
+    <h2>Executive Profile</h2>
+    <div class="card">
+      <p>
+        SC Cleared Senior IT Programme & Transformation Leader delivering complex digital programmes across global organisations.
+        Specialist in cyber security uplift, cloud adoption, enterprise infrastructure modernisation and workplace transformation.
+        Delivered programmes impacting over 120,000 users across Defence, NHS England, financial services and global law firms.
+      </p>
+    </div>
+
+    <h2>Key Achievements</h2>
+    <div class="card">
+      <ul>
+        <li>Delivered £40M cyber security uplift programme for NHS England, improving CAF maturity across all domains.</li>
+        <li>Led global Windows 10/11 transformation for 126,000 devices across 42 countries.</li>
+        <li>Delivered Azure and AWS cloud adoption programmes improving resilience and reducing operational cost by 18%.</li>
+      </ul>
+    </div>
+
+    <h2>Consulting Expertise</h2>
+    <div class="grid">
+      <div class="card"><h3>Cyber Security Programmes</h3><p>CAF, IAM, MFA, CyberArk, Splunk, identity security platforms.</p></div>
+      <div class="card"><h3>Cloud Transformation</h3><p>Azure, AWS, Entra, Intune and enterprise cloud adoption frameworks.</p></div>
+      <div class="card"><h3>Workplace Modernisation</h3><p>Windows 10/11 migration, Teams Rooms, global device estate transformation.</p></div>
+      <div class="card"><h3>Programme Governance</h3><p>PMO leadership, financial governance, RAID management and delivery assurance within ISO regulated environments and adhering to ITIL frameworks.</p></div>
+      <div class="card"><h3>Service Transition & BAU Readiness</h3><p>Structured service transition ensuring global services were operationally ready from day one. Delivered seamless onboarding for 25,000 users, integrated Salesforce into BAU, and stabilised major programmes through complete documentation, readiness governance and support alignment.</p></div>
+      <div class="card"><h3>Pre‑Sales</h3><p>Supported major bids with solution design, tender responses and commercial modelling. Ensured proposals were deliverable, accurately costed and aligned to operational capability, strengthening win probability and delivery confidence.</p></div>
+    </div>
+
+    <h2>Programme Case Studies</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>NHS England Cyber Security Programme</h3>
+        <p>Delivered CAF-aligned cyber security uplift implementing MFA, CyberArk, Splunk, Azure security controls and secure backup infrastructure.</p>
+        <p><b>Outcome:</b> Strengthened organisational cyber resilience and improved operational security posture.</p>
+      </div>
+      <div class="card">
+        <h3>Global Workplace Transformation</h3>
+        <p>Led Windows 10 and Windows 11 transformation programmes affecting up to 126,000 devices.</p>
+        <p><b>Outcome:</b> Enabled modern secure workplace environments across distributed global workforces.</p>
+      </div>
+      <div class="card">
+        <h3>Enterprise Cloud Deployments</h3>
+        <p>Delivered Azure, AWS and enterprise infrastructure programmes for major global organisations.</p>
+        <p><b>Outcome:</b> Improved scalability, resilience and operational performance.</p>
+      </div>
+    </div>
+
+    <h2>Certifications</h2>
+    <div class="card">
+      <span class="badge">APM PMQ</span>
+      <span class="badge">PRINCE2 Practitioner</span>
+      <span class="badge">PRINCE2 Agile</span>
+      <span class="badge">P3O Practitioner</span>
+      <span class="badge">ITIL</span>
+      <span class="badge">NIST Cyber Framework</span>
+      <span class="badge">Six Sigma Green Belt</span>
+      <span class="badge">MCSE</span>
+      <span class="badge">ServiceNow IT Leadership</span>
+    </div>
+
+    <h2>Industry Contribution</h2>
+    <div class="card">
+      <ul>
+        <li>STEM Ambassador supporting technology education</li>
+        <li>APM Mentor and research advisor</li>
+        <li>Career fair speaker supporting students entering technology careers</li>
+        <li>Volunteer interview mentor for early career professionals</li>
+        <li>UK Employee Forum Rep - Computacenter</li>
+      </ul>
+    </div>
+
+    <h2>Contact</h2>
+    <div class="card">
+      <p>Email: timwilliams07@outlook.com</p>
+      <p>Phone: 07801 453322</p>
+      <p>
+        <a href="https://www.linkedin.com/in/timwilliams77" target="_blank"
+           style="text-decoration:none; color:#0A66C2; font-weight:600;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+               style="vertical-align:middle; margin-right:6px;">
+            <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+            <path fill="#FFFFFF" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v16h-4V8zm7.5 0h3.8v2.2h.1c.5-1 1.8-2.2 3.9-2.2 4.2 0 5 2.8 5 6.5V24h-4v-8.2c0-2 0-4.5-2.8-4.5-2.8 0-3.2 2.2-3.2 4.3V24h-4V8z"
+                  transform="translate(4 0) scale(0.7)"/>
+          </svg>
+          Tim Williams
+        </a>
+      </p>
+    </div>
+
+  </div>
+
+  <!-- FLOATING BUTTONS -->
+  <a href="calendar.html" class="fab fab-booking">📅</a>
+  <div class="fab" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">⬆️</div>
+
+  <!-- FOOTER INCLUDE -->
+  <div id="footer"></div>
+  <script>
+    fetch("footer.html")
+      .then(r => r.text())
+      .then(h => document.getElementById("footer").innerHTML = h);
+  </script>
+
+  <script src="global.js"></script>
+</body>
+</html>

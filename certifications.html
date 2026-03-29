@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tim Williams – Certification Portfolio</title>
+
+  <link rel="stylesheet" href="certifications.css?v=1">
+  <script src="certifications.js?v=1002" defer></script>
+</head>
+
+<body class="page-certifications">
+
+  <!-- HEADER INCLUDE -->
+  <div id="header"></div>
+  <script>
+    fetch("header-standard.html")
+      .then(r => r.text())
+      .then(h => document.getElementById("header").innerHTML = h);
+  </script>
+
+  <!-- FILTER BAR -->
+  <div class="sticky-bar">
+    <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+    <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+    <button class="filter-btn" data-filter="Professional Certifications">Certifications</button>
+    <button class="filter-btn" data-filter="Leadership & Management">Leadership</button>
+    <button class="filter-btn" data-filter="Agile & Scrum">Agile</button>
+    <button class="filter-btn" data-filter="AI & Copilot">AI</button>
+    <button class="filter-btn" data-filter="Microsoft Skills & Cloud">Microsoft</button>
+    <button class="filter-btn" data-filter="Security & Governance">Security</button>
+    <button class="filter-btn" data-filter="Volunteering">Volunteering</button>
+    <button class="filter-btn" data-filter="Memberships">Memberships</button>
+    <button class="filter-btn" data-filter="Background Checks">Checks</button>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div id="certificationsContainer" class="container"></div>
+
+  <!-- FLOATING BUTTONS -->
+  <div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+  <a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
+
+  <!-- FOOTER INCLUDE -->
+  <div id="footer"></div>
+  <script>
+    fetch("footer.html")
+      .then(r => r.text())
+      .then(h => document.getElementById("footer").innerHTML = h);
+  </script>
+
+  <!-- JSON DATA -->
+  <script id="cert-data">
+  {
+    "Professional Certifications": [
+      { "icon": "🎓", "title": "APM Project Management Qualification", "issuer": "APMP", "url": "" },
+      { "icon": "🎓", "title": "Certified Risk Manager (CRM)", "issuer": "QA Ltd", "url": "" },
+      { "icon": "🎓", "title": "Citrix Certified Administrator (CCA)", "issuer": "QA Ltd", "url": "" },
+      { "icon": "🎓", "title": "Contract and Commercial Management Practitioner (ACCM)", "issuer": "QA Ltd", "url": "" },
+      { "icon": "🎓", "title": "ISO Awareness", "issuer": "Roc Technologies", "url": "" },
+      { "icon": "🎓", "title": "IT Infrastructure", "issuer": "CompTIA", "url": "" },
+      { "icon": "🎓", "title": "ITIL", "issuer": "QA Ltd", "url": "" },
+      { "icon": "🎓", "title": "P3O Practitioner", "issuer": "QA Ltd", "url": "" },
+      { "icon": "🎓", "title": "PointSec Administration", "issuer": "Pointsec Mobile Technologies", "url": "" },
+      { "icon": "🎓", "title": "PRINCE2® 2017 Practitioner", "issuer": "QA Ltd", "url": "" },
+      { "icon": "🎓", "title": "Program Management for IT Professionals", "issuer": "SHRM", "url": "" },
+      { "icon": "🎓", "title": "Programme Management for IT Professionals", "issuer": "CompTIA", "url": "" },
+      { "icon": "🎓", "title": "Program Management Professional (PgMP)", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🎓", "title": "VmWare ESXi Administration", "issuer": "VMware", "url": "" }
+    ],
+    "Leadership & Management": [
+      { "icon": "🧭", "title": "High-Stakes Presentation Skills for Leaders and Managers", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/095cce33db1a44ba0a7eeee2f8efabc9dd4604fa71bb642b9f9da9e700462e05" },
+      { "icon": "🧭", "title": "Lead a Successful PMO", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🧭", "title": "Leading Projects", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🧭", "title": "Presenting to Senior Executives", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/cef27bc151962281f9e5716b535b9c54c745b06f6c20bab1c47b04354c2b3790" },
+      { "icon": "🧭", "title": "ServiceNow IT Leadership", "issuer": "ServiceNow", "url": "" },
+      { "icon": "🧭", "title": "ServiceNow IT Leadership Professional Certificate", "issuer": "ServiceNow", "url": "https://www.linkedin.com/learning/certificates/527fca67cbd625fd5544360968604aa0370c8bc5f88c3c8b0bb730d63979e80b" },
+      { "icon": "🧭", "title": "Stakeholder Management and Communication for Senior Leaders and Executives", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/1a1cd147d7d0278342e3f44c8557d0cc8389e115770981301744c5db067e68f9" },
+      { "icon": "🧭", "title": "Stakeholder Management for Leaders and Managers", "issuer": "Project Management Institute", "url": "https://www.linkedin.com/learning/certificates/da598f374ad322e527bac08d1542e8256fd8b075869404f363ab328b272168ce" },
+      { "icon": "🧭", "title": "Succeeding as a First-Time Tech Manager", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/629d320d61d6256fe8f42145a2037bc831b5bb7d604010e0ab868752e298c4ce" },
+      { "icon": "🧭", "title": "Succeeding as a Tech Manager", "issuer": "Project Management Institute", "url": "" }
+    ],
+    "Agile & Scrum": [
+      { "icon": "🌀", "title": "Agile Business Analysis", "issuer": "International Institute of Business Analysis (IIBA)", "url": "" },
+      { "icon": "🌀", "title": "Agile Business Analysis", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/4d746baa62590cd6ec2f19918cdbe7232c2f19709697b2f5979e63f95a4bb626" },
+      { "icon": "🌀", "title": "Agile Foundations", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/0c9f8ff56a0b990918386b902c38362e5a759233732b04fc9a06640980ef3326" },
+      { "icon": "🌀", "title": "Agile Project Management - Mistakes to Avoid in Agile Project Management", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🌀", "title": "Agile Project Management Foundation", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🌀", "title": "Agile Project Management with Jira Cloud", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🌀", "title": "Agile Project Management with Jira Cloud", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/3adc06de87a08e0e5d881a2de59f5152b2e6f58313185b02abb7c0b0ba46244a" },
+      { "icon": "🌀", "title": "Agile Project Management with Jira Cloud - Advanced", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🌀", "title": "Agile Project Management with Jira Cloud: 1 Projects, Boards, and Issues", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/b40b053b4da8902f6a99422c43f2ba35bad5ed890a9968ca2553587506b27990" },
+      { "icon": "🌀", "title": "Agile Project Management with Jira Cloud: 2 Lean and Agile Processes", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/f4c85092b526f8232bc9bb4f2a5b2c1ad4e311c03e6b73c4ae8dbbee48147a91" },
+      { "icon": "🌀", "title": "Agile Project Management with Jira Cloud: 3 Advanced Topics", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/7aa783d5e9147c03a08a941f5366f07cae4ede034ebd43d15b6347154805f67c" },
+      { "icon": "🌀", "title": "Agile Project Management with Jira Cloud: Professional Certificate", "issuer": "Atlassian", "url": "https://www.linkedin.com/learning/certificates/d1f37f408986c461b5030282e6208b95617cb64bd65cd785db9f949a9e8d3f84" },
+      { "icon": "🌀", "title": "Agile Project Management Professional Certification", "issuer": "Atlassian", "url": "" },
+      { "icon": "🌀", "title": "Disciplined Agile in Project Management", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/17260b857007b131f9b7bdfae0092c9a25a5208ccd535a569f65aec74535a808" },
+      { "icon": "🌀", "title": "Disciplined Agile in Project Management", "issuer": "Project Management Institute", "url": "https://www.linkedin.com/learning/certificates/6023a57c47e3ec7bdb7618832ccef5517101a50aab93b6955c85359ba8a34b1d" },
+      { "icon": "🌀", "title": "Kickoff: Agile Project Management", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🌀", "title": "Mistakes in Agile Project Management", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🌀", "title": "Mistakes to Avoid in Agile Project Management", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/9a72d20d4602fcf9869cd4c9e76a27b9c5178743198cb86f6bbddc84bd597a47" },
+      { "icon": "🌀", "title": "Scrum: Basics", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🌀", "title": "Scrum: The Basics", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/f3250154283f6c7be8b9c36cd6132b911452f244bf0e29225c45b977315983e9" }
+    ],
+    "AI & Copilot": [
+      { "icon": "🤖", "title": "AI for Project Management", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🤖", "title": "AI in Project Management", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/da3115de085374ecc66e8e82885eaed03dc22fa01f5a77e6fc408c52f1b22b4a" },
+      { "icon": "🤖", "title": "Build an Agent with Copilot Studio", "issuer": "Microsoft", "url": "" },
+      { "icon": "🤖", "title": "Copilot in Power BI", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/PGHQ7E84?sharingId=18C938192D9A35FD" },
+      { "icon": "🤖", "title": "Drive Business Value with AI using Microsoft Foundry Tools", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/YPLEN37R?sharingId=18C938192D9A35FD" },
+      { "icon": "🤖", "title": "Drive Business Value with Microsoft Copilot Solutions", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/9RPYMVMU?sharingId=18C938192D9A35FD" },
+      { "icon": "🤖", "title": "Enhance Teaching and Learning with Microsoft 365 Copilot Chat", "issuer": "Microsoft", "url": "" },
+      { "icon": "🤖", "title": "Generative AI Overview for Project Managers", "issuer": "Project Management Institute", "url": "https://www.credly.com/badges/e8da0da3-46be-4283-944f-09ef6398e1ef/linked_in_profile" },
+      { "icon": "🤖", "title": "Getting Started with Power BI (AI‑enabled)", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/DUR94D6J?sharingId=18C938192D9A35FD" },
+      { "icon": "🤖", "title": "Introduction to AI Concepts", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/ELS2JJZP?sharingId=18C938192D9A35FD" },
+      { "icon": "🤖", "title": "Introduction to Generative AI and Agents", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/37KAMUUH?sharingId=18C938192D9A35FD" },
+      { "icon": "🤖", "title": "Introduction to Machine Learning Concepts", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/DUCP6T4J?sharingId=18C938192D9A35FD" },
+      { "icon": "🤖", "title": "Microsoft Applied Skills: Get Started with Azure Management Tasks", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/credentials/share/en-gb/TimWilliams-6478/466446DA28416590?sharingId" },
+      { "icon": "🤖", "title": "Microsoft Azure AI Essentials Professional Certificate", "issuer": "Microsoft", "url": "https://www.linkedin.com/learning/certificates/3c7fb9651058db03617277778763da585694c16aefac6640f923ff5969b4a39f" },
+      { "icon": "🤖", "title": "Power Automate Solutions", "issuer": "Microsoft", "url": "" },
+      { "icon": "🤖", "title": "Practical Application of Gen AI for Project Managers", "issuer": "Project Management Institute", "url": "https://www.credly.com/badges/8706155b-0357-4b4e-bad3-51b41ea6ba6f/linked_in_profile" },
+      { "icon": "🤖", "title": "Project Leadership in the Age of AI", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/b0abe3e2f9c039985cff5d6dec3da18fb7cb036c1c86252c45d965e248e4ccc7" },
+      { "icon": "🤖", "title": "Project Leadership in the Age of AI", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "🤖", "title": "Project Management with Microsoft Copilot", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/f74f2e3a25b9961340ab96cce9b2802e4d0cfaf6cebd705fa9ef03bec817742a" },
+      { "icon": "🤖", "title": "Project Management with Copilot", "issuer": "Project Management Institute", "url": "https://www.linkedin.com/learning/certificates/f2eccb2a5517376eb0b7985b47ec775b8732e9b731e195cd1f21431be8b03a8c" },
+      { "icon": "🤖", "title": "Scale AI in Your Organisation", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/82DZP9RW?sharingId=18C938192D9A35FD" },
+      { "icon": "🤖", "title": "Use Power Automate to Increase Productivity", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/J3AUBG2T?sharingId=18C938192D9A35FD" }
+    ],
+    "Microsoft Skills & Cloud": [
+      { "icon": "☁️", "title": "Advanced Excel", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "Getting Started with Power BI", "issuer": "Microsoft", "url": "https://learn.microsoft.com/api/achievements/share/en-gb/TimWilliams-6478/DUR94D6J?sharingId=18C938192D9A35FD" },
+      { "icon": "☁️", "title": "Hyper-V in Windows Server 2008", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "Introduction to Cloud Infrastructure", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "MCITP Virtualisation Administrator Server 2008 R2", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "Microsoft Certified IT Professional (MCITP)", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "Microsoft Certified Professional (MCP)", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "Microsoft Certified Technology Specialist (MCTS)", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "MCTS - Exchange Server 2007 Configuration Charter Member", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "MCTS - Windows Server 2008 Active Directory, Configuration", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "MCTS - Windows Server 2008 R2 Desktop Virtualisation", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "MCTS - Windows Server Virtualisation Configuration", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "Microsoft Project Step by Step: Planning for Successful Project Management", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/33a24fb66e7535a3d43a8144130e1a60ce19fc1e4c3eb2ac3a8d99b92c5d307f" },
+      { "icon": "☁️", "title": "Power BI Essential Training", "issuer": "Microsoft", "url": "https://www.linkedin.com/learning/certificates/5976c390a8149949bfcbe80e29e9f74d96794abca3743aec85670331d46b758f?trk=share_certificate" },
+      { "icon": "☁️", "title": "Power BI Essential Training (2024)", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/5976c390a8149949bfcbe80e29e9f74d96794abca3743aec85670331d46b758f" },
+      { "icon": "☁️", "title": "System Centre Virtual Machine Manager 2008", "issuer": "Microsoft", "url": "" },
+      { "icon": "☁️", "title": "Terminal Services in Windows Server 2008", "issuer": "Microsoft", "url": "" }
+    ],
+    "Security & Governance": [
+      { "icon": "🔐", "title": "Data Protection", "issuer": "Access LMS", "url": "" },
+      { "icon": "🔐", "title": "How to Support Yourself and Others with Mental Health", "issuer": "Access LMS", "url": "" },
+      { "icon": "🔐", "title": "Modern Slavery", "issuer": "Access LMS", "url": "" },
+      { "icon": "🔐", "title": "NIST - Cyber Security Framework (CSF) Foundation", "issuer": "Alison", "url": "" },
+      { "icon": "🔐", "title": "Security Framework Fundamentals", "issuer": "LinkedIn Learning Community", "url": "" },
+      { "icon": "🔐", "title": "Security Frameworks Fundamentals", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/08aec88c030ed69bf9868f1b57c5bfa045281a811cef6d0bccc6679355c72d0f" }
+    ],
+    "Volunteering": [
+      { "icon": "❤️", "title": "APM Volunteer", "issuer": "APMP", "url": "https://www.credly.com/badges/7f93d000-c0e5-46a9-9273-89bec8150b56/linked_in_profile" },
+      { "icon": "❤️", "title": "APM Volunteer", "issuer": "Association for Project Management", "url": "https://www.credly.com/badges/7f93d000-c0e5-46a9-9273-89bec8150b56" },
+      { "icon": "❤️", "title": "Career Coach & Mentor Volunteer", "issuer": "Inspiring the Future", "url": "" },
+      { "icon": "❤️", "title": "National Interview Week Volunteer", "issuer": "imployable®", "url": "" },
+      { "icon": "❤️", "title": "PMI Volunteer", "issuer": "Project Management Institute", "url": "" },
+      { "icon": "❤️", "title": "STEM Volunteer", "issuer": "National Centre for Computing Education", "url": "" },
+      { "icon": "❤️", "title": "Volunteer Contribution to the Project Management Profession", "issuer": "Project Management Institute", "url": "" }
+    ],
+    "Memberships": [
+      { "icon": "🏛️", "title": "Associated Professional Member (APM)", "issuer": "Association for Project Management", "url": "" },
+      { "icon": "🏛️", "title": "BCS Professional Member", "issuer": "British Computer Society (BCS) Middle East", "url": "" },
+      { "icon": "🏛️", "title": "House of PMO Member", "issuer": "House of PMO", "url": "" },
+      { "icon": "🏛️", "title": "PMI Professional Member", "issuer": "Project Management Institute", "url": "" }
+    ],
+    "Background Checks": [
+      { "icon": "🛂", "title": "Enhanced DBS", "issuer": "Disclosure and Barring Service (DBS)", "url": "" },
+      { "icon": "🛂", "title": "Enhanced SC Clearance", "issuer": "UK Home Office", "url": "" }
+    ]
+  }
+  </script>
+
+  <script src="global.js"></script>
+</body>
+</html>

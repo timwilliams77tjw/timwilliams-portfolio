@@ -1,4 +1,41 @@
 /* -----------------------------------------
+   INIT AFTER HEADER LOAD
+----------------------------------------- */
+window.initGlobal = function () {
+
+  /* ACTIVE BUTTON */
+  const path = window.location.pathname.split("/").pop();
+  document.querySelectorAll(".brand-btn").forEach(btn => {
+    const href = btn.getAttribute("href");
+    if (href && href === path) {
+      btn.classList.add("active");
+    }
+  });
+
+  /* TOOLTIP BEHAVIOUR */
+  document.querySelectorAll(".tooltip-icon").forEach(icon => {
+    icon.addEventListener("click", e => {
+      e.stopPropagation();
+      const tooltip = icon.closest(".tooltip");
+
+      document.querySelectorAll(".tooltip").forEach(t => {
+        if (t !== tooltip) t.classList.remove("tap-active");
+      });
+
+      tooltip.classList.toggle("tap-active");
+    });
+  });
+
+  /* BACK TO TOP */
+  const fab = document.getElementById("fab");
+  if (fab) {
+    fab.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+};
+
+/* -----------------------------------------
    DROPDOWN MENUS
 ----------------------------------------- */
 function closeAllMenus() {
@@ -27,44 +64,9 @@ function toggleMenu(id, button) {
   closeAllMenus();
 
   if (!isOpen) {
+    const width = button.offsetWidth;
+    menu.style.setProperty("--menu-width", width + "px");
     menu.style.display = "flex";
     button.classList.add("open");
   }
 }
-
-/* -----------------------------------------
-   INIT AFTER HEADER IS LOADED
------------------------------------------ */
-window.initGlobal = function () {
-  const path = window.location.pathname.split("/").pop();
-
-  // Active button
-  document.querySelectorAll(".brand-btn").forEach(btn => {
-    const href = btn.getAttribute("href");
-    if (href && href === path) {
-      btn.classList.add("active");
-    }
-  });
-
-  // Tooltips
-  document.querySelectorAll(".tooltip-icon").forEach(icon => {
-    icon.addEventListener("click", e => {
-      e.stopPropagation();
-      const tooltip = icon.closest(".tooltip");
-
-      document.querySelectorAll(".tooltip").forEach(t => {
-        if (t !== tooltip) t.classList.remove("tap-active");
-      });
-
-      tooltip.classList.toggle("tap-active");
-    });
-  });
-
-  // Back to top
-  const fab = document.getElementById("fab");
-  if (fab) {
-    fab.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-};

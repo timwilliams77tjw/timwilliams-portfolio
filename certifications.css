@@ -555,3 +555,84 @@ footer {
   opacity: 1;
   visibility: visible;
 }
+/* Ensure dropdowns and tooltips work on all pages */
+.brand-btn .arrow {
+  margin-left: 6px;
+  font-size: 14px;
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.brand-btn.open .arrow {
+  transform: rotate(180deg);
+}
+
+.popup-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--menu-width, auto);
+  background: white;
+  border: 2px solid #0A1A2F;
+  border-radius: 8px;
+  padding: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999999;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tooltip-icon {
+  font-size: 15px;
+  cursor: pointer;
+  color: #0A1A2F;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  background: #0A1A2F;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  width: 240px;
+  position: absolute;
+  left: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.25s ease;
+  z-index: 9999999;
+}
+
+.tooltip.tap-active .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+@media (max-width: 600px) {
+  .tooltip-text {
+    left: 50% !important;
+    right: auto !important;
+    top: -10px !important;
+    transform: translateX(-50%) translateY(-100%) !important;
+    width: 200px !important;
+  }
+
+  .tooltip-text::after {
+    left: 50% !important;
+    right: auto !important;
+    top: 100% !important;
+    transform: translateX(-50%) !important;
+    border-color: #0A1A2F transparent transparent transparent !important;
+  }
+}
+

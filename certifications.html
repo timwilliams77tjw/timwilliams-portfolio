@@ -7,7 +7,7 @@
 <title>Tim Williams – Certification Portfolio</title>
 
 <link rel="stylesheet" href="certifications.css?v=1">
-<script src="certifications.js?v=1002" defer></script>
+<!-- <script src="certifications.js?v=1002" defer></script> -->
 </head>
 
 <body class="page-certifications">
@@ -15,7 +15,7 @@
 <!-- HEADER INCLUDE -->
 <div id="header"></div>
 
-<!-- Load global.js BEFORE fetching the header -->
+<!-- IMPORTANT: Load global.js BEFORE fetching the header -->
 <script src="global.js"></script>
 
 <script>
@@ -23,7 +23,7 @@ fetch("header-standard.html")
     .then(r => r.text())
     .then(h => {
         document.getElementById("header").innerHTML = h;
-        initGlobal();
+        initGlobal(); // Now works because global.js is already loaded
     });
 </script>
 
@@ -60,7 +60,7 @@ fetch("footer.html")
 
 <!-- JSON DATA -->
 <script id="cert-data">
-{ /* unchanged JSON */ }
+{  /* your JSON data remains unchanged */ }
 </script>
 
 </body>

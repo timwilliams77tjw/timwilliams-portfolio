@@ -14,13 +14,15 @@
 <body class="page-certifications">
 
   <!-- HEADER INCLUDE -->
-  <div id="header"></div>
-  <script>
-    fetch("header-standard.html")
-      .then(r => r.text())
-      .then(h => document.getElementById("header").innerHTML = h);
-  </script>
-
+<div id="header"></div>
+<script>
+  fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => {
+      document.getElementById("header").innerHTML = h;
+      if (window.initGlobal) window.initGlobal();
+    });
+</script>
   <!-- MAIN CONTENT -->
   <div class="container" style="margin-top: 40px;">
     <h2 style="text-align:center; margin-bottom: 20px;">Book a Meeting with Tim Williams</h2>

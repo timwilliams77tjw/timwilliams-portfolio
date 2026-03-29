@@ -118,6 +118,18 @@
   /* -----------------------------------------------------------
      DROPDOWN MENUS (used by header-index.html)
   ----------------------------------------------------------- */
+  .popup-menu {
+    position: absolute;
+    background: white;
+    border: 2px solid #0A1A2F;
+    border-radius: 8px;
+    padding: 12px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999999;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
 
   .popup-menu a {
     color: #0A1A2F;
@@ -142,6 +154,24 @@
     cursor: pointer;
     color: #0A1A2F;
   }
+
+  .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    background: #0A1A2F;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    width: 240px;
+    position: absolute;
+    left: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 0.25s ease;
+    z-index: 999999;
+  }
+
   .tooltip-text::after {
     content: "";
     position: absolute;
@@ -253,39 +283,6 @@
   .footer-qr img {
     width: 60px;
   }
-/* -----------------------------------------
-   FIXED TOOLTIP (centered, never off-screen)
------------------------------------------ */
-.tooltip-text {
-  left: 50% !important;
-  top: calc(100% + 8px) !important;
-  transform: translateX(-50%) !important;
-  width: 240px;
-  text-align: center;
-  white-space: normal;
-}
-
-/* -----------------------------------------
-   FIXED DROPDOWN (centered under button)
------------------------------------------ */
-.popup-menu {
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  top: calc(100% + 6px) !important;
-  z-index: 9999999;
-}
-
-/* -----------------------------------------
-   ARROW ROTATION
------------------------------------------ */
-.brand-btn .arrow {
-  display: inline-block;
-  transition: transform 0.25s ease;
-}
-
-.brand-btn.open .arrow {
-  transform: rotate(180deg);
-}
   </style>
 </head>
 

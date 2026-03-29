@@ -283,6 +283,39 @@
   .footer-qr img {
     width: 60px;
   }
+/* -----------------------------------------
+   FIXED TOOLTIP (centered, never off-screen)
+----------------------------------------- */
+.tooltip-text {
+  left: 50% !important;
+  top: calc(100% + 8px) !important;
+  transform: translateX(-50%) !important;
+  width: 240px;
+  text-align: center;
+  white-space: normal;
+}
+
+/* -----------------------------------------
+   FIXED DROPDOWN (centered under button)
+----------------------------------------- */
+.popup-menu {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: calc(100% + 6px) !important;
+  z-index: 9999999;
+}
+
+/* -----------------------------------------
+   ARROW ROTATION
+----------------------------------------- */
+.brand-btn .arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.brand-btn.open .arrow {
+  transform: rotate(180deg);
+}
   </style>
 </head>
 

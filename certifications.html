@@ -7,7 +7,10 @@
 <title>Tim Williams – Certification Portfolio</title>
 
 <link rel="stylesheet" href="certifications.css?v=1">
+
+<!-- Load certifications.js FIRST so it can read the JSON -->
 <script src="certifications.js?v=1002" defer></script>
+
 </head>
 
 <body class="page-certifications">
@@ -15,7 +18,7 @@
 <!-- HEADER INCLUDE -->
 <div id="header"></div>
 
-<!-- IMPORTANT: Load global.js BEFORE fetching the header -->
+<!-- Load global.js BEFORE header fetch -->
 <script src="global.js"></script>
 
 <script>
@@ -23,7 +26,7 @@ fetch("header-standard.html")
     .then(r => r.text())
     .then(h => {
         document.getElementById("header").innerHTML = h;
-        initGlobal(); // Now works because global.js is already loaded
+        initGlobal();
     });
 </script>
 
@@ -58,9 +61,61 @@ fetch("footer.html")
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- JSON DATA -->
+<!-- JSON DATA (FULL, REAL JSON) -->
 <script id="cert-data">
-{  /* your JSON data remains unchanged */ }
+{
+  "Professional Certifications": [
+    { "icon": "🎓", "title": "APM Project Management Qualification", "issuer": "APMP", "url": "" },
+    { "icon": "🎓", "title": "Certified Risk Manager (CRM)", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "Citrix Certified Administrator (CCA)", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "Contract and Commercial Management Practitioner (ACCM)", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "ISO Awareness", "issuer": "Roc Technologies", "url": "" },
+    { "icon": "🎓", "title": "IT Infrastructure", "issuer": "CompTIA", "url": "" },
+    { "icon": "🎓", "title": "ITIL", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "P3O Practitioner", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "PointSec Administration", "issuer": "Pointsec Mobile Technologies", "url": "" },
+    { "icon": "🎓", "title": "PRINCE2® 2017 Practitioner", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "Program Management for IT Professionals", "issuer": "SHRM", "url": "" },
+    { "icon": "🎓", "title": "Programme Management for IT Professionals", "issuer": "CompTIA", "url": "" },
+    { "icon": "🎓", "title": "Program Management Professional (PgMP)", "issuer": "Project Management Institute", "url": "" },
+    { "icon": "🎓", "title": "VmWare ESXi Administration", "issuer": "VMware", "url": "" }
+  ],
+
+  "Leadership & Management": [
+    { "icon": "🧭", "title": "High-Stakes Presentation Skills for Leaders and Managers", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/095cce33db1a44ba0a7eeee2f8efabc9dd4604fa71bb642b9f9da9e700462e05" },
+    { "icon": "🧭", "title": "Lead a Successful PMO", "issuer": "Project Management Institute", "url": "" },
+    { "icon": "🧭", "title": "Leading Projects", "issuer": "Project Management Institute", "url": "" },
+    { "icon": "🧭", "title": "Presenting to Senior Executives", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/cef27bc151962281f9e5716b535b9c54c745b06f6c20bab1c47b04354c2b3790" }
+  ],
+
+  "Agile & Scrum": [
+    { "icon": "🌀", "title": "Agile Business Analysis", "issuer": "International Institute of Business Analysis (IIBA)", "url": "" }
+  ],
+
+  "AI & Copilot": [
+    { "icon": "🤖", "title": "AI for Project Management", "issuer": "Project Management Institute", "url": "" }
+  ],
+
+  "Microsoft Skills & Cloud": [
+    { "icon": "☁️", "title": "Advanced Excel", "issuer": "Microsoft", "url": "" }
+  ],
+
+  "Security & Governance": [
+    { "icon": "🔐", "title": "Data Protection", "issuer": "Access LMS", "url": "" }
+  ],
+
+  "Volunteering": [
+    { "icon": "❤️", "title": "APM Volunteer", "issuer": "APMP", "url": "https://www.credly.com/badges/7f93d000-c0e5-46a9-9273-89bec8150b56/linked_in_profile" }
+  ],
+
+  "Memberships": [
+    { "icon": "🏛️", "title": "Associated Professional Member (APM)", "issuer": "Association for Project Management", "url": "" }
+  ],
+
+  "Background Checks": [
+    { "icon": "🛂", "title": "Enhanced DBS", "issuer": "Disclosure and Barring Service (DBS)", "url": "" }
+  ]
+}
 </script>
 
 </body>

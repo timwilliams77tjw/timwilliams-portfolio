@@ -506,3 +506,52 @@ footer {
   z-index: 9999999;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
+.hero-banner {
+  position: relative;
+}
+
+.button-group {
+  position: relative;
+}
+
+.popup-menu {
+  position: absolute;
+  top: calc(100% + 6px); /* small gap */
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--menu-width, auto);
+  background: white;
+  border: 2px solid #0A1A2F;
+  border-radius: 8px;
+  padding: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999999;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip-text {
+  position: absolute;
+  left: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #0A1A2F;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 6px;
+  width: 240px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
+  z-index: 9999999;
+}
+
+.tooltip.tap-active .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+}

@@ -63,10 +63,11 @@ fetch("header-standard.html")
         document.getElementById("header").innerHTML = h;
         initGlobal();
 
-        // ADD THIS
-        document.querySelectorAll('.brand-btn[href="portfolio.html"]').forEach(btn => {
-            btn.classList.add("active");
-        });
+        // Force Portfolio button to be active
+        const portfolioBtn = document.querySelector('.brand-btn[href="portfolio.html"]');
+        if (portfolioBtn) {
+            portfolioBtn.classList.add("active");
+        }
     });
 </script>
     <!-- FILTER BAR -->

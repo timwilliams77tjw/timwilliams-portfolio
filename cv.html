@@ -54,7 +54,15 @@
         .card ul li {
             margin-bottom: 10px;
         }
-    </style>
+ </style>
+
+  <style>
+    /* existing styles... */
+
+    .page-content {
+        padding-top: 20px;
+    }
+</style> 
 
     <!-- GLOBAL JS -->
     <script src="global.js"></script>
@@ -81,16 +89,19 @@ fetch("header-standard.html")
     });
 </script>
 <!-- FILTER BAR -->
-<div class="sticky-bar">
-    <button class="filter-btn active-filter" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="summary">Summary</button>
-    <button class="filter-btn" data-filter="achievements">Achievements</button>
-    <button class="filter-btn" data-filter="experience">Experience</button>
-    <button class="filter-btn" data-filter="skills">Skills</button>
-    <button class="filter-btn" data-filter="certifications">Certifications</button>
-    <button class="filter-btn" data-filter="awards">Awards</button>
-</div>
+<main class="page-content">
+    <div class="sticky-bar">
+        <button class="filter-btn active-filter" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="summary">Summary</button>
+        <button class="filter-btn" data-filter="achievements">Achievements</button>
+        <button class="filter-btn" data-filter="experience">Experience</button>
+        <button class="filter-btn" data-filter="skills">Skills</button>
+        <button class="filter-btn" data-filter="certifications">Certifications</button>
+        <button class="filter-btn" data-filter="awards">Awards</button>
+    </div>
 
+    <div class="container">
+        <!-- Executive Summary, STAR, etc... -->
 <div class="container">
 <!-- EXECUTIVE SUMMARY (ALWAYS OPEN) -->
 <h2>Executive Summary</h2>
@@ -412,6 +423,11 @@ fetch("header-standard.html")
 </div>
 
 <hr class="section-divider">
+    <!-- all sections above (Awards, etc.) -->
+
+    </div> <!-- closes .container -->
+</main>
+
 <!-- FOOTER INCLUDE -->
 <div id="footer"></div>
 
@@ -421,13 +437,19 @@ fetch("footer-standard.html")
     .then(f => {
         document.getElementById("footer").innerHTML = f;
 
-        // Initialise global footer behaviour
         if (typeof initFooter === "function") {
             initFooter();
         }
     });
 </script>
+
 <!-- ACCORDION + FILTER LOGIC -->
+<script>
+    // your existing DOMContentLoaded accordion/filter code unchanged
+</script>
+
+</body>
+</html><!-- ACCORDION + FILTER LOGIC -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 

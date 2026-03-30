@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,71 +27,32 @@
             opacity: 0.9;
         }
 
-        /* Filter bar (same as Certifications page) */
-        .sticky-bar {
-            position: sticky;
-            top: 0;
+        /* Match Certifications card styling */
+        .card {
             background: white;
-            padding: 10px 0;
-            z-index: 50;
-            border-bottom: 1px solid #e5e7eb;
-            overflow-x: auto;
-            white-space: nowrap;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
         }
 
-        .filter-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            margin-right: 8px;
-            border-radius: 6px;
-            background: #f3f4f6;
-            border: 1px solid #d1d5db;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-
-        .filter-btn:hover {
-            background: #e5e7eb;
-        }
-
-        .active-filter {
-            background: #111827;
-            color: white;
-            border-color: #111827;
-        }
-
-        /* Floating buttons */
-        .fab {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #111827;
-            color: white;
-            padding: 14px 18px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 100;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-        }
-
-        .fab-booking {
-            right: 80px;
-            background: #2563eb;
+        /* Match Certifications grid spacing */
+        .grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         }
     </style>
 
     <!-- GLOBAL JS -->
     <script src="global.js"></script>
 </head>
-
 <body>
 
     <!-- HEADER INCLUDE -->
     <div id="header"></div>
     <script>
-        fetch("header-standard.html?v=2")
+        fetch("header-standard.html")
             .then(r => r.text())
             .then(h => {
                 document.getElementById("header").innerHTML = h;
@@ -103,18 +63,21 @@
     <!-- FILTER BAR -->
     <div class="sticky-bar">
         <button class="filter-btn active-filter" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="leadership">Leadership</button>
+        <button class="filter-btn" data-filter="rolefit">Role Fit</button>
         <button class="filter-btn" data-filter="euc">EUC</button>
         <button class="filter-btn" data-filter="cyber">Cyber</button>
         <button class="filter-btn" data-filter="pmo">PMO</button>
-        <button class="filter-btn" data-filter="service">Service Transition</button>
         <button class="filter-btn" data-filter="cloud">Cloud</button>
-        <button class="filter-btn" data-filter="legacy">Legacy & Migration</button>
+        <button class="filter-btn" data-filter="service">Service</button>
+        <button class="filter-btn" data-filter="legacy">Legacy</button>
         <button class="filter-btn" data-filter="presales">Pre‑Sales</button>
+        <button class="filter-btn" data-filter="whatibring">What I Bring</button>
     </div>
 
     <div class="container">
 
-        <!-- EXECUTIVE SUMMARY -->
+        <!-- EXECUTIVE SUMMARY (STATIC) -->
         <h2>Executive Summary</h2>
         <div class="card">
             <p>
@@ -131,72 +94,72 @@
 
         <hr class="section-divider">
 
-        <!-- LEADERSHIP MODEL -->
-        <h2>Leadership Model</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Governance & Delivery Control</h3>
-                <p>I establish clear frameworks, reporting rhythms, and decision pathways that bring stability to
-                    programmes under pressure. My approach reduces ambiguity, improves predictability, and ensures risks,
-                    dependencies, and scope are actively controlled.</p>
+        <!-- LEADERSHIP MODEL (FILTERABLE) -->
+        <div class="portfolio-section" data-category="leadership">
+            <h2>Leadership Model</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Governance & Delivery Control</h3>
+                    <p>I establish clear frameworks, reporting rhythms, and decision pathways that bring stability to
+                        programmes under pressure. My approach reduces ambiguity, improves predictability, and ensures risks,
+                        dependencies, and scope are actively controlled.</p>
+                </div>
+                <div class="card">
+                    <h3>Stakeholder Alignment & Communication</h3>
+                    <p>I build confidence across technical, operational, and executive stakeholders by translating
+                        complexity into clear, actionable narratives that enable faster decisions and smoother delivery.</p>
+                </div>
+                <div class="card">
+                    <h3>Operational Readiness & Service Sustainability</h3>
+                    <p>I embed service transition early, ensuring documentation, support models, and operational processes
+                        are in place before go-live. My focus is long-term stability, not just deployment success.</p>
+                </div>
+                <div class="card">
+                    <h3>Outcome-Based Delivery</h3>
+                    <p>I drive programmes toward measurable results including adoption, stability, risk reduction, and
+                        operational improvement.</p>
+                </div>
             </div>
-            <div class="card">
-                <h3>Stakeholder Alignment & Communication</h3>
-                <p>I build confidence across technical, operational, and executive stakeholders by translating
-                    complexity into clear, actionable narratives that enable faster decisions and smoother delivery.</p>
-            </div>
-            <div class="card">
-                <h3>Operational Readiness & Service Sustainability</h3>
-                <p>I embed service transition early, ensuring documentation, support models, and operational processes
-                    are in place before go-live. My focus is long-term stability, not just deployment success.</p>
-            </div>
-            <div class="card">
-                <h3>Outcome-Based Delivery</h3>
-                <p>I drive programmes toward measurable results including adoption, stability, risk reduction, and
-                    operational improvement.</p>
-            </div>
+            <hr class="section-divider">
         </div>
 
-        <hr class="section-divider">
-
-        <!-- ROLE FIT -->
-        <h2>Role Fit</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Roles I Fit</h3>
-                <ul>
-                    <li>Senior Project Manager</li>
-                    <li>Programme Manager</li>
-                    <li>PMO Manager / PMO Lead</li>
-                    <li>Service Transition Lead</li>
-                    <li>Delivery Assurance Lead</li>
-                </ul>
+        <!-- ROLE FIT (FILTERABLE) -->
+        <div class="portfolio-section" data-category="rolefit">
+            <h2>Role Fit</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Roles I Fit</h3>
+                    <ul>
+                        <li>Senior Project Manager</li>
+                        <li>Programme Manager</li>
+                        <li>PMO Manager / PMO Lead</li>
+                        <li>Service Transition Lead</li>
+                        <li>Delivery Assurance Lead</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>What Organisations Gain</h3>
+                    <ul>
+                        <li>Predictable, controlled delivery</li>
+                        <li>Strong governance and reporting discipline</li>
+                        <li>Confident stakeholder alignment</li>
+                        <li>Clean, stable service landings</li>
+                        <li>Measurable operational and risk outcomes</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Where I Add Most Value</h3>
+                    <ul>
+                        <li>Complex, multi-vendor environments</li>
+                        <li>Regulated sectors with high governance expectations</li>
+                        <li>Programmes requiring stabilisation or recovery</li>
+                        <li>Transformations with significant operational impact</li>
+                        <li>Services transitioning into BAU</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card">
-                <h3>What Organisations Gain</h3>
-                <ul>
-                    <li>Predictable, controlled delivery</li>
-                    <li>Strong governance and reporting discipline</li>
-                    <li>Confident stakeholder alignment</li>
-                    <li>Clean, stable service landings</li>
-                    <li>Measurable operational and risk outcomes</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>Where I Add Most Value</h3>
-                <ul>
-                    <li>Complex, multi-vendor environments</li>
-                    <li>Regulated sectors with high governance expectations</li>
-                    <li>Programmes requiring stabilisation or recovery</li>
-                    <li>Transformations with significant operational impact</li>
-                    <li>Services transitioning into BAU</li>
-                </ul>
-            </div>
+            <hr class="section-divider">
         </div>
-
-        <hr class="section-divider">
-
-        <!-- FILTERABLE SECTIONS BELOW -->
 
         <!-- EUC -->
         <div class="portfolio-section" data-category="euc">
@@ -313,16 +276,18 @@
             <hr class="section-divider">
         </div>
 
-        <!-- WHAT I BRING -->
-        <h2>What I Bring</h2>
-        <div class="card">
-            <ul>
-                <li>Execution certainty through structure, clarity, and governance</li>
-                <li>Cross-sector repeatability across regulated environments</li>
-                <li>Operational readiness and sustainable service landings</li>
-                <li>Stakeholder confidence through clear communication</li>
-                <li>Long-term service value through stability and adoption</li>
-            </ul>
+        <!-- WHAT I BRING (FILTERABLE) -->
+        <div class="portfolio-section" data-category="whatibring">
+            <h2>What I Bring</h2>
+            <div class="card">
+                <ul>
+                    <li>Execution certainty through structure, clarity, and governance</li>
+                    <li>Cross-sector repeatability across regulated environments</li>
+                    <li>Operational readiness and sustainable service landings</li>
+                    <li>Stakeholder confidence through clear communication</li>
+                    <li>Long-term service value through stability and adoption</li>
+                </ul>
+            </div>
         </div>
 
     </div> <!-- end container -->
@@ -335,9 +300,9 @@
             .then(h => document.getElementById("footer").innerHTML = h);
     </script>
 
-    <!-- Floating Buttons -->
-    <a href="calendar.html" class="fab fab-booking">📅</a>
-    <div class="fab" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</div>
+    <!-- FLOATING BUTTONS (match Certifications) -->
+    <div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+    <a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
 
     <!-- FILTERING LOGIC -->
     <script>

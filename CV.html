@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV – Tim Williams</title>
+
+    <!-- GLOBAL CSS -->
+    <link rel="stylesheet" href="certifications.css?v=1">
+
+    <!-- PAGE-SPECIFIC STYLES -->
+    <style>
+        .section-divider {
+            border: none;
+            border-top: 2px solid #e5e7eb;
+            margin: 50px 0 40px;
+            width: 100%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .card-list {
+            display: none;
+        }
+    </style>
+
+    <!-- GLOBAL JS -->
+    <script src="global.js"></script>
+</head>
+
+<body>
+
+<!-- HEADER INCLUDE -->
+<div id="header"></div>
+<script>
+fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header").innerHTML = h;
+        initGlobal();
+
+        // Force CV button to be active
+        const cvBtn = document.querySelector('.brand-btn[onclick="openCVMenu(event)"]');
+        if (cvBtn) cvBtn.classList.add("active");
+    });
+</script>
+
+<!-- FILTER BAR -->
+<div class="sticky-bar">
+    <button class="filter-btn active-filter" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="summary">Summary</button>
+    <button class="filter-btn" data-filter="achievements">Achievements</button>
+    <button class="filter-btn" data-filter="experience">Experience</button>
+    <button class="filter-btn" data-filter="skills">Skills</button>
+    <button class="filter-btn" data-filter="certifications">Certifications</button>
+    <button class="filter-btn" data-filter="awards">Awards</button>
+</div>
+
+<div class="container">
+
+    <!-- EXECUTIVE SUMMARY (ALWAYS OPEN) -->
+    <h2>Executive Summary</h2>
+    <div class="card">
+        <p>Senior IT Project & Program Manager with 25+ years delivering enterprise-scale infrastructure modernization, workplace transformation, cloud adoption, and cyber security programs across government, defense, healthcare, finance, and legal sectors.</p>
+        <p>Holding Enhanced SC and DBS clearance, I lead multimillion-pound programs impacting up to 126,000 users globally, spanning Windows 10/11 deployments, network and datacenter modernisation, identity and access management, cloud migrations (Azure & AWS), and secure-by-design cyber security uplift.</p>
+        <p>I combine strong governance, business case development, risk & change management, stakeholder leadership, and deep technical awareness to deliver predictable outcomes across complex, multi-supplier environments.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- STAR ACHIEVEMENTS -->
+    <div class="category-section cv-section" data-category="achievements">
+        <div class="category-header">
+            STAR Achievements
+            <span class="category-toggle">+</span>
+        </div>
+
+        <div class="card-list">
+            <div class="grid">
+
+                <!-- NHS England -->
+                <div class="card">
+                    <h3>NHS England — Cyber Security Programme</h3>
+                    <p><strong>Situation:</strong> NHS England required a full cyber-security uplift aligned to CAF standards (£18m).</p>
+                    <p><strong>Task:</strong> Lead discovery, design, and implementation of multiple security solutions.</p>
+                    <p><strong>Action:</strong> Delivered MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, and secure backup.</p>
+                    <p><strong>Result:</strong> Strengthened security posture and operational resilience.</p>
+                </div>
+
+                <!-- Roc Technologies -->
+                <div class="card">
+                    <h3>Roc Technologies — PMO & Infrastructure</h3>
+                    <p><strong>Situation:</strong> Multiple high-risk infrastructure and security programs required governance.</p>
+                    <p><strong>Task:</strong> Oversee PMO operations and lead transformation initiatives.</p>
+                    <p><strong>Action:</strong> Delivered MFA for Luton Airport, network refresh, ServiceNow MSP, hardened builds.</p>
+                    <p><strong>Result:</strong> Improved delivery predictability and service capability.</p>
+                </div>
+
+                <!-- Version One -->
+                <div class="card">
+                    <h3>Version One — Service Transition</h3>
+                    <p><strong>Situation:</strong> Major programs needed seamless transition into BAU.</p>
+                    <p><strong>Task:</strong> Ensure operational readiness and service stability.</p>
+                    <p><strong>Action:</strong> Delivered ITSM integration, service designs, knowledge transfer.</p>
+                    <p><strong>Result:</strong> Smooth handover and reduced early-life incidents.</p>
+                </div>
+
+                <!-- Computacenter -->
+                <div class="card">
+                    <h3>Computacenter — Global Workplace Transformation</h3>
+                    <p><strong>Situation:</strong> Enterprise clients required large-scale modernisation.</p>
+                    <p><strong>Task:</strong> Lead global Windows 10/11 and cloud-enabled endpoint programs.</p>
+                    <p><strong>Action:</strong> Delivered transformations for Tesco, HSBC, Linklaters, NFUM.</p>
+                    <p><strong>Result:</strong> Predictable, low-risk transformations improving security and performance.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- WORK EXPERIENCE -->
+    <div class="category-section cv-section" data-category="experience">
+        <div class="category-header">
+            Work Experience
+            <span class="category-toggle">+</span>
+        </div>
+
+        <div class="card-list">
+            <div class="card">
+                <h3>Senior Project Manager — NHS England</h3>
+                <p>Delivered CAF-aligned cyber uplift including MFA, IAM, CyberArk, Splunk, Azure, Entra, Intune.</p>
+            </div>
+
+            <div class="card">
+                <h3>Senior PM / PMO Manager — Roc Technologies</h3>
+                <p>Directed PMO operations, delivered MFA for Luton Airport, network refresh, ServiceNow MSP.</p>
+            </div>
+
+            <div class="card">
+                <h3>Senior Service Transition PM — Version One</h3>
+                <p>Delivered ITSM integration, service designs, BAU readiness, and ServiceNow alignment.</p>
+            </div>
+
+            <div class="card">
+                <h3>Senior PM / PMO Manager / Bid Manager — Computacenter</h3>
+                <p>Delivered global Windows 10/11, Intune, Autopilot, Azure AD, Teams Rooms, AWS migrations.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="category-section cv-section" data-category="skills">
+        <div class="category-header">
+            Core Skills
+            <span class="category-toggle">+</span>
+        </div>
+
+        <div class="card-list">
+            <div class="grid">
+                <div class="card">
+                    <h3>Cyber & Identity</h3>
+                    <p>CAF, IAM, MFA, CyberArk, Splunk, Secure Backup</p>
+                </div>
+                <div class="card">
+                    <h3>Cloud & Workplace</h3>
+                    <p>Azure, AWS, Intune, Entra, Autopilot, Teams Rooms</p>
+                </div>
+                <div class="card">
+                    <h3>Infrastructure</h3>
+                    <p>Windows 10/11, SCCM, SCOM, Citrix, Exchange, DC migrations</p>
+                </div>
+                <div class="card">
+                    <h3>PMO & Delivery</h3>
+                    <p>Governance, RAID, Reporting, Financial Control, Agile/Waterfall</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="category-section cv-section" data-category="certifications">
+        <div class="category-header">
+            Certifications
+            <span class="category-toggle">+</span>
+        </div>
+
+        <div class="card-list">
+            <div class="grid">
+                <div class="card">
+                    <h3>Project & Programme</h3>
+                    <p>APM PMQ, PRINCE2, PRINCE2 Agile, P3O, PMI AI</p>
+                </div>
+                <div class="card">
+                    <h3>ITSM</h3>
+                    <p>ITIL v3, ServiceNow IT Leadership Professional</p>
+                </div>
+                <div class="card">
+                    <h3>Cyber & Cloud</h3>
+                    <p>NIST CSF, Microsoft CAF</p>
+                </div>
+                <div class="card">
+                    <h3>Technical</h3>
+                    <p>MCSE, MCITP, MCP, VMware, Citrix CCA</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AWARDS -->
+    <div class="category-section cv-section" data-category="awards">
+        <div class="category-header">
+            Achievements & Awards
+            <span class="category-toggle">+</span>
+        </div>
+
+        <div class="card-list">
+            <div class="grid">
+                <div class="card">
+                    <h3>Leadership & Contribution</h3>
+                    <p>STEM Ambassador, APM Mentor, Career Fair Speaker</p>
+                </div>
+                <div class="card">
+                    <h3>Awards</h3>
+                    <p>High Performer Awards, Customer Service Awards, PMO Revenue Growth</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- FABs -->
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<!-- ACCORDION + FILTER JS -->
+<script>
+function closeAllAccordions() {
+    document.querySelectorAll(".category-section").forEach(sec => {
+        sec.classList.remove("open");
+        sec.querySelector(".card-list").style.display = "none";
+        sec.querySelector(".category-toggle").textContent = "+";
+    });
+}
+
+function openAccordion(section) {
+    section.classList.add("open");
+    section.querySelector(".card-list").style.display = "block";
+    section.querySelector(".category-toggle").textContent = "–";
+
+    const yOffset = -20;
+    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+}
+
+document.querySelectorAll(".category-header").forEach(header => {
+    header.addEventListener("click", () => {
+        const section = header.parentElement;
+        const isOpen = section.classList.contains("open");
+
+        closeAllAccordions();
+        if (!isOpen) openAccordion(section);
+    });
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+
+        document.querySelectorAll('.filter-btn')
+            .forEach(b => b.classList.remove('active-filter'));
+        btn.classList.add('active-filter');
+
+        const filter = btn.dataset.filter;
+        const visibleSections = [];
+
+        document.querySelectorAll('.cv-section').forEach(section => {
+            if (filter === 'all' || section.dataset.category === filter) {
+                section.style.display = 'block';
+                visibleSections.push(section);
+            } else {
+                section.style.display = 'none';
+            }
+        });
+
+        closeAllAccordions();
+
+        if (visibleSections.length > 0) {
+            openAccordion(visibleSections[0]);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

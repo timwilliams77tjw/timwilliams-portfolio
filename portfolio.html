@@ -351,65 +351,76 @@
     <div id="fab" class="fab" aria-label="Back to top">⬆️</div>
     <a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
 
-    <!-- ACCORDION + FILTER JS -->
-    <script>
-        /* ------------------------------
-           SINGLE-OPEN ACCORDION ENGINE
-        ------------------------------ */
-        document.querySelectorAll(".category-header").forEach(header => {
-            header.addEventListener("click", () => {
+<script>
+/* ------------------------------
+   SINGLE-OPEN ACCORDION ENGINE
+------------------------------ */
+function closeAllAccordions() {
+    document.querySelectorAll(".category-section").forEach(sec => {
+        sec.classList.remove("open");
+        sec.querySelector(".card-list").style.display = "none";
+        sec.querySelector(".category-toggle").textContent = "+";
+    });
+}
 
-                const section = header.parentElement;
-                const isOpen = section.classList.contains("open");
+function openAccordion(section) {
+    section.classList.add("open");
+    section.querySelector(".card-list").style.display = "block";
+    section.querySelector(".category-toggle").textContent = "–";
 
-                // Close all sections
-                document.querySelectorAll(".category-section").forEach(sec => {
-                    sec.classList.remove("open");
-                    sec.querySelector(".card-list").style.display = "none";
-                    sec.querySelector(".category-toggle").textContent = "+";
-                });
+    // Smooth scroll to the opened section
+    const yOffset = -20; 
+    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+}
 
-                // Re-open clicked section if it was closed
-                if (!isOpen) {
-                    section.classList.add("open");
-                    section.querySelector(".card-list").style.display = "block";
-                    section.querySelector(".category-toggle").textContent = "–";
-                }
-            });
+// Header click behaviour
+document.querySelectorAll(".category-header").forEach(header => {
+    header.addEventListener("click", () => {
+        const section = header.parentElement;
+        const isOpen = section.classList.contains("open");
+
+        closeAllAccordions();
+
+        if (!isOpen) {
+            openAccordion(section);
+        }
+    });
+});
+
+/* ------------------------------
+   FILTER ENGINE (AUTO-EXPAND)
+------------------------------ */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+
+        // Update active button
+        document.querySelectorAll('.filter-btn')
+            .forEach(b => b.classList.remove('active-filter'));
+        btn.classList.add('active-filter');
+
+        const filter = btn.dataset.filter;
+
+        // Show/hide sections
+        const visibleSections = [];
+        document.querySelectorAll('.portfolio-section').forEach(section => {
+            if (filter === 'all' || section.dataset.category === filter) {
+                section.style.display = 'block';
+                visibleSections.push(section);
+            } else {
+                section.style.display = 'none';
+            }
         });
 
-        /* ------------------------------
-           FILTER ENGINE
-        ------------------------------ */
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
+        // Collapse all accordions
+        closeAllAccordions();
 
-                document.querySelectorAll('.filter-btn')
-                    .forEach(b => b.classList.remove('active-filter'));
-
-                btn.classList.add('active-filter');
-
-                const filter = btn.dataset.filter;
-
-                document.querySelectorAll('.portfolio-section').forEach(section => {
-                    if (filter === 'all' || section.dataset.category === filter) {
-                        section.style.display = 'block';
-                    } else {
-                        section.style.display = 'none';
-                    }
-                });
-
-                // Collapse all accordions after filtering
-                document.querySelectorAll(".category-section").forEach(sec => {
-                    sec.classList.remove("open");
-                    sec.querySelector(".card-list").style.display = "none";
-                    sec.querySelector(".category-toggle").textContent = "+";
-                });
-
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
-    </script>
-
+        // Auto-expand the first visible section (if any)
+        if (visibleSections.length > 0) {
+            openAccordion(visibleSections[0]);
+        }
+    });
+});
+</script>
 </body>
 </html>

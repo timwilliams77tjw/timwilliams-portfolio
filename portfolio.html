@@ -56,15 +56,19 @@
 
     <!-- HEADER INCLUDE -->
     <div id="header"></div>
-    <script>
-        fetch("header-standard.html")
-            .then(r => r.text())
-            .then(h => {
-                document.getElementById("header").innerHTML = h;
-                initGlobal();
-            });
-    </script>
+<script>
+fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header").innerHTML = h;
+        initGlobal();
 
+        // ADD THIS
+        document.querySelectorAll('.brand-btn[href="portfolio.html"]').forEach(btn => {
+            btn.classList.add("active");
+        });
+    });
+</script>
     <!-- FILTER BAR -->
     <div class="sticky-bar">
         <button class="filter-btn active-filter" data-filter="all">All</button>

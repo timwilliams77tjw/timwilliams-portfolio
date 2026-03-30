@@ -10,6 +10,7 @@
 
     <!-- PAGE-SPECIFIC STYLES -->
     <style>
+        /* Divider styling */
         .section-divider {
             border: none;
             border-top: 2px solid #e5e7eb;
@@ -17,6 +18,7 @@
             width: 100%;
         }
 
+        /* Card styling */
         .card {
             background: white;
             border-radius: 10px;
@@ -25,38 +27,59 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.08);
         }
 
+        /* Grid layout for STAR and Skills sections */
         .grid {
             display: grid;
             gap: 20px;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         }
 
+        /* Accordion content hidden by default */
         .card-list {
             display: none;
+        }
+
+        /* Awards two-column layout */
+        .awards-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Ensure bullet lists use standard spacing */
+        .card ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        .card ul li {
+            margin-bottom: 10px;
         }
     </style>
 
     <!-- GLOBAL JS -->
     <script src="global.js"></script>
 </head>
-
 <body>
 
 <!-- HEADER INCLUDE -->
 <div id="header"></div>
+
 <script>
 fetch("header-standard.html")
     .then(r => r.text())
     .then(h => {
         document.getElementById("header").innerHTML = h;
+
+        // Initialise global header behaviour
         initGlobal();
 
         // Force CV button to be active
         const cvBtn = document.querySelector('.brand-btn[onclick="openCVMenu(event)"]');
-        if (cvBtn) cvBtn.classList.add("active");
+        if (cvBtn) {
+            cvBtn.classList.add("active");
+        }
     });
 </script>
-
 <!-- FILTER BAR -->
 <div class="sticky-bar">
     <button class="filter-btn active-filter" data-filter="all">All</button>
@@ -69,247 +92,424 @@ fetch("header-standard.html")
 </div>
 
 <div class="container">
+<!-- EXECUTIVE SUMMARY (ALWAYS OPEN) -->
+<h2>Executive Summary</h2>
 
-    <!-- EXECUTIVE SUMMARY (ALWAYS OPEN) -->
-    <h2>Executive Summary</h2>
-    <div class="card">
-        <p>Senior IT Project & Program Manager with 25+ years delivering enterprise-scale infrastructure modernization, workplace transformation, cloud adoption, and cyber security programs across government, defense, healthcare, finance, and legal sectors.</p>
-        <p>Holding Enhanced SC and DBS clearance, I lead multimillion-pound programs impacting up to 126,000 users globally, spanning Windows 10/11 deployments, network and datacenter modernisation, identity and access management, cloud migrations (Azure & AWS), and secure-by-design cyber security uplift.</p>
-        <p>I combine strong governance, business case development, risk & change management, stakeholder leadership, and deep technical awareness to deliver predictable outcomes across complex, multi-supplier environments.</p>
-    </div>
+<div class="card">
+    <p>Senior IT Project & Programme Manager with 25+ years’ experience delivering enterprise-scale infrastructure modernisation, workplace transformation, cloud adoption, and cyber security programmes across government, defence, healthcare, finance, and legal sectors.</p>
 
-    <hr class="section-divider">
+    <p>Holding Enhanced SC and DBS clearance, I have led multimillion‑pound programmes impacting up to 126,000 users globally, spanning Windows 10/11 deployments, network and datacentre modernisation, identity and access management, cloud migrations (Azure & AWS), and secure‑by‑design cyber security uplift.</p>
 
-    <!-- STAR ACHIEVEMENTS -->
-    <div class="category-section cv-section" data-category="achievements">
-        <div class="category-header">
-            STAR Achievements
-            <span class="category-toggle">+</span>
-        </div>
-
-        <div class="card-list">
-            <div class="grid">
-
-                <!-- NHS England -->
-                <div class="card">
-                    <h3>NHS England — Cyber Security Programme</h3>
-                    <p><strong>Situation:</strong> NHS England required a full cyber-security uplift aligned to CAF standards (£18m).</p>
-                    <p><strong>Task:</strong> Lead discovery, design, and implementation of multiple security solutions.</p>
-                    <p><strong>Action:</strong> Delivered MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, and secure backup.</p>
-                    <p><strong>Result:</strong> Strengthened security posture and operational resilience.</p>
-                </div>
-
-                <!-- Roc Technologies -->
-                <div class="card">
-                    <h3>Roc Technologies — PMO & Infrastructure</h3>
-                    <p><strong>Situation:</strong> Multiple high-risk infrastructure and security programs required governance.</p>
-                    <p><strong>Task:</strong> Oversee PMO operations and lead transformation initiatives.</p>
-                    <p><strong>Action:</strong> Delivered MFA for Luton Airport, network refresh, ServiceNow MSP, hardened builds.</p>
-                    <p><strong>Result:</strong> Improved delivery predictability and service capability.</p>
-                </div>
-
-                <!-- Version One -->
-                <div class="card">
-                    <h3>Version One — Service Transition</h3>
-                    <p><strong>Situation:</strong> Major programs needed seamless transition into BAU.</p>
-                    <p><strong>Task:</strong> Ensure operational readiness and service stability.</p>
-                    <p><strong>Action:</strong> Delivered ITSM integration, service designs, knowledge transfer.</p>
-                    <p><strong>Result:</strong> Smooth handover and reduced early-life incidents.</p>
-                </div>
-
-                <!-- Computacenter -->
-                <div class="card">
-                    <h3>Computacenter — Global Workplace Transformation</h3>
-                    <p><strong>Situation:</strong> Enterprise clients required large-scale modernisation.</p>
-                    <p><strong>Task:</strong> Lead global Windows 10/11 and cloud-enabled endpoint programs.</p>
-                    <p><strong>Action:</strong> Delivered transformations for Tesco, HSBC, Linklaters, NFUM.</p>
-                    <p><strong>Result:</strong> Predictable, low-risk transformations improving security and performance.</p>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- WORK EXPERIENCE -->
-    <div class="category-section cv-section" data-category="experience">
-        <div class="category-header">
-            Work Experience
-            <span class="category-toggle">+</span>
-        </div>
-
-        <div class="card-list">
-            <div class="card">
-                <h3>Senior Project Manager — NHS England</h3>
-                <p>Delivered CAF-aligned cyber uplift including MFA, IAM, CyberArk, Splunk, Azure, Entra, Intune.</p>
-            </div>
-
-            <div class="card">
-                <h3>Senior PM / PMO Manager — Roc Technologies</h3>
-                <p>Directed PMO operations, delivered MFA for Luton Airport, network refresh, ServiceNow MSP.</p>
-            </div>
-
-            <div class="card">
-                <h3>Senior Service Transition PM — Version One</h3>
-                <p>Delivered ITSM integration, service designs, BAU readiness, and ServiceNow alignment.</p>
-            </div>
-
-            <div class="card">
-                <h3>Senior PM / PMO Manager / Bid Manager — Computacenter</h3>
-                <p>Delivered global Windows 10/11, Intune, Autopilot, Azure AD, Teams Rooms, AWS migrations.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SKILLS -->
-    <div class="category-section cv-section" data-category="skills">
-        <div class="category-header">
-            Core Skills
-            <span class="category-toggle">+</span>
-        </div>
-
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <h3>Cyber & Identity</h3>
-                    <p>CAF, IAM, MFA, CyberArk, Splunk, Secure Backup</p>
-                </div>
-                <div class="card">
-                    <h3>Cloud & Workplace</h3>
-                    <p>Azure, AWS, Intune, Entra, Autopilot, Teams Rooms</p>
-                </div>
-                <div class="card">
-                    <h3>Infrastructure</h3>
-                    <p>Windows 10/11, SCCM, SCOM, Citrix, Exchange, DC migrations</p>
-                </div>
-                <div class="card">
-                    <h3>PMO & Delivery</h3>
-                    <p>Governance, RAID, Reporting, Financial Control, Agile/Waterfall</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CERTIFICATIONS -->
-    <div class="category-section cv-section" data-category="certifications">
-        <div class="category-header">
-            Certifications
-            <span class="category-toggle">+</span>
-        </div>
-
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <h3>Project & Programme</h3>
-                    <p>APM PMQ, PRINCE2, PRINCE2 Agile, P3O, PMI AI</p>
-                </div>
-                <div class="card">
-                    <h3>ITSM</h3>
-                    <p>ITIL v3, ServiceNow IT Leadership Professional</p>
-                </div>
-                <div class="card">
-                    <h3>Cyber & Cloud</h3>
-                    <p>NIST CSF, Microsoft CAF</p>
-                </div>
-                <div class="card">
-                    <h3>Technical</h3>
-                    <p>MCSE, MCITP, MCP, VMware, Citrix CCA</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- AWARDS -->
-    <div class="category-section cv-section" data-category="awards">
-        <div class="category-header">
-            Achievements & Awards
-            <span class="category-toggle">+</span>
-        </div>
-
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <h3>Leadership & Contribution</h3>
-                    <p>STEM Ambassador, APM Mentor, Career Fair Speaker</p>
-                </div>
-                <div class="card">
-                    <h3>Awards</h3>
-                    <p>High Performer Awards, Customer Service Awards, PMO Revenue Growth</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <p>I combine strong governance, business case development, risk & change management, stakeholder leadership, and deep technical awareness to deliver predictable outcomes across complex, multi‑supplier environments.</p>
 </div>
 
-<!-- FOOTER -->
+<hr class="section-divider">
+<!-- STAR ACHIEVEMENTS -->
+<div class="category-section cv-section" data-category="achievements">
+    <div class="category-header">
+        STAR Achievements
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <!-- NHS England -->
+            <div class="card">
+                <h3>NHS England — Cyber Security Programme</h3>
+                <p><strong>Situation:</strong> NHS England required a full cyber‑security uplift aligned to CAF standards (£18m), covering identity, access, monitoring, and secure backup across a large, complex environment.</p>
+                <p><strong>Task:</strong> Lead discovery, design, and implementation of multiple security solutions while ensuring alignment with CAF, NHS policy, and multi‑supplier governance.</p>
+                <p><strong>Action:</strong></p>
+                <ul>
+                    <li>Delivered MFA, SSO, IAM, IPAM, CyberArk, Splunk, Azure, Entra, Intune, and secure backup uplift.</li>
+                    <li>Coordinated technical SMEs, security architects, and operational teams across multiple suppliers.</li>
+                    <li>Implemented secure‑by‑design principles and strengthened identity governance.</li>
+                </ul>
+                <p><strong>Result:</strong> Strengthened security posture, improved compliance, and enhanced operational resilience across NHS England’s digital estate.</p>
+            </div>
+
+            <!-- Roc Technologies -->
+            <div class="card">
+                <h3>Roc Technologies — PMO & Infrastructure Transformation</h3>
+                <p><strong>Situation:</strong> Multiple high‑risk infrastructure and security programmes required governance, delivery leadership, and stabilisation.</p>
+                <p><strong>Task:</strong> Oversee PMO operations and lead transformation initiatives across security, network, and service management.</p>
+                <p><strong>Action:</strong></p>
+                <ul>
+                    <li>Delivered MFA for Luton Airport, network refresh, ServiceNow MSP onboarding, and hardened builds.</li>
+                    <li>Introduced structured governance, RAID management, and financial controls.</li>
+                    <li>Improved reporting accuracy and delivery predictability across programmes.</li>
+                </ul>
+                <p><strong>Result:</strong> Improved delivery performance, strengthened service capability, and reduced programme risk.</p>
+            </div>
+
+            <!-- Version One -->
+            <div class="card">
+                <h3>Version One — Service Transition Leadership</h3>
+                <p><strong>Situation:</strong> Major programmes required seamless transition into BAU with minimal disruption.</p>
+                <p><strong>Task:</strong> Ensure operational readiness, service stability, and ITSM alignment.</p>
+                <p><strong>Action:</strong></p>
+                <ul>
+                    <li>Delivered ITSM integration, service designs, and operational readiness assessments.</li>
+                    <li>Led knowledge transfer, support model definition, and BAU onboarding.</li>
+                    <li>Aligned delivery with ServiceNow processes and governance.</li>
+                </ul>
+                <p><strong>Result:</strong> Smooth handover, reduced early‑life incidents, and improved service stability.</p>
+            </div>
+
+            <!-- Computacenter -->
+            <div class="card">
+                <h3>Computacenter — Global Workplace Transformation</h3>
+                <p><strong>Situation:</strong> Enterprise clients required large‑scale modernisation across workplace, identity, and cloud.</p>
+                <p><strong>Task:</strong> Lead global Windows 10/11, endpoint, and cloud‑enabled transformation programmes.</p>
+                <p><strong>Action:</strong></p>
+                <ul>
+                    <li>Delivered transformations for Tesco, HSBC, Linklaters, NFUM, and other global clients.</li>
+                    <li>Led programmes covering Intune, Autopilot, Azure AD, Teams Rooms, and AWS migrations.</li>
+                    <li>Managed multi‑supplier delivery, governance, and stakeholder engagement.</li>
+                </ul>
+                <p><strong>Result:</strong> Predictable, low‑risk transformations improving security, performance, and user experience.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+<!-- WORK EXPERIENCE -->
+<div class="category-section cv-section" data-category="experience">
+    <div class="category-header">
+        Work Experience
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+
+        <!-- NHS England -->
+        <div class="card">
+            <h3>Senior Project Manager — NHS England (11/2025 – 02/2026)</h3>
+            <ul>
+                <li>Delivered a major CAF‑aligned cyber security uplift programme covering MFA, IAM, SSO, IPAM, CyberArk, Splunk, Azure, Entra, Intune, and secure backup.</li>
+                <li>Led discovery, design, and implementation across multiple security domains and suppliers.</li>
+                <li>Worked with security architects, SMEs, and operational teams to ensure secure‑by‑design delivery.</li>
+                <li>Strengthened identity governance, monitoring, and operational resilience.</li>
+                <li>Ensured alignment with NHS policy, CAF requirements, and multi‑supplier governance.</li>
+            </ul>
+        </div>
+
+        <!-- Roc Technologies -->
+        <div class="card">
+            <h3>Senior Project Manager / PMO Manager — Roc Technologies (07/2025 – 10/2025)</h3>
+            <ul>
+                <li>Directed PMO operations across multiple high‑risk infrastructure and security programmes.</li>
+                <li>Delivered MFA for Luton Airport, network refresh, ServiceNow MSP onboarding, and hardened builds.</li>
+                <li>Introduced structured governance, RAID management, and financial controls.</li>
+                <li>Improved reporting accuracy, delivery predictability, and stakeholder confidence.</li>
+                <li>Supported transformation initiatives across security, network, and service management.</li>
+            </ul>
+        </div>
+
+        <!-- Version One -->
+        <div class="card">
+            <h3>Senior Service Transition Project Manager — Version One (12/2024 – 07/2025)</h3>
+            <ul>
+                <li>Led service transition for major programmes, ensuring seamless handover into BAU.</li>
+                <li>Delivered ITSM integration, service designs, and operational readiness assessments.</li>
+                <li>Defined support models, SLAs, and BAU onboarding processes.</li>
+                <li>Aligned delivery with ServiceNow processes and governance.</li>
+                <li>Reduced early‑life incidents and improved service stability.</li>
+            </ul>
+        </div>
+
+        <!-- Computacenter -->
+        <div class="card">
+            <h3>Senior Project Manager / PMO Manager / Bid Manager — Computacenter (07/2013 – 09/2024)</h3>
+            <ul>
+                <li>Delivered global Windows 10/11, Intune, Autopilot, Azure AD, Teams Rooms, and AWS migration programmes.</li>
+                <li>Led workplace, identity, cloud, and endpoint modernisation for Tesco, HSBC, Linklaters, NFUM, and other global clients.</li>
+                <li>Managed multi‑supplier delivery, governance, financials, and stakeholder engagement.</li>
+                <li>Delivered datacentre migrations, network upgrades, and enterprise‑scale transformation programmes.</li>
+                <li>Produced business cases, delivery plans, RAID logs, and executive reporting.</li>
+                <li>Supported bids, pre‑sales, and solution shaping for major transformation opportunities.</li>
+                <li>Delivered secure‑by‑design programmes aligned to cyber, identity, and compliance requirements.</li>
+            </ul>
+        </div>
+
+        <!-- TrustMarq / Capita / Trinity / Liberata -->
+        <div class="card">
+            <h3>Project Manager — TrustMarq / Capita / Trinity Expert Systems / Liberata (01/2006 – 06/2013)</h3>
+            <ul>
+                <li>Delivered multiple infrastructure, workplace, and application projects across public and private sector clients.</li>
+                <li>Managed Windows, Exchange, Citrix, VMware, and network upgrade programmes.</li>
+                <li>Delivered ITSM improvements, service transitions, and operational readiness activities.</li>
+                <li>Worked across multi‑supplier environments with strong governance and stakeholder management.</li>
+                <li>Produced project plans, RAID logs, reporting packs, and financial tracking.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<hr class="section-divider">
+<!-- CORE SKILLS -->
+<div class="category-section cv-section" data-category="skills">
+    <div class="category-header">
+        Core Skills
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <!-- Cyber & Identity -->
+            <div class="card">
+                <h3>Cyber & Identity</h3>
+                <ul>
+                    <li>CAF, NIST CSF, Zero Trust</li>
+                    <li>Identity & Access Management (IAM)</li>
+                    <li>Multi‑Factor Authentication (MFA)</li>
+                    <li>Privileged Access Management (PAM) — CyberArk</li>
+                    <li>Security Monitoring — Splunk</li>
+                    <li>Secure Backup & Recovery</li>
+                </ul>
+            </div>
+
+            <!-- Cloud & Workplace -->
+            <div class="card">
+                <h3>Cloud & Workplace</h3>
+                <ul>
+                    <li>Azure, AWS</li>
+                    <li>Intune, Autopilot, Endpoint Management</li>
+                    <li>Entra ID (Azure AD)</li>
+                    <li>Teams Rooms, M365 Modern Workplace</li>
+                    <li>Windows 10/11 Enterprise Deployment</li>
+                </ul>
+            </div>
+
+            <!-- Infrastructure -->
+            <div class="card">
+                <h3>Infrastructure</h3>
+                <ul>
+                    <li>Windows Server, Active Directory</li>
+                    <li>SCCM, SCOM</li>
+                    <li>Citrix, VMware</li>
+                    <li>Exchange, Messaging, Collaboration</li>
+                    <li>Datacentre & Network Modernisation</li>
+                </ul>
+            </div>
+
+            <!-- PMO & Delivery -->
+            <div class="card">
+                <h3>PMO & Delivery</h3>
+                <ul>
+                    <li>Governance, RAID, Reporting</li>
+                    <li>Business Case Development</li>
+                    <li>Financial Control & Forecasting</li>
+                    <li>Stakeholder & Supplier Management</li>
+                    <li>Agile, Waterfall, Hybrid Delivery</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+<!-- CERTIFICATIONS -->
+<div class="category-section cv-section" data-category="certifications">
+    <div class="category-header">
+        Certifications
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <!-- Project & Programme -->
+            <div class="card">
+                <h3>Project & Programme</h3>
+                <ul>
+                    <li>APM Project Management Qualification (PMQ)</li>
+                    <li>PRINCE2 Practitioner</li>
+                    <li>PRINCE2 Agile Practitioner</li>
+                    <li>P3O Practitioner</li>
+                    <li>PMI Artificial Intelligence in Project Management</li>
+                </ul>
+            </div>
+
+            <!-- ITSM -->
+            <div class="card">
+                <h3>IT Service Management</h3>
+                <ul>
+                    <li>ITIL v3 Foundation</li>
+                    <li>ServiceNow IT Leadership Professional</li>
+                </ul>
+            </div>
+
+            <!-- Cyber & Cloud -->
+            <div class="card">
+                <h3>Cyber & Cloud</h3>
+                <ul>
+                    <li>NIST Cybersecurity Framework (CSF)</li>
+                    <li>Microsoft Cloud Adoption Framework (CAF)</li>
+                </ul>
+            </div>
+
+            <!-- Technical -->
+            <div class="card">
+                <h3>Technical</h3>
+                <ul>
+                    <li>Microsoft Certified Systems Engineer (MCSE)</li>
+                    <li>Microsoft Certified IT Professional (MCITP)</li>
+                    <li>Microsoft Certified Professional (MCP)</li>
+                    <li>VMware Certified Professional</li>
+                    <li>Citrix Certified Administrator (CCA)</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+<!-- ACHIEVEMENTS & AWARDS -->
+<div class="category-section cv-section" data-category="awards">
+    <div class="category-header">
+        Achievements & Awards
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="card">
+            <div class="awards-columns">
+
+                <!-- Column 1 -->
+                <div>
+                    <h3>Leadership & Contribution</h3>
+                    <ul>
+                        <li>STEM Ambassador</li>
+                        <li>APM Mentor</li>
+                        <li>Volunteer roles supporting early careers</li>
+                        <li>Career Fair Speaker</li>
+                        <li>Student Mentor</li>
+                    </ul>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <h3>Awards</h3>
+                    <ul>
+                        <li>High Performer Awards</li>
+                        <li>Customer Service Awards</li>
+                        <li>PMO revenue growth recognition</li>
+                        <li>Service satisfaction improvement awards</li>
+                        <li>UK Employee Forum Representative</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+<!-- FOOTER INCLUDE -->
 <div id="footer"></div>
+
 <script>
-fetch("footer.html")
+fetch("footer-standard.html")
     .then(r => r.text())
-    .then(h => document.getElementById("footer").innerHTML = h);
-</script>
+    .then(f => {
+        document.getElementById("footer").innerHTML = f;
 
-<!-- FABs -->
-<div id="fab" class="fab">⬆️</div>
-<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
-
-<!-- ACCORDION + FILTER JS -->
-<script>
-function closeAllAccordions() {
-    document.querySelectorAll(".category-section").forEach(sec => {
-        sec.classList.remove("open");
-        sec.querySelector(".card-list").style.display = "none";
-        sec.querySelector(".category-toggle").textContent = "+";
-    });
-}
-
-function openAccordion(section) {
-    section.classList.add("open");
-    section.querySelector(".card-list").style.display = "block";
-    section.querySelector(".category-toggle").textContent = "–";
-
-    const yOffset = -20;
-    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({ top: y, behavior: "smooth" });
-}
-
-document.querySelectorAll(".category-header").forEach(header => {
-    header.addEventListener("click", () => {
-        const section = header.parentElement;
-        const isOpen = section.classList.contains("open");
-
-        closeAllAccordions();
-        if (!isOpen) openAccordion(section);
-    });
-});
-
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-
-        document.querySelectorAll('.filter-btn')
-            .forEach(b => b.classList.remove('active-filter'));
-        btn.classList.add('active-filter');
-
-        const filter = btn.dataset.filter;
-        const visibleSections = [];
-
-        document.querySelectorAll('.cv-section').forEach(section => {
-            if (filter === 'all' || section.dataset.category === filter) {
-                section.style.display = 'block';
-                visibleSections.push(section);
-            } else {
-                section.style.display = 'none';
-            }
-        });
-
-        closeAllAccordions();
-
-        if (visibleSections.length > 0) {
-            openAccordion(visibleSections[0]);
+        // Initialise global footer behaviour
+        if (typeof initFooter === "function") {
+            initFooter();
         }
     });
+</script>
+<!-- ACCORDION + FILTER LOGIC -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const sections = document.querySelectorAll(".cv-section");
+
+    const closeAllSections = () => {
+        sections.forEach(section => {
+            const list = section.querySelector(".card-list");
+            const toggle = section.querySelector(".category-toggle");
+            if (list) list.style.display = "none";
+            if (toggle) toggle.textContent = "+";
+        });
+    };
+
+    const openSection = (section) => {
+        const list = section.querySelector(".card-list");
+        const toggle = section.querySelector(".category-toggle");
+        if (list) list.style.display = "block";
+        if (toggle) toggle.textContent = "−";
+    };
+
+    const scrollToSection = (section) => {
+        const rect = section.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: rect, behavior: "smooth" });
+    };
+
+    /* FILTER BUTTON LOGIC */
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+
+            filterButtons.forEach(b => b.classList.remove("active-filter"));
+            btn.classList.add("active-filter");
+
+            const filter = btn.dataset.filter;
+
+            if (filter === "all") {
+                sections.forEach(section => {
+                    section.style.display = "block";
+                    openSection(section);
+                });
+                return;
+            }
+
+            sections.forEach(section => {
+                const match = section.dataset.category === filter;
+                section.style.display = match ? "block" : "none";
+            });
+
+            closeAllSections();
+
+            const target = document.querySelector(`[data-category="${filter}"]`);
+            if (target) {
+                openSection(target);
+                scrollToSection(target);
+            }
+        });
+    });
+
+    /* ACCORDION TOGGLES */
+    document.querySelectorAll(".category-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const section = header.parentElement;
+            const list = section.querySelector(".card-list");
+            const toggle = section.querySelector(".category-toggle");
+
+            if (!list) return;
+
+            const isOpen = list.style.display === "block";
+
+            closeAllSections();
+
+            if (!isOpen) {
+                list.style.display = "block";
+                toggle.textContent = "−";
+            }
+        });
+    });
+
 });
 </script>
 
+</div> <!-- closes .container -->
 </body>
 </html>

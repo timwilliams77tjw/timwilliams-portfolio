@@ -6,7 +6,6 @@ window.initGlobal = function () {
 
     /* ACTIVE BUTTON */
     const path = window.location.pathname.split("/").pop();
-
     document.querySelectorAll(".brand-btn").forEach(btn => {
         const href = btn.getAttribute("href");
         if (href && href === path) {
@@ -35,7 +34,23 @@ window.initGlobal = function () {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
+
+    /* -----------------------------------------
+       DROPDOWN CLICK HANDLER (MUST RUN AFTER HEADER LOADS)
+    ----------------------------------------- */
+    document.addEventListener("click", (e) => {
+
+        // Click inside a menu → keep it open
+        if (e.target.closest(".popup-menu")) return;
+
+        // Click on menu buttons → let onclick handle it
+        if (e.target.closest(".cv-btn") || e.target.closest(".portfolio-btn")) return;
+
+        // Click anywhere else → close menus
+        closeAllMenus();
+    });
 };
+
 
 /* -----------------------------------------
 DROPDOWN MENUS
@@ -45,19 +60,6 @@ function closeAllMenus() {
     document.querySelectorAll(".popup-menu").forEach(m => m.style.display = "none");
     document.querySelectorAll(".brand-btn.open").forEach(b => b.classList.remove("open"));
 }
-
-/* FIXED: Only close menus when clicking OUTSIDE buttons and menus */
-document.addEventListener("click", (e) => {
-
-    // Click inside a menu → keep it open
-    if (e.target.closest(".popup-menu")) return;
-
-    // Click on menu buttons → let onclick handle it
-    if (e.target.closest(".cv-btn") || e.target.closest(".portfolio-btn")) return;
-
-    // Click anywhere else → close menus
-    closeAllMenus();
-});
 
 window.openCVMenu = function (event) {
     event.stopPropagation();

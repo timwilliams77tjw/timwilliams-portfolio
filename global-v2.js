@@ -46,13 +46,13 @@ function closeAllMenus() {
     document.querySelectorAll(".brand-btn.open").forEach(b => b.classList.remove("open"));
 }
 
-/* GLOBAL CLICK HANDLER (FINAL, STABLE VERSION) */
+/* GLOBAL CLICK HANDLER */
 document.addEventListener("click", (e) => {
 
     // Click inside a menu → keep it open
     if (e.target.closest(".popup-menu")) return;
 
-    // Click on menu buttons → let their onclick handle it
+    // Click on menu buttons → let onclick handle it
     if (e.target.closest(".cv-btn") || e.target.closest(".portfolio-btn")) return;
 
     // Click anywhere else → close menus

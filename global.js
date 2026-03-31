@@ -6,6 +6,7 @@ window.initGlobal = function () {
 
     /* ACTIVE BUTTON */
     const path = window.location.pathname.split("/").pop();
+
     document.querySelectorAll(".brand-btn").forEach(btn => {
         const href = btn.getAttribute("href");
         if (href && href === path) {
@@ -36,7 +37,6 @@ window.initGlobal = function () {
     }
 };
 
-
 /* -----------------------------------------
 DROPDOWN MENUS
 ----------------------------------------- */
@@ -46,37 +46,22 @@ function closeAllMenus() {
     document.querySelectorAll(".brand-btn.open").forEach(b => b.classList.remove("open"));
 }
 
-/* FIXED GLOBAL CLICK HANDLER */
+/* FIXED: Only close menus when clicking OUTSIDE buttons and menus */
 document.addEventListener("click", (e) => {
-
-    // Allow clicks on CV button
-    if (e.target.closest(".cv-btn")) return;
-
-    // Allow clicks on Portfolio button
-    if (e.target.closest("[onclick*='openPortfolioMenu']")) return;
-
-    // Allow clicks inside menus
-    if (e.target.closest(".popup-menu")) return;
-
-    // Otherwise close menus
+    if (e.target.closest(".popup-menu") || e.target.closest(".brand-btn")) return;
     closeAllMenus();
 });
 
-
-/* OPEN CV MENU */
 window.openCVMenu = function (event) {
     event.stopPropagation();
     toggleMenu("cvMenu", event.currentTarget);
 };
 
-/* OPEN PORTFOLIO MENU */
 window.openPortfolioMenu = function (event) {
     event.stopPropagation();
     toggleMenu("portfolioMenu", event.currentTarget);
 };
 
-
-/* CORE MENU TOGGLER */
 function toggleMenu(id, button) {
     const menu = document.getElementById(id);
     if (!menu) return;

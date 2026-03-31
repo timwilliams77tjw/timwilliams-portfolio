@@ -46,16 +46,19 @@ function closeAllMenus() {
     document.querySelectorAll(".brand-btn.open").forEach(b => b.classList.remove("open"));
 }
 
-/* GLOBAL CLICK HANDLER */
+/* FIXED GLOBAL CLICK HANDLER */
 document.addEventListener("click", (e) => {
 
-    // Click inside a menu → keep it open
+    // Allow clicks on CV button
+    if (e.target.closest(".cv-btn")) return;
+
+    // Allow clicks on Portfolio button
+    if (e.target.closest("[onclick*='openPortfolioMenu']")) return;
+
+    // Allow clicks inside menus
     if (e.target.closest(".popup-menu")) return;
 
-    // Click on menu buttons → let onclick handle it
-    if (e.target.closest(".cv-btn") || e.target.closest(".portfolio-btn")) return;
-
-    // Click anywhere else → close menus
+    // Otherwise close menus
     closeAllMenus();
 });
 

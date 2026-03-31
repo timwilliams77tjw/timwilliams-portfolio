@@ -82,15 +82,16 @@ img[src="orgs.png"] {
 
 <script>
 fetch("header-standard.html")
-    .then(r => r.text())
-    .then(h => {
-        document.getElementById("header").innerHTML = h;
-        if (typeof initGlobal === "function") initGlobal();
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header").innerHTML = h;
 
-const cvBtn = document.querySelector('.cv-btn');
-if (cvBtn) cvBtn.classList.add("active");    });
+    if (typeof initGlobal === "function") initGlobal();
+
+    const cvBtn = document.querySelector('.cv-btn');
+    if (cvBtn) cvBtn.classList.add("active");
+  });
 </script>
-
 <!-- ⭐ STICKY BAR MOVED HERE (OUTSIDE MAIN) ⭐ -->
 <div class="sticky-bar">
     <button class="filter-btn active-filter" data-filter="all">All</button>

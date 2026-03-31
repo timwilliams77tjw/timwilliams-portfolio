@@ -24,8 +24,10 @@ HEADER
     padding: 50px 30px;
     color: white;
     position: relative;
-    z-index: 1000; /* FIX: ensures dropdown appears above sticky bar */
-}.hero-content {
+    z-index: 10; /* FIX: ensures header sits above sticky bar */
+}
+
+.hero-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -69,8 +71,9 @@ BUTTONS
     gap: 12px;
     margin-top: 20px;
     position: relative;
-    z-index: 2000; /* FIX: ensures dropdown appears above sticky bar */
+    z-index: 20; /* FIX: ensures dropdown is clickable and visible */
 }
+
 .brand-btn {
     background: #ffffff;
     color: #0a2540;
@@ -148,7 +151,7 @@ FILTER BAR
     white-space: nowrap;
     gap: 8px;
     justify-content: center;
-    z-index: 999;
+    z-index: 1; /* FIX: must be BELOW header + dropdown */
     scrollbar-width: none;
 }
 
@@ -266,14 +269,14 @@ FLOATING BUTTONS
 }
 
 /* -----------------------------------------------------------
-DROPDOWN MENUS — FIXED
+DROPDOWN MENUS — FINAL FIXED VERSION
 ----------------------------------------------------------- */
 
 .popup-menu {
-    position: absolute !important;
-    top: calc(100% + 6px) !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
     width: var(--menu-width, auto);
     background: white;
     border: 2px solid #0A1A2F;
@@ -282,7 +285,7 @@ DROPDOWN MENUS — FIXED
     display: none;
     flex-direction: column;
     gap: 10px;
-    z-index: 9999999 !important;
+    z-index: 9999999; /* Always on top */
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
@@ -297,7 +300,7 @@ DROPDOWN MENUS — FIXED
 }
 
 /* -----------------------------------------------------------
-INLINE DOWNLOAD NOTE (REPLACES TOOLTIP)
+INLINE DOWNLOAD NOTE
 ----------------------------------------------------------- */
 
 .download-note {

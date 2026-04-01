@@ -498,9 +498,9 @@ closeAllAccordions();
 /* FILTER ENGINE */
 
 document.querySelectorAll(".filter-btn").forEach(btn=>{
-
 btn.addEventListener("click",()=>{
 
+if(!btn.dataset.filter) return;   // prevents Expand/Collapse triggering filter logic
 document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active-filter"));
 
 btn.classList.add("active-filter");

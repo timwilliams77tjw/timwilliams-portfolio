@@ -26,29 +26,53 @@ img[src="orgs.png"] {display:block;max-width:420px;width:100%;height:auto;margin
 <body class="page-cv">
 <div id="header"></div>
 <script>
-fetch("header-standard.html").then(r=>r.text()).then(h=>{
-  const headerEl=document.getElementById("header");headerEl.innerHTML=h;
-  if(typeof initGlobal==="function") initGlobal();
-  const cvBtn=headerEl.querySelector('.cv-btn');if(cvBtn) cvBtn.classList.add("active");
-  headerEl.querySelectorAll('.dropdown-toggle').forEach(toggle=>{
-    toggle.addEventListener('click',e=>{e.preventDefault();const menu=toggle.nextElementSibling;if(menu)menu.classList.toggle('show');});
-  });
-  document.addEventListener('click',e=>{
-    headerEl.querySelectorAll('.popup-menu.show').forEach(menu=>{
-      if(!menu.contains(e.target)&&!menu.previousElementSibling.contains(e.target)) menu.classList.remove('show');
+fetch("header-standard.html").then(r => r.text()).then(h => {
+  const headerEl = document.getElementById("header");
+  headerEl.innerHTML = h;
+
+  // Initialize global header logic
+  if (typeof initGlobal === "function") initGlobal();
+
+  // Highlight CV button
+  const cvBtn = headerEl.querySelector('.cv-btn');
+  if (cvBtn) cvBtn.classList.add("active");
+
+  // Initialize dropdown menus
+  headerEl.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+    const menu = toggle.closest('li').querySelector('.popup-menu'); // safer targeting
+    toggle.addEventListener('click', e => {
+      e.preventDefault();
+      if (menu) menu.classList.toggle('show');
     });
   });
-  headerEl.querySelectorAll('[data-tooltip]').forEach(el=>{
-    const tooltipText=el.getAttribute('data-tooltip');let tooltipEl;
-    el.addEventListener('mouseenter',()=>{
-      tooltipEl=document.createElement('div');tooltipEl.className='tooltip';tooltipEl.textContent=tooltipText;
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', e => {
+    headerEl.querySelectorAll('.popup-menu.show').forEach(menu => {
+      const toggle = menu.closest('li').querySelector('.dropdown-toggle');
+      if (!menu.contains(e.target) && toggle !== e.target && !toggle.contains(e.target)) {
+        menu.classList.remove('show');
+      }
+    });
+  });
+
+  // Initialize tooltips
+  headerEl.querySelectorAll('[data-tooltip]').forEach(el => {
+    const tooltipText = el.getAttribute('data-tooltip');
+    let tooltipEl;
+    el.addEventListener('mouseenter', () => {
+      tooltipEl = document.createElement('div');
+      tooltipEl.className = 'tooltip';
+      tooltipEl.textContent = tooltipText;
       document.body.appendChild(tooltipEl);
-      const rect=el.getBoundingClientRect();
-      tooltipEl.style.position='absolute';
-      tooltipEl.style.top=`${rect.bottom+window.scrollY+6}px`;
-      tooltipEl.style.left=`${rect.left+window.scrollX}px`;
+      const rect = el.getBoundingClientRect();
+      tooltipEl.style.position = 'absolute';
+      tooltipEl.style.top = `${rect.bottom + window.scrollY + 6}px`;
+      tooltipEl.style.left = `${rect.left + window.scrollX}px`;
     });
-    el.addEventListener('mouseleave',()=>{if(tooltipEl)tooltipEl.remove();});
+    el.addEventListener('mouseleave', () => {
+      if (tooltipEl) tooltipEl.remove();
+    });
   });
 });
 </script>

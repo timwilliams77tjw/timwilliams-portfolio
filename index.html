@@ -261,13 +261,14 @@ footer {
 </head>
 
 <body>
+<script src="global.js"></script>
 
 <!-- HEADER INCLUDE -->
 <div id="header"></div>
 
 <script>
-fetch("header-index.html?v=3")
-    .then(r => r.text())
+fetch("header-index.html")
+  .then(r => r.text())
     .then(h => {
         document.getElementById("header").innerHTML = h;
         initGlobal();
@@ -401,7 +402,6 @@ fetch("footer.html")
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<script src="global.js"></script>
 
 </body>
 </html>

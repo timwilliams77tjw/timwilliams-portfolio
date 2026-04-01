@@ -466,7 +466,36 @@ openAccordion(section);
 });
 
 });
+/* EXPAND ALL */
 
+const expandBtn = document.getElementById("expandAllBtn");
+
+if(expandBtn){
+expandBtn.addEventListener("click", () => {
+
+document.querySelectorAll(".portfolio-section").forEach(section => {
+
+section.style.display = "block";
+
+openAccordion(section);
+
+});
+
+});
+}
+
+
+/* COLLAPSE ALL */
+
+const collapseBtn = document.getElementById("collapseAllBtn");
+
+if(collapseBtn){
+collapseBtn.addEventListener("click", () => {
+
+closeAllAccordions();
+
+});
+}
 /* FILTER ENGINE */
 
 document.querySelectorAll(".filter-btn").forEach(btn=>{

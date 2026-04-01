@@ -59,6 +59,46 @@
 <body class="page-certifications">
   <!-- HEADER INCLUDE -->
   <div id="header"></div>
+<script>
+// Dropdown menu functions for header-standard buttons
+function openCVMenu(event) {
+    event.preventDefault();
+    const menu = document.getElementById('cvMenu');
+    if (menu) menu.classList.toggle('show');
+
+    // Close portfolio menu if open
+    const portfolioMenu = document.getElementById('portfolioMenu');
+    if (portfolioMenu && portfolioMenu.classList.contains('show')) {
+        portfolioMenu.classList.remove('show');
+    }
+}
+
+function openPortfolioMenu(event) {
+    event.preventDefault();
+    const menu = document.getElementById('portfolioMenu');
+    if (menu) menu.classList.toggle('show');
+
+    // Close CV menu if open
+    const cvMenu = document.getElementById('cvMenu');
+    if (cvMenu && cvMenu.classList.contains('show')) {
+        cvMenu.classList.remove('show');
+    }
+}
+
+// Close menus when clicking outside
+document.addEventListener('click', function(e) {
+    const cvMenu = document.getElementById('cvMenu');
+    const portfolioMenu = document.getElementById('portfolioMenu');
+
+    if (cvMenu && !cvMenu.contains(e.target) && !e.target.closest('.cv-btn')) {
+        cvMenu.classList.remove('show');
+    }
+    if (portfolioMenu && !portfolioMenu.contains(e.target) && !e.target.closest('.portfolio-btn')) {
+        portfolioMenu.classList.remove('show');
+    }
+});
+  </script>
+
   <script>
     fetch("header-standard.html")
   .then(r => r.text())
@@ -73,25 +113,6 @@
     const cvBtn = headerEl.querySelector('.cv-btn');
     if (cvBtn) cvBtn.classList.add("active");
 
-    // DROPDOWN MENU FIX
-    // Use event delegation to handle clicks even for dynamically loaded elements
-    document.addEventListener('click', function(e) {
-      // toggle buttons
-      const toggle = e.target.closest('.dropdown-toggle');
-      if (toggle) {
-        e.preventDefault();
-        const menu = toggle.nextElementSibling;
-        if (menu) menu.classList.toggle('show');
-        return;
-      }
-
-      // click outside closes any open menus
-      document.querySelectorAll('.popup-menu.show').forEach(menu => {
-        if (!menu.contains(e.target)) {
-          menu.classList.remove('show');
-        }
-      });
-    });
 
     // Initialize tooltips
     headerEl.querySelectorAll('[data-tooltip]').forEach(el => {
@@ -435,8 +456,7 @@
 
       document.getElementById("fab").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
     });
-  </script>
-
+</script>
   <script src="global.js"></script>
 </body>
 </html>

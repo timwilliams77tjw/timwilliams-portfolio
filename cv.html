@@ -2,120 +2,98 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CV – Tim Williams</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV – Tim Williams</title>
 
-<!-- GLOBAL CSS -->
-<link rel="stylesheet" href="certifications.css?v=1">
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="certifications.css?v=1">
 
-<!-- PAGE-SPECIFIC STYLES -->
-<style>
+  <!-- PAGE-SPECIFIC STYLES -->
+  <style>
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
 
-.card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
 
-.grid {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
+    .card-list {
+      display: none;
+    }
 
-.card-list {
-    display: none;
-}
+    .awards-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
 
-.awards-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
+    .card ul {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
 
-.card ul {
-    padding-left: 20px;
-    margin-bottom: 0;
-}
+    .card ul li {
+      margin-bottom: 10px;
+    }
 
-.card ul li {
-    margin-bottom: 10px;
-}
+    .page-content {
+      padding-top: 20px;
+    }
 
-.page-content {
-    padding-top: 20px;
-}
+    img[src="orgs.png"] {
+      display: block;
+      max-width: 420px;
+      width: 100%;
+      height: auto;
+      margin: 0 auto 25px;
+    }
 
-img[src="orgs.png"] {
-    display: block;
-    max-width: 420px;
-    width: 100%;
-    height: auto;
-    margin: 0 auto 25px;
-}
+    .orgs-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
 
-.orgs-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 20px;
-}
+    .orgs-columns ul {
+      padding-left: 20px;
+      margin: 0;
+    }
 
-.orgs-columns ul {
-    padding-left: 20px;
-    margin: 0;
-}
+    .orgs-columns li {
+      margin-bottom: 8px;
+    }
 
-.orgs-columns li {
-    margin-bottom: 8px;
-}
-.sticky-bar {
-    border-bottom: none !important;
-}
-
-</style>
-
-<!-- GLOBAL JS -->
-<script src="global.js"></script>
-
-
-
-
-
-
-
+    .sticky-bar {
+      border-bottom: none !important;
+    }
+  </style>
 </head>
 
-<body>
 <body class="page-cv">
-<!-- HEADER INCLUDE -->
-<div id="header"></div>
 
-<script>
-fetch("header-standard.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("header").innerHTML = h;
+  <!-- HEADER INCLUDE -->
+  <div id="header"></div>
+  <script src="global.js"></script>
+  <script>
+    fetch("header-standard.html")
+      .then(r => r.text())
+      .then(h => {
+        document.getElementById("header").innerHTML = h;
+        if (typeof initGlobal === "function") initGlobal();
 
-    if (typeof initGlobal === "function") initGlobal();
-// Re-run any scripts inside the loaded header
-document.querySelectorAll("#header script").forEach(oldScript => {
-    const newScript = document.createElement("script");
-    if (oldScript.src) {
-        newScript.src = oldScript.src;
-    } else {
-        newScript.textContent = oldScript.textContent;
-    }
-    document.body.appendChild(newScript);
-});
-    const cvBtn = document.querySelector('.cv-btn');
-    if (cvBtn) cvBtn.classList.add("active");
-  });
-</script>
-
+        const cvBtn = document.querySelector('.cv-btn');
+        if (cvBtn) cvBtn.classList.add("active");
+      });
+  </script>
 <!-- ⭐ STICKY BAR ⭐ -->
 <div class="sticky-bar">
     <button class="filter-btn active-filter" data-filter="all">All</button>

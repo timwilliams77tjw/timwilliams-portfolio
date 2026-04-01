@@ -101,7 +101,16 @@ fetch("header-standard.html")
     document.getElementById("header").innerHTML = h;
 
     if (typeof initGlobal === "function") initGlobal();
-
+// Re-run any scripts inside the loaded header
+document.querySelectorAll("#header script").forEach(oldScript => {
+    const newScript = document.createElement("script");
+    if (oldScript.src) {
+        newScript.src = oldScript.src;
+    } else {
+        newScript.textContent = oldScript.textContent;
+    }
+    document.body.appendChild(newScript);
+});
     const cvBtn = document.querySelector('.cv-btn');
     if (cvBtn) cvBtn.classList.add("active");
   });

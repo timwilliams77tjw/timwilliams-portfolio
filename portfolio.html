@@ -1,431 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio – Tim Williams</title>
 
-    <!-- GLOBAL CSS -->
-    <link rel="stylesheet" href="certifications.css?v=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- PAGE-SPECIFIC STYLES -->
-    <style>
-        /* Elegant section divider */
-        .section-divider {
-            border: none;
-            border-top: 2px solid #e5e7eb;
-            margin: 50px 0 40px;
-            width: 100%;
-        }
+<title>Portfolio – Tim Williams</title>
 
-        /* Logo styling */
-        .logo-img {
-            width: 90px;
-            height: auto;
-            object-fit: contain;
-            margin-bottom: 12px;
-            opacity: 0.9;
-        }
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css?v=1">
 
-        /* Match Certifications card styling */
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
+<style>
 
-        /* Match Certifications grid spacing */
-        .grid {
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        }
+/* Ensure active button is still clickable */
+.brand-btn.active{
+    pointer-events:auto;
+}
 
-        /* Start all accordion content collapsed */
-        .card-list {
-            display: none;
-        }
-    </style>
+/* Elegant section divider */
+.section-divider{
+border:none;
+border-top:2px solid #e5e7eb;
+margin:50px 0 40px;
+width:100%;
+}
 
-    <!-- GLOBAL JS -->
-    <script src="global.js"></script>
+/* Logo styling */
+.logo-img{
+width:90px;
+height:auto;
+object-fit:contain;
+margin-bottom:12px;
+opacity:0.9;
+}
+
+/* Card styling */
+.card{
+background:white;
+border-radius:10px;
+padding:20px;
+margin-bottom:24px;
+box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Grid layout */
+.grid{
+display:grid;
+gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+
+/* Accordion default state */
+.card-list{
+display:none;
+}
+
+</style>
+
+<script src="global.js"></script>
+
 </head>
+
 <body>
 
-    <!-- HEADER INCLUDE -->
-    <div id="header"></div>
-<script>
-fetch("header-standard.html?v=3")
-    .then(r => r.text())
-    .then(h => {
-        document.getElementById("header").innerHTML = h;
-        initGlobal();
-
-        // Force Portfolio button to be active on this page
-        const portfolioBtn = document.querySelector('.brand-btn[onclick="openPortfolioMenu(event)"]');
-        if (portfolioBtn) {
-            portfolioBtn.classList.add("active");
-        }
-    });
-</script>
-    <!-- FILTER BAR -->
-    <div class="sticky-bar">
-        <button class="filter-btn active-filter" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="leadership">Leadership</button>
-        <button class="filter-btn" data-filter="rolefit">Role Fit</button>
-        <button class="filter-btn" data-filter="euc">EUC</button>
-        <button class="filter-btn" data-filter="cyber">Cyber</button>
-        <button class="filter-btn" data-filter="pmo">PMO</button>
-        <button class="filter-btn" data-filter="cloud">Cloud</button>
-        <button class="filter-btn" data-filter="service">Service</button>
-        <button class="filter-btn" data-filter="legacy">Legacy</button>
-        <button class="filter-btn" data-filter="presales">Pre‑Sales</button>
-        <button class="filter-btn" data-filter="whatibring">What I Bring</button>
-    </div>
-
-    <div class="container">
-
-        <!-- EXECUTIVE SUMMARY (STATIC) -->
-        <h2>Executive Summary</h2>
-        <div class="card">
-            <p>
-                I deliver large-scale IT, infrastructure, and cyber programmes with a focus on execution certainty,
-                operational readiness, and governance. My work spans national EUC transformations, identity and access
-                uplift, PMO leadership, and service transition across complex, regulated, and multi-vendor environments.
-            </p>
-            <p>
-                My track record shows repeatability across financial services, utilities, government, healthcare,
-                aviation, and education. I stabilise programmes, drive adoption, and ensure services are secure,
-                resilient, and ready for BAU.
-            </p>
-        </div>
-
-        <hr class="section-divider">
-
-        <!-- ACCORDION SECTIONS BELOW -->
-
-        <!-- LEADERSHIP MODEL -->
-        <div class="category-section portfolio-section" data-category="leadership">
-            <div class="category-header">
-                Leadership Model
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="grid">
-                    <div class="card">
-                        <h3>Governance & Delivery Control</h3>
-                        <p>I establish clear frameworks, reporting rhythms, and decision pathways that bring stability to
-                            programmes under pressure.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Stakeholder Alignment & Communication</h3>
-                        <p>I build confidence across technical, operational, and executive stakeholders by translating
-                            complexity into clear, actionable narratives.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Operational Readiness & Service Sustainability</h3>
-                        <p>I embed service transition early, ensuring documentation, support models, and operational
-                            processes are in place before go-live.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Outcome-Based Delivery</h3>
-                        <p>I drive programmes toward measurable results including adoption, stability, risk reduction,
-                            and operational improvement.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ROLE FIT -->
-        <div class="category-section portfolio-section" data-category="rolefit">
-            <div class="category-header">
-                Role Fit
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="grid">
-                    <div class="card">
-                        <h3>Roles I Fit</h3>
-                        <ul>
-                            <li>Senior Project Manager</li>
-                            <li>Programme Manager</li>
-                            <li>PMO Manager / PMO Lead</li>
-                            <li>Service Transition Lead</li>
-                            <li>Delivery Assurance Lead</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h3>What Organisations Gain</h3>
-                        <ul>
-                            <li>Predictable, controlled delivery</li>
-                            <li>Strong governance and reporting discipline</li>
-                            <li>Confident stakeholder alignment</li>
-                            <li>Clean, stable service landings</li>
-                            <li>Measurable operational and risk outcomes</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h3>Where I Add Most Value</h3>
-                        <ul>
-                            <li>Complex, multi-vendor environments</li>
-                            <li>Regulated sectors with high governance expectations</li>
-                            <li>Programmes requiring stabilisation or recovery</li>
-                            <li>Transformations with significant operational impact</li>
-                            <li>Services transitioning into BAU</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- EUC -->
-        <div class="category-section portfolio-section" data-category="euc">
-            <div class="category-header">
-                Global Infrastructure & EUC Transformations
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="grid">
-                    <div class="card">
-                        <img src="hsbc.png" class="logo-img" alt="HSBC">
-                        <h3>National-Scale EUC Transformations</h3>
-                        <p>Tesco’s 126,000-device refresh and HSBC’s 46,000-user modernisation demonstrate my ability to
-                            coordinate multi-region deployments.</p>
-                    </div>
-                    <div class="card">
-                        <img src="uu.png" class="logo-img" alt="United Utilities">
-                        <h3>Modern Workplace Deployments</h3>
-                        <p>Delivered cloud-managed EUC, lifecycle, and secure configuration across 32,000+ devices for
-                            United Utilities and NFUM.</p>
-                    </div>
-                    <div class="card">
-                        <img src="nu.png" class="logo-img" alt="Newcastle University">
-                        <h3>Sector-Specific Modernisation</h3>
-                        <p>Led Teams Rooms deployment and print modernisation across a diverse academic environment.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CYBER -->
-        <div class="category-section portfolio-section" data-category="cyber">
-            <div class="category-header">
-                Cybersecurity & Identity Uplift
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="grid">
-                    <div class="card">
-                        <img src="logo-placeholder.png" class="logo-img" alt="NHS England">
-                        <h3>NHS England</h3>
-                        <p>Delivered CAF uplift, strengthened access controls, and embedded governance frameworks
-                            improving security posture.</p>
-                    </div>
-                    <div class="card">
-                        <img src="logo-placeholder.png" class="logo-img" alt="Luton Airport">
-                        <h3>Luton Airport</h3>
-                        <p>Delivered MFA, PAM, and SSO uplift in a regulated aviation environment.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PMO -->
-        <div class="category-section portfolio-section" data-category="pmo">
-            <div class="category-header">
-                PMO Leadership & Governance
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="grid">
-                    <div class="card">
-                        <h3>PMO Build & Leadership</h3>
-                        <p>Built and led PMO functions for Computacenter Belgium and Eversheds, improving reporting
-                            discipline and delivery assurance.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Regulated & Government PMO</h3>
-                        <p>Delivered structured reporting, risk control, and portfolio alignment across high-governance
-                            environments including FCO, NFUM, and Dounreay Nuclear.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SERVICE TRANSITION -->
-        <div class="category-section portfolio-section" data-category="service">
-            <div class="category-header">
-                Service Transition & BAU Integration
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="card">
-                    <p>Transitioned global services for Synchrony (25,000 users), integrated Salesforce into BAU, and
-                        stabilised major programmes through structured readiness and support alignment.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- CLOUD -->
-        <div class="category-section portfolio-section" data-category="cloud">
-            <div class="category-header">
-                Cloud, Platforms & Application Services
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="grid">
-                    <div class="card">
-                        <h3>AWS & SaaS Integration</h3>
-                        <p>Delivered AWS migration and SaaS integration for Telefonica.</p>
-                    </div>
-                    <div class="card">
-                        <h3>ServiceNow & Hosted Platforms</h3>
-                        <p>Led ServiceNow development and supported secure hosted infrastructure for Mitie and the Home
-                            Office.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- LEGACY -->
-        <div class="category-section portfolio-section" data-category="legacy">
-            <div class="category-header">
-                Legacy, Migration & Infrastructure Modernisation
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="grid">
-                    <div class="card">
-                        <h3>Identity, Messaging & Virtualisation</h3>
-                        <p>Delivered modernisation programmes for Santander, MET Office, and Unipart.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Large-Scale Migration</h3>
-                        <p>Delivered multi-stream migration and infrastructure modernisation for AdminRe and DWP.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PRE-SALES -->
-        <div class="category-section portfolio-section" data-category="presales">
-            <div class="category-header">
-                Pre-Sales & Commercial Leadership
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="card">
-                    <p>Supported tendering, solution design, and commercial modelling across major bids, ensuring
-                        proposals were deliverable, costed, and aligned with operational reality.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- WHAT I BRING -->
-        <div class="category-section portfolio-section" data-category="whatibring">
-            <div class="category-header">
-                What I Bring
-                <span class="category-toggle">+</span>
-            </div>
-            <div class="card-list">
-                <div class="card">
-                    <ul>
-                        <li>Execution certainty through structure, clarity, and governance</li>
-                        <li>Cross-sector repeatability across regulated environments</li>
-                        <li>Operational readiness and sustainable service landings</li>
-                        <li>Stakeholder confidence through clear communication</li>
-                        <li>Long-term service value through stability and adoption</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-    </div> <!-- end container -->
-
-    <!-- FOOTER INCLUDE -->
-    <div id="footer"></div>
-    <script>
-        fetch("footer.html")
-            .then(r => r.text())
-            .then(h => document.getElementById("footer").innerHTML = h);
-    </script>
-
-    <!-- FLOATING BUTTONS -->
-    <div id="fab" class="fab" aria-label="Back to top">⬆️</div>
-    <a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
+<!-- HEADER INCLUDE -->
+<div id="header"></div>
 
 <script>
-/* ------------------------------
-   SINGLE-OPEN ACCORDION ENGINE
------------------------------- */
-function closeAllAccordions() {
-    document.querySelectorAll(".category-section").forEach(sec => {
-        sec.classList.remove("open");
-        sec.querySelector(".card-list").style.display = "none";
-        sec.querySelector(".category-toggle").textContent = "+";
-    });
+
+fetch("header-standard.html")
+
+.then(r => r.text())
+
+.then(h => {
+
+document.getElementById("header").innerHTML = h;
+
+initGlobal();
+
+
+// Make Portfolio button active BUT keep dropdown working
+const portfolioBtn = document.querySelector(".portfolio-btn");
+
+if(portfolioBtn){
+portfolioBtn.classList.add("active");
 }
 
-function openAccordion(section) {
-    section.classList.add("open");
-    section.querySelector(".card-list").style.display = "block";
-    section.querySelector(".category-toggle").textContent = "–";
-
-    // Smooth scroll to the opened section
-    const yOffset = -20; 
-    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({ top: y, behavior: "smooth" });
-}
-
-// Header click behaviour
-document.querySelectorAll(".category-header").forEach(header => {
-    header.addEventListener("click", () => {
-        const section = header.parentElement;
-        const isOpen = section.classList.contains("open");
-
-        closeAllAccordions();
-
-        if (!isOpen) {
-            openAccordion(section);
-        }
-    });
 });
 
-/* ------------------------------
-   FILTER ENGINE (AUTO-EXPAND)
------------------------------- */
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-
-        // Update active button
-        document.querySelectorAll('.filter-btn')
-            .forEach(b => b.classList.remove('active-filter'));
-        btn.classList.add('active-filter');
-
-        const filter = btn.dataset.filter;
-
-        // Show/hide sections
-        const visibleSections = [];
-        document.querySelectorAll('.portfolio-section').forEach(section => {
-            if (filter === 'all' || section.dataset.category === filter) {
-                section.style.display = 'block';
-                visibleSections.push(section);
-            } else {
-                section.style.display = 'none';
-            }
-        });
-
-        // Collapse all accordions
-        closeAllAccordions();
-
-        // Auto-expand the first visible section (if any)
-        if (visibleSections.length > 0) {
-            openAccordion(visibleSections[0]);
-        }
-    });
-});
 </script>
+
+<!-- FILTER BAR -->
+
+<div class="sticky-bar">
+
+<button class="filter-btn active-filter" data-filter="all">All</button>
+<button class="filter-btn" data-filter="leadership">Leadership</button>
+<button class="filter-btn" data-filter="rolefit">Role Fit</button>
+<button class="filter-btn" data-filter="euc">EUC</button>
+<button class="filter-btn" data-filter="cyber">Cyber</button>
+<button class="filter-btn" data-filter="pmo">PMO</button>
+<button class="filter-btn" data-filter="cloud">Cloud</button>
+<button class="filter-btn" data-filter="service">Service</button>
+<button class="filter-btn" data-filter="legacy">Legacy</button>
+<button class="filter-btn" data-filter="presales">Pre-Sales</button>
+<button class="filter-btn" data-filter="whatibring">What I Bring</button>
+
+</div>
+
+<div class="container">
+
+<h2>Executive Summary</h2>
+
+<div class="card">
+
+<p>
+I deliver large-scale IT, infrastructure, and cyber programmes with a focus on execution certainty,
+operational readiness, and governance. My work spans national EUC transformations, identity and access
+uplift, PMO leadership, and service transition across complex, regulated, and multi-vendor environments.
+</p>
+
+<p>
+My track record shows repeatability across financial services, utilities, government, healthcare,
+aviation, and education. I stabilise programmes, drive adoption, and ensure services are secure,
+resilient, and ready for BAU.
+</p>
+
+</div>
+
+<hr class="section-divider">
+
+<!-- LEADERSHIP -->
+
+<div class="category-section portfolio-section" data-category="leadership">
+
+<div class="category-header">
+Leadership Model
+<span class="category-toggle">+</span>
+</div>
+
+<div class="card-list">
+
+<div class="grid">
+
+<div class="card">
+<h3>Governance & Delivery Control</h3>
+<p>I establish clear frameworks, reporting rhythms, and decision pathways that bring stability to programmes under pressure.</p>
+</div>
+
+<div class="card">
+<h3>Stakeholder Alignment & Communication</h3>
+<p>I build confidence across technical, operational, and executive stakeholders by translating complexity into clear narratives.</p>
+</div>
+
+<div class="card">
+<h3>Operational Readiness & Service Sustainability</h3>
+<p>I embed service transition early ensuring documentation, support models and operational processes are ready before go-live.</p>
+</div>
+
+<div class="card">
+<h3>Outcome-Based Delivery</h3>
+<p>I drive programmes toward measurable results including adoption, stability, risk reduction and operational improvement.</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ROLE FIT -->
+
+<div class="category-section portfolio-section" data-category="rolefit">
+
+<div class="category-header">
+Role Fit
+<span class="category-toggle">+</span>
+</div>
+
+<div class="card-list">
+
+<div class="grid">
+
+<div class="card">
+<h3>Roles I Fit</h3>
+<ul>
+<li>Senior Project Manager</li>
+<li>Programme Manager</li>
+<li>PMO Manager / PMO Lead</li>
+<li>Service Transition Lead</li>
+<li>Delivery Assurance Lead</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>What Organisations Gain</h3>
+<ul>
+<li>Predictable controlled delivery</li>
+<li>Strong governance and reporting discipline</li>
+<li>Confident stakeholder alignment</li>
+<li>Stable service landings</li>
+<li>Measurable operational outcomes</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Where I Add Most Value</h3>
+<ul>
+<li>Complex multi-vendor environments</li>
+<li>Regulated sectors</li>
+<li>Programme stabilisation or recovery</li>
+<li>Large transformations</li>
+<li>Services transitioning to BAU</li>
+</ul>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- EUC -->
+
+<div class="category-section portfolio-section" data-category="euc">
+
+<div class="category-header">
+Global Infrastructure & EUC Transformations
+<span class="category-toggle">+</span>
+</div>
+
+<div class="card-list">
+
+<div class="grid">
+
+<div class="card">
+<img src="logo-placeholder.png" class="logo-img">
+<h3>National-Scale EUC Transformations</h3>
+<p>Tesco 126k device refresh and HSBC 46k user modernisation programmes.</p>
+</div>
+
+<div class="card">
+<img src="logo-placeholder.png" class="logo-img">
+<h3>Modern Workplace Deployments</h3>
+<p>Cloud managed EUC lifecycle deployments across 32k+ devices.</p>
+</div>
+
+<div class="card">
+<img src="logo-placeholder.png" class="logo-img">
+<h3>Sector Specific Modernisation</h3>
+<p>Teams Rooms and print modernisation across academic environments.</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- CYBER -->
+
+<div class="category-section portfolio-section" data-category="cyber">
+
+<div class="category-header">
+Cybersecurity & Identity Uplift
+<span class="category-toggle">+</span>
+</div>
+
+<div class="card-list">
+
+<div class="grid">
+
+<div class="card">
+<img src="logo-placeholder.png" class="logo-img">
+<h3>NHS England</h3>
+<p>CAF uplift strengthening access controls and governance frameworks.</p>
+</div>
+
+<div class="card">
+<img src="logo-placeholder.png" class="logo-img">
+<h3>Luton Airport</h3>
+<p>MFA PAM and SSO uplift in regulated aviation environment.</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- OTHER SECTIONS REMAIN UNCHANGED -->
+
+</div>
+
+<!-- FOOTER -->
+
+<div id="footer"></div>
+
+<script>
+
+fetch("footer.html")
+
+.then(r => r.text())
+
+.then(h => document.getElementById("footer").innerHTML = h);
+
+</script>
+
+<!-- FLOAT BUTTONS -->
+
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<script>
+
+/* ACCORDION ENGINE */
+
+function closeAllAccordions(){
+
+document.querySelectorAll(".category-section").forEach(sec=>{
+sec.classList.remove("open");
+sec.querySelector(".card-list").style.display="none";
+sec.querySelector(".category-toggle").textContent="+";
+});
+
+}
+
+function openAccordion(section){
+
+section.classList.add("open");
+
+section.querySelector(".card-list").style.display="block";
+
+section.querySelector(".category-toggle").textContent="–";
+
+}
+
+document.querySelectorAll(".category-header").forEach(header=>{
+
+header.addEventListener("click",()=>{
+
+const section=header.parentElement;
+
+const isOpen=section.classList.contains("open");
+
+closeAllAccordions();
+
+if(!isOpen){
+openAccordion(section);
+}
+
+});
+
+});
+
+/* FILTER ENGINE */
+
+document.querySelectorAll(".filter-btn").forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active-filter"));
+
+btn.classList.add("active-filter");
+
+const filter=btn.dataset.filter;
+
+const visibleSections=[];
+
+document.querySelectorAll(".portfolio-section").forEach(section=>{
+
+if(filter==="all" || section.dataset.category===filter){
+
+section.style.display="block";
+
+visibleSections.push(section);
+
+}else{
+
+section.style.display="none";
+
+}
+
+});
+
+closeAllAccordions();
+
+if(visibleSections.length>0){
+openAccordion(visibleSections[0]);
+}
+
+});
+
+});
+
+</script>
+
 </body>
 </html>

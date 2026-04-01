@@ -96,6 +96,7 @@ portfolioBtn.classList.add("active");
 <div class="sticky-bar">
 
 <button class="filter-btn active-filter" data-filter="all">All</button>
+<button class="filter-btn" data-filter="summary">Summary</button>
 <button class="filter-btn" data-filter="leadership">Leadership</button>
 <button class="filter-btn" data-filter="rolefit">Role Fit</button>
 <button class="filter-btn" data-filter="euc">EUC</button>
@@ -111,10 +112,16 @@ portfolioBtn.classList.add("active");
 
 <div class="container">
 
-<h2>Executive Summary</h2>
+<div class="category-section portfolio-section" data-category="summary">
+
+<div class="category-header">
+Executive Summary
+<span class="category-toggle">+</span>
+</div>
+
+<div class="card-list">
 
 <div class="card">
-
 <p>
 I deliver large-scale IT, infrastructure, and cyber programmes with a focus on execution certainty,
 operational readiness, and governance. My work spans national EUC transformations, identity and access
@@ -128,8 +135,8 @@ resilient, and ready for BAU.
 </p>
 
 </div>
-
-<hr class="section-divider">
+</div>
+</div>
 
 <!-- LEADERSHIP -->
 
@@ -490,10 +497,17 @@ section.style.display="none";
 
 closeAllAccordions();
 
-if(visibleSections.length>0){
-openAccordion(visibleSections[0]);
-}
+if(filter === "all"){
 
+visibleSections.forEach(section=>{
+openAccordion(section);
+});
+
+}else if(visibleSections.length>0){
+
+openAccordion(visibleSections[0]);
+
+}
 });
 
 });

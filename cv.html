@@ -11,12 +11,6 @@
 
 <!-- PAGE-SPECIFIC STYLES -->
 <style>
-.section-divider {
-    border: none;
-    border-top: 2px solid #e5e7eb;
-    margin: 50px 0 40px;
-    width: 100%;
-}
 
 .card {
     background: white;
@@ -85,9 +79,7 @@ img[src="orgs.png"] {
 </style>
 
 <!-- GLOBAL JS -->
-<script src="global.js?v=3"></script>
-
-
+<script src="global.js"></script>
 
 
 
@@ -112,56 +104,6 @@ fetch("header-standard.html")
 
     const cvBtn = document.querySelector('.cv-btn');
     if (cvBtn) cvBtn.classList.add("active");
-  });
-</script>
-    
-<script>
-fetch("header-standard.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("header").innerHTML = h;
-
-    // Run global initialisation if available
-    if (typeof initGlobal === "function") initGlobal();
-
-    // Mark CV button active
-    const cvBtn = document.querySelector('.cv-btn');
-    if (cvBtn) cvBtn.classList.add("active");
-
-    /* -----------------------------------------
-       PAGE‑LOCAL DROPDOWN FIX FOR CV PAGE ONLY
-    ----------------------------------------- */
-
-    const cvButton = document.querySelector(".cv-btn");
-    const portfolioButton = document.querySelector(".portfolio-btn");
-    const cvMenu = document.getElementById("cvMenu");
-    const portfolioMenu = document.getElementById("portfolioMenu");
-
-    // Open CV menu
-    if (cvButton && cvMenu) {
-      cvButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        cvMenu.style.display = cvMenu.style.display === "flex" ? "none" : "flex";
-        portfolioMenu.style.display = "none";
-      });
-    }
-
-    // Open Portfolio menu
-    if (portfolioButton && portfolioMenu) {
-      portfolioButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        portfolioMenu.style.display = portfolioMenu.style.display === "flex" ? "none" : "flex";
-        cvMenu.style.display = "none";
-      });
-    }
-
-    // Close menus when clicking anywhere else
-    document.addEventListener("click", () => {
-      if (cvMenu) cvMenu.style.display = "none";
-      if (portfolioMenu) portfolioMenu.style.display = "none";
-    });
   });
 </script>
 

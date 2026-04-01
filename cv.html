@@ -88,18 +88,7 @@
 .popup-menu[style*="flex"] {
     display: flex !important;
 }
-  .hero-banner,
-.hero-content {
-    overflow: visible !important;
-    position: relative;
-    z-index: 10;
-}
-
-.popup-menu {
-    z-index: 99999 !important;
-}
-
-</style>
+  </style>
 </head>
 
 <body class="page-certifications">
@@ -447,81 +436,80 @@
 
   <!-- ACCORDION + FILTER LOGIC -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const filterButtons = document.querySelectorAll(".filter-btn");
-      const sections = document.querySelectorAll(".cv-section");
+document.addEventListener("DOMContentLoaded", () => {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const sections = document.querySelectorAll(".cv-section");
 
-      const closeAllSections = () => {
-        sections.forEach(section => {
-          const list = section.querySelector(".card-list");
-          const toggle = section.querySelector(".category-toggle");
-          if (list) list.style.display = "none";
-          if (toggle) toggle.textContent = "+";
-        });
-      };
-
-      const openSection = (section) => {
-        const list = section.querySelector(".card-list");
-        const toggle = section.querySelector(".category-toggle");
-        if (list) list.style.display = "block";
-        if (toggle) toggle.textContent = "−";
-      };
-
-      const scrollToSection = (section) => {
-        const rect = section.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: rect, behavior: "smooth" });
-      };
-
-      filterButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-          filterButtons.forEach(b => b.classList.remove("active-filter"));
-          btn.classList.add("active-filter");
-
-          const filter = btn.dataset.filter;
-
-          if (filter === "all") {
-            sections.forEach(section => {
-              section.style.display = "block";
-              openSection(section);
-            });
-            return;
-          }
-
-          sections.forEach(section => {
-            const match = section.dataset.category === filter;
-            section.style.display = match ? "block" : "none";
-          });
-
-          closeAllSections();
-
-          const target = document.querySelector(`[data-category="${filter}"]`);
-          if (target) {
-            openSection(target);
-            scrollToSection(target);
-          }
-        });
-      });
-
-      document.querySelectorAll(".category-header").forEach(header => {
-        header.addEventListener("click", () => {
-          const section = header.parentElement;
-          const list = section.querySelector(".card-list");
-          const toggle = section.querySelector(".category-toggle");
-
-          if (!list) return;
-
-          const isOpen = list.style.display === "block";
-          closeAllSections();
-
-          if (!isOpen) {
-            list.style.display = "block";
-            toggle.textContent = "−";
-          }
-        });
-      });
+  const closeAllSections = () => {
+    sections.forEach(section => {
+      const list = section.querySelector(".card-list");
+      const toggle = section.querySelector(".category-toggle");
+      if (list) list.style.display = "none";
+      if (toggle) toggle.textContent = "+";
     });
-  </script>
+  };
 
+  const openSection = (section) => {
+    const list = section.querySelector(".card-list");
+    const toggle = section.querySelector(".category-toggle");
+    if (list) list.style.display = "block";
+    if (toggle) toggle.textContent = "−";
+  };
+
+  const scrollToSection = (section) => {
+    const rect = section.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top: rect, behavior: "smooth" });
+  };
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterButtons.forEach(b => b.classList.remove("active-filter"));
+      btn.classList.add("active-filter");
+
+      const filter = btn.dataset.filter;
+
+      if (filter === "all") {
+        sections.forEach(section => {
+          section.style.display = "block";
+          openSection(section);
+        });
+        return;
+      }
+
+      sections.forEach(section => {
+        const match = section.dataset.category === filter;
+        section.style.display = match ? "block" : "none";
+      });
+
+      closeAllSections();
+
+      const target = document.querySelector(`[data-category="${filter}"]`);
+      if (target) {
+        openSection(target);
+        scrollToSection(target);
+      }
+    });
+  });
+
+  document.querySelectorAll(".category-header").forEach(header => {
+    header.addEventListener("click", () => {
+      const section = header.parentElement;
+      const list = section.querySelector(".card-list");
+      const toggle = section.querySelector(".category-toggle");
+
+      if (!list) return;
+
+      const isOpen = list.style.display === "block";
+      closeAllSections();
+
+      if (!isOpen) {
+        list.style.display = "block";
+        if (toggle) toggle.textContent = "−";
+      }
+    });
+  });
+});
+</script>
   <!-- FINAL GLOBAL JS LOAD (same as working page) -->
   <script src="global.js"></script>
 </body>

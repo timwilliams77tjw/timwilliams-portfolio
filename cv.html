@@ -66,17 +66,18 @@ fetch("header-standard.html")
     const headerEl = document.getElementById("header");
     headerEl.innerHTML = h;
 
-    // Initialize global header logic
-    if (typeof initGlobal === "function") initGlobal();
-
     // Highlight CV button
     const cvBtn = headerEl.querySelector('.cv-btn');
     if (cvBtn) cvBtn.classList.add("active");
 
-    // Attach dropdown menu event handlers **after header is loaded**
+    // Remove the inline onclick handlers to prevent conflicts
     const cvButton = headerEl.querySelector('.cv-btn');
     const portfolioButton = headerEl.querySelector('.portfolio-btn');
 
+    if (cvButton) cvButton.onclick = null;  // override inline onclick
+    if (portfolioButton) portfolioButton.onclick = null;
+
+    // Attach your JS-controlled event listeners
     if (cvButton) {
       cvButton.addEventListener('click', function(e) {
         e.preventDefault();
@@ -116,24 +117,6 @@ fetch("header-standard.html")
       }
     });
 
-    // Initialize tooltips
-    headerEl.querySelectorAll('[data-tooltip]').forEach(el => {
-      const tooltipText = el.getAttribute('data-tooltip');
-      let tooltipEl;
-      el.addEventListener('mouseenter', () => {
-        tooltipEl = document.createElement('div');
-        tooltipEl.className = 'tooltip';
-        tooltipEl.textContent = tooltipText;
-        document.body.appendChild(tooltipEl);
-        const rect = el.getBoundingClientRect();
-        tooltipEl.style.position = 'absolute';
-        tooltipEl.style.top = `${rect.bottom + window.scrollY + 6}px`;
-        tooltipEl.style.left = `${rect.left + window.scrollX}px`;
-      });
-      el.addEventListener('mouseleave', () => {
-        if (tooltipEl) tooltipEl.remove();
-      });
-    });
   });
 </script>
   <!-- STICKY BAR -->

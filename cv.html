@@ -60,65 +60,62 @@
   <!-- HEADER INCLUDE -->
   <div id="header"></div>
 <script>
-fetch("header-standard.html")
-  .then(r => r.text())
-  .then(h => {
-    const headerEl = document.getElementById("header");
-    headerEl.innerHTML = h;
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => {
+      const headerEl = document.getElementById("header");
+      headerEl.innerHTML = h;
 
-    // Highlight CV button
-    const cvBtn = headerEl.querySelector('.cv-btn');
-    if (cvBtn) cvBtn.classList.add("active");
+      // Highlight CV button
+      const cvBtn = headerEl.querySelector('.cv-btn');
+      if (cvBtn) cvBtn.classList.add("active");
 
-    // Remove the inline onclick handlers to prevent conflicts
-    const cvButton = headerEl.querySelector('.cv-btn');
-    const portfolioButton = headerEl.querySelector('.portfolio-btn');
+      const cvButton = headerEl.querySelector('.cv-btn');
+      const portfolioButton = headerEl.querySelector('.portfolio-btn');
 
-    if (cvButton) cvButton.onclick = null;  // override inline onclick
-    if (portfolioButton) portfolioButton.onclick = null;
+      // Remove any inline onclick handlers
+      if (cvButton) cvButton.removeAttribute("onclick");
+      if (portfolioButton) portfolioButton.removeAttribute("onclick");
 
-    // Attach your JS-controlled event listeners
-    if (cvButton) {
-      cvButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        const menu = document.getElementById('cvMenu');
-        if (menu) menu.classList.toggle('show');
+      // Attach dropdown listeners
+      if (cvButton) {
+        cvButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          const menu = document.getElementById('cvMenu');
+          if (menu) menu.classList.toggle('show');
 
+          const portfolioMenu = document.getElementById('portfolioMenu');
+          if (portfolioMenu) portfolioMenu.classList.remove('show');
+        });
+      }
+
+      if (portfolioButton) {
+        portfolioButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          const menu = document.getElementById('portfolioMenu');
+          if (menu) menu.classList.toggle('show');
+
+          const cvMenu = document.getElementById('cvMenu');
+          if (cvMenu) cvMenu.classList.remove('show');
+        });
+      }
+
+      // Close menus when clicking outside
+      document.addEventListener('click', function(e) {
+        const cvMenu = document.getElementById('cvMenu');
         const portfolioMenu = document.getElementById('portfolioMenu');
-        if (portfolioMenu && portfolioMenu.classList.contains('show')) {
+
+        if (cvMenu && !cvMenu.contains(e.target) && !e.target.closest('.cv-btn')) {
+          cvMenu.classList.remove('show');
+        }
+        if (portfolioMenu && !portfolioMenu.contains(e.target) && !e.target.closest('.portfolio-btn')) {
           portfolioMenu.classList.remove('show');
         }
       });
-    }
-
-    if (portfolioButton) {
-      portfolioButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        const menu = document.getElementById('portfolioMenu');
-        if (menu) menu.classList.toggle('show');
-
-        const cvMenu = document.getElementById('cvMenu');
-        if (cvMenu && cvMenu.classList.contains('show')) {
-          cvMenu.classList.remove('show');
-        }
-      });
-    }
-
-    // Close menus when clicking outside
-    document.addEventListener('click', function(e) {
-      const cvMenu = document.getElementById('cvMenu');
-      const portfolioMenu = document.getElementById('portfolioMenu');
-
-      if (cvMenu && !cvMenu.contains(e.target) && !e.target.closest('.cv-btn')) {
-        cvMenu.classList.remove('show');
-      }
-      if (portfolioMenu && !portfolioMenu.contains(e.target) && !e.target.closest('.portfolio-btn')) {
-        portfolioMenu.classList.remove('show');
-      }
     });
-
-  });
-</script>
+});
+</script> 
   <!-- STICKY BAR -->
   <div class="sticky-bar">
     <div class="container">

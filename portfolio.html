@@ -94,10 +94,8 @@ portfolioBtn.classList.add("active");
 <!-- FILTER BAR -->
 
 <div class="sticky-bar">
-
 <button id="expandAllBtn" class="special-btn">Expand All</button>
-<button id="collapseAllBtn" class="special-btn">Collapse All</button>
-<button class="filter-btn" data-filter="summary">Summary</button>
+<button id="collapseAllBtn" class="special-btn">Collapse All</button><button class="filter-btn" data-filter="summary">Summary</button>
 <button class="filter-btn" data-filter="leadership">Leadership</button>
 <button class="filter-btn" data-filter="rolefit">Role Fit</button>
 <button class="filter-btn" data-filter="euc">EUC</button>
@@ -472,24 +470,25 @@ const expandBtn = document.getElementById("expandAllBtn");
 if(expandBtn){
 expandBtn.addEventListener("click", () => {
 
+document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
+expandBtn.classList.add("active-filter");
+
 document.querySelectorAll(".portfolio-section").forEach(section => {
-
 section.style.display = "block";
-
 openAccordion(section);
-
 });
 
 });
 }
-
-
 /* COLLAPSE ALL */
 
 const collapseBtn = document.getElementById("collapseAllBtn");
 
 if(collapseBtn){
 collapseBtn.addEventListener("click", () => {
+
+document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
+collapseBtn.classList.add("active-filter");
 
 closeAllAccordions();
 

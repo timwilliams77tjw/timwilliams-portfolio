@@ -48,11 +48,16 @@
   position:absolute;
   top:100%;
   left:0;
+min-width:160px;
   flex-direction:column;
   background:white;
   border:1px solid #ddd;
   padding:10px;
   z-index:9999;
+}
+#portfolioMenu {
+  right: 0;
+  left: auto;
 }
 
 .button-group {
@@ -81,9 +86,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const headerEl = document.getElementById("header");
       headerEl.innerHTML = h;
 
-      // Highlight CV button
       const cvBtn = headerEl.querySelector('.cv-btn');
       if (cvBtn) cvBtn.classList.add("active");
+
+      // Attach dropdown handlers AFTER header loads
+      const cvButton = headerEl.querySelector(".cv-btn");
+      const portfolioButton = headerEl.querySelector(".portfolio-btn");
+
+      if (cvButton) {
+        cvButton.addEventListener("click", openCVMenu);
+      }
+
+      if (portfolioButton) {
+        portfolioButton.addEventListener("click", openPortfolioMenu);
+      }
     });
 });
 </script>

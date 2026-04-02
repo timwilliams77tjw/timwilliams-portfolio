@@ -55,15 +55,47 @@ min-width:160px;
   padding:10px;
   z-index:9999;
 }
-#cvMenu {
-  left: 0;   /* aligns to the button’s left edge */
-  right: auto;
-}
-#portfolioMenu {
-  right: 0;
-  left: auto;
+.cv-btn {
+  position: relative; /* parent button needs relative */
 }
 
+#cvMenu {
+  position: absolute;
+  top: 100%;   /* right below the button */
+  left: 0;     /* align with button left edge */
+  min-width: 160px;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: none; 
+  flex-direction: column;
+  z-index: 9999;
+}
+
+#cvMenu.show {
+  display: flex !important;
+}
+
+.portfolio-btn {
+  position: relative;
+}
+
+#portfolioMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;    /* align right edge of menu with button */
+  min-width: 160px;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: none; 
+  flex-direction: column;
+  z-index: 9999;
+}
+
+#portfolioMenu.show {
+  display: flex !important;
+}
 .button-group {
   display:flex;
   gap:8px;
@@ -97,20 +129,16 @@ function openCVMenu(event) {
 
   // Close portfolio menu
   const portfolioMenu = document.getElementById("portfolioMenu");
-  portfolioMenu.classList.remove("show");
+  if (portfolioMenu) portfolioMenu.classList.remove("show");
 
   // Toggle active class on CV button
   const cvBtn = document.querySelector(".cv-btn");
-  cvBtn.classList.toggle("active-filter");
+  if (cvBtn) cvBtn.classList.toggle("active-filter");
 
   // Remove active class from portfolio button if needed
   const portfolioBtn = document.querySelector(".portfolio-btn");
-  portfolioBtn.classList.remove("active-filter");
-
-    const portfolioMenu = document.getElementById("portfolioMenu");
-    if (portfolioMenu) portfolioMenu.classList.remove("show");
-  }
-
+  if (portfolioBtn) portfolioBtn.classList.remove("active-filter");
+}
   function openPortfolioMenu(event) {
     event.preventDefault();
     event.stopPropagation();

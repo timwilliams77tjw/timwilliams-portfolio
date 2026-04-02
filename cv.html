@@ -127,10 +127,14 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("header").innerHTML = h;
 
       const cvBtn = document.querySelector(".cv-btn");
-      const portfolioBtn = document.querySelector(".portfolio-btn");
-      const cvMenu = document.getElementById("cvMenu");
-      const portfolioMenu = document.getElementById("portfolioMenu");
+const portfolioBtn = document.querySelector(".portfolio-btn");
+const cvMenu = document.getElementById("cvMenu");
+const portfolioMenu = document.getElementById("portfolioMenu");
 
+// Make CV button active on page load
+if (cvBtn) {
+  cvBtn.classList.add("active-filter");
+}
       function positionMenu(menu, button) {
         const rect = button.getBoundingClientRect();
         const viewportWidth = window.innerWidth;

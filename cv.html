@@ -426,9 +426,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 </script>
 <script>
+// Dropdown toggle functions
 function openCVMenu(event) {
   event.preventDefault();
-
+  event.stopPropagation();
   const menu = document.getElementById("cvMenu");
   if (menu) menu.classList.toggle("show");
 
@@ -438,7 +439,7 @@ function openCVMenu(event) {
 
 function openPortfolioMenu(event) {
   event.preventDefault();
-
+  event.stopPropagation();
   const menu = document.getElementById("portfolioMenu");
   if (menu) menu.classList.toggle("show");
 
@@ -446,6 +447,7 @@ function openPortfolioMenu(event) {
   if (cvMenu) cvMenu.classList.remove("show");
 }
 
+// Close dropdowns when clicking outside
 document.addEventListener("click", function(e) {
   const cvMenu = document.getElementById("cvMenu");
   const portfolioMenu = document.getElementById("portfolioMenu");
@@ -458,7 +460,7 @@ document.addEventListener("click", function(e) {
     portfolioMenu.classList.remove("show");
   }
 });
-</script>
+}</script>
   <script src="global.js"></script>
 </body>
 </html>

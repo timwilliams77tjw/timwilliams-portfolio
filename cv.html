@@ -54,10 +54,22 @@
   padding:10px;
   z-index:9999;
 }
+
 .button-group {
-  position:relative;
-  display:inline-flex;
+  display:flex;
   gap:8px;
+  flex-wrap:wrap;
+}
+
+.popup-menu {
+  display:none;
+  position:absolute;
+  top:110px;
+  flex-direction:column;
+  background:white;
+  border:1px solid #ddd;
+  padding:10px;
+  z-index:9999;
 }
     .popup-menu.show { display:flex !important; }
     .tooltip {
@@ -83,9 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const cvBtn = headerEl.querySelector('.cv-btn');
       if (cvBtn) cvBtn.classList.add("active");
     });
-});  
-</script>
-<!-- STICKY BAR -->
+});  <!-- STICKY BAR -->
   <div class="sticky-bar">
     <div class="container">
       <button class="filter-btn active-filter" data-filter="all">All</button>

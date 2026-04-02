@@ -438,6 +438,40 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("fab").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
     });
 </script>
+<script>
+function openCVMenu(event) {
+  event.preventDefault();
+
+  const menu = document.getElementById("cvMenu");
+  if (menu) menu.classList.toggle("show");
+
+  const portfolioMenu = document.getElementById("portfolioMenu");
+  if (portfolioMenu) portfolioMenu.classList.remove("show");
+}
+
+function openPortfolioMenu(event) {
+  event.preventDefault();
+
+  const menu = document.getElementById("portfolioMenu");
+  if (menu) menu.classList.toggle("show");
+
+  const cvMenu = document.getElementById("cvMenu");
+  if (cvMenu) cvMenu.classList.remove("show");
+}
+
+document.addEventListener("click", function(e) {
+  const cvMenu = document.getElementById("cvMenu");
+  const portfolioMenu = document.getElementById("portfolioMenu");
+
+  if (cvMenu && !e.target.closest(".cv-btn") && !cvMenu.contains(e.target)) {
+    cvMenu.classList.remove("show");
+  }
+
+  if (portfolioMenu && !e.target.closest(".portfolio-btn") && !portfolioMenu.contains(e.target)) {
+    portfolioMenu.classList.remove("show");
+  }
+});
+</script>
   <script src="global.js"></script>
 </body>
 </html>

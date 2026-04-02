@@ -119,47 +119,72 @@ min-width:160px;
   <!-- HEADER INCLUDE -->
   <div id="header"></div>
 <script>
-  // Make these global so the inline onclick in header-standard.html works
-function openCVMenu(event) {
-  event.preventDefault();
-  event.stopPropagation();
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => {
+      document.getElementById("header").innerHTML = h;
 
-  const menu = document.getElementById("cvMenu");
-  menu.classList.toggle("show");
+      const cvBtn = document.querySelector(".cv-btn");
+      const portfolioBtn = document.querySelector(".portfolio-btn");
+      const cvMenu = document.getElementById("cvMenu");
+      const portfolioMenu = document.getElementById("portfolioMenu");
 
-  // Close portfolio menu
-  const portfolioMenu = document.getElementById("portfolioMenu");
-  if (portfolioMenu) portfolioMenu.classList.remove("show");
+      function positionMenu(menu, button) {
+        const rect = button.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
 
-  // Toggle active class on CV button
-  const cvBtn = document.querySelector(".cv-btn");
-  if (cvBtn) cvBtn.classList.toggle("active-filter");
+        menu.style.left = "0px";
+        menu.style.right = "auto";
 
-  // Remove active class from portfolio button if needed
-  const portfolioBtn = document.querySelector(".portfolio-btn");
-  if (portfolioBtn) portfolioBtn.classList.remove("active-filter");
-}
-  function openPortfolioMenu(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const menu = document.getElementById("portfolioMenu");
-    if (menu) menu.classList.toggle("show");
+        if (rect.left + menu.offsetWidth > viewportWidth) {
+          menu.style.left = "auto";
+          menu.style.right = "0px";
+        }
+      }
 
-    const cvMenu = document.getElementById("cvMenu");
-    if (cvMenu) cvMenu.classList.remove("show");
-  }
-</script>
+      // CV button
+      if (cvBtn) {
+        cvBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          cvMenu.classList.toggle("show");
+          positionMenu(cvMenu, cvBtn);
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    fetch("header-standard.html")
-      .then(r => r.text())
-      .then(h => {
-        document.getElementById("header").innerHTML = h;
-        // No need to attach any click handlers here since header uses inline onclick
+          if (portfolioMenu) portfolioMenu.classList.remove("show");
+          cvBtn.classList.toggle("active-filter");
+          if (portfolioBtn) portfolioBtn.classList.remove("active-filter");
+        });
+      }
+
+      // Portfolio button
+      if (portfolioBtn) {
+        portfolioBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          portfolioMenu.classList.toggle("show");
+          positionMenu(portfolioMenu, portfolioBtn);
+
+          if (cvMenu) cvMenu.classList.remove("show");
+          portfolioBtn.classList.toggle("active-filter");
+          if (cvBtn) cvBtn.classList.remove("active-filter");
+        });
+      }
+
+      // Close menus on outside click
+      document.addEventListener("click", (e) => {
+        if (cvMenu && !e.target.closest(".cv-btn") && !cvMenu.contains(e.target)) {
+          cvMenu.classList.remove("show");
+          if (cvBtn) cvBtn.classList.remove("active-filter");
+        }
+        if (portfolioMenu && !e.target.closest(".portfolio-btn") && !portfolioMenu.contains(e.target)) {
+          portfolioMenu.classList.remove("show");
+          if (portfolioBtn) portfolioBtn.classList.remove("active-filter");
+        }
       });
-  });
-</script>  
+    });
+});
+</script>
 <!-- STICKY BAR -->
   <div class="sticky-bar">
     <div class="container">
@@ -481,21 +506,6 @@ function openCVMenu(event) {
 
       document.getElementById("fab").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
     });
-</script>
-<script>
-// Close dropdowns when clicking outside
-document.addEventListener("click", function(e) {
-  const cvMenu = document.getElementById("cvMenu");
-  const portfolioMenu = document.getElementById("portfolioMenu");
-
-  if (cvMenu && !e.target.closest(".cv-btn") && !cvMenu.contains(e.target)) {
-    cvMenu.classList.remove("show");
-  }
-
-  if (portfolioMenu && !e.target.closest(".portfolio-btn") && !portfolioMenu.contains(e.target)) {
-    portfolioMenu.classList.remove("show");
-  }
-});
 </script>
   <script src="global.js"></script>
 </body>

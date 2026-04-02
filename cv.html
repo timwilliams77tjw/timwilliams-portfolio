@@ -113,20 +113,20 @@ min-width:160px;
   background-color: #001F3F; /* navy blue */
   color: white;
 }
-/* Sticky bar styling */
+/* Sticky bar adjustments */
 .sticky-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 12px 0;
-  background: #f9f9f9; /* same as portfolio */
+  padding: 0;           /* remove top/bottom spacing */
+  margin: 0;            /* remove any default margin */
+  background: #f9f9f9;  /* matches portfolio.html */
   border-bottom: 1px solid #e5e7eb;
 }
 
-/* Filter buttons */
-/* Default buttons look like portfolio style */
+/* Filter buttons default: navy blue */
 .filter-btn {
-  background-color: #001f3f; /* navy blue */
+  background-color: #001f3f; /* navy */
   color: white;
   border: 1px solid #001f3f;
   border-radius: 6px;
@@ -136,16 +136,17 @@ min-width:160px;
   transition: all 0.2s;
 }
 
+/* Hover: stays navy blue */
 .filter-btn:hover {
-  background-color: #001f3f; /* navy blue hover stays the same */
+  background-color: #001f3f;
   color: white;
 }
 
-/* Keep active-filter for JS toggling if needed */
+/* Active button: white background with light blue border */
 .filter-btn.active-filter {
-  background-color: #001f3f;
-  color: white;
-  border-color: #001f3f;
+  background-color: white;
+  color: #001f3f;           /* navy text */
+  border: 1px solid #7ac0f9; /* light blue border */
 }
 /* Special Expand/Collapse buttons styling */
 .special-btn {

@@ -108,8 +108,9 @@ min-width:160px;
       border-radius:4px; font-size:12px; pointer-events:none;
       white-space:nowrap;
     }
-.brand-btn.active-filter {
-  background-color: #007BFF; /* or your preferred highlight */
+.brand-btn.active-filter,
+.filter-btn.active-filter {
+  background-color: #001F3F; /* navy blue */
   color: white;
 }
   </style>
@@ -133,17 +134,20 @@ document.addEventListener("DOMContentLoaded", () => {
       function positionMenu(menu, button) {
         const rect = button.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
+        const menuWidth = menu.offsetWidth;
 
-        menu.style.left = "0px";
+        // Default: align left with button
+        menu.style.left = `${rect.left}px`;
         menu.style.right = "auto";
 
-        if (rect.left + menu.offsetWidth > viewportWidth) {
+        // If menu overflows right edge of viewport, align right with button
+        if (rect.left + menuWidth > viewportWidth) {
           menu.style.left = "auto";
-          menu.style.right = "0px";
+          menu.style.right = `${viewportWidth - rect.right}px`;
         }
       }
 
-      // CV button
+      // CV button click
       if (cvBtn) {
         cvBtn.addEventListener("click", (e) => {
           e.preventDefault();
@@ -157,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Portfolio button
+      // Portfolio button click
       if (portfolioBtn) {
         portfolioBtn.addEventListener("click", (e) => {
           e.preventDefault();
@@ -182,6 +186,13 @@ document.addEventListener("DOMContentLoaded", () => {
           if (portfolioBtn) portfolioBtn.classList.remove("active-filter");
         }
       });
+
+      // ✅ Add this here for responsive menu repositioning
+      window.addEventListener("resize", () => {
+        if (cvMenu.classList.contains("show")) positionMenu(cvMenu, cvBtn);
+        if (portfolioMenu.classList.contains("show")) positionMenu(portfolioMenu, portfolioBtn);
+      });
+
     });
 });
 </script>

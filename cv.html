@@ -55,6 +55,10 @@ min-width:160px;
   padding:10px;
   z-index:9999;
 }
+#cvMenu {
+  left: 0;   /* aligns to the button’s left edge */
+  right: auto;
+}
 #portfolioMenu {
   right: 0;
   left: auto;
@@ -72,6 +76,10 @@ min-width:160px;
       border-radius:4px; font-size:12px; pointer-events:none;
       white-space:nowrap;
     }
+.brand-btn.active-filter {
+  background-color: #007BFF; /* or your preferred highlight */
+  color: white;
+}
   </style>
 </head>
 
@@ -80,11 +88,24 @@ min-width:160px;
   <div id="header"></div>
 <script>
   // Make these global so the inline onclick in header-standard.html works
-  function openCVMenu(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const menu = document.getElementById("cvMenu");
-    if (menu) menu.classList.toggle("show");
+function openCVMenu(event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  const menu = document.getElementById("cvMenu");
+  menu.classList.toggle("show");
+
+  // Close portfolio menu
+  const portfolioMenu = document.getElementById("portfolioMenu");
+  portfolioMenu.classList.remove("show");
+
+  // Toggle active class on CV button
+  const cvBtn = document.querySelector(".cv-btn");
+  cvBtn.classList.toggle("active-filter");
+
+  // Remove active class from portfolio button if needed
+  const portfolioBtn = document.querySelector(".portfolio-btn");
+  portfolioBtn.classList.remove("active-filter");
 
     const portfolioMenu = document.getElementById("portfolioMenu");
     if (portfolioMenu) portfolioMenu.classList.remove("show");

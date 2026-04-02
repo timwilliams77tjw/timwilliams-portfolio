@@ -10,19 +10,24 @@
 
   <!-- PAGE-SPECIFIC STYLES -->
   <style>
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-    .grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-    .card-list { display: none; }
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;      /* same as portfolio */
+  margin-bottom: 24px; /* same as portfolio */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.grid {
+  display: grid;
+  gap: 20px;            /* same as portfolio */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.card-list {
+  display: none;
+  margin-top: 0;       /* remove extra spacing above */
+  margin-bottom: 0;    /* remove extra spacing below */
+}
     .awards-columns {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -123,7 +128,9 @@ min-width:160px;
   background: #f9f9f9;  /* matches portfolio.html */
   border-bottom: 1px solid #e5e7eb;
 }
-
+.sticky-bar .container {
+  padding: 0;  /* remove extra left/right space */
+}
 /* Filter buttons default: navy blue */
 .filter-btn {
   background-color: #001f3f; /* navy */
@@ -159,7 +166,14 @@ min-width:160px;
   color: white;
   border-color: #001f3f;
 }
-  </style>
+  .section-divider {
+  border: none;              /* remove default border */
+  height: 2px;               /* thickness */
+  background-color: #001f3f; /* navy blue to match filter buttons */
+  margin: 40px 0;            /* vertical spacing */
+  border-radius: 2px;        /* rounded edges if you like */
+}
+</style>
 </head>
 
 <body class="page-certifications">

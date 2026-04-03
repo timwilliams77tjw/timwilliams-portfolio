@@ -80,9 +80,7 @@ function toggleMenu(id, button) {
     closeAllMenus();
 
     if (!isOpen) {
-        const width = button.offsetWidth;
-        menu.style.setProperty("--menu-width", width + "px");
-        menu.style.display = "flex";
+menu.style.display = "flex";
         button.classList.add("open");
     }
 }

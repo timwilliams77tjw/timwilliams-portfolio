@@ -119,14 +119,14 @@ min-width:160px;
   color: white;
 }
 /* Sticky bar adjustments */
-.sticky-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 0;           /* remove top/bottom spacing */
-  margin: 0;            /* remove any default margin */
-  background: #f9f9f9;  /* matches portfolio.html */
-  border-bottom: 1px solid #e5e7eb;
+.sticky-bar{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+padding:12px 0;
+background:#f9f9f9;
+border-bottom:1px solid #e5e7eb;
+margin-bottom:20px;
 }
 .sticky-bar .container {
   padding: 0;  /* remove extra left/right space */
@@ -289,17 +289,19 @@ if (cvBtn) {
 });
 </script>
 <!-- STICKY BAR -->
-  <div class="sticky-bar">
-    <div class="container">
-      <button class="filter-btn active-filter" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="summary">Summary</button>
-      <button class="filter-btn" data-filter="achievements">Achievements</button>
-      <button class="filter-btn" data-filter="experience">Experience</button>
-      <button class="filter-btn" data-filter="skills">Skills</button>
-      <button class="filter-btn" data-filter="certifications">Certifications</button>
-      <button class="filter-btn" data-filter="awards">Awards</button>
-    </div>
-  </div>
+<div class="sticky-bar">
+
+<button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+<button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+
+<button class="filter-btn" data-filter="summary">Summary</button>
+<button class="filter-btn" data-filter="achievements">Achievements</button>
+<button class="filter-btn" data-filter="experience">Experience</button>
+<button class="filter-btn" data-filter="skills">Skills</button>
+<button class="filter-btn" data-filter="certifications">Certifications</button>
+<button class="filter-btn" data-filter="awards">Awards</button>
+
+</div>  </div>
 
 <main class="page-content">
   <div class="container">
@@ -646,6 +648,53 @@ if (cvBtn) {
 
       document.getElementById("fab").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
     });
+/* EXPAND ALL */
+
+const expandBtn = document.getElementById("expandAllBtn");
+
+if(expandBtn){
+expandBtn.addEventListener("click", () => {
+
+document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
+expandBtn.classList.add("active-filter");
+
+document.querySelectorAll(".cv-section").forEach(section => {
+section.style.display = "block";
+
+const list = section.querySelector(".card-list");
+const toggle = section.querySelector(".category-toggle");
+
+if(list) list.style.display = "block";
+if(toggle) toggle.textContent = "−";
+
+});
+
+});
+}
+
+/* COLLAPSE ALL */
+
+const collapseBtn = document.getElementById("collapseAllBtn");
+
+if(collapseBtn){
+collapseBtn.addEventListener("click", () => {
+
+document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
+collapseBtn.classList.add("active-filter");
+
+document.querySelectorAll(".cv-section").forEach(section => {
+
+const list = section.querySelector(".card-list");
+const toggle = section.querySelector(".category-toggle");
+
+if(list) list.style.display = "none";
+if(toggle) toggle.textContent = "+";
+
+});
+
+});
+}
+
 </script>
   <script src="global.js"></script>
 </body>

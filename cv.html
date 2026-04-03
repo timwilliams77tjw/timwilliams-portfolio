@@ -13,11 +13,10 @@
 .card {
   background: white;
   border-radius: 10px;
-  padding: 20px;      /* same as portfolio */
-  margin-bottom: 24px; /* same as portfolio */
+  padding: 20px;
+  margin-bottom: 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
-
 .grid {
   display: grid;
   gap: 20px;            /* same as portfolio */
@@ -126,7 +125,7 @@ gap:8px;
 padding:12px 0;
 background:#f9f9f9;
 border-bottom:1px solid #e5e7eb;
-margin-bottom:20px;
+margin-bottom:30px;
 }
 .sticky-bar .container {
   padding: 0;  /* remove extra left/right space */
@@ -156,15 +155,16 @@ margin-bottom:20px;
   border: 1px solid #7ac0f9; /* light blue border */
 }
 /* Special Expand/Collapse buttons styling */
-.special-btn {
-  background-color: #e0e0e0;
-  border-color: #ccc;
+.special-btn{
+  background-color:#001f3f;
+  color:white;
+  border:1px solid #001f3f;
 }
 
-.special-btn.active-filter {
-  background-color: #001f3f;
-  color: white;
-  border-color: #001f3f;
+.special-btn.active-filter{
+  background:white;
+  color:#001f3f;
+  border:1px solid #7ac0f9;
 }
   .section-divider {
   border: none;              /* remove default border */
@@ -176,11 +176,6 @@ margin-bottom:20px;
 /* Reduce spacing below sticky bar */
 .page-content {
   padding-top: 8px;  /* was 20px */
-}
-
-/* Reduce space between cards */
-.card {
-  margin-bottom: 16px; /* was 24px */
 }
 
 /* Optional: remove any unwanted line between sections */
@@ -301,7 +296,7 @@ if (cvBtn) {
 <button class="filter-btn" data-filter="certifications">Certifications</button>
 <button class="filter-btn" data-filter="awards">Awards</button>
 
-</div>  </div>
+</div>  
 
 <main class="page-content">
   <div class="container">
@@ -606,7 +601,8 @@ if (cvBtn) {
     document.addEventListener("DOMContentLoaded", ()=>{
       const filterButtons=document.querySelectorAll(".filter-btn");
       const sections=document.querySelectorAll(".cv-section");
-
+const expandBtn = document.getElementById("expandAllBtn");
+const collapseBtn = document.getElementById("collapseAllBtn");
       const closeAllSections=()=>sections.forEach(s=>{
         const list=s.querySelector(".card-list");
         const t=s.querySelector(".category-toggle");
@@ -626,7 +622,6 @@ if (cvBtn) {
           filterButtons.forEach(b=>b.classList.remove("active-filter"));
           btn.classList.add("active-filter");
           const filter=btn.dataset.filter;
-          if(filter==="all"){ sections.forEach(s=>{ s.style.display="block"; openSection(s); }); return; }
           sections.forEach(s=>{ s.style.display=s.dataset.category===filter?"block":"none"; });
           closeAllSections();
           const target=document.querySelector(`[data-category="${filter}"]`);
@@ -647,25 +642,22 @@ if (cvBtn) {
       });
 
       document.getElementById("fab").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
-    });
 /* EXPAND ALL */
 
-const expandBtn = document.getElementById("expandAllBtn");
-
 if(expandBtn){
-expandBtn.addEventListener("click", () => {
+expandBtn.addEventListener("click", ()=>{
 
-document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
+filterButtons.forEach(b=>b.classList.remove("active-filter"));
 expandBtn.classList.add("active-filter");
 
-document.querySelectorAll(".cv-section").forEach(section => {
-section.style.display = "block";
+sections.forEach(section=>{
+section.style.display="block";
 
 const list = section.querySelector(".card-list");
 const toggle = section.querySelector(".category-toggle");
 
-if(list) list.style.display = "block";
-if(toggle) toggle.textContent = "−";
+if(list) list.style.display="block";
+if(toggle) toggle.textContent="−";
 
 });
 
@@ -674,27 +666,26 @@ if(toggle) toggle.textContent = "−";
 
 /* COLLAPSE ALL */
 
-const collapseBtn = document.getElementById("collapseAllBtn");
-
 if(collapseBtn){
-collapseBtn.addEventListener("click", () => {
+collapseBtn.addEventListener("click", ()=>{
 
-document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
+filterButtons.forEach(b=>b.classList.remove("active-filter"));
 collapseBtn.classList.add("active-filter");
 
-document.querySelectorAll(".cv-section").forEach(section => {
+sections.forEach(section=>{
 
 const list = section.querySelector(".card-list");
 const toggle = section.querySelector(".category-toggle");
 
-if(list) list.style.display = "none";
-if(toggle) toggle.textContent = "+";
+if(list) list.style.display="none";
+if(toggle) toggle.textContent="+";
 
 });
 
 });
 }
 
+});
 </script>
   <script src="global.js"></script>
 </body>

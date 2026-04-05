@@ -1,202 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tim Williams – LinkedIn</title>
+    <link rel="stylesheet" href="certifications.css?v=1">
+    <link rel="stylesheet" href="insights.css?v=1">
+    <style>
+        /* PAGE-SPECIFIC STYLES ONLY — SAFE & ISOLATED */
 
-  <!-- GLOBAL CSS -->
-  <link rel="stylesheet" href="certifications.css?v=1">
+        .linkedin-header {
+            max-width: 900px;
+            margin: 40px auto 20px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
 
-  <!-- PAGE‑SPECIFIC CSS -->
-  <style>
-    .page-container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-    }
+        .linkedin-header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
 
-    .hero-section {
-      margin-bottom: 2rem;
-    }
+        .linkedin-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
 
-    .hero-section h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
-      color: #0a2540;
-    }
+        .linkedin-header .headline {
+            font-size: 17px;
+            margin-top: 6px;
+            color: #444;
+        }
 
-    .hero-section p {
-      font-size: 1.1rem;
-      color: #0a2540;
-      max-width: 720px;
-    }
+        .linkedin-header .tagline {
+            font-size: 15px;
+            margin-top: 10px;
+            color: #666;
+        }
 
-    /* LOCAL SEARCH BAR */
-    .search-bar-local {
-      margin: 20px 0 30px;
-    }
+        .linkedin-header .followers {
+            margin-top: 12px;
+            font-weight: 600;
+            color: #0a66c2;
+        }
 
-    #linkedin-search {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 50px;
-      border: 2px solid #0a2540;
-      background: white;
-      font-size: 15px;
-      color: #0a2540;
-      outline: none;
-      transition: 0.25s ease;
-    }
+        .qr-box {
+            margin-top: 15px;
+        }
 
-    #linkedin-search::placeholder {
-      color: #6b7280;
-    }
+        .sticky-follow {
+            position: sticky;
+            top: 0;
+            background: #0a66c2;
+            color: #fff;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 16px;
+            z-index: 999;
+        }
 
-    #linkedin-search:focus {
-      border-color: #0078ff;
-      box-shadow: 0 0 0 3px rgba(0,120,255,0.15);
-    }
+        .sticky-follow a {
+            color: #fff;
+            font-weight: bold;
+            text-decoration: underline;
+        }
 
-    /* CARD LAYOUT */
-    .linkedin-card {
-      background: white;
-      padding: 1.25rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      margin-bottom: 1.25rem;
-    }
+        .section-title {
+            text-align: center;
+            margin: 50px 0 20px;
+            font-size: 26px;
+        }
 
-    .linkedin-card h3 {
-      margin-top: 0;
-      color: #0a2540;
-      font-size: 1.15rem;
-    }
+        .card-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
 
-    .linkedin-card p {
-      margin-bottom: 0.75rem;
-      color: #0a2540;
-      line-height: 1.5;
-    }
+        .cardB {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
 
-    .btn {
-      display: inline-block;
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      background: #0078ff;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      margin-top: 0.5rem;
-    }
+        .search-bar {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: center;
+        }
 
-    .cta-section {
-      text-align: center;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid #e0e0e0;
-    }
-  </style>
+        .search-bar input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+    </style>
 </head>
 
-<body>
+<body class="page-certifications">
 
-<!-- HEADER (DYNAMIC LOAD) -->
+<!-- HEADER INCLUDE -->
 <div id="header"></div>
-
 <script src="global.js"></script>
-
 <script>
 fetch("header-standard.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("header").innerHTML = h;
-    initGlobal(); // IMPORTANT
-  });
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header").innerHTML = h;
+        initGlobal();
+    });
 </script>
 
-<!-- PAGE CONTENT -->
-<main class="page-container">
+<!-- STICKY FOLLOW BAR -->
+<div class="sticky-follow">
+    Follow Tim on LinkedIn:
+    <a href="https://www.linkedin.com/in/timwilliams77" target="_blank">linkedin.com/in/timwilliams77</a>
+</div>
 
-  <section class="hero-section">
-    <h1>LinkedIn Highlights</h1>
-    <p>A curated selection of my most engaged posts, leadership insights, and professional updates from LinkedIn.</p>
-  </section>
+<!-- LINKEDIN HEADER -->
+<div class="linkedin-header">
+    <img src="profile.jpg" alt="Tim Williams">
+    <div>
+        <h1>Tim Williams</h1>
+        <div class="headline">Programme Delivery Leader | Cyber Uplift | Cloud Adoption | Modern Workplace Transformation</div>
+        <div class="tagline">Driving secure, stable and adoption‑ready transformation across regulated, multi‑vendor environments.</div>
+        <div class="followers">1,424 followers</div>
 
-  <!-- LOCAL SEARCH BAR -->
-  <div class="search-bar-local">
-    <input type="text" id="linkedin-search" placeholder="Search LinkedIn posts…" />
-  </div>
+        <div class="qr-box">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.linkedin.com/in/timwilliams77" alt="QR Code">
+        </div>
+    </div>
+</div>
 
-  <!-- LINKEDIN CONTENT LIST -->
-  <div id="linkedin-list">
+<!-- SEARCH BAR -->
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search posts...">
+</div>
 
-    <div class="linkedin-card">
-      <h3>Why Cyber Uplift Fails — And How to Fix It</h3>
-      <p>A breakdown of the governance, ownership, and cultural blockers that derail cyber uplift programmes — and the practical steps to fix them.</p>
-      <a href="https://www.linkedin.com/in/timwilliams77" class="btn">View on LinkedIn</a>
+<!-- MOST POPULAR POSTS -->
+<h2 class="section-title">Most Popular Posts</h2>
+<div class="card-grid" id="postsContainer">
+
+    <div class="cardB" data-keywords="leadership delivery transformation">
+        <h3>Delivering Transformation with Clarity</h3>
+        <p>A breakdown of how structured programme leadership accelerates outcomes in complex environments.</p>
     </div>
 
-    <div class="linkedin-card">
-      <h3>Driving Cloud Adoption Amid Disruption</h3>
-      <p>Cloud transformation succeeds when it’s treated as a business change programme, not a technical migration. Here’s how to get it right.</p>
-      <a href="https://www.linkedin.com/in/timwilliams77" class="btn">View on LinkedIn</a>
+    <div class="cardB" data-keywords="cyber security uplift risk">
+        <h3>Cyber Uplift: Getting the Basics Right</h3>
+        <p>Why foundational controls matter more than flashy tooling when stabilising cyber posture.</p>
     </div>
 
-    <div class="linkedin-card">
-      <h3>Modern Workplace: What CIOs Get Wrong</h3>
-      <p>Technology alone doesn’t modernise a workplace. Adoption, communication and leadership alignment do.</p>
-      <a href="https://www.linkedin.com/in/timwilliams77 " class="btn">View on LinkedIn</a>
+    <div class="cardB" data-keywords="cloud adoption migration">
+        <h3>Cloud Adoption Without the Chaos</h3>
+        <p>How to align people, process and technology to deliver predictable cloud outcomes.</p>
     </div>
 
-    <div class="linkedin-card">
-      <h3>Leadership in High‑Pressure Delivery Environments</h3>
-      <p>How to stabilise programmes, align stakeholders, and deliver predictable outcomes in complex, multi‑vendor environments.</p>
-      <a href="https://www.linkedin.com/in/timwilliams77" class="btn">View on LinkedIn</a>
+</div>
+
+<!-- FEATURED COMMENTS -->
+<h2 class="section-title">Featured Comments</h2>
+<div class="card-grid">
+
+    <div class="cardB">
+        <strong>Jay Marskell<br>
+        <span style="font-size:14px; color:#666;">SC Cleared Project Manager | Infrastructure & PMO Delivery</span></strong>
+        <p style="margin-top:10px;">
+            “Tim was supportive, approachable and eager to help his colleagues improve. He was popular with his team and I would highly recommend him as both a PMO Lead and a Project Manager.”
+        </p>
     </div>
 
-    <div class="linkedin-card">
-      <h3>Service Transition: The Most Undervalued Discipline</h3>
-      <p>Why service transition is often overlooked — and how it prevents operational disruption and user frustration when done correctly.</p>
-      <a href="https://www.linkedin.com/in/timwilliams77 " class="btn">View on LinkedIn</a>
+    <div class="cardB">
+        <strong>Jane D.<br>
+        <span style="font-size:14px; color:#666;">Group Data Protection Officer</span></strong>
+        <p style="margin-top:10px;">
+            “Tim’s courteous and professional manner was always to the fore, no matter what challenges were presented. A pleasure to work with, with strong project management knowledge and a knack for reading a room.”
+        </p>
     </div>
 
-  </div>
-
-  <section class="cta-section">
-    <h2>Connect With Me on LinkedIn</h2>
-    <p>I regularly share leadership insights, programme delivery lessons, and transformation updates.</p>
-    <a href="https://www.linkedin.com/in/timwilliams77 " class="btn">Visit My LinkedIn</a>
-  </section>
-
-</main>
+</div>
 
 <!-- FLOATING BUTTONS -->
-<div id="fab" class="fab">⬆️</div>
-<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+<div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+<a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
 
-<!-- FOOTER -->
+<!-- FOOTER INCLUDE -->
 <div id="footer"></div>
-
 <script>
 fetch("footer.html")
-  .then(r => r.text())
-  .then(h => document.getElementById("footer").innerHTML = h);
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- PAGE‑SPECIFIC JS -->
+<!-- LOCAL SEARCH SCRIPT -->
 <script>
-const linkedinSearch = document.getElementById("linkedin-search");
-
-if (linkedinSearch) {
-  linkedinSearch.addEventListener("input", () => {
-    const term = linkedinSearch.value.toLowerCase();
-
-    document.querySelectorAll(".linkedin-card").forEach(card => {
-      const text = card.innerText.toLowerCase();
-      card.style.display = text.includes(term) ? "" : "none";
+document.getElementById("searchInput").addEventListener("input", function () {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll("#postsContainer .cardB").forEach(card => {
+        const match = card.dataset.keywords.includes(q);
+        card.style.display = match ? "block" : "none";
     });
-  });
-}
+});
 </script>
 
 </body>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact – Tim Williams</title>
+    <link rel="stylesheet" href="certifications.css?v=1">
+    <link rel="stylesheet" href="insights.css?v=1">
+
+    <style>
+        :root {
+            --bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --text-main: #111;
+            --text-sub: #444;
+            --accent: #0a66c2;
+            --shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+
+        body.dark-mode {
+            --bg: #0f172a;
+            --card-bg: #111827;
+            --text-main: #e5e7eb;
+            --text-sub: #9ca3af;
+            --accent: #38bdf8;
+            --shadow: 0 4px 18px rgba(0,0,0,0.6);
+        }
+
+        body.page-certifications {
+            background: var(--bg);
+            color: var(--text-main);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .sticky-follow {
+            position: sticky;
+            top: 0;
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 16px;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .dark-toggle-btn {
+            border: 1px solid rgba(255,255,255,0.6);
+            background: transparent;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .page-title {
+            text-align: center;
+            margin: 40px 0 10px;
+            font-size: 32px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 18px;
+            color: var(--text-sub);
+        }
+
+        .contact-card {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .contact-card label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .contact-card input,
+        .contact-card textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 16px;
+        }
+
+        .contact-card textarea {
+            height: 140px;
+            resize: vertical;
+        }
+
+        .contact-card button {
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 999px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .alt-links {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-sub);
+        }
+
+        .alt-links a {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="page-certifications">
+
+<!-- HEADER INCLUDE -->
+<div id="header"></div>
+<script src="global.js"></script>
+<script>
+fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header").innerHTML = h;
+        initGlobal();
+    });
+</script>
+
+<!-- STICKY BAR -->
+<div class="sticky-follow">
+    <span>Contact Tim</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
+
+<!-- PAGE TITLE -->
+<h1 class="page-title">Get in Touch</h1>
+<div class="page-subtitle">For programme leadership, cyber uplift, cloud adoption or modern workplace transformation.</div>
+
+<!-- CONTACT FORM -->
+<div class="contact-card">
+    <label for="name">Your Name</label>
+    <input id="name" type="text" placeholder="Enter your name">
+
+    <label for="email">Your Email</label>
+    <input id="email" type="email" placeholder="Enter your email">
+
+    <label for="message">Message</label>
+    <textarea id="message" placeholder="How can I help?"></textarea>
+
+    <button id="sendBtn">Send Message</button>
+
+    <div class="alt-links">
+        Prefer to book directly?  
+        <a href="calendar.html">Schedule a conversation</a>
+    </div>
+</div>
+
+<!-- FLOATING BUTTONS -->
+<div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+<a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+
+<!-- FOOTER INCLUDE -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- LOCAL JS: DARK MODE + FORM VALIDATION + ANALYTICS -->
+<script>
+(function() {
+
+    // Dark mode toggle
+    const darkToggle = document.getElementById("darkToggle");
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_contact_dark");
+
+    if (storedMode === "1") {
+        body.classList.add("dark-mode");
+    }
+
+    darkToggle.addEventListener("click", function() {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_contact_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    });
+
+    // Lightweight analytics hook
+    function track(eventName, data) {
+        console.log("TW-Contact-Analytics:", eventName, data || {});
+    }
+
+    track("page_view", { page: "contact" });
+
+    // Local form validation (no backend)
+    document.getElementById("sendBtn").addEventListener("click", function() {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!name || !email || !message) {
+            alert("Please complete all fields before sending.");
+            return;
+        }
+
+        alert("Thanks, your message has been recorded locally. (No backend configured.)");
+        track("contact_submit", { name, email });
+    });
+
+})();
+</script>
+
+</body>
+</html>

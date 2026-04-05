@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformation Playbooks – Tim Williams</title>
+    <link rel="stylesheet" href="certifications.css?v=1">
+    <link rel="stylesheet" href="insights.css?v=1">
+
+    <style>
+        :root {
+            --bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --text-main: #111;
+            --text-sub: #444;
+            --accent: #0a66c2;
+            --shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+
+        body.dark-mode {
+            --bg: #0f172a;
+            --card-bg: #111827;
+            --text-main: #e5e7eb;
+            --text-sub: #9ca3af;
+            --accent: #38bdf8;
+            --shadow: 0 4px 18px rgba(0,0,0,0.6);
+        }
+
+        body.page-certifications {
+            background: var(--bg);
+            color: var(--text-main);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .sticky-follow {
+            position: sticky;
+            top: 0;
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 16px;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .dark-toggle-btn {
+            border: 1px solid rgba(255,255,255,0.6);
+            background: transparent;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .page-title {
+            text-align: center;
+            margin: 40px 0 10px;
+            font-size: 32px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 18px;
+            color: var(--text-sub);
+        }
+
+        .search-bar {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            background: var(--card-bg);
+            color: var(--text-main);
+        }
+
+        .card-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .cardB {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .cardB:nth-child(1) { animation-delay: 0.1s; }
+        .cardB:nth-child(2) { animation-delay: 0.2s; }
+        .cardB:nth-child(3) { animation-delay: 0.3s; }
+        .cardB:nth-child(4) { animation-delay: 0.4s; }
+        .cardB:nth-child(5) { animation-delay: 0.5s; }
+        .cardB:nth-child(6) { animation-delay: 0.6s; }
+
+        .cardB h3 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .cardB p {
+            color: var(--text-sub);
+            margin-bottom: 10px;
+        }
+
+        .cta-section {
+            max-width: 900px;
+            margin: 50px auto 60px;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .cta-section h3 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .cta-section p {
+            margin: 10px 0 20px;
+            color: var(--text-sub);
+        }
+
+        .cta-section a.cta-btn {
+            display: inline-block;
+            padding: 10px 22px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="page-certifications">
+
+<!-- HEADER INCLUDE -->
+<div id="header"></div>
+<script src="global.js"></script>
+<script>
+fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header").innerHTML = h;
+        initGlobal();
+    });
+</script>
+
+<!-- STICKY BAR -->
+<div class="sticky-follow">
+    <span>Transformation Playbooks</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
+
+<!-- PAGE TITLE -->
+<h1 class="page-title">Transformation Playbooks</h1>
+<div class="page-subtitle">Practical, repeatable frameworks for delivering secure, stable and adoption‑ready change.</div>
+
+<!-- SEARCH BAR -->
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search playbooks...">
+</div>
+
+<!-- PLAYBOOK CARDS -->
+<div class="card-grid" id="modelsContainer">
+
+    <div class="cardB" data-keywords="cyber uplift security controls remediation risk">
+        <h3>Cyber Uplift Playbook</h3>
+        <p>A structured approach to strengthening identity, access, patching, monitoring and operational readiness.</p>
+        <p><strong>Best for:</strong> Organisations needing measurable cyber posture improvement.</p>
+    </div>
+
+    <div class="cardB" data-keywords="cloud adoption migration azure aws landing zone">
+        <h3>Cloud Adoption Playbook</h3>
+        <p>Clear patterns for landing cloud capability safely, predictably and without operational disruption.</p>
+        <p><strong>Best for:</strong> Teams scaling cloud usage or modernising legacy estates.</p>
+    </div>
+
+    <div class="cardB" data-keywords="modern workplace m365 endpoint intune collaboration">
+        <h3>Modern Workplace Playbook</h3>
+        <p>Frameworks for landing M365, endpoint and collaboration changes with adoption‑ready teams.</p>
+        <p><strong>Best for:</strong> Organisations modernising user experience and productivity tooling.</p>
+    </div>
+
+    <div class="cardB" data-keywords="service transition stabilisation operations handover">
+        <h3>Service Transition Playbook</h3>
+        <p>Ensuring new services land smoothly with clear ownership, documentation and operational readiness.</p>
+        <p><strong>Best for:</strong> Programmes introducing new platforms or major capability changes.</p>
+    </div>
+
+    <div class="cardB" data-keywords="programme recovery turnaround delivery rescue">
+        <h3>Programme Recovery Playbook</h3>
+        <p>Rapid assessment, stabilisation and recovery of programmes at risk, restoring confidence and momentum.</p>
+        <p><strong>Best for:</strong> Initiatives facing delays, misalignment or delivery uncertainty.</p>
+    </div>
+
+    <div class="cardB" data-keywords="pmo operating model governance reporting cadence">
+        <h3>PMO Operating Model Playbook</h3>
+        <p>Practical governance, reporting and cadence patterns that enable delivery rather than slow it down.</p>
+        <p><strong>Best for:</strong> Organisations needing clarity, rhythm and predictable delivery flow.</p>
+    </div>
+
+</div>
+
+<!-- CTA SECTION -->
+<div class="cta-section">
+    <h3>Work with Tim on your next transformation</h3>
+    <p>Whether you’re stabilising cyber posture, driving cloud adoption or landing modern workplace change, Tim brings structure, calm and delivery discipline to complex, multi‑vendor environments.</p>
+    <a href="calendar.html" class="cta-btn">Book a conversation</a>
+</div>
+
+<!-- FLOATING BUTTONS -->
+<div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+<a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+
+<!-- FOOTER INCLUDE -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- LOCAL SEARCH + DARK MODE + ANALYTICS -->
+<script>
+(function() {
+
+    // Local search
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll("#modelsContainer .cardB");
+
+    searchInput.addEventListener("input", function () {
+        const q = this.value.toLowerCase().trim();
+
+        cards.forEach(card => {
+            const keywords = (card.dataset.keywords || "").toLowerCase();
+            const text = card.innerText.toLowerCase();
+            const match = !q || keywords.includes(q) || text.includes(q);
+            card.style.display = match ? "block" : "none";
+        });
+    });
+
+    // Dark mode toggle
+    const darkToggle = document.getElementById("darkToggle");
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_playbooks_dark");
+
+    if (storedMode === "1") {
+        body.classList.add("dark-mode");
+    }
+
+    darkToggle.addEventListener("click", function() {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_playbooks_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    });
+
+    // Lightweight analytics hook
+    function track(eventName, data) {
+        console.log("TW-Playbooks-Analytics:", eventName, data || {});
+    }
+
+    track("page_view", { page: "playbooks" });
+
+})();
+</script>
+
+</body>
+</html>

@@ -7,18 +7,43 @@
     <link rel="stylesheet" href="certifications.css?v=1">
     <link rel="stylesheet" href="insights.css?v=1">
     <style>
-        /* PAGE-SPECIFIC STYLES ONLY — SAFE & ISOLATED */
+        :root {
+            --bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --text-main: #111;
+            --text-sub: #444;
+            --accent: #0a66c2;
+            --shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+
+        body.dark-mode {
+            --bg: #0f172a;
+            --card-bg: #111827;
+            --text-main: #e5e7eb;
+            --text-sub: #9ca3af;
+            --accent: #38bdf8;
+            --shadow: 0 4px 18px rgba(0,0,0,0.6);
+        }
+
+        body.page-certifications {
+            background: var(--bg);
+            color: var(--text-main);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
 
         .linkedin-header {
             max-width: 900px;
             margin: 40px auto 20px;
             padding: 30px;
-            background: #fff;
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow);
             display: flex;
             gap: 25px;
             align-items: center;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.6s ease forwards;
         }
 
         .linkedin-header img {
@@ -36,19 +61,19 @@
         .linkedin-header .headline {
             font-size: 17px;
             margin-top: 6px;
-            color: #444;
+            color: var(--text-sub);
         }
 
         .linkedin-header .tagline {
             font-size: 15px;
             margin-top: 10px;
-            color: #666;
+            color: var(--text-sub);
         }
 
         .linkedin-header .followers {
             margin-top: 12px;
             font-weight: 600;
-            color: #0a66c2;
+            color: var(--accent);
         }
 
         .qr-box {
@@ -58,18 +83,32 @@
         .sticky-follow {
             position: sticky;
             top: 0;
-            background: #0a66c2;
+            background: var(--accent);
             color: #fff;
             padding: 12px 20px;
             text-align: center;
             font-size: 16px;
             z-index: 999;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            align-items: center;
         }
 
         .sticky-follow a {
             color: #fff;
             font-weight: bold;
             text-decoration: underline;
+        }
+
+        .dark-toggle-btn {
+            border: 1px solid rgba(255,255,255,0.6);
+            background: transparent;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            cursor: pointer;
         }
 
         .section-title {
@@ -86,11 +125,18 @@
         }
 
         .cardB {
-            background: #fff;
+            background: var(--card-bg);
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease forwards;
         }
+
+        .cardB:nth-child(1) { animation-delay: 0.1s; }
+        .cardB:nth-child(2) { animation-delay: 0.2s; }
+        .cardB:nth-child(3) { animation-delay: 0.3s; }
 
         .search-bar {
             max-width: 900px;
@@ -105,6 +151,50 @@
             border-radius: 8px;
             border: 1px solid #ccc;
             font-size: 16px;
+            background: var(--card-bg);
+            color: var(--text-main);
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-sub);
+        }
+
+        .cta-section {
+            max-width: 900px;
+            margin: 50px auto 60px;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .cta-section h3 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .cta-section p {
+            margin: 10px 0 20px;
+            color: var(--text-sub);
+        }
+
+        .cta-section a.cta-btn {
+            display: inline-block;
+            padding: 10px 22px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -123,10 +213,12 @@ fetch("header-standard.html")
     });
 </script>
 
-<!-- STICKY FOLLOW BAR -->
+<!-- STICKY FOLLOW BAR + DARK MODE TOGGLE -->
 <div class="sticky-follow">
-    Follow Tim on LinkedIn:
-    <a href="https://www.linkedin.com/in/timwilliams77" target="_blank">linkedin.com/in/timwilliams77</a>
+    <span>Follow Tim on LinkedIn:
+        <a href="https://www.linkedin.com/in/timwilliams77" target="_blank">linkedin.com/in/timwilliams77</a>
+    </span>
+    <button class="dark-toggle-btn" id="darkToggle">Toggle dark mode</button>
 </div>
 
 <!-- LINKEDIN HEADER -->
@@ -146,7 +238,7 @@ fetch("header-standard.html")
 
 <!-- SEARCH BAR -->
 <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search posts...">
+    <input type="text" id="searchInput" placeholder="Search posts and articles...">
 </div>
 
 <!-- MOST POPULAR POSTS -->
@@ -170,13 +262,29 @@ fetch("header-standard.html")
 
 </div>
 
+<!-- FEATURED ARTICLES -->
+<h2 class="section-title">Featured Articles</h2>
+<div class="card-grid" id="articlesContainer">
+
+    <div class="cardB" data-keywords="governance risk compliance regulated environments">
+        <h3>Building Governance That Actually Enables Delivery</h3>
+        <p>Practical patterns for governance in regulated, multi‑vendor environments that don’t slow programmes down.</p>
+    </div>
+
+    <div class="cardB" data-keywords="service transition modern workplace">
+        <h3>Service Transition Without the Dip</h3>
+        <p>How to land modern workplace changes smoothly, with adoption‑ready teams and stable operations from day one.</p>
+    </div>
+
+</div>
+
 <!-- FEATURED COMMENTS -->
 <h2 class="section-title">Featured Comments</h2>
 <div class="card-grid">
 
     <div class="cardB">
         <strong>Jay Marskell<br>
-        <span style="font-size:14px; color:#666;">SC Cleared Project Manager | Infrastructure & PMO Delivery</span></strong>
+        <span style="font-size:14px; color:var(--text-sub);">SC Cleared Project Manager | Infrastructure & PMO Delivery</span></strong>
         <p style="margin-top:10px;">
             “Tim was supportive, approachable and eager to help his colleagues improve. He was popular with his team and I would highly recommend him as both a PMO Lead and a Project Manager.”
         </p>
@@ -184,12 +292,19 @@ fetch("header-standard.html")
 
     <div class="cardB">
         <strong>Jane D.<br>
-        <span style="font-size:14px; color:#666;">Group Data Protection Officer</span></strong>
+        <span style="font-size:14px; color:var(--text-sub);">Group Data Protection Officer</span></strong>
         <p style="margin-top:10px;">
             “Tim’s courteous and professional manner was always to the fore, no matter what challenges were presented. A pleasure to work with, with strong project management knowledge and a knack for reading a room.”
         </p>
     </div>
 
+</div>
+
+<!-- WORK WITH ME CTA -->
+<div class="cta-section">
+    <h3>Work with Tim on your next transformation</h3>
+    <p>Whether you’re stabilising cyber posture, driving cloud adoption or landing modern workplace change, Tim brings structure, calm and delivery discipline to complex, multi‑vendor environments.</p>
+    <a href="calendar.html" class="cta-btn">Book a conversation</a>
 </div>
 
 <!-- FLOATING BUTTONS -->
@@ -204,15 +319,61 @@ fetch("footer.html")
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- LOCAL SEARCH SCRIPT -->
+<!-- LOCAL SEARCH + DARK MODE + ANALYTICS HOOK -->
 <script>
-document.getElementById("searchInput").addEventListener("input", function () {
-    const q = this.value.toLowerCase();
-    document.querySelectorAll("#postsContainer .cardB").forEach(card => {
-        const match = card.dataset.keywords.includes(q);
-        card.style.display = match ? "block" : "none";
+(function() {
+    // Local search across posts + articles
+    const searchInput = document.getElementById("searchInput");
+    const postCards = document.querySelectorAll("#postsContainer .cardB");
+    const articleCards = document.querySelectorAll("#articlesContainer .cardB");
+
+    searchInput.addEventListener("input", function () {
+        const q = this.value.toLowerCase().trim();
+
+        function filterCards(cards) {
+            cards.forEach(card => {
+                const keywords = (card.dataset.keywords || "").toLowerCase();
+                const text = card.innerText.toLowerCase();
+                const match = !q || keywords.includes(q) || text.includes(q);
+                card.style.display = match ? "block" : "none";
+            });
+        }
+
+        filterCards(postCards);
+        filterCards(articleCards);
     });
-});
+
+    // Dark mode toggle (local only)
+    const darkToggle = document.getElementById("darkToggle");
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_linkedin_dark");
+
+    if (storedMode === "1") {
+        body.classList.add("dark-mode");
+    }
+
+    darkToggle.addEventListener("click", function() {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_linkedin_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    });
+
+    // Lightweight analytics hook (console-based; safe to extend)
+    function track(eventName, data) {
+        // Replace this with your analytics endpoint if/when you’re ready
+        console.log("TW-LinkedIn-Analytics:", eventName, data || {});
+    }
+
+    // Example events
+    track("page_view", { page: "linkedin_landing" });
+
+    document.querySelectorAll("a.cta-btn").forEach(btn => {
+        btn.addEventListener("click", () => track("cta_click", { target: "calendar" }));
+    });
+
+    document.querySelectorAll(".sticky-follow a").forEach(link => {
+        link.addEventListener("click", () => track("follow_click", { target: "linkedin_profile" }));
+    });
+})();
 </script>
 
 </body>

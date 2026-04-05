@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="certifications.css?v=1">
+
+  <!-- PAGE‑SPECIFIC CSS -->
+  <style>
+    .page-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .hero-section {
+      margin-bottom: 2rem;
+    }
+
+    .hero-section h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      color: #0a2540;
+    }
+
+    .hero-section p {
+      font-size: 1.1rem;
+      color: #0a2540;
+      max-width: 720px;
+    }
+
+    /* LOCAL SEARCH BAR */
+    .search-bar-local {
+      margin: 20px 0 30px;
+    }
+
+    #linkedin-search {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 50px;
+      border: 2px solid #0a2540;
+      background: white;
+      font-size: 15px;
+      color: #0a2540;
+      outline: none;
+      transition: 0.25s ease;
+    }
+
+    #linkedin-search::placeholder {
+      color: #6b7280;
+    }
+
+    #linkedin-search:focus {
+      border-color: #0078ff;
+      box-shadow: 0 0 0 3px rgba(0,120,255,0.15);
+    }
+
+    /* CARD LAYOUT */
+    .linkedin-card {
+      background: white;
+      padding: 1.25rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      margin-bottom: 1.25rem;
+    }
+
+    .linkedin-card h3 {
+      margin-top: 0;
+      color: #0a2540;
+      font-size: 1.15rem;
+    }
+
+    .linkedin-card p {
+      margin-bottom: 0.75rem;
+      color: #0a2540;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      background: #0078ff;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e0e0e0;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER (DYNAMIC LOAD) -->
+<div id="header"></div>
+
+<script src="global.js"></script>
+
+<script>
+fetch("header-standard.html")
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header").innerHTML = h;
+    initGlobal(); // IMPORTANT
+  });
+</script>
+
+<!-- PAGE CONTENT -->
+<main class="page-container">
+
+  <section class="hero-section">
+    <h1>LinkedIn Highlights</h1>
+    <p>A curated selection of my most engaged posts, leadership insights, and professional updates from LinkedIn.</p>
+  </section>
+
+  <!-- LOCAL SEARCH BAR -->
+  <div class="search-bar-local">
+    <input type="text" id="linkedin-search" placeholder="Search LinkedIn posts…" />
+  </div>
+
+  <!-- LINKEDIN CONTENT LIST -->
+  <div id="linkedin-list">
+
+    <div class="linkedin-card">
+      <h3>Why Cyber Uplift Fails — And How to Fix It</h3>
+      <p>A breakdown of the governance, ownership, and cultural blockers that derail cyber uplift programmes — and the practical steps to fix them.</p>
+      <a href="https://www.linkedin.com/in/tim-williams-uk" class="btn">View on LinkedIn</a>
+    </div>
+
+    <div class="linkedin-card">
+      <h3>Driving Cloud Adoption Amid Disruption</h3>
+      <p>Cloud transformation succeeds when it’s treated as a business change programme, not a technical migration. Here’s how to get it right.</p>
+      <a href="https://www.linkedin.com/in/tim-williams-uk" class="btn">View on LinkedIn</a>
+    </div>
+
+    <div class="linkedin-card">
+      <h3>Modern Workplace: What CIOs Get Wrong</h3>
+      <p>Technology alone doesn’t modernise a workplace. Adoption, communication and leadership alignment do.</p>
+      <a href="https://www.linkedin.com/in/tim-williams-uk" class="btn">View on LinkedIn</a>
+    </div>
+
+    <div class="linkedin-card">
+      <h3>Leadership in High‑Pressure Delivery Environments</h3>
+      <p>How to stabilise programmes, align stakeholders, and deliver predictable outcomes in complex, multi‑vendor environments.</p>
+      <a href="https://www.linkedin.com/in/tim-williams-uk" class="btn">View on LinkedIn</a>
+    </div>
+
+    <div class="linkedin-card">
+      <h3>Service Transition: The Most Undervalued Discipline</h3>
+      <p>Why service transition is often overlooked — and how it prevents operational disruption and user frustration when done correctly.</p>
+      <a href="https://www.linkedin.com/in/tim-williams-uk" class="btn">View on LinkedIn</a>
+    </div>
+
+  </div>
+
+  <section class="cta-section">
+    <h2>Connect With Me on LinkedIn</h2>
+    <p>I regularly share leadership insights, programme delivery lessons, and transformation updates.</p>
+    <a href="https://www.linkedin.com/in/tim-williams-uk" class="btn">Visit My LinkedIn</a>
+  </section>
+
+</main>
+
+<!-- FLOATING BUTTONS -->
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- PAGE‑SPECIFIC JS -->
+<script>
+const linkedinSearch = document.getElementById("linkedin-search");
+
+if (linkedinSearch) {
+  linkedinSearch.addEventListener("input", () => {
+    const term = linkedinSearch.value.toLowerCase();
+
+    document.querySelectorAll(".linkedin-card").forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(term) ? "" : "none";
+    });
+  });
+}
+</script>
+
+</body>
+</html>

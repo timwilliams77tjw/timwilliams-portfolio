@@ -1,49 +1,52 @@
 <div class="hero-banner">
     <div class="hero-content">
 
-        <!-- LEFT SIDE: TEXT -->
-        <div class="hero-text">
-            <h1>Tim Williams</h1>
-            <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-            <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
-        </div>
+        <!-- LEFT COLUMN: TEXT + BUTTONS -->
+        <div class="left-column">
 
-        <!-- BUTTON GROUP AS ITS OWN FLEX ITEM -->
-        <div class="button-group">
-            <a href="index.html" class="brand-btn">Home</a>
-
-            <a href="#" class="brand-btn cv-btn" onclick="openCVMenu(event)">
-                CV <span class="arrow">⌄</span>
-            </a>
-
-            <div id="cvMenu" class="popup-menu">
-                <a href="cv.html">View Online</a>
-                <a href="Tim_Williams_CV.pdf">Download CV (PDF)</a>
-                <a href="Tim_Williams_CV.download">Download for Safari (rename to .zip)</a>
-                <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
+            <div class="hero-text">
+                <h1>Tim Williams</h1>
+                <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
+                <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
             </div>
 
-            <a href="certifications.html" class="brand-btn">Certifications</a>
-            <a href="recommendations.html" class="brand-btn">Recommendations</a>
-            <a href="faq.html" class="brand-btn">FAQ</a>
-            <a href="insights.html" class="brand-btn">Insights</a>
-            <a href="linkedin.html" class="brand-btn">LinkedIn</a>
-            <a href="engagement.html" class="brand-btn">Engagement Models</a>
-            <a href="playbooks.html" class="brand-btn">Playbooks</a>
+            <div class="button-group">
+                <a href="index.html" class="brand-btn">Home</a>
 
-            <a href="#" class="brand-btn portfolio-btn" onclick="openPortfolioMenu(event)">
-                Portfolio <span class="arrow">⌄</span>
-            </a>
+                <a href="#" class="brand-btn cv-btn" onclick="openCVMenu(event)">
+                    CV <span class="arrow">⌄</span>
+                </a>
 
-            <div id="portfolioMenu" class="popup-menu">
-                <a href="portfolio.html">View Online</a>
-                <a href="portfolio_presentation.pdf">Download PDF</a>
-                <a href="portfolio_presentation.download">Download for Safari (rename to .zip)</a>
-                <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
+                <div id="cvMenu" class="popup-menu">
+                    <a href="cv.html">View Online</a>
+                    <a href="Tim_Williams_CV.pdf">Download CV (PDF)</a>
+                    <a href="Tim_Williams_CV.download">Download for Safari (rename to .zip)</a>
+                    <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
+                </div>
+
+                <a href="certifications.html" class="brand-btn">Certifications</a>
+                <a href="recommendations.html" class="brand-btn">Recommendations</a>
+                <a href="faq.html" class="brand-btn">FAQ</a>
+                <a href="insights.html" class="brand-btn">Insights</a>
+                <a href="linkedin.html" class="brand-btn">LinkedIn</a>
+                <a href="engagement.html" class="brand-btn">Engagement Models</a>
+                <a href="playbooks.html" class="brand-btn">Playbooks</a>
+
+                <a href="#" class="brand-btn portfolio-btn" onclick="openPortfolioMenu(event)">
+                    Portfolio <span class="arrow">⌄</span>
+                </a>
+
+                <div id="portfolioMenu" class="popup-menu">
+                    <a href="portfolio.html">View Online</a>
+                    <a href="portfolio_presentation.pdf">Download PDF</a>
+                    <a href="portfolio_presentation.download">Download for Safari (rename to .zip)</a>
+                    <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
+                </div>
+
+                <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
+                <a href="https://gethandover.uk" target="_blank" rel="noopener noreferrer" class="brand-btn">PM Tool Suite</a>
             </div>
 
-            <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
-            <a href="https://gethandover.uk" target="_blank" rel="noopener noreferrer" class="brand-btn">PM Tool Suite</a>
         </div>
 
         <!-- RIGHT SIDE: PROFILE PHOTO -->
@@ -51,3 +54,12 @@
 
     </div>
 </div>
+.left-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+.hero-content {
+    align-items: flex-start;
+}

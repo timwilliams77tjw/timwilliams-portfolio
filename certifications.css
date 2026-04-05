@@ -14,31 +14,12 @@ body {
     margin: 40px auto;
     padding: 0 20px;
 }
+
 .section-divider {
     border: none;
     margin: 40px 0;
 }
-/* -----------------------------------------------------------
-HEADER
------------------------------------------------------------ */
 
-.hero-banner {
-    background: linear-gradient(135deg, #0a2540, #1f4e79);
-    padding: 50px 30px;
-    color: white;
-    position: relative;
-    z-index: 10; /* FIX: ensures header sits above sticky bar */
-}
-
-.hero-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    max-width: 1100px;
-    margin: 0 auto;
-    flex-wrap: nowrap; /* NEW: prevents wrapping */
-}
 /* -----------------------------------------------------------
 HEADER
 ----------------------------------------------------------- */
@@ -54,10 +35,14 @@ HEADER
 .hero-content {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* correct alignment */
+    align-items: center; /* aligns photo with button group */
     gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: nowrap;
 }
 
+/* Left column: text + buttons */
 .left-column {
     display: flex;
     flex-direction: column;
@@ -65,13 +50,10 @@ HEADER
     min-width: 0;
 }
 
-.hero-photo {
-    flex-shrink: 0;
-    margin-left: 30px;
-}
 .hero-text {
     flex: 1;
     text-align: left;
+    min-width: 0;
 }
 
 .hero-text h1 {
@@ -86,28 +68,24 @@ HEADER
     line-height: 1.4;
 }
 
+/* Profile photo */
 .hero-photo {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid white;
-}
-/* Ensure profile photo stays right-aligned on all non-index pages */
-.hero-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.hero-text {
-    flex: 1;
-}
-
-.hero-photo {
     flex-shrink: 0;
     margin-left: 30px;
 }
+
+/* Invisible cluster break for grouping */
+.cluster-break {
+    display: inline-block;
+    width: 24px;
+    visibility: hidden;
+}
+
 /* -----------------------------------------------------------
 BUTTONS
 ----------------------------------------------------------- */
@@ -118,21 +96,9 @@ BUTTONS
     gap: 12px;
     margin-top: 20px;
     position: relative;
-    z-index: 20; /* FIX: ensures dropdown is clickable and visible */
-}
-.button-group .brand-btn.cluster-break {
-    margin-left: 24px;
-}
-/* Allow hero-text to shrink so the photo can stay on the right */
-.hero-text {
-    min-width: 0;
+    z-index: 20;
 }
 
-/* Prevent button group from forcing the photo to wrap */
-.hero-text .button-group {
-    max-width: 100%;
-    flex-wrap: wrap;
-}
 .brand-btn {
     background: #ffffff;
     color: #0a2540;
@@ -210,7 +176,7 @@ FILTER BAR
     white-space: nowrap;
     gap: 8px;
     justify-content: center;
-    z-index: 1; /* FIX: must be BELOW header + dropdown */
+    z-index: 1;
     scrollbar-width: none;
 }
 
@@ -347,12 +313,14 @@ DROPDOWN MENUS — FINAL FIXED VERSION
     z-index: 9999999;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
+
 .popup-menu a {
     color: #0A1A2F;
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
 }
+
 .popup-menu a:hover {
     color: #0078FF;
 }

@@ -31,6 +31,32 @@
       max-width: 720px;
     }
 
+    /* LOCAL SEARCH BAR */
+    .search-bar-local {
+      margin: 20px 0 30px;
+    }
+
+    #insights-search {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 50px;
+      border: 2px solid #0a2540;
+      background: white;
+      font-size: 15px;
+      color: #0a2540;
+      outline: none;
+      transition: 0.25s ease;
+    }
+
+    #insights-search::placeholder {
+      color: #6b7280;
+    }
+
+    #insights-search:focus {
+      border-color: #0078ff;
+      box-shadow: 0 0 0 3px rgba(0,120,255,0.15);
+    }
+
     .featured-article {
       border-left: 4px solid #0078ff;
       padding-left: 1rem;
@@ -108,6 +134,11 @@ fetch("header-standard.html")
     <p>Practical, experience-led thinking on programme delivery, cyber security, cloud transformation and modern workplace change.</p>
   </section>
 
+  <!-- LOCAL SEARCH BAR -->
+  <div class="search-bar-local">
+    <input type="text" id="insights-search" placeholder="Search insights…" />
+  </div>
+
   <section>
     <h2>Featured Insight</h2>
     <article class="featured-article insight-card" data-topic="cyber">
@@ -150,17 +181,33 @@ fetch("header-standard.html")
 
 </main>
 
-<!-- FLOATING BUTTONS (MUST MATCH EXISTING SITE EXACTLY) -->
+<!-- FLOATING BUTTONS -->
 <div id="fab" class="fab">⬆️</div>
 <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
-<!-- FOOTER (DYNAMIC LOAD) -->
+<!-- FOOTER -->
 <div id="footer"></div>
 
 <script>
 fetch("footer.html")
   .then(r => r.text())
   .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- PAGE‑SPECIFIC JS -->
+<script>
+const searchInput = document.getElementById("insights-search");
+
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    const term = searchInput.value.toLowerCase();
+
+    document.querySelectorAll(".insight-card").forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(term) ? "" : "none";
+    });
+  });
+}
 </script>
 
 </body>

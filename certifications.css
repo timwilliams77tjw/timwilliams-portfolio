@@ -14,14 +14,12 @@ body {
     margin: 40px auto;
     padding: 0 20px;
 }
-
 .section-divider {
     border: none;
     margin: 40px 0;
 }
-
 /* -----------------------------------------------------------
-HEADER (OPTION A — FULLY CENTRED LAYOUT)
+HEADER
 ----------------------------------------------------------- */
 
 .hero-banner {
@@ -29,23 +27,21 @@ HEADER (OPTION A — FULLY CENTRED LAYOUT)
     padding: 50px 30px;
     color: white;
     position: relative;
-    z-index: 10;
+    z-index: 10; /* FIX: ensures header sits above sticky bar */
 }
 
 .hero-content {
     display: flex;
-    flex-direction: column;      /* OPTION A */
-    text-align: center;          /* OPTION A */
+    justify-content: space-between;
+    align-items: center;
     gap: 30px;
     max-width: 1100px;
     margin: 0 auto;
 }
 
 .hero-text {
-    width: 100%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    flex: 1;
+    text-align: left;
 }
 
 .hero-text h1 {
@@ -60,14 +56,12 @@ HEADER (OPTION A — FULLY CENTRED LAYOUT)
     line-height: 1.4;
 }
 
-.hero-photo,
-.header-img.profile {
+.hero-photo {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid white;
-    margin-top: 10px;
 }
 
 /* -----------------------------------------------------------
@@ -78,14 +72,9 @@ BUTTONS
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    justify-content: center;
-    max-width: 650px;            /* OPTION A — clean centred block */
-    margin: 20px auto 0;
-}
-
-.button-group a {
-    flex: 0 1 auto;
-    white-space: nowrap;
+    margin-top: 20px;
+    position: relative;
+    z-index: 20; /* FIX: ensures dropdown is clickable and visible */
 }
 
 .brand-btn {
@@ -114,6 +103,7 @@ BUTTONS
     pointer-events: none;
 }
 
+/* Arrow rotation */
 .brand-btn .arrow {
     margin-left: 6px;
     font-size: 14px;
@@ -139,6 +129,10 @@ MOBILE HEADER
         text-align: center;
     }
 
+    .hero-photo {
+        margin-top: 20px;
+    }
+
     .button-group {
         justify-content: center;
     }
@@ -160,7 +154,7 @@ FILTER BAR
     white-space: nowrap;
     gap: 8px;
     justify-content: center;
-    z-index: 1;
+    z-index: 1; /* FIX: must be BELOW header + dropdown */
     scrollbar-width: none;
 }
 
@@ -278,7 +272,7 @@ FLOATING BUTTONS
 }
 
 /* -----------------------------------------------------------
-DROPDOWN MENUS
+DROPDOWN MENUS — FINAL FIXED VERSION
 ----------------------------------------------------------- */
 
 .popup-menu {
@@ -297,14 +291,12 @@ DROPDOWN MENUS
     z-index: 9999999;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
-
 .popup-menu a {
     color: #0A1A2F;
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
 }
-
 .popup-menu a:hover {
     color: #0078FF;
 }
@@ -354,4 +346,3 @@ MOBILE CARD FIXES
         text-align: left;
     }
 }
-

@@ -106,6 +106,24 @@
             resize: vertical;
         }
 
+        /* Disabled file upload styling */
+        .file-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .file-disabled:hover::after {
+            content: "File uploads are currently disabled.";
+            position: absolute;
+            background: #111;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            transform: translateY(-5px);
+        }
+
         .contact-card button {
             background: var(--accent);
             color: #fff;
@@ -203,8 +221,8 @@ fetch("header-standard.html")
         <label for="message">Message</label>
         <textarea id="message" name="message" placeholder="How can I help?" required></textarea>
 
-        <label for="file">Attach a File (optional)</label>
-        <input id="file" name="file" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">
+        <label for="file">Attach a File (disabled)</label>
+        <input id="file" name="file" type="file" class="file-disabled" disabled>
 
         <button type="submit">Send Message</button>
 
@@ -284,7 +302,6 @@ fetch("footer.html")
                 successMsg.style.display = "block";
                 track("contact_submit", { status: "success" });
 
-                // Redirect after 1.5 seconds
                 setTimeout(() => {
                     window.location.href = "success.html";
                 }, 1500);

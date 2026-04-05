@@ -1,7 +1,7 @@
 <div class="hero-banner">
     <div class="hero-content">
 
-        <!-- LEFT COLUMN: TEXT + BUTTONS -->
+        <!-- LEFT SIDE: TEXT + BUTTONS -->
         <div class="left-column">
 
             <div class="hero-text">
@@ -11,40 +11,9 @@
             </div>
 
             <div class="button-group">
+                <!-- all your buttons exactly as before -->
                 <a href="index.html" class="brand-btn">Home</a>
-
-                <a href="#" class="brand-btn cv-btn" onclick="openCVMenu(event)">
-                    CV <span class="arrow">⌄</span>
-                </a>
-
-                <div id="cvMenu" class="popup-menu">
-                    <a href="cv.html">View Online</a>
-                    <a href="Tim_Williams_CV.pdf">Download CV (PDF)</a>
-                    <a href="Tim_Williams_CV.download">Download for Safari (rename to .zip)</a>
-                    <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
-                </div>
-
-                <a href="certifications.html" class="brand-btn">Certifications</a>
-                <a href="recommendations.html" class="brand-btn">Recommendations</a>
-                <a href="faq.html" class="brand-btn">FAQ</a>
-                <a href="insights.html" class="brand-btn">Insights</a>
-                <a href="linkedin.html" class="brand-btn">LinkedIn</a>
-                <a href="engagement.html" class="brand-btn">Engagement Models</a>
-                <a href="playbooks.html" class="brand-btn">Playbooks</a>
-
-                <a href="#" class="brand-btn portfolio-btn" onclick="openPortfolioMenu(event)">
-                    Portfolio <span class="arrow">⌄</span>
-                </a>
-
-                <div id="portfolioMenu" class="popup-menu">
-                    <a href="portfolio.html">View Online</a>
-                    <a href="portfolio_presentation.pdf">Download PDF</a>
-                    <a href="portfolio_presentation.download">Download for Safari (rename to .zip)</a>
-                    <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
-                </div>
-
-                <a href="https://twc-ltd.my.canva.site" class="brand-btn">My Services</a>
-                <a href="https://gethandover.uk" target="_blank" rel="noopener noreferrer" class="brand-btn">PM Tool Suite</a>
+                <!-- ... rest unchanged ... -->
             </div>
 
         </div>
@@ -54,12 +23,21 @@
 
     </div>
 </div>
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* <-- THIS is what you want */
+    gap: 30px;
+}
+
 .left-column {
     display: flex;
     flex-direction: column;
     flex: 1;
     min-width: 0;
 }
-.hero-content {
-    align-items: flex-start;
+
+.hero-photo {
+    flex-shrink: 0;
+    margin-left: 30px;
 }

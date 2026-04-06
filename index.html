@@ -273,6 +273,10 @@ STICKY BAR (same behaviour as FAQ page)
 STICKY BAR
 ----------------------------------------------------------- */
 
+/* -----------------------------------------------------------
+STICKY BAR
+----------------------------------------------------------- */
+
 .sticky-follow {
     position: sticky;
     top: 0;
@@ -281,30 +285,27 @@ STICKY BAR
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
 
     padding: 10px 20px;
 
-    background: #3aa4d1; /* same tone as FAQ */
+    background: #6ec1e4; /* light blue (same as FAQ normal mode) */
     color: white;
 
     font-weight: 600;
 }
 
-.sticky-follow span {
-    flex: 1;
-    text-align: center;
+/* when dark mode is enabled */
+body.dark-mode .sticky-follow {
+    background: #3aa4d1; /* turquoise used across site */
 }
 
-/* dark toggle */
+/* dark mode button */
 .dark-toggle-btn {
-    position: absolute;
-    right: 20px;
-
     background: transparent;
     color: white;
 
-    border: 1px solid rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.8);
     border-radius: 20px;
 
     padding: 5px 14px;
@@ -313,21 +314,7 @@ STICKY BAR
     font-weight: 600;
 
     cursor: pointer;
-}
-/* DARK MODE */
-body.dark-mode {
-    background: #0b1220;
-    color: #e5e7eb;
-}
-
-body.dark-mode .card {
-    background: #1f2937;
-}
-
-body.dark-mode .sticky-follow {
-    background: #111827;
-}
-</style>
+}</style>
 </head>
 
 <body>

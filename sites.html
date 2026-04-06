@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* --- your CSS unchanged --- */
+/* --- PAGE CSS --- */
 .page-container {
   max-width: 960px;
   margin: 0 auto;
@@ -144,6 +144,25 @@
   justify-content: center;
   line-height: 1;
 }
+
+/* -----------------------------------------------------------
+   ⭐ FIX: Override global certifications.css accordion rules
+   ----------------------------------------------------------- */
+
+.category-section .card-list {
+  display: block !important;
+  height: auto !important;
+  overflow: hidden !important;
+}
+
+.category-section.open .card-list {
+  display: block !important;
+}
+
+.category-section .grid {
+  display: grid !important;
+}
+
 </style>
 </head>
 
@@ -161,9 +180,8 @@ fetch("header-standard.html")
     initGlobal();
 
     /* -----------------------------------------
-       RUN COLLAPSIBLE + COPY + ANALYTICS HERE
-       AFTER HEADER LOADS
-    ------------------------------------------*/
+       COLLAPSIBLE + COPY + ANALYTICS
+       ----------------------------------------- */
 
     // COLLAPSIBLE SECTIONS
     document.querySelectorAll(".category-header").forEach(header => {

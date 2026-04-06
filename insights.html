@@ -107,6 +107,28 @@
       font-weight: 600;
       margin-top: 1rem;
     }
+/* Sticky bar (copied from FAQ page) */
+.sticky-follow {
+    background: var(--accent);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.dark-toggle-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
   </style>
 </head>
 
@@ -125,7 +147,11 @@ fetch("header-standard.html")
     initGlobal(); // IMPORTANT
   });
 </script>
-
+<!-- STICKY BAR -->
+<div class="sticky-follow">
+    <span>Insights & Leadership Perspectives</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
@@ -209,6 +235,27 @@ if (searchInput) {
   });
 }
 </script>
+<!-- DARK MODE -->
+<script>
+(function () {
+    const darkToggle = document.getElementById("darkToggle");
+    if (!darkToggle) return;
 
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_dark");
+
+    if (storedMode === "1") {
+        body.classList.add("dark-mode");
+    }
+
+    darkToggle.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem(
+            "tw_dark",
+            body.classList.contains("dark-mode") ? "1" : "0"
+        );
+    });
+})();
+</script>
 </body>
 </html>

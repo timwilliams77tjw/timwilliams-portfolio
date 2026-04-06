@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Analytics Dashboard – Tim Williams</title>
+
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css?v=1">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* PAGE CONTAINER */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* TITLE */
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: #0a2540;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+}
+
+/* KPI GRID */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-left: 4px solid #0078ff;
+}
+
+.kpi-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 8px;
+  color: #0a2540;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: #0a2540;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 2px solid #0a2540;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-btn.active-filter {
+  background: white;
+  color: #0a2540;
+  border-color: #0078ff;
+}
+
+/* CHART */
+.chart-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  margin-bottom: 2rem;
+}
+
+svg {
+  width: 100%;
+  height: 260px;
+}
+
+/* TABLE */
+.table-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: #f5f7fb;
+  text-align: left;
+  font-weight: 600;
+}
+
+.clear-btn {
+  margin-top: 20px;
+  background: #b91c1c;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header"></div>
+<script src="global.js"></script>
+<script>
+fetch("header-standard.html")
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header").innerHTML = h;
+    initGlobal();
+  });
+</script>
+
+<main class="page-container">
+
+<h1>Analytics Dashboard</h1>
+<p class="subtitle">Tracking outbound clicks and copy‑link events across your digital presence.</p>
+
+<!-- KPI CARDS -->
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <h3>Total Outbound Clicks</h3>
+    <div id="kpi-clicks" class="kpi-value">0</div>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Total Copy Events</h3>
+    <div id="kpi-copies" class="kpi-value">0</div>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Most Clicked Link</h3>
+    <div id="kpi-top-click" class="kpi-value">–</div>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Most Copied Link</h3>
+    <div id="kpi-top-copy" class="kpi-value">–</div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active-filter" data-filter="all">All Events</button>
+  <button class="filter-btn" data-filter="outbound_click">Outbound Clicks</button>
+  <button class="filter-btn" data-filter="copy_link">Copy Events</button>
+</div>
+
+<!-- CHART -->
+<div class="chart-container">
+  <h3 style="margin-bottom: 10px;">Event Volume by Link</h3>
+  <svg id="analytics-chart"></svg>
+</div>
+
+<!-- TABLE -->
+<div class="table-container">
+  <h3 style="margin-bottom: 10px;">Event Log</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>Event</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody id="analytics-table"></tbody>
+  </table>
+
+  <button class="clear-btn" id="clearAnalytics">Clear Analytics Data</button>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- ANALYTICS ENGINE -->
+<script>
+function loadAnalytics() {
+  return JSON.parse(localStorage.getItem("analytics") || "[]");
+}
+
+function saveAnalytics(data) {
+  localStorage.setItem("analytics", JSON.stringify(data));
+}
+
+function updateKPIs(events) {
+  const clicks = events.filter(e => e.action === "outbound_click");
+  const copies = events.filter(e => e.action === "copy_link");
+
+  document.getElementById("kpi-clicks").textContent = clicks.length;
+  document.getElementById("kpi-copies").textContent = copies.length;
+
+  const topClick = clicks.length
+    ? clicks.reduce((a, b) => a.value === b.value ? a : (clicks.filter(x => x.value === a.value).length > clicks.filter(x => x.value === b.value).length ? a : b)).value
+    : "–";
+
+  const topCopy = copies.length
+    ? copies.reduce((a, b) => a.value === b.value ? a : (copies.filter(x => x.value === a.value).length > copies.filter(x => x.value === b.value).length ? a : b)).value
+    : "–";
+
+  document.getElementById("kpi-top-click").textContent = topClick;
+  document.getElementById("kpi-top-copy").textContent = topCopy;
+}
+
+function updateTable(events) {
+  const tbody = document.getElementById("analytics-table");
+  tbody.innerHTML = "";
+
+  events.forEach(e => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${new Date(e.timestamp).toLocaleString()}</td>
+      <td>${e.action}</td>
+      <td>${e.value}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+function updateChart(events) {
+  const svg = document.getElementById("analytics-chart");
+  svg.innerHTML = "";
+
+  const counts = {};
+  events.forEach(e => {
+    counts[e.value] = (counts[e.value] || 0) + 1;
+  });
+
+  const keys = Object.keys(counts);
+  const max = Math.max(...Object.values(counts), 1);
+
+  const barWidth = 1000 / keys.length;
+
+  keys.forEach((key, i) => {
+    const height = (counts[key] / max) * 200;
+
+    svg.innerHTML += `
+      <rect x="${i * barWidth}" y="${220 - height}" width="${barWidth - 10}" height="${height}" fill="#0078ff"></rect>
+      <text x="${i * barWidth + 5}" y="240" font-size="10">${key.slice(0, 20)}...</text>
+    `;
+  });
+}
+
+function applyFilter(type) {
+  const events = loadAnalytics();
+  const filtered = type === "all" ? events : events.filter(e => e.action === type);
+
+  updateKPIs(filtered);
+  updateTable(filtered);
+  updateChart(filtered);
+}
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
+    btn.classList.add("active-filter");
+
+    applyFilter(btn.dataset.filter);
+  });
+});
+
+document.getElementById("clearAnalytics").addEventListener("click", () => {
+  localStorage.removeItem("analytics");
+  applyFilter("all");
+});
+
+applyFilter("all");
+</script>
+
+</body>
+</html>

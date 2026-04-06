@@ -145,12 +145,26 @@
       line-height: 1;
     }
 
-    /* IMPORTANT: do NOT define .sticky-follow here.
-       Let certifications.css control its layout/colours. */
+    /* FIX: Override any global accordion rules that hide content */
+    .category-section .card-list {
+      display: block !important;
+      height: auto !important;
+      overflow: hidden !important;
+    }
+
+    .category-section.open .card-list {
+      display: block !important;
+    }
+
+    .category-section .grid {
+      display: grid !important;
+    }
+
+    /* Do NOT define .sticky-follow here – let global CSS handle it */
   </style>
 </head>
 
-<body>
+<body class="page-certifications">
 
 <!-- HEADER -->
 <div id="header"></div>
@@ -201,7 +215,7 @@ fetch("header-standard.html")
   });
 </script>
 
-<!-- STICKY BAR (HTML ONLY, STYLED BY GLOBAL CSS) -->
+<!-- STICKY BAR (HTML ONLY, styled by global CSS) -->
 <div class="sticky-follow">
   <span>My Websites & Professional Profiles</span>
   <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>

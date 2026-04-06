@@ -8,6 +8,9 @@
 <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css?v=1">
 
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <!-- PAGE‑SPECIFIC CSS -->
 <style>
 .page-container {
@@ -32,6 +35,15 @@
   max-width: 720px;
 }
 
+.category-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem;
+  color: #0a2540;
+  border-left: 4px solid #0078ff;
+  padding-left: 10px;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -49,6 +61,9 @@
 .website-card h3 {
   margin-top: 0;
   color: #0a2540;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .website-card a {
@@ -64,6 +79,7 @@
 
 <!-- HEADER (DYNAMIC LOAD) -->
 <div id="header"></div>
+
 <script src="global.js"></script>
 <script>
 fetch("header-standard.html")
@@ -82,50 +98,76 @@ fetch("header-standard.html")
   <p>A curated list of my professional platforms, portfolios and digital presence.</p>
 </section>
 
-<section>
-  <div class="grid">
+<!-- CATEGORY 1 -->
+<h2 class="category-title">Professional Profiles</h2>
+<div class="grid">
 
-    <article class="website-card">
-      <h3>LinkedIn Profile</h3>
-      <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
-    </article>
+  <article class="website-card">
+    <h3><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</h3>
+    <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
+  </article>
 
-    <article class="website-card">
-      <h3>PMI Community Profile</h3>
-      <a href="http://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
-    </article>
+  <article class="website-card">
+    <h3><i class="fa-solid fa-id-card"></i> PMI Community Profile</h3>
+    <a href="https://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
+  </article>
 
-    <article class="website-card">
-      <h3>Credly Certifications</h3>
-      <a href="https://credly.com/users/tim-williams.e51205ae">credly.com/users/tim-williams</a>
-    </article>
+  <article class="website-card">
+    <h3><i class="fa-solid fa-id-card"></i> PMI Community (Alt Link)</h3>
+    <a href="https://community.pmi.org/profile/timwilliams77">community.pmi.org/profile/timwilliams77</a>
+  </article>
 
-    <article class="website-card">
-      <h3>Tim Williams Consulting (LinkedIn)</h3>
-      <a href="https://www.linkedin.com/company/tim-williams-consulting/">linkedin.com/company/tim-williams-consulting</a>
-    </article>
+  <article class="website-card">
+    <h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
+    <a href="https://www.apm.org.uk/myapm/my-dashboard/">apm.org.uk/my-dashboard</a>
+  </article>
 
-    <article class="website-card">
-      <h3>GetHandover</h3>
-      <a href="https://gethandover.uk">gethandover.uk</a>
-    </article>
+</div>
 
-    <article class="website-card">
-      <h3>TWC Portfolio (Canva)</h3>
-      <a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
-    </article>
+<!-- CATEGORY 2 -->
+<h2 class="category-title">Certifications & Learning</h2>
+<div class="grid">
 
-    <article class="website-card">
-      <h3>Microsoft Learn Transcript</h3>
-      <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
-        Microsoft Learn Transcript
-      </a>
-    </article>
+  <article class="website-card">
+    <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+    <a href="https://credly.com/users/tim-williams.e51205ae">credly.com/users/tim-williams</a>
+  </article>
 
-  </div>
-</section>
+  <article class="website-card">
+    <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
+    <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
+      Microsoft Learn Transcript
+    </a>
+  </article>
+
+</div>
+
+<!-- CATEGORY 3 -->
+<h2 class="category-title">Business & Services</h2>
+<div class="grid">
+
+  <article class="website-card">
+    <h3><i class="fa-brands fa-linkedin"></i> Tim Williams Consulting</h3>
+    <a href="https://www.linkedin.com/company/tim-williams-consulting/">linkedin.com/company/tim-williams-consulting</a>
+  </article>
+
+  <article class="website-card">
+    <h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
+    <a href="https://gethandover.uk">gethandover.uk</a>
+  </article>
+
+  <article class="website-card">
+    <h3><i class="fa-solid fa-globe"></i> TWC Portfolio (Canva)</h3>
+    <a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
+  </article>
+
+</div>
 
 </main>
+
+<!-- FLOATING BUTTONS -->
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
 <!-- FOOTER -->
 <div id="footer"></div>

@@ -215,12 +215,26 @@ fetch("header-standard.html")
   });
 </script>
 
-<!-- STICKY BAR (HTML ONLY, styled by global CSS) -->
+<!-- STICKY BAR -->
 <div class="sticky-follow">
   <span>My Websites & Professional Profiles</span>
   <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
 </div>
 
+<script>
+  // Attach dark mode toggle AFTER sticky bar exists
+  document.getElementById("darkToggle").addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("tw_dark",
+      document.body.classList.contains("dark-mode") ? "1" : "0"
+    );
+  });
+
+  // Restore saved mode
+  if (localStorage.getItem("tw_dark") === "1") {
+    document.body.classList.add("dark-mode");
+  }
+</script>
 <!-- PAGE CONTENT -->
 <main class="page-container">
 

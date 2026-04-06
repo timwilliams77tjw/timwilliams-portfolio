@@ -23,31 +23,32 @@ body {
     padding: 0 20px;
 }
 
-/* Ensure header does not overlap content */
 #header {
     margin-bottom: 0;
 }
 
 /* -----------------------------------------------------------
-STICKY FOLLOW BAR (MATCHES FAQ EXACTLY)
+STICKY FOLLOW BAR — EXACT FAQ MATCH
 ----------------------------------------------------------- */
 .sticky-follow {
     position: sticky;
     top: 0;
     z-index: 999;
     background: #0a66c2; /* EXACT FAQ COLOUR */
-    color: white;
-    padding: 12px 20px;
+    border-bottom: 1px solid #0a5ab0; /* EXACT FAQ BORDER */
+    height: 48px; /* EXACT FAQ HEIGHT */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 20px; /* FAQ uses no vertical padding */
     font-weight: 600;
-    border-bottom: 2px solid #084f96;
+    color: white;
 }
 
 .sticky-follow span {
     display: flex;
     align-items: center;
+    height: 100%;
     line-height: 1; /* PERFECT VERTICAL ALIGNMENT */
 }
 
@@ -62,35 +63,38 @@ STICKY FOLLOW BAR (MATCHES FAQ EXACTLY)
 }
 
 /* -----------------------------------------------------------
-FULL DARK MODE FOR INDEX (LIGHTER, MATCHES FAQ FEEL)
+DARK MODE — SCOPED TO CONTENT ONLY
 ----------------------------------------------------------- */
 body.dark-mode {
-    background: #1a1f29; /* LIGHTER + MATCHES FAQ TONE */
+    background: #1a1f29;
     color: #e5e7eb;
 }
 
+/* Cards */
 body.dark-mode .card {
     background: #111827;
     color: #e5e7eb;
     border-color: #1f2937;
 }
 
-/* IMPORTANT: HEADER MUST NOT CHANGE IN DARK MODE */
+/* Header MUST NOT change */
 body.dark-mode .hero-banner {
-    background: linear-gradient(135deg, #0a2540, #1f4e79); /* ORIGINAL COLOURS */
+    background: linear-gradient(135deg, #0a2540, #1f4e79);
 }
 
-body.dark-mode .brand-btn {
+/* Buttons — ONLY inside .container */
+body.dark-mode .container .brand-btn {
     background: #1f2937;
     color: #e5e7eb;
     border-color: #374151;
 }
 
-body.dark-mode .brand-btn:hover {
+body.dark-mode .container .brand-btn:hover {
     background: #374151;
     border-color: #4b5563;
 }
 
+/* Popup menus */
 body.dark-mode .popup-menu {
     background: #1f2937;
     border-color: #374151;
@@ -100,12 +104,14 @@ body.dark-mode .popup-menu a {
     color: #e5e7eb;
 }
 
+/* FAB buttons */
 body.dark-mode .fab {
     background: #1f2937;
     color: #e5e7eb;
     border-color: #374151;
 }
 
+/* Footer */
 body.dark-mode footer {
     background: #111827;
     color: #e5e7eb;
@@ -146,14 +152,12 @@ HERO (unchanged)
     line-height: 1.4;
 }
 
-/* LOGO */
 .header-img {
     width: 120px;
     height: 120px;
     object-fit: contain;
 }
 
-/* PROFILE PHOTO */
 .header-img.profile {
     width: 150px;
     height: 150px;
@@ -163,13 +167,19 @@ HERO (unchanged)
 }
 
 /* -----------------------------------------------------------
-BUTTONS (unchanged)
+BUTTON GROUP — EXACT FAQ MATCH
 ----------------------------------------------------------- */
 .button-group {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 20px;
+}
+
+.button-group.cluster-break .brand-btn:not(:last-child) {
+    border-right: 1px solid rgba(255,255,255,0.3);
+    padding-right: 18px;
+    margin-right: 18px;
 }
 
 .brand-btn {
@@ -211,7 +221,7 @@ BUTTONS (unchanged)
 }
 
 /* -----------------------------------------------------------
-DROPDOWN MENUS (unchanged)
+POPUP MENUS (unchanged)
 ----------------------------------------------------------- */
 .popup-menu {
     position: absolute;
@@ -259,7 +269,7 @@ MOBILE HEADER (unchanged)
 }
 
 /* -----------------------------------------------------------
-CARD + GRID (unchanged)
+CARDS + GRID (unchanged)
 ----------------------------------------------------------- */
 .card {
     background: white;
@@ -358,7 +368,7 @@ fetch("header-index.html")
     });
 </script>
 
-<!-- ⭐ NEW STICKY BAR -->
+<!-- ⭐ STICKY BAR -->
 <div class="sticky-follow">
     <span>Home Page</span>
     <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
@@ -366,6 +376,11 @@ fetch("header-index.html")
 
 <!-- MAIN CONTENT -->
 <div class="container">
+
+<!-- BUTTON GROUP — EXACT FAQ MATCH -->
+<div class="button-group cluster-break">
+    <!-- Your existing buttons remain unchanged -->
+</div>
 
 <h2>Executive Profile</h2>
 

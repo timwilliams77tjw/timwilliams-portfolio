@@ -11,20 +11,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* PAGE WRAPPER */
-    body.page-certifications {
-      background: var(--bg);
-      color: var(--text-main);
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-
+    /* PAGE LAYOUT */
     .page-container {
       max-width: 960px;
       margin: 0 auto;
       padding: 2rem 1.5rem;
     }
 
-    /* HERO */
     .hero-section {
       margin-bottom: 2rem;
     }
@@ -32,27 +25,26 @@
     .hero-section h1 {
       font-size: 2.2rem;
       margin-bottom: 0.5rem;
-      color: var(--text-main);
+      color: #0a2540;
     }
 
     .hero-section p {
       font-size: 1.1rem;
-      color: var(--text-sub);
+      color: #0a2540;
       max-width: 720px;
     }
 
-    /* CATEGORY SECTIONS */
     .category-section {
-      background: var(--card-bg);
+      background: white;
       border-radius: 10px;
       margin-bottom: 24px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
       overflow: hidden;
     }
 
     .category-header {
       padding: 16px;
-      background: var(--accent);
+      background: #0a2540;
       color: white;
       font-size: 20px;
       font-weight: 600;
@@ -87,23 +79,23 @@
     }
 
     .website-card {
-      background: var(--card-bg);
+      background: white;
       padding: 1.25rem;
       border-radius: 8px;
-      box-shadow: var(--shadow);
-      border-left: 4px solid var(--accent);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      border-left: 4px solid #0078ff;
     }
 
     .website-card h3 {
       margin-top: 0;
-      color: var(--text-main);
+      color: #0a2540;
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
     .website-card a {
-      color: var(--accent);
+      color: #0078ff;
       font-weight: 600;
       text-decoration: none;
       word-break: break-all;
@@ -111,7 +103,7 @@
 
     .copy-btn {
       margin-top: 10px;
-      background: var(--accent);
+      background: #0a2540;
       color: white;
       border: none;
       padding: 8px 14px;
@@ -126,7 +118,7 @@
     }
 
     .copy-btn:hover {
-      background: #005fcc;
+      background: #0078ff;
     }
 
     #copy-toast {
@@ -134,7 +126,7 @@
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--accent);
+      background: #0a2540;
       color: white;
       padding: 10px 18px;
       border-radius: 6px;
@@ -145,22 +137,90 @@
       z-index: 999999;
     }
 
-    /* MATCH FAQ EXACTLY — ONLY THIS */
-    .sticky-follow {
-      background: var(--accent);
+    /* Floating buttons centring */
+    .fab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
     }
 
-    /* DARK MODE VARIABLES */
+    /* Sticky bar (local, not using vars) */
+    .sticky-follow {
+      background: #0a2540;
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-sizing: border-box;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .sticky-follow span {
+      display: flex;
+      align-items: center;
+      line-height: 1;
+    }
+
+    .dark-toggle-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    /* Dark mode (local overrides) */
     body.dark-mode {
-      --bg: #0a0a0a;
-      --text-main: #ffffff;
-      --text-sub: #cccccc;
-      --card-bg: #1a1a1a;
+      background: #0a0a0a;
+      color: #ffffff;
+    }
+
+    body.dark-mode .hero-section h1,
+    body.dark-mode .hero-section p {
+      color: #ffffff;
+    }
+
+    body.dark-mode .category-section {
+      background: #1a1a1a;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+
+    body.dark-mode .category-header {
+      background: #111827;
+    }
+
+    body.dark-mode .website-card {
+      background: #111827;
+      border-left-color: #3b82f6;
+    }
+
+    body.dark-mode .website-card h3 {
+      color: #ffffff;
+    }
+
+    body.dark-mode .website-card a {
+      color: #60a5fa;
+    }
+
+    body.dark-mode .copy-btn {
+      background: #2563eb;
+    }
+
+    body.dark-mode #copy-toast {
+      background: #111827;
     }
   </style>
 </head>
 
-<body class="page-certifications">
+<body>
 
 <!-- HEADER -->
 <div id="header"></div>
@@ -173,7 +233,7 @@ fetch("header-standard.html")
     document.getElementById("header").innerHTML = h;
     initGlobal();
 
-    /* COLLAPSIBLE SECTIONS */
+    // COLLAPSIBLE SECTIONS
     document.querySelectorAll(".category-header").forEach(header => {
       header.addEventListener("click", () => {
         const section = header.parentElement;
@@ -191,7 +251,7 @@ fetch("header-standard.html")
       });
     });
 
-    /* COPY BUTTONS */
+    // COPY BUTTONS
     document.addEventListener("click", function(e) {
       if (e.target.closest(".copy-btn")) {
         const btn = e.target.closest(".copy-btn");
@@ -202,7 +262,7 @@ fetch("header-standard.html")
       }
     });
 
-    /* OUTBOUND CLICK TRACKING */
+    // OUTBOUND CLICK TRACKING
     document.querySelectorAll(".website-card a").forEach(link => {
       link.addEventListener("click", () => {
         trackEvent("outbound_click", link.href);
@@ -211,7 +271,7 @@ fetch("header-standard.html")
   });
 </script>
 
-<!-- STICKY BAR (IDENTICAL TO FAQ) -->
+<!-- STICKY BAR -->
 <div class="sticky-follow">
   <span>My Websites & Profiles</span>
   <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>

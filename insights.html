@@ -144,32 +144,44 @@ body.dark-mode {
     --text-sub: #cccccc;
     --card-bg: #1a1a1a;
 }
+body.page-certifications {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    --bg: #0a0a0a;
+    --text-main: #ffffff;
+    --text-sub: #cccccc;
+    --card-bg: #1a1a1a;
+}
   </style>
 </head>
 
-<body>
+<body class="page-certifications">
 
 <!-- HEADER (DYNAMIC LOAD) -->
 <div id="header"></div>
 
 <script src="global.js"></script>
-
 <script>
 fetch("header-standard.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header").innerHTML = h;
-    initGlobal(); // IMPORTANT
+    initGlobal();
   });
 </script>
+
 <!-- STICKY BAR -->
 <div class="sticky-follow">
     <span>Insights & Leadership Perspectives</span>
     <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
 </div>
+
 <!-- PAGE CONTENT -->
-<body class="page-certifications">
-  <section class="hero-section">
+<main class="page-container">  <section class="hero-section">
     <h1>Insights & Leadership Perspectives</h1>
     <p>Practical, experience-led thinking on programme delivery, cyber security, cloud transformation and modern workplace change.</p>
   </section>

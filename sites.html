@@ -35,21 +35,55 @@
   max-width: 720px;
 }
 
-.category-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 2.5rem 0 1rem;
-  color: #0a2540;
-  border-left: 4px solid #0078ff;
-  padding-left: 10px;
+/* CATEGORY WRAPPER */
+.category-section {
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  overflow: hidden;
 }
 
+/* HEADER */
+.category-header {
+  padding: 16px;
+  background: #0a2540;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.category-toggle {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* COLLAPSIBLE CONTENT */
+.card-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  padding: 0 16px;
+}
+
+.category-section.open .card-list {
+  max-height: 1000px;
+  padding-bottom: 16px;
+}
+
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
+  margin-top: 16px;
 }
 
+/* CARDS */
 .website-card {
   background: white;
   padding: 1.25rem;
@@ -110,6 +144,14 @@
   transition: opacity 0.3s ease;
   z-index: 999999;
 }
+
+/* FAB CENTERING FIX */
+.fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
 </style>
 </head>
 
@@ -137,95 +179,111 @@ fetch("header-standard.html")
 </section>
 
 <!-- CATEGORY 1 -->
-<h2 class="category-title">Professional Profiles</h2>
-<div class="grid">
+<div class="category-section">
+  <div class="category-header">
+    Professional Profiles
+    <span class="category-toggle">+</span>
+  </div>
 
-  <article class="website-card">
-    <h3><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</h3>
-    <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
-    <button class="copy-btn" data-link="https://linkedin.com/in/timwilliams77">
-      <i class="fa-regular fa-copy"></i> Copy Link
-    </button>
-  </article>
+  <div class="card-list">
+    <div class="grid">
 
-  <article class="website-card">
-    <h3><i class="fa-solid fa-id-card"></i> PMI Community Profile</h3>
-    <a href="https://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
-    <button class="copy-btn" data-link="https://community.pmi.org/profile/Timwilliams77">
-      <i class="fa-regular fa-copy"></i> Copy Link
-    </button>
-  </article>
+      <article class="website-card">
+        <h3><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</h3>
+        <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
+        <button class="copy-btn" data-link="https://linkedin.com/in/timwilliams77">
+          <i class="fa-regular fa-copy"></i> Copy Link
+        </button>
+      </article>
 
-  <article class="website-card">
-    <h3><i class="fa-solid fa-id-card"></i> PMI Community (Alt Link)</h3>
-    <a href="https://community.pmi.org/profile/timwilliams77">community.pmi.org/profile/timwilliams77</a>
-    <button class="copy-btn" data-link="https://community.pmi.org/profile/timwilliams77">
-      <i class="fa-regular fa-copy"></i> Copy Link
-    </button>
-  </article>
+      <article class="website-card">
+        <h3><i class="fa-solid fa-id-card"></i> PMI Community Profile</h3>
+        <a href="https://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
+        <button class="copy-btn" data-link="https://community.pmi.org/profile/Timwilliams77">
+          <i class="fa-regular fa-copy"></i> Copy Link
+        </button>
+      </article>
 
-  <article class="website-card">
-    <h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
-    <a href="https://www.apm.org.uk/myapm/my-dashboard/">apm.org.uk/my-dashboard</a>
-    <button class="copy-btn" data-link="https://www.apm.org.uk/myapm/my-dashboard/">
-      <i class="fa-regular fa-copy"></i> Copy Link
-    </button>
-  </article>
+      <article class="website-card">
+        <h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
+        <a href="https://www.apm.org.uk/myapm/my-dashboard/">apm.org.uk/my-dashboard</a>
+        <button class="copy-btn" data-link="https://www.apm.org.uk/myapm/my-dashboard/">
+          <i class="fa-regular fa-copy"></i> Copy Link
+        </button>
+      </article>
 
+    </div>
+  </div>
 </div>
 
 <!-- CATEGORY 2 -->
-<h2 class="category-title">Certifications & Learning</h2>
-<div class="grid">
+<div class="category-section">
+  <div class="category-header">
+    Certifications & Learning
+    <span class="category-toggle">+</span>
+  </div>
 
-  <article class="website-card">
-    <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
-    <a href="https://credly.com/users/tim-williams.e51205ae">credly.com/users/tim-williams</a>
-    <button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
-      <i class="fa-regular fa-copy"></i> Copy Link
-    </button>
-  </article>
+  <div class="card-list">
+    <div class="grid">
 
-  <article class="website-card">
-    <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
-    <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
-      Microsoft Learn Transcript
-    </a>
-    <button class="copy-btn" data-link="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
-      <i class="fa-regular fa-copy"></i> Copy Link
-    </button>
-  </article>
+      <article class="website-card">
+        <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+        <a href="https://credly.com/users/tim-williams.e51205ae">credly.com/users/tim-williams</a>
+        <button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
+          <i class="fa-regular fa-copy"></i> Copy Link
+        </button>
+      </article>
 
+      <article class="website-card">
+        <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
+        <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
+          Microsoft Learn Transcript
+        </a>
+        <button class="copy-btn" data-link="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
+          <i class="fa-regular fa-copy"></i> Copy Link
+        </button>
+      </article>
+
+    </div>
+  </div>
 </div>
 
 <!-- CATEGORY 3 -->
-<h2 class="category-title">Business & Services</h2>
-<div class="grid">
+<div class="category-section">
+  <div class="category-header">
+    Business & Services
+    <span class="category-toggle">+</span>
+  </div>
 
-  <article class="website-card">
-    <h3><i class="fa-brands fa-linkedin"></i> Tim Williams Consulting</h3>
-    <a href="https://www.linkedin.com/company/tim-williams-consulting/">linkedin.com/company/tim-williams-consulting</a>
-    <button class="copy-btn" data-link="https://www.linkedin.com/company/tim-williams-consulting/">
-      <i class="fa-regular fa-copy"></i> Copy Link
-    </button>
-  </article>
+  <div class="card-list">
+    <div class="grid">
 
-  <article class="website-card">
-    <h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
-    <a href="https://gethandover.uk">gethandover.uk</a>
-    <button class="copy-btn" data-link="https://gethandover.uk">
-      <i class="fa-regular fa-copy"></i> Copy Link
-    </button>
-  </article>
+      <article class="website-card">
+        <h3><i class="fa-brands fa-linkedin"></i> Tim Williams Consulting</h3>
+        <a href="https://www.linkedin.com/company/tim-williams-consulting/">linkedin.com/company/tim-williams-consulting</a>
+        <button class="copy-btn" data-link="https://www.linkedin.com/company/tim-williams-consulting/">
+          <i class="fa-regular fa-copy"></i> Copy Link
+        </button>
+      </article>
 
-  <article class="website-card">
-    <h3><i class="fa-solid fa-globe"></i> TWC Portfolio (Canva)</h3>
-    <a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
-    <button class="copy-btn" data-link="https://twc-ltd.my.canva.site">
-      <i class="fa-regular fa-copy"></i> Copy Link
-    </button>
-  </article>
+      <article class="website-card">
+        <h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
+        <a href="https://gethandover.uk">gethandover.uk</a>
+        <button class="copy-btn" data-link="https://gethandover.uk">
+          <i class="fa-regular fa-copy"></i> Copy Link
+        </button>
+      </article>
 
+      <article class="website-card">
+        <h3><i class="fa-solid fa-globe"></i> TWC Portfolio (Canva)</h3>
+        <a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
+        <button class="copy-btn" data-link="https://twc-ltd.my.canva.site">
+          <i class="fa-regular fa-copy"></i> Copy Link
+        </button>
+      </article>
+
+    </div>
+  </div>
 </div>
 
 </main>
@@ -245,8 +303,26 @@ fetch("footer.html")
   .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- COPY + ANALYTICS SCRIPT -->
+<!-- COLLAPSIBLE + COPY + ANALYTICS SCRIPT -->
 <script>
+// COLLAPSIBLE SECTIONS
+document.querySelectorAll(".category-header").forEach(header => {
+  header.addEventListener("click", () => {
+    const section = header.parentElement;
+    const isOpen = section.classList.contains("open");
+
+    document.querySelectorAll(".category-section").forEach(sec => {
+      sec.classList.remove("open");
+      sec.querySelector(".category-toggle").textContent = "+";
+    });
+
+    if (!isOpen) {
+      section.classList.add("open");
+      section.querySelector(".category-toggle").textContent = "–";
+    }
+  });
+});
+
 // COPY LINK BUTTONS
 document.addEventListener("click", function(e) {
   if (e.target.closest(".copy-btn")) {
@@ -261,7 +337,7 @@ document.addEventListener("click", function(e) {
   }
 });
 
-// TOAST MESSAGE
+// TOAST
 function showToast(message) {
   const toast = document.getElementById("copy-toast");
   toast.textContent = message;
@@ -272,15 +348,20 @@ function showToast(message) {
   }, 1500);
 }
 
-// ANALYTICS TRACKING
+// ANALYTICS
 function trackEvent(action, value) {
-  console.log("Analytics:", action, value);
+  const event = {
+    timestamp: new Date().toISOString(),
+    action,
+    value
+  };
 
-  // Future backend hook:
-  // fetch("/analytics", { method: "POST", body: JSON.stringify({ action, value }) });
+  const existing = JSON.parse(localStorage.getItem("analytics") || "[]");
+  existing.push(event);
+  localStorage.setItem("analytics", JSON.stringify(existing));
 }
 
-// TRACK OUTBOUND CLICKS
+// OUTBOUND CLICK TRACKING
 document.querySelectorAll(".website-card a").forEach(link => {
   link.addEventListener("click", () => {
     trackEvent("outbound_click", link.href);

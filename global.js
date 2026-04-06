@@ -84,3 +84,8 @@ menu.style.display = "flex";
         button.classList.add("open");
     }
 }
+function initFooter(){
+  // Example: auto-year update
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+}

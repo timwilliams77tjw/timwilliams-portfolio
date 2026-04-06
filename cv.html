@@ -586,7 +586,18 @@ if (cvBtn) {
       if(typeof initFooter==="function") initFooter();
     });
   </script>
+const darkToggle = document.getElementById("darkToggle");
+const body = document.body;
+const storedMode = localStorage.getItem("tw_dark");
 
+if (storedMode === "1") {
+  body.classList.add("dark-mode");
+}
+
+darkToggle.addEventListener("click", function() {
+  body.classList.toggle("dark-mode");
+  localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+});
   <!-- ACCORDION + FILTER JS -->
   <script>
     document.addEventListener("DOMContentLoaded", ()=>{

@@ -212,17 +212,31 @@ if (faqSearch) {
 }
 </script>
 <script>
-const darkToggle = document.getElementById("darkToggle");
-const body = document.body;
-const storedMode = localStorage.getItem("tw_dark");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (storedMode === "1") {
-  body.classList.add("dark-mode");
-}
+    // Wait for header to finish loading
+    const waitForButton = setInterval(() => {
+        const darkToggle = document.getElementById("darkToggle");
+        if (!darkToggle) return; // button not ready yet
 
-darkToggle.addEventListener("click", function() {
-  body.classList.toggle("dark-mode");
-  localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+        clearInterval(waitForButton);
+
+        const body = document.body;
+        const storedMode = localStorage.getItem("tw_dark");
+
+        if (storedMode === "1") {
+            body.classList.add("dark-mode");
+        }
+
+        darkToggle.addEventListener("click", function () {
+            body.classList.toggle("dark-mode");
+            localStorage.setItem(
+                "tw_dark",
+                body.classList.contains("dark-mode") ? "1" : "0"
+            );
+        });
+    }, 50);
+
 });
 </script>
 </body>

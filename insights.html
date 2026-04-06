@@ -108,6 +108,7 @@
       margin-top: 1rem;
     }
 /* Sticky bar (copied from FAQ page) */
+/* Sticky bar (match FAQ exactly) */
 .sticky-follow {
     background: var(--accent);
     color: #fff;
@@ -115,11 +116,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     position: sticky;
     top: 0;
     z-index: 999;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
+.sticky-follow span {
+    display: flex;
+    align-items: center;
+}
 .dark-toggle-btn {
     background: rgba(255,255,255,0.2);
     border: none;
@@ -128,6 +136,13 @@
     color: #fff;
     cursor: pointer;
     font-size: 0.9rem;
+}
+/* Dark mode variables (copied from FAQ behaviour) */
+body.dark-mode {
+    --bg: #0a0a0a;
+    --text-main: #ffffff;
+    --text-sub: #cccccc;
+    --card-bg: #1a1a1a;
 }
   </style>
 </head>
@@ -153,8 +168,7 @@ fetch("header-standard.html")
     <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
 </div>
 <!-- PAGE CONTENT -->
-<main class="page-container">
-
+<body class="page-certifications">
   <section class="hero-section">
     <h1>Insights & Leadership Perspectives</h1>
     <p>Practical, experience-led thinking on programme delivery, cyber security, cloud transformation and modern workplace change.</p>

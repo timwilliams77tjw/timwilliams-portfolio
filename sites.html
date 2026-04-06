@@ -1,172 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- GLOBAL CSS -->
-<link rel="stylesheet" href="certifications.css?v=1">
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="certifications.css?v=1">
 
-<!-- ICONS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-/* --- PAGE CSS --- */
-.page-container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-}
+  <style>
+    /* PAGE WRAPPER */
+    body.page-certifications {
+      background: var(--bg);
+      color: var(--text-main);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
 
-.hero-section {
-  margin-bottom: 2rem;
-}
+    .page-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
 
-.hero-section h1 {
-  font-size: 2.2rem;
-  margin-bottom: 0.5rem;
-  color: #0a2540;
-}
+    /* HERO */
+    .hero-section {
+      margin-bottom: 2rem;
+    }
 
-.hero-section p {
-  font-size: 1.1rem;
-  color: #0a2540;
-  max-width: 720px;
-}
+    .hero-section h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
 
-.category-section {
-  background: white;
-  border-radius: 10px;
-  margin-bottom: 24px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  overflow: hidden;
-}
+    .hero-section p {
+      font-size: 1.1rem;
+      color: var(--text-sub);
+      max-width: 720px;
+    }
 
-.category-header {
-  padding: 16px;
-  background: #0a2540;
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
+    /* CATEGORY SECTIONS */
+    .category-section {
+      background: var(--card-bg);
+      border-radius: 10px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
 
-.category-toggle {
-  font-size: 24px;
-  font-weight: bold;
-}
+    .category-header {
+      padding: 16px;
+      background: var(--accent);
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
 
-.card-list {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease;
-  padding: 0 16px;
-}
+    .category-toggle {
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-.category-section.open .card-list {
-  max-height: 1000px;
-  padding-bottom: 16px;
-}
+    .card-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+      padding: 0 16px;
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  margin-top: 16px;
-}
+    .category-section.open .card-list {
+      max-height: 1000px;
+      padding-bottom: 16px;
+    }
 
-.website-card {
-  background: white;
-  padding: 1.25rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  border-left: 4px solid #0078ff;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 16px;
+    }
 
-.website-card h3 {
-  margin-top: 0;
-  color: #0a2540;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .website-card {
+      background: var(--card-bg);
+      padding: 1.25rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--accent);
+    }
 
-.website-card a {
-  color: #0078ff;
-  font-weight: 600;
-  text-decoration: none;
-  word-break: break-all;
-}
+    .website-card h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.copy-btn {
-  margin-top: 10px;
-  background: #0a2540;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: 0.2s ease;
-}
+    .website-card a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      word-break: break-all;
+    }
 
-.copy-btn:hover {
-  background: #0078ff;
-}
+    .copy-btn {
+      margin-top: 10px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s ease;
+    }
 
-#copy-toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #0a2540;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-size: 14px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 999999;
-}
+    .copy-btn:hover {
+      background: #005fcc;
+    }
 
-.fab {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
+    #copy-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 999999;
+    }
 
-/* -----------------------------------------------------------
-   ⭐ FIX: Override global certifications.css accordion rules
-   ----------------------------------------------------------- */
+    /* MATCH FAQ EXACTLY — ONLY THIS */
+    .sticky-follow {
+      background: var(--accent);
+    }
 
-.category-section .card-list {
-  display: block !important;
-  height: auto !important;
-  overflow: hidden !important;
-}
-
-.category-section.open .card-list {
-  display: block !important;
-}
-
-.category-section .grid {
-  display: grid !important;
-}
-
-</style>
+    /* DARK MODE VARIABLES */
+    body.dark-mode {
+      --bg: #0a0a0a;
+      --text-main: #ffffff;
+      --text-sub: #cccccc;
+      --card-bg: #1a1a1a;
+    }
+  </style>
 </head>
 
-<body>
+<body class="page-certifications">
 
 <!-- HEADER -->
 <div id="header"></div>
@@ -179,11 +173,7 @@ fetch("header-standard.html")
     document.getElementById("header").innerHTML = h;
     initGlobal();
 
-    /* -----------------------------------------
-       COLLAPSIBLE + COPY + ANALYTICS
-       ----------------------------------------- */
-
-    // COLLAPSIBLE SECTIONS
+    /* COLLAPSIBLE SECTIONS */
     document.querySelectorAll(".category-header").forEach(header => {
       header.addEventListener("click", () => {
         const section = header.parentElement;
@@ -201,143 +191,147 @@ fetch("header-standard.html")
       });
     });
 
-    // COPY BUTTONS
+    /* COPY BUTTONS */
     document.addEventListener("click", function(e) {
       if (e.target.closest(".copy-btn")) {
         const btn = e.target.closest(".copy-btn");
         const link = btn.getAttribute("data-link");
-
         navigator.clipboard.writeText(link);
         showToast("Link copied!");
         trackEvent("copy_link", link);
       }
     });
 
-    // OUTBOUND CLICK TRACKING
+    /* OUTBOUND CLICK TRACKING */
     document.querySelectorAll(".website-card a").forEach(link => {
       link.addEventListener("click", () => {
         trackEvent("outbound_click", link.href);
       });
     });
-
   });
 </script>
+
+<!-- STICKY BAR (IDENTICAL TO FAQ) -->
+<div class="sticky-follow">
+  <span>My Websites & Profiles</span>
+  <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
 
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
-<section class="hero-section">
-  <h1>My Websites & Professional Profiles</h1>
-  <p>A curated list of my professional platforms, portfolios and digital presence.</p>
-</section>
+  <section class="hero-section">
+    <h1>My Websites & Professional Profiles</h1>
+    <p>A curated list of my professional platforms, portfolios and digital presence.</p>
+  </section>
 
-<!-- CATEGORY 1 -->
-<div class="category-section">
-  <div class="category-header">
-    Professional Profiles
-    <span class="category-toggle">+</span>
-  </div>
+  <!-- CATEGORY 1 -->
+  <div class="category-section">
+    <div class="category-header">
+      Professional Profiles
+      <span class="category-toggle">+</span>
+    </div>
 
-  <div class="card-list">
-    <div class="grid">
+    <div class="card-list">
+      <div class="grid">
 
-      <article class="website-card">
-        <h3><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</h3>
-        <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
-        <button class="copy-btn" data-link="https://linkedin.com/in/timwilliams77">
-          <i class="fa-regular fa-copy"></i> Copy Link
-        </button>
-      </article>
+        <article class="website-card">
+          <h3><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</h3>
+          <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
+          <button class="copy-btn" data-link="https://linkedin.com/in/timwilliams77">
+            <i class="fa-regular fa-copy"></i> Copy Link
+          </button>
+        </article>
 
-      <article class="website-card">
-        <h3><i class="fa-solid fa-id-card"></i> PMI Community Profile</h3>
-        <a href="https://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
-        <button class="copy-btn" data-link="https://community.pmi.org/profile/Timwilliams77">
-          <i class="fa-regular fa-copy"></i> Copy Link
-        </button>
-      </article>
+        <article class="website-card">
+          <h3><i class="fa-solid fa-id-card"></i> PMI Community Profile</h3>
+          <a href="https://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
+          <button class="copy-btn" data-link="https://community.pmi.org/profile/Timwilliams77">
+            <i class="fa-regular fa-copy"></i> Copy Link
+          </button>
+        </article>
 
-      <article class="website-card">
-        <h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
-        <a href="https://www.apm.org.uk/myapm/my-dashboard/">apm.org.uk/my-dashboard</a>
-        <button class="copy-btn" data-link="https://www.apm.org.uk/myapm/my-dashboard/">
-          <i class="fa-regular fa-copy"></i> Copy Link
-        </button>
-      </article>
+        <article class="website-card">
+          <h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
+          <a href="https://www.apm.org.uk/myapm/my-dashboard/">apm.org.uk/my-dashboard</a>
+          <button class="copy-btn" data-link="https://www.apm.org.uk/myapm/my-dashboard/">
+            <i class="fa-regular fa-copy"></i> Copy Link
+          </button>
+        </article>
 
+      </div>
     </div>
   </div>
-</div>
 
-<!-- CATEGORY 2 -->
-<div class="category-section">
-  <div class="category-header">
-    Certifications & Learning
-    <span class="category-toggle">+</span>
-  </div>
+  <!-- CATEGORY 2 -->
+  <div class="category-section">
+    <div class="category-header">
+      Certifications & Learning
+      <span class="category-toggle">+</span>
+    </div>
 
-  <div class="card-list">
-    <div class="grid">
+    <div class="card-list">
+      <div class="grid">
 
-      <article class="website-card">
-        <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
-        <a href="https://credly.com/users/tim-williams.e51205ae">credly.com/users/tim-williams</a>
-        <button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
-          <i class="fa-regular fa-copy"></i> Copy Link
-        </button>
-      </article>
+        <article class="website-card">
+          <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+          <a href="https://credly.com/users/tim-williams.e51205ae">credly.com/users/tim-williams</a>
+          <button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
+            <i class="fa-regular fa-copy"></i> Copy Link
+          </button>
+        </article>
 
-      <article class="website-card">
-        <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
-        <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
-          Microsoft Learn Transcript
-        </a>
-        <button class="copy-btn" data-link="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
-          <i class="fa-regular fa-copy"></i> Copy Link
-        </button>
-      </article>
+        <article class="website-card">
+          <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
+          <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
+            Microsoft Learn Transcript
+          </a>
+          <button class="copy-btn" data-link="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
+            <i class="fa-regular fa-copy"></i> Copy Link
+          </button>
+        </article>
 
+      </div>
     </div>
   </div>
-</div>
 
-<!-- CATEGORY 3 -->
-<div class="category-section">
-  <div class="category-header">
-    Business & Services
-    <span class="category-toggle">+</span>
-  </div>
+  <!-- CATEGORY 3 -->
+  <div class="category-section">
+    <div class="category-header">
+      Business & Services
+      <span class="category-toggle">+</span>
+    </div>
 
-  <div class="card-list">
-    <div class="grid">
+    <div class="card-list">
+      <div class="grid">
 
-      <article class="website-card">
-        <h3><i class="fa-brands fa-linkedin"></i> Tim Williams Consulting</h3>
-        <a href="https://www.linkedin.com/company/tim-williams-consulting/">linkedin.com/company/tim-williams-consulting</a>
-        <button class="copy-btn" data-link="https://www.linkedin.com/company/tim-williams-consulting/">
-          <i class="fa-regular fa-copy"></i> Copy Link
-        </button>
-      </article>
+        <article class="website-card">
+          <h3><i class="fa-brands fa-linkedin"></i> Tim Williams Consulting</h3>
+          <a href="https://www.linkedin.com/company/tim-williams-consulting/">linkedin.com/company/tim-williams-consulting</a>
+          <button class="copy-btn" data-link="https://www.linkedin.com/company/tim-williams-consulting/">
+            <i class="fa-regular fa-copy"></i> Copy Link
+          </button>
+        </article>
 
-      <article class="website-card">
-        <h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
-        <a href="https://gethandover.uk">gethandover.uk</a>
-        <button class="copy-btn" data-link="https://gethandover.uk">
-          <i class="fa-regular fa-copy"></i> Copy Link
-        </button>
-      </article>
+        <article class="website-card">
+          <h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
+          <a href="https://gethandover.uk">gethandover.uk</a>
+          <button class="copy-btn" data-link="https://gethandover.uk">
+            <i class="fa-regular fa-copy"></i> Copy Link
+          </button>
+        </article>
 
-      <article class="website-card">
-        <h3><i class="fa-solid fa-globe"></i> TWC Portfolio (Canva)</h3>
-        <a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
-        <button class="copy-btn" data-link="https://twc-ltd.my.canva.site">
-          <i class="fa-regular fa-copy"></i> Copy Link
-        </button>
-      </article>
+        <article class="website-card">
+          <h3><i class="fa-solid fa-globe"></i> TWC Portfolio (Canva)</h3>
+          <a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
+          <button class="copy-btn" data-link="https://twc-ltd.my.canva.site">
+            <i class="fa-regular fa-copy"></i> Copy Link
+          </button>
+        </article>
 
+      </div>
     </div>
   </div>
-</div>
 
 </main>
 
@@ -350,6 +344,7 @@ fetch("header-standard.html")
 
 <!-- FOOTER -->
 <div id="footer"></div>
+
 <script>
 fetch("footer.html")
   .then(r => r.text())
@@ -374,6 +369,29 @@ function trackEvent(action, value) {
   existing.push(event);
   localStorage.setItem("analytics", JSON.stringify(existing));
 }
+</script>
+
+<!-- DARK MODE -->
+<script>
+(function () {
+    const darkToggle = document.getElementById("darkToggle");
+    if (!darkToggle) return;
+
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_dark");
+
+    if (storedMode === "1") {
+        body.classList.add("dark-mode");
+    }
+
+    darkToggle.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem(
+            "tw_dark",
+            body.classList.contains("dark-mode") ? "1" : "0"
+        );
+    });
+})();
 </script>
 
 </body>

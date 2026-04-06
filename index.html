@@ -183,19 +183,24 @@ body.dark-mode .card{
 
 <body>
 
-
-<!-- HEADER -->
+<!-- HEADER INCLUDE -->
 <div id="header"></div>
+
 <script>
 fetch("header-index.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header").innerHTML = h;
-    initGlobal();
+
+    // Load global.js AFTER header exists
+    const s = document.createElement("script");
+    s.src = "global.js";
+    s.onload = () => {
+      if (typeof initGlobal === "function") initGlobal();
+    };
+    document.body.appendChild(s);
   });
 </script>
-<script src="global.js"></script>
-
 
 <!-- STICKY BAR -->
 <div class="sticky-follow">
@@ -321,10 +326,14 @@ Tim Williams
 
 <!-- FOOTER INCLUDE -->
 <div id="footer"></div>
+
 <script>
 fetch("footer.html")
-  .then(r=>r.text())
-  .then(h=>document.getElementById("footer").innerHTML=h);
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("footer").innerHTML = h;
+    if (typeof initFooter === "function") initFooter();
+  });
 </script>
 
 <!-- DARK MODE -->
@@ -342,16 +351,6 @@ fetch("footer.html")
     localStorage.setItem("tw_dark", document.body.classList.contains("dark-mode")?"1":"0");
   };
 })();
-</script>
-<div id="footer"></div>
-
-<script>
-fetch("footer.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("footer").innerHTML = h;
-    if (typeof initFooter === "function") initFooter();
-  });
 </script>
 
 </body>

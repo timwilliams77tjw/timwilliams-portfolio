@@ -8,14 +8,14 @@
 
 <style>
 /* -----------------------------------------------------------
-ACCENT VARIABLE (used by sticky bar)
+ACCENT VARIABLE
 ----------------------------------------------------------- */
 :root {
-    --accent: #0A66C2; /* turquoise used on FAQ */
+    --accent: #0A66C2;
 }
 
 /* -----------------------------------------------------------
-GLOBAL PAGE STYLING (original Index)
+GLOBAL PAGE STYLING (original)
 ----------------------------------------------------------- */
 body {
     margin: 0;
@@ -31,9 +31,9 @@ body {
 }
 
 /* -----------------------------------------------------------
-STICKY BAR — FIXED + MATCHES FAQ
+PAGE‑STICKY (isolated sticky bar)
 ----------------------------------------------------------- */
-.sticky-follow {
+.page-sticky {
     position: sticky;
     top: 0;
     z-index: 999;
@@ -45,10 +45,10 @@ STICKY BAR — FIXED + MATCHES FAQ
     justify-content: space-between;
     padding: 0 20px;
     font-weight: 600;
-    color: white;
+    color: #ffffff;
 }
 
-.sticky-follow span {
+.page-sticky span {
     display: flex;
     align-items: center;
     height: 100%;
@@ -236,8 +236,8 @@ fetch("header-index.html")
     });
 </script>
 
-<!-- ⭐ STICKY BAR (now fixed) -->
-<div class="sticky-follow">
+<!-- ⭐ PAGE‑STICKY BAR (isolated, fixed) -->
+<div class="page-sticky">
     <span>Home Page</span>
     <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
 </div>
@@ -371,27 +371,14 @@ fetch("footer.html")
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- DARK MODE ENGINE -->
+<!-- DARK MODE BUTTON (wired independently) -->
 <script>
-(function () {
-    const darkToggle = document.getElementById("darkToggle");
-    if (!darkToggle) return;
-
-    const body = document.body;
-    const storedMode = localStorage.getItem("tw_dark");
-
-    if (storedMode === "1") {
-        body.classList.add("dark-mode");
-    }
-
-    darkToggle.addEventListener("click", function () {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem(
-            "tw_dark",
-            body.classList.contains("dark-mode") ? "1" : "0"
-        );
-    });
-})();
+document.getElementById("darkToggle")?.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("tw_dark",
+        document.body.classList.contains("dark-mode") ? "1" : "0"
+    );
+});
 </script>
 
 </body>

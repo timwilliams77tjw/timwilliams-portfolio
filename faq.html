@@ -4,10 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css?v=1">
 
-<!-- PAGE‑SPECIFIC CSS -->
 <style>
 .page-container {
   max-width: 960px;
@@ -98,18 +96,39 @@
 
 <body>
 
-<!-- HEADER (DYNAMIC LOAD) -->
+<!-- HEADER -->
 <div id="header"></div>
 
 <script src="global.js"></script>
 
+<!-- DARK MODE FUNCTION (must be defined BEFORE use) -->
+<script>
+function initDarkMode() {
+  const darkToggle = document.getElementById("darkToggle");
+  if (!darkToggle) return;
+
+  const body = document.body;
+  const storedMode = localStorage.getItem("tw_dark");
+
+  if (storedMode === "1") {
+    body.classList.add("dark-mode");
+  }
+
+  darkToggle.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+    localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+  });
+}
+</script>
+
+<!-- LOAD HEADER + THEN INIT DARK MODE -->
 <script>
 fetch("header-standard.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header").innerHTML = h;
-    initGlobal();
-    initDarkMode();  // Attach dark mode AFTER header loads
+    initGlobal();      // header scripts
+    setTimeout(initDarkMode, 50);  // ensure DOM is stable
   });
 </script>
 
@@ -207,29 +226,6 @@ if (faqSearch) {
       const text = card.innerText.toLowerCase();
       card.style.display = text.includes(term) ? "" : "none";
     });
-  });
-}
-</script>
-
-<!-- DARK MODE -->
-<script>
-function initDarkMode() {
-  const darkToggle = document.getElementById("darkToggle");
-  if (!darkToggle) return;
-
-  const body = document.body;
-  const storedMode = localStorage.getItem("tw_dark");
-
-  if (storedMode === "1") {
-    body.classList.add("dark-mode");
-  }
-
-  darkToggle.addEventListener("click", function () {
-    body.classList.toggle("dark-mode");
-    localStorage.setItem(
-      "tw_dark",
-      body.classList.contains("dark-mode") ? "1" : "0"
-    );
   });
 }
 </script>

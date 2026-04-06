@@ -343,6 +343,16 @@ fetch("footer.html")
   };
 })();
 </script>
+<div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("footer").innerHTML = h;
+    if (typeof initFooter === "function") initFooter();
+  });
+</script>
 
 </body>
 </html>

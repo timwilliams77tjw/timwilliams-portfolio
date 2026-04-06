@@ -11,8 +11,8 @@
 <!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- PAGE‑SPECIFIC CSS -->
 <style>
+/* --- your CSS unchanged --- */
 .page-container {
   max-width: 960px;
   margin: 0 auto;
@@ -35,7 +35,6 @@
   max-width: 720px;
 }
 
-/* CATEGORY WRAPPER */
 .category-section {
   background: white;
   border-radius: 10px;
@@ -44,7 +43,6 @@
   overflow: hidden;
 }
 
-/* HEADER */
 .category-header {
   padding: 16px;
   background: #0a2540;
@@ -62,7 +60,6 @@
   font-weight: bold;
 }
 
-/* COLLAPSIBLE CONTENT */
 .card-list {
   max-height: 0;
   overflow: hidden;
@@ -75,7 +72,6 @@
   padding-bottom: 16px;
 }
 
-/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -83,7 +79,6 @@
   margin-top: 16px;
 }
 
-/* CARDS */
 .website-card {
   background: white;
   padding: 1.25rem;
@@ -107,7 +102,6 @@
   word-break: break-all;
 }
 
-/* COPY BUTTON */
 .copy-btn {
   margin-top: 10px;
   background: #0a2540;
@@ -128,7 +122,6 @@
   background: #0078ff;
 }
 
-/* TOAST */
 #copy-toast {
   position: fixed;
   bottom: 30px;
@@ -145,7 +138,6 @@
   z-index: 999999;
 }
 
-/* FAB CENTERING FIX */
 .fab {
   display: flex;
   align-items: center;
@@ -157,7 +149,7 @@
 
 <body>
 
-<!-- HEADER (DYNAMIC LOAD) -->
+<!-- HEADER -->
 <div id="header"></div>
 
 <script src="global.js"></script>
@@ -167,6 +159,49 @@ fetch("header-standard.html")
   .then(h => {
     document.getElementById("header").innerHTML = h;
     initGlobal();
+
+    /* -----------------------------------------
+       RUN COLLAPSIBLE + COPY + ANALYTICS HERE
+       AFTER HEADER LOADS
+    ------------------------------------------*/
+
+    // COLLAPSIBLE SECTIONS
+    document.querySelectorAll(".category-header").forEach(header => {
+      header.addEventListener("click", () => {
+        const section = header.parentElement;
+        const isOpen = section.classList.contains("open");
+
+        document.querySelectorAll(".category-section").forEach(sec => {
+          sec.classList.remove("open");
+          sec.querySelector(".category-toggle").textContent = "+";
+        });
+
+        if (!isOpen) {
+          section.classList.add("open");
+          section.querySelector(".category-toggle").textContent = "–";
+        }
+      });
+    });
+
+    // COPY BUTTONS
+    document.addEventListener("click", function(e) {
+      if (e.target.closest(".copy-btn")) {
+        const btn = e.target.closest(".copy-btn");
+        const link = btn.getAttribute("data-link");
+
+        navigator.clipboard.writeText(link);
+        showToast("Link copied!");
+        trackEvent("copy_link", link);
+      }
+    });
+
+    // OUTBOUND CLICK TRACKING
+    document.querySelectorAll(".website-card a").forEach(link => {
+      link.addEventListener("click", () => {
+        trackEvent("outbound_click", link.href);
+      });
+    });
+
   });
 </script>
 
@@ -303,70 +338,20 @@ fetch("footer.html")
   .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- COLLAPSIBLE + COPY + ANALYTICS SCRIPT -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  // COLLAPSIBLE SECTIONS
-  document.querySelectorAll(".category-header").forEach(header => {
-    header.addEventListener("click", () => {
-      const section = header.parentElement;
-      const isOpen = section.classList.contains("open");
-
-      document.querySelectorAll(".category-section").forEach(sec => {
-        sec.classList.remove("open");
-        sec.querySelector(".category-toggle").textContent = "+";
-      });
-
-      if (!isOpen) {
-        section.classList.add("open");
-        section.querySelector(".category-toggle").textContent = "–";
-      }
-    });
-  });
-
-  // COPY LINK BUTTONS
-  document.addEventListener("click", function(e) {
-    if (e.target.closest(".copy-btn")) {
-      const btn = e.target.closest(".copy-btn");
-      const link = btn.getAttribute("data-link");
-
-      navigator.clipboard.writeText(link);
-
-      showToast("Link copied!");
-
-      trackEvent("copy_link", link);
-    }
-  });
-
-  // OUTBOUND CLICK TRACKING
-  document.querySelectorAll(".website-card a").forEach(link => {
-    link.addEventListener("click", () => {
-      trackEvent("outbound_click", link.href);
-    });
-  });
-
-});
-
-// TOAST
 function showToast(message) {
   const toast = document.getElementById("copy-toast");
   toast.textContent = message;
   toast.style.opacity = "1";
-
-  setTimeout(() => {
-    toast.style.opacity = "0";
-  }, 1500);
+  setTimeout(() => toast.style.opacity = "0", 1500);
 }
 
-// ANALYTICS
 function trackEvent(action, value) {
   const event = {
     timestamp: new Date().toISOString(),
     action,
     value
   };
-
   const existing = JSON.parse(localStorage.getItem("analytics") || "[]");
   existing.push(event);
   localStorage.setItem("analytics", JSON.stringify(existing));

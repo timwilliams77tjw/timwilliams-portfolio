@@ -128,37 +128,9 @@
       margin-top: 1rem;
     }
 
-    /* STICKY BAR (IDENTICAL TO FAQ) */
+    /* MATCH FAQ EXACTLY — ONLY THIS */
     .sticky-follow {
-      width: 100%;
       background: var(--accent);
-      color: #fff;
-      padding: 0.75rem 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      box-sizing: border-box;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .sticky-follow span {
-      display: flex;
-      align-items: center;
-      line-height: 1;
-    }
-
-    .dark-toggle-btn {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      padding: 6px 14px;
-      border-radius: 20px;
-      color: #fff;
-      cursor: pointer;
-      font-size: 0.9rem;
     }
 
     /* DARK MODE VARIABLES */
@@ -168,69 +140,7 @@
       --text-sub: #cccccc;
       --card-bg: #1a1a1a;
     }
-/* FIX: Perfect vertical centring for sticky bar */
-.sticky-follow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 56px; /* matches FAQ bar height */
-    line-height: 1 !important;
-}
 
-.sticky-follow span,
-.sticky-follow button {
-    display: flex;
-    align-items: center;
-}
-/* FINAL FIX: Force sticky bar to centre-align text + button */
-body.page-certifications .sticky-follow {
-    height: 56px !important;
-    padding: 0 1.25rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    line-height: 1 !important;
-}
-
-body.page-certifications .sticky-follow span,
-body.page-certifications .sticky-follow button {
-    display: flex !important;
-    align-items: center !important;
-}
-/* FIX: Reset sticky bar so it ignores header styling */
-.sticky-follow {
-    height: 56px !important;
-    padding: 0 1.25rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    line-height: 1 !important;
-
-    /* THE IMPORTANT PART */
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-/* Reset inherited header line-height */
-#header * {
-    line-height: normal !important;
-}
-/* FIX: Completely isolate sticky bar from header height */
-#header {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-#header * {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-/* Force sticky bar to sit flush at the top */
-.sticky-follow {
-    margin-top: 0 !important;
-    transform: translateY(0) !important;
-}
   </style>
 </head>
 
@@ -249,7 +159,7 @@ fetch("header-standard.html")
   });
 </script>
 
-<!-- STICKY BAR -->
+<!-- STICKY BAR (IDENTICAL TO FAQ) -->
 <div class="sticky-follow">
     <span>Insights & Leadership Perspectives</span>
     <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>

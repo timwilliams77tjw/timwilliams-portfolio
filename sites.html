@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* PAGE LAYOUT */
+    /* --- PAGE CSS (original) --- */
     .page-container {
       max-width: 960px;
       margin: 0 auto;
@@ -137,7 +137,7 @@
       z-index: 999999;
     }
 
-    /* Floating buttons centring */
+    /* Keep FAB icons centred */
     .fab {
       display: flex;
       align-items: center;
@@ -145,78 +145,8 @@
       line-height: 1;
     }
 
-    /* Sticky bar (local, not using vars) */
-    .sticky-follow {
-      background: #0a2540;
-      color: #fff;
-      padding: 0.75rem 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      box-sizing: border-box;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .sticky-follow span {
-      display: flex;
-      align-items: center;
-      line-height: 1;
-    }
-
-    .dark-toggle-btn {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      padding: 6px 14px;
-      border-radius: 20px;
-      color: #fff;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    /* Dark mode (local overrides) */
-    body.dark-mode {
-      background: #0a0a0a;
-      color: #ffffff;
-    }
-
-    body.dark-mode .hero-section h1,
-    body.dark-mode .hero-section p {
-      color: #ffffff;
-    }
-
-    body.dark-mode .category-section {
-      background: #1a1a1a;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
-    }
-
-    body.dark-mode .category-header {
-      background: #111827;
-    }
-
-    body.dark-mode .website-card {
-      background: #111827;
-      border-left-color: #3b82f6;
-    }
-
-    body.dark-mode .website-card h3 {
-      color: #ffffff;
-    }
-
-    body.dark-mode .website-card a {
-      color: #60a5fa;
-    }
-
-    body.dark-mode .copy-btn {
-      background: #2563eb;
-    }
-
-    body.dark-mode #copy-toast {
-      background: #111827;
-    }
+    /* IMPORTANT: do NOT define .sticky-follow here.
+       Let certifications.css control its layout/colours. */
   </style>
 </head>
 
@@ -271,9 +201,9 @@ fetch("header-standard.html")
   });
 </script>
 
-<!-- STICKY BAR -->
+<!-- STICKY BAR (HTML ONLY, STYLED BY GLOBAL CSS) -->
 <div class="sticky-follow">
-  <span>My Websites & Profiles</span>
+  <span>My Websites & Professional Profiles</span>
   <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
 </div>
 
@@ -431,7 +361,7 @@ function trackEvent(action, value) {
 }
 </script>
 
-<!-- DARK MODE -->
+<!-- DARK MODE TOGGLE (uses global dark-mode styles) -->
 <script>
 (function () {
     const darkToggle = document.getElementById("darkToggle");

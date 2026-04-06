@@ -2,13 +2,11 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tim Williams – Senior IT Project/PMO Manager</title>
 
 <style>
-
 /* -----------------------------------------------------------
 GLOBAL
 ----------------------------------------------------------- */
@@ -28,6 +26,33 @@ body {
 /* Ensure header does not overlap content */
 #header {
     margin-bottom: 40px;
+}
+
+/* -----------------------------------------------------------
+STICKY FOLLOW BAR (NEW)
+----------------------------------------------------------- */
+.sticky-follow {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #0a2540;
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    border-bottom: 2px solid #001a33;
+}
+
+.dark-toggle-btn {
+    background: white;
+    color: #0a2540;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 /* -----------------------------------------------------------
@@ -130,7 +155,7 @@ BUTTONS
 }
 
 /* -----------------------------------------------------------
-DROPDOWN MENUS (used by header-index.html)
+DROPDOWN MENUS
 ----------------------------------------------------------- */
 .popup-menu {
     position: absolute;
@@ -235,7 +260,7 @@ FLOATING BUTTONS
 }
 
 /* -----------------------------------------------------------
-FOOTER (used by footer.html)
+FOOTER
 ----------------------------------------------------------- */
 footer {
     background: #0a2540;
@@ -250,6 +275,7 @@ footer {
 .footer-qr img {
     width: 60px;
 }
+
 .download-note {
     font-size: 12px;
     color: #4b5563;
@@ -257,18 +283,11 @@ footer {
     line-height: 1.3;
 }
 </style>
-<style>
-.button-group .divider {
-    width: 1px;
-    height: 24px;
-    background: rgba(255,255,255,0.35);
-    margin: 0 6px;
-    align-self: center;
-}
-</style>
+
 </head>
 
 <body>
+
 <script src="global.js"></script>
 
 <!-- HEADER INCLUDE -->
@@ -276,17 +295,24 @@ footer {
 
 <script>
 fetch("header-index.html")
-  .then(r => r.text())
+    .then(r => r.text())
     .then(h => {
         document.getElementById("header").innerHTML = h;
         initGlobal();
     });
 </script>
 
+<!-- ⭐ NEW STICKY BAR -->
+<div class="sticky-follow">
+    <span>Home Page</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
+
 <!-- MAIN CONTENT -->
 <div class="container">
 
 <h2>Executive Profile</h2>
+
 <div class="card">
 <p>
 SC Cleared Senior IT Programme & Transformation Leader delivering complex digital programmes across global organisations.
@@ -296,6 +322,7 @@ Delivered programmes impacting over 120,000 users across Defence, NHS England, f
 </div>
 
 <h2>Key Achievements</h2>
+
 <div class="card">
 <ul>
 <li>Delivered £40M cyber security uplift programme for NHS England, improving CAF maturity across all domains.</li>
@@ -305,55 +332,67 @@ Delivered programmes impacting over 120,000 users across Defence, NHS England, f
 </div>
 
 <h2>Consulting Expertise</h2>
+
 <div class="grid">
+
 <div class="card">
-    <h3>Cyber Security Programmes</h3>
-    <p>CAF, IAM, MFA, CyberArk, Splunk, identity security platforms.</p>
+<h3>Cyber Security Programmes</h3>
+<p>CAF, IAM, MFA, CyberArk, Splunk, identity security platforms.</p>
 </div>
+
 <div class="card">
-    <h3>Cloud Transformation</h3>
-    <p>Azure, AWS, Entra, Intune and enterprise cloud adoption frameworks.</p>
+<h3>Cloud Transformation</h3>
+<p>Azure, AWS, Entra, Intune and enterprise cloud adoption frameworks.</p>
 </div>
+
 <div class="card">
-    <h3>Workplace Modernisation</h3>
-    <p>Windows 10/11 migration, Teams Rooms, global device estate transformation.</p>
+<h3>Workplace Modernisation</h3>
+<p>Windows 10/11 migration, Teams Rooms, global device estate transformation.</p>
 </div>
+
 <div class="card">
-    <h3>Programme Governance</h3>
-    <p>PMO leadership, financial governance, RAID management and delivery assurance within ISO regulated environments and adhering to ITIL frameworks.</p>
+<h3>Programme Governance</h3>
+<p>PMO leadership, financial governance, RAID management and delivery assurance within ISO regulated environments and adhering to ITIL frameworks.</p>
 </div>
+
 <div class="card">
-    <h3>Service Transition & BAU Readiness</h3>
-    <p>Structured service transition ensuring global services were operationally ready from day one. Delivered seamless onboarding for 25,000 users, integrated Salesforce into BAU, and stabilised major programmes through complete documentation, readiness governance and support alignment.</p>
+<h3>Service Transition & BAU Readiness</h3>
+<p>Structured service transition ensuring global services were operationally ready from day one. Delivered seamless onboarding for 25,000 users, integrated Salesforce into BAU, and stabilised major programmes through complete documentation, readiness governance and support alignment.</p>
 </div>
+
 <div class="card">
-    <h3>Pre‑Sales</h3>
-    <p>Supported major bids with solution design, tender responses and commercial modelling. Ensured proposals were deliverable, accurately costed and aligned to operational capability, strengthening win probability and delivery confidence.</p>
+<h3>Pre‑Sales</h3>
+<p>Supported major bids with solution design, tender responses and commercial modelling. Ensured proposals were deliverable, accurately costed and aligned to operational capability, strengthening win probability and delivery confidence.</p>
 </div>
+
 </div>
 
 <h2>Programme Case Studies</h2>
+
 <div class="grid">
+
 <div class="card">
-    <h3>NHS England Cyber Security Programme</h3>
-    <p>Delivered CAF-aligned cyber security uplift implementing MFA, CyberArk, Splunk, Azure security controls and secure backup infrastructure.</p>
-    <p><b>Outcome:</b> Strengthened organisational cyber resilience and improved operational security posture.</p>
+<h3>NHS England Cyber Security Programme</h3>
+<p>Delivered CAF-aligned cyber security uplift implementing MFA, CyberArk, Splunk, Azure security controls and secure backup infrastructure.</p>
+<p><b>Outcome:</b> Strengthened organisational cyber resilience and improved operational security posture.</p>
 </div>
 
 <div class="card">
-    <h3>Global Workplace Transformation</h3>
-    <p>Led Windows 10 and Windows 11 transformation programmes affecting up to 126,000 devices.</p>
-    <p><b>Outcome:</b> Enabled modern secure workplace environments across distributed global workforces.</p>
+<h3>Global Workplace Transformation</h3>
+<p>Led Windows 10 and Windows 11 transformation programmes affecting up to 126,000 devices.</p>
+<p><b>Outcome:</b> Enabled modern secure workplace environments across distributed global workforces.</p>
 </div>
 
 <div class="card">
-    <h3>Enterprise Cloud Deployments</h3>
-    <p>Delivered Azure, AWS and enterprise infrastructure programmes for major global organisations.</p>
-    <p><b>Outcome:</b> Improved scalability, resilience and operational performance.</p>
+<h3>Enterprise Cloud Deployments</h3>
+<p>Delivered Azure, AWS and enterprise infrastructure programmes for major global organisations.</p>
+<p><b>Outcome:</b> Improved scalability, resilience and operational performance.</p>
 </div>
+
 </div>
 
 <h2>Certifications</h2>
+
 <div class="card">
 <span class="badge">APM PMQ</span>
 <span class="badge">PRINCE2 Practitioner</span>
@@ -367,6 +406,7 @@ Delivered programmes impacting over 120,000 users across Defence, NHS England, f
 </div>
 
 <h2>Industry Contribution</h2>
+
 <div class="card">
 <ul>
 <li>STEM Ambassador supporting technology education</li>
@@ -378,19 +418,14 @@ Delivered programmes impacting over 120,000 users across Defence, NHS England, f
 </div>
 
 <h2>Contact</h2>
+
 <div class="card">
 <p>Email: timwilliams07@outlook.com</p>
 <p>Phone: 07801 453322</p>
 <p>
 <a href="https://www.linkedin.com/in/timwilliams77" target="_blank"
-   style="text-decoration:none; color:#0A66C2; font-weight:600;">
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-     style="vertical-align:middle; margin-right:6px;">
-    <rect width="24" height="24" rx="4" fill="#0A66C2"/>
-    <path fill="#FFFFFF" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v16h-4V8zm7.5 0h3.8v2.2h.1c.5-1 1.8-2.2 3.9-2.2 4.2 0 5 2.8 5 6.5V24h-4v-8.2c0-2 0-4.5-2.8-4.5-2.8 0-3.2 2.2-3.2 4.3V24h-4V8z"
-          transform="translate(4 0) scale(0.7)"/>
-</svg>
-Tim Williams
+style="text-decoration:none; color:#0A66C2; font-weight:600;">
+LinkedIn Profile
 </a>
 </p>
 </div>
@@ -410,6 +445,28 @@ fetch("footer.html")
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
+<!-- ⭐ DARK MODE ENGINE -->
+<script>
+(function () {
+    const darkToggle = document.getElementById("darkToggle");
+    if (!darkToggle) return;
+
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_dark");
+
+    if (storedMode === "1") {
+        body.classList.add("dark-mode");
+    }
+
+    darkToggle.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem(
+            "tw_dark",
+            body.classList.contains("dark-mode") ? "1" : "0"
+        );
+    });
+})();
+</script>
 
 </body>
 </html>

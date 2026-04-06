@@ -3,53 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Tim Williams – Book a Meeting</title>
 
+  <!-- GLOBAL CSS -->
   <link rel="stylesheet" href="certifications.css?v=1">
 
   <!-- Calendly script -->
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+  <style>
+    /* PAGE WRAPPER */
+    body.page-certifications {
+      background: var(--bg);
+      color: var(--text-main);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* MATCH FAQ EXACTLY — ONLY THIS */
+    .sticky-follow {
+      background: var(--accent);
+    }
+
+    /* DARK MODE VARIABLES */
+    body.dark-mode {
+      --bg: #0a0a0a;
+      --text-main: #ffffff;
+      --text-sub: #cccccc;
+      --card-bg: #1a1a1a;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 1.5rem;
+    }
+  </style>
 </head>
 
 <body class="page-certifications">
 
-  <!-- HEADER INCLUDE -->
+<!-- HEADER INCLUDE -->
 <div id="header"></div>
-<script src="global.js"></script>
 
+<script src="global.js"></script>
 <script>
 fetch("header-standard.html")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header").innerHTML = h;
-      initGlobal();
+    document.getElementById("header").innerHTML = h;
+    initGlobal();
   });
 </script>
 
-  <!-- MAIN CONTENT -->
-  <div class="container" style="margin-top: 40px;">
-    <h2 style="text-align:center; margin-bottom: 20px;">Book a Meeting with Tim Williams</h2>
+<!-- STICKY BAR (IDENTICAL TO FAQ) -->
+<div class="sticky-follow">
+    <span>Book a Meeting</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
 
-    <div class="calendly-inline-widget"
-         data-url="https://calendly.com/timwilliams07/30min?background_color=0a2540&text_color=ffffff"
-         style="min-width:320px; height:700px; border-radius: 10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.15);">
-    </div>
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <h2 style="text-align:center; margin-bottom: 20px;">Book a Meeting with Tim Williams</h2>
+
+  <div class="calendly-inline-widget"
+       data-url="https://calendly.com/timwilliams07/30min?background_color=0a2540&text_color=ffffff"
+       style="min-width:320px; height:700px; border-radius: 10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.15);">
   </div>
 
-  <!-- FLOATING BOOKING BUTTON (optional, to keep consistent) -->
-  <a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+</div>
 
-  <!-- BACK TO TOP BUTTON -->
-  <div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+<!-- FLOATING BUTTONS -->
+<a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+<div id="fab" class="fab" aria-label="Back to top">⬆️</div>
 
-  <!-- FOOTER INCLUDE -->
-  <div id="footer"></div>
-  <script>
-    fetch("footer.html")
-      .then(r => r.text())
-      .then(h => document.getElementById("footer").innerHTML = h);
-  </script>
+<!-- FOOTER INCLUDE -->
+<div id="footer"></div>
 
-  <script src="global.js"></script>
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- DARK MODE -->
+<script>
+(function () {
+    const darkToggle = document.getElementById("darkToggle");
+    if (!darkToggle) return;
+
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_dark");
+
+    if (storedMode === "1") {
+        body.classList.add("dark-mode");
+    }
+
+    darkToggle.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem(
+            "tw_dark",
+            body.classList.contains("dark-mode") ? "1" : "0"
+        );
+    });
+})();
+</script>
+
 </body>
 </html>

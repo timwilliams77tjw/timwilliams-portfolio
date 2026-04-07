@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tim Williams – CV</title>
+
+<title>Tim Williams | Senior IT Programme Manager</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
 body{
-font-family:Arial, Helvetica, sans-serif;
-background:#f5f7fa;
+font-family:Arial,Helvetica,sans-serif;
 margin:0;
+background:#f4f7fb;
 color:#001f3f;
 }
 
@@ -22,30 +24,30 @@ margin:auto;
 padding:20px;
 }
 
-h2{
+h1,h2,h3{
 margin-top:0;
 }
 
 .card{
 background:white;
-padding:20px;
+padding:25px;
 border-radius:10px;
 box-shadow:0 3px 10px rgba(0,0,0,0.08);
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
-/* FILTER BAR */
+/* NAV FILTER */
 
 .sticky-bar{
 position:sticky;
 top:0;
 background:white;
-padding:10px;
+padding:12px;
 display:flex;
 gap:10px;
 flex-wrap:wrap;
 border-bottom:1px solid #ddd;
-z-index:999;
+z-index:100;
 }
 
 .filter-btn{
@@ -61,6 +63,59 @@ cursor:pointer;
 background:#7ac0f9;
 }
 
+/* PROFILE */
+
+.hero{
+display:flex;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.profile-summary{
+background:#001f3f;
+color:white;
+padding:25px;
+border-radius:10px;
+max-width:350px;
+}
+
+.profile-summary ul{
+padding-left:20px;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+text-align:center;
+}
+
+.stat{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* LOGOS */
+
+.logo-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:25px;
+text-align:center;
+}
+
+.logo{
+font-weight:bold;
+padding:15px;
+background:white;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
 /* TIMELINE */
 
 .timeline-container{
@@ -70,11 +125,10 @@ overflow:hidden;
 
 .timeline-wrapper{
 display:flex;
-gap:40px;
+gap:30px;
 overflow-x:auto;
 scroll-snap-type:x mandatory;
-scroll-behavior:smooth;
-padding:20px;
+padding:15px;
 }
 
 .timeline-node{
@@ -87,15 +141,6 @@ scroll-snap-align:center;
 cursor:pointer;
 }
 
-.timeline-node:hover{
-transform:translateY(-3px);
-}
-
-.timeline-date{
-font-weight:bold;
-margin-bottom:8px;
-}
-
 .timeline-details{
 display:none;
 margin-top:10px;
@@ -104,8 +149,6 @@ margin-top:10px;
 .timeline-node.active .timeline-details{
 display:block;
 }
-
-/* arrows */
 
 .arrow{
 position:absolute;
@@ -132,11 +175,32 @@ grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:20px;
 }
 
+/* PROJECTS */
+
+.project-card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
 /* SKILL CHART */
 
 .skill-chart{
 max-width:600px;
 margin:auto;
+}
+
+/* DOWNLOAD */
+
+.cv-download{
+background:#001f3f;
+color:white;
+padding:12px 18px;
+border-radius:8px;
+text-decoration:none;
+display:inline-block;
+margin-top:10px;
 }
 
 /* FAB */
@@ -158,6 +222,7 @@ font-size:22px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -168,45 +233,124 @@ font-size:22px;
 <button class="filter-btn" data-filter="experience">Experience</button>
 <button class="filter-btn" data-filter="achievements">Achievements</button>
 <button class="filter-btn" data-filter="skills">Skills</button>
+<button class="filter-btn" data-filter="projects">Projects</button>
 <button class="filter-btn" data-filter="certifications">Certifications</button>
-<button class="filter-btn" data-filter="awards">Awards</button>
+<button class="filter-btn" data-filter="contact">Contact</button>
 
 </div>
 
 <div class="page">
 
-<!-- SUMMARY -->
+<!-- HERO -->
 
 <div class="section" data-category="summary">
 
+<div class="hero">
+
 <div class="card">
 
-<h2>Executive Summary</h2>
+<h1>Tim Williams</h1>
+
+<h3>Senior IT Programme & Project Manager</h3>
 
 <p>
 
-Senior IT Project & Programme Manager with 25+ years delivering enterprise-scale infrastructure transformation, cyber security programmes, cloud adoption and digital workplace initiatives across government, defence, healthcare and financial sectors.
+Senior IT transformation leader with over 25 years delivering enterprise infrastructure, cloud transformation, cyber security and digital workplace programmes across government and enterprise sectors.
 
 </p>
 
 <p>
 
-Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metropolitan Police, DWP, Telefonica and Tesco.
+Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metropolitan Police and Telefonica.
 
 </p>
 
+<a class="cv-download" href="#">Download CV</a>
+
+</div>
+
+<div class="profile-summary">
+
+<h2>Quick Profile</h2>
+
+<ul>
+
+<li>25+ Years IT Programme Delivery</li>
+<li>Enhanced SC Cleared</li>
+<li>Global Programme Delivery</li>
+<li>£100M+ Programme Value</li>
+<li>Government & Enterprise Clients</li>
+
+</ul>
+
+<p><strong>Available for Contract Roles</strong></p>
+
 </div>
 
 </div>
 
+</div>
 
-<!-- EXPERIENCE TIMELINE -->
+<!-- STATS -->
+
+<div class="card stats">
+
+<div class="stat">
+
+<h2>126,000</h2>
+<p>Devices Deployed</p>
+
+</div>
+
+<div class="stat">
+
+<h2>46,000</h2>
+<p>Windows 11 Upgrades</p>
+
+</div>
+
+<div class="stat">
+
+<h2>32,000</h2>
+<p>Endpoint Migrations</p>
+
+</div>
+
+<div class="stat">
+
+<h2>£18M</h2>
+<p>Cyber Security Programme</p>
+
+</div>
+
+</div>
+
+<!-- CLIENTS -->
+
+<div class="card">
+
+<h2>Clients & Organisations</h2>
+
+<div class="logo-grid">
+
+<div class="logo">NHS England</div>
+<div class="logo">HSBC</div>
+<div class="logo">Tesco</div>
+<div class="logo">MoD</div>
+<div class="logo">Telefonica</div>
+<div class="logo">Met Police</div>
+
+</div>
+
+</div>
+
+<!-- TIMELINE -->
 
 <div class="section" data-category="experience">
 
 <div class="card">
 
-<h2>Work Experience</h2>
+<h2>Career Timeline</h2>
 
 <div class="timeline-container">
 
@@ -217,16 +361,15 @@ Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metro
 
 <div class="timeline-node">
 
-<div class="timeline-date">2025–2026</div>
-
-<h3>Senior Project Manager – NHS England</h3>
+<h3>Senior Project Manager</h3>
+<p>NHS England</p>
 
 <div class="timeline-details">
 
 <ul>
-<li>Delivered £18m Cyber Security programme</li>
-<li>MFA, CyberArk, Splunk, IAM, Entra, Intune</li>
-<li>Aligned security architecture with CAF standards</li>
+<li>Delivered enterprise cyber security programme</li>
+<li>CAF aligned architecture</li>
+<li>MFA, IAM, CyberArk, Splunk, Azure</li>
 </ul>
 
 </div>
@@ -235,16 +378,15 @@ Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metro
 
 <div class="timeline-node">
 
-<div class="timeline-date">2025</div>
-
-<h3>PMO Manager – Roc Technologies</h3>
+<h3>PMO Manager</h3>
+<p>Roc Technologies</p>
 
 <div class="timeline-details">
 
 <ul>
-<li>Directed PMO delivery for Dounreay Nuclear</li>
-<li>Network refresh, ServiceNow MSP implementation</li>
-<li>MFA security rollout</li>
+<li>Directed PMO operations</li>
+<li>Network refresh programme</li>
+<li>ServiceNow MSP implementation</li>
 </ul>
 
 </div>
@@ -253,16 +395,15 @@ Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metro
 
 <div class="timeline-node">
 
-<div class="timeline-date">2013–2024</div>
-
-<h3>Senior Project Manager – Computacenter</h3>
+<h3>Senior Project Manager</h3>
+<p>Computacenter</p>
 
 <div class="timeline-details">
 
 <ul>
-<li>Global Windows 10/11 transformation</li>
-<li>Azure & AWS migrations</li>
-<li>Enterprise device rollout programmes</li>
+<li>Global enterprise transformation</li>
+<li>Windows 10/11 migration</li>
+<li>Azure cloud transformation</li>
 </ul>
 
 </div>
@@ -276,7 +417,6 @@ Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metro
 </div>
 
 </div>
-
 
 <!-- ACHIEVEMENTS -->
 
@@ -288,28 +428,27 @@ Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metro
 
 <div class="grid">
 
-<div>
+<div class="project-card">
 
 <h3>NHS Cyber Security Programme</h3>
 
-<p>Delivered enterprise security architecture improving resilience across NHS estate.</p>
+<p>Delivered enterprise security transformation improving cyber resilience.</p>
 
 </div>
 
-<div>
+<div class="project-card">
 
-<h3>Global Workplace Transformation</h3>
+<h3>Global Windows Transformation</h3>
 
-<p>Delivered global device transformation across 126k users.</p>
-
-</div>
-
-</div>
+<p>Delivered Windows transformation across multiple global enterprises.</p>
 
 </div>
 
 </div>
 
+</div>
+
+</div>
 
 <!-- SKILLS -->
 
@@ -329,6 +468,42 @@ Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metro
 
 </div>
 
+<!-- PROJECTS -->
+
+<div class="section" data-category="projects">
+
+<div class="card">
+
+<h2>Key Programme Deliveries</h2>
+
+<div class="grid">
+
+<div class="project-card">
+
+<h3>Tesco Windows 11 Programme</h3>
+<p>Enterprise rollout across 126k devices.</p>
+
+</div>
+
+<div class="project-card">
+
+<h3>NHS Security Transformation</h3>
+<p>Delivered national cyber security programme.</p>
+
+</div>
+
+<div class="project-card">
+
+<h3>MoD Mobile Device Programme</h3>
+<p>Delivered enterprise device management solution.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 <!-- CERTIFICATIONS -->
 
@@ -352,23 +527,16 @@ Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metro
 
 </div>
 
+<!-- CONTACT -->
 
-<!-- AWARDS -->
-
-<div class="section" data-category="awards">
+<div class="section" data-category="contact">
 
 <div class="card">
 
-<h2>Awards & Contributions</h2>
+<h2>Contact</h2>
 
-<ul>
-
-<li>STEM Ambassador</li>
-<li>APM Mentor</li>
-<li>High Performer Awards</li>
-<li>Customer Service Recognition</li>
-
-</ul>
+<p>Email: tim@twc-ltd.uk</p>
+<p>Location: United Kingdom</p>
 
 </div>
 
@@ -383,10 +551,10 @@ Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metro
 /* timeline expand */
 
 document.querySelectorAll(".timeline-node").forEach(node=>{
-node.addEventListener("click",()=>node.classList.toggle("active"))
+node.onclick=()=>node.classList.toggle("active")
 })
 
-/* timeline arrows */
+/* arrows */
 
 const wrapper=document.querySelector(".timeline-wrapper")
 
@@ -417,7 +585,7 @@ sec.style.display=(sec.dataset.category===cat)?"block":"none"
 
 })
 
-/* radar chart */
+/* radar */
 
 new Chart(document.getElementById("skillsRadar"),{
 
@@ -428,7 +596,7 @@ labels:[
 "Cyber Security",
 "Cloud",
 "Enterprise Infrastructure",
-"PMO Leadership",
+"Programme Leadership",
 "Service Management",
 "Pre-Sales"
 ],
@@ -441,17 +609,12 @@ fill:true
 },
 
 options:{
-scales:{
-r:{
-beginAtZero:true,
-max:100
-}
-}
+scales:{r:{beginAtZero:true,max:100}}
 }
 
 })
 
-/* fab */
+/* FAB */
 
 document.getElementById("fab").onclick=()=>{
 window.scrollTo({top:0,behavior:"smooth"})

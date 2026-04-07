@@ -1,52 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tim Williams – Recommendations</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="certifications.css?v=1">
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css?v=1">
+
+<style>
+
+body.page-certifications{
+  background:var(--bg);
+  color:var(--text-main);
+  transition:background .3s ease,color .3s ease;
+}
+
+.page-container{
+  max-width:960px;
+  margin:0 auto;
+  padding:2rem 1.5rem;
+}
+
+.hero-section{
+  margin-bottom:2rem;
+}
+
+.hero-section h1{
+  font-size:2.2rem;
+  margin-bottom:.5rem;
+  color:var(--text-main);
+}
+
+.hero-section p{
+  font-size:1.1rem;
+  color:var(--text-sub);
+  max-width:720px;
+}
+
+.recommendation-card{
+  background:var(--card-bg);
+  padding:1.25rem;
+  border-radius:8px;
+  box-shadow:var(--shadow);
+  margin-bottom:1rem;
+}
+
+.recommendation-card h3{
+  margin-top:0;
+  color:var(--text-main);
+  font-size:1.1rem;
+}
+
+.recommendation-card p{
+  margin-bottom:0;
+  color:var(--text-sub);
+  line-height:1.5;
+}
+
+.cta-section{
+  text-align:center;
+  margin-top:3rem;
+  padding-top:2rem;
+  border-top:1px solid #e0e0e0;
+}
+
+.btn{
+  display:inline-block;
+  padding:.6rem 1.4rem;
+  border-radius:999px;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  margin-top:1rem;
+}
+
+/* same sticky bar styling */
+.sticky-follow{
+  background:var(--accent);
+}
+
+</style>
 </head>
 
 <body class="page-certifications">
 
-  <!-- HEADER INCLUDE -->
+<!-- HEADER -->
 <div id="header"></div>
-<script src="global.js"></script>
 
+<script src="global.js"></script>
 <script>
 fetch("header-standard.html")
-  .then(r => r.text())
-  .then(h => {
-      document.getElementById("header").innerHTML = h;
-      initGlobal();
-  });
+.then(r=>r.text())
+.then(h=>{
+  document.getElementById("header").innerHTML=h;
+  initGlobal();
+});
 </script>
-  <!-- PAGE TITLE -->
-  <h2 style="text-align:center; margin-top:40px;">Recommendations</h2>
 
-  <!-- RECOMMENDATIONS WIDGET -->
-  <div class="container">
-    <div class="card">
-      <div class="sk-ww-linkedin-recommendations" data-embed-id="25660597"></div>
-      <script src="https://widgets.sociablekit.com/linkedin-recommendations/widget.js" defer></script>
-    </div>
-  </div>
 
-  <!-- BACK TO TOP BUTTON -->
-  <div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+<!-- STICKY BAR (SAME AS FAQ PAGE) -->
+<div class="sticky-follow">
+<span>Recommendations</span>
+<button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
 
-  <!-- FLOATING BOOKING BUTTON -->
-  <a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
 
-  <!-- FOOTER INCLUDE -->
-  <div id="footer"></div>
-  <script>
-    fetch("footer.html")
-      .then(r => r.text())
-      .then(h => document.getElementById("footer").innerHTML = h);
-  </script>
+<!-- PAGE CONTENT -->
+<main class="page-container">
 
-  <script src="global.js"></script>
+<section class="hero-section">
+<h1>Client Recommendations</h1>
+<p>Feedback and endorsements from colleagues, partners and organisations I have worked with.</p>
+</section>
+
+<div id="recommendations">
+
+<div class="recommendation-card">
+<h3>Senior Programme Sponsor</h3>
+<p>“An exceptional programme leader who brings clarity, structure and momentum to complex transformation initiatives.”</p>
+</div>
+
+<div class="recommendation-card">
+<h3>Technology Director</h3>
+<p>“Delivered a challenging cloud transformation programme with professionalism and precision.”</p>
+</div>
+
+<div class="recommendation-card">
+<h3>Delivery Partner</h3>
+<p>“Highly collaborative, strategic and focused on outcomes — a trusted programme leader.”</p>
+</div>
+
+</div>
+
+
+<section class="cta-section">
+<h2>Interested in working together?</h2>
+<p>If you'd like to discuss your programme or transformation initiative, feel free to get in touch.</p>
+<a href="/contact.html" class="btn">Get in Touch</a>
+</section>
+
+</main>
+
+
+<!-- FLOATING BUTTONS -->
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+
+<!-- FOOTER -->
+<div id="footer"></div>
+
+<script>
+fetch("footer.html")
+.then(r=>r.text())
+.then(h=>document.getElementById("footer").innerHTML=h);
+</script>
+
+
+<!-- DARK MODE (SAME SCRIPT AS FAQ PAGE) -->
+<script>
+(function(){
+
+const darkToggle=document.getElementById("darkToggle");
+if(!darkToggle) return;
+
+const body=document.body;
+const storedMode=localStorage.getItem("tw_dark");
+
+if(storedMode==="1"){
+  body.classList.add("dark-mode");
+}
+
+darkToggle.addEventListener("click",function(){
+
+  body.classList.toggle("dark-mode");
+
+  localStorage.setItem(
+    "tw_dark",
+    body.classList.contains("dark-mode")?"1":"0"
+  );
+
+});
+
+})();
+</script>
+
 </body>
 </html>

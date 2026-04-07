@@ -8,9 +8,19 @@
 <link rel="stylesheet" href="certifications.css?v=1">
 
 <style>
+
+/* Enable page background to react to dark mode */
+body.page-certifications{
+  background: var(--bg);
+  color: var(--text-main);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Sticky bar styling */
 .sticky-follow{
   background: var(--accent);
 }
+
 </style>
 
 </head>
@@ -24,11 +34,11 @@
 
 <script>
 fetch("header-standard.html")
-.then(r => r.text())
-.then(h => {
-    document.getElementById("header").innerHTML = h;
-    initGlobal();
-});
+  .then(r => r.text())
+  .then(h => {
+      document.getElementById("header").innerHTML = h;
+      initGlobal();
+  });
 </script>
 
 
@@ -45,10 +55,10 @@ fetch("header-standard.html")
 
 <!-- RECOMMENDATIONS WIDGET -->
 <div class="container">
-<div class="card">
-<div class="sk-ww-linkedin-recommendations" data-embed-id="25660597"></div>
-<script src="https://widgets.sociablekit.com/linkedin-recommendations/widget.js" defer></script>
-</div>
+  <div class="card">
+    <div class="sk-ww-linkedin-recommendations" data-embed-id="25660597"></div>
+    <script src="https://widgets.sociablekit.com/linkedin-recommendations/widget.js" defer></script>
+  </div>
 </div>
 
 
@@ -65,17 +75,18 @@ fetch("header-standard.html")
 
 <script>
 fetch("footer.html")
-.then(r => r.text())
-.then(h => document.getElementById("footer").innerHTML = h);
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
 
 <script src="global.js"></script>
 
 
-<!-- DARK MODE (EXACT SAME SCRIPT AS FAQ PAGE) -->
+<!-- DARK MODE SCRIPT -->
 <script>
 (function () {
+
 const darkToggle = document.getElementById("darkToggle");
 if (!darkToggle) return;
 
@@ -83,17 +94,20 @@ const body = document.body;
 const storedMode = localStorage.getItem("tw_dark");
 
 if (storedMode === "1") {
-body.classList.add("dark-mode");
+  body.classList.add("dark-mode");
 }
 
 darkToggle.addEventListener("click", function () {
-body.classList.toggle("dark-mode");
 
-localStorage.setItem(
-"tw_dark",
-body.classList.contains("dark-mode") ? "1" : "0"
-);
+  body.classList.toggle("dark-mode");
+
+  localStorage.setItem(
+    "tw_dark",
+    body.classList.contains("dark-mode") ? "1" : "0"
+  );
+
 });
+
 })();
 </script>
 

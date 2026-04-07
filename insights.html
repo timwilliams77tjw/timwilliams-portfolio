@@ -87,6 +87,23 @@ body.page-certifications {
     color: var(--text-sub);
 }
 
+/* READ MORE BUTTON */
+.read-more-btn {
+    margin-top: 0.75rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.read-more-btn:hover {
+    opacity: 0.85;
+}
+
 /* GRID */
 .grid {
     display: grid;
@@ -160,7 +177,7 @@ fetch("header-standard.html")
     });
 </script>
 
-<!-- STICKY BAR (IDENTICAL TO FAQ) -->
+<!-- STICKY BAR -->
 <div class="sticky-follow">
     <span>Insights & Leadership Perspectives</span>
     <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
@@ -181,9 +198,41 @@ fetch("header-standard.html")
 
 <section>
     <h2>Featured Insight</h2>
-    <article class="featured-article insight-card" data-topic="cyber">
-        <h3>Why Cyber Uplift Fails — And How to Fix It</h3>
-        <p>Most cyber uplift programmes fail not because of technology, but because of governance, ownership and cultural resistance. Here’s how to deliver uplift that actually sticks.</p>
+
+    <!-- NEW FEATURED AI ARTICLE -->
+    <article class="featured-article insight-card" data-topic="ai project-management leadership">
+        <h3>AI Isn’t Replacing Project Managers — It’s Redefining What Great Looks Like</h3>
+
+        <p>
+            AI is becoming a strategic partner for modern PMs — accelerating clarity, improving prediction,
+            strengthening stakeholder engagement and freeing leaders to focus on strategy, coaching and delivery excellence.
+        </p>
+
+        <button class="read-more-btn" onclick="toggleInsightFull(this)">Read more</button>
+
+        <div class="full-article" style="display:none; margin-top:1rem;">
+
+            <p>Over the past year, I’ve seen a clear shift: AI isn’t just another tool in the PM toolkit. It’s becoming a strategic partner that elevates how we plan, deliver, and lead.</p>
+
+            <p>The real advantage isn’t automation.<br><strong>It’s augmentation.</strong></p>
+
+            <h4>🔍 1. Clarity at Speed</h4>
+            <p>AI can analyse complex project data in seconds — risks, dependencies, resource constraints — giving PMs the ability to make sharper decisions with greater confidence.</p>
+
+            <h4>📊 2. Predictive Insight, Not Reactive Firefighting</h4>
+            <p>Instead of waiting for issues to surface, AI highlights patterns early. It’s like having a second pair of eyes constantly scanning the horizon.</p>
+
+            <h4>🤝 3. Stronger Stakeholder Engagement</h4>
+            <p>From summarising meetings to generating tailored updates, AI helps PMs communicate with precision and consistency — freeing up time to focus on relationships, not admin.</p>
+
+            <h4>🧩 4. More Time for Leadership</h4>
+            <p>When AI handles the repetitive tasks, PMs can lean into the work that truly moves organisations forward: strategy, coaching, alignment, and delivery excellence.</p>
+
+            <p><strong>AI won’t replace project managers. But project managers who embrace AI will absolutely outperform those who don’t.</strong></p>
+
+            <p>The future of project leadership belongs to those who combine human judgement with intelligent tools — and use both to deliver outcomes that are faster, clearer, and more resilient.</p>
+
+        </div>
     </article>
 </section>
 
@@ -264,6 +313,17 @@ if (searchInput) {
         );
     });
 })();
+</script>
+
+<!-- READ MORE TOGGLE -->
+<script>
+function toggleInsightFull(btn) {
+    const fullArticle = btn.nextElementSibling;
+    const isOpen = fullArticle.style.display === "block";
+
+    fullArticle.style.display = isOpen ? "none" : "block";
+    btn.textContent = isOpen ? "Read more" : "Show less";
+}
 </script>
 
 </body>

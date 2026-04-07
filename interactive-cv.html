@@ -3,265 +3,460 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tim Williams CV – Interactive Timeline</title>
+<title>Tim Williams – CV</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f8f9fa;
-  color: #001f3f;
-  margin: 0;
-  padding: 0;
-}
-.page-content { padding: 20px; max-width: 1400px; margin: auto; }
 
-/* ===== FILTER BAR ===== */
-.sticky-bar {
-  background:white; display:flex; flex-wrap:wrap; gap:8px; padding:10px;
-  border-bottom:1px solid #ddd;
-  position:sticky; top:0; z-index:999;
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#f5f7fa;
+margin:0;
+color:#001f3f;
 }
-.filter-btn {
-  background-color: #001f3f; color: white;
-  border: 1px solid #001f3f; border-radius: 6px; padding: 6px 14px;
-  font-size: 14px; cursor: pointer; transition: all 0.2s;
-}
-.filter-btn:hover { background-color:#7ac0f9; color:white; }
-.filter-btn.active-filter { background-color:white; color:#001f3f; border:1px solid #7ac0f9; }
 
-/* ===== TIMELINE ===== */
-.timeline-container {
-  position: relative;
-  margin: 40px 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 20px 0;
+.page{
+max-width:1300px;
+margin:auto;
+padding:20px;
 }
-.timeline-line {
-  position: absolute; top: 50%; left: 0; height: 4px; width: 100%;
-  background: #001f3f; transform: translateY(-50%); z-index: 1;
-}
-.timeline-wrapper {
-  display: flex; gap: 50px; position: relative; padding: 20px 0;
-  scroll-behavior: smooth;
-}
-.timeline-node {
-  position: relative;
-  min-width: 250px;
-  cursor: pointer;
-  text-align: center;
-  scroll-snap-align: center;
-  z-index: 2;
-}
-.timeline-node::before {
-  content: '';
-  width: 20px; height: 20px;
-  background: #001f3f;
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto 10px;
-  border: 3px solid white;
-}
-.timeline-date { font-weight: bold; margin-bottom: 5px; }
-.timeline-details {
-  display: none;
-  background:white; padding: 15px; margin-top:10px; border-radius: 10px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
-}
-.timeline-node.active .timeline-details { display: block; }
 
-/* Timeline arrows */
-.timeline-arrow {
-  position: absolute; top:50%; transform: translateY(-50%);
-  width:40px; height:40px; background:#001f3f; color:white;
-  border-radius:50%; display:flex; justify-content:center; align-items:center;
-  cursor:pointer; font-size:24px; z-index:3; user-select:none;
+h2{
+margin-top:0;
 }
-.timeline-arrow.left { left:-20px; }
-.timeline-arrow.right { right:-20px; }
 
-/* ===== CARDS ===== */
-.card { background:white; border-radius:10px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.08); margin-bottom:16px; }
-.card ul { padding-left:20px; margin:0; }
-.card ul li { margin-bottom:8px; }
-
-/* ===== GRID ===== */
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:10px; }
-
-/* ===== ACCORDION ===== */
-.category-header { font-size: 1.2em; font-weight:bold; margin-bottom:10px; cursor:pointer; }
-.category-toggle { float:right; }
-
-/* ===== FAB ===== */
-.fab {
-  position:fixed; bottom:20px; right:20px; 
-  background:#001f3f; color:white; border-radius:50%; 
-  width:50px;height:50px; display:flex; justify-content:center; align-items:center; 
-  cursor:pointer; font-size:24px;
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+margin-bottom:20px;
 }
+
+/* FILTER BAR */
+
+.sticky-bar{
+position:sticky;
+top:0;
+background:white;
+padding:10px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+border-bottom:1px solid #ddd;
+z-index:999;
+}
+
+.filter-btn{
+background:#001f3f;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.filter-btn.active{
+background:#7ac0f9;
+}
+
+/* TIMELINE */
+
+.timeline-container{
+position:relative;
+overflow:hidden;
+}
+
+.timeline-wrapper{
+display:flex;
+gap:40px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+scroll-behavior:smooth;
+padding:20px;
+}
+
+.timeline-node{
+min-width:260px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+scroll-snap-align:center;
+cursor:pointer;
+}
+
+.timeline-node:hover{
+transform:translateY(-3px);
+}
+
+.timeline-date{
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.timeline-details{
+display:none;
+margin-top:10px;
+}
+
+.timeline-node.active .timeline-details{
+display:block;
+}
+
+/* arrows */
+
+.arrow{
+position:absolute;
+top:40%;
+width:40px;
+height:40px;
+background:#001f3f;
+color:white;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+.arrow-left{left:-10px}
+.arrow-right{right:-10px}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+/* SKILL CHART */
+
+.skill-chart{
+max-width:600px;
+margin:auto;
+}
+
+/* FAB */
+
+.fab{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#001f3f;
+color:white;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:22px;
+}
+
 </style>
 </head>
+
 <body>
 
-<!-- FILTER BAR -->
 <div class="sticky-bar">
-  <button class="filter-btn active-filter" data-filter="summary">Summary</button>
-  <button class="filter-btn" data-filter="achievements">Achievements</button>
-  <button class="filter-btn" data-filter="experience">Experience</button>
-  <button class="filter-btn" data-filter="skills">Skills</button>
-  <button class="filter-btn" data-filter="certifications">Certifications</button>
-  <button class="filter-btn" data-filter="awards">Awards</button>
+
+<button class="filter-btn active" data-filter="summary">Summary</button>
+<button class="filter-btn" data-filter="experience">Experience</button>
+<button class="filter-btn" data-filter="achievements">Achievements</button>
+<button class="filter-btn" data-filter="skills">Skills</button>
+<button class="filter-btn" data-filter="certifications">Certifications</button>
+<button class="filter-btn" data-filter="awards">Awards</button>
+
 </div>
 
-<main class="page-content">
+<div class="page">
 
-<!-- EXECUTIVE SUMMARY -->
-<div class="category-section cv-section" data-category="summary">
-  <div class="category-header">Executive Summary <span class="category-toggle">+</span></div>
-  <div class="card-list" style="display:block">
-    <div class="card">
-      <p>Senior IT Project & Program Manager with 25+ years delivering enterprise-scale infrastructure modernization, workplace transformation, cloud adoption, and cyber security programs across government, defense, healthcare, finance, and legal sectors.</p>
-      <p>Enhanced SC and DBS clearance, leading multimillion‑pound programs across UK, Europe, APAC, and USA for organisations like NHS England, HSBC, MoD, Metropolitan Police, DWP, Linklater’s, Telefonica, and Tesco.</p>
-    </div>
-  </div>
+<!-- SUMMARY -->
+
+<div class="section" data-category="summary">
+
+<div class="card">
+
+<h2>Executive Summary</h2>
+
+<p>
+
+Senior IT Project & Programme Manager with 25+ years delivering enterprise-scale infrastructure transformation, cyber security programmes, cloud adoption and digital workplace initiatives across government, defence, healthcare and financial sectors.
+
+</p>
+
+<p>
+
+Enhanced SC cleared with extensive delivery across NHS England, HSBC, MoD, Metropolitan Police, DWP, Telefonica and Tesco.
+
+</p>
+
 </div>
 
-<!-- STAR ACHIEVEMENTS -->
-<div class="category-section cv-section" data-category="achievements">
-  <div class="category-header">STAR Achievements <span class="category-toggle">+</span></div>
-  <div class="card-list">
-    <div class="grid">
-      <div class="card">
-        <h3>NHS England — Cyber Security Programme</h3>
-        <ul>
-          <li>MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, Secure Backup platform</li>
-          <li>Improved operational resilience & security posture</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Roc Technologies — PMO & Infrastructure Transformation</h3>
-        <ul>
-          <li>Directed PMO, MFA rollout, network refresh, ServiceNow MSP, Nutanix storage, critical app migrations</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 </div>
 
-<!-- WORK EXPERIENCE TIMELINE -->
-<div class="category-section cv-section" data-category="experience">
-  <div class="category-header">Work Experience <span class="category-toggle">+</span></div>
-  <div class="card-list">
-    <div class="timeline-container">
-      <div class="timeline-line"></div>
-      <div class="timeline-arrow left">&#8592;</div>
-      <div class="timeline-arrow right">&#8594;</div>
-      <div class="timeline-wrapper">
-        <div class="timeline-node">
-          <div class="timeline-date">11/2025 – 02/2026</div>
-          <h3>Senior Project Manager — Tim Williams Consulting / NHS England</h3>
-          <div class="timeline-details">
-            <ul>
-              <li>Delivered Cyber Security Program (MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, Secure Backup).</li>
-              <li>Strategic advisory across identity, cyber security, cloud enablement, and modern workplace.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="timeline-node">
-          <div class="timeline-date">07/2025 – 10/2025</div>
-          <h3>Senior Project Manager / PMO Manager — Roc Technologies</h3>
-          <div class="timeline-details">
-            <ul>
-              <li>Directed PMO, implemented MFA, network refresh, ServiceNow MSP, server builds, Domino upgrades, Nutanix storage, critical app migrations.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="timeline-node">
-          <div class="timeline-date">07/2013 – 09/2024</div>
-          <h3>Senior Project Manager / PMO Manager — Computacenter</h3>
-          <div class="timeline-details">
-            <ul>
-              <li>Global workplace & infrastructure transformations: Windows 10/11, Intune, Azure AD, Teams Rooms, AWS/Azure transitions.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+<!-- EXPERIENCE TIMELINE -->
+
+<div class="section" data-category="experience">
+
+<div class="card">
+
+<h2>Work Experience</h2>
+
+<div class="timeline-container">
+
+<div class="arrow arrow-left">&#8592;</div>
+<div class="arrow arrow-right">&#8594;</div>
+
+<div class="timeline-wrapper">
+
+<div class="timeline-node">
+
+<div class="timeline-date">2025–2026</div>
+
+<h3>Senior Project Manager – NHS England</h3>
+
+<div class="timeline-details">
+
+<ul>
+<li>Delivered £18m Cyber Security programme</li>
+<li>MFA, CyberArk, Splunk, IAM, Entra, Intune</li>
+<li>Aligned security architecture with CAF standards</li>
+</ul>
+
 </div>
 
-<!-- OTHER SECTIONS (SKILLS, CERTIFICATIONS, AWARDS) -->
-<div class="category-section cv-section" data-category="skills">
-  <div class="category-header">Core Skills <span class="category-toggle">+</span></div>
-  <div class="card-list">
-    <div class="grid">
-      <div class="card"><h3>Cyber Security & Identity</h3><ul><li>CAF, IAM, MFA, CyberArk, Splunk, Secure Backup</li></ul></div>
-      <div class="card"><h3>Cloud & Workplace</h3><ul><li>Azure, AWS, Intune, Entra, Autopilot, Cloud Migrations, Windows 10/11, Teams Rooms</li></ul></div>
-    </div>
-  </div>
 </div>
 
-<div class="category-section cv-section" data-category="certifications">
-  <div class="category-header">Certifications <span class="category-toggle">+</span></div>
-  <div class="card-list">
-    <div class="grid">
-      <div class="card"><h3>Project & Programme</h3><ul><li>APM PMQ</li><li>PRINCE2 Practitioner</li></ul></div>
-    </div>
-  </div>
+<div class="timeline-node">
+
+<div class="timeline-date">2025</div>
+
+<h3>PMO Manager – Roc Technologies</h3>
+
+<div class="timeline-details">
+
+<ul>
+<li>Directed PMO delivery for Dounreay Nuclear</li>
+<li>Network refresh, ServiceNow MSP implementation</li>
+<li>MFA security rollout</li>
+</ul>
+
 </div>
 
-<div class="category-section cv-section" data-category="awards">
-  <div class="category-header">Achievements & Awards <span class="category-toggle">+</span></div>
-  <div class="card-list">
-    <div class="grid">
-      <div class="card">
-        <ul><li>STEM Ambassador</li><li>APM Mentor</li><li>High Performer Awards</li></ul>
-      </div>
-    </div>
-  </div>
 </div>
 
-</main>
+<div class="timeline-node">
 
-<div id="fab" class="fab">↑</div>
+<div class="timeline-date">2013–2024</div>
+
+<h3>Senior Project Manager – Computacenter</h3>
+
+<div class="timeline-details">
+
+<ul>
+<li>Global Windows 10/11 transformation</li>
+<li>Azure & AWS migrations</li>
+<li>Enterprise device rollout programmes</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ACHIEVEMENTS -->
+
+<div class="section" data-category="achievements">
+
+<div class="card">
+
+<h2>STAR Achievements</h2>
+
+<div class="grid">
+
+<div>
+
+<h3>NHS Cyber Security Programme</h3>
+
+<p>Delivered enterprise security architecture improving resilience across NHS estate.</p>
+
+</div>
+
+<div>
+
+<h3>Global Workplace Transformation</h3>
+
+<p>Delivered global device transformation across 126k users.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SKILLS -->
+
+<div class="section" data-category="skills">
+
+<div class="card">
+
+<h2>Core Skills</h2>
+
+<div class="skill-chart">
+
+<canvas id="skillsRadar"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CERTIFICATIONS -->
+
+<div class="section" data-category="certifications">
+
+<div class="card">
+
+<h2>Certifications</h2>
+
+<ul>
+
+<li>APM PMQ</li>
+<li>PRINCE2 Practitioner</li>
+<li>PRINCE2 Agile</li>
+<li>P3O Practitioner</li>
+<li>ITIL Foundation</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+<!-- AWARDS -->
+
+<div class="section" data-category="awards">
+
+<div class="card">
+
+<h2>Awards & Contributions</h2>
+
+<ul>
+
+<li>STEM Ambassador</li>
+<li>APM Mentor</li>
+<li>High Performer Awards</li>
+<li>Customer Service Recognition</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="fab" id="fab">↑</div>
 
 <script>
-// Timeline node toggle
-document.querySelectorAll('.timeline-node').forEach(node=>{
-  node.addEventListener('click',()=> node.classList.toggle('active'));
-});
 
-// Timeline carousel arrows
-const timeline = document.querySelector('.timeline-wrapper');
-const arrowLeft = document.querySelector('.timeline-arrow.left');
-const arrowRight = document.querySelector('.timeline-arrow.right');
-const nodeWidth = document.querySelector('.timeline-node').offsetWidth + 50; // node + gap
+/* timeline expand */
 
-arrowLeft.addEventListener('click', ()=> timeline.scrollBy({left:-nodeWidth, behavior:'smooth'}));
-arrowRight.addEventListener('click', ()=> timeline.scrollBy({left:nodeWidth, behavior:'smooth'}));
+document.querySelectorAll(".timeline-node").forEach(node=>{
+node.addEventListener("click",()=>node.classList.toggle("active"))
+})
 
-// Accordion toggle
-document.querySelectorAll('.category-header').forEach(header=>{
-  header.addEventListener('click', ()=>{
-    const cardList = header.nextElementSibling;
-    cardList.style.display = cardList.style.display === 'block' ? 'none' : 'block';
-  });
-});
+/* timeline arrows */
 
-// Filters
-const filterBtns = document.querySelectorAll('.filter-btn');
-filterBtns.forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const filter = btn.getAttribute('data-filter');
-    document.querySelectorAll('.cv-section').forEach(sec=>{
-      sec.style.display = (filter==='all' || sec.dataset.category===filter) ? 'block' : 'none';
-    });
-    filterBtns.forEach(b=>b.classList.remove('active-filter'));
-    btn.classList.add('active-filter');
-  });
-});
+const wrapper=document.querySelector(".timeline-wrapper")
 
-// FAB scroll
-document.getElementById('fab').addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+document.querySelector(".arrow-left").onclick=()=>wrapper.scrollBy({left:-300,behavior:"smooth"})
+document.querySelector(".arrow-right").onclick=()=>wrapper.scrollBy({left:300,behavior:"smooth"})
+
+/* filter */
+
+const buttons=document.querySelectorAll(".filter-btn")
+
+buttons.forEach(btn=>{
+
+btn.onclick=()=>{
+
+buttons.forEach(b=>b.classList.remove("active"))
+
+btn.classList.add("active")
+
+let cat=btn.dataset.filter
+
+document.querySelectorAll(".section").forEach(sec=>{
+
+sec.style.display=(sec.dataset.category===cat)?"block":"none"
+
+})
+
+}
+
+})
+
+/* radar chart */
+
+new Chart(document.getElementById("skillsRadar"),{
+
+type:"radar",
+
+data:{
+labels:[
+"Cyber Security",
+"Cloud",
+"Enterprise Infrastructure",
+"PMO Leadership",
+"Service Management",
+"Pre-Sales"
+],
+
+datasets:[{
+label:"Expertise",
+data:[95,90,92,96,88,85],
+fill:true
+}]
+},
+
+options:{
+scales:{
+r:{
+beginAtZero:true,
+max:100
+}
+}
+}
+
+})
+
+/* fab */
+
+document.getElementById("fab").onclick=()=>{
+window.scrollTo({top:0,behavior:"smooth"})
+}
+
 </script>
 
 </body>

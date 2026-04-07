@@ -6,120 +6,229 @@
 <title>Tim Williams | Senior IT Programme Manager</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-body { font-family: Arial, Helvetica, sans-serif; margin: 0; background: #f5f7fb; color: #001f3f; line-height: 1.6; scroll-behavior: smooth;}
-/* HERO BANNER HEADER */
-.hero-banner { background: linear-gradient(120deg,#001f3f,#003366); color: white; padding: 30px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;}
-.hero-content { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; margin: auto; }
-.left-column { flex: 1; }
-.hero-text h1 { margin: 0; font-size: 36px; }
-.hero-text p { margin: 5px 0; font-size: 16px; }
-.button-group { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; }
-.brand-btn { background: #7ac0f9; color: #001f3f; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; transition: background 0.3s; }
-.brand-btn:hover { background: #5aa0e0; }
-.arrow { margin-left: 4px; }
-.popup-menu { display: none; position: absolute; background: white; color: #001f3f; padding: 10px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; margin-top: 4px; }
-.popup-menu a { display: block; margin: 5px 0; color: #001f3f; text-decoration: none; }
-.popup-menu a:hover { text-decoration: underline; }
-.download-note { font-size: 12px; color: #555; margin-top: 5px; }
-.divider { width: 2px; background: white; margin: 0 5px; align-self: center; height: 24px; }
-.hero-photo { width: 150px; border-radius: 50%; margin-left: 20px; }
+body { font-family: Arial, Helvetica, sans-serif; margin:0; background:#f5f7fb; color:#001f3f; line-height:1.6; scroll-behavior: smooth; }
+a { text-decoration:none; }
+.hero-banner { background: linear-gradient(120deg,#001f3f,#003366); color:white; padding:30px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.hero-content { display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1200px; margin:auto; }
+.left-column { flex:1; }
+.hero-text h1 { margin:0; font-size:36px; }
+.hero-text p { margin:5px 0; font-size:16px; }
+.button-group { margin-top:15px; display:flex; flex-wrap:wrap; gap:10px; }
+.brand-btn { background:#7ac0f9; color:#001f3f; padding:8px 14px; border-radius:6px; font-weight:bold; cursor:pointer; transition: background 0.3s; }
+.brand-btn:hover { background:#5aa0e0; }
+.arrow { margin-left:4px; }
+.popup-menu { display:none; position:absolute; background:white; color:#001f3f; padding:10px; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index:100; margin-top:4px; }
+.popup-menu a { display:block; margin:5px 0; color:#001f3f; }
+.download-note { font-size:12px; color:#555; margin-top:5px; }
+.divider { width:2px; background:white; margin:0 5px; align-self:center; height:24px; }
+.hero-photo { width:150px; border-radius:50%; margin-left:20px; }
+
 /* CONTAINER */
-.container { max-width: 1200px; margin: auto; padding: 40px 20px; }
+.container { max-width:1200px; margin:auto; padding:40px 20px; }
 /* SECTION TITLES */
-.section-title { text-align: center; margin-bottom: 30px; }
+.section-title { text-align:center; margin-bottom:30px; }
 /* CARDS & GRIDS */
-.card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 25px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 25px; }
+.card { background:white; padding:25px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.08); margin-bottom:25px; }
+.grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:25px; }
 /* STATS */
-.stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 25px; text-align: center; margin-bottom: 50px; }
-.stat { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
-.stat h2 { font-size: 32px; margin: 0; }
+.stats { display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:25px; text-align:center; margin-bottom:50px; }
+.stat { background:white; padding:25px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.08); }
+.stat h2 { font-size:32px; margin:0; }
 /* CLIENT LOGOS */
-.logo-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 20px; text-align: center; margin-bottom: 50px; }
-.logo { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); font-weight: bold; transition: transform 0.3s, box-shadow 0.3s; }
-.logo:hover { transform: scale(1.1); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+.logo-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap:20px; text-align:center; margin-bottom:50px; }
+.logo { background:white; padding:15px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); font-weight:bold; transition: transform 0.3s, box-shadow 0.3s; }
+.logo:hover { transform:scale(1.1); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
 /* MAP */
-.map { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; text-align: center; margin-bottom: 50px; }
-.map div { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.map { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; text-align:center; margin-bottom:50px; }
+.map div { background:white; padding:15px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
 /* TIMELINE */
-.timeline-container { overflow-x: auto; padding-bottom: 20px; margin-bottom: 50px; display: flex; gap: 20px; scroll-snap-type: x mandatory; }
-.timeline-item { position: relative; min-width: 280px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.08); cursor: pointer; scroll-snap-align: start; transition: transform 0.3s ease; }
-.timeline-item:hover { transform: scale(1.05); }
-.timeline-marker { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); transition: transform 0.3s ease; }
-.timeline-item:hover .timeline-marker { transform: translateX(-50%) scale(1.3); }
-.timeline-details { display: none; margin-top: 10px; background: #f0f4f8; padding: 10px; border-radius: 8px; }
-.timeline-item.active .timeline-details { display: block; }
+.timeline-container { overflow-x:auto; padding-bottom:20px; margin-bottom:50px; display:flex; gap:20px; scroll-snap-type:x mandatory; }
+.timeline-item { position:relative; min-width:280px; background:white; padding:20px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.08); cursor:pointer; scroll-snap-align:start; transition: transform 0.3s ease; }
+.timeline-item:hover { transform:scale(1.05); }
+.timeline-marker { position:absolute; top:20px; left:50%; transform:translateX(-50%); transition: transform 0.3s ease; }
+.timeline-item:hover .timeline-marker { transform:translateX(-50%) scale(1.3); }
+.timeline-details { display:none; margin-top:10px; background:#f0f4f8; padding:10px; border-radius:8px; }
+.timeline-item.active .timeline-details { display:block; }
 /* PROJECT CASE STUDIES */
-.project { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
-.project h3 { margin-top: 0; }
+.project { background:white; padding:20px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.08); }
+.project h3 { margin-top:0; }
 /* DOWNLOAD */
-.download { text-align: center; margin-bottom: 50px; }
-.download a { background: #001f3f; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; transition: background 0.3s; }
-.download a:hover { background: #003366; }
+.download { text-align:center; margin-bottom:50px; }
+.download a { background:#001f3f; color:white; padding:12px 20px; border-radius:8px; transition: background 0.3s; }
+.download a:hover { background:#003366; }
 /* FOOTER */
-footer { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #001f3f; color: white; flex-wrap: wrap; }
-footer img { width: 60px; }
+footer { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; background:#001f3f; color:white; flex-wrap:wrap; }
+footer img { width:60px; }
 /* ANIMATION */
-@keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-.count { font-weight: bold; font-size: 32px; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+.count { font-weight:bold; font-size:32px; }
 </style>
 </head>
 <body>
 
-<!-- HERO HEADER -->
+<!-- HEADER -->
 <div class="hero-banner">
-    <div class="hero-content">
-        <div class="left-column">
-            <div class="hero-text">
-                <h1>Tim Williams</h1>
-                <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-                <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
-            </div>
-            <div class="button-group">
-                <a href="index.html" class="brand-btn">Home</a>
-                <a href="#" class="brand-btn cv-btn" onclick="openCVMenu(event)">CV <span class="arrow">⌄</span></a>
-                <div id="cvMenu" class="popup-menu">
-                    <a href="cv.html">View Online</a>
-                    <a href="Tim_Williams_CV.pdf">Download CV (PDF)</a>
-                    <a href="Tim_Williams_CV.download">Download for Safari (rename to .zip)</a>
-                    <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
-                </div>
-                <a href="certifications.html" class="brand-btn">Certifications</a>
-                <a href="recommendations.html" class="brand-btn">Recommendations</a>
-                <a href="linkedin.html" class="brand-btn">LinkedIn</a>
-                <span class="divider"></span>
-                <a href="insights.html" class="brand-btn">Insights</a>
-                <a href="playbooks.html" class="brand-btn">Playbooks</a>
-                <a href="engagement.html" class="brand-btn">Engagement Models</a>
-                <a href="faq.html" class="brand-btn">FAQ</a>
-                <span class="divider"></span>
-                <a href="#" class="brand-btn portfolio-btn" onclick="openPortfolioMenu(event)">Portfolio <span class="arrow">⌄</span></a>
-                <div id="portfolioMenu" class="popup-menu">
-                    <a href="portfolio.html">View Online</a>
-                    <a href="portfolio_presentation.pdf">Download PDF</a>
-                    <a href="portfolio_presentation.download">Download for Safari (rename to .zip)</a>
-                    <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
-                </div>
-                <a href="sites.html" class="brand-btn">Digital Presence</a>
-                <a href="https://twc-ltd.my.canva.site" target="_blank" rel="noopener noreferrer" class="brand-btn">My Services</a>
-                <a href="https://gethandover.uk" target="_blank" rel="noopener noreferrer" class="brand-btn">PM Tool Suite</a>
-            </div>
+  <div class="hero-content">
+    <div class="left-column">
+      <div class="hero-text">
+        <h1>Tim Williams</h1>
+        <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
+        <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
+      </div>
+      <div class="button-group">
+        <a href="index.html" class="brand-btn">Home</a>
+        <a href="#" class="brand-btn cv-btn" onclick="openCVMenu(event)">CV <span class="arrow">⌄</span></a>
+        <div id="cvMenu" class="popup-menu">
+          <a href="cv.html">View Online</a>
+          <a href="Tim_Williams_CV.pdf">Download CV (PDF)</a>
+          <a href="Tim_Williams_CV.download">Download for Safari (rename to .zip)</a>
+          <div class="download-note">Safari users: rename to “.zip”</div>
         </div>
-        <img src="profile.jpg" class="hero-photo" alt="Tim Williams">
+        <a href="certifications.html" class="brand-btn">Certifications</a>
+        <a href="recommendations.html" class="brand-btn">Recommendations</a>
+        <a href="linkedin.html" class="brand-btn">LinkedIn</a>
+        <span class="divider"></span>
+        <a href="insights.html" class="brand-btn">Insights</a>
+        <a href="playbooks.html" class="brand-btn">Playbooks</a>
+        <a href="engagement.html" class="brand-btn">Engagement Models</a>
+        <a href="faq.html" class="brand-btn">FAQ</a>
+        <span class="divider"></span>
+        <a href="#" class="brand-btn portfolio-btn" onclick="openPortfolioMenu(event)">Portfolio <span class="arrow">⌄</span></a>
+        <div id="portfolioMenu" class="popup-menu">
+          <a href="portfolio.html">View Online</a>
+          <a href="portfolio_presentation.pdf">Download PDF</a>
+          <a href="portfolio_presentation.download">Download for Safari</a>
+        </div>
+        <a href="sites.html" class="brand-btn">Digital Presence</a>
+        <a href="https://twc-ltd.my.canva.site" target="_blank" rel="noopener noreferrer" class="brand-btn">My Services</a>
+        <a href="https://gethandover.uk" target="_blank" rel="noopener noreferrer" class="brand-btn">PM Tool Suite</a>
+      </div>
     </div>
+    <img src="profile.jpg" class="hero-photo" alt="Tim Williams">
+  </div>
 </div>
 
+<!-- MAIN CONTENT -->
 <div class="container">
-<!-- [Insert Executive Profile, Stats, Clients, Map, Timeline, Projects, Download section] -->
-<!-- Keep all the CV content and interactive timeline here -->
+
+<!-- EXECUTIVE PROFILE -->
+<h2 class="section-title">Executive Profile</h2>
+<div class="grid">
+  <div class="card">
+    <ul>
+      <li>25+ Years IT Programme Delivery</li>
+      <li>Enhanced SC Security Clearance</li>
+      <li>£100M+ Programme Delivery</li>
+      <li>Global Enterprise Delivery</li>
+      <li>Government & Enterprise Clients</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Core Skills</h3>
+    <canvas id="skillsRadar"></canvas>
+  </div>
 </div>
+
+<!-- PROGRAMME DELIVERY STATS -->
+<h2 class="section-title">Programme Delivery Impact</h2>
+<div class="stats">
+  <div class="stat"><h2 class="count" data-target="126000">0</h2><p>Devices Deployed</p></div>
+  <div class="stat"><h2 class="count" data-target="46000">0</h2><p>Windows 11 Upgrades</p></div>
+  <div class="stat"><h2 class="count" data-target="32000">0</h2><p>Endpoint Migrations</p></div>
+  <div class="stat"><h2 class="count" data-target="18000000">0</h2><p>Cyber Security Programme (£)</p></div>
+</div>
+
+<!-- CLIENTS -->
+<h2 class="section-title">Organisations Delivered For</h2>
+<div class="logo-grid">
+  <div class="logo">NHS England</div>
+  <div class="logo">HSBC</div>
+  <div class="logo">Tesco</div>
+  <div class="logo">MoD</div>
+  <div class="logo">Telefonica</div>
+  <div class="logo">Met Police</div>
+</div>
+
+<!-- GLOBAL DELIVERY MAP -->
+<h2 class="section-title">Global Programme Delivery</h2>
+<div class="map">
+  <div>UK</div>
+  <div>Europe</div>
+  <div>USA</div>
+  <div>APAC</div>
+</div>
+
+<!-- CAREER TIMELINE -->
+<h2 class="section-title">Career Timeline</h2>
+<div class="timeline-container">
+  <div class="timeline-item">
+    <h3>NHS England <small>2019-2023</small></h3>
+    <p>Senior Project Manager</p>
+    <div class="timeline-details">
+      <ul>
+        <li>Cyber security transformation programme</li>
+        <li>MFA, IAM, CyberArk, Splunk</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <h3>Roc Technologies <small>2015-2019</small></h3>
+    <p>PMO Manager</p>
+    <div class="timeline-details">
+      <ul>
+        <li>Infrastructure transformation</li>
+        <li>Network refresh programme</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <h3>Computacenter <small>2010-2015</small></h3>
+    <p>Senior Project Manager</p>
+    <div class="timeline-details">
+      <ul>
+        <li>Global enterprise transformation</li>
+        <li>Azure migration programmes</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAMME CASE STUDIES -->
+<h2 class="section-title">Programme Case Studies</h2>
+<div class="grid">
+  <div class="project">
+    <h3>NHS Cyber Security Programme</h3>
+    <p><strong>Challenge:</strong> Improve national cyber resilience.</p>
+    <p><strong>Approach:</strong> Delivered enterprise IAM, MFA, CyberArk, Splunk integration.</p>
+    <p><strong>Outcome:</strong> Strengthened cyber security posture.</p>
+  </div>
+  <div class="project">
+    <h3>Tesco Windows Transformation</h3>
+    <p><strong>Challenge:</strong> Upgrade enterprise estate.</p>
+    <p><strong>Approach:</strong> Global device rollout programme.</p>
+    <p><strong>Outcome:</strong> 126k devices deployed.</p>
+  </div>
+  <div class="project">
+    <h3>MoD Device Management Programme</h3>
+    <p><strong>Challenge:</strong> Secure enterprise devices.</p>
+    <p><strong>Approach:</strong> Delivered Intune and mobile management solution.</p>
+    <p><strong>Outcome:</strong> Secure mobile platform.</p>
+  </div>
+</div>
+
+<!-- DOWNLOAD CV -->
+<div class="download">
+  <h2>Recruiter Resources</h2>
+  <p>Download capability profile and CV.</p>
+  <a href="Tim_Williams_CV.pdf">Download CV</a>
+</div>
+
+</div> <!-- END CONTAINER -->
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-left">© 2026 Tim Williams Consulting Ltd</div>
-  <div class="footer-qr">
-    <img src="qr.png" alt="QR Code">
-  </div>
+  <div class="footer-qr"><img src="qr.png" alt="QR Code"></div>
 </footer>
 
 <script>
@@ -130,24 +239,16 @@ function closeAllMenus(){ document.querySelectorAll('.popup-menu').forEach(m=>m.
 document.body.addEventListener('click', closeAllMenus);
 
 // Timeline expand/collapse
-document.querySelectorAll(".timeline-item").forEach(item => {
-  item.addEventListener("click", () => item.classList.toggle("active"));
-});
+document.querySelectorAll(".timeline-item").forEach(item => { item.addEventListener("click", () => item.classList.toggle("active")); });
 
 // Radar chart
 new Chart(document.getElementById("skillsRadar"), {
   type: "radar",
   data: {
-    labels: ["Cyber Security", "Cloud", "Infrastructure", "Programme Leadership", "Service Management", "Pre-Sales"],
-    datasets: [{
-      label: "Expertise",
-      data: [95, 90, 92, 96, 88, 85],
-      backgroundColor: "rgba(122,192,249,0.2)",
-      borderColor: "#001f3f",
-      pointBackgroundColor: "#001f3f"
-    }]
+    labels: ["Cyber Security","Cloud","Infrastructure","Programme Leadership","Service Management","Pre-Sales"],
+    datasets:[{ label:"Expertise", data:[95,90,92,96,88,85], backgroundColor:"rgba(122,192,249,0.2)", borderColor:"#001f3f", pointBackgroundColor:"#001f3f" }]
   },
-  options: { responsive: true, animation: { duration: 1500 }, scales: { r: { beginAtZero: true, max: 100 } } }
+  options:{ responsive:true, animation:{duration:1500}, scales:{ r:{ beginAtZero:true, max:100 } } }
 });
 
 // Animated counters
@@ -158,12 +259,11 @@ counters.forEach(counter => {
     const count = +counter.innerText.replace(/,/g,'');
     const increment = target / 200;
     if(count < target){ counter.innerText = Math.ceil(count + increment).toLocaleString(); requestAnimationFrame(updateCount); }
-    else { counter.innerText = target.toLocaleString(); }
+    else{ counter.innerText = target.toLocaleString(); }
   };
   const observer = new IntersectionObserver(entries => { if(entries[0].isIntersecting){ updateCount(); observer.disconnect(); } }, { threshold: 0.5 });
   observer.observe(counter);
 });
 </script>
-
 </body>
 </html>

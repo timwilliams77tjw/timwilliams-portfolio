@@ -6,47 +6,70 @@
 <title>Tim Williams | Senior IT Programme Manager</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f5f7fb;color:#001f3f;line-height:1.6;}
-.hero{background:linear-gradient(120deg,#001f3f,#003366);color:white;padding:90px 20px;text-align:center;animation:fadeIn 1.5s ease;}
-.hero h1{font-size:42px;margin-bottom:10px;} .hero h2{margin-top:0;} .hero p{max-width:700px;margin:auto;font-size:18px;}
-.cta{margin-top:25px;display:inline-block;background:#7ac0f9;color:#001f3f;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;}
-.container{max-width:1200px;margin:auto;padding:40px 20px;}
-.section-title{text-align:center;margin-bottom:30px;}
-.card{background:white;padding:25px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.08);margin-bottom:25px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px;text-align:center;}
-.stat{background:white;padding:25px;border-radius:10px;box-shadow:0 3px 8px rgba(0,0,0,0.08);}
-.stat h2{margin:0;font-size:34px;}
-.logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:25px;align-items:center;text-align:center;}
-.logo img{max-width:100px;filter:grayscale(100%);transition:.3s;}
-.logo img:hover{filter:none;transform:scale(1.05);}
-.dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:40px;margin-top:40px;}
-.chart-box{background:white;padding:20px;border-radius:10px;box-shadow:0 3px 8px rgba(0,0,0,0.08);}
-.timeline{position:relative;margin:60px 0;}
-.timeline::before{content:'';position:absolute;left:50%;width:4px;background:#001f3f;top:0;bottom:0;transform:translateX(-50%);}
-.timeline-item{position:relative;width:50%;padding:20px 40px;box-sizing:border-box;opacity:0;transform:translateY(40px);transition:.6s;cursor:pointer;}
-.timeline-item.show{opacity:1;transform:translateY(0);}
-.timeline-item:nth-child(odd){left:0;text-align:right;}
-.timeline-item:nth-child(even){left:50%;}
-.timeline-content{background:white;padding:20px;border-radius:10px;box-shadow:0 3px 8px rgba(0,0,0,0.08);}
-.timeline-details{display:none;margin-top:10px;}
-.timeline-item.active .timeline-details{display:block;}
-.project{background:white;padding:20px;border-radius:10px;box-shadow:0 3px 8px rgba(0,0,0,0.08);}
-footer{background:#001f3f;color:white;text-align:center;padding:30px;margin-top:40px;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #f5f7fb;
+  color: #001f3f;
+  line-height: 1.6;
+}
+/* HERO */
+.hero {
+  background: linear-gradient(120deg,#001f3f,#003366);
+  color: white;
+  padding: 90px 20px;
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+}
+.hero h1 { font-size: 42px; margin-bottom: 10px; }
+.hero h2 { font-size: 28px; margin-bottom: 20px; }
+.hero p { max-width: 700px; margin: auto; font-size: 18px; }
+.cta { margin-top: 25px; display: inline-block; background: #7ac0f9; color: #001f3f; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+/* LAYOUT */
+.container { max-width: 1200px; margin: auto; padding: 40px 20px; }
+.section-title { text-align: center; margin-bottom: 30px; }
+.card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 25px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 25px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 25px; text-align: center; margin-bottom: 50px; }
+.stat { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
+.stat h2 { font-size: 32px; margin: 0; }
+.logo-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 20px; text-align: center; margin-bottom: 50px; }
+.logo { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); font-weight: bold; }
+.map { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; text-align: center; margin-bottom: 50px; }
+.map div { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+/* TIMELINE */
+.timeline { display: flex; overflow-x:auto; gap: 20px; padding-bottom: 20px; margin-bottom: 50px; }
+.timeline-item { position: relative; min-width: 280px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.3s ease; }
+.timeline-item:hover { transform: scale(1.05); }
+.timeline-marker { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); transition: transform 0.3s ease; }
+.timeline-item:hover .timeline-marker { transform: translateX(-50%) scale(1.3); }
+.timeline-details { display: none; margin-top: 10px; }
+.timeline-item.active .timeline-details { display: block; }
+/* PROGRAMME CASE STUDIES */
+.project { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
+.project h3 { margin-top: 0; }
+/* DOWNLOAD */
+.download { text-align: center; margin-bottom: 50px; }
+.download a { background: #001f3f; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; }
+/* FOOTER */
+footer { background: #001f3f; color: white; text-align: center; padding: 30px; margin-top: 40px; }
+/* ANIMATION */
+@keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 </style>
 </head>
 <body>
 
+<!-- HERO -->
 <section class="hero">
 <h1>Tim Williams</h1>
 <h2>Senior IT Programme & Project Manager</h2>
-<p>Enterprise IT transformation leader delivering cyber security, infrastructure modernisation and digital workplace programmes across government and global enterprise organisations.</p>
+<p>Enterprise IT transformation leader delivering cyber security, infrastructure modernisation, and digital workplace programmes across government and global enterprise organisations.</p>
 <a class="cta" href="#">Download CV</a>
 </section>
 
 <div class="container">
 
+<!-- PROFILE -->
 <h2 class="section-title">Executive Profile</h2>
 <div class="grid">
 <div class="card">
@@ -56,7 +79,6 @@ footer{background:#001f3f;color:white;text-align:center;padding:30px;margin-top:
 <li>£100M+ Programme Delivery</li>
 <li>Global Enterprise Delivery</li>
 <li>Government & Enterprise Clients</li>
-<li>Programme Governance & Stakeholder Leadership</li>
 </ul>
 </div>
 <div class="card">
@@ -65,6 +87,7 @@ footer{background:#001f3f;color:white;text-align:center;padding:30px;margin-top:
 </div>
 </div>
 
+<!-- STATS -->
 <h2 class="section-title">Programme Delivery Impact</h2>
 <div class="stats">
 <div class="stat"><h2>126k</h2><p>Devices Deployed</p></div>
@@ -73,52 +96,76 @@ footer{background:#001f3f;color:white;text-align:center;padding:30px;margin-top:
 <div class="stat"><h2>£18M</h2><p>Cyber Security Programme</p></div>
 </div>
 
-<h2 class="section-title">Programme Dashboard</h2>
-<div class="dashboard">
-<div class="chart-box"><canvas id="deliveryChart"></canvas></div>
-<div class="chart-box"><canvas id="technologyChart"></canvas></div>
-</div>
-
+<!-- CLIENTS -->
 <h2 class="section-title">Organisations Delivered For</h2>
 <div class="logo-grid">
-<div class="logo"><img src="https://logo.clearbit.com/nhs.uk"></div>
-<div class="logo"><img src="https://logo.clearbit.com/hsbc.com"></div>
-<div class="logo"><img src="https://logo.clearbit.com/tesco.com"></div>
-<div class="logo"><img src="https://logo.clearbit.com/telefonica.com"></div>
-<div class="logo"><img src="https://logo.clearbit.com/gov.uk"></div>
+<div class="logo">NHS England</div>
+<div class="logo">HSBC</div>
+<div class="logo">Tesco</div>
+<div class="logo">MoD</div>
+<div class="logo">Telefonica</div>
+<div class="logo">Met Police</div>
 </div>
 
+<!-- GLOBAL DELIVERY -->
+<h2 class="section-title">Global Programme Delivery</h2>
+<div class="map">
+<div>UK</div>
+<div>Europe</div>
+<div>USA</div>
+<div>APAC</div>
+</div>
+
+<!-- CAREER TIMELINE -->
 <h2 class="section-title">Career Timeline</h2>
 <div class="timeline">
 
 <div class="timeline-item">
+<div class="timeline-marker">
+<svg width="24" height="24" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10" fill="#001f3f"/>
+<text x="12" y="16" text-anchor="middle" fill="white" font-size="12">N</text>
+</svg>
+</div>
 <div class="timeline-content">
 <h3>NHS England <span>(2019 - 2023)</span></h3>
 <p>Senior Project Manager</p>
 <div class="timeline-details">
 <ul>
-<li>Led Cyber security transformation programme</li>
-<li>Implemented MFA, IAM, CyberArk, Splunk</li>
-<li>Delivered enterprise-wide improvements and governance</li>
+<li>Cyber security transformation programme</li>
+<li>MFA, IAM, CyberArk, Splunk</li>
+<li>Enterprise-wide governance and improvements</li>
 </ul>
 </div>
 </div>
 </div>
 
 <div class="timeline-item">
+<div class="timeline-marker">
+<svg width="24" height="24" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10" fill="#003366"/>
+<text x="12" y="16" text-anchor="middle" fill="white" font-size="12">R</text>
+</svg>
+</div>
 <div class="timeline-content">
 <h3>Roc Technologies <span>(2016 - 2019)</span></h3>
 <p>PMO Manager</p>
 <div class="timeline-details">
 <ul>
-<li>Infrastructure transformation and network refresh programme</li>
-<li>Delivered enterprise IT operations efficiencies</li>
+<li>Infrastructure transformation and network refresh</li>
+<li>PMO governance and team leadership</li>
 </ul>
 </div>
 </div>
 </div>
 
 <div class="timeline-item">
+<div class="timeline-marker">
+<svg width="24" height="24" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10" fill="#0055a5"/>
+<text x="12" y="16" text-anchor="middle" fill="white" font-size="12">C</text>
+</svg>
+</div>
 <div class="timeline-content">
 <h3>Computacenter <span>(2010 - 2016)</span></h3>
 <p>Senior Project Manager</p>
@@ -133,13 +180,19 @@ footer{background:#001f3f;color:white;text-align:center;padding:30px;margin-top:
 </div>
 
 <div class="timeline-item">
+<div class="timeline-marker">
+<svg width="24" height="24" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10" fill="#0073e6"/>
+<text x="12" y="16" text-anchor="middle" fill="white" font-size="12">E</text>
+</svg>
+</div>
 <div class="timeline-content">
 <h3>Earlier Career <span>(1995 - 2010)</span></h3>
 <p>Infrastructure & Service Management Leadership</p>
 <div class="timeline-details">
 <ul>
-<li>Enterprise IT operations and service delivery management</li>
-<li>Managed multiple large-scale infrastructure projects</li>
+<li>Managed large-scale infrastructure projects</li>
+<li>Enterprise IT operations and service delivery</li>
 </ul>
 </div>
 </div>
@@ -147,34 +200,34 @@ footer{background:#001f3f;color:white;text-align:center;padding:30px;margin-top:
 
 </div>
 
+<!-- PROGRAMMES -->
 <h2 class="section-title">Programme Case Studies</h2>
 <div class="grid">
 <div class="project">
 <h3>NHS Cyber Security Programme</h3>
 <p><strong>Challenge:</strong> Improve national cyber resilience.</p>
-<p><strong>Approach:</strong> Delivered IAM, MFA, CyberArk and SIEM integration.</p>
-<p><strong>Outcome:</strong> Strengthened enterprise security posture.</p>
+<p><strong>Approach:</strong> Delivered enterprise IAM, MFA, CyberArk, Splunk integration.</p>
+<p><strong>Outcome:</strong> Strengthened cyber security posture.</p>
 </div>
 <div class="project">
 <h3>Tesco Windows Transformation</h3>
 <p><strong>Challenge:</strong> Upgrade enterprise estate.</p>
+<p><strong>Approach:</strong> Global device rollout programme.</p>
 <p><strong>Outcome:</strong> 126k devices deployed.</p>
 </div>
 <div class="project">
 <h3>MoD Device Management Programme</h3>
 <p><strong>Challenge:</strong> Secure enterprise devices.</p>
+<p><strong>Approach:</strong> Delivered Intune and mobile management solution.</p>
 <p><strong>Outcome:</strong> Secure mobile platform.</p>
 </div>
 </div>
 
-<h2 class="section-title">Certifications</h2>
-<div class="card">
-<ul>
-<li>PRINCE2 Practitioner</li>
-<li>ITIL Certified</li>
-<li>Agile Programme Delivery</li>
-<li>Cyber Security Programme Leadership</li>
-</ul>
+<!-- DOWNLOAD -->
+<div class="download">
+<h2>Recruiter Resources</h2>
+<p>Download capability profile and CV.</p>
+<a href="#">Download CV</a>
 </div>
 
 </div>
@@ -185,36 +238,30 @@ footer{background:#001f3f;color:white;text-align:center;padding:30px;margin-top:
 </footer>
 
 <script>
+// Timeline expand/collapse
+document.querySelectorAll(".timeline-item").forEach(item => {
+  item.addEventListener("click", () => {
+    item.classList.toggle("active");
+  });
+});
+
 // Radar chart
-new Chart(document.getElementById("skillsRadar"),{
-type:"radar",
-data:{labels:["Cyber Security","Cloud","Infrastructure","Programme Leadership","Service Management","Pre-Sales"],
-datasets:[{label:"Expertise",data:[95,90,92,96,88,85]}]},
-options:{scales:{r:{beginAtZero:true,max:100}}}
+new Chart(document.getElementById("skillsRadar"), {
+  type: "radar",
+  data: {
+    labels: ["Cyber Security", "Cloud", "Infrastructure", "Programme Leadership", "Service Management", "Pre-Sales"],
+    datasets: [{
+      label: "Expertise",
+      data: [95, 90, 92, 96, 88, 85],
+      backgroundColor: "rgba(122,192,249,0.2)",
+      borderColor: "#001f3f",
+      pointBackgroundColor: "#001f3f"
+    }]
+  },
+  options: {
+    scales: { r: { beginAtZero: true, max: 100 } }
+  }
 });
-
-// Bar chart
-new Chart(document.getElementById("deliveryChart"),{
-type:"bar",
-data:{labels:["Devices","Upgrades","Migrations"],datasets:[{label:"Programme Delivery Scale",data:[126000,46000,32000]}]}
-});
-
-// Doughnut chart
-new Chart(document.getElementById("technologyChart"),{
-type:"doughnut",
-data:{labels:["Cyber Security","Cloud","Infrastructure","Digital Workplace"],datasets:[{data:[35,25,25,15]}]}
-});
-
-// Timeline scroll animation
-const items=document.querySelectorAll('.timeline-item')
-function reveal(){items.forEach(item=>{const top=item.getBoundingClientRect().top;if(top<window.innerHeight-50){item.classList.add('show')}})}
-window.addEventListener('scroll',reveal)
-reveal()
-
-// Expandable timeline details
-items.forEach(item=>{
-item.addEventListener('click',()=>{item.classList.toggle('active')})
-})
 </script>
 
 </body>

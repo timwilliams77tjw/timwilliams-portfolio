@@ -21,7 +21,7 @@ body { font-family:Arial,Helvetica,sans-serif; margin:0; background:#f5f7fb; col
 .stat { background:white; padding:25px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.08); }
 .stat h2 { font-size:32px; margin:0; }
 .logo-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:20px; text-align:center; margin-bottom:40px; }
-.logo { background:white; padding:15px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+.logo { background:white; padding:15px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; height:80px; }
 .timeline { display:flex; overflow-x:auto; gap:20px; padding-bottom:10px; margin-bottom:40px; }
 .timeline-node { min-width:260px; background:white; padding:20px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.08); cursor:pointer; transition:transform 0.3s; }
 .timeline-node:hover { transform: translateY(-5px); }
@@ -127,50 +127,63 @@ footer img { height:80px; }
 <h2 class="section-title">Career Timeline</h2>
 <div class="timeline">
 
+  <!-- NHS -->
+  <div class="timeline-node">
+    <h3>NHS</h3>
+    <p>11/25 - 02/26</p>
+    <div class="timeline-details">
+      <ul>
+        <li>Senior Project Manager</li>
+        <li>Cyber security transformation</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ROC Technologies -->
+  <div class="timeline-node">
+    <h3>ROC Technologies</h3>
+    <p>07/25 - 10/25</p>
+    <div class="timeline-details">
+      <ul>
+        <li>Dounreay Nuclear PMO Manager</li>
+        <li>Luton Airport MFA</li>
+        <li>Line Management</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Version One -->
+  <div class="timeline-node">
+    <h3>Version One</h3>
+    <p>12/24 - 07/25</p>
+    <div class="timeline-details">
+      <ul>
+        <li>Programme Manager</li>
+        <li>Enterprise infrastructure & ITIL process transformation</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- Computacenter -->
   <div class="timeline-node">
     <h3>Computacenter</h3>
-    <p>Senior Project Manager | 2005–2008</p>
+    <p>07/13 - 09/24</p>
     <div class="timeline-details">
       <ul>
-        <li>Global enterprise transformation</li>
-        <li>Azure migration programmes</li>
+        <li>PMO Manager</li>
+        <li>Pre-Sales</li>
+        <li>ServiceNow Development</li>
       </ul>
     </div>
   </div>
 
-  <!-- Version 1 (inserted here correctly) -->
+  <!-- TrustMarque -->
   <div class="timeline-node">
-    <h3>Version 1</h3>
-    <p>Programme Manager | 2008–2010</p>
+    <h3>TrustMarque</h3>
+    <p>01/06 - 06/13</p>
     <div class="timeline-details">
       <ul>
-        <li>Enterprise infrastructure and ITIL process transformation</li>
-        <li>Network and data centre modernisation</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Roc Technologies -->
-  <div class="timeline-node">
-    <h3>Roc Technologies</h3>
-    <p>PMO Manager | 2010–2013</p>
-    <div class="timeline-details">
-      <ul>
-        <li>Infrastructure transformation</li>
-        <li>Network refresh programme</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- NHS England -->
-  <div class="timeline-node">
-    <h3>NHS England</h3>
-    <p>Senior Project Manager | 2013–2017</p>
-    <div class="timeline-details">
-      <ul>
-        <li>Cyber security transformation programme</li>
-        <li>MFA, IAM, CyberArk, Splunk</li>
+        <li>Senior IT Programme Delivery</li>
       </ul>
     </div>
   </div>
@@ -246,11 +259,7 @@ new Chart(document.getElementById("skillsRadar"), {
   },
   options:{ scales:{ r:{ beginAtZero:true, max:100 } } }
 });
-
-// Global map interactivity
-document.querySelectorAll('#global-map .location').forEach(loc => {
-  loc.addEventListener('mouseover', ()=> console.log('Hovering over region:', loc.dataset.region));
-});
 </script>
+
 </body>
 </html>

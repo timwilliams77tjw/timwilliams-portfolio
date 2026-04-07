@@ -1,259 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tim Williams | Senior IT Programme Manager</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  background: #f5f7fb;
-  color: #001f3f;
-  line-height: 1.6;
-}
-
-/* HERO */
-.hero-banner {
-  display: flex;
-  flex-wrap: wrap;
-  background: linear-gradient(120deg, #001f3f, #003366);
-  color: white;
-  padding: 60px 20px;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-content {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 1200px;
-  align-items: center;
-}
-
-.left-column {
-  flex: 1 1 400px;
-  min-width: 300px;
-  padding: 20px;
-}
-
-.hero-text h1 {
-  font-size: 42px;
-  margin-bottom: 10px;
-}
-
-.hero-text p {
-  margin: 8px 0;
-}
-
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.brand-btn {
-  background: #7ac0f9;
-  color: #001f3f;
-  padding: 10px 16px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.2s;
-}
-
-.brand-btn:hover {
-  background: #0059b3;
-  color: white;
-}
-
-.divider {
-  flex-basis: 100%;
-  height: 1px;
-}
-
-.hero-photo {
-  flex: 1 1 300px;
-  max-width: 300px;
-  border-radius: 50%;
-  margin: 20px;
-}
+body { font-family: Arial, Helvetica, sans-serif; margin:0; background:#f5f7fb; color:#001f3f; line-height:1.6;}
+a { text-decoration: none; color: inherit;}
+/* HERO BANNER */
+.hero-banner { background: linear-gradient(120deg,#001f3f,#003366); color:white; padding:60px 20px; display:flex; justify-content:center; align-items:center; flex-wrap:wrap;}
+.hero-content { display:flex; flex-wrap:wrap; justify-content:space-between; max-width:1200px; width:100%; align-items:center; gap:20px;}
+.left-column { flex:1; min-width:280px;}
+.hero-text h1 { font-size:42px; margin-bottom:10px;}
+.hero-text p { font-size:16px; margin:5px 0;}
+.hero-photo { max-width:250px; border-radius:50%; box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+.button-group { display:flex; flex-wrap:wrap; gap:8px; margin-top:15px;}
+.brand-btn { background:white; color:#001f3f; padding:8px 14px; border-radius:6px; font-weight:bold; border:1px solid #001f3f; display:flex; align-items:center; gap:4px;}
+.brand-btn:hover { background:#7ac0f9; color:white;}
+.arrow { font-size:12px;}
+.popup-menu { display:none; position:absolute; background:white; border:1px solid #ddd; padding:10px; border-radius:6px; z-index:9999;}
+.download-note { font-size:12px; color:#555; margin-top:5px;}
+.divider { width:1px; background:#ddd; margin:0 6px; display:inline-block; height:24px; align-self:center;}
 
 /* CONTAINER */
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px 20px;
-}
+.container { max-width:1200px; margin:auto; padding:40px 20px;}
 
 /* SECTION TITLES */
-.section-title {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 28px;
-}
+.section-title { text-align:center; margin-bottom:30px; font-size:28px;}
 
-/* CARDS */
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 25px;
-}
-
-/* GRIDS */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-}
-
-/* STATS */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 25px;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.stat h2 {
-  font-size: 32px;
-  margin: 0;
-}
-
-/* CLIENT LOGOS */
-.logo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 20px;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.logo {
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-/* MAP */
-.map {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 10px;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.map div {
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
+/* GRID & CARD */
+.grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+.card { background:white; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.08);}
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; text-align:center;}
+.stat { background:white; padding:20px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.08);}
+.stat h2 { font-size:32px; margin:0; }
+.logo-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:20px; text-align:center;}
+.logo { background:white; padding:15px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); font-weight:bold; display:flex; justify-content:center; align-items:center;}
 
 /* TIMELINE */
-.timeline {
-  display: flex;
-  overflow-x: auto;
-  gap: 20px;
-  padding-bottom: 20px;
-  margin-bottom: 40px;
-}
-
-.timeline-node {
-  min-width: 260px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.timeline-details {
-  display: none;
-  margin-top: 10px;
-}
-
-.timeline-node.active .timeline-details {
-  display: block;
-}
+.timeline { display:flex; flex-wrap:wrap; gap:20px; justify-content:center;}
+.timeline-node { min-width:260px; background:white; padding:20px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.08); cursor:pointer; position:relative;}
+.timeline-node h3 { margin-top:0;}
+.timeline-node .timeline-dates { font-size:12px; color:#555; margin-bottom:8px;}
+.timeline-details { display:none; margin-top:10px; }
+.timeline-node.active .timeline-details { display:block;}
+.timeline-node svg { width:24px; height:24px; vertical-align:middle; margin-right:6px; }
 
 /* PROJECTS */
-.project {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-}
+.project { background:white; padding:20px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.08);}
+.project h3{ margin-top:0; }
 
-/* DOWNLOAD */
-.download {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.download a {
-  background: #001f3f;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-}
+/* DOWNLOAD SECTION */
+.download { text-align:center; margin-top:40px;}
+.download a { background:#001f3f; color:white; padding:12px 20px; border-radius:8px; display:inline-block; margin-top:10px;}
 
 /* FOOTER */
-footer {
-  background: #001f3f;
-  color: white;
-  text-align: center;
-  padding: 30px;
-  margin-top: 40px;
-}
+footer { background:#001f3f; color:white; text-align:center; padding:30px; margin-top:40px; display:flex; justify-content:space-between; flex-wrap:wrap; align-items:center;}
+footer img { max-width:60px;}
 
-/* ANIMATION */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ANIMATIONS */
+@keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+.hero-banner, .container { animation:fadeIn 1.2s ease; }
+
 </style>
 </head>
-
 <body>
 
-<!-- HEADER INCLUDE -->
-<div id="header"></div>
-<script>
-fetch("header-standard.html").then(r => r.text()).then(h => {
-  document.getElementById("header").innerHTML = h;
-});
-</script>
-
-<!-- HERO -->
+<!-- HERO BANNER -->
 <div class="hero-banner">
   <div class="hero-content">
+
     <div class="left-column">
       <div class="hero-text">
         <h1>Tim Williams</h1>
         <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
         <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
       </div>
+
+      <div class="button-group">
+        <a href="index.html" class="brand-btn">Home</a>
+
+        <a href="#" class="brand-btn cv-btn" onclick="toggleMenu('cvMenu', event)">
+          CV <span class="arrow">⌄</span>
+        </a>
+        <div id="cvMenu" class="popup-menu">
+          <a href="cv.html">View Online</a>
+          <a href="Tim_Williams_CV.pdf">Download CV (PDF)</a>
+          <a href="Tim_Williams_CV.download">Download for Safari (rename to .zip)</a>
+          <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
+        </div>
+
+        <a href="certifications.html" class="brand-btn">Certifications</a>
+        <a href="recommendations.html" class="brand-btn">Recommendations</a>
+        <a href="linkedin.html" class="brand-btn">LinkedIn</a>
+        <span class="divider"></span>
+        <a href="insights.html" class="brand-btn">Insights</a>
+        <a href="playbooks.html" class="brand-btn">Playbooks</a>
+        <a href="engagement.html" class="brand-btn">Engagement Models</a>
+        <a href="faq.html" class="brand-btn">FAQ</a>
+        <span class="divider"></span>
+        <a href="#" class="brand-btn portfolio-btn" onclick="toggleMenu('portfolioMenu', event)">
+          Portfolio <span class="arrow">⌄</span>
+        </a>
+        <div id="portfolioMenu" class="popup-menu">
+          <a href="portfolio.html">View Online</a>
+          <a href="portfolio_presentation.pdf">Download PDF</a>
+          <a href="portfolio_presentation.download">Download for Safari (rename to .zip)</a>
+          <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
+        </div>
+
+        <a href="sites.html" class="brand-btn">Digital Presence</a>
+        <a href="https://twc-ltd.my.canva.site" target="_blank" rel="noopener noreferrer" class="brand-btn">My Services</a>
+        <a href="https://gethandover.uk" target="_blank" rel="noopener noreferrer" class="brand-btn">PM Tool Suite</a>
+      </div>
     </div>
+
     <img src="profile.jpg" class="hero-photo" alt="Tim Williams">
+
   </div>
 </div>
 
@@ -277,28 +141,16 @@ fetch("header-standard.html").then(r => r.text()).then(h => {
     </div>
   </div>
 
-  <!-- STATS -->
+  <!-- PROGRAMME STATS -->
   <h2 class="section-title">Programme Delivery Impact</h2>
   <div class="stats">
-    <div class="stat">
-      <h2>126k</h2>
-      <p>Devices Deployed</p>
-    </div>
-    <div class="stat">
-      <h2>46k</h2>
-      <p>Windows 11 Upgrades</p>
-    </div>
-    <div class="stat">
-      <h2>32k</h2>
-      <p>Endpoint Migrations</p>
-    </div>
-    <div class="stat">
-      <h2>£18M</h2>
-      <p>Cyber Security Programme</p>
-    </div>
+    <div class="stat"><h2>126k</h2><p>Devices Deployed</p></div>
+    <div class="stat"><h2>46k</h2><p>Windows 11 Upgrades</p></div>
+    <div class="stat"><h2>32k</h2><p>Endpoint Migrations</p></div>
+    <div class="stat"><h2>£18M</h2><p>Cyber Security Programme</p></div>
   </div>
 
-  <!-- CLIENTS -->
+  <!-- CLIENT LOGOS -->
   <h2 class="section-title">Organisations Delivered For</h2>
   <div class="logo-grid">
     <div class="logo">NHS England</div>
@@ -309,70 +161,43 @@ fetch("header-standard.html").then(r => r.text()).then(h => {
     <div class="logo">Met Police</div>
   </div>
 
-  <!-- GLOBAL DELIVERY -->
-  <h2 class="section-title">Global Programme Delivery</h2>
-  <div class="map">
-    <div>UK</div>
-    <div>Europe</div>
-    <div>USA</div>
-    <div>APAC</div>
-  </div>
-
   <!-- CAREER TIMELINE -->
   <h2 class="section-title">Career Timeline</h2>
   <div class="timeline">
 
-    <!-- NHS -->
-    <div class="timeline-node">
+    <div class="timeline-node" onclick="toggleNode(this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#001f3f"/></svg>
       <h3>NHS England</h3>
-      <p>Senior Project Manager | 11/2025 – 02/2026</p>
+      <div class="timeline-dates">11/2025 – 02/2026</div>
       <div class="timeline-details">
         <ul>
-          <li>Cyber security transformation programme</li>
-          <li>MFA, IAM, CyberArk, Splunk, Azure, Entra, Intune</li>
-          <li>Full secure backup solution implementation</li>
-          <li>Strategic advisory on cloud & modern workplace</li>
+          <li>Delivered Cyber Security Programme with MFA, IAM, CyberArk, Splunk, Azure & Entra.</li>
+          <li>Enhanced operational resilience for 126k devices.</li>
         </ul>
       </div>
     </div>
 
-    <!-- Roc Technologies -->
-    <div class="timeline-node">
+    <div class="timeline-node" onclick="toggleNode(this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#007f7f"/></svg>
       <h3>Roc Technologies</h3>
-      <p>PMO Manager | 07/2025 – 10/2025</p>
+      <div class="timeline-dates">07/2025 – 10/2025</div>
       <div class="timeline-details">
         <ul>
-          <li>Directed PMO operations for Dounreay Nuclear account</li>
-          <li>Network refresh & MFA rollout</li>
-          <li>University-wide infrastructure upgrades</li>
-          <li>Mentored Project Coordinators & Junior PMs</li>
+          <li>Directed PMO operations and infrastructure transformation projects.</li>
+          <li>Network refreshes, MFA rollout, ServiceNow MSP modules, critical migrations.</li>
         </ul>
       </div>
     </div>
 
-    <!-- Computacenter -->
-    <div class="timeline-node">
+    <div class="timeline-node" onclick="toggleNode(this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#555555"/></svg>
       <h3>Computacenter</h3>
-      <p>Senior Project Manager | 07/2013 – 09/2024</p>
+      <div class="timeline-dates">07/2013 – 09/2024</div>
       <div class="timeline-details">
         <ul>
-          <li>Global workplace & infrastructure transformations</li>
-          <li>Windows 10/11 deployment to 126k devices</li>
-          <li>Azure & AWS migrations</li>
-          <li>Managed service transitions & PMO governance</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Previous Roles -->
-    <div class="timeline-node">
-      <h3>TrustMarq / Capita / Trinity Expert Systems / Liberata</h3>
-      <p>Project Manager | 01/2006 – 06/2013</p>
-      <div class="timeline-details">
-        <ul>
-          <li>Infrastructure, migration & software projects</li>
-          <li>AD, SCCM, SCOM, Exchange, Citrix, Netscaler</li>
-          <li>Financial services client delivery</li>
+          <li>Global workplace transformation across UK, Europe, APAC & USA.</li>
+          <li>Windows 10/11 upgrades, Intune & Azure migrations, Teams Rooms deployments.</li>
+          <li>Managed PMO functions, governance, pre-sales, and service transitions.</li>
         </ul>
       </div>
     </div>
@@ -385,74 +210,71 @@ fetch("header-standard.html").then(r => r.text()).then(h => {
     <div class="project">
       <h3>NHS Cyber Security Programme</h3>
       <p><strong>Challenge:</strong> Improve national cyber resilience.</p>
-      <p><strong>Approach:</strong> Delivered enterprise IAM, MFA, CyberArk, Splunk integration.</p>
-      <p><strong>Outcome:</strong> Strengthened cyber security posture.</p>
+      <p><strong>Approach:</strong> Enterprise IAM, MFA, CyberArk, Splunk integration.</p>
+      <p><strong>Outcome:</strong> Strengthened security posture for NHS England.</p>
     </div>
     <div class="project">
       <h3>Tesco Windows Transformation</h3>
       <p><strong>Challenge:</strong> Upgrade enterprise estate.</p>
       <p><strong>Approach:</strong> Global device rollout programme.</p>
-      <p><strong>Outcome:</strong> 126k devices deployed.</p>
+      <p><strong>Outcome:</strong> 126k devices deployed successfully.</p>
     </div>
     <div class="project">
       <h3>MoD Device Management Programme</h3>
       <p><strong>Challenge:</strong> Secure enterprise devices.</p>
-      <p><strong>Approach:</strong> Delivered Intune and mobile management solution.</p>
-      <p><strong>Outcome:</strong> Secure mobile platform.</p>
+      <p><strong>Approach:</strong> Intune & mobile device management deployment.</p>
+      <p><strong>Outcome:</strong> Secure mobile platform operational.</p>
     </div>
   </div>
 
-  <!-- DOWNLOAD -->
+  <!-- DOWNLOAD CV -->
   <div class="download">
     <h2>Recruiter Resources</h2>
-    <p>Download capability profile and CV.</p>
+    <p>Download capability profile and CV</p>
     <a href="Tim_Williams_CV.pdf">Download CV</a>
   </div>
 
 </div>
 
-<!-- FOOTER INCLUDE -->
-<div id="footer"></div>
-<script>
-fetch("footer.html").then(r => r.text()).then(f => {
-  document.getElementById("footer").innerHTML = f;
-});
-</script>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Tim Williams Consulting Ltd</div>
+  <div class="footer-qr"><img src="qr.png" alt="QR Code"></div>
+</footer>
 
-<!-- SCRIPTS -->
 <script>
-// Expand timeline nodes
-document.querySelectorAll(".timeline-node").forEach(node => {
-  node.addEventListener("click", () => node.classList.toggle("active"));
-});
+// Toggle popup menus
+function toggleMenu(menuId, e){
+  e.preventDefault();
+  document.getElementById(menuId).classList.toggle('popup-menu-show');
+}
 
-// Radar Chart
-new Chart(document.getElementById("skillsRadar"), {
-  type: "radar",
-  data: {
-    labels: ["Cyber Security", "Cloud", "Infrastructure", "Programme Leadership", "Service Management", "Pre-Sales"],
-    datasets: [{
-      label: "Expertise",
-      data: [95, 90, 92, 96, 88, 85],
-      backgroundColor: "rgba(122,192,249,0.2)",
-      borderColor: "#001f3f",
-      pointBackgroundColor: "#001f3f"
+// Toggle timeline node
+function toggleNode(node){
+  node.classList.toggle('active');
+}
+
+// Radar chart for skills
+const ctx = document.getElementById('skillsRadar').getContext('2d');
+new Chart(ctx,{
+  type:'radar',
+  data:{
+    labels:["Cyber Security","Cloud","Infrastructure","Programme Leadership","Service Management","Pre-Sales"],
+    datasets:[{
+      label:"Expertise",
+      data:[95,90,92,96,88,85],
+      backgroundColor:'rgba(0,31,63,0.4)',
+      borderColor:'#001f3f',
+      borderWidth:2,
+      pointBackgroundColor:'#001f3f'
     }]
   },
-  options: {
-    scales: {
-      r: {
-        beginAtZero: true,
-        max: 100,
-        ticks: { stepSize: 20 }
-      }
-    },
-    plugins: {
-      legend: { display: false }
-    }
+  options:{
+    responsive:true,
+    scales:{r:{beginAtZero:true,max:100,ticks:{stepSize:20}}},
+    plugins:{legend:{display:false}}
   }
 });
 </script>
-
 </body>
 </html>

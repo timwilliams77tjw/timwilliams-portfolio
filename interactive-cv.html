@@ -5,85 +5,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tim Williams | Senior IT Programme Manager</title>
+<title>Tim Williams | IT Programme Manager</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
 body{
-font-family:Arial,Helvetica,sans-serif;
+font-family:Arial, Helvetica, sans-serif;
 margin:0;
 background:#f4f7fb;
 color:#001f3f;
 }
 
-.page{
-max-width:1300px;
-margin:auto;
-padding:20px;
+.hero{
+background:#001f3f;
+color:white;
+padding:60px 20px;
+text-align:center;
 }
 
-h1,h2,h3{
-margin-top:0;
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
 }
 
 .card{
 background:white;
 padding:25px;
 border-radius:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.08);
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
 margin-bottom:25px;
 }
 
-/* NAV FILTER */
-
-.sticky-bar{
-position:sticky;
-top:0;
-background:white;
-padding:12px;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-border-bottom:1px solid #ddd;
-z-index:100;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 }
-
-.filter-btn{
-background:#001f3f;
-color:white;
-border:none;
-padding:8px 14px;
-border-radius:6px;
-cursor:pointer;
-}
-
-.filter-btn.active{
-background:#7ac0f9;
-}
-
-/* PROFILE */
-
-.hero{
-display:flex;
-gap:40px;
-flex-wrap:wrap;
-}
-
-.profile-summary{
-background:#001f3f;
-color:white;
-padding:25px;
-border-radius:10px;
-max-width:350px;
-}
-
-.profile-summary ul{
-padding-left:20px;
-}
-
-/* STATS */
 
 .stats{
 display:grid;
@@ -99,36 +59,10 @@ border-radius:10px;
 box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* LOGOS */
-
-.logo-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:25px;
-text-align:center;
-}
-
-.logo{
-font-weight:bold;
-padding:15px;
-background:white;
-border-radius:8px;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
-}
-
-/* TIMELINE */
-
-.timeline-container{
-position:relative;
-overflow:hidden;
-}
-
-.timeline-wrapper{
+.timeline{
 display:flex;
-gap:30px;
 overflow-x:auto;
-scroll-snap-type:x mandatory;
-padding:15px;
+gap:25px;
 }
 
 .timeline-node{
@@ -137,7 +71,6 @@ background:white;
 padding:20px;
 border-radius:10px;
 box-shadow:0 2px 6px rgba(0,0,0,0.1);
-scroll-snap-align:center;
 cursor:pointer;
 }
 
@@ -150,50 +83,21 @@ margin-top:10px;
 display:block;
 }
 
-.arrow{
-position:absolute;
-top:40%;
-width:40px;
-height:40px;
-background:#001f3f;
-color:white;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-}
-
-.arrow-left{left:-10px}
-.arrow-right{right:-10px}
-
-/* GRID */
-
-.grid{
+.logo-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
 gap:20px;
+text-align:center;
 }
 
-/* PROJECTS */
-
-.project-card{
+.logo{
 background:white;
-padding:20px;
-border-radius:10px;
+padding:15px;
+border-radius:8px;
 box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* SKILL CHART */
-
-.skill-chart{
-max-width:600px;
-margin:auto;
-}
-
-/* DOWNLOAD */
-
-.cv-download{
+.download{
 background:#001f3f;
 color:white;
 padding:12px 18px;
@@ -203,22 +107,9 @@ display:inline-block;
 margin-top:10px;
 }
 
-/* FAB */
-
-.fab{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#001f3f;
-color:white;
-width:50px;
-height:50px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-font-size:22px;
+.skill-chart{
+max-width:600px;
+margin:auto;
 }
 
 </style>
@@ -227,63 +118,46 @@ font-size:22px;
 
 <body>
 
-<div class="sticky-bar">
-
-<button class="filter-btn active" data-filter="summary">Summary</button>
-<button class="filter-btn" data-filter="experience">Experience</button>
-<button class="filter-btn" data-filter="achievements">Achievements</button>
-<button class="filter-btn" data-filter="skills">Skills</button>
-<button class="filter-btn" data-filter="projects">Projects</button>
-<button class="filter-btn" data-filter="certifications">Certifications</button>
-<button class="filter-btn" data-filter="contact">Contact</button>
-
-</div>
-
-<div class="page">
-
-<!-- HERO -->
-
-<div class="section" data-category="summary">
-
-<div class="hero">
-
-<div class="card">
+<section class="hero">
 
 <h1>Tim Williams</h1>
-
-<h3>Senior IT Programme & Project Manager</h3>
-
-<p>
-
-Senior IT transformation leader with over 25 years delivering enterprise infrastructure, cloud transformation, cyber security and digital workplace programmes across government and enterprise sectors.
-
-</p>
+<h2>Senior IT Programme & Project Manager</h2>
 
 <p>
-
-Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metropolitan Police and Telefonica.
-
+Enterprise IT transformation leader delivering infrastructure, cyber security and digital workplace programmes across global organisations.
 </p>
 
-<a class="cv-download" href="#">Download CV</a>
+</section>
 
-</div>
+<div class="container">
 
-<div class="profile-summary">
+<!-- PROFILE -->
+
+<div class="grid">
+
+<div class="card">
 
 <h2>Quick Profile</h2>
 
 <ul>
-
 <li>25+ Years IT Programme Delivery</li>
 <li>Enhanced SC Cleared</li>
-<li>Global Programme Delivery</li>
+<li>Global Enterprise Delivery</li>
 <li>£100M+ Programme Value</li>
 <li>Government & Enterprise Clients</li>
-
 </ul>
 
-<p><strong>Available for Contract Roles</strong></p>
+<a class="download" href="#">Download CV</a>
+
+</div>
+
+<div class="card">
+
+<h2>Core Skills</h2>
+
+<div class="skill-chart">
+
+<canvas id="skillsRadar"></canvas>
 
 </div>
 
@@ -293,34 +167,28 @@ Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metrop
 
 <!-- STATS -->
 
-<div class="card stats">
+<h2>Programme Delivery Impact</h2>
+
+<div class="stats">
 
 <div class="stat">
-
 <h2>126,000</h2>
 <p>Devices Deployed</p>
-
 </div>
 
 <div class="stat">
-
 <h2>46,000</h2>
 <p>Windows 11 Upgrades</p>
-
 </div>
 
 <div class="stat">
-
 <h2>32,000</h2>
 <p>Endpoint Migrations</p>
-
 </div>
 
 <div class="stat">
-
 <h2>£18M</h2>
 <p>Cyber Security Programme</p>
-
 </div>
 
 </div>
@@ -329,7 +197,7 @@ Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metrop
 
 <div class="card">
 
-<h2>Clients & Organisations</h2>
+<h2>Organisations Delivered For</h2>
 
 <div class="logo-grid">
 
@@ -346,30 +214,23 @@ Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metrop
 
 <!-- TIMELINE -->
 
-<div class="section" data-category="experience">
-
 <div class="card">
 
 <h2>Career Timeline</h2>
 
-<div class="timeline-container">
-
-<div class="arrow arrow-left">&#8592;</div>
-<div class="arrow arrow-right">&#8594;</div>
-
-<div class="timeline-wrapper">
+<div class="timeline">
 
 <div class="timeline-node">
 
-<h3>Senior Project Manager</h3>
-<p>NHS England</p>
+<h3>NHS England</h3>
+<p>Senior Project Manager</p>
 
 <div class="timeline-details">
 
 <ul>
-<li>Delivered enterprise cyber security programme</li>
-<li>CAF aligned architecture</li>
-<li>MFA, IAM, CyberArk, Splunk, Azure</li>
+<li>Delivered cyber security programme</li>
+<li>MFA, IAM, CyberArk, Splunk</li>
+<li>CAF security architecture</li>
 </ul>
 
 </div>
@@ -378,15 +239,14 @@ Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metrop
 
 <div class="timeline-node">
 
-<h3>PMO Manager</h3>
-<p>Roc Technologies</p>
+<h3>Roc Technologies</h3>
+<p>PMO Manager</p>
 
 <div class="timeline-details">
 
 <ul>
-<li>Directed PMO operations</li>
-<li>Network refresh programme</li>
-<li>ServiceNow MSP implementation</li>
+<li>Directed PMO delivery</li>
+<li>Infrastructure transformation</li>
 </ul>
 
 </div>
@@ -395,72 +255,17 @@ Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metrop
 
 <div class="timeline-node">
 
-<h3>Senior Project Manager</h3>
-<p>Computacenter</p>
+<h3>Computacenter</h3>
+<p>Senior Project Manager</p>
 
 <div class="timeline-details">
 
 <ul>
 <li>Global enterprise transformation</li>
-<li>Windows 10/11 migration</li>
-<li>Azure cloud transformation</li>
+<li>Azure & workplace modernisation</li>
 </ul>
 
 </div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ACHIEVEMENTS -->
-
-<div class="section" data-category="achievements">
-
-<div class="card">
-
-<h2>STAR Achievements</h2>
-
-<div class="grid">
-
-<div class="project-card">
-
-<h3>NHS Cyber Security Programme</h3>
-
-<p>Delivered enterprise security transformation improving cyber resilience.</p>
-
-</div>
-
-<div class="project-card">
-
-<h3>Global Windows Transformation</h3>
-
-<p>Delivered Windows transformation across multiple global enterprises.</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- SKILLS -->
-
-<div class="section" data-category="skills">
-
-<div class="card">
-
-<h2>Core Skills</h2>
-
-<div class="skill-chart">
-
-<canvas id="skillsRadar"></canvas>
 
 </div>
 
@@ -470,34 +275,30 @@ Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metrop
 
 <!-- PROJECTS -->
 
-<div class="section" data-category="projects">
-
 <div class="card">
 
 <h2>Key Programme Deliveries</h2>
 
 <div class="grid">
 
-<div class="project-card">
+<div>
 
-<h3>Tesco Windows 11 Programme</h3>
+<h3>Tesco Windows Transformation</h3>
 <p>Enterprise rollout across 126k devices.</p>
 
 </div>
 
-<div class="project-card">
+<div>
 
-<h3>NHS Security Transformation</h3>
-<p>Delivered national cyber security programme.</p>
+<h3>NHS Cyber Security Programme</h3>
+<p>Delivered national security architecture.</p>
 
 </div>
 
-<div class="project-card">
+<div>
 
 <h3>MoD Mobile Device Programme</h3>
-<p>Delivered enterprise device management solution.</p>
-
-</div>
+<p>Enterprise device management transformation.</p>
 
 </div>
 
@@ -506,8 +307,6 @@ Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metrop
 </div>
 
 <!-- CERTIFICATIONS -->
-
-<div class="section" data-category="certifications">
 
 <div class="card">
 
@@ -525,11 +324,7 @@ Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metrop
 
 </div>
 
-</div>
-
 <!-- CONTACT -->
-
-<div class="section" data-category="contact">
 
 <div class="card">
 
@@ -542,50 +337,11 @@ Delivery experience across NHS England, HSBC, Tesco, Ministry of Defence, Metrop
 
 </div>
 
-</div>
-
-<div class="fab" id="fab">↑</div>
-
 <script>
-
-/* timeline expand */
 
 document.querySelectorAll(".timeline-node").forEach(node=>{
 node.onclick=()=>node.classList.toggle("active")
 })
-
-/* arrows */
-
-const wrapper=document.querySelector(".timeline-wrapper")
-
-document.querySelector(".arrow-left").onclick=()=>wrapper.scrollBy({left:-300,behavior:"smooth"})
-document.querySelector(".arrow-right").onclick=()=>wrapper.scrollBy({left:300,behavior:"smooth"})
-
-/* filter */
-
-const buttons=document.querySelectorAll(".filter-btn")
-
-buttons.forEach(btn=>{
-
-btn.onclick=()=>{
-
-buttons.forEach(b=>b.classList.remove("active"))
-
-btn.classList.add("active")
-
-let cat=btn.dataset.filter
-
-document.querySelectorAll(".section").forEach(sec=>{
-
-sec.style.display=(sec.dataset.category===cat)?"block":"none"
-
-})
-
-}
-
-})
-
-/* radar */
 
 new Chart(document.getElementById("skillsRadar"),{
 
@@ -595,7 +351,7 @@ data:{
 labels:[
 "Cyber Security",
 "Cloud",
-"Enterprise Infrastructure",
+"Infrastructure",
 "Programme Leadership",
 "Service Management",
 "Pre-Sales"
@@ -603,22 +359,13 @@ labels:[
 
 datasets:[{
 label:"Expertise",
-data:[95,90,92,96,88,85],
-fill:true
+data:[95,90,92,96,88,85]
 }]
 },
 
-options:{
-scales:{r:{beginAtZero:true,max:100}}
-}
+options:{scales:{r:{beginAtZero:true,max:100}}}
 
 })
-
-/* FAB */
-
-document.getElementById("fab").onclick=()=>{
-window.scrollTo({top:0,behavior:"smooth"})
-}
 
 </script>
 

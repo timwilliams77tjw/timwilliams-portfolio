@@ -20,6 +20,7 @@ a { text-decoration: none; color: inherit;}
 .brand-btn:hover { background:#7ac0f9; color:white;}
 .arrow { font-size:12px;}
 .popup-menu { display:none; position:absolute; background:white; border:1px solid #ddd; padding:10px; border-radius:6px; z-index:9999;}
+.popup-menu-show { display:block; }
 .download-note { font-size:12px; color:#555; margin-top:5px;}
 .divider { width:1px; background:#ddd; margin:0 6px; display:inline-block; height:24px; align-self:center;}
 
@@ -80,17 +81,13 @@ footer img { max-width:60px;}
 
       <div class="button-group">
         <a href="index.html" class="brand-btn">Home</a>
-
-        <a href="#" class="brand-btn cv-btn" onclick="toggleMenu('cvMenu', event)">
-          CV <span class="arrow">⌄</span>
-        </a>
+        <a href="#" class="brand-btn cv-btn" onclick="toggleMenu('cvMenu', event)">CV <span class="arrow">⌄</span></a>
         <div id="cvMenu" class="popup-menu">
           <a href="cv.html">View Online</a>
           <a href="Tim_Williams_CV.pdf">Download CV (PDF)</a>
           <a href="Tim_Williams_CV.download">Download for Safari (rename to .zip)</a>
           <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
         </div>
-
         <a href="certifications.html" class="brand-btn">Certifications</a>
         <a href="recommendations.html" class="brand-btn">Recommendations</a>
         <a href="linkedin.html" class="brand-btn">LinkedIn</a>
@@ -100,16 +97,13 @@ footer img { max-width:60px;}
         <a href="engagement.html" class="brand-btn">Engagement Models</a>
         <a href="faq.html" class="brand-btn">FAQ</a>
         <span class="divider"></span>
-        <a href="#" class="brand-btn portfolio-btn" onclick="toggleMenu('portfolioMenu', event)">
-          Portfolio <span class="arrow">⌄</span>
-        </a>
+        <a href="#" class="brand-btn portfolio-btn" onclick="toggleMenu('portfolioMenu', event)">Portfolio <span class="arrow">⌄</span></a>
         <div id="portfolioMenu" class="popup-menu">
           <a href="portfolio.html">View Online</a>
           <a href="portfolio_presentation.pdf">Download PDF</a>
           <a href="portfolio_presentation.download">Download for Safari (rename to .zip)</a>
           <div class="download-note">Safari users: this file saves as “.download”. Rename it to “.zip”.</div>
         </div>
-
         <a href="sites.html" class="brand-btn">Digital Presence</a>
         <a href="https://twc-ltd.my.canva.site" target="_blank" rel="noopener noreferrer" class="brand-btn">My Services</a>
         <a href="https://gethandover.uk" target="_blank" rel="noopener noreferrer" class="brand-btn">PM Tool Suite</a>
@@ -165,6 +159,7 @@ footer img { max-width:60px;}
   <h2 class="section-title">Career Timeline</h2>
   <div class="timeline">
 
+    <!-- Example Timeline Node -->
     <div class="timeline-node" onclick="toggleNode(this)">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#001f3f"/></svg>
       <h3>NHS England</h3>
@@ -201,6 +196,9 @@ footer img { max-width:60px;}
         </ul>
       </div>
     </div>
+
+    <!-- ADDITIONAL NODES HERE -->
+    <!-- You can continue to add all previous roles in same format -->
 
   </div>
 

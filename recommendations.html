@@ -75,33 +75,32 @@ fetch("footer.html")
 <script src="global.js"></script>
 
 
-<!-- DARK MODE SCRIPT (NEW) -->
 <script>
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-const darkToggle = document.getElementById("darkToggle");
-if (!darkToggle) return;
+  const darkToggle = document.getElementById("darkToggle");
+  if (!darkToggle) return;
 
-const body = document.body;
-const storedMode = localStorage.getItem("tw_dark");
+  const body = document.body;
 
-if (storedMode === "1") {
-  body.classList.add("dark-mode");
-}
+  /* load saved mode */
+  if (localStorage.getItem("tw_dark") === "1") {
+    body.classList.add("dark-mode");
+  }
 
-darkToggle.addEventListener("click", function () {
+  /* toggle mode */
+  darkToggle.addEventListener("click", function () {
 
-  body.classList.toggle("dark-mode");
+    body.classList.toggle("dark-mode");
 
-  localStorage.setItem(
-    "tw_dark",
-    body.classList.contains("dark-mode") ? "1" : "0"
-  );
+    localStorage.setItem(
+      "tw_dark",
+      body.classList.contains("dark-mode") ? "1" : "0"
+    );
+
+  });
 
 });
-
-})();
 </script>
-
 </body>
 </html>

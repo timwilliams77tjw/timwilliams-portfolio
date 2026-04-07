@@ -3,60 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CV – Tim Williams</title>
+<title>Tim Williams CV – Interactive Horizontal Timeline</title>
 <style>
-/* ===== GLOBAL STYLES ===== */
 body {
   font-family: Arial, sans-serif;
   background: #f8f9fa;
   color: #001f3f;
-  line-height: 1.6;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
-.page-content { padding: 20px; max-width:1200px; margin:auto; }
+.page-content { padding: 20px; max-width: 1400px; margin: auto; }
 
-/* Card styling */
-.card {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-.card ul { padding-left: 20px; margin-bottom: 0; }
-.card ul li { margin-bottom: 10px; }
-
-/* Timeline */
-.cv-timeline {
-  position: relative;
-  margin: 20px 0;
-  padding-left: 40px;
-  border-left: 3px solid #001f3f;
-}
-.timeline-node {
-  position: relative;
-  margin-bottom: 30px;
-}
-.timeline-node::before {
-  content: '';
-  position: absolute;
-  left: -9px;
-  top: 0;
-  width: 18px;
-  height: 18px;
-  background-color: #001f3f;
-  border-radius: 50%;
-  border: 3px solid white;
-  box-shadow: 0 0 3px rgba(0,0,0,0.3);
-  cursor: pointer;
-}
-.timeline-date { font-weight: bold; margin-bottom: 5px; }
-.timeline-role h3 { margin: 0; font-size: 1.1em; }
-.timeline-details { display: none; margin-top: 10px; }
-.timeline-node.active .timeline-details { display: block; }
-
-/* Accordion + filters */
+/* ===== FILTER BAR ===== */
 .sticky-bar {
   background:white; 
   display:flex; flex-wrap:wrap; gap:8px; padding:10px;
@@ -75,16 +34,69 @@ body {
 .filter-btn:hover { background-color:#7ac0f9; color:white; }
 .filter-btn.active-filter { background-color:white; color:#001f3f; border:1px solid #7ac0f9; }
 
-.category-header { font-size: 1.2em; font-weight: bold; margin-bottom: 10px; cursor: pointer; }
+/* ===== TIMELINE STYLES ===== */
+.timeline-container {
+  position: relative;
+  margin: 40px 0;
+  overflow-x: auto;
+  padding-bottom: 40px;
+}
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: #001f3f;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.timeline-wrapper {
+  display: flex;
+  gap: 50px;
+  position: relative;
+  padding: 20px 0;
+}
+.timeline-node {
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  z-index: 2;
+  min-width: 180px;
+}
+.timeline-node::before {
+  content: '';
+  width: 20px; height: 20px;
+  background: #001f3f;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 10px;
+  border: 3px solid white;
+}
+.timeline-date { font-weight: bold; margin-bottom: 5px; }
+.timeline-details {
+  display: none;
+  background:white; 
+  padding: 15px; 
+  margin-top:10px; 
+  border-radius: 10px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+.timeline-node.active .timeline-details { display: block; }
+
+/* ===== CARDS ===== */
+.card { background:white; border-radius:10px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.08); margin-bottom:16px; }
+.card ul { padding-left:20px; margin:0; }
+.card ul li { margin-bottom:8px; }
+
+/* ===== GRID ===== */
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:10px; }
+
+/* ===== ACCORDION ===== */
+.category-header { font-size: 1.2em; font-weight:bold; margin-bottom:10px; cursor:pointer; }
 .category-toggle { float:right; }
 
-.orgs-columns { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin-top:10px; }
-.orgs-columns ul { padding-left:20px; margin:0; }
-.orgs-columns li { margin-bottom:8px; }
-
-.awards-columns { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:20px; }
-
-/* FAB */
+/* ===== FAB ===== */
 .fab {
   position:fixed; bottom:20px; right:20px; 
   background:#001f3f; color:white; border-radius:50%; 
@@ -106,7 +118,6 @@ body {
 </div>
 
 <main class="page-content">
-<div class="container">
 
 <!-- EXECUTIVE SUMMARY -->
 <div class="category-section cv-section" data-category="summary">
@@ -114,16 +125,7 @@ body {
   <div class="card-list" style="display:block">
     <div class="card">
       <p>Senior IT Project & Program Manager with 25+ years delivering enterprise-scale infrastructure modernization, workplace transformation, cloud adoption, and cyber security programs across government, defense, healthcare, finance, and legal sectors.</p>
-      <p>Holding Enhanced SC and DBS clearance, leading multimillion‑pound programs across UK, Europe, APAC, and the USA for organisations such as NHS England, HSBC, MoD, Metropolitan Police, DWP, Linklater’s, Telefonica, and Tesco.</p>
-      <h3>Key Organisations Delivered For</h3>
-      <div class="orgs-columns">
-        <ul>
-          <li>NHS England</li><li>HSBC</li><li>Ministry of Defence</li><li>Metropolitan Police</li><li>DWP</li>
-        </ul>
-        <ul>
-          <li>Linklater’s</li><li>Telefonica</li><li>Tesco</li><li>Gateley</li><li>Eversheds</li>
-        </ul>
-      </div>
+      <p>Enhanced SC and DBS clearance, leading multimillion‑pound programs across UK, Europe, APAC, and USA for organisations like NHS England, HSBC, MoD, Metropolitan Police, DWP, Linklater’s, Telefonica, and Tesco.</p>
     </div>
   </div>
 </div>
@@ -137,76 +139,51 @@ body {
         <h3>NHS England — Cyber Security Programme</h3>
         <p><strong>Situation:</strong> NHS England required full cyber-security uplift aligned to CAF standards - £18m budget.</p>
         <p><strong>Task:</strong> Lead discovery, design, and implementation of multiple security solutions.</p>
-        <p><strong>Action:</strong> Delivered a Cyber Security Program covering MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, and a new secure backup platform.</p>
+        <p><strong>Action:</strong> Delivered MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, Secure Backup platform.</p>
         <p><strong>Result:</strong> Strengthened NHS England’s security posture and operational resilience.</p>
       </div>
       <div class="card">
         <h3>Roc Technologies — PMO & Infrastructure Transformation</h3>
-        <p><strong>Situation:</strong> High-risk infrastructure and security programs - £3.6m PMO service, £122m IT portfolio.</p>
-        <p><strong>Action:</strong> Directed PMO governance, delivered MFA for Luton Airport, university-wide network refresh, ServiceNow MSP, Nutanix storage, critical app migrations.</p>
+        <p><strong>Situation:</strong> High-risk infrastructure and security programs - £3.6m PMO, £122m IT portfolio.</p>
+        <p><strong>Action:</strong> Directed PMO governance, MFA rollout, network refresh, ServiceNow MSP, Nutanix storage, critical app migrations.</p>
         <p><strong>Result:</strong> Improved delivery predictability and accelerated secure infrastructure adoption.</p>
-      </div>
-      <div class="card">
-        <h3>Computacenter — Global Workplace Transformation</h3>
-        <p><strong>Situation:</strong> Multiple enterprise clients required large-scale workplace and infrastructure modernization.</p>
-        <p><strong>Action:</strong> Directed Windows 10/11 transformation, Intune, Autopilot, Azure AD, Teams Rooms, multi-vendor global delivery.</p>
-        <p><strong>Result:</strong> Delivered predictable, low-risk workplace transformations at global scale.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- WORK EXPERIENCE TIMELINE -->
+<!-- WORK EXPERIENCE HORIZONTAL TIMELINE -->
 <div class="category-section cv-section" data-category="experience">
   <div class="category-header">Work Experience <span class="category-toggle">+</span></div>
   <div class="card-list">
-    <div class="cv-timeline">
-      <!-- Node Example -->
-      <div class="timeline-node">
-        <div class="timeline-date">11/2025 – 02/2026</div>
-        <div class="timeline-role">
-          <h3>Senior Project Manager — Tim Williams Consulting Ltd / NHS England</h3>
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      <div class="timeline-wrapper">
+        <div class="timeline-node">
+          <div class="timeline-date">11/2025 – 02/2026</div>
+          <h3>Senior Project Manager — Tim Williams Consulting / NHS England</h3>
           <div class="timeline-details">
             <ul>
-              <li>Delivered comprehensive Cyber Security Program integrating CAF-aligned solutions (MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, Secure Backup).</li>
-              <li>Provided strategic advisory across identity, cyber security, cloud enablement, and modern workplace.</li>
+              <li>Delivered Cyber Security Program (MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, Secure Backup).</li>
+              <li>Strategic advisory across identity, cyber security, cloud enablement, and modern workplace.</li>
             </ul>
           </div>
         </div>
-      </div>
-      <div class="timeline-node">
-        <div class="timeline-date">07/2025 – 10/2025</div>
-        <div class="timeline-role">
+        <div class="timeline-node">
+          <div class="timeline-date">07/2025 – 10/2025</div>
           <h3>Senior Project Manager / PMO Manager — Roc Technologies</h3>
           <div class="timeline-details">
             <ul>
-              <li>Directed PMO operations for Dounreay Nuclear, implemented MFA, network refresh, ServiceNow MSP module, server builds, Domino upgrades, Nutanix storage, and critical app migrations.</li>
-              <li>Mentored Project Coordinators, engaged in pre-sales and SOW preparation.</li>
+              <li>Directed PMO, implemented MFA, network refresh, ServiceNow MSP, server builds, Domino upgrades, Nutanix storage, critical app migrations.</li>
             </ul>
           </div>
         </div>
-      </div>
-      <div class="timeline-node">
-        <div class="timeline-date">07/2013 – 09/2024</div>
-        <div class="timeline-role">
-          <h3>Senior Project Manager / PMO Manager / Bid Manager — Computacenter</h3>
+        <div class="timeline-node">
+          <div class="timeline-date">07/2013 – 09/2024</div>
+          <h3>Senior Project Manager / PMO Manager — Computacenter</h3>
           <div class="timeline-details">
             <ul>
-              <li>Global workplace and infrastructure transformations, Windows 10/11, Intune, Azure AD, Teams Rooms, AWS/Azure transitions.</li>
-              <li>Managed PMO, governance, RAID, reporting, financial control, pre-sales activities.</li>
-              <li>Global managed service transitions across UK, Europe, APAC, USA.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="timeline-node">
-        <div class="timeline-date">01/2006 – 06/2013</div>
-        <div class="timeline-role">
-          <h3>Project Manager — TrustMarq / Capita / Trinity Expert Systems / Liberata</h3>
-          <div class="timeline-details">
-            <ul>
-              <li>Executed infrastructure, migration, and software development projects for Financial Services clients.</li>
-              <li>Implemented AD, SCCM, SCOM, Exchange, Citrix, Netscaler, Splunk, NextThink, and DLP solutions.</li>
+              <li>Global workplace & infrastructure transformations: Windows 10/11, Intune, Azure AD, Teams Rooms, AWS/Azure transitions.</li>
             </ul>
           </div>
         </div>
@@ -215,57 +192,43 @@ body {
   </div>
 </div>
 
-<!-- CORE SKILLS -->
+<!-- OTHER SECTIONS (Skills, Certifications, Awards) -->
 <div class="category-section cv-section" data-category="skills">
   <div class="category-header">Core Skills <span class="category-toggle">+</span></div>
   <div class="card-list">
     <div class="grid">
       <div class="card"><h3>Cyber Security & Identity</h3><ul><li>CAF, IAM, MFA, CyberArk, Splunk, Secure Backup</li></ul></div>
       <div class="card"><h3>Cloud & Workplace</h3><ul><li>Azure, AWS, Intune, Entra, Autopilot, Cloud Migrations, Windows 10/11, Teams Rooms</li></ul></div>
-      <div class="card"><h3>Infrastructure & Digital Workplace</h3><ul><li>Windows 10/11 at scale, Teams Rooms, network refresh, server builds, storage, AD/SCCM/SCOM, Citrix, Exchange, data centre migrations</li></ul></div>
-      <div class="card"><h3>Project & PMO Leadership</h3><ul><li>Direct line management, 3rd party management, virtual/matrix teams, Governance, RAID, Reporting, Financial Control</li></ul></div>
-      <div class="card"><h3>Delivery Methods & Tools</h3><ul><li>Agile, Waterfall, Scrum, Kanban, MS Project, Hubspot, ServiceNow, Jira</li></ul></div>
-      <div class="card"><h3>Service Management</h3><ul><li>ITIL, ITSM, ServiceNow, ISO 27001 & 9001, SOX, CSI</li></ul></div>
-      <div class="card"><h3>Commercial & Pre‑Sales</h3><ul><li>SOWs, Cost Models, Procurement, Tender Responses, Contract Negotiation</li></ul></div>
     </div>
   </div>
 </div>
 
-<!-- CERTIFICATIONS -->
 <div class="category-section cv-section" data-category="certifications">
   <div class="category-header">Certifications <span class="category-toggle">+</span></div>
   <div class="card-list">
     <div class="grid">
-      <div class="card"><h3>Project & Programme</h3><ul><li>APM PMQ</li><li>PRINCE2 Practitioner</li><li>PRINCE2 Agile Practitioner</li><li>P3O Practitioner</li></ul></div>
-      <div class="card"><h3>IT Service Management</h3><ul><li>ITIL v3 Foundation</li><li>Six Sigma Green Belt</li><li>ServiceNow IT Leadership Professional</li></ul></div>
-      <div class="card"><h3>Cyber & Cloud</h3><ul><li>NIST CSF</li><li>Microsoft CAF</li></ul></div>
-      <div class="card"><h3>Technical</h3><ul><li>MCSE, MCITP, MCP, MCTS</li><li>VMware Certified Professional</li><li>Citrix CCA</li></ul></div>
-      <div class="card"><h3>Memberships</h3><ul><li>APM Professional</li><li>BCS Professional</li><li>House of PMO</li></ul></div>
+      <div class="card"><h3>Project & Programme</h3><ul><li>APM PMQ</li><li>PRINCE2 Practitioner</li></ul></div>
     </div>
   </div>
 </div>
 
-<!-- AWARDS -->
 <div class="category-section cv-section" data-category="awards">
   <div class="category-header">Achievements & Awards <span class="category-toggle">+</span></div>
   <div class="card-list">
-    <div class="card">
-      <div class="awards-columns">
-        <div><h3>Leadership & Contribution</h3><ul><li>STEM Ambassador</li><li>APM Mentor</li><li>Career Fair Speaker</li><li>Student Mentor</li></ul></div>
-        <div><h3>Awards</h3><ul><li>High Performer Awards</li><li>Customer Service Awards</li><li>PMO Revenue Growth Recognition</li><li>Service Satisfaction Awards</li><li>UK Employee Forum Rep</li></ul></div>
+    <div class="grid">
+      <div class="card">
+        <ul><li>STEM Ambassador</li><li>APM Mentor</li><li>High Performer Awards</li></ul>
       </div>
     </div>
   </div>
 </div>
 
-</div>
 </main>
 
-<!-- FAB -->
-<div id="fab" class="fab" aria-label="Back to top">↑</div>
+<div id="fab" class="fab">↑</div>
 
 <script>
-// Timeline toggle
+// Timeline click toggle
 document.querySelectorAll('.timeline-node').forEach(node=>{
   node.addEventListener('click',()=> node.classList.toggle('active'));
 });
@@ -291,8 +254,9 @@ filterBtns.forEach(btn=>{
   });
 });
 
-// FAB scroll to top
+// FAB scroll
 document.getElementById('fab').addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 </script>
+
 </body>
 </html>

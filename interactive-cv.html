@@ -34,7 +34,7 @@ body {
   margin: 40px 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 40px;
+  padding: 20px 0;
 }
 .timeline-line {
   position: absolute; top: 50%; left: 0; height: 4px; width: 100%;
@@ -42,6 +42,7 @@ body {
 }
 .timeline-wrapper {
   display: flex; gap: 50px; position: relative; padding: 20px 0;
+  scroll-behavior: smooth;
 }
 .timeline-node {
   position: relative;
@@ -67,6 +68,16 @@ body {
   box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 .timeline-node.active .timeline-details { display: block; }
+
+/* Timeline arrows */
+.timeline-arrow {
+  position: absolute; top:50%; transform: translateY(-50%);
+  width:40px; height:40px; background:#001f3f; color:white;
+  border-radius:50%; display:flex; justify-content:center; align-items:center;
+  cursor:pointer; font-size:24px; z-index:3; user-select:none;
+}
+.timeline-arrow.left { left:-20px; }
+.timeline-arrow.right { right:-20px; }
 
 /* ===== CARDS ===== */
 .card { background:white; border-radius:10px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.08); margin-bottom:16px; }
@@ -142,6 +153,8 @@ body {
   <div class="card-list">
     <div class="timeline-container">
       <div class="timeline-line"></div>
+      <div class="timeline-arrow left">&#8592;</div>
+      <div class="timeline-arrow right">&#8594;</div>
       <div class="timeline-wrapper">
         <div class="timeline-node">
           <div class="timeline-date">11/2025 – 02/2026</div>
@@ -176,7 +189,7 @@ body {
   </div>
 </div>
 
-<!-- OTHER SECTIONS -->
+<!-- OTHER SECTIONS (SKILLS, CERTIFICATIONS, AWARDS) -->
 <div class="category-section cv-section" data-category="skills">
   <div class="category-header">Core Skills <span class="category-toggle">+</span></div>
   <div class="card-list">
@@ -212,10 +225,19 @@ body {
 <div id="fab" class="fab">↑</div>
 
 <script>
-// Timeline click toggle
+// Timeline node toggle
 document.querySelectorAll('.timeline-node').forEach(node=>{
   node.addEventListener('click',()=> node.classList.toggle('active'));
 });
+
+// Timeline carousel arrows
+const timeline = document.querySelector('.timeline-wrapper');
+const arrowLeft = document.querySelector('.timeline-arrow.left');
+const arrowRight = document.querySelector('.timeline-arrow.right');
+const nodeWidth = document.querySelector('.timeline-node').offsetWidth + 50; // node + gap
+
+arrowLeft.addEventListener('click', ()=> timeline.scrollBy({left:-nodeWidth, behavior:'smooth'}));
+arrowRight.addEventListener('click', ()=> timeline.scrollBy({left:nodeWidth, behavior:'smooth'}));
 
 // Accordion toggle
 document.querySelectorAll('.category-header').forEach(header=>{

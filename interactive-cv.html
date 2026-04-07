@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tim Williams CV – Interactive Horizontal Timeline</title>
+<title>Tim Williams CV – Interactive Timeline</title>
 <style>
 body {
   font-family: Arial, sans-serif;
@@ -11,58 +11,45 @@ body {
   color: #001f3f;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 .page-content { padding: 20px; max-width: 1400px; margin: auto; }
 
 /* ===== FILTER BAR ===== */
 .sticky-bar {
-  background:white; 
-  display:flex; flex-wrap:wrap; gap:8px; padding:10px;
+  background:white; display:flex; flex-wrap:wrap; gap:8px; padding:10px;
   border-bottom:1px solid #ddd;
   position:sticky; top:0; z-index:999;
 }
 .filter-btn {
   background-color: #001f3f; color: white;
-  border: 1px solid #001f3f;
-  border-radius: 6px;
-  padding: 6px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
+  border: 1px solid #001f3f; border-radius: 6px; padding: 6px 14px;
+  font-size: 14px; cursor: pointer; transition: all 0.2s;
 }
 .filter-btn:hover { background-color:#7ac0f9; color:white; }
 .filter-btn.active-filter { background-color:white; color:#001f3f; border:1px solid #7ac0f9; }
 
-/* ===== TIMELINE STYLES ===== */
+/* ===== TIMELINE ===== */
 .timeline-container {
   position: relative;
   margin: 40px 0;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
   padding-bottom: 40px;
 }
 .timeline-line {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background: #001f3f;
-  transform: translateY(-50%);
-  z-index: 1;
+  position: absolute; top: 50%; left: 0; height: 4px; width: 100%;
+  background: #001f3f; transform: translateY(-50%); z-index: 1;
 }
 .timeline-wrapper {
-  display: flex;
-  gap: 50px;
-  position: relative;
-  padding: 20px 0;
+  display: flex; gap: 50px; position: relative; padding: 20px 0;
 }
 .timeline-node {
   position: relative;
+  min-width: 250px;
   cursor: pointer;
   text-align: center;
+  scroll-snap-align: center;
   z-index: 2;
-  min-width: 180px;
 }
 .timeline-node::before {
   content: '';
@@ -76,10 +63,7 @@ body {
 .timeline-date { font-weight: bold; margin-bottom: 5px; }
 .timeline-details {
   display: none;
-  background:white; 
-  padding: 15px; 
-  margin-top:10px; 
-  border-radius: 10px;
+  background:white; padding: 15px; margin-top:10px; border-radius: 10px;
   box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 .timeline-node.active .timeline-details { display: block; }
@@ -137,22 +121,22 @@ body {
     <div class="grid">
       <div class="card">
         <h3>NHS England — Cyber Security Programme</h3>
-        <p><strong>Situation:</strong> NHS England required full cyber-security uplift aligned to CAF standards - £18m budget.</p>
-        <p><strong>Task:</strong> Lead discovery, design, and implementation of multiple security solutions.</p>
-        <p><strong>Action:</strong> Delivered MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, Secure Backup platform.</p>
-        <p><strong>Result:</strong> Strengthened NHS England’s security posture and operational resilience.</p>
+        <ul>
+          <li>MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, Secure Backup platform</li>
+          <li>Improved operational resilience & security posture</li>
+        </ul>
       </div>
       <div class="card">
         <h3>Roc Technologies — PMO & Infrastructure Transformation</h3>
-        <p><strong>Situation:</strong> High-risk infrastructure and security programs - £3.6m PMO, £122m IT portfolio.</p>
-        <p><strong>Action:</strong> Directed PMO governance, MFA rollout, network refresh, ServiceNow MSP, Nutanix storage, critical app migrations.</p>
-        <p><strong>Result:</strong> Improved delivery predictability and accelerated secure infrastructure adoption.</p>
+        <ul>
+          <li>Directed PMO, MFA rollout, network refresh, ServiceNow MSP, Nutanix storage, critical app migrations</li>
+        </ul>
       </div>
     </div>
   </div>
 </div>
 
-<!-- WORK EXPERIENCE HORIZONTAL TIMELINE -->
+<!-- WORK EXPERIENCE TIMELINE -->
 <div class="category-section cv-section" data-category="experience">
   <div class="category-header">Work Experience <span class="category-toggle">+</span></div>
   <div class="card-list">
@@ -192,7 +176,7 @@ body {
   </div>
 </div>
 
-<!-- OTHER SECTIONS (Skills, Certifications, Awards) -->
+<!-- OTHER SECTIONS -->
 <div class="category-section cv-section" data-category="skills">
   <div class="category-header">Core Skills <span class="category-toggle">+</span></div>
   <div class="card-list">

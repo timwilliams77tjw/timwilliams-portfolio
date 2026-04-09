@@ -185,7 +185,6 @@ body.page-certifications{
 
 <!-- HEADER -->
 <div id="header"></div>
-<div id="credly-badges"></div>
 <script src="global.js"></script>
 <script>
 fetch("header-standard.html")
@@ -324,6 +323,16 @@ fetch("header-standard.html")
             <i class="fa-regular fa-copy"></i> Copy Link
           </button>
         </article>
+<article class="website-card">
+<h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+<a href="https://credly.com/users/tim-williams.e51205ae">credly.com/users/tim-williams</a>
+
+<div id="credly-badges"></div>
+
+<button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
+<i class="fa-regular fa-copy"></i> Copy Link
+</button>
+</article>
       </div>
     </div>
   </div>
@@ -399,26 +408,39 @@ function trackEvent(action, value) {
 </script>
 <script>
 async function loadCredlyBadges() {
+
   const username = "tim-williams.e51205ae";
+  const url = `https://www.credly.com/users/${username}/badges.json`;
 
-  const response = await fetch(
-    `https://www.credly.com/users/${username}/badges.json`
-  );
+  try {
 
-  const data = await response.json();
+    const response = await fetch(url);
+    const data = await response.json();
 
-  const container = document.getElementById("credly-badges");
+    const container = document.getElementById("credly-badges");
 
-  data.data.forEach(badge => {
-    const badgeHTML = `
-      <a href="${badge.public_url}" target="_blank" title="${badge.name}">
-        <img src="${badge.image_url}" alt="${badge.name}" width="120">
-      </a>
-    `;
-    container.innerHTML += badgeHTML;
-  });
+    data.data.forEach(badge => {
+
+      const name = badge.badge_template.name;
+      const image = badge.image_url;
+      const link = badge.badge_template.url;
+
+      const badgeHTML = `
+        <a href="${link}" target="_blank" title="${name}">
+          <img src="${image}" alt="${name}" width="120">
+        </a>
+      `;
+
+      container.innerHTML += badgeHTML;
+
+    });
+
+  } catch (error) {
+    console.error("Credly badges failed to load", error);
+  }
 }
 
 loadCredlyBadges();
-</script></body>
+</script>
+</body>
 </html>

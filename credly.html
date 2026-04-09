@@ -310,22 +310,18 @@ fetch("header-standard.html")
     <div class="card-list">
       <div class="grid">
 <article class="website-card">
-<h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+  <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
 
-<a href="https://credly.com/users/tim-williams.e51205ae">
-credly.com/users/tim-williams
-</a>
+  <a href="https://credly.com/users/tim-williams.e51205ae">
+    View my full Credly profile
+  </a>
 
-<iframe
-  src="https://www.credly.com/users/tim-williams.e51205ae/embed"
-  width="100%"
-  height="500"
-  frameborder="0">
-</iframe>
+  <!-- Credly badge container -->
+  <div id="credly-badges" style="margin-top:15px;"></div>
 
-<button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
+  <button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
+    <i class="fa-regular fa-copy"></i> Copy Link
+  </button>
 </article>
         <article class="website-card">
           <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
@@ -334,16 +330,6 @@ credly.com/users/tim-williams
             <i class="fa-regular fa-copy"></i> Copy Link
           </button>
         </article>
-<article class="website-card">
-<h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
-<a href="https://credly.com/users/tim-williams.e51205ae">credly.com/users/tim-williams</a>
-
-<div id="credly-badges"></div>
-
-<button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
       </div>
     </div>
   </div>
@@ -416,6 +402,20 @@ function trackEvent(action, value) {
   existing.push(event);
   localStorage.setItem("analytics", JSON.stringify(existing));
 }
+</script>
+<script src="https://cdn.credly.com/assets/utilities/embed.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const container = document.getElementById("credly-badges");
+
+  if (container) {
+    container.setAttribute(
+      "data-credly-id",
+      "tim-williams.e51205ae"
+    );
+  }
+});
 </script>
 </body>
 </html>

@@ -5,14 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tim Williams – My Sites</title>
 
-<!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css?v=1">
-
-<!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* --- PAGE CSS (original) --- */
 body.page-certifications{
   background: var(--bg);
   color: var(--text-main);
@@ -25,9 +21,7 @@ body.page-certifications{
   padding: 2rem 1.5rem;
 }
 
-.hero-section {
-  margin-bottom: 2rem;
-}
+.hero-section { margin-bottom: 2rem; }
 
 .hero-section h1 {
   font-size: 2.2rem;
@@ -61,10 +55,7 @@ body.page-certifications{
   cursor: pointer;
 }
 
-.category-toggle {
-  font-size: 24px;
-  font-weight: bold;
-}
+.category-toggle { font-size: 24px; font-weight: bold; }
 
 .card-list {
   max-height: 0;
@@ -121,12 +112,9 @@ body.page-certifications{
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: 0.2s ease;
 }
 
-.copy-btn:hover {
-  background: #0078ff;
-}
+.copy-btn:hover { background: #0078ff; }
 
 #copy-toast {
   position: fixed;
@@ -144,47 +132,26 @@ body.page-certifications{
   z-index: 999999;
 }
 
-.fab {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+/* Credly badges */
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  margin-top: 15px;
 }
 
-/* Override any global accordion rules */
-.category-section .card-list {
-  display: block !important;
-  height: auto !important;
-  overflow: hidden !important;
-}
-
-.category-section.open .card-list {
-  display: block !important;
-}
-
-.category-section .grid {
-  display: grid !important;
-}
-
-/* Sticky bar styling */
-.sticky-follow {
-  background: var(--accent);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 1.5rem;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  color: white;
+.badge-grid img {
+  width: 100%;
+  max-width: 110px;
+  border-radius: 8px;
 }
 </style>
 </head>
 
 <body class="page-certifications">
 
-<!-- HEADER -->
 <div id="header"></div>
+
 <script src="global.js"></script>
 <script>
 fetch("header-standard.html")
@@ -193,7 +160,6 @@ fetch("header-standard.html")
     document.getElementById("header").innerHTML = h;
     initGlobal();
 
-    // COLLAPSIBLE SECTIONS
     document.querySelectorAll(".category-header").forEach(header => {
       header.addEventListener("click", () => {
         const section = header.parentElement;
@@ -210,212 +176,113 @@ fetch("header-standard.html")
         }
       });
     });
-
-    // COPY BUTTONS
-    document.addEventListener("click", function(e) {
-      if (e.target.closest(".copy-btn")) {
-        const btn = e.target.closest(".copy-btn");
-        const link = btn.getAttribute("data-link");
-        navigator.clipboard.writeText(link);
-        showToast("Link copied!");
-        trackEvent("copy_link", link);
-      }
-    });
-
-    // OUTBOUND CLICK TRACKING
-    document.querySelectorAll(".website-card a").forEach(link => {
-      link.addEventListener("click", () => {
-        trackEvent("outbound_click", link.href);
-      });
-    });
-
   });
 </script>
 
-<!-- STICKY BAR -->
 <div class="sticky-follow">
   <span>My Websites & Professional Profiles</span>
   <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
 </div>
 
-<!-- DARK MODE SCRIPT -->
 <script>
 (function () {
   const darkToggle = document.getElementById("darkToggle");
   if (!darkToggle) return;
 
   const body = document.body;
-  const storedMode = localStorage.getItem("tw_dark");
-
-  if (storedMode === "1") {
+  if (localStorage.getItem("tw_dark") === "1") {
     body.classList.add("dark-mode");
   }
 
-  darkToggle.addEventListener("click", function () {
+  darkToggle.addEventListener("click", () => {
     body.classList.toggle("dark-mode");
-    localStorage.setItem("tw_dark",
-      body.classList.contains("dark-mode") ? "1" : "0"
-    );
+    localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
   });
-
 })();
 </script>
 
-<!-- PAGE CONTENT -->
 <main class="page-container">
-  <section class="hero-section">
-    <h1>My Websites & Professional Profiles</h1>
-    <p>A curated list of my professional platforms, portfolios and digital presence.</p>
-  </section>
 
-  <!-- CATEGORY 1 -->
-  <div class="category-section">
-    <div class="category-header">
-      Professional Profiles
-      <span class="category-toggle">+</span>
-    </div>
-    <div class="card-list">
-      <div class="grid">
-        <article class="website-card">
-          <h3><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</h3>
-          <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
-          <button class="copy-btn" data-link="https://linkedin.com/in/timwilliams77">
-            <i class="fa-regular fa-copy"></i> Copy Link
-          </button>
-        </article>
-        <article class="website-card">
-          <h3><i class="fa-solid fa-id-card"></i> PMI Community Profile</h3>
-          <a href="https://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
-          <button class="copy-btn" data-link="https://community.pmi.org/profile/Timwilliams77">
-            <i class="fa-regular fa-copy"></i> Copy Link
-          </button>
-        </article>
-        <article class="website-card">
-          <h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
-          <a href="https://www.apm.org.uk/myapm/my-dashboard/">apm.org.uk/my-dashboard</a>
-          <button class="copy-btn" data-link="https://www.apm.org.uk/myapm/my-dashboard/">
-            <i class="fa-regular fa-copy"></i> Copy Link
-          </button>
-        </article>
-      </div>
+<section class="hero-section">
+  <h1>My Websites & Professional Profiles</h1>
+  <p>A curated list of my professional platforms, portfolios and digital presence.</p>
+</section>
+
+<!-- PROFESSIONAL PROFILES -->
+<div class="category-section">
+  <div class="category-header">Professional Profiles <span class="category-toggle">+</span></div>
+  <div class="card-list">
+    <div class="grid">
+      <article class="website-card">
+        <h3><i class="fa-brands fa-linkedin"></i> LinkedIn</h3>
+        <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
+      </article>
     </div>
   </div>
+</div>
 
-  <!-- CATEGORY 2 -->
-  <div class="category-section">
-    <div class="category-header">
-      Certifications & Learning
-      <span class="category-toggle">+</span>
-    </div>
-    <div class="card-list">
-      <div class="grid">
-<article class="website-card">
-  <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+<!-- CERTIFICATIONS -->
+<div class="category-section">
+  <div class="category-header">Certifications & Learning <span class="category-toggle">+</span></div>
+  <div class="card-list">
+    <div class="grid">
 
-  <a href="https://credly.com/users/tim-williams.e51205ae">
-    View my full Credly profile
-  </a>
+      <article class="website-card">
+        <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
 
-  <!-- Credly badge container -->
-  <div id="credly-badges" style="margin-top:15px;"></div>
+        <a href="https://credly.com/users/tim-williams.e51205ae">
+          View my full Credly profile
+        </a>
 
-  <button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
-    <i class="fa-regular fa-copy"></i> Copy Link
-  </button>
-</article>
-        <article class="website-card">
-          <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
-          <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">Microsoft Learn Transcript</a>
-          <button class="copy-btn" data-link="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
-            <i class="fa-regular fa-copy"></i> Copy Link
-          </button>
-        </article>
-      </div>
+        <div id="credly-badges" class="badge-grid"></div>
+      </article>
+
     </div>
   </div>
-
-  <!-- CATEGORY 3 -->
-  <div class="category-section">
-    <div class="category-header">
-      Business & Services
-      <span class="category-toggle">+</span>
-    </div>
-    <div class="card-list">
-      <div class="grid">
-        <article class="website-card">
-          <h3><i class="fa-brands fa-linkedin"></i> Tim Williams Consulting</h3>
-          <a href="https://www.linkedin.com/company/tim-williams-consulting/">linkedin.com/company/tim-williams-consulting</a>
-          <button class="copy-btn" data-link="https://www.linkedin.com/company/tim-williams-consulting/">
-            <i class="fa-regular fa-copy"></i> Copy Link
-          </button>
-        </article>
-        <article class="website-card">
-          <h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
-          <a href="https://gethandover.uk">gethandover.uk</a>
-          <button class="copy-btn" data-link="https://gethandover.uk">
-            <i class="fa-regular fa-copy"></i> Copy Link
-          </button>
-        </article>
-        <article class="website-card">
-          <h3><i class="fa-solid fa-globe"></i> TWC Portfolio (Canva)</h3>
-          <a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
-          <button class="copy-btn" data-link="https://twc-ltd.my.canva.site">
-            <i class="fa-regular fa-copy"></i> Copy Link
-          </button>
-        </article>
-      </div>
-    </div>
-  </div>
+</div>
 
 </main>
 
-<!-- FLOATING BUTTONS -->
-<div id="fab" class="fab">⬆️</div>
-<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
-
-<!-- COPY TOAST -->
-<div id="copy-toast">Link copied!</div>
-
-<!-- FOOTER -->
-<div id="footer"></div>
-<script>
-fetch("footer.html")
-  .then(r => r.text())
-  .then(h => document.getElementById("footer").innerHTML = h);
-</script>
+<div id="copy-toast">Copied!</div>
 
 <script>
-function showToast(message) {
-  const toast = document.getElementById("copy-toast");
-  toast.textContent = message;
-  toast.style.opacity = "1";
-  setTimeout(() => toast.style.opacity = "0", 1500);
-}
-
-function trackEvent(action, value) {
-  const event = {
-    timestamp: new Date().toISOString(),
-    action,
-    value
-  };
-  const existing = JSON.parse(localStorage.getItem("analytics") || "[]");
-  existing.push(event);
-  localStorage.setItem("analytics", JSON.stringify(existing));
+function showToast(msg){
+  const t = document.getElementById("copy-toast");
+  t.textContent = msg;
+  t.style.opacity = "1";
+  setTimeout(()=>t.style.opacity="0",1500);
 }
 </script>
-<script src="https://cdn.credly.com/assets/utilities/embed.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+async function loadCredlyBadges(){
   const container = document.getElementById("credly-badges");
 
-  if (container) {
-    container.setAttribute(
-      "data-credly-id",
-      "tim-williams.e51205ae"
-    );
+  try {
+    const res = await fetch("https://api.credly.com/v1.1/users/tim-williams.e51205ae/badges");
+    const data = await res.json();
+
+    const badges = data?.data || [];
+
+    if(!badges.length){
+      container.innerHTML = "<p>No badges found.</p>";
+      return;
+    }
+
+    container.innerHTML = badges.map(b => `
+      <a href="${b.badge_template?.url || '#'}" target="_blank">
+        <img src="${b.badge_template?.image_url || ''}" alt="">
+      </a>
+    `).join("");
+
+  } catch(e){
+    console.error(e);
+    container.innerHTML = "<p>Unable to load badges.</p>";
   }
-});
+}
+
+document.addEventListener("DOMContentLoaded", loadCredlyBadges);
 </script>
+
 </body>
 </html>

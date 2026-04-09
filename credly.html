@@ -21,7 +21,9 @@ body.page-certifications{
   padding: 2rem 1.5rem;
 }
 
-.hero-section { margin-bottom: 2rem; }
+.hero-section {
+  margin-bottom: 2rem;
+}
 
 .hero-section h1 {
   font-size: 2.2rem;
@@ -55,7 +57,10 @@ body.page-certifications{
   cursor: pointer;
 }
 
-.category-toggle { font-size: 24px; font-weight: bold; }
+.category-toggle {
+  font-size: 24px;
+  font-weight: bold;
+}
 
 .card-list {
   max-height: 0;
@@ -65,7 +70,7 @@ body.page-certifications{
 }
 
 .category-section.open .card-list {
-  max-height: 1000px;
+  max-height: 1200px;
   padding-bottom: 16px;
 }
 
@@ -114,7 +119,9 @@ body.page-certifications{
   gap: 6px;
 }
 
-.copy-btn:hover { background: #0078ff; }
+.copy-btn:hover {
+  background: #0078ff;
+}
 
 #copy-toast {
   position: fixed;
@@ -132,24 +139,38 @@ body.page-certifications{
   z-index: 999999;
 }
 
-/* Credly badges */
+/* Credly fallback grid */
 .badge-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 10px;
   margin-top: 15px;
 }
 
 .badge-grid img {
   width: 100%;
-  max-width: 110px;
+  max-width: 100px;
   border-radius: 8px;
+}
+
+/* sticky bar */
+.sticky-follow {
+  background: var(--accent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  color: white;
 }
 </style>
 </head>
 
 <body class="page-certifications">
 
+<!-- HEADER -->
 <div id="header"></div>
 
 <script src="global.js"></script>
@@ -176,9 +197,19 @@ fetch("header-standard.html")
         }
       });
     });
+
+    document.addEventListener("click", function(e) {
+      if (e.target.closest(".copy-btn")) {
+        const btn = e.target.closest(".copy-btn");
+        navigator.clipboard.writeText(btn.getAttribute("data-link"));
+        showToast("Link copied!");
+        trackEvent("copy_link", btn.getAttribute("data-link"));
+      }
+    });
   });
 </script>
 
+<!-- STICKY BAR -->
 <div class="sticky-follow">
   <span>My Websites & Professional Profiles</span>
   <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
@@ -189,18 +220,20 @@ fetch("header-standard.html")
   const darkToggle = document.getElementById("darkToggle");
   if (!darkToggle) return;
 
-  const body = document.body;
   if (localStorage.getItem("tw_dark") === "1") {
-    body.classList.add("dark-mode");
+    document.body.classList.add("dark-mode");
   }
 
   darkToggle.addEventListener("click", () => {
-    body.classList.toggle("dark-mode");
-    localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("tw_dark",
+      document.body.classList.contains("dark-mode") ? "1" : "0"
+    );
   });
 })();
 </script>
 
+<!-- PAGE -->
 <main class="page-container">
 
 <section class="hero-section">
@@ -208,33 +241,96 @@ fetch("header-standard.html")
   <p>A curated list of my professional platforms, portfolios and digital presence.</p>
 </section>
 
-<!-- PROFESSIONAL PROFILES -->
+<!-- CATEGORY 1 -->
 <div class="category-section">
-  <div class="category-header">Professional Profiles <span class="category-toggle">+</span></div>
+  <div class="category-header">
+    Professional Profiles <span class="category-toggle">+</span>
+  </div>
   <div class="card-list">
     <div class="grid">
+
       <article class="website-card">
         <h3><i class="fa-brands fa-linkedin"></i> LinkedIn</h3>
         <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
       </article>
+
+      <article class="website-card">
+        <h3><i class="fa-solid fa-id-card"></i> PMI Profile</h3>
+        <a href="https://community.pmi.org/profile/Timwilliams77">PMI Profile</a>
+      </article>
+
+      <article class="website-card">
+        <h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
+        <a href="https://www.apm.org.uk/myapm/my-dashboard/">APM Dashboard</a>
+      </article>
+
     </div>
   </div>
 </div>
 
-<!-- CERTIFICATIONS -->
+<!-- CATEGORY 2 -->
 <div class="category-section">
-  <div class="category-header">Certifications & Learning <span class="category-toggle">+</span></div>
+  <div class="category-header">
+    Certifications & Learning <span class="category-toggle">+</span>
+  </div>
   <div class="card-list">
     <div class="grid">
 
+      <!-- ✅ FIXED CREDLY SECTION -->
       <article class="website-card">
         <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
 
         <a href="https://credly.com/users/tim-williams.e51205ae">
-          View my full Credly profile
+          View full Credly profile
         </a>
 
-        <div id="credly-badges" class="badge-grid"></div>
+        <!-- SAFE FALLBACK GRID -->
+        <div id="credly-badges" class="badge-grid">
+          <p style="font-size:13px;color:#666;">
+            Loading badges from Credly profile...
+          </p>
+        </div>
+
+        <button class="copy-btn"
+          data-link="https://credly.com/users/tim-williams.e51205ae">
+          <i class="fa-regular fa-copy"></i> Copy Link
+        </button>
+      </article>
+
+      <article class="website-card">
+        <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn</h3>
+        <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
+          View Transcript
+        </a>
+      </article>
+
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY 3 -->
+<div class="category-section">
+  <div class="category-header">
+    Business & Services <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+
+      <article class="website-card">
+        <h3><i class="fa-brands fa-linkedin"></i> Consulting</h3>
+        <a href="https://www.linkedin.com/company/tim-williams-consulting/">
+          LinkedIn Company
+        </a>
+      </article>
+
+      <article class="website-card">
+        <h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
+        <a href="https://gethandover.uk">gethandover.uk</a>
+      </article>
+
+      <article class="website-card">
+        <h3><i class="fa-solid fa-globe"></i> Portfolio</h3>
+        <a href="https://twc-ltd.my.canva.site">Canva Portfolio</a>
       </article>
 
     </div>
@@ -245,6 +341,14 @@ fetch("header-standard.html")
 
 <div id="copy-toast">Copied!</div>
 
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
 <script>
 function showToast(msg){
   const t = document.getElementById("copy-toast");
@@ -252,36 +356,12 @@ function showToast(msg){
   t.style.opacity = "1";
   setTimeout(()=>t.style.opacity="0",1500);
 }
-</script>
 
-<script>
-async function loadCredlyBadges(){
-  const container = document.getElementById("credly-badges");
-
-  try {
-    const res = await fetch("https://api.credly.com/v1.1/users/tim-williams.e51205ae/badges");
-    const data = await res.json();
-
-    const badges = data?.data || [];
-
-    if(!badges.length){
-      container.innerHTML = "<p>No badges found.</p>";
-      return;
-    }
-
-    container.innerHTML = badges.map(b => `
-      <a href="${b.badge_template?.url || '#'}" target="_blank">
-        <img src="${b.badge_template?.image_url || ''}" alt="">
-      </a>
-    `).join("");
-
-  } catch(e){
-    console.error(e);
-    container.innerHTML = "<p>Unable to load badges.</p>";
-  }
+function trackEvent(action, value){
+  const existing = JSON.parse(localStorage.getItem("analytics") || "[]");
+  existing.push({timestamp:new Date().toISOString(),action,value});
+  localStorage.setItem("analytics", JSON.stringify(existing));
 }
-
-document.addEventListener("DOMContentLoaded", loadCredlyBadges);
 </script>
 
 </body>

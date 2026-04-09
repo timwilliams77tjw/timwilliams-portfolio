@@ -312,18 +312,20 @@ fetch("header-standard.html")
 <article class="website-card">
   <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
 
-  <a href="https://credly.com/users/tim-williams.e51205ae">
+  <a href="https://www.credly.com/users/tim-williams.e51205ae">
     View full Credly profile
   </a>
 
-  <!-- REAL badge display container -->
-  <div id="credly-badges" class="badge-grid" style="margin-top:15px;">
-    <p style="font-size:13px;color:#666;">Loading badges...</p>
+  <div 
+    data-credly-embed-type="profile"
+    data-credly-id="tim-williams.e51205ae"
+    data-credly-theme="light"
+    style="margin-top:15px;">
   </div>
 
   <button class="copy-btn"
-    data-link="https://credly.com/users/tim-williams.e51205ae">
-    <i class="fa-regular fa-copy"></i> Copy Link
+    data-link="https://www.credly.com/users/tim-williams.e51205ae">
+    Copy Link
   </button>
 </article>        <article class="website-card">
           <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
@@ -405,39 +407,6 @@ function trackEvent(action, value) {
   localStorage.setItem("analytics", JSON.stringify(existing));
 }
 </script>
-<script>
-async function loadCredlyBadges() {
-  const container = document.getElementById("credly-badges");
-
-  try {
-    // Fetch Credly HTML page (this works because it's public HTML)
-    const res = await fetch("https://www.credly.com/users/tim-williams.e51205ae");
-    const text = await res.text();
-
-    // Extract badge images from HTML
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(text, "text/html");
-
-    const images = [...doc.querySelectorAll("img")]
-      .filter(img => img.src.includes("credly.com/images"))
-      .map(img => img.src);
-
-    if (!images.length) {
-      container.innerHTML = "<p>No badges found or profile is private.</p>";
-      return;
-    }
-
-    container.innerHTML = images.map(src => `
-      <img src="${src}" alt="Credly badge">
-    `).join("");
-
-  } catch (err) {
-    console.error(err);
-    container.innerHTML = "<p>Unable to load badges.</p>";
-  }
-}
-
-document.addEventListener("DOMContentLoaded", loadCredlyBadges);
-</script>
+<script src="https://cdn.credly.com/assets/utilities/embed.js"></script>
 </body>
 </html>

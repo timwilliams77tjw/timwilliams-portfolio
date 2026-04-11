@@ -309,13 +309,23 @@ fetch("header-standard.html")
     </div>
     <div class="card-list">
       <div class="grid">
-        <article class="website-card">
-          <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
-          <a href="https://credly.com/users/tim-williams.e51205ae">credly.com/users/tim-williams</a>
-          <button class="copy-btn" data-link="https://credly.com/users/tim-williams.e51205ae">
-            <i class="fa-regular fa-copy"></i> Copy Link
-          </button>
-        </article>
+<article class="website-card">
+  <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+
+  <a href="https://www.credly.com/users/tim-williams.e51205ae">
+    View full Credly profile
+  </a>
+
+  <!-- BADGE GRID (auto-filled from your deployed API) -->
+  <div id="credly-badges" class="badge-grid" style="margin-top:15px;">
+    <p style="font-size:13px;color:#666;">Loading badges...</p>
+  </div>
+
+  <button class="copy-btn"
+    data-link="https://www.credly.com/users/tim-williams.e51205ae">
+    <i class="fa-regular fa-copy"></i> Copy Link
+  </button>
+</article>
         <article class="website-card">
           <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
           <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">Microsoft Learn Transcript</a>
@@ -396,6 +406,27 @@ function trackEvent(action, value) {
   localStorage.setItem("analytics", JSON.stringify(existing));
 }
 </script>
+<div id="credly-badges" class="badge-grid"></div>
 
-</body>
+<script>
+async function loadCredly() {
+  const el = document.getElementById("credly-badges");
+
+  try {
+    const res = await fetch("https://credlyapi.timwilliams07.workers.dev/");
+    const data = await res.json();
+
+    el.innerHTML = data.map(b => `
+      <a href="${b.url}" target="_blank">
+        <img src="${b.image}" title="${b.name}" style="width:90px;border-radius:8px;margin:4px;">
+      </a>
+    `).join("");
+
+  } catch (e) {
+    el.innerHTML = "<p>Badges unavailable</p>";
+  }
+}
+
+loadCredly();
+</script></body>
 </html>

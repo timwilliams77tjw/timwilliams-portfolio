@@ -411,8 +411,9 @@ function trackEvent(action, value) {
 <script>
 async function loadCredly() {
   const el = document.getElementById("credly-badges");
+
   try {
-    const res = await fetch("https://credly-api.onrender.com/api/credly-badges");
+    const res = await fetch("https://credlyapi.timwilliams07.workers.dev/");
     const data = await res.json();
 
     el.innerHTML = data.map(b => `
@@ -424,8 +425,5 @@ async function loadCredly() {
   } catch (e) {
     el.innerHTML = "<p>Badges unavailable</p>";
   }
-}
-
-loadCredly();
-</script></body>
+}</script></body>
 </html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css?v=1">
+
+<style>
+body.page-certifications {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* HERO */
+.hero-section h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+.hero-section p {
+    font-size: 1.1rem;
+    color: var(--text-sub);
+    max-width: 720px;
+}
+
+/* FEATURED BLOCK */
+.featured-article {
+    border-left: 4px solid var(--accent);
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+.featured-article h3 {
+    margin-top: 0;
+    color: var(--text-main);
+}
+.featured-article p {
+    color: var(--text-sub);
+}
+
+/* READ MORE */
+.read-more-btn {
+    margin-top: 0.75rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+.read-more-btn:hover {
+    opacity: 0.85;
+}
+
+/* CTA */
+.cta-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+/* Sticky bar match */
+.sticky-follow {
+    background: var(--accent);
+}
+
+/* DARK MODE */
+body.dark-mode {
+    --bg: #0a0a0a;
+    --text-main: #ffffff;
+    --text-sub: #cccccc;
+    --card-bg: #1a1a1a;
+}
+</style>
+</head>
+
+<body class="page-certifications">
+
+<!-- HEADER -->
+<div id="header"></div>
+<script src="global.js"></script>
+<script>
+fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => { document.getElementById("header").innerHTML = h; initGlobal(); });
+</script>
+
+<!-- STICKY BAR -->
+<div class="sticky-follow">
+    <span>SC‑Cleared Programme Manager</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
+
+<main class="page-container">
+
+<section class="hero-section">
+    <h1>SC‑Cleared Programme Manager</h1>
+    <p>Delivering secure, high‑stakes transformation across government, defence, and regulated environments — with a focus on clarity, governance, and outcome‑driven delivery.</p>
+</section>
+
+<!-- VALUE PROPOSITION -->
+<article class="featured-article">
+    <h3>Driving Secure, High‑Impact Change in Sensitive Environments</h3>
+    <p>Security‑cleared programmes demand more than delivery experience — they require discretion, structured governance, risk‑aware decision‑making, and the ability to operate confidently within complex, multi‑agency landscapes.</p>
+    <p>With SC clearance and 20+ years leading large‑scale transformation, I specialise in stabilising delivery, strengthening governance, and ensuring programmes land safely, predictably, and securely.</p>
+</article>
+
+<!-- HYBRID ARTICLE SECTION -->
+<article class="featured-article">
+    <h3>How I Deliver in Secure and Regulated Environments</h3>
+
+    <button class="read-more-btn" onclick="toggleInsightFull(this)">Read more</button>
+
+    <div class="full-article" style="display:none; margin-top:1rem;">
+
+        <h4>🔐 Operating with Security, Discretion and Control</h4>
+        <p>SC‑cleared programmes often involve sensitive data, cross‑government dependencies, and strict compliance requirements. I ensure delivery is structured, auditable, and aligned to security protocols without slowing momentum.</p>
+
+        <h4>📘 Governance That Enables Delivery</h4>
+        <p>Using APM, PRINCE2, and ISO‑aligned controls, I build governance frameworks that provide clarity and predictability — while remaining lightweight enough to support pace and agility.</p>
+
+        <h4>🧩 Stakeholder Alignment Across Complex Ecosystems</h4>
+        <p>Secure programmes often involve multiple agencies, suppliers, and internal teams. I focus on alignment, communication, and expectation management to keep delivery moving in the same direction.</p>
+
+        <h4>📈 Outcome‑Driven Leadership</h4>
+        <p>Whether stabilising a failing programme or accelerating a strategic initiative, I focus on measurable outcomes: risk reduction, delivery predictability, stakeholder confidence, and operational readiness.</p>
+
+        <h4>💡 Typical Engagements</h4>
+        <p>
+        • Cyber uplift and security remediation<br>
+        • Cloud and infrastructure modernisation<br>
+        • Application migration and legacy remediation<br>
+        • Service transition and operational readiness<br>
+        • PMO uplift and governance reset<br>
+        </p>
+
+        <p><strong>Secure delivery requires clarity, discipline, and leadership. I bring all three.</strong></p>
+    </div>
+</article>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>Discuss SC‑Cleared Programme Leadership</h2>
+    <p>If you need secure, outcome‑driven programme delivery, I’d be happy to talk.</p>
+    <a href="https://www.linkedin.com/in/timwilliams77" class="btn">Connect on LinkedIn</a>
+</section>
+
+</main>
+
+<!-- FABs -->
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- DARK MODE -->
+<script>
+(function () {
+    const darkToggle = document.getElementById("darkToggle");
+    if (!darkToggle) return;
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_dark");
+    if (storedMode === "1") body.classList.add("dark-mode");
+    darkToggle.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    });
+})();
+</script>
+
+<!-- READ MORE -->
+<script>
+function toggleInsightFull(btn) {
+    const fullArticle = btn.nextElementSibling;
+    const isOpen = fullArticle.style.display === "block";
+    fullArticle.style.display = isOpen ? "none" : "block";
+    btn.textContent = isOpen ? "Read more" : "Show less";
+}
+</script>
+
+</body>
+</html>

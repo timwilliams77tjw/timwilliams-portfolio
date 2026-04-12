@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css?v=1">
+
+<style>
+body.page-certifications {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* HERO */
+.hero-section h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+.hero-section p {
+    font-size: 1.1rem;
+    color: var(--text-sub);
+    max-width: 720px;
+}
+
+/* FEATURED BLOCK */
+.featured-article {
+    border-left: 4px solid var(--accent);
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+.featured-article h3 {
+    margin-top: 0;
+    color: var(--text-main);
+}
+.featured-article p {
+    color: var(--text-sub);
+}
+
+/* READ MORE */
+.read-more-btn {
+    margin-top: 0.75rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+.read-more-btn:hover {
+    opacity: 0.85;
+}
+
+/* CTA */
+.cta-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+/* Sticky bar */
+.sticky-follow {
+    background: var(--accent);
+}
+
+/* DARK MODE */
+body.dark-mode {
+    --bg: #0a0a0a;
+    --text-main: #ffffff;
+    --text-sub: #cccccc;
+    --card-bg: #1a1a1a;
+}
+</style>
+</head>
+
+<body class="page-certifications">
+
+<!-- HEADER -->
+<div id="header"></div>
+<script src="global.js"></script>
+<script>
+fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => { document.getElementById("header").innerHTML = h; initGlobal(); });
+</script>
+
+<!-- STICKY BAR -->
+<div class="sticky-follow">
+    <span>NHS Digital Transformation Programme</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
+
+<main class="page-container">
+
+<section class="hero-section">
+    <h1>NHS Digital Transformation Programme</h1>
+    <p>Delivering safe, patient‑centred digital transformation across NHS Trusts, ICS organisations, and clinical environments — with a focus on operational readiness, clinical safety, and measurable improvement.</p>
+</section>
+
+<!-- VALUE PROPOSITION -->
+<article class="featured-article">
+    <h3>Driving Digital Change That Improves Patient and Staff Outcomes</h3>
+    <p>NHS transformation succeeds when technology, clinical workflows, governance, and operational processes move together. I specialise in delivering digital programmes that reduce friction, improve safety, and strengthen service quality across clinical and non‑clinical settings.</p>
+    <p>From EPR optimisation and modern workplace rollouts to cyber uplift, cloud adoption, and clinical safety governance, I bring structure, clarity, and leadership to NHS digital change.</p>
+</article>
+
+<!-- HYBRID ARTICLE SECTION -->
+<article class="featured-article">
+    <h3>How I Deliver NHS Digital Transformation</h3>
+
+    <button class="read-more-btn" onclick="toggleInsightFull(this)">Read more</button>
+
+    <div class="full-article" style="display:none; margin-top:1rem;">
+
+        <h4>🏥 Patient‑Centred, Clinically Safe Delivery</h4>
+        <p>Digital change in the NHS must protect patient safety and clinical workflows. I work closely with CCIOs, CNIOs, clinical safety officers, and operational teams to ensure transformation is safe, compliant, and aligned to DCB 0129/0160 standards.</p>
+
+        <h4>📘 Governance That Supports Pace and Assurance</h4>
+        <p>I establish governance frameworks that provide clarity, risk control, and auditability — while enabling delivery teams to move at pace. This includes integrated planning, RAID discipline, and structured reporting.</p>
+
+        <h4>🧩 Aligning Clinical, Operational, and Technical Teams</h4>
+        <p>NHS transformation requires alignment across estates, IT, clinical services, operations, and external suppliers. I ensure all parties are coordinated, informed, and working toward shared outcomes.</p>
+
+        <h4>💻 Typical NHS Programmes</h4>
+        <p>
+        • EPR optimisation and workflow redesign<br>
+        • Windows 11 and modern workplace deployment<br>
+        • Cloud and infrastructure modernisation<br>
+        • Cyber security uplift and compliance<br>
+        • Medical device integration and interoperability<br>
+        • Service transition and operational readiness<br>
+        </p>
+
+        <h4>📈 Measurable Outcomes</h4>
+        <p>
+        • Reduced clinical risk and improved safety governance<br>
+        • Faster, more reliable access to digital tools<br>
+        • Improved staff experience and reduced operational friction<br>
+        • Stronger cyber posture and compliance<br>
+        • Predictable delivery and clearer accountability<br>
+        </p>
+
+        <p><strong>NHS transformation is most successful when clinical safety, operational readiness, and delivery discipline come together. That’s where I focus.</strong></p>
+    </div>
+</article>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>Discuss NHS Digital Programme Leadership</h2>
+    <p>If you need structured, clinically safe, outcome‑driven digital transformation, I’d be happy to talk.</p>
+    <a href="https://www.linkedin.com/in/timwilliams77" class="btn">Connect on LinkedIn</a>
+</section>
+
+</main>
+
+<!-- FABs -->
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- DARK MODE -->
+<script>
+(function () {
+    const darkToggle = document.getElementById("darkToggle");
+    if (!darkToggle) return;
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_dark");
+    if (storedMode === "1") body.classList.add("dark-mode");
+    darkToggle.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    });
+})();
+</script>
+
+<!-- READ MORE -->
+<script>
+function toggleInsightFull(btn) {
+    const fullArticle = btn.nextElementSibling;
+    const isOpen = fullArticle.style.display === "block";
+    fullArticle.style.display = isOpen ? "none" : "block";
+    btn.textContent = isOpen ? "Read more" : "Show less";
+}
+</script>
+
+</body>
+</html>

@@ -2,49 +2,45 @@
 <html lang="en">
 
 <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Cloud Transformation Programme Leadership | Tim Williams</title>
-
+<title>Cloud Transformation Programmes | Tim Williams</title>
 <meta name="description" content="Enterprise cloud transformation programme delivery across Azure and AWS environments improving scalability, resilience and operational efficiency.">
-
 <link rel="canonical" href="https://www.twc-ltd.uk/cloud-transformation-programmes.html">
 
+<link rel="stylesheet" href="certifications.css?v=1">
 </head>
 
-<body>
+<body class="page-certifications">
 
-<script src="global.js"></script>
-
+<!-- HEADER -->
 <div id="header"></div>
-
+<script src="global.js"></script>
 <script>
-fetch("header-index.html")
-.then(r=>r.text())
-.then(h=>{
-document.getElementById("header").innerHTML=h;
-initGlobal();
-});
+fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => { document.getElementById("header").innerHTML = h; initGlobal(); });
 </script>
 
-<div class="container">
+<!-- STICKY BAR -->
+<div class="sticky-follow">
+    <span>Cloud Transformation Programmes</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
+
+<!-- PAGE CONTENT -->
+<main class="page-container">
 
 <h1>Cloud Transformation Programmes</h1>
 
 <div class="card">
-
-<p>
-Programme leadership delivering enterprise cloud adoption across Azure and AWS environments, enabling scalable, secure and resilient infrastructure for global organisations.
-</p>
-
+<p>Programme leadership delivering enterprise cloud adoption across Azure and AWS environments, enabling scalable, secure and resilient infrastructure for global organisations.</p>
 </div>
 
 <h2>Cloud Delivery Expertise</h2>
 
 <div class="grid">
-
 <div class="card">
 <h3>Enterprise Cloud Adoption</h3>
 <p>Large-scale migration of enterprise workloads to Azure and AWS platforms.</p>
@@ -59,22 +55,38 @@ Programme leadership delivering enterprise cloud adoption across Azure and AWS e
 <h3>Operational Transformation</h3>
 <p>Driving operational efficiency through modern cloud infrastructure and platform services.</p>
 </div>
-
 </div>
 
-<a href="calendar.html" class="brand-btn">Book Consultation</a>
+<a href="calendar.html" class="btn">Book Consultation</a>
 
-</div>
+</main>
 
+<!-- FLOATING BUTTONS -->
+<div id="fab" class="fab">⬆️</div>
+<a class="fab fab-booking" href="calendar.html">📅</a>
+
+<!-- FOOTER -->
 <div id="footer"></div>
-
 <script>
 fetch("footer.html")
-.then(r=>r.text())
-.then(h=>document.getElementById("footer").innerHTML=h);
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- DARK MODE -->
+<script>
+(function () {
+    const darkToggle = document.getElementById("darkToggle");
+    if (!darkToggle) return;
+    const body = document.body;
+    const stored = localStorage.getItem("tw_dark");
+    if (stored === "1") body.classList.add("dark-mode");
+    darkToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    });
+})();
 </script>
 
 </body>
-
 </html>
-

@@ -55,13 +55,10 @@ window.initGlobal = function () {
 /* -----------------------------------------
 DROPDOWN MENUS
 ----------------------------------------- */
-<script>
-function openServicesMenu(event) {
-    event.preventDefault();
-    closeAllMenus(); // if you’re using this elsewhere
-    document.getElementById("servicesMenu").classList.toggle("show");
-}
-</script>
+window.openServicesMenu = function (event) {
+    event.stopPropagation();
+    toggleMenu("servicesMenu", event.currentTarget);
+};
 function closeAllMenus() {
     document.querySelectorAll(".popup-menu").forEach(m => m.style.display = "none");
     document.querySelectorAll(".brand-btn.open").forEach(b => b.classList.remove("open"));

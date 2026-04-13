@@ -38,17 +38,20 @@ window.initGlobal = function () {
     /* -----------------------------------------
        DROPDOWN CLICK HANDLER (MUST RUN AFTER HEADER LOADS)
     ----------------------------------------- */
-    document.addEventListener("click", (e) => {
+document.addEventListener("click", (e) => {
+    // Click inside a menu → keep it open
+    if (e.target.closest(".popup-menu")) return;
 
-        // Click inside a menu → keep it open
-        if (e.target.closest(".popup-menu")) return;
+    // Click on menu buttons → let onclick handle it
+    if (
+        e.target.closest(".cv-btn") ||
+        e.target.closest(".portfolio-btn") ||
+        e.target.closest(".services-btn")
+    ) return;
 
-        // Click on menu buttons → let onclick handle it
-        if (e.target.closest(".cv-btn") || e.target.closest(".portfolio-btn")) return;
-
-        // Click anywhere else → close menus
-        closeAllMenus();
-    });
+    // Click anywhere else → close menus
+    closeAllMenus();
+});
 };
 
 

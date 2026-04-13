@@ -55,7 +55,13 @@ window.initGlobal = function () {
 /* -----------------------------------------
 DROPDOWN MENUS
 ----------------------------------------- */
-
+<script>
+function openServicesMenu(event) {
+    event.preventDefault();
+    closeAllMenus(); // if you’re using this elsewhere
+    document.getElementById("servicesMenu").classList.toggle("show");
+}
+</script>
 function closeAllMenus() {
     document.querySelectorAll(".popup-menu").forEach(m => m.style.display = "none");
     document.querySelectorAll(".brand-btn.open").forEach(b => b.classList.remove("open"));
@@ -83,9 +89,4 @@ function toggleMenu(id, button) {
 menu.style.display = "flex";
         button.classList.add("open");
     }
-}
-function initFooter(){
-  // Example: auto-year update
-  const y = document.getElementById("year");
-  if (y) y.textContent = new Date().getFullYear();
 }

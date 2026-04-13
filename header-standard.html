@@ -9,7 +9,13 @@
                 <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
                 <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
             </div>
-
+<script>
+function openServicesMenu(event) {
+    event.preventDefault();
+    closeAllMenus(); // if you’re using this elsewhere
+    document.getElementById("servicesMenu").classList.toggle("show");
+}
+</script>
             <!-- BUTTON GROUP (with safe cluster breaks) -->
             <div class="button-group">
 
@@ -59,10 +65,19 @@
 
                 <a href="sites.html" class="brand-btn">Digital Presence</a>
 
-                <a href="https://twc-ltd.my.canva.site" 
-          target="_blank"
-                   rel="noopener noreferrer"
-class="brand-btn">My Services</a>
+                <a href="#" class="brand-btn services-btn" onclick="openServicesMenu(event)">
+    My Services <span class="arrow">⌄</span>
+</a>
+
+<!-- SERVICES MENU -->
+<div id="servicesMenu" class="popup-menu">
+    <a href="https://twc-ltd.my.canva.site" 
+       target="_blank" rel="noopener noreferrer">
+       My Services Site
+    </a>
+
+    <a href="new.html">Offerings</a>
+</div>
                 <a href="https://gethandover.uk" target="_blank" rel="noopener noreferrer" class="brand-btn">PM Tool Suite</a>
 
             </div><!-- end button-group -->

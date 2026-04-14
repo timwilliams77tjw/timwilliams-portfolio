@@ -92,3 +92,8 @@ markActive(".drawer-link");
 markActive(".drawer-sublink");
 
 };
+// Mobile toggle (optional future-proofing)
+
+function toggleMenu() {
+    document.querySelector(".main-nav").classList.toggle("active");
+}

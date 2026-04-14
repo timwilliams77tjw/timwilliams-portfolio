@@ -335,3 +335,90 @@ body.dark-mode {
   --text-main: #e5e7eb;
   --text-sub: #9ca3af;
 }
+/* -----------------------------------------------------------
+MEGA MENU (SERCO-STYLE)
+----------------------------------------------------------- */
+
+.nav-item.mega {
+  position: relative;
+}
+
+/* container */
+.mega-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+
+  display: flex;
+  gap: 40px;
+
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.25s ease;
+
+  z-index: 3000;
+  min-width: 600px;
+}
+
+/* show on hover */
+.nav-item.mega:hover .mega-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* columns */
+.mega-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+}
+
+.mega-column h4 {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #0a2540;
+}
+
+/* links */
+.mega-column a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  padding: 6px 0;
+  transition: 0.2s;
+}
+
+.mega-column a:hover {
+  color: #0077cc;
+}
+
+/* MOBILE fallback */
+@media (max-width: 900px) {
+
+  .mega-menu {
+    position: static;
+    flex-direction: column;
+    min-width: auto;
+    box-shadow: none;
+    padding: 10px 0;
+
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+
+    display: none;
+  }
+
+  .nav-item.open .mega-menu {
+    display: flex;
+  }
+}

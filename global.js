@@ -97,22 +97,5 @@ markActive(".drawer-sublink");
 function toggleMenu() {
     document.querySelector(".main-nav").classList.toggle("active");
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.createElement("a");
-  btn.href = "#";
-  btn.className = "fab";
-  btn.id = "backToTop";
-  btn.textContent = "↑";
-  document.body.appendChild(btn);
-
-  btn.style.display = "none";
-
-  window.addEventListener("scroll", () => {
-    btn.style.display = window.scrollY > 300 ? "flex" : "none";
-  });
-
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 });

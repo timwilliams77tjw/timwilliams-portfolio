@@ -299,3 +299,163 @@ ACTIVE STATES
 .site-header {
     background: #0a2540;
 }
+/* =========================
+   HEADER BASE
+========================= */
+
+.site-header {
+    background: #0a2540;
+    color: white;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo h1 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.main-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    position: relative;
+}
+
+/* Top-level links */
+.nav-item > a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Hover underline effect */
+.nav-item > a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #0078ff;
+    transition: 0.25s ease;
+}
+
+.nav-item:hover > a::after {
+    width: 100%;
+}
+
+/* =========================
+   DROPDOWN
+========================= */
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: white;
+    color: #0a2540;
+    border-radius: 8px;
+    padding: 12px;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: all 0.25s ease;
+}
+
+/* Show on hover */
+.nav-item:hover .dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Dropdown links */
+.dropdown a {
+    text-decoration: none;
+    color: #0a2540;
+    font-weight: 500;
+}
+
+.dropdown a:hover {
+    color: #0078ff;
+}
+
+/* =========================
+   ARROW ANIMATION
+========================= */
+
+.arrow {
+    transition: transform 0.25s ease;
+}
+
+.nav-item:hover .arrow {
+    transform: rotate(180deg);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .main-nav {
+        flex-direction: column;
+        background: #0a2540;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        display: none;
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .dropdown {
+        position: static;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        background: #112e4a;
+        box-shadow: none;
+    }
+
+    .dropdown a {
+        color: white;
+    }
+}

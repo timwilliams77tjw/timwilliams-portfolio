@@ -459,3 +459,37 @@ ACTIVE STATES
         color: white;
     }
 }
+/* =================================
+   HOVER NAV FIX (NON-DESTRUCTIVE)
+================================= */
+
+.nav-item {
+    position: relative;
+}
+
+/* Hide by default (override inline JS display) */
+.nav-item .popup-menu {
+    display: none;
+}
+
+/* Show on hover */
+.nav-item:hover .popup-menu {
+    display: flex;
+}
+
+/* Smooth animation */
+.nav-item .popup-menu {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover .popup-menu {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Arrow rotate */
+.nav-item:hover .arrow {
+    transform: rotate(180deg);
+}

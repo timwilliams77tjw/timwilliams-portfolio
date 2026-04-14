@@ -104,73 +104,85 @@ BUTTONS / NAV
 
 /* Buttons */
 .brand-btn {
-    background: #ffffff;
-    color: #0a2540;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    border: 2px solid #ffffff;
-    transition: 0.25s ease;
+  background: transparent;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 0;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  position: relative;
 }
 
-.brand-btn:hover {
-    background: transparent;
-    color: white;
-    border-color: white;
+/* Subtle underline hover */
+.brand-btn::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  bottom: 6px;
+  width: 0%;
+  height: 2px;
+  background: #ffffff;
+  transition: width 0.25s ease;
 }
 
+.brand-btn:hover::after {
+  width: calc(100% - 36px);
+}
+
+/* Active page */
 .brand-btn.active {
-    background: transparent;
-    color: white;
-    border-color: white;
-    pointer-events: none;
+  font-weight: 600;
 }
 
+.brand-btn.active::after {
+  width: calc(100% - 36px);
+}
 /* -----------------------------------------------------------
 DROPDOWN (NEW SYSTEM)
 ----------------------------------------------------------- */
 
 .dropdown {
-    position: absolute;
-    top: calc(100% + 6px); /* FIXED GAP */
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    min-width: 240px;
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 10px 0;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
 
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 12px 0;
 
-    z-index: 2000;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: all 0.2s ease;
+
+  z-index: 2000;
 }
 
-/* Dropdown links */
 .dropdown a {
-    padding: 10px 18px;
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
-    white-space: nowrap;
+  padding: 10px 22px;
+  font-size: 14px;
+  color: #222;
 }
 
 .dropdown a:hover {
-    background: #f5f7fa;
-    color: #0077cc;
+  background: #f3f6fa;
+  color: #0077cc;
 }
-
 /* Hover trigger */
 .nav-item:hover .dropdown {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+}
+.nav-menu {
+  gap: 18px;
 }
 
 /* -----------------------------------------------------------

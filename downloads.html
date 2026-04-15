@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Downloads – Tim Williams</title>
+
+    <!-- GLOBAL CSS -->
+    <link rel="stylesheet" href="certifications.css?v=1">
+
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* PAGE-SPECIFIC OVERRIDES */
+body.page-certifications {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.hero-section {
+    margin-bottom: 2rem;
+}
+
+.hero-section h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: #0a2540;
+}
+
+.hero-section p {
+    font-size: 1.1rem;
+    color: #0a2540;
+    max-width: 720px;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 16px;
+}
+
+/* CARD STYLE (same as website-card) */
+.download-card {
+    background: white;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-left: 4px solid #0078ff;
+}
+
+.download-card h3 {
+    margin-top: 0;
+    color: #0a2540;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.download-card p {
+    margin-bottom: 12px;
+    color: #333;
+}
+
+/* BUTTON */
+.download-btn {
+    display: inline-block;
+    background: #0a2540;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.download-btn:hover {
+    background: #0078ff;
+}
+
+/* TOOLTIP */
+.tooltip {
+    position: relative;
+    cursor: help;
+    text-decoration: underline dotted;
+}
+
+.tooltip:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 0;
+    top: 120%;
+    background: #333;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    width: 240px;
+    z-index: 10;
+}
+
+/* STICKY BAR */
+.sticky-follow {
+    background: var(--accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    color: white;
+}
+</style>
+</head>
+
+<body class="page-certifications">
+
+<!-- HEADER -->
+<div id="header"></div>
+<script src="global.js"></script>
+<script>
+fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header").innerHTML = h;
+        initGlobal();
+    });
+</script>
+
+<!-- STICKY BAR -->
+<div class="sticky-follow">
+    <span>Downloads</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
+
+<!-- DARK MODE -->
+<script>
+(function () {
+    const darkToggle = document.getElementById("darkToggle");
+    if (!darkToggle) return;
+
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_dark");
+
+    if (storedMode === "1") {
+        body.classList.add("dark-mode");
+    }
+
+    darkToggle.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_dark",
+            body.classList.contains("dark-mode") ? "1" : "0"
+        );
+    });
+})();
+</script>
+
+<!-- PAGE CONTENT -->
+<main class="page-container">
+
+<section class="hero-section">
+    <h1>Downloads</h1>
+    <p>Access CVs, portfolio documents and Safari‑compatible downloads.</p>
+</section>
+
+<div class="grid">
+
+    <!-- CV PDF -->
+    <article class="download-card">
+        <h3><i class="fa-solid fa-file-pdf"></i> CV (PDF)</h3>
+        <p>Opens in a new window.</p>
+        <a href="Tim_Williams_CV.pdf" target="_blank" class="download-btn">Open PDF</a>
+    </article>
+
+    <!-- CV Safari -->
+    <article class="download-card">
+        <h3><i class="fa-solid fa-download"></i> CV (Safari Download)</h3>
+        <p class="tooltip" data-tip="Safari users: rename the downloaded file from .download to .zip.">
+            Safari‑compatible download package.
+        </p>
+        <a href="Tim_Williams_CV.download" class="download-btn">Download</a>
+    </article>
+
+    <!-- Portfolio PDF -->
+    <article class="download-card">
+        <h3><i class="fa-solid fa-file-pdf"></i> Portfolio Presentation (PDF)</h3>
+        <p>Opens in a new window.</p>
+        <a href="portfolio_presentation.pdf" target="_blank" class="download-btn">Open PDF</a>
+    </article>
+
+    <!-- Portfolio Safari -->
+    <article class="download-card">
+        <h3><i class="fa-solid fa-download"></i> Portfolio Presentation (Safari Download)</h3>
+        <p class="tooltip" data-tip="Safari users: rename the downloaded file from .download to .zip.">
+            Safari‑compatible download package.
+        </p>
+        <a href="portfolio_presentation.download" class="download-btn">Download</a>
+    </article>
+
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+</body>
+</html>

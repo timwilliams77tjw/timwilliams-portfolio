@@ -6,8 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tim Williams – Certification Portfolio</title>
 
-<link rel="stylesheet" href="certifications.css?v=1">
-
 <!-- Load certifications.js FIRST so it can read the JSON -->
 <script src="certifications.js?v=1002" defer></script>
 
@@ -18,18 +16,17 @@
 <!-- HEADER INCLUDE -->
 <div id="header"></div>
 
-<!-- Load global.js BEFORE header fetch -->
 <script src="global.js"></script>
-
 <script>
 fetch("header-standard.html")
-    .then(r => r.text())
-    .then(h => {
-        document.getElementById("header").innerHTML = h;
-        initGlobal();
-    });
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header").innerHTML = h;
+    initGlobal();
+  });
 </script>
 
+<link rel="stylesheet" href="certifications.css?v=3">
 <!-- FILTER BAR -->
 <div class="sticky-bar">
     <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>

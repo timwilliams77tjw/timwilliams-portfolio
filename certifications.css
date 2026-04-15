@@ -48,6 +48,8 @@ HEADER
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-width: 0;          /* allows shrinking */
+    overflow: hidden;      /* prevents mega-menu width expansion */
 }
 
 .hero-text h1 {
@@ -61,30 +63,11 @@ HEADER
     font-size: 18px;
     line-height: 1.4;
 }
-.hero-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: nowrap; /* prevents image dropping below */
-}
 
-.hero-text {
-    flex: 1;
-}
-
-.hero-image {
-    flex-shrink: 0;
-}
-
-.hero-image img {
-    width: 180px; /* adjust as needed */
-    height: auto;
-    border-radius: 50%;
-}
-/* PROFILE */
+/* PROFILE IMAGE */
 
 .hero-photo {
+    flex-shrink: 0;        /* prevents image being pushed down */
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -92,34 +75,14 @@ HEADER
     border: 4px solid white;
     margin-left: 30px;
 }
-.hero-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-}
 
-.left-column {
-    flex: 1;
-    min-width: 0; /* critical: allows shrinking so the image stays on the right */
-}
-
-.hero-photo {
-    flex-shrink: 0; /* prevents the image from being pushed down */
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid white;
-    margin-left: 30px;
-}
 /* -----------------------------------------------------------
 NAV SYSTEM (SERCO STYLE)
 ----------------------------------------------------------- */
 
 .button-group {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;       /* allows wrapping */
     gap: 10px;
     margin-top: 20px;
 }
@@ -128,26 +91,25 @@ NAV SYSTEM (SERCO STYLE)
     display: flex;
     gap: 6px;
     align-items: center;
-    flex-wrap: wrap; /* now works */
-}
-/* NAV ITEM */
-.nav-item {
-    position: relative;
+    flex-wrap: wrap;       /* prevents overflow */
 }
 
-/* NAV BUTTON (NO PILLS) */
+.nav-item {
+    position: relative;
+    flex-shrink: 1;        /* allows nav items to shrink */
+}
+
+/* NAV BUTTON */
+
 .brand-btn {
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
-
     color: white;
     font-size: 15px;
     font-weight: 500;
-
     padding: 12px 14px;
     text-decoration: none;
-
     position: relative;
     cursor: pointer;
 }
@@ -158,24 +120,19 @@ NAV SYSTEM (SERCO STYLE)
     position: absolute;
     left: 14px;
     bottom: 6px;
-
     width: 0%;
     height: 2px;
     background: white;
-
     transition: width 0.25s ease;
 }
 
-.brand-btn:hover::after {
-    width: calc(100% - 28px);
-}
-
+.brand-btn:hover::after,
 .brand-btn.active::after {
     width: calc(100% - 28px);
 }
 
 /* -----------------------------------------------------------
-MEGA MENU (FIXED - HIDDEN BY DEFAULT)
+MEGA MENU
 ----------------------------------------------------------- */
 
 .dropdown,
@@ -183,29 +140,24 @@ MEGA MENU (FIXED - HIDDEN BY DEFAULT)
     position: absolute;
     top: calc(100% + 10px);
     left: 0;
-
     display: flex;
     flex-direction: column;
-
     background: #ffffff;
     padding: 16px 0;
     border-radius: 8px;
-
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-
     opacity: 0 !important;
     visibility: hidden !important;
     transform: translateY(10px);
-
     pointer-events: none !important;
-
     transition: all 0.2s ease;
-
     z-index: 9999;
-    min-width: 260px;
+
+    min-width: unset !important;  /* stops forcing 600px width */
+    width: max-content;           /* only as wide as content */
 }
 
-/* SHOW ON HOVER ONLY */
+/* SHOW ON HOVER */
 .nav-item:hover .dropdown,
 .nav-item:hover .mega-menu {
     opacity: 1 !important;
@@ -236,10 +188,8 @@ MEGA MENU (FIXED - HIDDEN BY DEFAULT)
     flex-direction: row;
     gap: 40px;
     padding: 25px 30px;
-    min-width: 600px;
 }
 
-/* columns */
 .mega-column {
     display: flex;
     flex-direction: column;
@@ -260,22 +210,20 @@ MOBILE
 
 @media (max-width: 900px) {
     .hero-content {
-        /* keep row layout so image stays right */
-        flex-direction: row;
-        text-align: left;
+        /* flex-direction: column; */  /* remove this */
+        text-align: center;
     }
 
     .hero-photo {
-        margin-top: 0;
-        margin-left: 20px;
+        margin-top: 20px;
+        margin-left: 0;
     }
 
     .nav-menu {
-        flex-wrap: wrap;
-        justify-content: flex-start;
+        flex-direction: column;
         align-items: center;
     }
-
+}
     .dropdown,
     .mega-menu {
         position: static;
@@ -292,6 +240,7 @@ MOBILE
         display: flex;
     }
 }
+
 /* -----------------------------------------------------------
 FILTER BAR
 ----------------------------------------------------------- */
@@ -318,51 +267,35 @@ CARDS
     border-radius: 10px;
     margin-bottom: 24px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-/* -----------------------------------------------------------
-SECTION GROUP HEADERS (RESTORE)
------------------------------------------------------------ */
-
-.category-section {
-    background: white;
-    border-radius: 10px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     overflow: hidden;
 }
 
-/* HEADER BAR */
 .category-header {
     padding: 16px 18px;
     background: #0a2540;
     color: white;
-
     font-size: 18px;
     font-weight: 600;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     cursor: pointer;
 }
 
-/* TOGGLE ICON */
 .category-toggle {
     font-size: 20px;
     font-weight: bold;
 }
 
-/* COLLAPSIBLE CONTENT */
 .card-list {
     display: none;
     padding: 10px 0;
 }
 
-/* OPEN STATE */
 .category-section.open .card-list {
     display: block;
 }
+
 /* -----------------------------------------------------------
 FLOATING BUTTONS
 ----------------------------------------------------------- */
@@ -414,4 +347,26 @@ body.dark-mode {
   --card-bg: #111827;
   --text-main: #e5e7eb;
   --text-sub: #9ca3af;
+}
+.hero-banner {
+    position: relative; /* anchor for the photo */
+}
+
+/* Take the image out of the flex flow and pin it right */
+.hero-photo {
+    position: absolute;
+    top: 50px;          /* align vertically with heading */
+    right: 30px;        /* match hero padding */
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    margin-left: 0;     /* no longer needed */
+    flex-shrink: 0;
+}
+
+/* Give the text/nav some breathing room so they don't sit under the photo */
+.hero-content {
+    padding-right: 200px; /* slightly wider than photo width */
 }

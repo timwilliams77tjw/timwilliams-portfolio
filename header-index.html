@@ -237,4 +237,111 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
         display: flex;
     }
 }
+    /* Allow dropdowns to overflow */
+.hero-banner .hero-buttons {
+    overflow: visible;
+}
+
+/* Positioning context */
+.hero-banner .nav-item {
+    position: relative;
+}
+
+/* SERCO NAV BUTTONS */
+.hero-banner .hero-buttons .nav-menu .brand-btn {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 14px;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Underline hover */
+.hero-banner .hero-buttons .nav-menu .brand-btn::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    bottom: 6px;
+    width: 0%;
+    height: 2px;
+    background: white;
+    transition: width 0.25s ease;
+}
+
+.hero-banner .hero-buttons .nav-menu .brand-btn:hover::after,
+.hero-banner .hero-buttons .nav-menu .brand-btn.active::after {
+    width: calc(100% - 28px);
+}
+
+/* MEGA MENU (hidden by default) */
+.hero-banner .hero-buttons .nav-menu .mega-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    flex-direction: row;
+    gap: 40px;
+    padding: 25px 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.15);
+    z-index: 9999;
+}
+
+/* DESKTOP: show on hover */
+@media (min-width: 701px) {
+    .hero-banner .hero-buttons .nav-menu .nav-item:hover > .mega-menu {
+        display: flex;
+    }
+}
+
+/* MEGA MENU COLUMNS */
+.hero-banner .hero-buttons .nav-menu .mega-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+}
+
+.hero-banner .hero-buttons .nav-menu .mega-column h4 {
+    margin: 0 0 10px 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0a2540;
+}
+
+/* LINKS */
+.hero-banner .hero-buttons .nav-menu .mega-menu a {
+    padding: 8px 0;
+    text-decoration: none;
+    color: #222;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.hero-banner .hero-buttons .nav-menu .mega-menu a:hover {
+    color: #0077cc;
+}
+
+/* MOBILE: tap to open */
+@media (max-width: 700px) {
+    .hero-banner .hero-buttons .nav-menu .mega-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        padding: 10px 0;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .hero-banner .hero-buttons .nav-menu .nav-item.open > .mega-menu {
+        display: flex;
+    }
+}
+
 </style>

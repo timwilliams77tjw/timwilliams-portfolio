@@ -129,11 +129,20 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
 </script>
 
 
-<!-- REQUIRED CSS FIXES FOR SERCO MENU -->
+<!-- SELF-CONTAINED MENU CSS (OVERRIDES CONFLICTS) -->
 <style>
+/* Ensure hero buttons can show dropdowns */
+.hero-buttons {
+    overflow: visible !important;
+}
+
+/* Nav items must be positioning context */
+.nav-item {
+    position: relative;
+}
 
 /* NAV BUTTONS (Serco style) */
-.brand-btn {
+.hero-buttons .brand-btn {
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
@@ -147,7 +156,7 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
 }
 
 /* Underline hover */
-.brand-btn::after {
+.hero-buttons .brand-btn::after {
     content: "";
     position: absolute;
     left: 14px;
@@ -158,47 +167,41 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
     transition: width 0.25s ease;
 }
 
-.brand-btn:hover::after,
-.brand-btn.active::after {
+.hero-buttons .brand-btn:hover::after,
+.hero-buttons .brand-btn.active::after {
     width: calc(100% - 28px);
 }
 
 /* Mega menu hidden by default */
-.mega-menu {
+.hero-buttons .mega-menu {
+    display: none;                 /* key: hide by default */
     position: absolute;
     top: calc(100% + 10px);
     left: 0;
-    display: flex;
     flex-direction: row;
     gap: 40px;
     padding: 25px 30px;
     background: #ffffff;
     border-radius: 8px;
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transform: translateY(10px);
-    transition: all 0.2s ease;
     z-index: 9999;
 }
 
-/* Show on hover */
-.nav-item:hover .mega-menu {
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transform: translateY(0);
+/* Show on hover (desktop) */
+@media (min-width: 701px) {
+    .hero-buttons .nav-item:hover > .mega-menu {
+        display: flex;
+    }
 }
 
 /* Mega menu columns */
-.mega-column {
+.hero-buttons .mega-column {
     display: flex;
     flex-direction: column;
     min-width: 160px;
 }
 
-.mega-column h4 {
+.hero-buttons .mega-column h4 {
     margin: 0 0 10px 0;
     font-size: 12px;
     text-transform: uppercase;
@@ -206,28 +209,32 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
     color: #0a2540;
 }
 
-/* Mobile behaviour */
+/* Links inside mega menu */
+.hero-buttons .mega-menu a {
+    padding: 8px 0;
+    text-decoration: none;
+    color: #222;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.hero-buttons .mega-menu a:hover {
+    color: #0077cc;
+}
+
+/* Mobile behaviour: tap to open */
 @media (max-width: 700px) {
-    .mega-menu {
+    .hero-buttons .mega-menu {
         position: static;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none;
-        pointer-events: auto !important;
-        display: none;
+        width: 100%;
         box-shadow: none;
         padding: 10px 0;
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
     }
 
-    .nav-item.open .mega-menu {
+    .hero-buttons .nav-item.open > .mega-menu {
         display: flex;
     }
 }
-    /* Allow mega-menu to overflow correctly */
-.hero-buttons {
-    overflow: visible !important;
-}
-
 </style>

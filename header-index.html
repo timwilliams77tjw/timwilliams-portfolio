@@ -22,14 +22,16 @@
         </div><!-- end hero-row -->
 
 
-        <!-- SECOND ROW: SERCO MEGA-MENU -->
+        <!-- SECOND ROW: SERCO MEGA-MENU (centred) -->
         <div class="hero-buttons">
             <div class="button-group nav-menu">
 
+                <!-- HOME -->
                 <div class="nav-item">
                     <a href="index.html" class="brand-btn">Home</a>
                 </div>
 
+                <!-- ABOUT -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">About ⌄</a>
                     <div class="mega-menu">
@@ -51,6 +53,7 @@
                     </div>
                 </div>
 
+                <!-- SERVICES -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">Services ⌄</a>
                     <div class="mega-menu">
@@ -68,6 +71,7 @@
                     </div>
                 </div>
 
+                <!-- INSIGHTS -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">Insights ⌄</a>
                     <div class="mega-menu">
@@ -80,6 +84,7 @@
                     </div>
                 </div>
 
+                <!-- RESOURCES -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">Resources ⌄</a>
                     <div class="mega-menu">
@@ -92,6 +97,7 @@
                     </div>
                 </div>
 
+                <!-- CONTACT -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">Contact ⌄</a>
                     <div class="mega-menu">
@@ -110,10 +116,23 @@
 </div><!-- end hero-banner -->
 
 
-<!-- REQUIRED CSS FIXES -->
+<!-- MOBILE DROPDOWN SCRIPT -->
+<script>
+document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if (window.innerWidth <= 700) {
+            e.preventDefault();
+            this.parentElement.classList.toggle('open');
+        }
+    });
+});
+</script>
+
+
+<!-- REQUIRED CSS FIXES FOR SERCO MENU -->
 <style>
 
-/* Top-level button style (Serco) */
+/* NAV BUTTONS (Serco style) */
 .brand-btn {
     background: transparent !important;
     border: none !important;
@@ -127,7 +146,7 @@
     cursor: pointer;
 }
 
-/* Underline hover effect */
+/* Underline hover */
 .brand-btn::after {
     content: "";
     position: absolute;
@@ -164,7 +183,7 @@
     z-index: 9999;
 }
 
-/* Show on hover (desktop) */
+/* Show on hover */
 .nav-item:hover .mega-menu {
     opacity: 1 !important;
     visibility: visible !important;
@@ -172,8 +191,23 @@
     transform: translateY(0);
 }
 
+/* Mega menu columns */
+.mega-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+}
+
+.mega-column h4 {
+    margin: 0 0 10px 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0a2540;
+}
+
 /* Mobile behaviour */
-@media (max-width: 500px) {
+@media (max-width: 700px) {
     .mega-menu {
         position: static;
         opacity: 1 !important;
@@ -191,18 +225,4 @@
         display: flex;
     }
 }
-    /* Make each top-level item a real hover target */
-.nav-item {
-    position: relative;
-    display: inline-block;
-}
-
-/* Ensure mega-menu positions correctly under the button group */
-.nav-menu {
-    position: relative;
-    display: flex;
-    gap: 20px;
-}
-
-
 </style>

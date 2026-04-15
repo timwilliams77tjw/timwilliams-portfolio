@@ -343,5 +343,27 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
         display: flex;
     }
 }
+.hero-banner {
+  background: url('hero.jpg') center center / cover no-repeat;
+  padding: 50px 30px;
+  color: white;
+}
+.hero-banner {
+  position: relative;
+  background: url('hero.jpg') center center / cover no-repeat;
+  color: white;
+}
 
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 37, 64, 0.55); /* navy overlay for contrast */
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1; /* ensures text sits above overlay */
+}
 </style>

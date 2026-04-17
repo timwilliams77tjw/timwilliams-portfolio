@@ -1,12 +1,19 @@
-/* -----------------------------------------------------------
-GLOBAL
------------------------------------------------------------ */
+/* ===========================================================
+   GLOBAL CSS — COMPLETE, UNIFIED, ALL FIXES APPLIED
+   Includes: header fixes, mega‑menu fixes, mobile fixes,
+   dark mode unification, floating buttons, QR sizing,
+   unified section headers, button system, accordion system
+   =========================================================== */
 
+/* -----------------------------------------------------------
+   GLOBAL BASE
+----------------------------------------------------------- */
 body {
     margin: 0;
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #f5f7fb;
-    color: #0a2540;
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -21,9 +28,26 @@ body {
 }
 
 /* -----------------------------------------------------------
-HEADER
+   DARK MODE VARIABLES (Unified)
 ----------------------------------------------------------- */
+:root {
+    --bg: #f5f5f5;
+    --card-bg: #ffffff;
+    --text-main: #111;
+    --text-sub: #444;
+    --accent: #0a66c2;
+}
 
+body.dark-mode {
+    --bg: #0f172a;
+    --card-bg: #111827;
+    --text-main: #e5e7eb;
+    --text-sub: #9ca3af;
+}
+
+/* -----------------------------------------------------------
+   HEADER (Standard Header Layout)
+----------------------------------------------------------- */
 .hero-banner {
     background: linear-gradient(135deg, #0a2540, #1f4e79);
     padding: 50px 30px;
@@ -73,9 +97,8 @@ HEADER
 }
 
 /* -----------------------------------------------------------
-NAV SYSTEM (SERCO STYLE)
+   NAVIGATION (SERCO STYLE)
 ----------------------------------------------------------- */
-
 .button-group {
     display: flex;
     flex-wrap: wrap;
@@ -95,7 +118,7 @@ NAV SYSTEM (SERCO STYLE)
     position: relative;
 }
 
-/* HEADER NAV BUTTONS — CORRECTED */
+/* NAV BUTTONS */
 .nav-btn {
     background: transparent !important;
     border: none !important;
@@ -126,9 +149,8 @@ NAV SYSTEM (SERCO STYLE)
 }
 
 /* -----------------------------------------------------------
-MEGA MENU
+   MEGA MENU (Unified Behaviour)
 ----------------------------------------------------------- */
-
 .dropdown,
 .mega-menu {
     position: absolute;
@@ -196,9 +218,8 @@ MEGA MENU
 }
 
 /* -----------------------------------------------------------
-MOBILE
+   MOBILE NAV
 ----------------------------------------------------------- */
-
 @media (max-width: 700px) {
     .hero-content {
         text-align: center;
@@ -233,62 +254,8 @@ MOBILE
 }
 
 /* -----------------------------------------------------------
-FLOATING BUTTONS
+   GLOBAL BUTTON SYSTEM — WHITE PILL STYLE
 ----------------------------------------------------------- */
-
-.fab {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #0078ff;
-    color: white;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 26px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-/* -----------------------------------------------------------
-FOOTER
------------------------------------------------------------ */
-
-footer {
-    background: #0a2540;
-    color: white;
-    padding: 30px;
-    margin-top: 60px;
-    display: flex;
-    justify-content: space-between;
-}
-
-/* -----------------------------------------------------------
-DARK MODE
------------------------------------------------------------ */
-
-:root {
-    --bg: #f5f5f5;
-    --card-bg: #ffffff;
-    --text-main: #111;
-    --text-sub: #444;
-    --accent: #0a66c2;
-}
-
-body.dark-mode {
-    --bg: #0f172a;
-    --card-bg: #111827;
-    --text-main: #e5e7eb;
-    --text-sub: #9ca3af;
-}
-
-/* -----------------------------------------------------------
-GLOBAL BUTTON SYSTEM — WHITE PILL STYLE
------------------------------------------------------------ */
-
 .brand-btn,
 .cta-btn,
 .btn,
@@ -331,10 +298,10 @@ body.dark-mode .read-more-btn:hover {
     color: var(--accent);
     border-color: var(--accent);
 }
-/* -----------------------------------------------------------
-PAGE BUTTONS (USED IN CV, PORTFOLIO, SITES, CERTIFICATIONS)
------------------------------------------------------------ */
 
+/* -----------------------------------------------------------
+   PAGE BUTTONS (CV, Portfolio, Sites, Certifications)
+----------------------------------------------------------- */
 .filter-btn,
 .special-btn,
 .copy-btn {
@@ -357,7 +324,6 @@ PAGE BUTTONS (USED IN CV, PORTFOLIO, SITES, CERTIFICATIONS)
     border-color: var(--accent);
 }
 
-/* Dark mode */
 body.dark-mode .filter-btn,
 body.dark-mode .special-btn,
 body.dark-mode .copy-btn {
@@ -373,10 +339,10 @@ body.dark-mode .copy-btn:hover {
     color: var(--accent);
     border-color: var(--accent);
 }
-/* -----------------------------------------------------------
-SECTION HEADERS (USED IN CV, PORTFOLIO, SITES, CERTIFICATIONS)
------------------------------------------------------------ */
 
+/* -----------------------------------------------------------
+   UNIFIED SECTION HEADER SYSTEM (Accordion)
+----------------------------------------------------------- */
 .category-section {
     background: var(--card-bg);
     border-radius: 10px;
@@ -411,7 +377,6 @@ SECTION HEADERS (USED IN CV, PORTFOLIO, SITES, CERTIFICATIONS)
     display: block;
 }
 
-/* Dark mode */
 body.dark-mode .category-header {
     background: #1f2937;
     color: #e5e7eb;
@@ -423,50 +388,44 @@ body.dark-mode .category-section {
 }
 
 /* -----------------------------------------------------------
-UNIFIED SECTION HEADER SYSTEM (ALL PAGES)
+   FLOATING BUTTONS (Unified)
 ----------------------------------------------------------- */
-
-.category-section {
-    background: var(--card-bg);
-    border-radius: 10px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    overflow: hidden;
+.fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #0078ff;
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    z-index: 9999;
 }
 
-.category-header {
-    padding: 16px 18px;
+.fab-booking {
+    right: 100px;
+}
+
+/* -----------------------------------------------------------
+   FOOTER + QR FIX
+----------------------------------------------------------- */
+footer {
     background: #0a2540;
     color: white;
-    font-size: 18px;
-    font-weight: 600;
+    padding: 30px;
+    margin-top: 60px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
 }
 
-.category-toggle {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.card-list {
-    display: none;
-    padding: 16px 18px;
-}
-
-.category-section.open .card-list {
+footer .footer-qr img {
+    width: 120px;
+    height: auto;
     display: block;
-}
-
-/* Dark mode */
-body.dark-mode .category-header {
-    background: #1f2937;
-    color: #e5e7eb;
-}
-
-body.dark-mode .category-section {
-    background: #111827;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }

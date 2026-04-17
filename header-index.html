@@ -2,35 +2,27 @@
 <div class="hero-banner">
     <div class="hero-content">
 
-        <!-- TOP ROW: logo • text • profile -->
+        <!-- TOP ROW -->
         <div class="hero-row">
-
-            <!-- Logo -->
             <img src="logo.jpg" class="header-img" alt="Logo">
 
-            <!-- Centre text -->
             <div class="hero-text">
                 <h1>Tim Williams</h1>
                 <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
                 <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
             </div>
 
-            <!-- Profile -->
-            <img src="profile.jpg"
-                 alt="Tim Williams Senior IT Programme Manager Cyber Security and Cloud Transformation Leader"
-                 class="header-img profile">
+            <img src="profile.jpg" class="header-img profile" alt="Tim Williams">
         </div>
 
-        <!-- SECOND ROW: SERCO MEGA-MENU -->
+        <!-- NAVIGATION -->
         <div class="hero-buttons">
             <div class="button-group nav-menu">
 
-                <!-- HOME -->
                 <div class="nav-item">
                     <a href="index.html" class="brand-btn">Home</a>
                 </div>
 
-                <!-- ABOUT -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">About ⌄</a>
                     <div class="mega-menu">
@@ -52,7 +44,6 @@
                     </div>
                 </div>
 
-                <!-- SERVICES -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">Services ⌄</a>
                     <div class="mega-menu">
@@ -70,7 +61,6 @@
                     </div>
                 </div>
 
-                <!-- INSIGHTS -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">Insights ⌄</a>
                     <div class="mega-menu">
@@ -83,7 +73,6 @@
                     </div>
                 </div>
 
-                <!-- RESOURCES -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">Resources ⌄</a>
                     <div class="mega-menu">
@@ -96,7 +85,6 @@
                     </div>
                 </div>
 
-                <!-- CONTACT -->
                 <div class="nav-item mega">
                     <a href="#" class="brand-btn">Contact ⌄</a>
                     <div class="mega-menu">
@@ -108,70 +96,52 @@
                     </div>
                 </div>
 
-            </div><!-- end nav-menu -->
-        </div><!-- end hero-buttons -->
+            </div>
+        </div>
 
-    </div><!-- end hero-content -->
-</div><!-- end hero-banner -->
+    </div>
+</div>
 
-
-<!-- OPTIMISED HEADER JS -->
+<!-- HEADER JS -->
 <script>
 (function() {
-
     const isMobile = () => window.innerWidth <= 700;
     let openMenu = null;
 
     function closeAllMenus() {
-        document.querySelectorAll('#header .nav-item.open').forEach(item => {
-            item.classList.remove('open');
-        });
+        document.querySelectorAll('#header .nav-item.open').forEach(i => i.classList.remove('open'));
         openMenu = null;
     }
 
     function toggleMenu(item) {
-        const isOpen = item.classList.contains('open');
+        const wasOpen = item.classList.contains('open');
         closeAllMenus();
-        if (!isOpen) {
-            item.classList.add('open');
-            openMenu = item;
-        }
+        if (!wasOpen) item.classList.add('open');
     }
 
     document.querySelectorAll('#header .nav-item > a').forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', e => {
             if (!isMobile()) return;
             e.preventDefault();
-            toggleMenu(this.parentElement);
+            toggleMenu(link.parentElement);
         });
     });
 
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', e => {
         if (!isMobile()) return;
         if (!e.target.closest('#header .nav-item')) closeAllMenus();
     });
 
-    window.addEventListener('scroll', function() {
-        if (isMobile()) closeAllMenus();
-    });
-
-    window.addEventListener('resize', function() {
-        if (!isMobile()) closeAllMenus();
-    });
-
+    window.addEventListener('scroll', () => isMobile() && closeAllMenus());
+    window.addEventListener('resize', () => !isMobile() && closeAllMenus());
 })();
 </script>
 
-
-<!-- CLEAN, NAMESPACED HEADER CSS -->
+<!-- HEADER CSS -->
 <style>
-
-/* -----------------------------------------------------------
-   HERO BANNER — NAMESPACED
------------------------------------------------------------ */
 #header .hero-banner {
     position: relative;
-    background: url('hero.jpg') center center / cover no-repeat;
+    background: url('hero.jpg') center/cover no-repeat;
     padding: 50px 30px;
     color: white;
     z-index: 10000;
@@ -181,8 +151,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(10, 37, 64, 0.55);
-    z-index: 0;
+    background: rgba(10,37,64,0.55);
 }
 
 #header .hero-content {
@@ -197,8 +166,8 @@
 
 #header .hero-row {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     gap: 20px;
 }
 
@@ -212,18 +181,13 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    object-fit: cover;
     border: 4px solid white;
+    object-fit: cover;
 }
 
-/* -----------------------------------------------------------
-   NAVIGATION + MEGA MENU — NAMESPACED
------------------------------------------------------------ */
 #header .hero-buttons {
-    flex: 1;
     display: flex;
     justify-content: center;
-    overflow: visible !important;
 }
 
 #header .nav-item {
@@ -231,14 +195,12 @@
 }
 
 #header .brand-btn {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
+    background: transparent;
+    border: none;
     color: white;
+    padding: 12px 14px;
     font-size: 15px;
     font-weight: 500;
-    padding: 12px 14px;
-    text-decoration: none;
     cursor: pointer;
     position: relative;
 }
@@ -248,14 +210,13 @@
     position: absolute;
     left: 14px;
     bottom: 6px;
-    width: 0%;
+    width: 0;
     height: 2px;
     background: white;
-    transition: width 0.25s ease;
+    transition: width .25s;
 }
 
-#header .brand-btn:hover::after,
-#header .brand-btn.active::after {
+#header .brand-btn:hover::after {
     width: calc(100% - 28px);
 }
 
@@ -264,19 +225,17 @@
     position: absolute;
     top: calc(100% + 10px);
     left: 0;
-    flex-direction: row;
-    gap: 40px;
+    background: white;
     padding: 25px 30px;
-    background: #ffffff;
     border-radius: 8px;
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-    z-index: 10001 !important;
+    gap: 40px;
+    flex-direction: row;
+    z-index: 10001;
 }
 
-@media (min-width: 701px) {
-    #header .nav-item:hover > .mega-menu {
-        display: flex;
-    }
+#header .nav-item:hover > .mega-menu {
+    display: flex;
 }
 
 #header .mega-column {
@@ -286,40 +245,27 @@
 }
 
 #header .mega-column h4 {
-    margin: 0 0 10px 0;
+    margin-bottom: 10px;
     font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 1px;
     color: #0a2540;
 }
 
 #header .mega-menu a {
     padding: 8px 0;
-    text-decoration: none;
     color: #222;
-    font-size: 14px;
-    white-space: nowrap;
+    text-decoration: none;
 }
 
 #header .mega-menu a:hover {
     color: #0077cc;
 }
 
-/* -----------------------------------------------------------
-   MOBILE — NAMESPACED
------------------------------------------------------------ */
 @media (max-width: 700px) {
-
     #header .hero-row {
         flex-direction: column;
         text-align: center;
     }
-
-    #header .hero-content {
-        align-items: center;
-        text-align: center;
-    }
-
     #header .mega-menu {
         position: static;
         width: 100%;
@@ -328,10 +274,8 @@
         flex-direction: column;
         gap: 8px;
     }
-
     #header .nav-item.open > .mega-menu {
         display: flex;
     }
 }
-
 </style>

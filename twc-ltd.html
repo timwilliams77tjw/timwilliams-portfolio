@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -10,75 +9,7 @@
 
 <meta name="description" content="TWC Ltd (Tim Williams Consulting Ltd) is an independent consultancy delivering senior-level programme leadership across cyber security, cloud transformation, digital workplace and enterprise infrastructure.">
 
-<!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css?v=1">
-
-<style>
-/* PAGE WRAPPER – same pattern as insights */
-body.page-certifications {
-    background: var(--bg);
-    color: var(--text-main);
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.page-container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-}
-
-.hero-section {
-    margin-bottom: 2rem;
-}
-
-.hero-section h1 {
-    font-size: 2.2rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-main);
-}
-
-.hero-section p {
-    font-size: 1.1rem;
-    color: var(--text-sub);
-    max-width: 720px;
-}
-
-.card {
-    background: var(--card-bg);
-    padding: 1.25rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    margin-bottom: 1.5rem;
-}
-
-.card h2 {
-    margin-top: 0;
-    color: var(--text-main);
-}
-
-.card p,
-.card ul {
-    color: var(--text-sub);
-}
-
-.card ul {
-    padding-left: 1.2rem;
-}
-
-/* STICKY BAR */
-.sticky-follow {
-    background: var(--accent);
-}
-
-/* DARK MODE */
-body.dark-mode {
-    --bg: #0a0a0a;
-    --text-main: #ffffff;
-    --text-sub: #cccccc;
-    --card-bg: #1a1a1a;
-}
-</style>
-
 </head>
 
 <body class="page-certifications">
@@ -87,7 +18,6 @@ body.dark-mode {
 <div id="header"></div>
 
 <script>
-/* FIXED: global.js must load AFTER header injection */
 fetch("header-standard.html")
   .then(r => r.text())
   .then(h => {
@@ -111,7 +41,7 @@ fetch("header-standard.html")
 <nav class="breadcrumbs">
     <a href="/index.html">Home</a>
     <span class="separator">›</span>
-    <span class="current">About </span>
+    <span class="current">About</span>
 </nav>
 
 <section class="hero-section">
@@ -123,12 +53,7 @@ fetch("header-standard.html")
 
 <div class="card">
 <h2>Who We Are</h2>
-<p>
-TWC Ltd is the registered business name for Tim Williams Consulting Ltd, a specialist consultancy
-providing programme leadership, PMO governance and delivery assurance for complex technology
-transformation programmes. The brand is built on a reputation for clarity, delivery discipline and
-measurable outcomes.
-</p>
+<p>TWC Ltd is the registered business name for Tim Williams Consulting Ltd, a specialist consultancy providing programme leadership, PMO governance and delivery assurance for complex technology transformation programmes.</p>
 </div>
 
 <div class="card">
@@ -137,7 +62,7 @@ measurable outcomes.
 <li>Cyber security uplift and CAF maturity improvement</li>
 <li>Cloud transformation (Azure, AWS, Entra, Intune)</li>
 <li>Enterprise infrastructure modernisation</li>
-<li>Digital workplace transformation (Windows 10/11, Teams Rooms, global device estates)</li>
+<li>Digital workplace transformation</li>
 <li>Programme governance, PMO leadership and delivery assurance</li>
 <li>Service transition and operational readiness</li>
 </ul>
@@ -145,11 +70,7 @@ measurable outcomes.
 
 <div class="card">
 <h2>Why the Brand Exists</h2>
-<p>
-The TWC Ltd brand was created to provide a clear, professional identity for consulting engagements
-delivered by Tim Williams. While the consultancy is led by a single senior programme manager, the
-TWC Ltd brand reflects a structured, outcome-driven approach aligned to enterprise delivery standards.
-</p>
+<p>The TWC Ltd brand was created to provide a clear, professional identity for consulting engagements delivered by Tim Williams.</p>
 </div>
 
 <div class="card">
@@ -159,11 +80,7 @@ TWC Ltd brand reflects a structured, outcome-driven approach aligned to enterpri
 <p><strong>Registered Address:</strong> 59 Beaumont Rd, Halesowen, B62 9HD</p>
 <p><strong>Phone:</strong> 07801 453322</p>
 <p><strong>Website:</strong> https://www.twc-ltd.uk</p>
-<p><strong>LinkedIn:</strong>
-<a href="https://www.linkedin.com/in/timwilliams77" target="_blank">
-linkedin.com/in/timwilliams77
-</a>
-</p>
+<p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/timwilliams77" target="_blank">linkedin.com/in/timwilliams77</a></p>
 </div>
 
 <div class="card">
@@ -179,11 +96,7 @@ linkedin.com/in/timwilliams77
 
 <div class="card">
 <h2>Leadership</h2>
-<p>
-TWC Ltd is led by <strong>Tim Williams</strong>, an SC‑Cleared Senior IT Programme Manager with over
-25 years’ experience delivering cyber security, cloud and enterprise transformation programmes across
-global organisations.
-</p>
+<p>TWC Ltd is led by <strong>Tim Williams</strong>, an SC‑Cleared Senior IT Programme Manager with over 25 years’ experience delivering cyber security, cloud and enterprise transformation programmes.</p>
 </div>
 
 <div class="card">
@@ -199,16 +112,11 @@ global organisations.
 
 <div class="card">
 <h2>Contact</h2>
-<p>
-For programme leadership, cyber transformation or enterprise delivery support, TWC Ltd provides
-structured, outcome-driven consulting aligned to enterprise standards.
-</p>
 <p>Email: timwilliams07@outlook.com</p>
 <p>Phone: 07801 453322</p>
 </div>
 
 </section>
-
 </main>
 
 <!-- FLOATING BUTTONS -->
@@ -222,26 +130,6 @@ structured, outcome-driven consulting aligned to enterprise standards.
 fetch("footer.html")
   .then(r => r.text())
   .then(h => document.getElementById("footer").innerHTML = h);
-</script>
-
-<!-- DARK MODE -->
-<script>
-(function () {
-    const darkToggle = document.getElementById("darkToggle");
-    if (!darkToggle) return;
-
-    const body = document.body;
-    const storedMode = localStorage.getItem("tw_dark");
-
-    if (storedMode === "1") {
-        body.classList.add("dark-mode");
-    }
-
-    darkToggle.addEventListener("click", function () {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
-    });
-})();
 </script>
 
 </body>

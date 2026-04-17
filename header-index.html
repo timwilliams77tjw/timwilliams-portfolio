@@ -19,10 +19,9 @@
             <img src="profile.jpg"
                  alt="Tim Williams Senior IT Programme Manager Cyber Security and Cloud Transformation Leader"
                  class="header-img profile">
-        </div><!-- end hero-row -->
+        </div>
 
-
-        <!-- SECOND ROW: SERCO MEGA-MENU (centred) -->
+        <!-- SECOND ROW: SERCO MEGA-MENU -->
         <div class="hero-buttons">
             <div class="button-group nav-menu">
 
@@ -109,7 +108,7 @@
                     </div>
                 </div>
 
-            </div><!-- end button-group -->
+            </div><!-- end nav-menu -->
         </div><!-- end hero-buttons -->
 
     </div><!-- end hero-content -->
@@ -129,19 +128,72 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
 </script>
 
 
-<!-- SELF-CONTAINED MENU CSS (OVERRIDES CONFLICTS) -->
+<!-- CLEAN, OPTIMISED HEADER CSS -->
 <style>
-/* Ensure hero buttons can show dropdowns */
+/* -----------------------------------------------------------
+   HERO BANNER — CLEAN, UNIFIED, OPTIMISED
+----------------------------------------------------------- */
+.hero-banner {
+    position: relative;
+    background: url('hero.jpg') center center / cover no-repeat;
+    padding: 50px 30px;
+    color: white;
+    z-index: 10000; /* ensures nav sits above sticky bar */
+}
+
+.hero-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 37, 64, 0.55);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.hero-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.header-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.header-img.profile {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+}
+
+/* -----------------------------------------------------------
+   NAVIGATION + MEGA MENU
+----------------------------------------------------------- */
 .hero-buttons {
+    flex: 1;
+    display: flex;
+    justify-content: center;
     overflow: visible !important;
 }
 
-/* Nav items must be positioning context */
 .nav-item {
     position: relative;
 }
 
-/* NAV BUTTONS (Serco style) */
 .hero-buttons .brand-btn {
     background: transparent !important;
     border: none !important;
@@ -151,11 +203,10 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
     font-weight: 500;
     padding: 12px 14px;
     text-decoration: none;
-    position: relative;
     cursor: pointer;
+    position: relative;
 }
 
-/* Underline hover */
 .hero-buttons .brand-btn::after {
     content: "";
     position: absolute;
@@ -172,9 +223,8 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
     width: calc(100% - 28px);
 }
 
-/* Mega menu hidden by default */
 .hero-buttons .mega-menu {
-    display: none;                 /* key: hide by default */
+    display: none;
     position: absolute;
     top: calc(100% + 10px);
     left: 0;
@@ -184,17 +234,15 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
     background: #ffffff;
     border-radius: 8px;
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-    z-index: 9999;
+    z-index: 10001 !important;
 }
 
-/* Show on hover (desktop) */
 @media (min-width: 701px) {
     .hero-buttons .nav-item:hover > .mega-menu {
         display: flex;
     }
 }
 
-/* Mega menu columns */
 .hero-buttons .mega-column {
     display: flex;
     flex-direction: column;
@@ -209,7 +257,6 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
     color: #0a2540;
 }
 
-/* Links inside mega menu */
 .hero-buttons .mega-menu a {
     padding: 8px 0;
     text-decoration: none;
@@ -222,8 +269,21 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
     color: #0077cc;
 }
 
-/* Mobile behaviour: tap to open */
+/* -----------------------------------------------------------
+   MOBILE
+----------------------------------------------------------- */
 @media (max-width: 700px) {
+
+    .hero-row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        align-items: center;
+        text-align: center;
+    }
+
     .hero-buttons .mega-menu {
         position: static;
         width: 100%;
@@ -236,134 +296,5 @@ document.querySelectorAll('.nav-item > a').forEach(link => {
     .hero-buttons .nav-item.open > .mega-menu {
         display: flex;
     }
-}
-    /* Allow dropdowns to overflow */
-.hero-banner .hero-buttons {
-    overflow: visible;
-}
-
-/* Positioning context */
-.hero-banner .nav-item {
-    position: relative;
-}
-
-/* SERCO NAV BUTTONS */
-.hero-banner .hero-buttons .nav-menu .brand-btn {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    color: white;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 12px 14px;
-    text-decoration: none;
-    position: relative;
-    cursor: pointer;
-}
-
-/* Underline hover */
-.hero-banner .hero-buttons .nav-menu .brand-btn::after {
-    content: "";
-    position: absolute;
-    left: 14px;
-    bottom: 6px;
-    width: 0%;
-    height: 2px;
-    background: white;
-    transition: width 0.25s ease;
-}
-
-.hero-banner .hero-buttons .nav-menu .brand-btn:hover::after,
-.hero-banner .hero-buttons .nav-menu .brand-btn.active::after {
-    width: calc(100% - 28px);
-}
-
-/* MEGA MENU (hidden by default) */
-.hero-banner .hero-buttons .nav-menu .mega-menu {
-    display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    flex-direction: row;
-    gap: 40px;
-    padding: 25px 30px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-    z-index: 9999;
-}
-
-/* DESKTOP: show on hover */
-@media (min-width: 701px) {
-    .hero-banner .hero-buttons .nav-menu .nav-item:hover > .mega-menu {
-        display: flex;
-    }
-}
-
-/* MEGA MENU COLUMNS */
-.hero-banner .hero-buttons .nav-menu .mega-column {
-    display: flex;
-    flex-direction: column;
-    min-width: 160px;
-}
-
-.hero-banner .hero-buttons .nav-menu .mega-column h4 {
-    margin: 0 0 10px 0;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #0a2540;
-}
-
-/* LINKS */
-.hero-banner .hero-buttons .nav-menu .mega-menu a {
-    padding: 8px 0;
-    text-decoration: none;
-    color: #222;
-    font-size: 14px;
-    white-space: nowrap;
-}
-
-.hero-banner .hero-buttons .nav-menu .mega-menu a:hover {
-    color: #0077cc;
-}
-
-/* MOBILE: tap to open */
-@media (max-width: 700px) {
-    .hero-banner .hero-buttons .nav-menu .mega-menu {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-        padding: 10px 0;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .hero-banner .hero-buttons .nav-menu .nav-item.open > .mega-menu {
-        display: flex;
-    }
-}
-.hero-banner {
-  background: url('hero.jpg') center center / cover no-repeat;
-  padding: 50px 30px;
-  color: white;
-}
-.hero-banner {
-  position: relative;
-  background: url('hero.jpg') center center / cover no-repeat;
-  color: white;
-}
-
-.hero-banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 37, 64, 0.55); /* navy overlay for contrast */
-  z-index: 0;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1; /* ensures text sits above overlay */
 }
 </style>

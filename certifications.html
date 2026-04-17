@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tim Williams – Certification Portfolio</title>
 
+<link rel="stylesheet" href="certifications.css?v=1">
+
 <!-- Load certifications.js FIRST so it can read the JSON -->
 <script src="certifications.js?v=1002" defer></script>
 
@@ -14,28 +16,20 @@
 <body class="page-certifications">
 
 <!-- HEADER INCLUDE -->
+<div id="header"></div>
 
-<link rel="stylesheet" href="certifications.css?v=4">
-
-<div id="header"></div>   <!-- THIS WAS MISSING -->
+<!-- Load global.js BEFORE header fetch -->
+<script src="global.js"></script>
 
 <script>
 fetch("header-standard.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("header").innerHTML = h;
-
-    // Run Serco header JS
-    document.querySelectorAll('.nav-item > a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        if (window.innerWidth <= 900) {
-          e.preventDefault();
-          this.parentElement.classList.toggle('open');
-        }
-      });
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header").innerHTML = h;
+        initGlobal();
     });
-});
 </script>
+
 <!-- FILTER BAR -->
 <div class="sticky-bar">
     <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>

@@ -1,233 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>TWC Ltd — Brand Story | Tim Williams Consulting Ltd</title>
-    <meta name="description" content="TWC Ltd (Tim Williams Consulting Ltd) is an independent consultancy delivering senior-level programme leadership across cyber security, cloud transformation, digital workplace and enterprise infrastructure.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- GLOBAL CSS (same as insights) -->
-    <link rel="stylesheet" href="certifications.css?v=1">
+<title>About TWC Ltd – Tim Williams Consulting</title>
 
-    <style>
-    /* PAGE WRAPPER – same pattern as insights */
-    body.page-certifications {
-        background: var(--bg);
-        color: var(--text-main);
-        transition: background 0.3s ease, color 0.3s ease;
-    }
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css?v=1">
 
-    .page-container {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
-    }
-
-    .hero-section {
-        margin-bottom: 2rem;
-    }
-
-    .hero-section h1 {
-        font-size: 2.2rem;
-        margin-bottom: 0.5rem;
-        color: var(--text-main);
-    }
-
-    .hero-section p {
-        font-size: 1.1rem;
-        color: var(--text-sub);
-        max-width: 720px;
-    }
-
-    .card {
-        background: var(--card-bg);
-        padding: 1.25rem;
-        border-radius: 8px;
-        box-shadow: var(--shadow);
-        margin-bottom: 1.5rem;
-    }
-
-    .card h2 {
-        margin-top: 0;
-        color: var(--text-main);
-    }
-
-    .card p,
-    .card ul {
-        color: var(--text-sub);
-    }
-
-    .card ul {
-        padding-left: 1.2rem;
-    }
-
-    /* STICKY BAR */
-    .sticky-follow {
-        background: var(--accent);
-    }
-
-    /* DARK MODE */
-    body.dark-mode {
-        --bg: #0a0a0a;
-        --text-main: #ffffff;
-        --text-sub: #cccccc;
-        --card-bg: #1a1a1a;
-    }
-    </style>
 </head>
 
 <body class="page-certifications">
 
-    <!-- HEADER (same pattern as insights) -->
-    <div id="header"></div>
-    <script src="global.js"></script>
-    <script>
-    fetch("header-standard.html")
-        .then(r => r.text())
-        .then(h => { 
-            document.getElementById("header").innerHTML = h; 
-            initGlobal(); 
-        });
-    </script>
+<!-- HEADER -->
+<div id="header"></div>
 
-    <!-- STICKY BAR (same structure, different label) -->
-    <div class="sticky-follow">
-        <span>About TWC Ltd</span>
-        <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
-    </div>
+<script>
+fetch("header-standard.html")
+  .then(r => r.text())
+  .then(h => {
+      document.getElementById("header").innerHTML = h;
 
-    <!-- PAGE CONTENT -->
-    <main class="page-container">
-<nav class="breadcrumbs">
-    <a href="/index.html">Home</a>
-    <span class="separator">›</span>
-    <span class="current">About </span>
-</nav>
-        <section class="hero-section">
-            <h1>TWC Ltd — Brand Story</h1>
-            <p>TWC Ltd (Tim Williams Consulting Ltd) is the independent consulting brand for senior-level programme leadership across cyber security, cloud transformation, digital workplace and enterprise infrastructure.</p>
-        </section>
+      // Load global.js AFTER header is injected
+      const s = document.createElement("script");
+      s.src = "global.js?v=1";
+      document.body.appendChild(s);
+  });
+</script>
 
-        <section>
-            <div class="card">
-                <h2>Who We Are</h2>
-                <p>
-                    TWC Ltd is the registered business name for Tim Williams Consulting Ltd, a specialist consultancy
-                    providing programme leadership, PMO governance and delivery assurance for complex technology
-                    transformation programmes. The brand is built on a reputation for clarity, delivery discipline and
-                    measurable outcomes.
-                </p>
-            </div>
+<!-- STICKY BAR -->
+<div class="sticky-follow">
+    <span>About TWC Ltd</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
 
-            <div class="card">
-                <h2>What We Do</h2>
-                <ul>
-                    <li>Cyber security uplift and CAF maturity improvement</li>
-                    <li>Cloud transformation (Azure, AWS, Entra, Intune)</li>
-                    <li>Enterprise infrastructure modernisation</li>
-                    <li>Digital workplace transformation (Windows 10/11, Teams Rooms, global device estates)</li>
-                    <li>Programme governance, PMO leadership and delivery assurance</li>
-                    <li>Service transition and operational readiness</li>
-                </ul>
-            </div>
+<!-- PAGE CONTENT -->
+<main class="page-container">
 
-            <div class="card">
-                <h2>Why the Brand Exists</h2>
-                <p>
-                    The TWC Ltd brand was created to provide a clear, professional identity for consulting engagements
-                    delivered by Tim Williams. While the consultancy is led by a single senior programme manager, the
-                    TWC Ltd brand reflects a structured, outcome-driven approach aligned to enterprise delivery standards.
-                </p>
-            </div>
+    <nav class="breadcrumbs">
+        <a href="/index.html">Home</a>
+        <span class="separator">›</span>
+        <span class="current">About TWC Ltd</span>
+    </nav>
 
-            <div class="card">
-                <h2>Registered Business Information</h2>
-                <p><strong>Registered Name:</strong> Tim Williams Consulting Ltd</p>
-                <p><strong>Trading Name:</strong> TWC Ltd</p>
-                <p><strong>Registered Address:</strong> 59 Beaumont Rd, Halesowen, B62 9HD</p>
-                <p><strong>Phone:</strong> 07801 453322</p>
-                <p><strong>Website:</strong> https://www.twc-ltd.uk</p>
-                <p><strong>LinkedIn:</strong>
-                    <a href="https://www.linkedin.com/in/timwilliams77" target="_blank">
-                        linkedin.com/in/timwilliams77
-                    </a>
-                </p>
-            </div>
+    <section class="hero-section">
+        <h1>About Tim Williams Consulting Ltd</h1>
+        <p>
+            TWC Ltd provides senior programme leadership, cyber uplift, cloud transformation,
+            digital workplace modernisation and enterprise delivery assurance across public and private sectors.
+        </p>
+    </section>
 
-            <div class="card">
-                <h2>Brand Values</h2>
-                <ul>
-                    <li>Delivery discipline</li>
-                    <li>Transparency and governance</li>
-                    <li>Technical credibility</li>
-                    <li>Measurable outcomes</li>
-                    <li>Enterprise-grade assurance</li>
-                </ul>
-            </div>
+    <section class="category-section open">
+        <div class="category-header">
+            Who We Are
+            <span class="category-toggle">−</span>
+        </div>
+        <div class="card-list">
+            <p>
+                With 25+ years delivering enterprise-scale transformation, TWC Ltd specialises in secure,
+                predictable and outcome‑driven delivery across complex, multi‑supplier environments.
+            </p>
+        </div>
+    </section>
 
-            <div class="card">
-                <h2>Leadership</h2>
-                <p>
-                    TWC Ltd is led by <strong>Tim Williams</strong>, an SC‑Cleared Senior IT Programme Manager with over
-                    25 years’ experience delivering cyber security, cloud and enterprise transformation programmes across
-                    global organisations.
-                </p>
-            </div>
+    <section class="category-section">
+        <div class="category-header">
+            What We Deliver
+            <span class="category-toggle">+</span>
+        </div>
+        <div class="card-list">
+            <ul>
+                <li>Cyber Security Uplift & CAF Alignment</li>
+                <li>Cloud Adoption & Modernisation</li>
+                <li>Digital Workplace Transformation</li>
+                <li>Programme & Portfolio Leadership</li>
+                <li>Service Transition & Operational Readiness</li>
+            </ul>
+        </div>
+    </section>
 
-            <div class="card">
-                <h2>Why Organisations Choose TWC Ltd</h2>
-                <ul>
-                    <li>Proven delivery across NHS, Defence and global enterprises</li>
-                    <li>Strong governance and PMO leadership</li>
-                    <li>Deep technical understanding across cyber and cloud</li>
-                    <li>Ability to stabilise failing programmes</li>
-                    <li>Clear communication and stakeholder alignment</li>
-                </ul>
-            </div>
+    <section class="category-section">
+        <div class="category-header">
+            Clients & Sectors
+            <span class="category-toggle">+</span>
+        </div>
+        <div class="card-list">
+            <p>
+                Experience spans NHS England, MoD, Metropolitan Police, HSBC, Tesco, Linklaters,
+                DWP, universities, utilities, and global enterprises.
+            </p>
+        </div>
+    </section>
 
-            <div class="card">
-                <h2>Contact</h2>
-                <p>
-                    For programme leadership, cyber transformation or enterprise delivery support, TWC Ltd provides
-                    structured, outcome-driven consulting aligned to enterprise standards.
-                </p>
-                <p>Email: timwilliams07@outlook.com</p>
-                <p>Phone: 07801 453322</p>
-            </div>
-        </section>
+</main>
 
-    </main>
+<!-- FLOATING BUTTONS -->
+<div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
 
-    <!-- FLOATING BUTTONS (same as insights) -->
-    <div id="fab" class="fab">⬆️</div>
-    <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+<!-- FOOTER -->
+<div id="footer"></div>
 
-    <!-- FOOTER -->
-    <div id="footer"></div>
-    <script>
-    fetch("footer.html")
-        .then(r => r.text())
-        .then(h => document.getElementById("footer").innerHTML = h);
-    </script>
-
-    <!-- DARK MODE (same as insights) -->
-    <script>
-    (function () {
-        const darkToggle = document.getElementById("darkToggle");
-        if (!darkToggle) return;
-        const body = document.body;
-        const storedMode = localStorage.getItem("tw_dark");
-        if (storedMode === "1") {
-            body.classList.add("dark-mode");
-        }
-        darkToggle.addEventListener("click", function () {
-            body.classList.toggle("dark-mode");
-            localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
-        });
-    })();
-    </script>
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => {
+      document.getElementById("footer").innerHTML = h;
+  });
+</script>
 
 </body>
 </html>

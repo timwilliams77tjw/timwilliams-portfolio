@@ -1,8 +1,6 @@
 window.initGlobal = function () {
 
-    /* -----------------------------------------------------------
-       ACCORDION SYSTEM
-    ----------------------------------------------------------- */
+    /* ACCORDIONS */
     document.querySelectorAll(".category-header").forEach(header => {
         header.addEventListener("click", () => {
             const section = header.closest(".category-section");
@@ -17,9 +15,7 @@ window.initGlobal = function () {
         });
     });
 
-    /* -----------------------------------------------------------
-       BACK TO TOP FAB (GLOBAL)
-    ----------------------------------------------------------- */
+    /* BACK TO TOP FAB */
     const fab = document.getElementById("fab");
     if (fab) {
         window.addEventListener("scroll", () => {
@@ -35,9 +31,13 @@ window.initGlobal = function () {
         });
     }
 
-    /* -----------------------------------------------------------
-       DARK MODE (GLOBAL)
-    ----------------------------------------------------------- */
+    /* CALENDAR FAB ALWAYS VISIBLE */
+    const bookingFab = document.getElementById("bookingFab");
+    if (bookingFab) {
+        bookingFab.classList.add("show");
+    }
+
+    /* DARK MODE */
     const body = document.body;
     const storedMode = localStorage.getItem("tw_dark");
 
@@ -55,18 +55,14 @@ window.initGlobal = function () {
         });
     }
 
-    /* -----------------------------------------------------------
-       ACTIVE BUTTONS
-    ----------------------------------------------------------- */
+    /* ACTIVE BUTTONS */
     const path = window.location.pathname.split("/").pop();
     document.querySelectorAll(".brand-btn").forEach(btn => {
         const href = btn.getAttribute("href");
         if (href && href === path) btn.classList.add("active");
     });
 
-    /* -----------------------------------------------------------
-       NAV DRAWER + ACCORDIONS
-    ----------------------------------------------------------- */
+    /* NAV DRAWER */
     const hamburger = document.getElementById("navHamburger");
     const drawer = document.getElementById("navDrawer");
     const overlay = document.getElementById("navOverlay");
@@ -75,13 +71,11 @@ window.initGlobal = function () {
     function openDrawer() {
         drawer.classList.add("open");
         overlay.classList.add("open");
-        drawer.setAttribute("aria-hidden", "false");
     }
 
     function closeDrawer() {
         drawer.classList.remove("open");
         overlay.classList.remove("open");
-        drawer.setAttribute("aria-hidden", "true");
     }
 
     if (hamburger) hamburger.addEventListener("click", openDrawer);
@@ -92,7 +86,7 @@ window.initGlobal = function () {
         if (e.key === "Escape") closeDrawer();
     });
 
-    /* MOBILE: tapping desktop menu opens drawer + correct accordion */
+    /* MOBILE NAV */
     document.querySelectorAll(".nav-toggle").forEach(btn => {
         btn.addEventListener("click", (e) => {
             const isMobile = window.innerWidth <= 900;
@@ -120,7 +114,7 @@ window.initGlobal = function () {
         });
     });
 
-    /* Drawer accordions */
+    /* DRAWER ACCORDIONS */
     document.querySelectorAll(".drawer-accordion").forEach(btn => {
         btn.addEventListener("click", () => {
             const id = btn.getAttribute("data-acc");
@@ -150,7 +144,3 @@ window.initGlobal = function () {
     markActive(".drawer-link");
     markActive(".drawer-sublink");
 };
-const bookingFab = document.getElementById("bookingFab");
-if (bookingFab) {
-    bookingFab.classList.add("show");
-}

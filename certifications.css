@@ -215,7 +215,7 @@ MEGA MENU (FIXED - HIDDEN BY DEFAULT)
 MOBILE
 ----------------------------------------------------------- */
 
-@media (max-width: 500px) {  /* or 600px if you prefer */
+@media (max-width: 700px) {  /* or 600px if you prefer */
     .hero-content {
         text-align: center;
         flex-direction: column;
@@ -357,7 +357,47 @@ body.dark-mode {
 .mega-menu {
     min-width: 0 !important;
 }
-.hero-content {
-    flex-direction: row !important;
-    text-align: left !important;
+/* GLOBAL BUTTON STYLE — MATCHES INDEX.HTML */
+.brand-btn,
+.cta-btn,
+.btn,
+.read-more-btn {
+    background: #fff;
+    color: #0a2540;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #fff;
+    display: inline-block;
+    transition: .25s ease;
+}
+
+.brand-btn:hover,
+.cta-btn:hover,
+.btn:hover,
+.read-more-btn:hover {
+    background: transparent;
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* DARK MODE VARIANT */
+body.dark-mode .brand-btn,
+body.dark-mode .cta-btn,
+body.dark-mode .btn,
+body.dark-mode .read-more-btn {
+    background: #1f2937;
+    color: #e5e7eb;
+    border-color: #1f2937;
+}
+
+body.dark-mode .brand-btn:hover,
+body.dark-mode .cta-btn:hover,
+body.dark-mode .btn:hover,
+body.dark-mode .read-more-btn:hover {
+    background: transparent;
+    color: var(--accent);
+    border-color: var(--accent);
 }

@@ -12,6 +12,34 @@ document.querySelectorAll(".category-header").forEach(header => {
         if (icon) {
             icon.textContent = section.classList.contains("open") ? "−" : "+";
         }
+/* ---------------------------------------------
+   DARK MODE (Unified) — Fix 4.2
+--------------------------------------------- */
+const body = document.body;
+const storedMode = localStorage.getItem("tw_dark");
+if (storedMode === "1") {
+    body.classList.add("dark-mode");
+}
+
+const darkToggle = document.getElementById("darkToggle");
+if (darkToggle) {
+    darkToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_dark",
+            body.classList.contains("dark-mode") ? "1" : "0"
+        );
+    });
+}
+
+/* ---------------------------------------------
+   BACK TO TOP BUTTON (Global) — Fix 2.3
+--------------------------------------------- */
+const fab = document.getElementById("fab");
+if (fab) {
+    fab.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+}
     });
 });
 /* ACTIVE BUTTONS */

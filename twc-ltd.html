@@ -91,9 +91,8 @@ fetch("header-standard.html")
   .then(h => {
       document.getElementById("header").innerHTML = h;
 
-      // Load global.js AFTER header is injected AND parsed
       const s = document.createElement("script");
-      s.src = "global.js?v=4";
+      s.src = "global.js?v=5";
       s.onload = () => {
           if (typeof initGlobal === "function") {
               initGlobal();
@@ -102,6 +101,7 @@ fetch("header-standard.html")
       document.body.appendChild(s);
   });
 </script>
+
 
 <!-- STICKY BAR -->
 <div class="sticky-follow">

@@ -150,3 +150,7 @@ window.initGlobal = function () {
     markActive(".drawer-link");
     markActive(".drawer-sublink");
 };
+const bookingFab = document.getElementById("bookingFab");
+if (bookingFab) {
+    bookingFab.classList.add("show");
+}

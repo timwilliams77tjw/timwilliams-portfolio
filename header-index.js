@@ -69,28 +69,30 @@ setTimeout(() => {
     });
   }
 
+/* ------------------------------------------------------------
+   3. DARK MODE (iPad-safe)
+   ------------------------------------------------------------ */
 
+// Apply saved mode immediately
+if (localStorage.getItem("tw_dark") === "1") {
+  document.body.classList.add("dark-mode");
+}
 
-  /* ------------------------------------------------------------
-     3. DARK MODE (Unified system)
-     ------------------------------------------------------------ */
-
-  // Apply saved mode
-  const saved = localStorage.getItem("tw_dark");
-  if (saved === "1") {
-    document.body.classList.add("dark-mode");
-  }
-
-  // Attach toggle
+// Attach toggle once the button exists
+(function waitForDarkButton() {
   const btn = document.getElementById("darkToggle");
-  if (btn) {
-    btn.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      localStorage.setItem(
-        "tw_dark",
-        document.body.classList.contains("dark-mode") ? "1" : "0"
-      );
-    });
+
+  if (!btn) {
+    requestAnimationFrame(waitForDarkButton);
+    return;
   }
 
-}, 0); // END OF SAFARI-SAFE DELAY
+  btn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem(
+      "tw_dark",
+      document.body.classList.contains("dark-mode") ? "1" : "0"
+    );
+  });
+})();
+

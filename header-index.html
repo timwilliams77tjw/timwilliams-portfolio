@@ -138,57 +138,55 @@ class="header-img profile">
 
 <!-- HEADER JS -->
 <script>
-<script>
 (function() {
 
-const isTouchDevice = () =>
-  ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  // Use width-based detection but keep the same name
+  const isTouchDevice = () => window.innerWidth <= 700;
 
-let openMenu = null;
+  let openMenu = null;
 
-function closeAllMenus() {
-  document.querySelectorAll('.nav-item.open').forEach(item => {
-    item.classList.remove('open');
-  });
-  openMenu = null;
-}
-
-document.querySelectorAll('.nav-item > a').forEach(link => {
-  link.addEventListener('click', function(e) {
-
-    if (!isTouchDevice()) return;
-
-    const parent = this.parentElement;
-
-    // If already open → allow navigation
-    if (parent.classList.contains('open')) return;
-
-    // First tap → open menu
-    e.preventDefault();
-    e.stopPropagation();
-
-    closeAllMenus();
-    parent.classList.add('open');
-    openMenu = parent;
-  });
-});
-
-/* Tap outside closes */
-document.addEventListener('click', function(e) {
-  if (!isTouchDevice()) return;
-
-  if (!e.target.closest('.nav-item')) {
-    closeAllMenus();
+  function closeAllMenus() {
+    document.querySelectorAll('.nav-item.open').forEach(item => {
+      item.classList.remove('open');
+    });
+    openMenu = null;
   }
-});
 
-/* Close on scroll (mobile only) */
-window.addEventListener('scroll', function() {
-  if (isTouchDevice()) closeAllMenus();
-});
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      // Desktop / iPad (wide) → hover only
+      if (!isTouchDevice()) return;
+
+      const parent = this.parentElement;
+
+      // If already open → allow navigation
+      if (parent.classList.contains('open')) return;
+
+      // First tap → open menu
+      e.preventDefault();
+      e.stopPropagation();
+      closeAllMenus();
+      parent.classList.add('open');
+      openMenu = parent;
+    });
+  });
+
+  // Tap outside closes
+  document.addEventListener('click', function(e) {
+    if (!isTouchDevice()) return;
+    if (!e.target.closest('.nav-item')) {
+      closeAllMenus();
+    }
+  });
+
+  // Close on scroll (mobile only)
+  window.addEventListener('scroll', function() {
+    if (isTouchDevice()) closeAllMenus();
+  });
 
 })();
 </script>
+
 
 <!-- SEARCH TOGGLE JS -->
 <script>

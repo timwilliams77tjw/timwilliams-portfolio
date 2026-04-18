@@ -83,11 +83,9 @@
   });
 
 })();
-  
-
 
 /* ------------------------------------------------------------
-   3. DARK MODE (Unified system)
+   3. DARK MODE (Unified system, works after injection)
    ------------------------------------------------------------ */
 
 /* Apply saved mode BEFORE render */
@@ -98,17 +96,22 @@
   }
 })();
 
-/* Toggle button */
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("darkToggle");
-  if (!btn) return;
-
-  btn.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-
-    localStorage.setItem(
-      "tw_dark",
-      document.body.classList.contains("dark-mode") ? "1" : "0"
-    );
+/* Attach toggle AFTER header is injected */
+(function () {
+  const observer = new MutationObserver(() => {
+    const btn = document.getElementById("darkToggle");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem(
+          "tw_dark",
+          document.body.classList.contains("dark-mode") ? "1" : "0"
+        );
+      });
+      observer.disconnect(); // stop watching once attached
+    }
   });
-});
+
+  // Watch for header injection
+  observer.observe(document.body, { childList: true, subtree: true });
+})();

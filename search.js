@@ -25,7 +25,7 @@ const pagesToSearch = [
 const input = document.getElementById("siteSearchInput");
 const resultsBox = document.getElementById("searchResults");
 
-if (input) {
+if (input && resultsBox) {
     input.addEventListener("input", function () {
         const query = this.value.toLowerCase().trim();
         resultsBox.innerHTML = "";
@@ -53,7 +53,6 @@ if (input) {
         resultsBox.style.display = "flex";
     });
 
-    // Hide results when clicking outside
     document.addEventListener("click", function (e) {
         if (!e.target.closest(".search-wrapper")) {
             resultsBox.style.display = "none";

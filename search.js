@@ -1,3 +1,7 @@
+/* ============================================
+   CLIENT-SIDE SEARCH ENGINE (Option A)
+   ============================================ */
+
 const pagesToSearch = [
     { title: "Home", url: "index.html" },
     { title: "About TWC Ltd", url: "twc-ltd.html" },
@@ -21,35 +25,38 @@ const pagesToSearch = [
 const input = document.getElementById("siteSearchInput");
 const resultsBox = document.getElementById("searchResults");
 
-input.addEventListener("input", function () {
-    const query = this.value.toLowerCase().trim();
-    resultsBox.innerHTML = "";
+if (input) {
+    input.addEventListener("input", function () {
+        const query = this.value.toLowerCase().trim();
+        resultsBox.innerHTML = "";
 
-    if (!query) {
-        resultsBox.style.display = "none";
-        return;
-    }
+        if (!query) {
+            resultsBox.style.display = "none";
+            return;
+        }
 
-    const matches = pagesToSearch.filter(page =>
-        page.title.toLowerCase().includes(query)
-    );
+        const matches = pagesToSearch.filter(page =>
+            page.title.toLowerCase().includes(query)
+        );
 
-    if (matches.length === 0) {
-        resultsBox.innerHTML = `<div class="no-results">No results found</div>`;
-    } else {
-        matches.forEach(page => {
-            const link = document.createElement("a");
-            link.href = page.url;
-            link.textContent = page.title;
-            resultsBox.appendChild(link);
-        });
-    }
+        if (matches.length === 0) {
+            resultsBox.innerHTML = `<div class="no-results">No results found</div>`;
+        } else {
+            matches.forEach(page => {
+                const link = document.createElement("a");
+                link.href = page.url;
+                link.textContent = page.title;
+                resultsBox.appendChild(link);
+            });
+        }
 
-    resultsBox.style.display = "flex";
-});
+        resultsBox.style.display = "flex";
+    });
 
-document.addEventListener("click", function (e) {
-    if (!e.target.closest(".search-item")) {
-        resultsBox.style.display = "none";
-    }
-});
+    // Hide results when clicking outside
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest(".search-wrapper")) {
+            resultsBox.style.display = "none";
+        }
+    });
+}

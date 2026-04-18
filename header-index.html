@@ -140,8 +140,8 @@ class="header-img profile">
 <script>
 (function() {
 
-const isMobile = () => window.innerWidth <= 700;
-let openMenu = null;
+const isTouch = () => window.matchMedia("(hover: none)").matches;
+  let openMenu = null;
 
 function closeAllMenus() {
 document.querySelectorAll('.nav-item.open').forEach(item => item.classList.remove('open'));
@@ -159,8 +159,8 @@ openMenu = item;
 
 document.querySelectorAll('.nav-item > a').forEach(link => {
 link.addEventListener('click', function(e) {
-if (!isMobile()) return;
-e.preventDefault();
+if (!isTouch()) return;
+  e.preventDefault();
 toggleMenu(this.parentElement);
 });
 });

@@ -87,25 +87,27 @@
 
 
 /* ------------------------------------------------------------
-   3. DARK MODE TOGGLE
+   3. DARK MODE (Unified system)
    ------------------------------------------------------------ */
 
-// Apply saved mode before render
+/* Apply saved mode BEFORE render */
 (function () {
-  if (localStorage.getItem("tw_darkmode") === "1") {
+  const saved = localStorage.getItem("tw_dark");
+  if (saved === "1") {
     document.body.classList.add("dark-mode");
   }
 })();
 
-// Toggle button
+/* Toggle button */
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("darkToggle");
   if (!btn) return;
 
   btn.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
+
     localStorage.setItem(
-      "tw_darkmode",
+      "tw_dark",
       document.body.classList.contains("dark-mode") ? "1" : "0"
     );
   });

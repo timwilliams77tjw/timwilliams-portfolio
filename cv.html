@@ -191,21 +191,88 @@ min-width:160px;
 </head>
 
 <body class="page-certifications">
-<nav class="breadcrumbs">
-    <a href="/index.html">Home</a>
-    <span class="separator">›</span>
-    <span class="current">CV</span>
-</nav>
   <!-- HEADER INCLUDE -->
-<div id="header"></div>
-<script src="global.js"></script>
+  <div id="header"></div>
 <script>
-fetch("header-standard.html")
-  .then(r => r.text())
-  .then(h => { 
-    document.getElementById("header").innerHTML = h; 
-    initGlobal && initGlobal();
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("header-standard.html")
+    .then(r => r.text())
+    .then(h => {
+      document.getElementById("header").innerHTML = h;
+
+      const cvBtn = document.querySelector(".cv-btn");
+const portfolioBtn = document.querySelector(".portfolio-btn");
+const cvMenu = document.getElementById("cvMenu");
+const portfolioMenu = document.getElementById("portfolioMenu");
+
+// Make CV button active on page load
+if (cvBtn) {
+  cvBtn.classList.add("active-filter");
+}
+      function positionMenu(menu, button) {
+        const rect = button.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const menuWidth = menu.offsetWidth;
+
+        // Default: align left with button
+        menu.style.left = `${rect.left}px`;
+        menu.style.right = "auto";
+
+        // If menu overflows right edge of viewport, align right with button
+        if (rect.left + menuWidth > viewportWidth) {
+          menu.style.left = "auto";
+          menu.style.right = `${viewportWidth - rect.right}px`;
+        }
+      }
+
+      // CV button click
+      if (cvBtn) {
+        cvBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          cvMenu.classList.toggle("show");
+          positionMenu(cvMenu, cvBtn);
+
+          if (portfolioMenu) portfolioMenu.classList.remove("show");
+          cvBtn.classList.toggle("active-filter");
+          if (portfolioBtn) portfolioBtn.classList.remove("active-filter");
+        });
+      }
+
+      // Portfolio button click
+      if (portfolioBtn) {
+        portfolioBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          portfolioMenu.classList.toggle("show");
+          positionMenu(portfolioMenu, portfolioBtn);
+
+          if (cvMenu) cvMenu.classList.remove("show");
+          portfolioBtn.classList.toggle("active-filter");
+          if (cvBtn) cvBtn.classList.remove("active-filter");
+        });
+      }
+
+      // Close menus on outside click
+      document.addEventListener("click", (e) => {
+        if (cvMenu && !e.target.closest(".cv-btn") && !cvMenu.contains(e.target)) {
+          cvMenu.classList.remove("show");
+          if (cvBtn) cvBtn.classList.remove("active-filter");
+        }
+        if (portfolioMenu && !e.target.closest(".portfolio-btn") && !portfolioMenu.contains(e.target)) {
+          portfolioMenu.classList.remove("show");
+          if (portfolioBtn) portfolioBtn.classList.remove("active-filter");
+        }
+      });
+
+      // ✅ Add this here for responsive menu repositioning
+      window.addEventListener("resize", () => {
+        if (cvMenu.classList.contains("show")) positionMenu(cvMenu, cvBtn);
+        if (portfolioMenu.classList.contains("show")) positionMenu(portfolioMenu, portfolioBtn);
+      });
+
+    });
+});
 </script>
 <!-- STICKY BAR -->
 <div class="sticky-bar">
@@ -519,6 +586,20 @@ fetch("header-standard.html")
       if(typeof initFooter==="function") initFooter();
     });
   </script>
+<script>
+const darkToggle = document.getElementById("darkToggle");
+const body = document.body;
+const storedMode = localStorage.getItem("tw_dark");
+
+if (storedMode === "1") {
+  body.classList.add("dark-mode");
+}
+
+darkToggle.addEventListener("click", function() {
+  body.classList.toggle("dark-mode");
+  localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+});
+</script>
   <!-- ACCORDION + FILTER JS -->
   <script>
     document.addEventListener("DOMContentLoaded", ()=>{

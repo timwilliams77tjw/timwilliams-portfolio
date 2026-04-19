@@ -1,15 +1,9 @@
 /* ============================================================
-   HEADER-INDEX.JS — Matches header-standard behaviour
-   Mobile: tap-to-open mega menus
-   Desktop: hover menus (CSS-driven)
-   Dark mode handled ONLY by global.js
+HEADER-INDEX.JS — Cleaned + Stable
 ============================================================ */
 
 setTimeout(() => {
 
-  /* ------------------------------------------------------------
-     1. MOBILE MENU LOGIC (tap-to-open)
-  ------------------------------------------------------------ */
   const isMobile = () => window.innerWidth <= 700;
   let openMenu = null;
 
@@ -20,16 +14,16 @@ setTimeout(() => {
     openMenu = null;
   }
 
+  /* TAP-TO-OPEN MEGA MENUS ON MOBILE */
   document.querySelectorAll('.nav-item > a').forEach(link => {
     link.addEventListener('click', function (e) {
+
       if (!isMobile()) return;
 
       const parent = this.parentElement;
 
-      // If already open, allow the link to work normally
       if (parent.classList.contains('open')) return;
 
-      // First tap opens the menu
       e.preventDefault();
       e.stopPropagation();
 
@@ -48,9 +42,7 @@ setTimeout(() => {
     if (isMobile()) closeAllMenus();
   });
 
-  /* ------------------------------------------------------------
-     2. SEARCH TOGGLE
-  ------------------------------------------------------------ */
+  /* SEARCH TOGGLE */
   const icon = document.getElementById("searchIcon");
   const input = document.getElementById("siteSearchInput");
   const resultsBox = document.getElementById("searchResults");
@@ -68,10 +60,5 @@ setTimeout(() => {
       }
     });
   }
-
-  /* ------------------------------------------------------------
-     3. DARK MODE — handled by global.js ONLY
-        (No dark mode logic here)
-  ------------------------------------------------------------ */
 
 }, 0);

@@ -255,18 +255,75 @@ line-height: 1.3;
 
 <body>
 
-<script src="global.js"></script>
-
-<!-- HEADER INCLUDE -->
-<div id="header"></div>
-
 <script>
+function initHeaderNav() {
+  const isMobile = () => window.innerWidth <= 700;
+  let openMenu = null;
+
+  function closeAllMenus() {
+    document.querySelectorAll('.nav-item.open').forEach(item => {
+      item.classList.remove('open');
+    });
+    openMenu = null;
+  }
+
+  // Tap-to-open mega menus on mobile
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (!isMobile()) return;
+
+      const parent = this.parentElement;
+
+      if (parent.classList.contains('open')) {
+        // second tap: follow link normally
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      closeAllMenus();
+      parent.classList.add('open');
+      openMenu = parent;
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!isMobile()) return;
+    if (!e.target.closest('.nav-item')) closeAllMenus();
+  });
+
+  window.addEventListener('scroll', function () {
+    if (isMobile()) closeAllMenus();
+  });
+
+  // Search toggle
+  const icon = document.getElementById("searchIcon");
+  const input = document.getElementById("siteSearchInput");
+  const resultsBox = document.getElementById("searchResults");
+
+  if (icon && input) {
+    icon.addEventListener("click", () => {
+      input.classList.toggle("open");
+      if (input.classList.contains("open")) input.focus();
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".search-wrapper")) {
+        input.classList.remove("open");
+        if (resultsBox) resultsBox.style.display = "none";
+      }
+    });
+  }
+}
+
 fetch("header-index.html")
-.then(r => r.text())
-.then(h => {
-document.getElementById("header").innerHTML = h;
-initGlobal();
-});
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header").innerHTML = h;
+    initGlobal();      // your existing global.js init
+    initHeaderNav();   // new: wire up header behaviour
+  });
 </script>
 
 <!-- STICKY BAR -->

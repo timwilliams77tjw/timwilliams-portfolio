@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
+<head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Tim Williams – My Sites</title>
-
 <!-- GLOBAL CSS -->
-<link rel="stylesheet" href="certifications.css?v=2">
-
-<!-- ICONS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="certifications.css?v=1">
 
 <style>
-
-/* PAGE-SPECIFIC ONLY (NO ACCORDION OVERRIDES) */
-
+/* PAGE WRAPPER */
 body.page-certifications {
     background: var(--bg);
     color: var(--text-main);
@@ -29,366 +22,300 @@ body.page-certifications {
     padding: 2rem 1.5rem;
 }
 
+/* HERO */
 .hero-section {
     margin-bottom: 2rem;
 }
-
 .hero-section h1 {
     font-size: 2.2rem;
     margin-bottom: 0.5rem;
-    color: #0a2540;
+    color: var(--text-main);
 }
-
 .hero-section p {
     font-size: 1.1rem;
-    color: #0a2540;
+    color: var(--text-sub);
     max-width: 720px;
 }
 
+/* LOCAL SEARCH */
+.search-bar-local {
+    margin: 20px 0 30px;
+}
+#insights-search {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 50px;
+    border: 2px solid var(--text-main);
+    background: var(--card-bg);
+    font-size: 15px;
+    color: var(--text-main);
+    outline: none;
+    transition: 0.25s ease;
+}
+#insights-search::placeholder {
+    color: #6b7280;
+}
+#insights-search:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,120,255,0.15);
+}
+
+/* FEATURED ARTICLE */
+.featured-article {
+    border-left: 4px solid var(--accent);
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+.featured-article h3 {
+    margin-top: 0;
+    color: var(--text-main);
+}
+.featured-article p {
+    color: var(--text-sub);
+}
+
+/* READ MORE BUTTON */
+}/* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.5rem;
-    margin-top: 16px;
 }
-
-.website-card {
-    background: white;
+.insight-card {
+    background: var(--card-bg);
     padding: 1.25rem;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    border-left: 4px solid #0078ff;
+    box-shadow: var(--shadow);
 }
-
-.website-card h3 {
+.insight-card h3 {
     margin-top: 0;
-    color: #0a2540;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    color: var(--text-main);
+}
+.insight-card p {
+    color: var(--text-sub);
 }
 
-.website-card a {
-    color: #0078ff;
-    font-weight: 600;
-    text-decoration: none;
-    word-break: break-all;
+/* CTA */
+.cta-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
 }
-
-.copy-btn {
-    margin-top: 10px;
-    background: #0a2540;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: 0.2s ease;
-}
-
-.copy-btn:hover {
-    background: #0078ff;
-}
-
-#copy-toast {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #0a2540;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-size: 14px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 999999;
-}
-
-.fab {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-}
-
-/* Sticky bar */
+/* STICKY BAR */
 .sticky-follow {
     background: var(--accent);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 1.5rem;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    color: white;
 }
 
+/* DARK MODE */
+body.dark-mode {
+    --bg: #0a0a0a;
+    --text-main: #ffffff;
+    --text-sub: #cccccc;
+    --card-bg: #1a1a1a;
+}
 </style>
-
 </head>
 
 <body class="page-certifications">
 
 <!-- HEADER -->
 <div id="header"></div>
-
+<script src="global.js"></script>
 <script>
 fetch("header-standard.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("header").innerHTML = h;
-
-    const s = document.createElement("script");
-    s.src = "header-standard.js?v=1";
-    document.body.appendChild(s);
-  });
-</script>
-<script>
-
-    // COLLAPSIBLE SECTIONS
-    document.querySelectorAll(".category-header").forEach(header => {
-        header.addEventListener("click", () => {
-            const section = header.parentElement;
-            const isOpen = section.classList.contains("open");
-
-            document.querySelectorAll(".category-section").forEach(sec => {
-                sec.classList.remove("open");
-                sec.querySelector(".category-toggle").textContent = "+";
-            });
-
-            if (!isOpen) {
-                section.classList.add("open");
-                section.querySelector(".category-toggle").textContent = "–";
-            }
-        });
-    });
-
-    // COPY BUTTONS
-    document.addEventListener("click", function(e) {
-        if (e.target.closest(".copy-btn")) {
-            const btn = e.target.closest(".copy-btn");
-            const link = btn.getAttribute("data-link");
-            navigator.clipboard.writeText(link);
-            showToast("Link copied!");
-            trackEvent("copy_link", link);
-        }
-    });
-
-    // OUTBOUND CLICK TRACKING
-    document.querySelectorAll(".website-card a").forEach(link => {
-        link.addEventListener("click", () => {
-            trackEvent("outbound_click", link.href);
-        });
-    });
-});
+    .then(r => r.text())
+    .then(h => { document.getElementById("header").innerHTML = h; initGlobal(); });
 </script>
 
-<!-- DARK MODE -->
-<script>
-(function () {
-    const darkToggle = document.getElementById("darkToggle");
-    if (!darkToggle) return;
-
-    const body = document.body;
-    const storedMode = localStorage.getItem("tw_dark");
-
-    if (storedMode === "1") {
-        body.classList.add("dark-mode");
-    }
-
-    darkToggle.addEventListener("click", function () {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem("tw_dark",
-            body.classList.contains("dark-mode") ? "1" : "0"
-        );
-    });
-})();
-</script>
+<!-- STICKY BAR -->
+<div class="sticky-follow">
+    <span>Insights & Leadership Perspectives</span>
+    <button class="dark-toggle-btn" id="darkToggle">Dark mode</button>
+</div>
 
 <!-- PAGE CONTENT -->
 <main class="page-container">
-
+<nav class="breadcrumbs">
+    <a href="/index.html">Home</a>
+    <span class="separator">›</span>
+    <span class="current">Insights</span>
+</nav>
 <section class="hero-section">
-    <h1>My Websites & Professional Profiles</h1>
-    <p>A curated list of my professional platforms, portfolios and digital presence.</p>
+    <h1>Insights & Leadership Perspectives</h1>
+    <p>Practical, experience-led thinking on programme delivery, cyber security, cloud transformation and modern workplace change.</p>
 </section>
 
-<!-- CATEGORY 1 -->
-<div class="category-section">
-    <div class="category-header">
-        Professional Profiles
-        <span class="category-toggle">+</span>
-    </div>
-
-    <div class="card-list">
-        <div class="grid">
-
-            <article class="website-card">
-                <h3><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</h3>
-                <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
-                <button class="copy-btn" data-link="https://linkedin.com/in/timwilliams77">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
-
-            <article class="website-card">
-                <h3><i class="fa-solid fa-id-card"></i> PMI Community Profile</h3>
-                <a href="https://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
-                <button class="copy-btn" data-link="https://community.pmi.org/profile/Timwilliams77">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
-
-            <article class="website-card">
-                <h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
-                <a href="https://www.apm.org.uk/myapm/my-dashboard/">apm.org.uk/my-dashboard</a>
-                <button class="copy-btn" data-link="https://www.apm.org.uk/myapm/my-dashboard/">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
-
-        </div>
-    </div>
+<!-- SEARCH -->
+<div class="search-bar-local">
+    <input type="text" id="insights-search" placeholder="Search insights…" />
 </div>
 
-<!-- CATEGORY 2 -->
-<div class="category-section">
-    <div class="category-header">
-        Certifications & Learning
-        <span class="category-toggle">+</span>
-    </div>
+<!-- FEATURED INSIGHTS -->
+<section>
+    <h2>Featured Insight</h2>
 
-    <div class="card-list">
-        <div class="grid">
+    <!-- AI ARTICLE -->
+    <article class="featured-article insight-card" data-topic="ai project-management leadership">
+        <h3>AI Isn’t Replacing Project Managers — It’s Redefining What Great Looks Like</h3>
+        <p>AI is becoming a strategic partner for modern PMs — accelerating clarity, improving prediction, strengthening stakeholder engagement and freeing leaders to focus on strategy, coaching and delivery excellence.</p>
+        <button class="read-more-btn" onclick="toggleInsightFull(this)">Read more</button>
 
-            <article class="website-card">
-                <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
-                <a href="https://www.credly.com/users/tim-williams.e51205ae">View full Credly profile</a>
+        <div class="full-article" style="display:none; margin-top:1rem;">
+            <p>Over the past year, I’ve seen a clear shift: AI isn’t just another tool in the PM toolkit. It’s becoming a strategic partner that elevates how we plan, deliver, and lead.</p>
+            <p>The real advantage isn’t automation.<br><strong>It’s augmentation.</strong></p>
 
-                <div id="credly-badges" class="badge-grid" style="margin-top:15px;">
-                    <p style="font-size:13px;color:#666;">Loading badges...</p>
-                </div>
+            <h4>🔍 1. Clarity at Speed</h4>
+            <p>AI can analyse complex project data in seconds — risks, dependencies, resource constraints — giving PMs the ability to make sharper decisions with greater confidence.</p>
 
-                <button class="copy-btn" data-link="https://www.credly.com/users/tim-williams.e51205ae">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
+            <h4>📊 2. Predictive Insight, Not Reactive Firefighting</h4>
+            <p>Instead of waiting for issues to surface, AI highlights patterns early. It’s like having a second pair of eyes constantly scanning the horizon.</p>
 
-            <article class="website-card">
-                <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
-                <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">Microsoft Learn Transcript</a>
-                <button class="copy-btn" data-link="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
+            <h4>🤝 3. Stronger Stakeholder Engagement</h4>
+            <p>From summarising meetings to generating tailored updates, AI helps PMs communicate with precision and consistency — freeing up time to focus on relationships, not admin.</p>
 
+            <h4>🧩 4. More Time for Leadership</h4>
+            <p>When AI handles the repetitive tasks, PMs can lean into the work that truly moves organisations forward: strategy, coaching, alignment, and delivery excellence.</p>
+
+            <p><strong>AI won’t replace project managers. But project managers who embrace AI will absolutely outperform those who don’t.</strong></p>
         </div>
-    </div>
-</div>
+    </article>
 
-<!-- CATEGORY 3 -->
-<div class="category-section">
-    <div class="category-header">
-        Volunteering & Community Roles
-        <span class="category-toggle">+</span>
-    </div>
+    <!-- PMO TURNAROUND -->
+    <article id="pmo-turnaround" class="featured-article insight-card" data-topic="pmo leadership transformation">
+        <h3>From Underperforming PMO to Strategic Partner: Delivering a Measurable Turnaround</h3>
+        <p>A struggling PMO facing SLA failures, low morale, and declining client trust was transformed into a high‑performing, profitable, and strategically aligned service during a critical contract renewal phase.</p>
+        <button class="read-more-btn" onclick="toggleInsightFull(this)">Read more</button>
 
-    <div class="card-list">
-        <div class="grid">
+        <div class="full-article" style="display:none; margin-top:1rem;">
+            <p>When a managed service enters a contract renewal phase, performance becomes a commercial differentiator—not just an operational concern.</p>
 
-            <article class="website-card">
-                <h3><i class="fa-solid fa-hands-helping"></i> APM Volunteer</h3>
-                <a href="https://www.apm.org.uk">apm.org.uk</a>
-                <div style="margin-top:15px;">
-                    <img src="apm.png" alt="APM Volunteer Badge" style="width:110px;border-radius:8px;">
-                </div>
-                <button class="copy-btn" data-link="https://www.apm.org.uk">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
+            <h4>⚠️ The Challenge</h4>
+            <p>The PMO was experiencing systemic issues including SLA failures, -10% revenue contribution, low morale, poor delivery outcomes, and a breakdown in client collaboration.</p>
 
-            <article class="website-card">
-                <h3><i class="fa-solid fa-comments"></i> National Interview Week</h3>
-                <a href="https://imployable.me">imployable.me</a>
-                <div style="margin-top:15px;">
-                    <img src="interview.png" alt="National Interview Week Badge" style="width:110px;border-radius:8px;">
-                </div>
-                <button class="copy-btn" data-link="https://imployable.me">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
+            <h4>🎯 My Mandate</h4>
+            <p>My role was to take operational control, stabilise delivery, rebuild culture, restore trust, and return the service to profitability.</p>
 
-            <article class="website-card">
-                <h3><i class="fa-solid fa-star"></i> Inspiring the Future – Gold Volunteer</h3>
-                <a href="https://www.inspiringthefuture.org">inspiringthefuture.org</a>
-                <div style="margin-top:15px;">
-                    <img src="inspiring.jpg" alt="Inspiring the Future Gold Badge" style="width:110px;border-radius:8px;">
-                </div>
-                <button class="copy-btn" data-link="https://www.inspiringthefuture.org">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
+            <h4>🧩 1. Structured Recovery Through a Hybrid Delivery Model</h4>
+            <p>A hybrid Agile + Integrated Planning approach prioritised immediate recovery while aligning short‑term fixes with long‑term strategy.</p>
 
-            <article class="website-card">
-                <h3><i class="fa-solid fa-flask"></i> STEM Ambassador</h3>
-                <a href="https://www.stem.org.uk/stem-ambassadors">stem.org.uk/stem-ambassadors</a>
-                <div style="margin-top:15px;">
-                    <img src="stem.png" alt="STEM Ambassador Badge" style="width:110px;border-radius:8px;">
-                </div>
-                <button class="copy-btn" data-link="https://www.stem.org.uk/stem-ambassadors">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
+            <h4>📘 2. Governance Reset for Predictable Delivery</h4>
+            <p>Using Six Sigma, continuous improvement, lessons learned, and ISO 27001 alignment, governance was redesigned to enable—not restrict—delivery.</p>
 
+            <h4>🤝 3. Cultural Transformation</h4>
+            <p>Structured interviews and open communication rebuilt a “one team” ethos, restoring collaboration and trust.</p>
+
+            <h4>📈 The Results</h4>
+            <p>
+                • Majority of projects moved from Red → Green<br>
+                • Remaining projects moved from Red → Amber with plans<br>
+                • 30% improvement in delivery performance<br>
+                • CSAT increased from 3 → 7<br>
+                • Revenue improved from -10% → +15%<br>
+                • 100% SLA achievement<br>
+                • Client agreed to act as a reference customer
+            </p>
+
+            <button class="read-more-btn" onclick="window.open('pmo.pdf', '_blank');">Download PDF</button>
         </div>
+    </article>
+</section>
+
+<!-- LATEST PERSPECTIVES -->
+<section>
+    <h2>Latest Perspectives</h2>
+
+    <div class="grid" id="insights-grid">
+
+        <article class="insight-card" data-topic="cyber">
+            <h3>Why Cyber Uplift Fails — And How to Fix It</h3>
+            <p>Most cyber uplift programmes fail not because of technology, but because of governance, ownership and cultural resistance.</p>
+        </article>
+
+        <article class="insight-card" data-topic="service-transition">
+            <h3>The Real Cost of Poor Service Transition</h3>
+            <p>Service transition is often treated as an afterthought, leading to disruption and spiralling support costs.</p>
+        </article>
+
+        <article class="insight-card" data-topic="cloud">
+            <h3>Delivering Cloud Adoption Without Disruption</h3>
+            <p>Cloud transformation succeeds when it’s treated as a business change programme, not a technical migration.</p>
+        </article>
+
+        <article class="insight-card" data-topic="modern-workplace">
+            <h3>Modern Workplace: What CIOs Get Wrong</h3>
+            <p>Technology alone doesn’t modernise a workplace. Adoption, communication and leadership alignment do.</p>
+        </article>
+
     </div>
-</div>
+</section>
 
-<!-- CATEGORY 4 -->
-<div class="category-section">
-    <div class="category-header">
-        Business & Services
-        <span class="category-toggle">+</span>
+<!-- NEW SECTION: PROGRAMME LEADERSHIP ROLES -->
+<section style="margin-top: 3rem;">
+    <h2>Programme Leadership Roles</h2>
+
+    <div class="grid">
+        <article class="insight-card">
+            <h3>SC‑Cleared Programme Manager</h3>
+            <p>Secure, high‑stakes programme leadership across government, defence and regulated environments.</p>
+            <a href="sc-cleared-programme-manager" class="read-more-btn" style="margin-top: 1rem;">View role</a>
+        </article>
+
+        <article class="insight-card">
+            <h3>Cyber Security Programme Manager (UK)</h3>
+            <p>Leading cyber uplift, remediation and security transformation across complex organisations.</p>
+            <a href="cyber-security-programme-manager-uk" class="read-more-btn" style="margin-top: 1rem;">View role</a>
+        </article>
+
+        <article class="insight-card">
+            <h3>Cloud Transformation Programme Manager</h3>
+            <p>Delivering secure, predictable cloud adoption and modernisation programmes.</p>
+            <a href="cloud-transformation-programme-manager" class="read-more-btn" style="margin-top: 1rem;">View role</a>
+        </article>
+
+        <article class="insight-card">
+            <h3>NHS Digital Transformation Programme</h3>
+            <p>Clinically safe, operationally ready digital transformation across NHS Trusts and ICS organisations.</p>
+            <a href="nhs-digital-transformation-programme" class="read-more-btn" style="margin-top: 1rem;">View role</a>
+        </article>
     </div>
+</section>
 
-    <div class="card-list">
-        <div class="grid">
+<!-- NEW SECTION: LEADERSHIP ARTICLES -->
+<section style="margin-top: 3rem;">
+    <h2>New Leadership Articles</h2>
 
-            <article class="website-card">
-                <h3><i class="fa-brands fa-linkedin"></i> Tim Williams Consulting</h3>
-                <a href="https://www.linkedin.com/company/tim-williams-consulting/">linkedin.com/company/tim-williams-consulting</a>
-                <button class="copy-btn" data-link="https://www.linkedin.com/company/tim-williams-consulting/">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
+    <div class="grid">
+        <article class="insight-card">
+            <h3>Delivering Cyber Security Transformation in Large Organisations</h3>
+            <p>Why cyber uplift fails — and how to deliver transformation that is measurable, sustainable and aligned to real operational needs.</p>
+            <a href="delivering-cyber-security-transformation" class="read-more-btn" style="margin-top: 1rem;">Read article</a>
+        </article>
 
-            <article class="website-card">
-                <h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
-                <a href="https://gethandover.uk">gethandover.uk</a>
-                <button class="copy-btn" data-link="https://gethandover.uk">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
+        <article class="insight-card">
+            <h3>Lessons from Global Windows 11 Deployments</h3>
+            <p>What global enterprises have learned from deploying Windows 11 at scale — and how to avoid disruption.</p>
+            <a href="lessons-from-global-windows-11-deployments" class="read-more-btn" style="margin-top: 1rem;">Read article</a>
+        </article>
 
-            <article class="website-card">
-                <h3><i class="fa-solid fa-globe"></i> TWC Portfolio (Canva)</h3>
-                <a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
-                <button class="copy-btn" data-link="https://twc-ltd.my.canva.site">
-                    <i class="fa-regular fa-copy"></i> Copy Link
-                </button>
-            </article>
-
-        </div>
+        <article class="insight-card">
+            <h3>Cloud Transformation in Regulated Environments</h3>
+            <p>How regulated organisations can adopt cloud securely, predictably and without disrupting critical services.</p>
+            <a href="cloud-transformation-regulated-environments" class="read-more-btn" style="margin-top: 1rem;">Read article</a>
+        </article>
     </div>
-</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>Follow My Latest Insights</h2>
+    <p>I regularly share leadership perspectives on LinkedIn.</p>
+    <a href="https://www.linkedin.com/in/timwilliams77" class="btn">Connect on LinkedIn</a>
+</section>
 
 </main>
 
@@ -396,56 +323,38 @@ fetch("header-standard.html")
 <div id="fab" class="fab">⬆️</div>
 <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
-<!-- COPY TOAST -->
-<div id="copy-toast">Link copied!</div>
-
 <!-- FOOTER -->
 <div id="footer"></div>
-
 <script>
 fetch("footer.html")
-.then(r => r.text())
-.then(h => document.getElementById("footer").innerHTML = h);
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
+<!-- SEARCH LOGIC -->
 <script>
-function showToast(message) {
-    const toast = document.getElementById("copy-toast");
-    toast.textContent = message;
-    toast.style.opacity = "1";
-    setTimeout(() => toast.style.opacity = "0", 1500);
-}
-
-function trackEvent(action, value) {
-    const event = {
-        timestamp: new Date().toISOString(),
-        action,
-        value
-    };
-    const existing = JSON.parse(localStorage.getItem("analytics") || "[]");
-    existing.push(event);
-    localStorage.setItem("analytics", JSON.stringify(existing));
+const searchInput = document.getElementById("insights-search");
+if (searchInput) {
+    searchInput.addEventListener("input", () => {
+        const term = searchInput.value.toLowerCase();
+        document.querySelectorAll(".insight-card").forEach(card => {
+            const text = card.innerText.toLowerCase();
+            card.style.display = text.includes(term) ? "" : "none";
+        });
+    });
 }
 </script>
 
-<div id="credly-badges" class="badge-grid"></div>
+<!-- DARK MODE -->
 
+<!-- READ MORE -->
 <script>
-async function loadCredly() {
-    const el = document.getElementById("credly-badges");
-    try {
-        const res = await fetch("https://credlyapi.timwilliams07.workers.dev/");
-        const data = await res.json();
-        el.innerHTML = data.map(b => `
-            <a href="${b.url}" target="_blank">
-                <img src="${b.image}" title="${b.name}" style="width:90px;border-radius:8px;margin:4px;">
-            </a>
-        `).join("");
-    } catch (e) {
-        el.innerHTML = "<p>Badges unavailable</p>";
-    }
+function toggleInsightFull(btn) {
+    const fullArticle = btn.nextElementSibling;
+    const isOpen = fullArticle.style.display === "block";
+    fullArticle.style.display = isOpen ? "none" : "block";
+    btn.textContent = isOpen ? "Read more" : "Show less";
 }
-loadCredly();
 </script>
 
 </body>

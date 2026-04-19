@@ -1,12 +1,20 @@
-// global.js
+/* ============================================================
+   GLOBAL.JS — Unified Dark Mode + Shared Behaviour
+   Applies to ALL pages (index + standard pages)
+============================================================ */
 
 window.initGlobal = function () {
-  /* APPLY SAVED DARK MODE BEFORE ANYTHING ELSE */
+
+  /* ------------------------------------------------------------
+     1. APPLY SAVED DARK MODE BEFORE ANYTHING ELSE
+  ------------------------------------------------------------ */
   if (localStorage.getItem("tw_dark") === "1") {
     document.body.classList.add("dark-mode");
   }
 
-  /* ATTACH DARK MODE TOGGLE AFTER HEADER IS IN DOM */
+  /* ------------------------------------------------------------
+     2. ATTACH DARK MODE TOGGLE (after header loads)
+  ------------------------------------------------------------ */
   setTimeout(() => {
     const btn = document.getElementById("darkToggle");
     if (!btn) return;
@@ -20,25 +28,32 @@ window.initGlobal = function () {
     });
   }, 50);
 
-  /* SECTION TOGGLES (GROUP HEADERS) */
+  /* ------------------------------------------------------------
+     3. CATEGORY HEADERS (CV, Portfolio, etc.)
+  ------------------------------------------------------------ */
   document.querySelectorAll(".category-header").forEach(header => {
     header.addEventListener("click", () => {
       const section = header.closest(".category-section");
       if (!section) return;
+
       section.classList.toggle("open");
       const icon = header.querySelector(".category-toggle");
       if (icon) icon.textContent = section.classList.contains("open") ? "−" : "+";
     });
   });
 
-  /* ACTIVE BUTTONS (brand-btn) */
+  /* ------------------------------------------------------------
+     4. ACTIVE BUTTON HIGHLIGHTING (brand-btn)
+  ------------------------------------------------------------ */
   const path = window.location.pathname.split("/").pop();
   document.querySelectorAll(".brand-btn").forEach(btn => {
     const href = btn.getAttribute("href");
     if (href && href === path) btn.classList.add("active");
   });
 
-  /* NAV DRAWER + ACCORDIONS (if present) */
+  /* ------------------------------------------------------------
+     5. DRAWER NAVIGATION (if present)
+  ------------------------------------------------------------ */
   const hamburger = document.getElementById("navHamburger");
   const drawer = document.getElementById("navDrawer");
   const overlay = document.getElementById("navOverlay");
@@ -66,7 +81,9 @@ window.initGlobal = function () {
     if (e.key === "Escape") closeDrawer();
   });
 
-  /* MOBILE MENU BEHAVIOUR (drawer-based, if present) */
+  /* ------------------------------------------------------------
+     6. MOBILE MENU BEHAVIOUR (drawer-based, if present)
+  ------------------------------------------------------------ */
   document.querySelectorAll(".nav-toggle").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const isMobile = window.innerWidth <= 900;
@@ -93,7 +110,9 @@ window.initGlobal = function () {
     });
   });
 
-  /* DRAWER ACCORDIONS (if present) */
+  /* ------------------------------------------------------------
+     7. DRAWER ACCORDIONS (if present)
+  ------------------------------------------------------------ */
   document.querySelectorAll(".drawer-accordion").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-acc");
@@ -106,7 +125,9 @@ window.initGlobal = function () {
     });
   });
 
-  /* ACTIVE LINK HIGHLIGHTING (main nav / drawer links) */
+  /* ------------------------------------------------------------
+     8. ACTIVE LINK HIGHLIGHTING (main nav + drawer)
+  ------------------------------------------------------------ */
   const currentPath = window.location.pathname.split("/").pop() || "index.html";
 
   function markActive(selector) {
@@ -123,7 +144,9 @@ window.initGlobal = function () {
   markActive(".drawer-sublink");
 };
 
-/* SIMPLE MOBILE TOGGLE (if used) */
+/* ------------------------------------------------------------
+   9. SIMPLE MOBILE TOGGLE (if used)
+------------------------------------------------------------ */
 function toggleMenu() {
   const nav = document.querySelector(".main-nav");
   if (nav) nav.classList.toggle("active");

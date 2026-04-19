@@ -267,15 +267,14 @@ function initHeaderNav() {
   }
 
   // Tap-to-open mega menus on mobile
-  document.querySelectorAll('.nav-item > a').forEach(link => {
+  document.querySelectorAll('#header .nav-item > a').forEach(link => {
     link.addEventListener('click', function (e) {
       if (!isMobile()) return;
 
       const parent = this.parentElement;
 
       if (parent.classList.contains('open')) {
-        // second tap: follow link normally
-        return;
+        return; // second tap follows link
       }
 
       e.preventDefault();
@@ -289,7 +288,7 @@ function initHeaderNav() {
 
   document.addEventListener('click', function (e) {
     if (!isMobile()) return;
-    if (!e.target.closest('.nav-item')) closeAllMenus();
+    if (!e.target.closest('#header .nav-item')) closeAllMenus();
   });
 
   window.addEventListener('scroll', function () {
@@ -297,9 +296,9 @@ function initHeaderNav() {
   });
 
   // Search toggle
-  const icon = document.getElementById("searchIcon");
-  const input = document.getElementById("siteSearchInput");
-  const resultsBox = document.getElementById("searchResults");
+  const icon = document.querySelector("#header #searchIcon");
+  const input = document.querySelector("#header #siteSearchInput");
+  const resultsBox = document.querySelector("#header #searchResults");
 
   if (icon && input) {
     icon.addEventListener("click", () => {
@@ -308,7 +307,7 @@ function initHeaderNav() {
     });
 
     document.addEventListener("click", (e) => {
-      if (!e.target.closest(".search-wrapper")) {
+      if (!e.target.closest("#header .search-wrapper")) {
         input.classList.remove("open");
         if (resultsBox) resultsBox.style.display = "none";
       }
@@ -320,10 +319,15 @@ fetch("header-index.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header").innerHTML = h;
-    initGlobal();      // your existing global.js init
-    initHeaderNav();   // new: wire up header behaviour
+
+    // Wait for DOM to update before initialising nav
+    requestAnimationFrame(() => {
+      initGlobal();
+      initHeaderNav();
+    });
   });
 </script>
+
 
 
 <!-- STICKY BAR -->

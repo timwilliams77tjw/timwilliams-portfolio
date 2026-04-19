@@ -504,5 +504,66 @@
 .nav-item.open > .mega-menu {
   display: flex !important;
 }
+/* ============================================================
+   FINAL OVERRIDES — THESE MUST BE LAST IN THE FILE
+   ============================================================ */
+
+/* Fix submenu visibility */
+.nav-item.open > .mega-menu {
+  display: flex !important;
+}
+
+/* MOBILE FIXES */
+@media (max-width: 700px) {
+
+  /* Add spacing under profile photo */
+  .hero-buttons {
+    margin-top: 20px !important;
+  }
+
+  /* Force single-row horizontal scroll */
+  .nav-menu {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .nav-menu::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .nav-item {
+    flex: 0 0 auto !important;
+  }
+
+  /* REMOVE PILLS ON MOBILE */
+  .brand-btn {
+    border-radius: 6px !important;
+    border: 1px solid rgba(255,255,255,0.4) !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    background: rgba(255,255,255,0.15) !important;
+  }
+
+  /* Force submenu to appear full-width under tapped item */
+  .mega-menu {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    margin-top: 4px !important;
+    display: none !important; /* default hidden */
+  }
+
+  .mega-column {
+    min-width: 100% !important;
+  }
+}
 
 </style>

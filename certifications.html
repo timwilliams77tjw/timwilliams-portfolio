@@ -18,17 +18,18 @@
 <!-- HEADER INCLUDE -->
 <div id="header"></div>
 
-<!-- Load global.js BEFORE header fetch -->
-<script src="global.js"></script>
-
 <script>
 fetch("header-standard.html")
-    .then(r => r.text())
-    .then(h => {
-        document.getElementById("header").innerHTML = h;
-        initGlobal();
-    });
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header").innerHTML = h;
+
+    const s = document.createElement("script");
+    s.src = "header-standard.js?v=1";
+    document.body.appendChild(s);
+  });
 </script>
+
 
 <!-- FILTER BAR -->
 <div class="sticky-bar">

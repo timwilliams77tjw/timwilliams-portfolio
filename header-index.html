@@ -325,12 +325,20 @@
   color: #666;
 }
 
-/* MOBILE — HORIZONTAL SCROLL NAV */
 @media (max-width: 700px) {
 
+  /* Top row: hero stacks nicely (what you already see) */
+  .hero-row {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* NAV: single horizontal row with sideways scroll */
   .nav-menu {
     display: flex;
-    overflow-x: auto;
+    flex-wrap: nowrap;          /* force one row */
+    overflow-x: auto;           /* enable horizontal scroll */
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -342,31 +350,41 @@
     display: none;
   }
 
+  /* Each nav item stays as a pill in the row */
+  .nav-item {
+    flex: 0 0 auto;             /* prevent wrapping */
+  }
+
+  /* Make pills a bit tighter on mobile */
+  .brand-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  /* Mega menu: full-width dropdown under the item (Option A) */
   .mega-menu {
     position: static !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box;
     flex-direction: column !important;
-    gap: 20px !important;
-    padding: 20px !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    margin-top: 4px;            /* tight spacing under pill */
   }
 
   .mega-column {
     min-width: 100% !important;
   }
 
-  .hero-row {
-    display: flex;
-    flex-direction: column;
-  }
-
+  /* Search + dark mode stay in the same row */
   .search-wrapper {
-    margin-top: 10px;
+    margin-top: 0;
   }
 }
 
-/* Enable click-open on mobile */
-.nav-item.open > .mega-menu { display: flex; }
-
+/* Ensure tap-to-open actually shows the submenu */
+.nav-item.open > .mega-menu {
+  display: flex;
+}
 </style>

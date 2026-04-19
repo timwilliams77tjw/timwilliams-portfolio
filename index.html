@@ -31,32 +31,6 @@
 }
 </script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Tim Williams",
-  "jobTitle": "Senior IT Programme Manager",
-  "url": "https://www.twc-ltd.uk",
-  "image": "https://www.twc-ltd.uk/profile.jpg",
-  "sameAs": [
-    "https://www.linkedin.com/in/timwilliams77"
-  ],
-  "worksFor": {
-    "@type": "Organization",
-    "name": "TWC Ltd"
-  },
-  "knowsAbout": [
-    "Cyber Security",
-    "Cloud Transformation",
-    "Digital Transformation",
-    "Enterprise Infrastructure",
-    "Programme Management",
-    "PMO Governance"
-  ]
-}
-</script>
-
 <style>
 :root { --accent: #0a66c2; }
 body.dark-mode { --accent: #38bdf8; }
@@ -94,10 +68,20 @@ body.dark-mode .card {
   background: #1f2937;
 }
 
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
+}
+
+/* SERVICE CARD ICONS */
+.service-card img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 10px;
 }
 
 /* BUTTONS */
@@ -153,26 +137,6 @@ body.dark-mode .card {
   color: white;
   border: none;
 }
-
-/* FOOTER */
-footer {
-  background: #0a2540;
-  color: white;
-  padding: 30px;
-  margin-top: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-qr img { width: 60px; }
-
-.download-note {
-  font-size: 12px;
-  color: #4b5563;
-  margin-top: -4px;
-  line-height: 1.3;
-}
 </style>
 
 </head>
@@ -200,210 +164,145 @@ fetch("header-index.html")
 
 <!-- MAIN CONTENT -->
 <div class="container">
-  <!-- HERO / INTRO CARD -->
-<div class="card" style="text-align:center; padding:30px;">
-  <h1>IT Programme Delivery That Delivers — On Time and On Budget</h1>
 
-  <p style="font-size:18px; max-width:700px; margin:10px auto;">
-    Helping UK organisations successfully deliver complex cyber security, cloud and enterprise IT programmes with 30+ years of hands-on experience.
-  </p>
+  <!-- INTRO -->
+  <div class="card" style="text-align:center; padding:30px;">
+    <h1>IT Programme Delivery That Delivers — On Time and On Budget</h1>
 
-  <div class="button-group">
-    <a href="calendar.html" class="brand-btn">Book a Free Consultation</a>
-    <a href="contact.html" class="brand-btn">Discuss Your Programme</a>
+    <p style="font-size:18px; max-width:700px; margin:10px auto;">
+      Helping UK organisations successfully deliver complex cyber security, cloud and enterprise IT programmes with 30+ years of hands-on experience.
+    </p>
+
+    <div class="button-group">
+      <a href="calendar.html" class="brand-btn">Book a Free Consultation</a>
+      <a href="contact.html" class="brand-btn">Discuss Your Programme</a>
+    </div>
+
+    <p style="margin-top:15px;">
+      ✔ 150+ Programmes Delivered &nbsp; | &nbsp;
+      ✔ 30+ Years Experience &nbsp; | &nbsp;
+      ✔ Trusted Across NHS, Defence & Enterprise
+    </p>
   </div>
 
-  <p style="margin-top:15px;">
-    ✔ 150+ Programmes Delivered &nbsp; | &nbsp;
-    ✔ 30+ Years Experience &nbsp; | &nbsp;
-    ✔ Trusted Across NHS, Defence & Enterprise
-  </p>
-</div>
-
-<!-- WHO I WORK WITH -->
-<h2>Who I Work With</h2>
-<div class="card">
-  <ul>
-    <li>Organisations delivering complex cyber security or cloud transformation programmes</li>
-    <li>Businesses with delayed, high-risk or failing IT programmes</li>
-    <li>Enterprises needing senior programme leadership and governance</li>
-  </ul>
-</div>
-
-<!-- EXECUTIVE PROFILE -->
-<h2>Executive Profile</h2>
-<div class="card" style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
-  <div style="flex:1; min-width:250px;">
-    <p>SC Cleared Senior IT Programme Manager delivering large-scale cyber security, cloud transformation and enterprise infrastructure programmes across NHS England, Defence and global organisations.</p>
-    <p>Specialist in stabilising complex programmes, improving delivery performance and ensuring successful outcomes across high-risk environments.</p>
+  <!-- WHO I WORK WITH -->
+  <h2>Who I Work With</h2>
+  <div class="card">
+    <ul>
+      <li>Organisations delivering complex cyber security or cloud transformation programmes</li>
+      <li>Businesses with delayed, high-risk or failing IT programmes</li>
+      <li>Enterprises needing senior programme leadership and governance</li>
+    </ul>
   </div>
 
-  <div style="flex:0 0 250px; text-align:center;">
-    <img src="exec.jpg" alt="Executive Profile" style="width:250px; height:250px; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.15);" />
-  </div>
-</div>
+  <!-- EXECUTIVE PROFILE -->
+  <h2>Executive Profile</h2>
+  <div class="card" style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:250px;">
+      <p>SC Cleared Senior IT Programme Manager delivering large-scale cyber security, cloud transformation and enterprise infrastructure programmes across NHS England, Defence and global organisations.</p>
+      <p>Specialist in stabilising complex programmes, improving delivery performance and ensuring successful outcomes across high-risk environments.</p>
+    </div>
 
-<!-- PROVEN RESULTS -->
-<h2>Proven Results</h2>
-<div class="card">
-  <ul>
-    <li>Delivered £40M cyber security uplift programme for NHS England, improving CAF maturity across all domains.</li>
-    <li>Led global Windows 10/11 transformation for 126,000 devices across 42 countries.</li>
-    <li>Delivered Azure and AWS cloud adoption programmes reducing operational cost by 18%.</li>
-  </ul>
-</div>
-
-<!-- HOW I HELP -->
-<h2>How I Help</h2>
-<div class="grid">
-
-  <div class="card service-card">
-    <img src="service-delivery.png" alt="Programme Delivery Icon">
-    <h3>Programme Delivery</h3>
-    <p>End-to-end leadership of complex IT programmes ensuring delivery on time, within budget and aligned to business outcomes.</p>
+    <div style="flex:0 0 250px; text-align:center;">
+      <img src="exec.jpg" alt="Executive Profile" style="width:250px; height:250px; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.15);" />
+    </div>
   </div>
 
-  <div class="card service-card">
-    <img src="service-recovery.png" alt="Programme Recovery Icon">
-    <h3>Programme Recovery</h3>
-    <p>Stabilising failing or high-risk programmes and getting delivery back on track quickly and effectively.</p>
+  <!-- PROVEN RESULTS -->
+  <h2>Proven Results</h2>
+  <div class="card">
+    <ul>
+      <li>Delivered £40M cyber security uplift programme for NHS England, improving CAF maturity across all domains.</li>
+      <li>Led global Windows 10/11 transformation for 126,000 devices across 42 countries.</li>
+      <li>Delivered Azure and AWS cloud adoption programmes reducing operational cost by 18%.</li>
+    </ul>
   </div>
 
-  <div class="card service-card">
-    <img src="service-cyber.png" alt="Cyber Security Icon">
-    <h3>Cyber Security Transformation</h3>
-    <p>Delivering enterprise cyber security programmes including CAF, IAM, SIEM and resilience frameworks.</p>
+  <!-- HOW I HELP -->
+  <h2>How I Help</h2>
+  <div class="grid">
+
+    <div class="card service-card">
+      <img src="service-delivery.png" alt="Programme Delivery Icon">
+      <h3>Programme Delivery</h3>
+      <p>End-to-end leadership of complex IT programmes ensuring delivery on time, within budget and aligned to business outcomes.</p>
+    </div>
+
+    <div class="card service-card">
+      <img src="service-recovery.png" alt="Programme Recovery Icon">
+      <h3>Programme Recovery</h3>
+      <p>Stabilising failing or high-risk programmes and getting delivery back on track quickly and effectively.</p>
+    </div>
+
+    <div class="card service-card">
+      <img src="service-cyber.png" alt="Cyber Security Icon">
+      <h3>Cyber Security Transformation</h3>
+      <p>Delivering enterprise cyber security programmes including CAF, IAM, SIEM and resilience frameworks.</p>
+    </div>
+
+    <div class="card service-card">
+      <img src="service-cloud.png" alt="Cloud & Infrastructure Icon">
+      <h3>Cloud & Infrastructure Transformation</h3>
+      <p>Leading Azure, AWS and enterprise infrastructure programmes improving scalability and resilience.</p>
+    </div>
+
   </div>
 
-  <div class="card service-card">
-    <img src="service-cloud.png" alt="Cloud & Infrastructure Icon">
-    <h3>Cloud & Infrastructure Transformation</h3>
-    <p>Leading Azure, AWS and enterprise infrastructure programmes improving scalability and resilience.</p>
+  <!-- CASE STUDIES -->
+  <h2>Programme Case Studies</h2>
+  <div class="grid">
+
+    <div class="card service-card">
+      <img src="case-nhs-cyber.png" alt="NHS Cyber Programme Icon">
+      <h3>NHS England Cyber Security Programme</h3>
+      <p>Delivered CAF-aligned cyber security uplift implementing MFA, CyberArk, Splunk and Azure security controls.</p>
+      <p><b>Outcome:</b> Improved national cyber resilience and strengthened security posture.</p>
+    </div>
+
+    <div class="card service-card">
+      <img src="case-global-workplace.png" alt="Global Workplace Transformation Icon">
+      <h3>Global Workplace Transformation</h3>
+      <p>Led Windows 10/11 transformation across 126,000 devices in 42 countries.</p>
+      <p><b>Outcome:</b> Delivered a secure, modern global workplace environment.</p>
+    </div>
+
+    <div class="card service-card">
+      <img src="case-enterprise-cloud.png" alt="Enterprise Cloud Transformation Icon">
+      <h3>Enterprise Cloud Transformation</h3>
+      <p>Delivered Azure and AWS programmes across global organisations.</p>
+      <p><b>Outcome:</b> Improved scalability, resilience and reduced operational cost.</p>
+    </div>
+
   </div>
 
-</div>
+  <!-- CTA -->
+  <div class="card" style="text-align:center; padding:30px;">
+    <h2>Ready to Deliver Your Programme Successfully?</h2>
+    <p>Get experienced, hands-on support to ensure your programme delivers.</p>
 
-<!-- CASE STUDIES -->
-<h2>Programme Case Studies</h2>
-<div class="grid">
+    <div class="button-group">
+      <a href="calendar.html" class="brand-btn">Book a Free Consultation</a>
+      <a href="contact.html" class="brand-btn">Contact Now</a>
+    </div>
 
-  <div class="card service-card">
-    <img src="case-nhs-cyber.png" alt="NHS Cyber Programme Icon" style="width:70px; display:block; margin:0 0 10px 0;">
-    <h3>NHS England Cyber Security Programme</h3>
-    <p>Delivered CAF-aligned cyber security uplift implementing MFA, CyberArk, Splunk and Azure security controls.</p>
-    <p><b>Outcome:</b> Improved national cyber resilience and strengthened security posture.</p>
+    <p style="margin-top:10px;">No obligation — just practical advice.</p>
   </div>
 
-  <div class="card service-card">
-    <img src="case-global-workplace.png" alt="Global Workplace Transformation Icon" style="width:70px; display:block; margin:0 0 10px 0;">
-    <h3>Global Workplace Transformation</h3>
-    <p>Led Windows 10/11 transformation across 126,000 devices in 42 countries.</p>
-    <p><b>Outcome:</b> Delivered a secure, modern global workplace environment.</p>
+  <!-- CONTACT -->
+  <h2>Contact</h2>
+  <div class="card">
+    <p>Email: timwilliams07@outlook.com</p>
+    <p>Phone: 07801 453322</p>
+
+    <p>
+      <a href="https://www.linkedin.com/in/timwilliams77" target="_blank"
+         style="text-decoration:none; color:#0A66C2; font-weight:600;">
+        LinkedIn Profile
+      </a>
+    </p>
   </div>
 
-  <div class="card service-card">
-    <img src="case-enterprise-cloud.png" alt="Enterprise Cloud Transformation Icon" style="width:70px; display:block; margin:0 0 10px 0;">
-    <h3>Enterprise Cloud Transformation</h3>
-    <p>Delivered Azure and AWS programmes across global organisations.</p>
-    <p><b>Outcome:</b> Improved scalability, resilience and reduced operational cost.</p>
-  </div>
-
-</div>
-
-<!-- WHY ORGANISATIONS WORK WITH ME -->
-<h2>Why Organisations Work With Me</h2>
-<div class="grid">
-
-  <div class="card service-card">
-    <img src="trust-experience.png" alt="Experience Icon" style="width:70px; display:block; margin:0 0 10px 0;">
-    <h3>30+ Years of Experience</h3>
-    <p>Real-world programme delivery across NHS, Defence, and enterprise organisations.</p>
-  </div>
-
-  <div class="card service-card">
-    <img src="trust-sc-cleared.png" alt="SC Cleared Icon" style="width:70px; display:block; margin:0 0 10px 0;">
-    <h3>SC Cleared</h3>
-    <p>Trusted to lead high-security programmes with full clearance and compliance.</p>
-  </div>
-
-  <div class="card service-card">
-    <img src="trust-leadership.png" alt="Hands-on Leadership Icon" style="width:70px; display:block; margin:0 0 10px 0;">
-    <h3>Hands-on Leadership</h3>
-    <p>Active engagement and delivery ownership — not just advisory oversight.</p>
-  </div>
-
-  <div class="card service-card">
-    <img src="trust-proven-delivery.png" alt="Proven Delivery Icon" style="width:70px; display:block; margin:0 0 10px 0;">
-    <h3>Proven Delivery</h3>
-    <p>Consistent success stabilising and delivering complex, high-risk programmes.</p>
-  </div>
-
-</div>
-
-<!-- CONSULTING EXPERTISE -->
-<h2>Consulting Expertise</h2>
-<div class="grid">
-
-  <div class="card service-card">
-    <img src="expertise-cyber.png" alt="Cyber Security Icon">
-    <h3>Cyber Security</h3>
-    <p>CAF, IAM, MFA, CyberArk, Splunk.</p>
-  </div>
-
-  <div class="card service-card">
-    <img src="expertise-cloud.png" alt="Cloud Platforms Icon">
-    <h3>Cloud Platforms</h3>
-    <p>Azure, AWS, Entra, Intune.</p>
-  </div>
-
-  <div class="card service-card">
-    <img src="expertise-workplace.png" alt="Workplace Transformation Icon">
-    <h3>Workplace Transformation</h3>
-    <p>Global Windows migrations and collaboration platforms.</p>
-  </div>
-
-  <div class="card service-card">
-    <img src="expertise-pmo.png" alt="Governance & PMO Icon">
-    <h3>Governance & PMO</h3>
-    <p>RAID, financial control and programme assurance.</p>
-  </div>
-
-</div>
-
-<!-- CTA -->
-<div class="card" style="text-align:center; padding:30px;">
-  <h2>Ready to Deliver Your Programme Successfully?</h2>
-  <p>Get experienced, hands-on support to ensure your programme delivers.</p>
-
-  <div class="button-group">
-    <a href="calendar.html" class="brand-btn">Book a Free Consultation</a>
-    <a href="contact.html" class="brand-btn">Contact Now</a>
-  </div>
-
-  <p style="margin-top:10px;">No obligation — just practical advice.</p>
-</div>
-
-<!-- CONTACT -->
-<h2>Contact</h2>
-<div class="card">
-  <p>Email: timwilliams07@outlook.com</p>
-  <p>Phone: 07801 453322</p>
-
-  <p>
-    <a href="https://www.linkedin.com/in/timwilliams77" target="_blank"
-       style="text-decoration:none; color:#0A66C2; font-weight:600;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-           style="vertical-align:middle; margin-right:6px;">
-        <rect width="24" height="24" rx="4" fill="#0A66C2"/>
-        <path fill="#FFFFFF"
-              d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v16h-4V8zm7.5 0h3.8v2.2h.1c.5-1 1.8-2.2 3.9-2.2 4.2 0 5 2.8 5 6.5V24h-4v-8.2c0-2 0-4.5-2.8-4.5-2.8 0-3.2 2.2-3.2 4.3V24h-4V8z"
-              transform="translate(4 0) scale(0.7)"/>
-      </svg>
-      Tim Williams
-    </a>
-  </p>
-</div>
-</div> <!-- end .container -->
+</div><!-- end container -->
 
 <!-- FLOATING BUTTONS -->
 <a href="calendar.html" class="fab fab-booking">📅</a>
@@ -421,4 +320,3 @@ fetch("footer.html")
 
 </body>
 </html>
-

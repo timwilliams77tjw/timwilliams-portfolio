@@ -140,14 +140,18 @@ body.page-certifications {
 <!-- HEADER -->
 <div id="header"></div>
 
-<script src="global.js"></script>
-
 <script>
 fetch("header-standard.html")
-.then(r => r.text())
-.then(h => {
+  .then(r => r.text())
+  .then(h => {
     document.getElementById("header").innerHTML = h;
-    initGlobal();
+
+    const s = document.createElement("script");
+    s.src = "header-standard.js?v=1";
+    document.body.appendChild(s);
+  });
+</script>
+<script>
 
     // COLLAPSIBLE SECTIONS
     document.querySelectorAll(".category-header").forEach(header => {

@@ -387,4 +387,60 @@
 .nav-item.open > .mega-menu {
   display: flex;
 }
+  /* === FORCE MOBILE NAV TO ONE ROW === */
+@media (max-width: 700px) {
+
+  .hero-buttons {
+    margin-top: 20px !important; /* spacing under profile */
+  }
+
+  .nav-menu {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .nav-menu::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .nav-item {
+    flex: 0 0 auto !important;
+  }
+
+  /* Remove pill styling on mobile */
+  .brand-btn {
+    border-radius: 6px !important;
+    border: 1px solid rgba(255,255,255,0.4) !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    background: rgba(255,255,255,0.15) !important;
+  }
+
+  /* Submenu full width under tapped item */
+  .mega-menu {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    margin-top: 4px !important;
+  }
+
+  .mega-column {
+    min-width: 100% !important;
+  }
+}
+
+/* === FORCE SUBMENU TO SHOW WHEN OPEN === */
+.nav-item.open > .mega-menu {
+  display: flex !important;
+}
+
 </style>

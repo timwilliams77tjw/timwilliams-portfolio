@@ -150,15 +150,6 @@ fetch("header-standard.html")
     initGlobal();
 
     // COLLAPSIBLE SECTIONS
-    document.querySelectorAll(".category-header").forEach(header => {
-        header.addEventListener("click", () => {
-            const section = header.parentElement;
-            const isOpen = section.classList.contains("open");
-
-            document.querySelectorAll(".category-section").forEach(sec => {
-                sec.classList.remove("open");
-                sec.querySelector(".category-toggle").textContent = "+";
-            });
 
             if (!isOpen) {
                 section.classList.add("open");

@@ -301,6 +301,14 @@ function initHeaderNav() {
   const icon = document.querySelector("#header #searchIcon");
   const input = document.querySelector("#header #siteSearchInput");
   const resultsBox = document.querySelector("#header #searchResults");
+  const darkHeader = document.querySelector("#header #darkToggleHeader");
+if (darkHeader) {
+  darkHeader.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("tw_dark", document.body.classList.contains("dark-mode") ? "1" : "0");
+  });
+}
+
 
   if (icon && input) {
     icon.addEventListener("click", () => {

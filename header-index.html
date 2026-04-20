@@ -346,4 +346,63 @@
 .nav-item.open > .mega-menu {
   display: flex !important;
 }
+  /* === FINAL BUTTON + SPACING FIXES (MATCHES BRAND STORY PAGE) === */
+
+/* Applies to ALL devices */
+.brand-btn {
+  border-radius: 6px !important; /* square-ish corners */
+  border: 1px solid rgba(255,255,255,0.6) !important;
+  padding: 8px 14px !important;
+  background: transparent !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: white !important;
+}
+
+/* Fix spacing under profile image */
+.hero-buttons {
+  margin-top: 32px !important;
+}
+
+/* Mobile: keep scroll but same button style */
+@media (max-width: 700px) {
+  .nav-menu {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 8px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .nav-menu::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .nav-item {
+    flex: 0 0 auto !important;
+  }
+
+  /* Submenu full width */
+  .mega-menu {
+    position: static !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    margin-top: 4px !important;
+    display: none !important;
+  }
+
+  .mega-column {
+    min-width: 100% !important;
+  }
+}
+
+/* Show submenu when JS adds .open */
+.nav-item.open > .mega-menu {
+  display: flex !important;
+}
+
 </style>

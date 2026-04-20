@@ -254,7 +254,7 @@ line-height: 1.3;
 </head>
 
 <body>
-  <div id="header"></div>
+<div id="header"></div>
 
 <script>
 function initHeaderNav() {
@@ -322,22 +322,16 @@ fetch("header-index.html")
   .then(h => {
     document.getElementById("header").innerHTML = h;
 
-    // Wait for DOM to update before initialising nav
-    requestAnimationFrame(() => {
+    // Load header JS AFTER header is inserted
+    const script = document.createElement("script");
+    script.src = "header-index.js";
+    script.onload = () => {
       initGlobal();
       initHeaderNav();
-    });
+    };
+    document.body.appendChild(script);
   });
-  const script = document.createElement("script");
-script.src = "header-index.js";
-script.onload = () => {
-  initGlobal();
-  initHeaderNav();
-};
-document.body.appendChild(script);
-
 </script>
-
 
 
 <!-- STICKY BAR -->

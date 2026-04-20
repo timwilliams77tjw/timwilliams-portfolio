@@ -328,6 +328,14 @@ fetch("header-index.html")
       initHeaderNav();
     });
   });
+  const script = document.createElement("script");
+script.src = "header-index.js";
+script.onload = () => {
+  initGlobal();
+  initHeaderNav();
+};
+document.body.appendChild(script);
+
 </script>
 
 

@@ -129,17 +129,53 @@ body.page-certifications {
 <!-- HEADER -->
 <div id="header"></div>
 
+<script src="global.js"></script>
+
 <script>
 fetch("header-standard.html")
-  .then(r => r.text())
-  .then(h => {
+.then(r => r.text())
+.then(h => {
     document.getElementById("header").innerHTML = h;
+    initGlobal();
 
-    const s = document.createElement("script");
-    s.src = "header-standard.js?v=1";
-    document.body.appendChild(s);
-  });
+    // COLLAPSIBLE SECTIONS
+    document.querySelectorAll(".category-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const section = header.parentElement;
+            const isOpen = section.classList.contains("open");
+
+            document.querySelectorAll(".category-section").forEach(sec => {
+                sec.classList.remove("open");
+                sec.querySelector(".category-toggle").textContent = "+";
+            });
+
+            if (!isOpen) {
+                section.classList.add("open");
+                section.querySelector(".category-toggle").textContent = "–";
+            }
+        });
+    });
+
+    // COPY BUTTONS
+    document.addEventListener("click", function(e) {
+        if (e.target.closest(".copy-btn")) {
+            const btn = e.target.closest(".copy-btn");
+            const link = btn.getAttribute("data-link");
+            navigator.clipboard.writeText(link);
+            showToast("Link copied!");
+            trackEvent("copy_link", link);
+        }
+    });
+
+    // OUTBOUND CLICK TRACKING
+    document.querySelectorAll(".website-card a").forEach(link => {
+        link.addEventListener("click", () => {
+            trackEvent("outbound_click", link.href);
+        });
+    });
+});
 </script>
+
 
 
 

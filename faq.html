@@ -108,17 +108,23 @@
 <div id="header"></div>
 
 <script>
-fetch("header-standard.html?v=3")
-
+fetch("header-standard.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header").innerHTML = h;
 
+    // Load header JS
     const s = document.createElement("script");
-s.src = "header-standard.js?v=3";
-
+    s.src = "header-standard.js?v=1";
     document.body.appendChild(s);
+
+    // Load header CSS AFTER injection (Safari fix)
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = "header.css?v=10";
+    document.head.appendChild(css);
   });
+
 </script>
 
 

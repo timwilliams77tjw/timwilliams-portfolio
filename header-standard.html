@@ -308,17 +308,6 @@
 /* === MOBILE LAYOUT: iPHONE & SMALL SCREENS === */
 @media (max-width: 700px) {
 
-  /* Make sure header respects device width */
-  .hero-banner,
-  .hero-content,
-  .left-column {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    overflow-x: visible !important;
-  }
-
-  /* NAV CONTAINER — one row + scroll */
   .nav-menu {
     display: flex !important;
     flex-direction: row !important;
@@ -329,22 +318,17 @@
     -webkit-overflow-scrolling: touch !important;
     gap: 8px !important;
     padding-bottom: 6px !important;
-    margin-top: 10px !important; /* gap under hero text */
+    margin-top: 10px !important;
   }
 
-  .nav-menu::-webkit-scrollbar {
-    display: none !important;
-  }
+  .nav-menu::-webkit-scrollbar { display: none !important; }
 
-  /* NAV ITEMS — prevent wrapping */
   .nav-item {
     flex: 0 0 auto !important;
-    display: inline-flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
+    display: block !important;
+    width: auto !important;
   }
 
-  /* BUTTONS — rounded, consistent */
   .nav-btn {
     display: inline-block !important;
     border-radius: 6px !important;
@@ -357,11 +341,8 @@
     white-space: nowrap !important;
   }
 
-  /* SUBMENU — full width under tapped item */
   .mega-menu {
     position: static !important;
-    top: auto !important;
-    left: auto !important;
     width: 100% !important;
     flex-direction: column !important;
     gap: 12px !important;

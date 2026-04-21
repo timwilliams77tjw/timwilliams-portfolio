@@ -315,8 +315,9 @@
 /* === FINAL iPHONE FIX: FORCE ONE-ROW SCROLLING NAV (OVERRIDES GLOBAL CSS) === */
 @media (max-width: 700px) {
 
-  /* NAV CONTAINER — force horizontal scroll */
+  /* Reset ALL global styles */
   .nav-menu {
+    all: unset !important;
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
@@ -330,19 +331,14 @@
     min-width: 100% !important;
   }
 
+  .nav-menu::-webkit-scrollbar { display: none !important; }
 
-  .nav-menu::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  /* NAV ITEMS — prevent wrapping */
   .nav-item {
     flex: 0 0 auto !important;
     display: inline-flex !important;
     align-items: center !important;
   }
 
-  /* BUTTONS — correct mobile style */
   .nav-btn {
     display: inline-block !important;
     border-radius: 6px !important;
@@ -355,7 +351,6 @@
     white-space: nowrap !important;
   }
 
-  /* SUBMENU — mobile tap-to-open */
   .mega-menu {
     position: static !important;
     width: 100% !important;
@@ -370,4 +365,5 @@
     display: flex !important;
   }
 }
+
 </style>

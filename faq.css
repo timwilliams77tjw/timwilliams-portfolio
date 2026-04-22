@@ -1,109 +1,94 @@
 /* ============================================================
-   FAQ PAGE — PAGE‑SPECIFIC CSS ONLY
-   (No prefixes needed — page is already isolated)
+   FAQ PAGE — PAGE‑SPECIFIC CSS (EXTRACTED EXACTLY AS‑IS)
    ============================================================ */
 
-/* FAQ TITLE */
-.faq-title {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 28px;
-    font-weight: 700;
-    color: #0a2540;
+/* PAGE BACKGROUND + TEXT (inherits variables from global-shared.css) */
+body.page-certifications {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-body.dark-mode .faq-title {
-    color: #e5e7eb;
-}
-
-/* ACCORDION WRAPPER */
-.faq-accordion {
-    max-width: 900px;
+/* PAGE CONTAINER */
+.page-container {
+    max-width: 960px;
     margin: 0 auto;
+    padding: 2rem 1.5rem;
 }
 
-/* ACCORDION ITEM */
-.faq-item {
-    background: white;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    overflow: hidden;
-    transition: background .3s ease;
+/* HERO SECTION */
+.hero-section {
+    margin-bottom: 2rem;
 }
 
-body.dark-mode .faq-item {
-    background: #1f2937;
+.hero-section h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
 }
 
-/* QUESTION BUTTON */
-.faq-question {
+.hero-section p {
+    font-size: 1.1rem;
+    color: var(--text-sub);
+    max-width: 720px;
+}
+
+/* SEARCH BAR */
+.search-bar-local {
+    margin: 20px 0 30px;
+}
+
+#faq-search {
     width: 100%;
-    padding: 18px 20px;
-    text-align: left;
-    background: none;
-    border: none;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    color: #0a2540;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 12px 16px;
+    border-radius: 50px;
+    border: 2px solid var(--text-main);
+    background: var(--card-bg);
+    font-size: 15px;
+    color: var(--text-main);
+    outline: none;
+    transition: 0.25s ease;
 }
 
-body.dark-mode .faq-question {
-    color: #e5e7eb;
+#faq-search::placeholder {
+    color: #6b7280;
 }
 
-/* ICON ROTATION */
-.faq-question .icon {
-    transition: transform .3s ease;
+#faq-search:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,120,255,0.15);
 }
 
-.faq-item.open .faq-question .icon {
-    transform: rotate(45deg);
+/* FAQ CARDS */
+.faq-card {
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
 }
 
-/* ANSWER PANEL */
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 20px;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #4b5563;
-    transition: max-height .35s ease, padding .35s ease;
+.faq-card h3 {
+    margin-top: 0;
+    color: var(--text-main);
+    font-size: 1.1rem;
 }
 
-.faq-item.open .faq-answer {
-    padding: 15px 20px 20px;
-    max-height: 500px; /* enough for long answers */
+.faq-card p {
+    margin-bottom: 0;
+    color: var(--text-sub);
+    line-height: 1.5;
 }
 
-body.dark-mode .faq-answer {
-    color: #d1d5db;
+/* CTA SECTION */
+.cta-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
 }
 
-/* LINKS INSIDE ANSWERS */
-.faq-answer a {
-    color: var(--accent);
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.faq-answer a:hover {
-    text-decoration: underline;
-}
-
-/* MOBILE SPACING */
-@media (max-width: 600px) {
-    .faq-question {
-        font-size: 17px;
-        padding: 16px 18px;
-    }
-
-    .faq-answer {
-        font-size: 15px;
-    }
+/* FOLLOW BUTTON OVERRIDE */
+.sticky-follow {
+    background: var(--accent);
 }

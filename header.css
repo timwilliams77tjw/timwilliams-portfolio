@@ -200,3 +200,31 @@
     display: flex !important;
   }
 }
+/* Force footer logo to correct size on all pages */
+footer img {
+    max-width: 90px !important;
+    height: auto !important;
+}
+/* Force mobile nav scroll on all non-index pages */
+@media (max-width: 700px) {
+    .nav-menu {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 8px !important;
+        padding-bottom: 6px !important;
+        width: 100% !important;
+    }
+
+    .nav-menu::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .nav-item {
+        flex: 0 0 auto !important;
+    }
+}

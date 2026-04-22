@@ -150,6 +150,30 @@
 @media (max-width: 700px) {
 
   /* One-row horizontal scroll */
+  .button-group.nav-menu {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 8px !important;
+    padding-bottom: 6px !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+  }
+
+  .button-group.nav-menu::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .button-group.nav-menu .nav-item {
+    flex: 0 0 auto !important;
+    display: block !important;
+    width: auto !important;
+  }
+
   .nav-menu {
     display: flex !important;
     flex-direction: row !important;
@@ -165,14 +189,12 @@
 
   .nav-menu::-webkit-scrollbar { display: none !important; }
 
-  /* Each item is a block so submenu stacks correctly */
   .nav-item {
     flex: 0 0 auto !important;
     display: block !important;
     width: auto !important;
   }
 
-  /* Rounded buttons restored */
   .nav-btn {
     display: inline-block !important;
     border-radius: 6px !important;
@@ -185,7 +207,6 @@
     white-space: nowrap !important;
   }
 
-  /* Submenu appears UNDER the button, full width */
   .mega-menu {
     position: static !important;
     width: 100% !important;
@@ -200,59 +221,16 @@
     display: flex !important;
   }
 }
-/* FINAL OVERRIDES */
-footer .footer-logo img,
-footer img[alt*="Logo"] {
-    max-width: 90px !important;
-    height: auto !important;
-}
 
-@media (max-width: 700px) {
-    .nav-menu {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        white-space: nowrap !important;
-        -webkit-overflow-scrolling: touch !important;
-        gap: 8px !important;
-        padding-bottom: 6px !important;
-    }
-    .nav-item {
-        flex: 0 0 auto !important;
-    }
-}
-/* ===========================================================
-   FIX BUTTON-GROUP BREAKING MOBILE NAV
-   =========================================================== */
-
-@media (max-width: 700px) {
-    .button-group.nav-menu {
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        white-space: nowrap !important;
-        -webkit-overflow-scrolling: touch !important;
-        gap: 8px !important;
-        padding-bottom: 6px !important;
-        width: 100% !important;
-    }
-
-    .button-group.nav-menu::-webkit-scrollbar {
-        display: none !important;
-    }
-
-    .button-group.nav-menu .nav-item {
-        flex: 0 0 auto !important;
-        display: block !important;
-        width: auto !important;
-    }
-}
+/* FINAL FOOTER LOGO OVERRIDES */
 footer .footer-logo,
 footer .footer-logo img {
     max-width: 90px !important;
     width: 90px !important;
     height: auto !important;
     flex: 0 0 auto !important;
+}
+footer img[alt*="Logo"] {
+    max-width: 90px !important;
+    height: auto !important;
 }

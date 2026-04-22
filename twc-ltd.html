@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>TWC Ltd — Brand Story | Tim Williams Consulting Ltd</title>
-
 <meta name="description" content="TWC Ltd (Tim Williams Consulting Ltd) is an independent consultancy delivering senior-level programme leadership across cyber security, cloud transformation, digital workplace and enterprise infrastructure.">
 
 <!-- GLOBAL CSS -->
-<link rel="stylesheet" href="certifications.css?v=1">
-<link rel="stylesheet" href="header.css?v=999">
+<link rel="stylesheet" href="certifications-new.css">
+<link rel="stylesheet" href="header-new.css">
 
 <style>
 /* PAGE WRAPPER – same pattern as insights */
@@ -82,13 +82,14 @@ body.dark-mode {
 <body class="page-certifications">
 
 <!-- HEADER -->
-<div id="header"></div>
+<div id="header-placeholder"></div>
 
 <script>
 fetch("header-standard.html?v=20")
   .then(r => r.text())
   .then(h => {
-    document.getElementById("header").innerHTML = h;
+    const container = document.getElementById("header-placeholder");
+    container.innerHTML = h;
 
     const s = document.createElement("script");
     s.src = "header-standard.js?v=20";

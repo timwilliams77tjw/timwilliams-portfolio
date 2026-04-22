@@ -1,0 +1,228 @@
+/* ============================================================
+   SHARED HEADER CSS (FAQ + TWC ONLY)
+   Isolated using .page-certifications
+   ============================================================ */
+
+/* HEADER WRAPPER */
+.page-certifications #header {
+    width: 100%;
+    background: #0a2540;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 9999;
+}
+
+/* HERO SECTION */
+.page-certifications .hero {
+    background: #0a2540;
+    color: white;
+    padding: 40px 20px;
+    text-align: left;
+}
+
+.page-certifications .hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.page-certifications .hero-text {
+    flex: 1;
+    min-width: 260px;
+}
+
+.page-certifications .hero-profile {
+    flex: 0 0 220px;
+    text-align: center;
+}
+
+.page-certifications .hero-profile img {
+    width: 220px;
+    height: 220px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+/* MOBILE HERO FIXES */
+@media (max-width: 700px) {
+    .page-certifications .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .page-certifications .hero-profile img {
+        margin-top: 20px;
+    }
+}
+
+/* ============================================================
+   NAVIGATION BAR
+   ============================================================ */
+
+.page-certifications nav {
+    background: #0a2540;
+    padding: 10px 20px;
+}
+
+.page-certifications .nav-menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+/* NAV ITEMS */
+.page-certifications .nav-item {
+    position: relative;
+}
+
+.page-certifications .nav-item > a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 4px;
+    display: inline-block;
+}
+
+/* ACTIVE LINK */
+.page-certifications .nav-item > a.active {
+    color: var(--accent);
+}
+
+/* ============================================================
+   MEGA MENU (DESKTOP)
+   ============================================================ */
+
+.page-certifications .mega-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    color: #0a2540;
+    padding: 20px;
+    min-width: 260px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+}
+
+.page-certifications .nav-item:hover > .mega-menu {
+    display: flex;
+}
+
+/* iPad hover fix */
+@media (min-width: 701px) {
+    .page-certifications .nav-item:hover > .mega-menu {
+        display: flex;
+    }
+}
+
+/* ============================================================
+   MOBILE NAV (HORIZONTAL SCROLL)
+   ============================================================ */
+
+@media (max-width: 700px) {
+    .page-certifications .nav-menu {
+        overflow-x: auto;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        gap: 12px;
+        padding-bottom: 6px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .page-certifications .nav-item {
+        flex: 0 0 auto;
+    }
+
+    .page-certifications .nav-item.open > .mega-menu {
+        display: block;
+        position: static;
+        background: #ffffff;
+        color: #0a2540;
+        margin-top: 10px;
+        border-radius: 12px;
+    }
+}
+
+/* ============================================================
+   SEARCH BAR
+   ============================================================ */
+
+.page-certifications .search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.page-certifications #siteSearchInput {
+    width: 0;
+    opacity: 0;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    transition: width .3s ease, opacity .3s ease;
+}
+
+.page-certifications #siteSearchInput.open {
+    width: 180px;
+    opacity: 1;
+}
+
+.page-certifications #searchIcon svg {
+    display: block;
+    cursor: pointer;
+}
+
+/* SEARCH RESULTS BOX */
+.page-certifications #searchResults {
+    background: white;
+    color: #0a2540;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 260px;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 9999;
+}
+
+/* ============================================================
+   DARK MODE BUTTON (HEADER)
+   ============================================================ */
+
+.page-certifications #darkToggleHeader {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* ============================================================
+   MOBILE HEADER FIXES
+   ============================================================ */
+
+@media (max-width: 700px) {
+    .page-certifications #header {
+        text-align: center;
+    }
+
+    .page-certifications .search-wrapper {
+        justify-content: center;
+        margin-left: 0;
+    }
+}

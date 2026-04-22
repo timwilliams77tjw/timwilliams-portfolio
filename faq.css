@@ -1,0 +1,109 @@
+/* ============================================================
+   FAQ PAGE — PAGE‑SPECIFIC CSS ONLY
+   (No prefixes needed — page is already isolated)
+   ============================================================ */
+
+/* FAQ TITLE */
+.faq-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #0a2540;
+}
+
+body.dark-mode .faq-title {
+    color: #e5e7eb;
+}
+
+/* ACCORDION WRAPPER */
+.faq-accordion {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ACCORDION ITEM */
+.faq-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: background .3s ease;
+}
+
+body.dark-mode .faq-item {
+    background: #1f2937;
+}
+
+/* QUESTION BUTTON */
+.faq-question {
+    width: 100%;
+    padding: 18px 20px;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #0a2540;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.dark-mode .faq-question {
+    color: #e5e7eb;
+}
+
+/* ICON ROTATION */
+.faq-question .icon {
+    transition: transform .3s ease;
+}
+
+.faq-item.open .faq-question .icon {
+    transform: rotate(45deg);
+}
+
+/* ANSWER PANEL */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4b5563;
+    transition: max-height .35s ease, padding .35s ease;
+}
+
+.faq-item.open .faq-answer {
+    padding: 15px 20px 20px;
+    max-height: 500px; /* enough for long answers */
+}
+
+body.dark-mode .faq-answer {
+    color: #d1d5db;
+}
+
+/* LINKS INSIDE ANSWERS */
+.faq-answer a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.faq-answer a:hover {
+    text-decoration: underline;
+}
+
+/* MOBILE SPACING */
+@media (max-width: 600px) {
+    .faq-question {
+        font-size: 17px;
+        padding: 16px 18px;
+    }
+
+    .faq-answer {
+        font-size: 15px;
+    }
+}

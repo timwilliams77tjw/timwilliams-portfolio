@@ -239,3 +239,42 @@ footer img,
         width: auto !important;
     }
 }
+/* ===========================================================
+   FINAL OVERRIDES — STRONG SPECIFICITY
+   =========================================================== */
+
+/* Footer logo override — beats certifications.css */
+body footer img,
+body .footer img,
+body .footer-logo img {
+    max-width: 90px !important;
+    height: auto !important;
+}
+
+/* Mobile nav scroll override — beats certifications.css */
+@media (max-width: 700px) {
+
+    body .nav-menu {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 8px !important;
+        padding-bottom: 6px !important;
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+
+    body .nav-menu::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    body .nav-item {
+        flex: 0 0 auto !important;
+        display: block !important;
+        width: auto !important;
+    }
+}

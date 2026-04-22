@@ -429,9 +429,20 @@ footer .footer-qr img {
     height: auto;
     display: block;
 }
-.footer-logo img,
-.footer img[alt*="Logo"],
-footer img[alt*="Logo"] {
-  max-width: 120px;
-  height: auto;
+footer img[alt*="Logo"],
+.footer-logo img {
+    max-width: 90px;
+    height: auto;
+}
+footer {
+    display: flex !important;
+    justify-content: space-between !important;
+    text-align: left !important;
+}
+
+@media (max-width: 600px) {
+    footer {
+        flex-direction: column;
+        text-align: center !important;
+    }
 }

@@ -155,8 +155,7 @@
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
-overflow-y: visible !important;
-
+    overflow-y: visible !important; /* FIXED */
     white-space: nowrap !important;
     -webkit-overflow-scrolling: touch !important;
     gap: 8px !important;
@@ -201,36 +200,22 @@ overflow-y: visible !important;
     display: flex !important;
   }
 }
-/* FINAL OVERRIDES */
-footer .footer-logo img,
-footer img[alt*="Logo"] {
-    max-width: 90px !important;
-    height: auto !important;
+
+/* ===========================
+   FINAL OVERRIDES (ALWAYS WIN)
+=========================== */
+
+/* Footer logo sizing */
+footer img[src*="logo"] {
+  max-width: 90px !important;
+  height: auto !important;
 }
 
+/* Mobile footer alignment */
 @media (max-width: 700px) {
-    .nav-menu {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        white-space: nowrap !important;
-        -webkit-overflow-scrolling: touch !important;
-        gap: 8px !important;
-        padding-bottom: 6px !important;
-    }
-    .nav-item {
-        flex: 0 0 auto !important;
-    }
-}
-@media (max-width: 700px) {
-    footer {
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-    }
-}
-footer img[src*="logo"] {
-    max-width: 90px !important;
-    height: auto !important;
+  footer {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
 }

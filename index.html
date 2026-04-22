@@ -196,17 +196,26 @@ border: none;
 }
 
 /* FOOTER */
+/* INDEX FOOTER FIX */
 footer {
-background: #0a2540;
-color: white;
-padding: 30px;
-margin-top: 60px;
-display: flex;
-justify-content: space-between;
-align-items: center;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    text-align: left !important;
 }
 
-.footer-logo img { width: 60px; }
+footer .footer-logo img {
+    max-width: 90px !important;
+    height: auto !important;
+}
+
+@media (max-width: 600px) {
+    footer {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+}
+
 
 .download-note {
 font-size: 12px;
@@ -272,18 +281,26 @@ line-height: 1.3;
     border-color: #0a66c2 !important;
 }
   /* INDEX-ONLY FOOTER FIX */
+/* INDEX FOOTER FIX */
 footer {
-    display: block !important;
-    text-align: center !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    text-align: left !important;
 }
 
 footer .footer-logo img {
     max-width: 90px !important;
-    width: 90px !important;
     height: auto !important;
-    margin: 0 auto !important;
-    display: block !important;
 }
+
+@media (max-width: 600px) {
+    footer {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+}
+
 
 /* iPhone-only: centre align card icons */
 @media (max-width: 600px) {

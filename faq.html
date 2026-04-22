@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>Frequently Asked Questions | Tim Williams Consulting Ltd</title>
 
-<!-- SHARED + PAGE CSS -->
+<!-- NEW MODULAR CSS -->
 <link rel="stylesheet" href="global-shared.css">
 <link rel="stylesheet" href="header-shared.css">
 <link rel="stylesheet" href="faq.css">
@@ -17,88 +17,88 @@
 <body class="page-certifications">
 
 <!-- HEADER -->
-<div id="header"></div>
+<div id="header-placeholder"></div>
 
 <script>
-fetch("header-standard.html")
+fetch("header-standard.html?v=20")
     .then(r => r.text())
     .then(h => {
-        document.getElementById("header").innerHTML = h;
+        const container = document.getElementById("header-placeholder");
+        container.innerHTML = h;
 
-        if (typeof initGlobal === "function") initGlobal();
-        if (typeof initHeaderNav === "function") initHeaderNav();
+        const s = document.createElement("script");
+        s.src = "header-standard.js?v=20";
+        document.body.appendChild(s);
     });
 </script>
 
-<!-- MAIN CONTENT -->
-<div class="container">
+<!-- PAGE CONTENT -->
+<main class="page-container">
 
-<h1 class="faq-title">Frequently Asked Questions</h1>
+    <section class="hero-section">
+        <h1>Frequently Asked Questions</h1>
+        <p>Quick answers to common questions about my services, experience and ways of working.</p>
+    </section>
 
-<div class="faq-accordion">
-
-    <!-- FAQ ITEM 1 -->
-    <div class="faq-item">
-        <button class="faq-question">
-            What types of programmes do you deliver?
-            <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-            <p>I deliver cyber security, cloud transformation, digital workplace, and enterprise infrastructure programmes across NHS, Defence and global organisations.</p>
-        </div>
+    <div class="search-bar-local">
+        <input type="text" id="faq-search" placeholder="Search FAQs…" />
     </div>
 
-    <!-- FAQ ITEM 2 -->
-    <div class="faq-item">
-        <button class="faq-question">
-            Do you work with high‑risk or failing programmes?
-            <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-            <p>Yes — I specialise in stabilising failing or high‑risk programmes and getting delivery back on track quickly and effectively.</p>
+    <div id="faq-list">
+
+        <div class="faq-card">
+            <h3>What industries do you specialise in?</h3>
+            <p>I specialise in public sector, healthcare, financial services, global enterprise and regulated environments.</p>
         </div>
+
+        <div class="faq-card">
+            <h3>Do you work on fixed‑price or day‑rate engagements?</h3>
+            <p>I offer both, depending on scope, delivery model and programme complexity.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>Do you support remote or hybrid delivery?</h3>
+            <p>Yes — I lead programmes across fully remote, hybrid and on‑site models.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>Can you support pre‑sales or bid work?</h3>
+            <p>Yes — I regularly support RFP responses, solution shaping, delivery planning and programme mobilisation.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>Are you available for short‑term advisory work?</h3>
+            <p>Yes — I provide advisory sessions, programme reviews and delivery assurance assessments.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>What size programmes do you typically lead?</h3>
+            <p>From £1m–£50m+ programmes, including cyber uplift, cloud transformation, modern workplace and service transition.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>Do you work with third‑party suppliers and MSPs?</h3>
+            <p>Yes — I regularly lead multi‑supplier delivery environments and manage complex vendor landscapes.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>Can you recover failing or challenged programmes?</h3>
+            <p>Yes — programme recovery and delivery assurance are core parts of my service offering.</p>
+        </div>
+
     </div>
 
-    <!-- FAQ ITEM 3 -->
-    <div class="faq-item">
-        <button class="faq-question">
-            Are you SC Cleared?
-            <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-            <p>Yes — I hold active SC Clearance and work across secure environments including NHS England and Defence.</p>
-        </div>
-    </div>
+    <section class="cta-section">
+        <h2>Still Have a Question?</h2>
+        <p>If you’d like to discuss your programme or request more details, feel free to reach out.</p>
+        <a href="/contact.html" class="btn">Get in Touch</a>
+    </section>
 
-    <!-- FAQ ITEM 4 -->
-    <div class="faq-item">
-        <button class="faq-question">
-            Do you offer short‑term or long‑term engagements?
-            <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-            <p>I offer flexible engagement models including short‑term recovery, long‑term programme leadership, and advisory support.</p>
-        </div>
-    </div>
-
-    <!-- FAQ ITEM 5 -->
-    <div class="faq-item">
-        <button class="faq-question">
-            How do we get started?
-            <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-            <p>You can book a free consultation or contact me directly to discuss your programme needs.</p>
-        </div>
-    </div>
-
-</div>
-
-</div>
+</main>
 
 <!-- FLOATING BUTTONS -->
-<a href="calendar.html" class="fab fab-booking">📅</a>
-<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
 <!-- FOOTER -->
 <div id="footer"></div>
@@ -109,14 +109,20 @@ fetch("footer.html")
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- FAQ ACCORDION JS -->
+<!-- FAQ SEARCH -->
 <script>
-document.querySelectorAll(".faq-question").forEach(btn => {
-    btn.addEventListener("click", () => {
-        const item = btn.parentElement;
-        item.classList.toggle("open");
+const faqSearch = document.getElementById("faq-search");
+
+if (faqSearch) {
+    faqSearch.addEventListener("input", () => {
+        const term = faqSearch.value.toLowerCase();
+
+        document.querySelectorAll(".faq-card").forEach(card => {
+            const text = card.innerText.toLowerCase();
+            card.style.display = text.includes(term) ? "" : "none";
+        });
     });
-});
+}
 </script>
 
 </body>

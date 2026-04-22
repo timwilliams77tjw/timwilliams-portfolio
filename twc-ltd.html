@@ -87,16 +87,17 @@
 <div id="header"></div>
 
 <script>
-fetch("header-standard.html")
+fetch("header-standard.html?v=20")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header").innerHTML = h;
 
     const s = document.createElement("script");
-    s.src = "header-standard.js?v=1";
+    s.src = "header-standard.js?v=20";
     document.body.appendChild(s);
   });
 </script>
+
 
 
 
@@ -209,22 +210,6 @@ fetch("header-standard.html")
         .then(h => document.getElementById("footer").innerHTML = h);
     </script>
 
-    <!-- DARK MODE (same as insights) -->
-    <script>
-    (function () {
-        const darkToggle = document.getElementById("darkToggle");
-        if (!darkToggle) return;
-        const body = document.body;
-        const storedMode = localStorage.getItem("tw_dark");
-        if (storedMode === "1") {
-            body.classList.add("dark-mode");
-        }
-        darkToggle.addEventListener("click", function () {
-            body.classList.toggle("dark-mode");
-            localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
-        });
-    })();
-    </script>
 
 </body>
 </html>

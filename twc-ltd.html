@@ -2,12 +2,14 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>TWC Ltd | Tim Williams Consulting Ltd</title>
+<title>TWC Ltd — Brand Story | Tim Williams Consulting Ltd</title>
 
-<!-- SHARED + PAGE CSS -->
+<meta name="description" content="TWC Ltd (Tim Williams Consulting Ltd) is an independent consultancy delivering senior-level programme leadership across cyber security, cloud transformation, digital workplace and enterprise infrastructure.">
+
+<!-- NEW MODULAR CSS -->
 <link rel="stylesheet" href="global-shared.css">
 <link rel="stylesheet" href="header-shared.css">
 <link rel="stylesheet" href="twc.css">
@@ -17,113 +19,126 @@
 <body class="page-certifications">
 
 <!-- HEADER -->
-<div id="header"></div>
+<div id="header-placeholder"></div>
 
 <script>
-fetch("header-standard.html")
+fetch("header-standard.html?v=20")
     .then(r => r.text())
     .then(h => {
-        document.getElementById("header").innerHTML = h;
+        const container = document.getElementById("header-placeholder");
+        container.innerHTML = h;
 
-        if (typeof initGlobal === "function") initGlobal();
-        if (typeof initHeaderNav === "function") initHeaderNav();
+        const s = document.createElement("script");
+        s.src = "header-standard.js?v=20";
+        document.body.appendChild(s);
     });
 </script>
 
-<!-- MAIN CONTENT -->
-<div class="container">
+<!-- PAGE CONTENT -->
+<main class="page-container">
 
-<h1 class="twc-title">Tim Williams Consulting Ltd (TWC Ltd)</h1>
-
-<div class="twc-section">
-
-    <h2>Who We Are</h2>
-    <div class="twc-card">
-        <p>TWC Ltd provides senior IT programme leadership across cyber security, cloud transformation, digital workplace and enterprise infrastructure programmes. With 30+ years of hands‑on delivery experience, we support organisations across NHS England, Defence and global enterprise environments.</p>
-    </div>
-
-    <h2>What We Deliver</h2>
-    <div class="twc-grid">
-
-        <div class="twc-card">
-            <img src="service-delivery.png" alt="Programme Delivery Icon">
-            <h3>Programme Delivery</h3>
-            <p>End‑to‑end leadership ensuring delivery on time, within budget and aligned to business outcomes.</p>
-        </div>
-
-        <div class="twc-card">
-            <img src="service-recovery.png" alt="Programme Recovery Icon">
-            <h3>Programme Recovery</h3>
-            <p>Stabilising failing or high‑risk programmes and restoring delivery confidence quickly.</p>
-        </div>
-
-        <div class="twc-card">
-            <img src="service-cyber.png" alt="Cyber Security Icon">
-            <h3>Cyber Security Transformation</h3>
-            <p>Delivering CAF, IAM, SIEM, MFA, CyberArk, Splunk and resilience programmes.</p>
-        </div>
-
-        <div class="twc-card">
-            <img src="service-cloud.png" alt="Cloud & Infrastructure Icon">
-            <h3>Cloud & Infrastructure</h3>
-            <p>Leading Azure, AWS and enterprise infrastructure programmes improving scalability and resilience.</p>
-        </div>
-
-    </div>
-
-    <h2>Why Organisations Choose TWC Ltd</h2>
-    <div class="twc-grid">
-
-        <div class="twc-card">
-            <img src="trust-experience.png" alt="Experience Icon">
-            <h3>30+ Years Experience</h3>
-            <p>Decades of real‑world delivery across NHS, Defence and enterprise organisations.</p>
-        </div>
-
-        <div class="twc-card">
-            <img src="trust-sc-cleared.png" alt="SC Cleared Icon">
-            <h3>SC Cleared</h3>
-            <p>Trusted to operate in secure and sensitive environments.</p>
-        </div>
-
-        <div class="twc-card">
-            <img src="trust-leadership.png" alt="Leadership Icon">
-            <h3>Hands‑on Leadership</h3>
-            <p>Active engagement and delivery ownership — not just advisory oversight.</p>
-        </div>
-
-        <div class="twc-card">
-            <img src="trust-proven-delivery.png" alt="Proven Delivery Icon">
-            <h3>Proven Delivery</h3>
-            <p>Consistent success stabilising and delivering complex, high‑risk programmes.</p>
-        </div>
-
-    </div>
-
-    <h2>Contact TWC Ltd</h2>
-    <div class="twc-card">
-        <p>Email: timwilliams07@outlook.com</p>
-        <p>Phone: 07801 453322</p>
+    <section class="hero-section">
+        <h1>TWC Ltd — Brand Story</h1>
         <p>
-            <a href="https://www.linkedin.com/in/timwilliams77" target="_blank"
-               style="text-decoration:none; color:#0A66C2; font-weight:600;">
-                Connect on LinkedIn
-            </a>
+            TWC Ltd (Tim Williams Consulting Ltd) is the independent consulting brand for senior-level programme leadership across cyber security, cloud transformation, digital workplace and enterprise infrastructure.
         </p>
-    </div>
+    </section>
 
-    <div class="twc-buttons">
-        <a href="calendar.html" class="brand-btn">Book a Free Consultation</a>
-        <a href="contact.html" class="brand-btn">Contact Now</a>
-    </div>
+    <section>
 
-</div>
+        <div class="card">
+            <h2>Who We Are</h2>
+            <p>
+                TWC Ltd is the registered business name for Tim Williams Consulting Ltd, a specialist consultancy
+                providing programme leadership, PMO governance and delivery assurance for complex technology
+                transformation programmes. The brand is built on a reputation for clarity, delivery discipline and
+                measurable outcomes.
+            </p>
+        </div>
 
-</div>
+        <div class="card">
+            <h2>What We Do</h2>
+            <ul>
+                <li>Cyber security uplift and CAF maturity improvement</li>
+                <li>Cloud transformation (Azure, AWS, Entra, Intune)</li>
+                <li>Enterprise infrastructure modernisation</li>
+                <li>Digital workplace transformation (Windows 10/11, Teams Rooms, global device estates)</li>
+                <li>Programme governance, PMO leadership and delivery assurance</li>
+                <li>Service transition and operational readiness</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Why the Brand Exists</h2>
+            <p>
+                The TWC Ltd brand was created to provide a clear, professional identity for consulting engagements
+                delivered by Tim Williams. While the consultancy is led by a single senior programme manager, the
+                TWC Ltd brand reflects a structured, outcome-driven approach aligned to enterprise delivery standards.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Registered Business Information</h2>
+            <p><strong>Registered Name:</strong> Tim Williams Consulting Ltd</p>
+            <p><strong>Trading Name:</strong> TWC Ltd</p>
+            <p><strong>Registered Address:</strong> 59 Beaumont Rd, Halesowen, B62 9HD</p>
+            <p><strong>Phone:</strong> 07801 453322</p>
+            <p><strong>Website:</strong> https://www.twc-ltd.uk</p>
+            <p><strong>LinkedIn:</strong>
+                <a href="https://www.linkedin.com/in/timwilliams77" target="_blank">
+                    linkedin.com/in/timwilliams77
+                </a>
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Brand Values</h2>
+            <ul>
+                <li>Delivery discipline</li>
+                <li>Transparency and governance</li>
+                <li>Technical credibility</li>
+                <li>Measurable outcomes</li>
+                <li>Enterprise-grade assurance</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Leadership</h2>
+            <p>
+                TWC Ltd is led by <strong>Tim Williams</strong>, an SC‑Cleared Senior IT Programme Manager with over
+                25 years’ experience delivering cyber security, cloud and enterprise transformation programmes across
+                global organisations.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Why Organisations Choose TWC Ltd</h2>
+            <ul>
+                <li>Proven delivery across NHS, Defence and global enterprises</li>
+                <li>Strong governance and PMO leadership</li>
+                <li>Deep technical understanding across cyber and cloud</li>
+                <li>Ability to stabilise failing programmes</li>
+                <li>Clear communication and stakeholder alignment</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Contact</h2>
+            <p>
+                For programme leadership, cyber transformation or enterprise delivery support, TWC Ltd provides
+                structured, outcome-driven consulting aligned to enterprise standards.
+            </p>
+            <p>Email: timwilliams07@outlook.com</p>
+            <p>Phone: 07801 453322</p>
+        </div>
+
+    </section>
+
+</main>
 
 <!-- FLOATING BUTTONS -->
-<a href="calendar.html" class="fab fab-booking">📅</a>
-<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
 <!-- FOOTER -->
 <div id="footer"></div>

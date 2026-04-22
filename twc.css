@@ -1,106 +1,69 @@
 /* ============================================================
-   TWC LTD PAGE — PAGE‑SPECIFIC CSS ONLY
-   (No prefixes needed — page is already isolated)
+   TWC LTD PAGE — PAGE‑SPECIFIC CSS (EXTRACTED EXACTLY AS‑IS)
    ============================================================ */
 
-/* PAGE TITLE */
-.twc-title {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 30px;
-    font-weight: 700;
-    color: #0a2540;
+/* PAGE WRAPPER */
+body.page-certifications {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-body.dark-mode .twc-title {
-    color: #e5e7eb;
+.page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
 }
 
-/* SECTION HEADINGS */
-.twc-section h2 {
-    font-size: 24px;
-    margin-top: 40px;
-    margin-bottom: 15px;
-    color: #0a2540;
+/* HERO SECTION */
+.hero-section {
+    margin-bottom: 2rem;
 }
 
-body.dark-mode .twc-section h2 {
-    color: #e5e7eb;
+.hero-section h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
 }
 
-/* CARD WRAPPER */
-.twc-card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    margin-bottom: 25px;
+.hero-section p {
+    font-size: 1.1rem;
+    color: var(--text-sub);
+    max-width: 720px;
 }
 
-body.dark-mode .twc-card {
-    background: #1f2937;
+/* CARD SYSTEM */
+.card {
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
 }
 
-/* ICONS */
-.twc-card img {
-    width: 70px;
-    height: 70px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 15px;
+.card h2 {
+    margin-top: 0;
+    color: var(--text-main);
 }
 
-/* TEXT */
-.twc-card p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #4b5563;
+.card p,
+.card ul {
+    color: var(--text-sub);
 }
 
-body.dark-mode .twc-card p {
-    color: #d1d5db;
+.card ul {
+    padding-left: 1.2rem;
 }
 
-/* LISTS */
-.twc-card ul {
-    padding-left: 20px;
-    margin: 0;
+/* FOLLOW BUTTON OVERRIDE */
+.sticky-follow {
+    background: var(--accent);
 }
 
-.twc-card ul li {
-    margin-bottom: 10px;
-    line-height: 1.6;
-}
-
-/* GRID LAYOUT */
-.twc-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-}
-
-/* CTA BUTTONS */
-.twc-buttons {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.twc-buttons .brand-btn {
-    margin: 10px;
-}
-
-/* MOBILE FIXES */
-@media (max-width: 600px) {
-    .twc-title {
-        font-size: 26px;
-    }
-
-    .twc-card {
-        padding: 20px;
-    }
-
-    .twc-card img {
-        width: 60px;
-        height: 60px;
-    }
+/* DARK MODE OVERRIDES (PAGE‑SPECIFIC) */
+body.dark-mode {
+    --bg: #0a0a0a;
+    --text-main: #ffffff;
+    --text-sub: #cccccc;
+    --card-bg: #1a1a1a;
 }

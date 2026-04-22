@@ -222,3 +222,37 @@ footer img[alt*="Logo"] {
         flex: 0 0 auto !important;
     }
 }
+/* ===========================================================
+   FIX BUTTON-GROUP BREAKING MOBILE NAV
+   =========================================================== */
+
+@media (max-width: 700px) {
+    .button-group.nav-menu {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 8px !important;
+        padding-bottom: 6px !important;
+        width: 100% !important;
+    }
+
+    .button-group.nav-menu::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .button-group.nav-menu .nav-item {
+        flex: 0 0 auto !important;
+        display: block !important;
+        width: auto !important;
+    }
+}
+footer .footer-logo,
+footer .footer-logo img {
+    max-width: 90px !important;
+    width: 90px !important;
+    height: auto !important;
+    flex: 0 0 auto !important;
+}

@@ -1,37 +1,65 @@
 function initHeader() {
 
   const isMobile = () => window.innerWidth <= 700;
+  const body = document.body;
 
   /* ===========================
-     DARK MODE (MUST RUN FIRST)
+     DARK MODE (FIXED TIMING)
   =========================== */
-  const body = document.body;
   const storedTheme = localStorage.getItem("tw_dark");
-
   if (storedTheme === "1") {
     body.classList.add("dark-mode");
   }
 
+  const darkToggle = document.getElementById("darkToggleHeader");
+
+  if (darkToggle) {
+    darkToggle.onclick = () => {
+      body.classList.toggle("dark-mode");
+      localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    };
+  }
+
   /* ===========================
-     BACK TO TOP (SAFE)
+     BACK TO TOP (FIXED)
   =========================== */
   const fab = document.getElementById("fab");
 
-  if (fab && !fab.dataset.bound) {
-    fab.dataset.bound = "true";
-
-    fab.addEventListener("click", () => {
+  if (fab) {
+    fab.onclick = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+  }
+
+  /* ===========================
+     SEARCH (FIXED RELIABILITY)
+  =========================== */
+  const icon = document.getElementById("searchIcon");
+  const input = document.getElementById("siteSearchInput");
+  const resultsBox = document.getElementById("searchResults");
+
+  if (icon && input) {
+
+    input.classList.remove("open");
+
+    icon.onclick = () => {
+      input.classList.toggle("open");
+      if (input.classList.contains("open")) input.focus();
+    };
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".search-wrapper")) {
+        input.classList.remove("open");
+        if (resultsBox) resultsBox.style.display = "none";
+      }
     });
   }
 
   /* ===========================
      MOBILE MENU
   =========================== */
-  function closeAllMenus() {
-    document.querySelectorAll(".nav-item.open").forEach(item => {
-      item.classList.remove("open");
-    });
+  function closeMenus() {
+    document.querySelectorAll(".nav-item.open").forEach(i => i.classList.remove("open"));
   }
 
   document.querySelectorAll(".nav-item.mega > a").forEach(link => {
@@ -47,66 +75,19 @@ function initHeader() {
       }
 
       e.preventDefault();
-      e.stopPropagation();
-
-      closeAllMenus();
+      closeMenus();
       parent.classList.add("open");
     });
   });
 
-  document.addEventListener("click", function (e) {
+  document.addEventListener("click", (e) => {
     if (!isMobile()) return;
-    if (!e.target.closest(".nav-item")) closeAllMenus();
+    if (!e.target.closest(".nav-item")) closeMenus();
   });
 
-  window.addEventListener("scroll", function () {
-    if (isMobile()) closeAllMenus();
+  window.addEventListener("scroll", () => {
+    if (isMobile()) closeMenus();
   });
-
-  /* ===========================
-     SEARCH (FIXED)
-  =========================== */
-  const icon = document.getElementById("searchIcon");
-  const input = document.getElementById("siteSearchInput");
-  const resultsBox = document.getElementById("searchResults");
-
-  if (icon && input) {
-
-    input.classList.remove("open");
-    if (resultsBox) resultsBox.style.display = "none";
-
-    icon.addEventListener("click", () => {
-      input.classList.toggle("open");
-      if (input.classList.contains("open")) input.focus();
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".search-wrapper")) {
-        input.classList.remove("open");
-        if (resultsBox) resultsBox.style.display = "none";
-      }
-    });
-  }
-
-  /* ===========================
-     DARK MODE TOGGLE
-  =========================== */
-  const darkToggle = document.getElementById("darkToggleHeader");
-
-  if (darkToggle) {
-    darkToggle.addEventListener("click", () => {
-      body.classList.toggle("dark-mode");
-      localStorage.setItem(
-        "tw_dark",
-        body.classList.contains("dark-mode") ? "1" : "0"
-      );
-    });
-  }
-
-  /* ===========================
-     ENSURE BODY READY STATE
-  =========================== */
-  document.body.classList.add("header-ready");
 }
 
 window.initHeader = initHeader;

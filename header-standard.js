@@ -1,43 +1,33 @@
 /* ============================================================
-   HEADER-STANDARD.JS — CLEAN + iOS SAFE
+   HEADER-STANDARD.JS — CLEAN INIT SYSTEM
    ============================================================ */
 
-setTimeout(() => {
+function initHeader() {
 
   const isMobile = () => window.innerWidth <= 700;
-  let openMenu = null;
 
   /* CLOSE ALL MENUS */
   function closeAllMenus() {
     document.querySelectorAll(".nav-item.open").forEach(item => {
       item.classList.remove("open");
     });
-    openMenu = null;
   }
-function initHeader() {
-  // all event listeners, search, dropdowns, etc
-}
 
-window.initHeader = initHeader;
-   
-  /* MOBILE TAP MENU */
-  document.querySelectorAll(".nav-item > a").forEach(link => {
+  /* MOBILE MEGA MENU TOGGLE (ONLY .mega ITEMS) */
+  document.querySelectorAll(".nav-item.mega > a").forEach(link => {
     link.addEventListener("click", function (e) {
 
       if (!isMobile()) return;
 
       const parent = this.parentElement;
 
-      if (parent.classList.contains("open")) {
-        return; // second tap follows link
-      }
+      if (parent.classList.contains("open")) return;
 
       e.preventDefault();
       e.stopPropagation();
 
       closeAllMenus();
       parent.classList.add("open");
-      openMenu = parent;
     });
   });
 
@@ -49,18 +39,6 @@ window.initHeader = initHeader;
   window.addEventListener("scroll", function () {
     if (isMobile()) closeAllMenus();
   });
-
-  /* 🔥 CRITICAL iOS FIX: allow horizontal scroll */
-  const navMenu = document.querySelector(".nav-menu");
-  if (navMenu) {
-    navMenu.addEventListener(
-      "touchstart",
-      function (e) {
-        e.stopPropagation();
-      },
-      { passive: true }
-    );
-  }
 
   /* SEARCH */
   const icon = document.getElementById("searchIcon");
@@ -89,18 +67,12 @@ window.initHeader = initHeader;
   const body = document.body;
 
   if (darkToggle) {
-    const storedMode = localStorage.getItem("tw_dark");
-
-    if (storedMode === "1") {
-      body.classList.add("dark-mode");
-    }
+    const stored = localStorage.getItem("tw_dark");
+    if (stored === "1") body.classList.add("dark-mode");
 
     darkToggle.addEventListener("click", () => {
       body.classList.toggle("dark-mode");
-      localStorage.setItem(
-        "tw_dark",
-        body.classList.contains("dark-mode") ? "1" : "0"
-      );
+      localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
     });
   }
 
@@ -112,5 +84,7 @@ window.initHeader = initHeader;
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
+}
 
-}, 0);
+/* expose for fetch injection */
+window.initHeader = initHeader;

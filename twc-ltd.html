@@ -87,13 +87,14 @@ body.dark-mode {
 <script>
 fetch("header-standard.html?v=20")
   .then(r => r.text())
-  .then(h => {
+  .then(html => {
     const container = document.getElementById("header-placeholder");
-    container.innerHTML = h;
+    container.innerHTML = html;
 
-    const s = document.createElement("script");
-    s.src = "header-standard.js?v=20";
-    document.body.appendChild(s);
+    // ensure header JS runs AFTER DOM injection
+    if (window.initHeader) {
+      window.initHeader();
+    }
   });
 </script>
 

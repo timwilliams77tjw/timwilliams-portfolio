@@ -185,3 +185,22 @@ body {
   width: 100%;
   overflow: visible !important;
 }
+/* 🔥 NEW: dedicated scroll container */
+.nav-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* actual scrolling row */
+.nav-menu {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap;
+  min-width: max-content; /* 🔥 KEY: forces real overflow */
+}
+
+/* prevent shrinking */
+.nav-item {
+  flex: 0 0 auto !important;
+}

@@ -1,17 +1,17 @@
-/* ============================================================
-   HEADER-STANDARD.JS — CLEAN INIT SYSTEM
-   ============================================================ */
-
 function initHeader() {
-  /* BACK TO TOP */
+
+  const isMobile = () => window.innerWidth <= 700;
+
+  /* BACK TO TOP (SAFE BIND) */
   const fab = document.getElementById("fab");
 
-  if (fab) {
+  if (fab && !fab.dataset.bound) {
+    fab.dataset.bound = "true";
+
     fab.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
-  const isMobile = () => window.innerWidth <= 700;
 
   /* CLOSE ALL MENUS */
   function closeAllMenus() {
@@ -20,7 +20,7 @@ function initHeader() {
     });
   }
 
-  /* MOBILE MEGA MENU TOGGLE (ONLY .mega ITEMS) */
+  /* MOBILE MENU */
   document.querySelectorAll(".nav-item.mega > a").forEach(link => {
     link.addEventListener("click", function (e) {
 
@@ -28,7 +28,10 @@ function initHeader() {
 
       const parent = this.parentElement;
 
-      if (parent.classList.contains("open")) return;
+      if (parent.classList.contains("open")) {
+        e.preventDefault();
+        return;
+      }
 
       e.preventDefault();
       e.stopPropagation();
@@ -82,9 +85,6 @@ function initHeader() {
       localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
     });
   }
-
-
 }
 
-/* expose for fetch injection */
 window.initHeader = initHeader;

@@ -16,7 +16,9 @@
   background: rgba(10, 37, 64, 0.55);
   z-index: 0;
 }
-
+.hero-banner::before {
+  pointer-events: none;
+}
 /* 🔥 CRITICAL FIX (iOS flex scroll bug) */
 .hero-content {
   min-width: 0;
@@ -155,7 +157,11 @@
   cursor: pointer;
   font-size: 14px;
 }
-
+#header-placeholder {
+  display: block !important;
+  width: 100%;
+  overflow: visible !important;
+}
 /* ===========================
    🔥 MOBILE NAV (FIXED FOR iPHONE)
 =========================== */
@@ -224,4 +230,18 @@
 /* Prevent viewport overflow bugs */
 body {
   overflow-x: hidden;
+}
+@media (max-width: 700px) {
+
+  .button-group.nav-menu {
+    display: block !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .button-group.nav-menu .nav-item {
+    display: inline-block !important;
+  }
+
 }

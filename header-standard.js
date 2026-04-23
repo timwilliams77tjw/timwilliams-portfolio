@@ -2,7 +2,19 @@ function initHeader() {
 
   const isMobile = () => window.innerWidth <= 700;
 
-  /* BACK TO TOP (SAFE BIND) */
+  /* ===========================
+     DARK MODE (MUST RUN FIRST)
+  =========================== */
+  const body = document.body;
+  const storedTheme = localStorage.getItem("tw_dark");
+
+  if (storedTheme === "1") {
+    body.classList.add("dark-mode");
+  }
+
+  /* ===========================
+     BACK TO TOP (SAFE)
+  =========================== */
   const fab = document.getElementById("fab");
 
   if (fab && !fab.dataset.bound) {
@@ -13,14 +25,15 @@ function initHeader() {
     });
   }
 
-  /* CLOSE ALL MENUS */
+  /* ===========================
+     MOBILE MENU
+  =========================== */
   function closeAllMenus() {
     document.querySelectorAll(".nav-item.open").forEach(item => {
       item.classList.remove("open");
     });
   }
 
-  /* MOBILE MENU */
   document.querySelectorAll(".nav-item.mega > a").forEach(link => {
     link.addEventListener("click", function (e) {
 
@@ -50,12 +63,15 @@ function initHeader() {
     if (isMobile()) closeAllMenus();
   });
 
-  /* SEARCH */
+  /* ===========================
+     SEARCH (FIXED)
+  =========================== */
   const icon = document.getElementById("searchIcon");
   const input = document.getElementById("siteSearchInput");
   const resultsBox = document.getElementById("searchResults");
 
   if (icon && input) {
+
     input.classList.remove("open");
     if (resultsBox) resultsBox.style.display = "none";
 
@@ -72,19 +88,25 @@ function initHeader() {
     });
   }
 
-  /* DARK MODE */
+  /* ===========================
+     DARK MODE TOGGLE
+  =========================== */
   const darkToggle = document.getElementById("darkToggleHeader");
-  const body = document.body;
 
   if (darkToggle) {
-    const stored = localStorage.getItem("tw_dark");
-    if (stored === "1") body.classList.add("dark-mode");
-
     darkToggle.addEventListener("click", () => {
       body.classList.toggle("dark-mode");
-      localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+      localStorage.setItem(
+        "tw_dark",
+        body.classList.contains("dark-mode") ? "1" : "0"
+      );
     });
   }
+
+  /* ===========================
+     ENSURE BODY READY STATE
+  =========================== */
+  document.body.classList.add("header-ready");
 }
 
 window.initHeader = initHeader;

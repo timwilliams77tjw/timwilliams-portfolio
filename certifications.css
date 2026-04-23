@@ -1,127 +1,35 @@
-/* ===========================================================
-   PAGE CSS — CLEAN (NO HEADER CONFLICTS)
-   =========================================================== */
-
-/* BASE */
-body {
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text-main);
+/* PAGE WRAPPER */
+body.page-certifications {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* PAGE LAYOUT */
-.container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
+.page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
 }
 
-/* ===========================
-   DARK MODE
-=========================== */
-body.dark-mode {
-  --bg: #0f172a;
-  --card-bg: #111827;
-  --text-main: #e5e7eb;
-  --text-sub: #9ca3af;
-}
-
-/* ===========================
-   CARDS / CONTENT
-=========================== */
+/* CARDS */
 .card {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow);
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
 }
 
-.card h2 {
-  margin-top: 0;
+/* FOOTER LOGO FIX */
+footer img {
+    max-width: 90px !important;
+    height: auto !important;
 }
 
-/* ===========================
-   BUTTONS
-=========================== */
-.btn {
-  background: white;
-  color: #0a2540;
-  padding: 10px 20px;
-  border-radius: 50px;
-  border: 2px solid white;
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-block;
-}
-
-/* ===========================
-   ACCORDION
-=========================== */
-.category-section {
-  background: var(--card-bg);
-  margin-bottom: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.category-header {
-  background: #0a2540;
-  color: white;
-  padding: 15px;
-  cursor: pointer;
-}
-
-.category-section.open .card-list {
-  display: block;
-}
-
-.card-list {
-  display: none;
-  padding: 15px;
-}
-
-/* ===========================
-   FLOATING BUTTONS
-=========================== */
-.fab {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  background: #0078ff;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 26px;
-  cursor: pointer;
-  z-index: 9999;
-}
-
-.fab-booking {
-  right: 100px;
-}
-
-/* ===========================
-   FOOTER
-=========================== */
-footer {
-  background: #0a2540;
-  color: white;
-  padding: 30px;
-  margin-top: 60px;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* MOBILE */
-@media (max-width: 700px) {
-  footer {
-    flex-direction: column;
-    text-align: center;
-  }
+/* DARK MODE */
+body.dark-mode {
+    --bg: #0a0a0a;
+    --text-main: #ffffff;
+    --text-sub: #cccccc;
+    --card-bg: #1a1a1a;
 }

@@ -18,16 +18,17 @@ HERO BANNER
     pointer-events: none;
 }
 
-/* ⭐ FIX 1: Make hero-content a flex row so photo sits on the right */
+/* HERO CONTENT + LEFT COLUMN */
 .hero-content {
     position: relative;
     z-index: 2;
     min-width: 0;
 
-    display: flex;                /* NEW */
-    justify-content: space-between; /* NEW */
-    align-items: center;          /* NEW */
-    gap: 24px;                    /* NEW */
+    /* FIX: layout so photo sits on the right */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
 }
 
 .left-column {
@@ -63,10 +64,10 @@ NAV SYSTEM (FINAL CLEAN)
     min-width: 100%;
 }
 
-/* ⭐ FIX 2: Anchor mega-menu to each nav item */
+/* FIX: anchor mega-menu to each item */
 .nav-item {
     flex: 0 0 auto;
-    position: relative; /* NEW */
+    position: relative;
 }
 
 /* NAV BUTTON */
@@ -83,7 +84,7 @@ NAV SYSTEM (FINAL CLEAN)
 }
 
 /* ===========================
-SEARCH (already correct)
+SEARCH
 =========================== */
 
 #siteSearchInput {
@@ -118,7 +119,7 @@ MEGA MENU
     display: none;
     position: absolute;
     top: calc(100% + 10px);
-    left: 0; /* ⭐ NOW WORKS because nav-item is relative */
+    left: 0; /* now relative to .nav-item */
     background: #fff;
     padding: 25px 30px;
     border-radius: 8px;
@@ -158,7 +159,7 @@ MOBILE
 @media (max-width: 700px) {
 
     .hero-content {
-        flex-direction: column; /* NEW */
+        flex-direction: column;
         text-align: center;
     }
 
@@ -213,7 +214,7 @@ body.dark-mode {
 }
 
 /* ===========================
-⭐ FIX 3: Back to top button
+BACK TO TOP BUTTON
 =========================== */
 
 .fab {

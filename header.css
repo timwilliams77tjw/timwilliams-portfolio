@@ -18,7 +18,18 @@
   pointer-events: none;
 }
 
-.hero-content,
+/* ⭐ FIX 1: Make hero-content a flex row so photo sits on the right */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+
+  display: flex;                 /* NEW */
+  justify-content: space-between;/* NEW */
+  align-items: center;           /* NEW */
+  gap: 24px;                     /* NEW */
+}
+
 .left-column {
   position: relative;
   z-index: 2;
@@ -51,8 +62,10 @@
   min-width: 100%;
 }
 
+/* ⭐ FIX 2: Anchor mega-menu to each nav item */
 .nav-item {
   flex: 0 0 auto;
+  position: relative; /* NEW */
 }
 
 /* NAV BUTTON */
@@ -102,7 +115,7 @@
   display: none;
   position: absolute;
   top: calc(100% + 10px);
-  left: 0;
+  left: 0; /* now relative to .nav-item */
   background: #fff;
   padding: 25px 30px;
   border-radius: 8px;
@@ -192,4 +205,19 @@ body.dark-mode {
   --text-main: #e5e7eb;
   --text-sub: #9ca3af;
   --card-bg: #111827;
+}
+
+/* ===========================
+   ⭐ FIX 3: Back to top button
+=========================== */
+.fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: #0a2540;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
 }

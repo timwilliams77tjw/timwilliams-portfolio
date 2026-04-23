@@ -17,6 +17,15 @@
   z-index: 0;
 }
 
+/* 🔥 CRITICAL FIX (iOS flex scroll bug) */
+.hero-content {
+  min-width: 0;
+}
+
+.left-column {
+  min-width: 0;
+}
+
 .hero-content,
 .hero-text,
 .hero-text h1,
@@ -38,7 +47,9 @@
 /* ===========================
    NAVIGATION (BASE)
 =========================== */
-.nav-item { position: relative; }
+.nav-item { 
+  position: relative; 
+}
 
 .nav-btn {
   background: transparent;
@@ -53,7 +64,7 @@
 }
 
 /* ===========================
-   DESKTOP / iPAD MEGA MENU
+   DESKTOP MEGA MENU
 =========================== */
 .mega-menu {
   display: none;
@@ -66,7 +77,8 @@
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-  z-index: 10001 !important;
+  z-index: 10001;
+  max-width: 95vw;
 }
 
 @media (min-width: 701px) {
@@ -145,55 +157,52 @@
 }
 
 /* ===========================
-   MOBILE NAV (iPhone)
+   🔥 MOBILE NAV (FIXED FOR iPHONE)
 =========================== */
 @media (max-width: 700px) {
 
-  /* One-row horizontal scroll */
+  /* 🔥 REMOVE FLEX (this was breaking iOS scroll) */
   .nav-menu {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    overflow-y: visible !important; /* FIXED */
-    white-space: nowrap !important;
-    -webkit-overflow-scrolling: touch !important;
-    gap: 8px !important;
-    padding-bottom: 6px !important;
-    margin-top: 10px !important;
-  }
-
-  .nav-menu::-webkit-scrollbar { display: none !important; }
-
-  /* Each item is a block so submenu stacks correctly */
-  .nav-item {
-    flex: 0 0 auto !important;
     display: block !important;
-    width: auto !important;
-  }
-
-  /* Rounded buttons restored */
-  .nav-btn {
-    display: inline-block !important;
-    border-radius: 6px !important;
-    border: 1px solid rgba(255,255,255,0.6) !important;
-    padding: 10px 14px !important;
-    background: transparent !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    color: white !important;
+    overflow-x: auto !important;
     white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 10002;
   }
 
-  /* Submenu appears UNDER the button, full width */
+  .nav-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 🔥 inline-block instead of flex */
+  .nav-item {
+    display: inline-block !important;
+    vertical-align: top;
+  }
+
+  /* Button styling */
+  .nav-btn {
+    display: inline-block;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 10px 14px;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Dropdown under button */
   .mega-menu {
     position: static !important;
     width: 100% !important;
     flex-direction: column !important;
-    gap: 12px !important;
-    padding: 16px !important;
-    margin-top: 4px !important;
-    display: none !important;
+    gap: 12px;
+    padding: 16px;
+    margin-top: 4px;
+    display: none;
   }
 
   .nav-item.open > .mega-menu {
@@ -202,42 +211,17 @@
 }
 
 /* ===========================
-   FINAL OVERRIDES (ALWAYS WIN)
+   SAFETY FIXES
 =========================== */
 
-/* Footer logo sizing */
-footer img[src*="logo"] {
-  max-width: 90px !important;
-  height: auto !important;
-}
-
-/* Mobile footer alignment */
-@media (max-width: 700px) {
-  footer {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-  }
-}
-.nav-menu {
-  display: flex;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  white-space: nowrap;
-}
-
-.nav-item {
-  flex: 0 0 auto;
-  position: relative;
-}
-
-.mega-menu {
-  max-width: 95vw;
-  overflow-x: auto;
-}
-
+/* Prevent rogue overflow killing scroll */
 .hero-banner,
 .hero-content,
 .left-column {
-  overflow: visible;
+  overflow: visible !important;
+}
+
+/* Prevent viewport overflow bugs */
+body {
+  overflow-x: hidden;
 }

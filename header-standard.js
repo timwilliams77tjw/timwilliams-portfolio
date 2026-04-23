@@ -3,7 +3,14 @@
    ============================================================ */
 
 function initHeader() {
+  /* BACK TO TOP */
+  const fab = document.getElementById("fab");
 
+  if (fab) {
+    fab.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
   const isMobile = () => window.innerWidth <= 700;
 
   /* CLOSE ALL MENUS */
@@ -76,14 +83,7 @@ function initHeader() {
     });
   }
 
-  /* BACK TO TOP */
-  const fab = document.getElementById("fab");
 
-  if (fab) {
-    fab.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
 }
 
 /* expose for fetch injection */

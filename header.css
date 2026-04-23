@@ -20,12 +20,11 @@
 
 .hero-content,
 .left-column {
-  min-width: 0;
   position: relative;
   z-index: 2;
+  min-width: 0;
 }
 
-/* PROFILE */
 .hero-photo {
   width: 150px;
   height: 150px;
@@ -35,7 +34,7 @@
 }
 
 /* ===========================
-   NAV BASE
+   NAV SYSTEM (FINAL CLEAN)
 =========================== */
 .nav-scroll {
   width: 100%;
@@ -46,16 +45,19 @@
 
 .nav-menu {
   display: inline-flex;
+  flex-direction: row;
   flex-wrap: nowrap;
   width: max-content;
   gap: 10px;
+  align-items: center;
 }
 
 .nav-item {
-  flex: 0 0 auto;
   position: relative;
+  flex: 0 0 auto;
 }
 
+/* BUTTON */
 .nav-btn {
   background: transparent;
   border: none;
@@ -63,33 +65,29 @@
   font-size: 15px;
   font-weight: 500;
   padding: 10px 14px;
-  text-decoration: none;
   cursor: pointer;
+  text-decoration: none;
   white-space: nowrap;
 }
 
 /* ===========================
-   MEGA MENU (DESKTOP)
+   MEGA MENU
 =========================== */
 .mega-menu {
   display: none;
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
-  flex-direction: row;
-  gap: 40px;
-  padding: 25px 30px;
   background: #fff;
+  padding: 25px 30px;
   border-radius: 8px;
   box-shadow: 0 18px 45px rgba(0,0,0,0.15);
   z-index: 9999;
-  max-width: 95vw;
+  gap: 40px;
 }
 
-@media (min-width: 701px) {
-  .nav-item:hover > .mega-menu {
-    display: flex;
-  }
+.nav-item:hover > .mega-menu {
+  display: flex;
 }
 
 .mega-column {
@@ -107,9 +105,8 @@
 
 .mega-menu a {
   padding: 6px 0;
-  text-decoration: none;
   color: #222;
-  font-size: 14px;
+  text-decoration: none;
   white-space: nowrap;
 }
 
@@ -117,6 +114,11 @@
    MOBILE
 =========================== */
 @media (max-width: 700px) {
+
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
 
   .nav-menu {
     gap: 6px;
@@ -130,11 +132,10 @@
 
   .mega-menu {
     position: static;
-    width: 100%;
+    display: none;
     flex-direction: column;
     padding: 15px;
-    margin-top: 6px;
-    display: none;
+    box-shadow: none;
   }
 
   .nav-item.open > .mega-menu {
@@ -148,6 +149,8 @@
 body {
   overflow-x: hidden;
 }
+
+/* DEFAULT VARIABLES */
 :root {
   --bg: #ffffff;
   --text-main: #111;

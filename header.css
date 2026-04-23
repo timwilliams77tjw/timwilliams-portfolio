@@ -1,41 +1,90 @@
 /* ===========================
-HEADER LAYOUT FIX
+HERO BANNER
 =========================== */
-
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    gap: 20px;
+.hero-banner {
+    position: relative;
+    background: url('hero.jpg') center center / cover no-repeat;
+    padding: 50px 30px;
+    color: white;
+    z-index: 1000;
 }
 
-.left-side {
-    flex: 1;
+.hero-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 37, 64, 0.55);
+    z-index: 0;
+    pointer-events: none;
 }
 
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+/* ⭐ FIX 1: Make hero-content a flex row so photo sits on the right */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+
+    display: flex;                /* NEW */
+    justify-content: space-between; /* NEW */
+    align-items: center;          /* NEW */
+    gap: 24px;                    /* NEW */
 }
 
-.header-right .hero-photo {
-    width: 55px;
-    height: 55px;
+.left-column {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+}
+
+.hero-photo {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
+    border: 4px solid white;
 }
 
 /* ===========================
-SEARCH
+NAV SYSTEM (FINAL CLEAN)
 =========================== */
 
-.search-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.nav-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
 }
+
+.nav-menu {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: max-content;
+    min-width: 100%;
+}
+
+/* ⭐ FIX 2: Anchor mega-menu to each nav item */
+.nav-item {
+    flex: 0 0 auto;
+    position: relative; /* NEW */
+}
+
+/* NAV BUTTON */
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 14px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* ===========================
+SEARCH (already correct)
+=========================== */
 
 #siteSearchInput {
     width: 0;
@@ -50,16 +99,26 @@ SEARCH
     pointer-events: auto;
 }
 
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#darkToggleHeader {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
 /* ===========================
-MEGA MENU FIX
+MEGA MENU
 =========================== */
 
 .mega-menu {
     display: none;
     position: absolute;
     top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0; /* ⭐ NOW WORKS because nav-item is relative */
     background: #fff;
     padding: 25px 30px;
     border-radius: 8px;
@@ -72,27 +131,99 @@ MEGA MENU FIX
     display: flex;
 }
 
+.mega-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+}
+
+.mega-column h4 {
+    margin: 0 0 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #0a2540;
+}
+
+.mega-menu a {
+    padding: 6px 0;
+    color: #222;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
 /* ===========================
-BACK TO TOP BUTTON
+MOBILE
+=========================== */
+
+@media (max-width: 700px) {
+
+    .hero-content {
+        flex-direction: column; /* NEW */
+        text-align: center;
+    }
+
+    .nav-menu {
+        gap: 6px;
+    }
+
+    .nav-btn {
+        border: 1px solid rgba(255,255,255,0.6);
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .mega-menu {
+        position: static;
+        display: none;
+        flex-direction: column;
+        padding: 15px;
+        box-shadow: none;
+    }
+
+    .nav-item.open > .mega-menu {
+        display: flex;
+    }
+}
+
+/* ===========================
+SAFETY
+=========================== */
+body {
+    overflow-x: hidden;
+}
+
+/* ===========================
+DARK MODE VARIABLES (GLOBAL)
+=========================== */
+
+:root {
+    --bg: #ffffff;
+    --text-main: #111;
+    --text-sub: #555;
+    --card-bg: #f5f5f5;
+    --shadow: 0 8px 20px rgba(0,0,0,0.08);
+    --accent: #0a2540;
+}
+
+body.dark-mode {
+    --bg: #0f172a;
+    --text-main: #e5e7eb;
+    --text-sub: #9ca3af;
+    --card-bg: #111827;
+}
+
+/* ===========================
+⭐ FIX 3: Back to top button
 =========================== */
 
 .fab {
     position: fixed;
-    right: 30px;
-    bottom: 30px;
+    right: 24px;
+    bottom: 24px;
     background: #0a2540;
     color: white;
-    padding: 12px 14px;
+    padding: 10px 12px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 9999;
-}
-
-/* ===========================
-FOOTER LOGO FIX
-=========================== */
-
-footer img {
-    max-width: 90px !important;
-    height: auto !important;
 }

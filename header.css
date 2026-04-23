@@ -5,7 +5,7 @@
   position: relative;
   background: url('hero.jpg') center center / cover no-repeat;
   padding: 50px 30px;
-  color: white;
+  color: #fff;
   z-index: 1000;
 }
 
@@ -18,8 +18,18 @@
   pointer-events: none;
 }
 
+/* ensure text never inherits fade/opacity bugs */
+.hero-banner,
+.hero-text,
+.hero-text h1,
+.hero-text p,
+.nav-btn {
+  color: #fff !important;
+  opacity: 1 !important;
+}
+
 /* ===========================
-   LAYOUT FIX (CRITICAL)
+   LAYOUT FIX (CRITICAL STABILITY)
 =========================== */
 .hero-content {
   display: flex;
@@ -28,6 +38,8 @@
   gap: 30px;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .left-column {
@@ -46,7 +58,7 @@
 }
 
 /* ===========================
-   NAV SYSTEM
+   NAV SYSTEM (NO WRAP / NO BREAKS)
 =========================== */
 .nav-scroll {
   width: 100%;
@@ -68,11 +80,13 @@
   position: relative;
 }
 
-/* NAV BUTTON */
+/* ===========================
+   NAV BUTTON
+=========================== */
 .nav-btn {
   background: transparent;
   border: none;
-  color: white;
+  color: #fff;
   font-size: 15px;
   font-weight: 500;
   padding: 10px 14px;
@@ -82,7 +96,7 @@
 }
 
 /* ===========================
-   SEARCH + ICON FIX
+   SEARCH FIX (HIDDEN BY DEFAULT)
 =========================== */
 .search-wrapper {
   display: flex;
@@ -114,13 +128,14 @@
 }
 
 /* ===========================
-   MEGA MENU FIX (POSITIONING)
+   MEGA MENU (FIXED POSITIONING)
 =========================== */
 .mega-menu {
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
+  transform: translateX(0);
   background: #fff;
   padding: 25px 30px;
   border-radius: 8px;
@@ -130,8 +145,16 @@
   min-width: 300px;
 }
 
-.nav-item:hover > .mega-menu {
-  display: flex;
+/* desktop hover only */
+@media (min-width: 1025px) {
+  .nav-item:hover > .mega-menu {
+    display: flex;
+  }
+}
+
+/* JS-controlled mobile/tablet open */
+.nav-item.open > .mega-menu {
+  display: flex !important;
 }
 
 .mega-column {
@@ -155,7 +178,7 @@
 }
 
 /* ===========================
-   MOBILE
+   MOBILE FIXES
 =========================== */
 @media (max-width: 700px) {
 
@@ -181,14 +204,10 @@
     padding: 15px;
     box-shadow: none;
   }
-
-  .nav-item.open > .mega-menu {
-    display: flex;
-  }
 }
 
 /* ===========================
-   FAB FIX
+   FLOATING BUTTON (FAB FIXED)
 =========================== */
 .fab {
   position: fixed;

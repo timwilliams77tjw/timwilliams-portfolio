@@ -14,7 +14,12 @@ setTimeout(() => {
     });
     openMenu = null;
   }
+function initHeader() {
+  // all event listeners, search, dropdowns, etc
+}
 
+window.initHeader = initHeader;
+   
   /* MOBILE TAP MENU */
   document.querySelectorAll(".nav-item > a").forEach(link => {
     link.addEventListener("click", function (e) {

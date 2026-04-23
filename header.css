@@ -6,10 +6,9 @@
   background: url('hero.jpg') center center / cover no-repeat;
   padding: 50px 30px;
   color: white;
-  z-index: 10000;
+  z-index: 1000;
 }
 
-/* ✅ CLEAN overlay (no duplicates, no blocking) */
 .hero-banner::before {
   content: "";
   position: absolute;
@@ -19,22 +18,14 @@
   pointer-events: none;
 }
 
-/* 🔥 CRITICAL iOS FIX */
 .hero-content,
 .left-column {
   min-width: 0;
-}
-
-.hero-content,
-.hero-text,
-.hero-text h1,
-.hero-text p {
   position: relative;
   z-index: 2;
-  color: white !important;
 }
 
-/* PROFILE PHOTO */
+/* PROFILE */
 .hero-photo {
   width: 150px;
   height: 150px;
@@ -44,9 +35,24 @@
 }
 
 /* ===========================
-   NAVIGATION (BASE)
+   NAV BASE
 =========================== */
+.nav-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 15px;
+}
+
+.nav-menu {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  gap: 10px;
+}
+
 .nav-item {
+  flex: 0 0 auto;
   position: relative;
 }
 
@@ -56,14 +62,14 @@
   color: white;
   font-size: 15px;
   font-weight: 500;
-  padding: 12px 14px;
+  padding: 10px 14px;
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
 }
 
 /* ===========================
-   DESKTOP MEGA MENU
+   MEGA MENU (DESKTOP)
 =========================== */
 .mega-menu {
   display: none;
@@ -73,10 +79,10 @@
   flex-direction: row;
   gap: 40px;
   padding: 25px 30px;
-  background: #ffffff;
+  background: #fff;
   border-radius: 8px;
   box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-  z-index: 10001;
+  z-index: 9999;
   max-width: 95vw;
 }
 
@@ -93,15 +99,14 @@
 }
 
 .mega-column h4 {
-  margin: 0 0 10px 0;
+  margin: 0 0 10px;
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 1px;
   color: #0a2540;
 }
 
 .mega-menu a {
-  padding: 8px 0;
+  padding: 6px 0;
   text-decoration: none;
   color: #222;
   font-size: 14px;
@@ -109,98 +114,37 @@
 }
 
 /* ===========================
-   🔥 MOBILE NAV (ACTUAL FIX)
+   MOBILE
 =========================== */
 @media (max-width: 700px) {
 
-  /* 🔥 FORCE SCROLL CONTAINER */
-  .button-group.nav-menu {
-    display: block !important;
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
-    position: relative;
-    z-index: 10002;
-    padding-bottom: 6px;
-    margin-top: 10px;
-  }
-
-  /* 🔥 FORCE ITEMS TO EXCEED WIDTH */
-  .button-group.nav-menu .nav-item {
-    display: inline-block !important;
-    vertical-align: top;
-  }
-
-  /* 🔥 THIS IS THE MISSING PIECE */
-  .button-group.nav-menu::after {
-    content: "";
-    display: inline-block;
-    width: 60px; /* forces overflow so iOS scroll activates */
+  .nav-menu {
+    gap: 6px;
   }
 
   .nav-btn {
-    display: inline-block;
-    border-radius: 6px;
     border: 1px solid rgba(255,255,255,0.6);
-    padding: 10px 14px;
-    font-size: 15px;
+    border-radius: 6px;
     font-weight: 600;
   }
 
   .mega-menu {
-    position: static !important;
-    width: 100% !important;
-    flex-direction: column !important;
-    gap: 12px;
-    padding: 16px;
-    margin-top: 4px;
+    position: static;
+    width: 100%;
+    flex-direction: column;
+    padding: 15px;
+    margin-top: 6px;
     display: none;
   }
 
   .nav-item.open > .mega-menu {
-    display: flex !important;
+    display: flex;
   }
 }
 
 /* ===========================
-   SAFETY FIXES
+   SAFETY
 =========================== */
-
-/* prevent parent clipping */
-.hero-banner,
-.hero-content,
-.left-column {
-  overflow: visible !important;
-}
-
-/* prevent page overflow bugs */
 body {
   overflow-x: hidden;
-}
-
-/* header container */
-#header-placeholder {
-  display: block !important;
-  width: 100%;
-  overflow: visible !important;
-}
-/* 🔥 NEW: dedicated scroll container */
-.nav-scroll {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* actual scrolling row */
-.nav-menu {
-  display: inline-flex !important;
-  flex-wrap: nowrap !important;
-  white-space: nowrap;
-  min-width: max-content; /* 🔥 KEY: forces real overflow */
-}
-
-/* prevent shrinking */
-.nav-item {
-  flex: 0 0 auto !important;
 }

@@ -29,20 +29,21 @@ body.page-certifications{
 <body class="page-certifications">
 
 <!-- HEADER INCLUDE -->
-<div id="header"></div>
+<div id="header-placeholder"></div>
 
 <script>
-fetch("header-standard.html")
+fetch("header-standard.html?v=20")
   .then(r => r.text())
-  .then(h => {
-    document.getElementById("header").innerHTML = h;
+  .then(html => {
+    const container = document.getElementById("header-placeholder");
+    container.innerHTML = html;
 
-    const s = document.createElement("script");
-    s.src = "header-standard.js?v=1";
-    document.body.appendChild(s);
+    // ensure header JS runs AFTER DOM injection
+    if (window.initHeader) {
+      window.initHeader();
+    }
   });
 </script>
-
 
 
 

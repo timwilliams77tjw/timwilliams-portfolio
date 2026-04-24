@@ -72,20 +72,19 @@ display:none;
 <body>
 
 <!-- HEADER INCLUDE -->
-<div id="header-placeholder"></div>
+<div id="header"></div>
 
 <script>
-fetch("header-standard.html?v=20")
-  .then(r => r.text())
-  .then(html => {
-    const container = document.getElementById("header-placeholder");
-    container.innerHTML = html;
 
-    // ensure header JS runs AFTER DOM injection
-    if (window.initHeader) {
-      window.initHeader();
-    }
-  });
+fetch("header-standard.html")
+
+.then(r => r.text())
+
+.then(h => {
+
+document.getElementById("header").innerHTML = h;
+
+initGlobal();
 
 
 // Make Portfolio button active BUT keep dropdown working

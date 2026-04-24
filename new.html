@@ -480,15 +480,20 @@ justify-content:center;
 
 <!-- HEADER INCLUDE -->
 
-<div id="header"></div>
+<div id="header-placeholder"></div>
 
 <script>
-fetch("header-standard.html")
-.then(r=>r.text())
-.then(h=>{
-document.getElementById("header").innerHTML=h;
-initGlobal();
-});
+fetch("header-standard.html?v=20")
+  .then(r => r.text())
+  .then(html => {
+    const container = document.getElementById("header-placeholder");
+    container.innerHTML = html;
+
+    // ensure header JS runs AFTER DOM injection
+    if (window.initHeader) {
+      window.initHeader();
+    }
+  });
 </script>
 
 

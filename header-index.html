@@ -333,5 +333,23 @@
     align-items: center !important;
   }
 }
+/* === FIX MULTI-COLUMN MEGA MENU CLIPPING ON DESKTOP/IPAD === */
+@media (min-width: 701px) {
+
+    /* Allow dropdown to expand naturally */
+    .mega-menu {
+        width: max-content !important;
+        min-width: 260px !important;
+        overflow: visible !important;
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    /* Ensure parent doesn't clip the menu */
+    .nav-item {
+        position: relative !important;
+        overflow: visible !important;
+    }
+}
 
 </style>

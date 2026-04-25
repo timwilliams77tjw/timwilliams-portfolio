@@ -111,18 +111,10 @@ fetch("header-standard.html")
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
 
-      // Run global initialiser if it exists
-      if (typeof initGlobal === "function") {
-          initGlobal();
-      }
-
-      // ALWAYS run the header engine
-      if (typeof initHeader === "function") {
-          initHeader();
-      }
+      if (typeof initGlobal === "function") initGlobal();
+      if (typeof initHeader === "function") initHeader();
   });
 </script>
-
 
 <!-- PAGE CONTENT -->
 <main class="page-container">

@@ -112,12 +112,10 @@ body.page-certifications {
 
 <!-- 2. Inject the header HTML -->
 <script>
-fetch("header-standard-v4.html")
+fetch("./header-standard-v4.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
-
-      // 3. NOW run the header JS
       initHeader();
   });
 </script>

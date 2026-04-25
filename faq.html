@@ -104,25 +104,27 @@ body.page-certifications {
 <!-- HEADER -->
 <!-- HEADER INCLUDE -->
 <!-- HEADER -->
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
-<!-- 1. Inject the header HTML -->
+<!-- 1. Load the JS file FIRST -->
+<script src="header-standard-v23.js"></script>
+
+<!-- 2. Inject the header HTML -->
 <script>
 fetch("header-standard-v4.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
 
-      // NOW run the header JS
+      // 3. NOW run the header JS
       initHeader();
   });
 </script>
 
-
-<!-- 3. Load the JS file BEFORE calling initHeader() -->
-<script src="header-standard-v23.js"></script>
-
+<!-- 4. Debug output -->
 <div id="debug-output" style="padding:10px; background:#222; color:#0f0; font-family:monospace; font-size:14px;"></div>
+
 
 
 <!-- PAGE CONTENT -->

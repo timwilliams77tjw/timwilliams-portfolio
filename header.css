@@ -227,3 +227,30 @@ body.dark-mode {
     opacity: 1 !important;
     visibility: visible !important;
 }
+/* ===========================
+   FIX: Mega-menu must appear ABOVE hero banner
+=========================== */
+
+/* Hero banner sits BELOW the menu */
+.hero-banner {
+    position: relative;
+    z-index: 1 !important;
+}
+
+/* Hero overlay sits BELOW hero content */
+.hero-banner::before {
+    z-index: 0 !important;
+}
+
+/* Mega-menu sits ABOVE everything */
+.mega-menu {
+    position: absolute;
+    z-index: 999999 !important;
+}
+
+/* JS-controlled open state */
+.nav-item.open > .mega-menu {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}

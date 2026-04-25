@@ -6,7 +6,7 @@
     background: url('hero.jpg') center center / cover no-repeat;
     padding: 50px 30px;
     color: white;
-    z-index: 1; /* hero sits below menu */
+    z-index: 1; /* BELOW the mega-menu */
 }
 
 .hero-banner::before {
@@ -14,14 +14,14 @@
     position: absolute;
     inset: 0;
     background: rgba(10, 37, 64, 0.55);
-    z-index: 0; /* overlay behind content */
+    z-index: 0; /* BELOW hero content */
     pointer-events: none;
 }
 
 .hero-content,
 .left-column {
     position: relative;
-    z-index: 2; /* above overlay */
+    z-index: 2; /* ABOVE overlay */
     min-width: 0;
 }
 
@@ -54,7 +54,6 @@
 =========================== */
 .nav-scroll {
     width: 100%;
-    max-width: 100%;
     overflow-x: auto;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
@@ -68,8 +67,8 @@
 }
 
 .nav-item {
-    flex: 0 0 auto;
     position: relative;
+    flex: 0 0 auto;
 }
 
 /* NAV BUTTONS */
@@ -179,15 +178,6 @@
 }
 
 /* ===========================
-   TOUCH DEVICES
-=========================== */
-@media (hover: none) and (pointer: coarse) {
-    .nav-item.open > .mega-menu {
-        display: flex !important;
-    }
-}
-
-/* ===========================
    JS-CONTROLLED OPEN STATE
 =========================== */
 .nav-item.open > .mega-menu {
@@ -220,14 +210,4 @@ body.dark-mode {
 =========================== */
 body {
     overflow-x: hidden;
-}
-
-/* ===========================
-   iPAD SAFARI FIX
-=========================== */
-@supports (-webkit-touch-callout: none) {
-    .mega-trigger {
-        cursor: pointer !important;
-        touch-action: manipulation !important;
-    }
 }

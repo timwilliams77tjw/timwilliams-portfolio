@@ -1,3 +1,6 @@
+/* ---------------------------------------------------------
+   HEADER INITIALISATION
+--------------------------------------------------------- */
 function initHeader() {
 
     const isTouch = () => (
@@ -13,8 +16,13 @@ function initHeader() {
         });
     }
 
-    /* MEGA MENU TRIGGERS (BUTTONS) */
-    document.querySelectorAll(".mega-trigger").forEach(btn => {
+    /* ---------------------------------------------------------
+       MEGA MENU TRIGGERS (BUTTONS)
+    --------------------------------------------------------- */
+    const triggers = document.querySelectorAll(".mega-trigger");
+    console.log("Mega triggers found:", triggers.length);
+
+    triggers.forEach(btn => {
         btn.addEventListener("click", function (e) {
 
             const parent = this.closest(".nav-item");
@@ -47,7 +55,9 @@ function initHeader() {
         if (isTouch()) closeAllMenus();
     });
 
-    /* SEARCH */
+    /* ---------------------------------------------------------
+       SEARCH
+    --------------------------------------------------------- */
     const icon = document.getElementById("searchIcon");
     const input = document.getElementById("siteSearchInput");
     const resultsBox = document.getElementById("searchResults");
@@ -69,7 +79,9 @@ function initHeader() {
         });
     }
 
-    /* DARK MODE */
+    /* ---------------------------------------------------------
+       DARK MODE
+    --------------------------------------------------------- */
     const darkToggle = document.getElementById("darkToggleHeader");
     const body = document.body;
 
@@ -87,12 +99,18 @@ function initHeader() {
     }
 }
 
+/* Make initHeader() available globally */
 window.initHeader = initHeader;
-/* BACK TO TOP */
-const fab = document.getElementById("fab");
 
-if (fab) {
-    fab.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-}
+
+/* ---------------------------------------------------------
+   BACK TO TOP — MUST RUN AFTER DOM EXISTS
+--------------------------------------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
+    const fab = document.getElementById("fab");
+    if (fab) {
+        fab.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+});

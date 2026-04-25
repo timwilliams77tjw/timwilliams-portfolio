@@ -1,10 +1,18 @@
 function initHeader() {
 
-    /* DEVICE MODE DETECTION */
-    const isMobile = () => window.innerWidth <= 700;
-    const isTouch = () => "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    /* ============================================================
+       DEVICE DETECTION (BULLETPROOF FOR iPAD, iPHONE, AND TABLETS)
+       ============================================================ */
+    const isTouch = () => (
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia("(pointer: coarse)").matches
+    );
 
-    /* BACK TO TOP */
+    const isMobile = () => window.innerWidth <= 700;
+
+    /* ============================================================
+       BACK TO TOP
+       ============================================================ */
     const fab = document.getElementById("fab");
     if (fab && !fab.dataset.bound) {
         fab.dataset.bound = "true";
@@ -13,14 +21,18 @@ function initHeader() {
         });
     }
 
-    /* CLOSE ALL MENUS */
+    /* ============================================================
+       CLOSE ALL MENUS
+       ============================================================ */
     function closeAllMenus() {
         document.querySelectorAll(".nav-item.open").forEach(item => {
             item.classList.remove("open");
         });
     }
 
-    /* === UNIVERSAL TAP‑TO‑OPEN (iPhone + iPad + Android tablets) === */
+    /* ============================================================
+       UNIVERSAL TAP‑TO‑OPEN (iPad, iPhone, Android tablets)
+       ============================================================ */
     document.querySelectorAll(".nav-item.mega > a").forEach(link => {
         link.addEventListener("click", function (e) {
 
@@ -42,18 +54,24 @@ function initHeader() {
         });
     });
 
-    /* CLOSE ON OUTSIDE TAP (touch devices only) */
+    /* ============================================================
+       CLOSE ON OUTSIDE TAP (touch devices only)
+       ============================================================ */
     document.addEventListener("click", function (e) {
         if (!isTouch()) return;
         if (!e.target.closest(".nav-item")) closeAllMenus();
     });
 
-    /* CLOSE ON SCROLL (touch devices only) */
+    /* ============================================================
+       CLOSE ON SCROLL (touch devices only)
+       ============================================================ */
     window.addEventListener("scroll", function () {
         if (isTouch()) closeAllMenus();
     });
 
-    /* === SEARCH === */
+    /* ============================================================
+       SEARCH
+       ============================================================ */
     const icon = document.getElementById("searchIcon");
     const input = document.getElementById("siteSearchInput");
     const resultsBox = document.getElementById("searchResults");
@@ -75,7 +93,9 @@ function initHeader() {
         });
     }
 
-    /* === DARK MODE === */
+    /* ============================================================
+       DARK MODE
+       ============================================================ */
     const darkToggle = document.getElementById("darkToggleHeader");
     const body = document.body;
 

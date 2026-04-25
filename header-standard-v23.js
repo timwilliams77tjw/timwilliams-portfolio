@@ -88,3 +88,11 @@ function initHeader() {
 }
 
 window.initHeader = initHeader;
+/* BACK TO TOP */
+const fab = document.getElementById("fab");
+
+if (fab) {
+    fab.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+}

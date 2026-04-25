@@ -88,4 +88,3 @@ function initHeader() {
 }
 
 window.initHeader = initHeader;
-document.addEventListener("DOMContentLoaded", initHeader);

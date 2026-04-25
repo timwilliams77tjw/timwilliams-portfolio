@@ -3,8 +3,7 @@
 --------------------------------------------------------- */
 function initHeader() {
    
-document.getElementById("debug-output").innerText =
-    "Mega triggers found: " + document.querySelectorAll(".mega-trigger").length;
+
 
 
     const isTouch = () => (

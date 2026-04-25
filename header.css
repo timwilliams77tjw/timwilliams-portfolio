@@ -6,7 +6,7 @@
     background: url('hero.jpg') center center / cover no-repeat;
     padding: 50px 30px;
     color: white;
-    z-index: 1; /* below mega-menu */
+    z-index: 1; /* BELOW the mega-menu */
 }
 
 .hero-banner::before {
@@ -14,14 +14,14 @@
     position: absolute;
     inset: 0;
     background: rgba(10, 37, 64, 0.55);
-    z-index: 0; /* behind content + menu */
+    z-index: 0; /* BELOW hero content */
     pointer-events: none;
 }
 
 .hero-content,
 .left-column {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* ABOVE overlay */
     min-width: 0;
 }
 
@@ -54,25 +54,24 @@
 =========================== */
 .nav-scroll {
     width: 100%;
-    max-width: 100%;
     overflow-x: auto;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
 }
 
 .nav-menu {
-    display: flex !important;
-    flex-wrap: nowrap !important;
+    display: flex;
+    flex-wrap: nowrap;
     width: max-content;
     min-width: 100%;
 }
 
 .nav-item {
-    flex: 0 0 auto;
     position: relative;
+    flex: 0 0 auto;
 }
 
-/* NAV BUTTON */
+/* NAV BUTTONS */
 .nav-btn,
 .mega-trigger {
     background: transparent;
@@ -82,19 +81,19 @@
     font-weight: 500;
     padding: 10px 14px;
     cursor: pointer;
-    text-decoration: none;
     white-space: nowrap;
-}
-
-/* iPad fix */
-.nav-item.mega > a {
-    cursor: pointer !important;
-    touch-action: manipulation !important;
+    text-decoration: none;
 }
 
 /* ===========================
    SEARCH
 =========================== */
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 #siteSearchInput {
     width: 0;
     opacity: 0;
@@ -106,17 +105,6 @@
     width: 160px;
     opacity: 1;
     pointer-events: auto;
-}
-
-.search-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#darkToggleHeader {
-    white-space: nowrap;
-    flex-shrink: 0;
 }
 
 /* ===========================
@@ -132,7 +120,7 @@
     border-radius: 8px;
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
     gap: 40px;
-    z-index: 999999; /* above hero */
+    z-index: 9999; /* ABOVE hero */
 }
 
 .nav-item:hover > .mega-menu {
@@ -163,6 +151,7 @@
    MOBILE
 =========================== */
 @media (max-width: 700px) {
+
     .nav-menu {
         gap: 6px;
     }
@@ -189,10 +178,12 @@
 }
 
 /* ===========================
-   SAFETY
+   JS-CONTROLLED OPEN STATE
 =========================== */
-body {
-    overflow-x: hidden;
+.nav-item.open > .mega-menu {
+    display: flex !important;
+    opacity: 1;
+    visibility: visible;
 }
 
 /* ===========================
@@ -214,43 +205,9 @@ body.dark-mode {
     --card-bg: #111827;
 }
 
-/* Touch devices */
-@media (hover: none) and (pointer: coarse) {
-    .nav-item.open > .mega-menu {
-        display: flex !important;
-    }
-}
-
-/* UNIVERSAL: JS-controlled open state */
-.nav-item.open > .mega-menu {
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
 /* ===========================
-   FIX: Mega-menu must appear ABOVE hero banner
+   SAFETY
 =========================== */
-
-/* Hero banner sits BELOW the menu */
-.hero-banner {
-    position: relative;
-    z-index: 1 !important;
-}
-
-/* Hero overlay sits BELOW hero content */
-.hero-banner::before {
-    z-index: 0 !important;
-}
-
-/* Mega-menu sits ABOVE everything */
-.mega-menu {
-    position: absolute;
-    z-index: 999999 !important;
-}
-
-/* JS-controlled open state */
-.nav-item.open > .mega-menu {
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+body {
+    overflow-x: hidden;
 }

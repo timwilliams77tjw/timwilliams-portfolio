@@ -1,124 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- GLOBAL CSS -->
-    <link rel="stylesheet" href="certifications.css">
-    <link rel="stylesheet" href="header.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Frequently Asked Questions</title>
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="header.css">
 
-    <!-- LOAD HEADER JS FIRST -->
-    <script src="header-standard-v23.js"></script>
+<!-- PAGE‑SPECIFIC CSS -->
+<style>
+body.page-certifications {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.hero-section {
+    margin-bottom: 2rem;
+}
+
+.hero-section h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.hero-section p {
+    font-size: 1.1rem;
+    color: var(--text-sub);
+    max-width: 720px;
+}
+
+.search-bar-local {
+    margin: 20px 0 30px;
+}
+
+#faq-search {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 50px;
+    border: 2px solid var(--text-main);
+    background: var(--card-bg);
+    font-size: 15px;
+    color: var(--text-main);
+    outline: none;
+    transition: 0.25s ease;
+}
+
+#faq-search::placeholder {
+    color: #6b7280;
+}
+
+#faq-search:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,120,255,0.15);
+}
+
+.faq-card {
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.faq-card h3 {
+    margin-top: 0;
+    color: var(--text-main);
+    font-size: 1.1rem;
+}
+
+.faq-card p {
+    margin-bottom: 0;
+    color: var(--text-sub);
+    line-height: 1.5;
+}
+
+.cta-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.sticky-follow {
+    background: var(--accent);
+}
+
+</style>
+
 </head>
 
 <body class="page-certifications">
 
-    <!-- HEADER -->
-    <div id="header-placeholder"></div>
+<!-- HEADER -->
+<!-- HEADER INCLUDE -->
+<!-- HEADER -->
+<!-- HEADER -->
+<div id="header-placeholder"></div>
 
-    <script>
-    // Inject header HTML, then initialise header JS
-    fetch("header-standard-v4.html")
-      .then(r => r.text())
-      .then(h => {
-          document.getElementById("header-placeholder").innerHTML = h;
-          if (typeof initHeader === "function") {
-              initHeader();
-          }
-      });
-    </script>
+<!-- 1. Load the JS file FIRST -->
+<script src="header-standard-v23.js"></script>
 
-    <!-- PAGE CONTENT -->
-    <main class="page-container">
+<!-- 2. Inject the header HTML -->
+<script>
+fetch("header-standard-v4.html")
+  .then(r => r.text())
+  .then(h => {
+      document.getElementById("header-placeholder").innerHTML = h;
 
-        <section class="hero-section">
-            <h1>Frequently Asked Questions</h1>
-            <p>Quick answers to common questions about my services, experience and ways of working.</p>
-        </section>
+      // 3. NOW run the header JS
+      initHeader();
+  });
+</script>
 
-        <div class="search-bar-local">
-            <input type="text" id="faq-search" placeholder="Search FAQs…" />
-        </div>
+<!-- 4. Debug output -->
+<div id="debug-output" style="padding:10px; background:#222; color:#0f0; font-family:monospace; font-size:14px;"></div>
 
-        <div id="faq-list">
 
-            <div class="faq-card">
-                <h3>What industries do you specialise in?</h3>
-                <p>I specialise in public sector, healthcare, financial services, global enterprise and regulated environments.</p>
-            </div>
 
-            <div class="faq-card">
-                <h3>Do you work on fixed‑price or day‑rate engagements?</h3>
-                <p>I offer both, depending on scope, delivery model and programme complexity.</p>
-            </div>
+<!-- PAGE CONTENT -->
+<main class="page-container">
 
-            <div class="faq-card">
-                <h3>Do you support remote or hybrid delivery?</h3>
-                <p>Yes — I lead programmes across fully remote, hybrid and on‑site models.</p>
-            </div>
+<section class="hero-section">
+<h1>Frequently Asked Questions</h1>
+<p>Quick answers to common questions about my services, experience and ways of working.</p>
+</section>
 
-            <div class="faq-card">
-                <h3>Can you support pre‑sales or bid work?</h3>
-                <p>Yes — I regularly support RFP responses, solution shaping, delivery planning and programme mobilisation.</p>
-            </div>
+<div class="search-bar-local">
+<input type="text" id="faq-search" placeholder="Search FAQs…" />
+</div>
 
-            <div class="faq-card">
-                <h3>Are you available for short‑term advisory work?</h3>
-                <p>Yes — I provide advisory sessions, programme reviews and delivery assurance assessments.</p>
-            </div>
+<div id="faq-list">
 
-            <div class="faq-card">
-                <h3>What size programmes do you typically lead?</h3>
-                <p>From £1m–£50m+ programmes, including cyber uplift, cloud transformation, modern workplace and service transition.</p>
-            </div>
+<div class="faq-card">
+<h3>What industries do you specialise in?</h3>
+<p>I specialise in public sector, healthcare, financial services, global enterprise and regulated environments.</p>
+</div>
 
-            <div class="faq-card">
-                <h3>Do you work with third‑party suppliers and MSPs?</h3>
-                <p>Yes — I regularly lead multi‑supplier delivery environments and manage complex vendor landscapes.</p>
-            </div>
+<div class="faq-card">
+<h3>Do you work on fixed‑price or day‑rate engagements?</h3>
+<p>I offer both, depending on scope, delivery model and programme complexity.</p>
+</div>
 
-            <div class="faq-card">
-                <h3>Can you recover failing or challenged programmes?</h3>
-                <p>Yes — programme recovery and delivery assurance are core parts of my service offering.</p>
-            </div>
+<div class="faq-card">
+<h3>Do you support remote or hybrid delivery?</h3>
+<p>Yes — I lead programmes across fully remote, hybrid and on‑site models.</p>
+</div>
 
-        </div>
+<div class="faq-card">
+<h3>Can you support pre‑sales or bid work?</h3>
+<p>Yes — I regularly support RFP responses, solution shaping, delivery planning and programme mobilisation.</p>
+</div>
 
-        <section class="cta-section">
-            <h2>Still Have a Question?</h2>
-            <p>If you’d like to discuss your programme or request more details, feel free to reach out.</p>
-            <a href="/contact.html" class="btn">Get in Touch</a>
-        </section>
+<div class="faq-card">
+<h3>Are you available for short‑term advisory work?</h3>
+<p>Yes — I provide advisory sessions, programme reviews and delivery assurance assessments.</p>
+</div>
 
-    </main>
+<div class="faq-card">
+<h3>What size programmes do you typically lead?</h3>
+<p>From £1m–£50m+ programmes, including cyber uplift, cloud transformation, modern workplace and service transition.</p>
+</div>
 
-    <!-- FLOATING BUTTONS -->
-    <div id="fab" class="fab">⬆️</div>
-    <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+<div class="faq-card">
+<h3>Do you work with third‑party suppliers and MSPs?</h3>
+<p>Yes — I regularly lead multi‑supplier delivery environments and manage complex vendor landscapes.</p>
+</div>
 
-    <!-- FOOTER -->
-    <div id="footer"></div>
-    <script>
-    fetch("footer.html")
-      .then(r => r.text())
-      .then(h => document.getElementById("footer").innerHTML = h);
-    </script>
+<div class="faq-card">
+<h3>Can you recover failing or challenged programmes?</h3>
+<p>Yes — programme recovery and delivery assurance are core parts of my service offering.</p>
+</div>
 
-    <!-- FAQ SEARCH -->
-    <script>
-    const faqSearch = document.getElementById("faq-search");
-    if (faqSearch) {
-      faqSearch.addEventListener("input", () => {
-        const term = faqSearch.value.toLowerCase();
-        document.querySelectorAll(".faq-card").forEach(card => {
-          const text = card.innerText.toLowerCase();
-          card.style.display = text.includes(term) ? "" : "none";
-        });
-      });
-    }
-    </script>
+</div>
+
+<section class="cta-section">
+<h2>Still Have a Question?</h2>
+<p>If you’d like to discuss your programme or request more details, feel free to reach out.</p>
+<a href="/contact.html" class="btn">Get in Touch</a>
+</section>
+
+</main>
+
+<!-- FLOATING BUTTONS -->
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- FAQ SEARCH -->
+<script>
+const faqSearch = document.getElementById("faq-search");
+if (faqSearch) {
+  faqSearch.addEventListener("input", () => {
+    const term = faqSearch.value.toLowerCase();
+    document.querySelectorAll(".faq-card").forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(term) ? "" : "none";
+    });
+  });
+}
+</script>
 </body>
 </html>

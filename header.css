@@ -6,7 +6,7 @@
     background: url('hero.jpg') center center / cover no-repeat;
     padding: 50px 30px;
     color: white;
-    z-index: 1; /* below mega-menu */
+    z-index: 1; /* hero sits below menu */
 }
 
 .hero-banner::before {
@@ -14,14 +14,14 @@
     position: absolute;
     inset: 0;
     background: rgba(10, 37, 64, 0.55);
-    z-index: 0; /* behind content + menu */
+    z-index: 0; /* overlay behind content */
     pointer-events: none;
 }
 
 .hero-content,
 .left-column {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* above overlay */
     min-width: 0;
 }
 
@@ -61,8 +61,8 @@
 }
 
 .nav-menu {
-    display: flex !important;
-    flex-wrap: nowrap !important;
+    display: flex;
+    flex-wrap: nowrap;
     width: max-content;
     min-width: 100%;
 }
@@ -72,7 +72,7 @@
     position: relative;
 }
 
-/* NAV BUTTON */
+/* NAV BUTTONS */
 .nav-btn,
 .mega-trigger {
     background: transparent;
@@ -82,19 +82,19 @@
     font-weight: 500;
     padding: 10px 14px;
     cursor: pointer;
-    text-decoration: none;
     white-space: nowrap;
-}
-
-/* iPad fix */
-.nav-item.mega > a {
-    cursor: pointer !important;
-    touch-action: manipulation !important;
+    text-decoration: none;
 }
 
 /* ===========================
    SEARCH
 =========================== */
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 #siteSearchInput {
     width: 0;
     opacity: 0;
@@ -106,17 +106,6 @@
     width: 160px;
     opacity: 1;
     pointer-events: auto;
-}
-
-.search-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#darkToggleHeader {
-    white-space: nowrap;
-    flex-shrink: 0;
 }
 
 /* ===========================
@@ -132,7 +121,7 @@
     border-radius: 8px;
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
     gap: 40px;
-    z-index: 999999; /* above hero */
+    z-index: 9999; /* ABOVE hero */
 }
 
 .nav-item:hover > .mega-menu {
@@ -163,6 +152,7 @@
    MOBILE
 =========================== */
 @media (max-width: 700px) {
+
     .nav-menu {
         gap: 6px;
     }
@@ -189,10 +179,21 @@
 }
 
 /* ===========================
-   SAFETY
+   TOUCH DEVICES
 =========================== */
-body {
-    overflow-x: hidden;
+@media (hover: none) and (pointer: coarse) {
+    .nav-item.open > .mega-menu {
+        display: flex !important;
+    }
+}
+
+/* ===========================
+   JS-CONTROLLED OPEN STATE
+=========================== */
+.nav-item.open > .mega-menu {
+    display: flex !important;
+    opacity: 1;
+    visibility: visible;
 }
 
 /* ===========================
@@ -214,29 +215,16 @@ body.dark-mode {
     --card-bg: #111827;
 }
 
-/* Touch devices */
-@media (hover: none) and (pointer: coarse) {
-    .nav-item.open > .mega-menu {
-        display: flex !important;
-    }
-}
-
-/* UNIVERSAL: JS-controlled open state */
-.nav-item.open > .mega-menu {
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
 /* ===========================
-   FINAL FIXES
+   SAFETY
 =========================== */
-
-/* Ensure mega-menu appears above hero */
-.mega-menu {
-    z-index: 9999;
+body {
+    overflow-x: hidden;
 }
 
-/* iPad Safari tap fix */
+/* ===========================
+   iPAD SAFARI FIX
+=========================== */
 @supports (-webkit-touch-callout: none) {
     .mega-trigger {
         cursor: pointer !important;

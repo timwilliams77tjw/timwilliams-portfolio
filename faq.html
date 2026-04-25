@@ -103,18 +103,22 @@ body.page-certifications {
 
 <!-- HEADER -->
 <!-- HEADER INCLUDE -->
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
+<!-- 1. Inject the header HTML -->
 <script>
 fetch("header-standard-v4.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
-      // DO NOT call initHeader() here
+
+      // 2. Now that the header exists, run the JS
+      initHeader();
   });
 </script>
 
-<!-- NOW load the JS -->
+<!-- 3. Load the JS file BEFORE calling initHeader() -->
 <script src="header-standard-v23.js"></script>
 
 

@@ -2,6 +2,8 @@
    HEADER INITIALISATION
 --------------------------------------------------------- */
 function initHeader() {
+   
+console.log("Mega triggers found:", document.querySelectorAll(".mega-trigger").length);
 
     const isTouch = () => (
         navigator.maxTouchPoints > 0 ||

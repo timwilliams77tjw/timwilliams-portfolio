@@ -84,7 +84,10 @@ fetch("header-standard.html")
 
 document.getElementById("header").innerHTML = h;
 
-initGlobal();
+if (window.initHeader) {
+    window.initHeader();
+}
+
 
 
 // Make Portfolio button active BUT keep dropdown working

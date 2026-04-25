@@ -105,18 +105,18 @@ body.page-certifications {
 <!-- HEADER INCLUDE -->
 <div id="header-placeholder"></div>
 
-<script src="header-standard-v23.js"></script>
-
 <script>
 fetch("header-standard-v4.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
-
-      initHeader(); // guaranteed to be the new version
+      // DO NOT call initHeader() here
   });
-
 </script>
+
+<!-- NOW load the JS -->
+<script src="header-standard-v23.js"></script>
+
 
 
 <!-- PAGE CONTENT -->

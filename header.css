@@ -253,3 +253,19 @@ body.dark-mode {
     position: absolute;
     z-index: 999999 !important;
 }
+/* FIX: allow mega-menu to appear above hero overlay */
+.hero-banner {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-banner::before {
+    z-index: 0 !important;
+}
+
+.nav-menu,
+.nav-item,
+.mega-menu {
+    position: relative;
+    z-index: 9999 !important;
+}

@@ -1,8 +1,5 @@
 function initHeader() {
 
-    /* ============================================================
-       DEVICE DETECTION (BULLETPROOF FOR iPAD, iPHONE, AND TABLETS)
-       ============================================================ */
     const isTouch = () => (
         navigator.maxTouchPoints > 0 ||
         window.matchMedia("(pointer: coarse)").matches
@@ -10,43 +7,28 @@ function initHeader() {
 
     const isMobile = () => window.innerWidth <= 700;
 
-    /* ============================================================
-       BACK TO TOP
-       ============================================================ */
-    const fab = document.getElementById("fab");
-    if (fab && !fab.dataset.bound) {
-        fab.dataset.bound = "true";
-        fab.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-    }
-
-    /* ============================================================
-       CLOSE ALL MENUS
-       ============================================================ */
     function closeAllMenus() {
         document.querySelectorAll(".nav-item.open").forEach(item => {
             item.classList.remove("open");
         });
     }
 
-    /* ============================================================
-       UNIVERSAL TAP‑TO‑OPEN (iPad, iPhone, Android tablets)
-       ============================================================ */
-    document.querySelectorAll(".nav-item.mega > a").forEach(link => {
-        link.addEventListener("click", function (e) {
+    /* MEGA MENU TRIGGERS (BUTTONS) */
+    document.querySelectorAll(".mega-trigger").forEach(btn => {
+        btn.addEventListener("click", function (e) {
 
-            // Desktop hover mode → allow normal behaviour
+            const parent = this.closest(".nav-item");
+
+            // Desktop hover mode → ignore click
             if (!isTouch() && !isMobile()) return;
 
-            const parent = this.parentElement;
-
-            // Second tap → follow link
+            // Second tap → close
             if (parent.classList.contains("open")) {
+                parent.classList.remove("open");
                 return;
             }
 
-            // First tap → open menu
+            // First tap → open
             e.preventDefault();
             e.stopPropagation();
             closeAllMenus();
@@ -54,24 +36,18 @@ function initHeader() {
         });
     });
 
-    /* ============================================================
-       CLOSE ON OUTSIDE TAP (touch devices only)
-       ============================================================ */
+    /* CLOSE ON OUTSIDE TAP */
     document.addEventListener("click", function (e) {
         if (!isTouch()) return;
         if (!e.target.closest(".nav-item")) closeAllMenus();
     });
 
-    /* ============================================================
-       CLOSE ON SCROLL (touch devices only)
-       ============================================================ */
+    /* CLOSE ON SCROLL */
     window.addEventListener("scroll", function () {
         if (isTouch()) closeAllMenus();
     });
 
-    /* ============================================================
-       SEARCH
-       ============================================================ */
+    /* SEARCH */
     const icon = document.getElementById("searchIcon");
     const input = document.getElementById("siteSearchInput");
     const resultsBox = document.getElementById("searchResults");
@@ -93,9 +69,7 @@ function initHeader() {
         });
     }
 
-    /* ============================================================
-       DARK MODE
-       ============================================================ */
+    /* DARK MODE */
     const darkToggle = document.getElementById("darkToggleHeader");
     const body = document.body;
 

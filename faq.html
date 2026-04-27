@@ -214,5 +214,22 @@ if (faqSearch) {
   });
 }
 </script>
+    <script>
+window.addEventListener("load", () => {
+    const docWidth = document.documentElement.scrollWidth;
+    const viewportWidth = window.innerWidth;
+
+    if (docWidth > viewportWidth) {
+        console.log("OVERFLOW DETECTED");
+
+        document.querySelectorAll("*").forEach(el => {
+            if (el.scrollWidth > viewportWidth) {
+                console.log("OVERFLOW ELEMENT:", el);
+                el.style.outline = "3px solid red";
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>

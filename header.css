@@ -1,6 +1,6 @@
 /* ==================================================
    header.css
-   FINAL FIXED iOS/iPad NAV SCROLL + STABLE MEGA MENU
+   FINAL iOS / iPad NAV SCROLL FIX (STABLE VERSION)
 ================================================== */
 
 
@@ -97,32 +97,37 @@ body {
 
 
 /* ===========================
-   NAV SCROLL (CRITICAL FIX)
+   NAV SCROLL CONTAINER (CRITICAL iOS FIX)
 =========================== */
 .nav-scroll {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
+
     -webkit-overflow-scrolling: touch;
 
-    position: relative;
     display: block;
 
+    position: relative;
+
+    /* FINAL FIX */
+    flex-shrink: 0;
     min-width: 0;
 
-    /* IMPORTANT iPhone FIX */
-    flex: 0 0 auto;
+    white-space: nowrap;
 }
 
 
 /* ===========================
-   NAV MENU (FORCE OVERFLOW)
+   NAV MENU (FORCED OVERFLOW)
 =========================== */
 .nav-menu {
     display: inline-flex;
+
     flex-wrap: nowrap;
 
-    width: max-content;
+    /* CRITICAL CHANGE FOR iPHONE */
+    width: fit-content;
     min-width: max-content;
 
     gap: 4px;
@@ -321,12 +326,4 @@ body {
     .nav-item.open > .mega-menu {
         display: flex !important;
     }
-}
-
-
-/* ===========================
-   DEBUG (OPTIONAL - REMOVE LATER)
-=========================== */
-.nav-scroll {
-    outline: 3px solid blue !important;
 }

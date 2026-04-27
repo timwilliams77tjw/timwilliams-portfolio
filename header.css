@@ -1,6 +1,6 @@
 /* ==================================================
    header.css
-   FINAL STABLE iOS / iPad NAV + LAYOUT FIX
+   FINAL STABLE iOS / iPad NAV SCROLL FIX
 ================================================== */
 
 
@@ -25,12 +25,12 @@ body.dark-mode {
 
 
 /* ===========================
-   GLOBAL (SAFE ONLY)
+   GLOBAL
 =========================== */
 body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* ONLY SAFE GLOBAL CONTROL */
+    overflow-x: hidden;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -44,7 +44,6 @@ body {
     padding: 50px 30px;
     color: white;
     z-index: 1;
-    overflow-x: clip; /* prevents bleed without breaking scroll systems */
 }
 
 .hero-banner::before {
@@ -58,25 +57,20 @@ body {
 
 
 /* ===========================
-   HERO FLEX FIX (REAL ROOT FIX)
+   HERO LAYOUT (SIMPLIFIED)
 =========================== */
 .hero-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 24px;
-
     position: relative;
     z-index: 2;
-
-    max-width: 100%;
-    box-sizing: border-box;
-
-    flex-wrap: wrap; /* CRITICAL: prevents iPhone overflow drift */
 }
 
 .left-column {
-    flex: 1 1 auto;
+    display: block;
+    width: 100%;
     min-width: 0;
 }
 
@@ -100,14 +94,11 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid white;
-
-    flex-shrink: 0;
-    max-width: 150px;
 }
 
 
 /* ===========================
-   NAV SCROLL CONTAINER (iOS SAFE)
+   NAV SCROLL CONTAINER (CRITICAL iOS FIX)
 =========================== */
 .nav-scroll {
     width: 100%;
@@ -117,11 +108,11 @@ body {
     -webkit-overflow-scrolling: touch;
 
     display: block;
-    position: relative;
 
     white-space: nowrap;
 
-    min-width: 0;
+    /* IMPORTANT: isolate layout from flex bugs */
+    contain: layout style paint;
 }
 
 
@@ -331,4 +322,17 @@ body {
     .nav-item.open > .mega-menu {
         display: flex !important;
     }
+}
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.hero-banner {
+    overflow-x: clip;
+}
+
+.hero-content {
+    max-width: 100%;
+    box-sizing: border-box;
 }

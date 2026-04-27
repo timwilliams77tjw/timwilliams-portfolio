@@ -1,12 +1,6 @@
 /* ==================================================
    header.css
-   FINAL LOCKED VERSION
-   Keeps:
-   - iPad profile alignment fixed
-   - mobile menu jump fixed
-   Restores:
-   - horizontal scroll
-   - header fully visible
+   FINAL STABLE VERSION (FIX PATCHED)
 ================================================== */
 
 
@@ -186,9 +180,17 @@ body{
 
 
 /* ===========================
-   SEARCH
+   SEARCH + DARK MODE ROW FIX
 =========================== */
 .search-wrapper{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex:0 0 auto;
+}
+
+/* NEW: keeps search + dark mode aligned */
+.header-right{
     display:flex;
     align-items:center;
     gap:10px;
@@ -294,7 +296,7 @@ body{
 
 
 /* ===========================
-   PHONE ONLY
+   PHONE ONLY (FIXED JUMP)
 =========================== */
 @media (max-width:700px){
 
@@ -307,17 +309,23 @@ body{
         margin:0 auto;
     }
 
-    /* only item opens vertically */
+    /* FIX: prevents submenu pushing layout */
     .nav-item.open{
-        display:flex;
-        flex-direction:column;
-        align-items:stretch;
+        position:relative;
     }
 
-    .search-wrapper{
-        display:flex;
-        flex-direction:row;
-        align-items:center;
+    .nav-item.open > .mega-menu{
+        position:absolute;
+        left:0;
+        top:100%;
+        width:280px;
+        z-index:99999;
+
+        background:#fff;
+        border-radius:10px;
+        padding:16px;
+
+        box-shadow:0 18px 45px rgba(0,0,0,.18);
     }
 }
 
@@ -330,54 +338,23 @@ body{
         display:flex !important;
     }
 }
-/* ==========================================
-   FINAL MOBILE SUBMENU FIX
-   Keeps scroll working
-   Keeps off-screen fixed
-   Restores styling
-========================================== */
 
-@media (max-width: 900px) {
 
-    .nav-item {
-        display: block;
-        vertical-align: top;
+/* ===========================
+   IPAD SUBMENU RESTORE FIX
+=========================== */
+@media (max-width:900px){
+
+    .mega-menu{
+        font-size:14px;
+        line-height:1.4;
     }
 
-    .nav-item.open > .mega-menu {
-        display: flex !important;
-        position: absolute;
-        left: 0;
-        top: 100%;
-        width: 280px;
-        z-index: 99999;
-
-        background: #ffffff;
-        color: #111;
-
-        border-radius: 10px;
-        padding: 16px;
-        margin-top: 8px;
-
-        box-shadow: 0 18px 45px rgba(0,0,0,0.18);
-
-        flex-direction: column;
-        gap: 14px;
+    .mega-column h4{
+        color:#0a2540;
     }
 
-    .mega-column h4 {
-        display: block;
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin: 0 0 8px;
-        color: #0a2540;
-    }
-
-    .mega-menu a {
-        display: block;
-        padding: 6px 0;
-        color: #222;
-        text-decoration: none;
+    .mega-menu a{
+        color:#222;
     }
 }

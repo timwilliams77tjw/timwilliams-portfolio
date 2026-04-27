@@ -1,6 +1,5 @@
 /* ==================================================
    header.css
-   Full Updated Version
    FIXED iOS/iPad NAV SCROLL + MEGA MENU STABILITY
 ================================================== */
 
@@ -58,26 +57,27 @@ body {
 
 
 /* ===========================
-   FLEX FIX (iOS SAFARI SAFE)
+   FLEX CONTAINMENT FIX (iOS CRITICAL)
 =========================== */
-.hero-content,
-.left-column {
-    position: relative;
-    z-index: 2;
-    min-width: 0;
-}
-
-.left-column {
-    flex: 1 1 auto;
-}
-
 .hero-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 24px;
+
+    position: relative;
+    z-index: 2;
 }
 
+.left-column {
+    flex: 1 1 auto;   /* CRITICAL */
+    min-width: 0;     /* CRITICAL */
+}
+
+
+/* ===========================
+   HERO TEXT + IMAGE
+=========================== */
 .hero-text h1 {
     margin: 0 0 10px;
     font-size: 2rem;
@@ -98,26 +98,30 @@ body {
 
 
 /* ===========================
-   NAV SCROLL (CRITICAL FIX)
+   NAV SCROLL CONTAINER (CRITICAL FIX)
 =========================== */
 .nav-scroll {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    position: relative;
 
-    /* KEY FIX FOR IOS */
+    position: relative;
     display: block;
+
     white-space: nowrap;
+
+    /* CRITICAL IOS FIX */
+    min-width: 0;
+    flex-shrink: 0;
 }
 
 
 /* ===========================
-   NAV MENU (FIXED FOR IOS)
+   NAV MENU (FIXED FOR IOS SCROLL)
 =========================== */
 .nav-menu {
-    display: inline-flex;   /* IMPORTANT CHANGE */
+    display: inline-flex;   /* IMPORTANT */
     flex-wrap: nowrap;
     align-items: center;
     gap: 4px;
@@ -268,7 +272,7 @@ body {
 
 
 /* ===========================
-   DEBUG (REMOVE LATER)
+   DEBUG (REMOVE AFTER FIX)
 =========================== */
 .nav-item.open > .nav-btn,
 .nav-item.open > .mega-trigger {

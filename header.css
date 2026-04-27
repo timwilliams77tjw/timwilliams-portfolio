@@ -1,11 +1,11 @@
 /* ==================================================
    header.css
-   STABLE BASELINE (iOS + iPad SAFE RESET)
+   STABLE RECOVERY BASE (FIXES FADE + STYLE LOSS)
 ================================================== */
 
 
 /* ===========================
-   RESET / BASE
+   SAFE GLOBAL RESET (MINIMAL)
 =========================== */
 html, body {
     margin: 0;
@@ -17,13 +17,35 @@ html, body {
     overflow-x: hidden;
 
     font-family: Arial, Helvetica, sans-serif;
+}
 
-    touch-action: pan-y;
+/* DO NOT use position hacks here */
+body {
+    position: static;
 }
 
 
 /* ===========================
-   HERO (NO LAYOUT SIDE EFFECTS)
+   THEME VARIABLES SAFE RESTORE
+=========================== */
+:root {
+    --bg: #ffffff;
+    --text-main: #111111;
+    --text-sub: #555555;
+    --card-bg: #f5f5f5;
+    --accent: #0a2540;
+}
+
+body.dark-mode {
+    --bg: #0f172a;
+    --text-main: #e5e7eb;
+    --text-sub: #9ca3af;
+    --card-bg: #111827;
+}
+
+
+/* ===========================
+   HERO (RESTORED VISIBILITY)
 =========================== */
 .hero-banner {
     position: relative;
@@ -41,7 +63,7 @@ html, body {
 
 
 /* ===========================
-   HERO LAYOUT (SAFE FLEX)
+   HERO LAYOUT (SAFE)
 =========================== */
 .hero-content {
     display: flex;
@@ -69,29 +91,22 @@ html, body {
 
 
 /* ===========================
-   NAV CONTAINER (ONLY SOURCE OF SCROLL)
+   NAV WRAPPER (DISABLED FOR NOW)
+   (we isolate the problem)
 =========================== */
 .nav-scroll {
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden; /* TEMP SAFE MODE */
 }
 
 
 /* ===========================
-   NAV ROW (CRITICAL STABILITY RULE)
+   NAV ROW (NO SCROLL YET)
 =========================== */
 .nav-menu {
     display: flex;
     flex-wrap: nowrap;
-
-    /* IMPORTANT: allows scroll naturally */
-    width: max-content;
-
     gap: 6px;
-    align-items: center;
 }
 
 
@@ -99,7 +114,6 @@ html, body {
    NAV ITEMS
 =========================== */
 .nav-item {
-    flex: 0 0 auto;
     position: relative;
 }
 
@@ -112,100 +126,28 @@ html, body {
     background: transparent;
     border: none;
     color: #fff;
-
-    font-size: 15px;
-    font-weight: 500;
-
     padding: 10px 14px;
-
     white-space: nowrap;
-    cursor: pointer;
-
-    border-radius: 6px;
 }
 
 
 /* ===========================
-   SEARCH / DARK MODE
-=========================== */
-.search-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.search-icon,
-#darkToggleHeader {
-    color: #fff;
-}
-
-
-/* ===========================
-   MEGA MENU (DESKTOP SAFE)
+   MEGA MENU (SAFE VISIBILITY)
 =========================== */
 .mega-menu {
     display: none;
     position: fixed;
-
     top: 140px;
     left: 20px;
     right: 20px;
 
     background: #fff;
-    padding: 25px;
+    padding: 20px;
 
-    border-radius: 10px;
-
-    box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-
-    gap: 40px;
-    flex-wrap: wrap;
-
-    z-index: 999999;
+    z-index: 9999;
 }
 
 .nav-item:hover > .mega-menu,
 .nav-item.open > .mega-menu {
     display: flex;
-}
-
-.mega-column {
-    display: flex;
-    flex-direction: column;
-    min-width: 170px;
-}
-
-
-/* ===========================
-   MOBILE ONLY FIX (NO LAYOUT IMPACT)
-=========================== */
-@media (max-width: 900px) {
-
-    .hero-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    /* submenu does NOT affect layout */
-    .mega-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-
-        display: none;
-
-        background: #fff;
-        padding: 15px;
-
-        box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-
-        flex-direction: column;
-
-        z-index: 999999;
-    }
-
-    .nav-item.open > .mega-menu {
-        display: flex !important;
-    }
 }

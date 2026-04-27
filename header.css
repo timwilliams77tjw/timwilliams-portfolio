@@ -60,6 +60,7 @@ body {
     pointer-events: none;
 }
 
+
 /* ===========================
    FIX 1 — FLEX OVERFLOW CONTEXT
    (CRITICAL IOS FIX)
@@ -68,7 +69,12 @@ body {
 .left-column {
     position: relative;
     z-index: 2;
-    min-width: 0; /* FIX ADDED */
+    min-width: 0; /* REQUIRED FOR IOS FLEX OVERFLOW */
+}
+
+/* 🔥 FIX ADDED (CRITICAL) */
+.left-column {
+    flex: 1 1 auto;
 }
 
 .hero-content {
@@ -110,7 +116,7 @@ body {
     position: relative;
     scrollbar-width: none;
 
-    /* FIX ADDED */
+    /* REQUIRED FOR IOS FLEX CONTEXT */
     min-width: 0;
     display: block;
 }
@@ -124,19 +130,18 @@ body {
    FIX 3 — NAV FLEX BEHAVIOUR
 =========================== */
 .nav-menu {
-    display: flex;              /* CHANGED FROM inline-flex */
+    display: flex;
     flex-wrap: nowrap;
     width: max-content;
     gap: 4px;
     align-items: center;
 
-    /* IMPORTANT: REMOVE SCROLL BREAKING BEHAVIOUR */
     pointer-events: none;
 }
 
 .nav-item {
     position: static;
-    flex: 0 0 auto;             /* FIX ADDED */
+    flex: 0 0 auto;
 }
 
 .nav-item,
@@ -271,6 +276,7 @@ body {
     color: var(--accent);
 }
 
+
 /* ===========================
    DEBUG — ACTIVE MENU STATE
    (REMOVE AFTER TESTING)
@@ -279,9 +285,12 @@ body {
 .nav-item.open > .mega-trigger {
     background: red !important;
 }
+
 .nav-menu {
     outline: 3px solid lime;
 }
+
+
 /* ===========================
    MOBILE
 =========================== */

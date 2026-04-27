@@ -1,45 +1,26 @@
 /* ==================================================
    header.css
-   FINAL STABLE VERSION (FIX PATCHED)
+   STABLE iOS + iPad FIXED HEADER SYSTEM
 ================================================== */
 
 
 /* ===========================
-   ROOT VARIABLES
+   RESET / BASE
 =========================== */
-:root{
-    --bg:#ffffff;
-    --text-main:#111111;
-    --text-sub:#555555;
-    --card-bg:#f5f5f5;
-    --shadow:0 8px 20px rgba(0,0,0,.08);
-    --accent:#0a2540;
-}
-
-body.dark-mode{
-    --bg:#0f172a;
-    --text-main:#e5e7eb;
-    --text-sub:#9ca3af;
-    --card-bg:#111827;
-}
-
-
-/* ===========================
-   GLOBAL
-=========================== */
-html,
-body{
+html, body{
     margin:0;
     padding:0;
     width:100%;
     max-width:100%;
     overflow-x:hidden;
-    position:relative;
-    touch-action:pan-y;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
+    background:#fff;
+    color:#111;
+    -webkit-text-size-adjust:100%;
+    touch-action:pan-y;
 }
 
 
@@ -48,10 +29,9 @@ body{
 =========================== */
 .hero-banner{
     position:relative;
-    background:url("hero.jpg") center center / cover no-repeat;
+    background:url("hero.jpg") center/cover no-repeat;
     padding:50px 20px;
     color:#fff;
-    overflow:hidden;
 }
 
 .hero-banner::before{
@@ -68,91 +48,58 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:24px;
+    gap:20px;
 
     width:100%;
-    max-width:100%;
     box-sizing:border-box;
 }
 
-.left-column{
-    flex:1 1 auto;
-    min-width:0;
-    max-width:100%;
-}
-
 
 /* ===========================
-   TEXT
+   HERO ELEMENTS
 =========================== */
 .hero-text{
+    flex:1;
     min-width:0;
-    max-width:100%;
 }
 
-.hero-text h1{
-    margin:0 0 10px;
-    font-size:2rem;
-}
-
-.hero-text p{
-    margin:6px 0;
-    line-height:1.45;
-    white-space:normal;
-    overflow-wrap:anywhere;
-}
-
-
-/* ===========================
-   PHOTO
-=========================== */
 .hero-photo{
     width:110px;
     height:110px;
     border-radius:50%;
     object-fit:cover;
     border:4px solid #fff;
-    flex:0 0 auto;
-    margin-left:auto;
+    flex-shrink:0;
 }
 
 
 /* ===========================
-   NAV SCROLL
+   NAV WRAPPER (CRITICAL FIX)
 =========================== */
 .nav-scroll{
     width:100%;
-    max-width:100%;
     overflow-x:auto;
     overflow-y:hidden;
-
     -webkit-overflow-scrolling:touch;
     overscroll-behavior-x:contain;
-
-    white-space:nowrap;
 }
 
-
-/* ===========================
-   NAV MENU
-=========================== */
 .nav-menu{
-    display:inline-flex;
+    display:flex;
     flex-wrap:nowrap;
-    align-items:center;
     gap:6px;
+    align-items:center;
 
     min-width:max-content;
-    width:auto;
 }
 
 
 /* ===========================
-   ITEMS
+   NAV ITEM
 =========================== */
 .nav-item{
-    flex:0 0 auto;
     position:relative;
+    flex:0 0 auto;
 }
 
 
@@ -167,40 +114,28 @@ body{
     font-size:15px;
     font-weight:500;
     padding:10px 14px;
-    cursor:pointer;
-    text-decoration:none;
     white-space:nowrap;
     border-radius:6px;
-}
-
-.nav-item>a,
-.nav-item>button{
-    -webkit-tap-highlight-color:transparent;
+    cursor:pointer;
 }
 
 
 /* ===========================
-   SEARCH + DARK MODE ROW FIX
+   HEADER RIGHT (FIX ROW ISSUE)
 =========================== */
-.search-wrapper{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex:0 0 auto;
-}
-
-/* NEW: keeps search + dark mode aligned */
 .header-right{
     display:flex;
     align-items:center;
     gap:10px;
-    flex:0 0 auto;
 }
 
-.search-icon{
+
+/* ===========================
+   SEARCH
+=========================== */
+.search-wrapper{
     display:flex;
     align-items:center;
-    color:#fff;
 }
 
 #siteSearchInput{
@@ -220,83 +155,63 @@ body{
 }
 
 #darkToggleHeader{
-    border:none;
     background:transparent;
+    border:none;
     color:#fff;
     font-size:18px;
 }
 
 
 /* ===========================
-   DESKTOP MENU
+   MEGA MENU (STABLE MODEL)
 =========================== */
 .mega-menu{
     display:none;
-    position:fixed;
-    top:155px;
-    left:20px;
-    right:20px;
+    position:absolute;
+    top:100%;
+    left:0;
+
+    width:280px;
     background:#fff;
-    padding:25px 30px;
+
+    padding:16px;
     border-radius:10px;
-    box-shadow:0 18px 45px rgba(0,0,0,.15);
-    gap:40px;
-    flex-wrap:wrap;
-    z-index:999999;
-}
+    box-shadow:0 18px 45px rgba(0,0,0,.18);
 
-.nav-item:hover>.mega-menu,
-.nav-item.open>.mega-menu{
-    display:flex;
-}
-
-.mega-column{
-    display:flex;
     flex-direction:column;
-    min-width:170px;
+    gap:12px;
+
+    z-index:99999;
+}
+
+.nav-item:hover > .mega-menu,
+.nav-item.open > .mega-menu{
+    display:flex;
 }
 
 
 /* ===========================
-   TABLET
+   TABLET (iPad FIX)
 =========================== */
 @media (max-width:900px){
 
     .hero-content{
         flex-direction:row;
-        align-items:flex-start;
     }
 
     .hero-photo{
         margin-left:auto;
     }
 
-    .nav-btn,
-    .mega-trigger{
-        border:1px solid rgba(255,255,255,.6);
-        font-weight:600;
-    }
-
+    /* KEEP SAME MENU SYSTEM */
     .mega-menu{
-        position:static;
-        display:none;
-        width:100%;
-        padding:15px;
-        margin-top:8px;
-        border-radius:8px;
-        box-shadow:none;
-        gap:16px;
-        flex-direction:column;
-    }
-
-    .nav-item.open>.mega-menu{
-        display:flex !important;
+        width:320px;
     }
 }
 
 
 /* ===========================
-   PHONE ONLY (FIXED JUMP)
+   PHONE (iPhone FIX)
 =========================== */
 @media (max-width:700px){
 
@@ -309,52 +224,13 @@ body{
         margin:0 auto;
     }
 
-    /* FIX: prevents submenu pushing layout */
+    /* prevent layout shift */
     .nav-item.open{
         position:relative;
     }
 
-    .nav-item.open > .mega-menu{
-        position:absolute;
-        left:0;
-        top:100%;
-        width:280px;
-        z-index:99999;
-
-        background:#fff;
-        border-radius:10px;
-        padding:16px;
-
-        box-shadow:0 18px 45px rgba(0,0,0,.18);
-    }
-}
-
-
-/* ===========================
-   TOUCH
-=========================== */
-@media (hover:none) and (pointer:coarse){
-    .nav-item.open>.mega-menu{
-        display:flex !important;
-    }
-}
-
-
-/* ===========================
-   IPAD SUBMENU RESTORE FIX
-=========================== */
-@media (max-width:900px){
-
     .mega-menu{
-        font-size:14px;
-        line-height:1.4;
-    }
-
-    .mega-column h4{
-        color:#0a2540;
-    }
-
-    .mega-menu a{
-        color:#222;
+        width:90vw;
+        left:0;
     }
 }

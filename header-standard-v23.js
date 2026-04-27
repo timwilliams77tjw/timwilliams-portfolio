@@ -7,12 +7,17 @@
 
 function initHeader() {
 
-    const isTouch = () =>
-        navigator.maxTouchPoints > 0 ||
-        window.matchMedia("(pointer: coarse)").matches;
+    /* ===========================
+       FIX 1 — IMPROVED DEVICE DETECTION
+       (iPad now treated as touch + mobile-capable)
+    =========================== */
+
+    const isTouchDevice = () =>
+        window.matchMedia("(pointer: coarse)").matches ||
+        navigator.maxTouchPoints > 0;
 
     const isMobile = () =>
-        window.innerWidth <= 700;
+        window.innerWidth <= 900; // expanded for iPad compatibility
 
     const body = document.body;
 
@@ -63,9 +68,9 @@ function initHeader() {
             if (!parent) return;
 
             /* Desktop hover mode */
-            if (!isTouch() && !isMobile()) return;
+            if (!isTouchDevice() && !isMobile()) return;
 
-            /* Close same menu */
+            /* Toggle menu */
             if (parent.classList.contains("open")) {
                 parent.classList.remove("open");
                 return;

@@ -481,17 +481,16 @@ justify-content:center;
 <!-- HEADER INCLUDE -->
 <div id="header-placeholder"></div>
 
-<script>
-fetch("header-standard.html?v=20")
-  .then(r => r.text())
-  .then(html => {
-    const container = document.getElementById("header-placeholder");
-    container.innerHTML = html;
+<!-- 1. Load the JS file FIRST -->
+<script src="header-standard-v23.js"></script>
 
-    // ensure header JS runs AFTER DOM injection
-    if (window.initHeader) {
-      window.initHeader();
-    }
+<!-- 2. Inject the header HTML -->
+<script>
+fetch("./header-standard-v4.html")
+  .then(r => r.text())
+  .then(h => {
+      document.getElementById("header-placeholder").innerHTML = h;
+      initHeader();
   });
 </script>
 
@@ -701,6 +700,6 @@ body.classList.contains("dark-mode")?"1":"0"
 })();
 
 </script>
-<script src="header-standard.js?v=20"></script>
+
 </body>
 </html>

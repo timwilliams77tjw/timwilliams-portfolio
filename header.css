@@ -1,20 +1,19 @@
 /* ==================================================
    header.css
-   FINAL STABLE VERSION
-   Fixes:
-   - Mobile nav scroll works
-   - No off-screen swipe
-   - No red debug boxes
-   - Fix mobile menu jump
-   - Search + dark mode stay inline
-   - iPad photo right aligned
+   FINAL LOCKED VERSION
+   Keeps:
+   - iPad profile alignment fixed
+   - mobile menu jump fixed
+   Restores:
+   - horizontal scroll
+   - header fully visible
 ================================================== */
 
 
 /* ===========================
    ROOT VARIABLES
 =========================== */
-:root {
+:root{
     --bg:#ffffff;
     --text-main:#111111;
     --text-sub:#555555;
@@ -66,7 +65,6 @@ body{
     position:absolute;
     inset:0;
     background:rgba(10,37,64,.55);
-    pointer-events:none;
 }
 
 .hero-content{
@@ -86,12 +84,18 @@ body{
 .left-column{
     flex:1 1 auto;
     min-width:0;
+    max-width:100%;
 }
 
 
 /* ===========================
    TEXT
 =========================== */
+.hero-text{
+    min-width:0;
+    max-width:100%;
+}
+
 .hero-text h1{
     margin:0 0 10px;
     font-size:2rem;
@@ -132,7 +136,6 @@ body{
     overscroll-behavior-x:contain;
 
     white-space:nowrap;
-    box-sizing:border-box;
 }
 
 
@@ -144,7 +147,9 @@ body{
     flex-wrap:nowrap;
     align-items:center;
     gap:6px;
+
     min-width:max-content;
+    width:auto;
 }
 
 
@@ -172,27 +177,19 @@ body{
     text-decoration:none;
     white-space:nowrap;
     border-radius:6px;
-    line-height:1.2;
 }
 
-.nav-btn:hover,
-.mega-trigger:hover{
-    opacity:.9;
-}
-
-.nav-item > a,
-.nav-item > button{
+.nav-item>a,
+.nav-item>button{
     -webkit-tap-highlight-color:transparent;
-    touch-action:manipulation;
 }
 
 
 /* ===========================
-   SEARCH / DARK
+   SEARCH
 =========================== */
 .search-wrapper{
     display:flex;
-    flex-direction:row;
     align-items:center;
     gap:10px;
     flex:0 0 auto;
@@ -202,7 +199,6 @@ body{
     display:flex;
     align-items:center;
     color:#fff;
-    cursor:pointer;
 }
 
 #siteSearchInput{
@@ -225,13 +221,12 @@ body{
     border:none;
     background:transparent;
     color:#fff;
-    cursor:pointer;
     font-size:18px;
 }
 
 
 /* ===========================
-   DESKTOP MEGA MENU
+   DESKTOP MENU
 =========================== */
 .mega-menu{
     display:none;
@@ -239,19 +234,17 @@ body{
     top:155px;
     left:20px;
     right:20px;
-
     background:#fff;
     padding:25px 30px;
     border-radius:10px;
     box-shadow:0 18px 45px rgba(0,0,0,.15);
-
     gap:40px;
     flex-wrap:wrap;
     z-index:999999;
 }
 
-.nav-item:hover > .mega-menu,
-.nav-item.open > .mega-menu{
+.nav-item:hover>.mega-menu,
+.nav-item.open>.mega-menu{
     display:flex;
 }
 
@@ -259,24 +252,6 @@ body{
     display:flex;
     flex-direction:column;
     min-width:170px;
-}
-
-.mega-column h4{
-    margin:0 0 10px;
-    font-size:12px;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    color:#0a2540;
-}
-
-.mega-menu a{
-    color:#222;
-    text-decoration:none;
-    padding:6px 0;
-}
-
-.mega-menu a:hover{
-    color:var(--accent);
 }
 
 
@@ -288,7 +263,6 @@ body{
     .hero-content{
         flex-direction:row;
         align-items:flex-start;
-        text-align:left;
     }
 
     .hero-photo{
@@ -305,19 +279,15 @@ body{
         position:static;
         display:none;
         width:100%;
-        box-sizing:border-box;
-
         padding:15px;
         margin-top:8px;
-
         border-radius:8px;
         box-shadow:none;
-
         gap:16px;
         flex-direction:column;
     }
 
-    .nav-item.open > .mega-menu{
+    .nav-item.open>.mega-menu{
         display:flex !important;
     }
 }
@@ -337,18 +307,15 @@ body{
         margin:0 auto;
     }
 
-    /* FIX menu jump */
-    .nav-item{
+    /* only item opens vertically */
+    .nav-item.open{
         display:flex;
         flex-direction:column;
         align-items:stretch;
     }
 
-    .nav-menu{
-        align-items:flex-start;
-    }
-
     .search-wrapper{
+        display:flex;
         flex-direction:row;
         align-items:center;
     }
@@ -359,7 +326,7 @@ body{
    TOUCH
 =========================== */
 @media (hover:none) and (pointer:coarse){
-    .nav-item.open > .mega-menu{
+    .nav-item.open>.mega-menu{
         display:flex !important;
     }
 }

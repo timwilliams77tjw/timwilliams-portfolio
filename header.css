@@ -109,26 +109,23 @@ body {
     position: relative;
     display: block;
 
-    white-space: nowrap;
-
-    /* CRITICAL IOS FIX */
+    /* CRITICAL */
     min-width: 0;
-    flex-shrink: 0;
 }
 
-
-/* ===========================
-   NAV MENU (FIXED FOR IOS SCROLL)
-=========================== */
 .nav-menu {
-    display: inline-flex;   /* IMPORTANT */
+    display: flex;              /* CHANGE FROM inline-flex */
     flex-wrap: nowrap;
-    align-items: center;
+
+    /* FORCE REAL OVERFLOW */
+    width: max-content;
+    min-width: max-content;
+
     gap: 4px;
+    align-items: center;
 
     pointer-events: none;
 }
-
 
 /* ===========================
    NAV ITEMS

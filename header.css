@@ -1,10 +1,10 @@
 /* ==================================================
    header.css
-   STABLE iOS / iPAD / iPHONE NAV SYSTEM
-   - Restores iPhone scroll
-   - Restores iPhone submenu
-   - Keeps iPad working state
-   - Prevents header shift/off-screen load
+   FINAL STABLE IOS / IPAD / DESKTOP VERSION
+   - Fixed scroll (kept working version)
+   - Fixed off-screen behaviour
+   - Fixed iPhone submenu visibility
+   - Fixed iPad submenu clipping
 ================================================== */
 
 
@@ -29,16 +29,14 @@ body.dark-mode {
 
 
 /* ===========================
-   GLOBAL (CRITICAL IOS STABILITY)
+   GLOBAL
 =========================== */
 html,
 body {
     margin: 0;
     padding: 0;
-
-    max-width: 100vw;
     overflow-x: hidden;
-
+    max-width: 100%;
     position: relative;
     touch-action: pan-y;
 }
@@ -83,7 +81,6 @@ body {
 
     max-width: 100%;
     box-sizing: border-box;
-
     flex-wrap: wrap;
 }
 
@@ -124,12 +121,11 @@ body {
 
 
 /* ===========================
-   NAV SCROLL (CRITICAL FIX)
+   NAV SCROLL CONTAINER
 =========================== */
 .nav-scroll {
     width: 100%;
     max-width: 100%;
-
     overflow-x: auto;
     overflow-y: hidden;
 
@@ -140,29 +136,18 @@ body {
     box-sizing: border-box;
 }
 
-.nav-scroll::-webkit-scrollbar {
-    display: none;
-}
-
 
 /* ===========================
-   NAV MENU (DO NOT CHANGE ON MOBILE)
+   NAV MENU (WORKING VERSION KEPT)
 =========================== */
 .nav-menu {
     display: inline-flex;
     flex-wrap: nowrap;
-
     min-width: max-content;
-    width: max-content;
-
     gap: 6px;
     align-items: center;
 }
 
-
-/* ===========================
-   NAV ITEMS
-=========================== */
 .nav-item {
     position: relative;
     flex: 0 0 auto;
@@ -170,22 +155,19 @@ body {
 
 
 /* ===========================
-   NAV BUTTONS
+   BUTTONS
 =========================== */
 .nav-btn,
 .mega-trigger {
     background: transparent;
     border: none;
-
     color: white;
     font-size: 15px;
     font-weight: 500;
-
     padding: 10px 14px;
     cursor: pointer;
-
-    white-space: nowrap;
     border-radius: 6px;
+    white-space: nowrap;
     text-decoration: none;
 }
 
@@ -216,7 +198,6 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: 0.25s ease;
-
     border: none;
     border-radius: 30px;
     padding: 8px 12px;
@@ -238,13 +219,15 @@ body {
 
 
 /* ===========================
-   DESKTOP / IPAD MEGA MENU
+   MEGA MENU (DESKTOP / IPAD FIXED)
 =========================== */
 .mega-menu {
     display: none;
     position: fixed;
 
+    /* stable anchor */
     top: 120px;
+
     left: 20px;
     right: 20px;
 
@@ -287,7 +270,7 @@ body {
 
 
 /* ===========================
-   MOBILE (iPHONE FIX ONLY)
+   MOBILE FIX (iPHONE)
 =========================== */
 @media (max-width: 700px) {
 
@@ -307,21 +290,25 @@ body {
         font-weight: 600;
     }
 
-    /* DO NOT BREAK SCROLL OR NAV STRUCTURE */
+    /* IMPORTANT: keep relative for dropdown */
     .nav-item {
         position: relative;
     }
 
-    /* MOBILE DROPDOWN ONLY */
+    /* FIXED MOBILE DROPDOWN */
     .mega-menu {
-        display: none;
-
         position: absolute;
 
         top: calc(100% + 8px);
         left: 0;
+        right: 0;
 
-        width: 280px;
+        transform: none;
+
+        display: none;
+
+        width: 100%;
+        box-sizing: border-box;
 
         background: #ffffff;
         padding: 15px;
@@ -342,9 +329,10 @@ body {
 
 
 /* ===========================
-   FINAL SAFETY NET (iOS LOAD SHIFT FIX)
+   TOUCH DEVICES
 =========================== */
-html, body {
-    max-width: 100vw;
-    overflow-x: hidden;
+@media (hover:none) and (pointer:coarse) {
+    .nav-item.open > .mega-menu {
+        display: flex !important;
+    }
 }

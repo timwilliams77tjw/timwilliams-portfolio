@@ -1,6 +1,6 @@
 /* ==================================================
    header.css
-   FIXED iOS/iPad NAV SCROLL + MEGA MENU STABILITY
+   FINAL FIXED iOS/iPad NAV SCROLL + STABLE MEGA MENU
 ================================================== */
 
 
@@ -57,26 +57,25 @@ body {
 
 
 /* ===========================
-   FLEX CONTAINMENT FIX (iOS CRITICAL)
+   FLEX FIX (iOS CRITICAL)
 =========================== */
 .hero-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 24px;
-
     position: relative;
     z-index: 2;
 }
 
 .left-column {
-    flex: 1 1 auto;   /* CRITICAL */
-    min-width: 0;     /* CRITICAL */
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 
 /* ===========================
-   HERO TEXT + IMAGE
+   HERO CONTENT
 =========================== */
 .hero-text h1 {
     margin: 0 0 10px;
@@ -98,7 +97,7 @@ body {
 
 
 /* ===========================
-   NAV SCROLL CONTAINER (CRITICAL FIX)
+   NAV SCROLL (CRITICAL FIX)
 =========================== */
 .nav-scroll {
     width: 100%;
@@ -109,15 +108,20 @@ body {
     position: relative;
     display: block;
 
-    /* CRITICAL */
     min-width: 0;
+
+    /* IMPORTANT iPhone FIX */
+    flex: 0 0 auto;
 }
 
+
+/* ===========================
+   NAV MENU (FORCE OVERFLOW)
+=========================== */
 .nav-menu {
-    display: flex;              /* CHANGE FROM inline-flex */
+    display: inline-flex;
     flex-wrap: nowrap;
 
-    /* FORCE REAL OVERFLOW */
     width: max-content;
     min-width: max-content;
 
@@ -126,6 +130,7 @@ body {
 
     pointer-events: none;
 }
+
 
 /* ===========================
    NAV ITEMS
@@ -171,8 +176,9 @@ body {
 .nav-item > a,
 .nav-item > button {
     -webkit-tap-highlight-color: transparent;
-    touch-action: pan-y; /* IMPORTANT FIX */
+    touch-action: manipulation;
 }
+
 
 /* ===========================
    SEARCH
@@ -268,19 +274,6 @@ body {
 
 
 /* ===========================
-   DEBUG (REMOVE AFTER FIX)
-=========================== */
-.nav-item.open > .nav-btn,
-.nav-item.open > .mega-trigger {
-    background: red !important;
-}
-
-.nav-menu {
-    outline: 3px solid lime;
-}
-
-
-/* ===========================
    MOBILE
 =========================== */
 @media (max-width: 900px) {
@@ -329,6 +322,11 @@ body {
         display: flex !important;
     }
 }
+
+
+/* ===========================
+   DEBUG (OPTIONAL - REMOVE LATER)
+=========================== */
 .nav-scroll {
     outline: 3px solid blue !important;
 }

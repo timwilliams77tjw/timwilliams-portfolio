@@ -1,11 +1,7 @@
 /* ==================================================
    header.css
    Full Updated Version
-   Includes:
-   - Working iPhone/iPad mega menus
-   - Final iPhone horizontal nav scroll fix
-   - Dark mode
-   - Responsive layout
+   FIXED iOS/iPad NAV SCROLL + MEGA MENU STABILITY
 ================================================== */
 
 
@@ -62,17 +58,15 @@ body {
 
 
 /* ===========================
-   FIX 1 — FLEX OVERFLOW CONTEXT
-   (CRITICAL IOS FIX)
+   FLEX FIX (iOS SAFARI SAFE)
 =========================== */
 .hero-content,
 .left-column {
     position: relative;
     z-index: 2;
-    min-width: 0; /* REQUIRED FOR IOS FLEX OVERFLOW */
+    min-width: 0;
 }
 
-/* 🔥 FIX ADDED (CRITICAL) */
 .left-column {
     flex: 1 1 auto;
 }
@@ -104,44 +98,40 @@ body {
 
 
 /* ===========================
-   FIX 2 — NAV SCROLL CONTAINER
+   NAV SCROLL (CRITICAL FIX)
 =========================== */
 .nav-scroll {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-    touch-action: pan-x;
     position: relative;
-    scrollbar-width: none;
 
-    /* REQUIRED FOR IOS FLEX CONTEXT */
-    min-width: 0;
+    /* KEY FIX FOR IOS */
     display: block;
-}
-
-.nav-scroll::-webkit-scrollbar {
-    display: none;
+    white-space: nowrap;
 }
 
 
 /* ===========================
-   FIX 3 — NAV FLEX BEHAVIOUR
+   NAV MENU (FIXED FOR IOS)
 =========================== */
 .nav-menu {
-    display: flex;
+    display: inline-flex;   /* IMPORTANT CHANGE */
     flex-wrap: nowrap;
-    width: max-content;
-    gap: 4px;
     align-items: center;
+    gap: 4px;
 
     pointer-events: none;
 }
 
+
+/* ===========================
+   NAV ITEMS
+=========================== */
 .nav-item {
-    position: static;
     flex: 0 0 auto;
+    position: static;
 }
 
 .nav-item,
@@ -278,8 +268,7 @@ body {
 
 
 /* ===========================
-   DEBUG — ACTIVE MENU STATE
-   (REMOVE AFTER TESTING)
+   DEBUG (REMOVE LATER)
 =========================== */
 .nav-item.open > .nav-btn,
 .nav-item.open > .mega-trigger {
@@ -318,9 +307,6 @@ body {
 
     .mega-menu {
         position: static;
-        top: auto;
-        left: auto;
-        right: auto;
         box-shadow: none;
         border-radius: 8px;
         padding: 15px;

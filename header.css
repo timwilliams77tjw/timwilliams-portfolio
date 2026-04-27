@@ -60,11 +60,15 @@ body {
     pointer-events: none;
 }
 
+/* ===========================
+   FIX 1 — FLEX OVERFLOW CONTEXT
+   (CRITICAL IOS FIX)
+=========================== */
 .hero-content,
 .left-column {
     position: relative;
     z-index: 2;
-    min-width: 0;
+    min-width: 0; /* FIX ADDED */
 }
 
 .hero-content {
@@ -94,7 +98,7 @@ body {
 
 
 /* ===========================
-   FINAL IPHONE NAV SCROLL FIX
+   FIX 2 — NAV SCROLL CONTAINER
 =========================== */
 .nav-scroll {
     width: 100%;
@@ -105,18 +109,34 @@ body {
     touch-action: pan-x;
     position: relative;
     scrollbar-width: none;
+
+    /* FIX ADDED */
+    min-width: 0;
+    display: block;
 }
 
 .nav-scroll::-webkit-scrollbar {
     display: none;
 }
 
+
+/* ===========================
+   FIX 3 — NAV FLEX BEHAVIOUR
+=========================== */
 .nav-menu {
-    display: inline-flex;
-    min-width: max-content;
+    display: flex;              /* CHANGED FROM inline-flex */
+    flex-wrap: nowrap;
+    width: max-content;
     gap: 4px;
     align-items: center;
+
+    /* IMPORTANT: REMOVE SCROLL BREAKING BEHAVIOUR */
     pointer-events: none;
+}
+
+.nav-item {
+    position: static;
+    flex: 0 0 auto;             /* FIX ADDED */
 }
 
 .nav-item,
@@ -127,11 +147,6 @@ body {
 #darkToggleHeader,
 #siteSearchInput {
     pointer-events: auto;
-}
-
-.nav-item {
-    position: static;
-    flex: 0 0 auto;
 }
 
 

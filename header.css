@@ -1,285 +1,383 @@
 /* ==================================================
    header.css
-   STABLE CROSS-DEVICE HEADER (iPhone + iPad SAFE)
+   FINAL LOCKED VERSION
+   Keeps:
+   - iPad profile alignment fixed
+   - mobile menu jump fixed
+   Restores:
+   - horizontal scroll
+   - header fully visible
 ================================================== */
 
 
 /* ===========================
-   RESET / BASE
+   ROOT VARIABLES
 =========================== */
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
+:root{
+    --bg:#ffffff;
+    --text-main:#111111;
+    --text-sub:#555555;
+    --card-bg:#f5f5f5;
+    --shadow:0 8px 20px rgba(0,0,0,.08);
+    --accent:#0a2540;
 }
 
-*, *::before, *::after {
-    box-sizing: inherit;
+body.dark-mode{
+    --bg:#0f172a;
+    --text-main:#e5e7eb;
+    --text-sub:#9ca3af;
+    --card-bg:#111827;
 }
 
 
 /* ===========================
-   THEME VARIABLES
+   GLOBAL
 =========================== */
-:root {
-    --bg: #ffffff;
-    --text-main: #111111;
-    --text-sub: #555555;
-    --card-bg: #f5f5f5;
-    --accent: #0a2540;
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+    position:relative;
+    touch-action:pan-y;
 }
 
-body.dark-mode {
-    --bg: #0f172a;
-    --text-main: #e5e7eb;
-    --text-sub: #9ca3af;
-    --card-bg: #111827;
+body{
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 
 /* ===========================
-   HERO SECTION
+   HERO
 =========================== */
-.hero-banner {
-    position: relative;
-    background: url("hero.jpg") center/cover no-repeat;
-    padding: 50px 20px;
-    color: #fff;
+.hero-banner{
+    position:relative;
+    background:url("hero.jpg") center center / cover no-repeat;
+    padding:50px 20px;
+    color:#fff;
+    overflow:hidden;
 }
 
-.hero-banner::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(10, 37, 64, 0.55);
+.hero-banner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(10,37,64,.55);
 }
 
-.hero-content {
-    position: relative;
-    z-index: 1;
+.hero-content{
+    position:relative;
+    z-index:2;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
 
-    gap: 20px;
-    width: 100%;
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
 }
 
-.hero-text {
-    flex: 1;
-    min-width: 0;
-}
-
-.hero-text h1 {
-    margin: 0 0 10px;
-    font-size: 2rem;
-}
-
-.hero-text p {
-    margin: 6px 0;
-    line-height: 1.4;
-    word-break: break-word;
-}
-
-.hero-photo {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
+.left-column{
+    flex:1 1 auto;
+    min-width:0;
+    max-width:100%;
 }
 
 
 /* ===========================
-   NAV SCROLL WRAPPER
+   TEXT
 =========================== */
-.nav-scroll {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+.hero-text{
+    min-width:0;
+    max-width:100%;
+}
 
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
+.hero-text h1{
+    margin:0 0 10px;
+    font-size:2rem;
+}
+
+.hero-text p{
+    margin:6px 0;
+    line-height:1.45;
+    white-space:normal;
+    overflow-wrap:anywhere;
 }
 
 
 /* ===========================
-   NAV ROW
+   PHOTO
 =========================== */
-.nav-menu {
-    display: flex;
-    flex-wrap: nowrap;
-
-    width: max-content;
-    min-width: max-content;
-
-    gap: 6px;
-    align-items: center;
+.hero-photo{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #fff;
+    flex:0 0 auto;
+    margin-left:auto;
 }
 
 
 /* ===========================
-   NAV ITEMS
+   NAV SCROLL
 =========================== */
-.nav-item {
-    flex: 0 0 auto;
-    position: relative;
+.nav-scroll{
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+
+    white-space:nowrap;
 }
 
 
 /* ===========================
-   NAV BUTTONS
+   NAV MENU
+=========================== */
+.nav-menu{
+    display:inline-flex;
+    flex-wrap:nowrap;
+    align-items:center;
+    gap:6px;
+
+    min-width:max-content;
+    width:auto;
+}
+
+
+/* ===========================
+   ITEMS
+=========================== */
+.nav-item{
+    flex:0 0 auto;
+    position:relative;
+}
+
+
+/* ===========================
+   BUTTONS
 =========================== */
 .nav-btn,
-.mega-trigger {
-    background: transparent;
-    border: none;
-    color: #fff;
-
-    font-size: 15px;
-    font-weight: 500;
-
-    padding: 10px 14px;
-    white-space: nowrap;
-    cursor: pointer;
-
-    border-radius: 6px;
+.mega-trigger{
+    background:transparent;
+    border:none;
+    color:#fff;
+    font-size:15px;
+    font-weight:500;
+    padding:10px 14px;
+    cursor:pointer;
+    text-decoration:none;
+    white-space:nowrap;
+    border-radius:6px;
 }
 
-.nav-btn:hover,
-.mega-trigger:hover {
-    opacity: 0.9;
-}
-
-
-/* ===========================
-   SEARCH + DARK MODE ROW
-=========================== */
-.search-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.search-icon,
-#darkToggleHeader {
-    color: #fff;
-    background: none;
-    border: none;
-    cursor: pointer;
+.nav-item>a,
+.nav-item>button{
+    -webkit-tap-highlight-color:transparent;
 }
 
 
 /* ===========================
-   SEARCH INPUT
+   SEARCH
 =========================== */
-#siteSearchInput {
-    width: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.25s ease;
-    border: none;
-    border-radius: 30px;
-    padding: 8px 12px;
+.search-wrapper{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex:0 0 auto;
 }
 
-#siteSearchInput.open {
-    width: 160px;
-    opacity: 1;
-    pointer-events: auto;
+.search-icon{
+    display:flex;
+    align-items:center;
+    color:#fff;
+}
+
+#siteSearchInput{
+    width:0;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s ease;
+    border:none;
+    border-radius:30px;
+    padding:8px 12px;
+}
+
+#siteSearchInput.open{
+    width:160px;
+    opacity:1;
+    pointer-events:auto;
+}
+
+#darkToggleHeader{
+    border:none;
+    background:transparent;
+    color:#fff;
+    font-size:18px;
 }
 
 
 /* ===========================
-   MEGA MENU (DESKTOP)
+   DESKTOP MENU
 =========================== */
-.mega-menu {
-    display: none;
-    position: fixed;
-
-    top: 140px;
-    left: 20px;
-    right: 20px;
-
-    background: #fff;
-    padding: 20px;
-
-    border-radius: 10px;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-
-    gap: 40px;
-    flex-wrap: wrap;
-
-    z-index: 9999;
+.mega-menu{
+    display:none;
+    position:fixed;
+    top:155px;
+    left:20px;
+    right:20px;
+    background:#fff;
+    padding:25px 30px;
+    border-radius:10px;
+    box-shadow:0 18px 45px rgba(0,0,0,.15);
+    gap:40px;
+    flex-wrap:wrap;
+    z-index:999999;
 }
 
-.nav-item:hover > .mega-menu,
-.nav-item.open > .mega-menu {
-    display: flex;
+.nav-item:hover>.mega-menu,
+.nav-item.open>.mega-menu{
+    display:flex;
 }
 
-.mega-column {
-    display: flex;
-    flex-direction: column;
-    min-width: 170px;
-}
-
-.mega-column h4 {
-    margin: 0 0 10px;
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #0a2540;
-}
-
-.mega-menu a {
-    text-decoration: none;
-    color: #222;
-    padding: 6px 0;
-}
-
-.mega-menu a:hover {
-    color: var(--accent);
+.mega-column{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
 }
 
 
 /* ===========================
-   MOBILE / TABLET
+   TABLET
 =========================== */
+@media (max-width:900px){
+
+    .hero-content{
+        flex-direction:row;
+        align-items:flex-start;
+    }
+
+    .hero-photo{
+        margin-left:auto;
+    }
+
+    .nav-btn,
+    .mega-trigger{
+        border:1px solid rgba(255,255,255,.6);
+        font-weight:600;
+    }
+
+    .mega-menu{
+        position:static;
+        display:none;
+        width:100%;
+        padding:15px;
+        margin-top:8px;
+        border-radius:8px;
+        box-shadow:none;
+        gap:16px;
+        flex-direction:column;
+    }
+
+    .nav-item.open>.mega-menu{
+        display:flex !important;
+    }
+}
+
+
+/* ===========================
+   PHONE ONLY
+=========================== */
+@media (max-width:700px){
+
+    .hero-content{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-photo{
+        margin:0 auto;
+    }
+
+    /* only item opens vertically */
+    .nav-item.open{
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search-wrapper{
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+    }
+}
+
+
+/* ===========================
+   TOUCH
+=========================== */
+@media (hover:none) and (pointer:coarse){
+    .nav-item.open>.mega-menu{
+        display:flex !important;
+    }
+}
+/* ==========================================
+   FINAL MOBILE SUBMENU FIX
+   Keeps scroll working
+   Keeps off-screen fixed
+   Restores styling
+========================================== */
+
 @media (max-width: 900px) {
 
-    .hero-content {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
-
-    .hero-photo {
-        width: 100px;
-        height: 100px;
-    }
-
-    .nav-menu {
-        gap: 8px;
-    }
-
-    /* mobile submenu becomes dropdown */
-    .mega-menu {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-        border-radius: 8px;
-        padding: 12px;
-        flex-direction: column;
-        margin-top: 8px;
+    .nav-item {
+        display: block;
+        vertical-align: top;
     }
 
     .nav-item.open > .mega-menu {
         display: flex !important;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 280px;
+        z-index: 99999;
+
+        background: #ffffff;
+        color: #111;
+
+        border-radius: 10px;
+        padding: 16px;
+        margin-top: 8px;
+
+        box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .mega-column h4 {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 0 0 8px;
+        color: #0a2540;
+    }
+
+    .mega-menu a {
+        display: block;
+        padding: 6px 0;
+        color: #222;
+        text-decoration: none;
     }
 }

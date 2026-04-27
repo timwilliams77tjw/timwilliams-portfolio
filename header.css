@@ -1,7 +1,13 @@
 /* ==================================================
-   header.css (REWRITTEN)
-   iOS SAFE NAV SCROLL + STABLE MEGA MENUS
+   header.css
+   Full Updated Version
+   Includes:
+   - Working iPhone/iPad mega menus
+   - Final iPhone horizontal nav scroll fix
+   - Dark mode
+   - Responsive layout
 ================================================== */
+
 
 /* ===========================
    ROOT VARIABLES
@@ -22,6 +28,7 @@ body.dark-mode {
     --card-bg: #111827;
 }
 
+
 /* ===========================
    GLOBAL
 =========================== */
@@ -30,18 +37,18 @@ body {
     padding: 0;
     overflow-x: hidden;
     font-family: Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: var(--text-main);
 }
 
+
 /* ===========================
-   HERO
+   HERO BANNER
 =========================== */
 .hero-banner {
     position: relative;
-    background: url("hero.jpg") center/cover no-repeat;
+    background: url("hero.jpg") center center / cover no-repeat;
     padding: 50px 30px;
     color: white;
+    z-index: 1;
 }
 
 .hero-banner::before {
@@ -49,57 +56,87 @@ body {
     position: absolute;
     inset: 0;
     background: rgba(10, 37, 64, 0.55);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-content,
+.left-column {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
 }
 
 .hero-content {
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 24px;
 }
 
+.hero-text h1 {
+    margin: 0 0 10px;
+    font-size: 2rem;
+}
+
+.hero-text p {
+    margin: 6px 0;
+    line-height: 1.45;
+}
+
+.hero-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+}
+
+
 /* ===========================
-   NAV WRAPPER (CRITICAL FIX)
+   FINAL IPHONE NAV SCROLL FIX
 =========================== */
 .nav-scroll {
     width: 100%;
-    max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
-    display: block;
-
-    /* IMPORTANT iOS FIX */
-    min-width: 0;
     touch-action: pan-x;
+    position: relative;
+    scrollbar-width: none;
 }
 
-/* hide scrollbar */
 .nav-scroll::-webkit-scrollbar {
     display: none;
 }
 
-/* ===========================
-   NAV MENU (CRITICAL FIX)
-=========================== */
 .nav-menu {
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
+    display: inline-flex;
+    min-width: max-content;
+    gap: 4px;
     align-items: center;
-    gap: 6px;
+    pointer-events: none;
 }
 
-/* nav items */
+.nav-item,
+.nav-btn,
+.mega-trigger,
+.search-wrapper,
+.search-icon,
+#darkToggleHeader,
+#siteSearchInput {
+    pointer-events: auto;
+}
+
 .nav-item {
-    position: relative;
+    position: static;
     flex: 0 0 auto;
 }
 
+
 /* ===========================
-   BUTTONS / LINKS
+   NAV BUTTONS
 =========================== */
 .nav-btn,
 .mega-trigger {
@@ -110,14 +147,22 @@ body {
     font-weight: 500;
     padding: 10px 14px;
     cursor: pointer;
+    text-decoration: none;
     white-space: nowrap;
     border-radius: 6px;
 }
 
 .nav-btn:hover,
 .mega-trigger:hover {
-    opacity: 0.85;
+    opacity: 0.9;
 }
+
+.nav-item > a,
+.nav-item > button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
 
 /* ===========================
    SEARCH
@@ -129,18 +174,20 @@ body {
 }
 
 .search-icon {
-    color: white;
     cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
 }
 
 #siteSearchInput {
     width: 0;
     opacity: 0;
     pointer-events: none;
-    transition: 0.25s ease;
+    transition: all 0.25s ease;
+    border: none;
     border-radius: 30px;
     padding: 8px 12px;
-    border: none;
 }
 
 #siteSearchInput.open {
@@ -149,38 +196,66 @@ body {
     pointer-events: auto;
 }
 
+#darkToggleHeader {
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
 /* ===========================
-   MEGA MENU (SAFE VERSION)
+   MEGA MENU
 =========================== */
 .mega-menu {
     display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: white;
-    padding: 20px;
+    position: fixed;
+    top: 155px;
+    left: 20px;
+    right: 20px;
+    background: #ffffff;
+    padding: 25px 30px;
     border-radius: 10px;
-    box-shadow: var(--shadow);
-    min-width: 220px;
-    z-index: 9999;
-    flex-direction: column;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.15);
+    gap: 40px;
+    z-index: 999999;
+    flex-wrap: wrap;
 }
 
-/* open state */
-.nav-item.open > .mega-menu {
+.nav-item:hover > .mega-menu {
     display: flex;
 }
 
-/* links */
+.nav-item.open > .mega-menu {
+    display: flex !important;
+}
+
+.mega-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 170px;
+}
+
+.mega-column h4 {
+    margin: 0 0 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #0a2540;
+}
+
 .mega-menu a {
-    padding: 6px 0;
-    text-decoration: none;
     color: #222;
+    text-decoration: none;
+    padding: 6px 0;
+    white-space: nowrap;
 }
 
 .mega-menu a:hover {
     color: var(--accent);
 }
+
 
 /* ===========================
    MOBILE
@@ -192,27 +267,45 @@ body {
         text-align: center;
     }
 
+    .hero-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .nav-menu {
+        gap: 6px;
+    }
+
     .nav-btn,
     .mega-trigger {
+        border: 1px solid rgba(255,255,255,0.6);
         font-weight: 600;
-        border: 1px solid rgba(255,255,255,0.4);
     }
 
     .mega-menu {
         position: static;
+        top: auto;
+        left: auto;
+        right: auto;
         box-shadow: none;
+        border-radius: 8px;
+        padding: 15px;
+        gap: 16px;
+        flex-direction: column;
         margin-top: 8px;
+    }
+
+    .nav-item.open > .mega-menu {
+        display: flex !important;
     }
 }
 
-/* ===========================
-   DARK MODE
-=========================== */
-body.dark-mode .mega-menu {
-    background: #111827;
-    color: white;
-}
 
-body.dark-mode .mega-menu a {
-    color: #e5e7eb;
+/* ===========================
+   TOUCH DEVICES
+=========================== */
+@media (hover:none) and (pointer:coarse) {
+    .nav-item.open > .mega-menu {
+        display: flex !important;
+    }
 }

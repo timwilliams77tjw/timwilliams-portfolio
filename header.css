@@ -381,3 +381,73 @@ body{
         text-decoration: none;
     }
 }
+/* ==========================================
+   FINAL MOBILE HEADER ROW + NO MENU JUMP FIX
+   Add this at very bottom of header.css
+========================================== */
+
+@media (max-width: 900px) {
+
+    /* Keep everything on ONE horizontal row */
+    .nav-menu {
+        display: inline-flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 6px;
+        width: max-content;
+        min-width: max-content;
+    }
+
+    /* Prevent each item from stretching vertically */
+    .nav-item {
+        display: block;
+        flex: 0 0 auto;
+        position: relative;
+        vertical-align: top;
+    }
+
+    /* Search + dark mode stay inline */
+    .search-wrapper {
+        display: inline-flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 10px;
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    .search-icon,
+    #darkToggleHeader,
+    #siteSearchInput {
+        flex: 0 0 auto;
+    }
+
+    /* Stop button jumping when active */
+    .nav-btn,
+    .mega-trigger {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 14px;
+        box-sizing: border-box;
+        vertical-align: middle;
+    }
+
+    /* Dropdown appears OVERLAYED below row */
+    .nav-item.open > .mega-menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        width: 280px;
+        margin-top: 0;
+
+        display: flex !important;
+        flex-direction: column;
+        gap: 14px;
+
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 16px;
+        box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+        z-index: 99999;
+    }
+}

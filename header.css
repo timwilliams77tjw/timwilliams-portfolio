@@ -1,11 +1,11 @@
 /* ==================================================
    header.css
-   FINAL STABLE IOS + IPAD NAV (NO CONFLICT VERSION)
+   STABLE BASELINE (iOS + iPad SAFE RESET)
 ================================================== */
 
 
 /* ===========================
-   BASE RESET (CRITICAL)
+   RESET / BASE
 =========================== */
 html, body {
     margin: 0;
@@ -18,13 +18,12 @@ html, body {
 
     font-family: Arial, Helvetica, sans-serif;
 
-    /* prevents iOS sideways drift */
     touch-action: pan-y;
 }
 
 
 /* ===========================
-   HERO
+   HERO (NO LAYOUT SIDE EFFECTS)
 =========================== */
 .hero-banner {
     position: relative;
@@ -42,7 +41,7 @@ html, body {
 
 
 /* ===========================
-   HERO LAYOUT (NO WRAP FIX)
+   HERO LAYOUT (SAFE FLEX)
 =========================== */
 .hero-content {
     display: flex;
@@ -52,13 +51,11 @@ html, body {
     gap: 24px;
 
     width: 100%;
-    max-width: 100%;
-
     box-sizing: border-box;
 }
 
 .left-column {
-    flex: 1 1 auto;
+    flex: 1;
     min-width: 0;
 }
 
@@ -68,36 +65,29 @@ html, body {
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #fff;
-    flex-shrink: 0;
 }
 
 
 /* ===========================
-   NAV SCROLL WRAPPER (KEY FIX AREA)
+   NAV CONTAINER (ONLY SOURCE OF SCROLL)
 =========================== */
 .nav-scroll {
     width: 100%;
-    max-width: 100%;
-
     overflow-x: auto;
     overflow-y: hidden;
 
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-
-    display: block;
 }
 
 
 /* ===========================
-   NAV ROW (CRITICAL FIX)
-   MUST OVERFLOW PROPERLY
+   NAV ROW (CRITICAL STABILITY RULE)
 =========================== */
 .nav-menu {
     display: flex;
     flex-wrap: nowrap;
 
-    /* IMPORTANT: allow overflow */
+    /* IMPORTANT: allows scroll naturally */
     width: max-content;
 
     gap: 6px;
@@ -127,9 +117,10 @@ html, body {
     font-weight: 500;
 
     padding: 10px 14px;
-    cursor: pointer;
 
     white-space: nowrap;
+    cursor: pointer;
+
     border-radius: 6px;
 }
 
@@ -143,34 +134,14 @@ html, body {
     gap: 10px;
 }
 
-.search-icon {
-    color: #fff;
-}
-
-#siteSearchInput {
-    width: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.25s ease;
-    border-radius: 30px;
-    padding: 8px 12px;
-}
-
-#siteSearchInput.open {
-    width: 160px;
-    opacity: 1;
-    pointer-events: auto;
-}
-
+.search-icon,
 #darkToggleHeader {
-    background: none;
-    border: none;
     color: #fff;
 }
 
 
 /* ===========================
-   MEGA MENU (DESKTOP / IPAD)
+   MEGA MENU (DESKTOP SAFE)
 =========================== */
 .mega-menu {
     display: none;
@@ -184,12 +155,13 @@ html, body {
     padding: 25px;
 
     border-radius: 10px;
+
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
 
     gap: 40px;
-    z-index: 999999;
-
     flex-wrap: wrap;
+
+    z-index: 999999;
 }
 
 .nav-item:hover > .mega-menu,
@@ -205,22 +177,16 @@ html, body {
 
 
 /* ===========================
-   MOBILE (CRITICAL FIX SECTION)
+   MOBILE ONLY FIX (NO LAYOUT IMPACT)
 =========================== */
 @media (max-width: 900px) {
 
-    /* STOP layout jump */
     .hero-content {
         flex-direction: column;
         text-align: center;
     }
 
-    /* IMPORTANT: prevents submenu affecting layout flow */
-    .nav-item {
-        position: relative;
-    }
-
-    /* dropdown stays OUTSIDE flow */
+    /* submenu does NOT affect layout */
     .mega-menu {
         position: absolute;
         top: 100%;
@@ -232,8 +198,6 @@ html, body {
         background: #fff;
         padding: 15px;
 
-        border-radius: 8px;
-
         box-shadow: 0 18px 45px rgba(0,0,0,0.15);
 
         flex-direction: column;
@@ -243,10 +207,5 @@ html, body {
 
     .nav-item.open > .mega-menu {
         display: flex !important;
-    }
-
-    /* KEEP SCROLL WORKING */
-    .nav-menu {
-        width: max-content;
     }
 }

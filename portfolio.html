@@ -72,21 +72,20 @@ display:none;
 <body>
 
 <!-- HEADER INCLUDE -->
-<div id="header"></div>
+<div id="header-placeholder"></div>
 
+<!-- 1. Load the JS file FIRST -->
+<script src="header-standard-v23.js"></script>
+
+<!-- 2. Inject the header HTML -->
 <script>
+fetch("./header-standard-v4.html")
+  .then(r => r.text())
+  .then(h => {
+      document.getElementById("header-placeholder").innerHTML = h;
+      initHeader();
+  });
 
-fetch("header-standard.html")
-
-.then(r => r.text())
-
-.then(h => {
-
-document.getElementById("header").innerHTML = h;
-
-if (window.initHeader) {
-    window.initHeader();
-}
 
 
 
@@ -594,6 +593,6 @@ openAccordion(visibleSections[0]);
 });
 
 </script>
-<script src="header-standard.js?v=21"></script>
+
 </body>
 </html>

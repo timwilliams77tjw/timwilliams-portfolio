@@ -330,3 +330,54 @@ body{
         display:flex !important;
     }
 }
+/* ==========================================
+   FINAL MOBILE SUBMENU FIX
+   Keeps scroll working
+   Keeps off-screen fixed
+   Restores styling
+========================================== */
+
+@media (max-width: 900px) {
+
+    .nav-item {
+        display: block;
+        vertical-align: top;
+    }
+
+    .nav-item.open > .mega-menu {
+        display: flex !important;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 280px;
+        z-index: 99999;
+
+        background: #ffffff;
+        color: #111;
+
+        border-radius: 10px;
+        padding: 16px;
+        margin-top: 8px;
+
+        box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .mega-column h4 {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 0 0 8px;
+        color: #0a2540;
+    }
+
+    .mega-menu a {
+        display: block;
+        padding: 6px 0;
+        color: #222;
+        text-decoration: none;
+    }
+}

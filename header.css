@@ -1,6 +1,6 @@
 /* ==================================================
    header.css
-   FINAL STABLE iOS / iPad NAV SCROLL FIX
+   FINAL iOS / iPad NAV SCROLL + LAYOUT FIX (STABLE)
 ================================================== */
 
 
@@ -25,13 +25,17 @@ body.dark-mode {
 
 
 /* ===========================
-   GLOBAL
+   GLOBAL (SAFE ONLY)
 =========================== */
 body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow-x: hidden; /* SAFE + REQUIRED */
     font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+    max-width: 100%;
 }
 
 
@@ -44,6 +48,7 @@ body {
     padding: 50px 30px;
     color: white;
     z-index: 1;
+    overflow-x: clip;
 }
 
 .hero-banner::before {
@@ -57,26 +62,31 @@ body {
 
 
 /* ===========================
-   HERO LAYOUT (SIMPLIFIED)
+   HERO LAYOUT (FIXED OVERFLOW SOURCE)
 =========================== */
 .hero-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 24px;
+
     position: relative;
     z-index: 2;
+
+    max-width: 100%;
+    box-sizing: border-box;
+
+    flex-wrap: wrap; /* CRITICAL iOS FIX */
 }
 
 .left-column {
-    display: block;
-    width: 100%;
+    flex: 1 1 auto;
     min-width: 0;
 }
 
 
 /* ===========================
-   HERO TEXT / IMAGE
+   HERO TEXT + IMAGE
 =========================== */
 .hero-text h1 {
     margin: 0 0 10px;
@@ -94,11 +104,14 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid white;
+
+    flex-shrink: 0;
+    max-width: 150px;
 }
 
 
 /* ===========================
-   NAV SCROLL CONTAINER (CRITICAL iOS FIX)
+   NAV SCROLL CONTAINER (CORE FIX)
 =========================== */
 .nav-scroll {
     width: 100%;
@@ -108,25 +121,21 @@ body {
     -webkit-overflow-scrolling: touch;
 
     display: block;
-
-    white-space: nowrap;
-
-    /* IMPORTANT: isolate layout from flex bugs */
-    contain: layout style paint;
+    position: relative;
 }
 
 
 /* ===========================
-   NAV MENU (FORCED OVERFLOW)
+   NAV MENU (iOS SAFE FLEX MODEL)
 =========================== */
 .nav-menu {
-    display: inline-flex;
+    display: flex;
     flex-wrap: nowrap;
 
     width: max-content;
-    min-width: max-content;
+    min-width: 100%;
 
-    gap: 4px;
+    gap: 6px;
     align-items: center;
 
     pointer-events: none;
@@ -231,10 +240,13 @@ body {
     top: 155px;
     left: 20px;
     right: 20px;
+
     background: #ffffff;
     padding: 25px 30px;
+
     border-radius: 10px;
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
+
     gap: 40px;
     z-index: 999999;
     flex-wrap: wrap;
@@ -275,7 +287,7 @@ body {
 
 
 /* ===========================
-   MOBILE
+   MOBILE LAYOUT
 =========================== */
 @media (max-width: 900px) {
 
@@ -287,10 +299,6 @@ body {
     .hero-photo {
         width: 120px;
         height: 120px;
-    }
-
-    .nav-menu {
-        gap: 6px;
     }
 
     .nav-btn,
@@ -322,17 +330,4 @@ body {
     .nav-item.open > .mega-menu {
         display: flex !important;
     }
-}
-html, body {
-    overflow-x: hidden;
-    width: 100%;
-}
-
-.hero-banner {
-    overflow-x: clip;
-}
-
-.hero-content {
-    max-width: 100%;
-    box-sizing: border-box;
 }

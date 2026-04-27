@@ -1,12 +1,47 @@
+/* ==================================================
+   header.css
+   Fully Updated Version
+   Includes iPhone / iPad Mega Menu Fix
+================================================== */
+
+/* ===========================
+   ROOT VARIABLES
+=========================== */
+:root {
+    --bg: #ffffff;
+    --text-main: #111111;
+    --text-sub: #555555;
+    --card-bg: #f5f5f5;
+    --shadow: 0 8px 20px rgba(0,0,0,0.08);
+    --accent: #0a2540;
+}
+
+body.dark-mode {
+    --bg: #0f172a;
+    --text-main: #e5e7eb;
+    --text-sub: #9ca3af;
+    --card-bg: #111827;
+}
+
+/* ===========================
+   GLOBAL
+=========================== */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 /* ===========================
    HERO BANNER
 =========================== */
 .hero-banner {
     position: relative;
-    background: url('hero.jpg') center center / cover no-repeat;
+    background: url("hero.jpg") center center / cover no-repeat;
     padding: 50px 30px;
     color: white;
-    z-index: 1; /* below mega-menu */
+    z-index: 1;
 }
 
 .hero-banner::before {
@@ -14,7 +49,7 @@
     position: absolute;
     inset: 0;
     background: rgba(10, 37, 64, 0.55);
-    z-index: 0; /* behind content + menu */
+    z-index: 0;
     pointer-events: none;
 }
 
@@ -25,6 +60,23 @@
     min-width: 0;
 }
 
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.hero-text h1 {
+    margin: 0 0 10px;
+    font-size: 2rem;
+}
+
+.hero-text p {
+    margin: 6px 0;
+    line-height: 1.4;
+}
+
 .hero-photo {
     width: 150px;
     height: 150px;
@@ -33,24 +85,8 @@
     border: 4px solid white;
 }
 
-/* Desktop layout */
-.hero-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-}
-
-/* Mobile layout */
-@media (max-width: 700px) {
-    .hero-content {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
 /* ===========================
-   NAV SYSTEM
+   NAV SCROLL
 =========================== */
 .nav-scroll {
     width: 100%;
@@ -58,21 +94,29 @@
     overflow-x: auto;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
+    position: relative;
 }
 
+/* ===========================
+   NAV MENU
+=========================== */
 .nav-menu {
-    display: flex !important;
-    flex-wrap: nowrap !important;
+    display: flex;
+    flex-wrap: nowrap;
     width: max-content;
     min-width: 100%;
+    align-items: center;
+    gap: 4px;
 }
 
 .nav-item {
     flex: 0 0 auto;
-    position: relative;
+    position: static;
 }
 
-/* NAV BUTTON */
+/* ===========================
+   NAV BUTTONS
+=========================== */
 .nav-btn,
 .mega-trigger {
     background: transparent;
@@ -86,20 +130,41 @@
     white-space: nowrap;
 }
 
-/* iPad fix */
-.nav-item.mega > a {
-    cursor: pointer !important;
-    touch-action: manipulation !important;
+.nav-item > a,
+.nav-item > button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.nav-btn:hover,
+.mega-trigger:hover {
+    opacity: 0.9;
 }
 
 /* ===========================
    SEARCH
 =========================== */
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-icon {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
 #siteSearchInput {
     width: 0;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
+    border: none;
+    border-radius: 30px;
+    padding: 8px 12px;
 }
 
 #siteSearchInput.open {
@@ -108,15 +173,12 @@
     pointer-events: auto;
 }
 
-.search-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 #darkToggleHeader {
-    white-space: nowrap;
-    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
 }
 
 /* ===========================
@@ -124,45 +186,67 @@
 =========================== */
 .mega-menu {
     display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    background: #fff;
+    position: fixed;
+    top: 155px;
+    left: 20px;
+    right: 20px;
+    background: #ffffff;
     padding: 25px 30px;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
     gap: 40px;
-    z-index: 999999; /* above hero */
+    z-index: 999999;
+    flex-wrap: wrap;
 }
 
 .nav-item:hover > .mega-menu {
     display: flex;
 }
 
+.nav-item.open > .mega-menu {
+    display: flex !important;
+}
+
 .mega-column {
     display: flex;
     flex-direction: column;
-    min-width: 160px;
+    min-width: 170px;
 }
 
 .mega-column h4 {
     margin: 0 0 10px;
     font-size: 12px;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: #0a2540;
 }
 
 .mega-menu a {
-    padding: 6px 0;
     color: #222;
     text-decoration: none;
+    padding: 6px 0;
     white-space: nowrap;
+}
+
+.mega-menu a:hover {
+    color: var(--accent);
 }
 
 /* ===========================
    MOBILE
 =========================== */
 @media (max-width: 700px) {
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-photo {
+        width: 120px;
+        height: 120px;
+    }
+
     .nav-menu {
         gap: 6px;
     }
@@ -176,11 +260,15 @@
 
     .mega-menu {
         position: static;
-        display: none;
-        flex-direction: column;
-        padding: 15px;
+        left: auto;
+        right: auto;
+        top: auto;
         box-shadow: none;
-        z-index: 1;
+        border-radius: 8px;
+        padding: 15px;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 8px;
     }
 
     .nav-item.open > .mega-menu {
@@ -189,68 +277,10 @@
 }
 
 /* ===========================
-   SAFETY
+   TOUCH DEVICES
 =========================== */
-body {
-    overflow-x: hidden;
-}
-
-/* ===========================
-   DARK MODE VARIABLES
-=========================== */
-:root {
-    --bg: #ffffff;
-    --text-main: #111;
-    --text-sub: #555;
-    --card-bg: #f5f5f5;
-    --shadow: 0 8px 20px rgba(0,0,0,0.08);
-    --accent: #0a2540;
-}
-
-body.dark-mode {
-    --bg: #0f172a;
-    --text-main: #e5e7eb;
-    --text-sub: #9ca3af;
-    --card-bg: #111827;
-}
-
-/* Touch devices */
 @media (hover: none) and (pointer: coarse) {
     .nav-item.open > .mega-menu {
         display: flex !important;
     }
-}
-
-/* UNIVERSAL: JS-controlled open state */
-.nav-item.open > .mega-menu {
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
-/* ===========================
-   FIX: Mega-menu must appear ABOVE hero banner
-=========================== */
-
-/* Hero banner sits BELOW the menu */
-.hero-banner {
-    position: relative;
-    z-index: 1 !important;
-}
-
-/* Hero overlay sits BELOW hero content */
-.hero-banner::before {
-    z-index: 0 !important;
-}
-
-/* Mega-menu sits ABOVE everything */
-.mega-menu {
-    position: absolute;
-    z-index: 999999 !important;
-}
-
-/* JS-controlled open state */
-.nav-item.open > .mega-menu {
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
 }

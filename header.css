@@ -1,26 +1,45 @@
 /* ==================================================
    header.css
-   STABLE iOS + iPad FIXED HEADER SYSTEM
+   FINAL STABLE VERSION (FIX PATCHED)
 ================================================== */
 
 
 /* ===========================
-   RESET / BASE
+   ROOT VARIABLES
 =========================== */
-html, body{
+:root{
+    --bg:#ffffff;
+    --text-main:#111111;
+    --text-sub:#555555;
+    --card-bg:#f5f5f5;
+    --shadow:0 8px 20px rgba(0,0,0,.08);
+    --accent:#0a2540;
+}
+
+body.dark-mode{
+    --bg:#0f172a;
+    --text-main:#e5e7eb;
+    --text-sub:#9ca3af;
+    --card-bg:#111827;
+}
+
+
+/* ===========================
+   GLOBAL
+=========================== */
+html,
+body{
     margin:0;
     padding:0;
     width:100%;
     max-width:100%;
     overflow-x:hidden;
-    font-family:Arial, Helvetica, sans-serif;
+    position:relative;
+    touch-action:pan-y;
 }
 
 body{
-    background:#fff;
-    color:#111;
-    -webkit-text-size-adjust:100%;
-    touch-action:pan-y;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 
@@ -29,9 +48,10 @@ body{
 =========================== */
 .hero-banner{
     position:relative;
-    background:url("hero.jpg") center/cover no-repeat;
+    background:url("hero.jpg") center center / cover no-repeat;
     padding:50px 20px;
     color:#fff;
+    overflow:hidden;
 }
 
 .hero-banner::before{
@@ -48,58 +68,91 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:20px;
+    gap:24px;
 
     width:100%;
+    max-width:100%;
     box-sizing:border-box;
+}
+
+.left-column{
+    flex:1 1 auto;
+    min-width:0;
+    max-width:100%;
 }
 
 
 /* ===========================
-   HERO ELEMENTS
+   TEXT
 =========================== */
 .hero-text{
-    flex:1;
     min-width:0;
+    max-width:100%;
 }
 
+.hero-text h1{
+    margin:0 0 10px;
+    font-size:2rem;
+}
+
+.hero-text p{
+    margin:6px 0;
+    line-height:1.45;
+    white-space:normal;
+    overflow-wrap:anywhere;
+}
+
+
+/* ===========================
+   PHOTO
+=========================== */
 .hero-photo{
     width:110px;
     height:110px;
     border-radius:50%;
     object-fit:cover;
     border:4px solid #fff;
-    flex-shrink:0;
+    flex:0 0 auto;
+    margin-left:auto;
 }
 
 
 /* ===========================
-   NAV WRAPPER (CRITICAL FIX)
+   NAV SCROLL
 =========================== */
 .nav-scroll{
     width:100%;
+    max-width:100%;
     overflow-x:auto;
     overflow-y:hidden;
+
     -webkit-overflow-scrolling:touch;
     overscroll-behavior-x:contain;
-}
 
-.nav-menu{
-    display:flex;
-    flex-wrap:nowrap;
-    gap:6px;
-    align-items:center;
-
-    min-width:max-content;
+    white-space:nowrap;
 }
 
 
 /* ===========================
-   NAV ITEM
+   NAV MENU
+=========================== */
+.nav-menu{
+    display:inline-flex;
+    flex-wrap:nowrap;
+    align-items:center;
+    gap:6px;
+
+    min-width:max-content;
+    width:auto;
+}
+
+
+/* ===========================
+   ITEMS
 =========================== */
 .nav-item{
-    position:relative;
     flex:0 0 auto;
+    position:relative;
 }
 
 
@@ -114,28 +167,40 @@ body{
     font-size:15px;
     font-weight:500;
     padding:10px 14px;
+    cursor:pointer;
+    text-decoration:none;
     white-space:nowrap;
     border-radius:6px;
-    cursor:pointer;
+}
+
+.nav-item>a,
+.nav-item>button{
+    -webkit-tap-highlight-color:transparent;
 }
 
 
 /* ===========================
-   HEADER RIGHT (FIX ROW ISSUE)
-=========================== */
-.header-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-
-/* ===========================
-   SEARCH
+   SEARCH + DARK MODE ROW FIX
 =========================== */
 .search-wrapper{
     display:flex;
     align-items:center;
+    gap:10px;
+    flex:0 0 auto;
+}
+
+/* NEW: keeps search + dark mode aligned */
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex:0 0 auto;
+}
+
+.search-icon{
+    display:flex;
+    align-items:center;
+    color:#fff;
 }
 
 #siteSearchInput{
@@ -155,63 +220,83 @@ body{
 }
 
 #darkToggleHeader{
-    background:transparent;
     border:none;
+    background:transparent;
     color:#fff;
     font-size:18px;
 }
 
 
 /* ===========================
-   MEGA MENU (STABLE MODEL)
+   DESKTOP MENU
 =========================== */
 .mega-menu{
     display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-
-    width:280px;
+    position:fixed;
+    top:155px;
+    left:20px;
+    right:20px;
     background:#fff;
-
-    padding:16px;
+    padding:25px 30px;
     border-radius:10px;
-    box-shadow:0 18px 45px rgba(0,0,0,.18);
-
-    flex-direction:column;
-    gap:12px;
-
-    z-index:99999;
+    box-shadow:0 18px 45px rgba(0,0,0,.15);
+    gap:40px;
+    flex-wrap:wrap;
+    z-index:999999;
 }
 
-.nav-item:hover > .mega-menu,
-.nav-item.open > .mega-menu{
+.nav-item:hover>.mega-menu,
+.nav-item.open>.mega-menu{
     display:flex;
+}
+
+.mega-column{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
 }
 
 
 /* ===========================
-   TABLET (iPad FIX)
+   TABLET
 =========================== */
 @media (max-width:900px){
 
     .hero-content{
         flex-direction:row;
+        align-items:flex-start;
     }
 
     .hero-photo{
         margin-left:auto;
     }
 
-    /* KEEP SAME MENU SYSTEM */
+    .nav-btn,
+    .mega-trigger{
+        border:1px solid rgba(255,255,255,.6);
+        font-weight:600;
+    }
+
     .mega-menu{
-        width:320px;
+        position:static;
+        display:none;
+        width:100%;
+        padding:15px;
+        margin-top:8px;
+        border-radius:8px;
+        box-shadow:none;
+        gap:16px;
+        flex-direction:column;
+    }
+
+    .nav-item.open>.mega-menu{
+        display:flex !important;
     }
 }
 
 
 /* ===========================
-   PHONE (iPhone FIX)
+   PHONE ONLY (FIXED JUMP)
 =========================== */
 @media (max-width:700px){
 
@@ -224,13 +309,52 @@ body{
         margin:0 auto;
     }
 
-    /* prevent layout shift */
+    /* FIX: prevents submenu pushing layout */
     .nav-item.open{
         position:relative;
     }
 
-    .mega-menu{
-        width:90vw;
+    .nav-item.open > .mega-menu{
+        position:absolute;
         left:0;
+        top:100%;
+        width:280px;
+        z-index:99999;
+
+        background:#fff;
+        border-radius:10px;
+        padding:16px;
+
+        box-shadow:0 18px 45px rgba(0,0,0,.18);
+    }
+}
+
+
+/* ===========================
+   TOUCH
+=========================== */
+@media (hover:none) and (pointer:coarse){
+    .nav-item.open>.mega-menu{
+        display:flex !important;
+    }
+}
+
+
+/* ===========================
+   IPAD SUBMENU RESTORE FIX
+=========================== */
+@media (max-width:900px){
+
+    .mega-menu{
+        font-size:14px;
+        line-height:1.4;
+    }
+
+    .mega-column h4{
+        color:#0a2540;
+    }
+
+    .mega-menu a{
+        color:#222;
     }
 }

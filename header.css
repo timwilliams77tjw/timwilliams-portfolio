@@ -1,6 +1,6 @@
 /* ==================================================
    header.css
-   CLEAN STABLE iOS / iPad NAV SYSTEM
+   FINAL CLEAN iOS / iPad NAV FIX
 ================================================== */
 
 
@@ -25,18 +25,16 @@ body.dark-mode {
 
 
 /* ===========================
-   GLOBAL RESET (CRITICAL)
+   GLOBAL (CRITICAL BASE FIX)
 =========================== */
 html, body {
     margin: 0;
     padding: 0;
-
     overflow-x: hidden;
     max-width: 100%;
-
     position: relative;
 
-    /* iOS prevents sideways page pan */
+    /* iOS gesture containment */
     touch-action: pan-y;
 }
 
@@ -101,7 +99,6 @@ body {
 .hero-text p {
     margin: 6px 0;
     line-height: 1.45;
-
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -122,31 +119,32 @@ body {
 
 
 /* ===========================
-   NAV SCROLL WRAPPER
+   NAV SCROLL CONTAINER
 =========================== */
 .nav-scroll {
     width: 100%;
     max-width: 100%;
-
     overflow-x: auto;
     overflow-y: hidden;
 
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
+    overscroll-behavior: contain;
 
     display: block;
+    position: relative;
     box-sizing: border-box;
 }
 
 
 /* ===========================
-   NAV MENU ROW
+   NAV MENU
 =========================== */
 .nav-menu {
     display: flex;
     flex-wrap: nowrap;
 
     width: max-content;
+    min-width: max-content;
 
     gap: 6px;
     align-items: center;
@@ -163,7 +161,7 @@ body {
 
 
 /* ===========================
-   INTERACTION FIX
+   INTERACTION LAYER FIX
 =========================== */
 .nav-item,
 .nav-btn,
@@ -183,8 +181,8 @@ body {
 .mega-trigger {
     background: transparent;
     border: none;
-
     color: white;
+
     font-size: 15px;
     font-weight: 500;
 
@@ -228,7 +226,6 @@ body {
     width: 0;
     opacity: 0;
     pointer-events: none;
-
     transition: all 0.25s ease;
 
     border: none;
@@ -256,17 +253,15 @@ body {
 =========================== */
 .mega-menu {
     display: none;
-
     position: fixed;
     top: 155px;
     left: 20px;
     right: 20px;
 
     background: #ffffff;
-
     padding: 25px 30px;
-    border-radius: 10px;
 
+    border-radius: 10px;
     box-shadow: 0 18px 45px rgba(0,0,0,0.15);
 
     gap: 40px;
@@ -310,7 +305,7 @@ body {
 
 
 /* ===========================
-   MOBILE (NO LAYOUT JUMP FIX)
+   MOBILE
 =========================== */
 @media (max-width: 900px) {
 
@@ -335,12 +330,13 @@ body {
         box-shadow: none;
         border-radius: 8px;
         padding: 15px;
-
         gap: 16px;
         flex-direction: column;
-
         margin-top: 8px;
-        width: 100%;
+    }
+
+    .nav-item.open > .mega-menu {
+        display: flex !important;
     }
 }
 

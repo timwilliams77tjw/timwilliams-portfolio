@@ -1,6 +1,6 @@
 /* ==================================================
    header.css
-   FINAL iOS / iPad NAV SCROLL FIX (STABLE VERSION)
+   FINAL STABLE iOS / iPad NAV SCROLL FIX
 ================================================== */
 
 
@@ -57,7 +57,7 @@ body {
 
 
 /* ===========================
-   FLEX FIX (iOS CRITICAL)
+   HERO LAYOUT (SIMPLIFIED)
 =========================== */
 .hero-content {
     display: flex;
@@ -69,13 +69,14 @@ body {
 }
 
 .left-column {
-    flex: 1 1 auto;
+    display: block;
+    width: 100%;
     min-width: 0;
 }
 
 
 /* ===========================
-   HERO CONTENT
+   HERO TEXT / IMAGE
 =========================== */
 .hero-text h1 {
     margin: 0 0 10px;
@@ -108,13 +109,10 @@ body {
 
     display: block;
 
-    position: relative;
-
-    /* FINAL FIX */
-    flex-shrink: 0;
-    min-width: 0;
-
     white-space: nowrap;
+
+    /* IMPORTANT: isolate layout from flex bugs */
+    contain: layout style paint;
 }
 
 
@@ -123,11 +121,9 @@ body {
 =========================== */
 .nav-menu {
     display: inline-flex;
-
     flex-wrap: nowrap;
 
-    /* CRITICAL CHANGE FOR iPHONE */
-    width: fit-content;
+    width: max-content;
     min-width: max-content;
 
     gap: 4px;

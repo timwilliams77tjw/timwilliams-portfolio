@@ -1,11 +1,10 @@
 /* ==================================================
-   header.css
-   FINAL STABLE VERSION (FIX PATCHED)
+header.css
+FINAL STABLE VERSION (FIX PATCHED)
 ================================================== */
 
-
 /* ===========================
-   ROOT VARIABLES
+ROOT VARIABLES
 =========================== */
 :root{
     --bg:#ffffff;
@@ -23,9 +22,8 @@ body.dark-mode{
     --card-bg:#111827;
 }
 
-
 /* ===========================
-   GLOBAL
+GLOBAL
 =========================== */
 html,
 body{
@@ -42,9 +40,8 @@ body{
     font-family:Arial, Helvetica, sans-serif;
 }
 
-
 /* ===========================
-   HERO
+HERO
 =========================== */
 .hero-banner{
     position:relative;
@@ -64,12 +61,10 @@ body{
 .hero-content{
     position:relative;
     z-index:2;
-
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:24px;
-
     width:100%;
     max-width:100%;
     box-sizing:border-box;
@@ -81,9 +76,8 @@ body{
     max-width:100%;
 }
 
-
 /* ===========================
-   TEXT
+TEXT
 =========================== */
 .hero-text{
     min-width:0;
@@ -102,9 +96,8 @@ body{
     overflow-wrap:anywhere;
 }
 
-
 /* ===========================
-   PHOTO
+PHOTO
 =========================== */
 .hero-photo{
     width:110px;
@@ -116,48 +109,42 @@ body{
     margin-left:auto;
 }
 
-
 /* ===========================
-   NAV SCROLL
+NAV SCROLL
 =========================== */
 .nav-scroll{
     width:100%;
     max-width:100%;
     overflow-x:auto;
     overflow-y:hidden;
-
     -webkit-overflow-scrolling:touch;
     overscroll-behavior-x:contain;
-
     white-space:nowrap;
 }
 
-
 /* ===========================
-   NAV MENU
+NAV MENU
 =========================== */
 .nav-menu{
     display:inline-flex;
     flex-wrap:nowrap;
     align-items:center;
     gap:6px;
-
     min-width:max-content;
     width:auto;
 }
 
-
 /* ===========================
-   ITEMS
+ITEMS
 =========================== */
 .nav-item{
     flex:0 0 auto;
     position:relative;
+    height:auto; /* FIX: stabilise height */
 }
 
-
 /* ===========================
-   BUTTONS
+BUTTONS
 =========================== */
 .nav-btn,
 .mega-trigger{
@@ -171,6 +158,12 @@ body{
     text-decoration:none;
     white-space:nowrap;
     border-radius:6px;
+
+    /* FIX: prevent jump */
+    display:inline-flex;
+    align-items:center;
+    height:42px;
+    box-sizing:border-box;
 }
 
 .nav-item>a,
@@ -178,9 +171,8 @@ body{
     -webkit-tap-highlight-color:transparent;
 }
 
-
 /* ===========================
-   SEARCH + DARK MODE ROW FIX
+SEARCH + DARK MODE ROW FIX
 =========================== */
 .search-wrapper{
     display:flex;
@@ -189,7 +181,6 @@ body{
     flex:0 0 auto;
 }
 
-/* NEW: keeps search + dark mode aligned */
 .header-right{
     display:flex;
     align-items:center;
@@ -226,9 +217,8 @@ body{
     font-size:18px;
 }
 
-
 /* ===========================
-   DESKTOP MENU
+DESKTOP MENU
 =========================== */
 .mega-menu{
     display:none;
@@ -256,12 +246,10 @@ body{
     min-width:170px;
 }
 
-
 /* ===========================
-   TABLET
+TABLET
 =========================== */
 @media (max-width:900px){
-
     .hero-content{
         flex-direction:row;
         align-items:flex-start;
@@ -294,9 +282,8 @@ body{
     }
 }
 
-
 /* ===========================
-   PHONE ONLY (FIXED JUMP)
+PHONE ONLY (FIXED JUMP)
 =========================== */
 @media (max-width:700px){
 
@@ -309,29 +296,25 @@ body{
         margin:0 auto;
     }
 
-    /* FIX: prevents submenu pushing layout */
     .nav-item.open{
         position:relative;
     }
 
     .nav-item.open > .mega-menu{
         position:absolute;
+        top:calc(100% + 4px);
         left:0;
-        top:100%;
         width:280px;
         z-index:99999;
-
         background:#fff;
         border-radius:10px;
         padding:16px;
-
         box-shadow:0 18px 45px rgba(0,0,0,.18);
     }
 }
 
-
 /* ===========================
-   TOUCH
+TOUCH
 =========================== */
 @media (hover:none) and (pointer:coarse){
     .nav-item.open>.mega-menu{
@@ -339,22 +322,23 @@ body{
     }
 }
 
-
 /* ===========================
-   IPAD SUBMENU RESTORE FIX
+IPAD SUBMENU RESTORE FIX
 =========================== */
-@media (max-width:900px){
-
+@media (min-width:701px) and (max-width:1024px) and (hover:none) and (pointer:coarse){
     .mega-menu{
-        font-size:14px;
-        line-height:1.4;
+        position:absolute !important;
+        top:100% !important;
+        left:0 !important;
+        width:320px;
+        background:#fff;
+        border-radius:10px;
+        padding:20px;
+        box-shadow:0 18px 45px rgba(0,0,0,.18);
+        display:none;
     }
 
-    .mega-column h4{
-        color:#0a2540;
-    }
-
-    .mega-menu a{
-        color:#222;
+    .nav-item.open > .mega-menu{
+        display:flex !important;
     }
 }

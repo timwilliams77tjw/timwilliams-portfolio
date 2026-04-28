@@ -7,7 +7,7 @@
 
 <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">
-<link rel="stylesheet" href="header.css?v=27">
+
 
 <!-- PAGE‑SPECIFIC CSS -->
 <style>
@@ -104,21 +104,27 @@ body.page-certifications {
 
 
 
-<!-- HEADER INCLUDE -->
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="header.css?v=30">
+
+<!-- HEADER PLACEHOLDER -->
 <div id="header-placeholder"></div>
 
-<!-- Load JS -->
-<script src="header-standard-v23.js?v=27"></script>
+<!-- HEADER JS (deferred so CSS loads first) -->
+<script src="header-standard-v23.js?v=30" defer></script>
 
-<!-- Inject header HTML -->
+<!-- INJECT HEADER AFTER DOM + CSS ARE READY -->
 <script>
-fetch("./header-standard-v4.html?v=27")
-  .then(r => r.text())
-  .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
-  });
+window.addEventListener("DOMContentLoaded", () => {
+    fetch("./header-standard-v4.html?v=30")
+      .then(r => r.text())
+      .then(h => {
+          document.getElementById("header-placeholder").innerHTML = h;
+          initHeader();
+      });
+});
 </script>
+
 
 
 

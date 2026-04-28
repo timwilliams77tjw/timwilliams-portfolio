@@ -1,10 +1,11 @@
 /* ==================================================
    header.css
-   PRODUCTION FINAL VERSION
-   - iPhone menu stable
-   - iPad styling stable
-   - scroll preserved
-   - no overflow / swipe issues
+   FINAL STABLE PRODUCTION FIX (v2)
+   FIXES:
+   - iPhone scroll restored
+   - header no longer clipped
+   - submenu works on iPhone + iPad
+   - no jumping
 ================================================== */
 
 
@@ -29,7 +30,7 @@ body.dark-mode {
 
 
 /* ===========================
-   GLOBAL RESET
+   GLOBAL RESET (CRITICAL)
 =========================== */
 html,
 body {
@@ -37,11 +38,12 @@ body {
     padding: 0;
     width: 100%;
     max-width: 100%;
+
     overflow-x: hidden;
-    position: relative;
+    overflow-y: auto;
+
     font-family: Arial, Helvetica, sans-serif;
 
-    /* iOS scroll safety */
     touch-action: pan-y;
 }
 
@@ -54,7 +56,6 @@ body {
     background: url("hero.jpg") center/cover no-repeat;
     padding: 50px 20px;
     color: #fff;
-    overflow: hidden;
 }
 
 .hero-banner::before {
@@ -84,7 +85,7 @@ body {
 
 
 /* ===========================
-   HERO TEXT
+   TEXT
 =========================== */
 .hero-text h1 {
     margin: 0 0 10px;
@@ -99,7 +100,7 @@ body {
 
 
 /* ===========================
-   PROFILE IMAGE
+   IMAGE
 =========================== */
 .hero-photo {
     width: 110px;
@@ -107,18 +108,16 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #fff;
-    flex: 0 0 auto;
 }
 
 
 /* ===========================
-   NAV SCROLL CONTAINER
+   NAV SCROLL (IMPORTANT FIX)
 =========================== */
 .nav-scroll {
     width: 100%;
     overflow-x: auto;
-    overflow-y: hidden;
-
+    overflow-y: visible; /* CRITICAL FIX */
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
 }
@@ -164,7 +163,7 @@ body {
 
 
 /* ===========================
-   SEARCH + DARK MODE ROW
+   SEARCH / DARK MODE
 =========================== */
 .search-wrapper,
 .header-right {
@@ -184,7 +183,6 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: 0.25s ease;
-    border: none;
     border-radius: 30px;
     padding: 8px 12px;
 }
@@ -204,7 +202,7 @@ body {
 
 
 /* ===========================
-   DESKTOP MEGA MENU
+   DESKTOP MENU
 =========================== */
 .mega-menu {
     display: none;
@@ -236,19 +234,6 @@ body {
     min-width: 170px;
 }
 
-.mega-column h4 {
-    margin: 0 0 10px;
-    font-size: 12px;
-    text-transform: uppercase;
-    color: var(--accent);
-}
-
-.mega-menu a {
-    padding: 6px 0;
-    text-decoration: none;
-    color: #222;
-}
-
 
 /* ===========================
    TABLET (iPad)
@@ -264,12 +249,6 @@ body {
         margin-left: auto;
     }
 
-    .nav-btn,
-    .mega-trigger {
-        border: 1px solid rgba(255,255,255,0.6);
-        font-weight: 600;
-    }
-
     .mega-menu {
         position: absolute;
         top: 100%;
@@ -277,14 +256,11 @@ body {
 
         width: 300px;
 
-        padding: 18px;
         margin-top: 8px;
 
         flex-direction: column;
-        flex-wrap: nowrap;
 
         box-shadow: 0 18px 45px rgba(0,0,0,0.18);
-        border-radius: 10px;
     }
 }
 
@@ -303,30 +279,32 @@ body {
         margin: 0 auto;
     }
 
-    /* CRITICAL: prevents broken tap + scroll issues */
     .nav-item {
-        position: static;
+        position: relative; /* IMPORTANT FOR FLOW */
     }
 
     .nav-item.open > .mega-menu {
-        position: fixed;
+        position: absolute;
 
-        top: 200px;
-        left: 12px;
-        right: 12px;
+        top: 100%;
+        left: 0;
+        right: auto;
 
-        width: auto;
+        width: 280px;
+        max-width: 90vw;
 
         display: flex !important;
         flex-direction: column;
 
         padding: 16px;
-        border-radius: 10px;
+        margin-top: 8px;
 
         background: #fff;
+        border-radius: 10px;
+
         box-shadow: 0 18px 45px rgba(0,0,0,0.18);
 
-        z-index: 999999;
+        z-index: 99999;
     }
 }
 

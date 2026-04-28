@@ -346,3 +346,31 @@ MOBILE LAYOUT RESTORE
         justify-content:center;
     }
 }
+/* === iPHONE: stop jump + align under button === */
+@media (max-width:700px){
+    .nav-item.open{
+        position:relative;
+    }
+
+    .nav-item.open > .mega-menu{
+        position:absolute;
+        top:100%;
+        left:0;
+        width:280px;
+        z-index:99999;
+    }
+}
+
+/* === iPAD: narrow floating panel, keep styling === */
+@media (min-width:768px) and (max-width:1024px){
+    .nav-item.open > .mega-menu{
+        position:absolute;
+        top:100%;
+        left:0;
+        width:320px;
+        max-width:90%;
+        margin-top:8px;
+        border-radius:10px;
+        box-shadow:0 18px 45px rgba(0,0,0,.18);
+    }
+}

@@ -1,11 +1,11 @@
 /* ==================================================
    header.css
-   FINAL STABLE IOS / IPAD SAFE BUILD (CLEANED)
+   STABLE IOS / IPAD HEADER (FINAL STRUCTURAL FIX)
 ================================================== */
 
 
 /* ===========================
-   ROOT VARIABLES
+   ROOT
 =========================== */
 :root{
     --bg:#fff;
@@ -25,7 +25,7 @@ body.dark-mode{
 
 
 /* ===========================
-   GLOBAL RESET
+   GLOBAL
 =========================== */
 html, body{
     margin:0;
@@ -43,13 +43,15 @@ body{
 
 
 /* ===========================
-   HERO
+   HERO (NO OVERFLOW CONSTRAINTS)
 =========================== */
 .hero-banner{
     position:relative;
     background:url("hero.jpg") center/cover no-repeat;
     padding:50px 20px;
     color:#fff;
+
+    /* CRITICAL: allow dropdown escape */
     overflow:visible;
 }
 
@@ -69,24 +71,7 @@ body{
     align-items:center;
     gap:20px;
 
-    width:100%;
-    box-sizing:border-box;
     flex-wrap:wrap;
-}
-
-.left-column{
-    flex:1;
-    min-width:0;
-}
-
-.hero-text h1{
-    margin:0 0 10px;
-    font-size:2rem;
-}
-
-.hero-text p{
-    margin:6px 0;
-    overflow-wrap:anywhere;
 }
 
 .hero-photo{
@@ -104,31 +89,30 @@ body{
 .nav-scroll{
     width:100%;
     overflow-x:auto;
-    overflow-y:hidden;
+    overflow-y:visible; /* IMPORTANT FOR IOS DROPDOWNS */
     -webkit-overflow-scrolling:touch;
 }
 
 
 /* ===========================
-   NAV MENU (FIXED)
+   NAV ROW
 =========================== */
 .nav-menu{
     display:flex;
     flex-wrap:nowrap;
     min-width:max-content;
     width:max-content;
-
     gap:6px;
     align-items:center;
 }
 
 
 /* ===========================
-   NAV ITEMS
+   NAV ITEM
 =========================== */
 .nav-item{
-    flex:0 0 auto;
     position:relative;
+    flex:0 0 auto;
 }
 
 
@@ -144,7 +128,6 @@ body{
     font-weight:500;
     padding:10px 14px;
     white-space:nowrap;
-    cursor:pointer;
 }
 
 
@@ -183,25 +166,28 @@ body{
 
 
 /* ===========================
-   MEGA MENU (DESKTOP)
+   MEGA MENU (CRITICAL FIX)
+   MOVED OUT OF SCROLL CONTAINER EFFECTIVELY
 =========================== */
 .mega-menu{
     display:none;
-    position:absolute;
-    top:100%;
-    left:0;
 
-    min-width:280px;
-    padding:16px;
+    position:fixed; /* KEY FIX: removes scroll clipping */
+    top:140px;
+    left:20px;
+
+    width:300px;
 
     background:#fff;
     color:#111;
 
+    padding:16px;
     border-radius:10px;
+
     box-shadow:0 18px 45px rgba(0,0,0,.18);
 
     flex-direction:column;
-    gap:12px;
+    gap:10px;
 
     z-index:999999;
 }
@@ -214,27 +200,9 @@ body{
     display:flex !important;
 }
 
-.mega-column{
-    display:flex;
-    flex-direction:column;
-}
-
-.mega-column h4{
-    margin:0 0 8px;
-    font-size:12px;
-    text-transform:uppercase;
-    color:#0a2540;
-}
-
-.mega-menu a{
-    padding:6px 0;
-    text-decoration:none;
-    color:#222;
-}
-
 
 /* ===========================
-   TABLET (iPad)
+   TABLET
 =========================== */
 @media (max-width:900px){
 
@@ -246,37 +214,18 @@ body{
         margin-left:auto;
     }
 
-    .nav-btn,
-    .mega-trigger{
-        border:1px solid rgba(255,255,255,.6);
-        font-weight:600;
-    }
-
     .mega-menu{
-        position:absolute;
-        top:100%;
-        left:0;
-        width:300px;
-
-        padding:18px;
-        margin-top:8px;
-
-        border-radius:10px;
-        box-shadow:0 18px 45px rgba(0,0,0,.18);
-
-        display:none;
-        flex-direction:column;
-        gap:14px;
-    }
-
-    .nav-item.open > .mega-menu{
-        display:flex !important;
+        position:fixed;
+        top:140px;
+        left:10px;
+        right:10px;
+        width:auto;
     }
 }
 
 
 /* ===========================
-   PHONE (iPhone FIXED SCROLL SAFE)
+   MOBILE / IPHONE
 =========================== */
 @media (max-width:700px){
 
@@ -289,25 +238,12 @@ body{
         margin:0 auto;
     }
 
-    .nav-item.open > .mega-menu{
-        position:absolute;
-        top:100%;
-        left:0;
-
-        width:min(320px, 85vw);
-
-        display:flex !important;
-
-        background:#fff;
-        padding:14px;
-        border-radius:10px;
-
-        box-shadow:0 18px 45px rgba(0,0,0,.18);
-
-        flex-direction:column;
-        gap:10px;
-
-        z-index:999999;
+    .mega-menu{
+        position:fixed;
+        top:120px;
+        left:10px;
+        right:10px;
+        width:auto;
     }
 }
 

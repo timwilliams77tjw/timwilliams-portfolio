@@ -1,11 +1,8 @@
 /* ==================================================
    header-standard.css
-   FULL UPDATED VERSION
-   Fixes:
-   - iPhone horizontal nav scroll
-   - submenu wrong position
-   - submenu clipping
-   - Safari tap repaint issue
+   CLEAN FINAL VERSION
+   iPhone + iPad submenu fixed
+   horizontal scroll preserved
 ================================================== */
 
 /* ===========================
@@ -202,7 +199,7 @@ SEARCH / DARK
 }
 
 /* ===========================
-DESKTOP MENU
+DESKTOP MEGA MENU
 =========================== */
 .mega-menu{
     display:none;
@@ -241,47 +238,48 @@ DESKTOP MENU
     padding:6px 0;
 }
 
-/* ===========================
-MOBILE / TABLET FIX
-=========================== */
+/* ============================================================
+   MOBILE / TABLET SUBMENU (iPhone + iPad)
+============================================================ */
 @media (max-width:1024px){
 
-    .mega-menu{
-        display:none;
+    /* allow submenu to escape scroll container */
+    .nav-scroll{
+        overflow-x:auto;
+        overflow-y:visible;
     }
 
-    .nav-item.open > .mega-menu{
-        display:flex !important;
-
-        position:fixed !important;
-        top:170px;
-        left:16px;
-        right:16px;
-
-        width:auto !important;
-        min-width:auto !important;
-        max-width:none !important;
-
-        transform:none !important;
-
+    /* base submenu */
+    .mega-menu{
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        width:280px;
+        max-width:90%;
         background:#fff;
-        border-radius:16px;
-        padding:20px;
-
+        border-radius:14px;
+        padding:16px;
         flex-direction:column;
         flex-wrap:nowrap;
-        gap:18px;
+        gap:14px;
+        box-shadow:0 18px 45px rgba(0,0,0,.18);
+        z-index:9999;
+    }
 
-        box-shadow:0 20px 50px rgba(0,0,0,.22);
-        z-index:999999;
+    /* show when open */
+    .nav-item.open > .mega-menu{
+        display:flex;
     }
 
     .mega-column h4{
         color:#0a2540;
+        margin:0 0 8px;
     }
 
     .mega-menu a{
         color:#222;
+        padding:4px 0;
     }
 }
 
@@ -298,61 +296,5 @@ PHONE HERO STACK
 
     .hero-photo{
         margin-top:18px;
-    }
-}
-/* ============================================================
-   FINAL FIX — iPhone + iPad Submenu Behaviour
-   Removes fixed positioning, restores floating panel,
-   fixes first‑click Safari bug, fixes second‑click full‑width bug
-============================================================ */
-
-@media (max-width:1024px){
-
-    /* Reset desktop mega menu */
-    .mega-menu{
-        display:none !important;
-        position:absolute !important;
-        top:100% !important;
-        left:0 !important;
-        right:auto !important;
-        width:280px !important;
-        max-width:90% !important;
-        min-width:auto !important;
-        transform:none !important;
-        background:#fff !important;
-        border-radius:14px !important;
-        padding:16px !important;
-        flex-direction:column !important;
-        flex-wrap:nowrap !important;
-        gap:14px !important;
-        box-shadow:0 18px 45px rgba(0,0,0,.18) !important;
-        z-index:999999 !important;
-    }
-
-    /* When open */
-    .nav-item.open > .mega-menu{
-        display:flex !important;
-    }
-
-    /* Ensure submenu is above header */
-    .hero-banner,
-    .hero-content{
-        z-index:auto !important;
-    }
-
-    /* Ensure submenu is not clipped by nav-scroll */
-    .nav-scroll{
-        overflow:visible !important;
-    }
-
-    /* Typography */
-    .mega-column h4{
-        color:#0a2540 !important;
-        margin:0 0 8px !important;
-    }
-
-    .mega-menu a{
-        color:#222 !important;
-        padding:4px 0 !important;
     }
 }

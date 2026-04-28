@@ -1,166 +1,171 @@
 /* ==================================================
-header-standard.js
-FINAL — Minimal Diff, iPad Fix Only
+   header-standard.js
+   FINAL — iPhone + iPad Fix, Minimal Diff
 ================================================== */
 
 function initHeader() {
 
-/* ===========================
-DEVICE DETECTION
-=========================== */
-const isTouchDevice = () =>
-    window.matchMedia("(pointer: coarse)").matches ||
-    navigator.maxTouchPoints > 0;
+    /* ===========================
+       DEVICE DETECTION
+    =========================== */
+    const isTouchDevice = () =>
+        window.matchMedia("(pointer: coarse)").matches ||
+        navigator.maxTouchPoints > 0;
 
-const isMobile = () =>
-    window.innerWidth <= 900;
+    const isMobile = () =>
+        window.innerWidth <= 900;
 
-/* NEW — iPad detection */
-const isIpad = () =>
-    navigator.userAgent.includes("iPad") ||
-    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const isIpad = () =>
+        navigator.userAgent.includes("iPad") ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
-const body = document.body;
+    const body = document.body;
 
-/* ===========================
-CLOSE ALL MENUS
-=========================== */
-function closeAllMenus() {
-    document.querySelectorAll(".nav-item.open")
-        .forEach(item => item.classList.remove("open"));
-}
-
-/* ===========================
-MEGA MENU HANDLING
-=========================== */
-const triggers = document.querySelectorAll(".mega-trigger");
-
-triggers.forEach(btn => {
-
-    let startX = 0;
-    let startY = 0;
-    let moved = false;
-
-    btn.addEventListener("touchstart", e => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        moved = false;
-    }, { passive:true });
-
-    btn.addEventListener("touchmove", e => {
-        const dx = Math.abs(e.touches[0].clientX - startX);
-        const dy = Math.abs(e.touches[0].clientY - startY);
-        if (dx > 10 || dy > 10) moved = true;
-    }, { passive:true });
-
-    btn.addEventListener("click", function(e){
-
-        if (moved) return;
-
-        const parent = this.closest(".nav-item");
-        if (!parent) return;
-
-        /* Desktop hover mode */
-        if (!isTouchDevice() && !isMobile() && !isIpad()) return;
-
-        /* Toggle */
-        if (parent.classList.contains("open")){
-            parent.classList.remove("open");
-            return;
-        }
-
-        e.preventDefault();
-        e.stopPropagation();
-
-        closeAllMenus();
-        parent.classList.add("open");
-    });
-});
-// Force Safari to recalc layout before positioning submenu
-requestAnimationFrame(() => {
-    const menu = parent.querySelector(".mega-menu");
-    if (menu) {
-        menu.style.transform = "translateY(0)"; // triggers layout
-        menu.offsetHeight; // forces reflow
-        menu.style.transform = ""; // clean up
+    /* ===========================
+       CLOSE ALL MENUS
+    =========================== */
+    function closeAllMenus() {
+        document.querySelectorAll(".nav-item.open")
+            .forEach(item => item.classList.remove("open"));
     }
-});
 
-/* ===========================
-CLOSE ON OUTSIDE TAP
-=========================== */
-document.addEventListener("click", e => {
-    if (!e.target.closest(".nav-item")){
-        closeAllMenus();
-    }
-});
+    /* ===========================
+       MEGA MENU HANDLING
+    =========================== */
+    const triggers = document.querySelectorAll(".mega-trigger");
 
-/* ===========================
-CLOSE ON RESIZE
-=========================== */
-window.addEventListener("resize", closeAllMenus);
+    triggers.forEach(btn => {
 
-/* ===========================
-CLOSE ON SCROLL
-=========================== */
-let lastScroll = window.scrollY;
+        let startX = 0;
+        let startY = 0;
+        let moved = false;
 
-window.addEventListener("scroll", () => {
-    const current = window.scrollY;
-    if (Math.abs(current - lastScroll) > 20){
-        closeAllMenus();
-    }
-    lastScroll = current;
-});
+        btn.addEventListener("touchstart", e => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            moved = false;
+        }, { passive: true });
 
-/* ===========================
-SEARCH
-=========================== */
-const icon = document.getElementById("searchIcon");
-const input = document.getElementById("siteSearchInput");
-const results = document.getElementById("searchResults");
+        btn.addEventListener("touchmove", e => {
+            const dx = Math.abs(e.touches[0].clientX - startX);
+            const dy = Math.abs(e.touches[0].clientY - startY);
+            if (dx > 10 || dy > 10) moved = true;
+        }, { passive: true });
 
-if (icon && input){
+        btn.addEventListener("click", function (e) {
 
-    icon.addEventListener("click", e => {
-        e.stopPropagation();
-        input.classList.toggle("open");
+            if (moved) return;
 
-        if (input.classList.contains("open")){
-            input.focus();
-        } else {
-            if (results) results.style.display = "none";
-        }
+            const parent = this.closest(".nav-item");
+            if (!parent) return;
+
+            /* Desktop hover mode */
+            if (!isTouchDevice() && !isMobile() && !isIpad()) return;
+
+            /* Toggle */
+            if (parent.classList.contains("open")) {
+                parent.classList.remove("open");
+                return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            closeAllMenus();
+            parent.classList.add("open");
+
+            /* ==================================================
+               SAFARI FIX — FORCE LAYOUT BEFORE POSITIONING MENU
+               Prevents misalignment on first tap
+            ================================================== */
+            requestAnimationFrame(() => {
+                const menu = parent.querySelector(".mega-menu");
+                if (menu) {
+                    menu.style.transform = "translateY(0)"; // trigger layout
+                    menu.offsetHeight; // force reflow
+                    menu.style.transform = ""; // cleanup
+                }
+            });
+
+        });
+
     });
 
+    /* ===========================
+       CLOSE ON OUTSIDE TAP
+    =========================== */
     document.addEventListener("click", e => {
-        if (!e.target.closest(".search-wrapper")){
-            input.classList.remove("open");
-            if (results) results.style.display = "none";
+        if (!e.target.closest(".nav-item")) {
+            closeAllMenus();
         }
     });
-}
 
-/* ===========================
-DARK MODE
-=========================== */
-const darkBtn = document.getElementById("darkToggleHeader");
+    /* ===========================
+       CLOSE ON RESIZE
+    =========================== */
+    window.addEventListener("resize", closeAllMenus);
 
-if (darkBtn){
+    /* ===========================
+       CLOSE ON SCROLL
+    =========================== */
+    let lastScroll = window.scrollY;
 
-    const stored = localStorage.getItem("tw_dark");
-    if (stored === "1"){
-        body.classList.add("dark-mode");
+    window.addEventListener("scroll", () => {
+        const current = window.scrollY;
+        if (Math.abs(current - lastScroll) > 20) {
+            closeAllMenus();
+        }
+        lastScroll = current;
+    });
+
+    /* ===========================
+       SEARCH
+    =========================== */
+    const icon = document.getElementById("searchIcon");
+    const input = document.getElementById("siteSearchInput");
+    const results = document.getElementById("searchResults");
+
+    if (icon && input) {
+
+        icon.addEventListener("click", e => {
+            e.stopPropagation();
+            input.classList.toggle("open");
+
+            if (input.classList.contains("open")) {
+                input.focus();
+            } else {
+                if (results) results.style.display = "none";
+            }
+        });
+
+        document.addEventListener("click", e => {
+            if (!e.target.closest(".search-wrapper")) {
+                input.classList.remove("open");
+                if (results) results.style.display = "none";
+            }
+        });
     }
 
-    darkBtn.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem(
-            "tw_dark",
-            body.classList.contains("dark-mode") ? "1" : "0"
-        );
-    });
-}
+    /* ===========================
+       DARK MODE
+    =========================== */
+    const darkBtn = document.getElementById("darkToggleHeader");
+
+    if (darkBtn) {
+
+        const stored = localStorage.getItem("tw_dark");
+        if (stored === "1") {
+            body.classList.add("dark-mode");
+        }
+
+        darkBtn.addEventListener("click", () => {
+            body.classList.toggle("dark-mode");
+            localStorage.setItem(
+                "tw_dark",
+                body.classList.contains("dark-mode") ? "1" : "0"
+            );
+        });
+    }
 
 }
 
@@ -168,13 +173,13 @@ if (darkBtn){
 window.initHeader = initHeader;
 
 /* ===========================
-BACK TO TOP
+   BACK TO TOP
 =========================== */
 document.addEventListener("DOMContentLoaded", () => {
     const fab = document.getElementById("fab");
-    if (fab){
+    if (fab) {
         fab.addEventListener("click", () => {
-            window.scrollTo({ top:0, behavior:"smooth" });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
 });

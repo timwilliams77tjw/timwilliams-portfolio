@@ -157,7 +157,6 @@ BUTTONS
     white-space:nowrap;
     border-radius:6px;
 
-    /* Prevent jump */
     display:inline-flex;
     align-items:center;
     height:42px;
@@ -242,7 +241,7 @@ RESPONSIVE BEHAVIOUR
 ================================================== */
 
 /* ===========================
-PHONE — FLOATING PANEL
+1) PHONE — FLOATING PANEL
 =========================== */
 @media (max-width:700px){
 
@@ -267,7 +266,34 @@ PHONE — FLOATING PANEL
 }
 
 /* ===========================
-SMALL TABLETS (701–900px)
+2) iPAD — SAME AS PHONE
+=========================== */
+@media (min-width:701px) and (max-width:1024px){
+
+    .nav-item.open{
+        position:relative;
+    }
+
+    .nav-item.open > .mega-menu{
+        position:absolute !important;
+        top:100% !important;
+        left:0 !important;
+        width:280px !important;
+        background:#fff;
+        border-radius:10px;
+        padding:16px;
+        box-shadow:0 18px 45px rgba(0,0,0,.18);
+        display:flex !important;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .mega-column h4 { color:#0a2540 !important; }
+    .mega-menu a { color:#222 !important; }
+}
+
+/* ===========================
+3) SMALL TABLETS (701–900px)
 =========================== */
 @media (min-width:701px) and (max-width:900px){
 
@@ -294,30 +320,7 @@ SMALL TABLETS (701–900px)
 }
 
 /* ===========================
-IPAD — FORCE MOBILE FLOATING PANEL
-=========================== */
-@media (min-width:701px) and (max-width:1024px) and (hover:none){
-
-    .nav-item.open > .mega-menu{
-        position:absolute !important;
-        top:100% !important;
-        left:0 !important;
-        width:320px !important;
-        background:#fff;
-        border-radius:10px;
-        padding:20px;
-        box-shadow:0 18px 45px rgba(0,0,0,.18);
-        display:flex !important;
-        flex-direction:column;
-        gap:14px;
-    }
-
-    .mega-column h4 { color:#0a2540 !important; }
-    .mega-menu a { color:#222 !important; }
-}
-
-/* ===========================
-MOBILE LAYOUT RESTORE
+4) MOBILE LAYOUT RESTORE
 =========================== */
 @media (max-width:700px){
 
@@ -344,33 +347,5 @@ MOBILE LAYOUT RESTORE
     .nav-menu{
         width:100%;
         justify-content:center;
-    }
-}
-/* === iPHONE: stop jump + align under button === */
-@media (max-width:700px){
-    .nav-item.open{
-        position:relative;
-    }
-
-    .nav-item.open > .mega-menu{
-        position:absolute;
-        top:100%;
-        left:0;
-        width:280px;
-        z-index:99999;
-    }
-}
-
-/* === iPAD: narrow floating panel, keep styling === */
-@media (min-width:768px) and (max-width:1024px){
-    .nav-item.open > .mega-menu{
-        position:absolute;
-        top:100%;
-        left:0;
-        width:320px;
-        max-width:90%;
-        margin-top:8px;
-        border-radius:10px;
-        box-shadow:0 18px 45px rgba(0,0,0,.18);
     }
 }

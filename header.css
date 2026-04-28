@@ -1,6 +1,6 @@
 /* ==================================================
    header.css
-   STABLE IOS / IPAD HEADER (FINAL STRUCTURAL FIX)
+   SAFE IOS / IPAD RESTORE BUILD
 ================================================== */
 
 
@@ -25,7 +25,7 @@ body.dark-mode{
 
 
 /* ===========================
-   GLOBAL
+   GLOBAL RESET (CRITICAL)
 =========================== */
 html, body{
     margin:0;
@@ -43,7 +43,7 @@ body{
 
 
 /* ===========================
-   HERO (NO OVERFLOW CONSTRAINTS)
+   HERO
 =========================== */
 .hero-banner{
     position:relative;
@@ -51,7 +51,7 @@ body{
     padding:50px 20px;
     color:#fff;
 
-    /* CRITICAL: allow dropdown escape */
+    /* IMPORTANT */
     overflow:visible;
 }
 
@@ -84,24 +84,26 @@ body{
 
 
 /* ===========================
-   NAV SCROLL (CRITICAL FIX)
+   NAV SCROLL (CRITICAL)
 =========================== */
 .nav-scroll{
     width:100%;
     overflow-x:auto;
-    overflow-y:visible; /* IMPORTANT FOR IOS DROPDOWNS */
+    overflow-y:hidden;
     -webkit-overflow-scrolling:touch;
 }
 
 
 /* ===========================
-   NAV ROW
+   NAV MENU ROW
 =========================== */
 .nav-menu{
     display:flex;
     flex-wrap:nowrap;
+
     min-width:max-content;
     width:max-content;
+
     gap:6px;
     align-items:center;
 }
@@ -128,6 +130,7 @@ body{
     font-weight:500;
     padding:10px 14px;
     white-space:nowrap;
+    cursor:pointer;
 }
 
 
@@ -166,18 +169,16 @@ body{
 
 
 /* ===========================
-   MEGA MENU (CRITICAL FIX)
-   MOVED OUT OF SCROLL CONTAINER EFFECTIVELY
+   MEGA MENU (FIXED CONTEXTUAL)
 =========================== */
 .mega-menu{
     display:none;
 
-    position:fixed; /* KEY FIX: removes scroll clipping */
-    top:140px;
-    left:20px;
+    position:absolute;
+    top:100%;
+    left:0;
 
-    width:300px;
-
+    min-width:280px;
     background:#fff;
     color:#111;
 
@@ -202,7 +203,7 @@ body{
 
 
 /* ===========================
-   TABLET
+   TABLET (iPad FIXED ALIGNMENT)
 =========================== */
 @media (max-width:900px){
 
@@ -215,17 +216,17 @@ body{
     }
 
     .mega-menu{
-        position:fixed;
-        top:140px;
-        left:10px;
-        right:10px;
-        width:auto;
+        position:absolute;
+        top:100%;
+        left:0;
+
+        width:300px;
     }
 }
 
 
 /* ===========================
-   MOBILE / IPHONE
+   IPHONE FIX
 =========================== */
 @media (max-width:700px){
 
@@ -239,11 +240,11 @@ body{
     }
 
     .mega-menu{
-        position:fixed;
-        top:120px;
-        left:10px;
-        right:10px;
-        width:auto;
+        position:absolute;
+        top:100%;
+        left:0;
+
+        width:min(320px, 85vw);
     }
 }
 

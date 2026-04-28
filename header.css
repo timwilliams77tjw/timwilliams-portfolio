@@ -109,23 +109,21 @@ body{
 =========================== */
 .nav-scroll{
     width:100%;
-
-    /* IMPORTANT: horizontal scroll must work */
     overflow-x:auto;
     overflow-y:visible;
-
     -webkit-overflow-scrolling:touch;
-
-    /* prevents iOS clipping issues */
-    position:relative;
 }
 
 .nav-menu{
     display:flex;
     flex-wrap:nowrap;
 
+    /* CRITICAL FIX */
+    min-width:max-content;
+    width:fit-content;
+}
     /* CRITICAL: DO NOT USE 100% HERE */
-    width:max-content;
+
 
     gap:6px;
     align-items:center;
@@ -271,9 +269,7 @@ body{
     }
 
     /* KEEP MENU SAFE */
-    .nav-menu{
-        width:max-content;
-    }
+
 
     /* MOBILE DROPDOWN SAFE ZONE */
     .nav-item.open > .mega-menu{
@@ -305,4 +301,8 @@ body{
     .nav-item.open > .mega-menu{
         display:flex !important;
     }
+}
+.hero-banner,
+.hero-content{
+    overflow:visible !important;
 }

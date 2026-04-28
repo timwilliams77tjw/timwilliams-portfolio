@@ -1,83 +1,70 @@
 /* ==================================================
    header-standard.js
-   CLEAN REBUILD — Stable Desktop + iPhone + iPad
+   FULL UPDATED VERSION
 ================================================== */
 
 function initHeader() {
 
     const body = document.body;
-    const mobileBreakpoint = 1024;
 
-    /* ===========================
-       HELPERS
-    =========================== */
-    const isMobile = () => window.innerWidth <= mobileBreakpoint;
-
-    const closeAllMenus = () => {
+    function closeAllMenus() {
         document.querySelectorAll(".nav-item.open")
             .forEach(item => item.classList.remove("open"));
-    };
+    }
 
     /* ===========================
-       MEGA MENUS
+       MENU TRIGGERS
     =========================== */
     const triggers = document.querySelectorAll(".mega-trigger");
 
     triggers.forEach(btn => {
 
-        btn.addEventListener("click", function (e) {
+        btn.addEventListener("click", function(e){
 
             const parent = this.closest(".nav-item");
             if (!parent) return;
 
-            /* MOBILE / TABLET CLICK MODE */
-            if (isMobile()) {
+            /* MOBILE + TABLET */
+            if (window.innerWidth <= 1024) {
 
                 e.preventDefault();
                 e.stopPropagation();
 
-                const alreadyOpen = parent.classList.contains("open");
+                const alreadyOpen =
+                    parent.classList.contains("open");
 
                 closeAllMenus();
 
                 if (!alreadyOpen) {
-                    requestAnimationFrame(() => {
+                    setTimeout(() => {
                         parent.classList.add("open");
-                    });
+                    }, 10);
                 }
 
                 return;
             }
 
-            /* DESKTOP:
-               allow hover CSS, but first click opens if wanted */
+            /* DESKTOP CLICK SUPPORT */
             e.preventDefault();
 
-            const alreadyOpen = parent.classList.contains("open");
+            const alreadyOpen =
+                parent.classList.contains("open");
 
             closeAllMenus();
 
             if (!alreadyOpen) {
                 parent.classList.add("open");
             }
+
         });
 
     });
 
     /* ===========================
-       CLOSE ON OUTSIDE CLICK
+       CLOSE OUTSIDE CLICK
     =========================== */
     document.addEventListener("click", e => {
         if (!e.target.closest(".nav-item")) {
-            closeAllMenus();
-        }
-    });
-
-    /* ===========================
-       CLOSE ON ESC
-    =========================== */
-    document.addEventListener("keydown", e => {
-        if (e.key === "Escape") {
             closeAllMenus();
         }
     });
@@ -93,6 +80,7 @@ function initHeader() {
     let lastScroll = window.scrollY;
 
     window.addEventListener("scroll", () => {
+
         const current = window.scrollY;
 
         if (Math.abs(current - lastScroll) > 20) {
@@ -103,7 +91,7 @@ function initHeader() {
     });
 
     /* ===========================
-       SEARCH TOGGLE
+       SEARCH
     =========================== */
     const icon = document.getElementById("searchIcon");
     const input = document.getElementById("siteSearchInput");
@@ -112,6 +100,7 @@ function initHeader() {
     if (icon && input) {
 
         icon.addEventListener("click", e => {
+
             e.stopPropagation();
 
             input.classList.toggle("open");
@@ -121,9 +110,11 @@ function initHeader() {
             } else if (results) {
                 results.style.display = "none";
             }
+
         });
 
         document.addEventListener("click", e => {
+
             if (!e.target.closest(".search-wrapper")) {
                 input.classList.remove("open");
 
@@ -131,13 +122,15 @@ function initHeader() {
                     results.style.display = "none";
                 }
             }
+
         });
     }
 
     /* ===========================
        DARK MODE
     =========================== */
-    const darkBtn = document.getElementById("darkToggleHeader");
+    const darkBtn =
+        document.getElementById("darkToggleHeader");
 
     if (darkBtn) {
 
@@ -151,33 +144,32 @@ function initHeader() {
 
             localStorage.setItem(
                 "tw_dark",
-                body.classList.contains("dark-mode") ? "1" : "0"
+                body.classList.contains("dark-mode")
+                    ? "1"
+                    : "0"
             );
+
         });
     }
 }
 
-/* ===========================
-   GLOBAL ACCESS
-=========================== */
+/* Global */
 window.initHeader = initHeader;
 
-/* ===========================
-   DOM READY
-=========================== */
+/* Init */
 document.addEventListener("DOMContentLoaded", () => {
 
     initHeader();
 
-    /* Back to top button */
     const fab = document.getElementById("fab");
 
     if (fab) {
         fab.addEventListener("click", () => {
             window.scrollTo({
-                top: 0,
-                behavior: "smooth"
+                top:0,
+                behavior:"smooth"
             });
         });
     }
+
 });

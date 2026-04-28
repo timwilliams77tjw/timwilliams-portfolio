@@ -241,16 +241,18 @@ DESKTOP MEGA MENU
 /* ===========================
 TABLET (original behaviour)
 =========================== */
-@media (max-width:900px){
+/* ===========================
+TABLET (SMALL TABLETS ONLY)
+=========================== */
+@media (min-width:701px) and (max-width:900px){
 
+    /* Keep tablet stacked layout, but DO NOT override phone or iPad */
     .mega-menu{
-        position:static;
         display:none;
         width:100%;
         padding:15px;
         margin-top:8px;
         border-radius:8px;
-        box-shadow:none;
         gap:16px;
         flex-direction:column;
     }
@@ -259,11 +261,6 @@ TABLET (original behaviour)
         display:flex !important;
     }
 
-    /* RESTORE ORIGINAL STYLING */
-    .mega-menu{
-        font-size:14px;
-        line-height:1.4;
-    }
     .mega-column h4{
         color:#0a2540;
     }
@@ -271,6 +268,30 @@ TABLET (original behaviour)
         color:#222;
     }
 }
+
+/* ===========================
+IPAD — FORCE MOBILE FLOATING PANEL
+=========================== */
+@media (min-width:701px) and (max-width:1024px) and (hover:none){
+
+    .nav-item.open > .mega-menu{
+        position:absolute !important;
+        top:100% !important;
+        left:0 !important;
+        width:320px !important;
+        background:#fff;
+        border-radius:10px;
+        padding:20px;
+        box-shadow:0 18px 45px rgba(0,0,0,.18);
+        display:flex !important;
+        flex-direction:column;
+        gap:14px;
+    }
+
+    .mega-column h4 { color:#0a2540 !important; }
+    .mega-menu a { color:#222 !important; }
+}
+
 
 /* ===========================
 PHONE — FLOATING PANEL (B1)

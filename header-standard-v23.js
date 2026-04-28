@@ -1,14 +1,12 @@
 /* ==================================================
 header-standard.js
-Premium Responsive Version
-iPhone / iPad Scroll Safe
-Smooth Mega Menus
+FINAL — Minimal Diff, iPad Fix Only
 ================================================== */
 
 function initHeader() {
 
 /* ===========================
-FIX 1 — IMPROVED DEVICE DETECTION
+DEVICE DETECTION
 =========================== */
 const isTouchDevice = () =>
     window.matchMedia("(pointer: coarse)").matches ||
@@ -17,24 +15,24 @@ const isTouchDevice = () =>
 const isMobile = () =>
     window.innerWidth <= 900;
 
-/* NEW: iPad detection */
+/* NEW — iPad detection */
 const isIpad = () =>
     navigator.userAgent.includes("iPad") ||
     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
 const body = document.body;
 
-/* ==========================================
-MENU HELPERS
-========================================== */
+/* ===========================
+CLOSE ALL MENUS
+=========================== */
 function closeAllMenus() {
     document.querySelectorAll(".nav-item.open")
         .forEach(item => item.classList.remove("open"));
 }
 
-/* ==========================================
-MEGA MENUS
-========================================== */
+/* ===========================
+MEGA MENU HANDLING
+=========================== */
 const triggers = document.querySelectorAll(".mega-trigger");
 
 triggers.forEach(btn => {
@@ -43,22 +41,19 @@ triggers.forEach(btn => {
     let startY = 0;
     let moved = false;
 
-    /* Touch Start */
     btn.addEventListener("touchstart", e => {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         moved = false;
-    }, { passive: true });
+    }, { passive:true });
 
-    /* Detect Swipe */
     btn.addEventListener("touchmove", e => {
         const dx = Math.abs(e.touches[0].clientX - startX);
         const dy = Math.abs(e.touches[0].clientY - startY);
         if (dx > 10 || dy > 10) moved = true;
-    }, { passive: true });
+    }, { passive:true });
 
-    /* Click / Tap */
-    btn.addEventListener("click", function (e) {
+    btn.addEventListener("click", function(e){
 
         if (moved) return;
 
@@ -68,8 +63,8 @@ triggers.forEach(btn => {
         /* Desktop hover mode */
         if (!isTouchDevice() && !isMobile() && !isIpad()) return;
 
-        /* Toggle menu */
-        if (parent.classList.contains("open")) {
+        /* Toggle */
+        if (parent.classList.contains("open")){
             parent.classList.remove("open");
             return;
         }
@@ -82,49 +77,47 @@ triggers.forEach(btn => {
     });
 });
 
-/* ==========================================
-CLOSE MENU OUTSIDE TAP
-========================================== */
+/* ===========================
+CLOSE ON OUTSIDE TAP
+=========================== */
 document.addEventListener("click", e => {
-    if (!e.target.closest(".nav-item")) {
+    if (!e.target.closest(".nav-item")){
         closeAllMenus();
     }
 });
 
-/* ==========================================
-CLOSE ON WINDOW RESIZE
-========================================== */
-window.addEventListener("resize", () => {
-    closeAllMenus();
-});
+/* ===========================
+CLOSE ON RESIZE
+=========================== */
+window.addEventListener("resize", closeAllMenus);
 
-/* ==========================================
-CLOSE ON SCROLL DOWN PAGE
-========================================== */
+/* ===========================
+CLOSE ON SCROLL
+=========================== */
 let lastScroll = window.scrollY;
 
 window.addEventListener("scroll", () => {
     const current = window.scrollY;
-    if (Math.abs(current - lastScroll) > 20) {
+    if (Math.abs(current - lastScroll) > 20){
         closeAllMenus();
     }
     lastScroll = current;
 });
 
-/* ==========================================
+/* ===========================
 SEARCH
-========================================== */
+=========================== */
 const icon = document.getElementById("searchIcon");
 const input = document.getElementById("siteSearchInput");
 const results = document.getElementById("searchResults");
 
-if (icon && input) {
+if (icon && input){
 
     icon.addEventListener("click", e => {
         e.stopPropagation();
         input.classList.toggle("open");
 
-        if (input.classList.contains("open")) {
+        if (input.classList.contains("open")){
             input.focus();
         } else {
             if (results) results.style.display = "none";
@@ -132,22 +125,22 @@ if (icon && input) {
     });
 
     document.addEventListener("click", e => {
-        if (!e.target.closest(".search-wrapper")) {
+        if (!e.target.closest(".search-wrapper")){
             input.classList.remove("open");
             if (results) results.style.display = "none";
         }
     });
 }
 
-/* ==========================================
+/* ===========================
 DARK MODE
-========================================== */
+=========================== */
 const darkBtn = document.getElementById("darkToggleHeader");
 
-if (darkBtn) {
+if (darkBtn){
 
     const stored = localStorage.getItem("tw_dark");
-    if (stored === "1") {
+    if (stored === "1"){
         body.classList.add("dark-mode");
     }
 
@@ -162,20 +155,17 @@ if (darkBtn) {
 
 }
 
-/* Global Access */
+/* Make initHeader globally available */
 window.initHeader = initHeader;
 
-/* ==========================================
-BACK TO TOP BUTTON
-========================================== */
+/* ===========================
+BACK TO TOP
+=========================== */
 document.addEventListener("DOMContentLoaded", () => {
     const fab = document.getElementById("fab");
-    if (fab) {
+    if (fab){
         fab.addEventListener("click", () => {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo({ top:0, behavior:"smooth" });
         });
     }
 });

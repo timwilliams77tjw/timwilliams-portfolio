@@ -300,3 +300,59 @@ PHONE HERO STACK
         margin-top:18px;
     }
 }
+/* ============================================================
+   FINAL FIX — iPhone + iPad Submenu Behaviour
+   Removes fixed positioning, restores floating panel,
+   fixes first‑click Safari bug, fixes second‑click full‑width bug
+============================================================ */
+
+@media (max-width:1024px){
+
+    /* Reset desktop mega menu */
+    .mega-menu{
+        display:none !important;
+        position:absolute !important;
+        top:100% !important;
+        left:0 !important;
+        right:auto !important;
+        width:280px !important;
+        max-width:90% !important;
+        min-width:auto !important;
+        transform:none !important;
+        background:#fff !important;
+        border-radius:14px !important;
+        padding:16px !important;
+        flex-direction:column !important;
+        flex-wrap:nowrap !important;
+        gap:14px !important;
+        box-shadow:0 18px 45px rgba(0,0,0,.18) !important;
+        z-index:999999 !important;
+    }
+
+    /* When open */
+    .nav-item.open > .mega-menu{
+        display:flex !important;
+    }
+
+    /* Ensure submenu is above header */
+    .hero-banner,
+    .hero-content{
+        z-index:auto !important;
+    }
+
+    /* Ensure submenu is not clipped by nav-scroll */
+    .nav-scroll{
+        overflow:visible !important;
+    }
+
+    /* Typography */
+    .mega-column h4{
+        color:#0a2540 !important;
+        margin:0 0 8px !important;
+    }
+
+    .mega-menu a{
+        color:#222 !important;
+        padding:4px 0 !important;
+    }
+}

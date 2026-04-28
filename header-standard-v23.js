@@ -76,6 +76,15 @@ triggers.forEach(btn => {
         parent.classList.add("open");
     });
 });
+// Force Safari to recalc layout before positioning submenu
+requestAnimationFrame(() => {
+    const menu = parent.querySelector(".mega-menu");
+    if (menu) {
+        menu.style.transform = "translateY(0)"; // triggers layout
+        menu.offsetHeight; // forces reflow
+        menu.style.transform = ""; // clean up
+    }
+});
 
 /* ===========================
 CLOSE ON OUTSIDE TAP

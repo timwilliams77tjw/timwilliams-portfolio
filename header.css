@@ -1,15 +1,11 @@
 /* ==================================================
    header.css
-   FINAL STABLE IOS / IPAD SAFE BUILD
-   - Fixes hidden menu
-   - Restores scroll on iPhone + iPad
-   - Prevents header cut-off
-   - Stops overflow conflicts
+   FINAL STABLE IOS / IPAD SAFE BUILD (CLEANED)
 ================================================== */
 
 
 /* ===========================
-   ROOT
+   ROOT VARIABLES
 =========================== */
 :root{
     --bg:#fff;
@@ -29,12 +25,13 @@ body.dark-mode{
 
 
 /* ===========================
-   GLOBAL RESET (CRITICAL)
+   GLOBAL RESET
 =========================== */
 html, body{
     margin:0;
     padding:0;
     width:100%;
+    max-width:100%;
     overflow-x:hidden;
     font-family:Arial, Helvetica, sans-serif;
 }
@@ -46,15 +43,13 @@ body{
 
 
 /* ===========================
-   HERO (NO CLIPPING EVER)
+   HERO
 =========================== */
 .hero-banner{
     position:relative;
     background:url("hero.jpg") center/cover no-repeat;
     padding:50px 20px;
     color:#fff;
-
-    /* IMPORTANT: prevents cut-off */
     overflow:visible;
 }
 
@@ -76,7 +71,6 @@ body{
 
     width:100%;
     box-sizing:border-box;
-
     flex-wrap:wrap;
 }
 
@@ -105,25 +99,24 @@ body{
 
 
 /* ===========================
-   NAV WRAPPER (CRITICAL FIX)
+   NAV SCROLL (CRITICAL FIX)
 =========================== */
 .nav-scroll{
     width:100%;
     overflow-x:auto;
-    overflow-y:visible;
+    overflow-y:hidden;
     -webkit-overflow-scrolling:touch;
 }
 
+
+/* ===========================
+   NAV MENU (FIXED)
+=========================== */
 .nav-menu{
     display:flex;
     flex-wrap:nowrap;
-
-    /* CRITICAL FIX */
     min-width:max-content;
-    width:fit-content;
-}
-    /* CRITICAL: DO NOT USE 100% HERE */
-
+    width:max-content;
 
     gap:6px;
     align-items:center;
@@ -156,7 +149,7 @@ body{
 
 
 /* ===========================
-   SEARCH / DARK MODE ROW
+   SEARCH / DARK MODE
 =========================== */
 .search-wrapper{
     display:flex;
@@ -190,7 +183,7 @@ body{
 
 
 /* ===========================
-   MEGA MENU (DESKTOP BASE)
+   MEGA MENU (DESKTOP)
 =========================== */
 .mega-menu{
     display:none;
@@ -198,11 +191,12 @@ body{
     top:100%;
     left:0;
 
+    min-width:280px;
+    padding:16px;
+
     background:#fff;
     color:#111;
 
-    min-width:280px;
-    padding:16px;
     border-radius:10px;
     box-shadow:0 18px 45px rgba(0,0,0,.18);
 
@@ -251,11 +245,38 @@ body{
     .hero-photo{
         margin-left:auto;
     }
+
+    .nav-btn,
+    .mega-trigger{
+        border:1px solid rgba(255,255,255,.6);
+        font-weight:600;
+    }
+
+    .mega-menu{
+        position:absolute;
+        top:100%;
+        left:0;
+        width:300px;
+
+        padding:18px;
+        margin-top:8px;
+
+        border-radius:10px;
+        box-shadow:0 18px 45px rgba(0,0,0,.18);
+
+        display:none;
+        flex-direction:column;
+        gap:14px;
+    }
+
+    .nav-item.open > .mega-menu{
+        display:flex !important;
+    }
 }
 
 
 /* ===========================
-   MOBILE / iPhone (NO BREAKS VERSION)
+   PHONE (iPhone FIXED SCROLL SAFE)
 =========================== */
 @media (max-width:700px){
 
@@ -268,10 +289,6 @@ body{
         margin:0 auto;
     }
 
-    /* KEEP MENU SAFE */
-
-
-    /* MOBILE DROPDOWN SAFE ZONE */
     .nav-item.open > .mega-menu{
         position:absolute;
         top:100%;
@@ -284,6 +301,7 @@ body{
         background:#fff;
         padding:14px;
         border-radius:10px;
+
         box-shadow:0 18px 45px rgba(0,0,0,.18);
 
         flex-direction:column;
@@ -301,8 +319,4 @@ body{
     .nav-item.open > .mega-menu{
         display:flex !important;
     }
-}
-.hero-banner,
-.hero-content{
-    overflow:visible !important;
 }

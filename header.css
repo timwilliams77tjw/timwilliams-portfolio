@@ -1,10 +1,11 @@
 /* ==================================================
    header.css
    FINAL STABLE VERSION
-   - Fixes iPhone nav jump
-   - Restores submenu styling on iPad + iPhone
-   - Keeps scroll working
-   - Keeps off-screen fixed
+   FIXED:
+   - iPad submenu styling
+   - iPhone submenu now opens correctly
+   - iPhone no jump
+   - Keeps scroll + no off-screen issues
 ================================================== */
 
 
@@ -68,12 +69,10 @@ body{
 .hero-content{
     position:relative;
     z-index:2;
-
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:24px;
-
     width:100%;
     max-width:100%;
     box-sizing:border-box;
@@ -152,8 +151,8 @@ body{
    ITEMS
 =========================== */
 .nav-item{
-    flex:0 0 auto;
     position:relative;
+    flex:0 0 auto;
 }
 
 
@@ -174,14 +173,9 @@ body{
     border-radius:6px;
 }
 
-.nav-item>a,
-.nav-item>button{
-    -webkit-tap-highlight-color:transparent;
-}
-
 
 /* ===========================
-   SEARCH + DARK MODE
+   SEARCH / DARK MODE
 =========================== */
 .search-wrapper,
 .header-right{
@@ -230,12 +224,10 @@ body{
     top:155px;
     left:20px;
     right:20px;
-
     background:#fff;
     padding:25px 30px;
     border-radius:10px;
     box-shadow:0 18px 45px rgba(0,0,0,.15);
-
     gap:30px;
     flex-wrap:wrap;
     z-index:999999;
@@ -257,7 +249,6 @@ body{
     font-size:12px;
     font-weight:700;
     text-transform:uppercase;
-    letter-spacing:.04em;
     color:#0a2540;
 }
 
@@ -266,11 +257,6 @@ body{
     padding:6px 0;
     color:#222;
     text-decoration:none;
-    white-space:nowrap;
-}
-
-.mega-menu a:hover{
-    color:var(--accent);
 }
 
 
@@ -294,13 +280,12 @@ body{
         font-weight:600;
     }
 
-    /* Styled dropdown panel */
     .mega-menu{
         position:absolute;
         top:100%;
         left:0;
-        right:auto;
         width:300px;
+        right:auto;
 
         display:none;
         padding:18px;
@@ -321,7 +306,7 @@ body{
 
 
 /* ===========================
-   PHONE ONLY
+   IPHONE
 =========================== */
 @media (max-width:700px){
 
@@ -334,37 +319,38 @@ body{
         margin:0 auto;
     }
 
-    /* prevents jump */
-    .nav-item.open{
+    /* IMPORTANT:
+       keep nav-item normal,
+       only menu becomes dropdown */
+    .nav-item{
         position:relative;
     }
 
     .nav-item.open > .mega-menu{
+        display:flex !important;
+
         position:absolute;
-        left:0;
         top:100%;
+        left:0;
+
         width:280px;
         max-width:85vw;
 
-        display:flex !important;
-        z-index:99999;
-
-        background:#fff;
         padding:16px;
         margin-top:8px;
 
         border-radius:10px;
+        background:#fff;
         box-shadow:0 18px 45px rgba(0,0,0,.18);
 
         gap:14px;
         flex-direction:column;
         flex-wrap:nowrap;
+
+        z-index:99999;
     }
 
-    .mega-column h4{
-        text-align:left;
-    }
-
+    .mega-column h4,
     .mega-menu a{
         text-align:left;
     }
@@ -372,10 +358,10 @@ body{
 
 
 /* ===========================
-   TOUCH
+   TOUCH DEVICES
 =========================== */
 @media (hover:none) and (pointer:coarse){
-    .nav-item.open>.mega-menu{
+    .nav-item.open > .mega-menu{
         display:flex !important;
     }
 }

@@ -316,3 +316,31 @@ IPAD — FORCE MOBILE MODE
         gap:14px;
     }
 }
+/* FORCE PHONE SUBMENU TO FLOAT (OVERRIDES TABLET RULE) */
+@media (max-width:700px){
+    .nav-item.open > .mega-menu {
+        position:absolute !important;
+        top:100% !important;
+        left:0 !important;
+        width:280px !important;
+    }
+}
+/* iPad — force mobile floating submenu */
+@media (min-width:701px) and (max-width:1024px) {
+    .nav-item.open > .mega-menu {
+        position:absolute !important;
+        top:100% !important;
+        left:0 !important;
+        width:320px !important;
+        background:#fff;
+        border-radius:10px;
+        padding:20px;
+        box-shadow:0 18px 45px rgba(0,0,0,.18);
+        display:flex !important;
+        flex-direction:column;
+        gap:14px;
+    }
+
+    .mega-column h4 { color:#0a2540 !important; }
+    .mega-menu a { color:#222 !important; }
+}

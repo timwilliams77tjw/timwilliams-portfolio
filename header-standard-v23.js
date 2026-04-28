@@ -1,38 +1,37 @@
 /* ==================================================
    header-standard.js
-   Premium Responsive Version
-   iPhone / iPad Scroll Safe
-   Smooth Mega Menus
+   FINAL FIXED VERSION
+   - iPhone submenu works
+   - keeps horizontal scroll
+   - no jumping menu
+   - iPad menus work
 ================================================== */
 
 function initHeader() {
 
-    /* ===========================
-       FIX 1 — IMPROVED DEVICE DETECTION
-       (iPad now treated as touch + mobile-capable)
-    =========================== */
+    const body = document.body;
 
     const isTouchDevice = () =>
         window.matchMedia("(pointer: coarse)").matches ||
         navigator.maxTouchPoints > 0;
 
     const isMobile = () =>
-        window.innerWidth <= 900; // expanded for iPad compatibility
+        window.innerWidth <= 900;
 
-    const body = document.body;
 
-    /* ==========================================
-       MENU HELPERS
-    ========================================== */
+    /* ===========================
+       HELPERS
+    =========================== */
 
     function closeAllMenus() {
         document.querySelectorAll(".nav-item.open")
             .forEach(item => item.classList.remove("open"));
     }
 
-    /* ==========================================
+
+    /* ===========================
        MEGA MENUS
-    ========================================== */
+    =========================== */
 
     const triggers = document.querySelectorAll(".mega-trigger");
 
@@ -42,71 +41,79 @@ function initHeader() {
         let startY = 0;
         let moved = false;
 
-        /* Touch Start */
+        /* touch start */
         btn.addEventListener("touchstart", e => {
             startX = e.touches[0].clientX;
             startY = e.touches[0].clientY;
             moved = false;
         }, { passive: true });
 
-        /* Detect Swipe */
+        /* detect swipe */
         btn.addEventListener("touchmove", e => {
             const dx = Math.abs(e.touches[0].clientX - startX);
             const dy = Math.abs(e.touches[0].clientY - startY);
 
-            if (dx > 10 || dy > 10) {
-                moved = true;
-            }
+            if (dx > 10 || dy > 10) moved = true;
         }, { passive: true });
 
-        /* Click / Tap */
-        btn.addEventListener("click", function (e) {
+        /* IMPORTANT FIX:
+           use pointerup for iPhone Safari */
+        btn.addEventListener("pointerup", function (e) {
 
             if (moved) return;
 
             const parent = this.closest(".nav-item");
             if (!parent) return;
 
-            /* Desktop hover mode */
             if (!isTouchDevice() && !isMobile()) return;
-
-            /* Toggle menu */
-            if (parent.classList.contains("open")) {
-                parent.classList.remove("open");
-                return;
-            }
 
             e.preventDefault();
             e.stopPropagation();
 
+            const isOpen = parent.classList.contains("open");
+
             closeAllMenus();
-            parent.classList.add("open");
+
+            if (!isOpen) {
+                parent.classList.add("open");
+            }
+
+        });
+
+        /* fallback click */
+        btn.addEventListener("click", function (e) {
+
+            if (isTouchDevice() || isMobile()) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
 
         });
 
     });
 
-    /* ==========================================
-       CLOSE MENU OUTSIDE TAP
-    ========================================== */
 
-    document.addEventListener("click", e => {
+    /* ===========================
+       OUTSIDE CLICK CLOSE
+    =========================== */
+
+    document.addEventListener("pointerup", e => {
         if (!e.target.closest(".nav-item")) {
             closeAllMenus();
         }
     });
 
-    /* ==========================================
-       CLOSE ON WINDOW RESIZE
-    ========================================== */
 
-    window.addEventListener("resize", () => {
-        closeAllMenus();
-    });
+    /* ===========================
+       RESIZE CLOSE
+    =========================== */
 
-    /* ==========================================
-       CLOSE ON SCROLL DOWN PAGE
-    ========================================== */
+    window.addEventListener("resize", closeAllMenus);
+
+
+    /* ===========================
+       SCROLL PAGE CLOSE
+    =========================== */
 
     let lastScroll = window.scrollY;
 
@@ -119,11 +126,13 @@ function initHeader() {
         }
 
         lastScroll = current;
+
     });
 
-    /* ==========================================
+
+    /* ===========================
        SEARCH
-    ========================================== */
+    =========================== */
 
     const icon = document.getElementById("searchIcon");
     const input = document.getElementById("siteSearchInput");
@@ -132,14 +141,15 @@ function initHeader() {
     if (icon && input) {
 
         icon.addEventListener("click", e => {
+            e.preventDefault();
             e.stopPropagation();
 
             input.classList.toggle("open");
 
             if (input.classList.contains("open")) {
                 input.focus();
-            } else {
-                if (results) results.style.display = "none";
+            } else if (results) {
+                results.style.display = "none";
             }
         });
 
@@ -151,17 +161,16 @@ function initHeader() {
         });
     }
 
-    /* ==========================================
+
+    /* ===========================
        DARK MODE
-    ========================================== */
+    =========================== */
 
     const darkBtn = document.getElementById("darkToggleHeader");
 
     if (darkBtn) {
 
-        const stored = localStorage.getItem("tw_dark");
-
-        if (stored === "1") {
+        if (localStorage.getItem("tw_dark") === "1") {
             body.classList.add("dark-mode");
         }
 
@@ -175,17 +184,26 @@ function initHeader() {
             );
 
         });
+
     }
 
 }
 
-/* Global Access */
+
+/* ===========================
+   GLOBAL INIT
+=========================== */
+
 window.initHeader = initHeader;
 
+document.addEventListener("DOMContentLoaded", () => {
+    initHeader();
+});
 
-/* ==========================================
-   BACK TO TOP BUTTON
-========================================== */
+
+/* ===========================
+   BACK TO TOP
+=========================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 

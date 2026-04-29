@@ -298,3 +298,16 @@ PHONE HERO STACK
         margin-top:18px;
     }
 }
+/* Fix Safari stacking bug */
+.hero-banner::before {
+    z-index: 0;
+}
+
+.hero-content,
+.nav-scroll,
+.nav-menu,
+.nav-item,
+.mega-menu {
+    position: relative;
+    z-index: 1;
+}

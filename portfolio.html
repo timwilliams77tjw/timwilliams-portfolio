@@ -74,20 +74,22 @@ display:none;
 <!-- HEADER INCLUDE -->
 <div id="header-placeholder"></div>
 
-<!-- 1. Load the JS file FIRST -->
-<script src="header-standard-v23.js"></script>
+<!-- HEADER JS -->
+<script src="header-standard-v23.js?v=1001" defer></script>
 
-<!-- 2. Inject the header HTML -->
+<!-- INJECT HEADER AFTER DOM + CSS -->
 <script>
-fetch("./header-standard-v4.html")
-  .then(r => r.text())
-  .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
-  });
+window.addEventListener("DOMContentLoaded", () => {
+    fetch("./header-standard-v4.html?v=1001")
+      .then(r => r.text())
+      .then(h => {
+          document.getElementById("header-placeholder").innerHTML = h;
+          initHeader();
+      });
+});
+</script>
 
-
-
+<!-- ⭐ PAGE LAYOUT STARTS HERE -->
 
 // Make Portfolio button active BUT keep dropdown working
 const portfolioBtn = document.querySelector(".portfolio-btn");
@@ -99,7 +101,7 @@ portfolioBtn.classList.add("active");
 });
 
 </script>
-
+<div class="page-certifications">
 <!-- FILTER BAR -->
 
 <div class="sticky-bar">

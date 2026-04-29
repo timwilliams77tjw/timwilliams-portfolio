@@ -476,24 +476,26 @@ justify-content:center;
 
 </head>
 
-<body class="page-certifications">
+<body>
+      <div id="header-placeholder"></div>
 
-<!-- HEADER INCLUDE -->
-<div id="header-placeholder"></div>
+<!-- HEADER JS -->
+<script src="header-standard-v23.js?v=1001" defer></script>
 
-<!-- 1. Load the JS file FIRST -->
-<script src="header-standard-v23.js"></script>
-
-<!-- 2. Inject the header HTML -->
+<!-- INJECT HEADER AFTER DOM + CSS -->
 <script>
-fetch("./header-standard-v4.html")
-  .then(r => r.text())
-  .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
-  });
+window.addEventListener("DOMContentLoaded", () => {
+    fetch("./header-standard-v4.html?v=1001")
+      .then(r => r.text())
+      .then(h => {
+          document.getElementById("header-placeholder").innerHTML = h;
+          initHeader();
+      });
+});
 </script>
 
+<!-- ⭐ PAGE LAYOUT STARTS HERE -->
+<div class="page-certifications">
 <!-- MAIN CONTENT -->
 <div class="container">
 <h1>TWC Ltd - Senior IT Programme Manager | Cyber Security & Cloud Transformation Leader</h1>

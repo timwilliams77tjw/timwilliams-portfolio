@@ -1,11 +1,12 @@
 /* ==================================================
-   CLEAN HEADER SYSTEM — FINAL STABLE BUILD
-   Fixed: scroll, dropdown, stacking, cards, Safari
+   CLEAN HEADER SYSTEM
+   Rebuilt for your exact HTML
+   Stable / Safari Safe / Mobile Scroll / Dropdown Safe
 ================================================== */
 
 
 /* ===============================
-GLOBAL RESET
+GLOBAL
 =============================== */
 *{
     box-sizing:border-box;
@@ -24,7 +25,7 @@ HERO BANNER
 .hero-banner{
     position:relative;
     padding:50px 20px 40px;
-    background:url("hero.jpg") center/cover no-repeat;
+    background:url("hero.jpg") center center / cover no-repeat;
     color:#fff;
     overflow:visible;
 }
@@ -34,13 +35,12 @@ HERO BANNER
     position:absolute;
     inset:0;
     background:rgba(10,37,64,.58);
-    pointer-events:none;
     z-index:0;
 }
 
 .hero-banner > *{
     position:relative;
-    z-index:1;
+    z-index:2;
 }
 
 
@@ -74,22 +74,27 @@ HERO CONTENT
 NAV WRAPPER
 =============================== */
 .nav-wrapper{
-    position:relative;
     margin:24px auto;
     width:100%;
+    max-width:100%;
+    position:relative;
     overflow:visible;
-    z-index:10;
 }
 
 
 /* ===============================
-SCROLL CONTAINER (CRITICAL)
+SCROLL LAYER
 =============================== */
 .nav-scroll{
     overflow-x:auto;
     overflow-y:hidden;
     white-space:nowrap;
     -webkit-overflow-scrolling:touch;
+
+    /* dropdown visibility trick */
+    padding-bottom:180px;
+    margin-bottom:-180px;
+
     scrollbar-width:none;
 }
 
@@ -107,6 +112,7 @@ NAV MENU
     align-items:center;
     gap:6px;
     min-width:max-content;
+    padding:0 8px;
 }
 
 
@@ -115,30 +121,34 @@ NAV ITEMS
 =============================== */
 .nav-item{
     position:relative;
-    overflow:visible;
+    display:flex;
+    align-items:center;
 }
 
 
 /* ===============================
-BUTTONS (TEXT SIZE FIXED)
+BUTTONS
 =============================== */
 .nav-btn,
 .mega-trigger{
-    background:transparent;
+    appearance:none;
     border:none;
+    background:transparent;
     color:#fff;
+    text-decoration:none;
     cursor:pointer;
 
-    font-size:15px;
+    font-size:13px;
     font-weight:500;
 
-    padding:10px 14px;
-    height:42px;
-
-    display:flex;
-    align-items:center;
-    white-space:nowrap;
+    padding:10px 12px;
     border-radius:8px;
+    height:40px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    white-space:nowrap;
 }
 
 .nav-btn:hover,
@@ -148,7 +158,7 @@ BUTTONS (TEXT SIZE FIXED)
 
 
 /* ===============================
-MEGA MENU (FIXED POSITIONING)
+MEGA MENU
 =============================== */
 .mega-menu{
     display:none;
@@ -159,15 +169,15 @@ MEGA MENU (FIXED POSITIONING)
     min-width:540px;
     padding:22px;
     gap:28px;
+    flex-wrap:wrap;
 
     background:#fff;
     border-radius:14px;
     box-shadow:0 20px 45px rgba(0,0,0,.18);
 
-    z-index:9999;
+    z-index:99999;
 }
 
-/* show dropdown */
 .nav-item:hover > .mega-menu,
 .nav-item.open > .mega-menu{
     display:flex;
@@ -178,9 +188,9 @@ MEGA MENU (FIXED POSITIONING)
 MEGA COLUMNS
 =============================== */
 .mega-column{
+    min-width:160px;
     display:flex;
     flex-direction:column;
-    min-width:160px;
 }
 
 .mega-column h4{
@@ -196,30 +206,35 @@ MEGA COLUMNS
     font-size:14px;
 }
 
+.mega-menu a:hover{
+    color:#0a2540;
+}
+
 
 /* ===============================
-SEARCH + DARK MODE
+SEARCH / DARK MODE
 =============================== */
 .search-wrapper{
     display:flex;
     align-items:center;
     gap:10px;
+    margin-left:4px;
 }
 
 .search-icon{
     cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-
-/* ===============================
-SEARCH INPUT
-=============================== */
 #siteSearchInput{
     width:0;
     opacity:0;
     border:none;
     outline:none;
-    padding:0;
+    border-radius:8px;
+    padding:8px 0;
     transition:.25s ease;
     pointer-events:none;
 }
@@ -231,13 +246,9 @@ SEARCH INPUT
     pointer-events:auto;
 }
 
-
-/* ===============================
-DARK MODE BUTTON
-=============================== */
 .dark-toggle-btn{
-    background:transparent;
     border:none;
+    background:transparent;
     color:#fff;
     cursor:pointer;
     font-size:18px;
@@ -250,70 +261,57 @@ PROFILE PHOTO
 .hero-photo{
     width:110px;
     height:110px;
+    object-fit:cover;
     border-radius:50%;
     border:4px solid #fff;
-    object-fit:cover;
     display:block;
     margin:24px auto 0;
-    position:relative;
-    z-index:1;
 }
 
 
 /* ===============================
-CARD STYLING RESTORED
-=============================== */
-.card,
-.section-card,
-.content-card,
-.faq-card,
-article,
-main section > div{
-    background:#fff;
-    border-radius:14px;
-    padding:20px;
-    box-shadow:0 4px 14px rgba(0,0,0,.08);
-}
-
-
-/* ===============================
-DARK MODE CARDS
-=============================== */
-body.dark .card,
-body.dark .section-card,
-body.dark .content-card,
-body.dark .faq-card{
-    background:#1f1f1f;
-}
-
-
-/* ===============================
-RESPONSIVE TABLET
+TABLET
 =============================== */
 @media (max-width:1024px){
 
     .mega-menu{
         min-width:280px;
         width:280px;
+        left:0;
+        top:100%;
+        padding:16px;
+        gap:14px;
         flex-direction:column;
+    }
+
+    .mega-column{
+        min-width:100%;
     }
 }
 
 
 /* ===============================
-RESPONSIVE MOBILE
+PHONE
 =============================== */
 @media (max-width:700px){
+
+    .hero-banner{
+        padding:40px 14px 30px;
+    }
 
     .hero-text h1{
         font-size:1.7rem;
     }
 
+    .hero-text p{
+        font-size:.95rem;
+    }
+
     .nav-btn,
     .mega-trigger{
-        font-size:14px;
-        height:40px;
-        padding:9px 12px;
+        font-size:12px;
+        padding:8px 10px;
+        height:38px;
     }
 
     #siteSearchInput.open{
@@ -324,4 +322,477 @@ RESPONSIVE MOBILE
         width:96px;
         height:96px;
     }
+}
+/* ==========================================
+PATCH FIXES ONLY
+Add this UNDER the CSS I sent you
+========================================== */
+
+
+/* ==========================================
+1. DROPDOWN ABOVE PROFILE PHOTO
+========================================== */
+.nav-wrapper,
+.nav-scroll,
+.nav-menu,
+.nav-item,
+.mega-menu{
+    position:relative;
+    z-index:99999;
+}
+
+.mega-menu{
+    z-index:100000;
+}
+
+.hero-photo{
+    position:relative;
+    z-index:5;   /* lower than menu */
+}
+
+
+/* ==========================================
+2. RESTORE BODY CARD STYLING
+(keeps your original cards)
+========================================== */
+.card,
+.section-card,
+.content-card,
+.faq-card{
+    background:var(--card-bg, #ffffff);
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+
+
+/* ==========================================
+3. LARGER NAV TEXT (match hero sizing better)
+========================================== */
+.nav-btn,
+.mega-trigger{
+    font-size:15px;
+    font-weight:500;
+    padding:10px 14px;
+    height:42px;
+}
+
+
+/* mobile */
+@media (max-width:700px){
+
+    .nav-btn,
+    .mega-trigger{
+        font-size:14px;
+        padding:9px 12px;
+        height:40px;
+    }
+}
+/* ==========================================
+REPAIR PATCH
+Place BELOW everything else
+Fixes:
+1) Cards styling missing
+2) Dropdown opening to right instead of below
+========================================== */
+
+
+/* ==========================================
+1. FORCE DROPDOWN UNDER BUTTON
+========================================== */
+.nav-item{
+    position:relative !important;
+}
+
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;      /* directly below button */
+    left:0 !important;        /* start at left edge of button */
+    right:auto !important;
+    transform:none !important;
+    margin-top:8px !important;
+    z-index:100000 !important;
+}
+
+
+/* mobile/tablet */
+@media (max-width:1024px){
+    .mega-menu{
+        top:100% !important;
+        left:0 !important;
+        right:auto !important;
+        width:280px !important;
+        max-width:90vw !important;
+    }
+}
+
+
+/* ==========================================
+2. RESTORE CARD STYLING PROPERLY
+========================================== */
+.card,
+.section-card,
+.content-card,
+.faq-card,
+article,
+main section > div{
+    background:#ffffff !important;
+    border-radius:14px !important;
+    padding:20px !important;
+    box-shadow:0 4px 14px rgba(0,0,0,.08) !important;
+}
+
+
+/* dark mode safe */
+body.dark .card,
+body.dark .section-card,
+body.dark .content-card,
+body.dark .faq-card{
+    background:#1f1f1f !important;
+}
+
+
+/* ==========================================
+3. KEEP PHOTO UNDER MENU
+========================================== */
+.hero-photo{
+    position:relative !important;
+    z-index:1 !important;
+}
+
+.nav-wrapper,
+.nav-scroll,
+.nav-menu,
+.nav-item,
+.mega-menu{
+    z-index:99999 !important;
+}
+/* ==========================================
+FINAL PATCH
+Fix taller About dropdown being clipped
+Add BELOW all existing CSS
+========================================== */
+
+
+/* Let hero area allow overflow */
+.hero-banner{
+    overflow:visible !important;
+}
+
+
+/* Let nav containers allow dropdown outside hero */
+.nav-wrapper,
+.nav-scroll,
+.nav-menu,
+.nav-item{
+    overflow:visible !important;
+}
+
+
+/* Ensure dropdown can extend into body */
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;
+    left:0 !important;
+    z-index:100000 !important;
+    max-height:none !important;
+}
+
+
+/* Extra safe space below nav so tall menus never clip */
+.nav-wrapper{
+    padding-bottom:260px !important;
+    margin-bottom:-260px !important;
+}
+
+
+/* Mobile/tablet smaller allowance */
+@media (max-width:1024px){
+    .nav-wrapper{
+        padding-bottom:320px !important;
+        margin-bottom:-320px !important;
+    }
+}
+/* ==========================================
+FINAL BALANCE FIX
+Keeps:
+✓ horizontal scrolling
+✓ dropdown visible
+✓ tall About menu visible
+Fixes:
+✓ scroll stopped working
+Add BELOW all CSS
+========================================== */
+
+
+/* ------------------------------------------
+1. OUTER WRAPPER = allows dropdown overflow
+------------------------------------------ */
+.nav-wrapper{
+    position:relative !important;
+    overflow:visible !important;
+
+    /* space for tall dropdown */
+    padding-bottom:260px !important;
+    margin-bottom:-260px !important;
+}
+
+
+/* ------------------------------------------
+2. SCROLL LAYER = horizontal scroll only
+------------------------------------------ */
+.nav-scroll{
+    position:relative !important;
+
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+
+    white-space:nowrap !important;
+    -webkit-overflow-scrolling:touch !important;
+
+    scrollbar-width:none !important;
+}
+
+.nav-scroll::-webkit-scrollbar{
+    display:none !important;
+}
+
+
+/* ------------------------------------------
+3. MENU + ITEMS no clipping
+------------------------------------------ */
+.nav-menu,
+.nav-item{
+    overflow:visible !important;
+}
+
+
+/* ------------------------------------------
+4. DROPDOWN visible under button
+------------------------------------------ */
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;
+    left:0 !important;
+    margin-top:8px !important;
+    z-index:100000 !important;
+}
+
+
+/* ------------------------------------------
+5. Mobile extra room
+------------------------------------------ */
+@media (max-width:1024px){
+    .nav-wrapper{
+        padding-bottom:320px !important;
+        margin-bottom:-320px !important;
+    }
+}
+/* ==========================================
+TRUE FINAL FIX
+Keep scrolling working
+Keep dropdowns working
+Fix ONLY tall About menu clipping into body
+========================================== */
+
+
+/* ------------------------------------------
+1. Keep scroll exactly as working now
+------------------------------------------ */
+.nav-scroll{
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    white-space:nowrap !important;
+    -webkit-overflow-scrolling:touch !important;
+}
+
+
+/* ------------------------------------------
+2. Allow hero + wrapper overflow
+------------------------------------------ */
+.hero-banner,
+.nav-wrapper,
+.nav-menu,
+.nav-item{
+    overflow:visible !important;
+}
+
+
+/* ------------------------------------------
+3. Raise entire header above page content
+THIS is the real fix
+------------------------------------------ */
+.hero-banner{
+    position:relative !important;
+    z-index:5000 !important;
+}
+
+.nav-wrapper,
+.mega-menu{
+    position:relative;
+    z-index:6000 !important;
+}
+
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;
+    left:0 !important;
+}
+
+
+/* ------------------------------------------
+4. Lower page body beneath menu
+------------------------------------------ */
+main,
+body > section,
+body > .card,
+body > .section-card,
+body > .content-card{
+    position:relative;
+    z-index:1;
+}
+/* ==========================================
+ACTUAL ROOT FIX
+Your dropdown is not being clipped by nav now.
+It is being covered by BODY CONTENT below.
+Need stacking context fix on page sections.
+Add BELOW everything else.
+========================================== */
+
+
+/* ------------------------------------------
+1. Header sits above entire page
+------------------------------------------ */
+.hero-banner{
+    position:relative !important;
+    z-index:9999 !important;
+    overflow:visible !important;
+}
+
+.nav-wrapper,
+.nav-scroll,
+.nav-menu,
+.nav-item{
+    overflow:visible !important;
+    position:relative !important;
+    z-index:10000 !important;
+}
+
+
+/* ------------------------------------------
+2. Dropdown
+------------------------------------------ */
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;
+    left:0 !important;
+    z-index:10001 !important;
+}
+
+
+/* ------------------------------------------
+3. BODY CONTENT forced BELOW header
+This is what was missing
+------------------------------------------ */
+main,
+section,
+article,
+.card,
+.section-card,
+.content-card,
+.faq-card,
+footer{
+    position:relative !important;
+    z-index:1 !important;
+}
+
+
+/* ------------------------------------------
+4. Remove transforms that create stacking contexts
+------------------------------------------ */
+section,
+article,
+main{
+    transform:none !important;
+}
+/* ==========================================
+FINAL SURGICAL FIX
+Keep dropdown above body
+Restore horizontal scrolling
+Do NOT set overflow:visible on scroll layer
+========================================== */
+
+
+/* ------------------------------------------
+1. Header above body
+------------------------------------------ */
+.hero-banner{
+    position:relative !important;
+    z-index:9999 !important;
+    overflow:visible !important;
+}
+
+.nav-wrapper{
+    position:relative !important;
+    z-index:10000 !important;
+    overflow:visible !important;
+}
+
+
+/* ------------------------------------------
+2. SCROLL MUST stay scrollable
+(THIS was broken before)
+------------------------------------------ */
+.nav-scroll{
+    position:relative !important;
+    z-index:10000 !important;
+
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+
+    white-space:nowrap !important;
+    -webkit-overflow-scrolling:touch !important;
+
+    scrollbar-width:none !important;
+}
+
+.nav-scroll::-webkit-scrollbar{
+    display:none !important;
+}
+
+
+/* ------------------------------------------
+3. Menu items can overflow
+------------------------------------------ */
+.nav-menu,
+.nav-item{
+    position:relative !important;
+    overflow:visible !important;
+}
+
+
+/* ------------------------------------------
+4. Dropdown visible
+------------------------------------------ */
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;
+    left:0 !important;
+    z-index:10001 !important;
+}
+
+
+/* ------------------------------------------
+5. Body content below header
+------------------------------------------ */
+main,
+section,
+article,
+.card,
+.section-card,
+.content-card,
+.faq-card,
+footer{
+    position:relative !important;
+    z-index:1 !important;
 }

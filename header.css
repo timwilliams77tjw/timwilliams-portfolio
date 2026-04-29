@@ -1,15 +1,31 @@
 /* ==================================================
-   CLEAN HEADER SYSTEM — NAV INSIDE HERO (A4)
-   Submenu fixed • Scroll fixed • Hero fixed
+   CLEAN HEADER SYSTEM
+   Rebuilt for your exact HTML
+   Stable / Safari Safe / Mobile Scroll / Dropdown Safe
 ================================================== */
 
-/* ===========================
-HERO
-=========================== */
+
+/* ===============================
+GLOBAL
+=============================== */
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+}
+
+
+/* ===============================
+HERO BANNER
+=============================== */
 .hero-banner{
     position:relative;
-    background:url("hero.jpg") center center / cover no-repeat;
     padding:50px 20px 40px;
+    background:url("hero.jpg") center center / cover no-repeat;
     color:#fff;
     overflow:visible;
 }
@@ -18,97 +34,121 @@ HERO
     content:"";
     position:absolute;
     inset:0;
-    background:rgba(10,37,64,.55);
+    background:rgba(10,37,64,.58);
     z-index:0;
 }
 
-/* ===========================
-HERO CONTENT
-=========================== */
-.hero-content{
+.hero-banner > *{
     position:relative;
     z-index:2;
+}
+
+
+/* ===============================
+HERO CONTENT
+=============================== */
+.hero-content{
     display:flex;
-    flex-direction:column;
-    align-items:center;
+    justify-content:center;
     text-align:center;
-    gap:20px;
+}
+
+.left-column{
+    max-width:980px;
 }
 
 .hero-text h1{
     margin:0 0 10px;
     font-size:2rem;
+    font-weight:700;
 }
 
 .hero-text p{
     margin:6px 0;
     line-height:1.45;
+    font-size:1rem;
 }
 
-/* ===========================
-NAV WRAPPER (A4 POSITIONING)
-=========================== */
+
+/* ===============================
+NAV WRAPPER
+=============================== */
 .nav-wrapper{
+    margin:24px auto;
     width:100%;
+    max-width:100%;
     position:relative;
-    z-index:3;
-    margin:20px 0; /* equal spacing above and below */
-    display:flex;
-    justify-content:center;
+    overflow:visible;
 }
 
-/* ===========================
-NAV SCROLL
-=========================== */
+
+/* ===============================
+SCROLL LAYER
+=============================== */
 .nav-scroll{
     overflow-x:auto;
-    overflow-y:visible;
+    overflow-y:hidden;
     white-space:nowrap;
     -webkit-overflow-scrolling:touch;
-    position:relative;
-    padding-bottom:4px;
+
+    /* dropdown visibility trick */
+    padding-bottom:180px;
+    margin-bottom:-180px;
+
+    scrollbar-width:none;
 }
 
 .nav-scroll::-webkit-scrollbar{
     display:none;
 }
 
-/* ===========================
+
+/* ===============================
 NAV MENU
-=========================== */
+=============================== */
 .nav-menu{
-    display:inline-flex;
+    display:flex;
+    justify-content:center;
     align-items:center;
     gap:6px;
     min-width:max-content;
+    padding:0 8px;
 }
 
-/* ===========================
+
+/* ===============================
 NAV ITEMS
-=========================== */
+=============================== */
 .nav-item{
     position:relative;
-    overflow:visible;
+    display:flex;
+    align-items:center;
 }
 
-/* ===========================
-NAV BUTTONS
-=========================== */
+
+/* ===============================
+BUTTONS
+=============================== */
 .nav-btn,
 .mega-trigger{
-    background:transparent;
+    appearance:none;
     border:none;
+    background:transparent;
     color:#fff;
-    font-size:15px;
-    font-weight:500;
-    padding:10px 14px;
-    cursor:pointer;
     text-decoration:none;
-    white-space:nowrap;
+    cursor:pointer;
+
+    font-size:13px;
+    font-weight:500;
+
+    padding:10px 12px;
     border-radius:8px;
+    height:40px;
+
     display:inline-flex;
     align-items:center;
-    height:42px;
+    justify-content:center;
+    white-space:nowrap;
 }
 
 .nav-btn:hover,
@@ -116,22 +156,26 @@ NAV BUTTONS
     background:rgba(255,255,255,.12);
 }
 
-/* ===========================
-MEGA MENU (DESKTOP)
-=========================== */
+
+/* ===============================
+MEGA MENU
+=============================== */
 .mega-menu{
     display:none;
     position:absolute;
-    top:48px;
+    top:100%;
     left:0;
-    min-width:560px;
+
+    min-width:540px;
+    padding:22px;
+    gap:28px;
+    flex-wrap:wrap;
+
     background:#fff;
     border-radius:14px;
-    padding:24px;
-    box-shadow:0 20px 50px rgba(0,0,0,.18);
-    gap:30px;
-    flex-wrap:wrap;
-    z-index:9999;
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+    z-index:99999;
 }
 
 .nav-item:hover > .mega-menu,
@@ -139,14 +183,19 @@ MEGA MENU (DESKTOP)
     display:flex;
 }
 
+
+/* ===============================
+MEGA COLUMNS
+=============================== */
 .mega-column{
+    min-width:160px;
     display:flex;
     flex-direction:column;
-    min-width:160px;
 }
 
 .mega-column h4{
     margin:0 0 12px;
+    font-size:14px;
     color:#0a2540;
 }
 
@@ -154,267 +203,123 @@ MEGA MENU (DESKTOP)
     color:#222;
     text-decoration:none;
     padding:6px 0;
+    font-size:14px;
 }
 
-/* ===========================
-MOBILE / TABLET SUBMENU
-=========================== */
-@media (max-width:1024px){
-
-    .mega-menu{
-        display:none;
-        position:absolute;
-        top:100%;
-        left:0;
-        width:280px;
-        max-width:90%;
-        background:#fff;
-        border-radius:14px;
-        padding:16px;
-        flex-direction:column;
-        gap:14px;
-        box-shadow:0 18px 45px rgba(0,0,0,.18);
-        z-index:9999;
-    }
-
-    .nav-item.open > .mega-menu{
-        display:flex;
-    }
+.mega-menu a:hover{
+    color:#0a2540;
 }
 
-/* ===========================
+
+/* ===============================
+SEARCH / DARK MODE
+=============================== */
+.search-wrapper{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-left:4px;
+}
+
+.search-icon{
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+#siteSearchInput{
+    width:0;
+    opacity:0;
+    border:none;
+    outline:none;
+    border-radius:8px;
+    padding:8px 0;
+    transition:.25s ease;
+    pointer-events:none;
+}
+
+#siteSearchInput.open{
+    width:160px;
+    opacity:1;
+    padding:8px 10px;
+    pointer-events:auto;
+}
+
+.dark-toggle-btn{
+    border:none;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    font-size:18px;
+}
+
+
+/* ===============================
 PROFILE PHOTO
-=========================== */
+=============================== */
 .hero-photo{
     width:110px;
     height:110px;
-    border-radius:50%;
     object-fit:cover;
+    border-radius:50%;
     border:4px solid #fff;
-    position:relative;
-    z-index:2;
-    margin-top:20px;
+    display:block;
+    margin:24px auto 0;
 }
 
-/* ===========================
-PHONE HERO STACK
-=========================== */
+
+/* ===============================
+TABLET
+=============================== */
+@media (max-width:1024px){
+
+    .mega-menu{
+        min-width:280px;
+        width:280px;
+        left:0;
+        top:100%;
+        padding:16px;
+        gap:14px;
+        flex-direction:column;
+    }
+
+    .mega-column{
+        min-width:100%;
+    }
+}
+
+
+/* ===============================
+PHONE
+=============================== */
 @media (max-width:700px){
-    .hero-content{
-        gap:16px;
+
+    .hero-banner{
+        padding:40px 14px 30px;
     }
-}
-/* ===========================
-FIX 1 — Center profile photo
-=========================== */
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
 
-.hero-photo {
-    margin: 20px auto 0;
-    display: block;
-}
-
-/* ===========================
-FIX 2 — Search bar hidden by default
-=========================== */
-#siteSearchInput {
-    width: 0 !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-}
-
-#siteSearchInput.open {
-    width: 160px !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-}
-
-/* ===========================
-FIX 3 — Keep search + dark mode on same row
-=========================== */
-.search-wrapper {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    white-space: nowrap !important;
-}
-
-/* ===========================
-FIX 4 — Prevent nav wrapping
-=========================== */
-.nav-menu {
-    flex-wrap: nowrap !important;
-}
-
-/* ===========================
-FIX 5 — Submenu hidden by hero overlay
-=========================== */
-.hero-banner::before {
-    z-index: 0 !important;
-}
-
-.nav-wrapper,
-.nav-scroll,
-.nav-menu,
-.nav-item,
-.mega-menu {
-    position: relative !important;
-    z-index: 10 !important;
-}
-
-.mega-menu {
-    z-index: 999999 !important;
-}
-
-/* ===========================
-FIX 6 — A4 spacing (nav centered between text + photo)
-=========================== */
-.nav-wrapper {
-    margin: 20px 0 !important;
-    display: flex !important;
-    justify-content: center !important;
-}
-/* Fix nav text size */
-.nav-btn,
-.mega-trigger {
-    font-size: 13px !important;
-    font-weight: 400 !important;
-    padding: 8px 12px !important;
-    height: 38px !important;
-}
-
-/* Fix top-level button jump */
-.nav-item {
-    height: 42px !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-/* Ensure submenu always appears below button */
-.mega-menu {
-    top: 100% !important;
-}
-/* ===========================
-1) RESTORE BODY CARD STYLING
-=========================== */
-.card,
-.faq-card,
-.section-card,
-.content-card {
-    background: var(--card-bg) !important;
-    border-radius: 14px !important;
-    padding: 20px !important;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08) !important;
-}
-
-/* ===========================
-2) FIX NAV TEXT SIZE
-=========================== */
-.nav-btn,
-.mega-trigger {
-    font-size: 12px !important;
-    font-weight: 500 !important;
-    padding: 8px 10px !important;
-    height: 36px !important;
-}
-
-/* ===========================
-3) FIX NAV ALIGNMENT + STOP HIDING
-=========================== */
-
-/* Keep nav centred */
-.nav-menu {
-    display: inline-flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-}
-
-/* Ensure nav-scroll doesn't clip or shift */
-.nav-scroll {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    white-space: nowrap !important;
-    position: relative !important;
-    z-index: 10 !important;
-}
-
-/* Ensure submenu stays above hero overlay */
-.mega-menu {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    z-index: 999999 !important;
-}
-
-/* Prevent nav from being pushed right */
-.nav-item {
-    position: relative !important;
-    overflow: visible !important;
-    display: flex !important;
-    align-items: center !important;
-}
-html, body {
-    overflow-x: hidden !important;
-    max-width: 100% !important;
-}
-
-.nav-scroll {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-}
-/* FINAL FIX — ensure nav is above hero overlay */
-.nav-wrapper {
-    position: relative !important;
-    z-index: 999999 !important;
-}
-
-.nav-scroll,
-.nav-menu,
-.nav-item,
-.mega-menu {
-    position: relative !important;
-    z-index: 999999 !important;
-}
-/* FINAL FIX — force mobile submenu to appear UNDER the button and NOT to the right */
-@media (max-width:1024px) {
-    .mega-menu {
-        top: 100% !important;     /* directly under the button */
-        left: 0 !important;       /* not to the right */
-        width: 280px !important;
-        max-width: 90% !important;
-        position: absolute !important;
-        z-index: 999999 !important;
+    .hero-text h1{
+        font-size:1.7rem;
     }
-}
-/* FINAL FIX — stop Safari from clipping the submenu */
-.nav-scroll {
-    overflow: visible !important;
-}
 
-.nav-menu {
-    overflow: visible !important;
-}
-/* Restore horizontal scrolling but keep submenu visible */
-.nav-scroll {
-    overflow-x: auto !important;   /* enables horizontal scroll */
-    overflow-y: visible !important; /* prevents submenu clipping */
-    -webkit-overflow-scrolling: touch !important; /* required for iOS momentum scroll */
-}
-/* 1 — The scroll container handles ONLY scrolling */
-.nav-scroll {
-    overflow-x: auto !important;
-    overflow-y: hidden !important; /* prevents clipping context */
-    -webkit-overflow-scrolling: touch !important;
-}
+    .hero-text p{
+        font-size:.95rem;
+    }
 
-/* 2 — The menu itself becomes the escape container */
-.nav-menu {
-    overflow: visible !important; /* allows submenu to escape */
-    position: relative !important; /* required for absolute submenu */
+    .nav-btn,
+    .mega-trigger{
+        font-size:12px;
+        padding:8px 10px;
+        height:38px;
+    }
+
+    #siteSearchInput.open{
+        width:130px;
+    }
+
+    .hero-photo{
+        width:96px;
+        height:96px;
+    }
 }

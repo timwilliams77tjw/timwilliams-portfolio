@@ -651,3 +651,67 @@ body > .content-card{
     position:relative;
     z-index:1;
 }
+/* ==========================================
+ACTUAL ROOT FIX
+Your dropdown is not being clipped by nav now.
+It is being covered by BODY CONTENT below.
+Need stacking context fix on page sections.
+Add BELOW everything else.
+========================================== */
+
+
+/* ------------------------------------------
+1. Header sits above entire page
+------------------------------------------ */
+.hero-banner{
+    position:relative !important;
+    z-index:9999 !important;
+    overflow:visible !important;
+}
+
+.nav-wrapper,
+.nav-scroll,
+.nav-menu,
+.nav-item{
+    overflow:visible !important;
+    position:relative !important;
+    z-index:10000 !important;
+}
+
+
+/* ------------------------------------------
+2. Dropdown
+------------------------------------------ */
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;
+    left:0 !important;
+    z-index:10001 !important;
+}
+
+
+/* ------------------------------------------
+3. BODY CONTENT forced BELOW header
+This is what was missing
+------------------------------------------ */
+main,
+section,
+article,
+.card,
+.section-card,
+.content-card,
+.faq-card,
+footer{
+    position:relative !important;
+    z-index:1 !important;
+}
+
+
+/* ------------------------------------------
+4. Remove transforms that create stacking contexts
+------------------------------------------ */
+section,
+article,
+main{
+    transform:none !important;
+}

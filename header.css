@@ -467,3 +467,49 @@ body.dark .faq-card{
 .mega-menu{
     z-index:99999 !important;
 }
+/* ==========================================
+FINAL PATCH
+Fix taller About dropdown being clipped
+Add BELOW all existing CSS
+========================================== */
+
+
+/* Let hero area allow overflow */
+.hero-banner{
+    overflow:visible !important;
+}
+
+
+/* Let nav containers allow dropdown outside hero */
+.nav-wrapper,
+.nav-scroll,
+.nav-menu,
+.nav-item{
+    overflow:visible !important;
+}
+
+
+/* Ensure dropdown can extend into body */
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;
+    left:0 !important;
+    z-index:100000 !important;
+    max-height:none !important;
+}
+
+
+/* Extra safe space below nav so tall menus never clip */
+.nav-wrapper{
+    padding-bottom:260px !important;
+    margin-bottom:-260px !important;
+}
+
+
+/* Mobile/tablet smaller allowance */
+@media (max-width:1024px){
+    .nav-wrapper{
+        padding-bottom:320px !important;
+        margin-bottom:-320px !important;
+    }
+}

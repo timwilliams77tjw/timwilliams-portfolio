@@ -323,3 +323,68 @@ PHONE
         height:96px;
     }
 }
+/* ==========================================
+PATCH FIXES ONLY
+Add this UNDER the CSS I sent you
+========================================== */
+
+
+/* ==========================================
+1. DROPDOWN ABOVE PROFILE PHOTO
+========================================== */
+.nav-wrapper,
+.nav-scroll,
+.nav-menu,
+.nav-item,
+.mega-menu{
+    position:relative;
+    z-index:99999;
+}
+
+.mega-menu{
+    z-index:100000;
+}
+
+.hero-photo{
+    position:relative;
+    z-index:5;   /* lower than menu */
+}
+
+
+/* ==========================================
+2. RESTORE BODY CARD STYLING
+(keeps your original cards)
+========================================== */
+.card,
+.section-card,
+.content-card,
+.faq-card{
+    background:var(--card-bg, #ffffff);
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+
+
+/* ==========================================
+3. LARGER NAV TEXT (match hero sizing better)
+========================================== */
+.nav-btn,
+.mega-trigger{
+    font-size:15px;
+    font-weight:500;
+    padding:10px 14px;
+    height:42px;
+}
+
+
+/* mobile */
+@media (max-width:700px){
+
+    .nav-btn,
+    .mega-trigger{
+        font-size:14px;
+        padding:9px 12px;
+        height:40px;
+    }
+}

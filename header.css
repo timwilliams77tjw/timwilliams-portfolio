@@ -588,3 +588,66 @@ Add BELOW all CSS
         margin-bottom:-320px !important;
     }
 }
+/* ==========================================
+TRUE FINAL FIX
+Keep scrolling working
+Keep dropdowns working
+Fix ONLY tall About menu clipping into body
+========================================== */
+
+
+/* ------------------------------------------
+1. Keep scroll exactly as working now
+------------------------------------------ */
+.nav-scroll{
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    white-space:nowrap !important;
+    -webkit-overflow-scrolling:touch !important;
+}
+
+
+/* ------------------------------------------
+2. Allow hero + wrapper overflow
+------------------------------------------ */
+.hero-banner,
+.nav-wrapper,
+.nav-menu,
+.nav-item{
+    overflow:visible !important;
+}
+
+
+/* ------------------------------------------
+3. Raise entire header above page content
+THIS is the real fix
+------------------------------------------ */
+.hero-banner{
+    position:relative !important;
+    z-index:5000 !important;
+}
+
+.nav-wrapper,
+.mega-menu{
+    position:relative;
+    z-index:6000 !important;
+}
+
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;
+    left:0 !important;
+}
+
+
+/* ------------------------------------------
+4. Lower page body beneath menu
+------------------------------------------ */
+main,
+body > section,
+body > .card,
+body > .section-card,
+body > .content-card{
+    position:relative;
+    z-index:1;
+}

@@ -1,4 +1,5 @@
 <div id="header">
+
 <!-- HERO BANNER -->
 <div class="hero-banner">
   <div class="hero-content">
@@ -114,6 +115,11 @@
 
       </div>
     </div>
+
+  </div>
+</div>
+
+</div> <!-- END #header -->
 
 
 <style>
@@ -313,76 +319,61 @@
 .nav-item.open > .mega-menu {
   display: flex !important;
 }
+
 /* === FINAL MOBILE SPACING + CLIPPING FIX === */
 @media (max-width: 700px) {
-
-  /* Give the row a clear break before the buttons */
-  .hero-row {
-    margin-bottom: 16px !important;
-  }
-
-  /* Extra breathing room + prevent margin-collapsing clipping */
-  .hero-buttons {
-    margin-top: 24px !important;
-    padding-top: 8px !important;
-  }
-
-  /* Make sure the button row centers nicely */
-  .button-group.nav-menu {
-    align-items: center !important;
-  }
+  .hero-row { margin-bottom: 16px !important; }
+  .hero-buttons { margin-top: 24px !important; padding-top: 8px !important; }
+  .button-group.nav-menu { align-items: center !important; }
 }
+
 /* === FIX MULTI-COLUMN MEGA MENU CLIPPING ON DESKTOP/IPAD === */
 @media (min-width: 701px) {
-
-    /* Allow dropdown to expand naturally */
-    .mega-menu {
-        width: max-content !important;
-        min-width: 260px !important;
-        overflow: visible !important;
-        left: 0 !important;
-        right: auto !important;
-    }
-
-    /* Ensure parent doesn't clip the menu */
-    .nav-item {
-        position: relative !important;
-        overflow: visible !important;
-    }
+  .mega-menu {
+    width: max-content !important;
+    min-width: 260px !important;
+    overflow: visible !important;
+    left: 0 !important;
+    right: auto !important;
+  }
+  .nav-item {
+    position: relative !important;
+    overflow: visible !important;
+  }
 }
-/* FIX: Prevent iPhone Safari tap-jump on nav buttons */
+
+/* FIX: Prevent iPhone Safari tap-jump */
 #header .brand-btn,
 #header .brand-btn:active,
 #header .brand-btn:focus {
-    -webkit-tap-highlight-color: transparent !important;
-    transform: translateY(0) !important;
-    position: relative !important;
-    top: 0 !important;
+  -webkit-tap-highlight-color: transparent !important;
+  transform: translateY(0) !important;
+  position: relative !important;
+  top: 0 !important;
 }
+
 /* FIX: Restore header button styling on iPad/desktop */
 #header .brand-btn {
-    border: 1px solid rgba(255,255,255,0.6) !important;
-    padding: 8px 14px !important;
-    background: transparent !important;
-    color: white !important;
-    border-radius: 6px !important;
-    line-height: 1.2 !important;
+  border: 1px solid rgba(255,255,255,0.6) !important;
+  padding: 8px 14px !important;
+  background: transparent !important;
+  color: white !important;
+  border-radius: 6px !important;
+  line-height: 1.2 !important;
 }
 
 /* FIX: Ensure mega menus open correctly on iPad */
 #header .nav-item {
-    position: relative !important;
-    overflow: visible !important;
+  position: relative !important;
+  overflow: visible !important;
 }
-
 #header .mega-menu {
-    top: calc(100% + 4px) !important;
-    left: 0 !important;
-    display: none;
+  top: calc(100% + 4px) !important;
+  left: 0 !important;
+  display: none;
 }
-
 #header .nav-item:hover > .mega-menu {
-    display: flex !important;
+  display: flex !important;
 }
 
 </style>

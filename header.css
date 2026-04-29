@@ -513,3 +513,78 @@ Add BELOW all existing CSS
         margin-bottom:-320px !important;
     }
 }
+/* ==========================================
+FINAL BALANCE FIX
+Keeps:
+✓ horizontal scrolling
+✓ dropdown visible
+✓ tall About menu visible
+Fixes:
+✓ scroll stopped working
+Add BELOW all CSS
+========================================== */
+
+
+/* ------------------------------------------
+1. OUTER WRAPPER = allows dropdown overflow
+------------------------------------------ */
+.nav-wrapper{
+    position:relative !important;
+    overflow:visible !important;
+
+    /* space for tall dropdown */
+    padding-bottom:260px !important;
+    margin-bottom:-260px !important;
+}
+
+
+/* ------------------------------------------
+2. SCROLL LAYER = horizontal scroll only
+------------------------------------------ */
+.nav-scroll{
+    position:relative !important;
+
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+
+    white-space:nowrap !important;
+    -webkit-overflow-scrolling:touch !important;
+
+    scrollbar-width:none !important;
+}
+
+.nav-scroll::-webkit-scrollbar{
+    display:none !important;
+}
+
+
+/* ------------------------------------------
+3. MENU + ITEMS no clipping
+------------------------------------------ */
+.nav-menu,
+.nav-item{
+    overflow:visible !important;
+}
+
+
+/* ------------------------------------------
+4. DROPDOWN visible under button
+------------------------------------------ */
+.mega-menu{
+    position:absolute !important;
+    top:100% !important;
+    left:0 !important;
+    margin-top:8px !important;
+    z-index:100000 !important;
+}
+
+
+/* ------------------------------------------
+5. Mobile extra room
+------------------------------------------ */
+@media (max-width:1024px){
+    .nav-wrapper{
+        padding-bottom:320px !important;
+        margin-bottom:-320px !important;
+    }
+}

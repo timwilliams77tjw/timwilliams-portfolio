@@ -406,3 +406,15 @@ html, body {
     overflow-y: visible !important; /* prevents submenu clipping */
     -webkit-overflow-scrolling: touch !important; /* required for iOS momentum scroll */
 }
+/* 1 — The scroll container handles ONLY scrolling */
+.nav-scroll {
+    overflow-x: auto !important;
+    overflow-y: hidden !important; /* prevents clipping context */
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* 2 — The menu itself becomes the escape container */
+.nav-menu {
+    overflow: visible !important; /* allows submenu to escape */
+    position: relative !important; /* required for absolute submenu */
+}

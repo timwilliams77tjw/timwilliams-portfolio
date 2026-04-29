@@ -204,3 +204,78 @@ PHONE HERO STACK
         gap:16px;
     }
 }
+/* ===========================
+FIX 1 — Center profile photo
+=========================== */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-photo {
+    margin: 20px auto 0;
+    display: block;
+}
+
+/* ===========================
+FIX 2 — Search bar hidden by default
+=========================== */
+#siteSearchInput {
+    width: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#siteSearchInput.open {
+    width: 160px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* ===========================
+FIX 3 — Keep search + dark mode on same row
+=========================== */
+.search-wrapper {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    white-space: nowrap !important;
+}
+
+/* ===========================
+FIX 4 — Prevent nav wrapping
+=========================== */
+.nav-menu {
+    flex-wrap: nowrap !important;
+}
+
+/* ===========================
+FIX 5 — Submenu hidden by hero overlay
+=========================== */
+.hero-banner::before {
+    z-index: 0 !important;
+}
+
+.nav-wrapper,
+.nav-scroll,
+.nav-menu,
+.nav-item,
+.mega-menu {
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.mega-menu {
+    z-index: 999999 !important;
+}
+
+/* ===========================
+FIX 6 — A4 spacing (nav centered between text + photo)
+=========================== */
+.nav-wrapper {
+    margin: 20px 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+}

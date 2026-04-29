@@ -1,45 +1,7 @@
 /* ==================================================
-   header-standard.css
-   CLEAN FINAL VERSION
-   iPhone + iPad submenu fixed
-   horizontal scroll preserved
+   CLEAN HEADER SYSTEM — NAV INSIDE HERO (A4)
+   Submenu fixed • Scroll fixed • Hero fixed
 ================================================== */
-
-/* ===========================
-ROOT VARIABLES
-=========================== */
-:root{
-    --bg:#ffffff;
-    --text-main:#111111;
-    --text-sub:#555555;
-    --card-bg:#f5f5f5;
-    --accent:#0a2540;
-}
-
-body.dark-mode{
-    --bg:#0f172a;
-    --text-main:#e5e7eb;
-    --text-sub:#9ca3af;
-    --card-bg:#111827;
-}
-
-/* ===========================
-GLOBAL
-=========================== */
-html,
-body{
-    margin:0;
-    padding:0;
-    width:100%;
-    max-width:100%;
-    overflow-x:hidden;
-}
-
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:var(--bg);
-    color:var(--text-main);
-}
 
 /* ===========================
 HERO
@@ -47,10 +9,9 @@ HERO
 .hero-banner{
     position:relative;
     background:url("hero.jpg") center center / cover no-repeat;
-    padding:50px 20px;
+    padding:50px 20px 40px;
     color:#fff;
-    overflow:visible;     /* FIX: allow submenu to escape */
-    z-index:auto;         /* FIX: remove stacking context */
+    overflow:visible;
 }
 
 .hero-banner::before{
@@ -58,25 +19,22 @@ HERO
     position:absolute;
     inset:0;
     background:rgba(10,37,64,.55);
-}
-
-.hero-content{
-    position:relative;
-    z-index:auto;         /* FIX: remove stacking context */
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:24px;
-}
-
-.left-column{
-    flex:1 1 auto;
-    min-width:0;
+    z-index:0;
 }
 
 /* ===========================
-TEXT
+HERO CONTENT
 =========================== */
+.hero-content{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:20px;
+}
+
 .hero-text h1{
     margin:0 0 10px;
     font-size:2rem;
@@ -88,27 +46,25 @@ TEXT
 }
 
 /* ===========================
-PHOTO
+NAV WRAPPER (A4 POSITIONING)
 =========================== */
-.hero-photo{
-    width:110px;
-    height:110px;
-    border-radius:50%;
-    object-fit:cover;
-    border:4px solid #fff;
-    flex:0 0 auto;
+.nav-wrapper{
+    width:100%;
+    position:relative;
+    z-index:3;
+    margin:20px 0; /* equal spacing above and below */
+    display:flex;
+    justify-content:center;
 }
 
 /* ===========================
 NAV SCROLL
 =========================== */
 .nav-scroll{
-    width:100%;
     overflow-x:auto;
-    overflow-y:visible;   /* FIX: stop clipping submenu */
+    overflow-y:visible;
     white-space:nowrap;
     -webkit-overflow-scrolling:touch;
-    overscroll-behavior-x:contain;
     position:relative;
     padding-bottom:4px;
 }
@@ -128,15 +84,15 @@ NAV MENU
 }
 
 /* ===========================
-ITEMS
+NAV ITEMS
 =========================== */
 .nav-item{
     position:relative;
-    flex:0 0 auto;
+    overflow:visible;
 }
 
 /* ===========================
-BUTTONS
+NAV BUTTONS
 =========================== */
 .nav-btn,
 .mega-trigger{
@@ -161,45 +117,7 @@ BUTTONS
 }
 
 /* ===========================
-SEARCH / DARK
-=========================== */
-.search-wrapper{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.search-icon{
-    color:#fff;
-    cursor:pointer;
-}
-
-#siteSearchInput{
-    width:0;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s ease;
-    border:none;
-    border-radius:30px;
-    padding:8px 12px;
-}
-
-#siteSearchInput.open{
-    width:160px;
-    opacity:1;
-    pointer-events:auto;
-}
-
-#darkToggleHeader{
-    border:none;
-    background:transparent;
-    color:#fff;
-    font-size:18px;
-    cursor:pointer;
-}
-
-/* ===========================
-DESKTOP MEGA MENU
+MEGA MENU (DESKTOP)
 =========================== */
 .mega-menu{
     display:none;
@@ -213,7 +131,7 @@ DESKTOP MEGA MENU
     box-shadow:0 20px 50px rgba(0,0,0,.18);
     gap:30px;
     flex-wrap:wrap;
-    z-index:99999;
+    z-index:9999;
 }
 
 .nav-item:hover > .mega-menu,
@@ -238,18 +156,11 @@ DESKTOP MEGA MENU
     padding:6px 0;
 }
 
-/* ============================================================
-   MOBILE / TABLET SUBMENU (iPhone + iPad)
-============================================================ */
+/* ===========================
+MOBILE / TABLET SUBMENU
+=========================== */
 @media (max-width:1024px){
 
-    /* allow submenu to escape scroll container */
-    .nav-scroll{
-        overflow-x:auto;
-        overflow-y:visible;
-    }
-
-    /* base submenu */
     .mega-menu{
         display:none;
         position:absolute;
@@ -261,134 +172,35 @@ DESKTOP MEGA MENU
         border-radius:14px;
         padding:16px;
         flex-direction:column;
-        flex-wrap:nowrap;
         gap:14px;
         box-shadow:0 18px 45px rgba(0,0,0,.18);
         z-index:9999;
     }
 
-    /* show when open */
     .nav-item.open > .mega-menu{
         display:flex;
     }
+}
 
-    .mega-column h4{
-        color:#0a2540;
-        margin:0 0 8px;
-    }
-
-    .mega-menu a{
-        color:#222;
-        padding:4px 0;
-    }
+/* ===========================
+PROFILE PHOTO
+=========================== */
+.hero-photo{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #fff;
+    position:relative;
+    z-index:2;
+    margin-top:20px;
 }
 
 /* ===========================
 PHONE HERO STACK
 =========================== */
 @media (max-width:700px){
-
     .hero-content{
-        flex-direction:column;
-        text-align:center;
-        align-items:center;
+        gap:16px;
     }
-
-    .hero-photo{
-        margin-top:18px;
-    }
-}
-/* Fix Safari stacking bug */
-.hero-banner::before {
-    z-index: 0;
-}
-
-.hero-content,
-.nav-scroll,
-.nav-menu,
-.nav-item,
-.mega-menu {
-    position: relative;
-    z-index: 1;
-}
-/* Safari background-image clipping fix */
-.nav-scroll {
-    position: relative;
-    z-index: 999999;
-    isolation: isolate;
-}
-
-.mega-menu {
-    position: absolute;
-    z-index: 1000000;
-}
-/* Header bar (nav above hero) */
-.site-header {
-    width: 100%;
-    background: #0a2540;
-    padding: 10px 0;
-    position: relative;
-    z-index: 9999999;
-}
-
-/* Ensure nav text is visible */
-.site-header .nav-btn,
-.site-header .mega-trigger {
-    color: #fff;
-}
-/* Allow submenu to escape the header bar */
-.site-header,
-.nav-menu,
-.nav-item {
-    overflow: visible;
-}
-/* Fix header clipping submenu */
-.site-header {
-    overflow: visible !important;
-    position: static !important;
-}
-
-/* Ensure nav container doesn't clip */
-.nav-scroll {
-    overflow: visible !important;
-    position: relative !important;
-}
-
-/* Ensure each nav item can host an absolute submenu */
-.nav-item {
-    position: relative !important;
-    overflow: visible !important;
-}
-
-/* Ensure submenu renders above header */
-.mega-menu {
-    z-index: 9999999 !important;
-}
-/* NAV WRAPPER INSIDE HERO */
-.nav-wrapper {
-    width: 100%;
-    background: transparent;
-    position: relative;
-    z-index: 9999999;
-    margin: 10px 0;
-}
-
-/* RESTORE HORIZONTAL SCROLL, KEEP SUBMENU ESCAPE */
-.nav-scroll {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-    position: relative !important;
-}
-
-/* ENSURE SUBMENU CAN ESCAPE */
-.nav-item {
-    position: relative !important;
-    overflow: visible !important;
-}
-
-/* SUBMENU ABOVE EVERYTHING */
-.mega-menu {
-    z-index: 9999999 !important;
 }

@@ -299,3 +299,63 @@ FIX 6 — A4 spacing (nav centered between text + photo)
 .mega-menu {
     top: 100% !important;
 }
+/* ===========================
+1) RESTORE BODY CARD STYLING
+=========================== */
+.card,
+.faq-card,
+.section-card,
+.content-card {
+    background: var(--card-bg) !important;
+    border-radius: 14px !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08) !important;
+}
+
+/* ===========================
+2) FIX NAV TEXT SIZE
+=========================== */
+.nav-btn,
+.mega-trigger {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    padding: 8px 10px !important;
+    height: 36px !important;
+}
+
+/* ===========================
+3) FIX NAV ALIGNMENT + STOP HIDING
+=========================== */
+
+/* Keep nav centred */
+.nav-menu {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Ensure nav-scroll doesn't clip or shift */
+.nav-scroll {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    white-space: nowrap !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Ensure submenu stays above hero overlay */
+.mega-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    z-index: 999999 !important;
+}
+
+/* Prevent nav from being pushed right */
+.nav-item {
+    position: relative !important;
+    overflow: visible !important;
+    display: flex !important;
+    align-items: center !important;
+}

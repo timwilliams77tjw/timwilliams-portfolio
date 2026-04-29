@@ -58,6 +58,50 @@
 </script>
 
 <style>
+    /* === SHIELD HEADER FROM INDEX CSS (iPad + Desktop + iPhone) === */
+
+#header .brand-btn {
+  border: 1px solid rgba(255,255,255,0.6) !important;
+  padding: 8px 14px !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  color: white !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+  line-height: 1.2 !important;
+}
+
+/* Prevent header nav clipping on iPad/Desktop */
+#header .nav-menu {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+/* Ensure mega menus open correctly */
+#header .nav-item {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+#header .mega-menu {
+  top: calc(100% + 4px) !important;
+  left: 0 !important;
+  display: none;
+}
+
+#header .nav-item:hover > .mega-menu {
+  display: flex !important;
+}
+
+/* Stop iPhone Safari tap-jump */
+#header .brand-btn:active,
+#header .brand-btn:focus {
+  -webkit-tap-highlight-color: transparent !important;
+  transform: translateY(0) !important;
+  top: 0 !important;
+}
+
     /* FIX: Prevent index styles from breaking header buttons */
 #header .brand-btn {
     border: 1px solid rgba(255,255,255,0.6) !important;

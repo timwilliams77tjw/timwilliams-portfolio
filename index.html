@@ -60,12 +60,28 @@
 
 <style>
 
-/* ⭐ FIX: Prevent index CSS from affecting the header */
-#header .brand-btn,
-#header .nav-item,
-#header .nav-menu,
+/* ⭐ SAFE FIX — Prevent index CSS from affecting the header */
+#header .brand-btn {
+    background: transparent !important;
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.6) !important;
+    border-radius: 6px !important;
+    padding: 8px 14px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+}
+
+#header .nav-menu {
+    display: flex !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
 #header img {
-    all: unset !important;
+    object-fit: contain !important;
 }
 
 /* ORIGINAL INDEX CSS BELOW — UNCHANGED */
@@ -271,188 +287,14 @@ margin-right: auto !important;
 margin-left: 0 !important;
 margin-right: auto !important;
 }
-
-/* BUTTON OVERRIDES */
-.container .brand-btn {
-background: #0a2540;
-color: white;
-border-color: #0a2540;
-}
-
-.container .brand-btn:hover {
-background: transparent;
-color: #0a66c2;
-border-color: #0a66c2;
-}
-
-/* Fix invisible body buttons on index */
-.container .brand-btn {
-background: #0a2540 !important;
-color: white !important;
-border-color: #0a2540 !important;
-}
-
-.container .brand-btn:hover {
-background: transparent !important;
-color: #0a66c2 !important;
-border-color: #0a66c2 !important;
-}
-
-/* iPhone-only: centre align card icons */
-@media (max-width: 600px) {
-.card img,
-.card-icon,
-.why-card img,
-.case-card img {
-display: block !important;
-margin: 0 auto 10px auto !important;
-text-align: center !important;
-}
-}
-
-/* iPhone-only: centre align service-card icons */
-@media (max-width: 600px) {
-.card.service-card,
-.service-card {
-text-align: center !important;
-}
-
-.service-card img,
-.card.service-card img {
-display: block !important;
-margin-left: auto !important;
-margin-right: auto !important;
-}
-}
-
-/* iPhone-only: centre ALL service-card icons + text */
-@media (max-width: 600px) {
-.service-card,
-.card.service-card {
-text-align: center !important;
-}
-
-.service-card img,
-.card.service-card img,
-.service-card img[style],
-.card.service-card img[style] {
-display: block !important;
-margin-left: auto !important;
-margin-right: auto !important;
-}
-}
-
-/* INDEX-ONLY FLOATING BUTTON FIX */
-.fab, .fab-booking {
-position: fixed !important;
-width: 55px !important;
-height: 55px !important;
-font-size: 26px !important;
-z-index: 9999 !important;
-}
-
-footer {
-background: #0a2540 !important;
-}
-
-#footer,
-#footer footer,
-.footer,
-footer {
-background: #0a2540 !important;
-}
-
-</style>
-</head>
-
-<body>
-
-<div id="header"></div>
-
-<script>
-function initHeaderNav() {
-const isMobile = () => window.innerWidth <= 700;
-let openMenu = null;
-
-function closeAllMenus() {
-document.querySelectorAll('#header .nav-item.open').forEach(item => {
-item.classList.remove('open');
-});
-openMenu = null;
-}
-
-document.querySelectorAll('#header .nav-item > a').forEach(link => {
-link.addEventListener('click', function (e) {
-if (!isMobile()) return;
-
-const parent = this.parentElement;
-
-if (parent.classList.contains('open')) {
-return;
-}
-
-e.preventDefault();
-e.stopPropagation();
-closeAllMenus();
-parent.classList.add('open');
-openMenu = parent;
-});
-});
-
-document.addEventListener('click', function (e) {
-if (!isMobile()) return;
-if (!e.target.closest('#header .nav-item')) closeAllMenus();
-});
-
-window.addEventListener('scroll', function () {
-if (isMobile()) closeAllMenus();
-});
-
-const icon = document.querySelector("#header #searchIcon");
-const input = document.querySelector("#header #siteSearchInput");
-const resultsBox = document.querySelector("#header #searchResults");
-const darkHeader = document.querySelector("#header #darkToggleHeader");
-
-if (darkHeader) {
-darkHeader.addEventListener("click", () => {
-document.body.classList.toggle("dark-mode");
-localStorage.setItem(
-"tw_dark",
-document.body.classList.contains("dark-mode") ? "1" : "0"
-);
-});
-}
-
-if (icon && input) {
-icon.addEventListener("click", () => {
-input.classList.toggle("open");
-if (input.classList.contains("open")) input.focus();
-});
-
-document.addEventListener("click", (e) => {
-if (!e.target.closest("#header .search-wrapper")) {
-input.classList.remove("open");
-if (resultsBox) resultsBox.style.display = "none";
-}
-});
-}
-}
-
-fetch("header-index.html")
-.then(r => r.text())
-.then(h => {
-document.getElementById("header").innerHTML = h;
-if (typeof initGlobal === "function") {
-initGlobal();
-}
-initHeaderNav();
-});
-</script>
 <!-- MAIN CONTENT -->
+
 <div class="container">
 
 <div class="card" style="text-align:center; padding:30px;">
+
 <h1>IT Programme Delivery That Delivers — On Time and On Budget</h1>
+
 <p style="font-size:18px; max-width:700px; margin:10px auto;">
 Helping UK organisations successfully deliver complex cyber security, cloud and enterprise IT programmes with 30+ years of hands-on experience.
 </p>
@@ -467,6 +309,7 @@ Helping UK organisations successfully deliver complex cyber security, cloud and 
 ✔ 30+ Years Experience &nbsp; | &nbsp;
 ✔ Trusted Across NHS, Defence & Enterprise
 </p>
+
 </div>
 
 <h2>Who I Work With</h2>
@@ -480,6 +323,7 @@ Helping UK organisations successfully deliver complex cyber security, cloud and 
 
 <h2>Executive Profile</h2>
 <div class="card" style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+
 <div style="flex:1; min-width:250px;">
 <p>SC Cleared Senior IT Programme Manager delivering large-scale cyber security, cloud transformation and enterprise infrastructure programmes across NHS England, Defence and global organisations.</p>
 <p>Specialist in stabilising complex programmes, improving delivery performance and ensuring successful outcomes across high-risk environments.</p>
@@ -488,6 +332,7 @@ Helping UK organisations successfully deliver complex cyber security, cloud and 
 <div style="flex:0 0 250px; text-align:center;">
 <img src="exec.jpg" alt="Executive Profile" style="width:250px; height:250px; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.15);" />
 </div>
+
 </div>
 
 <h2>Proven Results</h2>
@@ -628,6 +473,7 @@ Helping UK organisations successfully deliver complex cyber security, cloud and 
 <!-- CONTACT -->
 <h2>Contact</h2>
 <div class="card">
+
 <p>Email: timwilliams07@outlook.com</p>
 <p>Phone: 07801 453322</p>
 
@@ -663,18 +509,18 @@ fetch("footer.html")
 <!-- DARK MODE -->
 <script>
 (function(){
-const darkToggle = document.getElementById("darkToggle");
-if(!darkToggle) return;
+    const darkToggle = document.getElementById("darkToggle");
+    if(!darkToggle) return;
 
-const body = document.body;
-const storedMode = localStorage.getItem("tw_dark");
+    const body = document.body;
+    const storedMode = localStorage.getItem("tw_dark");
 
-if(storedMode === "1") body.classList.add("dark-mode");
+    if(storedMode === "1") body.classList.add("dark-mode");
 
-darkToggle.addEventListener("click", function(){
-    body.classList.toggle("dark-mode");
-    localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
-});
+    darkToggle.addEventListener("click", function(){
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    });
 })();
 </script>
 

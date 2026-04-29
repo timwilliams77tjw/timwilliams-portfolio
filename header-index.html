@@ -370,64 +370,63 @@ body{
 
 
 /* =========================
-   TABLET + MOBILE FIXES
+   TABLET + MOBILE
 ========================= */
 @media (max-width:1024px){
 
   .hero-banner{
-    padding:35px 20px 28px;
+    padding:30px 15px 20px;
+    height:auto !important;
+    min-height:auto !important;
+    overflow:visible !important;
+  }
+
+  .hero-content{
+    overflow:visible !important;
   }
 
   .hero-row{
     display:flex;
     flex-direction:column;
-    gap:18px;
+    gap:16px;
     margin-bottom:18px;
   }
 
-  .hero-text h1{
-    font-size:32px;
-  }
-
   .hero-buttons{
-    margin-top:0;
     width:100%;
+    margin-top:0;
+    overflow:visible;
   }
 
   .nav-menu{
-    display:flex !important;
-    flex-wrap:wrap !important;
-    justify-content:center !important;
+    display:grid !important;
+    grid-template-columns:repeat(3, 1fr);
+    gap:10px;
+    width:100%;
+    padding:8px 0 10px;
     overflow:visible !important;
-    white-space:normal !important;
-    gap:10px !important;
-    padding:8px 0 10px !important;
-    width:100% !important;
   }
 
   .nav-item{
-    flex:0 0 auto !important;
+    width:100%;
   }
 
   .brand-btn{
-    min-width:110px;
+    width:100%;
+    min-width:auto;
     text-align:center;
-  }
-
-  .nav-menu a{
-    -webkit-tap-highlight-color:transparent;
+    padding:10px;
   }
 
   .mega-menu{
     position:absolute;
-    top:100%;
     left:0;
-    width:max-content;
+    top:100%;
     min-width:220px;
+    z-index:99999;
   }
 
 }
-
 /* =========================
    SMALL PHONE
 ========================= */

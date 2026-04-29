@@ -49,8 +49,8 @@ HERO
     background:url("hero.jpg") center center / cover no-repeat;
     padding:50px 20px;
     color:#fff;
-    overflow:visible;
-    z-index:auto;
+    overflow:visible;     /* FIX: allow submenu to escape */
+    z-index:auto;         /* FIX: remove stacking context */
 }
 
 .hero-banner::before{
@@ -62,7 +62,7 @@ HERO
 
 .hero-content{
     position:relative;
-    z-index:2;
+    z-index:auto;         /* FIX: remove stacking context */
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -105,7 +105,7 @@ NAV SCROLL
 .nav-scroll{
     width:100%;
     overflow-x:auto;
-    overflow-y:visible;
+    overflow-y:visible;   /* FIX: stop clipping submenu */
     white-space:nowrap;
     -webkit-overflow-scrolling:touch;
     overscroll-behavior-x:contain;

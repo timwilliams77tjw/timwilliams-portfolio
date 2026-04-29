@@ -287,14 +287,68 @@ margin-right: auto !important;
 margin-left: 0 !important;
 margin-right: auto !important;
 }
-<!-- MAIN CONTENT -->
 
+</style>
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<script>
+function initHeaderNav() {
+    const isMobile = () => window.innerWidth <= 700;
+    let openMenu = null;
+
+    function closeAllMenus() {
+        document.querySelectorAll('#header .nav-item.open').forEach(item => {
+            item.classList.remove('open');
+        });
+        openMenu = null;
+    }
+
+    document.querySelectorAll('#header .nav-item > a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            if (!isMobile()) return;
+
+            const parent = this.parentElement;
+
+            if (parent.classList.contains('open')) {
+                return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+            closeAllMenus();
+            parent.classList.add('open');
+            openMenu = parent;
+        });
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!isMobile()) return;
+        if (!e.target.closest('#header .nav-item')) closeAllMenus();
+    });
+
+    window.addEventListener('scroll', function () {
+        if (isMobile()) closeAllMenus();
+    });
+}
+
+fetch("header-index.html")
+.then(r => r.text())
+.then(h => {
+    document.getElementById("header").innerHTML = h;
+    if (typeof initGlobal === "function") initGlobal();
+    initHeaderNav();
+});
+</script>
+
+<!-- MAIN CONTENT -->
 <div class="container">
 
 <div class="card" style="text-align:center; padding:30px;">
-
 <h1>IT Programme Delivery That Delivers — On Time and On Budget</h1>
-
 <p style="font-size:18px; max-width:700px; margin:10px auto;">
 Helping UK organisations successfully deliver complex cyber security, cloud and enterprise IT programmes with 30+ years of hands-on experience.
 </p>
@@ -309,7 +363,6 @@ Helping UK organisations successfully deliver complex cyber security, cloud and 
 ✔ 30+ Years Experience &nbsp; | &nbsp;
 ✔ Trusted Across NHS, Defence & Enterprise
 </p>
-
 </div>
 
 <h2>Who I Work With</h2>
@@ -483,8 +536,7 @@ style="text-decoration:none; color:#0A66C2; font-weight:600;">
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
 style="vertical-align:middle; margin-right:6px;">
 <rect width="24" height="24" rx="4" fill="#0A66C2"/>
-<path fill="#FFFFFF" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v16h-4V8zm7.5 0h3.8v2.2h.1c.5-1 1.8-2.2 3.9-2.2 4.2 0 5 2.8 5 6.5V24h-4v-8.2c0-2 0-4.5-2.8-4.5-2.8 0-3.2 2.2-3.2 4.3V24h-4V8z"
-transform="translate(4 0) scale(0.7)"/>
+<path fill="#FFFFFF" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5z
 </svg>
 Tim Williams
 </a>
@@ -493,6 +545,7 @@ Tim Williams
 </div>
 
 </div> <!-- END CONTAINER -->
+
 <!-- FLOATING BUTTONS -->
 <a href="calendar.html" class="fab fab-booking">📅</a>
 <div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>

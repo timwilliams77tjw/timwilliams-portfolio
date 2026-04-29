@@ -905,3 +905,36 @@ section,
 article {
     transform: none !important;
 }
+/* ==========================================
+FIX: Digital column clipping on iPhone + iPad
+========================================== */
+
+/* Allow dropdowns to extend downward */
+.nav-scroll {
+    overflow-y: visible !important;
+    overflow-x: auto !important; /* keep horizontal scroll */
+    position: relative !important;
+    z-index: 10000 !important;
+}
+
+/* Ensure dropdown sits above everything */
+.mega-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    z-index: 10001 !important;
+    max-height: none !important;
+}
+
+/* Prevent body from covering the dropdown */
+main,
+section,
+article,
+footer,
+.card,
+.section-card,
+.content-card,
+.faq-card {
+    position: relative !important;
+    z-index: 1 !important;
+}

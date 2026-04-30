@@ -22,7 +22,6 @@
 
     <!-- NAVIGATION -->
     <div class="hero-buttons">
-      <!-- NEW: dedicated scroll container -->
       <div class="nav-scroll">
         <div class="nav-menu">
 
@@ -130,13 +129,18 @@
 ============================================================ -->
 <style>
 
-/* SAFARI FIX: Prevent page dragging */
-html, body {
-  overflow-x: hidden;
+/* SAFARI FIX: Move overlay OUTSIDE hero-banner */
+#header {
+  position: relative;
+  z-index: 1;
 }
 
-#header * {
-  box-sizing: border-box;
+#header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10,37,64,.58);
+  z-index: -1;
 }
 
 /* HERO BANNER */
@@ -145,16 +149,12 @@ html, body {
   background: url('hero.jpg') center center / cover no-repeat;
   padding: 40px 24px 26px;
   color: #fff;
-  z-index: 1000;
   overflow: visible;
 }
 
+/* Remove old clipping overlay */
 #header .hero-banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(10,37,64,.58);
-  z-index: 0;
+  content: none !important;
 }
 
 #header .hero-content {
@@ -204,20 +204,17 @@ html, body {
   overflow: visible;
 }
 
-/* NEW: scroll container */
 #header .nav-scroll {
   overflow-x: auto;
   overflow-y: visible;
   -webkit-overflow-scrolling: touch;
 }
 
-/* nav itself no longer scrolls, so it won't clip mega menus */
 #header .nav-menu {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-
   flex-wrap: nowrap;
   white-space: nowrap;
   overflow: visible;
@@ -410,4 +407,5 @@ html, body {
     margin-top: 18px;
   }
 }
+
 </style>

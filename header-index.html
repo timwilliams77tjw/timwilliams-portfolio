@@ -22,11 +22,7 @@
 
     <!-- NAVIGATION -->
     <div class="hero-buttons">
-
-      <!-- SCROLL CONTAINER (correct place) -->
       <div class="nav-scroll">
-
-        <!-- MENU (NO overflow here) -->
         <div class="nav-menu">
 
           <div class="nav-item">
@@ -106,7 +102,7 @@
             </div>
           </div>
 
-          <!-- SEARCH + DARK MODE (included in scroll row) -->
+          <!-- SEARCH + DARK MODE -->
           <div class="nav-item search-wrapper">
             <div id="searchIcon" class="search-icon">
               <svg width="18" height="18" stroke="currentColor" fill="none" stroke-width="2">
@@ -133,19 +129,17 @@
 ============================================================ -->
 <style>
 
-/* HEADER WRAPPER MUST ALLOW OVERFLOW */
+/* SAFARI FIX: overlay behind header */
 #header {
   position: relative;
-  overflow: visible !important;
-  z-index: 999999;
+  z-index: 1;
 }
 
-/* OVERLAY BEHIND HEADER */
 #header::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(10,37,64,.58);
+  background: rgba(10,37,64,.58); /* this is what made it brighter blue */
   z-index: -1;
 }
 
@@ -158,16 +152,50 @@
   overflow: visible;
 }
 
-/* REMOVE OLD OVERLAY */
+/* kill old overlay completely */
 #header .hero-banner::before {
   content: none !important;
 }
 
-/* TOP ROW */
 #header .hero-content {
   position: relative;
   z-index: 2;
   overflow: visible;
+}
+
+/* TOP ROW */
+#header .hero-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+#header .hero-text h1 {
+  margin: 0 0 10px;
+  font-size: 38px;
+}
+
+#header .hero-text p {
+  margin: 6px 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* IMAGES */
+#header .header-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+#header .header-img.profile {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #fff;
 }
 
 /* NAVIGATION */
@@ -176,34 +204,33 @@
   overflow: visible;
 }
 
-/* ⭐ SCROLL CONTAINER — correct place */
+/* CHANGE 1: nav-scroll no longer scrolls (no overflow here) */
 #header .nav-scroll {
+  overflow: visible;
+}
+
+/* CHANGE 2: nav-menu is now the scroll container */
+#header .nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  flex-wrap: nowrap;
+  white-space: nowrap;
+
   overflow-x: auto;
   overflow-y: visible;
   -webkit-overflow-scrolling: touch;
-  white-space: nowrap;
-  position: static !important;
 }
 
-/* ⭐ MENU — NO overflow here */
-#header .nav-menu {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-  overflow: visible !important;
-  position: static !important;
-}
-
-/* ⭐ NAV ITEM — positioning anchor */
 #header .nav-item {
   position: relative;
   flex: 0 0 auto;
-  overflow: visible !important;
+  overflow: visible;
   z-index: 100000;
 }
 
-/* BUTTONS */
 #header .brand-btn {
   display: block;
   padding: 9px 14px;
@@ -218,11 +245,15 @@
   transition: .25s ease;
 }
 
-/* ⭐ SUBMENU — correct positioning */
+#header .brand-btn:hover {
+  background: rgba(255,255,255,.14);
+}
+
+/* MEGA MENU — LEFT ALIGNED, NO CLIPPING */
 #header .mega-menu {
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   left: 0;
   transform: none;
   width: max-content;
@@ -239,6 +270,32 @@
   display: flex;
 }
 
+#header .mega-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+}
+
+#header .mega-column h4 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #0a2540;
+}
+
+#header .mega-column a {
+  padding: 8px 0;
+  text-decoration: none;
+  color: #222;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+#header .mega-column a:hover {
+  color: #0077cc;
+}
+
 /* SEARCH */
 #header .search-wrapper {
   display: flex;
@@ -246,13 +303,112 @@
   gap: 10px;
 }
 
+#header .search-icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+#header #siteSearchInput {
+  width: 0;
+  opacity: 0;
+  padding: 7px 10px;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  transition: .25s ease;
+}
+
+#header #siteSearchInput.open {
+  width: 180px;
+  opacity: 1;
+  background: #fff;
+}
+
+#header .dark-toggle-btn {
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.4);
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  cursor: pointer;
+}
+
+#header .search-results {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  width: 260px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.16);
+  display: none;
+  flex-direction: column;
+  z-index: 99999;
+}
+
+#header .search-results a {
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #222;
+  border-bottom: 1px solid #eee;
+}
+
+#header .search-results a:hover {
+  background: #f5f5f5;
+}
+
 /* RESPONSIVE */
+
+/* iPad & below */
+@media (max-width: 1024px) {
+  #header .hero-banner {
+    padding: 32px 18px 22px;
+  }
+}
+
+/* iPhone */
 @media (max-width: 700px) {
   #header .hero-row {
     display: flex;
     flex-direction: column;
     gap: 16px;
     text-align: center;
+  }
+
+  #header .header-img.logo {
+    order: 1;
+  }
+
+  #header .hero-text {
+    order: 2;
+  }
+
+  #header .header-img.profile {
+    order: 3;
+  }
+
+  #header .hero-text h1 {
+    font-size: 28px;
+  }
+
+  #header .hero-text p {
+    font-size: 14px;
+  }
+
+  #header .header-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  #header .header-img.profile {
+    width: 110px;
+    height: 110px;
+  }
+
+  #header .hero-buttons {
+    margin-top: 18px;
   }
 }
 

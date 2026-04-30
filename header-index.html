@@ -209,22 +209,23 @@
 
 /* SCROLL CONTAINER */
 #header-content .nav-scroll {
-  overflow-x: auto;
-  overflow-y: visible;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
   -webkit-overflow-scrolling: touch;
   white-space: nowrap;
-  position: static;
+  position: static !important;
 }
+
 
 /* MENU */
 #header-content .nav-menu {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
   overflow: visible !important;
   position: static !important;
+  display: inline-flex;
+  gap: 10px;
+  white-space: nowrap;
 }
+
 
 /* NAV ITEM */
 #header-content .nav-item {
@@ -250,19 +251,13 @@
 
 /* SUBMENU */
 #header-content .mega-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  transform: none;
-  background: #fff;
-  padding: 24px 28px;
-  border-radius: 10px;
-  box-shadow: 0 18px 45px rgba(0,0,0,.16);
-  z-index: 999999;
-  gap: 40px;
-  min-width: 260px;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  transform: none !important;
+  z-index: 999999 !important;
 }
+
 
 #header-content .nav-item:hover > .mega-menu {
   display: flex;
@@ -298,6 +293,25 @@
     flex-direction: column;
     gap: 16px;
   }
+}
+#header-content .mega-column h4 {
+  color: #0a2540 !important;
+  font-size: 12px !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  margin: 0 0 10px !important;
+}
+
+#header-content .mega-column a {
+  color: #222 !important;
+  font-size: 14px !important;
+  padding: 8px 0 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+
+#header-content .nav-menu {
+  justify-content: center !important; /* fixes iPad left alignment */
 }
 
 </style>

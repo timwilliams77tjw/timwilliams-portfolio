@@ -58,7 +58,6 @@
 </script>
 
 <style>
-
 /* GLOBAL */
 :root { --accent: #0a66c2; }
 body.dark-mode { --accent: #38bdf8; }
@@ -247,48 +246,28 @@ margin-left: auto !important;
 margin-right: auto !important;
 }
 }
-
 </style>
+
 </head>
 
 <body>
 
 <!-- ============================
-     A2 HEADER (loaded separately)
-     ============================ -->
+LOAD NEW COMBINED HEADER
+============================ -->
 <div id="header"></div>
 
 <script>
 fetch("header-index.html")
-.then(r => r.text())
-.then(h => {
-document.getElementById("header").innerHTML = h;
-if (typeof initHeaderNav === "function") initHeaderNav();
-});
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header").innerHTML = h;
+  });
 </script>
 
 <!-- ============================
-     HERO BANNER (unchanged)
-     ============================ -->
-<div class="hero-banner">
-    <div class="hero-content">
-        <div class="hero-row">
-            <img src="logo.jpg" class="header-img" alt="Logo">
-
-            <div class="hero-text">
-                <h1>Tim Williams</h1>
-                <p>Senior IT Project / PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-                <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
-            </div>
-
-            <img src="profile.jpg" alt="Tim Williams Senior IT Programme Manager" class="header-img profile">
-        </div>
-    </div>
-</div>
-
-<!-- ============================
-     MAIN CONTENT
-     ============================ -->
+MAIN CONTENT
+============================ -->
 <div class="container">
 
 <div class="card" style="text-align:center; padding:30px;">
@@ -494,26 +473,8 @@ Tim Williams
 
 <script>
 fetch("footer.html")
-.then(r => r.text())
-.then(h => document.getElementById("footer").innerHTML = h);
-</script>
-
-<!-- DARK MODE -->
-<script>
-(function(){
-const darkToggle = document.getElementById("darkToggle");
-if(!darkToggle) return;
-
-const body = document.body;
-const storedMode = localStorage.getItem("tw_dark");
-
-if(storedMode === "1") body.classList.add("dark-mode");
-
-darkToggle.addEventListener("click", function(){
-body.classList.toggle("dark-mode");
-localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
-});
-})();
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
 </body>

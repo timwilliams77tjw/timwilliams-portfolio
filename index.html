@@ -258,15 +258,20 @@ LOAD NEW COMBINED HEADER
 <div id="header"></div>
 
 <script>
-fetch("header-index.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("header").innerHTML = h;
-    if (typeof initHeaderNav === "function") {
-      initHeaderNav();
-    }
-  });
+Promise.all([
+  fetch("header-index.html").then(r => r.text()),
+  new Promise(resolve => {
+    const s = document.createElement("script");
+    s.src = "header-index.js";
+    s.onload = resolve;
+    document.head.appendChild(s);
+  })
+]).then(([html]) => {
+  document.getElementById("header").innerHTML = html;
+  if (typeof initHeaderNav === "function") initHeaderNav();
+});
 </script>
+
 
 
 <!-- ============================

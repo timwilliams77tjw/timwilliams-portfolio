@@ -262,8 +262,12 @@ fetch("header-index.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header").innerHTML = h;
+    if (typeof initHeaderNav === "function") {
+      initHeaderNav();
+    }
   });
 </script>
+
 
 <!-- ============================
 MAIN CONTENT

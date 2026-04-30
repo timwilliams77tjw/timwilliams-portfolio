@@ -1,72 +1,78 @@
-/* ============================
-   HEADER NAV JS (A2 CLEAN)
-   ============================ */
+function initHeaderNav() {
 
-setTimeout(() => {
+  const isMobile = () => window.innerWidth <= 700;
+  let openMenu = null;
 
-    const isMobile = () => window.innerWidth <= 700;
-    let openMenu = null;
+  function closeAllMenus() {
+    document.querySelectorAll('#header .nav-item.open').forEach(item => {
+      item.classList.remove('open');
+    });
+    openMenu = null;
+  }
 
-    function closeAllMenus() {
-        document.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
-        openMenu = null;
-    }
+  // TAP-TO-OPEN MEGA MENUS ON MOBILE
+  document.querySelectorAll('#header .nav-item.mega > a').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (!isMobile()) return;
 
-    // Mobile tap-to-open
-    document.querySelectorAll('.nav-item > a').forEach(link => {
-        link.addEventListener('click', function (e) {
-            if (!isMobile()) return;
+      const parent = this.parentElement;
 
-            const parent = this.parentElement;
+      if (parent.classList.contains('open')) {
+        return; // second tap follows link
+      }
 
-            if (parent.classList.contains('open')) return;
+      e.preventDefault();
+      e.stopPropagation();
 
-            e.preventDefault();
-            e.stopPropagation();
+      closeAllMenus();
+      parent.classList.add('open');
+      openMenu = parent;
+    });
+  });
 
-            closeAllMenus();
-            parent.classList.add('open');
-            openMenu = parent;
-        });
+  document.addEventListener('click', function (e) {
+    if (!isMobile()) return;
+    if (!e.target.closest('#header .nav-item')) closeAllMenus();
+  });
+
+  window.addEventListener('scroll', function () {
+    if (isMobile()) closeAllMenus();
+  });
+
+  // SEARCH TOGGLE
+  const icon = document.getElementById("searchIcon");
+  const input = document.getElementById("siteSearchInput");
+  const resultsBox = document.getElementById("searchResults");
+
+  if (icon && input) {
+    icon.addEventListener("click", () => {
+      input.classList.toggle("open");
+      if (input.classList.contains("open")) input.focus();
     });
 
-    document.addEventListener('click', e => {
-        if (!isMobile()) return;
-        if (!e.target.closest('.nav-item')) closeAllMenus();
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".search-wrapper")) {
+        input.classList.remove("open");
+        if (resultsBox) resultsBox.style.display = "none";
+      }
     });
+  }
 
-    window.addEventListener('scroll', () => {
-        if (isMobile()) closeAllMenus();
-    });
+  // DARK MODE TOGGLE
+  const darkHeader = document.getElementById("darkToggleHeader");
 
-    // Search toggle
-    const icon = document.getElementById("searchIcon");
-    const input = document.getElementById("siteSearchInput");
-    const results = document.getElementById("searchResults");
-
-    if (icon && input) {
-        icon.addEventListener("click", () => {
-            input.classList.toggle("open");
-            if (input.classList.contains("open")) input.focus();
-        });
-
-        document.addEventListener("click", e => {
-            if (!e.target.closest(".search-wrapper")) {
-                input.classList.remove("open");
-                if (results) results.style.display = "none";
-            }
-        });
+  if (darkHeader) {
+    const stored = localStorage.getItem("tw_dark");
+    if (stored === "1") {
+      document.body.classList.add("dark-mode");
     }
 
-    // Dark mode
-    const darkBtn = document.getElementById("darkToggleHeader");
-    if (darkBtn) {
-        darkBtn.addEventListener("click", () => {
-            document.body.classList.toggle("dark-mode");
-            localStorage.setItem("tw_dark",
-                document.body.classList.contains("dark-mode") ? "1" : "0"
-            );
-        });
-    }
-
-}, 0);
+    darkHeader.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem(
+        "tw_dark",
+        document.body.classList.contains("dark-mode") ? "1" : "0"
+      );
+    });
+  }
+}

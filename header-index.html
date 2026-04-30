@@ -129,7 +129,7 @@
 ============================================================ -->
 <style>
 
-/* SAFARI FIX: Move overlay OUTSIDE hero-banner */
+/* SAFARI FIX: overlay behind header */
 #header {
   position: relative;
   z-index: 1;
@@ -139,7 +139,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(10,37,64,.58);
+  background: rgba(10,37,64,.58); /* this is what made it brighter blue */
   z-index: -1;
 }
 
@@ -152,7 +152,7 @@
   overflow: visible;
 }
 
-/* Remove old clipping overlay */
+/* kill old overlay completely */
 #header .hero-banner::before {
   content: none !important;
 }
@@ -204,20 +204,24 @@
   overflow: visible;
 }
 
+/* CHANGE 1: nav-scroll no longer scrolls (no overflow here) */
 #header .nav-scroll {
-  overflow-x: auto;
-  overflow-y: visible;
-  -webkit-overflow-scrolling: touch;
+  overflow: visible;
 }
 
+/* CHANGE 2: nav-menu is now the scroll container */
 #header .nav-menu {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+
   flex-wrap: nowrap;
   white-space: nowrap;
-  overflow: visible;
+
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
 }
 
 #header .nav-item {

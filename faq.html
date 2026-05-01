@@ -231,9 +231,16 @@ window.addEventListener("load", () => {
     }
 });
 </script>
+<div id="debug-output" style="padding:20px; background:#fee; color:#900; font-size:14px;"></div>
+
 <script>
-console.log("Hero banner inline style:", document.querySelector(".hero-banner")?.getAttribute("style"));
-console.log("Nav menu inline style:", document.querySelector(".nav-menu")?.getAttribute("style"));
+const hero = document.querySelector(".hero-banner")?.getAttribute("style");
+const nav = document.querySelector(".nav-menu")?.getAttribute("style");
+
+document.getElementById("debug-output").innerHTML = `
+    <p><b>Hero inline style:</b> ${hero || "none"}</p>
+    <p><b>Nav inline style:</b> ${nav || "none"}</p>
+`;
 </script>
 
 </body>

@@ -2,6 +2,21 @@
    NAMESPACE: .header-standard
    All header styles isolated from global CSS
 =============================================================== */
+/* ============================================================
+   HEADER SANDBOX — Prevent global CSS from leaking in
+=============================================================== */
+
+.header-standard,
+.header-standard * {
+    all: unset;
+    box-sizing: border-box;
+}
+
+/* Restore block-level behaviour for the wrapper */
+.header-standard {
+    display: block;
+}
+
 /* Stop global clipping, but don’t break nav scroll */
 /* Only unclip the mega menu — not the entire header */
 .header-standard .hs-nav-item,

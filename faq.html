@@ -132,8 +132,15 @@ body.page-certifications {
 fetch("header-standard.html?v=2001")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+      const placeholder = document.getElementById("header-placeholder");
+      placeholder.innerHTML = h;
+
+      // Wait for the browser to render the injected HTML
+      requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+              initHeader();
+          });
+      });
   });
 </script>
 

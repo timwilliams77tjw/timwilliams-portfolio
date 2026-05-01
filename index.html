@@ -290,24 +290,29 @@ overflow-y: visible !important;
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    Promise.all([
-        fetch("header-index.html?v=20260502").then(r => r.text()),
-        new Promise(resolve => {
+
+    fetch("header-index.html?v=20260502")
+        .then(r => r.text())
+        .then(html => {
+            const header = document.getElementById("header");
+            header.innerHTML = html;
+
             const s = document.createElement("script");
             s.src = "header-index.js?v=20260502";
-            s.onload = resolve;
-            document.head.appendChild(s);
-        })
-    ]).then(([html]) => {
-        const header = document.getElementById("header");
-        if (header) {
-            header.innerHTML = html;
-            if (typeof initHeaderNav === "function") initHeaderNav();
-        }
-    });
-});
+            s.async = false;
 
+            s.onload = () => {
+                if (typeof initHeaderNav === "function") {
+                    initHeaderNav();
+                }
+            };
+
+            document.body.appendChild(s);
+        });
+
+});
 </script>
+
 
 <!-- ============================
      MAIN CONTENT

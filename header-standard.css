@@ -1,6 +1,6 @@
 /* ============================================================
-   HEADER STANDARD — FULL, SAFE, NAMESPACED VERSION
-   No resets. No global overrides. No collisions.
+   HEADER STANDARD — CLEAN, SAFE, NAMESPACED VERSION
+   No global overrides. No conflicts. Mobile-safe.
 =============================================================== */
 
 /* WRAPPER */
@@ -14,7 +14,6 @@
 /* ============================================================
    HERO BANNER
 =============================================================== */
-
 .header-standard .hs-hero-banner {
     background:
         linear-gradient(135deg, #003366 0%, #0055aa 100%),
@@ -66,22 +65,30 @@
    NAVIGATION
 =============================================================== */
 
+/* Desktop-only negative margin */
+@media (min-width: 701px) {
+    .header-standard .hs-nav-wrapper {
+        margin-top: -120px;
+    }
+}
+
 .header-standard .hs-nav-wrapper {
-    margin-top: -120px; /* Pull nav visually into hero */
     position: relative;
     z-index: 10000;
 }
 
-
+/* Scroll container — iPhone safe */
 .header-standard .hs-nav-scroll {
     display: block;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-       padding-bottom: 10px;
+    padding-bottom: 10px;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
 }
 
+/* Menu row */
 .header-standard .hs-nav-menu {
     display: flex;
     gap: 12px;
@@ -105,7 +112,6 @@
 /* ============================================================
    MEGA MENU — MULTI‑COLUMN
 =============================================================== */
-
 .header-standard .hs-nav-item {
     position: relative;
 }
@@ -159,7 +165,6 @@
 /* ============================================================
    SEARCH + DARK MODE
 =============================================================== */
-
 .header-standard .hs-search-wrapper {
     display: flex;
     align-items: center;
@@ -210,7 +215,6 @@
 /* ============================================================
    MOBILE (iPhone)
 =============================================================== */
-
 @media (max-width: 700px) {
 
     .header-standard .hs-hero-inner {
@@ -228,83 +232,34 @@
     }
 
     .header-standard .hs-nav-menu {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
-    /* Multi‑column even on mobile */
+    /* Correct iPhone mega menu alignment */
     .header-standard .hs-mega-menu {
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 0;
+        transform: none;
     }
 }
 
 /* ============================================================
    iPAD ONLY — LEFT ALIGN NAV
 =============================================================== */
-
 @media (min-width: 701px) and (max-width: 1024px) {
     .header-standard .hs-nav-menu {
         justify-content: flex-start !important;
     }
 }
-.header-standard,
-.header-standard * {
-    overflow: visible !important;
-}
-/* iPhone nav scroll fix */
-.header-standard .hs-nav-scroll {
-    display: block;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-}
 
-/* iPhone mega menu alignment fix */
-@media (max-width: 700px) {
-    .header-standard .hs-mega-menu {
-        left: 0;
-        transform: none;
-    }
-}
-/* Fix header height + Safari phantom spacing */
-.header-standard {
-    display: block;
-    width: 100%;
-    overflow: visible !important;
-}
+/* ============================================================
+   SAFARI FIXES
+=============================================================== */
 
-.header-standard .hs-hero-banner {
-    display: block;
-}
-
-/* Fix iPhone nav scroll being blocked by parent overflow */
-.header-standard .hs-nav-wrapper,
-.header-standard .hs-nav-scroll,
-.header-standard .hs-nav-menu {
-    overflow: visible !important;
-}
-/* Fix Safari header spacing */
+/* Ensure placeholder behaves like a real block */
 #header-placeholder {
     display: block;
     width: 100%;
-}
-
-/* Fix iPhone scroll clipping */
-.hs-nav-wrapper {
-    overflow: visible !important;
-    position: relative;
-}
-
-/* Fix iPhone horizontal scroll */
-.hs-nav-scroll {
-    display: block;
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
 }

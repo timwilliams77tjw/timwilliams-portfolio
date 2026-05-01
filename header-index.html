@@ -211,7 +211,7 @@
   overflow: visible !important;
 }
 
-/* SCROLL CONTAINER — FIX iPHONE DRIFT */
+/* SCROLL CONTAINER — iPHONE SAFE */
 #header-content .nav-scroll {
   overflow-x: auto !important;
   overflow-y: visible !important;
@@ -220,7 +220,7 @@
   position: relative !important;
 }
 
-/* NAV MENU — FIX iPAD CENTRING */
+/* NAV MENU — iPAD CENTRED, SAFARI-SAFE */
 #header-content .nav-menu {
   display: inline-flex;
   align-items: center !important;
@@ -228,7 +228,12 @@
   gap: 10px;
   white-space: nowrap;
   overflow: visible !important;
-  position: static !important;
+  /* position: static !important;  <-- REMOVED */
+}
+
+/* POSITIONED ANCHOR FOR SUBMENU */
+#header-content .nav-menu {
+  position: relative !important;
 }
 
 /* NAV ITEM */
@@ -253,7 +258,7 @@
   transition: .25s ease;
 }
 
-/* SUBMENU — FIX VERTICAL STACKING */
+/* SUBMENU — FIXED, VERTICAL, LEFT-ALIGNED */
 #header-content .mega-menu {
   display: none;
   position: absolute !important;

@@ -3,11 +3,14 @@
    All header styles isolated from global CSS
 =============================================================== */
 /* Stop global clipping, but don’t break nav scroll */
-.header-standard,
-.header-standard * {
-    overflow: visible;
+/* Only unclip the mega menu — not the entire header */
+.header-standard .hs-nav-item,
+.header-standard .hs-mega-menu,
+.header-standard .hs-mega-column {
+    overflow: visible !important;
 }
 
+/* Restore scroll container behaviour */
 .header-standard .hs-nav-scroll {
     overflow-x: auto !important;
     white-space: nowrap;

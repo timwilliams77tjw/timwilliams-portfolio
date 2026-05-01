@@ -64,10 +64,13 @@
    GITHUB PAGES WRAPPER FIX (ADDED AT TOP — DO NOT REMOVE)
 ============================================================ */
 /* Fix GitHub Pages wrapper ONLY */
-body > div.container-lg {
+body > div.container-lg,
+body > div.container-lg.markdown-body,
+body > div.container-lg.px-3.my-5.markdown-body {
     overflow: visible !important;
     position: static !important;
 }
+
 
 
 /* GLOBAL */
@@ -262,13 +265,10 @@ margin-right: auto !important;
 /* ============================================================
    SAFARI FIXES — CORRECTED
 ============================================================ */
-html {
-overflow-x: hidden;
+html, body {
+    overflow-x: hidden;
 }
 
-body {
-overflow-x: visible;
-}
 
 @supports (-webkit-touch-callout: none) {
 body {

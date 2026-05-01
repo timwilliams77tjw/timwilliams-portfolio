@@ -1,12 +1,4 @@
 /* ============================================================
-   NAMESPACE: .header-standard
-   All header styles isolated from global CSS
-=============================================================== */
-/* ============================================================
-   HEADER SANDBOX — Prevent global CSS from leaking in
-=============================================================== */
-
-/* ============================================================
    HEADER SANDBOX — SAFE VERSION
    Prevent global CSS from leaking in, but keep normal behaviour
 =============================================================== */
@@ -16,31 +8,18 @@
     box-sizing: border-box;
 }
 
-
-/* Restore block-level behaviour for the wrapper */
+/* Wrapper must be block */
 .header-standard {
     display: block;
+    width: 100%;
+    position: relative;
+    z-index: 9999;
 }
-
-/* Stop global clipping, but don’t break nav scroll */
-/* Only unclip the mega menu — not the entire header */
-.header-standard .hs-nav-item,
-.header-standard .hs-mega-menu,
-.header-standard .hs-mega-column {
-    overflow: visible !important;
-}
-
-/* Restore scroll container behaviour */
-.header-standard .hs-nav-scroll {
-    overflow-x: auto !important;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-}
-
 
 /* ============================================================
    HERO BACKGROUND — MATCH INDEX EXACTLY
 =============================================================== */
+
 .header-standard .hs-hero-banner {
     background:
         linear-gradient(135deg, #003366 0%, #0055aa 100%),
@@ -50,12 +29,12 @@
     padding: 60px 20px 160px;
     color: #fff;
     position: relative;
-    overflow: visible;
 }
 
 /* ============================================================
    HERO LAYOUT (DESKTOP + iPad)
 =============================================================== */
+
 .header-standard .hs-hero-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -96,14 +75,18 @@
 /* ============================================================
    NAVIGATION WRAPPER
 =============================================================== */
+
 .header-standard .hs-nav-wrapper {
-    margin-top: 30px;
+    margin-top: -120px; /* Pull nav into hero visually */
+    position: relative;
+    z-index: 10000;
 }
 
 .header-standard .hs-nav-scroll {
-    overflow-x: auto;
+    overflow-x: auto !important;
     white-space: nowrap;
     padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .header-standard .hs-nav-menu {
@@ -122,11 +105,13 @@
     color: #fff;
     font-weight: 600;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 /* ============================================================
    MEGA MENU — MULTI‑COLUMN VERSION
 =============================================================== */
+
 .header-standard .hs-nav-item {
     position: relative;
 }
@@ -140,10 +125,11 @@
     color: #000;
     padding: 20px;
     border-radius: 8px;
-    z-index: 9999;
+    z-index: 999999;
     min-width: 260px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     white-space: normal;
+    flex-wrap: nowrap;
 }
 
 .header-standard .hs-nav-item.open .hs-mega-menu {
@@ -179,6 +165,7 @@
 /* ============================================================
    SEARCH + DARK MODE
 =============================================================== */
+
 .header-standard .hs-search-wrapper {
     display: flex;
     align-items: center;
@@ -210,7 +197,7 @@
     border-radius: 6px;
     padding: 10px;
     display: none;
-    z-index: 9999;
+    z-index: 999999;
 }
 
 .header-standard .hs-dark-toggle-btn {
@@ -223,6 +210,7 @@
 /* ============================================================
    MOBILE (iPhone)
 =============================================================== */
+
 @media (max-width: 700px) {
 
     .header-standard .hs-hero-inner {
@@ -247,33 +235,22 @@
         justify-content: center;
     }
 
+    /* Multi‑column even on mobile */
     .header-standard .hs-mega-menu {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 20px;
         left: 50%;
         transform: translateX(-50%);
-        flex-direction: column;
-        gap: 20px;
     }
 }
 
 /* ============================================================
    iPAD ONLY — LEFT ALIGN NAV
 =============================================================== */
+
 @media (min-width: 701px) and (max-width: 1024px) {
     .header-standard .hs-nav-menu {
         justify-content: flex-start !important;
     }
-}
-.header-standard .hs-mega-menu {
-    position: absolute;
-    z-index: 999999 !important;
-}
-
-.header-standard .hs-nav-item {
-    position: relative !important;
-    z-index: 999998 !important;
-}
-
-.header-standard .hs-nav-menu {
-    position: relative !important;
-    z-index: 999997 !important;
 }

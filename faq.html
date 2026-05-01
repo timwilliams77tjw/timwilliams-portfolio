@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="certifications.css">
 <link rel="stylesheet" href="header-standard.css?v=3001">
 
-
 <!-- PAGE‑SPECIFIC CSS -->
 <style>
 
@@ -38,7 +37,7 @@ body.page-certifications {
     max-width: 720px;
 }
 
-/* ⭐ FIX 1 — Correct card width + centering */
+/* PAGE CONTAINER */
 .page-certifications .page-container {
     max-width: 960px;
     margin: 0 auto;
@@ -104,46 +103,16 @@ body.page-certifications {
     background: var(--accent);
 }
 
-/* ⭐ FIX 2 — Correct header → body spacing */
-/* Desktop */
-.page-container {
-    padding-top: 260px;
-}
-
-/* iPhone nav position */
-@media (max-width: 700px) {
-    .header-standard .hs-nav-wrapper {
-        margin-top: -130px;
-    }
-}
-
-/* iPad nav position */
-@media (min-width: 700px) and (max-width: 1200px) {
-    .header-standard .hs-nav-wrapper {
-        margin-top: -200px;
-    }
-}
-
-/* iPad body spacing */
-@media (min-width: 700px) and (max-width: 1200px) {
-    .page-container {
-        padding-top: 420px;
-    }
-}
-
 </style>
 
 </head>
 
 <body class="page-certifications">
 
-<!-- ⭐ HEADER MUST BE OUTSIDE ALL PAGE LAYOUT WRAPPERS -->
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
-<!-- HEADER JS -->
 <script src="header-standard.js?v=1001"></script>
-
-<!-- INJECT HEADER AFTER DOM + CSS -->
 
 <script>
 fetch("header-standard.html?v=2001")
@@ -152,7 +121,6 @@ fetch("header-standard.html?v=2001")
       const placeholder = document.getElementById("header-placeholder");
       placeholder.innerHTML = h;
 
-      // Wait for the browser to render the injected HTML
       requestAnimationFrame(() => {
           requestAnimationFrame(() => {
               initHeader();
@@ -161,10 +129,7 @@ fetch("header-standard.html?v=2001")
   });
 </script>
 
-
-<!-- ⭐ PAGE LAYOUT STARTS HERE -->
-
-
+<!-- PAGE CONTENT -->
 <main class="page-container">
 
 <section class="hero-section">
@@ -228,8 +193,6 @@ fetch("header-standard.html?v=2001")
 
 </main>
 
-
-
 <!-- FLOATING BUTTONS -->
 <div id="fab" class="fab">⬆️</div>
 <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
@@ -256,9 +219,6 @@ if (faqSearch) {
   });
 }
 </script>
-
-
-
 
 </body>
 </html>

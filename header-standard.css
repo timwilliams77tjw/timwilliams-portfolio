@@ -1,13 +1,18 @@
 /* ============================================================
+   NAMESPACE: .header-standard
+   This prevents ALL global CSS collisions
+=============================================================== */
+
+/* ============================================================
    HERO BACKGROUND — MATCH INDEX EXACTLY
 =============================================================== */
-.hero-banner {
+.header-standard .hero-banner {
     background:
         linear-gradient(135deg, #003366 0%, #0055aa 100%),
         url('hero.jpg') center center / cover no-repeat;
     background-blend-mode: overlay;
     filter: brightness(1.15);
-    padding: 60px 20px 160px; /* identical to index */
+    padding: 60px 20px 160px;
     color: #fff;
     position: relative;
     overflow: visible;
@@ -16,36 +21,36 @@
 /* ============================================================
    HERO LAYOUT (DESKTOP + iPad)
 =============================================================== */
-.hero-inner {
+.header-standard .hero-inner {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between; /* text left, profile right */
+    justify-content: space-between;
     align-items: center;
     gap: 40px;
 }
 
-.hero-left {
+.header-standard .hero-left {
     max-width: 60%;
 }
 
-.hero-left h1 {
+.header-standard .hero-left h1 {
     font-size: 2.4rem;
     margin-bottom: 10px;
 }
 
-.hero-left p {
+.header-standard .hero-left p {
     margin: 4px 0;
     font-size: 1.1rem;
     opacity: 0.9;
 }
 
-.hero-right {
+.header-standard .hero-right {
     display: flex;
     justify-content: flex-end;
 }
 
-.hero-photo {
+.header-standard .hero-photo {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -56,25 +61,25 @@
 /* ============================================================
    NAVIGATION WRAPPER
 =============================================================== */
-.nav-wrapper {
+.header-standard .nav-wrapper {
     margin-top: 30px;
 }
 
-.nav-scroll {
+.header-standard .nav-scroll {
     overflow-x: auto;
     white-space: nowrap;
     padding-bottom: 10px;
 }
 
-.nav-menu {
+.header-standard .nav-menu {
     display: flex;
     gap: 12px;
     align-items: center;
-    justify-content: flex-start; /* LEFT on desktop + iPad */
+    justify-content: flex-start;
 }
 
 /* NAV BUTTONS */
-.nav-btn {
+.header-standard .nav-btn {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.65);
     padding: 9px 14px;
@@ -85,41 +90,68 @@
 }
 
 /* ============================================================
-   MEGA MENU
+   MEGA MENU — MULTI‑COLUMN VERSION
 =============================================================== */
-.nav-item {
+.header-standard .nav-item {
     position: relative;
 }
 
-.mega-menu {
+.header-standard .mega-menu {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0; /* left-aligned under button */
+    left: 0;
     background: #fff;
     color: #000;
     padding: 20px;
     border-radius: 8px;
     z-index: 9999;
-    min-width: 200px;
+    min-width: 260px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    white-space: normal;
 }
 
-.nav-item.open .mega-menu {
+.header-standard .nav-item.open .mega-menu {
+    display: flex;
+    gap: 40px;
+}
+
+/* MULTI‑COLUMN STRUCTURE */
+.header-standard .mega-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+}
+
+.header-standard .mega-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.header-standard .mega-link {
     display: block;
+    padding: 4px 0;
+    color: #000;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.header-standard .mega-link:hover {
+    text-decoration: underline;
 }
 
 /* ============================================================
    SEARCH + DARK MODE
 =============================================================== */
-.search-wrapper {
+.header-standard .search-wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
     position: relative;
 }
 
-#siteSearchInput {
+.header-standard #siteSearchInput {
     display: none;
     background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.4);
@@ -129,11 +161,11 @@
     width: 180px;
 }
 
-#siteSearchInput.open {
+.header-standard #siteSearchInput.open {
     display: inline-block;
 }
 
-.search-results {
+.header-standard #searchResults {
     position: absolute;
     top: 42px;
     left: 0;
@@ -146,7 +178,7 @@
     z-index: 9999;
 }
 
-.dark-toggle-btn {
+.header-standard .dark-toggle-btn {
     background: rgba(255,255,255,0.2);
     border: none;
     padding: 6px 10px;
@@ -158,31 +190,33 @@
 =============================================================== */
 @media (max-width: 700px) {
 
-    .hero-inner {
+    .header-standard .hero-inner {
         flex-direction: column;
         text-align: center;
         gap: 20px;
     }
 
-    .hero-left {
+    .header-standard .hero-left {
         max-width: 100%;
     }
 
-    .hero-right {
+    .header-standard .hero-right {
         justify-content: center;
     }
 
-    .hero-photo {
+    .header-standard .hero-photo {
         margin-top: 10px;
     }
 
-    .nav-menu {
-        justify-content: center; /* full-width scrolling */
+    .header-standard .nav-menu {
+        justify-content: center;
     }
 
-    .mega-menu {
+    .header-standard .mega-menu {
         left: 50%;
-        transform: translateX(-50%); /* centre under button */
+        transform: translateX(-50%);
+        flex-direction: column;
+        gap: 20px;
     }
 }
 
@@ -190,7 +224,7 @@
    iPAD ONLY — LEFT ALIGN NAV
 =============================================================== */
 @media (min-width: 701px) and (max-width: 1024px) {
-    .nav-menu {
+    .header-standard .nav-menu {
         justify-content: flex-start !important;
     }
 }

@@ -2,10 +2,18 @@
    NAMESPACE: .header-standard
    All header styles isolated from global CSS
 =============================================================== */
+/* Stop global clipping, but don’t break nav scroll */
 .header-standard,
 .header-standard * {
-    overflow: visible !important;
+    overflow: visible;
 }
+
+.header-standard .hs-nav-scroll {
+    overflow-x: auto !important;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
 
 /* ============================================================
    HERO BACKGROUND — MATCH INDEX EXACTLY

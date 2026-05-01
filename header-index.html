@@ -202,7 +202,9 @@
 
 /* ✅ FIX APPLIED HERE */
 #header .nav-scroll {
-  overflow: visible; /* KEY FIX */
+  overflow-x: auto;
+  overflow-y: hidden; /* change from visible → hidden */
+  position: relative;
 }
 
 /* ✅ SCROLL MOVED HERE */
@@ -247,7 +249,21 @@
 #header .nav-item:hover > .mega-menu {
   display: flex;
 }
+#header .mega-menu {
+  position: fixed;   /* ← critical change */
+  top: auto;
+  left: 0;
+  right: auto;
+  z-index: 999999;
+  display: none;
+}
+     #header .nav-item {
+  position: relative;
+}
 
+#header .nav-item:hover > .mega-menu {
+  display: flex;
+}
 /* COLUMNS */
 #header .mega-column {
   min-width: 170px;
@@ -294,3 +310,15 @@
 }
 
 </style>
+
+<script>
+document.querySelectorAll('#header .nav-item.mega').forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    const menu = item.querySelector('.mega-menu');
+    const rect = item.getBoundingClientRect();
+
+    menu.style.top = rect.bottom + 'px';
+    menu.style.left = rect.left + 'px';
+  });
+});
+</script>

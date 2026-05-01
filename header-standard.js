@@ -1,6 +1,6 @@
 /* ==================================================
    header-standard.js
-   FULL UPDATED VERSION
+   UPDATED FOR hs-* CLASS NAMES
 ================================================== */
 
 function initHeader() {
@@ -8,20 +8,20 @@ function initHeader() {
     const body = document.body;
 
     function closeAllMenus() {
-        document.querySelectorAll(".nav-item.open")
+        document.querySelectorAll(".hs-nav-item.open")
             .forEach(item => item.classList.remove("open"));
     }
 
     /* ===========================
        MENU TRIGGERS
     =========================== */
-    const triggers = document.querySelectorAll(".mega-trigger");
+    const triggers = document.querySelectorAll(".hs-mega-trigger");
 
     triggers.forEach(btn => {
 
         btn.addEventListener("click", function(e){
 
-            const parent = this.closest(".nav-item");
+            const parent = this.closest(".hs-nav-item");
             if (!parent) return;
 
             /* MOBILE + TABLET */
@@ -64,7 +64,7 @@ function initHeader() {
        CLOSE OUTSIDE CLICK
     =========================== */
     document.addEventListener("click", e => {
-        if (!e.target.closest(".nav-item")) {
+        if (!e.target.closest(".hs-nav-item")) {
             closeAllMenus();
         }
     });
@@ -115,7 +115,7 @@ function initHeader() {
 
         document.addEventListener("click", e => {
 
-            if (!e.target.closest(".search-wrapper")) {
+            if (!e.target.closest(".hs-search-wrapper")) {
                 input.classList.remove("open");
 
                 if (results) {

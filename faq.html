@@ -12,12 +12,15 @@
 <!-- PAGE‑SPECIFIC CSS -->
 <style>
 
+/* PAGE‑SPECIFIC CSS FOR FAQ PAGE */
+
 body.page-certifications {
     background: var(--bg);
     color: var(--text-main);
     transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* HERO SECTION (scoped so it does NOT affect header) */
 .page-certifications .hero-section {
     margin: 0 0 2rem;
 }
@@ -34,8 +37,14 @@ body.page-certifications {
     max-width: 720px;
 }
 
+/* ⭐ FIX 1 — Correct card width + centering */
+.page-certifications .page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 2rem;
+}
 
-
+/* SEARCH BAR */
 .search-bar-local {
     margin: 20px 0 30px;
 }
@@ -61,6 +70,7 @@ body.page-certifications {
     box-shadow: 0 0 0 3px rgba(0,120,255,0.15);
 }
 
+/* FAQ CARDS */
 .faq-card {
     background: var(--card-bg);
     padding: 1.25rem;
@@ -81,6 +91,7 @@ body.page-certifications {
     line-height: 1.5;
 }
 
+/* CTA SECTION */
 .cta-section {
     text-align: center;
     margin-top: 3rem;
@@ -91,9 +102,12 @@ body.page-certifications {
 .sticky-follow {
     background: var(--accent);
 }
-    .page-certifications {
-    padding-top: 180px; /* matches hero height */
+
+/* ⭐ FIX 2 — Correct header → body spacing */
+.page-certifications {
+    padding-top: 180px;
 }
+
 @media (max-width: 700px) {
     .page-certifications {
         padding-top: 220px;

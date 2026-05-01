@@ -6,11 +6,16 @@
    HEADER SANDBOX — Prevent global CSS from leaking in
 =============================================================== */
 
-.header-standard,
+/* ============================================================
+   HEADER SANDBOX — SAFE VERSION
+   Prevent global CSS from leaking in, but keep normal behaviour
+=============================================================== */
+
 .header-standard * {
-    all: unset;
+    all: revert !important;
     box-sizing: border-box;
 }
+
 
 /* Restore block-level behaviour for the wrapper */
 .header-standard {

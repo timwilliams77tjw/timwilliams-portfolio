@@ -1,23 +1,18 @@
 /* ============================================================
-   HEADER SANDBOX — SAFE VERSION
-   Prevent global CSS from leaking in, but keep normal behaviour
+   HEADER STANDARD — FULL, SAFE, NAMESPACED VERSION
+   No resets. No global overrides. No collisions.
 =============================================================== */
 
-.header-standard * {
-    all: revert !important;
-    box-sizing: border-box;
-}
-
-/* Wrapper must be block */
+/* WRAPPER */
 .header-standard {
-    display: block;
     width: 100%;
     position: relative;
     z-index: 9999;
+    font-family: system-ui, sans-serif;
 }
 
 /* ============================================================
-   HERO BACKGROUND — MATCH INDEX EXACTLY
+   HERO BANNER
 =============================================================== */
 
 .header-standard .hs-hero-banner {
@@ -28,12 +23,7 @@
     filter: brightness(1.15);
     padding: 60px 20px 160px;
     color: #fff;
-    position: relative;
 }
-
-/* ============================================================
-   HERO LAYOUT (DESKTOP + iPad)
-=============================================================== */
 
 .header-standard .hs-hero-inner {
     max-width: 1200px;
@@ -73,17 +63,17 @@
 }
 
 /* ============================================================
-   NAVIGATION WRAPPER
+   NAVIGATION
 =============================================================== */
 
 .header-standard .hs-nav-wrapper {
-    margin-top: -120px; /* Pull nav into hero visually */
+    margin-top: -120px; /* Pull nav visually into hero */
     position: relative;
     z-index: 10000;
 }
 
 .header-standard .hs-nav-scroll {
-    overflow-x: auto !important;
+    overflow-x: auto;
     white-space: nowrap;
     padding-bottom: 10px;
     -webkit-overflow-scrolling: touch;
@@ -106,10 +96,11 @@
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
+    font-size: 0.95rem;
 }
 
 /* ============================================================
-   MEGA MENU — MULTI‑COLUMN VERSION
+   MEGA MENU — MULTI‑COLUMN
 =============================================================== */
 
 .header-standard .hs-nav-item {
@@ -173,6 +164,11 @@
     position: relative;
 }
 
+.header-standard .search-icon {
+    cursor: pointer;
+    color: #fff;
+}
+
 .header-standard .hs-search-input {
     display: none;
     background: rgba(255,255,255,0.15);
@@ -205,6 +201,7 @@
     border: none;
     padding: 6px 10px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 /* ============================================================
@@ -225,10 +222,6 @@
 
     .header-standard .hs-hero-right {
         justify-content: center;
-    }
-
-    .header-standard .hs-hero-photo {
-        margin-top: 10px;
     }
 
     .header-standard .hs-nav-menu {

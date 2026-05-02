@@ -7,6 +7,7 @@
 
 <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="header-standard.css?v=3001">
 
 
 <!-- PAGE‑SPECIFIC CSS -->
@@ -37,7 +38,7 @@ body.page-certifications {
     max-width: 720px;
 }
 
-/* PAGE CONTAINER */
+/* ⭐ FIX 1 — Correct card width + centering */
 .page-certifications .page-container {
     max-width: 960px;
     margin: 0 auto;
@@ -103,31 +104,63 @@ body.page-certifications {
     background: var(--accent);
 }
 
+/* ⭐ FIX 2 — Correct header → body spacing */
+/* Desktop */
+.page-container {
+    padding-top: 260px;
+}
+
+@media (max-width: 700px) {
+    .header-standard .hs-nav-wrapper {
+        margin-top: -160px;
+    }
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+    .header-standard .hs-nav-wrapper {
+        margin-top: -200px;
+    }
+}
+@media (min-width: 701px) and (max-width: 1024px) {
+    .page-container {
+        padding-top: 420px;
+    }
+}
+
 </style>
-<link rel="stylesheet" href="header-standard.css?v=9999">
+
 </head>
 
 <body class="page-certifications">
 
-<!-- HEADER -->
+<!-- ⭐ HEADER MUST BE OUTSIDE ALL PAGE LAYOUT WRAPPERS -->
 <div id="header-placeholder"></div>
 
+<!-- HEADER JS -->
 <script src="header-standard.js?v=1001"></script>
+
+<!-- INJECT HEADER AFTER DOM + CSS -->
 
 <script>
 fetch("header-standard.html?v=2001")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      requestAnimationFrame(() => requestAnimationFrame(() => initHeader()));
+      const placeholder = document.getElementById("header-placeholder");
+      placeholder.innerHTML = h;
+
+      // Wait for the browser to render the injected HTML
+      requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+              initHeader();
+          });
+      });
   });
 </script>
 
-<!-- ⭐ LOAD HEADER CSS HERE (AFTER INJECTION) -->
+
+<!-- ⭐ PAGE LAYOUT STARTS HERE -->
 
 
-
-<!-- PAGE CONTENT -->
 <main class="page-container">
 
 <section class="hero-section">
@@ -191,6 +224,8 @@ fetch("header-standard.html?v=2001")
 
 </main>
 
+
+
 <!-- FLOATING BUTTONS -->
 <div id="fab" class="fab">⬆️</div>
 <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
@@ -217,6 +252,9 @@ if (faqSearch) {
   });
 }
 </script>
+
+
+
 
 </body>
 </html>

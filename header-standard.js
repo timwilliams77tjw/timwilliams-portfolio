@@ -1,20 +1,53 @@
 /* ==================================================
-   header-standard.js
-   UPDATED FOR hs-* CLASS NAMES
+   header-standard.js — FINAL VERSION WITH PORTAL
+   Fixes iPhone/iPad clipping by moving mega menus
+   outside the scroll container.
 ================================================== */
 
 function initHeader() {
 
     const body = document.body;
 
+    /* ==================================================
+       PORTAL CONTAINER (added in header-standard.html)
+    =================================================== */
+    const portal = document.querySelector(".hs-mega-portal");
+
+    /* ==================================================
+       CLOSE ALL MENUS
+    =================================================== */
     function closeAllMenus() {
         document.querySelectorAll(".hs-nav-item.open")
             .forEach(item => item.classList.remove("open"));
+
+        // Hide all mega menus in the portal
+        document.querySelectorAll(".hs-mega-menu").forEach(menu => {
+            menu.style.display = "none";
+        });
     }
 
-    /* ===========================
+    /* ==================================================
+       OPEN MEGA MENU (PORTAL LOGIC)
+    =================================================== */
+    function openMegaMenu(parent, menu) {
+
+        // Move menu into the portal container
+        portal.appendChild(menu);
+
+        // Get trigger position
+        const rect = parent.getBoundingClientRect();
+
+        // Position menu under trigger
+        menu.style.position = "absolute";
+        menu.style.top = rect.bottom + "px";
+        menu.style.left = rect.left + "px";
+        menu.style.display = "flex";
+        menu.style.zIndex = 999999;
+    }
+
+    /* ==================================================
        MENU TRIGGERS
-    =========================== */
+    =================================================== */
     const triggers = document.querySelectorAll(".hs-mega-trigger");
 
     triggers.forEach(btn => {
@@ -22,65 +55,44 @@ function initHeader() {
         btn.addEventListener("click", function(e){
 
             const parent = this.closest(".hs-nav-item");
-            if (!parent) return;
+            const menu = parent.querySelector(".hs-mega-menu");
+            if (!parent || !menu) return;
 
-            /* MOBILE + TABLET */
-            if (window.innerWidth <= 1024) {
-
-                e.preventDefault();
-                e.stopPropagation();
-
-                const alreadyOpen =
-                    parent.classList.contains("open");
-
-                closeAllMenus();
-
-                if (!alreadyOpen) {
-                    setTimeout(() => {
-                        parent.classList.add("open");
-                    }, 10);
-                }
-
-                return;
-            }
-
-            /* DESKTOP CLICK SUPPORT */
             e.preventDefault();
+            e.stopPropagation();
 
-            const alreadyOpen =
-                parent.classList.contains("open");
+            const alreadyOpen = parent.classList.contains("open");
 
             closeAllMenus();
 
             if (!alreadyOpen) {
                 parent.classList.add("open");
+                openMegaMenu(parent, menu);
             }
-
         });
 
     });
 
-    /* ===========================
-       CLOSE OUTSIDE CLICK
-    =========================== */
+    /* ==================================================
+       CLOSE ON OUTSIDE CLICK
+    =================================================== */
     document.addEventListener("click", e => {
         if (!e.target.closest(".hs-nav-item")) {
             closeAllMenus();
         }
     });
 
-    /* ===========================
+    /* ==================================================
        CLOSE ON RESIZE
-    =========================== */
+    =================================================== */
     window.addEventListener("resize", closeAllMenus);
 
-    /* ===========================
+    /* ==================================================
        CLOSE ON PAGE SCROLL
-    =========================== */
+    =================================================== */
     let lastScroll = window.scrollY;
 
     window.addEventListener("scroll", () => {
-
         const current = window.scrollY;
 
         if (Math.abs(current - lastScroll) > 20) {
@@ -90,9 +102,9 @@ function initHeader() {
         lastScroll = current;
     });
 
-    /* ===========================
+    /* ==================================================
        SEARCH
-    =========================== */
+    =================================================== */
     const icon = document.getElementById("searchIcon");
     const input = document.getElementById("siteSearchInput");
     const results = document.getElementById("searchResults");
@@ -100,9 +112,7 @@ function initHeader() {
     if (icon && input) {
 
         icon.addEventListener("click", e => {
-
             e.stopPropagation();
-
             input.classList.toggle("open");
 
             if (input.classList.contains("open")) {
@@ -110,27 +120,20 @@ function initHeader() {
             } else if (results) {
                 results.style.display = "none";
             }
-
         });
 
         document.addEventListener("click", e => {
-
             if (!e.target.closest(".hs-search-wrapper")) {
                 input.classList.remove("open");
-
-                if (results) {
-                    results.style.display = "none";
-                }
+                if (results) results.style.display = "none";
             }
-
         });
     }
 
-    /* ===========================
+    /* ==================================================
        DARK MODE
-    =========================== */
-    const darkBtn =
-        document.getElementById("darkToggleHeader");
+    =================================================== */
+    const darkBtn = document.getElementById("darkToggleHeader");
 
     if (darkBtn) {
 
@@ -139,16 +142,11 @@ function initHeader() {
         }
 
         darkBtn.addEventListener("click", () => {
-
             body.classList.toggle("dark-mode");
-
             localStorage.setItem(
                 "tw_dark",
-                body.classList.contains("dark-mode")
-                    ? "1"
-                    : "0"
+                body.classList.contains("dark-mode") ? "1" : "0"
             );
-
         });
     }
 }

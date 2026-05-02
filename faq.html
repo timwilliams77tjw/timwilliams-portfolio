@@ -7,7 +7,7 @@
 
 <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css?v=20001">
-<link rel="stylesheet" href="header-standard.css?v=10001">
+<link rel="stylesheet" href="header-standard.css?v=30010">
    <link rel="stylesheet" href="faq.css?v=1">
 
 </head>
@@ -18,7 +18,7 @@
 <div id="header-placeholder"></div>
 
 <script>
-fetch("header-standard.html?v=30003")   // ← VERSIONED HTML
+fetch("header-standard.html?v=30010")   // ← VERSIONED HTML
   .then(r => r.text())
   .then(h => {
       const placeholder = document.getElementById("header-placeholder");
@@ -26,7 +26,7 @@ fetch("header-standard.html?v=30003")   // ← VERSIONED HTML
 
       // Load JS AFTER header is injected
       const script = document.createElement("script");
-      script.src = "header-standard.js?v=30003";  // ← VERSIONED JS
+      script.src = "header-standard.js?v=30010";  // ← VERSIONED JS
       script.onload = () => {
           requestAnimationFrame(() => {
               initHeader();

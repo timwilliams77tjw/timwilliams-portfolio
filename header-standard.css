@@ -1,6 +1,5 @@
 /* ============================================================
-   HEADER STANDARD — FULL, SAFE, NAMESPACED VERSION
-   No resets. No global overrides. No collisions.
+   HEADER STANDARD — CLEAN, SAFE, FINAL VERSION
 =============================================================== */
 
 /* WRAPPER */
@@ -72,10 +71,11 @@
     z-index: 10000;
 }
 
+/* SCROLL CONTAINER — FINAL, CORRECT VERSION */
 .header-standard .hs-nav-scroll {
     display: block;
     overflow-x: auto;
-    overflow-y: visible; /* allow dropdown height on mobile/tablet */
+    overflow-y: visible; /* allows dropdowns to extend downward */
     white-space: nowrap;
     padding-bottom: 10px;
     padding-right: 50px;
@@ -85,6 +85,7 @@
     z-index: 10;
 }
 
+/* NAV MENU */
 .header-standard .hs-nav-menu {
     display: flex;
     gap: 12px;
@@ -231,16 +232,13 @@
         justify-content: center;
     }
 
-.header-standard .hs-nav-menu {
-    justify-content: flex-start;
-}
-
+    /* FIX: allow full left/right scroll */
+    .header-standard .hs-nav-menu {
+        justify-content: flex-start;
+    }
 
     /* Mega menu alignment on mobile */
     .header-standard .hs-mega-menu {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 20px;
         left: 0;
         transform: none;
     }
@@ -266,7 +264,8 @@
         padding-left: 20px !important;
     }
 
+    /* Prevent right‑side clipping */
     .header-standard .hs-nav-scroll {
-        padding-right: 80px; /* was 50px */
+        padding-right: 80px;
     }
 }

@@ -18,7 +18,7 @@
 <div id="header-placeholder"></div>
 
 <script>
-fetch("header-standard.html?v=20001")
+fetch("header-standard.html?v=30003")   // ← VERSIONED HTML
   .then(r => r.text())
   .then(h => {
       const placeholder = document.getElementById("header-placeholder");
@@ -26,7 +26,7 @@ fetch("header-standard.html?v=20001")
 
       // Load JS AFTER header is injected
       const script = document.createElement("script");
-      script.src = "header-standard.js?v=30001";
+      script.src = "header-standard.js?v=30003";  // ← VERSIONED JS
       script.onload = () => {
           requestAnimationFrame(() => {
               initHeader();
@@ -35,6 +35,7 @@ fetch("header-standard.html?v=20001")
       document.body.appendChild(script);
   });
 </script>
+
 
 <!-- ⭐ PAGE LAYOUT STARTS HERE -->
 

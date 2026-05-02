@@ -7,7 +7,7 @@
 
 <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">
-<link rel="stylesheet" href="header-standard.css?v=9999">
+
 
 <!-- PAGE‑SPECIFIC CSS -->
 <style>
@@ -118,16 +118,14 @@ body.page-certifications {
 fetch("header-standard.html?v=2001")
   .then(r => r.text())
   .then(h => {
-      const placeholder = document.getElementById("header-placeholder");
-      placeholder.innerHTML = h;
-
-      requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-              initHeader();
-          });
-      });
+      document.getElementById("header-placeholder").innerHTML = h;
+      requestAnimationFrame(() => requestAnimationFrame(() => initHeader()));
   });
 </script>
+
+<!-- ⭐ LOAD HEADER CSS HERE (AFTER INJECTION) -->
+<link rel="stylesheet" href="header-standard.css?v=9999">
+
 
 <!-- PAGE CONTENT -->
 <main class="page-container">

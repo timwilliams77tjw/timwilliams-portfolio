@@ -258,7 +258,7 @@
 .header-standard .hs-nav-scroll {
     display: block;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
@@ -311,8 +311,20 @@
     position: relative;
     z-index: 10;
 }
-.header-standard .hs-nav-wrapper,
-.header-standard .hs-nav-scroll,
-.header-standard .hs-nav-menu {
-    overflow: visible !important;
+/* Mobile + tablet: mega menus flow below buttons instead of overlaying */
+@media (max-width: 1024px) {
+
+    .header-standard .hs-mega-menu {
+        position: static;
+        top: auto;
+        left: auto;
+        box-shadow: none;
+        border-radius: 0;
+        margin-top: 8px;
+        width: 100%;
+    }
+
+    .header-standard .hs-mega-menu .hs-mega-column {
+        min-width: 0;
+    }
 }

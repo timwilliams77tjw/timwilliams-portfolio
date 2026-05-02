@@ -158,6 +158,49 @@ body.page-certifications {
     -webkit-overflow-scrolling: touch;
     padding-right: 40px; /* ensures last button is reachable */
 }
+/* ------------------------------------------
+   1) Correct header → body spacing (all devices)
+------------------------------------------- */
+.page-container {
+    padding-top: 260px !important;
+}
+
+/* iPad only — correct spacing */
+@media (min-width: 701px) and (max-width: 1024px) {
+    .page-container {
+        padding-top: 300px !important;
+    }
+}
+
+/* ------------------------------------------
+   2) iPad nav alignment (align under hero text)
+------------------------------------------- */
+@media (min-width: 701px) and (max-width: 1024px) {
+    .header-standard .hs-nav-wrapper {
+        padding-left: 20px !important;
+        margin-top: -120px !important; /* matches hero pull-up */
+    }
+}
+
+/* ------------------------------------------
+   3) Fix nav clipping (iPhone + iPad)
+------------------------------------------- */
+.header-standard .hs-nav-menu,
+.header-standard .hs-nav-scroll,
+.header-standard .hs-nav-wrapper {
+    overflow: visible !important;
+}
+
+/* ------------------------------------------
+   4) Restore full iPhone scroll
+------------------------------------------- */
+.header-standard .hs-nav-scroll {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 40px;
+}
 
 </style>
 

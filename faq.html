@@ -168,6 +168,54 @@ body.page-certifications {
 .sticky-follow {
     background: var(--accent);
 }
+/* ============================================================
+   FINAL HEADER FIXES — iPhone + iPad + Desktop
+   ============================================================ */
+
+/* Desktop body spacing */
+.page-container {
+    padding-top: 220px !important;
+}
+
+/* iPhone — slight gap under profile photo */
+@media (max-width: 700px) {
+    .header-standard .hs-nav-wrapper {
+        margin-top: -135px !important;
+    }
+    .page-container {
+        padding-top: 240px !important;
+    }
+}
+
+/* iPad — slight gap under header text + left alignment */
+@media (min-width: 701px) and (max-width: 1024px) {
+    .header-standard .hs-nav-wrapper {
+        margin-top: -140px !important;
+        padding-left: 20px !important;
+    }
+    .page-container {
+        padding-top: 260px !important;
+    }
+}
+
+/* ============================================================
+   NAV SCROLL + CLIPPING FIXES
+   ============================================================ */
+
+.header-standard .hs-nav-scroll {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 50px !important;
+    position: relative;
+    z-index: 10;
+}
+
+.header-standard .hs-nav-menu,
+.header-standard .hs-nav-wrapper {
+    overflow: visible !important;
+}
 
 </style>
 

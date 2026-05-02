@@ -1,5 +1,5 @@
 /* ============================================================
-   HEADER STANDARD — CLEAN, SAFE, NAMESPACED VERSION
+   HEADER STANDARD — FULL, SAFE, NAMESPACED VERSION
    No resets. No global overrides. No collisions.
 =============================================================== */
 
@@ -9,7 +9,6 @@
     position: relative;
     z-index: 9999;
     font-family: system-ui, sans-serif;
-    display: block;
 }
 
 /* ============================================================
@@ -24,7 +23,6 @@
     filter: brightness(1.15);
     padding: 60px 20px 160px;
     color: #fff;
-    display: block;
 }
 
 .header-standard .hs-hero-inner {
@@ -68,32 +66,22 @@
    NAVIGATION
 =============================================================== */
 
-/* Desktop-only negative margin */
-@media (min-width: 701px) {
-    .header-standard .hs-nav-wrapper {
-        margin-top: -120px;
-    }
-}
-
 .header-standard .hs-nav-wrapper {
+    margin-top: -120px; /* Pull nav visually into hero */
     position: relative;
     z-index: 10000;
-    width: 100%;
-    display: block;
 }
 
-/* Scroll container — iPhone safe */
+
 .header-standard .hs-nav-scroll {
     display: block;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    padding-bottom: 10px;
+       padding-bottom: 10px;
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
 }
 
-/* Menu row */
 .header-standard .hs-nav-menu {
     display: flex;
     gap: 12px;
@@ -240,16 +228,16 @@
     }
 
     .header-standard .hs-nav-menu {
-        justify-content: flex-start;
+        justify-content: center;
     }
 
-    /* Correct iPhone mega menu alignment */
+    /* Multi‑column even on mobile */
     .header-standard .hs-mega-menu {
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 20px;
-        left: 0;
-        transform: none;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
@@ -262,61 +250,41 @@
         justify-content: flex-start !important;
     }
 }
+.header-standard,
+.header-standard * {
+    overflow: visible !important;
+}
+/* iPhone nav scroll fix */
+.header-standard .hs-nav-scroll {
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
 
-/* ============================================================
-   SAFARI FIXES
-=============================================================== */
-
-/* Ensure placeholder behaves like a real block */
-#header-placeholder {
+/* iPhone mega menu alignment fix */
+@media (max-width: 700px) {
+    .header-standard .hs-mega-menu {
+        left: 0;
+        transform: none;
+    }
+}
+/* Fix header height + Safari phantom spacing */
+.header-standard {
     display: block;
     width: 100%;
+    overflow: visible !important;
 }
-@media (max-width: 700px) {
 
-    /* Reduce hero height */
-    .header-standard .hs-hero-banner {
-        padding: 40px 20px 120px;
-    }
-
-    /* Pull nav up into correct position */
-    .header-standard .hs-nav-wrapper {
-        margin-top: -140px;
-    }
+.header-standard .hs-hero-banner {
+    display: block;
 }
-@media (min-width: 701px) and (max-width: 1200px) {
 
-    /* Reduce hero height */
-    .header-standard .hs-hero-banner {
-        padding: 50px 20px 140px;
-    }
-
-    /* Pull nav up */
-    .header-standard .hs-nav-wrapper {
-        margin-top: -180px;
-    }
-}
-@media (max-width: 700px) {
-
-    /* Reduce hero height */
-    .header-standard .hs-hero-banner {
-        padding: 40px 20px 110px;
-    }
-
-    /* Correct nav position */
-    .header-standard .hs-nav-wrapper {
-        margin-top: -130px;
-    }
-}
-@media (min-width: 700px) and (max-width: 1200px) {
-
-    /* Reduce hero height */
-    .header-standard .hs-hero-banner {
-        padding: 50px 20px 130px;
-    }
-
-    /* Correct nav position */
-    .header-standard .hs-nav-wrapper {
-        margin-top: -170px;
-    }
+/* Fix iPhone nav scroll being blocked by parent overflow */
+.header-standard .hs-nav-wrapper,
+.header-standard .hs-nav-scroll,
+.header-standard .hs-nav-menu {
+    overflow: visible !important;
 }

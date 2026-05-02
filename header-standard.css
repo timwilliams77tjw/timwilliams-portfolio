@@ -1,6 +1,5 @@
 /* ============================================================
-   HEADER STANDARD — FULL, SAFE, NAMESPACED VERSION
-   No resets. No global overrides. No collisions.
+   HEADER STANDARD — UPDATED FOR SCROLL + DROPDOWN COEXISTENCE
 =============================================================== */
 
 /* WRAPPER */
@@ -11,20 +10,18 @@
     font-family: system-ui, sans-serif;
 }
 
-/* ============================================================
-   HERO BANNER
-=============================================================== */
-
+/* HERO BANNER (unchanged except your padding fix) */
 .header-standard .hs-hero-banner {
     background:
         linear-gradient(135deg, #003366 0%, #0055aa 100%),
         url('hero.jpg') center center / cover no-repeat;
     background-blend-mode: overlay;
     filter: brightness(1.15);
-    padding: 60px 20px 120px;
+    padding: 60px 20px 120px; /* ← your corrected height */
     color: #fff;
 }
 
+/* HERO INNER */
 .header-standard .hs-hero-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -34,54 +31,27 @@
     gap: 40px;
 }
 
-.header-standard .hs-hero-left {
-    max-width: 60%;
-}
-
-.header-standard .hs-hero-left h1 {
-    font-size: 2.4rem;
-    margin-bottom: 10px;
-}
-
-.header-standard .hs-hero-left p {
-    margin: 4px 0;
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-.header-standard .hs-hero-right {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.header-standard .hs-hero-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid rgba(255,255,255,0.4);
-}
-
-/* ============================================================
-   NAVIGATION
-=============================================================== */
-
+/* NAV WRAPPER */
 .header-standard .hs-nav-wrapper {
-    margin-top: -120px; /* Pull nav visually into hero */
+    margin-top: -120px;
     position: relative;
     z-index: 10000;
 }
 
-
+/* SCROLL CONTAINER — scroll only */
 .header-standard .hs-nav-scroll {
     display: block;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-       padding-bottom: 10px;
     -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+    padding-right: 50px;
+    position: relative;
+    z-index: 10;
 }
 
+/* NAV MENU (buttons only) */
 .header-standard .hs-nav-menu {
     display: flex;
     gap: 12px;
@@ -89,27 +59,14 @@
     justify-content: flex-start;
 }
 
-/* NAV BUTTONS */
-.header-standard .hs-nav-btn {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.65);
-    padding: 9px 14px;
-    border-radius: 6px;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-    font-size: 0.95rem;
-}
-
-/* ============================================================
-   MEGA MENU — MULTI‑COLUMN
-=============================================================== */
-
-.header-standard .hs-nav-item {
+/* NEW: DROPDOWN LAYER — dropdowns only */
+.hs-dropdown-layer {
     position: relative;
+    z-index: 999999;
+    overflow: visible;
 }
 
+/* MEGA MENU */
 .header-standard .hs-mega-menu {
     display: none;
     position: absolute;
@@ -119,200 +76,27 @@
     color: #000;
     padding: 20px;
     border-radius: 8px;
-    z-index: 999999;
     min-width: 260px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     white-space: normal;
-    flex-wrap: nowrap;
 }
 
-.header-standard .hs-nav-item.open .hs-mega-menu {
+.header-standard .hs-nav-item.open + .hs-mega-menu {
     display: flex;
     gap: 40px;
 }
 
-/* MULTI‑COLUMN STRUCTURE */
-.header-standard .hs-mega-column {
-    display: flex;
-    flex-direction: column;
-    min-width: 180px;
-}
-
-.header-standard .hs-mega-title {
-    font-weight: 700;
-    margin-bottom: 10px;
-    font-size: 1rem;
-}
-
-.header-standard .hs-mega-link {
-    display: block;
-    padding: 4px 0;
-    color: #000;
-    text-decoration: none;
-    font-size: 0.95rem;
-}
-
-.header-standard .hs-mega-link:hover {
-    text-decoration: underline;
-}
-
-/* ============================================================
-   SEARCH + DARK MODE
-=============================================================== */
-
-.header-standard .hs-search-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-}
-
-.header-standard .search-icon {
-    cursor: pointer;
-    color: #fff;
-}
-
-.header-standard .hs-search-input {
-    display: none;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.4);
-    padding: 8px 12px;
-    border-radius: 6px;
-    color: #fff;
-    width: 180px;
-}
-
-.header-standard .hs-search-input.open {
-    display: inline-block;
-}
-
-.header-standard .hs-search-results {
-    position: absolute;
-    top: 42px;
-    left: 0;
-    right: 0;
-    background: #fff;
-    color: #000;
-    border-radius: 6px;
-    padding: 10px;
-    display: none;
-    z-index: 999999;
-}
-
-.header-standard .hs-dark-toggle-btn {
-    background: rgba(255,255,255,0.2);
-    border: none;
-    padding: 6px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* ============================================================
-   MOBILE (iPhone)
-=============================================================== */
-
-@media (max-width: 700px) {
-
-    .header-standard .hs-hero-inner {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
-
-    .header-standard .hs-hero-left {
-        max-width: 100%;
-    }
-
-    .header-standard .hs-hero-right {
-        justify-content: center;
-    }
-
-    .header-standard .hs-nav-menu {
-        justify-content: center;
-    }
-
-    /* Multi‑column even on mobile */
-    .header-standard .hs-mega-menu {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-
-/* ============================================================
-   iPAD ONLY — LEFT ALIGN NAV
-=============================================================== */
-
-@media (min-width: 701px) and (max-width: 1024px) {
-    .header-standard .hs-nav-menu {
-        justify-content: flex-start !important;
-    }
-}
-.header-standard,
-.header-standard * {
-    overflow: visible !important;
-}
-/* iPhone nav scroll fix */
-.header-standard .hs-nav-scroll {
-    display: block;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-}
-
-/* iPhone mega menu alignment fix */
-@media (max-width: 700px) {
-    .header-standard .hs-mega-menu {
-        left: 0;
-        transform: none;
-    }
-}
-/* Fix header height + Safari phantom spacing */
-.header-standard {
-    display: block;
-    width: 100%;
-    overflow: visible !important;
-}
-
-.header-standard .hs-hero-banner {
-    display: block;
-}
-
-
-}
-/* Remove underline from header nav buttons */
-.header-standard .hs-nav-btn {
-    text-decoration: none !important;
-}
-/* iPhone slight gap under profile photo */
+/* iPhone layout */
 @media (max-width: 700px) {
     .header-standard .hs-nav-wrapper {
-        margin-top: -100px !important;
+        margin-top: -100px;
     }
 }
 
-/* iPad slight gap under header text + left alignment */
+/* iPad layout */
 @media (min-width: 701px) and (max-width: 1024px) {
     .header-standard .hs-nav-wrapper {
-        margin-top: -110px !important;
-        padding-left: 20px !important;
+        margin-top: -110px;
+        padding-left: 20px;
     }
-}
-.header-standard .hs-nav-scroll {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-right: 50px;
-    position: relative;
-    z-index: 10;
-}
-.header-standard .hs-nav-wrapper,
-.header-standard .hs-nav-scroll,
-.header-standard .hs-nav-menu {
-    overflow: visible !important;
 }

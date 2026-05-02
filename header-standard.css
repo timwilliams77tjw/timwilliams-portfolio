@@ -282,13 +282,32 @@
     display: block;
 }
 
-/* Fix iPhone nav scroll being blocked by parent overflow */
-.header-standard .hs-nav-wrapper,
-.header-standard .hs-nav-scroll,
-.header-standard .hs-nav-menu {
-    overflow: visible !important;
+
 }
 /* Remove underline from header nav buttons */
 .header-standard .hs-nav-btn {
     text-decoration: none !important;
+}
+/* iPhone slight gap under profile photo */
+@media (max-width: 700px) {
+    .header-standard .hs-nav-wrapper {
+        margin-top: -100px !important;
+    }
+}
+
+/* iPad slight gap under header text + left alignment */
+@media (min-width: 701px) and (max-width: 1024px) {
+    .header-standard .hs-nav-wrapper {
+        margin-top: -110px !important;
+        padding-left: 20px !important;
+    }
+}
+.header-standard .hs-nav-scroll {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 50px;
+    position: relative;
+    z-index: 10;
 }

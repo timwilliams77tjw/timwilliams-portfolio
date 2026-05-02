@@ -21,7 +21,7 @@
         url('hero.jpg') center center / cover no-repeat;
     background-blend-mode: overlay;
     filter: brightness(1.15);
-    padding: 60px 20px 120px;
+    padding: 60px 20px 120px; /* corrected bottom padding */
     color: #fff;
 }
 
@@ -67,19 +67,22 @@
 =============================================================== */
 
 .header-standard .hs-nav-wrapper {
-    margin-top: -120px; /* Pull nav visually into hero */
+    margin-top: -120px; /* desktop pull into hero */
     position: relative;
     z-index: 10000;
 }
 
-
 .header-standard .hs-nav-scroll {
     display: block;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible; /* allow dropdown height on mobile/tablet */
     white-space: nowrap;
-       padding-bottom: 10px;
+    padding-bottom: 10px;
+    padding-right: 50px;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    position: relative;
+    z-index: 10;
 }
 
 .header-standard .hs-nav-menu {
@@ -100,6 +103,7 @@
     cursor: pointer;
     white-space: nowrap;
     font-size: 0.95rem;
+    text-decoration: none !important;
 }
 
 /* ============================================================
@@ -231,13 +235,18 @@
         justify-content: center;
     }
 
-    /* Multi‑column even on mobile */
+    /* Mega menu alignment on mobile */
     .header-standard .hs-mega-menu {
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 0;
+        transform: none;
+    }
+
+    /* Slight gap under profile photo */
+    .header-standard .hs-nav-wrapper {
+        margin-top: -100px !important;
     }
 }
 
@@ -246,72 +255,22 @@
 =============================================================== */
 
 @media (min-width: 701px) and (max-width: 1024px) {
+
     .header-standard .hs-nav-menu {
         justify-content: flex-start !important;
     }
-}
-.header-standard,
-.header-standard * {
-    overflow: visible !important;
-}
-/* iPhone nav scroll fix */
-.header-standard .hs-nav-scroll {
-    display: block;
-    overflow-x: auto;
-    overflow-y: visible;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-}
 
-/* iPhone mega menu alignment fix */
-@media (max-width: 700px) {
-    .header-standard .hs-mega-menu {
-        left: 0;
-        transform: none;
-    }
-}
-/* Fix header height + Safari phantom spacing */
-.header-standard {
-    display: block;
-    width: 100%;
-    overflow: visible !important;
-}
-
-.header-standard .hs-hero-banner {
-    display: block;
-}
-
-
-}
-/* Remove underline from header nav buttons */
-.header-standard .hs-nav-btn {
-    text-decoration: none !important;
-}
-/* iPhone slight gap under profile photo */
-@media (max-width: 700px) {
-    .header-standard .hs-nav-wrapper {
-        margin-top: -100px !important;
-    }
-}
-
-/* iPad slight gap under header text + left alignment */
-@media (min-width: 701px) and (max-width: 1024px) {
     .header-standard .hs-nav-wrapper {
         margin-top: -110px !important;
         padding-left: 20px !important;
     }
 }
-.header-standard .hs-nav-scroll {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-right: 50px;
-    position: relative;
-    z-index: 10;
-}
-/* Mobile + tablet: mega menus flow below buttons instead of overlaying */
+
+/* ============================================================
+   MOBILE + TABLET: MEGA MENUS FLOW INSTEAD OF OVERLAY
+   (allows scroll + dropdown to coexist)
+=============================================================== */
+
 @media (max-width: 1024px) {
 
     .header-standard .hs-mega-menu {

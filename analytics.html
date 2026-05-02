@@ -9,6 +9,7 @@
 
 <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css?v=1">
+  <link rel="stylesheet" href="header-standard.css">
 
 <!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -162,17 +163,21 @@ th {
 </style>
 </head>
 
-<body>
+<body class="page-certifications">
 
 <!-- HEADER -->
-<div id="header"></div>
-<script src="global.js"></script>
+<div id="header-placeholder"></div>
+
+<!-- 1. Load the JS file FIRST -->
+<script src="header-standard.js"></script>
+
+<!-- 2. Inject the header HTML -->
 <script>
-fetch("header-standard.html")
+fetch("./header-standard.html")
   .then(r => r.text())
   .then(h => {
-    document.getElementById("header").innerHTML = h;
-    initGlobal();
+      document.getElementById("header-placeholder").innerHTML = h;
+      initHeader();
   });
 </script>
 

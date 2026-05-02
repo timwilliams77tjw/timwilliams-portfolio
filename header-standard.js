@@ -1,7 +1,7 @@
 /* ==================================================
    header-standard.js — FINAL VERSION
-   - Uses portal on tablet/desktop only
-   - Mobile keeps inline dropdowns (no portal)
+   Mobile/tablet = inline menus
+   Desktop = portal menus
 ================================================== */
 
 function initHeader() {
@@ -10,9 +10,9 @@ function initHeader() {
     const header = document.querySelector(".header-standard");
     const portal = document.querySelector(".hs-mega-portal");
 
-    /* ===========================
+    /* ==================================================
        CLOSE ALL MENUS
-    =========================== */
+    =================================================== */
     function closeAllMenus() {
         document.querySelectorAll(".hs-nav-item.open")
             .forEach(item => item.classList.remove("open"));
@@ -26,10 +26,11 @@ function initHeader() {
         });
     }
 
-    /* ===========================
-       OPEN MEGA MENU (PORTAL FOR TABLET/DESKTOP)
-    =========================== */
+    /* ==================================================
+       OPEN MEGA MENU (DESKTOP ONLY)
+    =================================================== */
     function openMegaMenuDesktop(parent, menu) {
+
         if (!header || !portal) return;
 
         // Move menu into portal
@@ -49,9 +50,9 @@ function initHeader() {
         menu.style.zIndex = 999999;
     }
 
-    /* ===========================
+    /* ==================================================
        MENU TRIGGERS
-    =========================== */
+    =================================================== */
     const triggers = document.querySelectorAll(".hs-mega-trigger");
 
     triggers.forEach(btn => {
@@ -66,18 +67,25 @@ function initHeader() {
             e.stopPropagation();
 
             const alreadyOpen = parent.classList.contains("open");
+
             closeAllMenus();
 
-            // MOBILE: keep menu inline, no portal
-            if (window.innerWidth <= 700) {
+            /* ==========================================
+               MOBILE + TABLET (≤1024px)
+               → NO PORTAL, inline dropdowns
+            ========================================== */
+            if (window.innerWidth <= 1024) {
                 if (!alreadyOpen) {
                     parent.classList.add("open");
-                    // CSS handles: .hs-nav-item.open .hs-mega-menu { display:flex; }
+                    // CSS handles display: flex
                 }
                 return;
             }
 
-            // TABLET / DESKTOP: use portal
+            /* ==========================================
+               DESKTOP (≥1025px)
+               → USE PORTAL
+            ========================================== */
             if (!alreadyOpen) {
                 parent.classList.add("open");
                 openMegaMenuDesktop(parent, menu);
@@ -87,23 +95,23 @@ function initHeader() {
 
     });
 
-    /* ===========================
+    /* ==================================================
        CLOSE ON OUTSIDE CLICK
-    =========================== */
+    =================================================== */
     document.addEventListener("click", e => {
         if (!e.target.closest(".hs-nav-item")) {
             closeAllMenus();
         }
     });
 
-    /* ===========================
+    /* ==================================================
        CLOSE ON RESIZE
-    =========================== */
+    =================================================== */
     window.addEventListener("resize", closeAllMenus);
 
-    /* ===========================
+    /* ==================================================
        CLOSE ON PAGE SCROLL
-    =========================== */
+    =================================================== */
     let lastScroll = window.scrollY;
 
     window.addEventListener("scroll", () => {
@@ -114,9 +122,9 @@ function initHeader() {
         lastScroll = current;
     });
 
-    /* ===========================
+    /* ==================================================
        SEARCH
-    =========================== */
+    =================================================== */
     const icon = document.getElementById("searchIcon");
     const input = document.getElementById("siteSearchInput");
     const results = document.getElementById("searchResults");
@@ -142,9 +150,9 @@ function initHeader() {
         });
     }
 
-    /* ===========================
+    /* ==================================================
        DARK MODE
-    =========================== */
+    =================================================== */
     const darkBtn = document.getElementById("darkToggleHeader");
 
     if (darkBtn) {

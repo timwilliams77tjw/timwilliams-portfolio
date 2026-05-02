@@ -1,6 +1,6 @@
 /* ============================================================
    HEADER STANDARD — UPDATED FOR SCROLL + DROPDOWN COEXISTENCE
-=============================================================== */
+   ============================================================ */
 
 /* WRAPPER */
 .header-standard {
@@ -10,18 +10,20 @@
     font-family: system-ui, sans-serif;
 }
 
-/* HERO BANNER (unchanged except your padding fix) */
+/* ============================================================
+   HERO BANNER
+   ============================================================ */
+
 .header-standard .hs-hero-banner {
     background:
         linear-gradient(135deg, #003366 0%, #0055aa 100%),
         url('hero.jpg') center center / cover no-repeat;
     background-blend-mode: overlay;
     filter: brightness(1.15);
-    padding: 60px 20px 120px; /* ← your corrected height */
+    padding: 60px 20px 120px; /* Corrected height */
     color: #fff;
 }
 
-/* HERO INNER */
 .header-standard .hs-hero-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -31,27 +33,59 @@
     gap: 40px;
 }
 
-/* NAV WRAPPER */
+.header-standard .hs-hero-left {
+    max-width: 60%;
+}
+
+.header-standard .hs-hero-left h1 {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+}
+
+.header-standard .hs-hero-left p {
+    margin: 4px 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.header-standard .hs-hero-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header-standard .hs-hero-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255,255,255,0.4);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
 .header-standard .hs-nav-wrapper {
-    margin-top: -120px;
+    margin-top: -120px; /* Default desktop pull-up */
     position: relative;
     z-index: 10000;
 }
 
-/* SCROLL CONTAINER — scroll only */
+/* SCROLL CONTAINER — BUTTONS ONLY */
 .header-standard .hs-nav-scroll {
     display: block;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
     padding-bottom: 10px;
     padding-right: 50px;
     position: relative;
     z-index: 10;
 }
 
-/* NAV MENU (buttons only) */
+/* NAV MENU */
 .header-standard .hs-nav-menu {
     display: flex;
     gap: 12px;
@@ -59,7 +93,24 @@
     justify-content: flex-start;
 }
 
-/* NEW: DROPDOWN LAYER — dropdowns only */
+/* NAV BUTTONS */
+.header-standard .hs-nav-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.65);
+    padding: 9px 14px;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    text-decoration: none !important;
+}
+
+/* ============================================================
+   NEW: DROPDOWN LAYER — DROPDOWNS ONLY
+   ============================================================ */
+
 .hs-dropdown-layer {
     position: relative;
     z-index: 999999;
@@ -81,22 +132,72 @@
     white-space: normal;
 }
 
-.header-standard .hs-nav-item.open + .hs-mega-menu {
+.header-standard .hs-mega-menu .hs-mega-column {
     display: flex;
-    gap: 40px;
+    flex-direction: column;
+    min-width: 180px;
 }
 
-/* iPhone layout */
+.header-standard .hs-mega-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.header-standard .hs-mega-link {
+    display: block;
+    padding: 4px 0;
+    color: #000;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.header-standard .hs-mega-link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   MOBILE (iPhone)
+   ============================================================ */
+
 @media (max-width: 700px) {
+
+    .header-standard .hs-hero-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .header-standard .hs-hero-left {
+        max-width: 100%;
+    }
+
+    .header-standard .hs-hero-right {
+        justify-content: center;
+    }
+
+    .header-standard .hs-nav-menu {
+        justify-content: center;
+    }
+
+    /* Correct nav position under profile photo */
     .header-standard .hs-nav-wrapper {
-        margin-top: -100px;
+        margin-top: -100px !important;
     }
 }
 
-/* iPad layout */
+/* ============================================================
+   iPAD ONLY — LEFT ALIGN NAV + CORRECT GAP
+   ============================================================ */
+
 @media (min-width: 701px) and (max-width: 1024px) {
+
     .header-standard .hs-nav-wrapper {
-        margin-top: -110px;
-        padding-left: 20px;
+        margin-top: -110px !important;
+        padding-left: 20px !important; /* Align with hero text */
+    }
+
+    .header-standard .hs-nav-menu {
+        justify-content: flex-start !important;
     }
 }

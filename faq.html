@@ -17,28 +17,24 @@
 <!-- ⭐ HEADER MUST BE OUTSIDE ALL PAGE LAYOUT WRAPPERS -->
 <div id="header-placeholder"></div>
 
-<!-- HEADER JS -->
-<script src="header-standard.js?v=20001"></script>
-
-
-<!-- INJECT HEADER AFTER DOM + CSS -->
-
 <script>
-fetch("header-standard.html")
+fetch("header-standard.html?v=20001")
   .then(r => r.text())
   .then(h => {
       const placeholder = document.getElementById("header-placeholder");
       placeholder.innerHTML = h;
 
-      // Wait for the browser to render the injected HTML
-      requestAnimationFrame(() => {
+      // Load JS AFTER header is injected
+      const script = document.createElement("script");
+      script.src = "header-standard.js?v=30001";
+      script.onload = () => {
           requestAnimationFrame(() => {
               initHeader();
           });
-      });
+      };
+      document.body.appendChild(script);
   });
 </script>
-
 
 <!-- ⭐ PAGE LAYOUT STARTS HERE -->
 

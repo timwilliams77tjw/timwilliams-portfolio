@@ -13,15 +13,18 @@
 <!-- PAGE‑SPECIFIC CSS -->
 <style>
 
-/* PAGE‑SPECIFIC CSS FOR FAQ PAGE */
+/* ============================================================
+   FAQ PAGE — CLEAN, CONFLICT‑FREE, DEVICE‑TUNED CSS
+   ============================================================ */
 
+/* Base page styling */
 body.page-certifications {
     background: var(--bg);
     color: var(--text-main);
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* HERO SECTION (scoped so it does NOT affect header) */
+/* Hero section */
 .page-certifications .hero-section {
     margin: 0 0 2rem;
 }
@@ -38,14 +41,70 @@ body.page-certifications {
     max-width: 720px;
 }
 
-/* ⭐ FIX 1 — Correct card width + centering */
+/* Page container */
 .page-certifications .page-container {
     max-width: 960px;
     margin: 0 auto;
     padding: 1.5rem 1.5rem 2rem;
 }
 
-/* SEARCH BAR */
+/* ============================================================
+   HEADER → BODY SPACING (corrected for all devices)
+   ============================================================ */
+
+/* Default (desktop + fallback) */
+.page-container {
+    padding-top: 240px !important;
+}
+
+/* iPad spacing */
+@media (min-width: 701px) and (max-width: 1024px) {
+    .page-container {
+        padding-top: 280px !important;
+    }
+}
+
+/* ============================================================
+   NAV WRAPPER POSITIONING (iPhone + iPad)
+   ============================================================ */
+
+/* iPhone — slight gap under profile photo */
+@media (max-width: 700px) {
+    .header-standard .hs-nav-wrapper {
+        margin-top: -150px !important;
+    }
+}
+
+/* iPad — slight gap under header text + left alignment */
+@media (min-width: 701px) and (max-width: 1024px) {
+    .header-standard .hs-nav-wrapper {
+        margin-top: -140px !important;
+        padding-left: 20px !important;
+    }
+}
+
+/* ============================================================
+   NAV SCROLL + CLIPPING FIXES (iPhone + iPad)
+   ============================================================ */
+
+.header-standard .hs-nav-menu,
+.header-standard .hs-nav-scroll,
+.header-standard .hs-nav-wrapper {
+    overflow: visible !important;
+}
+
+.header-standard .hs-nav-scroll {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 40px;
+}
+
+/* ============================================================
+   SEARCH BAR
+   ============================================================ */
+
 .search-bar-local {
     margin: 20px 0 30px;
 }
@@ -71,7 +130,10 @@ body.page-certifications {
     box-shadow: 0 0 0 3px rgba(0,120,255,0.15);
 }
 
-/* FAQ CARDS */
+/* ============================================================
+   FAQ CARDS
+   ============================================================ */
+
 .faq-card {
     background: var(--card-bg);
     padding: 1.25rem;
@@ -92,7 +154,10 @@ body.page-certifications {
     line-height: 1.5;
 }
 
-/* CTA SECTION */
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+
 .cta-section {
     text-align: center;
     margin-top: 3rem;
@@ -102,104 +167,6 @@ body.page-certifications {
 
 .sticky-follow {
     background: var(--accent);
-}
-
-/* ⭐ FIX 2 — Correct header → body spacing */
-/* Desktop */
-.page-container {
-    padding-top: 260px;
-}
-
-@media (max-width: 700px) {
-    .header-standard .hs-nav-wrapper {
-        margin-top: -160px;
-    }
-}
-
-@media (min-width: 701px) and (max-width: 1024px) {
-    .header-standard .hs-nav-wrapper {
-        margin-top: -200px;
-    }
-}
-@media (min-width: 701px) and (max-width: 1024px) {
-    .page-container {
-        padding-top: 420px;
-    }
-}
-
-/* Correct header spacing on ALL devices */
-.page-container {
-    padding-top: 280px !important;
-}
-
-/* iPad only — reduce the huge 420px padding */
-@media (min-width: 701px) and (max-width: 1024px) {
-    .page-container {
-        padding-top: 320px !important;
-    }
-}
-/* iPad nav alignment fix */
-@media (min-width: 701px) and (max-width: 1024px) {
-    .header-standard .hs-nav-wrapper {
-        padding-left: 24px !important;
-    }
-}
-/* Prevent nav clipping */
-.header-standard .hs-nav-menu,
-.header-standard .hs-nav-scroll,
-.header-standard .hs-nav-wrapper {
-    overflow: visible !important;
-}
-/* Full iPhone scroll width */
-.header-standard .hs-nav-scroll {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-right: 40px; /* ensures last button is reachable */
-}
-/* ------------------------------------------
-   1) Correct header → body spacing (all devices)
-------------------------------------------- */
-.page-container {
-    padding-top: 240px !important;
-}
-
-/* iPad only — correct spacing */
-@media (min-width: 701px) and (max-width: 1024px) {
-    .page-container {
-        padding-top: 280px !important;
-    }
-}
-
-/* ------------------------------------------
-   2) iPad nav alignment (align under hero text)
-------------------------------------------- */
-@media (min-width: 701px) and (max-width: 1024px) {
-    .header-standard .hs-nav-wrapper {
-        margin-top: -120px !important; /* match header-standard */
-        padding-left: 20px !important; /* align with hero text */
-    }
-}
-
-/* ------------------------------------------
-   3) Fix nav clipping (iPhone + iPad)
-------------------------------------------- */
-.header-standard .hs-nav-menu,
-.header-standard .hs-nav-scroll,
-.header-standard .hs-nav-wrapper {
-    overflow: visible !important;
-}
-
-/* ------------------------------------------
-   4) Restore full iPhone scroll
-------------------------------------------- */
-.header-standard .hs-nav-scroll {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-right: 40px;
 }
 
 </style>

@@ -126,16 +126,37 @@ body.page-certifications {
         padding-top: 420px;
     }
 }
-/* Fix header overlap */
+
+/* Correct header spacing on ALL devices */
 .page-container {
-    padding-top: 300px !important;
+    padding-top: 280px !important;
 }
 
-/* iPad nav alignment */
+/* iPad only — reduce the huge 420px padding */
+@media (min-width: 701px) and (max-width: 1024px) {
+    .page-container {
+        padding-top: 320px !important;
+    }
+}
+/* iPad nav alignment fix */
 @media (min-width: 701px) and (max-width: 1024px) {
     .header-standard .hs-nav-wrapper {
-        padding-left: 20px;
+        padding-left: 24px !important;
     }
+}
+/* Prevent nav clipping */
+.header-standard .hs-nav-menu,
+.header-standard .hs-nav-scroll,
+.header-standard .hs-nav-wrapper {
+    overflow: visible !important;
+}
+/* Full iPhone scroll width */
+.header-standard .hs-nav-scroll {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 40px; /* ensures last button is reachable */
 }
 
 </style>

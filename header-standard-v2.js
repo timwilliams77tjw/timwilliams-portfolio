@@ -1,4 +1,4 @@
-// version 40000 — includes mobile hamburger + submenus
+// version 40000 — includes mobile hamburger + submenus + fixed FAB wiring
 
 function initHeader() {
 
@@ -29,7 +29,7 @@ function initHeader() {
     });
 
     /* ============================================================
-       DESKTOP + IPAD MEGA MENU (unchanged)
+       DESKTOP + IPAD MEGA MENU
     ============================================================ */
 
     function closeAllMenus() {
@@ -74,11 +74,13 @@ function initHeader() {
 
             closeAllMenus();
 
+            // Mobile / iPhone behaviour
             if (window.innerWidth <= 1024) {
                 if (!alreadyOpen) parent.classList.add("open");
                 return;
             }
 
+            // Desktop / iPad behaviour
             if (!alreadyOpen) {
                 parent.classList.add("open");
                 openMegaMenuDesktop(parent, menu);
@@ -100,7 +102,7 @@ function initHeader() {
     });
 
     /* ============================================================
-       SEARCH + DARK MODE (unchanged)
+       SEARCH + DARK MODE
     ============================================================ */
     const icon = document.getElementById("searchIcon");
     const input = document.getElementById("siteSearchInput");
@@ -137,15 +139,17 @@ function initHeader() {
             );
         });
     }
-}
 
-window.initHeader = initHeader;
-
-document.addEventListener("DOMContentLoaded", () => {
+    /* ============================================================
+       FAB (BACK TO TOP) — FIXED
+       Must be inside initHeader() so it works on FAQ
+    ============================================================ */
     const fab = document.getElementById("fab");
     if (fab) {
         fab.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
-});
+}
+
+window.initHeader = initHeader;

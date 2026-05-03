@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- GLOBAL CSS -->
-<link rel="stylesheet" href="certifications.css?v=20001">
+<link rel="stylesheet" href="certifications.css">
 <link rel="stylesheet" href="header-standard-v2.css">
    <link rel="stylesheet" href="faq.css?v=1">
 
@@ -18,25 +18,17 @@
 <div id="header-placeholder"></div>
 
 <script>
-fetch("header-standard-v2.html")
-   // ← ABSOLUTE PATH
+   fetch("header-standard-v2.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
 
       const script = document.createElement("script");
-      script.src = "header-standard-v2.js";  // ← ABSOLUTE PATH
-script.onload = () => {
-    // Wait for the header HTML to be fully inserted
-    requestAnimationFrame(() => {
-        initHeader();
-    });
-};
-
+      script.src = "header-standard-v2.js";
+      script.onload = () => initHeader();
       document.body.appendChild(script);
   });
 </script>
-
 
 <!-- ⭐ PAGE LAYOUT STARTS HERE -->
 

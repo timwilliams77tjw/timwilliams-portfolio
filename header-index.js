@@ -1,6 +1,7 @@
 /* ============================================================
-   DESKTOP/IPAD NAV (your existing behaviour)
+   DESKTOP + IPAD NAV (unchanged)
 ============================================================ */
+
 function initHeaderNav() {
     const items = document.querySelectorAll("#header-content .nav-item");
 
@@ -12,53 +13,85 @@ function initHeaderNav() {
 }
 
 /* ============================================================
-   iPHONE-ONLY MOBILE MEGA-MENU
+   SEARCH FIELD TOGGLE (unchanged)
 ============================================================ */
-function initMobileMenu() {
-    const toggle = document.getElementById("mobileMenuToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
 
-    const navItems = document.querySelectorAll("#header-content .nav-item");
+function initSearchToggle() {
+    const toggle = document.getElementById("siteSearchToggle");
+    const input = document.getElementById("siteSearchInput");
 
-    navItems.forEach(item => {
-        const title = item.querySelector(".brand-btn").innerText;
-        const submenu = item.querySelector(".mega-menu");
-
-        const section = document.createElement("div");
-        section.className = "mobile-section-header";
-        section.innerHTML = `${title} <span>+</span>`;
-        mobileMenu.appendChild(section);
-
-        const sub = document.createElement("div");
-        sub.className = "mobile-submenu";
-
-        if (submenu) {
-            submenu.querySelectorAll("a").forEach(link => {
-                const a = document.createElement("a");
-                a.href = link.href;
-                a.innerText = link.innerText;
-                sub.appendChild(a);
-            });
-        }
-
-        mobileMenu.appendChild(sub);
-
-        section.addEventListener("click", () => {
-            sub.classList.toggle("open");
-            section.querySelector("span").innerText =
-                sub.classList.contains("open") ? "−" : "+";
-        });
-    });
+    if (!toggle || !input) return;
 
     toggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("open");
+        input.classList.toggle("open");
+        if (input.classList.contains("open")) {
+            input.focus();
+        }
     });
 }
 
 /* ============================================================
-   INITIALISE BOTH SYSTEMS
+   DARK MODE TOGGLE (unchanged)
 ============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
+
+function initDarkMode() {
+    const toggle = document.getElementById("darkModeToggle");
+    if (!toggle) return;
+
+    toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+    });
+}
+
+/* ============================================================
+   iPHONE MOBILE MENU — Handover Style
+   - Push-down menu
+   - Smooth slide-down
+   - Accordion behaviour
+============================================================ */
+
+function initMobileMenu() {
+    const toggle = document.getElementById("mobileMenuToggle");
+    const menu = document.getElementById("mobileMenu");
+
+    if (!toggle || !menu) return;
+
+    // Toggle entire mobile menu
+    toggle.addEventListener("click", () => {
+        menu.classList.toggle("open");
+    });
+
+    // Accordion behaviour
+    const triggers = menu.querySelectorAll(".hs-mobile-trigger");
+
+    triggers.forEach(trigger => {
+        trigger.addEventListener("click", () => {
+
+            // Close all other sections
+            triggers.forEach(other => {
+                if (other !== trigger) {
+                    other.nextElementSibling.classList.remove("open");
+                }
+            });
+
+            // Toggle this section
+            const sub = trigger.nextElementSibling;
+            sub.classList.toggle("open");
+        });
+    });
+}
+
+/* ============================================================
+   INITIALISE EVERYTHING
+   (Runs immediately after header injection)
+============================================================ */
+
+function initHeaderSystem() {
     initHeaderNav();
+    initSearchToggle();
+    initDarkMode();
     initMobileMenu();
-});
+}
+
+// Run immediately — header HTML is already injected
+initHeaderSystem();

@@ -176,20 +176,12 @@ function initHeader() {
 /* Global */
 window.initHeader = initHeader;
 
-/* Init */
+// FAB only — header init is handled by the fetch block
 document.addEventListener("DOMContentLoaded", () => {
-
-    initHeader();
-
     const fab = document.getElementById("fab");
-
     if (fab) {
         fab.addEventListener("click", () => {
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
-
 });

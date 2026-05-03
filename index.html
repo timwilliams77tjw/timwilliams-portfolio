@@ -284,22 +284,31 @@ overflow-y: visible !important;
 
 <!-- LOAD HEADER HTML + JS -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-    fetch("header-index.html?v=20260505")
-        .then(r => r.text())
-        .then(html => {
-            document.getElementById("header").innerHTML = html;
+    const response = await fetch("header-index.html?v=20260507");
+    const text = await response.text();
 
-            const s = document.createElement("script");
-            s.src = "header-index.js?v=20260505";
-            s.async = false;
+    // Parse HTML safely (Safari-friendly)
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/html");
 
-            document.body.appendChild(s);
-        });
+    // Extract the header content
+    const headerContent = doc.body.firstElementChild;
+
+    // Replace header container content
+    const headerContainer = document.getElementById("header");
+    headerContainer.replaceChildren(headerContent);
+
+    // Load JS in a Safari-safe way
+    const script = document.createElement("script");
+    script.src = "header-index.js?v=20260507";
+    script.defer = true;
+    document.body.appendChild(script);
 
 });
 </script>
+
 <!-- ============================
      MAIN CONTENT
 ============================ -->

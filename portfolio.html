@@ -74,20 +74,19 @@ display:none;
 <!-- HEADER INCLUDE -->
 <div id="header-placeholder"></div>
 
-<!-- HEADER JS -->
-<script src="header-standard.js" defer></script>
-
-<!-- INJECT HEADER AFTER DOM + CSS -->
 <script>
-window.addEventListener("DOMContentLoaded", () => {
-    fetch("./header-standard.html")
-      .then(r => r.text())
-      .then(h => {
-          document.getElementById("header-placeholder").innerHTML = h;
-          initHeader();
-      });
-});
+fetch("/header-standard.html?v=30020")
+  .then(r => r.text())
+  .then(h => {
+      document.getElementById("header-placeholder").innerHTML = h;
+
+      const script = document.createElement("script");
+      script.src = "/header-standard.js?v=30020";
+      script.onload = () => initHeader();
+      document.body.appendChild(script);
+  });
 </script>
+
 
 
 <div class="page-certifications">

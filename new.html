@@ -22,16 +22,17 @@
 <!-- ⭐ HEADER (SAME PATTERN AS FAQ) -->
 <div id="header-placeholder"></div>
 
-<script src="header-standard.js" defer></script>
 <script>
-window.addEventListener("DOMContentLoaded", () => {
-  fetch("./header-standard.html")
-    .then(r => r.text())
-    .then(h => {
+fetch("/header-standard.html?v=30020")
+  .then(r => r.text())
+  .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
-    });
-});
+
+      const script = document.createElement("script");
+      script.src = "/header-standard.js?v=30020";
+      script.onload = () => initHeader();
+      document.body.appendChild(script);
+  });
 </script>
 
 <!-- ⭐ PAGE LAYOUT STARTS HERE -->

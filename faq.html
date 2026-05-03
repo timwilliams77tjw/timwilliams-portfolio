@@ -18,13 +18,14 @@
 <div id="header-placeholder"></div>
 
 <script>
-fetch("/header-standard.html?v=30030")   // ← ABSOLUTE PATH
+fetch("/header-standard.html?v=40000")
+   // ← ABSOLUTE PATH
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
 
       const script = document.createElement("script");
-      script.src = "/header-standard.js?v=30010";  // ← ABSOLUTE PATH
+      script.src = "/header-standard.js?v=40000";  // ← ABSOLUTE PATH
       script.onload = () => initHeader();
       document.body.appendChild(script);
   });

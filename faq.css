@@ -207,5 +207,23 @@ body.page-certifications {
         padding-top: 0 !important;
     }
 }
+/* Force hamburger to show on iPhone */
+@media (max-width: 700px) {
+    .hs-hamburger {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure mobile menu container is visible */
+    #hsMobileMenu {
+        display: flex !important;
+    }
+
+    /* Ensure desktop nav isn't accidentally hidden AND hamburger suppressed */
+    .header-standard .hs-nav-wrapper {
+        display: none !important; /* keep desktop nav hidden on iPhone */
+    }
+}
 
 </style>

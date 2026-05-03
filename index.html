@@ -306,8 +306,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     script.defer = true;
     document.body.appendChild(script);
 
+    // ⭐ Force Safari to reflow header CSS AFTER injection
+    const headerCSS = document.querySelector('link[href*="header-index.css"]');
+    if (headerCSS) {
+        const newCSS = headerCSS.cloneNode();
+        newCSS.href = headerCSS.href.split('?')[0] + '?v=' + Date.now();
+        headerCSS.replaceWith(newCSS);
+    }
+
 });
 </script>
+
 
 <!-- ============================
      MAIN CONTENT

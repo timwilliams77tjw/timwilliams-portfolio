@@ -80,10 +80,10 @@
     overflow-x: auto !important;
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
+    white-space: nowrap !important;
     position: static !important;
 
-    /* CRITICAL: allow absolute-positioned mega menus to escape */
+    /* CRITICAL: allow mega-menu to escape */
     contain: none !important;
 
     /* Centre nav row on iPad */
@@ -99,8 +99,6 @@
     white-space: nowrap;
     overflow: visible !important;
     position: static !important;
-
-    /* Required for iPad centring */
     margin: 0 auto !important;
 }
 
@@ -126,7 +124,7 @@
     transition: .25s ease;
 }
 
-/* SUBMENU — FIXED, CORRECT, FINAL */
+/* SUBMENU — CORRECT, FINAL */
 #header-content .mega-menu {
     display: none;
     position: absolute !important;
@@ -141,7 +139,8 @@
 
     /* CRITICAL FIXES */
     white-space: normal !important;
-    flex-direction: row !important;
+    display: flex;
+    flex-direction: row;
     gap: 40px;
     min-width: 260px;
 }
@@ -156,17 +155,20 @@
     display: flex !important;
 }
 
-/* SUBMENU COLUMNS — FIXED */
+/* SUBMENU COLUMNS */
 #header-content .mega-column {
     display: flex !important;
     flex-direction: column !important;
     white-space: normal !important;
 }
 
-/* SUBMENU LINKS — FIXED */
+/* SUBMENU LINKS */
 #header-content .mega-column a {
     display: block !important;
     white-space: normal !important;
+    color: #222 !important;
+    text-decoration: none !important;
+    padding: 8px 0 !important;
 }
 
 /* SUBMENU HEADERS */
@@ -216,47 +218,6 @@
     #header-content {
         overflow: visible !important;
     }
-}
-/* ============================================================
-FINAL SAFARI FIXES — MUST BE LAST
-============================================================ */
-
-/* 1. Ensure mega-menu escapes the scroll container */
-#header-content .nav-scroll {
-    contain: none !important;
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-}
-
-/* 2. Force mega-menu to behave like a dropdown, not inline */
-#header-content .mega-menu {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    display: flex !important;
-    flex-direction: row !important;
-    white-space: normal !important;
-    z-index: 999999 !important;
-}
-
-/* 3. Restore proper column layout */
-#header-content .mega-column {
-    display: flex !important;
-    flex-direction: column !important;
-    white-space: normal !important;
-}
-
-/* 4. Restore proper link styling (fixes blue + underline) */
-#header-content .mega-column a {
-    display: block !important;
-    color: #222 !important;
-    text-decoration: none !important;
-    padding: 8px 0 !important;
-}
-
-/* 5. Restore submenu header styling */
-#header-content .mega-column h4 {
-    color: #0a2540 !important;
 }
 
 </style>

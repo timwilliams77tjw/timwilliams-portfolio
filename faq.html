@@ -18,20 +18,14 @@
 <div id="header-placeholder"></div>
 
 <script>
-fetch("header-standard.html?v=30010")   // ← VERSIONED HTML
+fetch("/header-standard.html?v=30010")   // ← ABSOLUTE PATH
   .then(r => r.text())
   .then(h => {
-      const placeholder = document.getElementById("header-placeholder");
-      placeholder.innerHTML = h;
+      document.getElementById("header-placeholder").innerHTML = h;
 
-      // Load JS AFTER header is injected
       const script = document.createElement("script");
-      script.src = "header-standard.js?v=30010";  // ← VERSIONED JS
-      script.onload = () => {
-          requestAnimationFrame(() => {
-              initHeader();
-          });
-      };
+      script.src = "/header-standard.js?v=30010";  // ← ABSOLUTE PATH
+      script.onload = () => initHeader();
       document.body.appendChild(script);
   });
 </script>

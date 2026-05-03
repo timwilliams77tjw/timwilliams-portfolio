@@ -7,7 +7,7 @@
 
 <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css?v=20001">
-<link rel="stylesheet" href="header-standard.css?v=40000">
+<link rel="stylesheet" href="header-standard-v2.css">
    <link rel="stylesheet" href="faq.css?v=1">
 
 </head>
@@ -18,14 +18,14 @@
 <div id="header-placeholder"></div>
 
 <script>
-fetch("/header-standard.html?v=40000")
+fetch("/header-standard-v2.html")
    // ← ABSOLUTE PATH
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
 
       const script = document.createElement("script");
-      script.src = "/header-standard.js?v=40000";  // ← ABSOLUTE PATH
+      script.src = "/header-standard-v2.js";  // ← ABSOLUTE PATH
       script.onload = () => initHeader();
       document.body.appendChild(script);
   });

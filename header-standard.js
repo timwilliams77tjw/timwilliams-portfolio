@@ -1,9 +1,9 @@
-// version 30032
+// version 30040 — fully guarded, no early init, iPhone‑safe
 
 /* ==================================================
-   header-standard.js — FINAL VERSION
+   header-standard.js — FINAL STABLE VERSION
    Mobile/tablet = inline menus
-   Desktop = portal menus
+   Desktop = portal menus (if portal exists)
 ================================================== */
 
 function initHeader() {
@@ -13,13 +13,22 @@ function initHeader() {
     const portal = document.querySelector(".hs-mega-portal");
 
     /* ==================================================
+       SAFETY: If header doesn't exist, abort cleanly
+       (e.g., index.html uses a different header)
+    =================================================== */
+    if (!header) {
+        console.warn("initHeader: .header-standard not found — skipping header init");
+        return;
+    }
+
+    /* ==================================================
        CLOSE ALL MENUS
     =================================================== */
     function closeAllMenus() {
         document.querySelectorAll(".hs-nav-item.open")
             .forEach(item => item.classList.remove("open"));
 
-        // Hide any portaled menus
+        // Hide any portaled menus (if portal exists)
         document.querySelectorAll(".hs-mega-menu").forEach(menu => {
             menu.style.display = "none";
             menu.style.position = "";
@@ -33,15 +42,20 @@ function initHeader() {
     =================================================== */
     function openMegaMenuDesktop(parent, menu) {
 
-        if (!header || !portal) return;
+        // SAFETY: Portal or menu missing
+        if (!portal || !menu || !header) return;
 
         // Move menu into portal
-        portal.appendChild(menu);
+        try {
+            portal.appendChild(menu);
+        } catch (err) {
+            console.warn("Portal append failed:", err);
+            return;
+        }
 
         const headerRect = header.getBoundingClientRect();
         const parentRect = parent.getBoundingClientRect();
 
-        // Position relative to header, not viewport
         const top = parentRect.bottom - headerRect.top;
         const left = parentRect.left - headerRect.left;
 
@@ -57,45 +71,48 @@ function initHeader() {
     =================================================== */
     const triggers = document.querySelectorAll(".hs-mega-trigger");
 
-    triggers.forEach(btn => {
+    if (triggers.length > 0) {
+        triggers.forEach(btn => {
 
-        btn.addEventListener("click", function(e){
+            btn.addEventListener("click", function(e){
 
-            const parent = this.closest(".hs-nav-item");
-            const menu = parent.querySelector(".hs-mega-menu");
-            if (!parent || !menu) return;
+                const parent = this.closest(".hs-nav-item");
+                if (!parent) return;
 
-            e.preventDefault();
-            e.stopPropagation();
+                const menu = parent.querySelector(".hs-mega-menu");
+                if (!menu) return;
 
-            const alreadyOpen = parent.classList.contains("open");
+                e.preventDefault();
+                e.stopPropagation();
 
-            closeAllMenus();
+                const alreadyOpen = parent.classList.contains("open");
 
-            /* ==========================================
-               MOBILE + TABLET (≤1024px)
-               → NO PORTAL, inline dropdowns
-            ========================================== */
-            if (window.innerWidth <= 1024) {
+                closeAllMenus();
+
+                /* ==========================================
+                   MOBILE + TABLET (≤1024px)
+                   → inline dropdowns
+                ========================================== */
+                if (window.innerWidth <= 1024) {
+                    if (!alreadyOpen) {
+                        parent.classList.add("open");
+                    }
+                    return;
+                }
+
+                /* ==========================================
+                   DESKTOP (≥1025px)
+                   → portal menus (if portal exists)
+                ========================================== */
                 if (!alreadyOpen) {
                     parent.classList.add("open");
-                    // CSS handles display: flex
+                    openMegaMenuDesktop(parent, menu);
                 }
-                return;
-            }
 
-            /* ==========================================
-               DESKTOP (≥1025px)
-               → USE PORTAL
-            ========================================== */
-            if (!alreadyOpen) {
-                parent.classList.add("open");
-                openMegaMenuDesktop(parent, menu);
-            }
+            });
 
         });
-
-    });
+    }
 
     /* ==================================================
        CLOSE ON OUTSIDE CLICK
@@ -173,10 +190,14 @@ function initHeader() {
     }
 }
 
-/* Global */
+/* ==================================================
+   GLOBAL EXPORT
+================================================== */
 window.initHeader = initHeader;
 
-// FAB only — header init is handled by the fetch block
+/* ==================================================
+   FAB ONLY — header init is handled by fetch block
+================================================== */
 document.addEventListener("DOMContentLoaded", () => {
     const fab = document.getElementById("fab");
     if (fab) {

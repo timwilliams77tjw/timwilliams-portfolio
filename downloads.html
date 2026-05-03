@@ -130,18 +130,19 @@ body.page-certifications {
 <!-- HEADER -->
 <div id="header-placeholder"></div>
 
-<!-- 1. Load the JS file FIRST -->
-<script src="header-standard.js"></script>
-
-<!-- 2. Inject the header HTML -->
 <script>
-fetch("./header-standard.html")
+fetch("/header-standard.html?v=30020")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+
+      const script = document.createElement("script");
+      script.src = "/header-standard.js?v=30020";
+      script.onload = () => initHeader();
+      document.body.appendChild(script);
   });
 </script>
+
 
 
 

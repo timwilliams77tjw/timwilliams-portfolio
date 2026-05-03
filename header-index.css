@@ -1,8 +1,6 @@
 /* ============================================================
-   HEADER CSS — ISOLATED IN ITS OWN CASCADE LAYER
-   This guarantees header styles override global styles.
+   HEADER CSS — CASCADE LAYER TO ISOLATE FROM GLOBAL CSS
 ============================================================ */
-
 @layer header {
 
 /* SAFARI MUST NOT CLIP ANYTHING */
@@ -77,7 +75,7 @@
     overflow: visible !important;
 }
 
-/* SCROLL CONTAINER — SAFARI-SAFE + SCROLL RESTORED */
+/* SCROLL CONTAINER — DESKTOP/IPAD */
 #header-content .nav-scroll {
     overflow-x: auto !important;
     overflow-y: visible !important;
@@ -122,7 +120,7 @@
     transition: .25s ease;
 }
 
-/* SUBMENU — CORRECT, FINAL */
+/* SUBMENU */
 #header-content .mega-menu {
     display: none;
     position: absolute !important;
@@ -142,24 +140,20 @@
     min-width: 260px;
 }
 
-/* DESKTOP HOVER */
 #header-content .nav-item:hover > .mega-menu {
     display: flex;
 }
 
-/* MOBILE TAP */
 #header-content .nav-item.open > .mega-menu {
     display: flex !important;
 }
 
-/* SUBMENU COLUMNS */
 #header-content .mega-column {
     display: flex !important;
     flex-direction: column !important;
     white-space: normal !important;
 }
 
-/* SUBMENU LINKS */
 #header-content .mega-column a {
     display: block !important;
     white-space: normal !important;
@@ -168,7 +162,6 @@
     padding: 8px 0 !important;
 }
 
-/* SUBMENU HEADERS */
 #header-content .mega-column h4 {
     color: #0a2540 !important;
     font-size: 12px !important;
@@ -217,13 +210,68 @@
     }
 }
 
-} /* END OF @layer header */
+} /* END LAYER */
 
 
 /* ============================================================
-   FORCE HEADER LAYER TO WIN OVER GLOBAL CSS
+   iPHONE-ONLY HAMBURGER MENU
 ============================================================ */
+@media (max-width: 600px) {
 
-#header-content * {
-    all: revert-layer;
+    #header-content .nav-scroll {
+        display: none !important;
+    }
+
+    .mobile-menu-toggle {
+        display: block !important;
+        font-size: 28px;
+        background: transparent;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    .mobile-menu {
+        display: none;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.15);
+        margin-top: 10px;
+    }
+
+    .mobile-menu.open {
+        display: block;
+    }
+
+    .mobile-section-header {
+        font-size: 16px;
+        font-weight: 700;
+        padding: 12px 0;
+        color: #0a2540;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mobile-submenu {
+        display: none;
+        padding: 10px 0 0 0;
+    }
+
+    .mobile-submenu.open {
+        display: block;
+    }
+
+    .mobile-submenu a {
+        display: block;
+        padding: 10px 0;
+        color: #0a2540;
+        text-decoration: none;
+        font-size: 15px;
+        border-bottom: 1px solid #f0f0f0;
+    }
 }

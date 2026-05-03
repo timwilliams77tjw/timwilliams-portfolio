@@ -225,5 +225,39 @@ body.page-certifications {
         display: none !important; /* keep desktop nav hidden on iPhone */
     }
 }
+/* Keep search + dark mode on one row on iPad */
+.header-standard .hs-actions {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+/* Force mobile menu to behave correctly on iPhone */
+@media (max-width: 700px) {
+
+    /* Hide mobile menu until hamburger is clicked */
+    #hsMobileMenu {
+        display: none !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: #0a2342 !important;
+        padding: 20px !important;
+        z-index: 999999 !important;
+    }
+
+    #hsMobileMenu.open {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    /* Ensure hamburger is visible */
+    .hs-hamburger {
+        display: block !important;
+        z-index: 999999 !important;
+    }
+}
 
 </style>

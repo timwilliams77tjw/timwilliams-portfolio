@@ -282,7 +282,7 @@ overflow-y: visible !important;
 }
    </style>
 
-<link rel="stylesheet" href="header-index.css?v=20260503">
+<link rel="stylesheet" href="header-index.css?v=20260504">
 
 
 </head>
@@ -299,26 +299,21 @@ overflow-y: visible !important;
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    fetch("header-index.html?v=20260503")
+    fetch("header-index.html?v=20260504")
         .then(r => r.text())
         .then(html => {
             document.getElementById("header").innerHTML = html;
 
             const s = document.createElement("script");
-            s.src = "header-index.js?v=20260502";
+            s.src = "header-index.js?v=20260504";
             s.async = false;
-
-            s.onload = () => {
-                if (typeof initHeaderNav === "function") {
-                    initHeaderNav();
-                }
-            };
 
             document.body.appendChild(s);
         });
 
 });
 </script>
+
 
 
 

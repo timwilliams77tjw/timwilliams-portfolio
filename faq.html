@@ -26,7 +26,13 @@ fetch("/header-standard-v2.html")
 
       const script = document.createElement("script");
       script.src = "/header-standard-v2.js";  // ← ABSOLUTE PATH
-      script.onload = () => initHeader();
+script.onload = () => {
+    // Wait for the header HTML to be fully inserted
+    requestAnimationFrame(() => {
+        initHeader();
+    });
+};
+
       document.body.appendChild(script);
   });
 </script>

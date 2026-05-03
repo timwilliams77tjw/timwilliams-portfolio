@@ -1,3 +1,10 @@
+/* ============================================================
+   HEADER CSS — ISOLATED IN ITS OWN CASCADE LAYER
+   This guarantees header styles override global styles.
+============================================================ */
+
+@layer header {
+
 /* SAFARI MUST NOT CLIP ANYTHING */
 #header,
 #header-content {
@@ -77,11 +84,7 @@
     -webkit-overflow-scrolling: touch;
     white-space: nowrap !important;
     position: static !important;
-
-    /* CRITICAL: allow mega-menu to escape */
     contain: none !important;
-
-    /* Centre nav row on iPad */
     text-align: center !important;
 }
 
@@ -110,8 +113,8 @@
     padding: 9px 14px;
     border-radius: 6px;
     border: 1px solid rgba(255,255,255,.65);
-    color: #fff;
-    text-decoration: none;
+    color: #fff !important;
+    text-decoration: none !important;
     font-size: 15px;
     font-weight: 600;
     white-space: nowrap;
@@ -214,9 +217,13 @@
     }
 }
 
-/* FINAL SAFARI FIX — MUST BE LAST */
-#header-content .mega-menu,
-#header-content .mega-column,
-#header-content .mega-column a {
-    white-space: normal !important;
+} /* END OF @layer header */
+
+
+/* ============================================================
+   FORCE HEADER LAYER TO WIN OVER GLOBAL CSS
+============================================================ */
+
+#header-content * {
+    all: revert-layer;
 }

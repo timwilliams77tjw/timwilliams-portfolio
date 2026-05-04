@@ -83,11 +83,17 @@ function initHeader() {
         localStorage.setItem("darkMode", document.body.classList.contains("dark"));
     }
 
-    darkIcon?.addEventListener("click", toggleDarkMode);
-    mobileDarkItem?.addEventListener("click", () => {
-        closeMenu();
-        toggleDarkMode();
-    });
+darkIcon?.addEventListener("click", toggleDarkMode);
+mobileDarkItem?.addEventListener("click", () => {
+    closeMenu();
+    toggleDarkMode();
+});
+
+// FIX: Only attach if darkToggle exists
+if (darkToggle) {
+    darkToggle.addEventListener("click", toggleDarkMode);
+}
+
 
     applyDarkMode();
 

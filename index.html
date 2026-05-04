@@ -300,18 +300,38 @@ html, body {
 (function() {
     const frame = document.getElementById("header-frame");
 
-    // Auto-resize iframe height based on its content
-    function resize() {
+    function resizeFrame() {
         try {
             const doc = frame.contentDocument || frame.contentWindow.document;
-            frame.style.height = doc.body.scrollHeight + "px";
+            const height = doc.body.scrollHeight;
+            frame.style.height = height + "px";
         } catch (e) {}
     }
 
-    frame.onload = resize;
-    window.addEventListener("resize", resize);
+    // Resize when iframe loads
+    frame.onload = () => {
+        resizeFrame();
+
+        const doc = frame.contentDocument || frame.contentWindow.document;
+
+        // Resize on any DOM change inside the iframe
+        const observer = new MutationObserver(resizeFrame);
+        observer.observe(doc.body, { childList: true, subtree: true });
+
+        // Resize on window resize
+        frame.contentWindow.addEventListener("resize", resizeFrame);
+
+        // Resize after JS initialises menus
+        setTimeout(resizeFrame, 100);
+        setTimeout(resizeFrame, 300);
+        setTimeout(resizeFrame, 600);
+    };
+
+    // Resize when parent window resizes
+    window.addEventListener("resize", resizeFrame);
 })();
 </script>
+
 
 
 

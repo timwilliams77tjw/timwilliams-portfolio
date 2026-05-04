@@ -265,3 +265,31 @@ html, body {
 .hs-menu-panel {
     max-width: calc(100% - 20px) !important;
 }
+/* ============================================================
+FINAL FIXES — MENU LINK SCOPE + NORMAL LINK RESTORE
+============================================================ */
+
+/* 1 — Restrict menu link styling ONLY to the menu */
+.hs-menu-panel .hs-menu-column a,
+.hs-menu-panel .hs-menu-item {
+    color: #fff !important;
+    text-decoration: none !important;
+    display: block !important;
+    margin-bottom: 6px;
+}
+
+/* 2 — Restore normal link behaviour everywhere else */
+main a,
+.card a,
+.page-container a {
+    display: inline-block !important;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #0a66c2;
+}
+
+main a:hover,
+.card a:hover,
+.page-container a:hover {
+    text-decoration: underline;
+}

@@ -1,128 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta http-equiv="Cache-Control" content="no-store" />
 
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tim Williams Consulting Ltd | TWC Ltd | Senior IT Programme Manager | Cyber Security & Cloud Transformation</title>
+<title>Tim Williams Consulting Ltd | Senior IT Programme Manager</title>
 
-<!-- SEO + Structured Data -->
-<script type="application/ld+json">
-{
-"@context": "https://schema.org",
-"@type": "Organization",
-"name": "Tim Williams Consulting Ltd",
-"url": "https://www.twc-ltd.uk",
-"logo": "https://twc-ltd.uk/logo.jpg",
-"image": "https://twc-ltd.uk/logo.jpg",
-"address": {
-"@type": "PostalAddress",
-"streetAddress": "59 Beaumont Rd",
-"addressLocality": "Halesowen",
-"postalCode": "B62 9HD",
-"addressCountry": "GB"
-},
-"telephone": "+44 7801 453322",
-"sameAs": [
-"https://www.linkedin.com/in/tim-williams-e51205ae",
-"https://www.twc-ltd.uk"
-]
-}
-</script>
+<!-- GLOBAL HEADER CSS -->
+<link rel="stylesheet" href="header-standard-v4.css">
 
-<script type="application/ld+json">
-{
-"@context": "https://schema.org",
-"@type": "Person",
-"name": "Tim Williams",
-"jobTitle": "Senior IT Programme Manager",
-"url": "https://www.twc-ltd.uk",
-"image": "https://www.twc-ltd.uk/profile.jpg",
-"sameAs": [
-"https://www.linkedin.com/in/timwilliams77"
-],
-"worksFor": {
-"@type": "Organization",
-"name": "TWC Ltd"
-},
-"knowsAbout": [
-"Cyber Security",
-"Cloud Transformation",
-"Digital Transformation",
-"Enterprise Infrastructure",
-"Programme Management",
-"PMO Governance"
-]
-}
-</script>
-
+<!-- PAGE‑LEVEL CSS (clean, minimal, non‑conflicting) -->
 <style>
-/* ============================================================
-   GITHUB PAGES WRAPPER FIX
-============================================================ */
-.container-lg.px-3.my-5.markdown-body,
-.markdown-body {
-    overflow: visible !important;
-    position: static !important;
-}
-
-/* GLOBAL */
-:root { --accent: #0a66c2; }
-body.dark-mode { --accent: #38bdf8; }
-
-/* Page content wrapper (do NOT affect header) */
 main {
     margin: 0;
+    padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     background: #f5f7fb;
     color: #0a2540;
-    transition: background .3s, color .3s;
 }
 
-/* Dark mode base (header has its own colours) */
-body.dark-mode {
-    background: #0b1220;
-    color: #e5e7eb;
-}
-
-/* Scope layout to main content only */
-main .container {
+.container {
     max-width: 900px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-/* STICKY BAR */
-main .sticky-follow {
-    position: sticky;
-    top: 0;
-    z-index: 9998;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-    background: var(--accent);
-    color: white;
-    font-weight: 600;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-}
-
-main .dark-toggle-btn {
-    background: transparent;
-    color: white;
-    border: 1px solid rgba(255,255,255,.7);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-/* CARDS */
-main .card {
+.card {
     background: white;
     padding: 20px;
     border-radius: 12px;
@@ -130,17 +34,13 @@ main .card {
     margin-bottom: 20px;
 }
 
-body.dark-mode main .card {
-    background: #1f2937;
-}
-
-main .grid {
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
 }
 
-main .service-card img {
+.service-card img {
     width: 70px;
     height: 70px;
     object-fit: contain;
@@ -149,173 +49,62 @@ main .service-card img {
     padding: 10px;
 }
 
-main .card img[src*="expertise-"]:hover {
-    transform: scale(1.05);
-    transition: transform 0.25s ease;
-}
-
-/* BUTTONS */
-main .button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-main .brand-btn {
-    background: #0a2540;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    border: 2px solid #0a2540;
-    transition: .25s ease;
-}
-
-main .brand-btn:hover {
-    background: transparent;
-    color: #0a66c2;
-    border-color: #0a66c2;
-}
-
-/* FLOATING BUTTONS (page-level) */
-main .fab {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: white;
-    color: #0a2540;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 26px;
-    cursor: pointer;
-    border: 2px solid #0a2540;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    z-index: 9999;
-}
-
-main .fab-booking {
-    bottom: 100px;
-    background: #0a2540;
-    color: white;
-    border: none;
-}
-
-/* FOOTER */
-footer {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    text-align: left !important;
-    background: #0a2540 !important;
-    color: white;
-    padding: 20px;
-}
-
-footer .footer-logo img {
-    max-width: 90px !important;
-    height: auto !important;
-}
-
+/* iPhone: centre icons */
 @media (max-width: 600px) {
-    footer {
-        flex-direction: column !important;
+    .service-card,
+    .service-card img {
         text-align: center !important;
-    }
-}
-
-/* iPhone-only: centre align card icons */
-@media (max-width: 600px) {
-    main .card img,
-    main .card-icon,
-    main .why-card img,
-    main .case-card img {
-        display: block !important;
-        margin: 0 auto 10px auto !important;
-        text-align: center !important;
-    }
-}
-
-/* iPhone-only: centre ALL service-card icons + text */
-@media (max-width: 600px) {
-    main .service-card,
-    main .card.service-card {
-        text-align: center !important;
-    }
-
-    main .service-card img,
-    main .card.service-card img,
-    main .service-card img[style],
-    main .card.service-card img[style] {
-        display: block !important;
         margin-left: auto !important;
         margin-right: auto !important;
-    }
-}
-
-/* SAFARI FIXES */
-html, body {
-    overflow-x: hidden;
-}
-
-@supports (-webkit-touch-callout: none) {
-    body {
-        position: relative;
-        left: 0;
-        right: 0;
-        overflow-x: visible !important;
-        overflow-y: visible !important;
+        display: block !important;
     }
 }
 </style>
 
-
-<link rel="stylesheet" href="header-standar-v4.css">
-
 </head>
+
 <body class="header-with-logo">
 
+<!-- ============================
+GLOBAL HEADER v4
+============================ -->
 <div class="header-standard">
 
-    <!-- Top-right controls (iPad/Desktop) -->
     <div class="hs-topbar">
-        <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon" aria-label="Search">🔍</button>
-        <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon" aria-label="Dark mode">🌙</button>
-        <button id="hsHamburger" class="hs-hamburger" aria-label="Menu">☰</button>
+        <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon">🔍</button>
+        <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon">🌙</button>
+        <button id="hsHamburger" class="hs-hamburger">☰</button>
     </div>
 
-    <!-- HERO BANNER -->
     <div class="hs-hero-banner">
         <div class="hs-hero-inner">
-            <img src="logo.jpg" alt="Logo" class="hs-logo">
+            <img src="logo.jpg" class="hs-logo" alt="Logo">
+
             <div class="hs-hero-text">
                 <h1>Tim Williams Consulting</h1>
                 <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
                 <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
             </div>
-            <img src="profile.jpg" alt="Tim Williams" class="hs-hero-photo">
+
+            <img src="profile.jpg" class="hs-hero-photo" alt="Tim Williams">
         </div>
     </div>
 
-    <!-- SLIDE-DOWN SEARCH BAR -->
     <div id="hsSearchBar" class="hs-search-bar">
         <div class="hs-search-bar-inner">
             <input id="hsSearchInput" type="text" placeholder="Search site…">
-            <button type="button">Go</button>
+            <button>Go</button>
         </div>
     </div>
 
-    <!-- MENU OVERLAY + PANEL -->
     <div id="hsMenuOverlay" class="hs-menu-overlay">
         <div id="hsMenuPanel" class="hs-menu-panel">
             <div class="hs-menu-columns">
+
+                <div class="hs-menu-column">
+                    <h4>Home</h4>
+                    <a href="index.html">Home</a>
+                </div>
 
                 <div class="hs-menu-column">
                     <h4>About</h4>
@@ -355,7 +144,6 @@ html, body {
                     <a href="calendar.html">Calendar</a>
                 </div>
 
-                <!-- MOBILE-ONLY ITEMS: SEARCH + DARK MODE -->
                 <div class="hs-menu-column hs-menu-mobile-only">
                     <h4>Options</h4>
                     <button id="hsMobileSearchItem" class="hs-menu-item">Search</button>
@@ -368,25 +156,21 @@ html, body {
 
 </div>
 
-
-
 <!-- ============================
-     MAIN CONTENT
+MAIN CONTENT
 ============================ -->
 <main>
 <div class="container">
 
 <div class="card" style="text-align:center; padding:30px;">
-
 <h1>IT Programme Delivery That Delivers — On Time and On Budget</h1>
-
 <p style="font-size:18px; max-width:700px; margin:10px auto;">
 Helping UK organisations successfully deliver complex cyber security, cloud and enterprise IT programmes with 30+ years of hands-on experience.
 </p>
 
 <div class="button-group">
-    <a href="calendar.html" class="brand-btn">Book a Free Consultation</a>
-    <a href="contact.html" class="brand-btn">Discuss Your Programme</a>
+<a href="calendar.html" class="brand-btn">Book a Free Consultation</a>
+<a href="contact.html" class="brand-btn">Discuss Your Programme</a>
 </div>
 
 <p style="margin-top:15px;">
@@ -394,10 +178,9 @@ Helping UK organisations successfully deliver complex cyber security, cloud and 
 ✔ 30+ Years Experience &nbsp; | &nbsp;
 ✔ Trusted Across NHS, Defence & Enterprise
 </p>
-
 </div>
-<h2>Who I Work With</h2>
 
+<h2>Who I Work With</h2>
 <div class="card">
 <ul>
 <li>Organisations delivering complex cyber security or cloud transformation programmes</li>
@@ -407,31 +190,26 @@ Helping UK organisations successfully deliver complex cyber security, cloud and 
 </div>
 
 <h2>Executive Profile</h2>
-
 <div class="card" style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
 <div style="flex:1; min-width:250px;">
 <p>SC Cleared Senior IT Programme Manager delivering large-scale cyber security, cloud transformation and enterprise infrastructure programmes across NHS England, Defence and global organisations.</p>
-
 <p>Specialist in stabilising complex programmes, improving delivery performance and ensuring successful outcomes across high-risk environments.</p>
 </div>
-
 <div style="flex:0 0 250px; text-align:center;">
 <img src="exec.jpg" alt="Executive Profile" style="width:250px; height:250px; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.15);" />
 </div>
 </div>
 
 <h2>Proven Results</h2>
-
 <div class="card">
 <ul>
-<li>Delivered £40M cyber security uplift programme for NHS England, improving CAF maturity across all domains.</li>
-<li>Led global Windows 10/11 transformation for 126,000 devices across 42 countries.</li>
+<li>Delivered £40M cyber security uplift programme for NHS England.</li>
+<li>Led global Windows 10/11 transformation for 126,000 devices.</li>
 <li>Delivered Azure and AWS cloud adoption programmes reducing operational cost by 18%.</li>
 </ul>
 </div>
 
 <h2>How I Help</h2>
-
 <div class="grid">
 
 <div class="card service-card">
@@ -461,147 +239,82 @@ Helping UK organisations successfully deliver complex cyber security, cloud and 
 </div>
 
 <h2>Programme Case Studies</h2>
-
 <div class="grid">
 
 <div class="card service-card">
-<img src="case-nhs-cyber.png" alt="NHS Cyber Programme Icon" style="width:70px; display:block; margin:0 auto 10px;">
+<img src="case-nhs-cyber.png" alt="NHS Cyber Programme Icon">
 <h3>NHS England Cyber Security Programme</h3>
 <p>Delivered CAF-aligned cyber security uplift implementing MFA, CyberArk, Splunk and Azure security controls.</p>
-<p><b>Outcome:</b> Improved national cyber resilience and strengthened security posture.</p>
 </div>
 
 <div class="card service-card">
-<img src="case-global-workplace.png" alt="Global Workplace Transformation Icon" style="width:70px; display:block; margin:0 auto 10px;">
+<img src="case-global-workplace.png" alt="Global Workplace Transformation Icon">
 <h3>Global Workplace Transformation</h3>
 <p>Led Windows 10/11 transformation across 126,000 devices in 42 countries.</p>
-<p><b>Outcome:</b> Delivered a secure, modern global workplace environment.</p>
 </div>
 
 <div class="card service-card">
-<img src="case-enterprise-cloud.png" alt="Enterprise Cloud Transformation Icon" style="width:70px; display:block; margin:0 auto 10px;">
+<img src="case-enterprise-cloud.png" alt="Enterprise Cloud Transformation Icon">
 <h3>Enterprise Cloud Transformation</h3>
 <p>Delivered Azure and AWS programmes across global organisations.</p>
-<p><b>Outcome:</b> Improved scalability, resilience and reduced operational cost.</p>
 </div>
 
 </div>
 
 <h2>Why Organisations Work With Me</h2>
-
 <div class="grid">
 
 <div class="card service-card">
-<img src="trust-experience.png" alt="Experience Icon" style="width:70px; display:block; margin:0 auto 10px;">
+<img src="trust-experience.png" alt="Experience Icon">
 <h3>30+ Years of Experience</h3>
 <p>Real-world programme delivery across NHS, Defence, and enterprise organisations.</p>
 </div>
 
 <div class="card service-card">
-<img src="trust-sc-cleared.png" alt="SC Cleared Icon" style="width:70px; display:block; margin:0 auto 10px;">
+<img src="trust-sc-cleared.png" alt="SC Cleared Icon">
 <h3>SC Cleared</h3>
 <p>Trusted to lead high-security programmes with full clearance and compliance.</p>
 </div>
 
 <div class="card service-card">
-<img src="trust-leadership.png" alt="Hands-on Leadership Icon" style="width:70px; display:block; margin:0 auto 10px;">
+<img src="trust-leadership.png" alt="Hands-on Leadership Icon">
 <h3>Hands-on Leadership</h3>
 <p>Active engagement and delivery ownership — not just advisory oversight.</p>
 </div>
 
 <div class="card service-card">
-<img src="trust-proven-delivery.png" alt="Proven Delivery Icon" style="width:70px; display:block; margin:0 auto 10px;">
+<img src="trust-proven-delivery.png" alt="Proven Delivery Icon">
 <h3>Proven Delivery</h3>
 <p>Consistent success stabilising and delivering complex, high-risk programmes.</p>
 </div>
 
 </div>
 
-<h2>Consulting Expertise</h2>
-
-<div class="grid">
-
-<div class="card service-card">
-<img src="expertise-cyber.png" alt="Cyber Security Icon">
-<h3>Cyber Security</h3>
-<p>CAF, IAM, MFA, CyberArk, Splunk.</p>
-</div>
-
-<div class="card service-card">
-<img src="expertise-cloud.png" alt="Cloud Platforms Icon">
-<h3>Cloud Platforms</h3>
-<p>Azure, AWS, Entra, Intune.</p>
-</div>
-
-<div class="card service-card">
-<img src="expertise-workplace.png" alt="Workplace Transformation Icon">
-<h3>Workplace Transformation</h3>
-<p>Global Windows migrations and collaboration platforms.</p>
-</div>
-
-<div class="card service-card">
-<img src="expertise-pmo.png" alt="Governance & PMO Icon">
-<h3>Governance & PMO</h3>
-<p>RAID, financial control and programme assurance.</p>
-</div>
-
-</div>
-
-<div class="card" style="text-align:center; padding:30px;">
-<h2>Ready to Deliver Your Programme Successfully?</h2>
-<p>Get experienced, hands-on support to ensure your programme delivers.</p>
-
-<div class="button-group">
-    <a href="calendar.html" class="brand-btn">Book a Free Consultation</a>
-    <a href="contact.html" class="brand-btn">Contact Now</a>
-</div>
-
-<p style="margin-top:10px;">No obligation — just practical advice.</p>
-</div>
-
 <h2>Contact</h2>
-
 <div class="card">
 <p>Email: timwilliams07@outlook.com</p>
 <p>Phone: 07801 453322</p>
-
-<p>
-<a href="https://www.linkedin.com/in/timwilliams77" target="_blank"
-style="text-decoration:none; color:#0A66C2; font-weight:600;">
-
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-style="vertical-align:middle; margin-right:6px;">
-<rect width="24" height="24" rx="4" fill="#0A66C2"/>
-<path fill="#FFFFFF" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v16h-4V8zm7.5 0h3.8v2.2h.1c.5-1 1.8-2.2 3.9-2.2 4.2 0 5 2.8 5 6.5V24h-4v-8.2c0-2 0-4.5-2.8-4.5-2.8 0-3.2 2.2-3.2 4.3V24h-4V8z"
-transform="translate(4 0) scale(0.7)"/>
-</svg>
-
-Tim Williams
-</a>
-</p>
-
+<p><a href="https://www.linkedin.com/in/timwilliams77" target="_blank">LinkedIn Profile</a></p>
 </div>
 
-</div> <!-- end .container -->
-<!-- FLOATING BUTTONS -->
+</div>
+</main>
 
-<a href="calendar.html" class="fab fab-booking">📅</a>
+<!-- FAB BUTTONS -->
+<div id="fab" class="fab">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
-<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<!-- GLOBAL HEADER JS -->
+<script src="header-standard-v4.js"></script>
+<script>initHeader();</script>
 
-   <script src="header-standard-v4.js"></script>
-   <script>
-      initHeader();
-   </script>
 <!-- FOOTER -->
-
 <div id="footer"></div>
-
 <script>
 fetch("footer.html")
 .then(r => r.text())
 .then(h => document.getElementById("footer").innerHTML = h);
 </script>
-</main>
+
 </body>
 </html>

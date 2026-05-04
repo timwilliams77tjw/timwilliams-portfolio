@@ -277,81 +277,97 @@ html, body {
 </style>
 
 
-
+<link rel="stylesheet" href="header-standar-v4.css">
 
 </head>
-<body>
+<body class="header-with-logo">
 
-<!-- ============================
-     ISOLATED HEADER (iframe-based)
-============================ -->
+<div class="header-standard">
 
-<iframe id="header-frame" src="header-frame-v3.html" sandbox="allow-same-origin allow-scripts" style="width:100%; border:0; overflow:hidden; display:block;" scrolling="no"></iframe>
+    <!-- Top-right controls (iPad/Desktop) -->
+    <div class="hs-topbar">
+        <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon" aria-label="Search">🔍</button>
+        <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon" aria-label="Dark mode">🌙</button>
+        <button id="hsHamburger" class="hs-hamburger" aria-label="Menu">☰</button>
+    </div>
 
-<script>
-(function() {
-    const frame = document.getElementById("header-frame");
+    <!-- HERO BANNER -->
+    <div class="hs-hero-banner">
+        <div class="hs-hero-inner">
+            <img src="logo.jpg" alt="Logo" class="hs-logo">
+            <div class="hs-hero-text">
+                <h1>Tim Williams Consulting</h1>
+                <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
+                <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
+            </div>
+            <img src="profile.jpg" alt="Tim Williams" class="hs-hero-photo">
+        </div>
+    </div>
 
-    function resizeFrame() {
-        if (!frame) return;
-        try {
-            const doc = frame.contentDocument || frame.contentWindow.document;
-            if (!doc || !doc.body) return;
+    <!-- SLIDE-DOWN SEARCH BAR -->
+    <div id="hsSearchBar" class="hs-search-bar">
+        <div class="hs-search-bar-inner">
+            <input id="hsSearchInput" type="text" placeholder="Search site…">
+            <button type="button">Go</button>
+        </div>
+    </div>
 
-            const bodyHeight = doc.body.scrollHeight || 0;
-            const htmlHeight = doc.documentElement ? doc.documentElement.scrollHeight : 0;
-            let height = Math.max(bodyHeight, htmlHeight);
+    <!-- MENU OVERLAY + PANEL -->
+    <div id="hsMenuOverlay" class="hs-menu-overlay">
+        <div id="hsMenuPanel" class="hs-menu-panel">
+            <div class="hs-menu-columns">
 
-            // Safety clamp: ignore obviously broken heights
-            if (height < 100 || height > 4000) return;
+                <div class="hs-menu-column">
+                    <h4>About</h4>
+                    <a href="twc-ltd.html">About</a>
+                    <a href="recommendations.html">Recommendations</a>
+                    <a href="linkedin.html">LinkedIn</a>
+                    <a href="cv.html">CV</a>
+                    <a href="interactive-cv.html">Interactive CV</a>
+                    <a href="sites.html">Digital Presence</a>
+                </div>
 
-            frame.style.height = height + "px";
-        } catch (e) {
-            // ignore
-        }
-    }
+                <div class="hs-menu-column">
+                    <h4>Services</h4>
+                    <a href="https://twc-ltd.my.canva.site" target="_blank">My Services</a>
+                    <a href="new.html">Offerings</a>
+                    <a href="engagement.html">Engagement Models</a>
+                    <a href="portfolio.html">Portfolio</a>
+                    <a href="https://gethandover.uk" target="_blank">PM Tool Suite</a>
+                </div>
 
-    frame.onload = () => {
-        resizeFrame();
+                <div class="hs-menu-column">
+                    <h4>Insights</h4>
+                    <a href="insights.html">Insights</a>
+                    <a href="playbooks.html">Playbooks</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
 
-        const doc = frame.contentDocument || frame.contentWindow.document;
-        if (!doc || !doc.body) return;
+                <div class="hs-menu-column">
+                    <h4>Resources</h4>
+                    <a href="certifications.html">Certifications</a>
+                    <a href="downloads.html">Downloads</a>
+                </div>
 
-        const observer = new MutationObserver(resizeFrame);
-        observer.observe(doc.body, { childList: true, subtree: true });
+                <div class="hs-menu-column">
+                    <h4>Contact</h4>
+                    <a href="contact.html">Contact</a>
+                    <a href="calendar.html">Calendar</a>
+                </div>
 
-        frame.contentWindow.addEventListener("resize", resizeFrame);
+                <!-- MOBILE-ONLY ITEMS: SEARCH + DARK MODE -->
+                <div class="hs-menu-column hs-menu-mobile-only">
+                    <h4>Options</h4>
+                    <button id="hsMobileSearchItem" class="hs-menu-item">Search</button>
+                    <button id="hsMobileDarkItem" class="hs-menu-item">Dark Mode</button>
+                </div>
 
-        setTimeout(resizeFrame, 100);
-        setTimeout(resizeFrame, 300);
-        setTimeout(resizeFrame, 600);
-    };
+            </div>
+        </div>
+    </div>
 
-    window.addEventListener("resize", resizeFrame);
+</div>
 
-    window.addEventListener("message", (event) => {
-        if (!event.data) return;
-
-        if (event.data.headerResize) {
-            resizeFrame();
-        }
-
-        if (event.data.tw_dark_init) {
-            if (localStorage.getItem("tw_dark") === "1") {
-                document.body.classList.add("dark-mode");
-            }
-        }
-
-        if (event.data.tw_dark_toggle) {
-            document.body.classList.toggle("dark-mode");
-            localStorage.setItem(
-                "tw_dark",
-                document.body.classList.contains("dark-mode") ? "1" : "0"
-            );
-        }
-    });
-})();
-</script>
 
 
 <!-- ============================
@@ -573,6 +589,10 @@ Tim Williams
 
 <div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
 
+   <script src="header-standard-v4.js"></script>
+   <script>
+      initHeader();
+   </script>
 <!-- FOOTER -->
 
 <div id="footer"></div>

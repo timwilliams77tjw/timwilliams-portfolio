@@ -277,8 +277,7 @@ html, body {
 </style>
 
 
-<!-- LOAD HEADER CSS (single source of truth) -->
-<link rel="stylesheet" href="header-index.css?v=20260505">
+
 
 </head>
 <body>
@@ -288,56 +287,32 @@ html, body {
      LOAD HEADER (Safari‑Safe)
 ============================ -->
 
-<div id="header"></div>
+<!-- ============================
+     ISOLATED HEADER (iframe-based)
+============================ -->
+
+<iframe id="header-frame"
+        src="header-frame.html"
+        style="width:100%; border:0; overflow:hidden;"
+        scrolling="no"></iframe>
 
 <script>
 (function() {
+    const frame = document.getElementById("header-frame");
 
-    // Force Safari to re-request updated files
-    const version = "v1.0.0";
+    // Auto-resize iframe height based on its content
+    function resize() {
+        try {
+            const doc = frame.contentDocument || frame.contentWindow.document;
+            frame.style.height = doc.body.scrollHeight + "px";
+        } catch (e) {}
+    }
 
-    // 1. Inject header HTML
-    fetch("header-index.html?" + version)
-        .then(res => res.text())
-        .then(html => {
-            document.getElementById("header").innerHTML = html;
-
-            // 2. Inject CSS (Safari-safe)
-            const css = document.createElement("link");
-            css.rel = "stylesheet";
-            css.href = "header-index.css?" + version;
-            document.head.appendChild(css);
-
-            // 3. Inject JS AFTER header + CSS exist
-            const script = document.createElement("script");
-            script.src = "header-index.js?" + version;
-            script.defer = true;
-
-            script.onload = () => {
-                // 4. Initialise header system AFTER JS loads
-                if (typeof initHeaderMenus === "function") {
-                    initHeaderMenus();
-                }
-                if (typeof initSearchToggle === "function") {
-                    initSearchToggle();
-                }
-                if (typeof initDarkMode === "function") {
-                    initDarkMode();
-                }
-                if (typeof initCategoryHeaders === "function") {
-                    initCategoryHeaders();
-                }
-                if (typeof initActiveLinks === "function") {
-                    initActiveLinks();
-                }
-            };
-
-            document.body.appendChild(script);
-        })
-        .catch(err => console.error("Header load error:", err));
-
+    frame.onload = resize;
+    window.addEventListener("resize", resize);
 })();
 </script>
+
 
 
 <!-- ============================

@@ -296,6 +296,7 @@ html, body {
         style="width:100%; border:0; overflow:hidden;"
         scrolling="no"></iframe>
 
+<!-- STEP 2 GOES HERE -->
 <script>
 (function() {
     const frame = document.getElementById("header-frame");
@@ -303,35 +304,34 @@ html, body {
     function resizeFrame() {
         try {
             const doc = frame.contentDocument || frame.contentWindow.document;
-            const height = doc.body.scrollHeight;
-            frame.style.height = height + "px";
+            frame.style.height = doc.body.scrollHeight + "px";
         } catch (e) {}
     }
 
-    // Resize when iframe loads
     frame.onload = () => {
         resizeFrame();
 
         const doc = frame.contentDocument || frame.contentWindow.document;
 
-        // Resize on any DOM change inside the iframe
         const observer = new MutationObserver(resizeFrame);
         observer.observe(doc.body, { childList: true, subtree: true });
 
-        // Resize on window resize
         frame.contentWindow.addEventListener("resize", resizeFrame);
 
-        // Resize after JS initialises menus
         setTimeout(resizeFrame, 100);
         setTimeout(resizeFrame, 300);
         setTimeout(resizeFrame, 600);
     };
 
-    // Resize when parent window resizes
     window.addEventListener("resize", resizeFrame);
+
+    window.addEventListener("message", (event) => {
+        if (event.data && event.data.headerResize) {
+            resizeFrame();
+        }
+    });
 })();
 </script>
-
 
 
 

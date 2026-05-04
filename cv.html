@@ -1,204 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV – Tim Williams</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV – Tim Williams</title>
 
-  <!-- GLOBAL CSS -->
-  <link rel="stylesheet" href="header-standard-v4.css">
+    <!-- GLOBAL HEADER CSS FIRST -->
+    <link rel="stylesheet" href="header-standard-v4.css">
+
+    <!-- PAGE CSS -->
     <link rel="stylesheet" href="certifications.css">
 
-
-  <!-- PAGE-SPECIFIC STYLES -->
-  <style>
-.card {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-.grid {
-  display: grid;
-  gap: 20px;            /* same as portfolio */
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-.card-list {
-  display: none;
-  margin-top: 0;       /* remove extra spacing above */
-  margin-bottom: 0;    /* remove extra spacing below */
-}
-    .awards-columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .card ul {
-      padding-left: 20px;
-      margin-bottom: 0;
-    }
-    .card ul li { margin-bottom: 10px; }
-    .page-content { padding-top: 20px; }
-    img[src="orgs.png"] {
-      display:block; max-width:420px; width:100%; height:auto; margin:0 auto 25px;
-    }
-    .orgs-columns {
-      display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px;
-    }
-    .orgs-columns ul { padding-left:20px; margin:0; }
-    .orgs-columns li { margin-bottom:8px; }
-    .sticky-bar { border-bottom:none !important; margin-top:20px; }
-.popup-menu {
-  display:none;
-  position:absolute;
-  top:100%;
-  left:0;
-min-width:160px;
-  flex-direction:column;
-  background:white;
-  border:1px solid #ddd;
-  padding:10px;
-  z-index:9999;
-}
-.cv-btn {
-  position: relative; /* parent button needs relative */
-}
-
-#cvMenu {
-  position: absolute;
-  top: 100%;   /* right below the button */
-  left: 0;     /* align with button left edge */
-  min-width: 160px;
-  background: white;
-  border: 1px solid #ddd;
-  padding: 10px;
-  display: none; 
-  flex-direction: column;
-  z-index: 9999;
-}
-
-#cvMenu.show {
-  display: flex !important;
-}
-
-.portfolio-btn {
-  position: relative;
-}
-
-#portfolioMenu {
-  position: absolute;
-  top: 100%;
-  right: 0;    /* align right edge of menu with button */
-  min-width: 160px;
-  background: white;
-  border: 1px solid #ddd;
-  padding: 10px;
-  display: none; 
-  flex-direction: column;
-  z-index: 9999;
-}
-
-#portfolioMenu.show {
-  display: flex !important;
-}
-.button-group {
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-    .popup-menu.show { display:flex !important; }
-    .tooltip {
-      background:#333; color:#fff; padding:4px 8px;
-      border-radius:4px; font-size:12px; pointer-events:none;
-      white-space:nowrap;
-    }
-.brand-btn.active-filter,
-.filter-btn.active-filter {
-  background-color: #001F3F; /* navy blue */
-  color: white;
-}
-/* Sticky bar adjustments */
-.sticky-bar { border-bottom:none !important; margin-top:0; }
-.sticky-bar .container {
-  padding: 0;  /* remove extra left/right space */
-}
-/* Filter buttons default: navy blue */
-.filter-btn {
-  background-color: #001f3f; /* navy */
-  color: white;
-  border: 1px solid #001f3f;
-  border-radius: 6px;
-  padding: 6px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-/* Hover: stays navy blue */
-.filter-btn:hover {
-  background-color: #001f3f;
-  color: white;
-}
-
-/* Active button: white background with light blue border */
-.filter-btn.active-filter {
-  background-color: white;
-  color: #001f3f;           /* navy text */
-  border: 1px solid #7ac0f9; /* light blue border */
-}
-/* Special Expand/Collapse buttons styling */
-.special-btn{
-  background-color:#001f3f;
-  color:white;
-  border:1px solid #001f3f;
-}
-
-.special-btn.active-filter{
-  background:white;
-  color:#001f3f;
-  border:1px solid #7ac0f9;
-}
-  .section-divider {
-  border: none;              /* remove default border */
-  height: 2px;               /* thickness */
-  background-color: #001f3f; /* navy blue to match filter buttons */
-  margin: 40px 0;            /* vertical spacing */
-  border-radius: 2px;        /* rounded edges if you like */
-}
-/* Reduce spacing below sticky bar */
-.page-content {
-    padding-top: 20px; /* matches portfolio */
-}
-/* Optional: remove any unwanted line between sections */
-.section-divider {
-  display: none;      /* hides <hr class="section-divider"> */
-}
-/* Ensure Certification and Awards grids match other sections */
-.category-section[data-category="certifications"] .grid,
-.category-section[data-category="awards"] .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;           /* same as portfolio and other grids */
-}
-
-/* Make Awards columns responsive like other grids */
-.awards-columns {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-    
-     /* ADD or ENSURE this block exists: */
-        .hs-search-bar {
+    <!-- PAGE SEARCH BAR + FILTER BAR FIXES -->
+    <style>
+        /* PAGE SEARCH BAR — matches CV styling */
+        .page-search-bar {
             width: 100%;
             display: flex;
             justify-content: center;
             padding: 10px 0;
         }
 
-        .hs-search-bar-inner {
+        .page-search-bar-inner {
             max-width: 600px;
             width: 100%;
             margin: 0 auto;
@@ -206,10 +29,23 @@ min-width:160px;
             gap: 10px;
         }
 
-        #hsSearchInput {
+        .page-search-bar-inner input {
             flex: 1;
+            padding: 10px;
+            border: 1px solid #001f3f;
+            border-radius: 6px;
         }
 
+        .page-search-bar-inner button {
+            background-color: #001f3f;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* FILTER BAR — centred like Portfolio & Certifications */
         .sticky-bar {
             display: flex;
             flex-wrap: wrap;
@@ -219,199 +55,175 @@ min-width:160px;
             border-bottom: none !important;
             margin-top: 0;
         }
-    
 
-</style>
+        .filter-btn {
+            background-color: #001f3f;
+            color: white;
+            border: 1px solid #001f3f;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background-color: #001f3f;
+            color: white;
+        }
+
+        .filter-btn.active-filter {
+            background-color: white;
+            color: #001f3f;
+            border: 1px solid #7ac0f9;
+        }
+
+        .special-btn {
+            background-color: #001f3f;
+            color: white;
+            border: 1px solid #001f3f;
+        }
+
+        .special-btn.active-filter {
+            background: white;
+            color: #001f3f;
+            border: 1px solid #7ac0f9;
+        }
+
+        /* CV CARD + GRID STYLES (unchanged) */
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .card-list {
+            display: none;
+        }
+
+        .page-content {
+            padding-top: 20px;
+        }
+    </style>
 </head>
-
-
-
-
 
 <body class="header-with-logo">
 
-<!-- ============================
-GLOBAL HEADER v4
-============================ -->
-<div class="header-standard">
+    <!-- GLOBAL HEADER -->
+    <div class="header-standard">
+        <div class="hs-topbar">
+            <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon">🔍</button>
+            <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon">🌙</button>
+            <button id="hsHamburger" class="hs-hamburger">☰</button>
+        </div>
 
-    <div class="hs-topbar">
-        <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon">🔍</button>
-        <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon">🌙</button>
-        <button id="hsHamburger" class="hs-hamburger">☰</button>
-    </div>
-
-    <div class="hs-hero-banner">
-        <div class="hs-hero-inner">
-            <img src="logo.jpg" class="hs-logo" alt="Logo">
-
-            <div class="hs-hero-text">
-                <h1>Tim Williams Consulting</h1>
-                <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-                <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
+        <div class="hs-hero-banner">
+            <div class="hs-hero-inner">
+                <img src="logo.jpg" class="hs-logo" alt="Logo">
+                <div class="hs-hero-text">
+                    <h1>Tim Williams Consulting</h1>
+                    <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
+                    <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
+                </div>
+                <img src="profile.jpg" class="hs-hero-photo" alt="Tim Williams">
             </div>
+        </div>
 
-            <img src="profile.jpg" class="hs-hero-photo" alt="Tim Williams">
+        <!-- GLOBAL SEARCH BAR (hidden until icon clicked) -->
+        <div id="hsSearchBar" class="hs-search-bar">
+            <div class="hs-search-bar-inner">
+                <input id="hsSearchInput" type="text" placeholder="Search site…">
+                <button>Go</button>
+            </div>
+        </div>
+
+        <!-- GLOBAL MENU -->
+        <div id="hsMenuOverlay" class="hs-menu-overlay">
+            <div id="hsMenuPanel" class="hs-menu-panel">
+                <div class="hs-menu-columns">
+
+                    <div class="hs-menu-column">
+                        <h4>Home</h4>
+                        <a href="index.html">Home</a>
+                    </div>
+
+                    <div class="hs-menu-column">
+                        <h4>About</h4>
+                        <a href="twc-ltd.html">About</a>
+                        <a href="recommendations.html">Recommendations</a>
+                        <a href="linkedin.html">LinkedIn</a>
+                        <a href="cv.html">CV</a>
+                        <a href="interactive-cv.html">Interactive CV</a>
+                        <a href="sites.html">Digital Presence</a>
+                    </div>
+
+                    <div class="hs-menu-column">
+                        <h4>Services</h4>
+                        <a href="https://twc-ltd.my.canva.site" target="_blank">My Services</a>
+                        <a href="new.html">Offerings</a>
+                        <a href="engagement.html">Engagement Models</a>
+                        <a href="portfolio.html">Portfolio</a>
+                        <a href="https://gethandover.uk" target="_blank">PM Tool Suite</a>
+                    </div>
+
+                    <div class="hs-menu-column">
+                        <h4>Insights</h4>
+                        <a href="insights.html">Insights</a>
+                        <a href="playbooks.html">Playbooks</a>
+                        <a href="faq.html">FAQ</a>
+                    </div>
+
+                    <div class="hs-menu-column">
+                        <h4>Resources</h4>
+                        <a href="certifications.html">Certifications</a>
+                        <a href="downloads.html">Downloads</a>
+                    </div>
+
+                    <div class="hs-menu-column">
+                        <h4>Contact</h4>
+                        <a href="contact.html">Contact</a>
+                        <a href="calendar.html">Calendar</a>
+                    </div>
+
+                    <div class="hs-menu-column hs-menu-mobile-only">
+                        <h4>Options</h4>
+                        <button id="hsMobileSearchItem" class="hs-menu-item">Search</button>
+                        <button id="hsMobileDarkItem" class="hs-menu-item">Dark Mode</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="hsSearchBar" class="hs-search-bar">
-        <div class="hs-search-bar-inner">
-            <input id="hsSearchInput" type="text" placeholder="Search site…">
+    <!-- PAGE SEARCH BAR (separate from global search bar) -->
+    <div id="pageSearchBar" class="page-search-bar">
+        <div class="page-search-bar-inner">
+            <input type="text" placeholder="Search CV…">
             <button>Go</button>
         </div>
     </div>
 
-    <div id="hsMenuOverlay" class="hs-menu-overlay">
-        <div id="hsMenuPanel" class="hs-menu-panel">
-            <div class="hs-menu-columns">
-
-                <!-- HOME COLUMN (added) -->
-                <div class="hs-menu-column">
-                    <h4>Home</h4>
-                    <a href="index.html">Home</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>About</h4>
-                    <a href="twc-ltd.html">About</a>
-                    <a href="recommendations.html">Recommendations</a>
-                    <a href="linkedin.html">LinkedIn</a>
-                    <a href="cv.html">CV</a>
-                    <a href="interactive-cv.html">Interactive CV</a>
-                    <a href="sites.html">Digital Presence</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Services</h4>
-                    <a href="https://twc-ltd.my.canva.site" target="_blank">My Services</a>
-                    <a href="new.html">Offerings</a>
-                    <a href="engagement.html">Engagement Models</a>
-                    <a href="portfolio.html">Portfolio</a>
-                    <a href="https://gethandover.uk" target="_blank">PM Tool Suite</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Insights</h4>
-                    <a href="insights.html">Insights</a>
-                    <a href="playbooks.html">Playbooks</a>
-                    <a href="faq.html">FAQ</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Resources</h4>
-                    <a href="certifications.html">Certifications</a>
-                    <a href="downloads.html">Downloads</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Contact</h4>
-                    <a href="contact.html">Contact</a>
-                    <a href="calendar.html">Calendar</a>
-                </div>
-
-                <!-- MOBILE-ONLY ITEMS -->
-                <div class="hs-menu-column hs-menu-mobile-only">
-                    <h4>Options</h4>
-                    <button id="hsMobileSearchItem" class="hs-menu-item">Search</button>
-                    <button id="hsMobileDarkItem" class="hs-menu-item">Dark Mode</button>
-                </div>
-
-            </div>
-        </div>
+    <!-- FILTER BAR -->
+    <div class="sticky-bar">
+        <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+        <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+        <button class="filter-btn" data-filter="summary">Summary</button>
+        <button class="filter-btn" data-filter="achievements">Achievements</button>
+        <button class="filter-btn" data-filter="experience">Experience</button>
+        <button class="filter-btn" data-filter="skills">Skills</button>
+        <button class="filter-btn" data-filter="certifications">Certifications</button>
+        <button class="filter-btn" data-filter="awards">Awards</button>
     </div>
 
-</div>
-
-<script>
-      const cvBtn = document.querySelector(".cv-btn");
-const portfolioBtn = document.querySelector(".portfolio-btn");
-const cvMenu = document.getElementById("cvMenu");
-const portfolioMenu = document.getElementById("portfolioMenu");
-
-// Make CV button active on page load
-if (cvBtn) {
-  cvBtn.classList.add("active-filter");
-}
-      function positionMenu(menu, button) {
-        const rect = button.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const menuWidth = menu.offsetWidth;
-
-        // Default: align left with button
-        menu.style.left = `${rect.left}px`;
-        menu.style.right = "auto";
-
-        // If menu overflows right edge of viewport, align right with button
-        if (rect.left + menuWidth > viewportWidth) {
-          menu.style.left = "auto";
-          menu.style.right = `${viewportWidth - rect.right}px`;
-        }
-      }
-
-      // CV button click
-      if (cvBtn) {
-        cvBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          cvMenu.classList.toggle("show");
-          positionMenu(cvMenu, cvBtn);
-
-          if (portfolioMenu) portfolioMenu.classList.remove("show");
-          cvBtn.classList.toggle("active-filter");
-          if (portfolioBtn) portfolioBtn.classList.remove("active-filter");
-        });
-      }
-
-      // Portfolio button click
-      if (portfolioBtn) {
-        portfolioBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          portfolioMenu.classList.toggle("show");
-          positionMenu(portfolioMenu, portfolioBtn);
-
-          if (cvMenu) cvMenu.classList.remove("show");
-          portfolioBtn.classList.toggle("active-filter");
-          if (cvBtn) cvBtn.classList.remove("active-filter");
-        });
-      }
-
-      // Close menus on outside click
-      document.addEventListener("click", (e) => {
-        if (cvMenu && !e.target.closest(".cv-btn") && !cvMenu.contains(e.target)) {
-          cvMenu.classList.remove("show");
-          if (cvBtn) cvBtn.classList.remove("active-filter");
-        }
-        if (portfolioMenu && !e.target.closest(".portfolio-btn") && !portfolioMenu.contains(e.target)) {
-          portfolioMenu.classList.remove("show");
-          if (portfolioBtn) portfolioBtn.classList.remove("active-filter");
-        }
-      });
-
-      // ✅ Add this here for responsive menu repositioning
-      window.addEventListener("resize", () => {
-        if (cvMenu.classList.contains("show")) positionMenu(cvMenu, cvBtn);
-        if (portfolioMenu.classList.contains("show")) positionMenu(portfolioMenu, portfolioBtn);
-      });
-
-    });
-});
-</script>
-<!-- STICKY BAR -->
-<div class="sticky-bar">
-
-<button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
-<button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
-
-<button class="filter-btn" data-filter="summary">Summary</button>
-<button class="filter-btn" data-filter="achievements">Achievements</button>
-<button class="filter-btn" data-filter="experience">Experience</button>
-<button class="filter-btn" data-filter="skills">Skills</button>
-<button class="filter-btn" data-filter="certifications">Certifications</button>
-<button class="filter-btn" data-filter="awards">Awards</button>
-
-</div>  
 
 <main class="page-content">
   <div class="container">

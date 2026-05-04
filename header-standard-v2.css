@@ -351,3 +351,42 @@
         display: none !important;
     }
 }
+/* MOBILE-FIRST: iPhone + iPad ALWAYS use hamburger */
+@media (max-width: 1024px) {
+
+    /* Show hamburger */
+    .hs-hamburger {
+        display: block !important;
+        z-index: 999999;
+    }
+
+    /* Hide desktop nav completely */
+    .hs-nav-wrapper {
+        display: none !important;
+    }
+
+    /* Hide mega menus */
+    .hs-mega-menu {
+        display: none !important;
+    }
+}
+/* Mobile menu behaviour */
+@media (max-width: 1024px) {
+
+    #hsMobileMenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #0a2342;
+        padding: 20px;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 999999;
+    }
+
+    #hsMobileMenu.open {
+        display: flex !important;
+    }
+}

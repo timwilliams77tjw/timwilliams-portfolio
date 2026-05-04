@@ -293,3 +293,142 @@ main a:hover,
 .page-container a:hover {
     text-decoration: underline;
 }
+/* ============================================================
+FINAL CONSOLIDATED FIX PACK
+============================================================ */
+
+/* 1 — HERO BANNER HEIGHT (iPad too small) */
+.hs-hero-banner {
+    min-height: 260px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* 2 — MENU LINKS — restrict styling ONLY to menu */
+.hs-menu-panel .hs-menu-column a,
+.hs-menu-panel .hs-menu-item {
+    color: #fff !important;
+    text-decoration: none !important;
+    display: block !important;
+    margin-bottom: 6px !important;
+    font-size: 14px !important;
+}
+
+/* 3 — RESTORE NORMAL LINK BEHAVIOUR OUTSIDE MENU */
+main a,
+.card a,
+.page-container a {
+    display: inline-block !important;
+    margin-bottom: 8px !important;
+    text-decoration: none;
+    color: #0a66c2;
+}
+
+main a:hover,
+.card a:hover,
+.page-container a:hover {
+    text-decoration: underline;
+}
+
+/* 4 — RESTORE ICON BUTTONS (search + dark mode) */
+.hs-icon-btn,
+.hs-dark-icon,
+.hs-search-icon {
+    font-size: 22px !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 6px !important;
+}
+
+/* 5 — TILED MENU LAYOUT */
+.hs-menu-columns {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 24px !important;
+}
+
+.hs-menu-column {
+    min-width: 150px !important;
+}
+
+/* 6 — UNIFY HEADER TEXT STYLE (FAQ style applied globally) */
+.hs-hero-text h1 {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+}
+
+.hs-hero-text p {
+    font-size: 15px !important;
+    font-weight: 400 !important;
+}
+
+/* 7 — RESTORE INDEX PAGE BUTTONS */
+.brand-btn {
+    background: #0a2540 !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 50px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    border: 2px solid #0a2540 !important;
+}
+
+.brand-btn:hover {
+    background: transparent !important;
+    color: #0a66c2 !important;
+    border-color: #0a66c2 !important;
+}
+
+/* 8 — FOOTER VISIBILITY FIX */
+#footer {
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* 9 — FIX FAQ FOOTER LOGO SIZE */
+footer .footer-logo img {
+    max-width: 90px !important;
+    height: auto !important;
+}
+
+/* 10 — RESTORE LINKEDIN SVG ICON */
+.card svg path {
+    fill: #0A66C2 !important;
+}
+
+/* 11 — UNIFY FAB BUTTON STYLE (FAQ + INDEX) */
+.fab,
+#fab {
+    position: fixed !important;
+    right: 20px !important;
+    bottom: 20px !important;
+    width: 55px !important;
+    height: 55px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 26px !important;
+    background: white !important;
+    color: #0a2540 !important;
+    border: 2px solid #0a2540 !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+}
+
+.fab-booking {
+    bottom: 80px !important;
+}
+
+/* 12 — PREVENT IPHONE SIDE-SCROLL */
+html, body {
+    overflow-x: hidden !important;
+}
+
+/* Ensure menu never exceeds screen width */
+.hs-menu-panel {
+    max-width: calc(100% - 20px) !important;
+}

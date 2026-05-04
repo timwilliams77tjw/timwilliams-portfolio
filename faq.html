@@ -15,41 +15,39 @@
 
 <body class="page-certifications">
 
-<!-- ⭐ HEADER MUST BE OUTSIDE ALL PAGE LAYOUT WRAPPERS -->
 <!-- SHADOW DOM HEADER -->
 <div id="header-host"></div>
 
 <script>
 (async () => {
-    // 1. Create Shadow DOM
     const host = document.getElementById("header-host");
     const shadow = host.attachShadow({ mode: "open" });
 
-    // 2. Load header HTML
-    const html = await fetch("header-standard-v2.html?v=40010").then(r => r.text());
+    // 1. Load HTML + CSS
+    const [html, css] = await Promise.all([
+        fetch("header-standard-v2.html?v=40020").then(r => r.text()),
+        fetch("header-standard-v2.css?v=40020").then(r => r.text())
+    ]);
 
-    // 3. Load header CSS
-    const css = await fetch("header-standard-v2.css?v=40010").then(r => r.text());
-
-    // 4. Inject HTML + CSS into Shadow DOM
+    // 2. Inject HTML + CSS into Shadow DOM
     shadow.innerHTML = `
         <style>${css}</style>
         ${html}
     `;
 
-    // 5. Load header JS inside Shadow DOM
+    // 3. Load JS inside the Shadow DOM
+    const jsText = await fetch("header-standard-v2.js?v=40020").then(r => r.text());
+
     const script = document.createElement("script");
     script.textContent = `
-        (${function() {
-            ${window.initHeader.toString()}
+        (() => {
+            ${jsText}
             initHeader();
-        }.toString()})();
+        })();
     `;
     shadow.appendChild(script);
 })();
 </script>
-
-
 
 <!-- ⭐ PAGE LAYOUT STARTS HERE -->
 

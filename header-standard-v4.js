@@ -1,5 +1,5 @@
 /* ============================================================
-GLOBAL HEADER v4 — ONE SYSTEM, ALL PAGES
+GLOBAL HEADER v4 — FIXED VERSION
 ============================================================ */
 
 function initHeader() {
@@ -15,41 +15,47 @@ function initHeader() {
     const fab = document.getElementById("fab");
     const bookingFab = document.getElementById("bookingFab");
 
-    /* ---------------- HAMBURGER + MENU ---------------- */
+    /* ---------------- BODY SCROLL LOCK ---------------- */
+
+    function lockBody() {
+        document.body.style.overflow = "hidden";
+    }
+
+    function unlockBody() {
+        document.body.style.overflow = "";
+    }
+
+    /* ---------------- MENU ---------------- */
 
     function closeMenu() {
-        overlay?.classList.remove("open");
+        overlay.classList.remove("open");
+        unlockBody();
     }
 
     function toggleMenu() {
-        overlay?.classList.toggle("open");
+        overlay.classList.toggle("open");
+        if (overlay.classList.contains("open")) lockBody();
+        else unlockBody();
     }
 
-    hamburger?.addEventListener("click", (e) => {
+    hamburger.addEventListener("click", (e) => {
         e.stopPropagation();
         toggleMenu();
     });
 
-    overlay?.addEventListener("click", (e) => {
-        if (e.target === overlay) {
-            closeMenu();
-        }
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) closeMenu();
     });
 
-    panel?.addEventListener("click", (e) => {
+    panel.addEventListener("click", (e) => {
         e.stopPropagation();
     });
 
-    document.addEventListener("click", () => {
-        closeMenu();
-    });
-
-    /* ---------------- SEARCH BAR ---------------- */
+    /* ---------------- SEARCH ---------------- */
 
     function toggleSearchBar() {
-        if (!searchBar) return;
-        const open = searchBar.classList.toggle("open");
-        if (open && searchInput) {
+        searchBar.classList.toggle("open");
+        if (searchBar.classList.contains("open")) {
             setTimeout(() => searchInput.focus(), 50);
         }
     }
@@ -59,43 +65,33 @@ function initHeader() {
         toggleSearchBar();
     });
 
-    mobileSearchItem?.addEventListener("click", (e) => {
-        e.stopPropagation();
+    mobileSearchItem?.addEventListener("click", () => {
         closeMenu();
         toggleSearchBar();
     });
 
     /* ---------------- DARK MODE ---------------- */
 
-    function applyDarkModeFromStorage() {
-        const stored = localStorage.getItem("darkMode");
-        if (stored === "true") {
+    function applyDarkMode() {
+        if (localStorage.getItem("darkMode") === "true") {
             document.body.classList.add("dark");
         }
     }
 
     function toggleDarkMode() {
         document.body.classList.toggle("dark");
-        localStorage.setItem(
-            "darkMode",
-            document.body.classList.contains("dark")
-        );
+        localStorage.setItem("darkMode", document.body.classList.contains("dark"));
     }
 
-    darkIcon?.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleDarkMode();
-    });
-
-    mobileDarkItem?.addEventListener("click", (e) => {
-        e.stopPropagation();
+    darkIcon?.addEventListener("click", toggleDarkMode);
+    mobileDarkItem?.addEventListener("click", () => {
         closeMenu();
         toggleDarkMode();
     });
 
-    applyDarkModeFromStorage();
+    applyDarkMode();
 
-    /* ---------------- FAB BUTTONS ---------------- */
+    /* ---------------- FAB ---------------- */
 
     if (fab) {
         window.addEventListener("scroll", () => {
@@ -108,7 +104,6 @@ function initHeader() {
     }
 
     if (bookingFab) {
-        // Just ensure it's visible; behaviour is via href
         bookingFab.style.display = "flex";
     }
 }

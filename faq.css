@@ -287,5 +287,56 @@ body.page-certifications {
         z-index: 999999 !important;
     }
 }
+/* FORCE MOBILE HEADER ON IPHONE + IPAD */
+@media (max-width: 1024px) {
 
+    /* Force hamburger visible */
+    .hs-hamburger {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 999999 !important;
+    }
+
+    /* Force desktop nav hidden */
+    .hs-nav-wrapper {
+        display: none !important;
+    }
+
+    /* Force mobile menu hidden by default */
+    #hsMobileMenu {
+        display: none !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: #0a2342 !important;
+        padding: 20px !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        z-index: 999999 !important;
+    }
+
+    /* Force mobile menu visible when toggled */
+    #hsMobileMenu.open {
+        display: flex !important;
+    }
+
+    /* Force search + dark mode visible */
+    .hs-search-wrapper,
+    #searchIcon,
+    #darkToggleHeader {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Force FAB visible */
+    #fab {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        z-index: 999999 !important;
+    }
+}
 </style>

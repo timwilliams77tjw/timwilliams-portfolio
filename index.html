@@ -327,14 +327,31 @@ html, body {
     // Resize when parent window resizes
     window.addEventListener("resize", resizeFrame);
 
-    // Resize when iframe sends a message
-    window.addEventListener("message", (event) => {
-        if (event.data && event.data.headerResize) {
-            resizeFrame();
+window.addEventListener("message", (event) => {
+    if (!event.data) return;
+
+    // Resize from header
+    if (event.data.headerResize) {
+        resizeFrame();
+    }
+
+    // Initialise dark mode from saved state
+    if (event.data.tw_dark_init) {
+        if (localStorage.getItem("tw_dark") === "1") {
+            document.body.classList.add("dark-mode");
         }
-    });
-})();
-</script>
+    }
+
+    // Toggle dark mode from header button
+    if (event.data.tw_dark_toggle) {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem(
+            "tw_dark",
+            document.body.classList.contains("dark-mode") ? "1" : "0"
+        );
+    }
+});
+
 
 
 

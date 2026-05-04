@@ -18,17 +18,20 @@
 <div id="header-placeholder"></div>
 
 <script>
-   fetch("header-standard-v2.html")
+fetch("header-standard-v2.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
 
       const script = document.createElement("script");
-      script.src = "header-standard-v2.js";
-      script.onload = () => initHeader();
+      script.src = "header-standard-v2.js?v=40002"; // force reload
+      script.onload = () => {
+          if (typeof initHeader === "function") initHeader();
+      };
       document.body.appendChild(script);
   });
 </script>
+
 
 <!-- ⭐ PAGE LAYOUT STARTS HERE -->
 

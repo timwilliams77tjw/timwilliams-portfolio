@@ -172,5 +172,46 @@ if (window.top === window.self) {
     </div>
 
     <script src="header-index.js"></script>
+<body>
+
+    <div id="header-content">
+        <!-- your header HTML -->
+    </div>
+
+    <script src="header-index.js"></script>
+
+    <!-- STEP 1 GOES HERE -->
+    <script>
+    function notifyParentResize() {
+        if (window.parent && window.parent.postMessage) {
+            window.parent.postMessage({ headerResize: true }, "*");
+        }
+    }
+
+    document.querySelectorAll(".nav-item").forEach(item => {
+        item.addEventListener("mouseenter", notifyParentResize);
+        item.addEventListener("mouseleave", notifyParentResize);
+    });
+
+    document.querySelectorAll(".drawer-trigger").forEach(btn => {
+        btn.addEventListener("click", () => {
+            setTimeout(notifyParentResize, 50);
+            setTimeout(notifyParentResize, 200);
+        });
+    });
+
+    document.getElementById("mobileMenuToggle")?.addEventListener("click", () => {
+        setTimeout(notifyParentResize, 50);
+        setTimeout(notifyParentResize, 200);
+    });
+
+    document.getElementById("mobileOverlay")?.addEventListener("click", () => {
+        setTimeout(notifyParentResize, 50);
+        setTimeout(notifyParentResize, 200);
+    });
+    </script>
+
+</body>
+
 </body>
 </html>

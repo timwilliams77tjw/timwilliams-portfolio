@@ -90,27 +90,44 @@
         background: #0078ff;
     }
 
-    /* TOOLTIP */
-    .tooltip {
-        position: relative;
-        cursor: help;
-        text-decoration: underline dotted;
-    }
+/* TOOLTIP */
+.tooltip {
+    position: relative;
+    cursor: help;
+    text-decoration: underline dotted;
+}
 
-    .tooltip:hover::after {
-        content: attr(data-tip);
-        position: absolute;
-        left: 0;
-        top: 120%;
-        background: #333;
-        color: #fff;
-        padding: 8px 10px;
-        border-radius: 6px;
-        font-size: 0.85rem;
-        width: 240px;
-        z-index: 9999;
-        pointer-events: none;
-    }
+/* base tooltip, hidden by default */
+.tooltip::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 0;
+    top: 120%;
+    background: #333;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    width: 240px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* show on hover (desktop) */
+.tooltip:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* show when JS adds .is-active (touch) */
+.tooltip.is-active::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
     /* STICKY BAR */
     .sticky-follow {
@@ -331,6 +348,31 @@ fetch("footer.html")
 <!-- GLOBAL HEADER JS -->
 <script src="header-standard-v4.js"></script>
 <script>initHeader();</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const tooltips = document.querySelectorAll('.tooltip');
+
+    tooltips.forEach(tip => {
+        tip.addEventListener('click', function (e) {
+            e.stopPropagation();
+
+            // close any other open tooltips
+            document.querySelectorAll('.tooltip.is-active').forEach(other => {
+                if (other !== tip) other.classList.remove('is-active');
+            });
+
+            // toggle this one
+            tip.classList.toggle('is-active');
+        });
+    });
+
+    // click anywhere else to close
+    document.addEventListener('click', function () {
+        document.querySelectorAll('.tooltip.is-active')
+            .forEach(tip => tip.classList.remove('is-active'));
+    });
+});
+</script>
 
 </body>
 </html>

@@ -1,19 +1,91 @@
 /* ============================================================
-   DESKTOP + IPAD NAV (unchanged)
+   0. DARK MODE — APPLY SAVED STATE IMMEDIATELY
+============================================================ */
+if (localStorage.getItem("tw_dark") === "1") {
+    document.body.classList.add("dark-mode");
+}
+
+/* ============================================================
+   1. MOBILE/TABLET DRAWER MENU (≤1024px)
 ============================================================ */
 
-function initHeaderNav() {
-    const items = document.querySelectorAll("#header-content .nav-item");
+function initMobileDrawer() {
+    const toggle = document.getElementById("mobileMenuToggle");
+    const drawer = document.getElementById("mobileDrawer");
+    const overlay = document.getElementById("mobileOverlay");
+    const sections = document.querySelectorAll(".drawer-section");
 
-    items.forEach(item => {
-        item.addEventListener("click", () => {
-            item.classList.toggle("open");
+    if (!toggle || !drawer || !overlay) return;
+
+    // Open drawer
+    toggle.addEventListener("click", () => {
+        drawer.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+    });
+
+    // Close drawer when clicking overlay
+    overlay.addEventListener("click", () => {
+        drawer.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+    });
+
+    // ESC closes drawer
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            drawer.classList.remove("active");
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+    });
+
+    // Accordion logic
+    sections.forEach(section => {
+        const trigger = section.querySelector(".drawer-trigger");
+        const submenu = section.querySelector(".drawer-sub");
+
+        if (!trigger || !submenu) return;
+
+        trigger.addEventListener("click", () => {
+            const isOpen = section.classList.contains("open");
+
+            // Close all sections
+            sections.forEach(s => s.classList.remove("open"));
+
+            // Toggle current
+            if (!isOpen) {
+                section.classList.add("open");
+            }
         });
     });
 }
 
 /* ============================================================
-   SEARCH FIELD TOGGLE (unchanged)
+   2. DESKTOP MEGA-MENU (≥1025px)
+============================================================ */
+
+function initDesktopMenu() {
+    const navItems = document.querySelectorAll(".desktop-nav .nav-item");
+
+    if (!navItems.length) return;
+
+    navItems.forEach(item => {
+        const menu = item.querySelector(".mega-menu");
+        if (!menu) return;
+
+        item.addEventListener("mouseenter", () => {
+            menu.style.display = "block";
+        });
+
+        item.addEventListener("mouseleave", () => {
+            menu.style.display = "none";
+        });
+    });
+}
+
+/* ============================================================
+   3. SEARCH FIELD TOGGLE
 ============================================================ */
 
 function initSearchToggle() {
@@ -31,7 +103,7 @@ function initSearchToggle() {
 }
 
 /* ============================================================
-   DARK MODE TOGGLE (unchanged)
+   4. DARK MODE TOGGLE (with persistence)
 ============================================================ */
 
 function initDarkMode() {
@@ -40,58 +112,73 @@ function initDarkMode() {
 
     toggle.addEventListener("click", () => {
         document.body.classList.toggle("dark-mode");
+        localStorage.setItem(
+            "tw_dark",
+            document.body.classList.contains("dark-mode") ? "1" : "0"
+        );
     });
 }
 
 /* ============================================================
-   iPHONE MOBILE MENU — Handover Style
-   - Push-down menu
-   - Smooth slide-down
-   - Accordion behaviour
+   5. CATEGORY HEADERS (CV, Portfolio, etc.)
 ============================================================ */
 
-function initMobileMenu() {
-    const toggle = document.getElementById("mobileMenuToggle");
-    const menu = document.getElementById("mobileMenu");
+function initCategoryHeaders() {
+    document.querySelectorAll(".category-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const section = header.closest(".category-section");
+            if (!section) return;
 
-    if (!toggle || !menu) return;
+            section.classList.toggle("open");
 
-    // Toggle entire mobile menu
-    toggle.addEventListener("click", () => {
-        menu.classList.toggle("open");
-    });
-
-    // Accordion behaviour
-    const triggers = menu.querySelectorAll(".hs-mobile-trigger");
-
-    triggers.forEach(trigger => {
-        trigger.addEventListener("click", () => {
-
-            // Close all other sections
-            triggers.forEach(other => {
-                if (other !== trigger) {
-                    other.nextElementSibling.classList.remove("open");
-                }
-            });
-
-            // Toggle this section
-            const sub = trigger.nextElementSibling;
-            sub.classList.toggle("open");
+            const icon = header.querySelector(".category-toggle");
+            if (icon) {
+                icon.textContent = section.classList.contains("open") ? "−" : "+";
+            }
         });
     });
 }
 
 /* ============================================================
-   INITIALISE EVERYTHING
-   (Runs immediately after header injection)
+   6. ACTIVE LINK HIGHLIGHTING
 ============================================================ */
 
-function initHeaderSystem() {
-    initHeaderNav();
-    initSearchToggle();
-    initDarkMode();
-    initMobileMenu();
+function initActiveLinks() {
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+
+    document.querySelectorAll("a").forEach(link => {
+        const href = link.getAttribute("href");
+        if (!href) return;
+
+        const file = href.split("/").pop();
+        if (file === currentPath) {
+            link.classList.add("active");
+        }
+    });
 }
 
-// Run immediately — header HTML is already injected
-initHeaderSystem();
+/* ============================================================
+   7. INITIALISE BASED ON SCREEN SIZE
+============================================================ */
+
+function initHeaderMenus() {
+    const width = window.innerWidth;
+
+    if (width <= 1024) {
+        initMobileDrawer();
+    } else {
+        initDesktopMenu();
+    }
+}
+
+/* ============================================================
+   8. RUN EVERYTHING AFTER HEADER LOAD
+============================================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    initHeaderMenus();
+    initSearchToggle();
+    initDarkMode();
+    initCategoryHeaders();
+    initActiveLinks();
+});

@@ -1,14 +1,4 @@
-body::before {
-    content: "HEADER CSS LOADED";
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: red;
-    color: #fff;
-    padding: 4px 8px;
-    font-size: 10px;
-    z-index: 99999;
-}
+
 
 /* -------------------------------------------------------
    GLOBAL RESET / BASE
@@ -61,6 +51,35 @@ body::before {
     font-size: 14px;
     color: #334e68;
 }
+#darkModeToggle,
+#siteSearchToggle {
+    background: transparent;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #cbd2e1;
+    color: #0a2540;
+    font-size: 16px;
+}
+
+/* Optional: hide text and use simple icons */
+#darkModeToggle::before {
+    content: "☾";
+}
+
+#siteSearchToggle::before {
+    content: "🔍";
+}
+
+/* Hide the original text label */
+#darkModeToggle,
+#siteSearchToggle {
+    font-size: 0;
+}
 
 /* -------------------------------------------------------
    HERO BUTTONS
@@ -92,6 +111,17 @@ body::before {
     border: none;
     cursor: pointer;
     display: none; /* shown on mobile/tablet */
+}
+#siteSearchInput {
+    display: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd2e1;
+    font-size: 14px;
+}
+
+#siteSearchInput.open {
+    display: inline-block;
 }
 
 /* -------------------------------------------------------

@@ -69,13 +69,16 @@ function initDesktopMenu() {
         const menu = item.querySelector(".mega-menu");
         if (!menu) return;
 
-        item.addEventListener("mouseenter", () => {
-            menu.style.display = "block";
-        });
+item.addEventListener("mouseenter", () => {
+    menu.classList.add("open");
+    window.parent.postMessage({ headerResize: true }, "*");
+});
 
-        item.addEventListener("mouseleave", () => {
-            menu.style.display = "none";
-        });
+item.addEventListener("mouseleave", () => {
+    menu.classList.remove("open");
+    window.parent.postMessage({ headerResize: true }, "*");
+});
+
     });
 }
 

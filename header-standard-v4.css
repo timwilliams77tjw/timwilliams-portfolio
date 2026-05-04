@@ -202,3 +202,66 @@ FAQ FIXES
     max-width: 900px;
     margin: 0 auto;
 }
+/* ============================================================
+FIX PACK — HERO SIZE, MENU LINKS, DARK MODE, FAB, IPHONE SWIPE
+============================================================ */
+
+/* 1 — HERO BANNER HEIGHT (iPad too small) */
+.hs-hero-banner {
+    min-height: 260px;        /* matches screenshot scale */
+    display: flex;
+    align-items: center;
+}
+
+/* 2 — MENU LINK STYLING (blue underlined links issue) */
+.hs-menu-column a,
+.hs-menu-item {
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 14px;
+}
+
+.hs-menu-column a:hover,
+.hs-menu-item:hover {
+    text-decoration: underline !important;
+}
+
+/* 3 — DARK MODE FIX (body.dark was not styled) */
+body.dark {
+    background: #0b1220 !important;
+    color: #e5e7eb !important;
+}
+
+body.dark .header-standard {
+    background: linear-gradient(135deg, #000, #222) !important;
+}
+
+body.dark .hs-menu-panel {
+    background: #000 !important;
+}
+
+/* 4 — FAB POSITION FIX (index page stuck bottom-left) */
+.fab {
+    position: fixed !important;
+    right: 20px !important;
+    bottom: 20px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Booking FAB sits above */
+.fab-booking {
+    bottom: 80px !important;
+}
+
+/* 5 — IPHONE SWIPE-OFF-SCREEN FIX */
+html, body {
+    overflow-x: hidden !important;
+}
+
+/* Ensure menu never exceeds screen width */
+.hs-menu-panel {
+    max-width: calc(100% - 20px) !important;
+}

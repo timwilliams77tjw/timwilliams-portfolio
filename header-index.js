@@ -164,10 +164,10 @@ function initActiveLinks() {
 function initHeaderMenus() {
     const width = window.innerWidth;
 
-    if (width <= 1024) {
-        initMobileDrawer();
+    if (width <= 1365) {
+        initMobileDrawer();     // iPhone + all iPads
     } else {
-        initDesktopMenu();
+        initDesktopMenu();      // only laptops/desktops
     }
 }
 

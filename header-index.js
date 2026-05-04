@@ -1,9 +1,4 @@
-/* ============================================================
-   0. DARK MODE — APPLY SAVED STATE IMMEDIATELY
-============================================================ */
-if (localStorage.getItem("tw_dark") === "1") {
-    document.body.classList.add("dark-mode");
-}
+
 
 /* ============================================================
    1. MOBILE/TABLET DRAWER MENU (≤1024px)
@@ -103,7 +98,16 @@ function initSearchToggle() {
 }
 
 /* ============================================================
-   4. DARK MODE TOGGLE (with persistence)
+0. DARK MODE — APPLY SAVED STATE IN PARENT
+============================================================ */
+
+if (window.parent && window.parent !== window) {
+    // Ask parent to apply saved state on load
+    window.parent.postMessage({ tw_dark_init: true }, "*");
+}
+
+/* ============================================================
+4. DARK MODE TOGGLE (with persistence, via parent)
 ============================================================ */
 
 function initDarkMode() {
@@ -111,13 +115,12 @@ function initDarkMode() {
     if (!toggle) return;
 
     toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem(
-            "tw_dark",
-            document.body.classList.contains("dark-mode") ? "1" : "0"
-        );
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ tw_dark_toggle: true }, "*");
+        }
     });
 }
+
 
 /* ============================================================
    5. CATEGORY HEADERS (CV, Portfolio, etc.)

@@ -16,22 +16,39 @@
 <body class="page-certifications">
 
 <!-- ⭐ HEADER MUST BE OUTSIDE ALL PAGE LAYOUT WRAPPERS -->
-<div id="header-placeholder"></div>
+<!-- SHADOW DOM HEADER -->
+<div id="header-host"></div>
 
 <script>
-fetch("header-standard-v2.html")
-  .then(r => r.text())
-  .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
+(async () => {
+    // 1. Create Shadow DOM
+    const host = document.getElementById("header-host");
+    const shadow = host.attachShadow({ mode: "open" });
 
-      const script = document.createElement("script");
-      script.src = "header-standard-v2.js?v=40002"; // force reload
-      script.onload = () => {
-          if (typeof initHeader === "function") initHeader();
-      };
-      document.body.appendChild(script);
-  });
+    // 2. Load header HTML
+    const html = await fetch("header-standard-v2.html?v=40010").then(r => r.text());
+
+    // 3. Load header CSS
+    const css = await fetch("header-standard-v2.css?v=40010").then(r => r.text());
+
+    // 4. Inject HTML + CSS into Shadow DOM
+    shadow.innerHTML = `
+        <style>${css}</style>
+        ${html}
+    `;
+
+    // 5. Load header JS inside Shadow DOM
+    const script = document.createElement("script");
+    script.textContent = `
+        (${function() {
+            ${window.initHeader.toString()}
+            initHeader();
+        }.toString()})();
+    `;
+    shadow.appendChild(script);
+})();
 </script>
+
 
 
 <!-- ⭐ PAGE LAYOUT STARTS HERE -->

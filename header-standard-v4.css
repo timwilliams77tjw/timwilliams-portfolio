@@ -483,6 +483,69 @@ footer .footer-logo {
 footer svg path {
     fill: #0A66C2 !important;
 }
+footer.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 30px;
+    background: #111;
+    color: white;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Left column */
+.footer-left {
+    flex: 1;
+    min-width: 220px;
+    font-size: 0.95rem;
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Legal column */
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 160px;
+}
+
+.footer-column h4 {
+    margin: 0 0 6px 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.footer-column a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* Logo column */
+.footer-logo img {
+    max-width: 90px;
+    height: auto;
+    display: block;
+}
+
+/* Mobile fixes */
+@media (max-width: 600px) {
+    footer.footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-logo img {
+        max-width: 70px;
+        margin-top: 10px;
+    }
+}
 
 /* 4 — Unify FAB across all pages */
 .fab, #fab {

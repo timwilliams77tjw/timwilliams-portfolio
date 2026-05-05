@@ -1,338 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact – Tim Williams</title>
-    <link rel="stylesheet" href="certifications.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact – Tim Williams</title>
 
-    <link rel="stylesheet" href="insights.css?v=1">
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="insights.css?v=1">
 
-    <style>
-        :root {
-            --bg: #f5f5f5;
-            --card-bg: #ffffff;
-            --text-main: #111;
-            --text-sub: #444;
-            --accent: #0a66c2;
-            --shadow: 0 4px 14px rgba(0,0,0,0.08);
-        }
-
-        body.dark-mode {
-            --bg: #0f172a;
-            --card-bg: #111827;
-            --text-main: #e5e7eb;
-            --text-sub: #9ca3af;
-            --accent: #38bdf8;
-            --shadow: 0 4px 18px rgba(0,0,0,0.6);
-        }
-
-        body.page-certifications {
-            background: var(--bg);
-            color: var(--text-main);
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        .sticky-follow {
-            position: sticky;
-            top: 0;
-            background: var(--accent);
-            color: #fff;
-            padding: 12px 20px;
-            text-align: center;
-            font-size: 16px;
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .dark-toggle-btn {
-            border: 1px solid rgba(255,255,255,0.6);
-            background: transparent;
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 999px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .page-title {
-            text-align: center;
-            margin: 40px 0 10px;
-            font-size: 32px;
-        }
-
-        .page-subtitle {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 18px;
-            color: var(--text-sub);
-        }
-
-        .contact-card {
-            max-width: 700px;
-            margin: 0 auto 60px;
-            padding: 30px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            animation: fadeInUp 0.5s ease forwards;
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        .contact-card label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-
-        .contact-card input,
-        .contact-card textarea,
-        .contact-card select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 18px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            background: var(--card-bg);
-            color: var(--text-main);
-            font-size: 16px;
-        }
-
-        .contact-card textarea {
-            height: 140px;
-            resize: vertical;
-        }
-
-        /* Disabled file upload styling */
-        .file-disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        .file-disabled:hover::after {
-            content: "File uploads are currently disabled.";
-            position: absolute;
-            background: #111;
-            color: #fff;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            transform: translateY(-5px);
-        }
-
-        .contact-card button {
-            background: var(--accent);
-            color: #fff;
-            padding: 12px 22px;
-            border: none;
-            border-radius: 999px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .success-message,
-        .error-message {
-            margin-top: 20px;
-            padding: 12px;
-            border-radius: 8px;
-            display: none;
-            font-weight: 600;
-        }
-
-        .success-message {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .error-message {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .alt-links {
-            text-align: center;
-            margin-top: 30px;
-            color: var(--text-sub);
-        }
-
-        .alt-links a {
-            color: var(--accent);
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* CONTACT PAGE ICONS */
-.contact-icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 30px;
+<style>
+:root {
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-main: #111;
+  --text-sub: #444;
+  --accent: #0a66c2;
+  --shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
-.contact-icon {
-  max-width: 50%;
-  display: block;
-  margin: 0 auto;
+body.dark-mode {
+  --bg: #0f172a;
+  --card-bg: #111827;
+  --text-main: #e5e7eb;
+  --text-sub: #9ca3af;
+  --accent: #38bdf8;
+  --shadow: 0 4px 18px rgba(0,0,0,0.6);
 }
 
-.contact-icon-small {
-  max-width: 40%;
-  opacity: 0.9;
-}
-
-.contact-icon-inline {
-  max-width: 32px;
-  vertical-align: middle;
-  margin-right: 8px;
-}
-
-/* Optional hover effect */
-.contact-icons img:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
-}
-/* Contact page icon sizing */
-.contact-icons img {
-  display: block;
-  margin: 0 auto 1rem;
-  max-width: 40%; /* reduces large icons */
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-}
-
-/* LinkedIn icon specific adjustment */
-.contact-icons img[src*="linkedin"] {
-  max-width: 50%; /* enlarges smaller LinkedIn icon */
-}
-@media (max-width: 768px) {
-  .contact-icons img {
-    max-width: 60%;
-  }
-}
-/* Contact card layout */
-.contact-card {
-  width: 280px; /* identical width for all cards */
-  text-align: left;
-  display: inline-block;
-  vertical-align: top;
-  margin: 0 10px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-/* Icon sizing */
-.contact-card img {
-  display: block;
-  margin: 0 auto 12px;
-  width: 80px; /* identical image size */
-  height: 80px;
-  object-fit: contain;
-}
-
-/* Responsive scaling */
-@media (max-width: 768px) {
-  .contact-card {
-    width: 90%;
-    margin: 10px auto;
-  }
-  .contact-card img {
-    width: 60px;
-    height: 60px;
-  }
-}
-/* Restore normal page body width */
-.page-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Centre the contact card row */
-.contact-card-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 40px;
-}
-
-/* Identical card sizing */
-.contact-card {
-  width: 260px;
-  background: #f9f9f9;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: left;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-/* Identical icon sizing */
-.contact-card img {
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 12px;
-}
-
-/* Fix page title spacing */
 .page-title {
-  margin-bottom: 40px;
+  text-align: center;
+  margin: 40px 0 30px;
+  font-size: 32px;
 }
-/* ============================
-   CONTACT PAGE — FINAL FIXES
-   ============================ */
 
-/* 1. Wrap the entire contact page content */
+.page-subtitle {
+  text-align: center;
+  margin: 10px 0 40px;
+  font-size: 18px;
+  color: var(--text-sub);
+}
+
+/* ============================
+   CONTACT SECTION WRAPPER
+============================ */
 .contact-section {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px 60px;
 }
 
-/* 2. Fix page title spacing */
-.page-title {
-  text-align: center;
-  margin: 40px 0 30px;
-}
-
-/* 3. Centre the card row properly */
-.contact-card-wrapper {
+/* ============================
+   ICON CARDS (3 small cards)
+============================ */
+.contact-info-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 24px;
   flex-wrap: wrap;
-  margin-bottom: 20px; /* controls gap under cards */
+  margin-bottom: 20px;
 }
 
-/* 4. Identical card sizing */
-.contact-card {
+.contact-info-card {
   width: 260px;
   background: var(--card-bg);
   border-radius: 12px;
   padding: 20px;
   text-align: left;
   box-shadow: var(--shadow);
-  display: block;        /* FIX: prevents inline-block shifting the page */
-  margin: 0;             /* FIX: removes left drift */
 }
 
-/* 5. Identical icon sizing */
-.contact-card img {
+.contact-info-card img {
   width: 70px;
   height: 70px;
   object-fit: contain;
@@ -340,149 +79,138 @@
   margin: 0 auto 12px;
 }
 
-/* 6. Subtitle spacing */
-.page-subtitle {
+/* ============================
+   CONTACT FORM CARD (full width)
+============================ */
+.contact-card {
+  max-width: 700px;
+  margin: 0 auto 60px;
+  padding: 30px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.contact-card label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.contact-card input,
+.contact-card textarea,
+.contact-card select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--card-bg);
+  color: var(--text-main);
+  font-size: 16px;
+}
+
+.contact-card textarea {
+  height: 140px;
+  resize: vertical;
+}
+
+.contact-card button {
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.success-message,
+.error-message {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  display: none;
+  font-weight: 600;
+}
+
+.success-message {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.error-message {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.alt-links {
   text-align: center;
-  margin: 10px 0 40px; /* FIX: adds breathing room before form */
+  margin-top: 30px;
+  color: var(--text-sub);
 }
 
-/* 7. Centre the form and restore page width */
-.contact-form-wrapper,
-.contact-card form {
-  max-width: 600px;
-  margin: 0 auto;
+.alt-links a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
 }
 
-    </style>
-</head>
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 
-<!-- GLOBAL HEADER CSS -->
 <link rel="stylesheet" href="header-standard-v4.css">
 </head>
 
 <body class="header-with-logo">
 
-<!-- ============================
-GLOBAL HEADER v4
-============================ -->
+<!-- GLOBAL HEADER -->
 <div class="header-standard">
+  <div class="hs-topbar">
+    <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon">🔍</button>
+    <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon">🌙</button>
+    <button id="hsHamburger" class="hs-hamburger">☰</button>
+  </div>
 
-    <div class="hs-topbar">
-        <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon">🔍</button>
-        <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon">🌙</button>
-        <button id="hsHamburger" class="hs-hamburger">☰</button>
+  <div class="hs-hero-banner">
+    <div class="hs-hero-inner">
+      <img src="logo.jpg" class="hs-logo" alt="Logo">
+      <div class="hs-hero-text">
+        <h1>Tim Williams Consulting</h1>
+        <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
+        <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
+      </div>
+      <img src="profile.jpg" class="hs-hero-photo" alt="Tim Williams">
     </div>
-
-    <div class="hs-hero-banner">
-        <div class="hs-hero-inner">
-            <img src="logo.jpg" class="hs-logo" alt="Logo">
-
-            <div class="hs-hero-text">
-                <h1>Tim Williams Consulting</h1>
-                <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-                <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
-            </div>
-
-            <img src="profile.jpg" class="hs-hero-photo" alt="Tim Williams">
-        </div>
-    </div>
-
-    <div id="hsSearchBar" class="hs-search-bar">
-        <div class="hs-search-bar-inner">
-            <input id="hsSearchInput" type="text" placeholder="Search site…">
-            <button>Go</button>
-        </div>
-    </div>
-
-    <div id="hsMenuOverlay" class="hs-menu-overlay">
-        <div id="hsMenuPanel" class="hs-menu-panel">
-            <div class="hs-menu-columns">
-
-                <!-- HOME COLUMN (added) -->
-                <div class="hs-menu-column">
-                    <h4>Home</h4>
-                    <a href="index.html">Home</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>About</h4>
-                    <a href="twc-ltd.html">About</a>
-                    <a href="recommendations.html">Recommendations</a>
-                    <a href="linkedin.html">LinkedIn</a>
-                    <a href="cv.html">CV</a>
-                    <a href="interactive-cv.html">Interactive CV</a>
-                    <a href="sites.html">Digital Presence</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Services</h4>
-                    <a href="https://twc-ltd.my.canva.site" target="_blank">My Services</a>
-                    <a href="new.html">Offerings</a>
-                    <a href="engagement.html">Engagement Models</a>
-                    <a href="portfolio.html">Portfolio</a>
-                    <a href="https://gethandover.uk" target="_blank">PM Tool Suite</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Insights</h4>
-                    <a href="insights.html">Insights</a>
-                    <a href="playbooks.html">Playbooks</a>
-                    <a href="faq.html">FAQ</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Resources</h4>
-                    <a href="certifications.html">Certifications</a>
-                    <a href="downloads.html">Downloads</a>
-                </div>
-<div class="hs-menu-column">
-    <h4>Legal</h4>
-    <a href="legal.html">Legal Hub</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="cookies.html">Cookie Policy</a>
-    <a href="terms.html">Terms of Use</a>
-    <a href="data-protection.html">Data Protection</a>
+  </div>
 </div>
 
-                <div class="hs-menu-column">
-                    <h4>Contact</h4>
-                    <a href="contact.html">Contact</a>
-                    <a href="calendar.html">Calendar</a>
-                </div>
-
-                <!-- MOBILE-ONLY ITEMS -->
-                <div class="hs-menu-column hs-menu-mobile-only">
-                    <h4>Options</h4>
-                    <button id="hsMobileSearchItem" class="hs-menu-item">Search</button>
-                    <button id="hsMobileDarkItem" class="hs-menu-item">Dark Mode</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-</div>
 <div class="contact-section">
 
-
-<!-- PAGE TITLE -->
 <h1 class="page-title">Get in Touch</h1>
-    <!-- CONTACT PAGE ICONS -->
-<div class="contact-card-wrapper">
 
-  <div class="contact-card">
+<!-- ICON CARDS -->
+<div class="contact-info-wrapper">
+
+  <div class="contact-info-card">
     <img src="contact-secure.png" alt="Secure Contact">
     <h3>Secure Contact</h3>
     <p>Reach out securely for programme leadership and transformation.</p>
   </div>
 
-  <div class="contact-card">
+  <div class="contact-info-card">
     <img src="contact-location.png" alt="Location">
     <h3>Location</h3>
     <p>Birmingham, UK — delivering global transformation programmes.</p>
   </div>
 
-  <div class="contact-card">
+  <div class="contact-info-card">
     <img src="contact-linkedin.png" alt="LinkedIn Identity">
     <h3>LinkedIn Identity</h3>
     <p>Connect professionally via LinkedIn for collaboration.</p>
@@ -490,135 +218,63 @@ GLOBAL HEADER v4
 
 </div>
 
-
-<div class="page-subtitle">For programme leadership, cyber uplift, cloud adoption or modern workplace transformation.</div>
+<div class="page-subtitle">
+  For programme leadership, cyber uplift, cloud adoption or modern workplace transformation.
+</div>
 
 <!-- CONTACT FORM -->
 <div class="contact-card">
-    <form id="contactForm" 
-          action="https://formspree.io/f/mdappwww" 
-          method="POST" 
-          enctype="multipart/form-data">
+<form id="contactForm"
+      action="https://formspree.io/f/mdappwww"
+      method="POST"
+      enctype="multipart/form-data">
 
-        <label for="name">Your Name</label>
-        <input id="name" name="name" type="text" placeholder="Enter your name" required>
+  <label for="name">Your Name</label>
+  <input id="name" name="name" type="text" placeholder="Enter your name" required>
 
-        <label for="email">Your Email</label>
-        <input id="email" name="email" type="email" placeholder="Enter your email" required>
+  <label for="email">Your Email</label>
+  <input id="email" name="email" type="email" placeholder="Enter your email" required>
 
-        <label for="phone">Phone Number (optional)</label>
-        <input id="phone" name="phone" type="tel" placeholder="Enter your phone number">
+  <label for="phone">Phone Number (optional)</label>
+  <input id="phone" name="phone" type="tel" placeholder="Enter your phone number">
 
-        <label for="callback">Would you like a call back?</label>
-        <select id="callback" name="callback">
-            <option value="No">No</option>
-            <option value="Yes">Yes — please call me back</option>
-        </select>
+  <label for="callback">Would you like a call back?</label>
+  <select id="callback" name="callback">
+    <option value="No">No</option>
+    <option value="Yes">Yes — please call me back</option>
+  </select>
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="How can I help?" required></textarea>
+  <label for="message">Message</label>
+  <textarea id="message" name="message" placeholder="How can I help?" required></textarea>
 
-        <label for="file">Attach a File (disabled)</label>
-        <input id="file" name="file" type="file" class="file-disabled" disabled>
+  <label for="file">Attach a File (disabled)</label>
+  <input id="file" name="file" type="file" class="file-disabled" disabled>
 
-        <button type="submit">Send Message</button>
+  <button type="submit">Send Message</button>
 
-        <div class="success-message" id="successMsg">
-            Message sent successfully — redirecting…
-        </div>
+  <div class="success-message" id="successMsg">Message sent successfully — redirecting…</div>
+  <div class="error-message" id="errorMsg">Something went wrong — please try again.</div>
 
-        <div class="error-message" id="errorMsg">
-            Something went wrong — please try again.
-        </div>
-    </form>
+</form>
 
-    <div class="alt-links">
-        Prefer to book directly?  
-        <a href="calendar.html">Schedule a conversation</a>
-    </div>
+<div class="alt-links">
+  Prefer to book directly?
+  <a href="calendar.html">Schedule a conversation</a>
+</div>
 </div>
 
-<!-- FLOATING BUTTONS -->
-<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
-<a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+</div> <!-- end contact-section -->
 
-<!-- FOOTER INCLUDE -->
+<!-- FOOTER -->
 <div id="footer"></div>
 <script>
 fetch("footer.html")
-    .then(r => r.text())
-    .then(h => document.getElementById("footer").innerHTML = h);
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- FORM HANDLING + DARK MODE + ANALYTICS -->
-<script>
-(function() {
-
-    // Dark mode toggle
-    const darkToggle = document.getElementById("darkToggle");
-    const body = document.body;
-    const storedMode = localStorage.getItem("tw_contact_dark");
-
-    if (storedMode === "1") {
-        body.classList.add("dark-mode");
-    }
-
-    darkToggle.addEventListener("click", function() {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem("tw_contact_dark", body.classList.contains("dark-mode") ? "1" : "0");
-    });
-
-    // Analytics hook
-    function track(eventName, data) {
-        console.log("TW-Contact-Analytics:", eventName, data || {});
-    }
-
-    track("page_view", { page: "contact" });
-
-    // Form submission
-    const form = document.getElementById("contactForm");
-    const successMsg = document.getElementById("successMsg");
-    const errorMsg = document.getElementById("errorMsg");
-
-    form.addEventListener("submit", async function(e) {
-        e.preventDefault();
-
-        successMsg.style.display = "none";
-        errorMsg.style.display = "none";
-
-        const formData = new FormData(form);
-
-        try {
-            const response = await fetch(form.action, {
-                method: "POST",
-                body: formData,
-                headers: { "Accept": "application/json" }
-            });
-
-            if (response.ok) {
-                successMsg.style.display = "block";
-                track("contact_submit", { status: "success" });
-
-                setTimeout(() => {
-                    window.location.href = "success.html";
-                }, 1500);
-
-            } else {
-                errorMsg.style.display = "block";
-                track("contact_submit", { status: "error" });
-            }
-        } catch (err) {
-            errorMsg.style.display = "block";
-            track("contact_submit", { status: "network_error" });
-        }
-    });
-
-})();
-</script>
-<!-- GLOBAL HEADER JS -->
 <script src="header-standard-v4.js"></script>
 <script>initHeader();</script>
-</div> <!-- end contact-section -->
 
 </body>
 </html>

@@ -1,0 +1,45 @@
+/* ============================================================
+   GLOBAL DARK MODE — CONTENT ONLY
+   (Header stays light, page content goes dark)
+============================================================ */
+
+/* 1. Global dark mode variables */
+body.dark {
+    --bg: #0a0a0a;
+    --text-main: #ffffff;
+    --text-sub: #cccccc;
+    --card-bg: #1a1a1a;
+}
+
+/* 2. Apply dark mode to all content containers */
+body.dark main,
+body.dark .page-container,
+body.dark section,
+body.dark article,
+body.dark .cardB,
+body.dark .insight-card,
+body.dark .featured-article,
+body.dark .cta-section,
+body.dark .search-bar,
+body.dark .search-bar-local,
+body.dark input[type="text"],
+body.dark textarea {
+    background: var(--bg) !important;
+    color: var(--text-main) !important;
+}
+
+/* 3. Cards and blocks */
+body.dark .cardB,
+body.dark .insight-card,
+body.dark .featured-article,
+body.dark .cta-section {
+    background: var(--card-bg) !important;
+    color: var(--text-main) !important;
+}
+
+/* 4. Keep the header light */
+.header-standard,
+.header-standard * {
+    background: initial !important;
+    color: initial !important;
+}

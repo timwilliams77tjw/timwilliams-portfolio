@@ -72,30 +72,37 @@ function initHeader() {
 
     /* ---------------- DARK MODE ---------------- */
 
-    function applyDarkMode() {
-        if (localStorage.getItem("darkMode") === "true") {
-            document.body.classList.add("dark");
-        }
-    }
+/* ---------------- DARK MODE ---------------- */
 
-    function toggleDarkMode() {
-        document.body.classList.toggle("dark");
-        localStorage.setItem("darkMode", document.body.classList.contains("dark"));
+const DARK_MODE_KEY = "tw_dark_mode";
+
+function applyDarkMode() {
+    if (localStorage.getItem(DARK_MODE_KEY) === "true") {
+        document.body.classList.add("dark");
+        document.body.classList.add("dark-mode");
+    } else {
+        document.body.classList.remove("dark");
+        document.body.classList.remove("dark-mode");
     }
+}
+
+function toggleDarkMode() {
+    const enabled = !document.body.classList.contains("dark");
+
+    document.body.classList.toggle("dark", enabled);
+    document.body.classList.toggle("dark-mode", enabled);
+
+    localStorage.setItem(DARK_MODE_KEY, enabled ? "true" : "false");
+}
 
 darkIcon?.addEventListener("click", toggleDarkMode);
+
 mobileDarkItem?.addEventListener("click", () => {
     closeMenu();
     toggleDarkMode();
 });
 
-// FIX: Only attach if darkToggle exists
-if (darkToggle) {
-    darkToggle.addEventListener("click", toggleDarkMode);
-}
-
-
-    applyDarkMode();
+applyDarkMode();
 
     /* ---------------- FAB ---------------- */
 

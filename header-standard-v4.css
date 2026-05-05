@@ -75,6 +75,8 @@ GLOBAL DARK MODE TEXT NORMALISATION — FIXES CV, PORTFOLIO,
 INTERACTIVE CV, CERTIFICATIONS PAGES
 ============================================================ */
 
+
+
 /* Global dark mode text normalisation */
 body,
 main, .page-container, .content, .section, .card, .project, .certificate {
@@ -82,17 +84,19 @@ main, .page-container, .content, .section, .card, .project, .certificate {
     background: var(--bg) !important;
 }
 
-/* Text elements should NOT have a forced background */
-p, li, h1, h2, h3, h4, h5, h6,
-small, .subtext, .meta, .date {
+/* Text elements inside page content only */
+.page-container p,
+.page-container li,
+.page-container h1,
+.page-container h2,
+.page-container h3,
+.page-container h4,
+.page-container h5,
+.page-container h6 {
     color: var(--text-main) !important;
     background: transparent !important;
 }
 
-
-small, .subtext, .meta, .date {
-    color: var(--text-secondary) !important;
-}
 
 /* ============================================================
 SEARCH BAR — SLIDE DOWN

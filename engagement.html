@@ -1,375 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engagement Models – Tim Williams</title>
-    <link rel="stylesheet" href="certifications.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engagement Models – Tim Williams</title>
 
-
-    <style>
-        :root {
-            --bg: #f5f5f5;
-            --card-bg: #ffffff;
-            --text-main: #111;
-            --text-sub: #444;
-            --accent: #0a66c2;
-            --shadow: 0 4px 14px rgba(0,0,0,0.08);
-        }
-
-        body.dark-mode {
-            --bg: #0f172a;
-            --card-bg: #111827;
-            --text-main: #e5e7eb;
-            --text-sub: #9ca3af;
-            --accent: #38bdf8;
-            --shadow: 0 4px 18px rgba(0,0,0,0.6);
-        }
-
-        body.page-certifications {
-            background: var(--bg);
-            color: var(--text-main);
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        .sticky-follow {
-            position: sticky;
-            top: 0;
-            background: var(--accent);
-            color: #fff;
-            padding: 12px 20px;
-            text-align: center;
-            font-size: 16px;
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .dark-toggle-btn {
-            border: 1px solid rgba(255,255,255,0.6);
-            background: transparent;
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 999px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .page-title {
-            text-align: center;
-            margin: 40px 0 10px;
-            font-size: 32px;
-        }
-
-        .page-subtitle {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 18px;
-            color: var(--text-sub);
-        }
-
-        .search-bar {
-            max-width: 900px;
-            margin: 0 auto 30px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            background: var(--card-bg);
-            color: var(--text-main);
-        }
-
-        .card-grid {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            gap: 20px;
-        }
-
-        .cardB {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        .cardB:nth-child(1) { animation-delay: 0.1s; }
-        .cardB:nth-child(2) { animation-delay: 0.2s; }
-        .cardB:nth-child(3) { animation-delay: 0.3s; }
-        .cardB:nth-child(4) { animation-delay: 0.4s; }
-        .cardB:nth-child(5) { animation-delay: 0.5s; }
-        .cardB:nth-child(6) { animation-delay: 0.6s; }
-
-        .cardB h3 {
-            margin-top: 0;
-            font-size: 22px;
-        }
-
-        .cardB p {
-            color: var(--text-sub);
-            margin-bottom: 10px;
-        }
-
-        .cta-section {
-            max-width: 900px;
-            margin: 50px auto 60px;
-            padding: 30px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        .cta-section h3 {
-            margin-top: 0;
-            font-size: 22px;
-        }
-
-        .cta-section p {
-            margin: 10px 0 20px;
-            color: var(--text-sub);
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-
-<!-- GLOBAL HEADER CSS -->
+<link rel="stylesheet" href="certifications.css">
 <link rel="stylesheet" href="header-standard-v4.css">
+
+<style>
+:root {
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-main: #111;
+  --text-sub: #444;
+  --accent: #0a66c2;
+  --shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+body.dark-mode {
+  --bg: #0f172a;
+  --card-bg: #111827;
+  --text-main: #e5e7eb;
+  --text-sub: #9ca3af;
+  --accent: #38bdf8;
+  --shadow: 0 4px 18px rgba(0,0,0,0.6);
+}
+
+.page-title {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 32px;
+}
+
+.page-subtitle {
+  text-align: center;
+  margin: 10px 0 40px;
+  font-size: 18px;
+  color: var(--text-sub);
+}
+
+/* PAGE WRAPPER */
+.engagement-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+/* ICON ROW */
+.engagement-icons {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.engagement-icon-card {
+  width: 260px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+  box-shadow: var(--shadow);
+}
+
+.engagement-icon-card img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 12px;
+}
+
+/* SEARCH BAR */
+.search-bar {
+  max-width: 900px;
+  margin: 0 auto 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background: var(--card-bg);
+  color: var(--text-main);
+}
+
+/* GRID */
+.card-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+
+.cardB {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.cardB h3 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+.cardB p {
+  color: var(--text-sub);
+  margin-bottom: 10px;
+}
+
+/* CTA */
+.cta-section {
+  max-width: 900px;
+  margin: 50px auto 60px;
+  padding: 30px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.cta-section h3 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+.cta-section p {
+  margin: 10px 0 20px;
+  color: var(--text-sub);
+}
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 </head>
 
 <body class="header-with-logo">
 
-<!-- ============================
-GLOBAL HEADER v4
-============================ -->
+<!-- HEADER -->
 <div class="header-standard">
+  <div class="hs-topbar">
+    <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon">🔍</button>
+    <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon">🌙</button>
+    <button id="hsHamburger" class="hs-hamburger">☰</button>
+  </div>
 
-    <div class="hs-topbar">
-        <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon">🔍</button>
-        <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon">🌙</button>
-        <button id="hsHamburger" class="hs-hamburger">☰</button>
+  <div class="hs-hero-banner">
+    <div class="hs-hero-inner">
+      <img src="logo.jpg" class="hs-logo" alt="Logo">
+      <div class="hs-hero-text">
+        <h1>Tim Williams Consulting</h1>
+        <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
+        <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
+      </div>
+      <img src="profile.jpg" class="hs-hero-photo" alt="Tim Williams">
     </div>
+  </div>
 
-    <div class="hs-hero-banner">
-        <div class="hs-hero-inner">
-            <img src="logo.jpg" class="hs-logo" alt="Logo">
-
-            <div class="hs-hero-text">
-                <h1>Tim Williams Consulting</h1>
-                <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-                <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
-            </div>
-
-            <img src="profile.jpg" class="hs-hero-photo" alt="Tim Williams">
-        </div>
+  <div id="hsSearchBar" class="hs-search-bar">
+    <div class="hs-search-bar-inner">
+      <input id="hsSearchInput" type="text" placeholder="Search site…">
+      <button>Go</button>
     </div>
+  </div>
 
-    <div id="hsSearchBar" class="hs-search-bar">
-        <div class="hs-search-bar-inner">
-            <input id="hsSearchInput" type="text" placeholder="Search site…">
-            <button>Go</button>
-        </div>
-    </div>
+  <div id="hsMenuOverlay" class="hs-menu-overlay">
+    <div id="hsMenuPanel" class="hs-menu-panel">
+      <div class="hs-menu-columns">
 
-    <div id="hsMenuOverlay" class="hs-menu-overlay">
-        <div id="hsMenuPanel" class="hs-menu-panel">
-            <div class="hs-menu-columns">
-
-                <!-- HOME COLUMN (added) -->
-                <div class="hs-menu-column">
-                    <h4>Home</h4>
-                    <a href="index.html">Home</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>About</h4>
-                    <a href="twc-ltd.html">About</a>
-                    <a href="recommendations.html">Recommendations</a>
-                    <a href="linkedin.html">LinkedIn</a>
-                    <a href="cv.html">CV</a>
-                    <a href="interactive-cv.html">Interactive CV</a>
-                    <a href="sites.html">Digital Presence</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Services</h4>
-                    <a href="https://twc-ltd.my.canva.site" target="_blank">My Services</a>
-                    <a href="new.html">Offerings</a>
-                    <a href="engagement.html">Engagement Models</a>
-                    <a href="portfolio.html">Portfolio</a>
-                    <a href="https://gethandover.uk" target="_blank">PM Tool Suite</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Insights</h4>
-                    <a href="insights.html">Insights</a>
-                    <a href="playbooks.html">Playbooks</a>
-                    <a href="faq.html">FAQ</a>
-                </div>
-
-                <div class="hs-menu-column">
-                    <h4>Resources</h4>
-                    <a href="certifications.html">Certifications</a>
-                    <a href="downloads.html">Downloads</a>
-                </div>
+                <!-- HOME COLUMN (added) -->
+                <div class="hs-menu-column">
+                    <h4>Home</h4>
+                    <a href="index.html">Home</a>
+                </div>
+ 
+                <div class="hs-menu-column">
+                    <h4>About</h4>
+                    <a href="twc-ltd.html">About</a>
+                    <a href="recommendations.html">Recommendations</a>
+                    <a href="linkedin.html">LinkedIn</a>
+                    <a href="cv.html">CV</a>
+                    <a href="interactive-cv.html">Interactive CV</a>
+                    <a href="sites.html">Digital Presence</a>
+                </div>
+ 
+                <div class="hs-menu-column">
+                    <h4>Services</h4>
+                    <a href="https://twc-ltd.my.canva.site" target="_blank">My Services</a>
+                    <a href="new.html">Offerings</a>
+                    <a href="engagement.html">Engagement Models</a>
+                    <a href="portfolio.html">Portfolio</a>
+                    <a href="https://gethandover.uk" target="_blank">PM Tool Suite</a>
+                </div>
+ 
+                <div class="hs-menu-column">
+                    <h4>Insights</h4>
+                    <a href="insights.html">Insights</a>
+                    <a href="playbooks.html">Playbooks</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+ 
+                <div class="hs-menu-column">
+                    <h4>Resources</h4>
+                    <a href="certifications.html">Certifications</a>
+                    <a href="downloads.html">Downloads</a>
+                </div>
 <div class="hs-menu-column">
-    <h4>Legal</h4>
-    <a href="legal.html">Legal Hub</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="cookies.html">Cookie Policy</a>
-    <a href="terms.html">Terms of Use</a>
-    <a href="data-protection.html">Data Protection</a>
+    <h4>Legal</h4>
+    <a href="legal.html">Legal Hub</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="cookies.html">Cookie Policy</a>
+    <a href="terms.html">Terms of Use</a>
+    <a href="data-protection.html">Data Protection</a>
 </div>
-
-                <div class="hs-menu-column">
-                    <h4>Contact</h4>
-                    <a href="contact.html">Contact</a>
-                    <a href="calendar.html">Calendar</a>
-                </div>
-
-                <!-- MOBILE-ONLY ITEMS -->
-                <div class="hs-menu-column hs-menu-mobile-only">
-                    <h4>Options</h4>
-                    <button id="hsMobileSearchItem" class="hs-menu-item">Search</button>
-                    <button id="hsMobileDarkItem" class="hs-menu-item">Dark Mode</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
+ 
+                <div class="hs-menu-column">
+                    <h4>Contact</h4>
+                    <a href="contact.html">Contact</a>
+                    <a href="calendar.html">Calendar</a>
+                </div>
+ 
+                <!-- MOBILE-ONLY ITEMS -->
+                <div class="hs-menu-column hs-menu-mobile-only">
+                    <h4>Options</h4>
+                    <button id="hsMobileSearchItem" class="hs-menu-item">Search</button>
+                    <button id="hsMobileDarkItem" class="hs-menu-item">Dark Mode</button>
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+ 
 </div>
+ 
+ 
+ 
 
 
+<!-- PAGE CONTENT -->
+<div class="engagement-section">
 
-<!-- PAGE TITLE -->
 <h1 class="page-title">Engagement Models</h1>
-<div class="page-subtitle">Flexible delivery models designed for regulated, multi‑vendor environments.</div>
 
-<!-- SEARCH BAR -->
+<!-- NEW ICON ROW -->
+<div class="engagement-icons">
+
+  <div class="engagement-icon-card">
+    <img src="icon-programme.png" alt="Programme Leadership">
+    <h3>Programme Leadership</h3>
+    <p>Structured, governed, outcome‑driven leadership for complex transformation.</p>
+  </div>
+
+  <div class="engagement-icon-card">
+    <img src="icon-cyber.png" alt="Cyber Uplift">
+    <h3>Cyber Uplift</h3>
+    <p>Foundational security uplift across controls, identity, access and readiness.</p>
+  </div>
+
+  <div class="engagement-icon-card">
+    <img src="icon-cloud.png" alt="Cloud & Workplace Transformation">
+    <h3>Cloud & Workplace Transformation</h3>
+    <p>Predictable cloud adoption and modern workplace delivery.</p>
+  </div>
+
+</div>
+
+<div class="page-subtitle">
+  Flexible delivery models designed for regulated, multi‑vendor environments.
+</div>
+
+<!-- SEARCH -->
 <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search engagement models...">
+  <input type="text" id="searchInput" placeholder="Search engagement models...">
 </div>
 
 <!-- ENGAGEMENT MODEL CARDS -->
 <div class="card-grid" id="modelsContainer">
-
-    <div class="cardB" data-keywords="programme leadership fractional full time governance steering">
-        <h3>Programme Leadership (Fractional or Full‑Time)</h3>
-        <p>End‑to‑end leadership for complex transformation programmes, providing structure, clarity and predictable delivery.</p>
-        <p><strong>Best for:</strong> Organisations needing senior leadership without full‑time overhead.</p>
-    </div>
-
-    <div class="cardB" data-keywords="cyber uplift security controls risk remediation">
-        <h3>Cyber Uplift Delivery</h3>
-        <p>Driving foundational cyber improvements across identity, access, patching, monitoring and operational readiness.</p>
-        <p><strong>Best for:</strong> Regulated environments needing rapid uplift and measurable risk reduction.</p>
-    </div>
-
-    <div class="cardB" data-keywords="cloud adoption migration azure aws landing zone">
-        <h3>Cloud Adoption & Migration Leadership</h3>
-        <p>Aligning people, process and technology to deliver predictable cloud outcomes without operational disruption.</p>
-        <p><strong>Best for:</strong> Organisations scaling cloud usage or modernising legacy estates.</p>
-    </div>
-
-    <div class="cardB" data-keywords="modern workplace m365 endpoint intune adoption">
-        <h3>Modern Workplace Transformation</h3>
-        <p>Landing M365, endpoint and collaboration changes with adoption‑ready teams and stable operations.</p>
-        <p><strong>Best for:</strong> Organisations modernising user experience and productivity tooling.</p>
-    </div>
-
-    <div class="cardB" data-keywords="service transition stabilisation operations handover">
-        <h3>Service Transition & Stabilisation</h3>
-        <p>Ensuring new services land smoothly with clear ownership, documentation and operational readiness.</p>
-        <p><strong>Best for:</strong> Programmes introducing new platforms or major capability changes.</p>
-    </div>
-
-    <div class="cardB" data-keywords="programme recovery turnaround delivery rescue">
-        <h3>Programme Recovery / Turnaround</h3>
-        <p>Rapid assessment, stabilisation and recovery of programmes at risk, restoring confidence and momentum.</p>
-        <p><strong>Best for:</strong> Initiatives facing delays, misalignment or delivery uncertainty.</p>
-    </div>
-
+ 
+    <div class="cardB" data-keywords="programme leadership fractional full time governance steering">
+        <h3>Programme Leadership (Fractional or Full‑Time)</h3>
+        <p>End‑to‑end leadership for complex transformation programmes, providing structure, clarity and predictable delivery.</p>
+        <p><strong>Best for:</strong> Organisations needing senior leadership without full‑time overhead.</p>
+    </div>
+ 
+    <div class="cardB" data-keywords="cyber uplift security controls risk remediation">
+        <h3>Cyber Uplift Delivery</h3>
+        <p>Driving foundational cyber improvements across identity, access, patching, monitoring and operational readiness.</p>
+        <p><strong>Best for:</strong> Regulated environments needing rapid uplift and measurable risk reduction.</p>
+    </div>
+ 
+    <div class="cardB" data-keywords="cloud adoption migration azure aws landing zone">
+        <h3>Cloud Adoption & Migration Leadership</h3>
+        <p>Aligning people, process and technology to deliver predictable cloud outcomes without operational disruption.</p>
+        <p><strong>Best for:</strong> Organisations scaling cloud usage or modernising legacy estates.</p>
+    </div>
+ 
+    <div class="cardB" data-keywords="modern workplace m365 endpoint intune adoption">
+        <h3>Modern Workplace Transformation</h3>
+        <p>Landing M365, endpoint and collaboration changes with adoption‑ready teams and stable operations.</p>
+        <p><strong>Best for:</strong> Organisations modernising user experience and productivity tooling.</p>
+    </div>
+ 
+    <div class="cardB" data-keywords="service transition stabilisation operations handover">
+        <h3>Service Transition & Stabilisation</h3>
+        <p>Ensuring new services land smoothly with clear ownership, documentation and operational readiness.</p>
+        <p><strong>Best for:</strong> Programmes introducing new platforms or major capability changes.</p>
+    </div>
+ 
+    <div class="cardB" data-keywords="programme recovery turnaround delivery rescue">
+        <h3>Programme Recovery / Turnaround</h3>
+        <p>Rapid assessment, stabilisation and recovery of programmes at risk, restoring confidence and momentum.</p>
+        <p><strong>Best for:</strong> Initiatives facing delays, misalignment or delivery uncertainty.</p>
+    </div>
+ 
 </div>
+ 
 
-<!-- CTA SECTION -->
+
+<!-- CTA -->
 <div class="cta-section">
-    <h3>Work with Tim on your next transformation</h3>
-    <p>Whether you’re stabilising cyber posture, driving cloud adoption or landing modern workplace change, Tim brings structure, calm and delivery discipline to complex, multi‑vendor environments.</p>
-    <a href="calendar.html" class="cta-btn">Book a conversation</a>
+  <h3>Work with Tim on your next transformation</h3>
+  <p>Whether you’re stabilising cyber posture, driving cloud adoption or landing modern workplace change, Tim brings structure, calm and delivery discipline to complex, multi‑vendor environments.</p>
+  <a href="calendar.html" class="cta-btn">Book a conversation</a>
 </div>
-<!-- FLOATING BUTTONS -->
-<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
-<a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
 
-<!-- FOOTER INCLUDE -->
+</div>
+
+<!-- FAB BUTTONS -->
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a href="calendar.html" id="bookingFab" class="fab fab-booking">📅</a>
+
+<!-- FOOTER -->
 <div id="footer"></div>
 <script>
-fetch("footer.html")
-    .then(r => r.text())
-    .then(h => document.getElementById("footer").innerHTML = h);
+fetch("footer.html").then(r => r.text()).then(h => footer.innerHTML = h);
 </script>
 
-<!-- LOCAL SEARCH + DARK MODE + ANALYTICS -->
-<script>
-(function() {
-
-    // Local search
-    const searchInput = document.getElementById("searchInput");
-    const cards = document.querySelectorAll("#modelsContainer .cardB");
-
-    searchInput.addEventListener("input", function () {
-        const q = this.value.toLowerCase().trim();
-
-        cards.forEach(card => {
-            const keywords = (card.dataset.keywords || "").toLowerCase();
-            const text = card.innerText.toLowerCase();
-            const match = !q || keywords.includes(q) || text.includes(q);
-            card.style.display = match ? "block" : "none";
-        });
-    });
-
-    // Dark mode toggle
-    const darkToggle = document.getElementById("darkToggle");
-    const body = document.body;
-    const storedMode = localStorage.getItem("tw_engagement_dark");
-
-    if (storedMode === "1") {
-        body.classList.add("dark-mode");
-    }
-
-    darkToggle.addEventListener("click", function() {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem("tw_engagement_dark", body.classList.contains("dark-mode") ? "1" : "0");
-    });
-
-    // Lightweight analytics hook
-    function track(eventName, data) {
-        console.log("TW-Engagement-Analytics:", eventName, data || {});
-    }
-
-    track("page_view", { page: "engagement_models" });
-
-})();
-</script>
-<!-- GLOBAL HEADER JS -->
 <script src="header-standard-v4.js"></script>
 <script>initHeader();</script>
+
+<script>
+(function() {
+  const searchInput = document.getElementById("searchInput");
+  const cards = document.querySelectorAll("#modelsContainer .cardB");
+
+  searchInput.addEventListener("input", function () {
+    const q = this.value.toLowerCase().trim();
+    cards.forEach(card => {
+      const keywords = (card.dataset.keywords || "").toLowerCase();
+      const text = card.innerText.toLowerCase();
+      card.style.display = (!q || keywords.includes(q) || text.includes(q)) ? "block" : "none";
+    });
+  });
+})();
+</script>
 
 </body>
 </html>

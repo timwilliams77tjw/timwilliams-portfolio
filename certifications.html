@@ -97,100 +97,16 @@
 
 <body class="header-with-logo">
 
-    <!-- GLOBAL HEADER -->
-    <div class="header-standard">
-        <div class="hs-topbar">
-            <button id="hsSearchIcon" class="hs-icon-btn hs-search-icon">🔍</button>
-            <button id="hsDarkIcon" class="hs-icon-btn hs-dark-icon">🌙</button>
-            <button id="hsHamburger" class="hs-hamburger">☰</button>
-        </div>
+<div id="header-placeholder"></div>
 
-        <div class="hs-hero-banner">
-            <div class="hs-hero-inner">
-                <img src="logo.jpg" class="hs-logo" alt="Logo">
-                <div class="hs-hero-text">
-                    <h1>Tim Williams Consulting</h1>
-                    <p>Senior IT Project/PMO Manager | Cyber Security | Cloud Transformation | Digital Workplace | Infrastructure</p>
-                    <p>25+ years delivering enterprise transformation across Public & Private Sectors</p>
-                </div>
-                <img src="profile.jpg" class="hs-hero-photo" alt="Tim Williams">
-            </div>
-        </div>
-
-        <!-- GLOBAL SEARCH BAR (hidden until icon clicked) -->
-        <div id="hsSearchBar" class="hs-search-bar">
-            <div class="hs-search-bar-inner">
-                <input id="hsSearchInput" type="text" placeholder="Search site…">
-                <button>Go</button>
-            </div>
-        </div>
-
-        <!-- GLOBAL MENU -->
-        <div id="hsMenuOverlay" class="hs-menu-overlay">
-            <div id="hsMenuPanel" class="hs-menu-panel">
-                <div class="hs-menu-columns">
-
-                    <div class="hs-menu-column">
-                        <h4>Home</h4>
-                        <a href="index.html">Home</a>
-                    </div>
-
-                    <div class="hs-menu-column">
-                        <h4>About</h4>
-                        <a href="twc-ltd.html">About</a>
-                        <a href="recommendations.html">Recommendations</a>
-                        <a href="linkedin.html">LinkedIn</a>
-                        <a href="cv.html">CV</a>
-                        <a href="interactive-cv.html">Interactive CV</a>
-                        <a href="sites.html">Digital Presence</a>
-                    </div>
-
-                    <div class="hs-menu-column">
-                        <h4>Services</h4>
-                        <a href="https://twc-ltd.my.canva.site" target="_blank">My Services</a>
-                        <a href="new.html">Offerings</a>
-                        <a href="engagement.html">Engagement Models</a>
-                        <a href="portfolio.html">Portfolio</a>
-                        <a href="https://gethandover.uk" target="_blank">PM Tool Suite</a>
-                    </div>
-
-                    <div class="hs-menu-column">
-                        <h4>Insights</h4>
-                        <a href="insights.html">Insights</a>
-                        <a href="playbooks.html">Playbooks</a>
-                        <a href="faq.html">FAQ</a>
-                    </div>
-
-                    <div class="hs-menu-column">
-                        <h4>Resources</h4>
-                        <a href="certifications.html">Certifications</a>
-                        <a href="downloads.html">Downloads</a>
-                    </div>
-<div class="hs-menu-column">
-    <h4>Legal</h4>
-    <a href="legal.html">Legal Hub</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="cookies.html">Cookie Policy</a>
-    <a href="terms.html">Terms of Use</a>
-    <a href="data-protection.html">Data Protection</a>
-</div>
-
-                    <div class="hs-menu-column">
-                        <h4>Contact</h4>
-                        <a href="contact.html">Contact</a>
-                        <a href="calendar.html">Calendar</a>
-                    </div>
-
-                    <div class="hs-menu-column hs-menu-mobile-only">
-                        <h4>Options</h4>
-                        <button id="hsMobileSearchItem" class="hs-menu-item">Search</button>
-                        <button id="hsMobileDarkItem" class="hs-menu-item">Dark Mode</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+<script>
+fetch("header.html")
+  .then(r => r.text())
+  .then(h => {
+      document.getElementById("header-placeholder").innerHTML = h;
+      initHeader();
+  });
+</script>
 
     <!-- PAGE SEARCH BAR (separate from global search bar) -->
     <div id="pageSearchBar" class="page-search-bar">

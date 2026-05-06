@@ -104,22 +104,11 @@ fetch("header.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
-
-      // Load header JS AFTER header exists
-      const headerScript = document.createElement("script");
-      headerScript.src = "header-standard-v4.js";
-      headerScript.onload = () => {
-          initHeader();
-
-          // Load global search AFTER header is initialised
-          const searchScript = document.createElement("script");
-          searchScript.src = "site-search.js";
-          document.body.appendChild(searchScript);
-      };
-
-      document.body.appendChild(headerScript);
+      initHeader();
   });
 </script>
+
+
 
 
 

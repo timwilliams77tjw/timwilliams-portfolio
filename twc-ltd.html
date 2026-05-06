@@ -98,13 +98,17 @@ body.dark-mode {
 <link rel="stylesheet" href="header-standard-v4.css">
 
 <div id="header-placeholder"></div>
-
 <script>
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
       initHeader();
+
+      // Load global search AFTER header exists
+      const searchScript = document.createElement("script");
+      searchScript.src = "site-search.js";
+      document.body.appendChild(searchScript);
   });
 </script>
 
@@ -251,7 +255,6 @@ fetch("footer.html")
 <!-- GLOBAL HEADER JS -->
 <script src="header-standard-v4.js"></script>
 <script>initHeader();</script>
-<script src="site-search.js" defer></script>
 <script src="page-search.js" defer></script>
 
 

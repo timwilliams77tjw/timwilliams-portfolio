@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Search Results</title>
+<link rel="stylesheet" href="header-standard-v4.css">
+<link rel="stylesheet" href="certifications.css">
+
+<style>
+.search-results-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+.search-result {
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.search-result h3 {
+    margin: 0 0 8px;
+}
+.highlight {
+    background: yellow;
+}
+</style>
+
+</head>
+<body class="header-with-logo">
+
+<div id="header-placeholder"></div>
+<script>
+fetch("header.html").then(r=>r.text()).then(h=>{
+    document.getElementById("header-placeholder").innerHTML = h;
+    initHeader();
+});
+</script>
+
+<div class="search-results-container">
+    <h1>Search Results</h1>
+    <div id="results"></div>
+</div>
+
+<script src="site-search.js"></script>
+<script src="site-search-results.js"></script>
+
+</body>
+</html>

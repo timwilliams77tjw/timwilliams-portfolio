@@ -108,13 +108,16 @@ fetch("header.html")
       // Load header JS AFTER header exists
       const headerScript = document.createElement("script");
       headerScript.src = "header-standard-v4.js";
-      headerScript.onload = () => initHeader();
-      document.body.appendChild(headerScript);
+      headerScript.onload = () => {
+          initHeader();
 
-      // Load global search AFTER header exists
-      const searchScript = document.createElement("script");
-      searchScript.src = "site-search.js";
-      document.body.appendChild(searchScript);
+          // Load global search AFTER header is initialised
+          const searchScript = document.createElement("script");
+          searchScript.src = "site-search.js";
+          document.body.appendChild(searchScript);
+      };
+
+      document.body.appendChild(headerScript);
   });
 </script>
 

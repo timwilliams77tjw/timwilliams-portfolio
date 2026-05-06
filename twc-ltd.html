@@ -104,14 +104,20 @@ fetch("header.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+
+      // Load header JS AFTER header exists
+      const headerScript = document.createElement("script");
+      headerScript.src = "header-standard-v4.js";
+      headerScript.onload = () => initHeader();
+      document.body.appendChild(headerScript);
 
       // Load global search AFTER header exists
-      const s = document.createElement("script");
-      s.src = "site-search.js";
-      document.body.appendChild(s);
+      const searchScript = document.createElement("script");
+      searchScript.src = "site-search.js";
+      document.body.appendChild(searchScript);
   });
 </script>
+
 
 
 
@@ -249,9 +255,7 @@ fetch("footer.html")
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- GLOBAL HEADER JS -->
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
+
 
 
 </body>

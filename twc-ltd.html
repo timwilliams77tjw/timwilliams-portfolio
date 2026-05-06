@@ -105,8 +105,14 @@ fetch("header.html")
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
       initHeader();
+
+      // Load global search AFTER header exists
+      const s = document.createElement("script");
+      s.src = "site-search.js";
+      document.body.appendChild(s);
   });
 </script>
+
 
 
 <!-- PAGE CONTENT -->
@@ -246,7 +252,7 @@ fetch("footer.html")
 <!-- GLOBAL HEADER JS -->
 <script src="header-standard-v4.js"></script>
 <script>initHeader();</script>
-<script src="site-search.js" defer></script>
+
 
 </body>
 </html>

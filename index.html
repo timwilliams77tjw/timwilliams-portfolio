@@ -156,6 +156,16 @@ fetch("header.html")
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
       initHeader();
+
+      // Ensure site-search.js is loaded, then bind
+      const searchScript = document.createElement("script");
+      searchScript.src = "site-search.js";
+      searchScript.onload = () => {
+          if (typeof initSiteSearch === "function") {
+              initSiteSearch();
+          }
+      };
+      document.body.appendChild(searchScript);
   });
 </script>
 
@@ -330,7 +340,7 @@ Helping UK organisations successfully deliver complex cyber security, cloud and 
 <!-- GLOBAL HEADER JS -->
 <script src="header-standard-v4.js"></script>
 <script>initHeader();</script>
-    <script src="site-search.js" defer></script>
+
 
 
 <!-- FOOTER -->

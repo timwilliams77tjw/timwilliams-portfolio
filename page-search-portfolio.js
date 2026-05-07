@@ -1,11 +1,12 @@
 /* ============================================================
-   PORTFOLIO — LIVE SEARCH (FINAL VERSION)
+   PORTFOLIO — LIVE SEARCH (NO HTML CORRUPTION + NO RESULTS MSG)
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     const input = document.getElementById("pageSearchInput");
     const sections = document.querySelectorAll(".portfolio-section");
+    const noResults = document.getElementById("noResultsMessage");
 
     if (!input) return;
 
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function closeAll() {
         sections.forEach(sec => {
+            sec.style.display = "block";
             sec.querySelector(".card-list").style.display = "none";
             sec.querySelector(".category-toggle").textContent = "+";
         });
@@ -40,16 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (q.length === 0) {
             closeAll();
+            if (noResults) noResults.style.display = "none";
             return;
         }
 
-        // ⭐ IMPORTANT: Open all sections so cards are searchable
+        // Open all sections so content is searchable
         sections.forEach(sec => {
+            sec.style.display = "block";
             sec.querySelector(".card-list").style.display = "block";
             sec.querySelector(".category-toggle").textContent = "–";
         });
 
         let firstMatch = null;
+        let anyMatch = false;
 
         sections.forEach(section => {
             const cards = section.querySelectorAll(".card");
@@ -60,8 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 const match = text.includes(q);
 
                 if (match) {
-                    highlightMatches(card, q);
                     sectionHasMatch = true;
+                    anyMatch = true;
+
+                    // Only highlight inside text elements, not whole card
+                    card.querySelectorAll("p, h3, li").forEach(el => {
+                        highlightMatches(el, q);
+                    });
+
                     if (!firstMatch) firstMatch = section;
                 }
             });
@@ -69,6 +80,12 @@ document.addEventListener("DOMContentLoaded", () => {
             // Hide entire section if no match
             section.style.display = sectionHasMatch ? "block" : "none";
         });
+
+        if (!anyMatch) {
+            if (noResults) noResults.style.display = "block";
+        } else {
+            if (noResults) noResults.style.display = "none";
+        }
 
         if (firstMatch) {
             firstMatch.scrollIntoView({ behavior: "smooth", block: "start" });

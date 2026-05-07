@@ -1,5 +1,5 @@
 /* ============================================================
-   CERTIFICATIONS — LIVE SEARCH (FINAL VERSION)
+   CERTIFICATIONS — LIVE SEARCH (FINAL + FIXED)
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let anyMatch = false;
 
         if (q.length === 0) {
-            // Reset to full view
             categories.forEach(cat => {
                 cat.style.display = "block";
                 cat.querySelectorAll(".cert-card").forEach(card => {
@@ -46,15 +45,22 @@ document.addEventListener("DOMContentLoaded", () => {
             let categoryHasMatch = false;
 
             cards.forEach(card => {
-                const text = card.innerText.toLowerCase();
-                const match = text.includes(q);
+                const raw = card.innerText;
+
+                // ⭐ Normalise text to avoid false negatives
+                const clean = raw
+                    .replace(/[^\w\s]/g, "")   // remove emoji + symbols
+                    .replace(/\s+/g, " ")      // normalise whitespace
+                    .trim()
+                    .toLowerCase();
+
+                const match = clean.includes(q);
 
                 if (match) {
                     card.style.display = "block";
-                    anyMatch = true;
                     categoryHasMatch = true;
+                    anyMatch = true;
 
-                    // Highlight only text elements
                     card.querySelectorAll("p, h3, li, span").forEach(el => {
                         highlightMatches(el, q);
                     });
@@ -65,14 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // Hide category if no cards match
             cat.style.display = categoryHasMatch ? "block" : "none";
         });
 
         if (!anyMatch) {
-            if (noResults) noResults.style.display = "block";
+            noResults.style.display = "block";
         } else {
-            if (noResults) noResults.style.display = "none";
+            noResults.style.display = "none";
         }
 
         if (firstMatch) {

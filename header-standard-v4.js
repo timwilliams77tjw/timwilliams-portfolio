@@ -164,3 +164,11 @@ if (typeof initHeader === "function") {
   // Fallback if initHeader is defined later
   window.addEventListener("DOMContentLoaded", initHeaderEnhancements);
 }
+// When search bar opens, focus the input
+hsSearchIcon.addEventListener("click", () => {
+    hsSearchBar.classList.toggle("open");
+
+    if (hsSearchBar.classList.contains("open")) {
+        document.getElementById("hsSearchInput").focus();
+    }
+});

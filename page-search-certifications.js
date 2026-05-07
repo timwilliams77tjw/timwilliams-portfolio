@@ -1,5 +1,5 @@
 /* ============================================================
-   CERTIFICATIONS — LIVE SEARCH (FINAL + FIXED)
+   CERTIFICATIONS — LIVE SEARCH (MATCHES REAL HTML STRUCTURE)
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,29 +25,29 @@ document.addEventListener("DOMContentLoaded", () => {
         const q = input.value.trim().toLowerCase();
         clearHighlights();
 
-        const categories = container.querySelectorAll(".cert-category");
+        const categories = container.querySelectorAll(".category-section");
         let firstMatch = null;
         let anyMatch = false;
 
         if (q.length === 0) {
             categories.forEach(cat => {
                 cat.style.display = "block";
-                cat.querySelectorAll(".cert-card").forEach(card => {
+                cat.querySelectorAll(".card").forEach(card => {
                     card.style.display = "block";
                 });
             });
-            if (noResults) noResults.style.display = "none";
+            noResults.style.display = "none";
             return;
         }
 
         categories.forEach(cat => {
-            const cards = cat.querySelectorAll(".cert-card");
+            const cards = cat.querySelectorAll(".card");
             let categoryHasMatch = false;
 
             cards.forEach(card => {
                 const raw = card.innerText;
 
-                // ⭐ Normalise text to avoid false negatives
+                // Normalise text
                 const clean = raw
                     .replace(/[^\w\s]/g, "")   // remove emoji + symbols
                     .replace(/\s+/g, " ")      // normalise whitespace
@@ -74,11 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cat.style.display = categoryHasMatch ? "block" : "none";
         });
 
-        if (!anyMatch) {
-            noResults.style.display = "block";
-        } else {
-            noResults.style.display = "none";
-        }
+        noResults.style.display = anyMatch ? "none" : "block";
 
         if (firstMatch) {
             firstMatch.scrollIntoView({ behavior: "smooth", block: "start" });

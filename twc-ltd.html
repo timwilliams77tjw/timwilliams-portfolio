@@ -108,7 +108,7 @@ fetch("header.html")
       document.getElementById("header-placeholder").innerHTML = h;
       initHeader();
 
-      // Ensure site-search.js is loaded, then bind
+      // Load site-search.js AFTER header exists, then init
       const searchScript = document.createElement("script");
       searchScript.src = "site-search.js";
       searchScript.onload = () => {
@@ -119,6 +119,7 @@ fetch("header.html")
       document.body.appendChild(searchScript);
   });
 </script>
+
 
 <!-- NOW PAGE CONTENT -->
 <main class="page-container">

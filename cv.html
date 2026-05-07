@@ -128,14 +128,23 @@ fetch("header.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
 
-      // Load global search AFTER header is ready
-      const s = document.createElement("script");
-      s.src = "site-search.js";
-      document.body.appendChild(s);
+      // Load header JS AFTER header is injected
+      const headerScript = document.createElement("script");
+      headerScript.src = "header-standard-v4.js";
+      headerScript.onload = () => {
+          if (typeof initHeader === "function") initHeader();
+
+          // Load global site search AFTER header + initHeader
+          const searchScript = document.createElement("script");
+          searchScript.src = "site-search.js";
+          document.body.appendChild(searchScript);
+      };
+
+      document.body.appendChild(headerScript);
   });
 </script>
+
 
 
 <!-- FILTER BAR -->
@@ -641,9 +650,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- GLOBAL JS -->
 <script src="global.js"></script>
 
-<!-- GLOBAL HEADER JS -->
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
+
 
 
 

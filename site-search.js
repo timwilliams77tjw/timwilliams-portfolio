@@ -12,12 +12,12 @@ function initSiteSearch() {
         window.location.href = `search-results.html?q=${encodeURIComponent(q)}`;
     }
 
-    // Remove any existing listeners to avoid double-binding
-    button.onclick = null;
-    input.onkeydown = null;
-
     button.addEventListener("click", runGlobalSearch);
+
     input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") runGlobalSearch();
     });
 }
+
+// Fallback for pages with static header (no fetch)
+document.addEventListener("DOMContentLoaded", initSiteSearch);

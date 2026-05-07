@@ -128,8 +128,19 @@ fetch("header.html")
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
       initHeader();
+
+      // Load site-search.js AFTER header exists, then init
+      const searchScript = document.createElement("script");
+      searchScript.src = "site-search.js";
+      searchScript.onload = () => {
+          if (typeof initSiteSearch === "function") {
+              initSiteSearch();
+          }
+      };
+      document.body.appendChild(searchScript);
   });
 </script>
+
 
 <!-- FILTER BAR -->
 <div class="sticky-bar">
@@ -508,7 +519,7 @@ if(toggle) toggle.textContent="+";
 <!-- GLOBAL HEADER JS -->
 <script src="header-standard-v4.js"></script>
 <script>initHeader();</script>
-    <script src="site-search.js" defer></script>
+
 
 
 

@@ -131,6 +131,16 @@ fetch("header.html")
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
       initHeader();
+
+      // Ensure site-search.js is loaded, then bind
+      const searchScript = document.createElement("script");
+      searchScript.src = "site-search.js";
+      searchScript.onload = () => {
+          if (typeof initSiteSearch === "function") {
+              initSiteSearch();
+          }
+      };
+      document.body.appendChild(searchScript);
   });
 </script>
 
@@ -434,7 +444,7 @@ loadCredly();
 <!-- GLOBAL JS (shared behaviour) -->
 <script src="global.js?v=2"></script>
 <script>initGlobal();</script>
-<script src="site-search.js" defer></script>
+
 <script src="page-search.js" defer></script>
 
 </body>

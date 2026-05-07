@@ -127,17 +127,27 @@
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
+      // Inject header HTML
       document.getElementById("header-placeholder").innerHTML = h;
 
-      // Load header JS AFTER header is injected
+      // Load header JS AFTER injection
       const headerScript = document.createElement("script");
-      headerScript.src = "header-standard-v4.js";
-      headerScript.onload = () => {
-          if (typeof initHeader === "function") initHeader();
+      headerScript.src = "header-standard-v4.js?v=2"; // force fresh load
 
-          // Load global site search AFTER header + initHeader
+      headerScript.onload = () => {
+          console.log("Header JS loaded");
+
+          // Run initHeader() only when it exists
+          if (typeof initHeader === "function") {
+              initHeader();
+              console.log("initHeader() executed");
+          } else {
+              console.error("initHeader() not found");
+          }
+
+          // Load global site search AFTER header is ready
           const searchScript = document.createElement("script");
-          searchScript.src = "site-search.js";
+          searchScript.src = "site-search.js?v=2";
           document.body.appendChild(searchScript);
       };
 

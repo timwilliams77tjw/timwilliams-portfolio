@@ -1,5 +1,5 @@
 /* ============================================================
-   CERTIFICATIONS — SAFE LIVE SEARCH (NO HTML CORRUPTION)
+   CERTIFICATIONS — FINAL LIVE SEARCH (MATCHES REAL DOM)
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Reset everything
             categories.forEach(cat => {
                 cat.style.display = "block";
-                cat.querySelectorAll(".card").forEach(card => {
+                cat.querySelectorAll(".cert-card").forEach(card => {
                     card.style.display = "block";
                 });
             });
@@ -42,16 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         categories.forEach(cat => {
-            const cards = cat.querySelectorAll(".card");
+            const cards = cat.querySelectorAll(".cert-card");
             let categoryHasMatch = false;
 
             cards.forEach(card => {
-                const raw = card.innerText;
+                const title = card.querySelector(".cert-title")?.innerText || "";
+                const issuer = card.querySelector(".cert-issuer")?.innerText || "";
 
-                // Normalise text
-                const clean = raw
-                    .replace(/[^\w\s]/g, "")   // remove emoji + symbols
-                    .replace(/\s+/g, " ")      // normalise whitespace
+                const clean = (title + " " + issuer)
+                    .replace(/[^\w\s]/g, "")
+                    .replace(/\s+/g, " ")
                     .trim()
                     .toLowerCase();
 
@@ -62,10 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     categoryHasMatch = true;
                     anyMatch = true;
 
-                    // ⭐ Only highlight inside text elements, not whole card
-                    card.querySelectorAll("h3, p, li, span").forEach(el => {
-                        highlightMatches(el, q);
-                    });
+                    // Highlight only inside title + issuer
+                    highlightMatches(card.querySelector(".cert-title"), q);
+                    highlightMatches(card.querySelector(".cert-issuer"), q);
 
                     if (!firstMatch) firstMatch = card;
                 } else {

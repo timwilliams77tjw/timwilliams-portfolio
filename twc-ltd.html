@@ -94,32 +94,25 @@ body.dark-mode {
 
 </head>
 <body>
+
 <!-- GLOBAL HEADER CSS -->
 <link rel="stylesheet" href="header-standard-v4.css">
 
+<!-- HEADER FIRST -->
 <div id="header-placeholder"></div>
+
 <script>
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
       initHeader();
-
-      // Load global search AFTER header exists
-      const searchScript = document.createElement("script");
-      searchScript.src = "site-search.js";
-      document.body.appendChild(searchScript);
   });
 </script>
 
-
-
-
-
-
-
-<!-- PAGE CONTENT -->
+<!-- NOW PAGE CONTENT -->
 <main class="page-container">
+
 
 <section class="hero-section">
     <h1>TWC Ltd — Brand Story</h1>
@@ -252,10 +245,9 @@ fetch("footer.html")
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- GLOBAL HEADER JS -->
 <script src="header-standard-v4.js"></script>
 <script>initHeader();</script>
-
+<script src="site-search.js" defer></script>
 <script src="page-search.js" defer></script>
 
 

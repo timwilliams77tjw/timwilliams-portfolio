@@ -113,8 +113,19 @@ fetch("header.html")
   .then(h => {
       document.getElementById("header-placeholder").innerHTML = h;
       initHeader();
+
+      // Ensure site-search.js is loaded, then bind
+      const searchScript = document.createElement("script");
+      searchScript.src = "site-search.js";
+      searchScript.onload = () => {
+          if (typeof initSiteSearch === "function") {
+              initSiteSearch();
+          }
+      };
+      document.body.appendChild(searchScript);
   });
 </script>
+
 
 <main class="page-container">
 

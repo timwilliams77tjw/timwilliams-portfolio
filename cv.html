@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV – Tim Williams</title>
+
+    <!-- GLOBAL HEADER CSS FIRST -->
+    <link rel="stylesheet" href="header-standard-v4.css">
+
+    <!-- PAGE CSS -->
+    <link rel="stylesheet" href="certifications.css">
+
+    <!-- PAGE SEARCH BAR + FILTER BAR FIXES -->
+    <style>
+        /* PAGE SEARCH BAR — matches CV styling */
+        .page-search-bar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .page-search-bar-inner {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .page-search-bar-inner input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #001f3f;
+            border-radius: 6px;
+        }
+
+        .page-search-bar-inner button {
+            background-color: #001f3f;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* FILTER BAR — centred like Portfolio & Certifications */
+        .sticky-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 12px 0;
+            border-bottom: none !important;
+            margin-top: 0;
+        }
+
+        .filter-btn {
+            background-color: #001f3f;
+            color: white;
+            border: 1px solid #001f3f;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background-color: #001f3f;
+            color: white;
+        }
+
+        .filter-btn.active-filter {
+            background-color: white;
+            color: #001f3f;
+            border: 1px solid #7ac0f9;
+        }
+
+        .special-btn {
+            background-color: #001f3f;
+            color: white;
+            border: 1px solid #001f3f;
+        }
+
+        .special-btn.active-filter {
+            background: white;
+            color: #001f3f;
+            border: 1px solid #7ac0f9;
+        }
+
+        /* CV CARD + GRID STYLES (unchanged) */
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .card-list {
+            display: none;
+        }
+
+        .page-content {
+            padding-top: 20px;
+        }
+  /* DARK MODE FIX — CV */
+body.dark .card,
+body.dark .grid .card {
+    background: var(--bg);
+    color: var(--text-main);
+}
+
+body.dark .orgs-columns ul li {
+    color: var(--text-main);
+}
+
+    </style>
+</head>
+
+<body class="header-with-logo">
+
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+  .then(r => r.text())
+  .then(h => {
+      document.getElementById("header-placeholder").innerHTML = h;
+      initHeader();
+  });
+</script>
+
+
+    <!-- PAGE SEARCH BAR (separate from global search bar) -->
+    <div id="pageSearchBar" class="page-search-bar">
+        <div class="page-search-bar-inner">
+            <input type="text" placeholder="Search CV…">
+            <button>Go</button>
+        </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="sticky-bar">
+        <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+        <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+        <button class="filter-btn" data-filter="summary">Summary</button>
+        <button class="filter-btn" data-filter="achievements">Achievements</button>
+        <button class="filter-btn" data-filter="experience">Experience</button>
+        <button class="filter-btn" data-filter="skills">Skills</button>
+        <button class="filter-btn" data-filter="certifications">Certifications</button>
+        <button class="filter-btn" data-filter="awards">Awards</button>
+    </div>
+<div class="page-search-container">
+    <input type="text" id="pageSearchInput" placeholder="Search CV...">
+</div>
+
+<div id="noResultsMessage" style="display:none; margin-top:20px; opacity:0.7;">
+    No matching results found.
+</div>
+
+
+<main class="page-content">
+  <div class="container">
+
+    <!-- EXECUTIVE SUMMARY -->
+  <div class="category-section cv-section" data-category="summary">
+    <div class="category-header">Executive Summary <span class="category-toggle">+</span></div>
+    <div class="card-list">
+
+        <div class="searchable-item">
+            <div class="card">
+                <p>Senior IT Project & Program Manager with 25+ years delivering enterprise‑scale infrastructure modernization, workplace transformation, cloud adoption, and cyber security programs across government, defense, healthcare, finance, and legal sectors.</p>
+                <p>Holding Enhanced SC and DBS clearance, I lead multimillion‑pound programs impacting up to 126,000 users globally, spanning Windows 10/11 deployments, network and datacenter modernisation, identity and access management, cloud migrations (Azure & AWS), and secure‑by‑design cyber security uplift.</p>
+                <p>I combine strong governance, business case development, risk & change management, stakeholder leadership, and deep technical awareness to deliver predictable outcomes across complex, multi‑supplier environments. Experience includes leading virtual/matrix teams across the UK, Europe, APAC, and the USA for organizations such as NHS England, HSBC, MoD, Metropolitan Police, DWP, Linklater’s, Telefonica, and Tesco.</p>
+
+                <h3>Key Organisations Delivered For</h3>
+                <div class="orgs-columns">
+                    <ul>
+                        <li>NHS England</li><li>HSBC</li><li>Ministry of Defence</li><li>Metropolitan Police</li><li>DWP</li><li>NfUM</li><li>FCO</li><li>Latham & Watkins</li><li>AdminRe</li>
+                    </ul>
+                    <ul>
+                        <li>Linklater’s</li><li>Telefonica</li><li>Tesco</li><li>Gateley</li><li>Eversheds</li><li>Newcastle University</li><li>United Utilities</li><li>Dounreay Nuclear</li><li>Luton Airport</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="category-section cv-section" data-category="achievements">
+    <div class="category-header">STAR Achievements <span class="category-toggle">+</span></div>
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <h3>NHS England — Cyber Security Programme</h3>
+                    <p><strong>Situation:</strong> NHS England required a full cyber‑security uplift aligned to CAF standards - £18m budget.</p>
+                    <p><strong>Task:</strong> Lead discovery, design, and implementation of multiple security solutions.</p>
+                    <p><strong>Action:</strong> Delivered a Cyber Security Program covering MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune, and a new secure backup platform.</p>
+                    <p><strong>Result:</strong> Strengthened NHS England’s security posture and operational resilience.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <h3>Roc Technologies — PMO & Infrastructure Transformation</h3>
+                    <p><strong>Situation:</strong> Multiple high‑risk infrastructure and security programs required governance and delivery assurance.</p>
+                    <p><strong>Task:</strong> Oversee PMO operations and lead delivery of key transformation initiatives.</p>
+                    <p><strong>Action:</strong> Directed PMO governance for Dounreay Nuclear; delivered MFA for Luton Airport; led network refresh; rolled out ServiceNow MSP; delivered server builds, Domino upgrades, Nutanix storage, and app migrations.</p>
+                    <p><strong>Result:</strong> Improved delivery predictability and accelerated secure infrastructure adoption.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <h3>Version One — Service Transition Leadership</h3>
+                    <p><strong>Situation:</strong> Major programs needed seamless transition into BAU.</p>
+                    <p><strong>Task:</strong> Ensure operational readiness and service stability.</p>
+                    <p><strong>Action:</strong> Managed transitions across ITIL processes; produced service designs; executed knowledge transfer; integrated ITSM and ServiceNow.</p>
+                    <p><strong>Result:</strong> Smooth handover into BAU and reduced early‑life incidents.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <h3>Computacenter — Global Workplace Transformation</h3>
+                    <p><strong>Situation:</strong> Enterprise clients required large‑scale modernization.</p>
+                    <p><strong>Task:</strong> Lead end‑to‑end delivery of complex transformations.</p>
+                    <p><strong>Action:</strong>
+                        <ul>
+                            <li>Directed global Windows 10/11 programs for Tesco, HSBC, Linklater’s, NFUM.</li>
+                            <li>Led deployments of Intune, Autopilot, SCCM, Azure AD, Teams Rooms.</li>
+                            <li>Coordinated multi‑vendor teams across UK, Europe, APAC, USA.</li>
+                            <li>Oversaw network refreshes, server hardening, storage upgrades.</li>
+                        </ul>
+                    </p>
+                    <p><strong>Result:</strong> Delivered predictable, low‑risk global transformations.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <h3>TrustMarq / Capita / Trinity / Liberata — Project Management</h3>
+                    <p><strong>Situation:</strong> Financial Services clients required secure, reliable infrastructure.</p>
+                    <p><strong>Task:</strong> Deliver infrastructure, migration, and software development projects.</p>
+                    <p><strong>Action:</strong> Implemented AD, SCCM, SCOM, Exchange, Citrix, Netscaler, Splunk, NextThink, DLP.</p>
+                    <p><strong>Result:</strong> Improved performance and strengthened security.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="category-section cv-section" data-category="experience">
+    <div class="category-header">Work Experience <span class="category-toggle">+</span></div>
+    <div class="card-list">
+
+        <div class="searchable-item">
+            <div class="card">
+                <h3>Senior Project Manager — Tim Williams Consulting Ltd / NHS England (11/2025 – 02/2026)</h3>
+                <ul>
+                    <li>Delivered a comprehensive Cyber Security Program integrating CAF-aligned solutions (MFA, IPAM, SSO, IAM, CyberArk, Splunk, Azure, Entra, Intune) and new Secure Backup solution.</li>
+                    <li>Provided strategic advisory across identity, cyber security, cloud enablement, and modern workplace.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="searchable-item">
+            <div class="card">
+                <h3>Senior Project Manager / PMO Manager — Roc Technologies (07/2025 – 10/2025)</h3>
+                <ul>
+                    <li>Directed PMO operations for the Dounreay Nuclear account.</li>
+                    <li>Implemented MFA, network refresh, ServiceNow MSP, server builds, Domino upgrades, Nutanix storage, app migrations.</li>
+                    <li>Mentored Project Coordinators and Junior PMs; supported pre‑sales and SOW creation.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="searchable-item">
+            <div class="card">
+                <h3>Senior Service Transition Project Manager — Version One (12/2024 – 07/2025)</h3>
+                <ul>
+                    <li>Delivered seamless transition of major projects into BAU support.</li>
+                    <li>Executed service designs, knowledge transfer, training, and ITSM integration.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="searchable-item">
+            <div class="card">
+                <h3>Senior Project Manager / PMO Manager / Bid Manager — Computacenter (07/2013 – 09/2024)</h3>
+                <ul>
+                    <li>Delivered global workplace and infrastructure transformations (Windows 10/11, Intune, Azure AD, Teams Rooms).</li>
+                    <li>Managed PMO, governance, RAID, reporting, financial control, pre‑sales.</li>
+                    <li>Led global managed service transitions and enterprise deployments.</li>
+                    <li>Delivered NFUM 32,000‑device Windows 10 transformation.</li>
+                    <li>Delivered Linklater’s 15,000‑user Windows 10 deployment.</li>
+                    <li>Delivered HSBC 46,000‑user Windows 11 rollout and Tesco 126,000‑device transformation.</li>
+                    <li>Delivered Intune/Autopilot/Azure for United Utilities.</li>
+                    <li>Delivered Teams Rooms rollout at Newcastle University.</li>
+                    <li>Led AWS infrastructure, SaaS development, and data migration for Telefonica.</li>
+                    <li>Delivered MoD mobile device management (Intune, Autopilot, ServiceNow).</li>
+                    <li>Delivered ServiceNow development and ITSM integration projects.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="searchable-item">
+            <div class="card">
+                <h3>Project Manager — TrustMarq / Capita / Trinity Expert Systems / Liberata (01/2006 – 06/2013)</h3>
+                <ul>
+                    <li>Delivered infrastructure, migration, and software development projects.</li>
+                    <li>Implemented AD, SCCM, SCOM, Exchange, Citrix, Netscaler, Splunk, NextThink, DLP.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+    <div class="category-section cv-section" data-category="skills">
+    <div class="category-header">Core Skills <span class="category-toggle">+</span></div>
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item"><div class="card"><h3>Cyber Security & Identity</h3><ul><li>CAF, IAM, MFA, CyberArk, Splunk, Secure Backup</li></ul></div></div>
+            <div class="searchable-item"><div class="card"><h3>Cloud & Workplace</h3><ul><li>Azure, AWS, Intune, Entra, Autopilot, Cloud Migrations, Tenant-to-Tenant, Windows 10/11, Teams Rooms</li></ul></div></div>
+            <div class="searchable-item"><div class="card"><h3>Infrastructure & Digital Workplace</h3><ul><li>Windows 10/11, Teams Rooms, network refresh, server builds, storage, AD/SCCM/SCOM, Citrix, Exchange, datacenter migrations</li></ul></div></div>
+            <div class="searchable-item"><div class="card"><h3>Project & PMO Leadership</h3><ul><li>Line management, 3rd party management, governance, RAID, reporting, financial control</li></ul></div></div>
+            <div class="searchable-item"><div class="card"><h3>Delivery Methods & Tools</h3><ul><li>Agile, Waterfall, Scrum, Kanban, MS Project, ServiceNow SPM, Jira</li></ul></div></div>
+            <div class="searchable-item"><div class="card"><h3>Service Management</h3><ul><li>ITIL, ITSM, ServiceNow, ISO 27001/9001, SOX, CSI</li></ul></div></div>
+            <div class="searchable-item"><div class="card"><h3>Commercial & Pre‑Sales</h3><ul><li>SOWs, Cost Models, Procurement, Tender Responses, Contract Negotiation</li></ul></div></div>
+
+        </div>
+    </div>
+</div>
+
+  <div class="category-section cv-section" data-category="certifications">
+    <div class="category-header">Certifications <span class="category-toggle">+</span></div>
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item"><div class="card"><h3>Project & Programme</h3><ul><li>APM PMQ</li><li>PRINCE2 Practitioner</li><li>PRINCE2 Agile Practitioner</li><li>P3O Practitioner</li><li>PMI AI in Project Management</li><li>Disciplined Agile PM</li></ul></div></div>
+
+            <div class="searchable-item"><div class="card"><h3>IT Service Management</h3><ul><li>ITIL v3 Foundation</li><li>Six Sigma Green Belt</li><li>ServiceNow IT Leadership Professional</li></ul></div></div>
+
+            <div class="searchable-item"><div class="card"><h3>Cyber & Cloud</h3><ul><li>NIST CSF</li><li>Microsoft CAF</li></ul></div></div>
+
+            <div class="searchable-item"><div class="card"><h3>Technical</h3><ul><li>MCSE, MCITP, MCP, MCTS</li><li>VMware Certified Professional</li><li>Citrix CCA</li></ul></div></div>
+
+            <div class="searchable-item"><div class="card"><h3>Memberships</h3><ul><li>APM Professional</li><li>BCS Professional</li><li>House of PMO</li></ul></div></div>
+
+        </div>
+    </div>
+</div>
+
+
+  <div class="category-section cv-section" data-category="awards">
+    <div class="category-header">Achievements & Awards <span class="category-toggle">+</span></div>
+    <div class="card-list">
+        <div class="searchable-item">
+            <div class="card">
+                <div class="awards-columns">
+                    <div>
+                        <h3>Leadership & Contribution</h3>
+                        <ul>
+                            <li>STEM Ambassador</li>
+                            <li>APM Mentor</li>
+                            <li>Career Fair Speaker</li>
+                            <li>Student Mentor</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Awards</h3>
+                        <ul>
+                            <li>High Performer Awards</li>
+                            <li>Customer Service Awards</li>
+                            <li>PMO Revenue Growth Recognition</li>
+                            <li>Service Satisfaction Awards</li>
+                            <li>UK Employee Forum Rep</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ </main>
+
+  <!-- BACK TO TOP BUTTON -->
+  <div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+  <a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+
+  <!-- FOOTER INCLUDE -->
+  <div id="footer"></div>
+  <script>
+    fetch("footer.html").then(r=>r.text()).then(f=>{
+      document.getElementById("footer").innerHTML=f;
+      if(typeof initFooter==="function") initFooter();
+    });
+  </script>
+<script>
+const darkToggle = document.getElementById("darkToggle");
+const body = document.body;
+const storedMode = localStorage.getItem("tw_dark");
+
+if (storedMode === "1") {
+  body.classList.add("dark-mode");
+}
+
+darkToggle.addEventListener("click", function() {
+  body.classList.toggle("dark-mode");
+  localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+});
+</script>
+  <!-- ACCORDION + FILTER JS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", ()=>{
+      const filterButtons=document.querySelectorAll(".filter-btn");
+      const sections=document.querySelectorAll(".cv-section");
+const expandBtn = document.getElementById("expandAllBtn");
+const collapseBtn = document.getElementById("collapseAllBtn");
+      const closeAllSections=()=>sections.forEach(s=>{
+        const list=s.querySelector(".card-list");
+        const t=s.querySelector(".category-toggle");
+        if(list) list.style.display="none";
+        if(t) t.textContent="+";
+      });
+
+      const openSection=s=>{
+        const list=s.querySelector(".card-list");
+        const t=s.querySelector(".category-toggle");
+        if(list) list.style.display="block";
+        if(t) t.textContent="−";
+      };
+
+      filterButtons.forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          filterButtons.forEach(b=>b.classList.remove("active-filter"));
+          btn.classList.add("active-filter");
+          const filter=btn.dataset.filter;
+          sections.forEach(s=>{ s.style.display=s.dataset.category===filter?"block":"none"; });
+          closeAllSections();
+          const target=document.querySelector(`[data-category="${filter}"]`);
+          if(target){ openSection(target); target.scrollIntoView({behavior:"smooth",block:"start"}); }
+        });
+      });
+
+      document.querySelectorAll(".category-header").forEach(header=>{
+        header.addEventListener("click",()=>{
+          const section=header.parentElement;
+          const list=section.querySelector(".card-list");
+          const toggle=section.querySelector(".category-toggle");
+          if(!list) return;
+          const isOpen=list.style.display==="block";
+          closeAllSections();
+          if(!isOpen){ list.style.display="block"; if(toggle) toggle.textContent="−"; }
+        });
+      });
+
+      document.getElementById("fab").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+/* EXPAND ALL */
+
+if(expandBtn){
+expandBtn.addEventListener("click", ()=>{
+
+filterButtons.forEach(b=>b.classList.remove("active-filter"));
+expandBtn.classList.add("active-filter");
+
+sections.forEach(section=>{
+section.style.display="block";
+
+const list = section.querySelector(".card-list");
+const toggle = section.querySelector(".category-toggle");
+
+if(list) list.style.display="block";
+if(toggle) toggle.textContent="−";
+
+});
+
+});
+}
+
+/* COLLAPSE ALL */
+
+if(collapseBtn){
+collapseBtn.addEventListener("click", ()=>{
+
+filterButtons.forEach(b=>b.classList.remove("active-filter"));
+collapseBtn.classList.add("active-filter");
+
+sections.forEach(section=>{
+
+const list = section.querySelector(".card-list");
+const toggle = section.querySelector(".category-toggle");
+
+if(list) list.style.display="none";
+if(toggle) toggle.textContent="+";
+
+});
+
+});
+}
+
+});
+</script>
+  <script src="global.js"></script>
+<!-- GLOBAL HEADER JS -->
+<script src="header-standard-v4.js"></script>
+<script>initHeader();</script>
+    <script src="site-search.js" defer></script>
+
+<script src="page-search.js" defer></script>
+
+</body>
+</html>

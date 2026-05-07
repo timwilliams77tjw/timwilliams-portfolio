@@ -908,3 +908,100 @@ footer span {
     position: relative;
     z-index: 2;
 }
+/* --- Premium menu enhancements --- */
+
+/* Top bar shadow */
+.hs-topbar {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* Profile photo glow */
+.hs-hero-photo {
+  transition: box-shadow .3s ease, transform .3s ease;
+}
+.hs-hero-photo:hover {
+  box-shadow: 0 0 25px rgba(0,150,255,0.55);
+  transform: scale(1.03);
+}
+
+/* Gradient overlay behind menu */
+.hs-menu-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.35)
+  );
+}
+
+/* Glassmorphism menu panel */
+.hs-menu-panel {
+  background: rgba(20,20,20,0.55);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+}
+
+/* Column layout tweaks + dividers */
+.hs-menu-columns {
+  display: flex;
+  gap: 40px;
+}
+.hs-menu-column {
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding-right: 25px;
+}
+.hs-menu-column:last-child {
+  border-right: none;
+}
+
+/* Inline icons */
+.hs-menu-column h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+}
+
+/* Link hover underline */
+.hs-menu-column a {
+  position: relative;
+  padding-bottom: 2px;
+}
+.hs-menu-column a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #4da3ff;
+  transition: width .25s ease;
+}
+.hs-menu-column a:hover::after {
+  width: 100%;
+}
+
+/* Active page highlight */
+.hs-active-link {
+  color: #4da3ff !important;
+}
+.hs-active-link::after {
+  width: 100%;
+}
+
+/* Staggered fade-in */
+.hs-menu-column {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.hs-menu-overlay.open .hs-menu-column {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hs-menu-column:nth-child(1) { transition-delay: .05s; }
+.hs-menu-column:nth-child(2) { transition-delay: .10s; }
+.hs-menu-column:nth-child(3) { transition-delay: .15s; }
+.hs-menu-column:nth-child(4) { transition-delay: .20s; }
+.hs-menu-column:nth-child(5) { transition-delay: .25s; }
+.hs-menu-column:nth-child(6) { transition-delay: .30s; }
+.hs-menu-column:nth-child(7) { transition-delay: .35s; }

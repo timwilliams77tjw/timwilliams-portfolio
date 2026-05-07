@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,35 +12,19 @@
     <!-- PAGE SEARCH BAR + FILTER BAR FIXES -->
     <style>
         /* PAGE SEARCH BAR — matches CV styling */
-        .page-search-bar {
+        .page-search-container {
             width: 100%;
             display: flex;
             justify-content: center;
             padding: 10px 0;
         }
 
-        .page-search-bar-inner {
+        #pageSearchInput {
             max-width: 600px;
             width: 100%;
-            margin: 0 auto;
-            display: flex;
-            gap: 10px;
-        }
-
-        .page-search-bar-inner input {
-            flex: 1;
             padding: 10px;
             border: 1px solid #001f3f;
             border-radius: 6px;
-        }
-
-        .page-search-bar-inner button {
-            background-color: #001f3f;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            cursor: pointer;
         }
 
         /* FILTER BAR — centred like Portfolio & Certifications */
@@ -67,11 +49,6 @@
             transition: all 0.2s;
         }
 
-        .filter-btn:hover {
-            background-color: #001f3f;
-            color: white;
-        }
-
         .filter-btn.active-filter {
             background-color: white;
             color: #001f3f;
@@ -90,7 +67,7 @@
             border: 1px solid #7ac0f9;
         }
 
-        /* CV CARD + GRID STYLES (unchanged) */
+        /* CV CARD + GRID STYLES */
         .card {
             background: white;
             border-radius: 10px;
@@ -112,17 +89,17 @@
         .page-content {
             padding-top: 20px;
         }
-  /* DARK MODE FIX — CV */
-body.dark .card,
-body.dark .grid .card {
-    background: var(--bg);
-    color: var(--text-main);
-}
 
-body.dark .orgs-columns ul li {
-    color: var(--text-main);
-}
+        /* DARK MODE FIX — CV */
+        body.dark .card,
+        body.dark .grid .card {
+            background: var(--bg);
+            color: var(--text-main);
+        }
 
+        body.dark .orgs-columns ul li {
+            color: var(--text-main);
+        }
     </style>
 </head>
 
@@ -139,34 +116,29 @@ fetch("header.html")
   });
 </script>
 
+<!-- FILTER BAR -->
+<div class="sticky-bar">
+    <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+    <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+    <button class="filter-btn" data-filter="summary">Summary</button>
+    <button class="filter-btn" data-filter="achievements">Achievements</button>
+    <button class="filter-btn" data-filter="experience">Experience</button>
+    <button class="filter-btn" data-filter="skills">Skills</button>
+    <button class="filter-btn" data-filter="certifications">Certifications</button>
+    <button class="filter-btn" data-filter="awards">Awards</button>
+</div>
 
-    <!-- PAGE SEARCH BAR (separate from global search bar) -->
-    <div id="pageSearchBar" class="page-search-bar">
-        <div class="page-search-bar-inner">
-            <input type="text" placeholder="Search CV…">
-            <button>Go</button>
+<main class="page-content">
+    <div class="container">
+
+        <!-- PAGE SEARCH BAR (correct placement) -->
+        <div class="page-search-container">
+            <input type="text" id="pageSearchInput" placeholder="Search CV...">
         </div>
-    </div>
 
-    <!-- FILTER BAR -->
-    <div class="sticky-bar">
-        <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
-        <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
-        <button class="filter-btn" data-filter="summary">Summary</button>
-        <button class="filter-btn" data-filter="achievements">Achievements</button>
-        <button class="filter-btn" data-filter="experience">Experience</button>
-        <button class="filter-btn" data-filter="skills">Skills</button>
-        <button class="filter-btn" data-filter="certifications">Certifications</button>
-        <button class="filter-btn" data-filter="awards">Awards</button>
-    </div>
-<div class="page-search-container">
-    <input type="text" id="pageSearchInput" placeholder="Search CV...">
-</div>
-
-<div id="noResultsMessage" style="display:none; margin-top:20px; opacity:0.7;">
-    No matching results found.
-</div>
-
+        <div id="noResultsMessage" style="display:none; margin-top:20px; opacity:0.7;">
+            No matching results found.
+        </div>
 
 <main class="page-content">
   <div class="container">

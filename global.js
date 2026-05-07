@@ -82,3 +82,32 @@ setTimeout(() => {
 }, 200);
 
 };
+// ------------------------------
+// Dynamic Page Search (CV / Portfolio / Certifications)
+// ------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("pageSearchInput");
+    if (!input) return;
+
+    input.addEventListener("input", () => {
+        const query = input.value.trim().toLowerCase();
+        filterPageContent(query);
+    });
+});
+
+function filterPageContent(query) {
+    const items = document.querySelectorAll(".searchable-item");
+    const noResults = document.getElementById("noResultsMessage");
+    let visibleCount = 0;
+
+    items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        const match = text.includes(query);
+        item.style.display = match ? "" : "none";
+        if (match) visibleCount++;
+    });
+
+    if (noResults) {
+        noResults.style.display = visibleCount === 0 ? "block" : "none";
+    }
+}

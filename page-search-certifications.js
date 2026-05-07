@@ -79,8 +79,19 @@ function runSearch() {
             }
         });
 
-        if (categoryHasMatch) {
-            // ⭐ AUTO‑EXPAND MATCHING CATEGORY
+if (categoryHasMatch) {
+    // ⭐ AUTO‑EXPAND MATCHING CATEGORY
+    cat.style.display = "block";
+    list.style.display = "block";
+    toggle.textContent = "−";
+} else {
+    // Hide category if no matches
+    cat.style.display = "none";
+    list.style.display = "none";      // ⭐ REQUIRED
+    toggle.textContent = "+";         // ⭐ REQUIRED
+}
+
+
             cat.style.display = "block";
             list.style.display = "block";
             toggle.textContent = "−";

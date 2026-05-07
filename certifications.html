@@ -100,11 +100,50 @@
 <div id="header-placeholder"></div>
 
 <script>
+/* ============================================================
+   UNIFIED HEADER LOADER — CV (FINAL VERSION)
+   ============================================================ */
+
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+
+    /* 1. Inject header HTML */
+    document.getElementById("header-placeholder").innerHTML = h;
+
+    /* 2. Load header JS AFTER injection */
+    const headerScript = document.createElement("script");
+    headerScript.src = "header-standard-v4.js?v=4";
+
+    headerScript.onload = () => {
+
+      /* 3. Wait for browser to attach DOM */
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+
+          /* 4. Initialise header safely */
+          if (typeof initHeader === "function") {
+            initHeader();
+          }
+
+          /* 5. Load global site search AFTER header is ready */
+          const searchScript = document.createElement("script");
+          searchScript.src = "site-search.js?v=4";
+
+          /* 6. Explicitly initialise site search */
+          searchScript.onload = () => {
+            if (typeof initSiteSearch === "function") {
+              initSiteSearch();
+            }
+          };
+
+          document.body.appendChild(searchScript);
+
+        });
+      });
+    };
+
+    document.body.appendChild(headerScript);
   });
 </script>
 
@@ -644,7 +683,7 @@ fetch("footer.html")
 <!-- GLOBAL HEADER JS -->
 <script src="header-standard-v4.js"></script>
 <script>initHeader();</script>
-    <script src="site-search.js" defer></script>
+
 
 <script src="page-search.js" defer></script>
 

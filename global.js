@@ -1,89 +1,5 @@
-/* ============================================================
-GLOBAL.JS — Unified Dark Mode + FAB + Shared Behaviour
-============================================================ */
-
-window.initGlobal = function () {
-
-/* ------------------------------------------------------------
-1. APPLY SAVED DARK MODE (unified)
------------------------------------------------------------- */
-
-const savedDark = localStorage.getItem("darkMode") === "true";
-if (savedDark) document.body.classList.add("dark");
-
-/* ------------------------------------------------------------
-2. ATTACH DARK MODE TOGGLE (supports both header systems)
------------------------------------------------------------- */
-
-setTimeout(() => {
-    const toggles = [
-        document.getElementById("darkToggle"),     // old header
-        document.getElementById("hsDarkIcon"),     // new header
-        document.getElementById("hsMobileDarkItem") // mobile menu
-    ];
-
-    toggles.forEach(btn => {
-        if (!btn) return;
-        btn.addEventListener("click", () => {
-            document.body.classList.toggle("dark");
-            localStorage.setItem("darkMode",
-                document.body.classList.contains("dark")
-            );
-        });
-    });
-}, 100);
-
-/* ------------------------------------------------------------
-3. CATEGORY HEADERS (unchanged)
------------------------------------------------------------- */
-document.querySelectorAll(".category-header").forEach(header => {
-    header.addEventListener("click", () => {
-        const section = header.closest(".category-section");
-        if (!section) return;
-        section.classList.toggle("open");
-
-        const icon = header.querySelector(".category-toggle");
-        if (icon) icon.textContent = section.classList.contains("open") ? "−" : "+";
-    });
-});
-
-/* ------------------------------------------------------------
-4. ACTIVE BUTTON HIGHLIGHTING (unchanged)
------------------------------------------------------------- */
-const path = window.location.pathname.split("/").pop();
-document.querySelectorAll(".brand-btn").forEach(btn => {
-    const href = btn.getAttribute("href");
-    if (href && href === path) btn.classList.add("active");
-});
-
-/* ------------------------------------------------------------
-5. FAB BUTTON (unified + guaranteed to work)
------------------------------------------------------------- */
-
-setTimeout(() => {
-    const fab = document.getElementById("fab");
-    if (!fab) return;
-
-    window.addEventListener("scroll", () => {
-        fab.style.display = window.scrollY > 200 ? "flex" : "none";
-    });
-
-    fab.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-}, 200);
-
-/* ------------------------------------------------------------
-6. BOOKING FAB (always visible)
------------------------------------------------------------- */
-setTimeout(() => {
-    const bookingFab = document.getElementById("bookingFab");
-    if (bookingFab) bookingFab.style.display = "flex";
-}, 200);
-
-};
 // ------------------------------
-// Dynamic Page Search (CV / Portfolio / Certifications)
+// Dynamic Page Search with Auto-Expand
 // ------------------------------
 document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("pageSearchInput");
@@ -97,16 +13,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function filterPageContent(query) {
     const items = document.querySelectorAll(".searchable-item");
+    const sections = document.querySelectorAll(".cv-section");
     const noResults = document.getElementById("noResultsMessage");
+
     let visibleCount = 0;
 
+    // 1. Hide all items first
+    items.forEach(item => {
+        item.style.display = "none";
+    });
+
+    // 2. Collapse all categories
+    sections.forEach(section => {
+        const list = section.querySelector(".card-list");
+        const toggle = section.querySelector(".category-toggle");
+        if (list) list.style.display = "none";
+        if (toggle) toggle.textContent = "+";
+    });
+
+    // 3. If search is empty → restore default behaviour
+    if (query === "") {
+        sections.forEach(section => {
+            section.style.display = "block";
+        });
+        if (noResults) noResults.style.display = "none";
+        return;
+    }
+
+    // 4. Show only matching items and auto-expand their categories
     items.forEach(item => {
         const text = item.innerText.toLowerCase();
         const match = text.includes(query);
-        item.style.display = match ? "" : "none";
-        if (match) visibleCount++;
+
+        if (match) {
+            item.style.display = "block";
+            visibleCount++;
+
+            // Auto-expand the parent category
+            const section = item.closest(".cv-section");
+            const list = section.querySelector(".card-list");
+            const toggle = section.querySelector(".category-toggle");
+
+            section.style.display = "block";
+            if (list) list.style.display = "block";
+            if (toggle) toggle.textContent = "−";
+        }
     });
 
+    // 5. Show/hide "No results"
     if (noResults) {
         noResults.style.display = visibleCount === 0 ? "block" : "none";
     }

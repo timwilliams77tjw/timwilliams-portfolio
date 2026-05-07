@@ -1,5 +1,5 @@
 /* ============================================================
-   CERTIFICATIONS — SIMPLE LIVE SEARCH (HIGHLIGHT + SCROLL)
+   CERTIFICATIONS — SAFE LIVE SEARCH (NO HTML CORRUPTION)
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,39 +25,62 @@ document.addEventListener("DOMContentLoaded", () => {
         const q = input.value.trim().toLowerCase();
         clearHighlights();
 
-        if (q.length === 0) {
-            if (noResults) noResults.style.display = "none";
-            return;
-        }
-
-        // Search all reasonable text elements inside the container
-        const candidates = container.querySelectorAll("h2, h3, h4, p, li, span, a, div");
+        const categories = container.querySelectorAll(".category-section");
         let firstMatch = null;
         let anyMatch = false;
 
-        candidates.forEach(el => {
-            const raw = el.innerText || "";
-            const clean = raw
-                .replace(/\s+/g, " ")
-                .trim()
-                .toLowerCase();
+        if (q.length === 0) {
+            // Reset everything
+            categories.forEach(cat => {
+                cat.style.display = "block";
+                cat.querySelectorAll(".card").forEach(card => {
+                    card.style.display = "block";
+                });
+            });
+            noResults.style.display = "none";
+            return;
+        }
 
-            if (!clean) return;
+        categories.forEach(cat => {
+            const cards = cat.querySelectorAll(".card");
+            let categoryHasMatch = false;
 
-            if (clean.includes(q)) {
-                anyMatch = true;
-                highlightMatches(el, q);
-                if (!firstMatch) firstMatch = el;
-            }
+            cards.forEach(card => {
+                const raw = card.innerText;
+
+                // Normalise text
+                const clean = raw
+                    .replace(/[^\w\s]/g, "")   // remove emoji + symbols
+                    .replace(/\s+/g, " ")      // normalise whitespace
+                    .trim()
+                    .toLowerCase();
+
+                const match = clean.includes(q);
+
+                if (match) {
+                    card.style.display = "block";
+                    categoryHasMatch = true;
+                    anyMatch = true;
+
+                    // ⭐ Only highlight inside text elements, not whole card
+                    card.querySelectorAll("h3, p, li, span").forEach(el => {
+                        highlightMatches(el, q);
+                    });
+
+                    if (!firstMatch) firstMatch = card;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Hide category if no cards match
+            cat.style.display = categoryHasMatch ? "block" : "none";
         });
 
-        if (!anyMatch) {
-            if (noResults) noResults.style.display = "block";
-        } else {
-            if (noResults) noResults.style.display = "none";
-            if (firstMatch) {
-                firstMatch.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
+        noResults.style.display = anyMatch ? "none" : "block";
+
+        if (firstMatch) {
+            firstMatch.scrollIntoView({ behavior: "smooth", block: "start" });
         }
     }
 

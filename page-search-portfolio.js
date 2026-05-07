@@ -1,5 +1,5 @@
 /* ============================================================
-   PORTFOLIO — LIVE SEARCH (NO GO BUTTON)
+   PORTFOLIO — LIVE SEARCH (FINAL VERSION)
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -43,23 +43,31 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        closeAll();
+        // ⭐ IMPORTANT: Open all sections so cards are searchable
+        sections.forEach(sec => {
+            sec.querySelector(".card-list").style.display = "block";
+            sec.querySelector(".category-toggle").textContent = "–";
+        });
 
         let firstMatch = null;
 
         sections.forEach(section => {
-            const text = section.innerText.toLowerCase();
-            const match = text.includes(q);
+            const cards = section.querySelectorAll(".card");
+            let sectionHasMatch = false;
 
-            if (match) {
-                openSection(section);
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                const match = text.includes(q);
 
-                section.querySelectorAll(".card").forEach(card => {
+                if (match) {
                     highlightMatches(card, q);
-                });
+                    sectionHasMatch = true;
+                    if (!firstMatch) firstMatch = section;
+                }
+            });
 
-                if (!firstMatch) firstMatch = section;
-            }
+            // Hide entire section if no match
+            section.style.display = sectionHasMatch ? "block" : "none";
         });
 
         if (firstMatch) {

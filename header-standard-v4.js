@@ -70,8 +70,6 @@ function initHeader() {
         toggleSearchBar();
     });
 
-    /* ---------------- DARK MODE ---------------- */
-
 /* ---------------- DARK MODE ---------------- */
 
 const DARK_MODE_KEY = "tw_dark_mode";
@@ -103,6 +101,7 @@ mobileDarkItem?.addEventListener("click", () => {
 });
 
 applyDarkMode();
+
 
     /* ---------------- FAB ---------------- */
 

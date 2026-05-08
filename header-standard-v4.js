@@ -1,7 +1,10 @@
 /* ============================================================
-GLOBAL HEADER v6 — MATCHED TO FLOATING PILL + VIDEO HERO
+GLOBAL HEADER v5 — FULL FIXED VERSION
 ============================================================ */
 
+/* ------------------------------------------------------------
+INITIALISE HEADER ON DOM READY
+------------------------------------------------------------ */
 document.addEventListener("DOMContentLoaded", () => {
     initHeader();
     initHeaderEnhancements();
@@ -12,6 +15,7 @@ MAIN HEADER INITIALISATION
 ------------------------------------------------------------ */
 function initHeader() {
 
+    /* Grab all header elements */
     const hamburger = document.getElementById("hsHamburger");
     const overlay = document.getElementById("hsMenuOverlay");
     const panel = document.getElementById("hsMenuPanel");
@@ -19,11 +23,13 @@ function initHeader() {
     const searchIcon = document.getElementById("hsSearchIcon");
     const searchInput = document.getElementById("hsSearchInput");
     const darkIcon = document.getElementById("hsDarkIcon");
+    const mobileSearchItem = document.getElementById("hsMobileSearchItem");
+    const mobileDarkItem = document.getElementById("hsMobileDarkItem");
     const fab = document.getElementById("fab");
     const bookingFab = document.getElementById("bookingFab");
 
     /* ------------------------------------------------------------
-    SAFETY CHECK — WAIT UNTIL HEADER EXISTS
+    SAFETY CHECK — ENSURE HEADER EXISTS BEFORE ATTACHING LISTENERS
     ------------------------------------------------------------ */
     if (!hamburger || !overlay || !panel) {
         console.warn("Header not ready, retrying…");
@@ -32,18 +38,14 @@ function initHeader() {
     }
 
     /* ------------------------------------------------------------
-    BODY SCROLL LOCK (iPhone-safe)
+    BODY SCROLL LOCK
     ------------------------------------------------------------ */
     function lockBody() {
         document.body.style.overflow = "hidden";
-        document.body.style.position = "fixed";
-        document.body.style.width = "100%";
     }
 
     function unlockBody() {
         document.body.style.overflow = "";
-        document.body.style.position = "";
-        document.body.style.width = "";
     }
 
     /* ------------------------------------------------------------
@@ -51,19 +53,13 @@ function initHeader() {
     ------------------------------------------------------------ */
     function closeMenu() {
         overlay.classList.remove("open");
-        panel.classList.remove("open");
         unlockBody();
     }
 
-    function openMenu() {
-        overlay.classList.add("open");
-        panel.classList.add("open");
-        lockBody();
-    }
-
     function toggleMenu() {
-        if (overlay.classList.contains("open")) closeMenu();
-        else openMenu();
+        overlay.classList.toggle("open");
+        if (overlay.classList.contains("open")) lockBody();
+        else unlockBody();
     }
 
     hamburger.addEventListener("click", (e) => {
@@ -75,7 +71,9 @@ function initHeader() {
         if (e.target === overlay) closeMenu();
     });
 
-    panel.addEventListener("click", (e) => e.stopPropagation());
+    panel.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
 
     /* ------------------------------------------------------------
     SEARCH BAR
@@ -92,25 +90,40 @@ function initHeader() {
         toggleSearchBar();
     });
 
+    mobileSearchItem?.addEventListener("click", () => {
+        closeMenu();
+        toggleSearchBar();
+    });
+
     /* ------------------------------------------------------------
     DARK MODE
     ------------------------------------------------------------ */
     const DARK_MODE_KEY = "tw_dark_mode";
 
     function applyDarkMode() {
-        const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
-        document.body.classList.toggle("dark", enabled);
-        document.body.classList.toggle("dark-mode", enabled);
+        if (localStorage.getItem(DARK_MODE_KEY) === "true") {
+            document.body.classList.add("dark", "dark-mode");
+        } else {
+            document.body.classList.remove("dark", "dark-mode");
+        }
     }
 
     function toggleDarkMode() {
         const enabled = !document.body.classList.contains("dark");
+
         document.body.classList.toggle("dark", enabled);
         document.body.classList.toggle("dark-mode", enabled);
+
         localStorage.setItem(DARK_MODE_KEY, enabled ? "true" : "false");
     }
 
     darkIcon?.addEventListener("click", toggleDarkMode);
+
+    mobileDarkItem?.addEventListener("click", () => {
+        closeMenu();
+        toggleDarkMode();
+    });
+
     applyDarkMode();
 
     /* ------------------------------------------------------------
@@ -136,14 +149,15 @@ ACTIVE PAGE HIGHLIGHT + RECENTLY VIEWED
 ------------------------------------------------------------ */
 function initHeaderEnhancements() {
 
+    /* Active page highlight */
     const currentPage = window.location.pathname.split("/").pop();
-
     document.querySelectorAll(".hs-menu-column a").forEach(link => {
         if (link.getAttribute("href") === currentPage) {
             link.classList.add("hs-active-link");
         }
     });
 
+    /* Recently viewed pages */
     const pageTitle = document.title;
     const pageURL = window.location.pathname;
 

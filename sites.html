@@ -123,96 +123,35 @@ body.page-certifications {
 
 <body class="page-certifications header-with-logo">
 
-
 <div id="header-placeholder"></div>
 
 <script>
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+    document.getElementById("header-placeholder").innerHTML = h;
+    initHeader();
 
-      // Ensure site-search.js is loaded, then bind
-      const searchScript = document.createElement("script");
-      searchScript.src = "site-search.js";
-      searchScript.onload = () => {
-          if (typeof initSiteSearch === "function") {
-              initSiteSearch();
-          }
-      };
-      document.body.appendChild(searchScript);
+    // Load search AFTER header is ready
+    const searchScript = document.createElement("script");
+    searchScript.src = "site-search.js";
+    searchScript.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(searchScript);
   });
-</script>
-
-
-<script>
-// COLLAPSIBLE SECTIONS
-document.querySelectorAll(".category-header").forEach(header => {
-    header.addEventListener("click", () => {
-        const section = header.parentElement;
-        const isOpen = section.classList.contains("open");
-
-        document.querySelectorAll(".category-section").forEach(sec => {
-            sec.classList.remove("open");
-            sec.querySelector(".category-toggle").textContent = "+";
-        });
-
-        if (!isOpen) {
-            section.classList.add("open");
-            section.querySelector(".category-toggle").textContent = "–";
-        }
-    });
-});
-
-// COPY BUTTONS
-document.addEventListener("click", function(e) {
-    if (e.target.closest(".copy-btn")) {
-        const btn = e.target.closest(".copy-btn");
-        const link = btn.getAttribute("data-link");
-        navigator.clipboard.writeText(link);
-        showToast("Link copied!");
-        trackEvent("copy_link", link);
-    }
-});
-
-// OUTBOUND CLICK TRACKING
-document.querySelectorAll(".website-card a").forEach(link => {
-    link.addEventListener("click", () => {
-        trackEvent("outbound_click", link.href);
-    });
-});
-</script>
-
-<!-- DARK MODE -->
-<script>
-(function () {
-    const darkToggle = document.getElementById("darkToggle");
-    if (!darkToggle) return;
-
-    const body = document.body;
-    const storedMode = localStorage.getItem("tw_dark");
-
-    if (storedMode === "1") {
-        body.classList.add("dark-mode");
-    }
-
-    darkToggle.addEventListener("click", function () {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem("tw_dark",
-            body.classList.contains("dark-mode") ? "1" : "0"
-        );
-    });
-})();
 </script>
 
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
 <section class="hero-section">
-<h1>My Websites & Professional Profiles</h1>
-<p>A curated list of my professional platforms, portfolios and digital presence.</p>
+  <h1>My Websites & Professional Profiles</h1>
+  <p>A curated list of my professional platforms, portfolios and digital presence.</p>
 </section>
+
+<!-- CATEGORY SECTIONS (unchanged HTML) -->
+
 
 <!-- CATEGORY 1 -->
 <div class="category-section">
@@ -263,15 +202,19 @@ Certifications & Learning
 <div class="grid">
 
 <article class="website-card">
-<h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
-<a href="https://www.credly.com/users/tim-williams.e51205ae">View full Credly profile</a>
-<div id="credly-badges" class="badge-grid" style="margin-top:15px;">
-<p style="font-size:13px;color:#666;">Loading badges...</p>
-</div>
-<button class="copy-btn" data-link="https://www.credly.com/users/tim-williams.e51205ae">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
+  <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+
+  <a href="https://www.credly.com/users/tim-williams.e51205ae">View full Credly profile</a>
+
+  <div id="credly-badges" class="badge-grid" style="margin-top:15px;">
+    <p style="font-size:13px;color:#666;">Loading badges...</p>
+  </div>
+
+  <button class="copy-btn" data-link="https://www.credly.com/users/tim-williams.e51205ae">
+    <i class="fa-regular fa-copy"></i> Copy Link
+  </button>
 </article>
+
 
 <article class="website-card">
 <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>

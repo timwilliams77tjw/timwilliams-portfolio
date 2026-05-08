@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Tim Williams – Certification Portfolio</title>
 
-<!-- GLOBAL HEADER CSS FIRST -->
+<title>Certifications – Tim Williams</title>
+
+<!-- GLOBAL HEADER CSS -->
 <link rel="stylesheet" href="header-standard-v4.css">
 
-<!-- PAGE CSS -->
-<link rel="stylesheet" href="certifications.css">
+<!-- GLOBAL PAGE CSS -->
 <link rel="stylesheet" href="global-restore.css">
 
-<!-- PAGE SEARCH BAR + FILTER BAR FIXES -->
+<!-- PAGE-SPECIFIC CERTIFICATIONS CSS -->
 <style>
-/* PAGE SEARCH BAR — matches CV exactly */
+
+/* Accent blue category headers */
+.category-header {
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 14px 0;
+    margin: 20px 0 10px;
+    border-bottom: 2px solid #001f3f;
+    color: #7ac0f9;
+    cursor: pointer;
+}
+.category-toggle {
+    font-weight: 900;
+    font-size: 1.8rem;
+    margin-left: 10px;
+}
+
+/* Page Search Bar */
 .page-search-bar {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 20px 0 10px;
+    padding: 10px 0;
 }
 .page-search-bar-inner {
     max-width: 600px;
     width: 100%;
-    margin: 0 auto;
     display: flex;
     gap: 10px;
 }
@@ -35,7 +52,7 @@
     border-radius: 6px;
 }
 
-/* FILTER BAR — centred like CV */
+/* Filter Bar */
 .sticky-bar {
     display: flex;
     flex-wrap: wrap;
@@ -43,7 +60,6 @@
     justify-content: center;
     padding: 12px 0;
     border-bottom: none !important;
-    margin-top: 0;
 }
 .filter-btn {
     background-color: #001f3f;
@@ -70,175 +86,511 @@
     color: #001f3f;
     border: 1px solid #7ac0f9;
 }
+
+/* Card Layout */
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .3s ease, transform .3s ease;
+}
+.card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Card Title */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #001f3f;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* Accordion default state */
+.card-list {
+    display: none;
+}
+
+/* Dark Mode */
+body.dark-mode .card {
+    background: var(--bg);
+    color: var(--text-main);
+}
+body.dark-mode .category-header {
+    color: #7ac0f9;
+}
+
 </style>
 
 </head>
 
 <body class="header-with-logo page-site-search page-has-page-search">
 
-<!-- HEADER -->
+<!-- HEADER PLACEHOLDER -->
 <div id="header-placeholder"></div>
 
 <script>
-/* Group‑2 header loader (header + site search) */
+/* ============================================================
+   GROUP‑2 HEADER LOADER (Unified across all pages)
+   ============================================================ */
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header-placeholder").innerHTML = h;
 
-    // Load global site search
-    const siteSearch = document.createElement("script");
-    siteSearch.src = "site-search.js";
-    siteSearch.onload = () => {
-      if (typeof initSiteSearch === "function") initSiteSearch();
-    };
-    document.body.appendChild(siteSearch);
-
-    // Load header JS AFTER injection
-    const headerJS = document.createElement("script");
-    headerJS.src = "header-standard-v4.js";
-    headerJS.onload = () => {
+    const headerScript = document.createElement("script");
+    headerScript.src = "header-standard-v4.js";
+    headerScript.onload = () => {
       if (typeof initHeader === "function") initHeader();
       if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+
+      const searchScript = document.createElement("script");
+      searchScript.src = "site-search.js";
+      searchScript.onload = () => {
+        if (typeof initSiteSearch === "function") initSiteSearch();
+      };
+      document.body.appendChild(searchScript);
     };
-    document.body.appendChild(headerJS);
+    document.body.appendChild(headerScript);
   });
 </script>
 
 <!-- PAGE SEARCH BAR -->
 <div id="pageSearchBar" class="page-search-bar">
-    <div class="page-search-bar-inner">
-        <input id="pageSearchInput" type="text" placeholder="Search certifications…">
-    </div>
+  <div class="page-search-bar-inner">
+    <input id="pageSearchInput" type="text" placeholder="Search certifications…">
+  </div>
 </div>
 
 <div id="noResultsMessage" style="display:none; margin-top:10px; opacity:0.7;">
-    No matching results found.
+  No matching results found.
 </div>
 
 <!-- FILTER BAR -->
 <div class="sticky-bar">
-    <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
-    <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+  <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+  <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
 
-    <button class="filter-btn" data-filter="Professional Certifications">Certifications</button>
-    <button class="filter-btn" data-filter="Leadership & Management">Leadership</button>
-    <button class="filter-btn" data-filter="Agile & Scrum">Agile</button>
-    <button class="filter-btn" data-filter="AI & Copilot">AI</button>
-    <button class="filter-btn" data-filter="Microsoft Skills & Cloud">Microsoft</button>
-    <button class="filter-btn" data-filter="Security & Governance">Security</button>
-    <button class="filter-btn" data-filter="Volunteering">Volunteering</button>
-    <button class="filter-btn" data-filter="Memberships">Memberships</button>
-    <button class="filter-btn" data-filter="Background Checks">Checks</button>
+  <!-- UI-friendly category names -->
+  <button class="filter-btn" data-filter="Professional Certifications">Certifications</button>
+  <button class="filter-btn" data-filter="Leadership & Management">Leadership</button>
+  <button class="filter-btn" data-filter="Agile & Scrum">Agile</button>
+  <button class="filter-btn" data-filter="AI & Copilot">AI</button>
+  <button class="filter-btn" data-filter="Microsoft Skills & Cloud">Microsoft</button>
+  <button class="filter-btn" data-filter="Security & Governance">Security</button>
+  <button class="filter-btn" data-filter="Volunteering">Volunteering</button>
+  <button class="filter-btn" data-filter="Memberships">Memberships</button>
+  <button class="filter-btn" data-filter="Background Checks">Checks</button>
 </div>
 
-<!-- CERTIFICATIONS -->
-<div id="certificationsContainer" class="container"></div>
+<!-- MAIN CONTENT WRAPPER -->
+<main class="page-content">
+<div class="container">
+<!-- ========================= -->
+<!-- PROFESSIONAL CERTIFICATIONS -->
+<!-- ========================= -->
 
-<!-- FLOATING BUTTONS -->
-<div id="fab" class="fab" aria-label="Back to top">⬆️</div>
-<a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
+<div class="category-section cert-section" data-category="Professional Certifications">
+  <div class="category-header">
+    Professional Certifications
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <!-- Cards for this category will be inserted in Block 3 -->
 
+<!-- PROFESSIONAL CERTIFICATIONS -->
+<div class="searchable-item">
+  <div class="card">
+    <div class="card-title">🎓 Professional Certifications</div>
+    <ul>
+      <li>Project management, programme delivery, and PMO‑aligned certifications</li>
+      <li>Agile, hybrid, and structured delivery frameworks</li>
+      <li>Professional development across project, service, and leadership domains</li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================= -->
+<!-- LEADERSHIP & MANAGEMENT -->
+<!-- ========================= -->
+
+<div class="category-section cert-section" data-category="Leadership & Management">
+  <div class="category-header">
+    Leadership & Management
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <!-- Cards for this category will be inserted in Block 3 -->
+   <!-- LEADERSHIP & MANAGEMENT -->
+<div class="searchable-item">
+  <div class="card">
+    <div class="card-title">🧭 Leadership & Management</div>
+    <ul>
+      <li>Leadership‑focused certifications supporting team, stakeholder, and organisational capability</li>
+      <li>Management frameworks for structured delivery and operational oversight</li>
+    </ul>
+  </div>
+</div>
+
+ </div>
+  </div>
+</div>
+
+
+<!-- ========================= -->
+<!-- AGILE & SCRUM -->
+<!-- ========================= -->
+
+<div class="category-section cert-section" data-category="Agile & Scrum">
+  <div class="category-header">
+    Agile & Scrum
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <!-- Cards for this category will be inserted in Block 3 -->
+
+<!-- AGILE & SCRUM -->
+<div class="searchable-item">
+  <div class="card">
+    <div class="card-title">🌀 Agile & Scrum</div>
+    <ul>
+      <li>Agile delivery methods including Scrum, Kanban, and hybrid approaches</li>
+      <li>Scaled and enterprise‑level agile practices</li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================= -->
+<!-- AI & COPILOT -->
+<!-- ========================= -->
+
+<div class="category-section cert-section" data-category="AI & Copilot">
+  <div class="category-header">
+    AI & Copilot
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <!-- Cards for this category will be inserted in Block 3 -->
+
+<!-- AI & COPILOT -->
+<div class="searchable-item">
+  <div class="card">
+    <div class="card-title">🤖 AI & Copilot</div>
+    <ul>
+      <li>AI‑aligned certifications covering modern tooling and intelligent automation</li>
+      <li>Applied AI in project and service delivery environments</li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================= -->
+<!-- MICROSOFT SKILLS & CLOUD -->
+<!-- ========================= -->
+
+<div class="category-section cert-section" data-category="Microsoft Skills & Cloud">
+  <div class="category-header">
+    Microsoft Skills & Cloud
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <!-- Cards for this category will be inserted in Block 3 -->
+
+<!-- MICROSOFT SKILLS & CLOUD -->
+<div class="searchable-item">
+  <div class="card">
+    <div class="card-title">☁️ Microsoft Skills & Cloud</div>
+    <ul>
+      <li>Cloud, identity, and workplace certifications across Azure and Microsoft 365</li>
+      <li>Technical foundations supporting enterprise cloud adoption</li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================= -->
+<!-- SECURITY & GOVERNANCE -->
+<!-- ========================= -->
+
+<div class="category-section cert-section" data-category="Security & Governance">
+  <div class="category-header">
+    Security & Governance
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <!-- Cards for this category will be inserted in Block 3 -->
+
+<!-- SECURITY & GOVERNANCE -->
+<div class="searchable-item">
+  <div class="card">
+    <div class="card-title">🔐 Security & Governance</div>
+    <ul>
+      <li>Cyber frameworks, governance models, and security alignment certifications</li>
+      <li>Standards supporting secure‑by‑design delivery</li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================= -->
+<!-- VOLUNTEERING -->
+<!-- ========================= -->
+
+<div class="category-section cert-section" data-category="Volunteering">
+  <div class="category-header">
+    Volunteering
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <!-- Cards for this category will be inserted in Block 3 -->
+
+<!-- VOLUNTEERING -->
+<div class="searchable-item">
+  <div class="card">
+    <div class="card-title">❤️ Volunteering</div>
+    <ul>
+      <li>Community, mentoring, and professional development contributions</li>
+      <li>Engagement in STEM, career support, and industry outreach</li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================= -->
+<!-- MEMBERSHIPS -->
+<!-- ========================= -->
+
+<div class="category-section cert-section" data-category="Memberships">
+  <div class="category-header">
+    Memberships
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <!-- Cards for this category will be inserted in Block 3 -->
+
+<!-- MEMBERSHIPS -->
+<div class="searchable-item">
+  <div class="card">
+    <div class="card-title">🏛️ Memberships</div>
+    <ul>
+      <li>Professional memberships across project, technology, and service domains</li>
+      <li>Active participation in recognised industry bodies</li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================= -->
+<!-- BACKGROUND CHECKS -->
+<!-- ========================= -->
+
+<div class="category-section cert-section" data-category="Background Checks">
+  <div class="category-header">
+    Background Checks
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <!-- Cards for this category will be inserted in Block 3 -->
+
+<!-- BACKGROUND CHECKS -->
+<div class="searchable-item">
+  <div class="card">
+    <div class="card-title">🛂 Background Checks</div>
+    <ul>
+      <li>Security and background verification supporting work in regulated environments</li>
+      <li>Clearances aligned to government, defence, and critical‑infrastructure sectors</li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+<!-- ========================= -->
 <!-- FOOTER -->
+<!-- ========================= -->
+
+</div> <!-- closes .container -->
+</main>
+
 <div id="footer"></div>
 <script>
 fetch("footer.html")
   .then(r => r.text())
-  .then(h => document.getElementById("footer").innerHTML = h);
+  .then(f => {
+    document.getElementById("footer").innerHTML = f;
+    if (typeof initFooter === "function") initFooter();
+  });
 </script>
 
-<!-- JSON DATA -->
-<script id="cert-data">
-{{JSON_DATA_HERE}}
-</script>
 
-<!-- INLINE RENDERER + FILTER + PAGE SEARCH -->
+<!-- ========================= -->
+<!-- FLOATING BUTTONS -->
+<!-- ========================= -->
+
+<div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
+
+
+<!-- ========================= -->
+<!-- ACCORDION + FILTER ENGINE -->
+<!-- ========================= -->
+
 <script>
-/* Parse JSON */
-const certData = JSON.parse(document.getElementById("cert-data").textContent);
-const container = document.getElementById("certificationsContainer");
+document.addEventListener("DOMContentLoaded", () => {
 
-/* Render all categories */
-function renderCertifications() {
-  container.innerHTML = "";
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const sections = document.querySelectorAll(".cert-section");
 
-  Object.keys(certData).forEach(category => {
-    const section = document.createElement("div");
-    section.className = "cert-section";
-    section.dataset.category = category;
-
-    const header = document.createElement("h2");
-    header.className = "cert-category-header";
-    header.textContent = category;
-
-    const list = document.createElement("div");
-    list.className = "cert-list";
-
-    certData[category].forEach(item => {
-      const card = document.createElement("div");
-      card.className = "cert-card";
-      card.innerHTML = `
-        <span class="cert-icon">${item.icon}</span>
-        <div class="cert-info">
-          <h3>${item.title}</h3>
-          <p>${item.issuer}</p>
-        </div>
-      `;
-      list.appendChild(card);
+  const closeAll = () => {
+    sections.forEach(s => {
+      const list = s.querySelector(".card-list");
+      const t = s.querySelector(".category-toggle");
+      if (list) list.style.display = "none";
+      if (t) t.textContent = "+";
     });
+  };
 
-    section.appendChild(header);
-    section.appendChild(list);
-    container.appendChild(section);
-  });
-}
+  const openSection = s => {
+    const list = s.querySelector(".card-list");
+    const t = s.querySelector(".category-toggle");
+    if (list) list.style.display = "block";
+    if (t) t.textContent = "−";
+  };
 
-renderCertifications();
+  /* FILTERS */
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterButtons.forEach(b => b.classList.remove("active-filter"));
+      btn.classList.add("active-filter");
 
-/* FILTER ENGINE */
-document.querySelectorAll(".filter-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    if (!btn.dataset.filter) return;
+      const filter = btn.dataset.filter;
 
-    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
-    btn.classList.add("active-filter");
+      sections.forEach(s => {
+        s.style.display = s.dataset.category === filter ? "block" : "none";
+      });
 
-    const filter = btn.dataset.filter;
-
-    document.querySelectorAll(".cert-section").forEach(section => {
-      section.style.display = (filter === section.dataset.category) ? "block" : "none";
+      closeAll();
+      const target = document.querySelector(`[data-category="${filter}"]`);
+      if (target) openSection(target);
     });
   });
-});
 
-/* EXPAND ALL */
-document.getElementById("expandAllBtn").addEventListener("click", () => {
-  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
-  document.querySelectorAll(".cert-section").forEach(sec => sec.style.display = "block");
-});
+  /* ACCORDIONS */
+  document.querySelectorAll(".category-header").forEach(header => {
+    header.addEventListener("click", () => {
+      const section = header.parentElement;
+      const list = section.querySelector(".card-list");
+      const toggle = section.querySelector(".category-toggle");
+      const isOpen = list.style.display === "block";
 
-/* COLLAPSE ALL */
-document.getElementById("collapseAllBtn").addEventListener("click", () => {
-  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
-  document.querySelectorAll(".cert-section").forEach(sec => sec.style.display = "none");
-});
+      closeAll();
+      if (!isOpen) {
+        list.style.display = "block";
+        toggle.textContent = "−";
+      }
+    });
+  });
 
-/* INLINE PAGE SEARCH */
+  /* EXPAND ALL */
+  document.getElementById("expandAllBtn").addEventListener("click", () => {
+    filterButtons.forEach(b => b.classList.remove("active-filter"));
+    sections.forEach(s => {
+      s.style.display = "block";
+      openSection(s);
+    });
+  });
+
+  /* COLLAPSE ALL */
+  document.getElementById("collapseAllBtn").addEventListener("click", () => {
+    filterButtons.forEach(b => b.classList.remove("active-filter"));
+    closeAll();
+  });
+
+  /* CARD ANIMATIONS */
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add("card-visible");
+    }, 80 * index);
+  });
+
+});
+</script>
+
+
+<!-- ========================= -->
+<!-- PAGE SEARCH -->
+<!-- ========================= -->
+
+<script>
 const searchInput = document.getElementById("pageSearchInput");
+const certSections = document.querySelectorAll(".cert-section");
 const noResults = document.getElementById("noResultsMessage");
 
 searchInput.addEventListener("input", () => {
   const q = searchInput.value.toLowerCase().trim();
   let anyVisible = false;
 
-  document.querySelectorAll(".cert-section").forEach(section => {
-    const cards = section.querySelectorAll(".cert-card");
+  certSections.forEach(section => {
+    const items = section.querySelectorAll(".searchable-item");
     let sectionVisible = false;
 
-    cards.forEach(card => {
-      const text = card.innerText.toLowerCase();
+    items.forEach(item => {
+      const text = item.innerText.toLowerCase();
       const match = text.includes(q);
-      card.style.display = match ? "flex" : "none";
+      item.style.display = match ? "block" : "none";
       if (match) sectionVisible = true;
     });
 
@@ -249,6 +601,15 @@ searchInput.addEventListener("input", () => {
   noResults.style.display = anyVisible ? "none" : "block";
 });
 </script>
+
+
+<!-- ========================= -->
+<!-- GLOBAL SCRIPTS -->
+<!-- ========================= -->
+
+<script src="global.js"></script>
+<script src="site-search.js" defer></script>
+<script src="page-search.js" defer></script>
 
 </body>
 </html>

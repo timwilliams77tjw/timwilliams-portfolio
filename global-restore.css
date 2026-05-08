@@ -162,4 +162,50 @@ body.dark main *:not(.card):not(.box):not(.download-box):not(.timeline-box) {
     padding: 12px !important;
     border-radius: 12px !important;
     background: #0A1F44 !important;
+} 
+/* ============================================================
+   MOBILE BAR — GLOBAL FIX
+   ============================================================ */
+
+/* Make mobile bar appear on all pages */
+.mobile-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #0A1F44;
+    padding: 12px 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    z-index: 9999;
+}
+
+/* Buttons inside the bar */
+.mobile-sticky-bar .sticky-btn {
+    flex: 1;
+    text-align: center;
+    background: white;
+    color: #0A1F44;
+    padding: 12px 10px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* Prevent Discuss Programme from being cut off */
+.mobile-sticky-bar .sticky-btn:last-child {
+    white-space: normal;
+}
+
+/* Hide floating buttons when mobile bar is present */
+@media (max-width: 767px) {
+    .fab,
+    #fab,
+    .fab-booking,
+    #bookingFab {
+        display: none !important;
+    }
 }

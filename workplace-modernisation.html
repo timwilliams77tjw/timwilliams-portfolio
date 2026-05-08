@@ -41,18 +41,21 @@ fetch("header.html")
     };
     document.body.appendChild(siteSearch);
 
-    // ⭐ Load header JS AFTER header is injected
     const headerJS = document.createElement("script");
-    headerJS.src = "header-standard-v4.js";
-    document.body.appendChild(headerJS);
-  });
+headerJS.src = "header-standard-v4.js";
+headerJS.onload = () => {
+    initHeader();
+    initHeaderEnhancements();
+};
+document.body.appendChild(headerJS);
+
 </script>
 
-<h1>Workplace Modernisation</h1>
+
 <main>
 <div class="container">
     
-
+<h1>Workplace Modernisation</h1>
 
 
 

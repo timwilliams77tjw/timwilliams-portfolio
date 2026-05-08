@@ -1,8 +1,21 @@
 /* ============================================================
-GLOBAL HEADER v4 — FIXED VERSION
+GLOBAL HEADER v5 — FULL FIXED VERSION
 ============================================================ */
 
+/* ------------------------------------------------------------
+INITIALISE HEADER ON DOM READY
+------------------------------------------------------------ */
+document.addEventListener("DOMContentLoaded", () => {
+    initHeader();
+    initHeaderEnhancements();
+});
+
+/* ------------------------------------------------------------
+MAIN HEADER INITIALISATION
+------------------------------------------------------------ */
 function initHeader() {
+
+    /* Grab all header elements */
     const hamburger = document.getElementById("hsHamburger");
     const overlay = document.getElementById("hsMenuOverlay");
     const panel = document.getElementById("hsMenuPanel");
@@ -15,8 +28,18 @@ function initHeader() {
     const fab = document.getElementById("fab");
     const bookingFab = document.getElementById("bookingFab");
 
-    /* ---------------- BODY SCROLL LOCK ---------------- */
+    /* ------------------------------------------------------------
+    SAFETY CHECK — ENSURE HEADER EXISTS BEFORE ATTACHING LISTENERS
+    ------------------------------------------------------------ */
+    if (!hamburger || !overlay || !panel) {
+        console.warn("Header not ready, retrying…");
+        setTimeout(initHeader, 100);
+        return;
+    }
 
+    /* ------------------------------------------------------------
+    BODY SCROLL LOCK
+    ------------------------------------------------------------ */
     function lockBody() {
         document.body.style.overflow = "hidden";
     }
@@ -25,8 +48,9 @@ function initHeader() {
         document.body.style.overflow = "";
     }
 
-    /* ---------------- MENU ---------------- */
-
+    /* ------------------------------------------------------------
+    MENU OPEN / CLOSE
+    ------------------------------------------------------------ */
     function closeMenu() {
         overlay.classList.remove("open");
         unlockBody();
@@ -51,8 +75,9 @@ function initHeader() {
         e.stopPropagation();
     });
 
-    /* ---------------- SEARCH ---------------- */
-
+    /* ------------------------------------------------------------
+    SEARCH BAR
+    ------------------------------------------------------------ */
     function toggleSearchBar() {
         searchBar.classList.toggle("open");
         if (searchBar.classList.contains("open")) {
@@ -70,41 +95,40 @@ function initHeader() {
         toggleSearchBar();
     });
 
-/* ---------------- DARK MODE ---------------- */
+    /* ------------------------------------------------------------
+    DARK MODE
+    ------------------------------------------------------------ */
+    const DARK_MODE_KEY = "tw_dark_mode";
 
-const DARK_MODE_KEY = "tw_dark_mode";
-
-function applyDarkMode() {
-    if (localStorage.getItem(DARK_MODE_KEY) === "true") {
-        document.body.classList.add("dark");
-        document.body.classList.add("dark-mode");
-    } else {
-        document.body.classList.remove("dark");
-        document.body.classList.remove("dark-mode");
+    function applyDarkMode() {
+        if (localStorage.getItem(DARK_MODE_KEY) === "true") {
+            document.body.classList.add("dark", "dark-mode");
+        } else {
+            document.body.classList.remove("dark", "dark-mode");
+        }
     }
-}
 
-function toggleDarkMode() {
-    const enabled = !document.body.classList.contains("dark");
+    function toggleDarkMode() {
+        const enabled = !document.body.classList.contains("dark");
 
-    document.body.classList.toggle("dark", enabled);
-    document.body.classList.toggle("dark-mode", enabled);
+        document.body.classList.toggle("dark", enabled);
+        document.body.classList.toggle("dark-mode", enabled);
 
-    localStorage.setItem(DARK_MODE_KEY, enabled ? "true" : "false");
-}
+        localStorage.setItem(DARK_MODE_KEY, enabled ? "true" : "false");
+    }
 
-darkIcon?.addEventListener("click", toggleDarkMode);
+    darkIcon?.addEventListener("click", toggleDarkMode);
 
-mobileDarkItem?.addEventListener("click", () => {
-    closeMenu();
-    toggleDarkMode();
-});
+    mobileDarkItem?.addEventListener("click", () => {
+        closeMenu();
+        toggleDarkMode();
+    });
 
-applyDarkMode();
+    applyDarkMode();
 
-
-    /* ---------------- FAB ---------------- */
-
+    /* ------------------------------------------------------------
+    FAB BUTTONS
+    ------------------------------------------------------------ */
     if (fab) {
         window.addEventListener("scroll", () => {
             fab.style.display = window.scrollY > 200 ? "flex" : "none";
@@ -119,49 +143,36 @@ applyDarkMode();
         bookingFab.style.display = "flex";
     }
 }
-// --- Active page highlight + Recently Viewed ---
 
+/* ------------------------------------------------------------
+ACTIVE PAGE HIGHLIGHT + RECENTLY VIEWED
+------------------------------------------------------------ */
 function initHeaderEnhancements() {
-  // Active page highlight
-  const currentPage = window.location.pathname.split("/").pop();
-  document.querySelectorAll(".hs-menu-column a").forEach(link => {
-    if (link.getAttribute("href") === currentPage) {
-      link.classList.add("hs-active-link");
+
+    /* Active page highlight */
+    const currentPage = window.location.pathname.split("/").pop();
+    document.querySelectorAll(".hs-menu-column a").forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("hs-active-link");
+        }
+    });
+
+    /* Recently viewed pages */
+    const pageTitle = document.title;
+    const pageURL = window.location.pathname;
+
+    let viewed = JSON.parse(localStorage.getItem("hsRecentlyViewed") || "[]");
+
+    viewed = viewed.filter(v => v.url !== pageURL);
+    viewed.unshift({ title: pageTitle, url: pageURL });
+    viewed = viewed.slice(0, 5);
+
+    localStorage.setItem("hsRecentlyViewed", JSON.stringify(viewed));
+
+    const rvContainer = document.getElementById("hsRecentlyViewed");
+    if (rvContainer) {
+        rvContainer.innerHTML = viewed
+            .map(v => `<a href="${v.url}">${v.title}</a>`)
+            .join("");
     }
-  });
-
-  // Recently viewed
-  const pageTitle = document.title;
-  const pageURL = window.location.pathname;
-
-  let viewed = JSON.parse(localStorage.getItem("hsRecentlyViewed") || "[]");
-
-  // Remove current if already there
-  viewed = viewed.filter(v => v.url !== pageURL);
-  // Add to front
-  viewed.unshift({ title: pageTitle, url: pageURL });
-  // Limit to 5
-  viewed = viewed.slice(0, 5);
-
-  localStorage.setItem("hsRecentlyViewed", JSON.stringify(viewed));
-
-  const rvContainer = document.getElementById("hsRecentlyViewed");
-  if (rvContainer) {
-    rvContainer.innerHTML = viewed
-      .map(v => `<a href="${v.url}">${v.title}</a>`)
-      .join("");
-  }
 }
-
-// Call from your existing initHeader if possible
-if (typeof initHeader === "function") {
-  const originalInitHeader = initHeader;
-  window.initHeader = function () {
-    originalInitHeader();
-    initHeaderEnhancements();
-  };
-} else {
-  // Fallback if initHeader is defined later
-  window.addEventListener("DOMContentLoaded", initHeaderEnhancements);
-}
-

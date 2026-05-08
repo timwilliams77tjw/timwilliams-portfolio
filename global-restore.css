@@ -329,3 +329,81 @@ body.dark main *:not(.card):not(.box):not(.download-box):not(.timeline-box) {
         flex-direction: column !important;
     }
 }
+/* ============================================================
+   1. HEADER ICONS — REMOVE WHITE BACKGROUND + IMPROVE VISIBILITY
+   ============================================================ */
+
+.hs-icon-btn,
+.hs-search-icon,
+.hs-dark-icon,
+.hs-hamburger {
+    background: rgba(0,0,0,0.25) !important; /* subtle translucent dark */
+    border-radius: 50% !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+}
+
+.hs-icon-btn svg,
+.hs-search-icon svg,
+.hs-dark-icon svg,
+.hs-hamburger svg {
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.7)) !important;
+}
+
+
+/* ============================================================
+   2. IPHONE FAB LOGIC — ONLY BACK TO TOP, CORRECT POSITION
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    /* Hide calendar FAB completely */
+    #bookingFab,
+    .fab-booking {
+        display: none !important;
+    }
+
+    /* Show back-to-top FAB and position it correctly */
+    #fab,
+    .fab {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 85px !important;  /* sits above mobile bar */
+        right: 20px !important;
+        z-index: 999999 !important;
+    }
+}
+
+
+/* ============================================================
+   3. MOBILE BAR — FIX WIDTH, PREVENT STACKING, STOP OVERFLOW
+   ============================================================ */
+
+.mobile-sticky-bar {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    padding: 12px 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.mobile-sticky-bar .sticky-btn {
+    flex: 1 1 50% !important;
+    max-width: 50% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    padding: 12px 10px !important;
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Prevent overflow on very small screens */
+@media (max-width: 360px) {
+    .mobile-sticky-bar .sticky-btn {
+        font-size: 14px !important;
+        padding: 10px 8px !important;
+    }
+}

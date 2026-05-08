@@ -93,32 +93,38 @@ body.dark-mode {
 </style>
 
 </head>
-<body>
 
-<!-- GLOBAL HEADER CSS -->
-<link rel="stylesheet" href="header-standard-v4.css">
 
-<!-- HEADER FIRST -->
+<body class="header-with-logo">
+
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
 <script>
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+    document.getElementById("header-placeholder").innerHTML = h;
 
-      // Load site-search.js AFTER header exists, then init
-      const searchScript = document.createElement("script");
-      searchScript.src = "site-search.js";
-      searchScript.onload = () => {
-          if (typeof initSiteSearch === "function") {
-              initSiteSearch();
-          }
-      };
-      document.body.appendChild(searchScript);
+    // Load global site search
+    const siteSearch = document.createElement("script");
+    siteSearch.src = "site-search.js";
+    siteSearch.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(siteSearch);
+
+    // Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
   });
 </script>
+
 
 
 <!-- NOW PAGE CONTENT -->
@@ -256,10 +262,6 @@ fetch("footer.html")
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
-
-<script src="page-search.js" defer></script>
 
 
 </body>

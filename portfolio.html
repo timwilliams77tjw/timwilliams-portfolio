@@ -1,168 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio – Tim Williams</title>
 
-    <!-- GLOBAL HEADER CSS FIRST -->
-    <link rel="stylesheet" href="header-standard-v4.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- GLOBAL PAGE CSS -->
-    <link rel="stylesheet" href="certifications.css">
-    <link rel="stylesheet" href="global-restore.css">
+<title>Portfolio – Tim Williams</title>
 
-    <!-- PAGE-SPECIFIC CSS -->
-    <style>
-        /* Ensure active button is still clickable */
-        .brand-btn.active {
-            pointer-events: auto;
-        }
+<!-- GLOBAL HEADER CSS FIRST -->
+<link rel="stylesheet" href="header-standard-v4.css">
 
-        /* Elegant section divider */
-        .section-divider {
-            border: none;
-            border-top: 2px solid #e5e7eb;
-            margin: 50px 0 40px;
-            width: 100%;
-        }
+<!-- GLOBAL PAGE CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
 
-        /* Logo styling */
-        .logo-img {
-            width: 90px;
-            height: 60px;
-            object-fit: contain;
-            object-position: center;
-            margin-bottom: 12px;
-            opacity: 0.9;
-            display: block;
-        }
+<!-- PAGE-SPECIFIC CSS -->
+<style>
+/* Ensure active button is still clickable */
+.brand-btn.active {
+    pointer-events: auto;
+}
 
-        .card img.logo-img {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
+/* Elegant section divider */
+.section-divider {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 50px 0 40px;
+    width: 100%;
+}
 
-        /* Card styling */
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
+/* Logo styling */
+.logo-img {
+    width: 90px;
+    height: 60px;
+    object-fit: contain;
+    object-position: center;
+    margin-bottom: 12px;
+    opacity: 0.9;
+    display: block;
+}
+.card img.logo-img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+}
 
-        /* Grid layout */
-        .grid {
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        }
+/* Card styling + animation */
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        /* Accordion default state */
-        .card-list {
-            display: none;
-        }
+/* Grid layout */
+.grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
 
-        /* PAGE SEARCH BAR (CV-style, above filter bar) */
-        .page-search-bar {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding: 20px 0 10px;
-        }
+/* Accordion default state */
+.card-list {
+    display: none;
+}
 
-        .page-search-bar-inner {
-            max-width: 600px;
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            gap: 10px;
-        }
+/* PAGE SEARCH BAR (CV-style, above filter bar) */
+.page-search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 10px;
+}
+.page-search-bar-inner {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+}
+.page-search-bar-inner input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #001f3f;
+    border-radius: 6px;
+}
 
-        .page-search-bar-inner input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #001f3f;
-            border-radius: 6px;
-        }
+/* Download as PDF button */
+.download-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #001f3f;
+    background: #001f3f;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 auto 10px;
+    display: block;
+}
+.download-btn:hover {
+    background: #003366;
+}
 
-        /* FILTER BAR — centred like CV */
-        .sticky-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            padding: 12px 0;
-            border-bottom: none !important;
-            margin-top: 0;
-        }
+/* FILTER BAR — centred like CV */
+.sticky-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 12px 0;
+    border-bottom: none !important;
+    margin-top: 0;
+}
+.filter-btn {
+    background-color: #001f3f;
+    color: white;
+    border: 1px solid #001f3f;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.filter-btn:hover {
+    background-color: #001f3f;
+    color: white;
+}
+.filter-btn.active-filter {
+    background-color: white;
+    color: #001f3f;
+    border: 1px solid #7ac0f9;
+}
+.special-btn {
+    background-color: #001f3f;
+    color: white;
+    border: 1px solid #001f3f;
+}
+.special-btn.active-filter {
+    background: white;
+    color: #001f3f;
+    border: 1px solid #7ac0f9;
+}
 
-        .filter-btn {
-            background-color: #001f3f;
-            color: white;
-            border: 1px solid #001f3f;
-            border-radius: 6px;
-            padding: 6px 14px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+/* DARK MODE FIX — align with dark-mode class */
+body.dark-mode .card,
+body.dark-mode .logo,
+body.dark-mode .stat,
+body.dark-mode .project,
+body.dark-mode .timeline-node {
+    background: var(--bg);
+    color: var(--text-main);
+}
+body.dark-mode .category-header {
+    color: #7ac0f9;
+}
 
-        .filter-btn:hover {
-            background-color: #001f3f;
-            color: white;
-        }
+/* Category headers — accent blue */
+.category-header {
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 14px 0;
+    margin: 20px 0 10px;
+    border-bottom: 2px solid #001f3f;
+    color: #7ac0f9;
+    cursor: pointer;
+}
+.category-toggle {
+    font-weight: 900;
+    font-size: 1.8rem;
+    margin-left: 10px;
+}
+</style>
 
-        .filter-btn.active-filter {
-            background-color: white;
-            color: #001f3f;
-            border: 1px solid #7ac0f9;
-        }
-
-        .special-btn {
-            background-color: #001f3f;
-            color: white;
-            border: 1px solid #001f3f;
-        }
-
-        .special-btn.active-filter {
-            background: white;
-            color: #001f3f;
-            border: 1px solid #7ac0f9;
-        }
-
-        /* DARK MODE FIX — Portfolio */
-        body.dark .card,
-        body.dark .logo,
-        body.dark .stat,
-        body.dark .project,
-        body.dark .timeline-node {
-            background: var(--bg);
-            color: var(--text-main);
-        }
-
-        body.dark .category-header {
-            color: var(--text-main);
-        }
-
-        .category-header {
-            font-size: 1.6rem;
-            font-weight: 700;
-            padding: 14px 0;
-            margin: 20px 0 10px;
-            border-bottom: 2px solid #001f3f;
-            color: #001f3f;
-            cursor: pointer;
-        }
-
-        .category-toggle {
-            font-weight: 900;
-            font-size: 1.8rem;
-            margin-left: 10px;
-        }
-    </style>
 </head>
 
 <body class="header-with-logo page-site-search page-has-page-search">
@@ -170,28 +187,24 @@
 <div id="header-placeholder"></div>
 
 <script>
-/* Group-2 header loader: header + site search */
+/* Group-2 header loader: header -> header JS -> site search */
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header-placeholder").innerHTML = h;
 
-    // Load global site search
-    const searchScript = document.createElement("script");
-    searchScript.src = "site-search.js";
-    searchScript.onload = () => {
-      if (typeof initSiteSearch === "function") {
-        initSiteSearch();
-      }
-    };
-    document.body.appendChild(searchScript);
-
-    // Load header JS AFTER injection
     const headerScript = document.createElement("script");
     headerScript.src = "header-standard-v4.js";
     headerScript.onload = () => {
       if (typeof initHeader === "function") initHeader();
       if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+
+      const searchScript = document.createElement("script");
+      searchScript.src = "site-search.js";
+      searchScript.onload = () => {
+        if (typeof initSiteSearch === "function") initSiteSearch();
+      };
+      document.body.appendChild(searchScript);
     };
     document.body.appendChild(headerScript);
   });
@@ -199,307 +212,311 @@ fetch("header.html")
 
 <!-- PAGE SEARCH BAR (separate from global search bar) -->
 <div id="pageSearchBar" class="page-search-bar">
-    <div class="page-search-bar-inner">
-       <input id="pageSearchInput" type="text" placeholder="Search portfolio…">
-    </div>
+  <div class="page-search-bar-inner">
+    <input id="pageSearchInput" type="text" placeholder="Search portfolio…">
+  </div>
 </div>
+
+<button class="download-btn" id="downloadPdfBtn">Download as PDF</button>
+
 <div id="noResultsMessage" style="display:none; margin-top:10px; opacity:0.7;">
-    No matching results found.
+  No matching results found.
 </div>
 
 <!-- FILTER BAR -->
 <div class="sticky-bar">
-    <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
-    <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
-    <button class="filter-btn" data-filter="summary">Summary</button>
-    <button class="filter-btn" data-filter="leadership">Leadership</button>
-    <button class="filter-btn" data-filter="rolefit">Role Fit</button>
-    <button class="filter-btn" data-filter="euc">EUC</button>
-    <button class="filter-btn" data-filter="cyber">Cyber</button>
-    <button class="filter-btn" data-filter="pmo">PMO</button>
-    <button class="filter-btn" data-filter="cloud">Cloud</button>
-    <button class="filter-btn" data-filter="service">Service</button>
-    <button class="filter-btn" data-filter="legacy">Legacy</button>
-    <button class="filter-btn" data-filter="presales">Pre-Sales</button>
-    <button class="filter-btn" data-filter="whatibring">What I Bring</button>
+  <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+  <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+  <button class="filter-btn" data-filter="summary">Summary</button>
+  <button class="filter-btn" data-filter="leadership">Leadership</button>
+  <button class="filter-btn" data-filter="rolefit">Role Fit</button>
+  <button class="filter-btn" data-filter="euc">EUC</button>
+  <button class="filter-btn" data-filter="cyber">Cyber</button>
+  <button class="filter-btn" data-filter="pmo">PMO</button>
+  <button class="filter-btn" data-filter="cloud">Cloud</button>
+  <button class="filter-btn" data-filter="service">Service</button>
+  <button class="filter-btn" data-filter="legacy">Legacy</button>
+  <button class="filter-btn" data-filter="presales">Pre-Sales</button>
+  <button class="filter-btn" data-filter="whatibring">What I Bring</button>
 </div>
 
 <div class="container">
 
-    <div class="category-section portfolio-section" data-category="summary">
-        <div class="category-header">
-            Executive Summary
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="card">
-                <p>
-                    I deliver large-scale IT, infrastructure, and cyber programmes with a focus on execution certainty,
-                    operational readiness, and governance. My work spans national EUC transformations, identity and access
-                    uplift, PMO leadership, and service transition across complex, regulated, and multi-vendor environments.
-                </p>
-                <p>
-                    My track record shows repeatability across financial services, utilities, government, healthcare,
-                    aviation, and education. I stabilise programmes, drive adoption, and ensure services are secure,
-                    resilient, and ready for BAU.
-                </p>
-            </div>
-        </div>
+<!-- SUMMARY -->
+<div class="category-section portfolio-section" data-category="summary">
+  <div class="category-header">
+    Executive Summary (1)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="card">
+      <p>
+        I deliver large-scale IT, infrastructure, and cyber programmes with a focus on execution certainty,
+        operational readiness, and governance. My work spans national EUC transformations, identity and access
+        uplift, PMO leadership, and service transition across complex, regulated, and multi-vendor environments.
+      </p>
+      <p>
+        My track record shows repeatability across financial services, utilities, government, healthcare,
+        aviation, and education. I stabilise programmes, drive adoption, and ensure services are secure,
+        resilient, and ready for BAU.
+      </p>
     </div>
+  </div>
+</div>
 
-    <!-- LEADERSHIP -->
-    <div class="category-section portfolio-section" data-category="leadership">
-        <div class="category-header">
-            Leadership Model
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <img src="atl.png" class="logo-img" alt="Atlassian">
-                    <img src="pmi.png" class="logo-img" alt="PMI">
-                    <img src="prince.png" class="logo-img" alt="Prince2">
-                    <h3>Governance & Delivery Control</h3>
-                    <p>I establish clear frameworks, reporting rhythms, and decision pathways that bring stability to programmes under pressure.</p>
-                </div>
-                <div class="card">
-                    <img src="apm.png" class="logo-img" alt="APM">
-                    <h3>Stakeholder Alignment & Communication</h3>
-                    <p>I build confidence across technical, operational, and executive stakeholders by translating complexity into clear narratives.</p>
-                </div>
-                <div class="card">
-                    <img src="itil.png" class="logo-img" alt="ITIL">
-                    <img src="snow.png" class="logo-img" alt="ServiceNow">
-                    <h3>Operational Readiness & Service Sustainability</h3>
-                    <p>I embed service transition early ensuring documentation, support models and operational processes are ready before go-live.</p>
-                </div>
-                <div class="card">
-                    <img src="six.png" class="logo-img" alt="Six Sigma">
-                    <img src="comp.png" class="logo-img" alt="CompTia">
-                    <h3>Outcome-Based Delivery</h3>
-                    <p>I drive programmes toward measurable results including adoption, stability, risk reduction and operational improvement.</p>
-                </div>
-            </div>
-        </div>
+<!-- LEADERSHIP -->
+<div class="category-section portfolio-section" data-category="leadership">
+  <div class="category-header">
+    Leadership Model (4)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <div class="card">
+        <img src="atl.png" class="logo-img" alt="Atlassian">
+        <img src="pmi.png" class="logo-img" alt="PMI">
+        <img src="prince.png" class="logo-img" alt="Prince2">
+        <h3>Governance & Delivery Control</h3>
+        <p>I establish clear frameworks, reporting rhythms, and decision pathways that bring stability to programmes under pressure.</p>
+      </div>
+      <div class="card">
+        <img src="apm.png" class="logo-img" alt="APM">
+        <h3>Stakeholder Alignment & Communication</h3>
+        <p>I build confidence across technical, operational, and executive stakeholders by translating complexity into clear narratives.</p>
+      </div>
+      <div class="card">
+        <img src="itil.png" class="logo-img" alt="ITIL">
+        <img src="snow.png" class="logo-img" alt="ServiceNow">
+        <h3>Operational Readiness & Service Sustainability</h3>
+        <p>I embed service transition early ensuring documentation, support models and operational processes are ready before go-live.</p>
+      </div>
+      <div class="card">
+        <img src="six.png" class="logo-img" alt="Six Sigma">
+        <img src="comp.png" class="logo-img" alt="CompTia">
+        <h3>Outcome-Based Delivery</h3>
+        <p>I drive programmes toward measurable results including adoption, stability, risk reduction and operational improvement.</p>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- ROLE FIT -->
-    <div class="category-section portfolio-section" data-category="rolefit">
-        <div class="category-header">
-            Role Fit
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <h3>Roles I Fit</h3>
-                    <ul>
-                        <li>Senior Project Manager</li>
-                        <li>Programme Manager</li>
-                        <li>PMO Manager / PMO Lead</li>
-                        <li>Service Transition Lead</li>
-                        <li>Delivery Assurance Lead</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>What Organisations Gain</h3>
-                    <ul>
-                        <li>Predictable controlled delivery</li>
-                        <li>Strong governance and reporting discipline</li>
-                        <li>Confident stakeholder alignment</li>
-                        <li>Stable service landings</li>
-                        <li>Measurable operational outcomes</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Where I Add Most Value</h3>
-                    <ul>
-                        <li>Complex multi-vendor environments</li>
-                        <li>Regulated sectors</li>
-                        <li>Programme stabilisation or recovery</li>
-                        <li>Large transformations</li>
-                        <li>Services transitioning to BAU</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<!-- ROLE FIT -->
+<div class="category-section portfolio-section" data-category="rolefit">
+  <div class="category-header">
+    Role Fit (3)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <div class="card">
+        <h3>Roles I Fit</h3>
+        <ul>
+          <li>Senior Project Manager</li>
+          <li>Programme Manager</li>
+          <li>PMO Manager / PMO Lead</li>
+          <li>Service Transition Lead</li>
+          <li>Delivery Assurance Lead</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>What Organisations Gain</h3>
+        <ul>
+          <li>Predictable controlled delivery</li>
+          <li>Strong governance and reporting discipline</li>
+          <li>Confident stakeholder alignment</li>
+          <li>Stable service landings</li>
+          <li>Measurable operational outcomes</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Where I Add Most Value</h3>
+        <ul>
+          <li>Complex multi-vendor environments</li>
+          <li>Regulated sectors</li>
+          <li>Programme stabilisation or recovery</li>
+          <li>Large transformations</li>
+          <li>Services transitioning to BAU</li>
+        </ul>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- EUC -->
-    <div class="category-section portfolio-section" data-category="euc">
-        <div class="category-header">
-            Global Infrastructure & EUC Transformations
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <img src="hsbc.png" class="logo-img" alt="HSBC">
-                    <img src="tesco.png" class="logo-img">
-                    <h3>National-Scale EUC Transformations</h3>
-                    <p>Tesco 126k device refresh and HSBC 46k user modernisation programmes.</p>
-                </div>
-                <div class="card">
-                    <img src="uu.png" class="logo-img" alt="United Utilities">
-                    <h3>Modern Workplace Deployments</h3>
-                    <p>Cloud managed EUC lifecycle deployments across 32k+ devices.</p>
-                </div>
-                <div class="card">
-                    <img src="nu.png" class="logo-img" alt="Newcastle University">
-                    <h3>Sector Specific Modernisation</h3>
-                    <p>Teams Rooms and print modernisation across academic environments.</p>
-                </div>
-            </div>
-        </div>
+<!-- EUC -->
+<div class="category-section portfolio-section" data-category="euc">
+  <div class="category-header">
+    Global Infrastructure & EUC Transformations (3)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <div class="card">
+        <img src="hsbc.png" class="logo-img" alt="HSBC">
+        <img src="tesco.png" class="logo-img" alt="Tesco">
+        <h3>National-Scale EUC Transformations</h3>
+        <p>Tesco 126k device refresh and HSBC 46k user modernisation programmes.</p>
+      </div>
+      <div class="card">
+        <img src="uu.png" class="logo-img" alt="United Utilities">
+        <h3>Modern Workplace Deployments</h3>
+        <p>Cloud managed EUC lifecycle deployments across 32k+ devices.</p>
+      </div>
+      <div class="card">
+        <img src="nu.png" class="logo-img" alt="Newcastle University">
+        <h3>Sector Specific Modernisation</h3>
+        <p>Teams Rooms and print modernisation across academic environments.</p>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- CYBER -->
-    <div class="category-section portfolio-section" data-category="cyber">
-        <div class="category-header">
-            Cybersecurity & Identity Uplift
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <img src="nhs.png" class="logo-img">
-                    <h3>NHS England</h3>
-                    <p>CAF uplift strengthening access controls and governance frameworks.</p>
-                </div>
-                <div class="card">
-                    <img src="luton.png" class="logo-img">
-                    <h3>Luton Airport</h3>
-                    <p>MFA PAM and SSO uplift in regulated aviation environment.</p>
-                </div>
-            </div>
-        </div>
+<!-- CYBER -->
+<div class="category-section portfolio-section" data-category="cyber">
+  <div class="category-header">
+    Cybersecurity & Identity Uplift (2)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <div class="card">
+        <img src="nhs.png" class="logo-img" alt="NHS England">
+        <h3>NHS England</h3>
+        <p>CAF uplift strengthening access controls and governance frameworks.</p>
+      </div>
+      <div class="card">
+        <img src="luton.png" class="logo-img" alt="Luton Airport">
+        <h3>Luton Airport</h3>
+        <p>MFA PAM and SSO uplift in regulated aviation environment.</p>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- PMO -->
-    <div class="category-section portfolio-section" data-category="pmo">
-        <div class="category-header">
-            PMO Leadership & Governance
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <img src="cc.png" class="logo-img">
-                    <img src="es.png" class="logo-img">
-                    <h3>PMO Build & Leadership</h3>
-                    <p>Built and led PMO functions for Computacenter Belgium and Eversheds, improving reporting
-                        discipline and delivery assurance.</p>
-                </div>
-                <div class="card">
-                    <img src="nfu.png" class="logo-img">
-                    <img src="fco.png" class="logo-img">
-                    <img src="dn.png" class="logo-img">
-                    <h3>Regulated & Government PMO</h3>
-                    <p>Delivered structured reporting, risk control, and portfolio alignment across high-governance
-                        environments including FCO, NFUM, and Dounreay Nuclear.</p>
-                </div>
-            </div>
-        </div>
+<!-- PMO -->
+<div class="category-section portfolio-section" data-category="pmo">
+  <div class="category-header">
+    PMO Leadership & Governance (2)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <div class="card">
+        <img src="cc.png" class="logo-img" alt="Computacenter">
+        <img src="es.png" class="logo-img" alt="Eversheds">
+        <h3>PMO Build & Leadership</h3>
+        <p>Built and led PMO functions for Computacenter Belgium and Eversheds, improving reporting
+        discipline and delivery assurance.</p>
+      </div>
+      <div class="card">
+        <img src="nfu.png" class="logo-img" alt="NFU Mutual">
+        <img src="fco.png" class="logo-img" alt="FCO">
+        <img src="dn.png" class="logo-img" alt="Dounreay Nuclear">
+        <h3>Regulated & Government PMO</h3>
+        <p>Delivered structured reporting, risk control, and portfolio alignment across high-governance
+        environments including FCO, NFUM, and Dounreay Nuclear.</p>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- SERVICE TRANSITION -->
-    <div class="category-section portfolio-section" data-category="service">
-        <div class="category-header">
-            Service Transition & BAU Integration
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="card">
-                <img src="sf.png" class="logo-img">
-                <img src="sync.png" class="logo-img">
-                <p>Transitioned global services for Synchrony (25,000 users), integrated Salesforce into BAU, and
-                    stabilised major programmes through structured readiness and support alignment.</p>
-            </div>
-        </div>
+<!-- SERVICE TRANSITION -->
+<div class="category-section portfolio-section" data-category="service">
+  <div class="category-header">
+    Service Transition & BAU Integration (1)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="card">
+      <img src="sf.png" class="logo-img" alt="Salesforce">
+      <img src="sync.png" class="logo-img" alt="Synchrony">
+      <p>Transitioned global services for Synchrony (25,000 users), integrated Salesforce into BAU, and
+      stabilised major programmes through structured readiness and support alignment.</p>
     </div>
+  </div>
+</div>
 
-    <!-- CLOUD -->
-    <div class="category-section portfolio-section" data-category="cloud">
-        <div class="category-header">
-            Cloud, Platforms & Application Services
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <img src="mitie.png" class="logo-img">
-                    <h3>AWS & SaaS Integration</h3>
-                    <p>Delivered AWS migration and SaaS integration for Telefonica.</p>
-                </div>
-                <div class="card">
-                    <img src="tele.png" class="logo-img" alt="Telefonica">
-                    <img src="ho.png" class="logo-img" alt="Home Office">
-                    <h3>ServiceNow & Hosted Platforms</h3>
-                    <p>Led ServiceNow development and supported secure hosted infrastructure for Mitie and the Home
-                        Office.</p>
-                </div>
-            </div>
-        </div>
+<!-- CLOUD -->
+<div class="category-section portfolio-section" data-category="cloud">
+  <div class="category-header">
+    Cloud, Platforms & Application Services (2)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <div class="card">
+        <img src="mitie.png" class="logo-img" alt="Mitie">
+        <h3>AWS & SaaS Integration</h3>
+        <p>Delivered AWS migration and SaaS integration for Telefonica.</p>
+      </div>
+      <div class="card">
+        <img src="tele.png" class="logo-img" alt="Telefonica">
+        <img src="ho.png" class="logo-img" alt="Home Office">
+        <h3>ServiceNow & Hosted Platforms</h3>
+        <p>Led ServiceNow development and supported secure hosted infrastructure for Mitie and the Home
+        Office.</p>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- LEGACY -->
-    <div class="category-section portfolio-section" data-category="legacy">
-        <div class="category-header">
-            Legacy, Migration & Infrastructure Modernisation
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="grid">
-                <div class="card">
-                    <img src="san.png" class="logo-img" alt="Santander">
-                    <img src="met.png" class="logo-img" alt="MET">
-                    <img src="uni.png" class="logo-img" alt="Unipart">
-                    <h3>Identity, Messaging & Virtualisation</h3>
-                    <p>Delivered modernisation programmes for Santander, MET Office, and Unipart.</p>
-                </div>
-                <div class="card">
-                    <img src="admin.png" class="logo-img" alt="AdminRe">
-                    <img src="gov.png" class="logo-img" alt="Gov">
-                    <h3>Large-Scale Migration</h3>
-                    <p>Delivered multi-stream migration and infrastructure modernisation for AdminRe and DWP.</p>
-                </div>
-            </div>
-        </div>
+<!-- LEGACY -->
+<div class="category-section portfolio-section" data-category="legacy">
+  <div class="category-header">
+    Legacy, Migration & Infrastructure Modernisation (2)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="grid">
+      <div class="card">
+        <img src="san.png" class="logo-img" alt="Santander">
+        <img src="met.png" class="logo-img" alt="MET">
+        <img src="uni.png" class="logo-img" alt="Unipart">
+        <h3>Identity, Messaging & Virtualisation</h3>
+        <p>Delivered modernisation programmes for Santander, MET Office, and Unipart.</p>
+      </div>
+      <div class="card">
+        <img src="admin.png" class="logo-img" alt="AdminRe">
+        <img src="gov.png" class="logo-img" alt="Gov">
+        <h3>Large-Scale Migration</h3>
+        <p>Delivered multi-stream migration and infrastructure modernisation for AdminRe and DWP.</p>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- PRE-SALES -->
-    <div class="category-section portfolio-section" data-category="presales">
-        <div class="category-header">
-            Pre-Sales & Commercial Leadership
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="card">
-                <img src="hub.png" class="logo-img" alt="Hubspot">
-                <p>Supported tendering, solution design, and commercial modelling across major bids, ensuring
-                    proposals were deliverable, costed, and aligned with operational reality.</p>
-            </div>
-        </div>
+<!-- PRE-SALES -->
+<div class="category-section portfolio-section" data-category="presales">
+  <div class="category-header">
+    Pre-Sales & Commercial Leadership (1)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="card">
+      <img src="hub.png" class="logo-img" alt="Hubspot">
+      <p>Supported tendering, solution design, and commercial modelling across major bids, ensuring
+      proposals were deliverable, costed, and aligned with operational reality.</p>
     </div>
+  </div>
+</div>
 
-    <!-- WHAT I BRING -->
-    <div class="category-section portfolio-section" data-category="whatibring">
-        <div class="category-header">
-            What I Bring
-            <span class="category-toggle">+</span>
-        </div>
-        <div class="card-list">
-            <div class="card">
-                <ul>
-                    <li>Execution certainty through structure, clarity, and governance</li>
-                    <li>Cross-sector repeatability across regulated environments</li>
-                    <li>Operational readiness and sustainable service landings</li>
-                    <li>Stakeholder confidence through clear communication</li>
-                    <li>Long-term service value through stability and adoption</li>
-                </ul>
-            </div>
-        </div>
+<!-- WHAT I BRING -->
+<div class="category-section portfolio-section" data-category="whatibring">
+  <div class="category-header">
+    What I Bring (1)
+    <span class="category-toggle">+</span>
+  </div>
+  <div class="card-list">
+    <div class="card">
+      <ul>
+        <li>Execution certainty through structure, clarity, and governance</li>
+        <li>Cross-sector repeatability across regulated environments</li>
+        <li>Operational readiness and sustainable service landings</li>
+        <li>Stakeholder confidence through clear communication</li>
+        <li>Long-term service value through stability and adoption</li>
+      </ul>
     </div>
+  </div>
+</div>
 
 </div> <!-- end container -->
 
@@ -526,7 +543,6 @@ function closeAllAccordions() {
     if (toggle) toggle.textContent = "+";
   });
 }
-
 function openAccordion(section) {
   section.classList.add("open");
   const list = section.querySelector(".card-list");
@@ -572,8 +588,7 @@ if (collapseBtn) {
 /* FILTER ENGINE */
 document.querySelectorAll(".filter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    if (!btn.dataset.filter) return;   // prevents Expand/Collapse triggering filter logic
-
+    if (!btn.dataset.filter) return; // prevents Expand/Collapse triggering filter logic
     document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
     btn.classList.add("active-filter");
 
@@ -638,6 +653,24 @@ if (pageSearchInput) {
         }
       });
     }
+  });
+}
+
+/* Card animations (fade-in + slight lift) */
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add("card-visible");
+    }, 80 * index);
+  });
+});
+
+/* Download as PDF (simple print trigger) */
+const downloadBtn = document.getElementById("downloadPdfBtn");
+if (downloadBtn) {
+  downloadBtn.addEventListener("click", () => {
+    window.print();
   });
 }
 </script>

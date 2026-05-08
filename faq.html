@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- PAGE CSS -->
-<link rel="stylesheet" href="faq.css?v=1">
-<link rel="stylesheet" href="certifications.css?v=1">
-      <link rel="stylesheet" href="global-restore.css">
+<title>Frequently Asked Questions – Tim Williams</title>
 
-<!-- GLOBAL HEADER CSS -->
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="faq.css">
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
 <link rel="stylesheet" href="header-standard-v4.css">
+
 </head>
 
-<body class="header-with-logo">
+<body class="header-with-logo page-site-search">
 
-
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
 <script>
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+    document.getElementById("header-placeholder").innerHTML = h;
 
-      // Ensure site-search.js is loaded, then bind
-      const searchScript = document.createElement("script");
-      searchScript.src = "site-search.js";
-      searchScript.onload = () => {
-          if (typeof initSiteSearch === "function") {
-              initSiteSearch();
-          }
-      };
-      document.body.appendChild(searchScript);
+    const siteSearch = document.createElement("script");
+    siteSearch.src = "site-search.js";
+    siteSearch.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(siteSearch);
+
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
   });
 </script>
-
 
 <!-- ============================
 PAGE CONTENT
@@ -49,6 +52,7 @@ PAGE CONTENT
 <p>Quick answers to common questions about my services, experience and ways of working.</p>
 </section>
 
+<!-- LOCAL SEARCH -->
 <div class="search-bar-local">
 <input type="text" id="faq-search" placeholder="Search FAQs…" />
 </div>
@@ -113,28 +117,23 @@ PAGE CONTENT
 <div id="footer"></div>
 <script>
 fetch("footer.html")
-.then(r => r.text())
-.then(h => document.getElementById("footer").innerHTML = h);
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- FAQ SEARCH -->
+<!-- LOCAL FAQ SEARCH -->
 <script>
 const faqSearch = document.getElementById("faq-search");
 if (faqSearch) {
-    faqSearch.addEventListener("input", () => {
-        const term = faqSearch.value.toLowerCase();
-        document.querySelectorAll(".faq-card").forEach(card => {
-            const text = card.innerText.toLowerCase();
-            card.style.display = text.includes(term) ? "" : "none";
-        });
+  faqSearch.addEventListener("input", () => {
+    const term = faqSearch.value.toLowerCase();
+    document.querySelectorAll(".faq-card").forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(term) ? "" : "none";
     });
+  });
 }
 </script>
-
-<!-- GLOBAL HEADER JS -->
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
-
 
 </body>
 </html>

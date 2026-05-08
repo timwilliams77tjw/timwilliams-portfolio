@@ -6,9 +6,10 @@
 
   <title>Tim Williams – Book a Meeting</title>
 
-  <!-- GLOBAL CSS -->
-    <link rel="stylesheet" href="certifications.css">
-    <link rel="stylesheet" href="global-restore.css">
+     <!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
   <!-- Calendly script -->
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
@@ -41,30 +42,34 @@
   </style>
 </head>
 
-<!-- GLOBAL HEADER CSS -->
-<link rel="stylesheet" href="header-standard-v4.css">
-</head>
 
 <body class="header-with-logo">
 
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
 <script>
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+    document.getElementById("header-placeholder").innerHTML = h;
 
-      // Ensure site-search.js is loaded, then bind
-      const searchScript = document.createElement("script");
-      searchScript.src = "site-search.js";
-      searchScript.onload = () => {
-          if (typeof initSiteSearch === "function") {
-              initSiteSearch();
-          }
-      };
-      document.body.appendChild(searchScript);
+    // Load site search (homepage uses site-search)
+    const searchScript = document.createElement("script");
+    searchScript.src = "site-search.js";
+    searchScript.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(searchScript);
+
+    // Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
   });
 </script>
 
@@ -116,9 +121,6 @@ fetch("footer.html")
     });
 })();
 </script>
-<!-- GLOBAL HEADER JS -->
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
 
 </body>
 </html>

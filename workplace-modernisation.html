@@ -37,18 +37,22 @@ fetch("header.html")
     const siteSearch = document.createElement("script");
     siteSearch.src = "site-search.js";
     siteSearch.onload = () => {
-      if (typeof initSiteSearch === "function") {
-        initSiteSearch();
-      }
+      if (typeof initSiteSearch === "function") initSiteSearch();
     };
     document.body.appendChild(siteSearch);
+
+    // ⭐ Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    document.body.appendChild(headerJS);
   });
 </script>
 
-<!-- GLOBAL HEADER JS -->
-<script src="header-standard-v4.js"></script>
 <h1>Workplace Modernisation</h1>
-<main class="page-container">
+<main>
+<div class="container">
+    
+
 
 
 
@@ -77,6 +81,7 @@ fetch("header.html")
 
 <a href="calendar.html" class="btn">Book Consultation</a>
 
+</div>
 </main>
 
 <div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>

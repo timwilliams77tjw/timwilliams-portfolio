@@ -142,17 +142,35 @@ body.dark .service-card img {
 /* Hide floating buttons on mobile */
 @media (max-width: 767px) {
     .fab,
-    .fab-booking {
+    .fab-booking,
+    #bookingFab {
         display: none !important;
     }
 }
 
-/* Centre-align card text on mobile for How, Case Studies, Why */
-@media (max-width: 767px) {
+/* Centre-align card text on mobile ONLY (not iPad) */
+@media (max-width: 600px) {
     .grid .card h3,
     .grid .card p {
         text-align: center !important;
     }
+}
+
+/* Add spacing between hero buttons on iPad/desktop */
+.brand-btn {
+    margin: 8px !important;
+}
+
+/* Scroll Fade Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 </style>
 
@@ -192,12 +210,12 @@ fetch("header.html")
     </p>
 
     <!-- Primary CTA -->
-    <a href="calendar.html" class="brand-btn" style="margin-top:15px; display:inline-block;">
+    <a href="calendar.html" class="brand-btn" style="display:inline-block;">
         Book a Consultation
     </a>
 
     <!-- Secondary CTA -->
-    <a href="contact.html" class="brand-btn" style="margin-top:20px; display:inline-block;">
+    <a href="contact.html" class="brand-btn" style="display:inline-block;">
         Discuss Your Programme
     </a>
 
@@ -230,7 +248,7 @@ fetch("header.html")
 
 <!-- WHO I WORK WITH -->
 <h2>Who I Work With</h2>
-<div class="card">
+<div class="card fade-in">
 <ul>
     <li>Organisations delivering complex cyber security or cloud transformation programmes</li>
     <li>Businesses with delayed, high-risk or failing IT programmes</li>
@@ -240,7 +258,7 @@ fetch("header.html")
 
 <!-- EXECUTIVE PROFILE -->
 <h2>Executive Profile</h2>
-<div class="card" style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+<div class="card fade-in" style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
     <div style="flex:1; min-width:250px;">
         <p>SC Cleared Senior IT Programme Manager delivering large-scale cyber security, cloud transformation and enterprise infrastructure programmes across NHS England, Defence and global organisations.</p>
         <p>Specialist in stabilising complex programmes, improving delivery performance and ensuring successful outcomes across high-risk environments.</p>
@@ -253,7 +271,7 @@ fetch("header.html")
 
 <!-- PROVEN RESULTS -->
 <h2>Proven Results</h2>
-<div class="card">
+<div class="card fade-in">
 <ul>
     <li>Delivered £40M cyber security uplift programme for NHS England.</li>
     <li>Led global Windows 10/11 transformation for 126,000 devices.</li>
@@ -265,25 +283,25 @@ fetch("header.html")
 <h2>How I Help</h2>
 <div class="grid">
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="delivery.png" alt="Programme Delivery Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>Programme Delivery</h3>
         <p>End-to-end leadership of complex IT programmes ensuring delivery on time, within budget and aligned to business outcomes.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="recovery.png" alt="Programme Recovery Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>Programme Recovery</h3>
         <p>Stabilising failing or high-risk programmes and getting delivery back on track quickly and effectively.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="cyber.png" alt="Cyber Security Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>Cyber Security Transformation</h3>
         <p>Delivering enterprise cyber security programmes including CAF, IAM, SIEM and resilience frameworks.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="cloud.png" alt="Cloud & Infrastructure Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>Cloud & Infrastructure Transformation</h3>
         <p>Leading Azure, AWS and enterprise infrastructure programmes improving scalability and resilience.</p>
@@ -295,19 +313,19 @@ fetch("header.html")
 <h2>Programme Case Studies</h2>
 <div class="grid">
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="nhs1.png" alt="NHS Cyber Programme Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>NHS England Cyber Security Programme</h3>
         <p>Delivered CAF-aligned cyber security uplift implementing MFA, CyberArk, Splunk and Azure security controls.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="workplace.png" alt="Global Workplace Transformation Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>Global Workplace Transformation</h3>
         <p>Led Windows 10/11 transformation across 126,000 devices in 42 countries.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="enterprise.png" alt="Enterprise Cloud Transformation Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>Enterprise Cloud Transformation</h3>
         <p>Delivered Azure and AWS programmes across global organisations.</p>
@@ -319,25 +337,25 @@ fetch("header.html")
 <h2>Why Organisations Work With Me</h2>
 <div class="grid">
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="trust.png" alt="Experience Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>30+ Years of Experience</h3>
         <p>Real-world programme delivery across NHS, Defence, and enterprise organisations.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="sc.png" alt="SC Cleared Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>SC Cleared</h3>
         <p>Trusted to lead high-security programmes with full clearance and compliance.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="leadership.png" alt="Hands-on Leadership Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>Hands-on Leadership</h3>
         <p>Active engagement and delivery ownership — not just advisory oversight.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
         <img src="proven.png" alt="Proven Delivery Icon" style="width:70px;height:70px;object-fit:contain;background:#0A1F44;border-radius:12px;padding:10px;display:block;margin:0 auto;">
         <h3>Proven Delivery</h3>
         <p>Consistent success stabilising and delivering complex, high-risk programmes.</p>
@@ -347,7 +365,7 @@ fetch("header.html")
 
 <!-- CONTACT -->
 <h2>Contact</h2>
-<div class="card">
+<div class="card fade-in">
     <p>Email: <a href="mailto:timwilliams07@outlook.com">timwilliams07@outlook.com</a> / <a href="mailto:info@twc-ltd.uk">info@twc-ltd.uk</a></p>
     <p>Phone: 07801 453322</p>
 
@@ -382,6 +400,23 @@ fetch("header.html")
 fetch("footer.html")
 .then(r => r.text())
 .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- Scroll Fade Animation JS -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const elements = document.querySelectorAll(".fade-in");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.2 });
+
+    elements.forEach(el => observer.observe(el));
+});
 </script>
 
 </body>

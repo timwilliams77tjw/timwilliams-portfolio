@@ -226,22 +226,32 @@ body.dark .service-card img {
 
 <body class="header-with-logo">
 
-<!-- GLOBAL HEADER -->
+<!-- HEADER -->
 <div id="header-placeholder"></div>
+
 <script>
 fetch("header.html")
-.then(r => r.text())
-.then(h => {
+  .then(r => r.text())
+  .then(h => {
     document.getElementById("header-placeholder").innerHTML = h;
-    initHeader();
 
-    const searchScript = document.createElement("script");
-    searchScript.src = "site-search.js";
-    searchScript.onload = () => {
-        if (typeof initSiteSearch === "function") initSiteSearch();
+    // Load global site search
+    const siteSearch = document.createElement("script");
+    siteSearch.src = "site-search.js";
+    siteSearch.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
     };
-    document.body.appendChild(searchScript);
-});
+    document.body.appendChild(siteSearch);
+
+    // Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+  });
 </script>
 
 <!-- MAIN CONTENT -->
@@ -440,8 +450,7 @@ fetch("header.html")
 </div>
 
 <!-- GLOBAL FOOTER -->
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
+
 
 <div id="footer"></div>
 <script>

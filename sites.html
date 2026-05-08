@@ -6,9 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tim Williams – My Sites</title>
 
-<!-- GLOBAL CSS -->
+    <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">
-    <link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
     
 <!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -117,13 +118,13 @@ body.page-certifications {
 }
 </style>
 
-<!-- GLOBAL HEADER CSS -->
-<link rel="stylesheet" href="header-standard-v4.css">
+
 
 </head>
 
 <body class="page-certifications header-with-logo">
 
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
 <script>
@@ -131,17 +132,26 @@ fetch("header.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header-placeholder").innerHTML = h;
-    initHeader();
 
-    // Load search AFTER header is ready
+    // Load site search (homepage uses site-search)
     const searchScript = document.createElement("script");
     searchScript.src = "site-search.js";
     searchScript.onload = () => {
       if (typeof initSiteSearch === "function") initSiteSearch();
     };
     document.body.appendChild(searchScript);
+
+    // Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
   });
 </script>
+
 
 <!-- PAGE CONTENT -->
 <main class="page-container">
@@ -428,14 +438,7 @@ async function loadCredly() {
 loadCredly();
 </script>
 
-<!-- GLOBAL HEADER JS -->
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
-<!-- GLOBAL JS (shared behaviour) -->
-<script src="global.js?v=2"></script>
-<script>initGlobal();</script>
 
-<script src="page-search.js" defer></script>
 
 </body>
 </html>

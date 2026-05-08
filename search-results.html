@@ -59,8 +59,15 @@ fetch("header.html")
   });
 </script>
 
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a class="fab fab-booking" href="calendar.html">📅</a>
 
-
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
+</script>
 
 <div class="search-results-container">
     <h1>Search Results</h1>

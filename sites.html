@@ -343,42 +343,87 @@ fetch("footer.html")
 </script>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // COLLAPSIBLES
+  document.querySelectorAll(".category-header").forEach(header => {
+    header.addEventListener("click", () => {
+      const section = header.parentElement;
+      const open = section.classList.contains("open");
+
+      document.querySelectorAll(".category-section").forEach(sec => {
+        sec.classList.remove("open");
+        sec.querySelector(".category-toggle").textContent = "+";
+      });
+
+      if (!open) {
+        section.classList.add("open");
+        section.querySelector(".category-toggle").textContent = "–";
+      }
+    });
+  });
+
+  // COPY BUTTONS
+  document.addEventListener("click", e => {
+    const btn = e.target.closest(".copy-btn");
+    if (!btn) return;
+
+    const link = btn.getAttribute("data-link");
+    navigator.clipboard.writeText(link);
+
+    showToast("Link copied!");
+    trackEvent("copy_link", link);
+  });
+
+  // OUTBOUND TRACKING
+  document.querySelectorAll(".website-card a").forEach(link => {
+    link.addEventListener("click", () => {
+      trackEvent("outbound_click", link.href);
+    });
+  });
+
+});
+</script>
+
+<script>
+// TOAST
 function showToast(message) {
-    const toast = document.getElementById("copy-toast");
-    toast.textContent = message;
-    toast.style.opacity = "1";
-    setTimeout(() => toast.style.opacity = "0", 1500);
+  const toast = document.getElementById("copy-toast");
+  toast.textContent = message;
+  toast.style.opacity = "1";
+  setTimeout(() => toast.style.opacity = "0", 1500);
 }
 
+// ANALYTICS
 function trackEvent(action, value) {
-    const event = {
-        timestamp: new Date().toISOString(),
-        action,
-        value
-    };
-    const existing = JSON.parse(localStorage.getItem("analytics") || "[]");
-    existing.push(event);
-    localStorage.setItem("analytics", JSON.stringify(existing));
+  const event = { timestamp: new Date().toISOString(), action, value };
+  const existing = JSON.parse(localStorage.getItem("analytics") || "[]");
+  existing.push(event);
+  localStorage.setItem("analytics", JSON.stringify(existing));
 }
 </script>
 
-<div id="credly-badges" class="badge-grid"></div>
-
+<!-- FIXED CREDLY LOADER -->
 <script>
 async function loadCredly() {
-    const el = document.getElementById("credly-badges");
-    try {
-        const res = await fetch("https://credlyapi.timwilliams07.workers.dev/");
-        const data = await res.json();
-        el.innerHTML = data.map(b => `
-            <a href="${b.url}" target="_blank">
-                <img src="${b.image}" title="${b.name}" style="width:90px;border-radius:8px;margin:4px;">
-            </a>
-        `).join("");
-    } catch (e) {
-        el.innerHTML = "<p>Badges unavailable</p>";
-    }
+  const el = document.getElementById("credly-badges");
+  if (!el) return;
+
+  try {
+    const res = await fetch("https://credlyapi.timwilliams07.workers.dev/");
+    const data = await res.json();
+
+    el.innerHTML = data.map(b => `
+      <a href="${b.url}" target="_blank">
+        <img src="${b.image}" title="${b.name}" style="width:90px;border-radius:8px;margin:4px;">
+      </a>
+    `).join("");
+
+  } catch (e) {
+    el.innerHTML = "<p>Badges unavailable</p>";
+  }
 }
+
 loadCredly();
 </script>
 

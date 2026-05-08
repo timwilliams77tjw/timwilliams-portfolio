@@ -209,3 +209,56 @@ body.dark main *:not(.card):not(.box):not(.download-box):not(.timeline-box) {
         display: none !important;
     }
 }
+/* ============================================================
+   DEVICE LOGIC — CORRECT BEHAVIOUR FOR IPHONE / IPAD / DESKTOP
+   ============================================================ */
+
+/* ------------------------------
+   1. MOBILE BAR — iPHONE ONLY
+   ------------------------------ */
+
+/* Show mobile bar ONLY on screens narrower than 600px */
+@media (max-width: 600px) {
+    .mobile-sticky-bar {
+        display: flex !important;
+    }
+}
+
+/* Hide mobile bar on iPad and desktop */
+@media (min-width: 601px) {
+    .mobile-sticky-bar {
+        display: none !important;
+    }
+}
+
+/* ------------------------------
+   2. FLOATING BUTTONS — iPHONE
+   ------------------------------ */
+
+/* iPhone: show ONLY back-to-top FAB */
+@media (max-width: 600px) {
+    #fab,
+    .fab {
+        display: flex !important;
+    }
+
+    /* Hide calendar FAB on iPhone */
+    #bookingFab,
+    .fab-booking {
+        display: none !important;
+    }
+}
+
+/* ------------------------------
+   3. FLOATING BUTTONS — iPAD + DESKTOP
+   ------------------------------ */
+
+/* iPad and desktop: show BOTH floating buttons */
+@media (min-width: 601px) {
+    #fab,
+    .fab,
+    #bookingFab,
+    .fab-booking {
+        display: flex !important;
+    }
+}

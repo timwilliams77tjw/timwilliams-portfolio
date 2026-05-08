@@ -62,6 +62,7 @@ main {
     padding: 10px;
 }
 
+/* iPhone: centre icons */
 @media (max-width: 600px) {
     .service-card,
     .service-card img {
@@ -95,7 +96,8 @@ body.dark li {
 body.dark .service-card img {
     background-color: #1f2937 !important;
 }
-    /* ============================
+
+/* ============================
    MOBILE STICKY BAR (Raised)
 ============================ */
 .mobile-sticky-bar {
@@ -130,13 +132,28 @@ body.dark .service-card img {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* Hide on desktop */
+/* Hide sticky bar on desktop */
 @media (min-width: 768px) {
     .mobile-sticky-bar {
         display: none;
     }
 }
 
+/* Hide floating buttons on mobile */
+@media (max-width: 767px) {
+    .fab,
+    .fab-booking {
+        display: none !important;
+    }
+}
+
+/* Centre-align card text on mobile for How, Case Studies, Why */
+@media (max-width: 767px) {
+    .grid .card h3,
+    .grid .card p {
+        text-align: center !important;
+    }
+}
 </style>
 
 </head>
@@ -346,9 +363,15 @@ fetch("header.html")
 </div> <!-- END CONTAINER -->
 </main>
 
-<!-- FLOATING BUTTONS -->
+<!-- FLOATING BUTTONS (hidden on mobile) -->
 <div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
 <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<!-- MOBILE STICKY BAR -->
+<div class="mobile-sticky-bar">
+    <a href="calendar.html" class="sticky-btn">📅 Book Consultation</a>
+    <a href="contact.html" class="sticky-btn">✉️ Discuss Programme</a>
+</div>
 
 <!-- GLOBAL FOOTER -->
 <script src="header-standard-v4.js"></script>
@@ -360,11 +383,6 @@ fetch("footer.html")
 .then(r => r.text())
 .then(h => document.getElementById("footer").innerHTML = h);
 </script>
-<!-- MOBILE STICKY BAR -->
-<div class="mobile-sticky-bar">
-    <a href="calendar.html" class="sticky-btn">📅 Book Consultation</a>
-    <a href="contact.html" class="sticky-btn">✉️ Discuss Programme</a>
-</div>
 
 </body>
 </html>

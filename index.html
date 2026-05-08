@@ -95,6 +95,48 @@ body.dark li {
 body.dark .service-card img {
     background-color: #1f2937 !important;
 }
+    /* ============================
+   MOBILE STICKY BAR (Raised)
+============================ */
+.mobile-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #0A1F44;
+    padding: 12px 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.25);
+    z-index: 9999;
+    animation: slideUp 0.35s ease-out;
+}
+
+.sticky-btn {
+    flex: 1;
+    background: white;
+    color: #0A1F44;
+    text-align: center;
+    padding: 12px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Hide on desktop */
+@media (min-width: 768px) {
+    .mobile-sticky-bar {
+        display: none;
+    }
+}
+
 </style>
 
 </head>
@@ -318,6 +360,11 @@ fetch("footer.html")
 .then(r => r.text())
 .then(h => document.getElementById("footer").innerHTML = h);
 </script>
+<!-- MOBILE STICKY BAR -->
+<div class="mobile-sticky-bar">
+    <a href="calendar.html" class="sticky-btn">📅 Book Consultation</a>
+    <a href="contact.html" class="sticky-btn">✉️ Discuss Programme</a>
+</div>
 
 </body>
 </html>

@@ -540,3 +540,20 @@ body.dark main *:not(.card):not(.box):not(.download-box):not(.timeline-box) {
         drop-shadow(0 0 3px rgba(255,255,255,0.9))
         drop-shadow(0 0 2px rgba(0,0,0,0.9)) !important;
 }
+/* ============================================================
+   FORCE BACK-TO-TOP FAB POSITION ON iPHONE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+    /* Target the FAB with maximum specificity */
+    body .fab,
+    body #fab {
+        position: fixed !important;
+        bottom: 90px !important;   /* sits above mobile bar */
+        right: 20px !important;    /* same position calendar FAB used */
+        left: auto !important;
+        top: auto !important;
+        z-index: 999999 !important;
+    }
+}

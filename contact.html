@@ -6,9 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact – Tim Williams</title>
 
+    <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">
-<link rel="stylesheet" href="insights.css?v=1">
-    <link rel="stylesheet" href="global-restore.css">  
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
 <style>
 :root {
   --bg: #f5f5f5;
@@ -160,30 +161,36 @@ body.dark-mode {
 }
 </style>
 
-<link rel="stylesheet" href="header-standard-v4.css">
-</head>
+
 
 <body class="header-with-logo">
 
 
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
 <script>
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+    document.getElementById("header-placeholder").innerHTML = h;
 
-      // Ensure site-search.js is loaded, then bind
-      const searchScript = document.createElement("script");
-      searchScript.src = "site-search.js";
-      searchScript.onload = () => {
-          if (typeof initSiteSearch === "function") {
-              initSiteSearch();
-          }
-      };
-      document.body.appendChild(searchScript);
+    // Load site search (homepage uses site-search)
+    const searchScript = document.createElement("script");
+    searchScript.src = "site-search.js";
+    searchScript.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(searchScript);
+
+    // Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
   });
 </script>
 
@@ -275,9 +282,7 @@ fetch("footer.html")
   .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- HEADER + FORM JS -->
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
+
 
 
 <script>

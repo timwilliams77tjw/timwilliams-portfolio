@@ -41,9 +41,11 @@ fetch("header.html")
     };
     document.body.appendChild(siteSearch);
 
-    const headerJS = document.createElement("script");
+   // ⭐ Load header JS AFTER header is injected
+const headerJS = document.createElement("script");
 headerJS.src = "header-standard-v4.js";
 headerJS.onload = () => {
+    // Force initialisation because DOMContentLoaded has already fired
     initHeader();
     initHeaderEnhancements();
 };

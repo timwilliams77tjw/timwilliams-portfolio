@@ -262,3 +262,70 @@ body.dark main *:not(.card):not(.box):not(.download-box):not(.timeline-box) {
         display: flex !important;
     }
 }
+/* ============================================================
+   HEADER ICON VISIBILITY + SIZE FIX
+   ============================================================ */
+
+.hs-icon-btn,
+.hs-search-icon,
+.hs-dark-icon,
+.hs-hamburger {
+    font-size: 28px !important;      /* bigger icons */
+    width: 42px !important;
+    height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    background: rgba(0,0,0,0.08) !important; /* subtle background for visibility */
+    backdrop-filter: blur(6px) !important;
+}
+
+/* Make icons visible on white backgrounds */
+.hs-icon-btn svg,
+.hs-search-icon svg,
+.hs-dark-icon svg,
+.hs-hamburger svg {
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.6)) !important;
+}
+/* ============================================================
+   IPHONE FAB LOGIC — ONLY BACK TO TOP
+   ============================================================ */
+
+/* iPhone = max-width 600px */
+@media (max-width: 600px) {
+
+    /* Hide calendar FAB */
+    #bookingFab,
+    .fab-booking {
+        display: none !important;
+    }
+
+    /* Show back-to-top FAB */
+    #fab,
+    .fab {
+        display: flex !important;
+        bottom: 90px !important; /* sits above mobile bar */
+        right: 20px !important;  /* same position calendar FAB used */
+        z-index: 99999 !important;
+    }
+}
+/* ============================================================
+   MOBILE BAR BUTTON WIDTH FIX
+   ============================================================ */
+
+.mobile-sticky-bar .sticky-btn {
+    flex: 1 1 auto !important;
+    white-space: normal !important;
+    text-align: center !important;
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+}
+
+/* Prevent overflow on small screens */
+@media (max-width: 400px) {
+    .mobile-sticky-bar {
+        flex-direction: column !important;
+    }
+}

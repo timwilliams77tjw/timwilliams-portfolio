@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Search Results</title>
-<link rel="stylesheet" href="header-standard-v4.css">
+  <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
 
 <style>
 .search-results-container {
@@ -28,15 +30,37 @@
 </style>
 
 </head>
-<body class="header-with-logo">
-
+<body class="header-with-logo page-site-search">
+<!-- HEADER -->
 <div id="header-placeholder"></div>
+
 <script>
-fetch("header.html").then(r=>r.text()).then(h=>{
+fetch("header.html")
+  .then(r => r.text())
+  .then(h => {
     document.getElementById("header-placeholder").innerHTML = h;
-    initHeader();
-});
+
+    // Load global site search
+    const siteSearch = document.createElement("script");
+    siteSearch.src = "site-search.js";
+    siteSearch.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(siteSearch);
+
+    // Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+  });
 </script>
+
+
+
 
 <div class="search-results-container">
     <h1>Search Results</h1>
@@ -45,8 +69,7 @@ fetch("header.html").then(r=>r.text()).then(h=>{
 
 <script src="site-search.js"></script>
 <script src="site-search-results.js"></script>
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
+
 
 </body>
 </html>

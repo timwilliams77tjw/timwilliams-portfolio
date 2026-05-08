@@ -176,3 +176,15 @@ function initHeaderEnhancements() {
             .join("");
     }
 }
+/* ============================================================
+   MOBILE BAR INITIALISATION
+   ============================================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const mobileBar = document.querySelector(".mobile-sticky-bar");
+
+    if (mobileBar) {
+        // Ensure bar is visible on all pages
+        mobileBar.style.display = "flex";
+    }
+});

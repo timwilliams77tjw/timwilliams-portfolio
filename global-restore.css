@@ -1,0 +1,165 @@
+/* ============================================================
+   GLOBAL RESTORE PATCH — SAFE, ADDITIVE, NON‑DESTRUCTIVE
+   ============================================================ */
+
+/* ---------------------------------------------
+   1. RESTORE BADGE SIZING (SC + PRINCE2)
+   --------------------------------------------- */
+
+.badge img {
+    width: 70px !important;
+    height: 70px !important;
+    object-fit: contain !important;
+    border-radius: 12px !important;
+}
+
+/* ---------------------------------------------
+   2. RESTORE BADGE TEXT
+   --------------------------------------------- */
+
+.badge p {
+    margin-top: 8px !important;
+    font-size: 14px !important;
+    color: #fff !important;
+    text-align: center !important;
+}
+
+/* ---------------------------------------------
+   3. RESTORE MENU / SEARCH / DARK ICON SIZE
+   --------------------------------------------- */
+
+.hs-icon-btn,
+.hs-search-icon,
+.hs-dark-icon,
+.hs-hamburger {
+    font-size: 24px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 8px !important;
+}
+
+/* ---------------------------------------------
+   4. KEEP ICONS VISIBLE WHILE SCROLLING
+   --------------------------------------------- */
+
+.hs-topbar {
+    position: fixed !important;
+    top: 10px !important;
+    right: 10px !important;
+    left: auto !important;
+    z-index: 9999 !important;
+}
+
+/* ---------------------------------------------
+   5. FIX MOBILE — DISCUSS PROGRAM BUTTON WIDTH
+   --------------------------------------------- */
+
+.brand-btn,
+.discuss-btn {
+    max-width: 100% !important;
+    width: auto !important;
+    display: inline-block !important;
+    white-space: normal !important;
+}
+
+/* ---------------------------------------------
+   6. FIX MOBILE — SEARCH ICON OVERLAP
+   --------------------------------------------- */
+
+@media (max-width: 767px) {
+    .hs-topbar {
+        right: 12px !important;
+    }
+    .hs-logo {
+        margin-top: 40px !important;
+    }
+}
+
+/* ---------------------------------------------
+   7. RESTORE FLOATING BAR BEHAVIOUR
+   --------------------------------------------- */
+
+.fab,
+#fab {
+    display: none !important;
+}
+
+body.scrolled .fab,
+body.scrolled #fab {
+    display: flex !important;
+}
+
+/* ---------------------------------------------
+   8. REMOVE DUPLICATE FLOATING BUTTONS
+   --------------------------------------------- */
+
+.fab-booking,
+#bookingFab {
+    display: none !important;
+}
+
+/* ---------------------------------------------
+   9. RESTORE RECENTLY VIEWED SPACING
+   --------------------------------------------- */
+
+#hsRecentlyViewed a {
+    display: block !important;
+    margin-bottom: 6px !important;
+    font-size: 14px !important;
+}
+
+/* ---------------------------------------------
+   10. RESTORE HERO BUTTONS (INDEX)
+   --------------------------------------------- */
+
+.brand-btn {
+    background: #0a2540 !important;
+    color: white !important;
+    padding: 12px 24px !important;
+    border-radius: 50px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    border: 2px solid #0a2540 !important;
+}
+
+.brand-btn:hover {
+    background: transparent !important;
+    color: #0a66c2 !important;
+    border-color: #0a66c2 !important;
+}
+
+/* ---------------------------------------------
+   11. FIX MENU NOT WORKING UNTIL REFRESH
+   --------------------------------------------- */
+
+#hsMenuOverlay,
+#hsMenuPanel {
+    pointer-events: auto !important;
+}
+
+/* ---------------------------------------------
+   12. FIX MENU PANEL WIDTH ON MOBILE
+   --------------------------------------------- */
+
+.hs-menu-panel {
+    max-width: calc(100% - 20px) !important;
+}
+
+/* ---------------------------------------------
+   13. FIX DARK MODE TEXT BLEED
+   --------------------------------------------- */
+
+body.dark main *:not(.card):not(.box):not(.download-box):not(.timeline-box) {
+    color: #e6e6e6 !important;
+}
+
+/* ---------------------------------------------
+   14. FIX INDEX BADGE GRID SPACING
+   --------------------------------------------- */
+
+.badge {
+    padding: 12px !important;
+    border-radius: 12px !important;
+    background: #0A1F44 !important;
+}

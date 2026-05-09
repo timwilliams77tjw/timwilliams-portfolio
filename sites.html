@@ -30,19 +30,25 @@ body.page-certifications {
 
 .hero-section {
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .hero-section h1 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
     margin-bottom: 0.5rem;
     color: #0a2540;
 }
 
 .hero-section p {
-    font-size: 1.1rem;
-    color: #0a2540;
+    font-size: 1.15rem;
+    opacity: 0.85;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 720px;
 }
+
 
 .grid {
     display: grid;
@@ -835,26 +841,33 @@ fetch("header.html")
 </script>
 
 <script>
-    // Floating index scroll
-document.querySelectorAll("#categoryIndex li").forEach(item => {
-    item.addEventListener("click", () => {
-        const target = document.querySelector(`[data-category='${item.dataset.target}']`);
-        if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("#categoryIndex li").forEach(item => {
+        item.addEventListener("click", () => {
+            const target = document.querySelector(`[data-category='${item.dataset.target}']`);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        });
     });
 });
 </script>
-    <script>
-        // Search filter
-document.getElementById("siteSearchInput").addEventListener("input", e => {
-    const term = e.target.value.toLowerCase();
-    document.querySelectorAll(".website-card").forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(term) ? "block" : "none";
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("siteSearchInput");
+    if (!input) return;
+
+    input.addEventListener("input", e => {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll(".website-card").forEach(card => {
+            const text = card.innerText.toLowerCase();
+            card.style.display = text.includes(term) ? "block" : "none";
+        });
     });
 });
-    </script>
+</script>
+
     <script>
         // Smooth scroll for category headers
 document.querySelectorAll(".category-header").forEach(header => {
@@ -884,14 +897,19 @@ document.querySelectorAll(".category-header").forEach(header => {
     </button>
 </div>
 
-
 <script>
-    document.getElementById("copyAllLinks").addEventListener("click", () => {
-    const links = [...document.querySelectorAll(".website-card a")].map(a => a.href).join("\n");
-    navigator.clipboard.writeText(links);
-    showToast("All links copied!");
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("copyAllLinks");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+        const links = [...document.querySelectorAll(".website-card a")].map(a => a.href).join("\n");
+        navigator.clipboard.writeText(links);
+        showToast("All links copied!");
+    });
 });
 </script>
+
 <!-- CATEGORY 1 -->
 <div class="category-section cat" data-category="cat1">
 <div class="category-header">

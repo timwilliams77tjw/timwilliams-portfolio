@@ -757,6 +757,28 @@ body.page-certifications {
         color: #001f3f;
     }
 }
+/* Search bar */
+.site-search-bar {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+#siteSearchInput {
+    width: 100%;
+    max-width: 480px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 2px solid #d0d7e2;
+    font-size: 1rem;
+    transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+#siteSearchInput:focus {
+    border-color: #7ac0f9;
+    box-shadow: 0 0 0 4px rgba(122,192,249,0.25);
+    outline: none;
+}
 
 </style>
 
@@ -805,6 +827,16 @@ document.querySelectorAll("#categoryIndex li").forEach(item => {
     });
 });
 </script>
+    <script>
+        // Search filter
+document.getElementById("siteSearchInput").addEventListener("input", e => {
+    const term = e.target.value.toLowerCase();
+    document.querySelectorAll(".website-card").forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(term) ? "block" : "none";
+    });
+});
+    </script>
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
@@ -815,7 +847,20 @@ document.querySelectorAll("#categoryIndex li").forEach(item => {
 
 <!-- CATEGORY SECTIONS (unchanged HTML) -->
 
-
+<div class="site-search-bar">
+    <input id="siteSearchInput" type="text" placeholder="Search sites…">
+</div>
+<button id="copyAllLinks" class="copy-btn" style="margin-bottom:20px;">
+    <i class="fa-regular fa-copy"></i> Copy All Links
+</button>
+// Copy all links
+<script>
+    document.getElementById("copyAllLinks").addEventListener("click", () => {
+    const links = [...document.querySelectorAll(".website-card a")].map(a => a.href).join("\n");
+    navigator.clipboard.writeText(links);
+    showToast("All links copied!");
+});
+</script>
 <!-- CATEGORY 1 -->
 <div class="category-section" data-category="cat1">
 <div class="category-header">

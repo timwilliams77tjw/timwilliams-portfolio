@@ -595,6 +595,116 @@ body.page-certifications {
     background: #fff3e6;
     color: #d46a00;
 }
+/* --- FINAL POLISH LAYER --- */
+
+/* Page-wide fade-in */
+body.page-certifications {
+    opacity: 0;
+    animation: pageFade 0.6s ease forwards;
+}
+
+@keyframes pageFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Hero section polish */
+.hero-section h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.hero-section p {
+    font-size: 1.15rem;
+    opacity: 0.85;
+}
+
+/* Section spacing rhythm */
+.category-section {
+    margin-bottom: 2.2rem;
+}
+
+/* Soft gradient backgrounds per category */
+.category-section:nth-of-type(1) {
+    background: linear-gradient(to bottom, #f7fbff 0%, #ffffff 100%);
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.category-section:nth-of-type(2) {
+    background: linear-gradient(to bottom, #faf5ff 0%, #ffffff 100%);
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.category-section:nth-of-type(3) {
+    background: linear-gradient(to bottom, #f4fff6 0%, #ffffff 100%);
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.category-section:nth-of-type(4) {
+    background: linear-gradient(to bottom, #fff8f0 0%, #ffffff 100%);
+    padding: 6px;
+    border-radius: 12px;
+}
+
+/* Divider line between categories */
+.category-section:not(:last-of-type)::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: rgba(0,0,0,0.06);
+    margin-top: 22px;
+}
+
+/* Animated toggle icon */
+.category-toggle {
+    transition: transform 0.25s ease;
+}
+
+.category-section.open .category-toggle {
+    transform: rotate(180deg);
+}
+
+/* Smooth accordion easing */
+.card-list {
+    transition: max-height 0.45s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Card hover polish */
+.website-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+/* Card inner spacing */
+.website-card {
+    padding: 1.55rem;
+}
+
+/* Link hover polish */
+.website-card a:hover {
+    text-decoration: underline;
+}
+
+/* Copy button polish */
+.copy-btn {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.copy-btn:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+}
+
+/* Toast polish */
+#copy-toast {
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
 
 </style>
 

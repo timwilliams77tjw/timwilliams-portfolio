@@ -626,25 +626,25 @@ body.page-certifications {
 }
 
 /* Soft gradient backgrounds per category */
-.category-section:nth-of-type(1) {
+.cat:nth-of-type(1) {
     background: linear-gradient(to bottom, #f7fbff 0%, #ffffff 100%);
     padding: 6px;
     border-radius: 12px;
 }
 
-.category-section:nth-of-type(2) {
+.cat:nth-of-type(2) {
     background: linear-gradient(to bottom, #faf5ff 0%, #ffffff 100%);
     padding: 6px;
     border-radius: 12px;
 }
 
-.category-section:nth-of-type(3) {
+.cat:nth-of-type(3) {
     background: linear-gradient(to bottom, #f4fff6 0%, #ffffff 100%);
     padding: 6px;
     border-radius: 12px;
 }
 
-.category-section:nth-of-type(4) {
+.cat:nth-of-type(4) {
     background: linear-gradient(to bottom, #fff8f0 0%, #ffffff 100%);
     padding: 6px;
     border-radius: 12px;
@@ -786,6 +786,17 @@ body.page-certifications {
 .category-section.open {
     transform: translateY(4px);
 }
+.copy-all-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#copyAllLinks {
+    font-size: 14px;
+    padding: 10px 18px;
+    border-radius: 10px;
+}
 
 </style>
 
@@ -867,10 +878,13 @@ document.querySelectorAll(".category-header").forEach(header => {
 <div class="site-search-bar">
     <input id="siteSearchInput" type="text" placeholder="Search sites…">
 </div>
-<button id="copyAllLinks" class="copy-btn" style="margin-bottom:20px;">
-    <i class="fa-regular fa-copy"></i> Copy All Links
-</button>
-// Copy all links
+<div class="copy-all-wrapper">
+    <button id="copyAllLinks" class="copy-btn">
+        <i class="fa-regular fa-copy"></i> Copy All Links
+    </button>
+</div>
+
+
 <script>
     document.getElementById("copyAllLinks").addEventListener("click", () => {
     const links = [...document.querySelectorAll(".website-card a")].map(a => a.href).join("\n");
@@ -879,7 +893,7 @@ document.querySelectorAll(".category-header").forEach(header => {
 });
 </script>
 <!-- CATEGORY 1 -->
-<div class="category-section" data-category="cat1">
+<div class="category-section cat" data-category="cat1">
 <div class="category-header">
 Professional Profiles
 <span class="category-toggle">+</span>
@@ -917,7 +931,7 @@ Professional Profiles
 </div>
 
 <!-- CATEGORY 2 -->
-<div class="category-section" data-category="cat2">
+<div class="category-section cat" data-category="cat2">
 <div class="category-header">
 Certifications & Learning
 <span class="category-toggle">+</span>
@@ -954,7 +968,7 @@ Certifications & Learning
 </div>
 
 <!-- CATEGORY 3 -->
-<div class="category-section" data-category="cat3">
+<div class="category-section cat" data-category="cat3">
 <div class="category-header">
 Volunteering & Community Roles
 <span class="category-toggle">+</span>
@@ -1012,7 +1026,7 @@ Volunteering & Community Roles
 </div>
 
 <!-- CATEGORY 4 -->
-<div class="category-section" data-category="cat4">
+<div class="category-section cat" data-category="cat4">
 <div class="category-header">
 Business & Services
 <span class="category-toggle">+</span>

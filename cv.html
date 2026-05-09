@@ -185,21 +185,29 @@ fetch("header.html")
 </div>
 
 <!-- ========================= -->
-<!-- CV ICON BUTTONS -->
+<!-- CV ICON BUTTONS WITH TOOLTIP -->
 <!-- ========================= -->
 
 <div class="cv-download-wrapper">
-    <!-- View CV -->
-    <a href="Tim_Williams_CV.pdf" target="_blank" class="cv-icon-btn" aria-label="View CV PDF">
+
+    <!-- View CV (no tooltip needed) -->
+    <a href="Tim_Williams_CV.pdf" 
+       target="_blank" 
+       class="cv-icon-btn" 
+       aria-label="View CV PDF">
         📄
     </a>
 
-    <!-- Download CV -->
-    <a href="Tim_Williams_CV.download" download="Tim_Williams_CV.pdf" class="cv-icon-btn" aria-label="Download CV PDF">
+    <!-- Download CV (with tooltip identical to downloads page) -->
+    <a href="Tim_Williams_CV.download" 
+       download="Tim_Williams_CV.pdf" 
+       class="cv-icon-btn" 
+       data-tip="Safari users: rename .download to .zip"
+       aria-label="Download CV PDF">
         ⬇️
     </a>
-</div>
 
+</div>
 
 <style>
 .cv-download-wrapper {
@@ -224,6 +232,7 @@ fetch("header.html")
     text-decoration: none;
     border: 1px solid #001f3f;
     transition: all 0.2s ease;
+    position: relative; /* required for tooltip */
 }
 
 /* Hover */
@@ -231,6 +240,35 @@ fetch("header.html")
     background-color: white;
     color: #001f3f;
     border-color: #7ac0f9;
+}
+
+/* Tooltip (same as downloads page) */
+.cv-icon-btn[data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #001f3f;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 20;
+}
+
+.cv-icon-btn[data-tip]:hover::before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #001f3f transparent transparent transparent;
+    z-index: 21;
 }
 
 /* Dark mode */
@@ -244,7 +282,17 @@ body.dark-mode .cv-icon-btn:hover {
     background-color: #7ac0f9;
     color: #001f3f;
 }
+
+body.dark-mode .cv-icon-btn[data-tip]:hover::after {
+    background: #7ac0f9;
+    color: #001f3f;
+}
+
+body.dark-mode .cv-icon-btn[data-tip]:hover::before {
+    border-color: #7ac0f9 transparent transparent transparent;
+}
 </style>
+
 
 
 <!-- FILTER BAR -->

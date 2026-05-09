@@ -453,29 +453,30 @@ body.page-certifications {
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-/* Category 1 — Professional Profiles (blue) */
-.category-section:nth-of-type(1) .website-card h3 i {
-    background: #e6f2ff;
-    color: #0050a8;
+[data-category="cat1"] {
+    background: linear-gradient(to bottom, #f7fbff 0%, #ffffff 100%);
+    padding: 6px;
+    border-radius: 12px;
 }
 
-/* Category 2 — Certifications & Learning (purple) */
-.category-section:nth-of-type(2) .website-card h3 i {
-    background: #f1e8ff;
-    color: #6a32c9;
+[data-category="cat2"] {
+    background: linear-gradient(to bottom, #faf5ff 0%, #ffffff 100%);
+    padding: 6px;
+    border-radius: 12px;
 }
 
-/* Category 3 — Volunteering & Community (green) */
-.category-section:nth-of-type(3) .website-card h3 i {
-    background: #e8fbea;
-    color: #1f8a3b;
+[data-category="cat3"] {
+    background: linear-gradient(to bottom, #f4fff6 0%, #ffffff 100%);
+    padding: 6px;
+    border-radius: 12px;
 }
 
-/* Category 4 — Business & Services (orange) */
-.category-section:nth-of-type(4) .website-card h3 i {
-    background: #fff3e6;
-    color: #d46a00;
+[data-category="cat4"] {
+    background: linear-gradient(to bottom, #fff8f0 0%, #ffffff 100%);
+    padding: 6px;
+    border-radius: 12px;
 }
+
 /* --- CATEGORY HEADER ICONS + COLOUR THEMES --- */
 
 .category-header {
@@ -803,6 +804,14 @@ body.page-certifications {
     padding: 10px 18px;
     border-radius: 10px;
 }
+#categoryIndex li[data-target="cat1"] { color: #003a73; }
+#categoryIndex li[data-target="cat2"] { color: #4b1f9e; }
+#categoryIndex li[data-target="cat3"] { color: #1f6b33; }
+#categoryIndex li[data-target="cat4"] { color: #a65300; }
+
+#categoryIndex li:hover {
+    opacity: 0.7;
+}
 
 </style>
 
@@ -839,22 +848,28 @@ fetch("header.html")
     document.body.appendChild(headerJS);
   });
 </script>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("#categoryIndex li").forEach(item => {
         item.addEventListener("click", () => {
             const target = document.querySelector(`[data-category='${item.dataset.target}']`);
-            if (target) {
+            if (!target) return;
+
+            // OPEN THE SECTION
+            const header = target.querySelector(".category-header");
+            if (header) header.click();
+
+            // SCROLL TO IT
+            setTimeout(() => {
                 target.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
+            }, 150);
         });
     });
 });
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
     const input = document.getElementById("siteSearchInput");
     if (!input) return;
 
@@ -866,6 +881,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
 </script>
 
     <script>

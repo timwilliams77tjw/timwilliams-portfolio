@@ -582,6 +582,58 @@ fetch("footer.html")
 <script src="global.js"></script>
 <script src="site-search.js" defer></script>
 <script src="page-search.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const sections = document.querySelectorAll(".portfolio-section");
+    const expandAllBtn = document.getElementById("expandAllBtn");
+    const collapseAllBtn = document.getElementById("collapseAllBtn");
+
+    /* Close all sections */
+    const closeAll = () => {
+        sections.forEach(section => {
+            section.classList.remove("open");
+        });
+    };
+
+    /* Open a single section */
+    const openSection = (section) => {
+        section.classList.add("open");
+    };
+
+    /* Header click accordion */
+    document.querySelectorAll(".portfolio-section .category-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const section = header.closest(".portfolio-section");
+            const isOpen = section.classList.contains("open");
+
+            closeAll();
+            if (!isOpen) {
+                openSection(section);
+            }
+        });
+    });
+
+    /* Expand All */
+    expandAllBtn.addEventListener("click", () => {
+        sections.forEach(section => section.classList.add("open"));
+    });
+
+    /* Collapse All */
+    collapseAllBtn.addEventListener("click", () => {
+        closeAll();
+    });
+
+    /* Card fade‑in animation */
+    const cards = document.querySelectorAll(".portfolio-section .card");
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.classList.add("card-visible");
+        }, 80 * index);
+    });
+
+});
+</script>
 
 </body>
 </html>

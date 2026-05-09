@@ -705,6 +705,58 @@ body.page-certifications {
     font-weight: 600;
     letter-spacing: 0.3px;
 }
+/* Floating category index */
+#categoryIndex {
+    position: fixed;
+    top: 120px;
+    right: 24px;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    z-index: 9999;
+    width: 220px;
+}
+
+#categoryIndex ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#categoryIndex li {
+    padding: 10px 0;
+    font-weight: 600;
+    color: #001f3f;
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+#categoryIndex li:hover {
+    color: #0078ff;
+}
+
+/* Mobile: convert to FAB */
+@media (max-width: 900px) {
+    #categoryIndex {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: auto;
+        padding: 12px 14px;
+        border-radius: 50px;
+    }
+
+    #categoryIndex ul {
+        display: none;
+    }
+
+    #categoryIndex::after {
+        content: "☰ Sections";
+        font-weight: 700;
+        color: #001f3f;
+    }
+}
 
 </style>
 
@@ -742,7 +794,17 @@ fetch("header.html")
   });
 </script>
 
-
+<script>
+    // Floating index scroll
+document.querySelectorAll("#categoryIndex li").forEach(item => {
+    item.addEventListener("click", () => {
+        const target = document.querySelector(`[data-category='${item.dataset.target}']`);
+        if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    });
+});
+</script>
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
@@ -755,7 +817,7 @@ fetch("header.html")
 
 
 <!-- CATEGORY 1 -->
-<div class="category-section">
+<div class="category-section" data-category="cat1">
 <div class="category-header">
 Professional Profiles
 <span class="category-toggle">+</span>
@@ -793,7 +855,7 @@ Professional Profiles
 </div>
 
 <!-- CATEGORY 2 -->
-<div class="category-section">
+<div class="category-section" data-category="cat2">
 <div class="category-header">
 Certifications & Learning
 <span class="category-toggle">+</span>
@@ -830,7 +892,7 @@ Certifications & Learning
 </div>
 
 <!-- CATEGORY 3 -->
-<div class="category-section">
+<div class="category-section" data-category="cat3">
 <div class="category-header">
 Volunteering & Community Roles
 <span class="category-toggle">+</span>
@@ -888,7 +950,7 @@ Volunteering & Community Roles
 </div>
 
 <!-- CATEGORY 4 -->
-<div class="category-section">
+<div class="category-section" data-category="cat4">
 <div class="category-header">
 Business & Services
 <span class="category-toggle">+</span>

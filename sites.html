@@ -779,6 +779,13 @@ body.page-certifications {
     box-shadow: 0 0 0 4px rgba(122,192,249,0.25);
     outline: none;
 }
+.category-section {
+    transition: transform 0.35s ease;
+}
+
+.category-section.open {
+    transform: translateY(4px);
+}
 
 </style>
 
@@ -834,6 +841,16 @@ document.getElementById("siteSearchInput").addEventListener("input", e => {
     document.querySelectorAll(".website-card").forEach(card => {
         const text = card.innerText.toLowerCase();
         card.style.display = text.includes(term) ? "block" : "none";
+    });
+});
+    </script>
+    <script>
+        // Smooth scroll for category headers
+document.querySelectorAll(".category-header").forEach(header => {
+    header.addEventListener("click", () => {
+        setTimeout(() => {
+            header.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 200);
     });
 });
     </script>

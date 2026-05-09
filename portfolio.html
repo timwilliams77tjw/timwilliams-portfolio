@@ -17,11 +17,9 @@
 
 <style>
 
-/* ============================================================
-   PORTFOLIO OVERRIDES TO MATCH CERTIFICATIONS
-   ============================================================ */
+/* ===== Portfolio-specific overrides (match Certifications) ===== */
 
-/* Fix section headers */
+/* Section headers */
 .portfolio-section .category-header {
     background: none !important;
     color: #7ac0f9 !important;
@@ -30,96 +28,119 @@
     margin: 20px 0 10px !important;
     font-size: 1.6rem !important;
     font-weight: 700 !important;
+    cursor: pointer !important;
 }
 
-/* Fix toggle */
 .portfolio-section .category-toggle {
     font-weight: 900 !important;
     font-size: 1.8rem !important;
     margin-left: 10px !important;
 }
 
-/* Fix card titles */
+/* Card titles */
 .portfolio-section .card-title {
-    color: #001f3f !important;
     font-size: 1.2rem !important;
     font-weight: 700 !important;
     margin-bottom: 8px !important;
+    color: #001f3f !important;
 }
 
-/* Fix card styling */
+/* Cards */
 .portfolio-section .card {
     background: white !important;
     border-radius: 10px !important;
     padding: 20px !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 24px !important;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity .3s ease, transform .3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 .portfolio-section .card.card-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Fix grid */
+/* Grid */
 .portfolio-section .grid {
     display: grid !important;
     gap: 20px !important;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
 }
 
-/* Fix accordion visibility */
+/* Accordion default (JS will toggle display) */
 .portfolio-section .card-list {
-    display: none !important;
+    display: none;
 }
 
-/* Fix filter bar */
-.sticky-bar {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-    justify-content: center !important;
-    padding: 12px 0 !important;
+/* Page search */
+.page-search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 10px;
 }
 
-/* Fix filter buttons */
-.filter-btn {
-    background-color: #001f3f !important;
-    color: white !important;
-    border: 1px solid #001f3f !important;
-    border-radius: 6px !important;
-    padding: 6px 14px !important;
-    font-size: 14px !important;
-    cursor: pointer !important;
-}
-.filter-btn.active-filter {
-    background-color: white !important;
-    color: #001f3f !important;
-    border: 1px solid #7ac0f9 !important;
+.page-search-bar-inner {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
 }
 
-/* Fix download button */
+.page-search-bar-inner input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #001f3f;
+    border-radius: 6px;
+}
+
+/* Download button */
 .download-btn {
-    padding: 8px 16px !important;
-    border-radius: 6px !important;
-    border: 1px solid #001f3f !important;
-    background: #001f3f !important;
-    color: #fff !important;
-    font-size: 14px !important;
-    cursor: pointer !important;
-    margin: 0 auto 20px !important;
-    display: inline-block !important;
-    text-decoration: none !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #001f3f;
+    background: #001f3f;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 auto 20px;
+    display: inline-block;
+    text-decoration: none;
 }
 
-/* Remove link underline */
+/* Filter bar */
+.sticky-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.filter-btn {
+    background-color: #001f3f;
+    color: white;
+    border: 1px solid #001f3f;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filter-btn.active-filter {
+    background-color: white;
+    color: #001f3f;
+    border: 1px solid #7ac0f9;
+}
+
+/* Remove link underline inside portfolio content */
 .portfolio-section a {
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
-/* Logo images */
+/* Logos */
 .logo-img {
     width: 90px;
     height: 60px;
@@ -174,8 +195,8 @@ fetch("header.html")
   </div>
 </div>
 
-<!-- DOWNLOAD BUTTON -->
-<a class="download-btn" href="portfolio_presentation.pdf" target="_blank" download>
+<!-- PDF BUTTON -->
+<a class="download-btn" id="downloadPdfBtn" href="portfolio_presentation.pdf" target="_blank" download>
     Download Portfolio (PDF)
 </a>
 
@@ -187,22 +208,7 @@ fetch("header.html")
 <div class="sticky-bar">
   <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
   <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
-  <button class="filter-btn" data-filter="summary">Summary</button>
-  <button class="filter-btn" data-filter="leadership">Leadership</button>
-  <button class="filter-btn" data-filter="rolefit">Role Fit</button>
-  <button class="filter-btn" data-filter="euc">EUC</button>
-  <button class="filter-btn" data-filter="cyber">Cyber</button>
-  <button class="filter-btn" data-filter="pmo">PMO</button>
-  <button class="filter-btn" data-filter="service">Service</button>
-  <button class="filter-btn" data-filter="cloud">Cloud</button>
-  <button class="filter-btn" data-filter="legacy">Legacy</button>
-  <button class="filter-btn" data-filter="presales">Pre-Sales</button>
-  <button class="filter-btn" data-filter="whatibring">What I Bring</button>
 </div>
-
-<!-- ========================= -->
-<!-- PORTFOLIO CONTENT -->
-<!-- ========================= -->
 
 <div class="container">
 
@@ -214,9 +220,7 @@ Executive Summary (1)
 </div>
 
 <div class="card-list">
-<div class="grid">
-
-<div class="card searchable-item">
+<div class="card">
 <p>
 I deliver large-scale IT, infrastructure, and cyber programmes with a focus on execution certainty,
 operational readiness, and governance. My work spans national EUC transformations, identity and access
@@ -228,8 +232,6 @@ My track record shows repeatability across financial services, utilities, govern
 aviation, and education. I stabilise programmes, drive adoption, and ensure services are secure,
 resilient, and ready for BAU.
 </p>
-</div>
-
 </div>
 </div>
 </div>
@@ -244,7 +246,7 @@ Leadership Model (4)
 <div class="card-list">
 <div class="grid">
 
-<div class="card searchable-item">
+<div class="card">
 <img src="atl.png" class="logo-img" alt="Atlassian">
 <img src="pmi.png" class="logo-img" alt="PMI">
 <img src="prince.png" class="logo-img" alt="Prince2">
@@ -252,20 +254,20 @@ Leadership Model (4)
 <p>I establish clear frameworks, reporting rhythms, and decision pathways that bring stability to programmes under pressure.</p>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <img src="apm.png" class="logo-img" alt="APM">
 <div class="card-title">Stakeholder Alignment & Communication</div>
 <p>I build confidence across technical, operational, and executive stakeholders by translating complexity into clear narratives.</p>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <img src="itil.png" class="logo-img" alt="ITIL">
 <img src="snow.png" class="logo-img" alt="ServiceNow">
 <div class="card-title">Operational Readiness & Service Sustainability</div>
 <p>I embed service transition early ensuring documentation, support models and operational processes are ready before go-live.</p>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <img src="six.png" class="logo-img" alt="Six Sigma">
 <img src="comp.png" class="logo-img" alt="CompTia">
 <div class="card-title">Outcome-Based Delivery</div>
@@ -286,7 +288,7 @@ Role Fit (3)
 <div class="card-list">
 <div class="grid">
 
-<div class="card searchable-item">
+<div class="card">
 <div class="card-title">Roles I Fit</div>
 <ul>
 <li>Senior Project Manager</li>
@@ -297,7 +299,7 @@ Role Fit (3)
 </ul>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <div class="card-title">What Organisations Gain</div>
 <ul>
 <li>Predictable controlled delivery</li>
@@ -308,7 +310,7 @@ Role Fit (3)
 </ul>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <div class="card-title">Where I Add Most Value</div>
 <ul>
 <li>Complex multi-vendor environments</li>
@@ -333,20 +335,20 @@ Global Infrastructure & EUC Transformations (3)
 <div class="card-list">
 <div class="grid">
 
-<div class="card searchable-item">
+<div class="card">
 <img src="hsbc.png" class="logo-img" alt="HSBC">
 <img src="tesco.png" class="logo-img" alt="Tesco">
 <div class="card-title">National-Scale EUC Transformations</div>
 <p>Tesco 126k device refresh and HSBC 46k user modernisation programmes.</p>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <img src="uu.png" class="logo-img" alt="United Utilities">
 <div class="card-title">Modern Workplace Deployments</div>
 <p>Cloud managed EUC lifecycle deployments across 32k+ devices.</p>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <img src="nu.png" class="logo-img" alt="Newcastle University">
 <div class="card-title">Sector Specific Modernisation</div>
 <p>Teams Rooms and print modernisation across academic environments.</p>
@@ -366,13 +368,13 @@ Cybersecurity & Identity Uplift (2)
 <div class="card-list">
 <div class="grid">
 
-<div class="card searchable-item">
+<div class="card">
 <img src="nhs.png" class="logo-img" alt="NHS England">
 <div class="card-title">NHS England</div>
 <p>CAF uplift strengthening access controls and governance frameworks.</p>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <img src="luton.png" class="logo-img" alt="Luton Airport">
 <div class="card-title">Luton Airport</div>
 <p>MFA PAM and SSO uplift in regulated aviation environment.</p>
@@ -392,7 +394,7 @@ PMO Leadership & Governance (2)
 <div class="card-list">
 <div class="grid">
 
-<div class="card searchable-item">
+<div class="card">
 <img src="cc.png" class="logo-img" alt="Computacenter">
 <img src="es.png" class="logo-img" alt="Eversheds">
 <div class="card-title">PMO Build & Leadership</div>
@@ -400,7 +402,7 @@ PMO Leadership & Governance (2)
 discipline and delivery assurance.</p>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <img src="nfu.png" class="logo-img" alt="NFU Mutual">
 <img src="fco.png" class="logo-img" alt="FCO">
 <img src="dn.png" class="logo-img" alt="Dounreay Nuclear">
@@ -421,15 +423,11 @@ Service Transition & BAU Integration (1)
 </div>
 
 <div class="card-list">
-<div class="grid">
-
-<div class="card searchable-item">
+<div class="card">
 <img src="sf.png" class="logo-img" alt="Salesforce">
 <img src="sync.png" class="logo-img" alt="Synchrony">
 <p>Transitioned global services for Synchrony (25,000 users), integrated Salesforce into BAU, and
 stabilised major programmes through structured readiness and support alignment.</p>
-</div>
-
 </div>
 </div>
 </div>
@@ -444,13 +442,13 @@ Cloud, Platforms & Application Services (2)
 <div class="card-list">
 <div class="grid">
 
-<div class="card searchable-item">
+<div class="card">
 <img src="mitie.png" class="logo-img" alt="Mitie">
 <div class="card-title">AWS & SaaS Integration</div>
 <p>Delivered AWS migration and SaaS integration for Telefonica.</p>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <img src="tele.png" class="logo-img" alt="Telefonica">
 <img src="ho.png" class="logo-img" alt="Home Office">
 <div class="card-title">ServiceNow & Hosted Platforms</div>
@@ -472,7 +470,7 @@ Legacy, Migration & Infrastructure Modernisation (2)
 <div class="card-list">
 <div class="grid">
 
-<div class="card searchable-item">
+<div class="card">
 <img src="san.png" class="logo-img" alt="Santander">
 <img src="met.png" class="logo-img" alt="MET">
 <img src="uni.png" class="logo-img" alt="Unipart">
@@ -480,7 +478,7 @@ Legacy, Migration & Infrastructure Modernisation (2)
 <p>Delivered modernisation programmes for Santander, MET Office, and Unipart.</p>
 </div>
 
-<div class="card searchable-item">
+<div class="card">
 <img src="admin.png" class="logo-img" alt="AdminRe">
 <img src="gov.png" class="logo-img" alt="Gov">
 <div class="card-title">Large-Scale Migration</div>
@@ -499,14 +497,10 @@ Pre-Sales & Commercial Leadership (1)
 </div>
 
 <div class="card-list">
-<div class="grid">
-
-<div class="card searchable-item">
+<div class="card">
 <img src="hub.png" class="logo-img" alt="Hubspot">
 <p>Supported tendering, solution design, and commercial modelling across major bids, ensuring
 proposals were deliverable, costed, and aligned with operational reality.</p>
-</div>
-
 </div>
 </div>
 </div>
@@ -519,9 +513,7 @@ What I Bring (1)
 </div>
 
 <div class="card-list">
-<div class="grid">
-
-<div class="card searchable-item">
+<div class="card">
 <ul>
 <li>Execution certainty through structure, clarity, and governance</li>
 <li>Cross-sector repeatability across regulated environments</li>
@@ -530,8 +522,6 @@ What I Bring (1)
 <li>Long-term service value through stability and adoption</li>
 </ul>
 </div>
-
-</div>
 </div>
 </div>
 
@@ -539,140 +529,15 @@ What I Bring (1)
 
 <!-- FOOTER -->
 <div id="footer"></div>
-
 <script>
 fetch("footer.html")
   .then(r => r.text())
-  .then(f => {
-    document.getElementById("footer").innerHTML = f;
-    if (typeof initFooter === "function") initFooter();
-  });
+  .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
 <!-- FAB BUTTONS -->
-<div id="fab" class="fab" aria-label="Back to top">⬆️</div>
-<a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
-
-<!-- ========================= -->
-<!-- ACCORDION + FILTER ENGINE -->
-<!-- ========================= -->
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-const filterButtons = document.querySelectorAll(".filter-btn");
-const sections = document.querySelectorAll(".portfolio-section");
-
-const closeAll = () => {
-    sections.forEach(s => {
-        const list = s.querySelector(".card-list");
-        const t = s.querySelector(".category-toggle");
-        if (list) list.style.display = "none";
-        if (t) t.textContent = "+";
-    });
-};
-
-const openSection = s => {
-    const list = s.querySelector(".card-list");
-    const t = s.querySelector(".category-toggle");
-    if (list) list.style.display = "block";
-    if (t) t.textContent = "−";
-};
-
-/* FILTERS */
-filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-
-        filterButtons.forEach(b => b.classList.remove("active-filter"));
-        btn.classList.add("active-filter");
-
-        const filter = btn.dataset.filter;
-
-        sections.forEach(s => {
-            s.style.display = s.dataset.category === filter ? "block" : "none";
-        });
-
-        closeAll();
-
-        const target = document.querySelector(`[data-category="${filter}"]`);
-        if (target) openSection(target);
-    });
-});
-
-/* ACCORDIONS */
-document.querySelectorAll(".category-header").forEach(header => {
-    header.addEventListener("click", () => {
-        const section = header.parentElement;
-        const list = section.querySelector(".card-list");
-        const toggle = section.querySelector(".category-toggle");
-        const isOpen = list.style.display === "block";
-
-        closeAll();
-
-        if (!isOpen) {
-            list.style.display = "block";
-            toggle.textContent = "−";
-        }
-    });
-});
-
-/* EXPAND ALL */
-document.getElementById("expandAllBtn").addEventListener("click", () => {
-    filterButtons.forEach(b => b.classList.remove("active-filter"));
-    sections.forEach(s => {
-        s.style.display = "block";
-        openSection(s);
-    });
-});
-
-/* COLLAPSE ALL */
-document.getElementById("collapseAllBtn").addEventListener("click", () => {
-    filterButtons.forEach(b => b.classList.remove("active-filter"));
-    closeAll();
-});
-
-/* CARD ANIMATIONS */
-const cards = document.querySelectorAll(".card");
-cards.forEach((card, index) => {
-    setTimeout(() => {
-        card.classList.add("card-visible");
-    }, 80 * index);
-});
-
-});
-</script>
-
-<!-- ========================= -->
-<!-- PAGE SEARCH -->
-<!-- ========================= -->
-
-<script>
-const searchInput = document.getElementById("pageSearchInput");
-const portfolioSections = document.querySelectorAll(".portfolio-section");
-const noResults = document.getElementById("noResultsMessage");
-
-searchInput.addEventListener("input", () => {
-    const q = searchInput.value.toLowerCase().trim();
-    let anyVisible = false;
-
-    portfolioSections.forEach(section => {
-        const items = section.querySelectorAll(".searchable-item");
-        let sectionVisible = false;
-
-        items.forEach(item => {
-            const text = item.innerText.toLowerCase();
-            const match = text.includes(q);
-            item.style.display = match ? "block" : "none";
-            if (match) sectionVisible = true;
-        });
-
-        section.style.display = sectionVisible ? "block" : "none";
-        if (sectionVisible) anyVisible = true;
-    });
-
-    noResults.style.display = anyVisible ? "none" : "block";
-});
-</script>
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
 <!-- GLOBAL SCRIPTS -->
 <script src="global.js"></script>

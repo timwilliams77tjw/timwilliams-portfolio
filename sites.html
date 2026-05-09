@@ -116,6 +116,114 @@ body.page-certifications {
     justify-content: center;
     line-height: 1;
 }
+
+/* --- PREMIUM PAGE UPGRADE --- */
+
+/* Accent header styling */
+.category-header {
+    background: #7ac0f9;
+    color: #001f3f;
+    padding: 14px 18px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.25s ease, transform 0.25s ease;
+    margin-bottom: 10px;
+}
+
+.category-header:hover {
+    background: #5ab0f7;
+    transform: translateY(-2px);
+}
+
+/* Toggle icon */
+.category-toggle {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #001f3f;
+}
+
+/* Expanded section styling */
+.category-section.open .category-header {
+    background: #001f3f;
+    color: white;
+}
+
+.category-section.open .category-toggle {
+    color: white;
+}
+
+/* Smooth accordion animation */
+.card-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+
+.category-section.open .card-list {
+    max-height: 2000px;
+}
+
+/* Premium card styling */
+.website-card {
+    background: white;
+    padding: 1.4rem;
+    border-radius: 10px;
+    border-left: 4px solid #7ac0f9;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.website-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Card titles */
+.website-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #001f3f;
+}
+
+/* Links */
+.website-card a {
+    color: #0078ff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Copy button */
+.copy-btn {
+    background: #001f3f;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.copy-btn:hover {
+    background: #0078ff;
+    transform: translateY(-2px);
+}
+
+/* Fade-in animation */
+.website-card, .category-header {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 </style>
 
 

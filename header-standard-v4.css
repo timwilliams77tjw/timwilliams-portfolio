@@ -1049,3 +1049,26 @@ footer span {
 .hs-hamburger:hover {
   opacity: 0.7;
 }
+/* Ensure columns flow left → right but allow reordering */
+.hs-menu-columns {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Legal column should be second-to-last */
+.legal-column {
+    order: 998;
+}
+
+/* Recently Viewed should be last (to the right of Legal) */
+.recently-viewed-column {
+    order: 999;
+}
+
+/* Mobile: natural stacking */
+@media (max-width: 900px) {
+    .legal-column,
+    .recently-viewed-column {
+        order: initial;
+    }
+}

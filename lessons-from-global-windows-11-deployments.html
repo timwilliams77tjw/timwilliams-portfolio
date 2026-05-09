@@ -4,8 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet" href="certifications.css?v=1">
-    <link rel="stylesheet" href="global-restore.css">
+
     
 <style>
 body.page-certifications {
@@ -91,31 +90,50 @@ body.dark-mode {
     --card-bg: #1a1a1a;
 }
 </style>
+        <!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
+
+    
+    
 </head>
 
-<!-- GLOBAL HEADER CSS -->
-<link rel="stylesheet" href="header-standard-v4.css">
-    
-<body class="header-with-logo">
 
+    
+
+    
+<body class="header-with-logo page-site-search">
+
+
+
+
+
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
 <script>
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+    document.getElementById("header-placeholder").innerHTML = h;
 
-      // Ensure site-search.js is loaded, then bind
-      const searchScript = document.createElement("script");
-      searchScript.src = "site-search.js";
-      searchScript.onload = () => {
-          if (typeof initSiteSearch === "function") {
-              initSiteSearch();
-          }
-      };
-      document.body.appendChild(searchScript);
+    // Load global site search
+    const siteSearch = document.createElement("script");
+    siteSearch.src = "site-search.js";
+    siteSearch.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(siteSearch);
+
+    // Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
   });
 </script>
 
@@ -208,8 +226,6 @@ function toggleInsightFull(btn) {
     btn.textContent = isOpen ? "Read more" : "Show less";
 }
 </script>
-<script src="global.js"></script>
-<script src="header-standard-v4.js"></script>
-<script>initHeader();</script>
+
 </body>
 </html>

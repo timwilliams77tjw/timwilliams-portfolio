@@ -153,7 +153,13 @@ fetch("header.html")
 
     const headerScript = document.createElement("script");
     headerScript.src = "header-standard-v4.js";
-    headerScript.onload = () => {
+headerScript.addEventListener("load", () => {
+    requestAnimationFrame(() => {
+        if (typeof initHeader === "function") initHeader();
+        if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+    });
+});
+
       if (typeof initHeader === "function") initHeader();
       if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
 
@@ -667,6 +673,8 @@ fetch("header.html")
 
 </div> <!-- closes .container -->
 </main>
+<div id="fab" class="fab" aria-label="Back to top">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
 
 <div id="footer"></div>
 <script>
@@ -775,7 +783,6 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- CLOSE OUT PAGE -->
 <!-- ========================= -->
 
-</div> <!-- closes .container -->
-</main>
+
 </body>
 </html>

@@ -184,16 +184,18 @@ fetch("header.html")
   No matching results found.
 </div>
 <!-- ========================= -->
-<!-- CV DOWNLOAD BUTTONS -->
+<!-- CV ICON BUTTONS -->
 <!-- ========================= -->
 
 <div class="cv-download-wrapper">
-    <a href="Tim_Williams_CV.pdf" target="_blank" class="cv-download-btn">
-        View CV (PDF)
+    <!-- View CV -->
+    <a href="Tim_Williams_CV.pdf" target="_blank" class="cv-icon-btn" aria-label="View CV PDF">
+        📄
     </a>
 
-    <a href="Tim_Williams_CV.pdf" download class="cv-download-btn secondary">
-        Download CV
+    <!-- Download CV -->
+    <a href="Tim_Williams_CV.pdf" download="Tim_Williams_CV.pdf" class="cv-icon-btn" aria-label="Download CV PDF">
+        ⬇️
     </a>
 </div>
 
@@ -202,51 +204,46 @@ fetch("header.html")
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 14px;
+    gap: 16px;
     margin: 20px 0 10px;
 }
 
-.cv-download-btn {
+/* Icon button styling */
+.cv-icon-btn {
     background-color: #001f3f;
     color: white;
-    padding: 10px 18px;
-    border-radius: 6px;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
     text-decoration: none;
-    font-size: 15px;
     border: 1px solid #001f3f;
     transition: all 0.2s ease;
 }
 
-.cv-download-btn:hover {
+/* Hover */
+.cv-icon-btn:hover {
     background-color: white;
     color: #001f3f;
     border-color: #7ac0f9;
 }
 
-.cv-download-btn.secondary {
-    background-color: #7ac0f9;
-    border-color: #7ac0f9;
-    color: #001f3f;
-}
-
-.cv-download-btn.secondary:hover {
-    background-color: white;
-    color: #001f3f;
-    border-color: #7ac0f9;
-}
-
-/* Dark mode support */
-body.dark-mode .cv-download-btn {
+/* Dark mode */
+body.dark-mode .cv-icon-btn {
     background-color: var(--bg-alt);
     color: var(--text-main);
     border-color: #7ac0f9;
 }
 
-body.dark-mode .cv-download-btn:hover {
+body.dark-mode .cv-icon-btn:hover {
     background-color: #7ac0f9;
     color: #001f3f;
 }
 </style>
+
 
 <!-- FILTER BAR -->
 <div class="sticky-bar">

@@ -150,12 +150,50 @@
     opacity: 0.9;
     display: block;
 }
+/* ============================================================
+   FINAL PORTFOLIO FIXES — OVERRIDE CERTIFICATIONS.CSS
+   ============================================================ */
+
+/* 1 — Fix section headers (remove blue background) */
+body.page-portfolio .portfolio-section .category-header {
+    background: none !important;
+    color: #7ac0f9 !important;
+    border-bottom: 2px solid #001f3f !important;
+}
+
+/* 2 — Fix card titles */
+body.page-portfolio .portfolio-section .card-title {
+    color: #001f3f !important;
+}
+
+/* 3 — Allow accordion to open (override certifications.css) */
+body.page-portfolio .portfolio-section .card-list {
+    display: none !important; /* default collapsed */
+}
+
+/* When JS opens a section, force it to show */
+body.page-portfolio .portfolio-section.open .card-list {
+    display: block !important;
+}
+
+/* 4 — Fix download button alignment + behaviour */
+body.page-portfolio .download-btn {
+    display: inline-block !important;
+    margin: 0 auto 20px !important;
+    text-decoration: none !important;
+}
+
+/* 5 — Remove underline from all links in Portfolio */
+body.page-portfolio .portfolio-section a {
+    text-decoration: none !important;
+}
 
 </style>
 
 </head>
 
 <body class="header-with-logo page-site-search page-has-page-search page-portfolio">
+
 
 <!-- HEADER -->
 <div id="header-placeholder"></div>
@@ -196,9 +234,10 @@ fetch("header.html")
 </div>
 
 <!-- PDF BUTTON -->
-<a class="download-btn" id="downloadPdfBtn" href="portfolio_presentation.pdf" target="_blank" download>
+<a class="download-btn" href="portfolio_presentation.pdf" target="_blank" download>
     Download Portfolio (PDF)
 </a>
+
 
 <div id="noResultsMessage" style="display:none; margin-top:10px; opacity:0.7;">
   No matching results found.

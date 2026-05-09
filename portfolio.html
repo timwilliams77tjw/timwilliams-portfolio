@@ -196,18 +196,122 @@ fetch("header.html")
   </div>
 </div>
 
-<!-- DOWNLOAD BUTTON -->
-<a class="download-btn"
-   href="portfolio_presentation.pdf"
-   target="_blank"
-   rel="noopener noreferrer"
-   download>
-    Download Portfolio (PDF)
-</a>
+
 
 <div id="noResultsMessage" style="display:none; margin-top:10px; opacity:0.7;">
   No matching results found.
 </div>
+
+   <!-- ========================= -->
+<!-- PORTFOLIO ICON BUTTONS WITH TOOLTIP -->
+<!-- ========================= -->
+
+<div class="portfolio-download-wrapper">
+
+    <!-- View Portfolio -->
+    <a href="portfolio_presentation.pdf"
+       target="_blank"
+       class="portfolio-icon-btn"
+       aria-label="View Portfolio PDF">
+        📄
+    </a>
+
+    <!-- Download Portfolio -->
+    <a href="portfolio_presentation.download"
+       download="portfolio_presentation.pdf"
+       class="portfolio-icon-btn"
+       data-tip="Safari users: rename .download to .zip"
+       aria-label="Download Portfolio PDF">
+        ⬇️
+    </a>
+
+</div>
+
+<style>
+/* Wrapper */
+.portfolio-download-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 10px 0 20px;
+}
+
+/* Icon buttons */
+.portfolio-icon-btn {
+    background-color: #001f3f;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    text-decoration: none;
+    border: 1px solid #001f3f;
+    transition: all 0.2s ease;
+    position: relative; /* required for tooltip */
+}
+
+/* Hover */
+.portfolio-icon-btn:hover {
+    background-color: white;
+    color: #001f3f;
+    border-color: #7ac0f9;
+}
+
+/* Tooltip (same as Downloads page) */
+.portfolio-icon-btn[data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #001f3f;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 20;
+}
+
+.portfolio-icon-btn[data-tip]:hover::before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #001f3f transparent transparent transparent;
+    z-index: 21;
+}
+
+/* Dark mode */
+body.dark-mode .portfolio-icon-btn {
+    background-color: var(--bg-alt);
+    color: var(--text-main);
+    border-color: #7ac0f9;
+}
+
+body.dark-mode .portfolio-icon-btn:hover {
+    background-color: #7ac0f9;
+    color: #001f3f;
+}
+
+body.dark-mode .portfolio-icon-btn[data-tip]:hover::after {
+    background: #7ac0f9;
+    color: #001f3f;
+}
+
+body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
+    border-color: #7ac0f9 transparent transparent transparent;
+}
+</style>
+
 
 <!-- FILTER BAR -->
 <div class="sticky-bar">

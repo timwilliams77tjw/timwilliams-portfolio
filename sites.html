@@ -15,11 +15,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* PAGE-SPECIFIC ONLY (NO ACCORDION OVERRIDES) */
+/* PAGE-SPECIFIC ONLY */
 body.page-certifications {
     background: var(--bg);
     color: var(--text-main);
     transition: background 0.3s ease, color 0.3s ease;
+    opacity: 0;
+    animation: pageFade 0.6s ease forwards;
+}
+
+@keyframes pageFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .page-container {
@@ -37,19 +44,17 @@ body.page-certifications {
     font-size: 2.4rem;
     font-weight: 800;
     letter-spacing: -0.5px;
-    margin-bottom: 0.5rem;
     color: #0a2540;
 }
 
 .hero-section p {
     font-size: 1.15rem;
     opacity: 0.85;
-    margin-left: auto;
-    margin-right: auto;
     max-width: 720px;
+    margin: 0 auto;
 }
 
-
+/* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -57,20 +62,48 @@ body.page-certifications {
     margin-top: 16px;
 }
 
+/* WEBSITE CARDS */
 .website-card {
     background: white;
-    padding: 1.25rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    border-left: 4px solid #0078ff;
+    padding: 1.55rem;
+    border-radius: 10px;
+    border-left: 4px solid #7ac0f9;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+}
+
+.website-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .website-card h3 {
-    margin-top: 0;
-    color: #0a2540;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #001f3f;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.website-card h3 i {
+    font-size: 1.4rem;
+    padding: 10px;
+    border-radius: 10px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
 .website-card a {
@@ -80,26 +113,32 @@ body.page-certifications {
     word-break: break-all;
 }
 
+.website-card a:hover {
+    text-decoration: underline;
+}
+
+/* COPY BUTTON */
 .copy-btn {
-    margin-top: 10px;
-    background: #0a2540;
+    background: #001f3f;
     color: white;
-    border: none;
     padding: 8px 14px;
     border-radius: 6px;
     font-size: 13px;
     font-weight: 600;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    transition: 0.2s ease;
+    transition: background 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
 
 .copy-btn:hover {
     background: #0078ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
 }
 
+/* TOAST */
 #copy-toast {
     position: fixed;
     bottom: 30px;
@@ -107,567 +146,66 @@ body.page-certifications {
     transform: translateX(-50%);
     background: #0a2540;
     color: white;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
     z-index: 999999;
 }
-
-.fab {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-}
-
-/* --- PREMIUM PAGE UPGRADE --- */
-
-/* Accent header styling */
-.category-header {
-    background: #7ac0f9;
-    color: #001f3f;
-    padding: 14px 18px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background 0.25s ease, transform 0.25s ease;
-    margin-bottom: 10px;
-}
-
-.category-header:hover {
-    background: #5ab0f7;
-    transform: translateY(-2px);
-}
-
-/* Toggle icon */
-.category-toggle {
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: #001f3f;
-}
-
-/* Expanded section styling */
-.category-section.open .category-header {
-    background: #001f3f;
-    color: white;
-}
-
-.category-section.open .category-toggle {
-    color: white;
-}
-
-/* Smooth accordion animation */
-.card-list {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-}
-
-.category-section.open .card-list {
-    max-height: 2000px;
-}
-
-/* Premium card styling */
-.website-card {
-    background: white;
-    padding: 1.4rem;
-    border-radius: 10px;
-    border-left: 4px solid #7ac0f9;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.website-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-/* Card titles */
-.website-card h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #001f3f;
-}
-
-/* Links */
-.website-card a {
-    color: #0078ff;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-/* Copy button */
-.copy-btn {
-    background: #001f3f;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    transition: background 0.25s ease, transform 0.25s ease;
-}
-
-.copy-btn:hover {
-    background: #0078ff;
-    transform: translateY(-2px);
-}
-
-/* Fade-in animation */
-.website-card, .category-header {
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- PREMIUM PAGE UPGRADE (Unified with Portfolio / CV / Certifications) --- */
-
-/* Category Header */
-.category-header {
-    background: #7ac0f9;
-    color: #001f3f;
-    padding: 14px 18px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background 0.25s ease, transform 0.25s ease;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-.category-header:hover {
-    background: #5ab0f7;
-    transform: translateY(-2px);
-}
-
-/* Toggle Icon */
-.category-toggle {
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: #001f3f;
-}
-
-/* Expanded State */
-.category-section.open .category-header {
-    background: #001f3f;
-    color: white;
-}
-
-.category-section.open .category-toggle {
-    color: white;
-}
-
-/* Accordion Animation */
-.card-list {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-}
-
-.category-section.open .card-list {
-    max-height: 2000px;
-}
-
-/* Website Cards */
-.website-card {
-    background: white;
-    padding: 1.4rem;
-    border-radius: 10px;
-    border-left: 4px solid #7ac0f9;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-}
-
-.website-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-/* Card Titles */
-.website-card h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #001f3f;
-    margin-bottom: 8px;
-}
-
-/* Links */
-.website-card a {
-    color: #0078ff;
-    font-weight: 600;
-    text-decoration: none;
-    word-break: break-all;
-}
-
-/* Copy Button */
-.copy-btn {
-    background: #001f3f;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    transition: background 0.25s ease, transform 0.25s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.copy-btn:hover {
-    background: #0078ff;
-    transform: translateY(-2px);
-}
-
-/* Fade-in Animation */
-.category-header,
-.website-card {
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- CARD ICON UPGRADE --- */
-
-/* Icon inside card titles */
-.website-card h3 i {
-    font-size: 1.4rem;
-    color: #001f3f;
-    background: #e8f3ff;
-    padding: 10px;
-    border-radius: 10px;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    flex-shrink: 0;
-}
-
-/* Align icon + text perfectly */
-.website-card h3 {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-    /* --- CARD ICON UPGRADE --- */
-
-/* Icon inside card titles */
-.website-card h3 i {
-    font-size: 1.4rem;
-    color: #001f3f;
-    background: #e8f3ff;
-    padding: 10px;
-    border-radius: 10px;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    flex-shrink: 0;
-}
-
-/* Align icon + text perfectly */
-.website-card h3 {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-/* --- CATEGORY HEADER ICONS --- */
-
-.category-header {
-    position: relative;
-    padding-left: 54px; /* space for icon */
-}
-
-/* Icon container */
-.category-header::before {
-    content: "";
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    background-size: 16px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: rgba(255,255,255,0.35);
-}
-
-/* Category-specific icons */
-.category-section:nth-of-type(1) .category-header::before {
-    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f464.svg'); /* 👤 */
-}
-
-.category-section:nth-of-type(2) .category-header::before {
-    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f393.svg'); /* 🎓 */
-}
-
-.category-section:nth-of-type(3) .category-header::before {
-    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f91d.svg'); /* 🤝 */
-}
-
-.category-section:nth-of-type(4) .category-header::before {
-    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4bc.svg'); /* 💼 */
-}
-
-    /* --- CARD ICON BACKGROUND THEMES --- */
-
-/* Base icon styling (already added earlier) */
-.website-card h3 i {
-    font-size: 1.4rem;
-    background: #e8f3ff;
-    padding: 10px;
-    border-radius: 10px;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-[data-category="cat1"] {
-    background: linear-gradient(to bottom, #f7fbff 0%, #ffffff 100%);
-    padding: 6px;
-    border-radius: 12px;
-}
-
-[data-category="cat2"] {
-    background: linear-gradient(to bottom, #faf5ff 0%, #ffffff 100%);
-    padding: 6px;
-    border-radius: 12px;
-}
-
-[data-category="cat3"] {
-    background: linear-gradient(to bottom, #f4fff6 0%, #ffffff 100%);
-    padding: 6px;
-    border-radius: 12px;
-}
-
-[data-category="cat4"] {
-    background: linear-gradient(to bottom, #fff8f0 0%, #ffffff 100%);
-    padding: 6px;
-    border-radius: 12px;
-}
-
-/* --- CATEGORY HEADER ICONS + COLOUR THEMES --- */
-
-.category-header {
-    position: relative;
-    padding-left: 54px;
-    border-radius: 10px;
-    font-weight: 700;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background 0.25s ease, transform 0.25s ease;
-}
-
-/* Icon container */
-.category-header::before {
-    content: "";
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    background-size: 16px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-/* CATEGORY 1 — Professional Profiles (Blue) */
-.category-section:nth-of-type(1) .category-header {
-    background: #e6f2ff;
-    color: #003a73;
-}
-.category-section:nth-of-type(1) .category-header:hover {
-    background: #d4e9ff;
-}
-.category-section:nth-of-type(1) .category-header::before {
-    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f464.svg'); /* 👤 */
-    background-color: #cfe4ff;
-}
-
-/* CATEGORY 2 — Certifications & Learning (Purple) */
-.category-section:nth-of-type(2) .category-header {
-    background: #f3eaff;
-    color: #4b1f9e;
-}
-.category-section:nth-of-type(2) .category-header:hover {
-    background: #eadbff;
-}
-.category-section:nth-of-type(2) .category-header::before {
-    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f393.svg'); /* 🎓 */
-    background-color: #e2d1ff;
-}
-
-/* CATEGORY 3 — Volunteering & Community (Green) */
-.category-section:nth-of-type(3) .category-header {
-    background: #e8fbea;
-    color: #1f6b33;
-}
-.category-section:nth-of-type(3) .category-header:hover {
-    background: #d8f5dc;
-}
-.category-section:nth-of-type(3) .category-header::before {
-    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f91d.svg'); /* 🤝 */
-    background-color: #d0f2d4;
-}
-
-/* CATEGORY 4 — Business & Services (Orange) */
-.category-section:nth-of-type(4) .category-header {
-    background: #fff3e6;
-    color: #a65300;
-}
-.category-section:nth-of-type(4) .category-header:hover {
-    background: #ffe8d1;
-}
-.category-section:nth-of-type(4) .category-header::before {
-    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4bc.svg'); /* 💼 */
-    background-color: #ffe0bf;
-}
-
-/* OPEN STATE (keeps your navy theme) */
-.category-section.open .category-header {
-    background: #001f3f !important;
-    color: white !important;
-}
-.category-section.open .category-header::before {
-    background-color: rgba(255,255,255,0.25) !important;
-}
-/* --- CARD ICON THEMES --- */
-
-.website-card h3 i {
-    font-size: 1.4rem;
-    padding: 10px;
-    border-radius: 10px;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-/* Category 1 — Blue */
-.category-section:nth-of-type(1) .website-card h3 i {
-    background: #e6f2ff;
-    color: #0050a8;
-}
-
-/* Category 2 — Purple */
-.category-section:nth-of-type(2) .website-card h3 i {
-    background: #f1e8ff;
-    color: #6a32c9;
-}
-
-/* Category 3 — Green */
-.category-section:nth-of-type(3) .website-card h3 i {
-    background: #e8fbea;
-    color: #1f8a3b;
-}
-
-/* Category 4 — Orange */
-.category-section:nth-of-type(4) .website-card h3 i {
-    background: #fff3e6;
-    color: #d46a00;
-}
-/* --- FINAL POLISH LAYER --- */
-
-/* Page-wide fade-in */
-body.page-certifications {
-    opacity: 0;
-    animation: pageFade 0.6s ease forwards;
-}
-
-@keyframes pageFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Hero section polish */
-.hero-section h1 {
-    font-size: 2.4rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-}
-
-.hero-section p {
-    font-size: 1.15rem;
-    opacity: 0.85;
-}
-
-/* Section spacing rhythm */
+/* CATEGORY SECTIONS */
 .category-section {
     margin-bottom: 2.2rem;
+    transition: transform 0.35s ease;
 }
 
-/* Soft gradient backgrounds per category */
-.cat:nth-of-type(1) {
-    background: linear-gradient(to bottom, #f7fbff 0%, #ffffff 100%);
-    padding: 6px;
-    border-radius: 12px;
+.category-section.open {
+    transform: translateY(4px);
 }
 
-.cat:nth-of-type(2) {
-    background: linear-gradient(to bottom, #faf5ff 0%, #ffffff 100%);
-    padding: 6px;
-    border-radius: 12px;
+/* CATEGORY HEADER */
+.category-header {
+    background: #7ac0f9;
+    color: #001f3f;
+    padding: 14px 18px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.25s ease, transform 0.25s ease;
+    position: relative;
+    padding-left: 54px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-.cat:nth-of-type(3) {
-    background: linear-gradient(to bottom, #f4fff6 0%, #ffffff 100%);
-    padding: 6px;
-    border-radius: 12px;
+.category-header:hover {
+    transform: translateY(-2px);
 }
 
-.cat:nth-of-type(4) {
-    background: linear-gradient(to bottom, #fff8f0 0%, #ffffff 100%);
-    padding: 6px;
-    border-radius: 12px;
-}
-
-/* Divider line between categories */
-.category-section:not(:last-of-type)::after {
+/* CATEGORY HEADER ICON CONTAINER */
+.category-header::before {
     content: "";
-    display: block;
-    height: 1px;
-    background: rgba(0,0,0,0.06);
-    margin-top: 22px;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-/* Animated toggle icon */
+/* CATEGORY TOGGLE ICON */
 .category-toggle {
+    font-size: 1.4rem;
+    font-weight: 900;
     transition: transform 0.25s ease;
 }
 
@@ -675,96 +213,97 @@ body.page-certifications {
     transform: rotate(180deg);
 }
 
-/* Smooth accordion easing */
+/* ACCORDION */
 .card-list {
+    max-height: 0;
+    overflow: hidden;
     transition: max-height 0.45s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-/* Card hover polish */
-.website-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+.category-section.open .card-list {
+    max-height: 2000px;
 }
 
-/* Card inner spacing */
-.website-card {
-    padding: 1.55rem;
+/* OPEN STATE OVERRIDE */
+.category-section.open .category-header {
+    background: #001f3f !important;
+    color: white !important;
 }
 
-/* Link hover polish */
-.website-card a:hover {
-    text-decoration: underline;
+.category-section.open .category-header::before {
+    background-color: rgba(255,255,255,0.25) !important;
 }
 
-/* Copy button polish */
-.copy-btn {
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+/* CATEGORY THEMES — ATTRIBUTE-BASED (FIXED) */
+
+/* CAT 1 — Professional Profiles */
+[data-category="cat1"] .category-header {
+    background: #e6f2ff;
+    color: #003a73;
+}
+[data-category="cat1"] .category-header:hover {
+    background: #d4e9ff;
+}
+[data-category="cat1"] .category-header::before {
+    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f464.svg');
+    background-color: #cfe4ff;
+}
+[data-category="cat1"] .website-card h3 i {
+    background: #e6f2ff;
+    color: #0050a8;
 }
 
-.copy-btn:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+/* CAT 2 — Certifications & Learning */
+[data-category="cat2"] .category-header {
+    background: #f3eaff;
+    color: #4b1f9e;
+}
+[data-category="cat2"] .category-header:hover {
+    background: #eadbff;
+}
+[data-category="cat2"] .category-header::before {
+    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f393.svg');
+    background-color: #e2d1ff;
+}
+[data-category="cat2"] .website-card h3 i {
+    background: #f1e8ff;
+    color: #6a32c9;
 }
 
-/* Toast polish */
-#copy-toast {
-    border-radius: 10px;
-    padding: 12px 20px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
+/* CAT 3 — Volunteering & Community */
+[data-category="cat3"] .category-header {
+    background: #e8fbea;
+    color: #1f6b33;
 }
-/* Floating category index */
-#categoryIndex {
-    position: fixed;
-    top: 120px;
-    right: 24px;
-    background: white;
-    padding: 14px 18px;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    z-index: 9999;
-    width: 220px;
+[data-category="cat3"] .category-header:hover {
+    background: #d8f5dc;
+}
+[data-category="cat3"] .category-header::before {
+    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f91d.svg');
+    background-color: #d0f2d4;
+}
+[data-category="cat3"] .website-card h3 i {
+    background: #e8fbea;
+    color: #1f8a3b;
 }
 
-#categoryIndex ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+/* CAT 4 — Business & Services */
+[data-category="cat4"] .category-header {
+    background: #fff3e6;
+    color: #a65300;
 }
-
-#categoryIndex li {
-    padding: 10px 0;
-    font-weight: 600;
-    color: #001f3f;
-    cursor: pointer;
-    transition: color 0.25s ease;
+[data-category="cat4"] .category-header:hover {
+    background: #ffe8d1;
 }
-
-#categoryIndex li:hover {
-    color: #0078ff;
+[data-category="cat4"] .category-header::before {
+    background-image: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4bc.svg');
+    background-color: #ffe0bf;
 }
-
-/* Mobile: convert to FAB */
-@media (max-width: 900px) {
-    #categoryIndex {
-        position: fixed;
-        bottom: 90px;
-        right: 20px;
-        width: auto;
-        padding: 12px 14px;
-        border-radius: 50px;
-    }
-
-    #categoryIndex ul {
-        display: none;
-    }
-
-    #categoryIndex::after {
-        content: "☰ Sections";
-        font-weight: 700;
-        color: #001f3f;
-    }
+[data-category="cat4"] .website-card h3 i {
+    background: #fff3e6;
+    color: #d46a00;
 }
-/* Search bar */
+/* SEARCH BAR */
 .site-search-bar {
     margin-bottom: 24px;
     display: flex;
@@ -786,33 +325,106 @@ body.page-certifications {
     box-shadow: 0 0 0 4px rgba(122,192,249,0.25);
     outline: none;
 }
-.category-section {
-    transition: transform 0.35s ease;
-}
 
-.category-section.open {
-    transform: translateY(4px);
-}
+/* COPY ALL BUTTON WRAPPER */
 .copy-all-wrapper {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-#copyAllLinks {
-    font-size: 14px;
-    padding: 10px 18px;
-    border-radius: 10px;
+/* FLOATING CATEGORY INDEX */
+#categoryIndex {
+    position: fixed;
+    top: 120px;
+    right: 24px;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    z-index: 9999;
+    width: 220px;
 }
-#categoryIndex li[data-target="cat1"] { color: #003a73; }
-#categoryIndex li[data-target="cat2"] { color: #4b1f9e; }
-#categoryIndex li[data-target="cat3"] { color: #1f6b33; }
-#categoryIndex li[data-target="cat4"] { color: #a65300; }
+
+#categoryIndex ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#categoryIndex li {
+    padding: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.25s ease, opacity 0.25s ease;
+}
 
 #categoryIndex li:hover {
     opacity: 0.7;
 }
 
+/* CATEGORY INDEX COLOUR CODING */
+#categoryIndex li[data-target="cat1"] { color: #003a73; }
+#categoryIndex li[data-target="cat2"] { color: #4b1f9e; }
+#categoryIndex li[data-target="cat3"] { color: #1f6b33; }
+#categoryIndex li[data-target="cat4"] { color: #a65300; }
+
+/* MOBILE VERSION — iPhone FIXED */
+@media (max-width: 900px) {
+    #categoryIndex {
+        position: fixed;
+        bottom: calc(90px + env(safe-area-inset-bottom));
+        right: calc(20px + env(safe-area-inset-right));
+        width: 130px;
+        padding: 12px 0;
+        border-radius: 50px;
+        text-align: center;
+        background: white;
+    }
+
+    #categoryIndex ul {
+        display: none;
+    }
+
+    #categoryIndex::after {
+        content: "Sections";
+        font-weight: 700;
+        color: #001f3f;
+    }
+}
+
+/* FLOATING BUTTONS */
+.fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #001f3f;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    z-index: 9999;
+}
+
+.fab:hover {
+    background: #0078ff;
+}
+
+/* BOOKING FAB */
+.fab-booking {
+    bottom: 80px;
+    background: #0078ff;
+}
+
+.fab-booking:hover {
+    background: #005fcc;
+}
 </style>
 
 
@@ -826,279 +438,223 @@ body.page-certifications {
 
 <script>
 fetch("header.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("header-placeholder").innerHTML = h;
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header-placeholder").innerHTML = h;
 
-    // Load site search (homepage uses site-search)
-    const searchScript = document.createElement("script");
-    searchScript.src = "site-search.js";
-    searchScript.onload = () => {
-      if (typeof initSiteSearch === "function") initSiteSearch();
-    };
-    document.body.appendChild(searchScript);
+        const searchScript = document.createElement("script");
+        searchScript.src = "site-search.js";
+        searchScript.onload = () => {
+            if (typeof initSiteSearch === "function") initSiteSearch();
+        };
+        document.body.appendChild(searchScript);
 
-    // Load header JS AFTER header is injected
-    const headerJS = document.createElement("script");
-    headerJS.src = "header-standard-v4.js";
-    headerJS.onload = () => {
-      initHeader();
-      initHeaderEnhancements();
-    };
-    document.body.appendChild(headerJS);
-  });
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("#categoryIndex li").forEach(item => {
-        item.addEventListener("click", () => {
-            const target = document.querySelector(`[data-category='${item.dataset.target}']`);
-            if (!target) return;
-
-            // OPEN THE SECTION
-            const header = target.querySelector(".category-header");
-            if (header) header.click();
-
-            // SCROLL TO IT
-            setTimeout(() => {
-                target.scrollIntoView({ behavior: "smooth", block: "start" });
-            }, 150);
-        });
+        const headerJS = document.createElement("script");
+        headerJS.src = "header-standard-v4.js";
+        headerJS.onload = () => {
+            initHeader();
+            initHeaderEnhancements();
+        };
+        document.body.appendChild(headerJS);
     });
-});
 </script>
 
-<script>
-window.addEventListener("load", () => {
-    const input = document.getElementById("siteSearchInput");
-    if (!input) return;
-
-    input.addEventListener("input", e => {
-        const term = e.target.value.toLowerCase();
-        document.querySelectorAll(".website-card").forEach(card => {
-            const text = card.innerText.toLowerCase();
-            card.style.display = text.includes(term) ? "block" : "none";
-        });
-    });
-});
-
-</script>
-
-    <script>
-        // Smooth scroll for category headers
-document.querySelectorAll(".category-header").forEach(header => {
-    header.addEventListener("click", () => {
-        setTimeout(() => {
-            header.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 200);
-    });
-});
-    </script>
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
 <section class="hero-section">
-  <h1>My Websites & Professional Profiles</h1>
-  <p>A curated list of my professional platforms, portfolios and digital presence.</p>
+    <h1>My Websites & Professional Profiles</h1>
+    <p>A curated list of my professional platforms, portfolios and digital presence.</p>
 </section>
 
-<!-- CATEGORY SECTIONS (unchanged HTML) -->
-
+<!-- SEARCH BAR -->
 <div class="site-search-bar">
     <input id="siteSearchInput" type="text" placeholder="Search sites…">
 </div>
+
+<!-- COPY ALL LINKS -->
 <div class="copy-all-wrapper">
     <button id="copyAllLinks" class="copy-btn">
         <i class="fa-regular fa-copy"></i> Copy All Links
     </button>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("copyAllLinks");
-    if (!btn) return;
-
-    btn.addEventListener("click", () => {
-        const links = [...document.querySelectorAll(".website-card a")].map(a => a.href).join("\n");
-        navigator.clipboard.writeText(links);
-        showToast("All links copied!");
-    });
-});
-</script>
-
 <!-- CATEGORY 1 -->
 <div class="category-section cat" data-category="cat1">
-<div class="category-header">
-Professional Profiles
-<span class="category-toggle">+</span>
-</div>
+    <div class="category-header">
+        Professional Profiles
+        <span class="category-toggle">+</span>
+    </div>
 
-<div class="card-list">
-<div class="grid">
+    <div class="card-list">
+        <div class="grid">
 
-<article class="website-card">
-<h3><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</h3>
-<a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
-<button class="copy-btn" data-link="https://linkedin.com/in/timwilliams77">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
+            <article class="website-card">
+                <h3><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</h3>
+                <a href="https://linkedin.com/in/timwilliams77">linkedin.com/in/timwilliams77</a>
+                <button class="copy-btn" data-link="https://linkedin.com/in/timwilliams77">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
 
-<article class="website-card">
-<h3><i class="fa-solid fa-id-card"></i> PMI Community Profile</h3>
-<a href="https://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
-<button class="copy-btn" data-link="https://community.pmi.org/profile/Timwilliams77">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
+            <article class="website-card">
+                <h3><i class="fa-solid fa-id-card"></i> PMI Community Profile</h3>
+                <a href="https://community.pmi.org/profile/Timwilliams77">community.pmi.org/profile/Timwilliams77</a>
+                <button class="copy-btn" data-link="https://community.pmi.org/profile/Timwilliams77">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
 
-<article class="website-card">
-<h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
-<a href="https://www.apm.org.uk/myapm/my-dashboard/">apm.org.uk/my-dashboard</a>
-<button class="copy-btn" data-link="https://www.apm.org.uk/myapm/my-dashboard/">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
+            <article class="website-card">
+                <h3><i class="fa-solid fa-user-shield"></i> APM Dashboard</h3>
+                <a href="https://www.apm.org.uk/myapm/my-dashboard/">apm.org.uk/my-dashboard</a>
+                <button class="copy-btn" data-link="https://www.apm.org.uk/myapm/my-dashboard/">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
 
-</div>
-</div>
+        </div>
+    </div>
 </div>
 
 <!-- CATEGORY 2 -->
 <div class="category-section cat" data-category="cat2">
-<div class="category-header">
-Certifications & Learning
-<span class="category-toggle">+</span>
-</div>
+    <div class="category-header">
+        Certifications & Learning
+        <span class="category-toggle">+</span>
+    </div>
 
-<div class="card-list">
-<div class="grid">
+    <div class="card-list">
+        <div class="grid">
 
-<article class="website-card">
-  <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+            <article class="website-card">
+                <h3><i class="fa-solid fa-certificate"></i> Credly Certifications</h3>
+                <a href="https://www.credly.com/users/tim-williams.e51205ae">View full Credly profile</a>
 
-  <a href="https://www.credly.com/users/tim-williams.e51205ae">View full Credly profile</a>
+                <div id="credly-badges" class="badge-grid" style="margin-top:15px;">
+                    <p style="font-size:13px;color:#666;">Loading badges...</p>
+                </div>
 
-  <div id="credly-badges" class="badge-grid" style="margin-top:15px;">
-    <p style="font-size:13px;color:#666;">Loading badges...</p>
-  </div>
+                <button class="copy-btn" data-link="https://www.credly.com/users/tim-williams.e51205ae">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
 
-  <button class="copy-btn" data-link="https://www.credly.com/users/tim-williams.e51205ae">
-    <i class="fa-regular fa-copy"></i> Copy Link
-  </button>
-</article>
+            <article class="website-card">
+                <h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
+                <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
+                    Microsoft Learn Transcript
+                </a>
+                <button class="copy-btn" data-link="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
 
-
-<article class="website-card">
-<h3><i class="fa-solid fa-graduation-cap"></i> Microsoft Learn Transcript</h3>
-<a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">Microsoft Learn Transcript</a>
-<button class="copy-btn" data-link="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
-
-</div>
-</div>
+        </div>
+    </div>
 </div>
 
 <!-- CATEGORY 3 -->
 <div class="category-section cat" data-category="cat3">
-<div class="category-header">
-Volunteering & Community Roles
-<span class="category-toggle">+</span>
-</div>
+    <div class="category-header">
+        Volunteering & Community Roles
+        <span class="category-toggle">+</span>
+    </div>
 
-<div class="card-list">
-<div class="grid">
+    <div class="card-list">
+        <div class="grid">
 
-<article class="website-card">
-<h3><i class="fa-solid fa-hands-helping"></i> APM Volunteer</h3>
-<a href="https://www.apm.org.uk">apm.org.uk</a>
-<div style="margin-top:15px;">
-<img src="apm.png" alt="APM Volunteer Badge" style="width:110px;border-radius:8px;">
-</div>
-<button class="copy-btn" data-link="https://www.apm.org.uk">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
+            <article class="website-card">
+                <h3><i class="fa-solid fa-hands-helping"></i> APM Volunteer</h3>
+                <a href="https://www.apm.org.uk">apm.org.uk</a>
+                <div style="margin-top:15px;">
+                    <img src="apm.png" alt="APM Volunteer Badge" style="width:110px;border-radius:8px;">
+                </div>
+                <button class="copy-btn" data-link="https://www.apm.org.uk">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
 
-<article class="website-card">
-<h3><i class="fa-solid fa-comments"></i> National Interview Week</h3>
-<a href="https://imployable.me">imployable.me</a>
-<div style="margin-top:15px;">
-<img src="interview.png" alt="National Interview Week Badge" style="width:110px;border-radius:8px;">
-</div>
-<button class="copy-btn" data-link="https://imployable.me">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
+            <article class="website-card">
+                <h3><i class="fa-solid fa-comments"></i> National Interview Week</h3>
+                <a href="https://imployable.me">imployable.me</a>
+                <div style="margin-top:15px;">
+                    <img src="interview.png" alt="National Interview Week Badge" style="width:110px;border-radius:8px;">
+                </div>
+                <button class="copy-btn" data-link="https://imployable.me">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
 
-<article class="website-card">
-<h3><i class="fa-solid fa-star"></i> Inspiring the Future – Gold Volunteer</h3>
-<a href="https://www.inspiringthefuture.org">inspiringthefuture.org</a>
-<div style="margin-top:15px;">
-<img src="inspiring.jpg" alt="Inspiring the Future Gold Badge" style="width:110px;border-radius:8px;">
-</div>
-<button class="copy-btn" data-link="https://www.inspiringthefuture.org">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
+            <article class="website-card">
+                <h3><i class="fa-solid fa-star"></i> Inspiring the Future – Gold Volunteer</h3>
+                <a href="https://www.inspiringthefuture.org">inspiringthefuture.org</a>
+                <div style="margin-top:15px;">
+                    <img src="inspiring.jpg" alt="Inspiring the Future Gold Badge" style="width:110px;border-radius:8px;">
+                </div>
+                <button class="copy-btn" data-link="https://www.inspiringthefuture.org">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
 
-<article class="website-card">
-<h3><i class="fa-solid fa-flask"></i> STEM Ambassador</h3>
-<a href="https://www.stem.org.uk/stem-ambassadors">stem.org.uk/stem-ambassadors</a>
-<div style="margin-top:15px;">
-<img src="stem.png" alt="STEM Ambassador Badge" style="width:110px;border-radius:8px;">
-</div>
-<button class="copy-btn" data-link="https://www.stem.org.uk/stem-ambassadors">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
+            <article class="website-card">
+                <h3><i class="fa-solid fa-flask"></i> STEM Ambassador</h3>
+                <a href="https://www.stem.org.uk/stem-ambassadors">stem.org.uk/stem-ambassadors</a>
+                <div style="margin-top:15px;">
+                    <img src="stem.png" alt="STEM Ambassador Badge" style="width:110px;border-radius:8px;">
+                </div>
+                <button class="copy-btn" data-link="https://www.stem.org.uk/stem-ambassadors">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
 
-</div>
-</div>
+        </div>
+    </div>
 </div>
 
 <!-- CATEGORY 4 -->
 <div class="category-section cat" data-category="cat4">
-<div class="category-header">
-Business & Services
-<span class="category-toggle">+</span>
+    <div class="category-header">
+        Business & Services
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <article class="website-card">
+                <h3><i class="fa-brands fa-linkedin"></i> Tim Williams Consulting</h3>
+                <a href="https://www.linkedin.com/company/tim-williams-consulting/">
+                    linkedin.com/company/tim-williams-consulting
+                </a>
+                <button class="copy-btn" data-link="https://www.linkedin.com/company/tim-williams-consulting/">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
+
+            <article class="website-card">
+                <h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
+                <a href="https://gethandover.uk">gethandover.uk</a>
+                <button class="copy-btn" data-link="https://gethandover.uk">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
+
+            <article class="website-card">
+                <h3><i class="fa-solid fa-globe"></i> TWC Portfolio (Canva)</h3>
+                <a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
+                <button class="copy-btn" data-link="https://twc-ltd.my.canva.site">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </article>
+
+        </div>
+    </div>
 </div>
 
-<div class="card-list">
-<div class="grid">
-
-<article class="website-card">
-<h3><i class="fa-brands fa-linkedin"></i> Tim Williams Consulting</h3>
-<a href="https://www.linkedin.com/company/tim-williams-consulting/">linkedin.com/company/tim-williams-consulting</a>
-<button class="copy-btn" data-link="https://www.linkedin.com/company/tim-williams-consulting/">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
-
-<article class="website-card">
-<h3><i class="fa-solid fa-briefcase"></i> GetHandover</h3>
-<a href="https://gethandover.uk">gethandover.uk</a>
-<button class="copy-btn" data-link="https://gethandover.uk">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
-
-<article class="website-card">
-<h3><i class="fa-solid fa-globe"></i> TWC Portfolio (Canva)</h3>
-<a href="https://twc-ltd.my.canva.site">twc-ltd.my.canva.site</a>
-<button class="copy-btn" data-link="https://twc-ltd.my.canva.site">
-<i class="fa-regular fa-copy"></i> Copy Link
-</button>
-</article>
-
-</div>
-</div>
-</div>
 </main>
 
-<!-- FLOATING CATEGORY INDEX (MOVED OUTSIDE MAIN) -->
+<!-- FLOATING CATEGORY INDEX -->
 <nav id="categoryIndex">
     <ul>
         <li data-target="cat1">Professional Profiles</li>
@@ -1123,30 +679,67 @@ fetch("footer.html")
     .then(r => r.text())
     .then(h => document.getElementById("footer").innerHTML = h);
 </script>
+<script>
+// CATEGORY INDEX CLICK → OPEN + SCROLL
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("#categoryIndex li").forEach(item => {
+        item.addEventListener("click", () => {
+            const target = document.querySelector(`[data-category='${item.dataset.target}']`);
+            if (!target) return;
+
+            const header = target.querySelector(".category-header");
+            if (header) header.click();
+
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 150);
+        });
+    });
+});
+</script>
 
 <script>
+// SEARCH FIX — runs AFTER cards exist
 document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("siteSearchInput");
+    if (!input) return;
 
-  // COLLAPSIBLES
-  document.querySelectorAll(".category-header").forEach(header => {
-    header.addEventListener("click", () => {
-      const section = header.parentElement;
-      const open = section.classList.contains("open");
+    input.addEventListener("input", e => {
+        const term = e.target.value.toLowerCase();
 
-      document.querySelectorAll(".category-section").forEach(sec => {
-        sec.classList.remove("open");
-        sec.querySelector(".category-toggle").textContent = "+";
-      });
-
-      if (!open) {
-        section.classList.add("open");
-        section.querySelector(".category-toggle").textContent = "–";
-      }
+        document.querySelectorAll(".website-card").forEach(card => {
+            const text = card.innerText.toLowerCase();
+            card.style.display = text.includes(term) ? "block" : "none";
+        });
     });
-  });
+});
+</script>
 
-  // COPY BUTTONS
-  document.addEventListener("click", e => {
+<script>
+// ACCORDION FIX — ensures only one section opens at a time
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".category-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const section = header.parentElement;
+            const isOpen = section.classList.contains("open");
+
+            document.querySelectorAll(".category-section").forEach(sec => {
+                sec.classList.remove("open");
+                sec.querySelector(".category-toggle").textContent = "+";
+            });
+
+            if (!isOpen) {
+                section.classList.add("open");
+                section.querySelector(".category-toggle").textContent = "–";
+            }
+        });
+    });
+});
+</script>
+
+<script>
+// COPY BUTTONS
+document.addEventListener("click", e => {
     const btn = e.target.closest(".copy-btn");
     if (!btn) return;
 
@@ -1155,61 +748,79 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showToast("Link copied!");
     trackEvent("copy_link", link);
-  });
+});
+</script>
 
-  // OUTBOUND TRACKING
-  document.querySelectorAll(".website-card a").forEach(link => {
-    link.addEventListener("click", () => {
-      trackEvent("outbound_click", link.href);
+<script>
+// COPY ALL LINKS
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("copyAllLinks");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+        const links = [...document.querySelectorAll(".website-card a")]
+            .map(a => a.href)
+            .join("\n");
+
+        navigator.clipboard.writeText(links);
+        showToast("All links copied!");
     });
-  });
+});
+</script>
 
+<script>
+// OUTBOUND LINK TRACKING
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".website-card a").forEach(link => {
+        link.addEventListener("click", () => {
+            trackEvent("outbound_click", link.href);
+        });
+    });
 });
 </script>
 
 <script>
 // TOAST
 function showToast(message) {
-  const toast = document.getElementById("copy-toast");
-  toast.textContent = message;
-  toast.style.opacity = "1";
-  setTimeout(() => toast.style.opacity = "0", 1500);
+    const toast = document.getElementById("copy-toast");
+    toast.textContent = message;
+    toast.style.opacity = "1";
+    setTimeout(() => toast.style.opacity = "0", 1500);
 }
 
 // ANALYTICS
 function trackEvent(action, value) {
-  const event = { timestamp: new Date().toISOString(), action, value };
-  const existing = JSON.parse(localStorage.getItem("analytics") || "[]");
-  existing.push(event);
-  localStorage.setItem("analytics", JSON.stringify(existing));
+    const event = { timestamp: new Date().toISOString(), action, value };
+    const existing = JSON.parse(localStorage.getItem("analytics") || "[]");
+    existing.push(event);
+    localStorage.setItem("analytics", JSON.stringify(existing));
 }
 </script>
 
-<!-- FIXED CREDLY LOADER -->
 <script>
+// CREDLY LOADER (unchanged but cleaned)
 async function loadCredly() {
-  const el = document.getElementById("credly-badges");
-  if (!el) return;
+    const el = document.getElementById("credly-badges");
+    if (!el) return;
 
-  try {
-    const res = await fetch("https://credlyapi.timwilliams07.workers.dev/");
-    const data = await res.json();
+    try {
+        const res = await fetch("https://credlyapi.timwilliams07.workers.dev/");
+        const data = await res.json();
 
-    el.innerHTML = data.map(b => `
-      <a href="${b.url}" target="_blank">
-        <img src="${b.image}" title="${b.name}" style="width:90px;border-radius:8px;margin:4px;">
-      </a>
-    `).join("");
+        el.innerHTML = data.map(b => `
+            <a href="${b.url}" target="_blank">
+                <img src="${b.image}" title="${b.name}"
+                     style="width:90px;border-radius:8px;margin:4px;">
+            </a>
+        `).join("");
 
-  } catch (e) {
-    el.innerHTML = "<p>Badges unavailable</p>";
-  }
+    } catch (e) {
+        el.innerHTML = "<p>Badges unavailable</p>";
+    }
 }
 
 loadCredly();
 </script>
-
-
 
 </body>
 </html>

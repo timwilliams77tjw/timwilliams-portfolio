@@ -7,10 +7,8 @@
 
 <title>Certifications – Tim Williams</title>
 
-<!-- GLOBAL HEADER CSS -->
 <link rel="stylesheet" href="header-standard-v4.css">
-
-<!-- GLOBAL PAGE CSS -->
+<link rel="stylesheet" href="certifications.css">
 <link rel="stylesheet" href="global-restore.css">
 
 <!-- PAGE-SPECIFIC CERTIFICATIONS CSS -->
@@ -594,13 +592,13 @@ searchInput.addEventListener("input", () => {
     const q = searchInput.value.toLowerCase().trim();
     let anyVisible = false;
 
-    certSections.forEach(section => {
+       certSections.forEach(section => {
         const items = section.querySelectorAll(".searchable-item");
+        const cardList = section.querySelector(".card-list");
         let sectionVisible = false;
 
         items.forEach(item => {
-            const card = item.querySelector(".card");
-            const text = card ? card.innerText.toLowerCase() : "";
+            const text = item.innerText.toLowerCase();
             const match = text.includes(q);
 
             item.style.display = match ? "block" : "none";
@@ -608,11 +606,15 @@ searchInput.addEventListener("input", () => {
         });
 
         section.style.display = sectionVisible ? "block" : "none";
+
+        // 🔑 NEW: open the accordion when there is a match
+        if (cardList) {
+            cardList.style.display = sectionVisible ? "block" : "none";
+        }
+
         if (sectionVisible) anyVisible = true;
     });
 
-    noResults.style.display = anyVisible ? "none" : "block";
-});
 </script>
 
 
@@ -622,8 +624,7 @@ searchInput.addEventListener("input", () => {
 <!-- ========================= -->
 
 <script src="global.js"></script>
-<script src="site-search.js" defer></script>
-<script src="page-search.js"></script>
+<script src="page-search.js" defer></script>
 
 </body>
 </html>

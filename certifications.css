@@ -141,3 +141,13 @@ html, body {
     overflow-x: hidden;
     max-width: none;
 }
+/* FIX: Remove accidental blue overlay on Certifications card */
+.page-certifications h2 + .card {
+    background: #ffffff !important;
+    position: relative;
+    z-index: 1;
+}
+
+.page-certifications h2 + .card::before {
+    display: none !important;
+}

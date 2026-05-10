@@ -712,13 +712,13 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
 
 <!-- FOOTER -->
 <div id="footer"></div>
-
 <script>
 fetch("footer.html")
-    .then(r => r.text())
-    .then(h => {
-        document.getElementById("footer").innerHTML = h;
-    });
+  .then(r => r.text())
+  .then(f => {
+    document.getElementById("footer").innerHTML = f;
+    if (typeof initFooter === "function") initFooter();
+  });
 </script>
 
 <!-- FAB BUTTONS -->

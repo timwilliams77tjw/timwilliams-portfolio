@@ -164,28 +164,39 @@ fetch("header.html")
     .then(h => {
         document.getElementById("header-placeholder").innerHTML = h;
 
-        const headerScript = document.createElement("script");
-        headerScript.src = "header-standard-v4.js";
+        // Load global.js first
+        const globalScript = document.createElement("script");
+        globalScript.src = "global.js";
 
-        headerScript.onload = () => {
-            requestAnimationFrame(() => {
-                if (typeof initHeader === "function") initHeader();
-                if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+        globalScript.onload = () => {
+            // Then load header-standard-v4.js
+            const headerScript = document.createElement("script");
+            headerScript.src = "header-standard-v4.js";
 
-                const searchScript = document.createElement("script");
-                searchScript.src = "site-search.js";
+            headerScript.onload = () => {
+                requestAnimationFrame(() => {
+                    if (typeof initHeader === "function") initHeader();
+                    if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
 
-                searchScript.onload = () => {
-                    if (typeof initSiteSearch === "function") initSiteSearch();
-                };
+                    // Then load site-search.js once
+                    const searchScript = document.createElement("script");
+                    searchScript.src = "site-search.js";
 
-                document.body.appendChild(searchScript);
-            });
+                    searchScript.onload = () => {
+                        if (typeof initSiteSearch === "function") initSiteSearch();
+                    };
+
+                    document.body.appendChild(searchScript);
+                });
+            };
+
+            document.body.appendChild(headerScript);
         };
 
-        document.body.appendChild(headerScript);
+        document.body.appendChild(globalScript);
     });
 </script>
+
 
 <!-- PAGE SEARCH -->
 <div id="pageSearchBar" class="page-search-bar">
@@ -855,8 +866,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <!-- GLOBAL SCRIPTS -->
-<script src="global.js"></script>
-<script src="site-search.js" defer></script>
+
 <script src="page-search.js" defer></script>
 
 </body>

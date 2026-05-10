@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 <title>Portfolio – Tim Williams</title>
 
 <!-- GLOBAL HEADER CSS -->
@@ -16,9 +13,8 @@
 <link rel="stylesheet" href="global-restore.css">
 
 <style>
-
 /* ============================================================
-   PORTFOLIO OVERRIDES — MATCH CERTIFICATIONS
+   PORTFOLIO OVERRIDES — POLISHED (S2 BALANCED SPACING)
    ============================================================ */
 
 /* Section headers */
@@ -26,24 +22,26 @@ body.page-portfolio .portfolio-section .category-header {
     background: none !important;
     color: #7ac0f9 !important;
     border-bottom: 2px solid #001f3f !important;
-    padding: 14px 0 !important;
-    margin: 20px 0 10px !important;
+    padding: 16px 0 !important; /* S2 balanced */
+    margin: 28px 0 14px !important; /* S2 balanced */
     font-size: 1.6rem !important;
     font-weight: 700 !important;
     cursor: pointer !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 body.page-portfolio .portfolio-section .category-toggle {
     font-weight: 900 !important;
     font-size: 1.8rem !important;
-    margin-left: 10px !important;
 }
 
 /* Card titles */
 body.page-portfolio .portfolio-section .card-title {
     font-size: 1.2rem !important;
     font-weight: 700 !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 10px !important; /* S2 balanced */
     color: #001f3f !important;
 }
 
@@ -51,12 +49,12 @@ body.page-portfolio .portfolio-section .card-title {
 body.page-portfolio .portfolio-section .card {
     background: white !important;
     border-radius: 10px !important;
-    padding: 20px !important;
-    margin-bottom: 24px !important;
+    padding: 22px !important; /* S2 balanced */
+    margin-bottom: 26px !important; /* S2 balanced */
     box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(12px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 body.page-portfolio .portfolio-section .card.card-visible {
@@ -67,7 +65,7 @@ body.page-portfolio .portfolio-section .card.card-visible {
 /* Grid */
 body.page-portfolio .portfolio-section .grid {
     display: grid !important;
-    gap: 20px !important;
+    gap: 22px !important; /* S2 balanced */
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
 }
 
@@ -86,7 +84,7 @@ body.page-portfolio .portfolio-section.open .card-list {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 20px 0 10px;
+    padding: 22px 0 12px; /* S2 balanced */
 }
 
 .page-search-bar-inner {
@@ -97,7 +95,7 @@ body.page-portfolio .portfolio-section.open .card-list {
 
 .page-search-bar-inner input {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #001f3f;
     border-radius: 6px;
 }
@@ -121,9 +119,9 @@ body.page-portfolio .download-btn {
 .sticky-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px; /* S2 balanced */
     justify-content: center;
-    padding: 12px 0;
+    padding: 14px 0; /* S2 balanced */
 }
 
 .filter-btn {
@@ -131,7 +129,7 @@ body.page-portfolio .download-btn {
     color: white;
     border: 1px solid #001f3f;
     border-radius: 6px;
-    padding: 6px 14px;
+    padding: 7px 16px; /* S2 balanced */
     font-size: 14px;
     cursor: pointer;
 }
@@ -148,13 +146,11 @@ body.page-portfolio .download-btn {
     height: 60px;
     object-fit: contain;
     object-position: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px; /* S2 balanced */
     opacity: 0.9;
     display: block;
 }
-
 </style>
-
 </head>
 
 <body class="header-with-logo page-site-search page-has-page-search page-portfolio">
@@ -164,46 +160,46 @@ body.page-portfolio .download-btn {
 
 <script>
 fetch("header.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("header-placeholder").innerHTML = h;
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header-placeholder").innerHTML = h;
 
-    const headerScript = document.createElement("script");
-    headerScript.src = "header-standard-v4.js";
+        const headerScript = document.createElement("script");
+        headerScript.src = "header-standard-v4.js";
 
-    headerScript.onload = () => {
-        requestAnimationFrame(() => {
-            if (typeof initHeader === "function") initHeader();
-            if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+        headerScript.onload = () => {
+            requestAnimationFrame(() => {
+                if (typeof initHeader === "function") initHeader();
+                if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
 
-            const searchScript = document.createElement("script");
-            searchScript.src = "site-search.js";
-            searchScript.onload = () => {
-                if (typeof initSiteSearch === "function") initSiteSearch();
-            };
-            document.body.appendChild(searchScript);
-        });
-    };
+                const searchScript = document.createElement("script");
+                searchScript.src = "site-search.js";
 
-    document.body.appendChild(headerScript);
-  });
+                searchScript.onload = () => {
+                    if (typeof initSiteSearch === "function") initSiteSearch();
+                };
+
+                document.body.appendChild(searchScript);
+            });
+        };
+
+        document.body.appendChild(headerScript);
+    });
 </script>
 
 <!-- PAGE SEARCH -->
 <div id="pageSearchBar" class="page-search-bar">
-  <div class="page-search-bar-inner">
-    <input id="pageSearchInput" type="text" placeholder="Search portfolio…">
-  </div>
+    <div class="page-search-bar-inner">
+        <input id="pageSearchInput" type="text" placeholder="Search portfolio…">
+    </div>
 </div>
 
-
-
-<div id="noResultsMessage" style="display:none; margin-top:10px; opacity:0.7;">
-  No matching results found.
+<div id="noResultsMessage" style="display:none; margin-top:12px; opacity:0.75;">
+    No matching results found.
 </div>
 
-   <!-- ========================= -->
-<!-- PORTFOLIO ICON BUTTONS WITH TOOLTIP -->
+<!-- ========================= -->
+<!-- PORTFOLIO ICON BUTTONS -->
 <!-- ========================= -->
 
 <div class="portfolio-download-wrapper">
@@ -233,8 +229,8 @@ fetch("header.html")
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 16px;
-    margin: 10px 0 20px;
+    gap: 18px; /* S2 balanced */
+    margin: 14px 0 26px; /* S2 balanced */
 }
 
 /* Icon buttons */
@@ -251,7 +247,7 @@ fetch("header.html")
     text-decoration: none;
     border: 1px solid #001f3f;
     transition: all 0.2s ease;
-    position: relative; /* required for tooltip */
+    position: relative;
 }
 
 /* Hover */
@@ -261,11 +257,11 @@ fetch("header.html")
     border-color: #7ac0f9;
 }
 
-/* Tooltip (same as Downloads page) */
+/* Tooltip */
 .portfolio-icon-btn[data-tip]:hover::after {
     content: attr(data-tip);
     position: absolute;
-    bottom: -38px;
+    bottom: -40px;
     left: 50%;
     transform: translateX(-50%);
     background: #001f3f;
@@ -281,7 +277,7 @@ fetch("header.html")
 .portfolio-icon-btn[data-tip]:hover::before {
     content: "";
     position: absolute;
-    bottom: -10px;
+    bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
     border-width: 6px;
@@ -312,27 +308,25 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
 }
 </style>
 
-
 <!-- FILTER BAR -->
 <div class="sticky-bar">
-  <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
-  <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+    <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+    <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
 
-  <button class="filter-btn" data-filter="summary">Summary</button>
-  <button class="filter-btn" data-filter="leadership">Leadership</button>
-  <button class="filter-btn" data-filter="rolefit">Role Fit</button>
-  <button class="filter-btn" data-filter="euc">EUC</button>
-  <button class="filter-btn" data-filter="cyber">Cyber</button>
-  <button class="filter-btn" data-filter="pmo">PMO</button>
-  <button class="filter-btn" data-filter="service">Service</button>
-  <button class="filter-btn" data-filter="cloud">Cloud</button>
-  <button class="filter-btn" data-filter="legacy">Legacy</button>
-  <button class="filter-btn" data-filter="presales">Pre‑Sales</button>
-  <button class="filter-btn" data-filter="whatibring">What I Bring</button>
+    <button class="filter-btn" data-filter="summary">Summary</button>
+    <button class="filter-btn" data-filter="leadership">Leadership</button>
+    <button class="filter-btn" data-filter="rolefit">Role Fit</button>
+    <button class="filter-btn" data-filter="euc">EUC</button>
+    <button class="filter-btn" data-filter="cyber">Cyber</button>
+    <button class="filter-btn" data-filter="pmo">PMO</button>
+    <button class="filter-btn" data-filter="service">Service</button>
+    <button class="filter-btn" data-filter="cloud">Cloud</button>
+    <button class="filter-btn" data-filter="legacy">Legacy</button>
+    <button class="filter-btn" data-filter="presales">Pre‑Sales</button>
+    <button class="filter-btn" data-filter="whatibring">What I Bring</button>
 </div>
 
 <div class="container">
-
 
 <!-- SUMMARY -->
 <div class="category-section portfolio-section" data-category="summary">
@@ -550,7 +544,7 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
                     <img src="es.png" class="logo-img" alt="Eversheds">
                     <div class="card-title">PMO Build & Leadership</div>
                     <p>Built and led PMO functions for Computacenter Belgium and Eversheds, improving reporting
-                       discipline and delivery assurance.</p>
+                        discipline and delivery assurance.</p>
                 </div>
             </div>
 
@@ -561,7 +555,7 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
                     <img src="dn.png" class="logo-img" alt="Dounreay Nuclear">
                     <div class="card-title">Regulated & Government PMO</div>
                     <p>Delivered structured reporting, risk control, and portfolio alignment across high-governance
-                       environments including FCO, NFUM, and Dounreay Nuclear.</p>
+                        environments including FCO, NFUM, and Dounreay Nuclear.</p>
                 </div>
             </div>
 
@@ -578,14 +572,16 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
 
     <div class="card-list">
         <div class="grid">
+
             <div class="searchable-item">
                 <div class="card">
                     <img src="sf.png" class="logo-img" alt="Salesforce">
                     <img src="sync.png" class="logo-img" alt="Synchrony">
                     <p>Transitioned global services for Synchrony (25,000 users), integrated Salesforce into BAU, and
-                       stabilised major programmes through structured readiness and support alignment.</p>
+                        stabilised major programmes through structured readiness and support alignment.</p>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -614,7 +610,7 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
                     <img src="ho.png" class="logo-img" alt="Home Office">
                     <div class="card-title">ServiceNow & Hosted Platforms</div>
                     <p>Led ServiceNow development and supported secure hosted infrastructure for Mitie and the Home
-                       Office.</p>
+                        Office.</p>
                 </div>
             </div>
 
@@ -664,13 +660,15 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
 
     <div class="card-list">
         <div class="grid">
+
             <div class="searchable-item">
                 <div class="card">
                     <img src="hub.png" class="logo-img" alt="Hubspot">
                     <p>Supported tendering, solution design, and commercial modelling across major bids, ensuring
-                       proposals were deliverable, costed, and aligned with operational reality.</p>
+                        proposals were deliverable, costed, and aligned with operational reality.</p>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -684,6 +682,7 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
 
     <div class="card-list">
         <div class="grid">
+
             <div class="searchable-item">
                 <div class="card">
                     <ul>
@@ -695,41 +694,78 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
                     </ul>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
-</div> <!-- end container -->
-
 <!-- FOOTER -->
 <div id="footer"></div>
+
 <script>
 fetch("footer.html")
-  .then(r => r.text())
-  .then(h => document.getElementById("footer").innerHTML = h);
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("footer").innerHTML = h;
+    });
 </script>
 
 <!-- FAB BUTTONS -->
-<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<div class="fab" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">⬆️</div>
 <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
+<style>
+/* FAB Buttons */
+.fab {
+    position: fixed;
+    bottom: 24px; /* S2 balanced */
+    right: 24px;  /* S2 balanced */
+    width: 48px;
+    height: 48px;
+    background: #001f3f;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 999;
+}
+
+.fab:hover {
+    background: #7ac0f9;
+    color: #001f3f;
+    transform: translateY(-2px);
+}
+
+.fab-booking {
+    bottom: 84px; /* S2 balanced vertical spacing between FABs */
+}
+</style>
+
 <!-- ============================================================
-     PORTFOLIO‑ONLY INLINE JS (SAFE, ISOLATED)
+     PORTFOLIO‑ONLY INLINE JS (POLISHED + BUG‑FIXED)
      ============================================================ -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
+    /* -----------------------------------------------------------
+       ELEMENT REFERENCES
+       ----------------------------------------------------------- */
     const sections = document.querySelectorAll(".portfolio-section");
     const expandAllBtn = document.getElementById("expandAllBtn");
     const collapseAllBtn = document.getElementById("collapseAllBtn");
     const filterButtons = document.querySelectorAll(".filter-btn[data-filter]");
     const searchInput = document.getElementById("pageSearchInput");
     const noResultsMessage = document.getElementById("noResultsMessage");
+    const searchableItems = document.querySelectorAll(".searchable-item");
 
-    /* ------------------------------
+    /* -----------------------------------------------------------
        ACCORDION BEHAVIOUR
-       ------------------------------ */
-
+       ----------------------------------------------------------- */
     const closeAll = () => {
         sections.forEach(section => section.classList.remove("open"));
     };
@@ -756,20 +792,22 @@ document.addEventListener("DOMContentLoaded", () => {
         closeAll();
     });
 
-    /* ------------------------------
-       FILTERING
-       ------------------------------ */
-
+    /* -----------------------------------------------------------
+       FILTERING — FIXED + POLISHED
+       ----------------------------------------------------------- */
     filterButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             const filter = btn.getAttribute("data-filter");
 
+            // Update active button
             filterButtons.forEach(b => b.classList.remove("active-filter"));
             btn.classList.add("active-filter");
 
+            // Show/hide sections
             sections.forEach(section => {
                 if (filter === "all" || section.dataset.category === filter) {
                     section.style.display = "";
+                    section.classList.add("open");   // <-- FIX: keep content visible
                 } else {
                     section.style.display = "none";
                 }
@@ -777,15 +815,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* ------------------------------
-       PAGE SEARCH
-       ------------------------------ */
-
-    const searchableItems = document.querySelectorAll(".searchable-item");
-
+    /* -----------------------------------------------------------
+       PAGE SEARCH — FIXED + AUTO‑OPEN SECTIONS
+       ----------------------------------------------------------- */
     const performSearch = () => {
         const query = searchInput.value.toLowerCase().trim();
         let visibleCount = 0;
+
+        // Auto-open all sections during search
+        sections.forEach(section => section.classList.add("open"));
 
         searchableItems.forEach(item => {
             const text = item.innerText.toLowerCase();
@@ -800,15 +838,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     searchInput.addEventListener("input", performSearch);
 
-    /* ------------------------------
-       CARD FADE‑IN ANIMATION
-       ------------------------------ */
-
+    /* -----------------------------------------------------------
+       CARD FADE‑IN ANIMATION — FIXED TIMING
+       ----------------------------------------------------------- */
     const cards = document.querySelectorAll(".portfolio-section .card");
-    cards.forEach((card, index) => {
-        setTimeout(() => {
-            card.classList.add("card-visible");
-        }, 80 * index);
+
+    requestAnimationFrame(() => {
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add("card-visible");
+            }, 80 * index);
+        });
     });
 
 });

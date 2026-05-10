@@ -910,9 +910,18 @@ searchInput?.addEventListener("input", () => {
     if (sectionVisible) anyVisible = true;
   });
 
+  // ⭐ NEW: ensure ALL matching sections fully expand
+  document.querySelectorAll(".cert-section").forEach(section => {
+    if (section.style.display === "block") {
+      const list = section.querySelector(".card-list");
+      if (list) list.style.display = "block";
+    }
+  });
+
   noResults.style.display = anyVisible ? "none" : "block";
 });
 </script>
+
 
 <!-- GLOBAL SCRIPTS -->
 <script src="global.js"></script>

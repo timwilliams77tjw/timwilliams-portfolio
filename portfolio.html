@@ -795,13 +795,29 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    expandAllBtn.addEventListener("click", () => {
-        sections.forEach(section => section.classList.add("open"));
+expandAllBtn.addEventListener("click", () => {
+    // Clear active filter
+    filterButtons.forEach(b => b.classList.remove("active-filter"));
+
+    // Show all sections
+    sections.forEach(section => {
+        section.style.display = "";
+        section.classList.add("open");
+    });
+});
+
+collapseAllBtn.addEventListener("click", () => {
+    // Clear active filter
+    filterButtons.forEach(b => b.classList.remove("active-filter"));
+
+    // Show all sections
+    sections.forEach(section => {
+        section.style.display = "";
     });
 
-    collapseAllBtn.addEventListener("click", () => {
-        closeAll();
-    });
+    closeAll();
+});
+
 
     /* -----------------------------------------------------------
        FILTERING — FIXED + POLISHED

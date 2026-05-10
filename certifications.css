@@ -151,3 +151,26 @@ html, body {
 .page-certifications h2 + .card::before {
     display: none !important;
 }
+/* HARD FIX: Remove blue overlay from Certifications card */
+.page-certifications h2 + .card {
+    background: #ffffff !important;
+    position: relative !important;
+    z-index: 10 !important;
+    overflow: visible !important;
+}
+
+/* Kill any accidental pseudo-element overlays */
+.page-certifications h2 + .card::before,
+.page-certifications h2 + .card::after {
+    content: none !important;
+    display: none !important;
+    background: transparent !important;
+}
+
+/* Ensure badges are visible */
+.page-certifications .card .badge {
+    position: relative !important;
+    z-index: 20 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+}

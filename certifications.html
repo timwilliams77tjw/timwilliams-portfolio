@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 <title>Certifications – Tim Williams</title>
 
+<!-- GLOBAL HEADER CSS -->
 <link rel="stylesheet" href="header-standard-v4.css">
+
+<!-- PAGE CSS (must load BEFORE global-restore) -->
 <link rel="stylesheet" href="certifications.css">
+
+<!-- GLOBAL RESTORE CSS -->
 <link rel="stylesheet" href="global-restore.css">
 
 <!-- PAGE-SPECIFIC CERTIFICATIONS CSS -->
 <style>
-
 /* Accent blue category headers */
 .category-header {
     font-size: 1.6rem;
@@ -129,13 +129,14 @@ body.dark-mode .card {
 body.dark-mode .category-header {
     color: #7ac0f9;
 }
+
 /* Prevent header text from being indexed by page search */
 #header-placeholder * {
     user-select: none;
 }
-
 </style>
-<!-- FONT RESTORE OVERRIDE (fixes header, nav, footer text) -->
+
+<!-- FONT RESTORE OVERRIDE -->
 <style>
 header, header *, nav, nav *, footer, footer * {
     font-family: "Segoe UI", Arial, sans-serif !important;
@@ -143,7 +144,6 @@ header, header *, nav, nav *, footer, footer * {
     line-height: 1.4 !important;
 }
 </style>
-
 </head>
 
 <body class="header-with-logo page-site-search page-has-page-search">
@@ -152,354 +152,173 @@ header, header *, nav, nav *, footer, footer * {
 <div id="header-placeholder"></div>
 
 <script>
-/* ============================================================
-   GROUP‑2 HEADER LOADER (Unified across all pages)
-   ============================================================ */
 fetch("header.html")
-  .then(r => r.text())
-  .then(h => {
+.then(r => r.text())
+.then(h => {
     document.getElementById("header-placeholder").innerHTML = h;
 
     const headerScript = document.createElement("script");
     headerScript.src = "header-standard-v4.js";
-    headerScript.onload = () => {
-      if (typeof initHeader === "function") initHeader();
-      if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
 
-      const searchScript = document.createElement("script");
-      searchScript.src = "site-search.js";
-      searchScript.onload = () => {
-        if (typeof initSiteSearch === "function") initSiteSearch();
-      };
-      document.body.appendChild(searchScript);
+    headerScript.onload = () => {
+        if (typeof initHeader === "function") initHeader();
+        if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+
+        const searchScript = document.createElement("script");
+        searchScript.src = "site-search.js";
+        searchScript.onload = () => {
+            if (typeof initSiteSearch === "function") initSiteSearch();
+        };
+        document.body.appendChild(searchScript);
     };
+
     document.body.appendChild(headerScript);
-  });
+});
 </script>
 
 <!-- PAGE SEARCH BAR -->
 <div id="pageSearchBar" class="page-search-bar">
-  <div class="page-search-bar-inner">
-    <input id="pageSearchInput" type="text" placeholder="Search certifications…">
-  </div>
+    <div class="page-search-bar-inner">
+        <input id="pageSearchInput" type="text" placeholder="Search certifications…">
+    </div>
 </div>
 
 <div id="noResultsMessage" style="display:none; margin-top:10px; opacity:0.7;">
-  No matching results found.
+    No matching results found.
 </div>
 
 <!-- FILTER BAR -->
 <div class="sticky-bar">
-  <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
-  <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+    <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+    <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
 
-  <!-- UI-friendly category names -->
-  <button class="filter-btn" data-filter="Professional Certifications">Certifications</button>
-  <button class="filter-btn" data-filter="Leadership & Management">Leadership</button>
-  <button class="filter-btn" data-filter="Agile & Scrum">Agile</button>
-  <button class="filter-btn" data-filter="AI & Copilot">AI</button>
-  <button class="filter-btn" data-filter="Microsoft Skills & Cloud">Microsoft</button>
-  <button class="filter-btn" data-filter="Security & Governance">Security</button>
-  <button class="filter-btn" data-filter="Volunteering">Volunteering</button>
-  <button class="filter-btn" data-filter="Memberships">Memberships</button>
-  <button class="filter-btn" data-filter="Background Checks">Checks</button>
+    <button class="filter-btn" data-filter="Professional Certifications">Certifications</button>
+    <button class="filter-btn" data-filter="Leadership & Management">Leadership</button>
+    <button class="filter-btn" data-filter="Agile & Scrum">Agile</button>
+    <button class="filter-btn" data-filter="AI & Copilot">AI</button>
+    <button class="filter-btn" data-filter="Microsoft Skills & Cloud">Microsoft</button>
+    <button class="filter-btn" data-filter="Security & Governance">Security</button>
+    <button class="filter-btn" data-filter="Volunteering">Volunteering</button>
+    <button class="filter-btn" data-filter="Memberships">Memberships</button>
+    <button class="filter-btn" data-filter="Background Checks">Checks</button>
 </div>
 
-<!-- MAIN CONTENT WRAPPER -->
 <main class="page-content">
-<div class="container">
-<!-- ========================= -->
-<!-- PROFESSIONAL CERTIFICATIONS -->
-<!-- ========================= -->
-
-<div class="category-section cert-section" data-category="Professional Certifications">
-  <div class="category-header">
-    Professional Certifications
-    <span class="category-toggle">+</span>
-  </div>
-  <div class="card-list">
-    <div class="grid">
-      <!-- Cards for this category will be inserted in Block 3 -->
-
-<!-- PROFESSIONAL CERTIFICATIONS -->
-<div class="searchable-item">
-  <div class="card">
-    <div class="card-title">🎓 Professional Certifications</div>
-    <ul>
-      <li>Project management, programme delivery, and PMO‑aligned certifications</li>
-      <li>Agile, hybrid, and structured delivery frameworks</li>
-      <li>Professional development across project, service, and leadership domains</li>
-    </ul>
-  </div>
-</div>
-
+    <div class="container" id="certContainer">
+        <!-- JSON-driven content will render here -->
     </div>
-  </div>
-</div>
-
-
-<!-- ========================= -->
-<!-- LEADERSHIP & MANAGEMENT -->
-<!-- ========================= -->
-
-<div class="category-section cert-section" data-category="Leadership & Management">
-  <div class="category-header">
-    Leadership & Management
-    <span class="category-toggle">+</span>
-  </div>
-  <div class="card-list">
-    <div class="grid">
-      <!-- Cards for this category will be inserted in Block 3 -->
-   <!-- LEADERSHIP & MANAGEMENT -->
-<div class="searchable-item">
-  <div class="card">
-    <div class="card-title">🧭 Leadership & Management</div>
-    <ul>
-      <li>Leadership‑focused certifications supporting team, stakeholder, and organisational capability</li>
-      <li>Management frameworks for structured delivery and operational oversight</li>
-    </ul>
-  </div>
-</div>
-
- </div>
-  </div>
-</div>
-
-
-<!-- ========================= -->
-<!-- AGILE & SCRUM -->
-<!-- ========================= -->
-
-<div class="category-section cert-section" data-category="Agile & Scrum">
-  <div class="category-header">
-    Agile & Scrum
-    <span class="category-toggle">+</span>
-  </div>
-  <div class="card-list">
-    <div class="grid">
-      <!-- Cards for this category will be inserted in Block 3 -->
-
-<!-- AGILE & SCRUM -->
-<div class="searchable-item">
-  <div class="card">
-    <div class="card-title">🌀 Agile & Scrum</div>
-    <ul>
-      <li>Agile delivery methods including Scrum, Kanban, and hybrid approaches</li>
-      <li>Scaled and enterprise‑level agile practices</li>
-    </ul>
-  </div>
-</div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ========================= -->
-<!-- AI & COPILOT -->
-<!-- ========================= -->
-
-<div class="category-section cert-section" data-category="AI & Copilot">
-  <div class="category-header">
-    AI & Copilot
-    <span class="category-toggle">+</span>
-  </div>
-  <div class="card-list">
-    <div class="grid">
-      <!-- Cards for this category will be inserted in Block 3 -->
-
-<!-- AI & COPILOT -->
-<div class="searchable-item">
-  <div class="card">
-    <div class="card-title">🤖 AI & Copilot</div>
-    <ul>
-      <li>AI‑aligned certifications covering modern tooling and intelligent automation</li>
-      <li>Applied AI in project and service delivery environments</li>
-    </ul>
-  </div>
-</div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ========================= -->
-<!-- MICROSOFT SKILLS & CLOUD -->
-<!-- ========================= -->
-
-<div class="category-section cert-section" data-category="Microsoft Skills & Cloud">
-  <div class="category-header">
-    Microsoft Skills & Cloud
-    <span class="category-toggle">+</span>
-  </div>
-  <div class="card-list">
-    <div class="grid">
-      <!-- Cards for this category will be inserted in Block 3 -->
-
-<!-- MICROSOFT SKILLS & CLOUD -->
-<div class="searchable-item">
-  <div class="card">
-    <div class="card-title">☁️ Microsoft Skills & Cloud</div>
-    <ul>
-      <li>Cloud, identity, and workplace certifications across Azure and Microsoft 365</li>
-      <li>Technical foundations supporting enterprise cloud adoption</li>
-    </ul>
-  </div>
-</div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ========================= -->
-<!-- SECURITY & GOVERNANCE -->
-<!-- ========================= -->
-
-<div class="category-section cert-section" data-category="Security & Governance">
-  <div class="category-header">
-    Security & Governance
-    <span class="category-toggle">+</span>
-  </div>
-  <div class="card-list">
-    <div class="grid">
-      <!-- Cards for this category will be inserted in Block 3 -->
-
-<!-- SECURITY & GOVERNANCE -->
-<div class="searchable-item">
-  <div class="card">
-    <div class="card-title">🔐 Security & Governance</div>
-    <ul>
-      <li>Cyber frameworks, governance models, and security alignment certifications</li>
-      <li>Standards supporting secure‑by‑design delivery</li>
-    </ul>
-  </div>
-</div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ========================= -->
-<!-- VOLUNTEERING -->
-<!-- ========================= -->
-
-<div class="category-section cert-section" data-category="Volunteering">
-  <div class="category-header">
-    Volunteering
-    <span class="category-toggle">+</span>
-  </div>
-  <div class="card-list">
-    <div class="grid">
-      <!-- Cards for this category will be inserted in Block 3 -->
-
-<!-- VOLUNTEERING -->
-<div class="searchable-item">
-  <div class="card">
-    <div class="card-title">❤️ Volunteering</div>
-    <ul>
-      <li>Community, mentoring, and professional development contributions</li>
-      <li>Engagement in STEM, career support, and industry outreach</li>
-    </ul>
-  </div>
-</div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ========================= -->
-<!-- MEMBERSHIPS -->
-<!-- ========================= -->
-
-<div class="category-section cert-section" data-category="Memberships">
-  <div class="category-header">
-    Memberships
-    <span class="category-toggle">+</span>
-  </div>
-  <div class="card-list">
-    <div class="grid">
-      <!-- Cards for this category will be inserted in Block 3 -->
-
-<!-- MEMBERSHIPS -->
-<div class="searchable-item">
-  <div class="card">
-    <div class="card-title">🏛️ Memberships</div>
-    <ul>
-      <li>Professional memberships across project, technology, and service domains</li>
-      <li>Active participation in recognised industry bodies</li>
-    </ul>
-  </div>
-</div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ========================= -->
-<!-- BACKGROUND CHECKS -->
-<!-- ========================= -->
-
-<div class="category-section cert-section" data-category="Background Checks">
-  <div class="category-header">
-    Background Checks
-    <span class="category-toggle">+</span>
-  </div>
-  <div class="card-list">
-    <div class="grid">
-      <!-- Cards for this category will be inserted in Block 3 -->
-
-<!-- BACKGROUND CHECKS -->
-<div class="searchable-item">
-  <div class="card">
-    <div class="card-title">🛂 Background Checks</div>
-    <ul>
-      <li>Security and background verification supporting work in regulated environments</li>
-      <li>Clearances aligned to government, defence, and critical‑infrastructure sectors</li>
-    </ul>
-  </div>
-</div>
-
-    </div>
-  </div>
-</div>
-<!-- ========================= -->
-<!-- FOOTER -->
-<!-- ========================= -->
-
-</div> <!-- closes .container -->
 </main>
 
-<div id="footer"></div>
-<script>
-fetch("footer.html")
-  .then(r => r.text())
-  .then(f => {
-    document.getElementById("footer").innerHTML = f;
-    if (typeof initFooter === "function") initFooter();
-  });
+<!-- JSON DATA -->
+<script id="cert-data">
+PASTE YOUR FULL JSON HERE EXACTLY AS PROVIDED
 </script>
 
+<!-- JSON → HTML RENDER ENGINE -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("certContainer");
+  const dataScript = document.getElementById("cert-data");
+  if (!container || !dataScript) return;
 
-<!-- ========================= -->
-<!-- FLOATING BUTTONS -->
-<!-- ========================= -->
+  let certData;
+  try {
+    certData = JSON.parse(dataScript.textContent.trim());
+  } catch (e) {
+    console.error("Invalid cert JSON", e);
+    return;
+  }
+
+  const order = [
+    "Professional Certifications",
+    "Leadership & Management",
+    "Agile & Scrum",
+    "AI & Copilot",
+    "Microsoft Skills & Cloud",
+    "Security & Governance",
+    "Volunteering",
+    "Memberships",
+    "Background Checks"
+  ];
+
+  order.forEach(categoryName => {
+    const items = certData[categoryName];
+    if (!items || !items.length) return;
+
+    const section = document.createElement("div");
+    section.className = "category-section cert-section";
+    section.dataset.category = categoryName;
+
+    const header = document.createElement("div");
+    header.className = "category-header";
+    header.innerHTML = `${categoryName} <span class="category-toggle">+</span>`;
+
+    const cardList = document.createElement("div");
+    cardList.className = "card-list";
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+
+    items.forEach(item => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "searchable-item";
+
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const title = document.createElement("div");
+      title.className = "card-title";
+      title.textContent = `${item.icon || ""} ${item.title}`;
+
+      const meta = document.createElement("p");
+      meta.style.margin = "6px 0 0";
+      meta.style.fontSize = "0.9rem";
+      meta.style.opacity = "0.8";
+      meta.textContent = item.issuer ? `Issuer: ${item.issuer}` : "";
+
+      card.appendChild(title);
+      if (item.issuer) card.appendChild(meta);
+
+      if (item.url) {
+        const link = document.createElement("a");
+        link.href = item.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "View credential";
+        link.style.display = "inline-block";
+        link.style.marginTop = "8px";
+        card.appendChild(link);
+      }
+
+      wrapper.appendChild(card);
+      grid.appendChild(wrapper);
+    });
+
+    cardList.appendChild(grid);
+    section.appendChild(header);
+    section.appendChild(cardList);
+    container.appendChild(section);
+  });
+});
+</script>
+
+<div id="footer"></div>
+
+<script>
+fetch("footer.html")
+.then(r => r.text())
+.then(f => {
+    document.getElementById("footer").innerHTML = f;
+    if (typeof initFooter === "function") initFooter();
+});
+</script>
 
 <div id="fab" class="fab" aria-label="Back to top">⬆️</div>
 <a id="bookingFab" class="fab fab-booking" href="calendar.html" aria-label="Make a booking">📅</a>
 
-
-<!-- ========================= -->
 <!-- ACCORDION + FILTER ENGINE -->
-<!-- ========================= -->
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-
   const filterButtons = document.querySelectorAll(".filter-btn");
   const sections = document.querySelectorAll(".cert-section");
 
@@ -519,7 +338,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (t) t.textContent = "−";
   };
 
-  /* FILTERS */
   filterButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       filterButtons.forEach(b => b.classList.remove("active-filter"));
@@ -537,7 +355,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ACCORDIONS */
   document.querySelectorAll(".category-header").forEach(header => {
     header.addEventListener("click", () => {
       const section = header.parentElement;
@@ -553,7 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* EXPAND ALL */
   document.getElementById("expandAllBtn").addEventListener("click", () => {
     filterButtons.forEach(b => b.classList.remove("active-filter"));
     sections.forEach(s => {
@@ -562,67 +378,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* COLLAPSE ALL */
   document.getElementById("collapseAllBtn").addEventListener("click", () => {
     filterButtons.forEach(b => b.classList.remove("active-filter"));
     closeAll();
   });
 
-  /* CARD ANIMATIONS */
   const cards = document.querySelectorAll(".card");
   cards.forEach((card, index) => {
     setTimeout(() => {
       card.classList.add("card-visible");
     }, 80 * index);
   });
-
 });
 </script>
 
-
-<!-- ========================= -->
 <!-- PAGE SEARCH (Corrected) -->
-<!-- ========================= -->
 <script>
 const searchInput = document.getElementById("pageSearchInput");
-const certSections = document.querySelectorAll(".cert-section");
 const noResults = document.getElementById("noResultsMessage");
 
-searchInput.addEventListener("input", () => {
-    const q = searchInput.value.toLowerCase().trim();
-    let anyVisible = false;
+searchInput?.addEventListener("input", () => {
+  const q = searchInput.value.toLowerCase().trim();
+  const sections = document.querySelectorAll(".cert-section");
+  let anyVisible = false;
 
-       certSections.forEach(section => {
-        const items = section.querySelectorAll(".searchable-item");
-        const cardList = section.querySelector(".card-list");
-        let sectionVisible = false;
+  sections.forEach(section => {
+    const items = section.querySelectorAll(".searchable-item");
+    const cardList = section.querySelector(".card-list");
+    let sectionVisible = false;
 
-        items.forEach(item => {
-            const text = item.innerText.toLowerCase();
-            const match = text.includes(q);
-
-            item.style.display = match ? "block" : "none";
-            if (match) sectionVisible = true;
-        });
-
-        section.style.display = sectionVisible ? "block" : "none";
-
-        // 🔑 NEW: open the accordion when there is a match
-        if (cardList) {
-            cardList.style.display = sectionVisible ? "block" : "none";
-        }
-
-        if (sectionVisible) anyVisible = true;
+    items.forEach(item => {
+      const text = item.innerText.toLowerCase();
+      const match = text.includes(q);
+      item.style.display = match ? "block" : "none";
+      if (match) sectionVisible = true;
     });
 
+    section.style.display = sectionVisible ? "block" : "none";
+    if (cardList) cardList.style.display = sectionVisible ? "block" : "none";
+    if (sectionVisible) anyVisible = true;
+  });
+
+  noResults.style.display = anyVisible ? "none" : "block";
+});
 </script>
 
-
-
-<!-- ========================= -->
 <!-- GLOBAL SCRIPTS -->
-<!-- ========================= -->
-
 <script src="global.js"></script>
 <script src="page-search.js" defer></script>
 

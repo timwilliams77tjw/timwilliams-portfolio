@@ -131,7 +131,19 @@ body.dark-mode .card {
 body.dark-mode .category-header {
     color: #7ac0f9;
 }
+/* Prevent header text from being indexed by page search */
+#header-placeholder * {
+    user-select: none;
+}
 
+</style>
+<!-- FONT RESTORE OVERRIDE (fixes header, nav, footer text) -->
+<style>
+header, header *, nav, nav *, footer, footer * {
+    font-family: "Segoe UI", Arial, sans-serif !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+}
 </style>
 
 </head>
@@ -571,36 +583,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <!-- ========================= -->
-<!-- PAGE SEARCH -->
+<!-- PAGE SEARCH (Corrected) -->
 <!-- ========================= -->
-
 <script>
 const searchInput = document.getElementById("pageSearchInput");
 const certSections = document.querySelectorAll(".cert-section");
 const noResults = document.getElementById("noResultsMessage");
 
 searchInput.addEventListener("input", () => {
-  const q = searchInput.value.toLowerCase().trim();
-  let anyVisible = false;
+    const q = searchInput.value.toLowerCase().trim();
+    let anyVisible = false;
 
-  certSections.forEach(section => {
-    const items = section.querySelectorAll(".searchable-item");
-    let sectionVisible = false;
+    certSections.forEach(section => {
+        const items = section.querySelectorAll(".searchable-item");
+        let sectionVisible = false;
 
-    items.forEach(item => {
-      const text = item.innerText.toLowerCase();
-      const match = text.includes(q);
-      item.style.display = match ? "block" : "none";
-      if (match) sectionVisible = true;
+        items.forEach(item => {
+            const card = item.querySelector(".card");
+            const text = card ? card.innerText.toLowerCase() : "";
+            const match = text.includes(q);
+
+            item.style.display = match ? "block" : "none";
+            if (match) sectionVisible = true;
+        });
+
+        section.style.display = sectionVisible ? "block" : "none";
+        if (sectionVisible) anyVisible = true;
     });
 
-    section.style.display = sectionVisible ? "block" : "none";
-    if (sectionVisible) anyVisible = true;
-  });
-
-  noResults.style.display = anyVisible ? "none" : "block";
+    noResults.style.display = anyVisible ? "none" : "block";
 });
 </script>
+
 
 
 <!-- ========================= -->

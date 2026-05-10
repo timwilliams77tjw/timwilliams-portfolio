@@ -1141,3 +1141,74 @@ footer span {
         flex-wrap: wrap;
     }
 }
+/* FORCE override old footer styles */
+footer.footer {
+    background: #0d0d0d !important;
+    color: #ffffff !important;
+    padding: 24px 0 72px !important;
+    border-top: 1px solid rgba(255,255,255,0.08) !important;
+    font-size: 0.95rem !important;
+}
+
+/* Layout wrapper */
+footer.footer .footer-inner {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 24px !important;
+    flex-wrap: nowrap !important; /* stops stacking */
+}
+
+/* Left side */
+footer.footer .footer-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    flex-direction: row !important;
+}
+
+/* Logo */
+footer.footer .footer-logo img {
+    width: 150px !important;
+    height: auto !important;
+}
+
+/* Right side links */
+footer.footer .footer-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 24px !important;
+    flex-direction: row !important;
+}
+
+footer.footer .footer-right a {
+    color: #7ac0f9 !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+footer.footer .footer-right a:hover {
+    color: #a8d8ff !important;
+}
+
+/* Copy text */
+footer.footer .footer-copy {
+    color: rgba(255,255,255,0.8) !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    footer.footer .footer-inner {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    footer.footer .footer-left,
+    footer.footer .footer-right {
+        justify-content: center !important;
+    }
+}

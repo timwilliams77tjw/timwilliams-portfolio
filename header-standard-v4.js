@@ -1,14 +1,6 @@
 /* ============================================================
-GLOBAL HEADER v5 — FULL FIXED VERSION
+GLOBAL HEADER v5 — FIXED FOR DYNAMIC LOADING
 ============================================================ */
-
-/* ------------------------------------------------------------
-INITIALISE HEADER ON DOM READY
------------------------------------------------------------- */
-document.addEventListener("DOMContentLoaded", () => {
-    initHeader();
-    initHeaderEnhancements();
-});
 
 /* ------------------------------------------------------------
 MAIN HEADER INITIALISATION
@@ -81,7 +73,7 @@ function initHeader() {
     function toggleSearchBar() {
         searchBar.classList.toggle("open");
         if (searchBar.classList.contains("open")) {
-            setTimeout(() => searchInput.focus(), 50);
+            setTimeout(() => searchInput?.focus(), 50);
         }
     }
 
@@ -176,15 +168,11 @@ function initHeaderEnhancements() {
             .join("");
     }
 }
-/* ============================================================
-   MOBILE BAR INITIALISATION
-   ============================================================ */
 
-document.addEventListener("DOMContentLoaded", () => {
+/* ------------------------------------------------------------
+MOBILE BAR INITIALISATION
+------------------------------------------------------------ */
+function initMobileBar() {
     const mobileBar = document.querySelector(".mobile-sticky-bar");
-
-    if (mobileBar) {
-        // Ensure bar is visible on all pages
-        mobileBar.style.display = "flex";
-    }
-});
+    if (mobileBar) mobileBar.style.display = "flex";
+}

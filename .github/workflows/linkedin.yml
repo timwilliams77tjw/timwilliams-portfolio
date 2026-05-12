@@ -1,19 +1,31 @@
-- name: Dump LinkedIn HTML
-  run: |
-    node << 'EOF'
-    const puppeteer = require('puppeteer');
-    (async () => {
-      const browser = await puppeteer.launch({
-        headless: "new",
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]
-      });
-      const page = await browser.newPage();
-      await page.goto("https://www.linkedin.com/in/timwilliams77", {
-        waitUntil: "networkidle2",
-      });
+name: LinkedIn Debug
 
-      const html = await page.content();
-      console.log(html.substring(0, 5000)); // print first 5000 chars
-      await browser.close();
-    })();
-    EOF
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Dump LinkedIn HTML
+        run: |
+          node << 'EOF'
+          const puppeteer = require('puppeteer');
+          (async () => {
+            const browser = await puppeteer.launch({
+              headless: "new",
+              args: ["--no-sandbox", "--disable-setuid-sandbox"]
+            });
+            const page = await browser.newPage();
+            await page.goto("https://www.linkedin.com/in/timwilliams77", {
+              waitUntil: "networkidle2",
+            });
+
+            const html = await page.content();
+            console.log(html.substring(0, 5000));
+            await browser.close();
+          })();
+          EOF

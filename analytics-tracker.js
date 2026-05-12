@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------
-   GLOBAL ANALYTICS ENGINE – Tracks all user interactions
-   --------------------------------------------------------- */
+   GLOBAL ANALYTICS ENGINE – Runs on ALL pages
+--------------------------------------------------------- */
 
 function logAnalytics(action, value) {
   const events = JSON.parse(localStorage.getItem("analytics") || "[]");
@@ -16,13 +16,13 @@ function logAnalytics(action, value) {
 
 /* ---------------------------------------------------------
    1. PAGE VIEWS
-   --------------------------------------------------------- */
+--------------------------------------------------------- */
 logAnalytics("page_view", window.location.pathname);
 
 
 /* ---------------------------------------------------------
-   2. OUTBOUND LINK CLICKS
-   --------------------------------------------------------- */
+   2. OUTBOUND LINK CLICKS (capture mode)
+--------------------------------------------------------- */
 document.addEventListener("click", (e) => {
   const link = e.target.closest("a");
   if (!link) return;
@@ -35,12 +35,12 @@ document.addEventListener("click", (e) => {
   if (isExternal) {
     logAnalytics("outbound_click", link.href);
   }
-});
+}, true);
 
 
 /* ---------------------------------------------------------
-   3. BUTTON CLICKS
-   --------------------------------------------------------- */
+   3. BUTTON CLICKS (capture mode)
+--------------------------------------------------------- */
 document.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
@@ -52,12 +52,12 @@ document.addEventListener("click", (e) => {
     "Unnamed Button";
 
   logAnalytics("button_click", label);
-});
+}, true);
 
 
 /* ---------------------------------------------------------
    4. COPY EVENTS
-   --------------------------------------------------------- */
+--------------------------------------------------------- */
 document.addEventListener("copy", () => {
   const active = document.activeElement;
 
@@ -71,8 +71,8 @@ document.addEventListener("copy", () => {
 
 
 /* ---------------------------------------------------------
-   5. ACCORDION OPENS / CLOSES
-   --------------------------------------------------------- */
+   5. ACCORDION EVENTS
+--------------------------------------------------------- */
 document.addEventListener("click", (e) => {
   const acc = e.target.closest(".accordion, .faq-item, details");
   if (!acc) return;
@@ -85,12 +85,12 @@ document.addEventListener("click", (e) => {
   const state = acc.open ? "accordion_close" : "accordion_open";
 
   logAnalytics(state, label);
-});
+}, true);
 
 
 /* ---------------------------------------------------------
    6. SEARCH QUERIES
-   --------------------------------------------------------- */
+--------------------------------------------------------- */
 document.addEventListener("input", (e) => {
   if (!e.target.matches("input[type='search'], .search-input")) return;
 
@@ -103,11 +103,10 @@ document.addEventListener("input", (e) => {
 
 /* ---------------------------------------------------------
    7. FILTER SELECTIONS
-   --------------------------------------------------------- */
+--------------------------------------------------------- */
 document.addEventListener("click", (e) => {
   const filter = e.target.closest("[data-filter]");
   if (!filter) return;
 
-  const value = filter.dataset.filter;
-  logAnalytics("filter_select", value);
-});
+  logAnalytics("filter_select", filter.dataset.filter);
+}, true);

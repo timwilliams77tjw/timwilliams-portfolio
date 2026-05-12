@@ -10,9 +10,24 @@ jobs:
       - name: Debug 1 - reached scraping step
         run: echo "Scraping step started"
 
-      - name: Scrape LinkedIn followers
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Puppeteer test
         run: |
-          echo "About to run Puppeteer"
-          node -v
-          npm -v
-          ls -la
+          node << 'EOF'
+          const puppeteer = require('puppeteer');
+          (async () => {
+            try {
+              const browser = await puppeteer.launch({
+                headless: "new",
+                args: ["--no-sandbox", "--disable-setuid-sandbox"]
+              });
+              console.log("Chromium launched");
+              await browser.close();
+            } catch (e) {
+              console.error("Puppeteer error:", e);
+              process.exit(1);
+            }
+          })();
+          EOF

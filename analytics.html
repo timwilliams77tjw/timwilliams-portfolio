@@ -225,7 +225,7 @@ fetch("footer.html")
   .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-
+<!-- ANALYTICS ENGINE -->
 <script>
 function loadAnalytics() {
   return JSON.parse(localStorage.getItem("analytics") || "[]");
@@ -303,8 +303,12 @@ function applyFilter(type) {
 }
 
 document.querySelectorAll(".filter-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation(); /* FIX: prevents header from stealing clicks */
+
+    document.querySelectorAll(".filter-btn")
+      .forEach(b => b.classList.remove("active-filter"));
+
     btn.classList.add("active-filter");
     applyFilter(btn.dataset.filter);
   });

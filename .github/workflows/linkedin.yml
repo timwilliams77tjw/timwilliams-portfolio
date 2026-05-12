@@ -12,17 +12,39 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 18
+
+      - name: Install Puppeteer
+        run: npm install puppeteer
 
       - name: Scrape LinkedIn followers
         run: |
-          curl -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15" \
-            -s https://www.linkedin.com/in/timwilliams77 > profile.html
+          node << 'EOF'
+          const fs = require('fs');
+          const puppeteer = require('puppeteer');
 
-          FOLLOWERS=$(grep -oP '[0-9,]+(?=\s+followers)' profile.html | head -1)
+          (async () => {
+            const browser = await puppeteer.launch({ headless: "new" });
+            const page = await browser.newPage();
 
-          echo "{ \"followers\": \"$FOLLOWERS\" }" > data/linkedin.json
+            await page.goto("https://www.linkedin.com/in/timwilliams77", {
+              waitUntil: "networkidle2",
+            });
+
+            const followers = await page.evaluate(() => {
+              const el = [...document.querySelectorAll("*")]
+                .find(e => e.textContent.includes("followers"));
+              return el ? el.textContent.replace(/\D/g, "") : "0";
+            });
+
+            fs.writeFileSync("data/linkedin.json", JSON.stringify({ followers }));
+            await browser.close();
+          })();
+          EOF
 
       - name: Commit changes
         run: |

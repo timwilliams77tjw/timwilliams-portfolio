@@ -42,6 +42,15 @@ h1 {
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
+<div class="kpi-card"><h3>Page Views</h3><div id="kpi-pageviews" class="kpi-value">0</div></div>
+<div class="kpi-card"><h3>Button Clicks</h3><div id="kpi-buttons" class="kpi-value">0</div></div>
+<div class="kpi-card"><h3>Search Queries</h3><div id="kpi-searches" class="kpi-value">0</div></div>
+<div class="kpi-card"><h3>Filter Selections</h3><div id="kpi-filters" class="kpi-value">0</div></div>
+<div class="kpi-card"><h3>Accordion Opens</h3><div id="kpi-acc-open" class="kpi-value">0</div></div>
+<div class="kpi-card"><h3>Accordion Closes</h3><div id="kpi-acc-close" class="kpi-value">0</div></div>
+<div class="kpi-card"><h3>Most Viewed Page</h3><div id="kpi-top-page" class="kpi-value">–</div></div>
+<div class="kpi-card"><h3>Most Clicked Button</h3><div id="kpi-top-button" class="kpi-value">–</div></div>
+<div class="kpi-card"><h3>Top Search Term</h3><div id="kpi-top-search" class="kpi-value">–</div></div>
 
 .kpi-card {
   background: white;
@@ -212,9 +221,16 @@ fetch("./header-standard.html")
 <!-- FILTER BAR -->
 <div class="filter-bar">
   <button class="filter-btn active-filter" data-filter="all">All Events</button>
+  <button class="filter-btn" data-filter="page_view">Page Views</button>
   <button class="filter-btn" data-filter="outbound_click">Outbound Clicks</button>
-  <button class="filter-btn" data-filter="copy_link">Copy Events</button>
+  <button class="filter-btn" data-filter="button_click">Button Clicks</button>
+  <button class="filter-btn" data-filter="copy_event">Copy Events</button>
+  <button class="filter-btn" data-filter="search_query">Search Queries</button>
+  <button class="filter-btn" data-filter="filter_select">Filter Selections</button>
+  <button class="filter-btn" data-filter="accordion_open">Accordion Opens</button>
+  <button class="filter-btn" data-filter="accordion_close">Accordion Closes</button>
 </div>
+
 
 <!-- CHART -->
 <div class="chart-container">

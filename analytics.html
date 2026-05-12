@@ -264,10 +264,30 @@ fetch("footer.html")
 
 
 <!-- ANALYTICS ENGINE -->
-<script>
-function loadAnalytics() {
-  return JSON.parse(localStorage.getItem("analytics") || "[]");
-}
+<script type="module">
+  import { db } from "./firebase-init.js";
+  import {
+    collection,
+    getDocs,
+    query,
+    orderBy
+  } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+  async function loadAnalytics() {
+    const q = query(collection(db, "events"), orderBy("ts", "desc"));
+    const snap = await getDocs(q);
+    const events = [];
+    snap.forEach(doc => {
+      const d = doc.data();
+      events.push({
+        timestamp: d.ts?.toDate ? d.ts.toDate().getTime() : Date.now(),
+        action: d.action,
+        value: d.value
+      });
+    });
+    return events;
+  }
+
 
 function updateKPIs(events) {
   const count = (type) => events.filter(e => e.action === type).length;

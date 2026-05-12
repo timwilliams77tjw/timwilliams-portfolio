@@ -265,30 +265,38 @@ fetch("footer.html")
 
 <!-- ANALYTICS ENGINE -->
 <script type="module">
-  import { db } from "./firebase-init.js";
-  import {
-    collection,
-    getDocs,
-    query,
-    orderBy
-  } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-  async function loadAnalytics() {
-    const q = query(collection(db, "events"), orderBy("ts", "desc"));
-    const snap = await getDocs(q);
-    const events = [];
-    snap.forEach(doc => {
-      const d = doc.data();
-      events.push({
-        timestamp: d.ts?.toDate ? d.ts.toDate().getTime() : Date.now(),
-        action: d.action,
-        value: d.value
-      });
+import { db } from "./firebase-init.js";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+/* -----------------------------
+   LOAD ANALYTICS FROM FIRESTORE
+------------------------------ */
+async function loadAnalytics() {
+  const q = query(collection(db, "events"), orderBy("ts", "desc"));
+  const snap = await getDocs(q);
+
+  const events = [];
+  snap.forEach(doc => {
+    const d = doc.data();
+    events.push({
+      timestamp: d.ts?.toDate ? d.ts.toDate().getTime() : Date.now(),
+      action: d.action,
+      value: d.value
     });
-    return events;
-  }
+  });
 
+  return events;
+}
 
+/* -----------------------------
+   KPI UPDATE
+------------------------------ */
 function updateKPIs(events) {
   const count = (type) => events.filter(e => e.action === type).length;
 
@@ -314,9 +322,13 @@ function updateKPIs(events) {
   document.getElementById("kpi-top-search").textContent = getTop("search_query");
 }
 
+/* -----------------------------
+   TABLE UPDATE
+------------------------------ */
 function updateTable(events) {
   const tbody = document.getElementById("analytics-table");
   tbody.innerHTML = "";
+
   events.forEach(e => {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -328,6 +340,9 @@ function updateTable(events) {
   });
 }
 
+/* -----------------------------
+   CHART UPDATE
+------------------------------ */
 function updateChart(events) {
   const svg = document.getElementById("analytics-chart");
   svg.innerHTML = "";
@@ -352,33 +367,49 @@ function updateChart(events) {
   });
 }
 
-function applyFilter(type) {
-  const events = loadAnalytics();
+/* -----------------------------
+   FILTERING (ASYNC FIX APPLIED)
+------------------------------ */
+async function applyFilter(type) {
+  const events = await loadAnalytics();
   const filtered = type === "all" ? events : events.filter(e => e.action === type);
+
   updateKPIs(filtered);
   updateTable(filtered);
   updateChart(filtered);
 }
 
+/* -----------------------------
+   FILTER BUTTON HANDLERS
+------------------------------ */
 document.querySelectorAll(".filter-btn").forEach(btn => {
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation(); /* FIX: prevents header from stealing clicks */
+  btn.addEventListener("click", async (e) => {
+    e.stopPropagation();
 
     document.querySelectorAll(".filter-btn")
       .forEach(b => b.classList.remove("active-filter"));
 
     btn.classList.add("active-filter");
-    applyFilter(btn.dataset.filter);
+
+    await applyFilter(btn.dataset.filter);
   });
 });
 
+/* -----------------------------
+   CLEAR BUTTON (LOCALSTORAGE ONLY)
+------------------------------ */
 document.getElementById("clearAnalytics").addEventListener("click", () => {
   localStorage.removeItem("analytics");
   applyFilter("all");
 });
 
+/* -----------------------------
+   INITIAL LOAD
+------------------------------ */
 applyFilter("all");
+
 </script>
+
 
 </body>
 </html>

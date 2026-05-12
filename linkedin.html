@@ -13,7 +13,6 @@
 
 <!-- PAGE CSS -->
 <style>
-/* Your entire LinkedIn CSS block exactly as provided */
 :root {
   --bg: #f5f5f5;
   --card-bg: #ffffff;
@@ -120,13 +119,12 @@ body.page-certifications {
 }
 .section-title {
   max-width: 900px;
-  margin: 40px auto 10px; /* aligns with card grid */
-  padding-left: 0;        /* ensures perfect left alignment */
+  margin: 40px auto 10px;
+  padding-left: 0;
   font-size: 24px;
   font-weight: 700;
   color: var(--text-main);
 }
-/* iPhone + iPad: full‑width cards */
 @media (max-width: 1024px) {
   .card-grid {
     grid-template-columns: 1fr !important;
@@ -250,13 +248,17 @@ fetch("header.html")
 <!-- FOOTER -->
 <div id="footer"></div>
 <script>
-fetch("footer.html").then(r => r.text()).then(h => footer.innerHTML = h);
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => {
+    const footerEl = document.getElementById("footer");
+    if (footerEl) footerEl.innerHTML = h;
+  });
 </script>
 
-<!-- LOCAL SEARCH + ANALYTICS (no page-level dark mode here) -->
+<!-- LOCAL SEARCH + ANALYTICS -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Local search
   const searchInput = document.getElementById("searchInput");
   const postCards = document.querySelectorAll("#postsContainer .cardB");
   const articleCards = document.querySelectorAll("#articlesContainer .cardB");
@@ -279,7 +281,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Analytics
   function track(eventName, data) {
     console.log("TW-LinkedIn-Analytics:", eventName, data || {});
   }

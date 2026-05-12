@@ -249,8 +249,10 @@ fetch("footer.html")
   .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- ANALYTICS ENGINE -->
 <script>
+/* ============================================================
+   LOAD + SAVE
+============================================================ */
 function loadAnalytics() {
   return JSON.parse(localStorage.getItem("analytics") || "[]");
 }
@@ -259,25 +261,62 @@ function saveAnalytics(data) {
   localStorage.setItem("analytics", JSON.stringify(data));
 }
 
+/* ============================================================
+   KPI CALCULATIONS
+============================================================ */
 function updateKPIs(events) {
-  const clicks = events.filter(e => e.action === "outbound_click");
-  const copies = events.filter(e => e.action === "copy_link");
+  const count = (type) => events.filter(e => e.action === type).length;
 
-  document.getElementById("kpi-clicks").textContent = clicks.length;
-  document.getElementById("kpi-copies").textContent = copies.length;
+  const pageViews = count("page_view");
+  const outbound = count("outbound_click");
+  const buttons = count("button_click");
+  const copies = count("copy_event");
+  const searches = count("search_query");
+  const filters = count("filter_select");
+  const accOpen = count("accordion_open");
+  const accClose = count("accordion_close");
 
-  const topClick = clicks.length
-    ? clicks.reduce((a, b) => a.value === b.value ? a : (clicks.filter(x => x.value === a.value).length > clicks.filter(x => x.value === b.value).length ? a : b)).value
+  document.getElementById("kpi-pageviews").textContent = pageViews;
+  document.getElementById("kpi-clicks").textContent = outbound;
+  document.getElementById("kpi-buttons").textContent = buttons;
+  document.getElementById("kpi-copies").textContent = copies;
+  document.getElementById("kpi-searches").textContent = searches;
+  document.getElementById("kpi-filters").textContent = filters;
+  document.getElementById("kpi-acc-open").textContent = accOpen;
+  document.getElementById("kpi-acc-close").textContent = accClose;
+
+  /* Most Viewed Page */
+  const pages = events.filter(e => e.action === "page_view");
+  const topPage = pages.length
+    ? getTopValue(pages)
     : "–";
+  document.getElementById("kpi-top-page").textContent = topPage;
 
-  const topCopy = copies.length
-    ? copies.reduce((a, b) => a.value === b.value ? a : (copies.filter(x => x.value === a.value).length > copies.filter(x => x.value === b.value).length ? a : b)).value
+  /* Most Clicked Button */
+  const btns = events.filter(e => e.action === "button_click");
+  const topBtn = btns.length
+    ? getTopValue(btns)
     : "–";
+  document.getElementById("kpi-top-button").textContent = topBtn;
 
-  document.getElementById("kpi-top-click").textContent = topClick;
-  document.getElementById("kpi-top-copy").textContent = topCopy;
+  /* Most Used Search Term */
+  const searchTerms = events.filter(e => e.action === "search_query");
+  const topSearch = searchTerms.length
+    ? getTopValue(searchTerms)
+    : "–";
+  document.getElementById("kpi-top-search").textContent = topSearch;
 }
 
+/* Helper: find most frequent value */
+function getTopValue(list) {
+  const counts = {};
+  list.forEach(e => counts[e.value] = (counts[e.value] || 0) + 1);
+  return Object.entries(counts).sort((a,b) => b[1] - a[1])[0][0];
+}
+
+/* ============================================================
+   TABLE
+============================================================ */
 function updateTable(events) {
   const tbody = document.getElementById("analytics-table");
   tbody.innerHTML = "";
@@ -293,6 +332,9 @@ function updateTable(events) {
   });
 }
 
+/* ============================================================
+   CHART
+============================================================ */
 function updateChart(events) {
   const svg = document.getElementById("analytics-chart");
   svg.innerHTML = "";
@@ -304,22 +346,30 @@ function updateChart(events) {
 
   const keys = Object.keys(counts);
   const max = Math.max(...Object.values(counts), 1);
-
   const barWidth = 1000 / keys.length;
 
   keys.forEach((key, i) => {
     const height = (counts[key] / max) * 200;
 
     svg.innerHTML += `
-      <rect x="${i * barWidth}" y="${220 - height}" width="${barWidth - 10}" height="${height}" fill="#0078ff"></rect>
-      <text x="${i * barWidth + 5}" y="240" font-size="10">${key.slice(0, 20)}...</text>
+      <rect x="${i * barWidth}" y="${220 - height}"
+            width="${barWidth - 10}" height="${height}"
+            fill="#0078ff"></rect>
+      <text x="${i * barWidth + 5}" y="240" font-size="10">
+        ${key.slice(0, 20)}...
+      </text>
     `;
   });
 }
 
+/* ============================================================
+   FILTERING
+============================================================ */
 function applyFilter(type) {
   const events = loadAnalytics();
-  const filtered = type === "all" ? events : events.filter(e => e.action === type);
+  const filtered = type === "all"
+    ? events
+    : events.filter(e => e.action === type);
 
   updateKPIs(filtered);
   updateTable(filtered);
@@ -328,18 +378,23 @@ function applyFilter(type) {
 
 document.querySelectorAll(".filter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
-    btn.classList.add("active-filter");
+    document.querySelectorAll(".filter-btn")
+      .forEach(b => b.classList.remove("active-filter"));
 
+    btn.classList.add("active-filter");
     applyFilter(btn.dataset.filter);
   });
 });
 
+/* ============================================================
+   CLEAR DATA
+============================================================ */
 document.getElementById("clearAnalytics").addEventListener("click", () => {
   localStorage.removeItem("analytics");
   applyFilter("all");
 });
 
+/* INITIAL LOAD */
 applyFilter("all");
 </script>
 

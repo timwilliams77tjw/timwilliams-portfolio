@@ -265,7 +265,6 @@ fetch("footer.html")
 
 <!-- ANALYTICS ENGINE -->
 <script type="module">
-
 import { db } from "./firebase-init.js";
 import {
   collection,
@@ -273,6 +272,11 @@ import {
   query,
   orderBy
 } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+/* -----------------------------
+   GLOBAL STATE
+------------------------------ */
+let allEvents = [];
 
 /* -----------------------------
    LOAD ANALYTICS FROM FIRESTORE
@@ -351,6 +355,8 @@ function updateChart(events) {
   events.forEach(e => counts[e.value] = (counts[e.value] || 0) + 1);
 
   const keys = Object.keys(counts);
+  if (!keys.length) return;
+
   const max = Math.max(...Object.values(counts), 1);
   const barWidth = 1000 / keys.length;
 
@@ -368,10 +374,10 @@ function updateChart(events) {
 }
 
 /* -----------------------------
-   FILTERING (ASYNC FIX APPLIED)
+   FILTERING (SYNC, USING CACHED DATA)
 ------------------------------ */
-async function applyFilter(type) {
-  const events = await loadAnalytics();
+function applyFilter(type) {
+  const events = allEvents;
   const filtered = type === "all" ? events : events.filter(e => e.action === type);
 
   updateKPIs(filtered);
@@ -383,7 +389,7 @@ async function applyFilter(type) {
    FILTER BUTTON HANDLERS
 ------------------------------ */
 document.querySelectorAll(".filter-btn").forEach(btn => {
-  btn.addEventListener("click", async (e) => {
+  btn.addEventListener("click", (e) => {
     e.stopPropagation();
 
     document.querySelectorAll(".filter-btn")
@@ -391,12 +397,12 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
 
     btn.classList.add("active-filter");
 
-    await applyFilter(btn.dataset.filter);
+    applyFilter(btn.dataset.filter);
   });
 });
 
 /* -----------------------------
-   CLEAR BUTTON (LOCALSTORAGE ONLY)
+   CLEAR BUTTON (LOCALSTORAGE LEGACY)
 ------------------------------ */
 document.getElementById("clearAnalytics").addEventListener("click", () => {
   localStorage.removeItem("analytics");
@@ -406,8 +412,14 @@ document.getElementById("clearAnalytics").addEventListener("click", () => {
 /* -----------------------------
    INITIAL LOAD
 ------------------------------ */
-applyFilter("all");
-
+(async function init() {
+  try {
+    allEvents = await loadAnalytics();
+    applyFilter("all");
+  } catch (e) {
+    console.error("Failed to load analytics:", e);
+  }
+})();
 </script>
 
 

@@ -2,8 +2,8 @@ name: Update LinkedIn Followers
 
 on:
   schedule:
-    - cron: "0 6 * * *"   # Runs daily at 06:00 UTC
-  workflow_dispatch:       # Allows manual run
+    - cron: "0 6 * * *"
+  workflow_dispatch:
 
 jobs:
   scrape:
@@ -12,17 +12,22 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Scrape LinkedIn followers
         run: |
-          curl -s https://www.linkedin.com/in/timwilliams77 > profile.html
-          FOLLOWERS=$(grep -oP '(?<=followers">)[0-9,]+' profile.html | head -1)
+          curl -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15" \
+            -s https://www.linkedin.com/in/timwilliams77 > profile.html
+
+          FOLLOWERS=$(grep -oP '[0-9,]+(?=\s+followers)' profile.html | head -1)
+
           echo "{ \"followers\": \"$FOLLOWERS\" }" > data/linkedin.json
 
       - name: Commit changes
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "actions@github.com"
-          git add data/linkedin.json
-          git commit -m "Update LinkedIn followers" || echo "No changes"
-          git push
+          git add data/linkedin.json || true
+          git commit -m "Update LinkedIn followers" || true
+          git push || true

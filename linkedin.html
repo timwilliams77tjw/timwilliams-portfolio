@@ -169,7 +169,6 @@ fetch("header.html")
     <div class="headline">Programme Delivery Leader | Cyber Uplift | Cloud Adoption | Modern Workplace Transformation</div>
     <div class="tagline">Driving secure, stable and adoption‑ready transformation across regulated, multi‑vendor environments.</div>
     <div class="followers">1,523 followers</div>
-    <span id="linkedin-followers">Loading…</span>
     <div class="qr-box">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.linkedin.com/in/timwilliams77" alt="QR Code">
     </div>
@@ -293,23 +292,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- SOCIABLEKIT WIDGET SCRIPT (MUST BE LAST) -->
 <script src="https://widgets.sociablekit.com/linkedin-profile-posts/widget.js" defer></script>
-  <script>
-async function loadLinkedInFollowers() {
-  const apiUrl = "https://linkedin-data-api.vercel.app/api?url=https://www.linkedin.com/in/timwilliams77";
-
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-
-    const followers = data.followers || "N/A";
-    document.getElementById("linkedin-followers").innerText = followers;
-  } catch (error) {
-    console.error("LinkedIn API error:", error);
-    document.getElementById("linkedin-followers").innerText = "N/A";
-  }
-}
-
-loadLinkedInFollowers();
-</script>
+  
 </body>
 </html>

@@ -144,18 +144,37 @@ th {
 </style>
 </head>
 
-<body class="page-certifications">
+<body class="header-with-logo page-site-search">
+
+
+
+
 
 <!-- HEADER -->
 <div id="header-placeholder"></div>
 
-<script src="header-standard.js"></script>
 <script>
 fetch("header.html")
   .then(r => r.text())
   .then(h => {
     document.getElementById("header-placeholder").innerHTML = h;
-    initHeader();
+
+    // Load global site search
+    const siteSearch = document.createElement("script");
+    siteSearch.src = "site-search.js";
+    siteSearch.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(siteSearch);
+
+    // Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
   });
 </script>
 

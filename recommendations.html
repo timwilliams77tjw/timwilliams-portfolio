@@ -29,6 +29,7 @@ body.page-certifications {
 <body class="header-with-logo">
 
 <!-- HEADER -->
+<!-- HEADER -->
 <div id="header-placeholder"></div>
 
 <script>
@@ -41,17 +42,23 @@ fetch("header.html")
     const siteSearch = document.createElement("script");
     siteSearch.src = "site-search.js";
     siteSearch.onload = () => {
-      if (typeof initSiteSearch === "function") {
-        initSiteSearch();
-      }
+      if (typeof initSiteSearch === "function") initSiteSearch();
     };
     document.body.appendChild(siteSearch);
+
+    // Load global header JS AFTER header HTML exists
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v5.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
   });
 </script>
+
 <script src="analytics-tracker.js"></script>
 
-<!-- GLOBAL HEADER JS -->
-<script src="header-standard-v4.js"></script>
 
 <!-- PAGE TITLE -->
 <h2 style="text-align:center; margin-top:40px;">Recommendations</h2>

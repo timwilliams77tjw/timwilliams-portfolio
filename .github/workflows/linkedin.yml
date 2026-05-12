@@ -1,11 +1,9 @@
-name: LinkedIn Test
+      - name: Debug 1 — reached scraping step
+        run: echo "Scraping step started"
 
-on:
-  workflow_dispatch:
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Step 1
-        run: echo "Workflow is running"
+      - name: Scrape LinkedIn followers
+        run: |
+          echo "About to run Puppeteer"
+          node -v
+          npm -v
+          ls -la

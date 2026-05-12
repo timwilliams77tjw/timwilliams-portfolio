@@ -1,26 +1,15 @@
-import { db } from "./firebase-init.js";
-import {
-  collection,
-  addDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+// analytics-tracker.js — Plausible version
 
-async function logAnalytics(action, value) {
-  try {
-    await addDoc(collection(db, "events"), {
-      action,
-      value,
-      path: window.location.pathname,
-      userAgent: navigator.userAgent,
-      ts: serverTimestamp()
-    });
-  } catch (e) {
-    console.error("Analytics error:", e);
+function track(event, props = {}) {
+  if (window.plausible) {
+    window.plausible(event, { props });
   }
 }
 
-logAnalytics("page_view", window.location.pathname);
+// Page view (Plausible does this automatically, but we add metadata)
+track("page_view", { path: window.location.pathname });
 
+// Outbound link clicks
 document.addEventListener("click", (e) => {
   const link = e.target.closest("a");
   if (!link) return;
@@ -31,10 +20,11 @@ document.addEventListener("click", (e) => {
     !link.href.startsWith("javascript:");
 
   if (isExternal) {
-    logAnalytics("outbound_click", link.href);
+    track("outbound_click", { url: link.href });
   }
 }, true);
 
+// Button clicks
 document.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
@@ -45,14 +35,16 @@ document.addEventListener("click", (e) => {
     btn.id ||
     "Unnamed Button";
 
-  logAnalytics("button_click", label);
+  track("button_click", { label });
 }, true);
 
+// Copy events
 document.addEventListener("copy", () => {
   const sel = window.getSelection().toString();
-  logAnalytics("copy_event", sel || "Copied content");
+  track("copy_event", { text: sel || "Copied content" });
 });
 
+// Accordion opens/closes
 document.addEventListener("click", (e) => {
   const acc = e.target.closest(".accordion, .faq-item, details");
   if (!acc) return;
@@ -63,18 +55,20 @@ document.addEventListener("click", (e) => {
     acc.innerText.slice(0, 40);
 
   const state = acc.open ? "accordion_close" : "accordion_open";
-  logAnalytics(state, label);
+  track(state, { label });
 }, true);
 
+// Search queries
 document.addEventListener("input", (e) => {
   if (!e.target.matches("input[type='search'], .search-input")) return;
   const query = e.target.value.trim();
   if (query.length < 2) return;
-  logAnalytics("search_query", query);
+  track("search_query", { query });
 });
 
+// Filter selections
 document.addEventListener("click", (e) => {
   const filter = e.target.closest("[data-filter]");
   if (!filter) return;
-  logAnalytics("filter_select", filter.dataset.filter);
+  track("filter_select", { filter: filter.dataset.filter });
 }, true);

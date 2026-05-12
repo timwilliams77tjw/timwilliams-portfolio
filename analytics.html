@@ -9,7 +9,7 @@
 
 <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css?v=1">
-  <link rel="stylesheet" href="header-standard.css">
+<link rel="stylesheet" href="header-standard.css">
 
 <!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -39,62 +39,33 @@ h1 {
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
+  gap: 1rem;
   margin-bottom: 2rem;
 }
-<div class="kpi-card"><h3>Page Views</h3><div id="kpi-pageviews" class="kpi-value">0</div></div>
-<div class="kpi-card"><h3>Button Clicks</h3><div id="kpi-buttons" class="kpi-value">0</div></div>
-<div class="kpi-card"><h3>Search Queries</h3><div id="kpi-searches" class="kpi-value">0</div></div>
-<div class="kpi-card"><h3>Filter Selections</h3><div id="kpi-filters" class="kpi-value">0</div></div>
-<div class="kpi-card"><h3>Accordion Opens</h3><div id="kpi-acc-open" class="kpi-value">0</div></div>
-<div class="kpi-card"><h3>Accordion Closes</h3><div id="kpi-acc-close" class="kpi-value">0</div></div>
-<div class="kpi-card"><h3>Most Viewed Page</h3><div id="kpi-top-page" class="kpi-value">–</div></div>
-<div class="kpi-card"><h3>Most Clicked Button</h3><div id="kpi-top-button" class="kpi-value">–</div></div>
-<div class="kpi-card"><h3>Top Search Term</h3><div id="kpi-top-search" class="kpi-value">–</div></div>
 
 .kpi-card {
   background: white;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  border-left: 4px solid #0078ff;
+  border-left: 3px solid #0078ff;
 }
 
 .kpi-card h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: #4b5563;
-}
-
-.kpi-value {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-top: 8px;
-  color: #0a2540;
-}
-/* --- KPI REFINEMENT: smaller, cleaner, more proportional --- */
-
-.kpi-card {
-  padding: 1rem;                 /* smaller padding */
-  border-left-width: 3px;        /* slimmer accent */
-}
-
-.kpi-card h3 {
-  font-size: 0.85rem;            /* smaller label */
   margin-bottom: 4px;
 }
 
 .kpi-value {
-  font-size: 1.4rem;             /* reduced from 2rem */
+  font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.2;
-  word-break: break-word;        /* prevents overflow */
+  color: #0a2540;
+  word-break: break-word;
 }
 
-/* Optional: tighten the grid spacing */
-.kpi-grid {
-  gap: 1rem;
-}
 /* FILTER BAR */
 .filter-bar {
   display: flex;
@@ -177,45 +148,36 @@ th {
 <!-- HEADER -->
 <div id="header-placeholder"></div>
 
-<!-- 1. Load the JS file FIRST -->
 <script src="header-standard.js"></script>
-
-<!-- 2. Inject the header HTML -->
 <script>
 fetch("./header-standard.html")
   .then(r => r.text())
   .then(h => {
-      document.getElementById("header-placeholder").innerHTML = h;
-      initHeader();
+    document.getElementById("header-placeholder").innerHTML = h;
+    initHeader();
   });
 </script>
 
 <main class="page-container">
-
 <h1>Analytics Dashboard</h1>
-<p class="subtitle">Tracking outbound clicks and copy‑link events across your digital presence.</p>
+<p class="subtitle">Tracking user interactions across your entire digital presence.</p>
 
 <!-- KPI CARDS -->
 <div class="kpi-grid">
-  <div class="kpi-card">
-    <h3>Total Outbound Clicks</h3>
-    <div id="kpi-clicks" class="kpi-value">0</div>
-  </div>
 
-  <div class="kpi-card">
-    <h3>Total Copy Events</h3>
-    <div id="kpi-copies" class="kpi-value">0</div>
-  </div>
+  <div class="kpi-card"><h3>Page Views</h3><div id="kpi-pageviews" class="kpi-value">0</div></div>
+  <div class="kpi-card"><h3>Total Outbound Clicks</h3><div id="kpi-clicks" class="kpi-value">0</div></div>
+  <div class="kpi-card"><h3>Button Clicks</h3><div id="kpi-buttons" class="kpi-value">0</div></div>
+  <div class="kpi-card"><h3>Total Copy Events</h3><div id="kpi-copies" class="kpi-value">0</div></div>
+  <div class="kpi-card"><h3>Search Queries</h3><div id="kpi-searches" class="kpi-value">0</div></div>
+  <div class="kpi-card"><h3>Filter Selections</h3><div id="kpi-filters" class="kpi-value">0</div></div>
+  <div class="kpi-card"><h3>Accordion Opens</h3><div id="kpi-acc-open" class="kpi-value">0</div></div>
+  <div class="kpi-card"><h3>Accordion Closes</h3><div id="kpi-acc-close" class="kpi-value">0</div></div>
 
-  <div class="kpi-card">
-    <h3>Most Clicked Link</h3>
-    <div id="kpi-top-click" class="kpi-value">–</div>
-  </div>
+  <div class="kpi-card"><h3>Most Viewed Page</h3><div id="kpi-top-page" class="kpi-value">–</div></div>
+  <div class="kpi-card"><h3>Most Clicked Button</h3><div id="kpi-top-button" class="kpi-value">–</div></div>
+  <div class="kpi-card"><h3>Top Search Term</h3><div id="kpi-top-search" class="kpi-value">–</div></div>
 
-  <div class="kpi-card">
-    <h3>Most Copied Link</h3>
-    <div id="kpi-top-copy" class="kpi-value">–</div>
-  </div>
 </div>
 
 <!-- FILTER BAR -->
@@ -231,10 +193,9 @@ fetch("./header-standard.html")
   <button class="filter-btn" data-filter="accordion_close">Accordion Closes</button>
 </div>
 
-
 <!-- CHART -->
 <div class="chart-container">
-  <h3 style="margin-bottom: 10px;">Event Volume by Link</h3>
+  <h3 style="margin-bottom: 10px;">Event Volume by Value</h3>
   <svg id="analytics-chart"></svg>
 </div>
 
@@ -246,7 +207,7 @@ fetch("./header-standard.html")
       <tr>
         <th>Timestamp</th>
         <th>Event</th>
-        <th>Link</th>
+        <th>Value</th>
       </tr>
     </thead>
     <tbody id="analytics-table"></tbody>
@@ -254,7 +215,6 @@ fetch("./header-standard.html")
 
   <button class="clear-btn" id="clearAnalytics">Clear Analytics Data</button>
 </div>
-
 </main>
 
 <!-- FOOTER -->
@@ -265,78 +225,40 @@ fetch("footer.html")
   .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
+
 <script>
-/* ============================================================
-   LOAD + SAVE
-============================================================ */
 function loadAnalytics() {
   return JSON.parse(localStorage.getItem("analytics") || "[]");
 }
 
-function saveAnalytics(data) {
-  localStorage.setItem("analytics", JSON.stringify(data));
-}
-
-/* ============================================================
-   KPI CALCULATIONS
-============================================================ */
 function updateKPIs(events) {
   const count = (type) => events.filter(e => e.action === type).length;
 
-  const pageViews = count("page_view");
-  const outbound = count("outbound_click");
-  const buttons = count("button_click");
-  const copies = count("copy_event");
-  const searches = count("search_query");
-  const filters = count("filter_select");
-  const accOpen = count("accordion_open");
-  const accClose = count("accordion_close");
+  document.getElementById("kpi-pageviews").textContent = count("page_view");
+  document.getElementById("kpi-clicks").textContent = count("outbound_click");
+  document.getElementById("kpi-buttons").textContent = count("button_click");
+  document.getElementById("kpi-copies").textContent = count("copy_event");
+  document.getElementById("kpi-searches").textContent = count("search_query");
+  document.getElementById("kpi-filters").textContent = count("filter_select");
+  document.getElementById("kpi-acc-open").textContent = count("accordion_open");
+  document.getElementById("kpi-acc-close").textContent = count("accordion_close");
 
-  document.getElementById("kpi-pageviews").textContent = pageViews;
-  document.getElementById("kpi-clicks").textContent = outbound;
-  document.getElementById("kpi-buttons").textContent = buttons;
-  document.getElementById("kpi-copies").textContent = copies;
-  document.getElementById("kpi-searches").textContent = searches;
-  document.getElementById("kpi-filters").textContent = filters;
-  document.getElementById("kpi-acc-open").textContent = accOpen;
-  document.getElementById("kpi-acc-close").textContent = accClose;
+  const getTop = (type) => {
+    const list = events.filter(e => e.action === type);
+    if (!list.length) return "–";
+    const counts = {};
+    list.forEach(e => counts[e.value] = (counts[e.value] || 0) + 1);
+    return Object.entries(counts).sort((a,b) => b[1] - a[1])[0][0];
+  };
 
-  /* Most Viewed Page */
-  const pages = events.filter(e => e.action === "page_view");
-  const topPage = pages.length
-    ? getTopValue(pages)
-    : "–";
-  document.getElementById("kpi-top-page").textContent = topPage;
-
-  /* Most Clicked Button */
-  const btns = events.filter(e => e.action === "button_click");
-  const topBtn = btns.length
-    ? getTopValue(btns)
-    : "–";
-  document.getElementById("kpi-top-button").textContent = topBtn;
-
-  /* Most Used Search Term */
-  const searchTerms = events.filter(e => e.action === "search_query");
-  const topSearch = searchTerms.length
-    ? getTopValue(searchTerms)
-    : "–";
-  document.getElementById("kpi-top-search").textContent = topSearch;
+  document.getElementById("kpi-top-page").textContent = getTop("page_view");
+  document.getElementById("kpi-top-button").textContent = getTop("button_click");
+  document.getElementById("kpi-top-search").textContent = getTop("search_query");
 }
 
-/* Helper: find most frequent value */
-function getTopValue(list) {
-  const counts = {};
-  list.forEach(e => counts[e.value] = (counts[e.value] || 0) + 1);
-  return Object.entries(counts).sort((a,b) => b[1] - a[1])[0][0];
-}
-
-/* ============================================================
-   TABLE
-============================================================ */
 function updateTable(events) {
   const tbody = document.getElementById("analytics-table");
   tbody.innerHTML = "";
-
   events.forEach(e => {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -348,17 +270,12 @@ function updateTable(events) {
   });
 }
 
-/* ============================================================
-   CHART
-============================================================ */
 function updateChart(events) {
   const svg = document.getElementById("analytics-chart");
   svg.innerHTML = "";
 
   const counts = {};
-  events.forEach(e => {
-    counts[e.value] = (counts[e.value] || 0) + 1;
-  });
+  events.forEach(e => counts[e.value] = (counts[e.value] || 0) + 1);
 
   const keys = Object.keys(counts);
   const max = Math.max(...Object.values(counts), 1);
@@ -366,7 +283,6 @@ function updateChart(events) {
 
   keys.forEach((key, i) => {
     const height = (counts[key] / max) * 200;
-
     svg.innerHTML += `
       <rect x="${i * barWidth}" y="${220 - height}"
             width="${barWidth - 10}" height="${height}"
@@ -378,15 +294,9 @@ function updateChart(events) {
   });
 }
 
-/* ============================================================
-   FILTERING
-============================================================ */
 function applyFilter(type) {
   const events = loadAnalytics();
-  const filtered = type === "all"
-    ? events
-    : events.filter(e => e.action === type);
-
+  const filtered = type === "all" ? events : events.filter(e => e.action === type);
   updateKPIs(filtered);
   updateTable(filtered);
   updateChart(filtered);
@@ -394,23 +304,17 @@ function applyFilter(type) {
 
 document.querySelectorAll(".filter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".filter-btn")
-      .forEach(b => b.classList.remove("active-filter"));
-
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active-filter"));
     btn.classList.add("active-filter");
     applyFilter(btn.dataset.filter);
   });
 });
 
-/* ============================================================
-   CLEAR DATA
-============================================================ */
 document.getElementById("clearAnalytics").addEventListener("click", () => {
   localStorage.removeItem("analytics");
   applyFilter("all");
 });
 
-/* INITIAL LOAD */
 applyFilter("all");
 </script>
 

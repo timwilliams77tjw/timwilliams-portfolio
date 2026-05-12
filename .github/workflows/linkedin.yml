@@ -1,33 +1,19 @@
-name: LinkedIn Debug
+- name: Dump LinkedIn HTML
+  run: |
+    node << 'EOF'
+    const puppeteer = require('puppeteer');
+    (async () => {
+      const browser = await puppeteer.launch({
+        headless: "new",
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+      });
+      const page = await browser.newPage();
+      await page.goto("https://www.linkedin.com/in/timwilliams77", {
+        waitUntil: "networkidle2",
+      });
 
-on:
-  workflow_dispatch:
-
-jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Debug 1 - reached scraping step
-        run: echo "Scraping step started"
-
-      - name: Install Puppeteer
-        run: npm install puppeteer
-
-      - name: Puppeteer test
-        run: |
-          node << 'EOF'
-          const puppeteer = require('puppeteer');
-          (async () => {
-            try {
-              const browser = await puppeteer.launch({
-                headless: "new",
-                args: ["--no-sandbox", "--disable-setuid-sandbox"]
-              });
-              console.log("Chromium launched");
-              await browser.close();
-            } catch (e) {
-              console.error("Puppeteer error:", e);
-              process.exit(1);
-            }
-          })();
-          EOF
+      const html = await page.content();
+      console.log(html.substring(0, 5000)); // print first 5000 chars
+      await browser.close();
+    })();
+    EOF

@@ -261,45 +261,48 @@ fetch("footer.html").then(r => r.text()).then(h => footer.innerHTML = h);
 
 <!-- LOCAL SEARCH + DARK MODE + ANALYTICS -->
 <script>
-/* Your entire LinkedIn JS block exactly as provided */
 (function() {
-const searchInput = document.getElementById("searchInput");
-const postCards = document.querySelectorAll("#postsContainer .cardB");
-const articleCards = document.querySelectorAll("#articlesContainer .cardB");
+  const searchInput = document.getElementById("searchInput");
+  const postCards = document.querySelectorAll("#postsContainer .cardB");
+  const articleCards = document.querySelectorAll("#articlesContainer .cardB");
 
-searchInput.addEventListener("input", function () {
-const q = this.value.toLowerCase().trim();
-function filterCards(cards) {
-cards.forEach(card => {
-const keywords = (card.dataset.keywords || "").toLowerCase();
-const text = card.innerText.toLowerCase();
-const match = !q || keywords.includes(q) || text.includes(q);
-card.style.display = match ? "block" : "none";
-});
-}
-filterCards(postCards);
-filterCards(articleCards);
-});
+  searchInput.addEventListener("input", function () {
+    const q = this.value.toLowerCase().trim();
+    function filterCards(cards) {
+      cards.forEach(card => {
+        const keywords = (card.dataset.keywords || "").toLowerCase();
+        const text = card.innerText.toLowerCase();
+        const match = !q || keywords.includes(q) || text.includes(q);
+        card.style.display = match ? "block" : "none";
+      });
+    }
+    filterCards(postCards);
+    filterCards(articleCards);
+  });
 
-// Dark mode
-const darkToggle = document.getElementById("darkToggle");
-const body = document.body;
-const storedMode = localStorage.getItem("tw_linkedin_dark");
-if (storedMode === "1") body.classList.add("dark-mode");
+  // Dark mode
+  const darkToggle = document.getElementById("darkToggle");
+  const body = document.body;
+  const storedMode = localStorage.getItem("tw_linkedin_dark");
+  if (storedMode === "1") body.classList.add("dark-mode");
 
-darkToggle.addEventListener("click", function() {
-body.classList.toggle("dark-mode");
-localStorage.setItem("tw_linkedin_dark", body.classList.contains("dark-mode") ? "1" : "0");
-});
+  darkToggle.addEventListener("click", function() {
+    body.classList.toggle("dark-mode");
+    localStorage.setItem(
+      "tw_linkedin_dark",
+      body.classList.contains("dark-mode") ? "1" : "0"
+    );
+  });
 
-// Analytics
-function track(eventName, data) {
-console.log("TW-LinkedIn-Analytics:", eventName, data || {});
-}
-track("page_view", { page: "linkedin_landing" });
+  // Analytics
+  function track(eventName, data) {
+    console.log("TW-LinkedIn-Analytics:", eventName, data || {});
+  }
+  track("page_view", { page: "linkedin_landing" });
 })();
 </script>
-<script src="https://widgets.sociablekit.com/linkedin-profile-posts/widget.js" defer></script>
 
+<!-- SOCIABLEKIT WIDGET SCRIPT (MUST BE LAST) -->
+<script src="https://widgets.sociablekit.com/linkedin-profile-posts/widget.js" defer></script>
 </body>
 </html>

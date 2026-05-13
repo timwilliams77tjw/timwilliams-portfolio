@@ -120,6 +120,41 @@ body.dark main { background: #0d1117 !important; color: #e6e6e6 !important; }
 body.dark .card { background: #161b22 !important; color: #e6e6e6 !important; box-shadow: 0 2px 6px rgba(0,0,0,0.4) !important; }
 body.dark h1, body.dark h2, body.dark h3, body.dark p, body.dark li { color: #e6e6e6 !important; }
 body.dark .service-card img { background-color: #1f2937 !important; }
+
+/* iPad + Desktop: left-align card images */
+@media (min-width: 768px) {
+    .card img {
+        display: inline-block !important;
+        margin: 0 !important;
+    }
+}
+/* iPhone only: centre text inside cards */
+@media (max-width: 767px) {
+    .card h3,
+    .card p {
+        text-align: center !important;
+    }
+}
+	/* iPad: enforce clean 2-column grid */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+/* Contact card spacing fix */
+.card p {
+    margin: 6px 0 !important;
+}
+
+/* LinkedIn row left-align */
+.contact-linkedin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left !important;
+    justify-content: flex-start !important;
+}
+	
 </style>
 	<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
 </head>
@@ -318,12 +353,13 @@ fetch("header.html")
     <p>Phone: 07801 453322</p>
  
     <p style="margin-top:15px; text-align:left; display:flex; align-items:center; gap:8px;">
-        <a href="https://www.linkedin.com/in/timwilliams77" target="_blank"
-           style="text-decoration:none; color:#0A66C2; font-weight:600; display:flex; align-items:center;">
-            <img src="linkedin.png" alt="LinkedIn" style="width:20px; height:20px; margin-right:6px;">
-            Tim Williams
-        </a>
-    </p>
+        <p class="contact-linkedin">
+    <a href="https://www.linkedin.com/in/timwilliams77" target="_blank">
+        <img src="linkedin.png" alt="LinkedIn" style="width:20px;height:20px;">
+        Tim Williams
+    </a>
+</p>
+
 </div>
  
 

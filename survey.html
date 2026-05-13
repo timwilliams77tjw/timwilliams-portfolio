@@ -7,6 +7,85 @@
 <link rel="stylesheet" href="certifications.css">
 <link rel="stylesheet" href="header-standard-v4.css">
     <link rel="stylesheet" href="global-restore.css">  
+
+<style>
+  .survey-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .survey-section h2 {
+    margin-bottom: 1rem;
+  }
+
+  .survey-form fieldset {
+    border: 1px solid #ddd;
+    padding: 1.25rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+  }
+
+  .survey-form legend {
+    font-weight: 600;
+    padding: 0 0.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font: inherit;
+    box-sizing: border-box;
+  }
+
+  .options label {
+    display: block;
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+  }
+
+  .form-actions {
+    text-align: right;
+    margin-top: 1rem;
+  }
+
+  .form-actions button {
+    padding: 0.6rem 1.4rem;
+    border-radius: 4px;
+    border: none;
+    background: #0052cc;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .form-actions button:hover {
+    background: #003f99;
+  }
+
+  @media (max-width: 600px) {
+    .survey-section {
+      padding: 1.5rem 1rem;
+    }
+
+    .survey-form fieldset {
+      padding: 1rem 0.75rem;
+    }
+  }
+</style>    
 </head>
 
 <body class="header-with-logo page-site-search">
@@ -270,81 +349,19 @@ fetch("header.html")
   </form>
 </section>
 
-<style>
-  .survey-section {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
 
-  .survey-section h2 {
-    margin-bottom: 1rem;
-  }
+</main>
 
-  .survey-form fieldset {
-    border: 1px solid #ddd;
-    padding: 1.25rem 1rem;
-    margin-bottom: 1.5rem;
-    border-radius: 6px;
-  }
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
-  .survey-form legend {
-    font-weight: 600;
-    padding: 0 0.5rem;
-  }
+<div id="footer"></div>
+<script>
+fetch("footer.html").then(r => r.text()).then(h => document.getElementById("footer").innerHTML = h);
+</script>
 
-  .form-group {
-    margin-bottom: 1rem;
-  }
 
-  .form-group label {
-    display: block;
-    margin-bottom: 0.35rem;
-  }
 
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    max-width: 100%;
-    padding: 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font: inherit;
-    box-sizing: border-box;
-  }
 
-  .options label {
-    display: block;
-    margin-bottom: 0.25rem;
-    cursor: pointer;
-  }
-
-  .form-actions {
-    text-align: right;
-    margin-top: 1rem;
-  }
-
-  .form-actions button {
-    padding: 0.6rem 1.4rem;
-    border-radius: 4px;
-    border: none;
-    background: #0052cc;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .form-actions button:hover {
-    background: #003f99;
-  }
-
-  @media (max-width: 600px) {
-    .survey-section {
-      padding: 1.5rem 1rem;
-    }
-
-    .survey-form fieldset {
-      padding: 1rem 0.75rem;
-    }
-  }
-</style>
+</body>
+</html>

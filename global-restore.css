@@ -573,3 +573,59 @@ body.dark main *:not(.card):not(.box):not(.download-box):not(.timeline-box) {
         z-index: 10000 !important;
     }
 }
+/* ============================================================
+   INDEX PAGE LAYOUT FIXES — IPAD + IPHONE + CONTACT CARD
+   ============================================================ */
+
+/* ---------------------------------------------
+   1. iPad — force stable 2-column grid
+   --------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .grid,
+    .container .grid,
+    main .grid {
+        grid-template-columns: 1fr 1fr !important;
+        align-items: start !important;
+    }
+}
+
+/* ---------------------------------------------
+   2. iPad + Desktop — left-align card images
+   --------------------------------------------- */
+@media (min-width: 768px) {
+    .card img {
+        display: inline-block !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }
+}
+
+/* ---------------------------------------------
+   3. iPhone — centre text inside cards
+   --------------------------------------------- */
+@media (max-width: 767px) {
+    .card h3,
+    .card p {
+        text-align: center !important;
+    }
+}
+
+/* ---------------------------------------------
+   4. Contact card — fix spacing
+   --------------------------------------------- */
+.card p {
+    margin: 4px 0 !important;
+}
+
+/* ---------------------------------------------
+   5. LinkedIn row — left-align + remove gaps
+   --------------------------------------------- */
+.contact-linkedin {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 8px !important;
+    padding: 0 !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+}

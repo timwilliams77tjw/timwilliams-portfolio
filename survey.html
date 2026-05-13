@@ -1,3 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="header-standard-v4.css">
+    <link rel="stylesheet" href="global-restore.css">  
+</head>
+
+<body class="header-with-logo page-site-search">
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+
+    // Load global site search
+    const siteSearch = document.createElement("script");
+    siteSearch.src = "site-search.js";
+    siteSearch.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(siteSearch);
+
+    // Load header JS AFTER header is injected
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+  });
+</script>
+<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+<script src="analytics-tracker.js" defer></script>
+
+
+<main class="page-container">
 
 <section class="survey-section">
   <h2>Website Feedback Survey</h2>

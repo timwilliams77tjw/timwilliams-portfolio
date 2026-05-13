@@ -125,7 +125,19 @@ fetch("header.html")
 <section class="survey-section">
   <h2>Website Feedback Survey</h2>
   <form class="survey-form" action="https://formspree.io/f/xqenjlwb" method="post">
-      <input type="hidden" name="_success" value="Thanks for your feedback!">
+<div id="survey-success" style="
+  display:none;
+  padding:1rem;
+  margin-bottom:1rem;
+  border-radius:6px;
+  background:#e6ffed;
+  border:1px solid #b2f5c0;
+  color:#0f5132;
+  font-weight:600;
+">
+  Thank you — your feedback has been submitted successfully.
+</div>
+
     <!-- 1. Visitor Profile -->
     <fieldset>
       <legend>Visitor profile</legend>
@@ -361,7 +373,36 @@ fetch("header.html")
 fetch("footer.html").then(r => r.text()).then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector(".survey-form");
+  const successBox = document.getElementById("survey-success");
 
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // stop normal redirect
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { "Accept": "application/json" }
+      });
+
+      if (response.ok) {
+        successBox.style.display = "block";
+        form.reset();
+        form.scrollIntoView({ behavior: "smooth" });
+      } else {
+        alert("Something went wrong submitting the form.");
+      }
+    } catch (err) {
+      alert("Network error — please try again.");
+    }
+  });
+});
+</script>
 
 
 </body>

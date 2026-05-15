@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Downloads – Tim Williams</title>
 
-       <!-- GLOBAL CSS -->
-<link rel="stylesheet" href="certifications.css">
-<link rel="stylesheet" href="global-restore.css">
-<link rel="stylesheet" href="header-standard-v4.css">
+    <!-- GLOBAL CSS -->
+    <link rel="stylesheet" href="certifications.css">
+    <link rel="stylesheet" href="global-restore.css">
+    <link rel="stylesheet" href="header-standard-v4.css">
 
     <!-- ICONS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -51,15 +51,24 @@
         margin-top: 16px;
     }
 
-    /* CARD STYLE (same as website-card) */
+    /* CARD STYLE */
     .download-card {
         background: white;
         padding: 1.25rem;
         border-radius: 8px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.08);
         border-left: 4px solid #0078ff;
-        position: relative;      /* ensure tooltip can sit above */
-        overflow: visible;       /* don’t clip tooltip */
+        text-align: center;
+        overflow: visible;
+    }
+
+    .download-card img {
+        width: 160px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 6px;
+        display: block;
+        margin: 0 auto 10px;
     }
 
     .download-card h3 {
@@ -67,6 +76,7 @@
         color: #0a2540;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 10px;
     }
 
@@ -92,144 +102,64 @@
         background: #0078ff;
     }
 
-/* TOOLTIP */
-.tooltip {
-    position: relative;
-    cursor: help;
-    text-decoration: underline dotted;
-}
-
-/* base tooltip, hidden by default */
-.tooltip::after {
-    content: attr(data-tip);
-    position: absolute;
-    left: 0;
-    top: 120%;
-    background: #333;
-    color: #fff;
-    padding: 8px 10px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    width: 240px;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0;
-    transform: translateY(4px);
-    transition: opacity 0.15s ease, transform 0.15s ease;
-}
-
-/* show on hover (desktop) */
-.tooltip:hover::after {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* show when JS adds .is-active (touch) */
-.tooltip.is-active::after {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-    /* STICKY BAR */
-    .sticky-follow {
-        background: var(--accent);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 1.5rem;
-        position: sticky;
-        top: 0;
-        z-index: 999;
-        color: white;
+    /* VIDEO CARD */
+    .video-card {
+        background: white;
+        padding: 1.25rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        border-left: 4px solid #0078ff;
+        text-align: center;
+        margin-top: 2rem;
     }
-        .insight-thumb {
-    width: 160px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 6px;
-    display: block;
-    margin: 0 auto 10px;
-}
 
-   .insight-thumb {
-    width: 140px;
-    height: 105px;
-}
-.download-card {
-    text-align: center;
-}
+    .video-card img {
+        width: 160px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 6px;
+        display: block;
+        margin: 0 auto 10px;
+    }
 
-.download-card img {
-    width: 160px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 6px;
-    display: block;
-    margin: 0 auto 10px;
-}
-/* VIDEO CARD STYLING */
-.video-card {
-    background: white;
-    padding: 1.25rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    border-left: 4px solid #0078ff;
-    text-align: center;
-}
+    .video-card video {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        margin-top: 1rem;
+    }
 
-.video-card img {
-    width: 160px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 6px;
-    display: block;
-    margin: 0 auto 10px;
-}
+    /* Play button overlay */
+    .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 50%;
+        padding: 20px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
 
-/* Embedded video responsiveness */
-.video-card video {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    margin-top: 1rem;
-}
+    .play-button span {
+        font-size: 2rem;
+        color: white;
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
 
-/* Play button overlay */
-.play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    padding: 20px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
+    .play-button:hover {
+        background: rgba(0, 0, 0, 0.8);
+        transform: translate(-50%, -50%) scale(1.1);
+    }
 
-.play-button span {
-    font-size: 2rem;
-    color: white;
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-/* Hover animation */
-.play-button:hover {
-    background: rgba(0, 0, 0, 0.8);
-    transform: translate(-50%, -50%) scale(1.1);
-}
-
-.play-button:hover span {
-    transform: scale(1.2);
-}
-
+    .play-button:hover span {
+        transform: scale(1.2);
+    }
     </style>
-
 </head>
-
 
 <body class="header-with-logo page-site-search">
 
@@ -238,55 +168,29 @@
 
 <script>
 fetch("header.html")
-  .then(r => r.text())
-  .then(h => {
+.then(r => r.text())
+.then(h => {
     document.getElementById("header-placeholder").innerHTML = h;
 
-    // Load global site search
     const siteSearch = document.createElement("script");
     siteSearch.src = "site-search.js";
     siteSearch.onload = () => {
-      if (typeof initSiteSearch === "function") initSiteSearch();
+        if (typeof initSiteSearch === "function") initSiteSearch();
     };
     document.body.appendChild(siteSearch);
 
-    // Load header JS AFTER header is injected
     const headerJS = document.createElement("script");
     headerJS.src = "header-standard-v4.js";
     headerJS.onload = () => {
-      initHeader();
-      initHeaderEnhancements();
+        initHeader();
+        initHeaderEnhancements();
     };
     document.body.appendChild(headerJS);
-  });
+});
 </script>
+
 <script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
 <script src="analytics-tracker.js" defer></script>
-
-
-
-
-<!-- DARK MODE -->
-<script>
-(function () {
-    const darkToggle = document.getElementById("darkToggle");
-    if (!darkToggle) return;
-
-    const body = document.body;
-    const storedMode = localStorage.getItem("tw_dark");
-
-    if (storedMode === "1") {
-        body.classList.add("dark-mode");
-    }
-
-    darkToggle.addEventListener("click", function () {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem("tw_dark",
-            body.classList.contains("dark-mode") ? "1" : "0"
-        );
-    });
-})();
-</script>
 
 <!-- PAGE CONTENT -->
 <main class="page-container">
@@ -298,86 +202,90 @@ fetch("header.html")
 
 <div class="grid">
 
-<!-- CV PDF -->
-<article class="download-card">
-    <img src="cv-thumbnail.jpg" alt="Tim Williams CV Thumbnail" class="insight-thumb" />
-    <h3><i class="fa-solid fa-file-pdf"></i> CV (PDF)</h3>
-    <p>Opens in a new window.</p>
-    <a href="Tim_Williams_CV.pdf" target="_blank" class="download-btn">Open PDF</a>
-</article>
+    <!-- CV PDF -->
+    <article class="download-card">
+        <img src="cv-thumbnail.jpg" alt="Tim Williams CV Thumbnail" />
+        <h3><i class="fa-solid fa-file-pdf"></i> CV (PDF)</h3>
+        <p>Opens in a new window.</p>
+        <a href="Tim_Williams_CV.pdf" target="_blank" class="download-btn">Open PDF</a>
+    </article>
 
     <!-- CV Safari -->
     <article class="download-card">
         <h3><i class="fa-solid fa-download"></i> CV (Safari Download)</h3>
-        <p class="tooltip"
-   data-tip="Safari users: rename the downloaded file from .download to .zip."
-   title="Safari users: rename the downloaded file from .download to .zip.">
-    Safari‑compatible download package.
-</p>
-
+        <p class="tooltip" data-tip="Safari users: rename the downloaded file from .download to .zip.">
+            Safari‑compatible download package.
+        </p>
         <a href="Tim_Williams_CV.download" class="download-btn">Download</a>
     </article>
 
-<!-- PORTFOLIO PRESENTATION PDF -->
-<article class="download-card">
-    <img src="portfolio-thumbnail.jpg" alt="Portfolio Presentation Thumbnail" class="insight-thumb" />
-    <h3><i class="fa-solid fa-file-pdf"></i> Portfolio Presentation (PDF)</h3>
-    <p>Opens in a new window.</p>
-    <a href="portfolio_presentation.pdf" target="_blank" class="download-btn">Open PDF</a>
-</article>
+    <!-- Portfolio PDF -->
+    <article class="download-card">
+        <img src="portfolio-thumbnail.jpg" alt="Portfolio Presentation Thumbnail" />
+        <h3><i class="fa-solid fa-file-pdf"></i> Portfolio Presentation (PDF)</h3>
+        <p>Opens in a new window.</p>
+        <a href="portfolio_presentation.pdf" target="_blank" class="download-btn">Open PDF</a>
+    </article>
 
     <!-- Portfolio Safari -->
     <article class="download-card">
         <h3><i class="fa-solid fa-download"></i> Portfolio Presentation (Safari Download)</h3>
-        <p class="tooltip"
-   data-tip="Safari users: rename the downloaded file from .download to .zip."
-   title="Safari users: rename the downloaded file from .download to .zip.">
-    Safari‑compatible download package.
-</p>
-
+        <p class="tooltip" data-tip="Safari users: rename the downloaded file from .download to .zip.">
+            Safari‑compatible download package.
+        </p>
         <a href="portfolio_presentation.download" class="download-btn">Download</a>
     </article>
 
-    <!-- FOUNDATIONS OF SUCCESSFUL PROJECT DELIVERY PDF -->
-<article class="download-card">
-    <img src="foundations-thumbnail.jpg" alt="Foundations of Successful Project Delivery Thumbnail" class="insight-thumb" />
-    <h3><i class="fa-solid fa-file-pdf"></i> Foundations of Successful Project Delivery (PDF)</h3>
-    <p>Opens in a new window.</p>
-    <a href="Foundations_of_Successful_Project_Delivery.pdf" target="_blank" class="download-btn">Open PDF</a>
-</article>
+    <!-- Foundations PDF -->
+    <article class="download-card">
+        <img src="foundations-thumbnail.jpg" alt="Foundations of Successful Project Delivery Thumbnail" />
+        <h3><i class="fa-solid fa-file-pdf"></i> Foundations of Successful Project Delivery (PDF)</h3>
+        <p>Opens in a new window.</p>
+        <a href="Foundations_of_Successful_Project_Delivery.pdf" target="_blank" class="download-btn">Open PDF</a>
+    </article>
 
-<!-- PMO PLAYBOOK PDF -->
-<article class="download-card">
-    <img src="pmo-thumbnail.jpg" alt="PMO Turnaround Thumbnail" class="insight-thumb" />
-    <h3><i class="fa-solid fa-file-pdf"></i> PMO Playbook (PDF)</h3>
-    <p>Opens in a new window.</p>
-    <a href="pmo.pdf" target="_blank" class="download-btn">Open PDF</a>
-</article>
+    <!-- PMO Playbook -->
+    <article class="download-card">
+        <img src="pmo-thumbnail.jpg" alt="PMO Turnaround Thumbnail" />
+        <h3><i class="fa-solid fa-file-pdf"></i> PMO Playbook (PDF)</h3>
+        <p>Opens in a new window.</p>
+        <a href="pmo.pdf" target="_blank" class="download-btn">Open PDF</a>
+    </article>
 
-<!-- STAKEHOLDER TRANSFORMATION PLAYBOOK PDF -->
-<article class="download-card">
-    <img src="stakeholder-thumbnail.jpg" alt="Stakeholder Transformation Playbook Thumbnail" class="insight-thumb" />
-    <h3><i class="fa-solid fa-file-pdf"></i> Stakeholder Transformation Playbook (PDF)</h3>
-    <p>Opens in a new window.</p>
-    <a href="stakeholder-playbook.pdf" target="_blank" class="download-btn">Open PDF</a>
-</article>
+    <!-- Stakeholder Playbook -->
+    <article class="download-card">
+        <img src="stakeholder-thumbnail.jpg" alt="Stakeholder Transformation Playbook Thumbnail" />
+        <h3><i class="fa-solid fa-file-pdf"></i> Stakeholder Transformation Playbook (PDF)</h3>
+        <p>Opens in a new window.</p>
+        <a href="stakeholder-playbook.pdf" target="_blank" class="download-btn">Open PDF</a>
+    </article>
 
-<!-- PMO HYBRID STRATEGIC SERVICE PDF -->
-<article class="download-card">
-    <img src="PMO_Hybrid_thumbnail.png" 
-         alt="PMO Hybrid Strategic Service Thumbnail" 
-         class="insight-thumb" />
-    <h3><i class="fa-solid fa-file-pdf"></i> PMO Hybrid Strategic Service (PDF)</h3>
-    <p>Opens in a new window.</p>
-    <a href="PMO_Hybrid.pdf" target="_blank" class="download-btn">Open PDF</a>
-</article>
+    <!-- PMO Hybrid -->
+    <article class="download-card">
+        <img src="PMO_Hybrid_thumbnail.png" alt="PMO Hybrid Strategic Service Thumbnail" />
+        <h3><i class="fa-solid fa-file-pdf"></i> PMO Hybrid Strategic Service (PDF)</h3>
+        <p>Opens in a new window.</p>
+        <a href="PMO_Hybrid.pdf" target="_blank" class="download-btn">Open PDF</a>
+    </article>
 
-</div>
+</div> <!-- END GRID -->
+
+
+<!-- VIDEOS SECTION HEADER -->
+<section class="video-section-header" style="margin-top: 3rem; margin-bottom: 1rem;">
+    <h2 style="font-size: 1.8rem; color: #0a2540; margin-bottom: 0.5rem;">
+        Videos
+    </h2>
+    <p style="color: #333; font-size: 1rem; max-width: 720px;">
+        Watch short introductions and media content from TWC Ltd.
+    </p>
+</section>
+
 
 <!-- VIDEO BIO CARD -->
 <article class="video-card">
 
-    <img src="portrait-thumbnail.jpg" alt="Video Bio Thumbnail" class="insight-thumb" />
+    <img src="portrait-thumbnail.jpg" alt="Video Bio Thumbnail" />
 
     <h3><i class="fa-solid fa-video"></i> Video Bio</h3>
     <p>Watch Tim’s short introduction video.</p>
@@ -399,21 +307,20 @@ fetch("header.html")
 </article>
 
 
-    </div>
-  
 </main>
-  <!-- BACK TO TOP BUTTON -->
+
+<!-- BACK TO TOP BUTTON -->
 <div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
-  <a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+<a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+
 <!-- FOOTER -->
 <div id="footer"></div>
+
 <script>
 fetch("footer.html")
-    .then(r => r.text())
-    .then(h => document.getElementById("footer").innerHTML = h);
+.then(r => r.text())
+.then(h => document.getElementById("footer").innerHTML = h);
 </script>
-
-
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -423,17 +330,14 @@ document.addEventListener('DOMContentLoaded', function () {
         tip.addEventListener('click', function (e) {
             e.stopPropagation();
 
-            // close any other open tooltips
             document.querySelectorAll('.tooltip.is-active').forEach(other => {
                 if (other !== tip) other.classList.remove('is-active');
             });
 
-            // toggle this one
             tip.classList.toggle('is-active');
         });
     });
 
-    // click anywhere else to close
     document.addEventListener('click', function () {
         document.querySelectorAll('.tooltip.is-active')
             .forEach(tip => tip.classList.remove('is-active'));

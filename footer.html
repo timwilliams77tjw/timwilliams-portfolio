@@ -34,71 +34,130 @@
     <a href="contact.html" class="sticky-btn">✉️ Discuss Programme</a>
 </div>
 
-    <style>
-/* UNIVERSAL FOOTER FIXES - FINAL */
+   <style>
+/* ============================================================
+   UNIVERSAL FOOTER STYLES
+============================================================ */
 
-/* Restore link colour + remove underline */
 footer.footer a {
   color: #7ac0f9 !important;
   text-decoration: none !important;
 }
 
-/* Desktop + iPad logo size */
-footer.footer .footer-row-bottom .footer-logo img {
-  max-width: 120px !important;
-  width: auto !important;
-  height: auto !important;
+footer.footer .footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
 }
 
-/* Desktop + iPad QR size */
-footer.footer .footer-row-bottom .footer-qr img {
-  width: 90px !important;
-  max-width: 90px !important;
-  height: auto !important;
+/* ============================================================
+   ROW ALIGNMENT
+============================================================ */
+
+/* Copyright row */
+footer.footer .footer-row-copy {
+  text-align: center;
 }
 
-/* iPHONE LAYOUT - EXACT SPEC */
+/* Links row */
+footer.footer .footer-row-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Bottom row */
+footer.footer .footer-row-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* ============================================================
+   IMAGE SIZING
+============================================================ */
+
+footer.footer .footer-logo img,
+footer.footer .footer-qr img {
+  width: 70px !important;
+  max-width: 70px !important;
+  height: auto !important;
+  display: block;
+}
+
+/* ============================================================
+   DESKTOP + iPAD
+============================================================ */
+
+@media (min-width: 601px) {
+
+  footer.footer .footer-inner {
+    gap: 20px;
+  }
+
+  footer.footer .footer-row-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Force logo LEFT */
+  footer.footer .footer-logo {
+    margin-right: auto;
+  }
+
+  /* Force QR RIGHT */
+  footer.footer .footer-qr {
+    margin-left: auto;
+  }
+}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
 @media (max-width: 600px) {
-  /* Stack vertically */
+
   footer.footer .footer-inner {
     display: flex;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    gap: 20px !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
   }
 
-  /* 1 - COPYRIGHT TOP, CENTRED */
+  /* Row order */
   footer.footer .footer-row-copy {
-    order: 1 !important;
-    width: 100% !important;
-    text-align: center !important;
+    order: 1;
+    width: 100%;
   }
 
-  /* 2 - LINKS MIDDLE, ONE ROW, CENTRED */
   footer.footer .footer-row-links {
-    order: 2 !important;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 20px !important;
+    order: 2;
+    width: 100%;
+    justify-content: center;
   }
 
-  /* 3 - BOTTOM ROW: LOGO + QR */
   footer.footer .footer-row-bottom {
-    order: 3 !important;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
+    order: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  /* iPhone logo + QR same size */
-  footer.footer .footer-row-bottom .footer-logo img,
-  footer.footer .footer-row-bottom .footer-qr img {
-    width: 70px !important;
-    max-width: 70px !important;
-    height: auto !important;
+  /* Force correct image positions */
+  footer.footer .footer-logo {
+    margin-right: auto;
+  }
+
+  footer.footer .footer-qr {
+    margin-left: auto;
   }
 }
 </style>

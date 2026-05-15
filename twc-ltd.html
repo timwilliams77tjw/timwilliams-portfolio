@@ -100,6 +100,34 @@ body.dark-mode {
     width: 100%;
     height: auto;
 }
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    padding: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.play-button span {
+    font-size: 2rem;
+    color: white;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Hover animation */
+.play-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.play-button:hover span {
+    transform: scale(1.2);
+}
 
 </style>
 
@@ -281,8 +309,8 @@ fetch("header.html")
 
     <div class="video-thumbnail" style="position:relative; display:inline-block; max-width:100%;">
         <img src="portrait-thumbnail.jpg" alt="Video Bio Thumbnail" style="width:100%; border-radius:8px; box-shadow: var(--shadow);">
-        <a href="Video_Bio_Comp.mp4" target="_blank" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.6); border-radius:50%; padding:20px; text-decoration:none;">
-            <span style="font-size:2rem; color:white;">▶</span>
+        <a href="Video_Bio_Comp.mp4" target="_blank" class="play-button">
+            <span>▶</span>
         </a>
     </div>
 
@@ -291,6 +319,7 @@ fetch("header.html")
         Your browser does not support the video tag.
     </video>
 </div>
+
 </p>
  
 </div>

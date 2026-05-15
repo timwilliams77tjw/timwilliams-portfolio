@@ -91,6 +91,15 @@ body.dark-mode {
     border-radius: 8px;
     box-shadow: var(--shadow);
 }
+.video-thumbnail a:hover {
+    background: rgba(0,0,0,0.8);
+    transform: translate(-50%, -50%) scale(1.1);
+    transition: all 0.3s ease;
+}
+.video-wrapper video {
+    width: 100%;
+    height: auto;
+}
 
 </style>
 
@@ -266,8 +275,22 @@ fetch("header.html")
 <p>Email:<a href=mailto:timwilliams07@outlook.com>timwilliams07@outlook.com</a> / <a href=mailto:info@twc-ltd.uk>info@twc-ltd.uk</a>  </p>
     <p>Phone: 07801 453322</p>
    <p>
-    <strong>Video Bio:</strong>
-    <a href="Video_Bio_Comp.mp4" target="_blank">Watch Video Bio</a>
+<!-- VIDEO BIO EMBED -->
+<div class="video-wrapper" style="margin-top: 1.5rem; text-align:center;">
+    <h3 style="margin-bottom: 0.5rem;">Video Bio</h3>
+
+    <div class="video-thumbnail" style="position:relative; display:inline-block; max-width:100%;">
+        <img src="portrait-thumbnail.jpg" alt="Video Bio Thumbnail" style="width:100%; border-radius:8px; box-shadow: var(--shadow);">
+        <a href="Video_Bio_Comp.mp4" target="_blank" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.6); border-radius:50%; padding:20px; text-decoration:none;">
+            <span style="font-size:2rem; color:white;">▶</span>
+        </a>
+    </div>
+
+    <video controls poster="portrait-thumbnail.jpg" style="width:100%; border-radius:8px; box-shadow: var(--shadow); margin-top:1rem;">
+        <source src="Video_Bio_Comp.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
 </p>
  
 </div>

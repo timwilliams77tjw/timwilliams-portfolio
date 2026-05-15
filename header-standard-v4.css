@@ -1304,3 +1304,62 @@ footer.footer .footer-right .footer-qr img {
     max-width: 90px !important;
     height: auto !important;
 }
+/* === QR CODE SIZE FIX (DESKTOP + IPAD) === */
+footer .footer-right .footer-qr img {
+    width: 90px !important;
+    max-width: 90px !important;
+    height: auto !important;
+}
+/* === IPHONE FOOTER LAYOUT FIX === */
+@media (max-width: 600px) {
+
+    /* Stack footer vertically */
+    .footer-inner {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
+        text-align: left !important;
+    }
+
+    /* Copyright first */
+    .footer-copy {
+        order: 1 !important;
+        width: 100% !important;
+    }
+
+    /* Links second (vertical) */
+    .footer-right {
+        order: 2 !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+
+    /* Bottom row: logo left, QR right */
+    .footer-left {
+        order: 3 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    /* Ensure logo + QR sit side-by-side */
+    .footer-logo,
+    .footer-qr {
+        width: 48% !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+}
+/* === IPHONE LOGO + QR SIZE (70PX) === */
+@media (max-width: 600px) {
+    .footer-logo img,
+    .footer-qr img {
+        width: 70px !important;
+        max-width: 70px !important;
+        height: auto !important;
+    }
+}

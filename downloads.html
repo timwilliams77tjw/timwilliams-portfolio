@@ -168,6 +168,63 @@
     display: block;
     margin: 0 auto 10px;
 }
+/* VIDEO CARD STYLING */
+.video-card {
+    background: white;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-left: 4px solid #0078ff;
+    text-align: center;
+}
+
+.video-card img {
+    width: 160px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+/* Embedded video responsiveness */
+.video-card video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    margin-top: 1rem;
+}
+
+/* Play button overlay */
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    padding: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.play-button span {
+    font-size: 2rem;
+    color: white;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Hover animation */
+.play-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.play-button:hover span {
+    transform: scale(1.2);
+}
 
     </style>
 
@@ -317,6 +374,28 @@ fetch("header.html")
 
 </div>
 
+<!-- VIDEO BIO CARD -->
+<article class="video-card">
+    <img src="portrait-thumbnail.jpg" alt="Video Bio Thumbnail" class="insight-thumb" />
+
+    <h3><i class="fa-solid fa-video"></i> Video Bio</h3>
+    <p>Watch Tim’s short introduction video.</p>
+
+    <!-- Thumbnail with animated play button -->
+    <div class="video-thumbnail" style="position:relative; display:inline-block; max-width:100%; margin-bottom:1rem;">
+        <img src="portrait-thumbnail.jpg" alt="Video Bio Thumbnail" style="width:100%; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+        <a href="Video_Bio_Comp.mp4" target="_blank" class="play-button">
+            <span>▶</span>
+        </a>
+    
+        <!-- Embedded video -->
+    <video controls poster="portrait-thumbnail.jpg">
+        <source src="Video_Bio_Comp.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</article>
+    </div>
+  
 </main>
   <!-- BACK TO TOP BUTTON -->
 <div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>

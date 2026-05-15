@@ -1363,3 +1363,57 @@ footer .footer-right .footer-qr img {
         height: auto !important;
     }
 }
+/* === FINAL QR FIX — OVERRIDES ALL GLOBAL RULES === */
+footer .footer-qr img {
+    width: 90px !important;
+    max-width: 90px !important;
+    height: auto !important;
+}
+/* === IPHONE FOOTER LAYOUT — MATCHES ACTUAL HTML === */
+@media (max-width: 600px) {
+
+    /* Stack footer vertically */
+    .footer-inner {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
+    }
+
+    /* 1) Copyright first */
+    .footer-copy {
+        order: 1 !important;
+        width: 100% !important;
+    }
+
+    /* 2) Links second (vertical) */
+    .footer-right a {
+        display: block !important;
+        margin-bottom: 6px !important;
+    }
+
+    .footer-right {
+        order: 2 !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+    }
+
+    /* 3) Bottom row: logo left, QR right */
+    .footer-left {
+        order: 3 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    /* Logo + QR sizing */
+    .footer-logo img,
+    .footer-qr img {
+        width: 70px !important;
+        max-width: 70px !important;
+        height: auto !important;
+    }
+}

@@ -1560,3 +1560,83 @@ footer.footer img {
         height: auto !important;
     }
 }
+/* ============================================================
+   FINAL FOOTER FIX — NOTHING BELOW THIS
+   ============================================================ */
+
+/* --- DESKTOP + IPAD --- */
+
+/* Logo uses natural size (fixes oversized iPad logo) */
+footer.footer .footer-logo img {
+    width: auto !important;
+    max-width: 120px !important;
+    height: auto !important;
+}
+
+/* QR code fixed at 90px on desktop/iPad */
+footer.footer .footer-qr img {
+    width: 90px !important;
+    max-width: 90px !important;
+    height: auto !important;
+}
+
+/* Override any global footer image clamps */
+footer.footer img {
+    max-width: none !important;
+    height: auto !important;
+}
+
+/* ============================================================
+   iPHONE LAYOUT (YOUR EXACT REQUIREMENTS)
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    /* Stack footer vertically */
+    footer.footer .footer-inner {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 20px !important;
+    }
+
+    /* 1 — COPYRIGHT TOP, CENTRED */
+    footer.footer .footer-copy {
+        order: 1 !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    /* 2 — LINKS MIDDLE, ONE ROW, CENTRED */
+    footer.footer .footer-right {
+        order: 2 !important;
+        width: 100% !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 20px !important;
+    }
+
+    footer.footer .footer-right a {
+        display: inline-block !important;
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    /* 3 — BOTTOM ROW: LOGO LEFT, QR RIGHT */
+    footer.footer .footer-left {
+        order: 3 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    /* iPhone logo + QR size (same size) */
+    footer.footer .footer-logo img,
+    footer.footer .footer-qr img {
+        width: 70px !important;
+        max-width: 70px !important;
+        height: auto !important;
+    }
+}

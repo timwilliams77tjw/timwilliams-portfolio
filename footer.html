@@ -35,131 +35,133 @@
 </div>
 
    <style>
-/* ============================================================
-   UNIVERSAL FOOTER STYLES
-============================================================ */
 
-footer.footer a {
-  color: #7ac0f9 !important;
-  text-decoration: none !important;
+/* =========================================================
+   BASE
+========================================================= */
+
+footer.footer a{
+  color:#7ac0f9 !important;
+  text-decoration:none !important;
 }
-
-footer.footer .footer-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  width: 100%;
-}
-
-/* ============================================================
-   ROW ALIGNMENT
-============================================================ */
-
-/* Copyright row */
-footer.footer .footer-row-copy {
-  text-align: center;
-}
-
-/* Links row */
-footer.footer .footer-row-links {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-/* Bottom row */
-footer.footer .footer-row-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-/* ============================================================
-   IMAGE SIZING
-============================================================ */
 
 footer.footer .footer-logo img,
-footer.footer .footer-qr img {
-  width: 70px !important;
-  max-width: 70px !important;
-  height: auto !important;
-  display: block;
+footer.footer .footer-qr img{
+  width:70px !important;
+  max-width:70px !important;
+  height:auto !important;
+  display:block;
 }
 
-/* ============================================================
+/* =========================================================
    DESKTOP + iPAD
-============================================================ */
+========================================================= */
 
-@media (min-width: 601px) {
+@media (min-width:601px){
 
-  footer.footer .footer-inner {
-    gap: 20px;
+  footer.footer .footer-inner{
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:100% !important;
+    gap:20px !important;
   }
 
-  footer.footer .footer-row-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  /* remove stacked rows */
+  footer.footer .footer-row{
+    width:auto !important;
   }
 
-  /* Force logo LEFT */
-  footer.footer .footer-logo {
-    margin-right: auto;
+  /* logo far LEFT */
+  footer.footer .footer-row-bottom{
+    display:flex !important;
+    align-items:center !important;
+    gap:20px !important;
+    margin-left:auto !important;
   }
 
-  /* Force QR RIGHT */
-  footer.footer .footer-qr {
-    margin-left: auto;
+  footer.footer .footer-logo{
+    margin-right:auto !important;
+  }
+
+  /* copyright centered */
+  footer.footer .footer-row-copy{
+    white-space:nowrap;
+    text-align:center !important;
+  }
+
+  /* links next to copyright */
+  footer.footer .footer-row-links{
+    display:flex !important;
+    gap:18px !important;
+    justify-content:center !important;
+    flex-wrap:nowrap !important;
+  }
+
+  /* push QR to absolute right */
+  footer.footer .footer-qr{
+    margin-left:auto !important;
+  }
+}
+
+/* =========================================================
+   iPHONE
+========================================================= */
+
+@media (max-width:600px){
+
+  footer.footer .footer-inner{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    gap:20px !important;
+    width:100% !important;
+  }
+
+  /* COPYRIGHT */
+  footer.footer .footer-row-copy{
+    order:1 !important;
+    width:100% !important;
+    text-align:center !important;
+  }
+
+  /* LINKS */
+  footer.footer .footer-row-links{
+    order:2 !important;
+    width:100% !important;
+    display:flex !important;
+    justify-content:center !important;
+    gap:18px !important;
+    flex-wrap:wrap !important;
+    text-align:center !important;
+  }
+
+  /* IMAGES */
+  footer.footer .footer-row-bottom{
+    order:3 !important;
+    width:100% !important;
+    display:flex !important;
+    flex-direction:row !important;
+    justify-content:space-between !important;
+    align-items:center !important;
+  }
+
+  /* force logo LEFT */
+  footer.footer .footer-logo{
+    width:50% !important;
+    display:flex !important;
+    justify-content:flex-start !important;
+  }
+
+  /* force QR RIGHT */
+  footer.footer .footer-qr{
+    width:50% !important;
+    display:flex !important;
+    justify-content:flex-end !important;
   }
 }
 
-/* ============================================================
-   MOBILE
-============================================================ */
-
-@media (max-width: 600px) {
-
-  footer.footer .footer-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-  }
-
-  /* Row order */
-  footer.footer .footer-row-copy {
-    order: 1;
-    width: 100%;
-  }
-
-  footer.footer .footer-row-links {
-    order: 2;
-    width: 100%;
-    justify-content: center;
-  }
-
-  footer.footer .footer-row-bottom {
-    order: 3;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  /* Force correct image positions */
-  footer.footer .footer-logo {
-    margin-right: auto;
-  }
-
-  footer.footer .footer-qr {
-    margin-left: auto;
-  }
-}
 </style>
 
 </footer>

@@ -1417,3 +1417,68 @@ footer .footer-qr img {
         height: auto !important;
     }
 }
+/* ============================================================
+   FINAL OVERRIDES — NOTHING BELOW THIS POINT
+   ============================================================ */
+
+/* 1 — QR CODE SIZE (DESKTOP + IPAD) */
+footer.footer .footer-right .footer-qr img {
+    width: 90px !important;
+    max-width: 90px !important;
+    height: auto !important;
+}
+
+/* 2 — iPHONE FOOTER LAYOUT (MATCHES YOUR HTML) */
+@media (max-width: 600px) {
+
+    /* Stack footer vertically */
+    footer.footer .footer-inner {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
+        text-align: left !important;
+    }
+
+    /* Copyright first */
+    footer.footer .footer-copy {
+        order: 1 !important;
+        width: 100% !important;
+    }
+
+    /* Links second (vertical) */
+    footer.footer .footer-right {
+        order: 2 !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+    }
+
+    footer.footer .footer-right a {
+        display: block !important;
+        margin-bottom: 6px !important;
+    }
+
+    /* Bottom row: logo left, QR right */
+    footer.footer .footer-left {
+        order: 3 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    /* iPhone logo + QR size */
+    footer.footer .footer-logo img,
+    footer.footer .footer-qr img {
+        width: 70px !important;
+        max-width: 70px !important;
+        height: auto !important;
+    }
+}
+
+/* 3 — OVERRIDE ANY GLOBAL FOOTER IMAGE CLAMPS */
+footer.footer img {
+    height: auto !important;
+}

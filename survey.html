@@ -109,7 +109,35 @@
     text-align: center;
   }
 }
-    
+    .form-actions button {
+    width: 100%;
+    padding: 0.9rem 1.4rem;
+    border-radius: 6px;
+    border: none;
+    background: #0073e6;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.form-actions button:hover {
+    background: #005bb5;
+    transform: translateY(-1px);
+}
+  #survey-success {
+    background: #d1f7d6;
+    border: 2px solid #28a745;
+    color: #0f5132;
+    font-size: 1.1rem;
+    padding: 1.2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-top: 1.5rem;
+}
+  
   </style>
 </head>
 
@@ -506,7 +534,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script src="https://cdn.jsdelivr.net/npm/ahoy.js@0.3.9/dist/ahoy.min.js"
         async defer onload="configureAhoy()"></script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".survey-form");
 
+    form.addEventListener("submit", function (e) {
+        const missing = [];
+        const requiredFields = form.querySelectorAll("[required]");
+
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                const label = field.closest(".form-group").querySelector("label strong");
+                if (label) missing.push(label.textContent);
+            }
+        });
+
+        if (missing.length > 0) {
+            e.preventDefault();
+            alert("Please complete the following required fields:\n\n- " + missing.join("\n- "));
+            return;
+        }
+    });
+});
 </body>
 </html>
 

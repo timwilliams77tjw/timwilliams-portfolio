@@ -36,11 +36,18 @@
 .card-list, .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  align-items: stretch; /* forces equal height */
+  gap: 24px; /* restore spacing between cards */
+  align-items: stretch;
 }
+
 .card {
-  height: 100%;
+  height: auto; /* prevent forced stretching that can cause overlap */
 }
+
+.card h3 {
+  margin-top: 0; /* avoids heading creeping into previous card’s space */
+}
+
 </style>
     <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">

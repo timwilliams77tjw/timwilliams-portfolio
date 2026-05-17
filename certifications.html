@@ -959,13 +959,23 @@ window.addEventListener("load", () => {
     });
 });
 </script>
-    <script>
-setTimeout(() => {
+  <script>
+function forceHeaderColour() {
     document.querySelectorAll(".category-header").forEach(h => {
         h.style.setProperty("color", "#7ac0f9", "important");
         h.style.setProperty("border-bottom", "2px solid #001f3f", "important");
     });
-}, 50);
+}
+
+// Run after load
+window.addEventListener("load", forceHeaderColour);
+
+// Run again after deferred scripts
+setTimeout(forceHeaderColour, 500);
+
+// Run again after Safari layout batching
+setTimeout(forceHeaderColour, 1500);
 </script>
+
 </body>
 </html>

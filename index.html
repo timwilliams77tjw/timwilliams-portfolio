@@ -144,7 +144,12 @@ body.dark .service-card img { background-color: #1f2937 !important; }
 }
 
 
-  
+  /* Ensure hover colours override global/dark mode */
+body.dark .cta-btn:hover {
+    background: #7ac0f9;   /* light blue */
+    border-color: #001f3f; /* navy */
+    color: #ffffff;        /* white text */
+}
 </style>
    
 <script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
@@ -206,7 +211,7 @@ fetch("header.html")
     z-index:11;
 ">
     <a href="calendar.html"
-       class="brand-btn"
+       class="cta-btn"
        style="
           display:inline-block;
           margin-right:15px;
@@ -217,7 +222,7 @@ fetch("header.html")
     </a>
 
     <a href="contact.html"
-       class="brand-btn"
+       class="cta-btn"
        style="display:inline-block;">
        Discuss Your Programme
     </a>

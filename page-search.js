@@ -1,4 +1,9 @@
-if (document.body.classList.contains("page-site-search")) return;
+
+// Disable legacy page search on Certifications page
+if (document.body.classList.contains("page-site-search")) {
+    console.log("page-search.js disabled on Certifications page");
+    return;
+}
 
 /* ============================
    PAGE SEARCH ENGINE

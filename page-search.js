@@ -1,3 +1,5 @@
+if (document.body.classList.contains("page-site-search")) return;
+
 /* ============================
    PAGE SEARCH ENGINE
    ============================ */

@@ -61,4 +61,28 @@ fetch("header.html")
 </div>
 
 </body>
+    
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a class="fab fab-booking" href="calendar.html">📅</a>
+
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+    .then(r => r.text())
+    .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<script>
+(function () {
+    const darkToggle = document.getElementById("darkToggle");
+    if (!darkToggle) return;
+    const body = document.body;
+    const stored = localStorage.getItem("tw_dark");
+    if (stored === "1") body.classList.add("dark-mode");
+    darkToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("tw_dark", body.classList.contains("dark-mode") ? "1" : "0");
+    });
+})();
+</script>
 </html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Core Skills – Tim Williams</title>
+
+<!-- GLOBAL HEADER CSS -->
+<link rel="stylesheet" href="header-standard-v4.css">
+
+<!-- GLOBAL PAGE CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+
+<style>
+/* Accent blue headers */
+.category-header {
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 14px 0;
+    margin: 20px 0 10px;
+    border-bottom: 2px solid #001f3f;
+    color: #7ac0f9;
+    cursor: pointer;
+}
+.category-toggle {
+    font-weight: 900;
+    font-size: 1.8rem;
+    margin-left: 10px;
+}
+
+/* Page Search Bar */
+.page-search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+.page-search-bar-inner {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+.page-search-bar-inner input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #001f3f;
+    border-radius: 6px;
+}
+
+/* Card Styling */
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .3s ease, transform .3s ease;
+}
+.card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Card Title */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #7ac0f9 !important;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* Accordion default state */
+.card-list {
+    display: none;
+}
+
+/* Universal left alignment */
+.card, .card p, .card ul, .card li, .card-title {
+    text-align: left !important;
+}
+</style>
+
+</head>
+
+<body class="header-with-logo page-site-search page-has-page-search">
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+<script>
+fetch("header.html")
+.then(r => r.text())
+.then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+    const headerScript = document.createElement("script");
+    headerScript.src = "header-standard-v4.js";
+    headerScript.onload = () => {
+        if (typeof initHeader === "function") initHeader();
+        if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+        const searchScript = document.createElement("script");
+        searchScript.src = "site-search.js";
+        searchScript.onload = () => {
+            if (typeof initSiteSearch === "function") initSiteSearch();
+        };
+        document.body.appendChild(searchScript);
+    };
+    document.body.appendChild(headerScript);
+});
+</script>
+
+<!-- PAGE SEARCH BAR -->
+<div id="pageSearchBar" class="page-search-bar">
+    <div class="page-search-bar-inner">
+        <input id="pageSearchInput" type="text" placeholder="Search Skills…">
+    </div>
+</div>
+
+<div id="noResultsMessage" style="display:none; margin-top:10px; opacity:0.7;">
+    No matching results found.
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="page-content">
+<div class="container">
+
+<div class="category-section cv-section" data-category="skills">
+    <div class="category-header">
+        Core Skills (7)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <!-- Cyber Security & Identity -->
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">Cyber Security & Identity</div>
+                    <ul>
+                        <li>Identity, access, MFA, privileged access, SIEM, secure backup</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cloud & Workplace -->
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">Cloud & Workplace</div>
+                    <ul>
+                        <li>Azure, AWS, Intune, Entra, Autopilot, cloud migrations, Teams Rooms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Infrastructure & Digital Workplace -->
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">Infrastructure & Digital Workplace</div>
+                    <ul>
+                        <li>Large‑scale Windows deployments, network refresh, server/storage modernisation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Project & PMO Leadership -->
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">Project & PMO Leadership</div>
+                    <ul>
+                        <li>Governance, RAID, reporting, financial control, matrix leadership</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Delivery Methods & Tools -->
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">Delivery Methods & Tools</div>
+                    <ul>
+                        <li>Agile, Waterfall, Scrum, Kanban, MS Project, Planner, Jira, ServiceNow SPM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Service Management -->
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">Service Management</div>
+                    <ul>
+                        <li>ITIL, ITSM, ServiceNow, ISO frameworks, service design & transition</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Commercial & Pre‑Sales -->
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">Commercial & Pre‑Sales</div>
+                    <ul>
+                        <li>SOWs, cost models, procurement, tender responses, contract shaping</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+</main>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+.then(r => r.text())
+.then(f => {
+    document.getElementById("footer").innerHTML = f;
+    if (typeof initFooter === "function") initFooter();
+});
+</script>
+
+<!-- GLOBAL SCRIPTS -->
+<script src="global.js"></script>
+<script src="site-search.js" defer></script>
+<script src="page-search.js" defer></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll(".cv-section");
+    const closeAll = () => {
+        sections.forEach(s => {
+            const list = s.querySelector(".card-list");
+            const t = s.querySelector(".category-toggle");
+            if (list) list.style.display = "none";
+            if (t) t.textContent = "+";
+        });
+    };
+    const openSection = s => {
+        const list = s.querySelector(".card-list");
+        const t = s.querySelector(".category-toggle");
+        if (list) list.style.display = "block";
+        if (t) t.textContent = "−";
+    };
+
+    document.querySelectorAll(".category-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const section = header.parentElement;
+            const list = section.querySelector(".card-list");
+            const toggle = section.querySelector(".category-toggle");
+            const isOpen = list.style.display === "block";
+            closeAll();
+            if (!isOpen) {
+                list.style.display = "block";
+                toggle.textContent = "−";
+            }
+        });
+    });
+
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.classList.add("card-visible");
+        }, 80 * index);
+    });
+});
+</script>
+
+</body>
+</html>

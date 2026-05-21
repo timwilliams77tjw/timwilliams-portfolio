@@ -224,4 +224,5 @@ function initA2HS() {
 }
 
 /* Call inside initHeader() after DOM is ready */
-setTimeout(initA2HS, 300);
+setTimeout(initA2HS, 700);
+

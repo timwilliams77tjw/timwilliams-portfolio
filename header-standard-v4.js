@@ -176,3 +176,52 @@ function initMobileBar() {
     const mobileBar = document.querySelector(".mobile-sticky-bar");
     if (mobileBar) mobileBar.style.display = "flex";
 }
+/* ============================================================
+ADD TO HOME SCREEN (PWA INSTALL)
+============================================================ */
+
+let deferredPrompt;
+
+function initA2HS() {
+    const installBtn = document.getElementById("hsInstallBtn");
+    const iosModal = document.getElementById("iosModal");
+    const closeIosModal = document.getElementById("closeIosModal");
+
+    // Detect iOS Safari
+    function isIos() {
+        return /iphone|ipad|ipod/i.test(navigator.userAgent);
+    }
+
+    function isInStandaloneMode() {
+        return ('standalone' in window.navigator) && window.navigator.standalone;
+    }
+
+    // Show iOS modal
+    if (isIos() && !isInStandaloneMode()) {
+        installBtn.style.display = "inline-flex";
+        installBtn.addEventListener("click", () => {
+            iosModal.style.display = "flex";
+        });
+        closeIosModal.addEventListener("click", () => {
+            iosModal.style.display = "none";
+        });
+        return;
+    }
+
+    // Android / Desktop
+    window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installBtn.style.display = "inline-flex";
+    });
+
+    installBtn.addEventListener("click", async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+    });
+}
+
+/* Call inside initHeader() after DOM is ready */
+setTimeout(initA2HS, 300);

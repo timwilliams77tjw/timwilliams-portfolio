@@ -187,6 +187,14 @@ function initA2HS() {
     const iosModal = document.getElementById("iosModal");
     const closeIosModal = document.getElementById("closeIosModal");
 
+    if (!installBtn || !iosModal || !closeIosModal) {
+        console.warn("A2HS elements not found yet");
+        return;
+    }
+
+    // …rest of your existing A2HS code unchanged…
+}
+
     // Detect iOS Safari
     function isIos() {
         return /iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -223,7 +231,7 @@ function initA2HS() {
     });
 }
 
-/* Call inside initHeader() after DOM is ready */
-setTimeout(initA2HS, 1000);
+// Do NOT auto-run here anymore – initA2HS will be called from index.html
+
 
 

@@ -178,6 +178,11 @@ body.dark .cta-btn:hover {
 </head>
 
 <body class="header-with-logo">
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker.js");
+}
+</script>
 
 <!-- HEADER -->
 <div id="header-placeholder"></div>
@@ -454,11 +459,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.2 });
     elements.forEach(el => observer.observe(el));
 });
-</script>
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js");
-}
 </script>
 
 </body>

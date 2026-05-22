@@ -194,14 +194,16 @@ fetch("header.html")
     siteSearch.onload = () => { if (typeof initSiteSearch === "function") initSiteSearch(); };
     document.body.appendChild(siteSearch);
 
-    const headerJS = document.createElement("script");
-    headerJS.src = "header-standard-v4.js";
-    headerJS.defer = true;
-    headerJS.onload = () => {
-        initHeader();
-        initHeaderEnhancements();
-    };
-    document.body.appendChild(headerJS);
+   const headerJS = document.createElement("script");
+headerJS.src = "header-standard-v4.js";
+headerJS.defer = true;
+headerJS.onload = () => {
+    initHeader();
+    initHeaderEnhancements();
+    initA2HS(); // now safe: header HTML + JS are both ready
+};
+document.body.appendChild(headerJS);
+
 });
 </script>
 

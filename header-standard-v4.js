@@ -192,9 +192,6 @@ function initA2HS() {
         return;
     }
 
-    // …rest of your existing A2HS code unchanged…
-}
-
     // Detect iOS Safari
     function isIos() {
         return /iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -204,7 +201,7 @@ function initA2HS() {
         return ('standalone' in window.navigator) && window.navigator.standalone;
     }
 
-    // Show iOS modal
+    // iOS behaviour
     if (isIos() && !isInStandaloneMode()) {
         installBtn.style.display = "inline-flex";
         installBtn.addEventListener("click", () => {
@@ -216,7 +213,7 @@ function initA2HS() {
         return;
     }
 
-    // Android / Desktop
+    // Android / Desktop behaviour
     window.addEventListener("beforeinstallprompt", (e) => {
         e.preventDefault();
         deferredPrompt = e;
@@ -230,6 +227,7 @@ function initA2HS() {
         deferredPrompt = null;
     });
 }
+
 
 // Do NOT auto-run here anymore – initA2HS will be called from index.html
 

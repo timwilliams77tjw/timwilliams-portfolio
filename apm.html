@@ -1,4 +1,1110 @@
+<!DOCTYPE html><!-- BLOCK 1/3 -->
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional Development & Competence – Tim Williams</title>
+
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="certifications.css">
+  <link rel="stylesheet" href="global-restore.css">
+  <link rel="stylesheet" href="header-standard-v4.css">
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body.page-prof-dev {
+      background: var(--bg);
+      color: var(--text-main);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .page-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .hero-section {
+      margin-bottom: 2rem;
+    }
+
+    .hero-section h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #0a2540;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-section p {
+      font-size: 1.15rem;
+      opacity: 0.85;
+      max-width: 720px;
+    }
+
+    /* Section headings */
+    .section-heading {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0a2540;
+      margin: 2.5rem 0 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: #444;
+      max-width: 780px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Cards layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .info-card {
+      background: #ffffff;
+      padding: 1.75rem 1.5rem;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border-left: 5px solid #0078ff;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+    }
+
+    .info-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0a2540;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card p,
+    .info-card ul {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .info-card ul {
+      padding-left: 1.1rem;
+      margin: 0.4rem 0 0;
+    }
+
+    .info-card ul li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* CPD table */
+    .cpd-table-wrapper {
+      margin-top: 1.5rem;
+      overflow-x: auto;
+    }
+
+    table.cpd-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    table.cpd-table thead {
+      background: #0a2540;
+      color: #ffffff;
+    }
+
+    table.cpd-table th,
+    table.cpd-table td {
+      padding: 0.75rem 0.9rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e5e5;
+      vertical-align: top;
+    }
+
+    table.cpd-table th {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    table.cpd-table tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    table.cpd-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Development priorities list */
+    .dev-list {
+      list-style: disc;
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .dev-list li {
+      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    /* Summary box */
+    .summary-box {
+      margin-top: 2rem;
+      padding: 1.5rem 1.5rem;
+      border-radius: 12px;
+      background: #f3f7fc;
+      border: 1px solid #d5e3f5;
+    }
+
+    .summary-box p {
+      margin: 0.2rem 0;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      .hero-section h1 {
+        font-size: 2.1rem;
+      }
+      .section-heading {
+        font-size: 1.4rem;
+      }
+    }
+
+    /* Rating badge colours */
+    .rating-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-left: 10px;
+      color: white;
+    }
+
+    /* Expert = Red */
+    .rating-expert {
+      background: #d7263d;
+    }
+
+    /* Proficient = Blue */
+    .rating-proficient {
+      background: #0078ff;
+    }
+
+    /* Competent = Green */
+    .rating-competent {
+      background: #2e8b57;
+    }
+
+    /* Practised = Orange */
+    .rating-practised {
+      background: #ff8c00;
+    }
+
+    /* Aware = Grey */
+    .rating-aware {
+      background: #6c757d;
+    }
+
+    /* Simple accordion styling (optional, if not already in global CSS) */
+    .accordion {
+      margin-top: 2rem;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+      cursor: pointer;
+      font-weight: 600;
+      color: #0a2540;
+    }
+
+    .accordion-header i.fa-chevron-right {
+      transition: transform 0.2s ease;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .accordion-item.open .accordion-header i.fa-chevron-right {
+      transform: rotate(90deg);
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 0 0 0.9rem 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .accordion-item.open .accordion-content {
+      display: block;
+    }
+
+    .accordion-content p {
+      margin-bottom: 0.5rem;
+    }
+
+    .accordion-content details summary {
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 0.4rem;
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+
+<body class="header-with-logo page-prof-dev">
+  <!-- HEADER -->
+  <div id="header-placeholder"></div>
+
+  <script>
+    fetch("header.html")
+      .then(r => r.text())
+      .then(h => {
+        document.getElementById("header-placeholder").innerHTML = h;
+
+        const siteSearch = document.createElement("script");
+        siteSearch.src = "site-search.js";
+        siteSearch.onload = () => {
+          if (typeof initSiteSearch === "function") initSiteSearch();
+        };
+        document.body.appendChild(siteSearch);
+
+        const headerJS = document.createElement("script");
+        headerJS.src = "header-standard-v4.js";
+        headerJS.onload = () => {
+          if (typeof initHeader === "function") initHeader();
+          if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+        };
+        document.body.appendChild(headerJS);
+      });
+  </script>
+
+  <script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+  <script src="analytics-tracker.js" defer></script>
+
+  <!-- PAGE CONTENT -->
+  <main class="page-container">
+
+    <!-- HERO -->
+    <section class="hero-section">
+      <h1>Professional Development &amp; Competence</h1>
+      <p>
+        <img
+          src="apm-cpd-thumbnail.jpg"
+          alt="APM CPD &amp; Competence Framework Thumbnail"
+          style="width:160px; height:auto; border-radius:8px; margin-top:1rem; float:right; margin-left:1rem;"
+        >
+        A consolidated view of ongoing CPD activity and alignment to the APM Competence Framework,
+        demonstrating sustained professional growth and reflective practice.
+      </p>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section>
+      <h2 class="section-heading"><i class="fa-solid fa-circle-info"></i> Overview</h2>
+      <p class="section-subtitle">
+        This page provides a comprehensive view of continuing professional development activities and
+        competence alignment with the APM Competence Framework (3rd edition). It brings together
+        a detailed CPD activity log, reflective themes, and a structured summary of key competence areas.
+      </p>
+    </section>
+
+    <!-- CPD SECTION -->
+    <section>
+      <h2 class="section-heading"><i class="fa-solid fa-graduation-cap"></i> Continuing Professional Development (CPD)</h2>
+      <p class="section-subtitle">
+        The CPD log below captures formal and informal learning, outreach, and volunteering activities,
+        including dates, hours, development goals, and completion notes.
+      </p>
+
+      <div class="cpd-table-wrapper">
+        <table class="cpd-table">
+          <thead>
+            <tr>
+              <th>Activity</th>
+              <th>Start date</th>
+              <th>End date</th>
+              <th>CPD hours</th>
+              <th>Development goal</th>
+              <th>Reflective statement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Project Portfolio Management</td><td>23 May 2026</td><td>23 May 2026</td><td>4.45</td><td>Continue my professional development</td><td>Course complete</td></tr>
+            <tr><td>Scrum Master</td><td>23 May 2026</td><td>23 May 2026</td><td>4.45</td><td>Continue my professional development</td><td>Course complete</td></tr>
+            <tr><td>Agile PM with Kanban</td><td>23 May 2026</td><td>23 May 2026</td><td>1.50</td><td>Continue my professional development</td><td>Course complete</td></tr>
+            <tr><td>PMP® Certification</td><td>23 May 2026</td><td>23 May 2026</td><td>16.30</td><td>Continue my professional development</td><td>Course complete</td></tr>
+            <tr><td>Google Project Management Certificate</td><td>23 May 2026</td><td>23 May 2026</td><td>0.25</td><td>Continue my professional development</td><td>Course complete</td></tr>
+            <tr><td>Create my portfolio</td><td>02 Mar 2026</td><td>23 May 2026</td><td>50.00</td><td>Get a new job</td><td>Website built</td></tr>
+            <tr><td>PMO Managers Lunch</td><td>11 Feb 2026</td><td>11 Feb 2026</td><td>4.45</td><td>Get a new job</td><td>Attended</td></tr>
+            <tr><td>Attend careers fair</td><td>20 May 2026</td><td>23 May 2026</td><td>7.30</td><td>Mentor, coach and inspire future generations</td><td>Supported the inspiring the future career fair</td></tr>
+            <tr><td>Create LinkedIn article – Foundations</td><td>01 Apr 2026</td><td>10 Apr 2026</td><td>5.20</td><td>Contribute to my network</td><td>Created article for LinkedIn &amp; Insights</td></tr>
+            <tr><td>Create LinkedIn article – Stakeholder Playbook</td><td>08 Apr 2026</td><td>16 Apr 2026</td><td>3.10</td><td>Contribute to my network</td><td>Created article for LinkedIn &amp; Insights</td></tr>
+            <tr><td>Create LinkedIn article – AI &amp; PM</td><td>13 Apr 2026</td><td>04 May 2026</td><td>1.00</td><td>Increase my networking</td><td>Created article for LinkedIn &amp; Insights</td></tr>
+            <tr><td>Create LinkedIn article – Continuous Improvement</td><td>11 May 2026</td><td>22 May 2026</td><td>2.10</td><td>Increase my networking</td><td>Created article for LinkedIn &amp; Insights</td></tr>
+            <tr><td>Create LinkedIn article – PMO Turnaround</td><td>04 May 2026</td><td>22 May 2026</td><td>2.45</td><td>Continue my professional development</td><td>Created article for LinkedIn &amp; Insights</td></tr>
+            <tr><td>Associate Networking Event</td><td>14 May 2026</td><td>14 May 2026</td><td>5.00</td><td>Get a new job</td><td>Attended</td></tr>
+            <tr><td>APM &amp; Skills Builder Training</td><td>17 Jun 2026</td><td>17 Jun 2026</td><td>1.00</td><td>Increase my networking</td><td></td></tr>
+            <tr><td>APM Talk to Apprentices</td><td>09 Jun 2026</td><td>09 Jun 2026</td><td>1.00</td><td>Mentor, coach and inspire future generations</td><td></td></tr>
+            <tr><td>National Interview Week Webinar</td><td>28 May 2026</td><td>28 May 2026</td><td>1.30</td><td>Mentor, coach and inspire future generations</td><td></td></tr>
+            <tr><td>APM Future of AI for PMs</td><td>26 Jun 2026</td><td>26 Jun 2026</td><td>4.00</td><td>Increase my networking</td><td></td></tr>
+            <tr><td>Microsoft 365 Copilot Training</td><td>22 Mar 2026</td><td>22 Mar 2026</td><td>3.00</td><td>Continue my professional development</td><td>Completed</td></tr>
+            <tr><td>APM Volunteers’ Forum</td><td>11 Jun 2026</td><td>12 Jun 2026</td><td>12.00</td><td>Contribute to APM</td><td></td></tr>
+            <tr><td>Education Ambassador Training</td><td>17 Jun 2026</td><td>17 Jun 2026</td><td>1.00</td><td>Mentor, coach and inspire future generations</td><td></td></tr>
+            <tr><td>APM Apprenticeships Session</td><td>09 Jun 2026</td><td>09 Jun 2026</td><td>2.30</td><td>Mentor, coach and inspire future generations</td><td></td></tr>
+            <tr><td>Streetly Academy Careers Fair</td><td>21 Jan 2026</td><td>21 Jan 2026</td><td>8.00</td><td>Mentor, coach and inspire future generations</td><td>Completed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+<!-- BLOCK 2/3 -->
+
+    <!-- APM COMPETENCE SUMMARY -->
+    <section>
+      <h2 class="section-heading"><i class="fa-solid fa-diagram-project"></i> APM Competence Assessment</h2>
+      <p class="section-subtitle">
+        The APM Competence Framework (3rd edition) defines 29 competences across life cycles, governance,
+        people, planning and delivery. Each competence is expressed in terms of knowledge and application,
+        with a five‑point rating scale from Unaware (0) to Expert (5).
+      </p>
+
+      <div class="grid">
+        <article class="info-card">
+          <h3><i class="fa-solid fa-layer-group"></i> Life cycles</h3>
+          <p>
+            The framework describes life cycles as the structure underpinning deployment, covering linear,
+            iterative and hybrid approaches. It emphasises selecting an appropriate life cycle based on
+            outputs, outcomes, benefits, uncertainty, novelty and organisational risk appetite.
+          </p>
+          <ul>
+            <li>Knowledge of available life cycle options and organisational culture.</li>
+            <li>Ability to analyse, select and implement suitable life cycles.</li>
+            <li>Continuous improvement through feedback, data and refinement.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-sitemap"></i> Governance arrangements</h3>
+          <p>
+            Governance arrangements define authority, accountability and control over change initiatives.
+            They ensure alignment with organisational governance and provide clear reporting and
+            decision‑making structures.
+          </p>
+          <ul>
+            <li>Designing governance structures appropriate to context and complexity.</li>
+            <li>Clarifying ownership, roles, escalation routes and reporting.</li>
+            <li>Maintaining confidence through robust data and adherence to standards.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-leaf"></i> Sustainability</h3>
+          <p>
+            Sustainability is defined as meeting current stakeholder needs without compromising future
+            generations, embedding environmental, social, economic and administrative considerations
+            across the life cycle.
+          </p>
+          <ul>
+            <li>Aligning change initiatives with organisational sustainability agendas.</li>
+            <li>Assessing impacts, metrics and stakeholder expectations.</li>
+            <li>Embedding sustainable behaviours, monitoring and continuous improvement.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-sterling-sign"></i> Financial management</h3>
+          <p>
+            Financial management ensures affordability, secures funding and controls expenditure in line
+            with organisational financial systems, optimising the business case.
+          </p>
+          <ul>
+            <li>Consistent estimating and investment appraisal.</li>
+            <li>Capital and revenue planning aligned to strategy.</li>
+            <li>Financial reporting, control limits and variance management.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-briefcase"></i> Business case</h3>
+          <p>
+            Business cases justify initiation and continuation of change initiatives, and must be revisited
+            at key review points as circumstances evolve.
+          </p>
+          <ul>
+            <li>Identifying value, benefits and strategic alignment.</li>
+            <li>Analysing options, risks and commercial approaches.</li>
+            <li>Maintaining and refining the case through change control.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-chess-board"></i> Portfolio shaping</h3>
+          <p>
+            Portfolio shaping groups and prioritises change initiatives to deliver strategic objectives,
+            balancing business‑as‑usual with change and optimising return on investment.
+          </p>
+          <ul>
+            <li>Translating strategic objectives into required change.</li>
+            <li>Balancing capacity, risk and value across initiatives.</li>
+            <li>Ensuring coherent, strategically aligned portfolios.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- DEVELOPMENT PRIORITIES -->
+    <section>
+      <h2 class="section-heading"><i class="fa-solid fa-bullseye"></i> Development priorities (next 12 months)</h2>
+      <p class="section-subtitle">
+        Drawing on the CPD log and competence review, the following areas are prioritised for focused
+        development over the coming year.
+      </p>
+      <ul class="dev-list">
+        <li><strong>Leadership &amp; mentoring:</strong> deepen coaching practice and structured support for apprentices and early‑career professionals.</li>
+        <li><strong>Stakeholder engagement &amp; communication:</strong> refine narrative, influence and conflict‑resolution skills across complex programmes.</li>
+        <li><strong>AI &amp; digital transformation:</strong> expand practical application of AI tools (including Microsoft 365 Copilot) in project delivery and governance.</li>
+        <li><strong>Sustainability in change initiatives:</strong> embed sustainability criteria into business cases, governance and benefits management.</li>
+      </ul>
+    </section>
+
+    <!-- ========================= -->
+    <!--   PART 1 — COMPETENCES 1–10   -->
+    <!-- ========================= -->
+
+    <div class="accordion">
+
+      <!-- 1. Life cycles -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-layer-group"></i>
+            Life cycles
+            <span class="rating-badge rating-proficient">Proficient</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> You demonstrate strong capability in selecting and applying appropriate life cycle models. You understand when to use linear, iterative or hybrid approaches and can adapt based on uncertainty, risk and organisational maturity.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to structure and organise change initiatives.</p>
+            <p>Life cycles are a framework comprising a series of distinct stages required to transform an idea or concept into reality in an orderly and efficient manner. They can be viewed as the structure underpinning deployment. Recognised life cycles include: linear (commonly referred to as waterfall), iterative (commonly referred to as agile), and hybrid, and the choice depends on the desired outputs, benefits, outcomes and the expected uncertainty, novelty and risk appetite for the change initiative.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- 2. Governance arrangements -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-sitemap"></i>
+            Governance arrangements
+            <span class="rating-badge rating-expert">Expert</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> Governance is one of your strongest areas. You excel at establishing clear authority, accountability and decision‑making structures that align with organisational governance and ensure value delivery.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to establish and maintain governance structures that define control of deployment for governance and delivery of change initiatives, and that align with organisational practice.</p>
+            <p>Governance arrangements comprise the framework of authority and accountability that defines and controls the outputs, outcomes and benefits from change initiatives. They are the mechanism whereby the investing organisation exerts financial and technical control over the deployment of the work and the realisation of value.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- 3. Sustainability -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-leaf"></i>
+            Sustainability
+            <span class="rating-badge rating-practised">Practised</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> You have a solid working knowledge of sustainability principles and how they influence project outcomes. You understand environmental, social and economic impacts and how to embed sustainable thinking into delivery.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to balance the environmental, social, economic and administration considerations which will impact a change initiative.</p>
+            <p>Sustainability involves both individual and organisational responsibility to ensure outputs, outcomes and benefits are sustainable over their life cycles, meeting the current needs of stakeholders without compromising or overburdening future generations. Sustainability is so significant and important, that change initiatives need to proactively alter behaviours and apply methods that ensure these considerations become second nature.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- 4. Financial management -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-sterling-sign"></i>
+            Financial management
+            <span class="rating-badge rating-proficient">Proficient</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> You demonstrate strong financial planning and control skills. You understand affordability, funding release, forecasting and financial governance, ensuring alignment with organisational financial systems.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to enable financial resource for delivery and to plan and control the finances of change initiatives as part of the organisation’s overall financial management to ensure optimisation of the business case.</p>
+            <p>Financial management considers the affordability of the proposal within the timeframe, and ensures that the money required is secured and made available when needed, and is subsequently managed. It provides an interface between the financial management arrangements for the change initiatives and the financial systems of the organisation.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- 5. Business case -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-briefcase"></i>
+            Business case
+            <span class="rating-badge rating-competent">Competent</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> You can confidently prepare, justify and maintain business cases. You understand benefits, costs, risks and strategic alignment, and you revisit cases as conditions evolve.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to prepare, gain approval of, refine and update business cases that justify the initiation, investment and/or continuation of change initiatives in terms of benefits, costs, and risks.</p>
+            <p>Business cases provide the justification for undertaking, and continuing with, a change initiative. The business case needs to be reconsidered at regular review points during the change initiative, in case the original justifications are affected by later developments.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- 6. Portfolio shaping -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-chess-board"></i>
+            Portfolio shaping
+            <span class="rating-badge rating-competent">Competent</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> You understand how to align change initiatives with strategic objectives and organisational capacity. You can support prioritisation and balance BAU with change.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to set up portfolios to ensure efficient delivery of strategic objectives.</p>
+            <p>Portfolio shaping is the grouping of change initiatives at an organisational or functional level to select, prioritise and control deployment in line with strategic objectives and the capacity to deliver, balancing change initiatives and business-as-usual (BAU), while optimising return on investment.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- 7. Procurement -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-truck-ramp-box"></i>
+            Procurement
+            <span class="rating-badge rating-practised">Practised</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> You have a working understanding of procurement strategies and supplier engagement. You can support sourcing decisions and ensure value from supply chains.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to secure the provision of resources choosing strategies for obtaining best value from supply chains.</p>
+            <p>Procurement is the process for securing the goods and services that are required from external suppliers to satisfy change initiative needs as appropriate.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- 8. Reviews -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            Reviews
+            <span class="rating-badge rating-competent">Competent</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> You can effectively plan and conduct reviews to assess progress, viability and performance. You understand how to gather insights and guide decision‑making.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to manage progression through the life cycle of the change initiative.</p>
+            <p>Reviews are a way of gathering information to provide an assessment on the status of the change initiative and the ongoing viability of the work, and to supply advice and guidance.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- 9. Assurance -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-shield-check"></i>
+            Assurance
+            <span class="rating-badge rating-competent">Competent</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> You understand assurance principles and can support independent checks that ensure a change initiative remains on track to deliver value.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to provide confidence to the governance board that the change initiative is on track to deliver the objectives and intended value.</p>
+            <p>Assurance is objective and independent, working in partnership with governance and risk management.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- 10. Capability development -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>
+            <i class="fa-solid fa-seedling"></i>
+            Capability development
+            <span class="rating-badge rating-practised">Practised</span>
+          </span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Summary:</strong> You understand organisational maturity and how to improve capability. You can support initiatives that strengthen competence, predictability and performance.</p>
+          <details class="full-description">
+            <summary>Show full description</summary>
+            <p>The ability to assess organisational maturity in relation to a change initiative and the wider organisation.</p>
+            <p>Capability development addresses the continual improvement of competences within an organisation, investing in people and knowledge, and improving the predictability of delivering results and creating the correct context for teams to perform.</p>
+          </details>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!--   PART 2 — COMPETENCES 11–20   -->
+    <!-- ========================= -->
+
+    <!-- 11. Transition management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-right-left"></i>
+          Transition management
+          <span class="rating-badge rating-practised">Practised</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You understand how to integrate outputs into BAU and support organisational change. You can help ensure benefits are realised and new capabilities embedded effectively.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to manage the integration of the outputs of the change initiative into business-as-usual (BAU) ensuring that outputs enable the intended value.</p>
+          <p>Transition management is multi-faceted, its purpose being to facilitate changed capability, bedding in new processes, practices, and tools and techniques. It includes organisational change management and directing benefits realisation management.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 12. Benefits management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-gift"></i>
+          Benefits management
+          <span class="rating-badge rating-aware">Aware</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You have awareness of benefits identification, measurement and tracking. You understand how benefits align with business cases and intended outcomes.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to identify and agree the benefits and determine how they will be measured, monitored, and managed throughout the change initiative until they are realised.</p>
+          <p>Benefits management actively documents, measures and monitors the change initiative to assure realisation. It aligns with the business case and intended outcomes for delivery.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 13. Stakeholder engagement and communication management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-users"></i>
+          Stakeholder engagement &amp; communication
+          <span class="rating-badge rating-competent">Competent</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You can identify, analyse and engage stakeholders effectively. You understand communication planning and how to build commitment, alignment and trust.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to work with people, both internally and externally, to build support to achieve intended outcomes.</p>
+          <p>Stakeholder engagement is understanding who needs to be engaged and influenced, and ensuring ongoing commitment. Communication management ensures the exchange of relevant and timely information to support the successful delivery of the change initiative and inform decision making.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 14. Conflict resolution -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-handshake-angle"></i>
+          Conflict resolution
+          <span class="rating-badge rating-competent">Competent</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You can recognise, address and resolve conflict constructively. You understand how to prevent negative conflict and promote healthy challenge within teams.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to identify, address and resolve differences between individuals and/or interest groups.</p>
+          <p>Conflict resolution is the process of identifying and addressing differences that, if unmanaged, would affect the delivery of change initiatives and the culture of the workplace. Effective conflict management exploits healthy conflict to support group development and learning, and addresses negative conflict to prevent differences from becoming harmful elements in the change initiative.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 15. Leadership -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-person-rays"></i>
+          Leadership
+          <span class="rating-badge rating-competent">Competent</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You can lead teams with clarity, direction and support. You understand how to adapt leadership styles and empower others to deliver successful outcomes.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to empower and inspire others to deliver successful change initiatives by providing vision, direction, feedback, and support so people can do their best work.</p>
+          <p>Leadership is essential to the successful management of change initiatives. It requires clear communication of vision, values and objectives. Leadership styles need to be adapted to create a supportive working environment that builds trust, through coaching and mentoring that is engaging and empowering for the individual.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 16. Team management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-people-group"></i>
+          Team management
+          <span class="rating-badge rating-competent">Competent</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You can build, motivate and coordinate teams effectively. You understand collaboration, development and how to align people to shared goals.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to select, develop and manage individuals to create and sustain teams.</p>
+          <p>Team management entails bringing people together and motivating, co‑ordinating and developing them to achieve specified objectives that cannot be realised individually. It involves encouraging team members, internal and external, to work in collaboration towards achieving a common goal. The success of any change initiative is dependent on effective team management.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 17. Diversity and inclusion -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-people-arrows"></i>
+          Diversity &amp; inclusion
+          <span class="rating-badge rating-aware">Aware</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You recognise the importance of inclusive environments and fair treatment. You understand the value of diverse perspectives in change initiatives.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to build and maintain an inclusive environment that embraces a diverse culture.</p>
+          <p>Diversity and inclusion need to be considered, as workplace environments are increasingly made up of individuals with different backgrounds, needs, abilities and ways of working. There is an opportunity within change initiatives to proactively address the institutionalised inequalities that may exist, by being aware and treating people fairly.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 18. Ethics, compliance and professionalism -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-scale-balanced"></i>
+          Ethics, compliance &amp; professionalism
+          <span class="rating-badge rating-aware">Aware</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You understand the importance of ethical behaviour, legal compliance and professional standards. You recognise how these shape trust and credibility.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to embody, promote and maintain a trusted profession and to navigate the cultural, legal, and regulatory environment.</p>
+          <p>Ethics, compliance and professionalism encompass working consistently in a moral, legal and socially responsible manner.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 19. Requirements management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-list-check"></i>
+          Requirements management
+          <span class="rating-badge rating-competent">Competent</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You can capture, assess and justify stakeholder needs effectively. You understand how to define measurable requirements and success criteria.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to prepare and maintain definitions of the requirements of change initiatives.</p>
+          <p>Requirements management is the process of capturing, assessing and justifying stakeholders’ wants and needs to satisfy an identified need. Comprehensive and measurable requirements and success criteria are critical to the success of the change initiative.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 20. Solutions development -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-lightbulb"></i>
+          Solutions development
+          <span class="rating-badge rating-aware">Aware</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You have awareness of how to explore solution options and clarify the problem to be solved. You understand the importance of evaluating alternatives.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to determine the optimal solution to satisfy agreed requirements.</p>
+          <p>Solutions development is the process of ensuring that there is clarity on the problem to be solved, and then of exploring multiple options until a preferred solution is identified and subsequently maintained and refined.</p>
+        </details>
+      </div>
+    </div>
+<!-- BLOCK 3/3 -->
+
+    <!-- ========================= -->
+    <!--   PART 3 — COMPETENCES 21–29   -->
+    <!-- ========================= -->
+
+    <!-- 21. Quality management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-check-double"></i>
+          Quality management
+          <span class="rating-badge rating-competent">Competent</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You ensure outputs meet defined requirements and stakeholder expectations. You understand how to maintain quality throughout delivery and ensure outputs are fit for purpose.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to ensure that outputs are delivered in accordance with requirements.</p>
+          <p>Quality management ensures that the outputs from the defined scope and the processes through which they are delivered are meeting stakeholder requirements and are fit for purpose.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 22. Integrated planning -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-diagram-project"></i>
+          Integrated planning
+          <span class="rating-badge rating-practised">Practised</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You develop integrated plans that bring together scope, schedule, cost, risk, resources and benefits. You coordinate multiple planning elements into a coherent whole.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to take forward the definition of outputs into detailed planning incorporating multiple areas into the integrated project management plan (PMP).</p>
+          <p>Integrated planning involves collating a suite of plans and processes to support the change initiative to create an integrated plan (commonly referred to as the project management plan). Its size, format and content may vary according to the complexity of the change initiative. The intention is that it captures the fundamental components of scope, quality, time, cost, resources, risks and issues, communication, success and completion criteria and benefits management.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 23. Schedule management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-calendar-days"></i>
+          Schedule management
+          <span class="rating-badge rating-proficient">Proficient</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You demonstrate strong capability in developing and maintaining schedules. You understand dependencies, resource constraints and how to create realistic, deliverable timelines.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to undertake time-based planning with an emphasis on activities and resource.</p>
+          <p>Schedule management is the process of developing and maintaining schedules that show when work for a specific change initiative is planned to be performed. It considers any dependencies and can be for internal and/or external resources and activities.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 24. Resource management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-people-carry-box"></i>
+          Resource management
+          <span class="rating-badge rating-proficient">Proficient</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You identify, acquire and deploy resources effectively. You optimise scarce resources and ensure the right capability is available at the right time.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to acquire and deploy internal and external resources.</p>
+          <p>Resource management is the process of identifying and scheduling the resources required to implement a change initiative, while acknowledging the need to use scarce resources in an optimal way.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 25. Resource capacity planning -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-chart-line"></i>
+          Resource capacity planning
+          <span class="rating-badge rating-practised">Practised</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You forecast future resource needs based on organisational strategy. You support planning for skills, capabilities and capacity across portfolios.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to plan resource needs in line with the strategic direction of the organisation to ensure that resource utilisation is maintained at an appropriate level for optimal efficiency.</p>
+          <p>Resource capacity planning looks at the strategic direction of the organisation, to create a forecast of the skills, capabilities and resources required to deliver future needs. This activity is typically delivered by a programme and/or portfolio manager.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 26. Budgeting and cost control -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-coins"></i>
+          Budgeting &amp; cost control
+          <span class="rating-badge rating-expert">Expert</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You excel in cost estimation, budgeting and financial control. You understand cost profiles, forecasting, variance management and how to maintain financial integrity across delivery.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to develop and agree budgets for change initiatives, understanding where costs fall over time.</p>
+          <p>Budgeting and cost control comprises the estimation of costs, the setting of an agreed budget, and management of actual and forecast cost against the budget.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 27. Contract management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-file-contract"></i>
+          Contract management
+          <span class="rating-badge rating-competent">Competent</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You manage supplier performance and maintain effective commercial relationships. You understand contract monitoring, reporting and closure activities.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to monitor and manage supplier performance.</p>
+          <p>Contract management is a proactive activity tailored to the size, complexity and significance of the change initiative. Appropriate contract management will facilitate a proactive working environment and include a process to review progress, incorporating formalised reporting from contract initiation through to contract closure.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 28. Risk and issue management -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          Risk &amp; issue management
+          <span class="rating-badge rating-expert">Expert</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You demonstrate expert capability in identifying, assessing and responding to risks and issues. You understand threat mitigation, opportunity exploitation and appropriate escalation.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to identify and monitor risks (threats and opportunities), to plan and implement responses to those risks, and respond to issues that affect the change initiative.</p>
+          <p>Risk management is the proactive process to identify, assess and respond appropriately to risks. Risk management includes discerning which threats to actively minimise, and opportunities to maximise or pursue. Issue management is about having the flexibility to react to issues in ethical and appropriate ways, including escalation to the appropriate authority.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 29. Change control -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>
+          <i class="fa-solid fa-sliders"></i>
+          Change control
+          <span class="rating-badge rating-expert">Expert</span>
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Summary:</strong> You excel at managing scope changes in a controlled and transparent way. You understand evaluation, approval, rejection and deferral processes and maintain baseline integrity.</p>
+        <details class="full-description">
+          <summary>Show full description</summary>
+          <p>The ability to manage variations and change requests in a controlled way.</p>
+          <p>Change control is the process through which all requests to alter the baseline scope of change initiatives are identified, evaluated, and then approved, rejected or deferred.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- Optional: simple JS to toggle accordion open/closed -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const items = document.querySelectorAll('.accordion-item .accordion-header');
+        items.forEach(header => {
+          header.addEventListener('click', () => {
+            const parent = header.parentElement;
+            parent.classList.toggle('open');
+          });
+        });
+      });
+    </script>
+
+  </main>
+</body>
+</html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />

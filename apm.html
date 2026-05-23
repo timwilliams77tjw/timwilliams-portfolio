@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional Development & Competence – Tim Williams</title>
+
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="certifications.css">
+  <link rel="stylesheet" href="global-restore.css">
+  <link rel="stylesheet" href="header-standard-v4.css">
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body.page-prof-dev {
+      background: var(--bg);
+      color: var(--text-main);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .page-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .hero-section {
+      margin-bottom: 2rem;
+    }
+
+    .hero-section h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #0a2540;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-section p {
+      font-size: 1.15rem;
+      opacity: 0.85;
+      max-width: 720px;
+    }
+
+    /* Section headings */
+    .section-heading {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0a2540;
+      margin: 2.5rem 0 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: #444;
+      max-width: 780px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Cards layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .info-card {
+      background: #ffffff;
+      padding: 1.75rem 1.5rem;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border-left: 5px solid #0078ff;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+    }
+
+    .info-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0a2540;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card p,
+    .info-card ul {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .info-card ul {
+      padding-left: 1.1rem;
+      margin: 0.4rem 0 0;
+    }
+
+    .info-card ul li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* CPD table */
+    .cpd-table-wrapper {
+      margin-top: 1.5rem;
+      overflow-x: auto;
+    }
+
+    table.cpd-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    table.cpd-table thead {
+      background: #0a2540;
+      color: #ffffff;
+    }
+
+    table.cpd-table th,
+    table.cpd-table td {
+      padding: 0.75rem 0.9rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e5e5;
+      vertical-align: top;
+    }
+
+    table.cpd-table th {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    table.cpd-table tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    table.cpd-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Development priorities list */
+    .dev-list {
+      list-style: disc;
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .dev-list li {
+      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    /* Summary box */
+    .summary-box {
+      margin-top: 2rem;
+      padding: 1.5rem 1.5rem;
+      border-radius: 12px;
+      background: #f3f7fc;
+      border: 1px solid #d5e3f5;
+    }
+
+    .summary-box p {
+      margin: 0.2rem 0;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      .hero-section h1 {
+        font-size: 2.1rem;
+      }
+      .section-heading {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="header-with-logo page-prof-dev">
+  <!-- HEADER -->
+  <div id="header-placeholder"></div>
+  <script>
+    fetch("header.html")
+      .then(r => r.text())
+      .then(h => {
+        document.getElementById("header-placeholder").innerHTML = h;
+
+        const siteSearch = document.createElement("script");
+        siteSearch.src = "site-search.js";
+        siteSearch.onload = () => {
+          if (typeof initSiteSearch === "function") initSiteSearch();
+        };
+        document.body.appendChild(siteSearch);
+
+        const headerJS = document.createElement("script");
+        headerJS.src = "header-standard-v4.js";
+        headerJS.onload = () => {
+          initHeader();
+          initHeaderEnhancements();
+        };
+        document.body.appendChild(headerJS);
+      });
+  </script>
+
+  <script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+  <script src="analytics-tracker.js" defer></script>
+
+  <!-- PAGE CONTENT -->
+  <main class="page-container">
+    <!-- HERO -->
+    <section class="hero-section">
+      <h1>Professional Development &amp; Competence</h1>
+      <p>
+        A consolidated view of ongoing CPD activity and alignment to the APM Competence Framework,
+        demonstrating sustained professional growth and reflective practice.
+      </p>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section>
+      <h2 class="section-heading"><i class="fa-solid fa-circle-info"></i> Overview</h2>
+      <p class="section-subtitle">
+        This page provides a comprehensive view of continuing professional development activities and
+        competence alignment with the APM Competence Framework (3rd edition). It brings together
+        a detailed CPD activity log, reflective themes, and a structured summary of key competence areas.
+      </p>
+    </section>
+
+    <!-- CPD SECTION -->
+    <section>
+      <h2 class="section-heading"><i class="fa-solid fa-graduation-cap"></i> Continuing Professional Development (CPD)</h2>
+      <p class="section-subtitle">
+        The CPD log below captures formal and informal learning, outreach, and volunteering activities,
+        including dates, hours, development goals, and completion notes.
+      </p>
+
+      <div class="cpd-table-wrapper">
+        <table class="cpd-table">
+          <thead>
+            <tr>
+              <th>Activity</th>
+              <th>Start date</th>
+              <th>End date</th>
+              <th>CPD hours</th>
+              <th>Development goal</th>
+              <th>Reflective statement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Associate Networking Event</td>
+              <td>14 May 2026</td>
+              <td>14 May 2026</td>
+              <td>5.00</td>
+              <td>Get a new job</td>
+              <td>Attended</td>
+            </tr>
+            <tr>
+              <td>Elevate your outreach: APM &amp; skills builder partnership training</td>
+              <td>17 Jun 2026</td>
+              <td>17 Jun 2026</td>
+              <td>1.00</td>
+              <td>Increase my networking</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>APM talk to Project Management Degree Apprentices</td>
+              <td>09 Jun 2026</td>
+              <td>09 Jun 2026</td>
+              <td>1.00</td>
+              <td>Mentor, coach and inspire future generations</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>National Interview Week Webinar</td>
+              <td>28 May 2026</td>
+              <td>28 May 2026</td>
+              <td>1.30</td>
+              <td>Mentor, coach and inspire future generations</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>APM event Future of AI for Project Managers</td>
+              <td>26 Jun 2026</td>
+              <td>26 Jun 2026</td>
+              <td>4.00</td>
+              <td>Increase my networking</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Microsoft 365 Copilot Training: Explore Microsoft 365 Copilot Chat</td>
+              <td>22 Mar 2026</td>
+              <td>22 Mar 2026</td>
+              <td>3.00</td>
+              <td>Continue my professional development</td>
+              <td>Completed</td>
+            </tr>
+            <tr>
+              <td>APM Volunteers’ Development Forum Series - Forum 2026</td>
+              <td>11 Jun 2026</td>
+              <td>12 Jun 2026</td>
+              <td>12.00</td>
+              <td>Contribute to APM</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Education Ambassador Training</td>
+              <td>17 Jun 2026</td>
+              <td>17 Jun 2026</td>
+              <td>1.00</td>
+              <td>Mentor, coach and inspire future generations</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Virtual Volunteer Opportunity – Introduction to APM Apprenticeships Session – University of Northampton</td>
+              <td>09 Jun 2026</td>
+              <td>09 Jun 2026</td>
+              <td>2.30</td>
+              <td>Mentor, coach and inspire future generations</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Streetly Academy careers fair</td>
+              <td>21 Jan 2026</td>
+              <td>21 Jan 2026</td>
+              <td>8.00</td>
+              <td>Mentor, coach and inspire future generations</td>
+              <td>Completed</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- APM COMPETENCE SUMMARY -->
+    <section>
+      <h2 class="section-heading"><i class="fa-solid fa-diagram-project"></i> APM Competence Assessment</h2>
+      <p class="section-subtitle">
+        The APM Competence Framework (3rd edition) defines 29 competences across life cycles, governance,
+        people, planning and delivery. Each competence is expressed in terms of knowledge and application,
+        with a five‑point rating scale from Unaware (0) to Expert (5).
+      </p>
+
+      <div class="grid">
+        <article class="info-card">
+          <h3><i class="fa-solid fa-layer-group"></i> Life cycles</h3>
+          <p>
+            The framework describes life cycles as the structure underpinning deployment, covering linear,
+            iterative and hybrid approaches. It emphasises selecting an appropriate life cycle based on
+            outputs, outcomes, benefits, uncertainty, novelty and organisational risk appetite.
+          </p>
+          <ul>
+            <li>Knowledge of available life cycle options and organisational culture.</li>
+            <li>Ability to analyse, select and implement suitable life cycles.</li>
+            <li>Continuous improvement through feedback, data and refinement.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-sitemap"></i> Governance arrangements</h3>
+          <p>
+            Governance arrangements define authority, accountability and control over change initiatives.
+            They ensure alignment with organisational governance and provide clear reporting and
+            decision‑making structures.
+          </p>
+          <ul>
+            <li>Designing governance structures appropriate to context and complexity.</li>
+            <li>Clarifying ownership, roles, escalation routes and reporting.</li>
+            <li>Maintaining confidence through robust data and adherence to standards.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-leaf"></i> Sustainability</h3>
+          <p>
+            Sustainability is defined as meeting current stakeholder needs without compromising future
+            generations, embedding environmental, social, economic and administrative considerations
+            across the life cycle.
+          </p>
+          <ul>
+            <li>Aligning change initiatives with organisational sustainability agendas.</li>
+            <li>Assessing impacts, metrics and stakeholder expectations.</li>
+            <li>Embedding sustainable behaviours, monitoring and continuous improvement.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-sterling-sign"></i> Financial management</h3>
+          <p>
+            Financial management ensures affordability, secures funding and controls expenditure in line
+            with organisational financial systems, optimising the business case.
+          </p>
+          <ul>
+            <li>Consistent estimating and investment appraisal.</li>
+            <li>Capital and revenue planning aligned to strategy.</li>
+            <li>Financial reporting, control limits and variance management.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-briefcase"></i> Business case</h3>
+          <p>
+            Business cases justify initiation and continuation of change initiatives, and must be revisited
+            at key review points as circumstances evolve.
+          </p>
+          <ul>
+            <li>Identifying value, benefits and strategic alignment.</li>
+            <li>Analysing options, risks and commercial approaches.</li>
+            <li>Maintaining and refining the case through change control.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3><i class="fa-solid fa-chess-board"></i> Portfolio shaping</h3>
+          <p>
+            Portfolio shaping groups and prioritises change initiatives to deliver strategic objectives,
+            balancing business‑as‑usual with change and optimising return on investment.
+          </p>
+          <ul>
+            <li>Translating strategic objectives into required change.</li>
+            <li>Balancing capacity, risk and value across initiatives.</li>
+            <li>Ensuring coherent, strategically aligned portfolios.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- DEVELOPMENT PRIORITIES -->
+    <section>
+      <h2 class="section-heading"><i class="fa-solid fa-bullseye"></i> Development priorities (next 12 months)</h2>
+      <p class="section-subtitle">
+        Drawing on the CPD log and competence review, the following areas are prioritised for focused
+        development over the coming year.
+      </p>
+      <ul class="dev-list">
+        <li><strong>Leadership &amp; mentoring:</strong> deepen coaching practice and structured support for apprentices and early‑career professionals.</li>
+        <li><strong>Stakeholder engagement &amp; communication:</strong> refine narrative, influence and conflict‑resolution skills across complex programmes.</li>
+        <li><strong>AI &amp; digital transformation:</strong> expand practical application of AI tools (including Microsoft 365 Copilot) in project delivery and governance.</li>
+        <li><strong>Sustainability in change initiatives:</strong> embed sustainability criteria into business cases, governance and benefits management.</li>
+      </ul>
+    </section>
+
+    <!-- SUMMARY -->
+    <section class="summary-box">
+      <h2 class="section-heading" style="margin-top:0;"><i class="fa-solid fa-check-circle"></i> Summary</h2>
+      <p>
+        This page consolidates professional development activity and competence alignment against the APM
+        Competence Framework, providing a transparent view of learning, outreach and capability.
+      </p>
+      <p>
+        It is intended as a living record—updated as new CPD is undertaken, competences are strengthened,
+        and development priorities evolve in line with organisational needs and the wider project profession.
+      </p>
+    </section>
+  </main>
+
+  <!-- BACK TO TOP BUTTON -->
+  <div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+  <a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+  <script>
+    fetch("footer.html")
+      .then(r => r.text())
+      .then(h => document.getElementById("footer").innerHTML = h);
+  </script>
+</body>
+</html>

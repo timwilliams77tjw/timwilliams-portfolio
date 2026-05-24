@@ -336,6 +336,105 @@ body.page-prof-dev .accordion-content {
   padding-top: 0.75rem !important;
   border-top: 1px solid #e5e5e5 !important;
 }
+  /* FOOTER – force visible styling */
+body.page-prof-dev #footer,
+body.page-prof-dev #footer footer {
+  margin-top: 3rem !important;
+  padding: 2rem 1.5rem !important;
+  border-top: 1px solid #e5e5e5 !important;
+  background: #0a2540 !important;
+  color: #ffffff !important;
+  font-size: 0.9rem !important;
+}
+
+body.page-prof-dev #footer a {
+  color: #ffffff !important;
+}
+
+/* FAB – match a white button with blue icon */
+body.page-prof-dev .fab {
+  position: fixed !important;
+  right: 16px !important;
+  bottom: calc(20px + env(safe-area-inset-bottom)) !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  color: #0a66c2 !important;
+  border: 2px solid #0a66c2 !important;
+  font-size: 26px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25) !important;
+  z-index: 9999 !important;
+}
+
+body.page-prof-dev .fab-booking {
+  bottom: calc(84px + env(safe-area-inset-bottom)) !important;
+}
+
+/* iPhone-specific tweak (narrow screens) */
+@media (max-width: 480px) {
+  body.page-prof-dev .fab {
+    right: 14px !important;
+    bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+  }
+  body.page-prof-dev .fab-booking {
+    bottom: calc(80px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* MOBILE MENU – force proper styling and position */
+body.page-prof-dev .header-mobile-menu {
+  position: fixed !important;
+  top: 56px !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: #0a2540 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #00152b !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25) !important;
+  z-index: 9998 !important;
+}
+
+body.page-prof-dev .header-mobile-menu a {
+  color: #ffffff !important;
+}
+ /* COLOUR ACCORDION ITEMS BY RATING */
+body.page-prof-dev .accordion-item {
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.page-prof-dev .accordion-item:has(.rating-expert) {
+  background: #e6f0ff !important;
+  border-left: 4px solid #0a66c2 !important;
+}
+
+body.page-prof-dev .accordion-item:has(.rating-proficient) {
+  background: #e5f7f1 !important;
+  border-left: 4px solid #007b5f !important;
+}
+
+body.page-prof-dev .accordion-item:has(.rating-competent) {
+  background: #fff7e5 !important;
+  border-left: 4px solid #b8860b !important;
+}
+
+body.page-prof-dev .accordion-item:has(.rating-practised) {
+  background: #f3e9ff !important;
+  border-left: 4px solid #8a2be2 !important;
+}
+
+body.page-prof-dev .accordion-item:has(.rating-aware) {
+  background: #f2f2f2 !important;
+  border-left: 4px solid #555555 !important;
+}
+ /* FILTER STATE FOR RATING LEGEND */
+body.page-prof-dev .rating-filter-active {
+  outline: 2px solid #00000033;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #00000022 !important;
+}
   </style>
 </head>
 
@@ -1227,7 +1326,52 @@ body.page-prof-dev .accordion-content {
     });
   });
 </script>
+<script>
+  // Derive data-rating from the badge inside each accordion item
+  (function () {
+    const items = document.querySelectorAll('.accordion-item');
+    items.forEach(item => {
+      const badge = item.querySelector('.rating-badge');
+      if (!badge) return;
+      const cls = Array.from(badge.classList).find(c => c.startsWith('rating-') && c !== 'rating-badge');
+      if (!cls) return;
+      item.dataset.rating = cls.replace('rating-', ''); // expert, proficient, etc.
+    });
 
+    const legendBadges = document.querySelectorAll('.section-subtitle .rating-badge');
+    let currentFilter = null;
+
+    function applyFilter(rating) {
+      items.forEach(item => {
+        if (!rating) {
+          item.style.display = '';
+          return;
+        }
+        item.style.display = (item.dataset.rating === rating) ? '' : 'none';
+      });
+    }
+
+    legendBadges.forEach(badge => {
+      const cls = Array.from(badge.classList).find(c => c.startsWith('rating-') && c !== 'rating-badge');
+      if (!cls) return;
+      const rating = cls.replace('rating-', '');
+
+      badge.style.cursor = 'pointer';
+      badge.addEventListener('click', () => {
+        if (currentFilter === rating) {
+          currentFilter = null;
+          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+          applyFilter(null);
+        } else {
+          currentFilter = rating;
+          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+          badge.classList.add('rating-filter-active');
+          applyFilter(rating);
+        }
+      });
+    });
+  })();
+</script>
 </main>
 </body>
 </html>

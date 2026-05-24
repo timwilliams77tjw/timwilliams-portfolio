@@ -611,33 +611,51 @@ body.page-prof-dev .rating-filter-active {
               <th>Reflective statement</th>
             </tr>
           </thead>
-          <tbody>
-            <!-- CPD rows preserved exactly as provided -->
-            <tr><td>Project Portfolio Management</td><td>23 May 2026</td><td>23 May 2026</td><td>4.45</td><td>Continue my professional development</td><td>Course complete</td></tr>
-            <tr><td>Scrum Master</td><td>23 May 2026</td><td>23 May 2026</td><td>4.45</td><td>Continue my professional development</td><td>Course complete</td></tr>
-            <tr><td>Agile PM with Kanban</td><td>23 May 2026</td><td>23 May 2026</td><td>1.50</td><td>Continue my professional development</td><td>Course complete</td></tr>
-            <tr><td>PMP® Certification</td><td>23 May 2026</td><td>23 May 2026</td><td>16.30</td><td>Continue my professional development</td><td>Course complete</td></tr>
-            <tr><td>Google Project Management Certificate</td><td>23 May 2026</td><td>23 May 2026</td><td>0.25</td><td>Continue my professional development</td><td>Course complete</td></tr>
-            <tr><td>Create my portfolio</td><td>02 Mar 2026</td><td>23 May 2026</td><td>50.00</td><td>Get a new job</td><td>Website built</td></tr>
-            <tr><td>PMO Managers Lunch</td><td>11 Feb 2026</td><td>11 Feb 2026</td><td>4.45</td><td>Get a new job</td><td>Attended</td></tr>
-            <tr><td>Attend careers fair</td><td>20 May 2026</td><td>23 May 2026</td><td>7.30</td><td>Mentor, coach and inspire future generations</td><td>Supported the Inspiring the Future career fair</td></tr>
-            <tr><td>Create LinkedIn article - Foundations</td><td>01 Apr 2026</td><td>10 Apr 2026</td><td>5.20</td><td>Contribute to my network</td><td>Created article for LinkedIn & Insights</td></tr>
-            <tr><td>Create LinkedIn article - Stakeholder Playbook</td><td>08 Apr 2026</td><td>16 Apr 2026</td><td>3.10</td><td>Contribute to my network</td><td>Created article for LinkedIn & Insights</td></tr>
-            <tr><td>Create LinkedIn article - AI & PM</td><td>13 Apr 2026</td><td>04 May 2026</td><td>1.00</td><td>Increase my networking</td><td>Created article for LinkedIn & Insights</td></tr>
-            <tr><td>Create LinkedIn article - Continuous Improvement</td><td>11 May 2026</td><td>22 May 2026</td><td>2.10</td><td>Increase my networking</td><td>Created article for LinkedIn & Insights</td></tr>
-            <tr><td>Create LinkedIn article - PMO Turnaround</td><td>04 May 2026</td><td>22 May 2026</td><td>2.45</td><td>Continue my professional development</td><td>Created article for LinkedIn & Insights</td></tr>
-            <tr><td>Associate Networking Event</td><td>14 May 2026</td><td>14 May 2026</td><td>5.00</td><td>Get a new job</td><td>Attended</td></tr>
-            <tr><td>APM & Skills Builder Training</td><td>17 Jun 2026</td><td>17 Jun 2026</td><td>1.00</td><td>Increase my networking</td><td></td></tr>
-            <tr><td>APM Talk to Apprentices</td><td>09 Jun 2026</td><td>09 Jun 2026</td><td>1.00</td><td>Mentor, coach and inspire future generations</td><td></td></tr>
-            <tr><td>National Interview Week Webinar</td><td>28 May 2026</td><td>28 May 2026</td><td>1.30</td><td>Mentor, coach and inspire future generations</td><td></td></tr>
-            <tr><td>APM Future of AI for PMs</td><td>26 Jun 2026</td><td>26 Jun 2026</td><td>4.00</td><td>Increase my networking</td><td></td></tr>
-            <tr><td>Microsoft 365 Copilot Training</td><td>22 Mar 2026</td><td>22 Mar 2026</td><td>3.00</td><td>Continue my professional development</td><td>Completed</td></tr>
-            <tr><td>APM Volunteers' Forum</td><td>11 Jun 2026</td><td>12 Jun 2026</td><td>12.00</td><td>Contribute to APM</td><td></td></tr>
-            <tr><td>Education Ambassador Training</td><td>17 Jun 2026</td><td>17 Jun 2026</td><td>1.00</td><td>Mentor, coach and inspire future generations</td><td></td></tr>
-            <tr><td>APM Apprenticeships Session</td><td>09 Jun 2026</td><td>09 Jun 2026</td><td>2.30</td><td>Mentor, coach and inspire future generations</td><td></td></tr>
-            <tr><td>Streetly Academy Careers Fair</td><td>21 Jan 2026</td><td>21 Jan 2026</td><td>8.00</td><td>Mentor, coach and inspire future generations</td><td>Completed</td></tr>
-          </tbody>
+          <tbody id="cpd-body">
+  <tr><td colspan="6">Loading CPD log…</td></tr>
+</tbody>
+
         </table>
+        <script>
+async function loadCPD() {
+  const url = "https://script.google.com/macros/s/AKfycbwigdbD9fGmIexab91lKp5wu1X5T3rkTR6He5mDyHmqaJuOSE2a7x-6K9c0LMJPdBgq/exec";
+  const tbody = document.getElementById("cpd-body");
+
+  try {
+    const res = await fetch(url);
+    const items = await res.json();
+
+    tbody.innerHTML = "";
+
+    items.forEach(item => {
+      const tr = document.createElement("tr");
+
+      const cells = [
+        item["Activity"],
+        item["Start date"],
+        item["End date"],
+        item["CPD hours"],
+        item["Development goal"],
+        item["Reflective statement"]
+      ];
+
+      cells.forEach(text => {
+        const td = document.createElement("td");
+        td.textContent = text || "";
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="6">Unable to load CPD log</td></tr>`;
+    console.error("CPD load error:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadCPD);
+</script>
       </div>
     </section>
 

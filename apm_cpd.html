@@ -615,33 +615,34 @@ body.page-prof-dev .rating-filter-active {
   <tr><td colspan="6">Loading CPD log…</td></tr>
 </tbody>
 
+
         </table>
         <script>
 async function loadCPD() {
-  const url = "https://script.google.com/macros/s/AKfycbwigdbD9fGmIexab91lKp5wu1X5T3rkTR6He5mDyHmqaJuOSE2a7x-6K9c0LMJPdBgq/exec";
+  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
   const tbody = document.getElementById("cpd-body");
 
   try {
     const res = await fetch(url);
-    const items = await res.json();
+    const csv = await res.text();
+
+    // Split rows safely
+    const rows = csv
+      .trim()
+      .split(/\r?\n/)
+      .map(line => line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(cell => cell.replace(/^"|"$/g, "")));
+
+    // Remove header row
+    rows.shift();
 
     tbody.innerHTML = "";
 
-    items.forEach(item => {
+    rows.forEach(row => {
       const tr = document.createElement("tr");
 
-      const cells = [
-        item["Activity"],
-        item["Start date"],
-        item["End date"],
-        item["CPD hours"],
-        item["Development goal"],
-        item["Reflective statement"]
-      ];
-
-      cells.forEach(text => {
+      row.forEach(cell => {
         const td = document.createElement("td");
-        td.textContent = text || "";
+        td.textContent = cell;
         tr.appendChild(td);
       });
 
@@ -656,6 +657,7 @@ async function loadCPD() {
 
 document.addEventListener("DOMContentLoaded", loadCPD);
 </script>
+
       </div>
     </section>
 

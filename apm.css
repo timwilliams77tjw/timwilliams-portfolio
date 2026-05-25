@@ -1,0 +1,232 @@
+/* ============================================================
+   APM PAGE — CLEAN, SAFE, CONFLICT‑FREE CSS
+   ============================================================ */
+
+/* Root colours */
+:root {
+  --apm-blue: #0a2540;
+  --apm-accent: #0a66c2;
+  --apm-bg: #f8f9fa;
+  --apm-text: #111;
+  --apm-subtext: #555;
+  --apm-card-bg: #ffffff;
+  --apm-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Page wrapper */
+body.page-prof-dev {
+  background: var(--apm-bg);
+  color: var(--apm-text);
+}
+
+/* Page container */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+/* ------------------------------------------------------------
+   HERO SECTION
+   ------------------------------------------------------------ */
+.hero-section img {
+  float: right;
+  margin-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  border-radius: 8px;
+  width: 180px;
+  height: auto;
+}
+
+.hero-section h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--apm-blue);
+  margin-bottom: 0.3rem;
+}
+
+.hero-section p {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+/* Mobile hero */
+@media (max-width: 700px) {
+  .hero-section img {
+    float: none;
+    display: block;
+    margin: 0 0 1rem 0;
+    width: 100%;
+    max-width: 260px;
+  }
+}
+
+/* ------------------------------------------------------------
+   SECTION HEADINGS
+   ------------------------------------------------------------ */
+.section-heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--apm-blue);
+  margin: 2.5rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-heading i {
+  color: var(--apm-accent);
+}
+
+.section-subtitle {
+  font-size: 0.98rem;
+  color: var(--apm-subtext);
+  max-width: 780px;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------
+   CPD TABLE
+   ------------------------------------------------------------ */
+.cpd-table-wrapper {
+  margin-top: 1.5rem;
+  overflow-x: auto;
+}
+
+table.cpd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: var(--apm-card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--apm-shadow);
+}
+
+table.cpd-table thead {
+  background: var(--apm-blue);
+  color: #ffffff;
+}
+
+table.cpd-table th,
+table.cpd-table td {
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e5e5;
+  vertical-align: top;
+}
+
+table.cpd-table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* ------------------------------------------------------------
+   COMPETENCE GRID (BEFORE CAROUSEL)
+   ------------------------------------------------------------ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.info-card {
+  background: var(--apm-card-bg);
+  padding: 1.8rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: var(--apm-shadow);
+  border-left: 5px solid var(--apm-accent);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+}
+
+.info-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--apm-blue);
+  margin-bottom: 0.55rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.info-card p {
+  font-size: 0.95rem;
+  color: var(--apm-subtext);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   RATING BADGES
+   ------------------------------------------------------------ */
+.rating-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin-left: 12px;
+  color: #fff;
+}
+
+.rating-expert { background: #0a66c2; }
+.rating-proficient { background: #007b5f; }
+.rating-competent { background: #b8860b; }
+.rating-practised { background: #8a2be2; }
+.rating-aware { background: #555; }
+
+/* ------------------------------------------------------------
+   ACCORDION
+   ------------------------------------------------------------ */
+.accordion-item {
+  margin-bottom: 1.4rem;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--apm-shadow);
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.accordion-content {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+details summary {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+/* ------------------------------------------------------------
+   CAROUSEL (READY FOR ACTIVATION)
+   ------------------------------------------------------------ */
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.2rem;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+}
+
+.carousel .info-card {
+  min-width: 280px;
+  scroll-snap-align: start;
+}

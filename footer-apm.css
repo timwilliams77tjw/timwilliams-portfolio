@@ -1,173 +1,173 @@
+@layer footer-reset, footer-base;
+
+/* Reset all previous footer rules */
+footer.footer {
+  all: revert-layer;
+}
+
+@layer footer-base {
 
 /* ============================================================
-   FOOTER — CHARCOAL, 3 EQUAL COLUMNS, COMFORTABLE SPACING
-   ============================================================ */
+FOOTER — CHARCOAL, 3 EQUAL COLUMNS, COMFORTABLE SPACING
+============================================================ */
 
 footer {
-    background: #111;
-    color: #fff;
-    padding: 50px 20px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  padding: 50px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 }
 
 .footer-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: start;
 }
 
 footer h4 {
-    margin-bottom: 12px;
-    font-size: 18px;
-    font-weight: 600;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 footer a {
-    color: #0A66C2;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 6px;
-    font-size: 15px;
+  color: #0A66C2;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 15px;
 }
 
 footer a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* Mobile stacking */
 @media (max-width: 768px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
 }
+
 /* =========================================================
-   BASE
+BASE
 ========================================================= */
 
-footer.footer a{
-  color:#7ac0f9 !important;
-  text-decoration:none !important;
+footer.footer a {
+  color:#7ac0f9;
+  text-decoration:none;
 }
 
 footer.footer .footer-logo img,
-footer.footer .footer-qr img{
-  width:70px !important;
-  max-width:70px !important;
-  height:auto !important;
+footer.footer .footer-qr img {
+  width:70px;
+  max-width:70px;
+  height:auto;
   display:block;
 }
 
 /* =========================================================
-   DESKTOP + iPAD
+DESKTOP + iPAD
 ========================================================= */
 
-@media (min-width:601px){
+@media (min-width:601px) {
 
-  footer.footer .footer-inner{
-    display:flex !important;
-    flex-direction:row !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-    width:100% !important;
-    gap:20px !important;
+  footer.footer .footer-inner {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    gap:20px;
   }
 
-  /* remove stacked rows */
-  footer.footer .footer-row{
-    width:auto !important;
+  footer.footer .footer-row {
+    width:auto;
   }
 
-  /* logo + QR row */
-  footer.footer .footer-row-bottom{
-    display:flex !important;
-    align-items:center !important;
-    gap:20px !important;
-    margin-left:auto !important;
+  footer.footer .footer-row-bottom {
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-left:auto;
   }
 
-  footer.footer .footer-logo{
-    margin-right:auto !important;
+  footer.footer .footer-logo {
+    margin-right:auto;
   }
 
-  /* copyright centered */
-  footer.footer .footer-row-copy{
+  footer.footer .footer-row-copy {
     white-space:nowrap;
-    text-align:center !important;
+    text-align:center;
   }
 
-  /* links next to copyright */
-  footer.footer .footer-row-links{
-    display:flex !important;
-    gap:18px !important;
-    justify-content:center !important;
-    flex-wrap:nowrap !important;
+  footer.footer .footer-row-links {
+    display:flex;
+    gap:18px;
+    justify-content:center;
+    flex-wrap:nowrap;
   }
 
-  /* push QR to absolute right */
-  footer.footer .footer-qr{
-    margin-left:auto !important;
+  footer.footer .footer-qr {
+    margin-left:auto;
   }
 }
 
 /* =========================================================
-   iPHONE
+iPHONE
 ========================================================= */
 
-@media (max-width:600px){
+@media (max-width:600px) {
 
-  footer.footer .footer-inner{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    gap:20px !important;
-    width:100% !important;
+  footer.footer .footer-inner {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    width:100%;
   }
 
-  /* COPYRIGHT */
-  footer.footer .footer-row-copy{
-    order:1 !important;
-    width:100% !important;
-    text-align:center !important;
+  footer.footer .footer-row-copy {
+    order:1;
+    width:100%;
+    text-align:center;
   }
 
-  /* LINKS */
-  footer.footer .footer-row-links{
-    order:2 !important;
-    width:100% !important;
-    display:flex !important;
-    justify-content:center !important;
-    gap:18px !important;
-    flex-wrap:wrap !important;
-    text-align:center !important;
+  footer.footer .footer-row-links {
+    order:2;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    text-align:center;
   }
 
-  /* BOTTOM ROW: logo + QR together */
-  footer.footer .footer-row-bottom{
-    order:3 !important;
-    width:100% !important;
-    display:flex !important;
-    flex-direction:row !important;
-    justify-content:center !important;
-    align-items:center !important;
-    gap:20px !important;
+  footer.footer .footer-row-bottom {
+    order:3;
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
   }
 
-  /* FULL RESET of desktop alignment rules */
   footer.footer .footer-logo,
-  footer.footer .footer-qr{
-    width:auto !important;
-    margin:0 !important;
-    padding:0 !important;
-    display:flex !important;
-    justify-content:center !important;
-    align-items:center !important;
-    float:none !important;
-    position:static !important;
+  footer.footer .footer-qr {
+    width:auto;
+    margin:0;
+    padding:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    float:none;
+    position:static;
   }
 }
 
-
+}

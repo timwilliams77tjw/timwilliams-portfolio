@@ -700,6 +700,46 @@ body.page-prof-dev .rating-filter-active {
   color: var(--apm-blue);
   margin: 0;
 }
+/* ============================================================
+   CPD INSIGHTS PANEL
+============================================================ */
+
+.cpd-insights {
+  margin: 3rem 0;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.insight-card {
+  background: var(--apm-card-bg);
+  padding: 1.6rem 1.4rem;
+  border-radius: 14px;
+  box-shadow: var(--apm-shadow);
+  border-left: 5px solid var(--apm-accent);
+}
+
+.insight-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--apm-blue);
+  margin-bottom: 0.8rem;
+}
+
+.insight-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--apm-subtext);
+  line-height: 1.55;
+}
+
+.insight-card li {
+  margin-bottom: 0.4rem;
+}
 
   </style>
 </head>
@@ -829,6 +869,34 @@ body.page-prof-dev .rating-filter-active {
 
 
         </table>
+        <section class="cpd-insights">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-lightbulb"></i>
+    CPD Insights Summary
+  </h2>
+
+  <p class="section-subtitle">
+    Automatically generated insights based on your reflective statements and activity patterns.
+  </p>
+
+  <div class="insights-grid">
+    <div class="insight-card">
+      <h3>Key Themes</h3>
+      <ul id="insight-themes"></ul>
+    </div>
+
+    <div class="insight-card">
+      <h3>Strengths Demonstrated</h3>
+      <ul id="insight-strengths"></ul>
+    </div>
+
+    <div class="insight-card">
+      <h3>Growth Opportunities</h3>
+      <ul id="insight-growth"></ul>
+    </div>
+  </div>
+</section>
+
         <script>
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(calculateMetrics, 800); // wait for CPD table to load
@@ -903,6 +971,70 @@ async function loadCPD() {
 }
 
 document.addEventListener("DOMContentLoaded", loadCPD);
+</script>
+<script>
+function generateInsights() {
+  const rows = [...document.querySelectorAll("#cpd-body tr")];
+  if (!rows.length) return;
+
+  let reflections = [];
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    if (cells.length < 6) return;
+
+    const reflection = cells[5].textContent.trim();
+    if (reflection) reflections.push(reflection.toLowerCase());
+  });
+
+  if (!reflections.length) return;
+
+  const text = reflections.join(" ");
+
+  // Simple keyword extraction
+  const keywords = {
+    leadership: ["lead", "mentor", "coach", "guide"],
+    communication: ["communicat", "stakeholder", "present", "engage"],
+    planning: ["plan", "schedule", "organis", "structure"],
+    risk: ["risk", "issue", "mitigat"],
+    learning: ["learn", "develop", "improve", "reflect"],
+    delivery: ["deliver", "implement", "execute"]
+  };
+
+  const themes = [];
+  const strengths = [];
+  const growth = [];
+
+  for (const [theme, words] of Object.entries(keywords)) {
+    const count = words.reduce((acc, w) => acc + (text.includes(w) ? 1 : 0), 0);
+    if (count > 0) themes.push(theme);
+  }
+
+  // Strengths = themes with strong presence
+  if (text.includes("lead") || text.includes("coach")) strengths.push("Leadership & mentoring");
+  if (text.includes("stakeholder") || text.includes("communicat")) strengths.push("Stakeholder engagement");
+  if (text.includes("plan") || text.includes("schedule")) strengths.push("Planning & organisation");
+  if (text.includes("risk")) strengths.push("Risk awareness & mitigation");
+
+  // Growth areas = themes with light presence
+  if (!text.includes("benefit")) growth.push("Benefits management");
+  if (!text.includes("sustain")) growth.push("Sustainability in change initiatives");
+  if (!text.includes("ai")) growth.push("AI & digital transformation");
+  if (!text.includes("finance")) growth.push("Financial management depth");
+
+  // Update UI
+  const addList = (id, items) => {
+    const el = document.getElementById(id);
+    el.innerHTML = items.map(i => `<li>${i}</li>`).join("");
+  };
+
+  addList("insight-themes", themes.length ? themes : ["No dominant themes detected"]);
+  addList("insight-strengths", strengths.length ? strengths : ["Emerging strengths developing"]);
+  addList("insight-growth", growth.length ? growth : ["No clear growth areas detected"]);
+}
+
+// Run after CPD + metrics load
+setTimeout(generateInsights, 1200);
 </script>
 
       </div>

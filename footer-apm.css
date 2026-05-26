@@ -1,173 +1,155 @@
-@layer footer-reset, footer-base;
-
-/* Reset all previous footer rules */
-footer.footer {
-  all: revert-layer;
-}
-
-@layer footer-base {
-
 /* ============================================================
-FOOTER — CHARCOAL, 3 EQUAL COLUMNS, COMFORTABLE SPACING
+   FOOTER — APM PAGE ISOLATED VERSION
+   This targets ONLY the injected footer inside #footer
+   and prevents overrides from other CSS files.
 ============================================================ */
 
-footer {
+/* Reset any inherited styles from certifications.css, header CSS, etc. */
+#footer footer.footer {
+  all: unset;
+  display: block;
   background: #111;
   color: #fff;
   padding: 50px 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 }
 
-.footer-container {
+/* Inner wrapper */
+#footer .footer-inner {
   max-width: 1100px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-footer h4 {
-  margin-bottom: 12px;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-footer a {
-  color: #0A66C2;
+/* Footer links */
+#footer footer.footer a {
+  color: #7ac0f9;
   text-decoration: none;
-  display: block;
-  margin-bottom: 6px;
   font-size: 15px;
 }
 
-footer a:hover {
+#footer footer.footer a:hover {
   text-decoration: underline;
 }
 
-/* Mobile stacking */
-@media (max-width: 768px) {
-  .footer-container {
-    grid-template-columns: 1fr;
+/* Logo + QR images */
+#footer footer.footer .footer-logo img,
+#footer footer.footer .footer-qr img {
+  width: 70px;
+  max-width: 70px;
+  height: auto;
+  display: block;
+}
+
+/* Sticky bar */
+#footer .mobile-sticky-bar {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+#footer .sticky-btn {
+  background: #0a66c2;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+/* ============================================================
+   DESKTOP + TABLET
+============================================================ */
+@media (min-width: 601px) {
+
+  #footer .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #footer .footer-row {
+    width: auto;
+  }
+
+  #footer .footer-row-copy {
+    white-space: nowrap;
     text-align: center;
   }
-}
 
-/* =========================================================
-BASE
-========================================================= */
-
-footer.footer a {
-  color:#7ac0f9;
-  text-decoration:none;
-}
-
-footer.footer .footer-logo img,
-footer.footer .footer-qr img {
-  width:70px;
-  max-width:70px;
-  height:auto;
-  display:block;
-}
-
-/* =========================================================
-DESKTOP + iPAD
-========================================================= */
-
-@media (min-width:601px) {
-
-  footer.footer .footer-inner {
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:space-between;
-    width:100%;
-    gap:20px;
+  #footer .footer-row-links {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: nowrap;
   }
 
-  footer.footer .footer-row {
-    width:auto;
+  #footer .footer-row-bottom {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: auto;
   }
 
-  footer.footer .footer-row-bottom {
-    display:flex;
-    align-items:center;
-    gap:20px;
-    margin-left:auto;
+  #footer .footer-logo {
+    margin-right: auto;
   }
 
-  footer.footer .footer-logo {
-    margin-right:auto;
-  }
-
-  footer.footer .footer-row-copy {
-    white-space:nowrap;
-    text-align:center;
-  }
-
-  footer.footer .footer-row-links {
-    display:flex;
-    gap:18px;
-    justify-content:center;
-    flex-wrap:nowrap;
-  }
-
-  footer.footer .footer-qr {
-    margin-left:auto;
+  #footer .footer-qr {
+    margin-left: auto;
   }
 }
 
-/* =========================================================
-iPHONE
-========================================================= */
+/* ============================================================
+   MOBILE (iPhone)
+============================================================ */
+@media (max-width: 600px) {
 
-@media (max-width:600px) {
-
-  footer.footer .footer-inner {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:20px;
-    width:100%;
+  #footer .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
 
-  footer.footer .footer-row-copy {
-    order:1;
-    width:100%;
-    text-align:center;
+  #footer .footer-row-copy {
+    order: 1;
+    width: 100%;
+    text-align: center;
   }
 
-  footer.footer .footer-row-links {
-    order:2;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    gap:18px;
-    flex-wrap:wrap;
-    text-align:center;
+  #footer .footer-row-links {
+    order: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    text-align: center;
   }
 
-  footer.footer .footer-row-bottom {
-    order:3;
-    width:100%;
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items:center;
-    gap:20px;
+  #footer .footer-row-bottom {
+    order: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
   }
 
-  footer.footer .footer-logo,
-  footer.footer .footer-qr {
-    width:auto;
-    margin:0;
-    padding:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    float:none;
-    position:static;
+  #footer .footer-logo,
+  #footer .footer-qr {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: none;
+    position: static;
   }
-}
-
 }

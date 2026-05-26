@@ -598,6 +598,75 @@ body.page-prof-dev .rating-filter-active {
   .carousel-btn.prev { left: 5px; }
   .carousel-btn.next { right: 5px; }
 }
+/* ============================================================
+   CPD PROGRESS RING (APM STYLE)
+   ============================================================ */
+
+.cpd-progress-section {
+  margin: 2rem 0 3rem;
+  text-align: center;
+}
+
+.cpd-progress-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 1.5rem;
+}
+
+.cpd-progress-ring {
+  transform: rotate(-90deg);
+}
+
+.cpd-ring-bg {
+  fill: none;
+  stroke: #e5e7eb;
+  stroke-width: 12;
+}
+
+.cpd-ring-fill {
+  fill: none;
+  stroke: #0a66c2;
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 0 999;
+  transition: stroke-dasharray 1s ease;
+}
+
+.cpd-progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cpd-progress-text h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 700;
+  color: #0a2540;
+}
+
+.cpd-progress-text p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.cpd-progress-heading {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0a2540;
+  margin-bottom: 0.3rem;
+}
+
+.cpd-progress-subtext {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
 
   </style>
 </head>
@@ -656,6 +725,26 @@ body.page-prof-dev .rating-filter-active {
         reflective themes, and a structured summary of key competence areas.
       </p>
     </section>
+<section class="cpd-progress-section">
+
+  <div class="cpd-progress-container">
+    <svg class="cpd-progress-ring" width="180" height="180">
+      <circle class="cpd-ring-bg" cx="90" cy="90" r="80" />
+      <circle class="cpd-ring-fill" cx="90" cy="90" r="80" />
+    </svg>
+
+    <div class="cpd-progress-text">
+      <h3>120:55 Completed hours</h3>
+      <p>35 hours needed before 30 Sep 2026</p>
+    </div>
+  </div>
+
+  <h2 class="cpd-progress-heading">Development Goals</h2>
+  <p class="cpd-progress-subtext">
+    Reflect on the areas where you’d like to develop, and what skills or knowledge you’d like to enhance.
+  </p>
+
+</section>
 
     <!-- CPD SECTION -->
     <section>
@@ -1583,6 +1672,25 @@ document.addEventListener("DOMContentLoaded", loadCPD);
   btnNext.addEventListener('click', () => {
     track.scrollBy({ left: cardWidth, behavior: 'smooth' });
   });
+})();
+</script>
+<script>
+(function() {
+  const completed = 120.92; // 120:55 converted to decimal hours
+  const target = 156;       // 120.92 + 35 hours remaining
+  const percent = completed / target;
+
+  const circle = document.querySelector('.cpd-ring-fill');
+  const radius = circle.r.baseVal.value;
+  const circumference = 2 * Math.PI * radius;
+
+  circle.style.strokeDasharray = `${circumference} ${circumference}`;
+  circle.style.strokeDashoffset = circumference;
+
+  const offset = circumference - percent * circumference;
+  setTimeout(() => {
+    circle.style.strokeDashoffset = offset;
+  }, 300);
 })();
 </script>
 

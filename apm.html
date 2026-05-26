@@ -667,6 +667,39 @@ body.page-prof-dev .rating-filter-active {
   color: #555;
   line-height: 1.5;
 }
+/* ============================================================
+   CPD METRIC CARDS
+============================================================ */
+
+.cpd-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+
+.cpd-metric-card {
+  background: var(--apm-card-bg);
+  padding: 1.4rem 1.2rem;
+  border-radius: 14px;
+  box-shadow: var(--apm-shadow);
+  text-align: center;
+  border-left: 5px solid var(--apm-accent);
+}
+
+.cpd-metric-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--apm-blue);
+  margin-bottom: 0.4rem;
+}
+
+.cpd-metric-card p {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--apm-blue);
+  margin: 0;
+}
 
   </style>
 </head>
@@ -745,6 +778,27 @@ body.page-prof-dev .rating-filter-active {
   </p>
 
 </section>
+<section class="cpd-metrics">
+  <div class="cpd-metric-card">
+    <h4>Total Hours</h4>
+    <p id="metric-total-hours">–</p>
+  </div>
+
+  <div class="cpd-metric-card">
+    <h4>Hours Remaining</h4>
+    <p id="metric-hours-remaining">–</p>
+  </div>
+
+  <div class="cpd-metric-card">
+    <h4>Activities Logged</h4>
+    <p id="metric-activities">–</p>
+  </div>
+
+  <div class="cpd-metric-card">
+    <h4>Avg Hours / Month</h4>
+    <p id="metric-hours-month">–</p>
+  </div>
+</section>
 
     <!-- CPD SECTION -->
     <section>
@@ -775,6 +829,41 @@ body.page-prof-dev .rating-filter-active {
 
 
         </table>
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(calculateMetrics, 800); // wait for CPD table to load
+});
+
+function calculateMetrics() {
+  const rows = [...document.querySelectorAll("#cpd-body tr")];
+  if (!rows.length) return;
+
+  let totalHours = 0;
+  let activityCount = 0;
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    if (cells.length < 4) return;
+
+    const hours = parseFloat(cells[3].textContent.replace(":", "."));
+    if (!isNaN(hours)) {
+      totalHours += hours;
+      activityCount++;
+    }
+  });
+
+  const targetHours = 156; // 120.92 + 35 remaining
+  const hoursRemaining = Math.max(0, targetHours - totalHours);
+
+  const avgHoursPerMonth = (totalHours / 12).toFixed(1);
+
+  document.getElementById("metric-total-hours").textContent = totalHours.toFixed(1);
+  document.getElementById("metric-hours-remaining").textContent = hoursRemaining.toFixed(1);
+  document.getElementById("metric-activities").textContent = activityCount;
+  document.getElementById("metric-hours-month").textContent = avgHoursPerMonth;
+}
+</script>
+
         <script>
 async function loadCPD() {
   const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";

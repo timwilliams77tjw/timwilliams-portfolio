@@ -530,6 +530,75 @@ body.page-prof-dev .rating-filter-active {
   outline: 2px solid #00000033;
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #00000022 !important;
 }
+    /* ============================================================
+   FULL CAROUSEL WITH ARROWS — APM COMPETENCE SECTION
+   ============================================================ */
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track .info-card {
+  min-width: 320px;
+  max-width: 320px;
+  scroll-snap-align: start;
+}
+
+/* Arrow buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: white;
+  border: 2px solid var(--apm-blue);
+  color: var(--apm-blue);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.carousel-btn:hover {
+  background: var(--apm-blue);
+  color: white;
+}
+
+.carousel-btn.prev {
+  left: -10px;
+}
+
+.carousel-btn.next {
+  right: -10px;
+}
+
+/* Mobile: arrows sit inside the container */
+@media (max-width: 600px) {
+  .carousel-btn.prev { left: 5px; }
+  .carousel-btn.next { right: 5px; }
+}
+
   </style>
 </head>
 
@@ -1496,6 +1565,27 @@ document.addEventListener("DOMContentLoaded", loadCPD);
     });
   })();
 </script>
+    <script>
+(function() {
+  const wrapper = document.querySelector('.carousel-wrapper');
+  if (!wrapper) return;
+
+  const track = wrapper.querySelector('.carousel-track');
+  const btnPrev = wrapper.querySelector('.carousel-btn.prev');
+  const btnNext = wrapper.querySelector('.carousel-btn.next');
+
+  const cardWidth = 340; // card width + gap
+
+  btnPrev.addEventListener('click', () => {
+    track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+  });
+
+  btnNext.addEventListener('click', () => {
+    track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+  });
+})();
+</script>
+
 </main>
 </body>
 </html>

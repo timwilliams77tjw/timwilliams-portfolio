@@ -1023,6 +1023,19 @@ document.addEventListener("DOMContentLoaded", loadCPD);
 
 <script>
 /* ============================================================
+   US DATE PARSER (MM/DD/YYYY → JS Date)
+============================================================ */
+function parseUSDate(d) {
+  if (!d || typeof d !== "string") return null;
+  const parts = d.split("/");
+  if (parts.length !== 3) return null;
+  return new Date(parts[2], parts[0] - 1, parts[1]);
+}
+</script>
+
+
+<script>
+/* ============================================================
    METRICS (TOTAL HOURS, REMAINING, TOP CATEGORY, PROJECTED)
 ============================================================ */
 function calculateMetrics() {
@@ -1056,7 +1069,7 @@ function calculateMetrics() {
     }
 
     // Completed vs ongoing (based on end date)
-    const endDate = parseUKDate(endDateRaw);
+    const endDate = parseUSDate(endDateRaw);
     if (!endDate || isNaN(endDate.getTime())) {
       ongoingHours += hours;
     } else if (endDate < today) {
@@ -1093,19 +1106,6 @@ function calculateMetrics() {
 
 <script>
 /* ============================================================
-   UK DATE PARSER (DD/MM/YYYY → JS Date)
-============================================================ */
-function parseUKDate(d) {
-  if (!d || typeof d !== "string") return null;
-  const parts = d.split("/");
-  if (parts.length !== 3) return null;
-  return new Date(parts[2], parts[1] - 1, parts[0]);
-}
-</script>
-
-
-<script>
-/* ============================================================
    HEATMAP (LAST 12 MONTHS)
 ============================================================ */
 function generateHeatmap() {
@@ -1123,7 +1123,7 @@ function generateHeatmap() {
     if (cells.length < 2) return;
 
     const startDateRaw = cells[1].textContent.trim();
-    const date = parseUKDate(startDateRaw);
+    const date = parseUSDate(startDateRaw);
 
     if (!date || isNaN(date.getTime())) return;
     if (date < oneYearAgo || date > today) return;
@@ -1233,6 +1233,7 @@ function generateInsights() {
   addList("insight-growth", growth.length ? growth : ["No clear growth areas detected"]);
 }
 </script>
+
 
 
 

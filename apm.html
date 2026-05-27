@@ -758,6 +758,41 @@ body.page-prof-dev .rating-filter-active {
   font-weight: 800;
   color: var(--apm-blue);
 }
+   /* ============================================================
+   CPD HEATMAP
+============================================================ */
+
+.cpd-heatmap {
+  margin: 3rem 0 3.5rem;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(53, 1fr); /* 53 weeks */
+  gap: 3px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.heatmap-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--apm-card-bg);
+  transition: background 0.2s ease;
+}
+
+.heatmap-cell.level-1 { background: #cfe8ff; }
+.heatmap-cell.level-2 { background: #7ac0f9; }
+.heatmap-cell.level-3 { background: #0a66c2; }
+.heatmap-cell.level-4 { background: #003a73; }
+
+.heatmap-cell:hover {
+  outline: 2px solid var(--apm-accent);
+  cursor: pointer;
+}
+ 
   </style>
 </head>
 
@@ -865,7 +900,18 @@ body.page-prof-dev .rating-filter-active {
   <p id="metric-projected-hours">–</p>
 </div>
 </section>
+<section class="cpd-heatmap">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-calendar-week"></i>
+    CPD Activity Heatmap
+  </h2>
 
+  <p class="section-subtitle">
+    Visual overview of your CPD activity over the past 12 months.
+  </p>
+
+  <div id="heatmap-grid" class="heatmap-grid"></div>
+</section>
     <!-- CPD SECTION -->
     <section>
       <h2 class="section-heading">
@@ -995,6 +1041,57 @@ function calculateMetrics() {
 
 </script>
 
+<script>
+function generateHeatmap() {
+  const rows = [...document.querySelectorAll("#cpd-body tr")];
+  if (!rows.length) return;
+
+  const today = new Date();
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(today.getFullYear() - 1);
+
+  const activityMap = {};
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    if (cells.length < 2) return;
+
+    const startDateRaw = cells[1].textContent.trim();
+    const date = new Date(startDateRaw);
+
+    if (isNaN(date.getTime())) return;
+    if (date < oneYearAgo || date > today) return;
+
+    const key = date.toISOString().split("T")[0];
+    activityMap[key] = (activityMap[key] || 0) + 1;
+  });
+
+  const heatmap = document.getElementById("heatmap-grid");
+  heatmap.innerHTML = "";
+
+  const days = 365;
+  for (let i = 0; i < days; i++) {
+    const d = new Date(oneYearAgo);
+    d.setDate(oneYearAgo.getDate() + i);
+
+    const key = d.toISOString().split("T")[0];
+    const count = activityMap[key] || 0;
+
+    let level = 0;
+    if (count >= 4) level = 4;
+    else if (count === 3) level = 3;
+    else if (count === 2) level = 2;
+    else if (count === 1) level = 1;
+
+    const cell = document.createElement("div");
+    cell.className = `heatmap-cell level-${level}`;
+    cell.title = `${key}: ${count} activities`;
+
+    heatmap.appendChild(cell);
+  }
+}
+</script>
+        
   <script>
 async function loadCPD() {
   const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
@@ -1030,7 +1127,7 @@ async function loadCPD() {
     // ✅ Now that the table is populated, run metrics + insights
     calculateMetrics();
     generateInsights();
-
+generateHeatmap();
   } catch (err) {
     tbody.innerHTML = `<tr><td colspan="6">Unable to load CPD log</td></tr>`;
     console.error("CPD load error:", err);

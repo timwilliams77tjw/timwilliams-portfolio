@@ -1056,8 +1056,8 @@ function calculateMetrics() {
     }
 
     // Completed vs ongoing (based on end date)
-    const endDate = new Date(endDateRaw);
-    if (isNaN(endDate.getTime())) {
+    const endDate = parseUKDate(endDateRaw);
+    if (!endDate || isNaN(endDate.getTime())) {
       ongoingHours += hours;
     } else if (endDate < today) {
       completedHours += hours;
@@ -1093,6 +1093,19 @@ function calculateMetrics() {
 
 <script>
 /* ============================================================
+   UK DATE PARSER (DD/MM/YYYY → JS Date)
+============================================================ */
+function parseUKDate(d) {
+  if (!d || typeof d !== "string") return null;
+  const parts = d.split("/");
+  if (parts.length !== 3) return null;
+  return new Date(parts[2], parts[1] - 1, parts[0]);
+}
+</script>
+
+
+<script>
+/* ============================================================
    HEATMAP (LAST 12 MONTHS)
 ============================================================ */
 function generateHeatmap() {
@@ -1110,9 +1123,9 @@ function generateHeatmap() {
     if (cells.length < 2) return;
 
     const startDateRaw = cells[1].textContent.trim();
-    const date = new Date(startDateRaw);
+    const date = parseUKDate(startDateRaw);
 
-    if (isNaN(date.getTime())) return;
+    if (!date || isNaN(date.getTime())) return;
     if (date < oneYearAgo || date > today) return;
 
     const key = date.toISOString().split("T")[0];
@@ -1220,6 +1233,7 @@ function generateInsights() {
   addList("insight-growth", growth.length ? growth : ["No clear growth areas detected"]);
 }
 </script>
+
 
 
       </div>

@@ -673,72 +673,84 @@ body.page-prof-dev .rating-filter-active {
 
 .cpd-metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.2rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.4rem;
+  margin: 2.2rem 0 2.6rem;
 }
 
 .cpd-metric-card {
   background: var(--apm-card-bg);
-  padding: 1.4rem 1.2rem;
-  border-radius: 14px;
+  padding: 1.6rem 1.4rem;
+  border-radius: 16px;
   box-shadow: var(--apm-shadow);
-  text-align: center;
-  border-left: 5px solid var(--apm-accent);
+  border-top: 4px solid var(--apm-accent);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .cpd-metric-card h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--apm-blue);
-  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--apm-subtext);
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .cpd-metric-card p {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: var(--apm-blue);
   margin: 0;
 }
+
 /* ============================================================
    CPD INSIGHTS PANEL
 ============================================================ */
 
 .cpd-insights {
-  margin: 3rem 0;
+  margin: 3rem 0 3.5rem;
+}
+
+.cpd-insights .section-heading {
+  margin-bottom: 0.4rem;
+}
+
+.cpd-insights .section-subtitle {
+  margin-bottom: 1.6rem;
 }
 
 .insights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  gap: 1.6rem;
 }
 
 .insight-card {
   background: var(--apm-card-bg);
   padding: 1.6rem 1.4rem;
-  border-radius: 14px;
+  border-radius: 16px;
   box-shadow: var(--apm-shadow);
   border-left: 5px solid var(--apm-accent);
 }
 
 .insight-card h3 {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--apm-blue);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.7rem;
 }
 
 .insight-card ul {
   margin: 0;
   padding-left: 1.2rem;
   color: var(--apm-subtext);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .insight-card li {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
 }
 
   </style>
@@ -913,16 +925,16 @@ function calculateMetrics() {
     const cells = row.querySelectorAll("td");
     if (cells.length < 4) return;
 
-    const hours = parseFloat(cells[3].textContent.replace(":", "."));
+    const raw = cells[3].textContent.trim(); // e.g. "06.10"
+    const hours = parseFloat(raw);
     if (!isNaN(hours)) {
       totalHours += hours;
       activityCount++;
     }
   });
 
-  const targetHours = 156; // 120.92 + 35 remaining
+  const targetHours = 156; // adjust if you want
   const hoursRemaining = Math.max(0, targetHours - totalHours);
-
   const avgHoursPerMonth = (totalHours / 12).toFixed(1);
 
   document.getElementById("metric-total-hours").textContent = totalHours.toFixed(1);
@@ -930,9 +942,10 @@ function calculateMetrics() {
   document.getElementById("metric-activities").textContent = activityCount;
   document.getElementById("metric-hours-month").textContent = avgHoursPerMonth;
 }
+
 </script>
 
-        <script>
+  <script>
 async function loadCPD() {
   const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
   const tbody = document.getElementById("cpd-body");
@@ -941,28 +954,32 @@ async function loadCPD() {
     const res = await fetch(url);
     const csv = await res.text();
 
-    // Split rows safely
     const rows = csv
       .trim()
       .split(/\r?\n/)
-      .map(line => line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(cell => cell.replace(/^"|"$/g, "")));
+      .map(line =>
+        line
+          .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
+          .map(cell => cell.replace(/^"|"$/g, ""))
+      );
 
     // Remove header row
     rows.shift();
-
     tbody.innerHTML = "";
 
     rows.forEach(row => {
       const tr = document.createElement("tr");
-
       row.forEach(cell => {
         const td = document.createElement("td");
         td.textContent = cell;
         tr.appendChild(td);
       });
-
       tbody.appendChild(tr);
     });
+
+    // ✅ Now that the table is populated, run metrics + insights
+    calculateMetrics();
+    generateInsights();
 
   } catch (err) {
     tbody.innerHTML = `<tr><td colspan="6">Unable to load CPD log</td></tr>`;
@@ -972,6 +989,7 @@ async function loadCPD() {
 
 document.addEventListener("DOMContentLoaded", loadCPD);
 </script>
+
 <script>
 function generateInsights() {
   const rows = [...document.querySelectorAll("#cpd-body tr")];

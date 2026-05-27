@@ -752,7 +752,12 @@ body.page-prof-dev .rating-filter-active {
 .insight-card li {
   margin-bottom: 0.35rem;
 }
-
+/* ADVANCED METRIC CARDS */
+.cpd-metric-card p {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--apm-blue);
+}
   </style>
 </head>
 
@@ -850,6 +855,15 @@ body.page-prof-dev .rating-filter-active {
     <h4>Avg Hours / Month</h4>
     <p id="metric-hours-month">–</p>
   </div>
+  <div class="cpd-metric-card">
+  <h4>Top Category</h4>
+  <p id="metric-top-category">–</p>
+</div>
+
+<div class="cpd-metric-card">
+  <h4>Projected Hours</h4>
+  <p id="metric-projected-hours">–</p>
+</div>
 </section>
 
     <!-- CPD SECTION -->
@@ -923,25 +937,30 @@ function calculateMetrics() {
   let ongoingHours = 0;
   let activityCount = 0;
 
+  const categoryCounts = {};
   const today = new Date();
 
   rows.forEach(row => {
     const cells = row.querySelectorAll("td");
-    if (cells.length < 4) return;
+    if (cells.length < 6) return;
 
     const hours = parseFloat(cells[3].textContent.trim());
-    const endDateRaw = cells[2].textContent.trim(); // End date column
+    const endDateRaw = cells[2].textContent.trim();
+    const category = cells[4].textContent.trim();
 
     if (isNaN(hours)) return;
 
     totalHours += hours;
     activityCount++;
 
-    // Parse date safely (MM/DD/YYYY or DD/MM/YYYY)
-    const endDate = new Date(endDateRaw);
+    // Track category frequency
+    if (category) {
+      categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+    }
 
+    // Determine completed vs ongoing by end date
+    const endDate = new Date(endDateRaw);
     if (isNaN(endDate.getTime())) {
-      // If date is invalid, treat as ongoing
       ongoingHours += hours;
     } else if (endDate < today) {
       completedHours += hours;
@@ -950,13 +969,28 @@ function calculateMetrics() {
     }
   });
 
-  // Hours remaining = hours still in future-dated activities
+  // Hours remaining = hours in future-dated activities
   const hoursRemaining = ongoingHours;
 
+  // Projected hours = average per month * 12
+  const avgHoursPerMonth = totalHours / 12;
+  const projectedHours = avgHoursPerMonth * 12;
+
+  // Determine top category
+  let topCategory = "–";
+  if (Object.keys(categoryCounts).length > 0) {
+    topCategory = Object.entries(categoryCounts)
+      .sort((a, b) => b[1] - a[1])[0][0];
+  }
+
+  // Update UI
   document.getElementById("metric-total-hours").textContent = totalHours.toFixed(1);
   document.getElementById("metric-hours-remaining").textContent = hoursRemaining.toFixed(1);
   document.getElementById("metric-activities").textContent = activityCount;
-  document.getElementById("metric-hours-month").textContent = (totalHours / 12).toFixed(1);
+  document.getElementById("metric-hours-month").textContent = avgHoursPerMonth.toFixed(1);
+
+  document.getElementById("metric-top-category").textContent = topCategory;
+  document.getElementById("metric-projected-hours").textContent = projectedHours.toFixed(1);
 }
 
 </script>

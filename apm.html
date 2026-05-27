@@ -919,28 +919,44 @@ function calculateMetrics() {
   if (!rows.length) return;
 
   let totalHours = 0;
+  let completedHours = 0;
+  let ongoingHours = 0;
   let activityCount = 0;
+
+  const today = new Date();
 
   rows.forEach(row => {
     const cells = row.querySelectorAll("td");
     if (cells.length < 4) return;
 
-    const raw = cells[3].textContent.trim(); // e.g. "06.10"
-    const hours = parseFloat(raw);
-    if (!isNaN(hours)) {
-      totalHours += hours;
-      activityCount++;
+    const hours = parseFloat(cells[3].textContent.trim());
+    const endDateRaw = cells[2].textContent.trim(); // End date column
+
+    if (isNaN(hours)) return;
+
+    totalHours += hours;
+    activityCount++;
+
+    // Parse date safely (MM/DD/YYYY or DD/MM/YYYY)
+    const endDate = new Date(endDateRaw);
+
+    if (isNaN(endDate.getTime())) {
+      // If date is invalid, treat as ongoing
+      ongoingHours += hours;
+    } else if (endDate < today) {
+      completedHours += hours;
+    } else {
+      ongoingHours += hours;
     }
   });
 
-  const targetHours = 156; // adjust if you want
-  const hoursRemaining = Math.max(0, targetHours - totalHours);
-  const avgHoursPerMonth = (totalHours / 12).toFixed(1);
+  // Hours remaining = hours still in future-dated activities
+  const hoursRemaining = ongoingHours;
 
   document.getElementById("metric-total-hours").textContent = totalHours.toFixed(1);
   document.getElementById("metric-hours-remaining").textContent = hoursRemaining.toFixed(1);
   document.getElementById("metric-activities").textContent = activityCount;
-  document.getElementById("metric-hours-month").textContent = avgHoursPerMonth;
+  document.getElementById("metric-hours-month").textContent = (totalHours / 12).toFixed(1);
 }
 
 </script>

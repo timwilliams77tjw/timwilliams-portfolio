@@ -1013,8 +1013,8 @@ async function loadCPD() {
       .split(/\r?\n/)
       .map(line =>
         line
-          // ✅ Correct CSV-safe split regex
-.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
+          // ✅ Correct CSV-safe split regex (fully fixed)
+          .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
           .map(cell => cell.replace(/^"|"$/g, ""))
       );
 

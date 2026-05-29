@@ -786,15 +786,15 @@ async function loadCPD() {
     const res = await fetch(url);
     const csv = await res.text();
 
-    const rows = csv
-      .trim()
-      .split(/\r?\n/)
-      .map(line =>
-        line
-          /* ✅ Correct CSV-safe split regex */
-          .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
-          .map(cell => cell.replace(/^"|"$/g, ""))
-      );
+const rows = csv
+  .trim()
+  .split(/\r?\n/)
+  .map(line =>
+    line
+      .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
+      .map(cell => cell.replace(/^"|"$/g, ""))
+  );
+
 
     rows.shift(); // remove header
     tbody.innerHTML = "";

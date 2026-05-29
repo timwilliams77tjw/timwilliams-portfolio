@@ -462,82 +462,57 @@ Download PDF
 <!-- AI IN PROJECT MANAGEMENT – VIDEO FEATURE -->
 <article class="featured-article insight-card" data-topic="ai project-management leadership">
 
-    <!-- Thumbnail with Play Button Overlay -->
-    <div class="video-thumbnail-wrapper" style="position: relative; cursor: pointer; max-width: 100%;"
-         onclick="document.getElementById('aiPMVideo').style.display='block'; this.style.display='none';">
+  <img src="AI_PM_thumbnail.png"
+       alt="AI in Project Management Thumbnail"
+       class="insight-thumb" />
 
-        <img src="AI_PM_thumbnail.jpg" 
-             alt="AI in Project Management Video Thumbnail"
-             style="width:100%; border-radius:8px; box-shadow: var(--shadow);" />
+  <div style="flex: 1 1 auto;">
+    <h3>Guest Speaker Session: AI in Project Management</h3>
 
-        <!-- Play Button Overlay -->
-        <div style="
-            position:absolute;
-            top:50%;
-            left:50%;
-            transform:translate(-50%, -50%);
-            background:rgba(0,0,0,0.55);
-            width:90px;
-            height:90px;
-            border-radius:50%;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            transition:0.3s;
-        ">
-            <span style="font-size:3rem; color:white;">▶</span>
-        </div>
+    <!-- Video Wrapper with Play Overlay -->
+    <div class="ai-video-wrapper" style="position:relative; max-width:100%; margin:1rem 0;">
+      <video id="aiPMVideo"
+             width="100%"
+             controls
+             poster="AI_PM_thumbnail.png"
+             style="border-radius:8px; box-shadow:var(--shadow); display:block;">
+        <source src="AI_in_Project_Management.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- Play Button Overlay -->
+      <button type="button"
+              onclick="playAIPMVideo(event)"
+              style="
+                position:absolute;
+                top:50%;
+                left:50%;
+                transform:translate(-50%, -50%);
+                width:90px;
+                height:90px;
+                border-radius:50%;
+                border:none;
+                background:rgba(0,0,0,0.55);
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                cursor:pointer;
+                transition:0.25s;
+              ">
+        <span style="font-size:3rem; color:#fff; margin-left:4px;">▶</span>
+      </button>
     </div>
 
-    <!-- AI IN PROJECT MANAGEMENT – VIDEO FEATURE -->
-<article class="featured-article insight-card" data-topic="ai project-management leadership">
-
-  <h3>Guest Speaker Session: AI in Project Management</h3>
-
-  <!-- Video Wrapper with Thumbnail + Play Overlay -->
-  <div class="ai-video-wrapper" style="position:relative; max-width:100%; margin:1rem 0;">
-    <video id="aiPMVideo"
-           width="100%"
-           controls
-           poster="AI_PM_thumbnail.jpg"
-           style="border-radius:8px; box-shadow:var(--shadow); display:block;">
-      <source src="AI_in_Project_Management.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-
-    <!-- Play Button Overlay -->
-    <button type="button"
-            onclick="playAIPMVideo()"
-            style="
-              position:absolute;
-              top:50%;
-              left:50%;
-              transform:translate(-50%, -50%);
-              width:90px;
-              height:90px;
-              border-radius:50%;
-              border:none;
-              background:rgba(0,0,0,0.55);
-              display:flex;
-              align-items:center;
-              justify-content:center;
-              cursor:pointer;
-              transition:0.25s;
-            ">
-      <span style="font-size:3rem; color:#fff; margin-left:4px;">▶</span>
-    </button>
+    <p>
+      A practical, research‑backed walkthrough of how AI is reshaping modern project delivery —
+      from forecasting and risk management to automation, resource optimisation and the evolving
+      role of the project manager. This session explores real‑world use cases, barriers to adoption,
+      and what the future PMO will look like in an AI‑driven world.
+    </p>
   </div>
-
-  <p>
-    A practical, research‑backed walkthrough of how AI is reshaping modern project delivery —
-    from forecasting and risk management to automation, resource optimisation and the evolving
-    role of the project manager. This session explores real‑world use cases, barriers to adoption,
-    and what the future PMO will look like in an AI‑driven world.
-  </p>
 
 </article>
 
-    
   <!-- FOUNDATIONS OF SUCCESSFUL PROJECT DELIVERY -->
 <article class="featured-article insight-card" data-topic="project-delivery leadership">
 
@@ -853,14 +828,16 @@ btn.textContent = isOpen ? "Read more" : "Show less";
 }
 </script>
 <script>
-  function playAIPMVideo() {
-    const video = document.getElementById('aiPMVideo');
-    if (!video) return;
-    video.play();
-    // Hide the overlay button after first click
-    const btn = event.currentTarget;
-    if (btn) btn.style.display = 'none';
+function playAIPMVideo(e) {
+  const video = document.getElementById('aiPMVideo');
+  if (!video) return;
+  video.play();
+  // Hide the overlay button after first click
+  if (e && e.currentTarget) {
+    e.currentTarget.style.display = 'none';
   }
+}
 </script>
+
 </body>
 </html>

@@ -250,30 +250,33 @@ body.dark-mode {
 <body class="header-with-logo page-site-search">
 
 <!-- HEADER -->
+<!-- HEADER (Safari-safe synchronous load) -->
 <div id="header-placeholder"></div>
 
 <script>
-fetch("header.html")
-  .then(r => r.text())
-  .then(h => {
-    document.getElementById("header-placeholder").innerHTML = h;
+(async () => {
+    const response = await fetch("header.html");
+    const html = await response.text();
+    document.getElementById("header-placeholder").innerHTML = html;
 
+    // Load search script
     const siteSearch = document.createElement("script");
     siteSearch.src = "site-search.js";
-    siteSearch.onload = () => {
-      if (typeof initSiteSearch === "function") initSiteSearch();
-    };
     document.body.appendChild(siteSearch);
 
+    // Load header JS
     const headerJS = document.createElement("script");
     headerJS.src = "header-standard-v4.js";
     headerJS.onload = () => {
-      initHeader();
-      initHeaderEnhancements();
+        setTimeout(() => {
+            initHeader();
+            initHeaderEnhancements();
+        }, 30); // Safari needs a tiny delay
     };
     document.body.appendChild(headerJS);
-  });
+})();
 </script>
+
 <script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
 <script src="analytics-tracker.js" defer></script>
 

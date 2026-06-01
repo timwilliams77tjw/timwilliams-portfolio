@@ -842,30 +842,32 @@ async function loadCPD() {
       tbody.appendChild(tr);
     });
 
-        // run the post‑processing pipeline, but don't let one error kill the rest
-    try {
-      calculateMetrics();
-    } catch (e) {
-      console.error("metrics error", e);
-    }
+    debug("loadCPD: table rows = " +
+      document.querySelectorAll("#cpd-body tr").length);
 
-    try {
-      generateInsights();
-    } catch (e) {
-      console.error("insights error", e);
-    }
-
-    try {
-      generateHeatmap();
-    } catch (e) {
-      console.error("heatmap error", e);
-    }
-
-  } catch (err) {
-    console.error("CPD load error:", err);
-    tbody.innerHTML = '<tr><td colspan="6">Unable to load CPD log</td></tr>';
-  }
+try {
+  calculateMetrics();
+  debug("calculateMetrics: OK");
+} catch (e) {
+  debug("calculateMetrics ERROR: " + e.message);
 }
+
+try {
+  generateInsights();
+  debug("generateInsights: OK");
+} catch (e) {
+  debug("generateInsights ERROR: " + e.message);
+}
+
+try {
+  generateHeatmap();
+  debug("generateHeatmap: OK");
+  debug("heatmap cells = " +
+        document.getElementById("heatmap-grid").children.length);
+} catch (e) {
+  debug("generateHeatmap ERROR: " + e.message);
+}
+
 
 document.addEventListener("DOMContentLoaded", loadCPD);
 </script>
@@ -941,6 +943,7 @@ function calculateMetrics() {
 </script>
 
 <script>
+  debug("generateHeatmap: starting");
 function generateHeatmap() {
   const rows = [...document.querySelectorAll("#cpd-body tr")];
   if (!rows.length) return;
@@ -987,6 +990,8 @@ function generateHeatmap() {
     heatmap.appendChild(cell);
   }
 }
+  debug("generateHeatmap: finished, cells = " +
+      document.getElementById("heatmap-grid").children.length);
 </script>
 
 <script>
@@ -1812,7 +1817,12 @@ function generateInsights() {
       if (footer) footer.innerHTML = h;
     });
 </script>
-
+<script>
+function debug(msg) {
+  const box = document.getElementById("debug-panel");
+  if (box) box.textContent += "\n" + msg;
+}
+</script>
 <!-- ACCORDION OPEN/CLOSE -->
 <script>
   document.querySelectorAll(".accordion-header").forEach(header => {
@@ -1918,7 +1928,16 @@ function generateInsights() {
   }, 300);
 })();
 </script>
-
+<div id="debug-panel" style="
+  background:#111;
+  color:#0f0;
+  padding:10px;
+  font-size:12px;
+  margin:20px 0;
+  white-space:pre-wrap;
+  border-radius:8px;">
+  Debug panel initialised…
+</div>
 </main>
 </body>
 </html>

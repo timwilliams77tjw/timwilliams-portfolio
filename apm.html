@@ -842,10 +842,25 @@ async function loadCPD() {
       tbody.appendChild(tr);
     });
 
-    // keep your existing pipeline
-    calculateMetrics();
-    generateInsights();
-    generateHeatmap();
+        // run the post‑processing pipeline, but don't let one error kill the rest
+    try {
+      calculateMetrics();
+    } catch (e) {
+      console.error("metrics error", e);
+    }
+
+    try {
+      generateInsights();
+    } catch (e) {
+      console.error("insights error", e);
+    }
+
+    try {
+      generateHeatmap();
+    } catch (e) {
+      console.error("heatmap error", e);
+    }
+
   } catch (err) {
     console.error("CPD load error:", err);
     tbody.innerHTML = '<tr><td colspan="6">Unable to load CPD log</td></tr>';

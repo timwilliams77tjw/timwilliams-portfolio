@@ -770,11 +770,42 @@ body.page-prof-dev #footer a {
   </section>
 </section>
 
-<!-- ============================= -->
-<!-- CPD SCRIPTS (ALL FUNCTIONAL) -->
-<!-- ============================= -->
-
 <script>
+/* SIMPLE, SAFE CSV PARSER (NO REGEX) */
+function parseCsvLine(line) {
+  const cells = [];
+  let current = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    const next = i + 1 < line.length ? line[i + 1] : "";
+
+    if (ch === '"' && !inQuotes) {
+      // starting quoted field
+      inQuotes = true;
+    } else if (ch === '"' && inQuotes) {
+      // possible end of quoted field or escaped quote
+      if (next === '"') {
+        // escaped quote ("")
+        current += '"';
+        i++; // skip next
+      } else {
+        inQuotes = false;
+      }
+    } else if (ch === ',' && !inQuotes) {
+      // field separator
+      cells.push(current);
+      current = "";
+    } else {
+      current += ch;
+    }
+  }
+
+  cells.push(current);
+  return cells.map(c => c.trim());
+}
+
 /* LOAD CPD FROM GOOGLE SHEETS (CSV) */
 async function loadCPD() {
   const url =
@@ -786,41 +817,43 @@ async function loadCPD() {
     const res = await fetch(url);
     const csv = await res.text();
 
-const rows = csv
-  .trim()
-  .split(/\r?\n/)
-  .map(line =>
-    line
-      .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
-      .map(cell => cell.replace(/^"|"$/g, ""))
-  );
+    const lines = csv.trim().split(/\r?\n/);
+    if (!lines.length) {
+      tbody.innerHTML = '<tr><td colspan="6">No CPD data found</td></tr>';
+      return;
+    }
 
+    // remove header row
+    lines.shift();
 
-    rows.shift(); // remove header
     tbody.innerHTML = "";
 
-    rows.forEach(row => {
+    lines.forEach(line => {
+      const row = parseCsvLine(line);
       const tr = document.createElement("tr");
+
       row.forEach(cell => {
         const td = document.createElement("td");
-        td.textContent = cell;
+        td.textContent = cell.replace(/^"|"$/g, "");
         tr.appendChild(td);
       });
+
       tbody.appendChild(tr);
     });
 
+    // keep your existing pipeline
     calculateMetrics();
     generateInsights();
     generateHeatmap();
-
   } catch (err) {
-    tbody.innerHTML = '<tr><td colspan="6">Unable to load CPD log</td></tr>';
     console.error("CPD load error:", err);
+    tbody.innerHTML = '<tr><td colspan="6">Unable to load CPD log</td></tr>';
   }
 }
 
 document.addEventListener("DOMContentLoaded", loadCPD);
 </script>
+
 
 <script>
 /* US DATE PARSER (MM/DD/YYYY → JS Date) */

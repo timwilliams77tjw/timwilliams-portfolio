@@ -771,8 +771,16 @@ body.page-prof-dev #footer a {
   </section>
 </section>
 
+<!-- DEBUG HELPER -->
 <script>
-/* SIMPLE, SAFE CSV PARSER (NO REGEX) */
+function debug(msg) {
+  const box = document.getElementById("debug-panel");
+  if (box) box.textContent += "\n" + msg;
+}
+</script>
+
+<!-- CSV PARSER -->
+<script>
 function parseCsvLine(line) {
   const cells = [];
   let current = "";
@@ -783,19 +791,15 @@ function parseCsvLine(line) {
     const next = i + 1 < line.length ? line[i + 1] : "";
 
     if (ch === '"' && !inQuotes) {
-      // starting quoted field
       inQuotes = true;
     } else if (ch === '"' && inQuotes) {
-      // possible end of quoted field or escaped quote
       if (next === '"') {
-        // escaped quote ("")
         current += '"';
-        i++; // skip next
+        i++;
       } else {
         inQuotes = false;
       }
     } else if (ch === ',' && !inQuotes) {
-      // field separator
       cells.push(current);
       current = "";
     } else {
@@ -806,9 +810,13 @@ function parseCsvLine(line) {
   cells.push(current);
   return cells.map(c => c.trim());
 }
+</script>
 
-/* LOAD CPD FROM GOOGLE SHEETS (CSV) */
+<!-- LOAD CPD -->
+<script>
 async function loadCPD() {
+  debug("loadCPD: starting");
+
   const url =
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
 
@@ -824,9 +832,7 @@ async function loadCPD() {
       return;
     }
 
-    // remove header row
-    lines.shift();
-
+    lines.shift(); // remove header
     tbody.innerHTML = "";
 
     lines.forEach(line => {
@@ -843,40 +849,42 @@ async function loadCPD() {
     });
 
     debug("loadCPD: table rows = " +
-      document.querySelectorAll("#cpd-body tr").length);
+          document.querySelectorAll("#cpd-body tr").length);
 
-try {
-  calculateMetrics();
-  debug("calculateMetrics: OK");
-} catch (e) {
-  debug("calculateMetrics ERROR: " + e.message);
+    try {
+      calculateMetrics();
+      debug("calculateMetrics: OK");
+    } catch (e) {
+      debug("calculateMetrics ERROR: " + e.message);
+    }
+
+    try {
+      generateInsights();
+      debug("generateInsights: OK");
+    } catch (e) {
+      debug("generateInsights ERROR: " + e.message);
+    }
+
+    try {
+      generateHeatmap();
+      debug("generateHeatmap: OK");
+      debug("heatmap cells = " +
+            document.getElementById("heatmap-grid").children.length);
+    } catch (e) {
+      debug("generateHeatmap ERROR: " + e.message);
+    }
+
+  } catch (err) {
+    debug("loadCPD ERROR: " + err.message);
+    tbody.innerHTML = '<tr><td colspan="6">Unable to load CPD log</td></tr>';
+  }
 }
 
-try {
-  generateInsights();
-  debug("generateInsights: OK");
-} catch (e) {
-  debug("generateInsights ERROR: " + e.message);
-}
-
-try {
-  generateHeatmap();
-  debug("generateHeatmap: OK");
-  debug("heatmap cells = " +
-        document.getElementById("heatmap-grid").children.length);
-} catch (e) {
-  debug("generateHeatmap ERROR: " + e.message);
-}
-
-</script>
-
-
-<script>
 document.addEventListener("DOMContentLoaded", loadCPD);
 </script>
 
+<!-- US DATE PARSER -->
 <script>
-/* US DATE PARSER (MM/DD/YYYY → JS Date) */
 function parseUSDate(d) {
   if (!d || typeof d !== "string") return null;
   const parts = d.split("/");
@@ -885,8 +893,8 @@ function parseUSDate(d) {
 }
 </script>
 
+<!-- METRICS -->
 <script>
-/* METRICS (TOTAL HOURS, REMAINING, TOP CATEGORY, PROJECTED) */
 function calculateMetrics() {
   const rows = [...document.querySelectorAll("#cpd-body tr")];
   if (!rows.length) return;
@@ -916,6 +924,7 @@ function calculateMetrics() {
     }
 
     const endDate = parseUSDate(endDateRaw);
+
     if (!endDate || isNaN(endDate.getTime())) {
       ongoingHours += hours;
     } else if (endDate < today) {
@@ -944,9 +953,11 @@ function calculateMetrics() {
 }
 </script>
 
+<!-- HEATMAP -->
 <script>
-  debug("generateHeatmap: starting");
 function generateHeatmap() {
+  debug("generateHeatmap: starting");
+
   const rows = [...document.querySelectorAll("#cpd-body tr")];
   if (!rows.length) return;
 
@@ -962,6 +973,7 @@ function generateHeatmap() {
 
     const startDateRaw = cells[1].textContent.trim();
     const date = parseUSDate(startDateRaw);
+
     if (!date || isNaN(date.getTime())) return;
     if (date < oneYearAgo || date > today) return;
 
@@ -973,6 +985,7 @@ function generateHeatmap() {
   heatmap.innerHTML = "";
 
   const days = 365;
+
   for (let i = 0; i < days; i++) {
     const d = new Date(oneYearAgo);
     d.setDate(oneYearAgo.getDate() + i);
@@ -991,13 +1004,14 @@ function generateHeatmap() {
     cell.title = key + ": " + count + " activities";
     heatmap.appendChild(cell);
   }
-}
+
   debug("generateHeatmap: finished, cells = " +
-      document.getElementById("heatmap-grid").children.length);
+        document.getElementById("heatmap-grid").children.length);
+}
 </script>
 
+<!-- INSIGHTS -->
 <script>
-/* INSIGHTS PANEL (THEMES, STRENGTHS, GROWTH) */
 function generateInsights() {
   const rows = [...document.querySelectorAll("#cpd-body tr")];
   if (!rows.length) return;
@@ -1060,7 +1074,7 @@ function generateInsights() {
 
   const addList = (id, items) => {
     const el = document.getElementById(id);
-    el.innerHTML = items.map(i => `<li>${i}</li>`).join("");
+    el.innerHTML = items.map(i => "<li>" + i + "</li>").join("");
   };
 
   addList("insight-themes", themes.length ? themes : ["No dominant themes detected"]);
@@ -1068,6 +1082,8 @@ function generateInsights() {
   addList("insight-growth", growth.length ? growth : ["No clear growth areas detected"]);
 }
 </script>
+
+
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section>
   <h2 class="section-heading">

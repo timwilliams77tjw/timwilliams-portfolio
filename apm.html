@@ -14,9 +14,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
- /* =========================================
-   ROOT + GLOBAL
+
+/* =========================================
+ROOT + GLOBAL
 ========================================= */
+
 :root {
   --apm-card-bg: #ffffff;
   --apm-shadow: 0 4px 14px rgba(0,0,0,0.06);
@@ -38,8 +40,9 @@ body.page-prof-dev {
 }
 
 /* =========================================
-   HERO
+HERO
 ========================================= */
+
 .hero-section {
   margin-bottom: 2rem;
 }
@@ -68,9 +71,7 @@ body.page-prof-dev {
 }
 
 @media (max-width: 700px) {
-  .hero-section h1 {
-    font-size: 2.1rem;
-  }
+  .hero-section h1 { font-size: 2.1rem; }
   .hero-section img {
     float: none;
     display: block;
@@ -81,8 +82,9 @@ body.page-prof-dev {
 }
 
 /* =========================================
-   SECTION HEADINGS
+SECTION HEADINGS
 ========================================= */
+
 .section-heading {
   font-size: 1.6rem;
   font-weight: 700;
@@ -106,8 +108,9 @@ body.page-prof-dev {
 }
 
 /* =========================================
-   INFO CARDS
+INFO CARDS
 ========================================= */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -139,11 +142,6 @@ body.page-prof-dev {
   gap: 0.55rem;
 }
 
-.info-card h3 i {
-  color: var(--apm-blue);
-  font-size: 1.1rem;
-}
-
 .info-card p {
   font-size: 0.95rem;
   color: #444;
@@ -152,8 +150,9 @@ body.page-prof-dev {
 }
 
 /* =========================================
-   CPD TABLE
+CPD TABLE
 ========================================= */
+
 .cpd-table-wrapper {
   margin-top: 1.5rem;
   overflow-x: auto;
@@ -182,22 +181,14 @@ table.cpd-table td {
   vertical-align: top;
 }
 
-table.cpd-table th {
-  font-weight: 600;
-  white-space: nowrap;
-}
-
 table.cpd-table tbody tr:nth-child(even) {
   background: #f8fafc;
 }
 
-table.cpd-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
 /* =========================================
-   RATING BADGES
+RATING BADGES
 ========================================= */
+
 .rating-badge {
   display: inline-block;
   padding: 6px 14px;
@@ -216,22 +207,21 @@ table.cpd-table tbody tr:last-child td {
 .rating-aware { background: #555; }
 
 /* =========================================
-   ACCORDION
+ACCORDION
 ========================================= */
+
 .accordion-item {
   margin-bottom: 1.4rem;
   padding: 1rem 1.2rem;
   border-radius: 12px;
   background: #fff;
   box-shadow: var(--apm-shadow);
-  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .accordion-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
   cursor: pointer;
 }
 
@@ -241,48 +231,10 @@ table.cpd-table tbody tr:last-child td {
   border-top: 1px solid #e5e5e5;
 }
 
-details summary {
-  margin-top: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 6px 0;
-}
-
-details {
-  margin-top: 0.5rem;
-  border-top: 1px solid #e5e5e5;
-  padding-top: 0.75rem;
-}
-
-/* Colour accordion items by rating */
-.accordion-item:has(.rating-expert) {
-  background: #e6f0ff;
-  border-left: 4px solid #0a66c2;
-}
-
-.accordion-item:has(.rating-proficient) {
-  background: #e5f7f1;
-  border-left: 4px solid #007b5f;
-}
-
-.accordion-item:has(.rating-competent) {
-  background: #fff7e5;
-  border-left: 4px solid #b8860b;
-}
-
-.accordion-item:has(.rating-practised) {
-  background: #f3e9ff;
-  border-left: 4px solid #8a2be2;
-}
-
-.accordion-item:has(.rating-aware) {
-  background: #f2f2f2;
-  border-left: 4px solid #555;
-}
-
 /* =========================================
-   CAROUSEL
+CAROUSEL
 ========================================= */
+
 .carousel-wrapper {
   position: relative;
   width: 100%;
@@ -308,42 +260,10 @@ details {
   scroll-snap-align: start;
 }
 
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: white;
-  border: 2px solid var(--apm-blue);
-  color: var(--apm-blue);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-.carousel-btn:hover {
-  background: var(--apm-blue);
-  color: white;
-}
-
-.carousel-btn.prev { left: -10px; }
-.carousel-btn.next { right: -10px; }
-
-@media (max-width: 600px) {
-  .carousel-btn.prev { left: 5px; }
-  .carousel-btn.next { right: 5px; }
-}
-
 /* =========================================
-   CPD PROGRESS RING
+CPD PROGRESS RING
 ========================================= */
+
 .cpd-progress-section {
   margin: 2rem 0 3rem;
   text-align: center;
@@ -354,10 +274,6 @@ details {
   width: 180px;
   height: 180px;
   margin: 0 auto 1.5rem;
-}
-
-.cpd-progress-ring {
-  transform: rotate(-90deg);
 }
 
 .cpd-ring-bg {
@@ -375,29 +291,10 @@ details {
   transition: stroke-dasharray 1s ease;
 }
 
-.cpd-progress-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.cpd-progress-text h3 {
-  font-size: 1.1rem;
-  margin: 0;
-  font-weight: 700;
-  color: #0a2540;
-}
-
-.cpd-progress-text p {
-  margin: 4px 0 0;
-  font-size: 0.85rem;
-  color: #555;
-}
-
 /* =========================================
-   CPD METRICS
+CPD METRICS
 ========================================= */
+
 .cpd-metrics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -418,8 +315,6 @@ details {
   font-weight: 600;
   color: var(--apm-subtext);
   margin: 0 0 0.35rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .cpd-metric-card p {
@@ -430,8 +325,9 @@ details {
 }
 
 /* =========================================
-   INSIGHTS
+INSIGHTS
 ========================================= */
+
 .cpd-insights {
   margin: 3rem 0 3.5rem;
 }
@@ -450,69 +346,65 @@ details {
   border-left: 5px solid var(--apm-accent);
 }
 
-.insight-card h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--apm-blue);
-  margin-bottom: 0.7rem;
+/* =========================================
+HEATMAP — FINAL, CLEAN, SAFARI‑SAFE
+========================================= */
+
+#heatmap-grid {
+  min-height: 120px;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
 }
 
-.insight-card ul {
-  margin: 0;
-  padding-left: 1.2rem;
-  color: var(--apm-subtext);
-  line-height: 1.6;
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(53, 1fr);
+  grid-auto-rows: 12px;
+  gap: 3px;
+  padding-bottom: 0.5rem;
 }
 
-.insight-card li {
-  margin-bottom: 0.35rem;
+.heatmap-cell {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
 }
+
+.heatmap-cell.level-0 { background: #eef2f7; }
+.heatmap-cell.level-1 { background: #cfe8ff; }
+.heatmap-cell.level-2 { background: #7ac0f9; }
+.heatmap-cell.level-3 { background: #0a66c2; }
+.heatmap-cell.level-4 { background: #003a73; }
 
 /* =========================================
-   HEATMAP (FIXED + SAFARI SAFE)
+APM PROGRESS BAR — FINAL
 ========================================= */
-.cpd-heatmap {
-  margin: 3rem 0 3.5rem;
-}
 
-
-/* =========================================
-   APM PROGRESS BAR (FIXED)
-========================================= */
 .apm-progress-bar {
   width: 100%;
   height: 28px;
   border-radius: 6px;
   overflow: hidden;
-  margin: 1rem 0;
   background-image: linear-gradient(
     to right,
-    #d9534f 0%,  #d9534f 10%,  /* unaware 10% */
-    #f0ad4e 10%, #f0ad4e 30%,  /* aware 20% */
-    #8a2be2 30%, #8a2be2 55%,  /* practised 25% */
-    #b8860b 55%, #b8860b 75%,  /* competent 20% */
-    #007b5f 75%, #007b5f 90%,  /* proficient 15% */
-    #0a66c2 90%, #0a66c2 100%  /* expert 10% */
+    #d9534f 0%, #d9534f 10%,
+    #f0ad4e 10%, #f0ad4e 30%,
+    #8a2be2 30%, #8a2be2 55%,
+    #b8860b 55%, #b8860b 75%,
+    #007b5f 75%, #007b5f 90%,
+    #0a66c2 90%, #0a66c2 100%
   );
+  background-size: 100% 100%;
 }
-
-
-.unaware { background: #d9534f; }
-.aware { background: #f0ad4e; }
-.practised { background: #8a2be2; }
-.competent { background: #b8860b; }
-.proficient { background: #007b5f; }
-.expert { background: #0a66c2; }
 
 /* =========================================
-   FOOTER + FAB
+FOOTER
 ========================================= */
-#footer {
-  margin-top: 3rem;
-}
 
-body.page-prof-dev #footer,
-body.page-prof-dev #footer footer {
+body.page-prof-dev #footer {
   margin-top: 3rem;
   padding: 2rem 1.5rem;
   border-top: 1px solid #e5e5e5;
@@ -525,83 +417,8 @@ body.page-prof-dev #footer a {
   color: #ffffff;
 }
 
-.fab {
-  position: fixed;
-  right: 16px;
-  bottom: calc(20px + env(safe-area-inset-bottom));
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: #ffffff;
-  color: var(--apm-blue);
-  border: 2px solid var(--apm-blue);
-  font-size: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  z-index: 9999;
-}
+</style>
 
-.fab-booking {
-  bottom: calc(84px + env(safe-area-inset-bottom));
-}
-
-@media (max-width: 480px) {
-  .fab {
-    right: 14px;
-    bottom: calc(18px + env(safe-area-inset-bottom));
-  }
-  .fab-booking {
-    bottom: calc(80px + env(safe-area-inset-bottom));
-  }
-}
-
- /* FIX SAFARI HEATMAP + PROGRESS BAR VISIBILITY */
-
-.apm-progress-bar {
-  min-height: 28px !important;
-  display: block !important;
-}
-
-
-/* SAFARI FIX — PROGRESS BAR VISIBILITY */
-.apm-progress-bar {
-  min-height: 28px !important;
-  display: block !important;
-  background-size: 100% 100% !important;
-}
-
-
-
-
-/* FINAL HEATMAP — CLEAN, CORRECT, SAFARI‑SAFE */
-.heatmap-grid {
-  display: grid;
-  grid-template-columns: repeat(53, 1fr);
-  grid-auto-rows: 12px;
-  gap: 3px;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.5rem;
-}
-
-.heatmap-cell {
-  display: block;
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-}
-
-/* COLOUR LEVELS */
-.heatmap-cell.level-0 { background: #eef2f7; }
-.heatmap-cell.level-1 { background: #cfe8ff; }
-.heatmap-cell.level-2 { background: #7ac0f9; }
-.heatmap-cell.level-3 { background: #0a66c2; }
-.heatmap-cell.level-4 { background: #003a73; }
-  
-  
-  </style>
 </head>
 
 <body class="header-with-logo page-prof-dev">

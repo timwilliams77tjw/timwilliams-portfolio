@@ -640,6 +640,28 @@ body.page-prof-dev #footer a {
   min-height: 28px !important;
   display: block !important;
 }
+/* SAFARI FIX — FORCE HEATMAP CELLS TO RENDER AS BLOCKS */
+.heatmap-cell {
+  display: block !important;
+  width: 12px !important;
+  height: 12px !important;
+  background-clip: padding-box !important;
+}
+
+/* SAFARI FIX — ENSURE GRID DOES NOT COLLAPSE */
+#heatmap-grid {
+  min-height: 120px !important;
+  overflow-x: scroll !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* SAFARI FIX — PROGRESS BAR VISIBILITY */
+.apm-progress-bar {
+  min-height: 28px !important;
+  display: block !important;
+  background-size: 100% 100% !important;
+}
+    
   </style>
 </head>
 

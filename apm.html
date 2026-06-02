@@ -681,6 +681,28 @@ body.page-prof-dev #footer a {
   display: block !important;
   background-size: 100% 100% !important;
 }
+/* DEBUG: make heatmap cells brutally obvious */
+.heatmap-grid {
+  grid-template-columns: repeat(20, 1fr) !important; /* fewer, wider columns */
+  grid-auto-rows: 20px !important;
+  min-height: 200px !important;
+  overflow-x: scroll !important;
+  -webkit-overflow-scrolling: touch;
+  background: #ddd;
+}
+
+.heatmap-cell {
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 1px solid #000 !important;
+  background: #eef2f7 !important; /* base colour for level-0 */
+}
+
+.heatmap-cell.level-1 { background: #cfe8ff !important; }
+.heatmap-cell.level-2 { background: #7ac0f9 !important; }
+.heatmap-cell.level-3 { background: #0a66c2 !important; }
+.heatmap-cell.level-4 { background: #003a73 !important; }
 
   </style>
 </head>

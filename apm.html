@@ -476,21 +476,22 @@ details {
 }
 
 .heatmap-grid {
-  display: grid;
-  grid-template-columns: repeat(53, 1fr);
-  grid-auto-rows: 12px; /* SAFARI FIX */
-  gap: 3px;
-  max-width: 100%;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
+  display:grid;
+  grid-template-columns:repeat(53, 12px);
+  grid-template-rows:repeat(7, 12px);
+  gap:3px;
+
+  width:max-content;
+  overflow-x:auto;
+
+  padding:10px;
 }
 
 .heatmap-cell {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  background: var(--apm-card-bg);
-  transition: background 0.2s ease;
+  width:12px;
+  height:12px;
+  border-radius:2px;
+  display:block;
 }
 
 .heatmap-cell.level-1 { background: #cfe8ff; }
@@ -666,21 +667,22 @@ body.page-prof-dev #footer a {
 }
 /* FINAL SAFARI‑SAFE HEATMAP */
 .heatmap-grid {
-  display: grid;
-  grid-template-columns: repeat(53, 1fr);
-  grid-auto-rows: 12px;
-  gap: 3px;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.5rem;
+  display:grid;
+  grid-template-columns:repeat(53, 12px);
+  grid-template-rows:repeat(7, 12px);
+  gap:3px;
+
+  width:max-content;
+  overflow-x:auto;
+
+  padding:10px;
 }
 
 .heatmap-cell {
-  display: block;
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  background: #eef2f7; /* level-0 */
+  width:12px;
+  height:12px;
+  border-radius:2px;
+  display:block;
 }
 
 .heatmap-cell.level-1 { background: #cfe8ff; }
@@ -704,28 +706,31 @@ body.page-prof-dev #footer a {
   background-size: 100% 100%;
 }
 .heatmap-grid {
-  display: grid;
-  grid-template-columns: repeat(53, 1fr);
-  grid-auto-rows: 12px;
-  gap: 3px;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.5rem;
+  display:grid;
+  grid-template-columns:repeat(53, 12px);
+  grid-template-rows:repeat(7, 12px);
+  gap:3px;
+
+  width:max-content;
+  overflow-x:auto;
+
+  padding:10px;
 }
 
 .heatmap-cell {
-  display: block;
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  background: #eef2f7; /* level-0 */
+  width:12px;
+  height:12px;
+  border-radius:2px;
+  display:block;
 }
 
 .heatmap-cell.level-1 { background: #cfe8ff; }
 .heatmap-cell.level-2 { background: #7ac0f9; }
 .heatmap-cell.level-3 { background: #0a66c2; }
 .heatmap-cell.level-4 { background: #003a73; }
-  </style>
+    .heatmap-grid {
+  grid-auto-flow: column;
+}  </style>
 </head>
 
 <body class="header-with-logo page-prof-dev">

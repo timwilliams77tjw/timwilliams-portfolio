@@ -681,28 +681,29 @@ body.page-prof-dev #footer a {
   display: block !important;
   background-size: 100% 100% !important;
 }
-/* DEBUG: make heatmap cells brutally obvious */
+/* FINAL SAFARI‑SAFE HEATMAP */
 .heatmap-grid {
-  grid-template-columns: repeat(20, 1fr) !important; /* fewer, wider columns */
-  grid-auto-rows: 20px !important;
-  min-height: 200px !important;
-  overflow-x: scroll !important;
+  display: grid;
+  grid-template-columns: repeat(53, 1fr);
+  grid-auto-rows: 12px;
+  gap: 3px;
+  overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
-  background: #ddd;
+  padding-bottom: 0.5rem;
 }
 
 .heatmap-cell {
-  display: block !important;
-  width: 20px !important;
-  height: 20px !important;
-  border: 1px solid #000 !important;
-  background: #eef2f7 !important; /* base colour for level-0 */
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: #eef2f7; /* level-0 */
 }
 
-.heatmap-cell.level-1 { background: #cfe8ff !important; }
-.heatmap-cell.level-2 { background: #7ac0f9 !important; }
-.heatmap-cell.level-3 { background: #0a66c2 !important; }
-.heatmap-cell.level-4 { background: #003a73 !important; }
+.heatmap-cell.level-1 { background: #cfe8ff; }
+.heatmap-cell.level-2 { background: #7ac0f9; }
+.heatmap-cell.level-3 { background: #0a66c2; }
+.heatmap-cell.level-4 { background: #003a73; }
 
   </style>
 </head>

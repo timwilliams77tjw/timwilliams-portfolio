@@ -593,37 +593,20 @@ body.page-prof-dev #footer a {
     .heatmap-grid {
   background: #ddd;
 }
-  .heatmap-cell {
-  background: red !important;
-}
-  .apm-progress-bar {
-  border: 2px solid red !important;
-}
+
+
     #heatmap-grid, .apm-progress-bar {
   border: 3px solid lime !important;
   min-height: 120px !important;
   background: rgba(0,255,0,0.1) !important;
 }
-.heatmap-cell {
-  background: red !important;
-}
+
    #heatmap-grid {
   min-height: 150px !important;
   background: #eee !important;
 }
 
-.heatmap-cell {
-  width: 12px !important;
-  height: 12px !important;
-  background: red !important;
-  display: block !important;
-}
-.apm-progress-bar {
-  min-height: 28px !important;
-  display: block !important;
-  background-size: cover !important;
-  border: 2px solid red !important; /* temporary */
-}
+
  /* FIX SAFARI HEATMAP + PROGRESS BAR VISIBILITY */
 .heatmap-cell {
   display: block !important;
@@ -720,7 +703,28 @@ body.page-prof-dev #footer a {
   );
   background-size: 100% 100%;
 }
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(53, 1fr);
+  grid-auto-rows: 12px;
+  gap: 3px;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+}
 
+.heatmap-cell {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: #eef2f7; /* level-0 */
+}
+
+.heatmap-cell.level-1 { background: #cfe8ff; }
+.heatmap-cell.level-2 { background: #7ac0f9; }
+.heatmap-cell.level-3 { background: #0a66c2; }
+.heatmap-cell.level-4 { background: #003a73; }
   </style>
 </head>
 

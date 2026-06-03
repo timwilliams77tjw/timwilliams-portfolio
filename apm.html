@@ -1039,87 +1039,88 @@ function parseUSDate(d) {
 <!-- METRICS -->
 <script>
 function calculateMetrics() {
-  const rows = [...document.querySelectorAll("#cpd-body tr")];
-  if (!rows.length) return;
+    const rows = [...document.querySelectorAll("#cpd-body tr")];
+    if (!rows.length) return;
 
-  let totalHours = 0;
-  let completedHours = 0;
-  let ongoingHours = 0;
-  let activityCount = 0;
-  const categoryCounts = {};
-  const today = new Date();
+    let totalHours = 0;
+    let completedHours = 0;
+    let ongoingHours = 0;
+    let activityCount = 0;
+    const categoryCounts = {};
 
-  rows.forEach(row => {
-    const cells = row.querySelectorAll("td");
-    if (cells.length < 6) return;
+    const today = new Date();
 
-    const hours = parseFloat(cells[3].textContent.trim());
-    const endDateRaw = cells[2].textContent.trim();
-    const category = cells[4].textContent.trim();
+    rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        if (cells.length < 6) return;
 
-    if (isNaN(hours)) return;
+        const hours = parseFloat(cells[3].textContent.trim());
+        const endDateRaw = cells[2].textContent.trim();
+        const category = cells[4].textContent.trim();
 
-    totalHours += hours;
-    activityCount++;
+        if (isNaN(hours)) return;
 
-    if (category) {
-      categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+        totalHours += hours;
+        activityCount++;
+
+        if (category) {
+            categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+        }
+
+        const endDate = parseUSDate(endDateRaw);
+
+        if (!endDate || isNaN(endDate.getTime())) {
+            ongoingHours += hours;
+        } else if (endDate < today) {
+            completedHours += hours;
+        } else {
+            ongoingHours += hours;
+        }
+    });
+
+    const hoursRemaining = ongoingHours;
+    const avgHoursPerMonth = totalHours / 12;
+    const projectedHours = avgHoursPerMonth * 12;
+
+    let topCategory = "–";
+    if (Object.keys(categoryCounts).length > 0) {
+        topCategory = Object.entries(categoryCounts)
+            .sort((a, b) => b[1] - a[1])[0][0];
     }
 
-    const endDate = parseUSDate(endDateRaw);
+    // Update metric cards
+    document.getElementById("metric-total-hours").textContent = totalHours.toFixed(1);
+    document.getElementById("metric-hours-remaining").textContent = hoursRemaining.toFixed(1);
+    document.getElementById("metric-activities").textContent = activityCount;
+    document.getElementById("metric-hours-month").textContent = avgHoursPerMonth.toFixed(1);
+    document.getElementById("metric-top-category").textContent = topCategory;
+    document.getElementById("metric-projected-hours").textContent = projectedHours.toFixed(1);
 
-    if (!endDate || isNaN(endDate.getTime())) {
-      ongoingHours += hours;
-    } else if (endDate < today) {
-      completedHours += hours;
-    } else {
-      ongoingHours += hours;
+    // --- CPD WHEEL (correct placement) ---
+    const targetHours = totalHours + hoursRemaining; 
+    const completed = totalHours;
+    const remaining = Math.max(targetHours - completed, 0);
+
+    const completedEl = document.getElementById("cpd-wheel-completed");
+    const remainingEl = document.getElementById("cpd-wheel-remaining");
+
+    if (completedEl) {
+        completedEl.textContent = completed.toFixed(1) + " completed hours";
     }
-  });
+    if (remainingEl) {
+        remainingEl.textContent = remaining.toFixed(1) + " hours needed before 30 Sep 2026";
+    }
 
-  const hoursRemaining = ongoingHours;
-  const avgHoursPerMonth = totalHours / 12;
-  const projectedHours = avgHoursPerMonth * 12;
-
-  let topCategory = "–";
-  if (Object.keys(categoryCounts).length > 0) {
-    topCategory = Object.entries(categoryCounts)
-      .sort((a, b) => b[1] - a[1])[0][0];
-  }
-
-  document.getElementById("metric-total-hours").textContent = totalHours.toFixed(1);
-  document.getElementById("metric-hours-remaining").textContent = hoursRemaining.toFixed(1);
-  document.getElementById("metric-activities").textContent = activityCount;
-  document.getElementById("metric-hours-month").textContent = avgHoursPerMonth.toFixed(1);
-  document.getElementById("metric-top-category").textContent = topCategory;
-  document.getElementById("metric-projected-hours").textContent = projectedHours.toFixed(1);
+    // Progress ring
+    const ring = document.querySelector(".cpd-ring-fill");
+    if (ring && targetHours > 0) {
+        const radius = 80;
+        const circumference = 2 * Math.PI * radius;
+        const ratio = Math.min(completed / targetHours, 1);
+        ring.style.strokeDasharray = `${circumference * ratio} ${circumference}`;
+    }
 }
 
-  
-  // --- NEW: drive the wheel from the same numbers ---
-  const targetHours = totalHours + hoursRemaining; // or your real CPD target
-  const completed = totalHours;                     // or completedHours if you prefer
-  const remaining = Math.max(targetHours - completed, 0);
-
-  const completedEl = document.getElementById("cpd-wheel-completed");
-  const remainingEl = document.getElementById("cpd-wheel-remaining");
-
-  if (completedEl) {
-    completedEl.textContent = completed.toFixed(1) + " completed hours";
-  }
-  if (remainingEl) {
-    remainingEl.textContent = remaining.toFixed(1) + " hours needed before 30 Sep 2026";
-  }
-
-  // progress ring
-  const ring = document.querySelector(".cpd-ring-fill");
-  if (ring && targetHours > 0) {
-    const radius = 80;
-    const circumference = 2 * Math.PI * radius;
-    const ratio = Math.min(completed / targetHours, 1);
-    ring.style.strokeDasharray = `${circumference * ratio} ${circumference}`;
-  }
-}
   
 </script>
 

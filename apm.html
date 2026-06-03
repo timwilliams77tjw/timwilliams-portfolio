@@ -475,6 +475,34 @@ details {
   margin: 3rem 0 3.5rem;
 }
 
+.heatmap-grid {
+  display:grid;
+  grid-template-columns:repeat(53, 12px);
+  grid-template-rows:repeat(7, 12px);
+  gap:3px;
+
+  width:max-content;
+  overflow-x:auto;
+
+  padding:10px;
+}
+
+.heatmap-cell {
+  width:12px;
+  height:12px;
+  border-radius:2px;
+  display:block;
+}
+
+.heatmap-cell.level-1 { background: #cfe8ff; }
+.heatmap-cell.level-2 { background: #7ac0f9; }
+.heatmap-cell.level-3 { background: #0a66c2; }
+.heatmap-cell.level-4 { background: #003a73; }
+
+.heatmap-cell:hover {
+  outline: 2px solid var(--apm-accent);
+  cursor: pointer;
+}
 
 /* =========================================
    APM PROGRESS BAR (FIXED)
@@ -556,14 +584,60 @@ body.page-prof-dev #footer a {
     bottom: calc(80px + env(safe-area-inset-bottom));
   }
 }
+ .heatmap-grid {
+  border: 1px solid red;
+}
+.heatmap-cell.level-0 { background: #eef2f7; }
+    #heatmap-grid {
+  min-height: 100px;
+}
+    .heatmap-grid {
+  background: #ddd;
+}
+
+
+    #heatmap-grid, .apm-progress-bar {
+  border: 3px solid lime !important;
+  min-height: 120px !important;
+  background: rgba(0,255,0,0.1) !important;
+}
+
+   #heatmap-grid {
+  min-height: 150px !important;
+  background: #eee !important;
+}
+
 
  /* FIX SAFARI HEATMAP + PROGRESS BAR VISIBILITY */
+.heatmap-cell {
+  display: block !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.heatmap-grid {
+  overflow-x: scroll !important;
+  -webkit-overflow-scrolling: touch;
+}
 
 .apm-progress-bar {
   min-height: 28px !important;
   display: block !important;
 }
+/* SAFARI FIX — FORCE HEATMAP CELLS TO RENDER AS BLOCKS */
+.heatmap-cell {
+  display: block !important;
+  width: 12px !important;
+  height: 12px !important;
+  background-clip: padding-box !important;
+}
 
+/* SAFARI FIX — ENSURE GRID DOES NOT COLLAPSE */
+#heatmap-grid {
+  min-height: 120px !important;
+  overflow-x: scroll !important;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* SAFARI FIX — PROGRESS BAR VISIBILITY */
 .apm-progress-bar {
@@ -571,37 +645,92 @@ body.page-prof-dev #footer a {
   display: block !important;
   background-size: 100% 100% !important;
 }
+    /* SAFARI: FORCE HEATMAP CELLS TO HAVE REAL SIZE */
+.heatmap-cell {
+  display: inline-block !important;
+  width: 14px !important;
+  height: 14px !important;
+  background-clip: padding-box !important;
+}
 
-
-
-
-/* FINAL HEATMAP — CLEAN, CORRECT, SAFARI‑SAFE */
-.heatmap-grid {
-  display: grid;
-  grid-template-columns: repeat(53, 1fr);
-  grid-auto-rows: 12px;
-  gap: 3px;
-  overflow-x: scroll;
+/* SAFARI: FORCE GRID TO SHOW CELLS */
+#heatmap-grid {
+  min-height: 120px !important;
+  overflow-x: scroll !important;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.5rem;
+  align-items: start !important;
+}
+.apm-progress-bar {
+  min-height: 28px !important;
+  display: block !important;
+  background-size: 100% 100% !important;
+}
+/* FINAL SAFARI‑SAFE HEATMAP */
+.heatmap-grid {
+  display:grid;
+  grid-template-columns:repeat(53, 12px);
+  grid-template-rows:repeat(7, 12px);
+  gap:3px;
+
+  width:max-content;
+  overflow-x:auto;
+
+  padding:10px;
 }
 
 .heatmap-cell {
-  display: block;
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
+  width:12px;
+  height:12px;
+  border-radius:2px;
+  display:block;
 }
 
-/* COLOUR LEVELS */
-.heatmap-cell.level-0 { background: #eef2f7; }
 .heatmap-cell.level-1 { background: #cfe8ff; }
 .heatmap-cell.level-2 { background: #7ac0f9; }
 .heatmap-cell.level-3 { background: #0a66c2; }
 .heatmap-cell.level-4 { background: #003a73; }
-  
-  
-  </style>
+.apm-progress-bar {
+  width: 100%;
+  height: 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  background-image: linear-gradient(
+    to right,
+    #d9534f 0%, #d9534f 10%,
+    #f0ad4e 10%, #f0ad4e 30%,
+    #8a2be2 30%, #8a2be2 55%,
+    #b8860b 55%, #b8860b 75%,
+    #007b5f 75%, #007b5f 90%,
+    #0a66c2 90%, #0a66c2 100%
+  );
+  background-size: 100% 100%;
+}
+.heatmap-grid {
+  display:grid;
+  grid-template-columns:repeat(53, 12px);
+  grid-template-rows:repeat(7, 12px);
+  gap:3px;
+
+  width:max-content;
+  overflow-x:auto;
+
+  padding:10px;
+}
+
+.heatmap-cell {
+  width:12px;
+  height:12px;
+  border-radius:2px;
+  display:block;
+}
+
+.heatmap-cell.level-1 { background: #cfe8ff; }
+.heatmap-cell.level-2 { background: #7ac0f9; }
+.heatmap-cell.level-3 { background: #0a66c2; }
+.heatmap-cell.level-4 { background: #003a73; }
+    .heatmap-grid {
+  grid-auto-flow: column;
+}  </style>
 </head>
 
 <body class="header-with-logo page-prof-dev">

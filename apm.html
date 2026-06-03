@@ -797,10 +797,10 @@ body.page-prof-dev #footer a {
       <circle class="cpd-ring-fill" cx="90" cy="90" r="80" />
     </svg>
     <div class="cpd-progress-text">
-      <h3>120:55 Completed hours</h3>
-      <p>35 hours needed before 30 Sep 2026</p>
-    </div>
-  </div>
+  <h3 id="cpd-wheel-completed">Completed hours</h3>
+  <p id="cpd-wheel-remaining">Hours needed before 30 Sep 2026</p>
+</div>
+
 
   <h2 class="cpd-progress-heading">Development Goals</h2>
   <p class="cpd-progress-subtext">
@@ -1094,6 +1094,33 @@ function calculateMetrics() {
   document.getElementById("metric-top-category").textContent = topCategory;
   document.getElementById("metric-projected-hours").textContent = projectedHours.toFixed(1);
 }
+
+  
+  // --- NEW: drive the wheel from the same numbers ---
+  const targetHours = totalHours + hoursRemaining; // or your real CPD target
+  const completed = totalHours;                     // or completedHours if you prefer
+  const remaining = Math.max(targetHours - completed, 0);
+
+  const completedEl = document.getElementById("cpd-wheel-completed");
+  const remainingEl = document.getElementById("cpd-wheel-remaining");
+
+  if (completedEl) {
+    completedEl.textContent = completed.toFixed(1) + " completed hours";
+  }
+  if (remainingEl) {
+    remainingEl.textContent = remaining.toFixed(1) + " hours needed before 30 Sep 2026";
+  }
+
+  // progress ring
+  const ring = document.querySelector(".cpd-ring-fill");
+  if (ring && targetHours > 0) {
+    const radius = 80;
+    const circumference = 2 * Math.PI * radius;
+    const ratio = Math.min(completed / targetHours, 1);
+    ring.style.strokeDasharray = `${circumference * ratio} ${circumference}`;
+  }
+}
+  
 </script>
 
 <!-- HEATMAP -->

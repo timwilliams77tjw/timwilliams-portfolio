@@ -638,6 +638,62 @@ body.page-prof-dev #footer a {
   ) !important;
   background-size: 100% 100% !important;
 }
+/* FORCE PROGRESS BAR TO DISPLAY */
+.apm-progress-bar,
+.apm-progress-bar--static {
+  width: 100% !important;
+  height: 28px !important;
+  display: block !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  background-image: linear-gradient(
+    to right,
+    #d9534f 0%, #d9534f 10%,
+    #f0ad4e 10%, #f0ad4e 30%,
+    #8a2be2 30%, #8a2be2 55%,
+    #b8860b 55%, #b8860b 75%,
+    #007b5f 75%, #007b5f 90%,
+    #0a66c2 90%, #0a66c2 100%
+  ) !important;
+  background-size: 100% 100% !important;
+}
+
+/* FORCE HEATMAP TO DISPLAY */
+#heatmap-grid {
+  display: grid !important;
+  grid-template-columns: repeat(53, 1fr) !important;
+  grid-auto-rows: 12px !important;
+  gap: 3px !important;
+  overflow-x: scroll !important;
+  -webkit-overflow-scrolling: touch !important;
+  min-height: 120px !important;
+}
+
+.heatmap-cell {
+  display: block !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 3px !important;
+}
+
+/* FORCE HEATMAP COLOURS */
+.heatmap-cell.level-0 { background: #eef2f7 !important; }
+.heatmap-cell.level-1 { background: #cfe8ff !important; }
+.heatmap-cell.level-2 { background: #7ac0f9 !important; }
+.heatmap-cell.level-3 { background: #0a66c2 !important; }
+.heatmap-cell.level-4 { background: #003a73 !important; }
+
+/* FORCE CPD CIRCLE TO RENDER CORRECTLY */
+.cpd-ring-fill,
+.cpd-ring-bg {
+  stroke-width: 12 !important;
+  fill: none !important;
+}
+
+.cpd-progress-ring {
+  overflow: visible !important;
+  transform: rotate(-90deg) !important;
+}
 
   </style>
 </head>

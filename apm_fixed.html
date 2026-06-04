@@ -1034,29 +1034,59 @@ function updateProgressRing(completed, target) {
    HEATMAP
 ========================================================== */
 function generateHeatmap() {
+    const rows = [...document.querySelectorAll("#cpd-body tr")];
+    if (!rows.length) return;
 
-    debug("Generating heatmap");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-  const heatmap = document.getElementById("heatmap-grid");
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(today.getFullYear() - 1);
+    oneYearAgo.setHours(0, 0, 0, 0);
 
-if (!heatmap) {
-  console.log("Heatmap not found");
-  return;
+    const activityMap = {};
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        if (cells.length < 2) return;
+
+        const startDateRaw = cells[1].textContent.trim();
+        const date = parseUSDate(startDateRaw);
+        if (!date) return;
+
+        date.setHours(0, 0, 0, 0);
+
+        if (date < oneYearAgo || date > today) return;
+
+        const key = date.toISOString().split("T")[0];
+        activityMap[key] = (activityMap[key] || 0) + 1;
+    });
+
+    const heatmap = document.getElementById("heatmap-grid");
+    if (!heatmap) return;
+
+    heatmap.innerHTML = "";
+
+    const days = 365;
+    for (let i = 0; i < days; i++) {
+        const d = new Date(oneYearAgo);
+        d.setDate(oneYearAgo.getDate() + i);
+
+        const key = d.toISOString().split("T")[0];
+        const count = activityMap[key] || 0;
+
+        let level = 0;
+        if (count >= 4) level = 4;
+        else if (count === 3) level = 3;
+        else if (count === 2) level = 2;
+        else if (count === 1) level = 1;
+
+        const cell = document.createElement("div");
+        cell.className = "heatmap-cell level-" + level;
+        cell.title = key + ": " + count + " activities";
+        heatmap.appendChild(cell);
+    }
 }
-
-heatmap.innerHTML = "";
-
-for (let i = 0; i < 50; i++) {
-  const cell = document.createElement("div");
-  cell.className = "heatmap-cell level-4";
-  heatmap.appendChild(cell);
-}
-
-return;
-
-    debug("Heatmap generated");
-}
-
 /* ==========================================================
    INSIGHTS
 ========================================================== */

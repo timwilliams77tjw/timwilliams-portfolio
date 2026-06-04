@@ -849,6 +849,24 @@ async function loadCPD() {
 
       tbody.appendChild(tr);
     });
+    debug("loadCPD: table rows = " + tbody.rows.length);
+
+    calculateMetrics();
+    debug("calculateMetrics: OK");
+
+    generateInsights();
+    debug("generateInsights: OK");
+
+    generateHeatmap();
+    debug("generateHeatmap: OK");
+
+  } catch (err) {
+    console.error(err);
+
+    tbody.innerHTML =
+      '<tr><td colspan="6">Unable to load CPD log</td></tr>';
+  }
+}
 </script>
 <!-- US DATE PARSER -->
 <script>
@@ -1927,6 +1945,9 @@ TEST BAR
     circle.style.strokeDashoffset = offset;
   }, 300);
 })();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", loadCPD);
 </script>
 </main>
 </body>

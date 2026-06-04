@@ -486,36 +486,13 @@ body.page-prof-dev #footer a {
 ========================================= */
 .apm-progress-bar {
   width: 100%;
-  height: 40px;
+  height: 40px !important;
 
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
+  background: red !important;
 
-  background-image: linear-gradient(
-    to right,
-    #d9534f 0%,
-    #d9534f 10%,
+  border: 5px solid blue !important;
 
-    #f0ad4e 10%,
-    #f0ad4e 30%,
-
-    #8a2be2 30%,
-    #8a2be2 55%,
-
-    #b8860b 55%,
-    #b8860b 75%,
-
-    #007b5f 75%,
-    #007b5f 90%,
-
-    #0a66c2 90%,
-    #0a66c2 100%
-  );
-
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-
-  margin: 1rem 0;
+  display: block !important;
 }
 /* =========================================
    CPD HEATMAP
@@ -1048,79 +1025,22 @@ function generateHeatmap() {
 
     debug("Generating heatmap");
 
-    const heatmap =
-        document.getElementById("heatmap-grid");
+  const heatmap = document.getElementById("heatmap-grid");
 
-    if (!heatmap) return;
+if (!heatmap) {
+  console.log("Heatmap not found");
+  return;
+}
 
-    const rows =
-        [...document.querySelectorAll("#cpd-body tr")];
+heatmap.innerHTML = "";
 
-    const today = new Date();
+for (let i = 0; i < 50; i++) {
+  const cell = document.createElement("div");
+  cell.className = "heatmap-cell level-4";
+  heatmap.appendChild(cell);
+}
 
-    const oneYearAgo = new Date();
-
-    oneYearAgo.setFullYear(
-        today.getFullYear() - 1
-    );
-
-    const activityMap = {};
-
-    rows.forEach(row => {
-
-        const cells = row.querySelectorAll("td");
-
-        if (cells.length < 2) return;
-
-        const date =
-            parseUSDate(cells[1].textContent.trim());
-
-        if (!date) return;
-
-        if (date < oneYearAgo || date > today)
-            return;
-
-        const key =
-            date.toISOString().split("T")[0];
-
-        activityMap[key] =
-            (activityMap[key] || 0) + 1;
-
-    });
-
-    heatmap.innerHTML = "";
-
-    for (let i = 0; i < 365; i++) {
-
-        const d = new Date(oneYearAgo);
-
-        d.setDate(oneYearAgo.getDate() + i);
-
-        const key =
-            d.toISOString().split("T")[0];
-
-        const count =
-            activityMap[key] || 0;
-
-        let level = 0;
-
-        if (count >= 4) level = 4;
-        else if (count === 3) level = 3;
-        else if (count === 2) level = 2;
-        else if (count === 1) level = 1;
-
-        const cell =
-            document.createElement("div");
-
-        cell.className =
-            "heatmap-cell level-" + level;
-
-        cell.title =
-            `${key}: ${count} activities`;
-
-        heatmap.appendChild(cell);
-
-    }
+return;
 
     debug("Heatmap generated");
 }

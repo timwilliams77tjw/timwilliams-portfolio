@@ -93,6 +93,38 @@
         text-align: left !important;
     }
 }
+.hero-rotator {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 25px 0 35px 0;
+}
+
+.rotator-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.rotator-img.active {
+  opacity: 1;
+}
+
+/* Mobile optimisation */
+@media (max-width: 480px) {
+  .hero-rotator {
+    height: 220px;
+    border-radius: 10px;
+  }
+}
+     
 </style>
 
     
@@ -143,6 +175,17 @@ fetch("header.html")
 
 <h1>TWC Ltd - Senior IT Programme Manager | Cyber Security & Cloud Transformation Leader</h1>
 
+<h1>TWC Ltd - Senior IT Programme Manager | Cyber Security & Cloud Transformation Leader</h1>
+
+<div class="hero-rotator">
+  <img src="img-cyber.jpg" class="rotator-img active" alt="Cyber security mesh and shield">
+  <img src="img-cloud.jpg" class="rotator-img" alt="Cloud transformation data flow">
+  <img src="img-workplace.jpg" class="rotator-img" alt="Modern workplace collaboration interface">
+  <img src="img-governance.jpg" class="rotator-img" alt="Programme governance dashboard">
+  <img src="img-transition.jpg" class="rotator-img" alt="Service transition process flow">
+  <img src="img-presales.jpg" class="rotator-img" alt="Technical blueprint architecture layers">
+</div>
+     
 <h2>Executive Profile</h2>
 <div class="card">
   <p>
@@ -312,6 +355,17 @@ fetch("footer.html")
 </script>
 
 
+<script>
+let index = 0;
+const images = document.querySelectorAll('.rotator-img');
 
+function rotateImages() {
+  images[index].classList.remove('active');
+  index = (index + 1) % images.length;
+  images[index].classList.add('active');
+}
+
+setInterval(rotateImages, 3500);
+</script>
 </body>
 </html>

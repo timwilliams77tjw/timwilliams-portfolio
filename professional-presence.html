@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Professional Presence Hub – Tim Williams</title>
+
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
+
+<style>
+/* PAGE WRAPPER */
+body.page-presence {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* HERO */
+.hero-section {
+    margin-bottom: 2rem;
+}
+.hero-section h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+.hero-section p {
+    font-size: 1.15rem;
+    color: var(--text-sub);
+    max-width: 720px;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+/* CARDS */
+.presence-card {
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: transform 0.25s ease;
+}
+.presence-card:hover {
+    transform: translateY(-6px);
+}
+.presence-card h3 {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-main);
+}
+.presence-card a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+.presence-card a:hover {
+    text-decoration: underline;
+}
+
+/* CTA BUTTON */
+.cta-btn {
+    display: inline-block;
+    padding: 12px 26px;
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+.cta-btn:hover {
+    background: #7ac0f9;
+    border-color: #001f3f;
+    color: #ffffff;
+}
+</style>
+</head>
+
+<body class="header-with-logo page-presence">
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+<script>
+fetch("header.html")
+.then(r => r.text())
+.then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+        initHeader();
+        initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+});
+</script>
+
+<main class="page-container">
+
+<section class="hero-section">
+    <h1>Professional Presence Hub</h1>
+    <p>Your verified professional profiles, memberships, certifications and learning records — all in one place.</p>
+</section>
+
+<div class="grid">
+
+    <article class="presence-card">
+        <h3>🌐 LinkedIn Profile</h3>
+        <a href="https://linkedin.com/in/timwilliams77" target="_blank">linkedin.com/in/timwilliams77</a>
+    </article>
+
+    <article class="presence-card">
+        <h3>🏢 Company LinkedIn</h3>
+        <a href="https://www.linkedin.com/company/tim-williams-consulting/" target="_blank">Tim Williams Consulting</a>
+    </article>
+
+    <article class="presence-card">
+        <h3>🎓 Credly Certifications</h3>
+        <a href="https://www.credly.com/users/tim-williams.e51205ae/badges#credly" target="_blank">View Credly Profile</a>
+    </article>
+
+    <article class="presence-card">
+        <h3>🛡️ APM Dashboard</h3>
+        <a href="https://www.apm.org.uk/myapm/my-dashboard/" target="_blank">APM Member Dashboard</a>
+    </article>
+
+    <article class="presence-card">
+        <h3>📘 PMI Community</h3>
+        <a href="https://community.pmi.org/profile/Timwilliams77" target="_blank">PMI Profile</a>
+    </article>
+
+    <article class="presence-card">
+        <h3>💼 Microsoft Learn</h3>
+        <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j" target="_blank">Microsoft Transcript</a>
+    </article>
+
+</div>
+
+<section style="margin-top: 3rem; text-align:center;">
+    <a href="sites.html" class="cta-btn">View Digital Presence</a>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+.then(r => r.text())
+.then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+</body>
+</html>

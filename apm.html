@@ -1102,7 +1102,7 @@ async function loadCPD() {
         generateHeatmap();
       generateDonutChart();
 generateRadarChart();
-    generateProgressPillars();
+
   
 
     } catch (err) {
@@ -1238,9 +1238,10 @@ function calculateMetrics() {
     updateProgressRing(totalHours, targetHours);
 
     debug("Metrics calculated");
-}
+      generateProgressPillars();}
 
-/* ==========================================================
+  
+  /* ==========================================================
    PROGRESS RING
 ========================================================== */
 function updateProgressRing(completed, target) {

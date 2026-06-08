@@ -1508,20 +1508,22 @@ function generateRadarChart() {
     svg.innerHTML += `<circle class="radar-point" cx="${x}" cy="${y}" r="2.5"></circle>`;
   });
 }
-  function generateProgressPillars() {
+function generateProgressPillars() {
   const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
   const remaining = parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
   const projected = parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
 
-  const max = Math.max(completed, remaining, projected, 1);
+  // FIXED SCALING:
+  // Scale pillars relative to completed + remaining (real values)
+  const max = completed + remaining || 1;
 
   const setPillar = (id, value, maxValue) => {
     const bar = document.getElementById(id);
-    const heightPercent = (value / maxValue) * 100;
+    const heightPercent = Math.min((value / maxValue) * 100, 100);
     bar.style.height = heightPercent + "%";
   };
 
-  // Set values
+  // Update visible numbers
   document.getElementById("pillar-completed-value").textContent = completed.toFixed(1);
   document.getElementById("pillar-remaining-value").textContent = remaining.toFixed(1);
   document.getElementById("pillar-projected-value").textContent = projected.toFixed(1);
@@ -1530,9 +1532,12 @@ function generateRadarChart() {
   setTimeout(() => {
     setPillar("pillar-completed", completed, max);
     setPillar("pillar-remaining", remaining, max);
+
+    // Projected is still shown, but scaled sensibly
     setPillar("pillar-projected", projected, max);
   }, 300);
 }
+
 
 </script>
 <!-- APM COMPETENCE FRAMEWORK GRID -->

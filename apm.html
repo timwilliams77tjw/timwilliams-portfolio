@@ -627,7 +627,49 @@ body.page-prof-dev #footer a {
   border-radius: 3px;
   margin-right: 0.6rem;
 }
+.cpd-radar-section {
+  margin: 3rem 0;
+}
 
+.radar-wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#radar-chart {
+  width: 320px;
+  height: 320px;
+}
+
+.radar-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.radar-legend li {
+  margin-bottom: 0.4rem;
+}
+
+.radar-grid {
+  stroke: #d0d7e2;
+  stroke-width: 0.5;
+  fill: none;
+}
+
+.radar-area {
+  fill: rgba(10, 102, 194, 0.35);
+  stroke: #0a66c2;
+  stroke-width: 2;
+}
+
+.radar-point {
+  fill: #0a66c2;
+}
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -993,7 +1035,7 @@ async function loadCPD() {
         generateInsights();
         generateHeatmap();
       generateDonutChart();
-
+generateRadarChart();
 
     } catch (err) {
 
@@ -1335,6 +1377,70 @@ if (document.readyState === "loading") {
     loadCPD();
 
 }
+function generateRadarChart() {
+  const svg = document.getElementById("radar-chart");
+  if (!svg) return;
+
+  // 1. Extract competence names + ratings from your page
+  const items = [...document.querySelectorAll(".info-card")].slice(0, 6);
+
+  const ratingMap = {
+    "Aware": 1,
+    "Practised": 2,
+    "Competent": 3,
+    "Proficient": 4,
+    "Expert": 5
+  };
+
+  const data = items.map(card => {
+    const title = card.querySelector("h3").innerText.trim();
+    const ratingBadge = card.querySelector(".rating-badge");
+    const ratingText = ratingBadge ? ratingBadge.innerText.trim() : "Competent";
+    return {
+      label: title,
+      value: ratingMap[ratingText] || 3
+    };
+  });
+
+  const legend = document.getElementById("radar-legend");
+  legend.innerHTML = data
+    .map(d => `<li>${d.label}: ${d.value}/5</li>`)
+    .join("");
+
+  // 2. Radar chart geometry
+  const maxValue = 5;
+  const radius = 50;
+  const angleStep = (Math.PI * 2) / data.length;
+
+  // Draw grid rings
+  for (let level = 1; level <= maxValue; level++) {
+    const r = (radius / maxValue) * level;
+    const points = data.map((_, i) => {
+      const angle = i * angleStep - Math.PI / 2;
+      return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
+    }).join(" ");
+    svg.innerHTML += `<polygon class="radar-grid" points="${points}"></polygon>`;
+  }
+
+  // 3. Draw data area
+  const areaPoints = data.map((d, i) => {
+    const r = (radius / maxValue) * d.value;
+    const angle = i * angleStep - Math.PI / 2;
+    return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
+  }).join(" ");
+
+  svg.innerHTML += `<polygon class="radar-area" points="${areaPoints}"></polygon>`;
+
+  // 4. Draw data points
+  data.forEach((d, i) => {
+    const r = (radius / maxValue) * d.value;
+    const angle = i * angleStep - Math.PI / 2;
+    const x = Math.cos(angle) * r;
+    const y = Math.sin(angle) * r;
+    svg.innerHTML += `<circle class="radar-point" cx="${x}" cy="${y}" r="2.5"></circle>`;
+  });
+}
+  
 </script>
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section>
@@ -1581,7 +1687,21 @@ if (document.readyState === "loading") {
     <li><strong>Sustainability in change initiatives:</strong> embed sustainability criteria into business cases, governance and benefits management.</li>
   </ul>
 </section>
+<section class="cpd-radar-section">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-chart-radar"></i>
+    APM Competence Radar
+  </h2>
+  <p class="section-subtitle">
+    Automatically generated from your competence ratings.
+  </p>
 
+  <div class="radar-wrapper">
+    <svg id="radar-chart" viewBox="-60 -60 120 120"></svg>
+
+    <ul id="radar-legend" class="radar-legend"></ul>
+  </div>
+</section>
 <!-- PERSONAL ASSESSMENT ACCORDION -->
 <section>
   <h2 class="section-heading">

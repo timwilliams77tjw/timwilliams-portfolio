@@ -670,7 +670,7 @@ body.page-prof-dev #footer a {
 .radar-point {
   fill: #0a66c2;
 }
- .cpd-pillars-section {
+.cpd-pillars-section {
   margin: 3rem 0;
 }
 
@@ -679,20 +679,26 @@ body.page-prof-dev #footer a {
   gap: 2rem;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: flex-end;
 }
 
 .pillar {
   flex: 1;
   min-width: 120px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .pillar-bar {
   width: 100%;
   height: 0;
+  max-height: 180px;          /* visual height of the column */
   background: linear-gradient(to top, #0a66c2, #4da3ff);
   border-radius: 8px;
   transition: height 1.2s ease;
+  align-self: stretch;
 }
 
 .pillar-label {
@@ -706,6 +712,7 @@ body.page-prof-dev #footer a {
   font-weight: 700;
   color: #0a2540;
 }
+
    
   </style>
 </head>
@@ -1203,42 +1210,38 @@ function calculateMetrics() {
         if (el) el.textContent = value;
     };
 
-    setText("metric-total-hours",
-        totalHours.toFixed(1));
+         // Use completedHours for "Total Hours" (completed CPD)
+    setText("metric-total-hours", completedHours.toFixed(1));
 
-    setText("metric-hours-remaining",
-        hoursRemaining.toFixed(1));
+    setText("metric-hours-remaining", hoursRemaining.toFixed(1));
+    setText("metric-activities", activityCount);
+    setText("metric-hours-month", avgHoursPerMonth.toFixed(1));
+    setText("metric-top-category", topCategory);
 
-    setText("metric-activities",
-        activityCount);
+    // Correct projected hours (completed + remaining)
+    const projectedTotal = completedHours + hoursRemaining;
+    setText("metric-projected-hours", projectedTotal.toFixed(1));
 
-    setText("metric-hours-month",
-        avgHoursPerMonth.toFixed(1));
-
-    setText("metric-top-category",
-        topCategory);
-
-    setText("metric-projected-hours",
-        projectedHours.toFixed(1));
-
-    const targetHours =
-        totalHours + hoursRemaining;
+    // Progress ring target
+    const targetHours = completedHours + hoursRemaining;
 
     setText(
         "cpd-wheel-completed",
-        totalHours.toFixed(1) + " completed hours"
+        completedHours.toFixed(1) + " completed hours"
     );
 
     setText(
         "cpd-wheel-remaining",
-        hoursRemaining.toFixed(1) +
-        " hours remaining"
+        hoursRemaining.toFixed(1) + " hours remaining"
     );
 
-    updateProgressRing(totalHours, targetHours);
+    updateProgressRing(completedHours, targetHours);
 
     debug("Metrics calculated");
-      generateProgressPillars();}
+
+    // Run pillars AFTER metrics are populated
+    generateProgressPillars();
+}
 
   
   /* ==========================================================

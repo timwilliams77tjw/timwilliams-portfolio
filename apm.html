@@ -670,6 +670,43 @@ body.page-prof-dev #footer a {
 .radar-point {
   fill: #0a66c2;
 }
+ .cpd-pillars-section {
+  margin: 3rem 0;
+}
+
+.pillars-wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.pillar {
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+}
+
+.pillar-bar {
+  width: 100%;
+  height: 0;
+  background: linear-gradient(to top, #0a66c2, #4da3ff);
+  border-radius: 8px;
+  transition: height 1.2s ease;
+}
+
+.pillar-label {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.pillar-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0a2540;
+}
+   
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -775,6 +812,35 @@ body.page-prof-dev #footer a {
   <div class="cpd-metric-card">
     <h4>Projected Hours</h4>
     <p id="metric-projected-hours">–</p>
+  </div>
+</section>
+<section class="cpd-pillars-section">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-chart-simple"></i>
+    CPD Progress Pillars
+  </h2>
+  <p class="section-subtitle">
+    A visual summary of your completed, remaining and projected CPD hours.
+  </p>
+
+  <div class="pillars-wrapper">
+    <div class="pillar">
+      <div class="pillar-bar" id="pillar-completed"></div>
+      <p class="pillar-label">Completed</p>
+      <p class="pillar-value" id="pillar-completed-value">–</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-bar" id="pillar-remaining"></div>
+      <p class="pillar-label">Remaining</p>
+      <p class="pillar-value" id="pillar-remaining-value">–</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-bar" id="pillar-projected"></div>
+      <p class="pillar-label">Projected</p>
+      <p class="pillar-value" id="pillar-projected-value">–</p>
+    </div>
   </div>
 </section>
 
@@ -1036,6 +1102,8 @@ async function loadCPD() {
         generateHeatmap();
       generateDonutChart();
 generateRadarChart();
+    generateProgressPillars();
+  
 
     } catch (err) {
 
@@ -1440,7 +1508,32 @@ function generateRadarChart() {
     svg.innerHTML += `<circle class="radar-point" cx="${x}" cy="${y}" r="2.5"></circle>`;
   });
 }
-  
+  function generateProgressPillars() {
+  const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
+  const remaining = parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
+  const projected = parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
+
+  const max = Math.max(completed, remaining, projected, 1);
+
+  const setPillar = (id, value, maxValue) => {
+    const bar = document.getElementById(id);
+    const heightPercent = (value / maxValue) * 100;
+    bar.style.height = heightPercent + "%";
+  };
+
+  // Set values
+  document.getElementById("pillar-completed-value").textContent = completed.toFixed(1);
+  document.getElementById("pillar-remaining-value").textContent = remaining.toFixed(1);
+  document.getElementById("pillar-projected-value").textContent = projected.toFixed(1);
+
+  // Animate pillars
+  setTimeout(() => {
+    setPillar("pillar-completed", completed, max);
+    setPillar("pillar-remaining", remaining, max);
+    setPillar("pillar-projected", projected, max);
+  }, 300);
+}
+
 </script>
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section>

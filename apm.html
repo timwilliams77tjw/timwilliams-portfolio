@@ -678,8 +678,10 @@ body.page-prof-dev #footer a {
   display: flex;
   gap: 2rem;
   justify-content: space-between;
-  flex-wrap: wrap;
   align-items: flex-end;
+  padding: 1rem 0;
+  border-bottom: 2px solid #e2e8f0;
+  position: relative;
 }
 
 .pillar {
@@ -688,30 +690,51 @@ body.page-prof-dev #footer a {
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
+}
+
+.pillar-bar-container {
+  width: 100%;
+  height: 180px; /* fixed visual height */
+  background: linear-gradient(to top, #f8fafc, #edf2f7);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.08);
 }
 
 .pillar-bar {
   width: 100%;
   height: 0;
-  max-height: 180px;          /* visual height of the column */
-  background: linear-gradient(to top, #0a66c2, #4da3ff);
-  border-radius: 8px;
-  transition: height 1.2s ease;
-  align-self: stretch;
+  border-radius: 10px 10px 0 0;
+  transition: height 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  position: relative;
+}
+
+.pillar-bar.completed { background: linear-gradient(to top, #0a66c2, #4da3ff); }
+.pillar-bar.remaining { background: linear-gradient(to top, #b8860b, #f0c75e); }
+.pillar-bar.projected { background: linear-gradient(to top, #007b5f, #4dd6a8); }
+
+.pillar-value-label {
+  position: absolute;
+  bottom: 6px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 
 .pillar-label {
   margin-top: 0.6rem;
   font-size: 0.95rem;
   color: #444;
+  font-weight: 600;
 }
 
-.pillar-value {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #0a2540;
-}
 
    
   </style>
@@ -831,24 +854,35 @@ body.page-prof-dev #footer a {
   </p>
 
   <div class="pillars-wrapper">
-    <div class="pillar">
-      <div class="pillar-bar" id="pillar-completed"></div>
-      <p class="pillar-label">Completed</p>
-      <p class="pillar-value" id="pillar-completed-value">–</p>
-    </div>
-
-    <div class="pillar">
-      <div class="pillar-bar" id="pillar-remaining"></div>
-      <p class="pillar-label">Remaining</p>
-      <p class="pillar-value" id="pillar-remaining-value">–</p>
-    </div>
-
-    <div class="pillar">
-      <div class="pillar-bar" id="pillar-projected"></div>
-      <p class="pillar-label">Projected</p>
-      <p class="pillar-value" id="pillar-projected-value">–</p>
+ <div class="pillar">
+  <div class="pillar-bar-container">
+    <div class="pillar-bar completed" id="pillar-completed">
+      <div class="pillar-value-label" id="pillar-completed-label"></div>
     </div>
   </div>
+  <p class="pillar-label">Completed</p>
+</div>
+
+
+   <div class="pillar">
+  <div class="pillar-bar-container">
+    <div class="pillar-bar remaining" id="pillar-remaining">
+      <div class="pillar-value-label" id="pillar-remaining-label"></div>
+    </div>
+  </div>
+  <p class="pillar-label">Remaining</p>
+</div>
+
+
+    <div class="pillar">
+  <div class="pillar-bar-container">
+    <div class="pillar-bar projected" id="pillar-projected">
+      <div class="pillar-value-label" id="pillar-projected-label"></div>
+    </div>
+  </div>
+  <p class="pillar-label">Projected</p>
+</div>
+
 </section>
 
 <section class="cpd-donut-section">
@@ -1517,28 +1551,21 @@ function generateProgressPillars() {
   const remaining = parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
   const projected = parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
 
-  // FIXED SCALING:
-  // Scale pillars relative to completed + remaining (real values)
   const max = completed + remaining || 1;
 
-  const setPillar = (id, value, maxValue) => {
+  const setPillar = (id, labelId, value, maxValue) => {
     const bar = document.getElementById(id);
+    const label = document.getElementById(labelId);
     const heightPercent = Math.min((value / maxValue) * 100, 100);
+
     bar.style.height = heightPercent + "%";
+    label.textContent = value.toFixed(1);
   };
 
-  // Update visible numbers
-  document.getElementById("pillar-completed-value").textContent = completed.toFixed(1);
-  document.getElementById("pillar-remaining-value").textContent = remaining.toFixed(1);
-  document.getElementById("pillar-projected-value").textContent = projected.toFixed(1);
-
-  // Animate pillars
   setTimeout(() => {
-    setPillar("pillar-completed", completed, max);
-    setPillar("pillar-remaining", remaining, max);
-
-    // Projected is still shown, but scaled sensibly
-    setPillar("pillar-projected", projected, max);
+    setPillar("pillar-completed", "pillar-completed-label", completed, max);
+    setPillar("pillar-remaining", "pillar-remaining-label", remaining, max);
+    setPillar("pillar-projected", "pillar-projected-label", projected, max);
   }, 300);
 }
 

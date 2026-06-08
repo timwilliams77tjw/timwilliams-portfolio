@@ -679,14 +679,13 @@ body.page-prof-dev #footer a {
   gap: 2rem;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 1rem 0;
+  padding: 1rem 0 0.5rem;
   border-bottom: 2px solid #e2e8f0;
-  position: relative;
 }
 
 .pillar {
   flex: 1;
-  min-width: 120px;
+  min-width: 140px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -695,27 +694,36 @@ body.page-prof-dev #footer a {
 
 .pillar-bar-container {
   width: 100%;
-  height: 180px; /* fixed visual height */
+  height: 200px; /* fixed height for consistent scaling */
   background: linear-gradient(to top, #f8fafc, #edf2f7);
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.08);
   display: flex;
   align-items: flex-end;
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.08);
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .pillar-bar {
-  width: 100%;
+  width: 65%;
   height: 0;
   border-radius: 10px 10px 0 0;
   transition: height 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
   position: relative;
 }
 
-.pillar-bar.completed { background: linear-gradient(to top, #0a66c2, #4da3ff); }
-.pillar-bar.remaining { background: linear-gradient(to top, #b8860b, #f0c75e); }
-.pillar-bar.projected { background: linear-gradient(to top, #007b5f, #4dd6a8); }
+.pillar-bar.completed {
+  background: linear-gradient(to top, #0a66c2, #4da3ff);
+}
+
+.pillar-bar.remaining {
+  background: linear-gradient(to top, #b8860b, #f0c75e);
+}
+
+.pillar-bar.projected {
+  background: linear-gradient(to top, #007b5f, #4dd6a8);
+}
 
 .pillar-value-label {
   position: absolute;
@@ -730,10 +738,11 @@ body.page-prof-dev #footer a {
 
 .pillar-label {
   margin-top: 0.6rem;
-  font-size: 0.95rem;
-  color: #444;
+  font-size: 1rem;
   font-weight: 600;
+  color: #0a2540;
 }
+
 
 
    
@@ -854,7 +863,7 @@ body.page-prof-dev #footer a {
   </p>
 
   <div class="pillars-wrapper">
- <div class="pillar">
+<div class="pillar">
   <div class="pillar-bar-container">
     <div class="pillar-bar completed" id="pillar-completed">
       <div class="pillar-value-label" id="pillar-completed-label"></div>
@@ -864,7 +873,8 @@ body.page-prof-dev #footer a {
 </div>
 
 
-   <div class="pillar">
+
+  <div class="pillar">
   <div class="pillar-bar-container">
     <div class="pillar-bar remaining" id="pillar-remaining">
       <div class="pillar-value-label" id="pillar-remaining-label"></div>
@@ -874,7 +884,7 @@ body.page-prof-dev #footer a {
 </div>
 
 
-    <div class="pillar">
+  <div class="pillar">
   <div class="pillar-bar-container">
     <div class="pillar-bar projected" id="pillar-projected">
       <div class="pillar-value-label" id="pillar-projected-label"></div>
@@ -882,6 +892,7 @@ body.page-prof-dev #footer a {
   </div>
   <p class="pillar-label">Projected</p>
 </div>
+
 
 </section>
 

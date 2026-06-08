@@ -561,7 +561,74 @@ body.page-prof-dev #footer a {
 .heatmap-cell.level-2 { background: #7ac0f9 !important; }
 .heatmap-cell.level-3 { background: #0a66c2 !important; }
 .heatmap-cell.level-4 { background: #003a73 !important; }
-</style>
+.cpd-donut-section {
+  margin: 3rem 0;
+}
+
+.donut-wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.donut {
+  width: 220px;
+  height: 220px;
+  transform: rotate(-90deg);
+}
+
+.donut-ring {
+  fill: transparent;
+  stroke: #eef2f7;
+  stroke-width: 3;
+}
+
+.donut-segment {
+  fill: transparent;
+  stroke-width: 3;
+  transition: stroke-width 0.3s ease;
+}
+
+.donut-segment:hover {
+  stroke-width: 4.5;
+}
+
+.seg-1 { stroke: #0a66c2; }
+.seg-2 { stroke: #007b5f; }
+.seg-3 { stroke: #b8860b; }
+.seg-4 { stroke: #8a2be2; }
+
+.donut-text {
+  font-size: 0.45rem;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: #0a2540;
+  transform: rotate(90deg);
+}
+
+.donut-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.donut-legend li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.legend-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 0.6rem;
+}
+
+  </style>
 </head>
 <body class="header-with-logo page-prof-dev">
 <!-- HEADER -->
@@ -669,23 +736,33 @@ body.page-prof-dev #footer a {
   </div>
 </section>
 
-<!-- HEATMAP -->
-<section class="cpd-heatmap">
+<section class="cpd-donut-section">
   <h2 class="section-heading">
-    <i class="fa-solid fa-calendar-week"></i>
-    CPD Activity Heatmap
+    <i class="fa-solid fa-chart-pie"></i>
+    CPD Category Distribution
   </h2>
   <p class="section-subtitle">
-    Visual overview of your CPD activity over the past 12 months.
+    Automatically generated from your CPD log.
   </p>
-<div id="heatmap-grid" class="heatmap-grid">
-  <div class="heatmap-cell level-1"></div>
-  <div class="heatmap-cell level-2"></div>
-  <div class="heatmap-cell level-3"></div>
-  <div class="heatmap-cell level-4"></div>
-</div>
 
+  <div class="donut-wrapper">
+    <svg viewBox="0 0 42 42" class="donut">
+      <circle class="donut-ring" cx="21" cy="21" r="15.915"></circle>
+
+      <!-- Dynamic segments -->
+      <circle class="donut-segment seg-1" cx="21" cy="21" r="15.915"></circle>
+      <circle class="donut-segment seg-2" cx="21" cy="21" r="15.915"></circle>
+      <circle class="donut-segment seg-3" cx="21" cy="21" r="15.915"></circle>
+      <circle class="donut-segment seg-4" cx="21" cy="21" r="15.915"></circle>
+
+      <text x="50%" y="50%" class="donut-text">CPD</text>
+    </svg>
+
+    <ul class="donut-legend" id="donut-legend"></ul>
+  </div>
 </section>
+
+
 <!-- CPD SECTION -->
 <section>
   <h2 class="section-heading">
@@ -786,6 +863,55 @@ function parseCsvLine(line) {
     cells.push(current);
     return cells.map(c => c.trim());
 }
+function generateDonutChart() {
+  const rows = [...document.querySelectorAll("#cpd-body tr")];
+  if (!rows.length) return;
+
+  const categoryCounts = {};
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    if (cells.length < 5) return;
+
+    const category = cells[4].textContent.trim();
+    if (!category) return;
+
+    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+  });
+
+  const total = Object.values(categoryCounts).reduce((a, b) => a + b, 0);
+  if (total === 0) return;
+
+  const segments = document.querySelectorAll(".donut-segment");
+  const legend = document.getElementById("donut-legend");
+
+  legend.innerHTML = "";
+
+  let offset = 0;
+  let index = 0;
+
+  Object.entries(categoryCounts).forEach(([category, count]) => {
+    if (index > 3) return; // limit to 4 segments
+
+    const percent = (count / total) * 100;
+    const dash = percent;
+    const gap = 100 - dash;
+
+    const seg = segments[index];
+    seg.style.strokeDasharray = `${dash} ${gap}`;
+    seg.style.strokeDashoffset = `-${offset}`;
+
+    offset += dash;
+    index++;
+
+    legend.innerHTML += `
+      <li>
+        <span class="legend-box seg-${index}"></span>
+        ${category} (${count})
+      </li>
+    `;
+  });
+}
 
 /* ==========================================================
    DATE PARSER (US FORMAT MM/DD/YYYY)
@@ -866,6 +992,8 @@ async function loadCPD() {
         calculateMetrics();
         generateInsights();
         generateHeatmap();
+      generateDonutChart();
+
 
     } catch (err) {
 
@@ -876,6 +1004,7 @@ async function loadCPD() {
 
     }
 }
+
 
 /* ==========================================================
    METRICS + PROGRESS RING

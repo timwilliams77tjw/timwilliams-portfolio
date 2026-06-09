@@ -1358,6 +1358,48 @@ html, body {
     opacity: .85;
     line-height: 1.4;
 }
+    /* ==========================================================
+   CPD CARD STATUS STYLING
+========================================================== */
+
+/* Left colour band */
+.cpd-card.completed {
+    border-left: 6px solid #16a34a;
+}
+
+.cpd-card.inprogress {
+    border-left: 6px solid #2563eb;
+}
+
+.cpd-card.planned {
+    border-left: 6px solid #d97706;
+}
+
+/* Status badge */
+.cpd-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+    margin-left: auto;
+    color: #fff;
+}
+
+.cpd-status.completed { background: #16a34a; }
+.cpd-status.inprogress { background: #2563eb; }
+.cpd-status.planned { background: #d97706; }
+
+/* Status icon */
+.status-icon {
+    font-size: 1rem;
+    margin-left: auto;
+    opacity: .85;
+}
+
+.status-icon.completed { color: #16a34a; }
+.status-icon.inprogress { color: #2563eb; }
+.status-icon.planned { color: #d97706; }
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -1702,7 +1744,6 @@ function parseUSDate(d) {
 
     return isNaN(date.getTime()) ? null : date;
 }
-
 /* ==========================================================
    LOAD CPD DATA
 ========================================================== */
@@ -1710,102 +1751,119 @@ async function loadCPD() {
 
     debug("loadCPD: starting");
 
-    const tbody = document.getElementById("cpd-body");
-
-    if (!tbody) {
-        console.error("Element #cpd-body not found");
-        return;
-    }
-
     const url =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
 
     try {
 
         const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error("HTTP " + response.status);
-        }
+        if (!response.ok) throw new Error("HTTP " + response.status);
 
         const csv = await response.text();
-
         const lines = csv.trim().split(/\r?\n/);
 
-        if (lines.length <= 1) {
-            tbody.innerHTML =
-                '<tr><td colspan="6">No CPD data found</td></tr>';
-            return;
-        }
+        if (lines.length <= 1) return;
 
-       lines.shift(); // remove header row
+        lines.shift(); // remove header row
 
-const tbody = document.getElementById("cpd-body");
-const cardContainer = document.getElementById("cpd-card-container");
+        // Containers
+        const tbody = document.getElementById("cpd-body"); // hidden table
+        const cardContainer = document.getElementById("cpd-card-container");
 
-if (tbody) tbody.innerHTML = "";
-if (cardContainer) cardContainer.innerHTML = "";
+        if (tbody) tbody.innerHTML = "";
+        if (cardContainer) cardContainer.innerHTML = "";
 
-lines.forEach(line => {
-  const row = parseCsvLine(line);
+        lines.forEach(line => {
+            const row = parseCsvLine(line);
 
-  const activity   = row[0].replace(/^"|"$/g, "");
-  const start      = row[1].replace(/^"|"$/g, "");
-  const end        = row[2].replace(/^"|"$/g, "");
-  const hours      = row[3].replace(/^"|"$/g, "");
-  const category   = row[4].replace(/^"|"$/g, "");
-  const reflection = row[5].replace(/^"|"$/g, "");
+            const activity   = row[0].replace(/^"|"$/g, "");
+            const start      = row[1].replace(/^"|"$/g, "");
+            const end        = row[2].replace(/^"|"$/g, "");
+            const hours      = row[3].replace(/^"|"$/g, "");
+            const category   = row[4].replace(/^"|"$/g, "");
+            const reflection = row[5].replace(/^"|"$/g, "");
 
-  // 1) Hidden table row for existing metrics logic
-  if (tbody) {
-    const tr = document.createElement("tr");
-    [activity, start, end, hours, category, reflection].forEach(text => {
-      const td = document.createElement("td");
-      td.textContent = text;
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  }
+            /* ------------------------------------------------------
+               1. Determine status
+            ------------------------------------------------------ */
+            const today = new Date();
+            const startDate = start ? new Date(start) : null;
+            const endDate   = end   ? new Date(end)   : null;
 
-  // 2) Visible CPD card
-  if (cardContainer) {
-    const card = document.createElement("div");
-    card.className = "cpd-card";
-    card.innerHTML = `
-      <div class="cpd-card-title">${activity}</div>
-      <div class="cpd-card-meta">
-        <span class="cpd-badge cpd-hours">${hours} hrs</span>
-        <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
-        <span>${start} → ${end || "Ongoing"}</span>
-      </div>
-      <div class="cpd-card-reflection">
-        ${reflection || "<em>No reflective statement provided.</em>"}
-      </div>
-    `;
-    cardContainer.appendChild(card);
-  }
-});
+            let statusClass = "";
+            let statusLabel = "";
+            let statusIcon  = "";
 
-debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
+            if (startDate && startDate > today) {
+                statusClass = "planned";
+                statusLabel = "Planned";
+                statusIcon  = "fa-calendar-plus";
+            }
+            else if (!endDate || endDate >= today) {
+                statusClass = "inprogress";
+                statusLabel = "In Progress";
+                statusIcon  = "fa-hourglass-half";
+            }
+            else {
+                statusClass = "completed";
+                statusLabel = "Completed";
+                statusIcon  = "fa-circle-check";
+            }
 
-calculateMetrics();
-generateInsights();
-generateHeatmap();
-generateDonutChart();
-generateRadarChart();
+            /* ------------------------------------------------------
+               2. Hidden table row (keeps metrics working)
+            ------------------------------------------------------ */
+            if (tbody) {
+                const tr = document.createElement("tr");
+                [activity, start, end, hours, category, reflection].forEach(text => {
+                    const td = document.createElement("td");
+                    td.textContent = text;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            }
 
-  
+            /* ------------------------------------------------------
+               3. Visible CPD card
+            ------------------------------------------------------ */
+            if (cardContainer) {
+                const card = document.createElement("div");
+                card.className = `cpd-card ${statusClass}`;
+
+                card.innerHTML = `
+                    <div class="cpd-card-title">
+                        ${activity}
+                        <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
+                    </div>
+
+                    <div class="cpd-card-meta">
+                        <span class="cpd-badge cpd-hours">${hours} hrs</span>
+                        <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
+                        <span>${start} → ${end || "Ongoing"}</span>
+                        <span class="cpd-status ${statusClass}">${statusLabel}</span>
+                    </div>
+
+                    <div class="cpd-card-reflection">
+                        ${reflection || "<em>No reflective statement provided.</em>"}
+                    </div>
+                `;
+
+                cardContainer.appendChild(card);
+            }
+        });
+
+        debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
+
+        calculateMetrics();
+        generateInsights();
+        generateHeatmap();
+        generateDonutChart();
+        generateRadarChart();
 
     } catch (err) {
-
         console.error(err);
-
-        tbody.innerHTML =
-            '<tr><td colspan="6">Unable to load CPD log</td></tr>';
-
     }
 }
-
 
 /* ==========================================================
    METRICS + PROGRESS RING

@@ -415,6 +415,94 @@ body.dark .playbooks-highlights-pro__col li {
 body.dark .playbooks-highlights-pro__col li strong {
   color: #fff;
 }
+  /* ---------------------------------------------
+   TWO-COLUMN HIGHLIGHTS WITH LEFT ACCENT BAR
+   --------------------------------------------- */
+
+.playbooks-highlights-accent {
+  background: #efefef;
+  padding: 72px 24px;
+  margin: 96px 0;
+  border-radius: 12px;
+  border-left: 6px solid var(--accent-blue, #7ac0f9);
+}
+
+.playbooks-highlights-accent__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+.playbooks-highlights-accent__header {
+  margin-bottom: 48px;
+}
+
+.playbooks-highlights-accent__header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.playbooks-highlights-accent__header p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary, #555);
+}
+
+/* Grid */
+.playbooks-highlights-accent__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+}
+
+/* Column titles */
+.playbooks-highlights-accent__col h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Lists */
+.playbooks-highlights-accent__col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.playbooks-highlights-accent__col li {
+  margin-bottom: 18px;
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+.playbooks-highlights-accent__col li strong {
+  font-weight: 600;
+  color: var(--text-strong, #111);
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .playbooks-highlights-accent__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Dark mode */
+body.dark .playbooks-highlights-accent {
+  background: #1e1e1e;
+  border-left-color: #7ac0f9;
+}
+
+body.dark .playbooks-highlights-accent__header p,
+body.dark .playbooks-highlights-accent__col li {
+  color: #ccc;
+}
+
+body.dark .playbooks-highlights-accent__col li strong {
+  color: #fff;
+}
 </style>
 </head>
 
@@ -502,69 +590,35 @@ fetch("header.html")
   </div>
 
 </div>
-<section class="playbooks-highlights-pro">
-  <div class="playbooks-highlights-pro__inner">
+<section class="playbooks-highlights-accent">
+  <div class="playbooks-highlights-accent__inner">
 
-    <header class="playbooks-highlights-pro__header">
+    <header class="playbooks-highlights-accent__header">
       <h2>Playbooks Highlights</h2>
       <p>Each Playbook delivers a consistent, high‑quality transformation framework built for pace, clarity and measurable outcomes.</p>
     </header>
 
-    <div class="playbooks-highlights-pro__grid">
+    <div class="playbooks-highlights-accent__grid">
 
       <!-- LEFT COLUMN -->
-      <div class="playbooks-highlights-pro__col">
+      <div class="playbooks-highlights-accent__col">
         <h3>What you get across all playbooks</h3>
         <ul>
-
-          <li>
-            <span class="icon"><img src="/icons/structure.svg" alt=""></span>
-            <div><strong>Structured delivery patterns</strong> — repeatable methods that reduce ambiguity and accelerate decision‑making.</div>
-          </li>
-
-          <li>
-            <span class="icon"><img src="/icons/governance.svg" alt=""></span>
-            <div><strong>Clear governance checkpoints</strong> — lightweight controls that keep programmes aligned without slowing momentum.</div>
-          </li>
-
-          <li>
-            <span class="icon"><img src="/icons/change.svg" alt=""></span>
-            <div><strong>Adoption‑ready change assets</strong> — communication, training and readiness materials that land change with minimal friction.</div>
-          </li>
-
-          <li>
-            <span class="icon"><img src="/icons/alignment.svg" alt=""></span>
-            <div><strong>Technical and business alignment</strong> — ensuring architecture, operations and user experience move forward together.</div>
-          </li>
-
-          <li>
-            <span class="icon"><img src="/icons/metrics.svg" alt=""></span>
-            <div><strong>Measurable success criteria</strong> — outcome‑based metrics that demonstrate progress and value.</div>
-          </li>
-
+          <li><strong>Structured delivery patterns</strong> — repeatable methods that reduce ambiguity and accelerate decision‑making.</li>
+          <li><strong>Clear governance checkpoints</strong> — lightweight controls that keep programmes aligned without slowing momentum.</li>
+          <li><strong>Adoption‑ready change assets</strong> — communication, training and readiness materials that land change with minimal friction.</li>
+          <li><strong>Technical and business alignment</strong> — ensuring architecture, operations and user experience move forward together.</li>
+          <li><strong>Measurable success criteria</strong> — outcome‑based metrics that demonstrate progress and value.</li>
         </ul>
       </div>
 
       <!-- RIGHT COLUMN -->
-      <div class="playbooks-highlights-pro__col">
+      <div class="playbooks-highlights-accent__col">
         <h3>Why these playbooks work</h3>
         <ul>
-
-          <li>
-            <span class="icon"><img src="/icons/proven.svg" alt=""></span>
-            <div><strong>Proven in real programmes</strong> — built from delivery patterns used across enterprise‑scale transformations.</div>
-          </li>
-
-          <li>
-            <span class="icon"><img src="/icons/pace.svg" alt=""></span>
-            <div><strong>Designed for pace</strong> — reduces noise, increases clarity, and accelerates mobilisation.</div>
-          </li>
-
-          <li>
-            <span class="icon"><img src="/icons/team.svg" alt=""></span>
-            <div><strong>Optimised for modern teams</strong> — remote‑friendly, tool‑agnostic, and compatible with agile or hybrid delivery.</div>
-          </li>
-
+          <li><strong>Proven in real programmes</strong> — built from delivery patterns used across enterprise‑scale transformations.</li>
+          <li><strong>Designed for pace</strong> — reduces noise, increases clarity, and accelerates mobilisation.</li>
+          <li><strong>Optimised for modern teams</strong> — remote‑friendly, tool‑agnostic, and compatible with agile or hybrid delivery.</li>
         </ul>
       </div>
 
@@ -572,6 +626,7 @@ fetch("header.html")
 
   </div>
 </section>
+
 
 
 

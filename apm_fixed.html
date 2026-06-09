@@ -1131,6 +1131,146 @@ html, body {
 .pillar-card.projected {
   animation: pillarPulse 2.4s ease-in-out infinite;
 }
+    /* ==========================================================
+   CPD PILLARS — CARD SYSTEM (CLEAN, FINAL, NO CONFLICTS)
+========================================================== */
+
+/* Scroll container */
+.pillars-scroll {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 10px 0 20px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pillars-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.pillars-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+/* Pillar card container */
+.pillar-card {
+  min-width: 220px;
+  flex: 0 0 auto;
+  border-radius: 24px;
+  padding: 22px;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  scroll-snap-align: start;
+  transition: transform .35s ease, box-shadow .35s ease;
+  position: relative;
+}
+
+/* Hover lift */
+.pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0,0,0,.18);
+}
+
+/* Completed */
+.pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+/* Remaining */
+.pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+/* Projected */
+.pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* Icon */
+.pillar-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  font-size: 22px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(255,255,255,.25);
+}
+
+/* Value */
+.pillar-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+/* Title */
+.pillar-title {
+  font-size: .95rem;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 18px;
+}
+
+/* Progress bar container */
+.pillar-progress {
+  height: 12px;
+  background: rgba(255,255,255,.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Progress fill — animated */
+.pillar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Gradient fills — FINAL, GUARANTEED */
+.pillar-card.completed .pillar-fill {
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+}
+
+.pillar-card.remaining .pillar-fill {
+  background: linear-gradient(90deg, #dc2626, #ef4444);
+}
+
+.pillar-card.projected .pillar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+/* CPD badge */
+.pillar-card::after {
+  content: "CPD";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.15);
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+/* Pulse animation for projected pillar */
+@keyframes pillarPulse {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.03); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pillar-card.projected {
+  animation: pillarPulse 2.4s ease-in-out infinite;
+}
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">

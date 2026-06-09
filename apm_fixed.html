@@ -2117,14 +2117,15 @@ function generateProgressPillars() {
   const setPillar = (id, labelId, value, className) => {
     const fill = document.getElementById(id);
     const label = document.getElementById(labelId);
-    const card = fill.closest(".pillar-card");
+    if (!fill || !label) return;
 
-    // RE‑APPLY THE CORRECT CLASS (THIS FIXES THE COLOUR)
+    const card = fill.closest(".pillar-card");
+    if (!card) return;
+
     card.classList.remove("completed", "remaining", "projected");
     card.classList.add(className);
 
     const percent = (value / max) * 100;
-
     label.textContent = value.toFixed(1);
 
     requestAnimationFrame(() => {
@@ -2138,10 +2139,8 @@ function generateProgressPillars() {
     setPillar("pillar-projected", "pillar-projected-label", projected, "projected");
   }, 300);
 }
-
-  
-}
 </script>
+
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section>
   <h2 class="section-heading">

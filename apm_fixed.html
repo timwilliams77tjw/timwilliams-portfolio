@@ -2105,72 +2105,37 @@ function generateRadarChart() {
   });
 }
 function generateProgressPillars() {
-
-    const completed =
-        parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
-
-    const remaining =
-        parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
-
-    const projected =
-        parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
-
-    const max =
-        Math.max(completed, remaining, projected);
-
-    const setPillar = (id, labelId, value) => {
-
-        const bar = document.getElementById(id);
-        const label = document.getElementById(labelId);
-
-        const percent = (value / max) * 100;
-
-        label.textContent = value.toFixed(1);
-
-        bar.style.width = percent + "%";
-    };
-
-    setPillar(
-        "pillar-completed",
-        "pillar-completed-label",
-        completed
-    );
-
-    setPillar(
-        "pillar-remaining",
-        "pillar-remaining-label",
-        remaining
-    );
-
-    setPillar(
-        "pillar-projected",
-        "pillar-projected-label",
-        projected
-    );
-function generateProgressPillars() {
   const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
   const remaining = parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
   const projected = parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
 
-  const max = completed + remaining || 1;
+  const max = Math.max(completed, remaining, projected, 1);
 
-  const setPillar = (id, labelId, value, maxValue) => {
+  const setPillar = (id, labelId, value, className) => {
     const fill = document.getElementById(id);
     const label = document.getElementById(labelId);
-    const percent = Math.min((value / maxValue) * 100, 100);
+    const card = fill.closest(".pillar-card");
+
+    // RE‑APPLY THE CORRECT CLASS (THIS FIXES THE COLOUR)
+    card.classList.remove("completed", "remaining", "projected");
+    card.classList.add(className);
+
+    const percent = (value / max) * 100;
 
     label.textContent = value.toFixed(1);
+
     requestAnimationFrame(() => {
       fill.style.width = percent + "%";
     });
   };
 
   setTimeout(() => {
-    setPillar("pillar-completed", "pillar-completed-label", completed, max);
-    setPillar("pillar-remaining", "pillar-remaining-label", remaining, max);
-    setPillar("pillar-projected", "pillar-projected-label", projected, max);
+    setPillar("pillar-completed", "pillar-completed-label", completed, "completed");
+    setPillar("pillar-remaining", "pillar-remaining-label", remaining, "remaining");
+    setPillar("pillar-projected", "pillar-projected-label", projected, "projected");
   }, 300);
 }
+
   
 }
 </script>

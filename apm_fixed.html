@@ -1295,6 +1295,69 @@ html, body {
 .pillar-card.projected #pillar-projected {
   background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
 }
+    /* ==========================================================
+   CPD CARD LAYOUT
+========================================================== */
+
+.cpd-card-container {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.cpd-card {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.cpd-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.cpd-card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.cpd-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-bottom: .75rem;
+    font-size: .9rem;
+    opacity: .9;
+}
+
+.cpd-badge {
+    background: rgba(255,255,255,0.18);
+    padding: .35rem .75rem;
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.cpd-hours {
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+.cpd-category {
+    background: linear-gradient(135deg, #9333ea, #c084fc);
+}
+
+.cpd-card-reflection {
+    margin-top: .75rem;
+    font-size: .9rem;
+    opacity: .85;
+    line-height: 1.4;
+}
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -1495,35 +1558,20 @@ html, body {
 
 
 <!-- CPD SECTION -->
-<section>
-  <h2 class="section-heading">
-    <i class="fa-solid fa-graduation-cap"></i>
-    Continuing Professional Development (CPD)
-  </h2>
+<section class="cpd-log-section">
+    <h2 class="section-heading">
+        <i class="fa-solid fa-graduation-cap"></i>
+        Continuing Professional Development (CPD)
+    </h2>
 
-  <p class="section-subtitle">
-    The CPD log below captures formal and informal learning, outreach, and volunteering activities,
-    including dates, hours, development goals, and completion notes.
-  </p>
+    <p class="section-subtitle">
+        Your CPD activities, presented as clean, modern cards.
+    </p>
 
-  <div class="cpd-table-wrapper">
-    <table class="cpd-table">
-      <thead>
-        <tr>
-          <th>Activity</th>
-          <th>Start date</th>
-          <th>End date</th>
-          <th>CPD hours</th>
-          <th>Development goal</th>
-          <th>Reflective statement</th>
-        </tr>
-      </thead>
-
-      <tbody id="cpd-body">
-        <tr><td colspan="6">Loading CPD log…</td></tr>
-      </tbody>
-    </table>
-  </div>
+    <div id="cpd-card-container" class="cpd-card-container">
+        <!-- Cards will be injected here -->
+    </div>
+</section>
 
   <!-- INSIGHTS PANEL -->
   <section class="cpd-insights">

@@ -561,7 +561,558 @@ body.page-prof-dev #footer a {
 .heatmap-cell.level-2 { background: #7ac0f9 !important; }
 .heatmap-cell.level-3 { background: #0a66c2 !important; }
 .heatmap-cell.level-4 { background: #003a73 !important; }
-</style>
+.cpd-donut-section {
+  margin: 3rem 0;
+}
+
+.donut-wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.donut {
+  width: 220px;
+  height: 220px;
+  transform: rotate(-90deg);
+}
+
+.donut-ring {
+  fill: transparent;
+  stroke: #eef2f7;
+  stroke-width: 3;
+}
+
+.donut-segment {
+  fill: transparent;
+  stroke-width: 3;
+  transition: stroke-width 0.3s ease;
+}
+
+.donut-segment:hover {
+  stroke-width: 4.5;
+}
+
+.seg-1 { stroke: #0a66c2; }
+.seg-2 { stroke: #007b5f; }
+.seg-3 { stroke: #b8860b; }
+.seg-4 { stroke: #8a2be2; }
+
+.donut-text {
+  font-size: 0.45rem;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: #0a2540;
+  transform: rotate(90deg);
+}
+
+.donut-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.donut-legend li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.legend-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 0.6rem;
+}
+.cpd-radar-section {
+  margin: 3rem 0;
+}
+
+.radar-wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#radar-chart {
+  width: 320px;
+  height: 320px;
+}
+
+.radar-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.radar-legend li {
+  margin-bottom: 0.4rem;
+}
+
+.radar-grid {
+  stroke: #d0d7e2;
+  stroke-width: 0.5;
+  fill: none;
+}
+
+.radar-area {
+  fill: rgba(10, 102, 194, 0.35);
+  stroke: #0a66c2;
+  stroke-width: 2;
+}
+
+.radar-point {
+  fill: #0a66c2;
+}
+.pillars-wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1rem 0 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.pillar {
+  flex: 1;
+  min-width: 140px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pillar-bar-container {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, #f8fafc, #edf2f7);
+  border-radius: 12px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar-bar {
+  width: 65%;
+  height: 0;
+  border-radius: 10px 10px 0 0;
+  transition: height 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  position: relative;
+}
+
+.pillar-bar.completed {
+  background: linear-gradient(to top, #0a66c2, #4da3ff);
+}
+
+.pillar-bar.remaining {
+  background: linear-gradient(to top, #b8860b, #f0c75e);
+}
+
+.pillar-bar.projected {
+  background: linear-gradient(to top, #007b5f, #4dd6a8);
+}
+
+.pillar-value-label {
+  position: absolute;
+  bottom: 6px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.pillar-label {
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a2540;
+}
+
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto !important;
+}
+
+
+   /* ==========================================================
+   FIXED, ISOLATED PILLAR STYLING (NO GLOBAL IMPACT)
+========================================================== */
+
+.cpd-pillars-section .pillars-wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1rem 0 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.cpd-pillars-section .pillar {
+  flex: 1;
+  min-width: 140px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cpd-pillars-section .pillar-bar-container {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, #f8fafc, #edf2f7);
+  border-radius: 12px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cpd-pillars-section .pillar-bar {
+  width: 65%;
+  height: 0;
+  border-radius: 10px 10px 0 0;
+  transition: height 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  position: relative;
+}
+
+.cpd-pillars-section .pillar-bar.completed {
+  background: linear-gradient(to top, #0a66c2, #4da3ff);
+}
+
+.cpd-pillars-section .pillar-bar.remaining {
+  background: linear-gradient(to top, #b8860b, #f0c75e);
+}
+
+.cpd-pillars-section .pillar-bar.projected {
+  background: linear-gradient(to top, #007b5f, #4dd6a8);
+}
+
+.cpd-pillars-section .pillar-value-label {
+  position: absolute;
+  bottom: 6px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.cpd-pillars-section .pillar-label {
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a2540;
+}
+.pillars-scroll{
+    display:flex;
+    gap:18px;
+    overflow-x:auto;
+    padding:10px 0 20px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+}
+
+.pillars-scroll::-webkit-scrollbar{
+    height:6px;
+}
+
+.pillars-scroll::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:20px;
+}
+
+.pillar-card{
+    min-width:220px;
+    flex:0 0 auto;
+
+    background:#fff;
+    border-radius:24px;
+
+    padding:22px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
+
+    scroll-snap-align:start;
+
+    transition:.3s;
+}
+
+.pillar-card:hover{
+    transform:translateY(-4px);
+}
+
+.pillar-icon{
+    width:56px;
+    height:56px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    font-size:22px;
+
+    margin-bottom:16px;
+}
+
+.completed .pillar-icon{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.remaining .pillar-icon{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.projected .pillar-icon{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.pillar-value{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:4px;
+}
+
+.pillar-title{
+    font-size:.95rem;
+    color:#64748b;
+    margin-bottom:18px;
+}
+
+.pillar-progress{
+    height:12px;
+    background:#edf2f7;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.pillar-fill{
+    width:0%;
+    height:100%;
+    border-radius:999px;
+    transition:1.2s ease;
+}
+
+.completed .pillar-fill{
+    background:linear-gradient(90deg,#16a34a,#22c55e);
+}
+
+.remaining .pillar-fill{
+    background:linear-gradient(90deg,#dc2626,#ef4444);
+}
+
+.projected .pillar-fill{
+    background:linear-gradient(90deg,#2563eb,#60a5fa);
+}
+    .pillar-card{
+    min-width:220px;
+    flex:0 0 auto;
+
+    border-radius:24px;
+    padding:22px;
+
+    color:#fff;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.12);
+
+    scroll-snap-align:start;
+
+    transition:.3s;
+}
+
+.pillar-card:hover{
+    transform:translateY(-4px);
+}
+
+/* Completed */
+.pillar-card.completed{
+    background:linear-gradient(
+        135deg,
+        #16a34a,
+        #22c55e
+    );
+}
+
+/* Remaining */
+.pillar-card.remaining{
+    background:linear-gradient(
+        135deg,
+        #dc2626,
+        #ef4444
+    );
+}
+
+/* Projected */
+.pillar-card.projected{
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #60a5fa
+    );
+}
+    .pillar-title{
+    color:rgba(255,255,255,.85);
+}
+
+.pillar-value{
+    color:#fff;
+}
+
+.pillar-icon{
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    backdrop-filter:blur(8px);
+}
+    .pillar-progress{
+    height:10px;
+    background:rgba(255,255,255,.25);
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.pillar-fill{
+    height:100%;
+    background:#fff;
+    border-radius:999px;
+}
+    .pillar-card{
+    position:relative;
+}
+
+.pillar-card::after{
+    content:"CPD";
+    position:absolute;
+    top:16px;
+    right:16px;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.15);
+
+    font-size:.7rem;
+    font-weight:600;
+}
+
+   /* ==========================================================
+   PREMIUM PILLAR CARD ENHANCEMENTS
+========================================================== */
+
+.pillar-card {
+  position: relative;
+  border-radius: 24px;
+  padding: 22px;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  scroll-snap-align: start;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+/* Hover lift */
+.pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0,0,0,.18);
+}
+
+/* Completed */
+.pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+/* Remaining */
+.pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+/* Projected */
+.pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* Icon glow */
+.pillar-icon {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(255,255,255,.25);
+}
+
+/* Value */
+.pillar-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* Title */
+.pillar-title {
+  font-size: .95rem;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 18px;
+}
+
+/* Progress bar */
+.pillar-progress {
+  height: 12px;
+  background: rgba(255,255,255,.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Animated fill */
+.pillar-fill {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  border-radius: 999px;
+  transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* CPD badge */
+.pillar-card::after {
+  content: "CPD";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.15);
+  font-size: .7rem;
+  font-weight: 600;
+}
+ 
+  </style>
 </head>
 <body class="header-with-logo page-prof-dev">
 <!-- HEADER -->
@@ -637,9 +1188,7 @@ body.page-prof-dev #footer a {
 
   <h2 class="cpd-progress-heading">Development Goals</h2>
 
-  <p class="cpd-progress-subtext">
-    Reflect on the areas where you'd like to develop, and what skills or knowledge you'd like to enhance.
-  </p>
+
 
 </section>
 
@@ -670,24 +1219,98 @@ body.page-prof-dev #footer a {
     <p id="metric-projected-hours">–</p>
   </div>
 </section>
+<section class="cpd-pillars-section">
 
-<!-- HEATMAP -->
-<section class="cpd-heatmap">
-  <h2 class="section-heading">
-    <i class="fa-solid fa-calendar-week"></i>
-    CPD Activity Heatmap
-  </h2>
-  <p class="section-subtitle">
-    Visual overview of your CPD activity over the past 12 months.
-  </p>
-<div id="heatmap-grid" class="heatmap-grid">
-  <div class="heatmap-cell level-1"></div>
-  <div class="heatmap-cell level-2"></div>
-  <div class="heatmap-cell level-3"></div>
-  <div class="heatmap-cell level-4"></div>
-</div>
+    <h2 class="section-heading">
+        <i class="fa-solid fa-chart-simple"></i>
+        CPD Progress Pillars
+    </h2>
+
+    <p class="section-subtitle">
+        A visual summary of your completed, remaining and projected CPD hours.
+    </p>
+
+    <div class="pillars-scroll">
+
+        <div class="pillar-card completed">
+            <div class="pillar-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div class="pillar-value" id="pillar-completed-label">0</div>
+
+            <div class="pillar-title">
+                Completed
+            </div>
+
+            <div class="pillar-progress">
+                <div class="pillar-fill" id="pillar-completed"></div>
+            </div>
+        </div>
+
+        <div class="pillar-card remaining">
+            <div class="pillar-icon">
+                <i class="fa-solid fa-hourglass-half"></i>
+            </div>
+
+            <div class="pillar-value" id="pillar-remaining-label">0</div>
+
+            <div class="pillar-title">
+                Remaining
+            </div>
+
+            <div class="pillar-progress">
+                <div class="pillar-fill" id="pillar-remaining"></div>
+            </div>
+        </div>
+
+        <div class="pillar-card projected">
+            <div class="pillar-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <div class="pillar-value" id="pillar-projected-label">0</div>
+
+            <div class="pillar-title">
+                Projected
+            </div>
+
+            <div class="pillar-progress">
+                <div class="pillar-fill" id="pillar-projected"></div>
+            </div>
+        </div>
+
+    </div>
 
 </section>
+
+<section class="cpd-donut-section">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-chart-pie"></i>
+    CPD Category Distribution
+  </h2>
+  <p class="section-subtitle">
+    Automatically generated from your CPD log.
+  </p>
+
+  <div class="donut-wrapper">
+    <svg viewBox="0 0 42 42" class="donut">
+      <circle class="donut-ring" cx="21" cy="21" r="15.915"></circle>
+
+      <!-- Dynamic segments -->
+      <circle class="donut-segment seg-1" cx="21" cy="21" r="15.915"></circle>
+      <circle class="donut-segment seg-2" cx="21" cy="21" r="15.915"></circle>
+      <circle class="donut-segment seg-3" cx="21" cy="21" r="15.915"></circle>
+      <circle class="donut-segment seg-4" cx="21" cy="21" r="15.915"></circle>
+
+      <text x="50%" y="50%" class="donut-text">CPD</text>
+    </svg>
+
+    <ul class="donut-legend" id="donut-legend"></ul>
+  </div>
+</section>
+
+
 <!-- CPD SECTION -->
 <section>
   <h2 class="section-heading">
@@ -788,6 +1411,55 @@ function parseCsvLine(line) {
     cells.push(current);
     return cells.map(c => c.trim());
 }
+function generateDonutChart() {
+  const rows = [...document.querySelectorAll("#cpd-body tr")];
+  if (!rows.length) return;
+
+  const categoryCounts = {};
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    if (cells.length < 5) return;
+
+    const category = cells[4].textContent.trim();
+    if (!category) return;
+
+    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+  });
+
+  const total = Object.values(categoryCounts).reduce((a, b) => a + b, 0);
+  if (total === 0) return;
+
+  const segments = document.querySelectorAll(".donut-segment");
+  const legend = document.getElementById("donut-legend");
+
+  legend.innerHTML = "";
+
+  let offset = 0;
+  let index = 0;
+
+  Object.entries(categoryCounts).forEach(([category, count]) => {
+    if (index > 3) return; // limit to 4 segments
+
+    const percent = (count / total) * 100;
+    const dash = percent;
+    const gap = 100 - dash;
+
+    const seg = segments[index];
+    seg.style.strokeDasharray = `${dash} ${gap}`;
+    seg.style.strokeDashoffset = `-${offset}`;
+
+    offset += dash;
+    index++;
+
+    legend.innerHTML += `
+      <li>
+        <span class="legend-box seg-${index}"></span>
+        ${category} (${count})
+      </li>
+    `;
+  });
+}
 
 /* ==========================================================
    DATE PARSER (US FORMAT MM/DD/YYYY)
@@ -868,6 +1540,10 @@ async function loadCPD() {
         calculateMetrics();
         generateInsights();
         generateHeatmap();
+      generateDonutChart();
+generateRadarChart();
+
+  
 
     } catch (err) {
 
@@ -878,6 +1554,7 @@ async function loadCPD() {
 
     }
 }
+
 
 /* ==========================================================
    METRICS + PROGRESS RING
@@ -966,44 +1643,41 @@ function calculateMetrics() {
         if (el) el.textContent = value;
     };
 
-    setText("metric-total-hours",
-        totalHours.toFixed(1));
+         // Use completedHours for "Total Hours" (completed CPD)
+    setText("metric-total-hours", completedHours.toFixed(1));
 
-    setText("metric-hours-remaining",
-        hoursRemaining.toFixed(1));
+    setText("metric-hours-remaining", hoursRemaining.toFixed(1));
+    setText("metric-activities", activityCount);
+    setText("metric-hours-month", avgHoursPerMonth.toFixed(1));
+    setText("metric-top-category", topCategory);
 
-    setText("metric-activities",
-        activityCount);
+    // Correct projected hours (completed + remaining)
+    const projectedTotal = completedHours + hoursRemaining;
+    setText("metric-projected-hours", projectedTotal.toFixed(1));
 
-    setText("metric-hours-month",
-        avgHoursPerMonth.toFixed(1));
-
-    setText("metric-top-category",
-        topCategory);
-
-    setText("metric-projected-hours",
-        projectedHours.toFixed(1));
-
-    const targetHours =
-        totalHours + hoursRemaining;
+    // Progress ring target
+    const targetHours = completedHours + hoursRemaining;
 
     setText(
         "cpd-wheel-completed",
-        totalHours.toFixed(1) + " completed hours"
+        completedHours.toFixed(1) + " completed hours"
     );
 
     setText(
         "cpd-wheel-remaining",
-        hoursRemaining.toFixed(1) +
-        " hours remaining"
+        hoursRemaining.toFixed(1) + " hours remaining"
     );
 
-    updateProgressRing(totalHours, targetHours);
+    updateProgressRing(completedHours, targetHours);
 
     debug("Metrics calculated");
+
+    // Run pillars AFTER metrics are populated
+    generateProgressPillars();
 }
 
-/* ==========================================================
+  
+  /* ==========================================================
    PROGRESS RING
 ========================================================== */
 function updateProgressRing(completed, target) {
@@ -1207,6 +1881,138 @@ if (document.readyState === "loading") {
 
     loadCPD();
 
+}
+function generateRadarChart() {
+  const svg = document.getElementById("radar-chart");
+  if (!svg) return;
+
+  // 1. Extract competence names + ratings from your page
+  const items = [...document.querySelectorAll(".info-card")].slice(0, 6);
+
+  const ratingMap = {
+    "Aware": 1,
+    "Practised": 2,
+    "Competent": 3,
+    "Proficient": 4,
+    "Expert": 5
+  };
+
+  const data = items.map(card => {
+    const title = card.querySelector("h3").innerText.trim();
+    const ratingBadge = card.querySelector(".rating-badge");
+    const ratingText = ratingBadge ? ratingBadge.innerText.trim() : "Competent";
+    return {
+      label: title,
+      value: ratingMap[ratingText] || 3
+    };
+  });
+
+  const legend = document.getElementById("radar-legend");
+  legend.innerHTML = data
+    .map(d => `<li>${d.label}: ${d.value}/5</li>`)
+    .join("");
+
+  // 2. Radar chart geometry
+  const maxValue = 5;
+  const radius = 50;
+  const angleStep = (Math.PI * 2) / data.length;
+
+  // Draw grid rings
+  for (let level = 1; level <= maxValue; level++) {
+    const r = (radius / maxValue) * level;
+    const points = data.map((_, i) => {
+      const angle = i * angleStep - Math.PI / 2;
+      return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
+    }).join(" ");
+    svg.innerHTML += `<polygon class="radar-grid" points="${points}"></polygon>`;
+  }
+
+  // 3. Draw data area
+  const areaPoints = data.map((d, i) => {
+    const r = (radius / maxValue) * d.value;
+    const angle = i * angleStep - Math.PI / 2;
+    return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
+  }).join(" ");
+
+  svg.innerHTML += `<polygon class="radar-area" points="${areaPoints}"></polygon>`;
+
+  // 4. Draw data points
+  data.forEach((d, i) => {
+    const r = (radius / maxValue) * d.value;
+    const angle = i * angleStep - Math.PI / 2;
+    const x = Math.cos(angle) * r;
+    const y = Math.sin(angle) * r;
+    svg.innerHTML += `<circle class="radar-point" cx="${x}" cy="${y}" r="2.5"></circle>`;
+  });
+}
+function generateProgressPillars() {
+
+    const completed =
+        parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
+
+    const remaining =
+        parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
+
+    const projected =
+        parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
+
+    const max =
+        Math.max(completed, remaining, projected);
+
+    const setPillar = (id, labelId, value) => {
+
+        const bar = document.getElementById(id);
+        const label = document.getElementById(labelId);
+
+        const percent = (value / max) * 100;
+
+        label.textContent = value.toFixed(1);
+
+        bar.style.width = percent + "%";
+    };
+
+    setPillar(
+        "pillar-completed",
+        "pillar-completed-label",
+        completed
+    );
+
+    setPillar(
+        "pillar-remaining",
+        "pillar-remaining-label",
+        remaining
+    );
+
+    setPillar(
+        "pillar-projected",
+        "pillar-projected-label",
+        projected
+    );
+function generateProgressPillars() {
+  const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
+  const remaining = parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
+  const projected = parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
+
+  const max = completed + remaining || 1;
+
+  const setPillar = (id, labelId, value, maxValue) => {
+    const fill = document.getElementById(id);
+    const label = document.getElementById(labelId);
+    const percent = Math.min((value / maxValue) * 100, 100);
+
+    label.textContent = value.toFixed(1);
+    requestAnimationFrame(() => {
+      fill.style.width = percent + "%";
+    });
+  };
+
+  setTimeout(() => {
+    setPillar("pillar-completed", "pillar-completed-label", completed, max);
+    setPillar("pillar-remaining", "pillar-remaining-label", remaining, max);
+    setPillar("pillar-projected", "pillar-projected-label", projected, max);
+  }, 300);
+}
+  
 }
 </script>
 <!-- APM COMPETENCE FRAMEWORK GRID -->
@@ -1454,7 +2260,21 @@ if (document.readyState === "loading") {
     <li><strong>Sustainability in change initiatives:</strong> embed sustainability criteria into business cases, governance and benefits management.</li>
   </ul>
 </section>
+<section class="cpd-radar-section">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-chart-radar"></i>
+    APM Competence Radar
+  </h2>
+  <p class="section-subtitle">
+    Automatically generated from your competence ratings.
+  </p>
 
+  <div class="radar-wrapper">
+    <svg id="radar-chart" viewBox="-60 -60 120 120"></svg>
+
+    <ul id="radar-legend" class="radar-legend"></ul>
+  </div>
+</section>
 <!-- PERSONAL ASSESSMENT ACCORDION -->
 <section>
   <h2 class="section-heading">

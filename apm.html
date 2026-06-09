@@ -1295,6 +1295,69 @@ html, body {
 .pillar-card.projected #pillar-projected {
   background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
 }
+    /* ==========================================================
+   CPD CARD LAYOUT
+========================================================== */
+
+.cpd-card-container {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.cpd-card {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.cpd-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.cpd-card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.cpd-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-bottom: .75rem;
+    font-size: .9rem;
+    opacity: .9;
+}
+
+.cpd-badge {
+    background: rgba(255,255,255,0.18);
+    padding: .35rem .75rem;
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.cpd-hours {
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+.cpd-category {
+    background: linear-gradient(135deg, #9333ea, #c084fc);
+}
+
+.cpd-card-reflection {
+    margin-top: .75rem;
+    font-size: .9rem;
+    opacity: .85;
+    line-height: 1.4;
+}
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -1447,23 +1510,16 @@ html, body {
             </div>
         </div>
 
-        <div class="pillar-card projected">
-            <div class="pillar-icon">
-                <i class="fa-solid fa-chart-line"></i>
-            </div>
-
-            <div class="pillar-value" id="pillar-projected-label">0</div>
-
-            <div class="pillar-title">
-                Projected
-            </div>
-
-            <div class="pillar-progress">
-                <div class="pillar-fill" id="pillar-projected"></div>
-            </div>
-        </div>
-
-    </div>
+       <div class="pillar-card projected">
+  <div class="pillar-icon">
+    <i class="fa-solid fa-chart-line"></i>
+  </div>
+  <div class="pillar-value" id="pillar-projected-label">0</div>
+  <div class="pillar-title">Projected</div>
+  <div class="pillar-progress">
+    <div class="pillar-fill" id="pillar-projected"></div>
+  </div>
+</div>
 
 </section>
 
@@ -1493,37 +1549,26 @@ html, body {
   </div>
 </section>
 
-
+<div class="cpd-table-wrapper" style="display:none">
+  <table class="cpd-table">
+    <tbody id="cpd-body"></tbody>
+  </table>
+</div>
 <!-- CPD SECTION -->
-<section>
-  <h2 class="section-heading">
-    <i class="fa-solid fa-graduation-cap"></i>
-    Continuing Professional Development (CPD)
-  </h2>
+<section class="cpd-log-section">
+    <h2 class="section-heading">
+        <i class="fa-solid fa-graduation-cap"></i>
+        Continuing Professional Development (CPD)
+    </h2>
 
-  <p class="section-subtitle">
-    The CPD log below captures formal and informal learning, outreach, and volunteering activities,
-    including dates, hours, development goals, and completion notes.
-  </p>
+    <p class="section-subtitle">
+        Your CPD activities, presented as clean, modern cards.
+    </p>
 
-  <div class="cpd-table-wrapper">
-    <table class="cpd-table">
-      <thead>
-        <tr>
-          <th>Activity</th>
-          <th>Start date</th>
-          <th>End date</th>
-          <th>CPD hours</th>
-          <th>Development goal</th>
-          <th>Reflective statement</th>
-        </tr>
-      </thead>
-
-      <tbody id="cpd-body">
-        <tr><td colspan="6">Loading CPD log…</td></tr>
-      </tbody>
-    </table>
-  </div>
+    <div id="cpd-card-container" class="cpd-card-container">
+        <!-- Cards will be injected here -->
+    </div>
+</section>
 
   <!-- INSIGHTS PANEL -->
   <section class="cpd-insights">
@@ -1693,37 +1738,60 @@ async function loadCPD() {
             return;
         }
 
-        lines.shift(); // remove header row
+       lines.shift(); // remove header row
 
-        tbody.innerHTML = "";
+const tbody = document.getElementById("cpd-body");
+const cardContainer = document.getElementById("cpd-card-container");
 
-        lines.forEach(line => {
+if (tbody) tbody.innerHTML = "";
+if (cardContainer) cardContainer.innerHTML = "";
 
-            const row = parseCsvLine(line);
+lines.forEach(line => {
+  const row = parseCsvLine(line);
 
-            const tr = document.createElement("tr");
+  const activity   = row[0].replace(/^"|"$/g, "");
+  const start      = row[1].replace(/^"|"$/g, "");
+  const end        = row[2].replace(/^"|"$/g, "");
+  const hours      = row[3].replace(/^"|"$/g, "");
+  const category   = row[4].replace(/^"|"$/g, "");
+  const reflection = row[5].replace(/^"|"$/g, "");
 
-            row.forEach(cell => {
+  // 1) Hidden table row for existing metrics logic
+  if (tbody) {
+    const tr = document.createElement("tr");
+    [activity, start, end, hours, category, reflection].forEach(text => {
+      const td = document.createElement("td");
+      td.textContent = text;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
 
-                const td = document.createElement("td");
+  // 2) Visible CPD card
+  if (cardContainer) {
+    const card = document.createElement("div");
+    card.className = "cpd-card";
+    card.innerHTML = `
+      <div class="cpd-card-title">${activity}</div>
+      <div class="cpd-card-meta">
+        <span class="cpd-badge cpd-hours">${hours} hrs</span>
+        <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
+        <span>${start} → ${end || "Ongoing"}</span>
+      </div>
+      <div class="cpd-card-reflection">
+        ${reflection || "<em>No reflective statement provided.</em>"}
+      </div>
+    `;
+    cardContainer.appendChild(card);
+  }
+});
 
-                td.textContent =
-                    cell.replace(/^"|"$/g, "");
+debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
 
-                tr.appendChild(td);
-
-            });
-
-            tbody.appendChild(tr);
-
-        });
-
-        debug("Rows loaded: " + tbody.rows.length);
-
-        calculateMetrics();
-        generateInsights();
-        generateHeatmap();
-      generateDonutChart();
+calculateMetrics();
+generateInsights();
+generateHeatmap();
+generateDonutChart();
 generateRadarChart();
 
   

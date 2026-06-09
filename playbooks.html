@@ -229,6 +229,92 @@ body.dark .playbooks-highlights__list li strong {
 body.dark .playbooks-highlights__group--secondary {
   border-top-color: #444;
 }
+  /* ---------------------------------------------
+   TWO-COLUMN HIGHLIGHTS PANEL (CONSULTING STYLE)
+   --------------------------------------------- */
+
+.playbooks-highlights-panel {
+  background: var(--panel-bg, #f7f7f7);
+  padding: 48px 20px;
+  margin: 64px 0;
+  border-radius: 12px;
+}
+
+.playbooks-highlights-panel__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+.playbooks-highlights-panel__header {
+  margin-bottom: 40px;
+}
+
+.playbooks-highlights-panel__header h2 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.playbooks-highlights-panel__header p {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--text-secondary, #555);
+}
+
+/* Two-column grid */
+.playbooks-highlights-panel__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+/* Column titles */
+.playbooks-highlights-panel__col h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Lists */
+.playbooks-highlights-panel__col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.playbooks-highlights-panel__col li {
+  margin-bottom: 14px;
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+.playbooks-highlights-panel__col li strong {
+  font-weight: 600;
+  color: var(--text-strong, #111);
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .playbooks-highlights-panel__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Dark mode */
+body.dark .playbooks-highlights-panel {
+  background: #1e1e1e;
+}
+
+body.dark .playbooks-highlights-panel__header p,
+body.dark .playbooks-highlights-panel__col li {
+  color: #ccc;
+}
+
+body.dark .playbooks-highlights-panel__col li strong {
+  color: #fff;
+}
 </style>
 </head>
 
@@ -318,38 +404,43 @@ fetch("header.html")
 </div>
 
 <!-- PLAYBOOKS HIGHLIGHTS -->
-<section class="playbooks-highlights">
-  <div class="playbooks-highlights__inner">
+<section class="playbooks-highlights-panel">
+  <div class="playbooks-highlights-panel__inner">
 
-    <header class="playbooks-highlights__header">
-      <h2 class="playbooks-highlights__title">Playbooks Highlights</h2>
-      <p class="playbooks-highlights__intro">
-        Each Playbook delivers a consistent, high-quality transformation framework built for pace, clarity and measurable outcomes.
-      </p>
+    <header class="playbooks-highlights-panel__header">
+      <h2>Playbooks Highlights</h2>
+      <p>Each Playbook delivers a consistent, high‑quality transformation framework built for pace, clarity and measurable outcomes.</p>
     </header>
 
-    <div class="playbooks-highlights__group">
-      <h3 class="playbooks-highlights__group-title">What you get across all playbooks</h3>
-      <ul class="playbooks-highlights__list">
-        <li><strong>Structured delivery patterns</strong> — repeatable methods that reduce ambiguity and accelerate decision-making.</li>
-        <li><strong>Clear governance checkpoints</strong> — lightweight controls that keep programmes aligned without slowing momentum.</li>
-        <li><strong>Adoption-ready change assets</strong> — communication, training and readiness materials that land change with minimal friction.</li>
-        <li><strong>Technical and business alignment</strong> — ensuring architecture, operations and user experience move forward together.</li>
-        <li><strong>Measurable success criteria</strong> — outcome-based metrics that demonstrate progress and value.</li>
-      </ul>
-    </div>
+    <div class="playbooks-highlights-panel__grid">
 
-    <div class="playbooks-highlights__group playbooks-highlights__group--secondary">
-      <h3 class="playbooks-highlights__group-title">Why these playbooks work</h3>
-      <ul class="playbooks-highlights__list">
-        <li><strong>Proven in real programmes</strong> — built from delivery patterns used across enterprise-scale transformations.</li>
-        <li><strong>Designed for pace</strong> — reduces noise, increases clarity, and accelerates mobilisation.</li>
-        <li><strong>Optimised for modern teams</strong> — remote-friendly, tool-agnostic, and compatible with agile or hybrid delivery.</li>
-      </ul>
+      <!-- LEFT COLUMN -->
+      <div class="playbooks-highlights-panel__col">
+        <h3>What you get across all playbooks</h3>
+        <ul>
+          <li><strong>Structured delivery patterns</strong> — repeatable methods that reduce ambiguity and accelerate decision‑making.</li>
+          <li><strong>Clear governance checkpoints</strong> — lightweight controls that keep programmes aligned without slowing momentum.</li>
+          <li><strong>Adoption‑ready change assets</strong> — communication, training and readiness materials that land change with minimal friction.</li>
+          <li><strong>Technical and business alignment</strong> — ensuring architecture, operations and user experience move forward together.</li>
+          <li><strong>Measurable success criteria</strong> — outcome‑based metrics that demonstrate progress and value.</li>
+        </ul>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="playbooks-highlights-panel__col">
+        <h3>Why these playbooks work</h3>
+        <ul>
+          <li><strong>Proven in real programmes</strong> — built from delivery patterns used across enterprise‑scale transformations.</li>
+          <li><strong>Designed for pace</strong> — reduces noise, increases clarity, and accelerates mobilisation.</li>
+          <li><strong>Optimised for modern teams</strong> — remote‑friendly, tool‑agnostic, and compatible with agile or hybrid delivery.</li>
+        </ul>
+      </div>
+
     </div>
 
   </div>
 </section>
+
 
   
 <!-- CTA SECTION -->

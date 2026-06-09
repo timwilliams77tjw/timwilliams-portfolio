@@ -1743,28 +1743,40 @@ async function loadCPD() {
 
         lines.shift(); // remove header row
 
-        tbody.innerHTML = "";
+     // Render CPD cards instead of table rows
+const container = document.getElementById("cpd-card-container");
+container.innerHTML = "";
 
-        lines.forEach(line => {
+lines.forEach(line => {
+    const row = parseCsvLine(line);
 
-            const row = parseCsvLine(line);
+    const activity = row[0].replace(/^"|"$/g, "");
+    const start = row[1].replace(/^"|"$/g, "");
+    const end = row[2].replace(/^"|"$/g, "");
+    const hours = row[3].replace(/^"|"$/g, "");
+    const category = row[4].replace(/^"|"$/g, "");
+    const reflection = row[5].replace(/^"|"$/g, "");
 
-            const tr = document.createElement("tr");
+    const card = document.createElement("div");
+    card.className = "cpd-card";
 
-            row.forEach(cell => {
+    card.innerHTML = `
+        <div class="cpd-card-title">${activity}</div>
 
-                const td = document.createElement("td");
+        <div class="cpd-card-meta">
+            <span class="cpd-badge cpd-hours">${hours} hrs</span>
+            <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
+            <span>${start} → ${end || "Ongoing"}</span>
+        </div>
 
-                td.textContent =
-                    cell.replace(/^"|"$/g, "");
+        <div class="cpd-card-reflection">
+            ${reflection || "<em>No reflective statement provided.</em>"}
+        </div>
+    `;
 
-                tr.appendChild(td);
+    container.appendChild(card);
+});
 
-            });
-
-            tbody.appendChild(tr);
-
-        });
 
         debug("Rows loaded: " + tbody.rows.length);
 

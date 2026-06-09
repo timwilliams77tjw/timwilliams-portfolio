@@ -1803,7 +1803,8 @@ function calculateMetrics() {
     };
 
          // Use completedHours for "Total Hours" (completed CPD)
-    setText("metric-total-hours", completedHours.toFixed(1));
+setText("metric-total-hours", totalHours.toFixed(1));
+
 
     setText("metric-hours-remaining", hoursRemaining.toFixed(1));
     setText("metric-activities", activityCount);
@@ -1811,11 +1812,13 @@ function calculateMetrics() {
     setText("metric-top-category", topCategory);
 
     // Correct projected hours (completed + remaining)
-    const projectedTotal = completedHours + hoursRemaining;
+const projectedTotal = totalHours;
+
     setText("metric-projected-hours", projectedTotal.toFixed(1));
 
     // Progress ring target
-    const targetHours = completedHours + hoursRemaining;
+const targetHours = totalHours;
+
 
     setText(
         "cpd-wheel-completed",

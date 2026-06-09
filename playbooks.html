@@ -503,6 +503,114 @@ body.dark .playbooks-highlights-accent__col li {
 body.dark .playbooks-highlights-accent__col li strong {
   color: #fff;
 }
+  /* ----------------------------------------------------
+   PREMIUM HIGHLIGHTS: ACCENT BAR + ICONS + CARDS
+   ---------------------------------------------------- */
+
+.playbooks-highlights-procards {
+  background: #efefef;
+  padding: 80px 24px;
+  margin: 100px 0;
+  border-radius: 14px;
+  border-left: 6px solid var(--accent-blue, #7ac0f9);
+}
+
+.playbooks-highlights-procards__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+.playbooks-highlights-procards__header {
+  margin-bottom: 56px;
+}
+
+.playbooks-highlights-procards__header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.playbooks-highlights-procards__header p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary, #555);
+}
+
+/* Grid */
+.playbooks-highlights-procards__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+}
+
+/* Column titles */
+.playbooks-highlights-procards__col h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* Highlight cards */
+.highlight-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px 20px 20px 56px;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Icon placeholder */
+.highlight-card .icon {
+  width: 26px;
+  height: 26px;
+  background: var(--accent-blue, #7ac0f9);
+  border-radius: 6px;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  opacity: 0.9;
+}
+
+/* Text */
+.highlight-card p {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+.highlight-card strong {
+  color: #111;
+  font-weight: 600;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .playbooks-highlights-procards__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Dark mode */
+body.dark .playbooks-highlights-procards {
+  background: #1e1e1e;
+  border-left-color: #7ac0f9;
+}
+
+body.dark .highlight-card {
+  background: #2a2a2a;
+  box-shadow: none;
+}
+
+body.dark .highlight-card p {
+  color: #ccc;
+}
+
+body.dark .highlight-card strong {
+  color: #fff;
+}
 </style>
 </head>
 
@@ -590,36 +698,65 @@ fetch("header.html")
   </div>
 
 </div>
-<section class="playbooks-highlights-accent">
-  <div class="playbooks-highlights-accent__inner">
+<section class="playbooks-highlights-procards">
+  <div class="playbooks-highlights-procards__inner">
 
-    <header class="playbooks-highlights-accent__header">
+    <header class="playbooks-highlights-procards__header">
       <h2>Playbooks Highlights</h2>
       <p>Each Playbook delivers a consistent, high‑quality transformation framework built for pace, clarity and measurable outcomes.</p>
     </header>
 
-    <div class="playbooks-highlights-accent__grid">
+    <div class="playbooks-highlights-procards__grid">
 
       <!-- LEFT COLUMN -->
-      <div class="playbooks-highlights-accent__col">
+      <div class="playbooks-highlights-procards__col">
         <h3>What you get across all playbooks</h3>
-        <ul>
-          <li><strong>Structured delivery patterns</strong> — repeatable methods that reduce ambiguity and accelerate decision‑making.</li>
-          <li><strong>Clear governance checkpoints</strong> — lightweight controls that keep programmes aligned without slowing momentum.</li>
-          <li><strong>Adoption‑ready change assets</strong> — communication, training and readiness materials that land change with minimal friction.</li>
-          <li><strong>Technical and business alignment</strong> — ensuring architecture, operations and user experience move forward together.</li>
-          <li><strong>Measurable success criteria</strong> — outcome‑based metrics that demonstrate progress and value.</li>
-        </ul>
+
+        <div class="highlight-card">
+          <span class="icon"></span>
+          <p><strong>Structured delivery patterns</strong> — repeatable methods that reduce ambiguity and accelerate decision‑making.</p>
+        </div>
+
+        <div class="highlight-card">
+          <span class="icon"></span>
+          <p><strong>Clear governance checkpoints</strong> — lightweight controls that keep programmes aligned without slowing momentum.</p>
+        </div>
+
+        <div class="highlight-card">
+          <span class="icon"></span>
+          <p><strong>Adoption‑ready change assets</strong> — communication, training and readiness materials that land change with minimal friction.</p>
+        </div>
+
+        <div class="highlight-card">
+          <span class="icon"></span>
+          <p><strong>Technical and business alignment</strong> — ensuring architecture, operations and user experience move forward together.</p>
+        </div>
+
+        <div class="highlight-card">
+          <span class="icon"></span>
+          <p><strong>Measurable success criteria</strong> — outcome‑based metrics that demonstrate progress and value.</p>
+        </div>
       </div>
 
       <!-- RIGHT COLUMN -->
-      <div class="playbooks-highlights-accent__col">
+      <div class="playbooks-highlights-procards__col">
         <h3>Why these playbooks work</h3>
-        <ul>
-          <li><strong>Proven in real programmes</strong> — built from delivery patterns used across enterprise‑scale transformations.</li>
-          <li><strong>Designed for pace</strong> — reduces noise, increases clarity, and accelerates mobilisation.</li>
-          <li><strong>Optimised for modern teams</strong> — remote‑friendly, tool‑agnostic, and compatible with agile or hybrid delivery.</li>
-        </ul>
+
+        <div class="highlight-card">
+          <span class="icon"></span>
+          <p><strong>Proven in real programmes</strong> — built from delivery patterns used across enterprise‑scale transformations.</p>
+        </div>
+
+        <div class="highlight-card">
+          <span class="icon"></span>
+          <p><strong>Designed for pace</strong> — reduces noise, increases clarity, and accelerates mobilisation.</p>
+        </div>
+
+        <div class="highlight-card">
+          <span class="icon"></span>
+          <p><strong>Optimised for modern teams</strong> — remote‑friendly, tool‑agnostic, and compatible with agile or hybrid delivery.</p>
+        </div>
+
       </div>
 
     </div>

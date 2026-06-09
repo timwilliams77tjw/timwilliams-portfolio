@@ -819,7 +819,112 @@ html, body {
   font-weight: 600;
   color: #0a2540;
 }
+.pillars-scroll{
+    display:flex;
+    gap:18px;
+    overflow-x:auto;
+    padding:10px 0 20px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+}
 
+.pillars-scroll::-webkit-scrollbar{
+    height:6px;
+}
+
+.pillars-scroll::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:20px;
+}
+
+.pillar-card{
+    min-width:220px;
+    flex:0 0 auto;
+
+    background:#fff;
+    border-radius:24px;
+
+    padding:22px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
+
+    scroll-snap-align:start;
+
+    transition:.3s;
+}
+
+.pillar-card:hover{
+    transform:translateY(-4px);
+}
+
+.pillar-icon{
+    width:56px;
+    height:56px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    font-size:22px;
+
+    margin-bottom:16px;
+}
+
+.completed .pillar-icon{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.remaining .pillar-icon{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.projected .pillar-icon{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.pillar-value{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:4px;
+}
+
+.pillar-title{
+    font-size:.95rem;
+    color:#64748b;
+    margin-bottom:18px;
+}
+
+.pillar-progress{
+    height:12px;
+    background:#edf2f7;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.pillar-fill{
+    width:0%;
+    height:100%;
+    border-radius:999px;
+    transition:1.2s ease;
+}
+
+.completed .pillar-fill{
+    background:linear-gradient(90deg,#16a34a,#22c55e);
+}
+
+.remaining .pillar-fill{
+    background:linear-gradient(90deg,#dc2626,#ef4444);
+}
+
+.projected .pillar-fill{
+    background:linear-gradient(90deg,#2563eb,#60a5fa);
+}
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -928,45 +1033,67 @@ html, body {
   </div>
 </section>
 <section class="cpd-pillars-section">
-  <h2 class="section-heading">
-    <i class="fa-solid fa-chart-simple"></i>
-    CPD Progress Pillars
-  </h2>
-  <p class="section-subtitle">
-    A visual summary of your completed, remaining and projected CPD hours.
-  </p>
 
-  <div class="pillars-wrapper">
-<div class="pillar">
-  <div class="pillar-bar-container">
-    <div class="pillar-bar completed" id="pillar-completed">
-      <div class="pillar-value-label" id="pillar-completed-label"></div>
+    <h2 class="section-heading">
+        <i class="fa-solid fa-chart-simple"></i>
+        CPD Progress Pillars
+    </h2>
+
+    <p class="section-subtitle">
+        A visual summary of your completed, remaining and projected CPD hours.
+    </p>
+
+    <div class="pillars-scroll">
+
+        <div class="pillar-card completed">
+            <div class="pillar-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div class="pillar-value" id="pillar-completed-label">0</div>
+
+            <div class="pillar-title">
+                Completed
+            </div>
+
+            <div class="pillar-progress">
+                <div class="pillar-fill" id="pillar-completed"></div>
+            </div>
+        </div>
+
+        <div class="pillar-card remaining">
+            <div class="pillar-icon">
+                <i class="fa-solid fa-hourglass-half"></i>
+            </div>
+
+            <div class="pillar-value" id="pillar-remaining-label">0</div>
+
+            <div class="pillar-title">
+                Remaining
+            </div>
+
+            <div class="pillar-progress">
+                <div class="pillar-fill" id="pillar-remaining"></div>
+            </div>
+        </div>
+
+        <div class="pillar-card projected">
+            <div class="pillar-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <div class="pillar-value" id="pillar-projected-label">0</div>
+
+            <div class="pillar-title">
+                Projected
+            </div>
+
+            <div class="pillar-progress">
+                <div class="pillar-fill" id="pillar-projected"></div>
+            </div>
+        </div>
+
     </div>
-  </div>
-  <p class="pillar-label">Completed</p>
-</div>
-
-
-
-  <div class="pillar">
-  <div class="pillar-bar-container">
-    <div class="pillar-bar remaining" id="pillar-remaining">
-      <div class="pillar-value-label" id="pillar-remaining-label"></div>
-    </div>
-  </div>
-  <p class="pillar-label">Remaining</p>
-</div>
-
-
-  <div class="pillar">
-  <div class="pillar-bar-container">
-    <div class="pillar-bar projected" id="pillar-projected">
-      <div class="pillar-value-label" id="pillar-projected-label"></div>
-    </div>
-  </div>
-  <p class="pillar-label">Projected</p>
-</div>
-
 
 </section>
 
@@ -1632,28 +1759,49 @@ function generateRadarChart() {
   });
 }
 function generateProgressPillars() {
-  const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
-  const remaining = parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
-  const projected = parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
 
-  const max = completed + remaining || 1;
+    const completed =
+        parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
 
-  const setPillar = (id, labelId, value, maxValue) => {
-    const bar = document.getElementById(id);
-    const label = document.getElementById(labelId);
-    const heightPercent = Math.min((value / maxValue) * 100, 100);
+    const remaining =
+        parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
 
-    bar.style.height = heightPercent + "%";
-    label.textContent = value.toFixed(1);
-  };
+    const projected =
+        parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
 
-  setTimeout(() => {
-    setPillar("pillar-completed", "pillar-completed-label", completed, max);
-    setPillar("pillar-remaining", "pillar-remaining-label", remaining, max);
-    setPillar("pillar-projected", "pillar-projected-label", projected, max);
-  }, 300);
+    const max =
+        Math.max(completed, remaining, projected);
+
+    const setPillar = (id, labelId, value) => {
+
+        const bar = document.getElementById(id);
+        const label = document.getElementById(labelId);
+
+        const percent = (value / max) * 100;
+
+        label.textContent = value.toFixed(1);
+
+        bar.style.width = percent + "%";
+    };
+
+    setPillar(
+        "pillar-completed",
+        "pillar-completed-label",
+        completed
+    );
+
+    setPillar(
+        "pillar-remaining",
+        "pillar-remaining-label",
+        remaining
+    );
+
+    setPillar(
+        "pillar-projected",
+        "pillar-projected-label",
+        projected
+    );
 }
-
 </script>
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section>

@@ -1510,23 +1510,16 @@ html, body {
             </div>
         </div>
 
-        <div class="pillar-card projected">
-            <div class="pillar-icon">
-                <i class="fa-solid fa-chart-line"></i>
-            </div>
-
-            <div class="pillar-value" id="pillar-projected-label">0</div>
-
-            <div class="pillar-title">
-                Projected
-            </div>
-
-            <div class="pillar-progress">
-                <div class="pillar-fill" id="pillar-projected"></div>
-            </div>
-        </div>
-
-    </div>
+       <div class="pillar-card projected">
+  <div class="pillar-icon">
+    <i class="fa-solid fa-chart-line"></i>
+  </div>
+  <div class="pillar-value" id="pillar-projected-label">0</div>
+  <div class="pillar-title">Projected</div>
+  <div class="pillar-progress">
+    <div class="pillar-fill" id="pillar-projected"></div>
+  </div>
+</div>
 
 </section>
 
@@ -1556,7 +1549,11 @@ html, body {
   </div>
 </section>
 
-
+<div class="cpd-table-wrapper" style="display:none">
+  <table class="cpd-table">
+    <tbody id="cpd-body"></tbody>
+  </table>
+</div>
 <!-- CPD SECTION -->
 <section class="cpd-log-section">
     <h2 class="section-heading">
@@ -1741,49 +1738,60 @@ async function loadCPD() {
             return;
         }
 
-        lines.shift(); // remove header row
+       lines.shift(); // remove header row
 
-     // Render CPD cards instead of table rows
-const container = document.getElementById("cpd-card-container");
-container.innerHTML = "";
+const tbody = document.getElementById("cpd-body");
+const cardContainer = document.getElementById("cpd-card-container");
+
+if (tbody) tbody.innerHTML = "";
+if (cardContainer) cardContainer.innerHTML = "";
 
 lines.forEach(line => {
-    const row = parseCsvLine(line);
+  const row = parseCsvLine(line);
 
-    const activity = row[0].replace(/^"|"$/g, "");
-    const start = row[1].replace(/^"|"$/g, "");
-    const end = row[2].replace(/^"|"$/g, "");
-    const hours = row[3].replace(/^"|"$/g, "");
-    const category = row[4].replace(/^"|"$/g, "");
-    const reflection = row[5].replace(/^"|"$/g, "");
+  const activity   = row[0].replace(/^"|"$/g, "");
+  const start      = row[1].replace(/^"|"$/g, "");
+  const end        = row[2].replace(/^"|"$/g, "");
+  const hours      = row[3].replace(/^"|"$/g, "");
+  const category   = row[4].replace(/^"|"$/g, "");
+  const reflection = row[5].replace(/^"|"$/g, "");
 
+  // 1) Hidden table row for existing metrics logic
+  if (tbody) {
+    const tr = document.createElement("tr");
+    [activity, start, end, hours, category, reflection].forEach(text => {
+      const td = document.createElement("td");
+      td.textContent = text;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
+
+  // 2) Visible CPD card
+  if (cardContainer) {
     const card = document.createElement("div");
     card.className = "cpd-card";
-
     card.innerHTML = `
-        <div class="cpd-card-title">${activity}</div>
-
-        <div class="cpd-card-meta">
-            <span class="cpd-badge cpd-hours">${hours} hrs</span>
-            <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
-            <span>${start} → ${end || "Ongoing"}</span>
-        </div>
-
-        <div class="cpd-card-reflection">
-            ${reflection || "<em>No reflective statement provided.</em>"}
-        </div>
+      <div class="cpd-card-title">${activity}</div>
+      <div class="cpd-card-meta">
+        <span class="cpd-badge cpd-hours">${hours} hrs</span>
+        <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
+        <span>${start} → ${end || "Ongoing"}</span>
+      </div>
+      <div class="cpd-card-reflection">
+        ${reflection || "<em>No reflective statement provided.</em>"}
+      </div>
     `;
-
-    container.appendChild(card);
+    cardContainer.appendChild(card);
+  }
 });
 
+debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
 
-        debug("Rows loaded: " + tbody.rows.length);
-
-        calculateMetrics();
-        generateInsights();
-        generateHeatmap();
-      generateDonutChart();
+calculateMetrics();
+generateInsights();
+generateHeatmap();
+generateDonutChart();
 generateRadarChart();
 
   

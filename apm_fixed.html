@@ -1123,6 +1123,16 @@ html, body {
 .pillar-card.projected .pillar-fill {
   background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
 }
+/* Pulse animation for projected pillar */
+@keyframes pillarPulse {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.03); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pillar-card.projected {
+  animation: pillarPulse 2.4s ease-in-out infinite;
+}
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">

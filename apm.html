@@ -1016,6 +1016,123 @@ html, body {
     font-size:.7rem;
     font-weight:600;
 }
+
+   /* ==========================================================
+   PREMIUM PILLAR CARD ENHANCEMENTS
+========================================================== */
+
+.pillar-card {
+  position: relative;
+  border-radius: 24px;
+  padding: 22px;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  scroll-snap-align: start;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+/* Hover lift */
+.pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0,0,0,.18);
+}
+
+/* Completed */
+.pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+/* Remaining */
+.pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+/* Projected */
+.pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* Icon glow */
+.pillar-icon {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(255,255,255,.25);
+}
+
+/* Value */
+.pillar-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* Title */
+.pillar-title {
+  font-size: .95rem;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 18px;
+}
+
+/* Progress bar */
+.pillar-progress {
+  height: 12px;
+  background: rgba(255,255,255,.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Animated fill */
+.pillar-fill {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  border-radius: 999px;
+  transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* CPD badge */
+.pillar-card::after {
+  content: "CPD";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.15);
+  font-size: .7rem;
+  font-weight: 600;
+}
+ /* Force correct gradient colours for pillar fills */
+.pillar-card.completed .pillar-fill {
+  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
+}
+
+.pillar-card.remaining .pillar-fill {
+  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
+}
+
+.pillar-card.projected .pillar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
+}
+/* Pulse animation for projected pillar */
+@keyframes pillarPulse {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.03); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pillar-card.projected {
+  animation: pillarPulse 2.4s ease-in-out infinite;
+}
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -1892,6 +2009,31 @@ function generateProgressPillars() {
         "pillar-projected-label",
         projected
     );
+function generateProgressPillars() {
+  const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
+  const remaining = parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
+  const projected = parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
+
+  const max = completed + remaining || 1;
+
+  const setPillar = (id, labelId, value, maxValue) => {
+    const fill = document.getElementById(id);
+    const label = document.getElementById(labelId);
+    const percent = Math.min((value / maxValue) * 100, 100);
+
+    label.textContent = value.toFixed(1);
+    requestAnimationFrame(() => {
+      fill.style.width = percent + "%";
+    });
+  };
+
+  setTimeout(() => {
+    setPillar("pillar-completed", "pillar-completed-label", completed, max);
+    setPillar("pillar-remaining", "pillar-remaining-label", remaining, max);
+    setPillar("pillar-projected", "pillar-projected-label", projected, max);
+  }, 300);
+}
+  
 }
 </script>
 <!-- APM COMPETENCE FRAMEWORK GRID -->

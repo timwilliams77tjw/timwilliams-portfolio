@@ -1271,6 +1271,15 @@ html, body {
 .pillar-card.projected {
   animation: pillarPulse 2.4s ease-in-out infinite;
 }
+    /* FIX: Ensure pillar-fill gradient is not washed out by card overlay */
+.pillar-card .pillar-progress {
+  background: rgba(0,0,0,0.15) !important;
+}
+
+.pillar-card .pillar-fill {
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">

@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- ============================================================
+     SECTION 1 — HEAD + CLEANED CSS + FADE EDGES + FIXES
+     ============================================================ -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +27,22 @@ body {
     background: var(--bg);
     color: var(--text-main);
     line-height: 1.6;
+}
+
+/* Scroll progress bar */
+#scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: #7ac0f9;
+    z-index: 9999;
+    transition: width 0.1s linear;
+}
+
+body.dark #scrollProgress {
+    background: #4da3ff;
 }
 
 .container {
@@ -116,12 +138,7 @@ body.dark .stat {
     display: flex;
     align-items: center;
     gap: 40px;
-    animation: scrollLogos 18s linear infinite;
     will-change: transform;
-}
-
-.logo-carousel:hover .logo-track {
-    animation-play-state: paused;
 }
 
 .logo-carousel .logo {
@@ -145,12 +162,6 @@ body.dark .logo-carousel .logo {
     max-width: 90px;
     max-height: 50px;
     object-fit: contain;
-}
-
-/* LOGO SCROLL ANIMATION */
-@keyframes scrollLogos {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
 }
 
 /* GLOBAL PROGRAMME DELIVERY — SCROLL STRIP */
@@ -193,7 +204,6 @@ body.dark .logo-carousel .logo {
     display: flex;
     align-items: center;
     gap: 30px;
-    animation: scrollDelivery 14s linear infinite;
     will-change: transform;
 }
 
@@ -212,12 +222,6 @@ body.dark .delivery-pill {
     background: var(--bg);
     color: var(--text-main);
     border-color: var(--text-main);
-}
-
-/* DELIVERY SCROLL ANIMATION */
-@keyframes scrollDelivery {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
 }
 
 /* TIMELINE */
@@ -281,7 +285,15 @@ body.dark .timeline-node {
 
 </style>
 </head>
+
+
+
+<!-- ============================================================
+     SECTION 2 — FULL BODY CONTENT
+     ============================================================ -->
 <body class="header-with-logo">
+
+<div id="scrollProgress"></div>
 
 <!-- HEADER -->
 <div id="header-placeholder"></div>
@@ -363,17 +375,6 @@ fetch("header.html")
                     <div class="logo"><img src="tele.png" alt="Telefonica"></div>
                     <div class="logo"><img src="met.png" alt="Met Police"></div>
 
-                    <!-- Duplicate set for seamless infinite scroll -->
-                    <div class="logo"><img src="nhs.png" alt="NHS England"></div>
-                    <div class="logo"><img src="hsbc.png" alt="HSBC"></div>
-                    <div class="logo"><img src="dn.png" alt="Dounreay Nuclear"></div>
-                    <div class="logo"><img src="fco.png" alt="Foreign Commonwealth"></div>
-                    <div class="logo"><img src="nu.png" alt="Newcastle University"></div>
-                    <div class="logo"><img src="tesco.png" alt="Tesco"></div>
-                    <div class="logo"><img src="mod.png" alt="MoD"></div>
-                    <div class="logo"><img src="tele.png" alt="Telefonica"></div>
-                    <div class="logo"><img src="met.png" alt="Met Police"></div>
-
                 </div>
             </div>
         </div>
@@ -387,12 +388,6 @@ fetch("header.html")
             <div class="delivery-carousel">
                 <div class="delivery-track">
 
-                    <div class="delivery-pill">UK</div>
-                    <div class="delivery-pill">Europe</div>
-                    <div class="delivery-pill">USA</div>
-                    <div class="delivery-pill">APAC</div>
-
-                    <!-- Duplicate for seamless loop -->
                     <div class="delivery-pill">UK</div>
                     <div class="delivery-pill">Europe</div>
                     <div class="delivery-pill">USA</div>
@@ -520,9 +515,9 @@ fetch("header.html")
     </div>
 
 </main>
+
 <!-- FLOATING BUTTONS -->
 <div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
-
 <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
 
 <!-- GLOBAL FOOTER -->
@@ -533,8 +528,69 @@ fetch("footer.html")
     .then(r => r.text())
     .then(html => document.getElementById("footer-container").innerHTML = html);
 </script>
+
+
+
 <!-- PAGE SCRIPTS -->
 <script>
+
+/* ============================================================
+   UNIVERSAL INFINITE SCROLL ENGINE
+   ============================================================ */
+
+function initInfiniteScroll(wrapperSelector, trackSelector, speed = 0.5) {
+    const wrapper = document.querySelector(wrapperSelector);
+    const track = document.querySelector(trackSelector);
+
+    if (!wrapper || !track) return;
+
+    let scrollPos = 0;
+    let currentSpeed = speed;
+
+    // Duplicate content dynamically for seamless infinite loop
+    track.innerHTML += track.innerHTML;
+
+    function step() {
+        scrollPos += currentSpeed;
+
+        // Reset when half the duplicated width has scrolled
+        if (scrollPos >= track.scrollWidth / 2) {
+            scrollPos = 0;
+        }
+
+        track.style.transform = `translateX(${-scrollPos}px)`;
+        requestAnimationFrame(step);
+    }
+
+    // Pause on hover
+    wrapper.addEventListener("mouseenter", () => currentSpeed = 0);
+    wrapper.addEventListener("mouseleave", () => currentSpeed = speed);
+
+    requestAnimationFrame(step);
+}
+
+/* Initialise both carousels */
+initInfiniteScroll(".logo-carousel-wrapper", ".logo-track", 0.6);
+initInfiniteScroll(".delivery-carousel-wrapper", ".delivery-track", 0.8);
+
+
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+
+window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById("scrollProgress").style.width = progress + "%";
+});
+
+
+
+/* ============================================================
+   TIMELINE SCROLL BUTTONS
+   ============================================================ */
 
 function scrollTimeline(amount) {
     document.getElementById("timeline").scrollBy({
@@ -543,11 +599,22 @@ function scrollTimeline(amount) {
     });
 }
 
+
+
+/* ============================================================
+   TIMELINE EXPAND / COLLAPSE
+   ============================================================ */
+
 document.querySelectorAll(".timeline-node").forEach(node => {
     node.onclick = () => node.classList.toggle("active");
 });
 
-/* Radar Chart */
+
+
+/* ============================================================
+   RADAR CHART
+   ============================================================ */
+
 new Chart(document.getElementById("skillsRadar"), {
     type: "radar",
     data: {

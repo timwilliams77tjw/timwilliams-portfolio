@@ -295,7 +295,51 @@ body.dark .timeline-node.active .timeline-details {
     border-color: #001f3f; /* navy */
     color: #ffffff;        /* white text */
 }
- 
+
+        /* Auto-scrolling logo carousel */
+.logo-carousel {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.logo-track {
+    display: flex;
+    gap: 40px;
+    animation: scrollLogos 22s linear infinite;
+}
+
+.logo-carousel .logo {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-carousel .logo img {
+    max-width: 90px;
+    max-height: 50px;
+    object-fit: contain;
+}
+
+/* Infinite scroll animation */
+@keyframes scrollLogos {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Dark mode compatibility */
+body.dark .logo-carousel .logo {
+    background: var(--bg);
+    color: var(--text-main);
+    box-shadow: 0 2px 6px rgba(255,255,255,0.08);
+}
+
     </style>
 </head>
 
@@ -367,19 +411,30 @@ fetch("header.html")
 
     <div class="card">
   <h2 class="section-title">Organisations Delivered For</h2>
-  <div class="logo-grid">
-    <div class="logo"><img src="nhs.png" alt="NHS England"></div>
-    <div class="logo"><img src="hsbc.png" alt="HSBC"></div>
-    <div class="logo"><img src="dn.png" alt="Dounreay Nuclear"></div>
-    <div class="logo"><img src="fco.png" alt="Foreign Commonwealth"></div>
-    <div class="logo"><img src="nu.png" alt="Newcastle University"></div>
-    <div class="logo"><img src="tesco.png" alt="Tesco"></div>
-    <div class="logo"><img src="mod.png" alt="MoD"></div>
-    <div class="logo"><img src="tele.png" alt="Telefonica"></div>
-    <div class="logo"><img src="met.png" alt="Met Police"></div>
-  </div>
-</div>
+<div class="logo-carousel">
+    <div class="logo-track">
+        <div class="logo"><img src="nhs.png" alt="NHS England"></div>
+        <div class="logo"><img src="hsbc.png" alt="HSBC"></div>
+        <div class="logo"><img src="dn.png" alt="Dounreay Nuclear"></div>
+        <div class="logo"><img src="fco.png" alt="Foreign Commonwealth"></div>
+        <div class="logo"><img src="nu.png" alt="Newcastle University"></div>
+        <div class="logo"><img src="tesco.png" alt="Tesco"></div>
+        <div class="logo"><img src="mod.png" alt="MoD"></div>
+        <div class="logo"><img src="tele.png" alt="Telefonica"></div>
+        <div class="logo"><img src="met.png" alt="Met Police"></div>
 
+        <!-- Duplicate set for seamless infinite scroll -->
+        <div class="logo"><img src="nhs.png" alt="NHS England"></div>
+        <div class="logo"><img src="hsbc.png" alt="HSBC"></div>
+        <div class="logo"><img src="dn.png" alt="Dounreay Nuclear"></div>
+        <div class="logo"><img src="fco.png" alt="Foreign Commonwealth"></div>
+        <div class="logo"><img src="nu.png" alt="Newcastle University"></div>
+        <div class="logo"><img src="tesco.png" alt="Tesco"></div>
+        <div class="logo"><img src="mod.png" alt="MoD"></div>
+        <div class="logo"><img src="tele.png" alt="Telefonica"></div>
+        <div class="logo"><img src="met.png" alt="Met Police"></div>
+    </div>
+</div>
 
     <div class="card">
   <h2 class="section-title">Global Programme Delivery</h2>

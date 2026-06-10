@@ -528,61 +528,91 @@ fetch("footer.html")
 <script>
 
 /* ============================================================
-   UNIVERSAL INFINITE SCROLL ENGINE (scrollLeft version)
-   High-speed + manual scroll + auto pause/resume
+   PREMIUM SMOOTH MODE — APPLE-STYLE INFINITE MARQUEE
+   Transform-based auto-scroll + magnetic drag (medium resistance)
    ============================================================ */
 
-function initInfiniteScroll(wrapperSelector, trackSelector, speed = 8) {
+function initSmoothMarquee(wrapperSelector, trackSelector, speed = 0.25) {
     const wrapper = document.querySelector(wrapperSelector);
     const track = document.querySelector(trackSelector);
 
     if (!wrapper || !track) return;
 
-    let currentSpeed = speed;
-    let isUserScrolling = false;
-
-    // Duplicate content for seamless infinite loop
+    /* Duplicate content for seamless infinite loop */
     track.innerHTML += track.innerHTML;
 
-    function step() {
-        if (!isUserScrolling) {
-            wrapper.scrollLeft += currentSpeed;
+    let pos = 0;                 // current translateX position
+    let autoSpeed = speed;       // auto-scroll speed
+    let isDragging = false;
+    let startX = 0;
+    let lastX = 0;
+    let velocity = 0;
+    let dragResistance = 0.12;   // medium magnetic resistance
 
-            // Correct reset point (critical for speed)
-            const resetPoint = (track.scrollWidth / 2) - wrapper.clientWidth;
+    /* Disable native scroll completely */
+    wrapper.style.overflow = "hidden";
 
-            if (wrapper.scrollLeft >= resetPoint) {
-                wrapper.scrollLeft = 0;
-            }
+    /* Auto-scroll loop */
+    function animate() {
+        if (!isDragging) {
+            pos -= autoSpeed;
+        } else {
+            pos += velocity;
+            velocity *= (1 - dragResistance);
         }
 
-        requestAnimationFrame(step);
+        const width = track.scrollWidth / 2;
+
+        /* Loop seamlessly */
+        if (pos <= -width) pos += width;
+        if (pos >= 0) pos -= width;
+
+        track.style.transform = `translateX(${pos}px)`;
+        requestAnimationFrame(animate);
     }
 
-    // Pause on hover
-    wrapper.addEventListener("mouseenter", () => currentSpeed = 0);
-    wrapper.addEventListener("mouseleave", () => {
-        if (!isUserScrolling) currentSpeed = speed;
-    });
+    /* Drag start */
+    function onDragStart(e) {
+        isDragging = true;
+        startX = e.clientX || e.touches?.[0].clientX;
+        lastX = startX;
+        velocity = 0;
+    }
 
-    // Pause while user scrolls manually
-    wrapper.addEventListener("scroll", () => {
-        isUserScrolling = true;
-        currentSpeed = 0;
+    /* Drag move */
+    function onDragMove(e) {
+        if (!isDragging) return;
 
-        clearTimeout(wrapper._scrollTimeout);
-        wrapper._scrollTimeout = setTimeout(() => {
-            isUserScrolling = false;
-            currentSpeed = speed;
-        }, 800);
-    });
+        const x = e.clientX || e.touches?.[0].clientX;
+        const delta = x - lastX;
 
-    requestAnimationFrame(step);
+        pos += delta * 1.2;   // drag sensitivity
+        velocity = delta;     // used for magnetic easing
+
+        lastX = x;
+    }
+
+    /* Drag end */
+    function onDragEnd() {
+        isDragging = false;
+    }
+
+    /* Event listeners */
+    wrapper.addEventListener("mousedown", onDragStart);
+    wrapper.addEventListener("mousemove", onDragMove);
+    wrapper.addEventListener("mouseup", onDragEnd);
+    wrapper.addEventListener("mouseleave", onDragEnd);
+
+    wrapper.addEventListener("touchstart", onDragStart, { passive: true });
+    wrapper.addEventListener("touchmove", onDragMove, { passive: true });
+    wrapper.addEventListener("touchend", onDragEnd);
+
+    requestAnimationFrame(animate);
 }
 
-/* High-speed settings */
-initInfiniteScroll(".logo-carousel-wrapper", ".logo-track", 8);
-initInfiniteScroll(".delivery-carousel-wrapper", ".delivery-track", 10);
+/* Medium-speed settings */
+initSmoothMarquee(".logo-carousel-wrapper", ".logo-track", 0.25);
+initSmoothMarquee(".delivery-carousel-wrapper", ".delivery-track", 0.35);
 
 
 

@@ -550,8 +550,8 @@ fetch("footer.html")
 <script>
 
 /* ============================================================
-   UNIVERSAL INFINITE SCROLL ENGINE
-   (Faster speed + manual scroll + auto‑pause)
+   UNIVERSAL INFINITE SCROLL ENGINE (scrollLeft version)
+   Enables manual scroll + auto scroll + auto pause/resume
    ============================================================ */
 
 function initInfiniteScroll(wrapperSelector, trackSelector, speed = 1.2) {
@@ -560,7 +560,6 @@ function initInfiniteScroll(wrapperSelector, trackSelector, speed = 1.2) {
 
     if (!wrapper || !track) return;
 
-    let scrollPos = 0;
     let currentSpeed = speed;
     let isUserScrolling = false;
 
@@ -569,13 +568,12 @@ function initInfiniteScroll(wrapperSelector, trackSelector, speed = 1.2) {
 
     function step() {
         if (!isUserScrolling) {
-            scrollPos += currentSpeed;
+            wrapper.scrollLeft += currentSpeed;
 
-            if (scrollPos >= track.scrollWidth / 2) {
-                scrollPos = 0;
+            // Reset when reaching half of duplicated content
+            if (wrapper.scrollLeft >= track.scrollWidth / 2) {
+                wrapper.scrollLeft = 0;
             }
-
-            track.style.transform = `translateX(${-scrollPos}px)`;
         }
 
         requestAnimationFrame(step);

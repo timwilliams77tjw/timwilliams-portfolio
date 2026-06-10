@@ -374,6 +374,58 @@ body.dark .timeline-arrow {
 
 .timeline-left { left: -20px; }
 .timeline-right { right: -20px; }
+
+     /* FINAL — Applies to your actual buttons */
+.arrow-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #7ac0f9;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #001f3f;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    z-index: 20;
+}
+
+.arrow-btn:hover {
+    background: #7ac0f9;
+    border-color: #4da3ff;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+body.dark .arrow-btn {
+    background: #1a1a1a;
+    border-color: #4da3ff;
+    color: #ffffff;
+}
+
+/* Positioning */
+.timeline-wrapper {
+    position: relative;
+}
+
+.arrow-btn:first-of-type {
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.arrow-btn:last-of-type {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+     
 </style>
 </head>
 

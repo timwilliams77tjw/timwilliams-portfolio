@@ -109,14 +109,13 @@ body.dark .stat {
     overflow-y: hidden;
 
     /* Hide scrollbars */
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
 }
-
 .logo-carousel-wrapper::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
 }
 
-/* Fade edges (dynamic — matches card background) */
+/* Fade edges */
 .logo-carousel-wrapper::before,
 .logo-carousel-wrapper::after {
     content: "";
@@ -127,16 +126,29 @@ body.dark .stat {
     z-index: 5;
     pointer-events: none;
 }
-
 .logo-carousel-wrapper::before {
     left: 0;
     background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
 }
-
 .logo-carousel-wrapper::after {
     right: 0;
     background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
 }
+
+/* IMPORTANT: allow scrollLeft to work */
+.logo-carousel {
+    width: max-content; /* expands to fit track */
+    position: relative;
+    overflow: visible; /* FIX */
+}
+
+.logo-track {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    /* transform no longer used */
+}
+
 
 
 /* GLOBAL PROGRAMME DELIVERY — SCROLL STRIP */
@@ -152,12 +164,11 @@ body.dark .stat {
     /* Hide scrollbars */
     scrollbar-width: none;
 }
-
 .delivery-carousel-wrapper::-webkit-scrollbar {
     display: none;
 }
 
-/* Fade edges (dynamic) */
+/* Fade edges */
 .delivery-carousel-wrapper::before,
 .delivery-carousel-wrapper::after {
     content: "";
@@ -168,23 +179,28 @@ body.dark .stat {
     z-index: 5;
     pointer-events: none;
 }
-
 .delivery-carousel-wrapper::before {
     left: 0;
     background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
 }
-
 .delivery-carousel-wrapper::after {
     right: 0;
     background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+}
+
+/* IMPORTANT: allow scrollLeft to work */
+.delivery-carousel {
+    width: max-content;
+    position: relative;
+    overflow: visible; /* FIX */
 }
 
 .delivery-track {
     display: flex;
     align-items: center;
     gap: 30px;
-    will-change: transform;
 }
+
 
 .delivery-pill {
     background: white;

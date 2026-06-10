@@ -101,10 +101,17 @@ body.dark .stat {
 /* LOGO CAROUSEL — ORGANISATIONS */
 .logo-carousel-wrapper {
     width: 100%;
-    overflow: hidden;
     margin-bottom: 40px;
     position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none; /* Firefox */
 }
+
+.logo-carousel-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
 
 /* Fade edges (dynamic — matches card background) */
 .logo-carousel-wrapper::before,
@@ -167,7 +174,15 @@ body.dark .logo-carousel .logo {
 /* GLOBAL PROGRAMME DELIVERY — SCROLL STRIP */
 .delivery-carousel-wrapper {
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.delivery-carousel-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
     margin-bottom: 40px;
     position: relative;
 }

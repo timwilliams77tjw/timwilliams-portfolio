@@ -551,9 +551,10 @@ fetch("footer.html")
 
 /* ============================================================
    UNIVERSAL INFINITE SCROLL ENGINE
+   (Faster speed + manual scroll + auto‑pause)
    ============================================================ */
 
-function initInfiniteScroll(wrapperSelector, trackSelector, speed = 0.5) {
+function initInfiniteScroll(wrapperSelector, trackSelector, speed = 1.2) {
     const wrapper = document.querySelector(wrapperSelector);
     const track = document.querySelector(trackSelector);
 
@@ -561,32 +562,49 @@ function initInfiniteScroll(wrapperSelector, trackSelector, speed = 0.5) {
 
     let scrollPos = 0;
     let currentSpeed = speed;
+    let isUserScrolling = false;
 
-    // Duplicate content dynamically for seamless infinite loop
+    /* Duplicate content dynamically for seamless infinite loop */
     track.innerHTML += track.innerHTML;
 
     function step() {
-        scrollPos += currentSpeed;
+        if (!isUserScrolling) {
+            scrollPos += currentSpeed;
 
-        // Reset when half the duplicated width has scrolled
-        if (scrollPos >= track.scrollWidth / 2) {
-            scrollPos = 0;
+            if (scrollPos >= track.scrollWidth / 2) {
+                scrollPos = 0;
+            }
+
+            track.style.transform = `translateX(${-scrollPos}px)`;
         }
 
-        track.style.transform = `translateX(${-scrollPos}px)`;
         requestAnimationFrame(step);
     }
 
-    // Pause on hover
+    /* Pause on hover */
     wrapper.addEventListener("mouseenter", () => currentSpeed = 0);
-    wrapper.addEventListener("mouseleave", () => currentSpeed = speed);
+    wrapper.addEventListener("mouseleave", () => {
+        if (!isUserScrolling) currentSpeed = speed;
+    });
+
+    /* Pause while user scrolls manually */
+    wrapper.addEventListener("scroll", () => {
+        isUserScrolling = true;
+        currentSpeed = 0;
+
+        clearTimeout(wrapper._scrollTimeout);
+        wrapper._scrollTimeout = setTimeout(() => {
+            isUserScrolling = false;
+            currentSpeed = speed;
+        }, 800);
+    });
 
     requestAnimationFrame(step);
 }
 
-/* Initialise both carousels */
-initInfiniteScroll(".logo-carousel-wrapper", ".logo-track", 0.6);
-initInfiniteScroll(".delivery-carousel-wrapper", ".delivery-track", 0.8);
+/* Faster speeds applied */
+initInfiniteScroll(".logo-carousel-wrapper", ".logo-track", 1.2);
+initInfiniteScroll(".delivery-carousel-wrapper", ".delivery-track", 1.4);
 
 
 

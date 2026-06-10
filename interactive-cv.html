@@ -103,15 +103,18 @@ body.dark .stat {
     width: 100%;
     margin-bottom: 40px;
     position: relative;
+
+    /* Enable manual scroll */
     overflow-x: auto;
     overflow-y: hidden;
+
+    /* Hide scrollbars */
     scrollbar-width: none; /* Firefox */
 }
 
 .logo-carousel-wrapper::-webkit-scrollbar {
     display: none; /* Chrome/Safari */
 }
-
 
 /* Fade edges (dynamic — matches card background) */
 .logo-carousel-wrapper::before,
@@ -135,56 +138,23 @@ body.dark .stat {
     background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
 }
 
-.logo-carousel {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-}
-
-.logo-track {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    will-change: transform;
-}
-
-.logo-carousel .logo {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    min-width: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-body.dark .logo-carousel .logo {
-    background: var(--bg);
-    color: var(--text-main);
-    box-shadow: 0 2px 6px rgba(255,255,255,0.08);
-}
-
-.logo-carousel .logo img {
-    max-width: 90px;
-    max-height: 50px;
-    object-fit: contain;
-}
 
 /* GLOBAL PROGRAMME DELIVERY — SCROLL STRIP */
 .delivery-carousel-wrapper {
     width: 100%;
+    margin-bottom: 40px;
+    position: relative;
+
+    /* Enable manual scroll */
     overflow-x: auto;
     overflow-y: hidden;
+
+    /* Hide scrollbars */
     scrollbar-width: none;
 }
 
 .delivery-carousel-wrapper::-webkit-scrollbar {
     display: none;
-}
-
-    margin-bottom: 40px;
-    position: relative;
 }
 
 /* Fade edges (dynamic) */
@@ -207,12 +177,6 @@ body.dark .logo-carousel .logo {
 .delivery-carousel-wrapper::after {
     right: 0;
     background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
-}
-
-.delivery-carousel {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
 }
 
 .delivery-track {

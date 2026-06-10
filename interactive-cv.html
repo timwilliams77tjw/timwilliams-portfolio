@@ -529,10 +529,10 @@ fetch("footer.html")
 
 /* ============================================================
    UNIVERSAL INFINITE SCROLL ENGINE (scrollLeft version)
-   Enables manual scroll + auto scroll + auto pause/resume
+   High-speed + manual scroll + auto pause/resume
    ============================================================ */
 
-function initInfiniteScroll(wrapperSelector, trackSelector, speed = 1.2) {
+function initInfiniteScroll(wrapperSelector, trackSelector, speed = 8) {
     const wrapper = document.querySelector(wrapperSelector);
     const track = document.querySelector(trackSelector);
 
@@ -541,15 +541,17 @@ function initInfiniteScroll(wrapperSelector, trackSelector, speed = 1.2) {
     let currentSpeed = speed;
     let isUserScrolling = false;
 
-    /* Duplicate content dynamically for seamless infinite loop */
+    // Duplicate content for seamless infinite loop
     track.innerHTML += track.innerHTML;
 
     function step() {
         if (!isUserScrolling) {
             wrapper.scrollLeft += currentSpeed;
 
-            // Reset when reaching half of duplicated content
-            if (wrapper.scrollLeft >= track.scrollWidth / 2) {
+            // Correct reset point (critical for speed)
+            const resetPoint = (track.scrollWidth / 2) - wrapper.clientWidth;
+
+            if (wrapper.scrollLeft >= resetPoint) {
                 wrapper.scrollLeft = 0;
             }
         }
@@ -557,13 +559,13 @@ function initInfiniteScroll(wrapperSelector, trackSelector, speed = 1.2) {
         requestAnimationFrame(step);
     }
 
-    /* Pause on hover */
+    // Pause on hover
     wrapper.addEventListener("mouseenter", () => currentSpeed = 0);
     wrapper.addEventListener("mouseleave", () => {
         if (!isUserScrolling) currentSpeed = speed;
     });
 
-    /* Pause while user scrolls manually */
+    // Pause while user scrolls manually
     wrapper.addEventListener("scroll", () => {
         isUserScrolling = true;
         currentSpeed = 0;
@@ -578,9 +580,9 @@ function initInfiniteScroll(wrapperSelector, trackSelector, speed = 1.2) {
     requestAnimationFrame(step);
 }
 
-/* Faster speeds applied */
-initInfiniteScroll(".logo-carousel-wrapper", ".logo-track", 1.2);
-initInfiniteScroll(".delivery-carousel-wrapper", ".delivery-track", 1.4);
+/* High-speed settings */
+initInfiniteScroll(".logo-carousel-wrapper", ".logo-track", 8);
+initInfiniteScroll(".delivery-carousel-wrapper", ".delivery-track", 10);
 
 
 

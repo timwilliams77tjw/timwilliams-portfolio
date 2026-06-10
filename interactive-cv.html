@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <!-- ============================================================
-     SECTION 1 — HEAD + CLEANED CSS + FADE EDGES + FIXES
+     SECTION 1 — HEAD + CLEANED CSS + FADE EDGES + SCROLL FIXES
      ============================================================ -->
 <head>
 <meta charset="UTF-8">
@@ -20,7 +19,6 @@
 <style>
 
 /* PAGE-SPECIFIC ONLY — NO HEADER OVERRIDES */
-
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
@@ -40,7 +38,6 @@ body {
     z-index: 9999;
     transition: width 0.1s linear;
 }
-
 body.dark #scrollProgress {
     background: #4da3ff;
 }
@@ -65,7 +62,6 @@ body.dark #scrollProgress {
     position: relative;
     overflow: hidden;
 }
-
 body.dark .card {
     background: var(--bg);
     color: var(--text-main);
@@ -86,19 +82,19 @@ body.dark .card {
     text-align: center;
     margin-bottom: 40px;
 }
-
 .stat {
     background: white;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.08);
 }
-
 body.dark .stat {
     background: var(--bg);
 }
 
-/* LOGO CAROUSEL — ORGANISATIONS */
+/* ============================================================
+   LOGO CAROUSEL — ORGANISATIONS (scrollLeft engine compatible)
+   ============================================================ */
 .logo-carousel-wrapper {
     width: 100%;
     margin-bottom: 40px;
@@ -137,21 +133,30 @@ body.dark .stat {
 
 /* IMPORTANT: allow scrollLeft to work */
 .logo-carousel {
-    width: max-content; /* expands to fit track */
+    width: max-content;
+    overflow: visible;
     position: relative;
-    overflow: visible; /* FIX */
 }
 
 .logo-track {
     display: flex;
     align-items: center;
     gap: 40px;
-    /* transform no longer used */
 }
 
+/* Prevent giant logos */
+.logo {
+    max-width: 140px;
+}
+.logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
 
-
-/* GLOBAL PROGRAMME DELIVERY — SCROLL STRIP */
+/* ============================================================
+   GLOBAL PROGRAMME DELIVERY — SCROLL STRIP
+   ============================================================ */
 .delivery-carousel-wrapper {
     width: 100%;
     margin-bottom: 40px;
@@ -191,8 +196,8 @@ body.dark .stat {
 /* IMPORTANT: allow scrollLeft to work */
 .delivery-carousel {
     width: max-content;
+    overflow: visible;
     position: relative;
-    overflow: visible; /* FIX */
 }
 
 .delivery-track {
@@ -201,7 +206,7 @@ body.dark .stat {
     gap: 30px;
 }
 
-
+/* Delivery pills */
 .delivery-pill {
     background: white;
     padding: 16px 28px;
@@ -212,7 +217,6 @@ body.dark .stat {
     white-space: nowrap;
     border: 2px solid #000;
 }
-
 body.dark .delivery-pill {
     background: var(--bg);
     color: var(--text-main);
@@ -226,7 +230,6 @@ body.dark .delivery-pill {
     justify-content: center;
     margin-bottom: 40px;
 }
-
 .timeline {
     display: flex;
     overflow-x: auto;
@@ -234,7 +237,6 @@ body.dark .delivery-pill {
     padding: 20px 0;
     scroll-behavior: smooth;
 }
-
 .timeline-node {
     min-width: 260px;
     background: white;
@@ -244,15 +246,12 @@ body.dark .delivery-pill {
     cursor: pointer;
     flex-shrink: 0;
 }
-
 body.dark .timeline-node {
     background: var(--bg);
 }
-
 .timeline-node.active .timeline-details {
     display: block;
 }
-
 .timeline-details {
     display: none;
     margin-top: 10px;
@@ -271,7 +270,6 @@ body.dark .timeline-node {
     text-decoration: none;
     transition: all 0.25s ease;
 }
-
 .cta-btn:hover {
     background: #7ac0f9;
     border-color: #001f3f;

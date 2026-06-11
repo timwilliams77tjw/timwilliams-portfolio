@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>PMO Operating Model Wheel — TWC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PMO Operating Model Wheel | TWC Ltd</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Discover the PMO Operating Model Wheel — a visual framework covering governance, planning, people, and strategic outcomes for predictable, value-driven delivery." />
   <meta name="keywords" content="PMO, Project Management Office, Governance, Portfolio Management, PMO Framework, PMO Operating Model, Delivery Excellence, APM" />
+
+  <!-- Global CSS (same as Interactive CV) -->
+  <link rel="stylesheet" href="certifications.css">
+  <link rel="stylesheet" href="global-restore.css">
+  <link rel="stylesheet" href="header-standard-v4.css">
 
   <style>
     :root {
@@ -24,18 +29,13 @@
       --max-width: 1120px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      margin: 0;
     }
 
     img {
@@ -52,14 +52,29 @@
       text-decoration: underline;
     }
 
-    .page {
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: #7ac0f9;
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    body.dark #scrollProgress {
+      background: #4da3ff;
+    }
+
+    .page-container {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 32px 20px 64px;
+      padding: 40px 20px 64px;
     }
 
     @media (min-width: 1024px) {
-      .page {
+      .page-container {
         padding: 48px 0 80px;
       }
     }
@@ -166,48 +181,6 @@
       justify-content: center;
     }
 
-    .hero-visual-placeholder {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      border: 10px solid #dbeafe;
-      background: conic-gradient(
-        from 0deg,
-        #1f4f7f 0 25%,
-        #2f6fa8 25% 50%,
-        #00a0a8 50% 75%,
-        #4b5563 75% 100%
-      );
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-visual-center {
-      position: absolute;
-      inset: 18%;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 10px;
-    }
-
-    .hero-visual-center h3 {
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: #111827;
-    }
-
-    .hero-visual-center p {
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
     /* SECTIONS */
     .section {
       margin-top: 40px;
@@ -308,21 +281,10 @@
       border-radius: 999px;
     }
 
-    .domain-badge--gov {
-      background: #1f4f7f;
-    }
-
-    .domain-badge--plan {
-      background: #2f6fa8;
-    }
-
-    .domain-badge--people {
-      background: #00a0a8;
-    }
-
-    .domain-badge--value {
-      background: #4b5563;
-    }
+    .domain-badge--gov { background: #1f4f7f; }
+    .domain-badge--plan { background: #2f6fa8; }
+    .domain-badge--people { background: #00a0a8; }
+    .domain-badge--value { background: #4b5563; }
 
     .domain-purpose {
       font-size: 0.85rem;
@@ -333,6 +295,7 @@
       list-style: none;
       margin-top: 4px;
       font-size: 0.9rem;
+      padding-left: 0;
     }
 
     .domain-list li {
@@ -368,47 +331,6 @@
       padding: 18px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-soft);
-    }
-
-    .wheel-placeholder {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      border: 8px solid #e5e7eb;
-      background: conic-gradient(
-        from 0deg,
-        #1f4f7f 0 25%,
-        #2f6fa8 25% 50%,
-        #00a0a8 50% 75%,
-        #4b5563 75% 100%
-      );
-      position: relative;
-      overflow: hidden;
-    }
-
-    .wheel-center {
-      position: absolute;
-      inset: 20%;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 10px;
-    }
-
-    .wheel-center h3 {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .wheel-center p {
-      font-size: 0.75rem;
-      color: var(--muted);
     }
 
     .wheel-legend {
@@ -463,6 +385,7 @@
     .usecases-list {
       list-style: none;
       font-size: 0.9rem;
+      padding-left: 0;
     }
 
     .usecases-list li {
@@ -488,6 +411,7 @@
     .asset-list {
       list-style: none;
       margin-top: 6px;
+      padding-left: 0;
     }
 
     .asset-list li {
@@ -562,23 +486,86 @@
       border-color: #e5e7eb;
     }
 
-    /* FOOTER META */
     .footer-meta {
       margin-top: 24px;
       font-size: 0.8rem;
       color: var(--muted);
       text-align: right;
     }
+
+    /* FABs (reuse your existing classes if already defined globally) */
+    .fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 999;
+      font-size: 20px;
+    }
+
+    .fab-booking {
+      right: 76px;
+    }
+
+    body.dark .fab {
+      background: #1a1a1a;
+      color: #ffffff;
+      border-color: #4da3ff;
+    }
   </style>
 </head>
-<body>
-  <main class="page">
 
+<body class="header-with-logo">
+  <div id="scrollProgress"></div>
+
+  <!-- HEADER -->
+  <div id="header-placeholder"></div>
+
+  <script>
+    fetch("header.html")
+      .then(r => r.text())
+      .then(h => {
+        document.getElementById("header-placeholder").innerHTML = h;
+
+        const searchScript = document.createElement("script");
+        searchScript.src = "site-search.js";
+        searchScript.onload = () => {
+          if (typeof initSiteSearch === "function") initSiteSearch();
+        };
+        document.body.appendChild(searchScript);
+
+        const headerJS = document.createElement("script");
+        headerJS.src = "header-standard-v4.js";
+        headerJS.onload = () => {
+          if (typeof initHeader === "function") initHeader();
+          if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+        };
+        document.body.appendChild(headerJS);
+      });
+  </script>
+
+  <!-- Analytics (same as CV) -->
+  <script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+  <script src="analytics-tracker.js" defer></script>
+
+  <!-- PAGE CONTENT -->
+  <main class="page-container">
     <!-- HERO -->
     <section class="hero" aria-labelledby="hero-title">
       <div>
         <h1 id="hero-title" class="hero-title">PMO Operating Model Wheel</h1>
-        <p class="hero-tagline">Enabling predictable, value‑driven delivery across your portfolio, programmes, and projects.</p>
+        <p class="hero-tagline">
+          Enabling predictable, value‑driven delivery across your portfolio, programmes, and projects.
+        </p>
 
         <div class="hero-meta">
           <span>PMO Framework</span>
@@ -596,16 +583,9 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
-        <!-- Replace this placeholder with your exported wheel image if preferred -->
-<div class="hero-visual">
-  <img src="pmo-operating-model-wheel.png" alt="PMO Operating Model Wheel">
-</div>
-          <div class="hero-visual-center">
-            <h3>PMO Operating Model</h3>
-            <p>Enabling Predictable, Value‑Driven Delivery</p>
-          </div>
-        </div>
+      <div class="hero-visual">
+        <!-- Real wheel image in same folder as this HTML -->
+        <img src="pmo-operating-model-wheel.png" alt="PMO Operating Model Wheel">
       </div>
     </section>
 
@@ -734,16 +714,9 @@
       </div>
 
       <div class="wheel-section">
-        <div class="wheel-card" aria-hidden="true">
-          <!-- Replace with your final wheel SVG/PNG -->
-<div class="wheel-card">
-  <img src="pmo-operating-model-wheel.png" alt="PMO Operating Model Wheel">
-</div>
-            <div class="wheel-center">
-              <h3>PMO Operating Model</h3>
-              <p>Enabling Predictable, Value‑Driven Delivery</p>
-            </div>
-          </div>
+        <div class="wheel-card">
+          <!-- Same wheel image reused here -->
+          <img src="pmo-operating-model-wheel.png" alt="PMO Operating Model Wheel">
 
           <div class="wheel-legend">
             <div class="wheel-legend-item">
@@ -809,8 +782,8 @@
             <li>PMO Operating Model Wheel — PNG</li>
             <li>PMO Operating Model Wheel — PPTX slide</li>
           </ul>
-          <!-- Replace # with actual download URLs -->
           <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
+            <!-- Replace # with actual URLs when ready -->
             <a href="#" class="btn-ghost">Download PDF</a>
             <a href="#" class="btn-ghost">Download PNG</a>
             <a href="#" class="btn-ghost">Download PPTX</a>
@@ -838,5 +811,27 @@
       PMO Operating Model Wheel &mdash; designed for modern, value‑driven PMOs.
     </div>
   </main>
+
+  <!-- FABs -->
+  <div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+  <a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+  <script>
+    fetch("footer.html")
+      .then(r => r.text())
+      .then(html => document.getElementById("footer-container").innerHTML = html);
+  </script>
+
+  <!-- PAGE SCRIPTS (scroll progress only; no radar/timeline needed here) -->
+  <script>
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById("scrollProgress").style.width = progress + "%";
+    });
+  </script>
 </body>
 </html>

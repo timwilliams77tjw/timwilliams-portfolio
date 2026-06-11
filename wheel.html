@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PMO Operating Model Wheel — TWC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Discover the PMO Operating Model Wheel — a visual framework covering governance, planning, people, and strategic outcomes for predictable, value-driven delivery." />
+  <meta name="keywords" content="PMO, Project Management Office, Governance, Portfolio Management, PMO Framework, PMO Operating Model, Delivery Excellence, APM" />
+
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --bg-alt: #ffffff;
+      --primary: #1f4f7f;
+      --primary-soft: #2f6fa8;
+      --accent: #00a0a8;
+      --text: #1f2933;
+      --muted: #6b7280;
+      --border: #d1d5db;
+      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-pill: 999px;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: var(--primary-soft);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    @media (min-width: 1024px) {
+      .page {
+        padding: 48px 0 80px;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      background: radial-gradient(circle at top left, #e5f0ff 0, #f5f7fa 45%, #f5f7fa 100%);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px 28px;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-title {
+      font-size: 1.9rem;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hero-meta span {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: var(--radius-pill);
+      padding: 9px 18px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.18s ease-out;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-soft));
+      color: #ffffff;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(15, 23, 42, 0.22);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary);
+      border-color: rgba(148, 163, 184, 0.7);
+    }
+
+    .btn-ghost:hover {
+      background: #ffffff;
+    }
+
+    .hero-visual {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual-placeholder {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 10px solid #dbeafe;
+      background: conic-gradient(
+        from 0deg,
+        #1f4f7f 0 25%,
+        #2f6fa8 25% 50%,
+        #00a0a8 50% 75%,
+        #4b5563 75% 100%
+      );
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual-center {
+      position: absolute;
+      inset: 18%;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .hero-visual-center h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .hero-visual-center p {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* SECTIONS */
+    .section {
+      margin-top: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .section-body {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 20px 20px 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .section-body p {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #dbeafe;
+    }
+
+    /* DOMAIN GRID */
+    .domain-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    @media (min-width: 900px) {
+      .domain-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .domain-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .domain-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .domain-title {
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .domain-badge {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+    }
+
+    .domain-badge--gov {
+      background: #1f4f7f;
+    }
+
+    .domain-badge--plan {
+      background: #2f6fa8;
+    }
+
+    .domain-badge--people {
+      background: #00a0a8;
+    }
+
+    .domain-badge--value {
+      background: #4b5563;
+    }
+
+    .domain-purpose {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .domain-list {
+      list-style: none;
+      margin-top: 4px;
+      font-size: 0.9rem;
+    }
+
+    .domain-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .domain-list li::before {
+      content: "•";
+      color: var(--primary-soft);
+      margin-top: 1px;
+    }
+
+    /* INTERACTIVE WHEEL SECTION */
+    .wheel-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .wheel-section {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .wheel-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .wheel-placeholder {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 8px solid #e5e7eb;
+      background: conic-gradient(
+        from 0deg,
+        #1f4f7f 0 25%,
+        #2f6fa8 25% 50%,
+        #00a0a8 50% 75%,
+        #4b5563 75% 100%
+      );
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wheel-center {
+      position: absolute;
+      inset: 20%;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .wheel-center h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .wheel-center p {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .wheel-legend {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+      font-size: 0.8rem;
+    }
+
+    .wheel-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+    }
+
+    .wheel-copy p {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .wheel-copy ul {
+      margin-left: 16px;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .wheel-copy li {
+      margin-bottom: 4px;
+    }
+
+    /* USE CASES */
+    .usecases-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    @media (min-width: 900px) {
+      .usecases-grid {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    .usecases-list {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .usecases-list li {
+      margin-bottom: 6px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .usecases-list li::before {
+      content: "▹";
+      color: var(--primary-soft);
+      margin-top: 1px;
+    }
+
+    .asset-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .asset-list {
+      list-style: none;
+      margin-top: 6px;
+    }
+
+    .asset-list li {
+      margin-bottom: 4px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .asset-list li::before {
+      content: "⬇";
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* CTA */
+    .cta {
+      margin-top: 40px;
+      background: linear-gradient(135deg, #0f172a, #1f2937);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    @media (min-width: 768px) {
+      .cta {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .cta-text h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #f9fafb;
+    }
+
+    .cta-text p {
+      font-size: 0.9rem;
+      color: #d1d5db;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-cta {
+      border-radius: var(--radius-pill);
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.7);
+      color: #e5e7eb;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease-out;
+    }
+
+    .btn-cta:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: #e5e7eb;
+    }
+
+    /* FOOTER META */
+    .footer-meta {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title" class="hero-title">PMO Operating Model Wheel</h1>
+        <p class="hero-tagline">Enabling predictable, value‑driven delivery across your portfolio, programmes, and projects.</p>
+
+        <div class="hero-meta">
+          <span>PMO Framework</span>
+          <span>Governance • People • Planning • Value</span>
+          <span>Executive Visual Model</span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#download-wheel" class="btn-primary">
+            <span>Download the PMO Wheel (PDF)</span>
+          </a>
+          <a href="#contact" class="btn-ghost">
+            <span>Discuss using this model</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <!-- Replace this placeholder with your exported wheel image if preferred -->
+        <div class="hero-visual-placeholder">
+          <div class="hero-visual-center">
+            <h3>PMO Operating Model</h3>
+            <p>Enabling Predictable, Value‑Driven Delivery</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="section" aria-labelledby="overview-title">
+      <div class="section-header">
+        <h2 id="overview-title" class="section-title">Overview</h2>
+        <span class="section-kicker">Why this wheel exists</span>
+      </div>
+      <div class="section-body">
+        <p>
+          The PMO Operating Model Wheel provides a complete, visual representation of how a modern PMO delivers value.
+          It brings together governance, planning, people, and strategic outcomes into a single, coherent framework that
+          leaders can understand at a glance.
+        </p>
+        <p>
+          Use it to communicate PMO purpose, define scope, support maturity assessments, and anchor conversations with
+          executives, delivery teams, and stakeholders.
+        </p>
+
+        <div class="pill-list">
+          <span class="pill">Communicates PMO value</span>
+          <span class="pill">Supports maturity assessment</span>
+          <span class="pill">Ideal for onboarding</span>
+          <span class="pill">Executive‑friendly visual</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOMAINS -->
+    <section class="section" aria-labelledby="domains-title">
+      <div class="section-header">
+        <h2 id="domains-title" class="section-title">The Four Domains</h2>
+        <span class="section-kicker">Core capability areas</span>
+      </div>
+
+      <div class="domain-grid">
+        <!-- Governance & Assurance -->
+        <article class="domain-card">
+          <header class="domain-header">
+            <div class="domain-title">
+              <span class="domain-badge domain-badge--gov"></span>
+              <span>Governance &amp; Assurance</span>
+            </div>
+          </header>
+          <p class="domain-purpose">
+            Establishes confidence, consistency, and control across delivery.
+          </p>
+          <ul class="domain-list">
+            <li>Governance &amp; Assurance</li>
+            <li>Decision Making</li>
+            <li>Standardisation</li>
+            <li>Best Practice</li>
+            <li>Reporting &amp; Performance</li>
+          </ul>
+        </article>
+
+        <!-- Planning & Control -->
+        <article class="domain-card">
+          <header class="domain-header">
+            <div class="domain-title">
+              <span class="domain-badge domain-badge--plan"></span>
+              <span>Planning &amp; Control</span>
+            </div>
+          </header>
+          <p class="domain-purpose">
+            Ensures structure, visibility, and predictability across programmes and projects.
+          </p>
+          <ul class="domain-list">
+            <li>Configuration Management</li>
+            <li>Change Management</li>
+            <li>Dependency Management</li>
+            <li>KPI &amp; SLA Management</li>
+            <li>Risk &amp; Issue Control</li>
+          </ul>
+        </article>
+
+        <!-- People, Skills & Culture -->
+        <article class="domain-card">
+          <header class="domain-header">
+            <div class="domain-title">
+              <span class="domain-badge domain-badge--people"></span>
+              <span>People, Skills &amp; Culture</span>
+            </div>
+          </header>
+          <p class="domain-purpose">
+            Builds capability, confidence, and collaboration across teams and stakeholders.
+          </p>
+          <ul class="domain-list">
+            <li>Resource Management</li>
+            <li>Skills Management</li>
+            <li>Learning &amp; Development</li>
+            <li>Coaching &amp; Mentoring</li>
+            <li>Stakeholder Management</li>
+          </ul>
+        </article>
+
+        <!-- Value, Strategy & Outcomes -->
+        <article class="domain-card">
+          <header class="domain-header">
+            <div class="domain-title">
+              <span class="domain-badge domain-badge--value"></span>
+              <span>Value, Strategy &amp; Outcomes</span>
+            </div>
+          </header>
+          <p class="domain-purpose">
+            Aligns PMO activity with organisational goals and measurable outcomes.
+          </p>
+          <ul class="domain-list">
+            <li>Strategic Alignment</li>
+            <li>Portfolio Management</li>
+            <li>Continuous Service Improvement (CSI)</li>
+            <li>Opportunity Management</li>
+            <li>Customer Satisfaction (CSAT)</li>
+            <li>Financial Management</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE WHEEL -->
+    <section class="section" aria-labelledby="wheel-title">
+      <div class="section-header">
+        <h2 id="wheel-title" class="section-title">Explore the PMO Wheel</h2>
+        <span class="section-kicker">Central operating model</span>
+      </div>
+
+      <div class="wheel-section">
+        <div class="wheel-card" aria-hidden="true">
+          <!-- Replace with your final wheel SVG/PNG -->
+          <div class="wheel-placeholder">
+            <div class="wheel-center">
+              <h3>PMO Operating Model</h3>
+              <p>Enabling Predictable, Value‑Driven Delivery</p>
+            </div>
+          </div>
+
+          <div class="wheel-legend">
+            <div class="wheel-legend-item">
+              <span class="legend-dot" style="background:#1f4f7f;"></span>
+              <span>Governance &amp; Assurance</span>
+            </div>
+            <div class="wheel-legend-item">
+              <span class="legend-dot" style="background:#2f6fa8;"></span>
+              <span>Planning &amp; Control</span>
+            </div>
+            <div class="wheel-legend-item">
+              <span class="legend-dot" style="background:#00a0a8;"></span>
+              <span>People, Skills &amp; Culture</span>
+            </div>
+            <div class="wheel-legend-item">
+              <span class="legend-dot" style="background:#4b5563;"></span>
+              <span>Value, Strategy &amp; Outcomes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="wheel-copy">
+          <p>
+            At the centre of the wheel sits the PMO’s mission:
+            <strong>Enabling Predictable, Value‑Driven Delivery.</strong>
+          </p>
+          <p>
+            Each domain radiates from this purpose, ensuring the PMO operates as a strategic partner rather than a
+            reporting function. The wheel can be used in:
+          </p>
+          <ul>
+            <li>Executive briefings and board packs</li>
+            <li>PMO service catalogues and charters</li>
+            <li>Capability and maturity assessments</li>
+            <li>Onboarding and training materials</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- USE CASES & ASSETS -->
+    <section class="section" aria-labelledby="usecases-title">
+      <div class="section-header">
+        <h2 id="usecases-title" class="section-title">How to Use This Model</h2>
+        <span class="section-kicker">Practical applications</span>
+      </div>
+
+      <div class="usecases-grid">
+        <div>
+          <ul class="usecases-list">
+            <li>Anchor PMO strategy and operating model discussions.</li>
+            <li>Frame PMO scope when engaging with new stakeholders.</li>
+            <li>Support PMO maturity assessments and roadmap planning.</li>
+            <li>Integrate into portfolio and governance documentation.</li>
+            <li>Use as a visual in APM talks, training, and outreach.</li>
+          </ul>
+        </div>
+
+        <aside class="asset-card" id="download-wheel">
+          <strong>Downloadable Assets</strong>
+          <ul class="asset-list">
+            <li>PMO Operating Model Wheel — PDF</li>
+            <li>PMO Operating Model Wheel — PNG</li>
+            <li>PMO Operating Model Wheel — PPTX slide</li>
+          </ul>
+          <!-- Replace # with actual download URLs -->
+          <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
+            <a href="#" class="btn-ghost">Download PDF</a>
+            <a href="#" class="btn-ghost">Download PNG</a>
+            <a href="#" class="btn-ghost">Download PPTX</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contact">
+      <div class="cta-text">
+        <h3>Want to adopt this PMO model in your organisation?</h3>
+        <p>
+          Use the PMO Operating Model Wheel as the foundation for your PMO strategy, service catalogue, and capability
+          roadmap. Get in touch to explore how it can be tailored to your context.
+        </p>
+      </div>
+      <div class="cta-actions">
+        <a href="#download-wheel" class="btn-cta">Download the Wheel</a>
+        <a href="/contact" class="btn-cta">Contact Tim</a>
+      </div>
+    </section>
+
+    <div class="footer-meta">
+      PMO Operating Model Wheel &mdash; designed for modern, value‑driven PMOs.
+    </div>
+  </main>
+</body>
+</html>

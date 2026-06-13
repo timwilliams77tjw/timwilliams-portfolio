@@ -570,7 +570,50 @@ body.dark .cta {
 .hotspot-right { top: 25%; right: 0; }
 .hotspot-bottom { bottom: 0; left: 25%; }
 .hotspot-left { top: 25%; left: 0; }
- 
+
+  .sticky-wheel {
+  position: fixed;
+  bottom: 90px;
+  left: 20px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #d1d5db;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  cursor: pointer;
+  z-index: 9999;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.sticky-wheel:hover {
+  transform: scale(1.12);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+}
+
+.sticky-wheel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sticky-hotspots {
+  position: absolute;
+  inset: 0;
+}
+
+.s-hotspot {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+}
+
+.s-top { top: 0; left: 25%; }
+.s-right { top: 25%; right: 0; }
+.s-bottom { bottom: 0; left: 25%; }
+.s-left { top: 25%; left: 0; }
+  
   </style>
 </head>
 
@@ -905,5 +948,15 @@ function scrollToSection(id) {
       document.getElementById("scrollProgress").style.width = progress + "%";
     });
   </script>
+  <div class="sticky-wheel">
+  <img src="pmo-operating-model-wheel.png" alt="Mini PMO Wheel">
+
+  <div class="sticky-hotspots">
+    <div class="s-hotspot s-top" onclick="scrollToSection('gov')"></div>
+    <div class="s-hotspot s-right" onclick="scrollToSection('people')"></div>
+    <div class="s-hotspot s-bottom" onclick="scrollToSection('value')"></div>
+    <div class="s-hotspot s-left" onclick="scrollToSection('planning')"></div>
+  </div>
+</div>
 </body>
 </html>

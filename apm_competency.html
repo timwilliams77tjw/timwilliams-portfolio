@@ -1768,136 +1768,132 @@ function parseUSDate(d) {
     const date = new Date(parts[2], parts[0] - 1, parts[1]);
 
     return isNaN(date.getTime()) ? null : date;
-}
-/* ==========================================================
+}/* ==========================================================
    LOAD CPD DATA
 ========================================================== */
 async function loadCPD() {
+  debug("loadCPD: starting");
 
-    debug("loadCPD: starting");
+  const url =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
 
-    const url =
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("HTTP " + response.status);
 
-    try {
+    const csv = await response.text();
+    const lines = csv.trim().split(/\r?\n/);
 
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("HTTP " + response.status);
+    if (lines.length <= 1) return;
 
-        const csv = await response.text();
-        const lines = csv.trim().split(/\r?\n/);
+    // remove header row
+    lines.shift();
 
-        if (lines.length <= 1) return;
+    const tbody = document.getElementById("cpd-body"); // hidden table
+    const cardContainer = document.getElementById("cpd-card-container");
 
-        lines.shift(); // remove header row
+    if (tbody) tbody.innerHTML = "";
+    if (cardContainer) cardContainer.innerHTML = "";
 
-        // Containers
-        const tbody = document.getElementById("cpd-body"); // hidden table
-        const cardContainer = document.getElementById("cpd-card-container");
+    lines.forEach(line => {
+      const row = parseCsvLine(line);
 
-        if (tbody) tbody.innerHTML = "";
-        if (cardContainer) cardContainer.innerHTML = "";
+      const activity   = (row[0] || "").replace(/^"|"$/g, "");
+      const start      = (row[1] || "").replace(/^"|"$/g, "");
+      const end        = (row[2] || "").replace(/^"|"$/g, "");
+      const hours      = (row[3] || "").replace(/^"|"$/g, "");
+      const category   = (row[4] || "").replace(/^"|"$/g, "");
+      const reflection = (row[5] || "").replace(/^"|"$/g, "");
+      const competenceRaw = (row[6] || "").replace(/^"|"$/g, "");
 
-      lines.forEach(line => {
-  const row = parseCsvLine(line);
+      const competences = competenceRaw
+        ? competenceRaw.split("|").map(c => c.trim()).filter(Boolean)
+        : [];
 
-  const activity    = (row[0] || "").replace(/^"|"$/g, "");
-  const start       = (row[1] || "").replace(/^"|"$/g, "");
-  const end         = (row[2] || "").replace(/^"|"$/g, "");
-  const hours       = (row[3] || "").replace(/^"|"$/g, "");
-  const category    = (row[4] || "").replace(/^"|"$/g, "");
-  const reflection  = (row[5] || "").replace(/^"|"$/g, "");
-  const competences = (row[6] || "").replace(/^"|"$/g, ""); // NEW
+      // ---------- 1. Status ----------
+      const today = new Date();
+      const startDate = start ? new Date(start) : null;
+      const endDate   = end   ? new Date(end)   : null;
 
-  // ---------- 1. Status ----------
-  const today = new Date();
-  const startDate = start ? new Date(start) : null;
-  const endDate   = end   ? new Date(end)   : null;
+      let statusClass = "";
+      let statusLabel = "";
+      let statusIcon  = "";
 
-  let statusClass = "";
-  let statusLabel = "";
-  let statusIcon  = "";
+      if (startDate && startDate > today) {
+        statusClass = "planned";
+        statusLabel = "Planned";
+        statusIcon  = "fa-calendar-plus";
+      } else if (!endDate || endDate >= today) {
+        statusClass = "inprogress";
+        statusLabel = "In Progress";
+        statusIcon  = "fa-hourglass-half";
+      } else {
+        statusClass = "completed";
+        statusLabel = "Completed";
+        statusIcon  = "fa-circle-check";
+      }
 
-  if (startDate && startDate > today) {
-    statusClass = "planned";
-    statusLabel = "Planned";
-    statusIcon  = "fa-calendar-plus";
-  } else if (!endDate || endDate >= today) {
-    statusClass = "inprogress";
-    statusLabel = "In Progress";
-    statusIcon  = "fa-hourglass-half";
-  } else {
-    statusClass = "completed";
-    statusLabel = "Completed";
-    statusIcon  = "fa-circle-check";
+      // ---------- 2. Hidden table row (metrics) ----------
+      if (tbody) {
+        const tr = document.createElement("tr");
+        [activity, start, end, hours, category, reflection, competenceRaw].forEach(text => {
+          const td = document.createElement("td");
+          td.textContent = text;
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      }
+
+      // ---------- 3. Visible CPD card ----------
+      if (cardContainer) {
+        const card = document.createElement("div");
+        card.className = `cpd-card ${statusClass}`;
+
+        card.innerHTML = `
+          <div class="cpd-card-title">
+            ${activity}
+            <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
+          </div>
+          <div class="cpd-card-meta">
+            <span class="cpd-badge cpd-hours">${hours} hrs</span>
+            <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
+            <span>${start} → ${end || "Ongoing"}</span>
+            <span class="cpd-status ${statusClass}">${statusLabel}</span>
+          </div>
+          <div class="cpd-card-reflection">
+            ${reflection || "<em>No reflective statement provided.</em>"}
+          </div>
+        `;
+
+        // ---------- 4. Competence badges ----------
+        if (competences.length > 0) {
+          renderCompetenceBadges(card, competences);
+        }
+
+        cardContainer.appendChild(card);
+      }
+    });
+
+    debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
+
+    // ---------- 5. Metrics & visuals ----------
+    calculateMetrics();
+    generateInsights();
+    generateHeatmap();
+    generateDonutChart();
+    generateRadarChart();
+
+  } catch (err) {
+    console.error(err);
   }
-
-  // ---------- 2. Hidden table row (metrics) ----------
-  if (tbody) {
-    const tr = document.createElement("tr");
- [activity, start, end, hours, category, reflection, competences].forEach(text => {
-    const td = document.createElement("td");
-    td.textContent = text;
-    tr.appendChild(td);
-});
-
-    tbody.appendChild(tr);
-  }
-
-  // ---------- 3. Visible CPD card ----------
-  if (cardContainer) {
-    const card = document.createElement("div");
-    card.className = `cpd-card ${statusClass}`;
-
-    card.innerHTML = `
-      <div class="cpd-card-title">
-        ${activity}
-        <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
-      </div>
-      <div class="cpd-card-meta">
-        <span class="cpd-badge cpd-hours">${hours} hrs</span>
-        <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
-        <span>${start} → ${end || "Ongoing"}</span>
-        <span class="cpd-status ${statusClass}">${statusLabel}</span>
-      </div>
-      <div class="cpd-card-reflection">
-        ${reflection || "<em>No reflective statement provided.</em>"}
-      </div>
-    `;
-
-    // ---------- 4. Competence badges (NEW) ----------
-    if (competences && competences.trim().length > 0) {
-      renderCompetenceBadges(card, competences);
-    }
-if (competences && competences.trim().length > 0) {
-    renderCompetenceBadges(card, competences);
-}
-    cardContainer.appendChild(card);
-  }
-});
-
-
-// NEW: Competence mapping (fallback safe)
-const competenceRaw = row[6] ? row[6].replace(/^"|"$/g, "") : "";
-const competences = competenceRaw
-    ? competenceRaw.split("|").map(c => c.trim())
-    : [];
-      
-        debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
-
-        calculateMetrics();
-        generateInsights();
-        generateHeatmap();
-        generateDonutChart();
-        generateRadarChart();
-      loadCPD().then(wireCompetenceLinks);
-
-    } catch (err) {
-        console.error(err);
-    }
 }
 
-
+// Call once, then wire links
+loadCPD().then(() => {
+  if (typeof wireCompetenceLinks === "function") {
+    wireCompetenceLinks();
+  }
+});
 
   
 /* ==========================================================

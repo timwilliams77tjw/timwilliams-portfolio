@@ -1634,15 +1634,7 @@ html, body {
     <div id="cpd-card-container" class="cpd-card-container">
         <!-- Cards will be injected here -->
     </div>
-  ${competences.length ? `
-<div class="cpd-card-competence">
-    ${competences.map(c => `
-        <span class="cpd-competence-badge" data-target="${c}">
-            ${c.replace(/^comp-/, "").replace(/-/g, " ")}
-        </span>
-    `).join("")}
-</div>
-` : ""}
+  
 </section>
 
   <!-- INSIGHTS PANEL -->
@@ -1843,11 +1835,12 @@ async function loadCPD() {
   // ---------- 2. Hidden table row (metrics) ----------
   if (tbody) {
     const tr = document.createElement("tr");
-    [activity, start, end, hours, category, reflection].forEach(text => {
-      const td = document.createElement("td");
-      td.textContent = text;
-      tr.appendChild(td);
-    });
+ [activity, start, end, hours, category, reflection, competences].forEach(text => {
+    const td = document.createElement("td");
+    td.textContent = text;
+    tr.appendChild(td);
+});
+
     tbody.appendChild(tr);
   }
 
@@ -1876,7 +1869,9 @@ async function loadCPD() {
     if (competences && competences.trim().length > 0) {
       renderCompetenceBadges(card, competences);
     }
-
+if (competences && competences.trim().length > 0) {
+    renderCompetenceBadges(card, competences);
+}
     cardContainer.appendChild(card);
   }
 });
@@ -1903,36 +1898,7 @@ const competences = competenceRaw
 }
 
 
-function renderCompetenceBadges(card, competenceString) {
-  const raw = competenceString.split("|")
-    .map(c => c.trim())
-    .filter(Boolean);
 
-  if (!raw.length) return;
-
-  const wrapper = document.createElement("div");
-  wrapper.className = "cpd-card-competence";
-
-  raw.forEach(id => {
-    const label = id
-      .replace(/^comp-/, "")   // drop prefix
-      .replace(/-/g, " ")      // nicer text
-      .replace(/\b\w/g, c => c.toUpperCase()); // capitalise words
-
-    const badge = document.createElement("span");
-    badge.className = "cpd-competence-badge";
-    badge.dataset.competenceId = id;
-    badge.textContent = label;
-
-    badge.addEventListener("click", () => {
-      highlightCompetenceCard(id);
-    });
-
-    wrapper.appendChild(badge);
-  });
-
-  card.appendChild(wrapper);
-}
   
 /* ==========================================================
    METRICS + PROGRESS RING
@@ -2371,20 +2337,48 @@ function wireCompetenceLinks() {
         });
     });
 }
-function highlightCompetenceCard(id) {
-  // Remove previous highlights
-  document.querySelectorAll(".info-card.highlight-competence")
-    .forEach(el => el.classList.remove("highlight-competence"));
+function renderCompetenceBadges(card, competenceString) {
+    const raw = competenceString.split("|")
+        .map(c => c.trim())
+        .filter(Boolean);
 
-  // Find the competence card by class, e.g. <article class="info-card comp-leadership">
-  const target = document.querySelector(`.info-card.${id}`);
-  if (!target) return;
+    if (!raw.length) return;
 
-  target.classList.add("highlight-competence");
+    const wrapper = document.createElement("div");
+    wrapper.className = "cpd-card-competence";
 
-  // Optional: scroll into view
-  target.scrollIntoView({ behavior: "smooth", block: "center" });
+    raw.forEach(id => {
+        const label = id
+            .replace(/^comp-/, "")
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, c => c.toUpperCase());
+
+        const badge = document.createElement("span");
+        badge.className = "cpd-competence-badge";
+        badge.dataset.competenceId = id;
+        badge.textContent = label;
+
+        badge.addEventListener("click", () => {
+            highlightCompetenceCard(id);
+        });
+
+        wrapper.appendChild(badge);
+    });
+
+    card.appendChild(wrapper);
 }
+
+function highlightCompetenceCard(id) {
+    document.querySelectorAll(".info-card.highlight-competence")
+        .forEach(el => el.classList.remove("highlight-competence"));
+
+    const target = document.querySelector(`.info-card.${id}`);
+    if (!target) return;
+
+    target.classList.add("highlight-competence");
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
   
 </script>
 

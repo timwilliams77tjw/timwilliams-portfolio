@@ -643,6 +643,37 @@ body.dark .cta {
   height: 28px;
   opacity: 0.9;
 }
+
+    .pill {
+  all: unset;
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e8f1ff, #ffffff);
+  color: #1f4f7f;
+  border: 1px solid #d0e2ff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+.wheel-animate {
+  animation: pulseWheel 4s ease-in-out infinite;
+}
+
+@keyframes pulseWheel {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.03); filter: drop-shadow(0 0 10px rgba(31,79,127,0.25)); }
+  100% { transform: scale(1); }
+}
+.sticky-wheel img {
+  animation: pulseWheel 4s ease-in-out infinite;
+}
+
   </style>
 </head>
 

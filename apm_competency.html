@@ -1806,84 +1806,81 @@ async function loadCPD() {
         if (tbody) tbody.innerHTML = "";
         if (cardContainer) cardContainer.innerHTML = "";
 
-        lines.forEach(line => {
-            const row = parseCsvLine(line);
+      lines.forEach(line => {
+  const row = parseCsvLine(line);
 
-            const activity   = row[0].replace(/^"|"$/g, "");
-            const start      = row[1].replace(/^"|"$/g, "");
-            const end        = row[2].replace(/^"|"$/g, "");
-            const hours      = row[3].replace(/^"|"$/g, "");
-            const category   = row[4].replace(/^"|"$/g, "");
-            const reflection = row[5].replace(/^"|"$/g, "");
+  const activity    = (row[0] || "").replace(/^"|"$/g, "");
+  const start       = (row[1] || "").replace(/^"|"$/g, "");
+  const end         = (row[2] || "").replace(/^"|"$/g, "");
+  const hours       = (row[3] || "").replace(/^"|"$/g, "");
+  const category    = (row[4] || "").replace(/^"|"$/g, "");
+  const reflection  = (row[5] || "").replace(/^"|"$/g, "");
+  const competences = (row[6] || "").replace(/^"|"$/g, ""); // NEW
 
-            /* ------------------------------------------------------
-               1. Determine status
-            ------------------------------------------------------ */
-            const today = new Date();
-            const startDate = start ? new Date(start) : null;
-            const endDate   = end   ? new Date(end)   : null;
+  // ---------- 1. Status ----------
+  const today = new Date();
+  const startDate = start ? new Date(start) : null;
+  const endDate   = end   ? new Date(end)   : null;
 
-            let statusClass = "";
-            let statusLabel = "";
-            let statusIcon  = "";
+  let statusClass = "";
+  let statusLabel = "";
+  let statusIcon  = "";
 
-            if (startDate && startDate > today) {
-                statusClass = "planned";
-                statusLabel = "Planned";
-                statusIcon  = "fa-calendar-plus";
-            }
-            else if (!endDate || endDate >= today) {
-                statusClass = "inprogress";
-                statusLabel = "In Progress";
-                statusIcon  = "fa-hourglass-half";
-            }
-            else {
-                statusClass = "completed";
-                statusLabel = "Completed";
-                statusIcon  = "fa-circle-check";
-            }
+  if (startDate && startDate > today) {
+    statusClass = "planned";
+    statusLabel = "Planned";
+    statusIcon  = "fa-calendar-plus";
+  } else if (!endDate || endDate >= today) {
+    statusClass = "inprogress";
+    statusLabel = "In Progress";
+    statusIcon  = "fa-hourglass-half";
+  } else {
+    statusClass = "completed";
+    statusLabel = "Completed";
+    statusIcon  = "fa-circle-check";
+  }
 
-            /* ------------------------------------------------------
-               2. Hidden table row (keeps metrics working)
-            ------------------------------------------------------ */
-            if (tbody) {
-                const tr = document.createElement("tr");
-                [activity, start, end, hours, category, reflection].forEach(text => {
-                    const td = document.createElement("td");
-                    td.textContent = text;
-                    tr.appendChild(td);
-                });
-                tbody.appendChild(tr);
-            }
+  // ---------- 2. Hidden table row (metrics) ----------
+  if (tbody) {
+    const tr = document.createElement("tr");
+    [activity, start, end, hours, category, reflection].forEach(text => {
+      const td = document.createElement("td");
+      td.textContent = text;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
 
-            /* ------------------------------------------------------
-               3. Visible CPD card
-            ------------------------------------------------------ */
-            if (cardContainer) {
-                const card = document.createElement("div");
-                card.className = `cpd-card ${statusClass}`;
+  // ---------- 3. Visible CPD card ----------
+  if (cardContainer) {
+    const card = document.createElement("div");
+    card.className = `cpd-card ${statusClass}`;
 
-                card.innerHTML = `
-                    <div class="cpd-card-title">
-                        ${activity}
-                        <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
-                    </div>
+    card.innerHTML = `
+      <div class="cpd-card-title">
+        ${activity}
+        <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
+      </div>
+      <div class="cpd-card-meta">
+        <span class="cpd-badge cpd-hours">${hours} hrs</span>
+        <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
+        <span>${start} → ${end || "Ongoing"}</span>
+        <span class="cpd-status ${statusClass}">${statusLabel}</span>
+      </div>
+      <div class="cpd-card-reflection">
+        ${reflection || "<em>No reflective statement provided.</em>"}
+      </div>
+    `;
 
-                    <div class="cpd-card-meta">
-                        <span class="cpd-badge cpd-hours">${hours} hrs</span>
-                        <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
-                        <span>${start} → ${end || "Ongoing"}</span>
-                        <span class="cpd-status ${statusClass}">${statusLabel}</span>
-                    </div>
+    // ---------- 4. Competence badges (NEW) ----------
+    if (competences && competences.trim().length > 0) {
+      renderCompetenceBadges(card, competences);
+    }
 
-                    <div class="cpd-card-reflection">
-                        ${reflection || "<em>No reflective statement provided.</em>"}
-                    </div>
-                `;
+    cardContainer.appendChild(card);
+  }
+});
 
-                cardContainer.appendChild(card);
-            }
-        });
 
 // NEW: Competence mapping (fallback safe)
 const competenceRaw = row[6] ? row[6].replace(/^"|"$/g, "") : "";
@@ -1905,6 +1902,38 @@ const competences = competenceRaw
     }
 }
 
+
+function renderCompetenceBadges(card, competenceString) {
+  const raw = competenceString.split("|")
+    .map(c => c.trim())
+    .filter(Boolean);
+
+  if (!raw.length) return;
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "cpd-card-competence";
+
+  raw.forEach(id => {
+    const label = id
+      .replace(/^comp-/, "")   // drop prefix
+      .replace(/-/g, " ")      // nicer text
+      .replace(/\b\w/g, c => c.toUpperCase()); // capitalise words
+
+    const badge = document.createElement("span");
+    badge.className = "cpd-competence-badge";
+    badge.dataset.competenceId = id;
+    badge.textContent = label;
+
+    badge.addEventListener("click", () => {
+      highlightCompetenceCard(id);
+    });
+
+    wrapper.appendChild(badge);
+  });
+
+  card.appendChild(wrapper);
+}
+  
 /* ==========================================================
    METRICS + PROGRESS RING
 ========================================================== */
@@ -2341,6 +2370,20 @@ function wireCompetenceLinks() {
             setTimeout(() => target.classList.remove("highlight-competence"), 1500);
         });
     });
+}
+function highlightCompetenceCard(id) {
+  // Remove previous highlights
+  document.querySelectorAll(".info-card.highlight-competence")
+    .forEach(el => el.classList.remove("highlight-competence"));
+
+  // Find the competence card by class, e.g. <article class="info-card comp-leadership">
+  const target = document.querySelector(`.info-card.${id}`);
+  if (!target) return;
+
+  target.classList.add("highlight-competence");
+
+  // Optional: scroll into view
+  target.scrollIntoView({ behavior: "smooth", block: "center" });
 }
   
 </script>

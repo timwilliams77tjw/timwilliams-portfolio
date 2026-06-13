@@ -613,7 +613,32 @@ body.dark .cta {
 .s-right { top: 25%; right: 0; }
 .s-bottom { bottom: 0; left: 25%; }
 .s-left { top: 25%; left: 0; }
-  
+
+.wheel-animate {
+  animation: slowspin 38s linear infinite;
+}
+
+@keyframes slowspin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+    .pill {
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e8f1ff, #ffffff);
+  color: #1f4f7f;
+  border: 1px solid #d0e2ff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
   </style>
 </head>
 
@@ -819,7 +844,8 @@ body.dark .cta {
       </div>
 
       <!-- Wheel image -->
-      <img src="pmo-operating-model-wheel.png" alt="PMO Operating Model Wheel">
+<img src="pmo-operating-model-wheel.png" class="wheel-animate" alt="PMO Operating Model Wheel">
+
 
       <!-- Legend -->
       <div class="wheel-legend">

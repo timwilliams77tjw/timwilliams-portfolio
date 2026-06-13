@@ -521,6 +521,56 @@
       color: #ffffff;
       border-color: #4da3ff;
     }
+  .cta {
+  margin-top: 40px;
+  background: #eaf3ff; /* soft blue to match hero */
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  border: 1px solid #d0e2ff;
+}
+
+body.dark .cta {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+.btn-cta {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+}
+
+.btn-cta:hover {
+  background: var(--primary-soft);
+}
+  .wheel-card img:hover {
+  filter: drop-shadow(0 0 12px rgba(31,79,127,0.35));
+  transform: scale(1.03);
+  transition: all 0.4s ease;
+}
+   .wheel-hotspots {
+  position: absolute;
+  inset: 0;
+}
+
+.hotspot {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  cursor: pointer;
+}
+
+.hotspot-top { top: 0; left: 25%; }
+.hotspot-right { top: 25%; right: 0; }
+.hotspot-bottom { bottom: 0; left: 25%; }
+.hotspot-left { top: 25%; left: 0; }
+ 
   </style>
 </head>
 
@@ -707,57 +757,74 @@
       </div>
     </section>
 
-    <!-- INTERACTIVE WHEEL -->
-    <section class="section" aria-labelledby="wheel-title">
-      <div class="section-header">
-        <h2 id="wheel-title" class="section-title">Explore the PMO Wheel</h2>
-        <span class="section-kicker">Central operating model</span>
+   <!-- INTERACTIVE WHEEL -->
+<section class="section" aria-labelledby="wheel-title">
+  <div class="section-header">
+    <h2 id="wheel-title" class="section-title">Explore the PMO Wheel</h2>
+    <span class="section-kicker">Central operating model</span>
+  </div>
+
+  <div class="wheel-section">
+    <div class="wheel-card" style="position: relative;">
+      
+      <!-- Hotspots overlay -->
+      <div class="wheel-hotspots">
+        <div class="hotspot hotspot-top" onclick="scrollToSection('gov')"></div>
+        <div class="hotspot hotspot-right" onclick="scrollToSection('people')"></div>
+        <div class="hotspot hotspot-bottom" onclick="scrollToSection('value')"></div>
+        <div class="hotspot hotspot-left" onclick="scrollToSection('planning')"></div>
       </div>
 
-      <div class="wheel-section">
-        <div class="wheel-card">
-          <!-- Same wheel image reused here -->
-          <img src="pmo-operating-model-wheel.png" alt="PMO Operating Model Wheel">
+      <!-- Wheel image -->
+      <img src="pmo-operating-model-wheel.png" alt="PMO Operating Model Wheel">
 
-          <div class="wheel-legend">
-            <div class="wheel-legend-item">
-              <span class="legend-dot" style="background:#1f4f7f;"></span>
-              <span>Governance &amp; Assurance</span>
-            </div>
-            <div class="wheel-legend-item">
-              <span class="legend-dot" style="background:#2f6fa8;"></span>
-              <span>Planning &amp; Control</span>
-            </div>
-            <div class="wheel-legend-item">
-              <span class="legend-dot" style="background:#00a0a8;"></span>
-              <span>People, Skills &amp; Culture</span>
-            </div>
-            <div class="wheel-legend-item">
-              <span class="legend-dot" style="background:#4b5563;"></span>
-              <span>Value, Strategy &amp; Outcomes</span>
-            </div>
-          </div>
+      <!-- Legend -->
+      <div class="wheel-legend">
+        <div class="wheel-legend-item">
+          <span class="legend-dot" style="background:#1f4f7f;"></span>
+          <span>Governance &amp; Assurance</span>
         </div>
-
-        <div class="wheel-copy">
-          <p>
-            At the centre of the wheel sits the PMO’s mission:
-            <strong>Enabling Predictable, Value‑Driven Delivery.</strong>
-          </p>
-          <p>
-            Each domain radiates from this purpose, ensuring the PMO operates as a strategic partner rather than a
-            reporting function. The wheel can be used in:
-          </p>
-          <ul>
-            <li>Executive briefings and board packs</li>
-            <li>PMO service catalogues and charters</li>
-            <li>Capability and maturity assessments</li>
-            <li>Onboarding and training materials</li>
-          </ul>
+        <div class="wheel-legend-item">
+          <span class="legend-dot" style="background:#2f6fa8;"></span>
+          <span>Planning &amp; Control</span>
+        </div>
+        <div class="wheel-legend-item">
+          <span class="legend-dot" style="background:#00a0a8;"></span>
+          <span>People, Skills &amp; Culture</span>
+        </div>
+        <div class="wheel-legend-item">
+          <span class="legend-dot" style="background:#4b5563;"></span>
+          <span>Value, Strategy &amp; Outcomes</span>
         </div>
       </div>
-    </section>
+    </div>
 
+    <div class="wheel-copy">
+      <p>
+        At the centre of the wheel sits the PMO’s mission:
+        <strong>Enabling Predictable, Value‑Driven Delivery.</strong>
+      </p>
+      <p>
+        Each domain radiates from this purpose, ensuring the PMO operates as a strategic partner rather than a
+        reporting function. The wheel can be used in:
+      </p>
+      <ul>
+        <li>Executive briefings and board packs</li>
+        <li>PMO service catalogues and charters</li>
+        <li>Capability and maturity assessments</li>
+        <li>Onboarding and training materials</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+    
     <!-- USE CASES & ASSETS -->
     <section class="section" aria-labelledby="usecases-title">
       <div class="section-header">

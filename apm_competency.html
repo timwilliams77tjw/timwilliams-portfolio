@@ -1400,6 +1400,30 @@ html, body {
 .status-icon.completed { color: #16a34a; }
 .status-icon.inprogress { color: #2563eb; }
 .status-icon.planned { color: #d97706; }
+  .cpd-card-competence {
+    margin-top: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.cpd-competence-badge {
+    background: #0a66c2;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: .8rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.highlight-competence {
+    outline: 3px solid #0a66c2;
+    border-radius: 12px;
+    transition: outline 0.3s ease;
+}
+  
+  
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -1610,6 +1634,15 @@ html, body {
     <div id="cpd-card-container" class="cpd-card-container">
         <!-- Cards will be injected here -->
     </div>
+  ${competences.length ? `
+<div class="cpd-card-competence">
+    ${competences.map(c => `
+        <span class="cpd-competence-badge" data-target="${c}">
+            ${c.replace(/^comp-/, "").replace(/-/g, " ")}
+        </span>
+    `).join("")}
+</div>
+` : ""}
 </section>
 
   <!-- INSIGHTS PANEL -->
@@ -1852,6 +1885,12 @@ async function loadCPD() {
             }
         });
 
+// NEW: Competence mapping (fallback safe)
+const competenceRaw = row[6] ? row[6].replace(/^"|"$/g, "") : "";
+const competences = competenceRaw
+    ? competenceRaw.split("|").map(c => c.trim())
+    : [];
+      
         debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
 
         calculateMetrics();
@@ -1859,6 +1898,7 @@ async function loadCPD() {
         generateHeatmap();
         generateDonutChart();
         generateRadarChart();
+      loadCPD().then(wireCompetenceLinks);
 
     } catch (err) {
         console.error(err);
@@ -2290,6 +2330,19 @@ function generateProgressPillars() {
     setPillar("pillar-projected", "pillar-projected-label", projected, "projected");
   }, 300);
 }
+
+function wireCompetenceLinks() {
+    document.querySelectorAll(".cpd-competence-badge").forEach(badge => {
+        badge.addEventListener("click", () => {
+            const target = document.getElementById(badge.dataset.target);
+            if (!target) return;
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            target.classList.add("highlight-competence");
+            setTimeout(() => target.classList.remove("highlight-competence"), 1500);
+        });
+    });
+}
+  
 </script>
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->

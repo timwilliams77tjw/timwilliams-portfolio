@@ -786,7 +786,27 @@ body.dark .cta {
     transform: translateY(-2px);
     transition: all 0.25s ease;
 }
- 
+ .quadrant-glow {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    border-radius: 0;
+}
+
+/* Quadrant positions */
+.q-gov { top: 0; left: 25%; }
+.q-plan { top: 25%; right: 0; }
+.q-value { bottom: 0; left: 25%; }
+.q-people { top: 25%; left: 0; }
+
+/* Glow effect */
+.quadrant-glow.active {
+    opacity: 1;
+    box-shadow: 0 0 40px 20px rgba(31,79,127,0.35);
+}
   </style>
 </head>
 
@@ -1009,6 +1029,10 @@ body.dark .cta {
       </div>
 
       <!-- Wheel image -->
+      <div class="quadrant-glow q-gov"></div>
+<div class="quadrant-glow q-plan"></div>
+<div class="quadrant-glow q-people"></div>
+<div class="quadrant-glow q-value"></div>
 <img src="pmo-operating-model-wheel.png" class="wheel-animate" alt="PMO Operating Model Wheel">
 
 
@@ -1064,6 +1088,19 @@ function scrollToSection(id) {
         behavior: "smooth"
     });
 }
+  function scrollToSection(id) {
+    const headerOffset = 200;
+    const el = document.getElementById(id);
+    const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+
+    // Trigger glow immediately
+    domainSections.forEach(section => {
+        const glow = document.querySelector(section.glow);
+        glow.classList.toggle('active', section.id === id);
+    });
+}
 const sections = document.querySelectorAll('.domain-card');
 
 window.addEventListener('scroll', () => {
@@ -1077,7 +1114,27 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+const domainSections = [
+    { id: 'gov', glow: '.q-gov' },
+    { id: 'planning', glow: '.q-plan' },
+    { id: 'people', glow: '.q-people' },
+    { id: 'value', glow: '.q-value' }
+];
 
+window.addEventListener('scroll', () => {
+    let scrollPos = window.scrollY + 250;
+
+    domainSections.forEach(section => {
+        const el = document.getElementById(section.id);
+        const glow = document.querySelector(section.glow);
+
+        if (scrollPos > el.offsetTop && scrollPos < el.offsetTop + el.offsetHeight) {
+            glow.classList.add('active');
+        } else {
+            glow.classList.remove('active');
+        }
+    });
+});
 </script>
 
     

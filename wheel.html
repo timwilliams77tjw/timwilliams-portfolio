@@ -807,6 +807,23 @@ body.dark .cta {
     opacity: 1;
     box-shadow: 0 0 40px 20px rgba(31,79,127,0.35);
 }
+    .wheel-legend-item {
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    background: rgba(255,255,255,0.4);
+}
+
+.wheel-legend-item:hover {
+    background: rgba(31,79,127,0.15);
+    transform: translateX(6px);
+    color: var(--primary-soft);
+}
+
+.wheel-legend-item:hover .legend-dot {
+    box-shadow: 0 0 12px rgba(31,79,127,0.45);
+}
   </style>
 </head>
 
@@ -1087,38 +1104,44 @@ const domainSections = [
 
 // 2. Smooth scroll with proper header offset + instant glow
 function scrollToSection(id) {
-    const headerOffset = 200; // adjust if needed
     const el = document.getElementById(id);
+
+    // Dynamic header offset based on device
+    const headerOffset = window.innerWidth < 768 ? 180 : 260;
+
     const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
 
     window.scrollTo({ top: y, behavior: "smooth" });
 
-    // Trigger quadrant glow immediately
+    // Trigger glow immediately
     domainSections.forEach(section => {
         const glow = document.querySelector(section.glow);
         glow.classList.toggle('active', section.id === id);
     });
 }
 
+
 // 3. Scroll listener for active domain + active quadrant glow
 window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY + 250;
+    const viewportHeight = window.innerHeight;
+
+    // Dynamic detection zone: 35% from top of screen
+    const scrollPos = window.scrollY + viewportHeight * 0.35;
 
     domainSections.forEach(section => {
         const el = document.getElementById(section.id);
         const glow = document.querySelector(section.glow);
 
-        const inView =
-            scrollPos > el.offsetTop &&
-            scrollPos < el.offsetTop + el.offsetHeight;
+        const top = el.offsetTop;
+        const bottom = el.offsetTop + el.offsetHeight;
 
-        // Highlight domain card
+        const inView = scrollPos >= top && scrollPos < bottom;
+
         el.classList.toggle('active', inView);
-
-        // Highlight quadrant glow
         glow.classList.toggle('active', inView);
     });
 });
+
 </script>
 
 

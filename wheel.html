@@ -764,6 +764,29 @@ body.dark .cta {
     background: rgba(0,160,168,0.15);
     transition: background 0.2s ease;
 }
+    .wheel-legend-item {
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+.wheel-legend-item:hover {
+    background: rgba(31,79,127,0.08);
+    transform: translateX(6px);
+    color: var(--primary-soft);
+}
+
+.wheel-legend-item:hover .legend-dot {
+    box-shadow: 0 0 10px rgba(31,79,127,0.4);
+}
+   .domain-card.active {
+    border-color: var(--primary-soft);
+    box-shadow: 0 0 12px rgba(31,79,127,0.25);
+    transform: translateY(-2px);
+    transition: all 0.25s ease;
+}
+ 
   </style>
 </head>
 
@@ -1032,9 +1055,28 @@ body.dark .cta {
 <script>
 function scrollToSection(id) {
     const el = document.getElementById(id);
-    const y = el.getBoundingClientRect().top + window.pageYOffset - 120; 
-    window.scrollTo({ top: y, behavior: 'smooth' });
+    const headerOffset = 200; // adjust between 180–220 depending on your header height
+    const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - headerOffset;
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+    });
 }
+const sections = document.querySelectorAll('.domain-card');
+
+window.addEventListener('scroll', () => {
+    let scrollPos = window.scrollY + 250; // offset for header
+
+    sections.forEach(section => {
+        if (scrollPos > section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+            section.classList.add('active');
+        } else {
+            section.classList.remove('active');
+        }
+    });
+});
 
 </script>
 

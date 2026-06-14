@@ -796,11 +796,25 @@ body.dark .cta {
     border-radius: 0;
 }
 
-/* Quadrant positions */
-.q-gov { top: 0; left: 25%; }
-.q-plan { top: 25%; right: 0; }
-.q-value { bottom: 0; left: 25%; }
-.q-people { top: 25%; left: 0; }
+.q-gov {
+    top:0;
+    left:0;
+}
+
+.q-plan {
+    top:0;
+    right:0;
+}
+
+.q-people {
+    bottom:0;
+    left:0;
+}
+
+.q-value {
+    bottom:0;
+    right:0;
+}
 
 /* Glow effect */
 .quadrant-glow.active {
@@ -841,7 +855,63 @@ body.dark .cta {
 .wheel-legend-item:hover .legend-dot {
     box-shadow: 0 0 12px rgba(31,79,127,0.45);
 }
-  
+  .hotspot {
+    position:absolute;
+    width:50%;
+    height:50%;
+    cursor:pointer;
+}
+
+.hotspot-gov {
+    top:0;
+    left:0;
+}
+
+.hotspot-plan {
+    top:0;
+    right:0;
+}
+
+.hotspot-people {
+    bottom:0;
+    left:0;
+}
+
+.hotspot-value {
+    bottom:0;
+    right:0;
+} 
+  .wheel-card img {
+    pointer-events:none;
+}
+  .wheel-hotspots {
+    position:absolute;
+    inset:0;
+    z-index:10;
+}
+
+.hotspot {
+    z-index:11;
+}  
+.quadrant-glow {
+    z-index:2;
+}
+
+.wheel-card img {
+    position:relative;
+    z-index:1;
+}
+.hotspot:hover {
+    background:rgba(0,160,168,.08);
+}
+
+.hotspot {
+    cursor:pointer;
+}
+.hotspot:active {
+    background:rgba(0,160,168,.15);
+}    
+    
   </style>
 </head>
 
@@ -1057,10 +1127,17 @@ body.dark .cta {
       
       <!-- Hotspots overlay -->
       <div class="wheel-hotspots">
-        <div class="hotspot hotspot-top" onclick="scrollToSection('gov')"></div>
-        <div class="hotspot hotspot-right" onclick="scrollToSection('people')"></div>
-        <div class="hotspot hotspot-bottom" onclick="scrollToSection('value')"></div>
-        <div class="hotspot hotspot-left" onclick="scrollToSection('planning')"></div>
+       <div class="hotspot hotspot-gov"
+     onclick="scrollToSection('gov')"></div>
+
+<div class="hotspot hotspot-plan"
+     onclick="scrollToSection('planning')"></div>
+
+<div class="hotspot hotspot-people"
+     onclick="scrollToSection('people')"></div>
+
+<div class="hotspot hotspot-value"
+     onclick="scrollToSection('value')"></div>
       </div>
 
       <!-- Wheel image -->

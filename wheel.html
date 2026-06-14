@@ -1077,43 +1077,7 @@ body.dark .cta {
 </section>
 
 <script>
-function scrollToSection(id) {
-    const el = document.getElementById(id);
-    const headerOffset = 200; // adjust between 180–220 depending on your header height
-    const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
-    const offsetPosition = elementPosition - headerOffset;
-
-    window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-    });
-}
-  function scrollToSection(id) {
-    const headerOffset = 200;
-    const el = document.getElementById(id);
-    const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-
-    window.scrollTo({ top: y, behavior: "smooth" });
-
-    // Trigger glow immediately
-    domainSections.forEach(section => {
-        const glow = document.querySelector(section.glow);
-        glow.classList.toggle('active', section.id === id);
-    });
-}
-const sections = document.querySelectorAll('.domain-card');
-
-window.addEventListener('scroll', () => {
-    let scrollPos = window.scrollY + 250; // offset for header
-
-    sections.forEach(section => {
-        if (scrollPos > section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
-            section.classList.add('active');
-        } else {
-            section.classList.remove('active');
-        }
-    });
-});
+// 1. Define domain → quadrant mapping FIRST
 const domainSections = [
     { id: 'gov', glow: '.q-gov' },
     { id: 'planning', glow: '.q-plan' },
@@ -1121,21 +1085,42 @@ const domainSections = [
     { id: 'value', glow: '.q-value' }
 ];
 
+// 2. Smooth scroll with proper header offset + instant glow
+function scrollToSection(id) {
+    const headerOffset = 200; // adjust if needed
+    const el = document.getElementById(id);
+    const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+
+    // Trigger quadrant glow immediately
+    domainSections.forEach(section => {
+        const glow = document.querySelector(section.glow);
+        glow.classList.toggle('active', section.id === id);
+    });
+}
+
+// 3. Scroll listener for active domain + active quadrant glow
 window.addEventListener('scroll', () => {
-    let scrollPos = window.scrollY + 250;
+    const scrollPos = window.scrollY + 250;
 
     domainSections.forEach(section => {
         const el = document.getElementById(section.id);
         const glow = document.querySelector(section.glow);
 
-        if (scrollPos > el.offsetTop && scrollPos < el.offsetTop + el.offsetHeight) {
-            glow.classList.add('active');
-        } else {
-            glow.classList.remove('active');
-        }
+        const inView =
+            scrollPos > el.offsetTop &&
+            scrollPos < el.offsetTop + el.offsetHeight;
+
+        // Highlight domain card
+        el.classList.toggle('active', inView);
+
+        // Highlight quadrant glow
+        glow.classList.toggle('active', inView);
     });
 });
 </script>
+
 
     
     <!-- USE CASES & ASSETS -->

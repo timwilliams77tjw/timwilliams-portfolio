@@ -746,7 +746,24 @@ body.dark .cta {
   align-items: center;
   gap: 12px;
 }
-    
+ .wheel-legend-item {
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.wheel-legend-item:hover {
+    transform: translateX(4px);
+    color: var(--primary-soft);
+}
+
+.wheel-legend-item:hover .legend-dot {
+    box-shadow: 0 0 8px rgba(31,79,127,0.4);
+}
+   .hotspot:active,
+.s-hotspot:active {
+    background: rgba(0,160,168,0.15);
+    transition: background 0.2s ease;
+}
   </style>
 </head>
 
@@ -974,19 +991,19 @@ body.dark .cta {
 
       <!-- Legend -->
       <div class="wheel-legend">
-        <div class="wheel-legend-item">
+<div class="wheel-legend-item" onclick="scrollToSection('gov')">
           <span class="legend-dot" style="background:#1f4f7f;"></span>
           <span>Governance &amp; Assurance</span>
         </div>
-        <div class="wheel-legend-item">
+<div class="wheel-legend-item" onclick="scrollToSection('planning')">
           <span class="legend-dot" style="background:#2f6fa8;"></span>
           <span>Planning &amp; Control</span>
         </div>
-        <div class="wheel-legend-item">
+<div class="wheel-legend-item" onclick="scrollToSection('people')">
           <span class="legend-dot" style="background:#00a0a8;"></span>
           <span>People, Skills &amp; Culture</span>
         </div>
-        <div class="wheel-legend-item">
+<div class="wheel-legend-item" onclick="scrollToSection('value')">
           <span class="legend-dot" style="background:#4b5563;"></span>
           <span>Value, Strategy &amp; Outcomes</span>
         </div>
@@ -1014,8 +1031,11 @@ body.dark .cta {
 
 <script>
 function scrollToSection(id) {
-  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById(id);
+    const y = el.getBoundingClientRect().top + window.pageYOffset - 120; 
+    window.scrollTo({ top: y, behavior: 'smooth' });
 }
+
 </script>
 
     

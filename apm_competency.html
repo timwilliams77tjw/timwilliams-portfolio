@@ -1423,7 +1423,26 @@ html, body {
     transition: outline 0.3s ease;
 }
   
-  
+ .cpd-reference{
+    margin:.6rem 0;
+    font-size:.85rem;
+    color:#64748b;
+}
+
+.cpd-reference i{
+    color:#0a66c2;
+    margin-right:6px;
+}
+
+.cpd-reference a{
+    color:#0a66c2;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.cpd-reference a:hover{
+    text-decoration:underline;
+} 
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -1854,6 +1873,25 @@ async function loadCPD() {
             ${activity}
             <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
           </div>
+
+${
+  competences.length
+    ? `
+      <div class="cpd-reference">
+        <i class="fa-solid fa-link"></i>
+        ${
+          competences
+            .map(c =>
+              `<a href="#${c}">
+                ${competenceNames[c] || c}
+              </a>`
+            )
+            .join(" • ")
+        }
+      </div>
+    `
+    : ""
+}          
           <div class="cpd-card-meta">
             <span class="cpd-badge cpd-hours">${hours} hrs</span>
             <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
@@ -2374,8 +2412,18 @@ function highlightCompetenceCard(id) {
     target.classList.add("highlight-competence");
     target.scrollIntoView({ behavior: "smooth", block: "center" });
 }
-
-  
+const competenceNames = {
+  "comp-life-cycles": "Life cycles",
+  "comp-governance-arrangements": "Governance arrangements",
+  "comp-sustainability": "Sustainability",
+  "comp-financial-management": "Financial management",
+  "comp-business-case": "Business case",
+  "comp-portfolio-shaping": "Portfolio shaping",
+  "comp-procurement": "Procurement",
+  "comp-reviews": "Reviews",
+  "comp-assurance": "Assurance",
+  "comp-capability-development": "Capability development"
+};  
 </script>
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->
@@ -2397,28 +2445,36 @@ function highlightCompetenceCard(id) {
     <div class="carousel-track">
 
   <!-- 1. Life cycles -->
-  <article class="info-card comp-life-cycles">
+<article
+  id="comp-life-cycles"
+  class="info-card comp-life-cycles">
     <h3><i class="fa-solid fa-layer-group"></i> Life cycles</h3>
     <p>The ability to structure and organise change initiatives through appropriate life cycle
     choices that transform ideas into reality in an orderly and efficient manner.</p>
   </article>
 
   <!-- 2. Governance arrangements -->
-  <article class="info-card comp-governance-arrangements">
+<article
+  id="comp-governance-arrangements"
+  class="info-card comp-governance-arrangements">
     <h3><i class="fa-solid fa-sitemap"></i> Governance arrangements</h3>
     <p>The ability to establish and maintain governance structures that define control of
     deployment and align with organisational practice to realise value.</p>
   </article>
 
   <!-- 3. Sustainability -->
-  <article class="info-card comp-sustainability">
+<article
+  id="comp-sustainability"
+  class="info-card comp-sustainability">
     <h3><i class="fa-solid fa-leaf"></i> Sustainability</h3>
     <p>The ability to balance environmental, social, economic and administrative considerations
     so that outputs, outcomes and benefits remain sustainable over their life cycles.</p>
   </article>
 
   <!-- 4. Financial management -->
-  <article class="info-card comp-financial-management">
+<article
+  id="comp-financial-management"
+  class="info-card comp-financial-management">
     <h3><i class="fa-solid fa-sterling-sign"></i> Financial management</h3>
     <p>The ability to enable financial resource for delivery and to plan and control finances as
     part of the organisation’s overall financial management to optimise the business case.</p>

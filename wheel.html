@@ -824,6 +824,24 @@ body.dark .cta {
 .wheel-legend-item:hover .legend-dot {
     box-shadow: 0 0 12px rgba(31,79,127,0.45);
 }
+  .wheel-legend-item {
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.5);
+    transition: all 0.25s ease;
+}
+
+.wheel-legend-item:hover {
+    background: rgba(31,79,127,0.15);
+    transform: translateX(6px);
+    color: var(--primary-soft);
+}
+
+.wheel-legend-item:hover .legend-dot {
+    box-shadow: 0 0 12px rgba(31,79,127,0.45);
+}
+  
   </style>
 </head>
 
@@ -1094,7 +1112,7 @@ body.dark .cta {
 </section>
 
 <script>
-// 1. Define domain → quadrant mapping FIRST
+// Map domains to quadrant glows
 const domainSections = [
     { id: 'gov', glow: '.q-gov' },
     { id: 'planning', glow: '.q-plan' },
@@ -1102,46 +1120,43 @@ const domainSections = [
     { id: 'value', glow: '.q-value' }
 ];
 
-// 2. Smooth scroll with proper header offset + instant glow
+// Intersection Observer for active domain + quadrant glow
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const id = entry.target.id;
+        const section = domainSections.find(s => s.id === id);
+        const glow = document.querySelector(section.glow);
+
+        if (entry.isIntersecting) {
+            // Highlight domain
+            entry.target.classList.add('active');
+
+            // Highlight quadrant
+            glow.classList.add('active');
+        } else {
+            entry.target.classList.remove('active');
+            glow.classList.remove('active');
+        }
+    });
+}, {
+    root: null,
+    threshold: 0.45   // 45% of the card must be visible
+});
+
+// Observe each domain card
+domainSections.forEach(section => {
+    const el = document.getElementById(section.id);
+    observer.observe(el);
+});
+
+// Smooth scroll for hotspots + legend
 function scrollToSection(id) {
     const el = document.getElementById(id);
-
-    // Dynamic header offset based on device
-    const headerOffset = window.innerWidth < 768 ? 180 : 260;
-
+    const headerOffset = 180; // works on all devices
     const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
 
     window.scrollTo({ top: y, behavior: "smooth" });
-
-    // Trigger glow immediately
-    domainSections.forEach(section => {
-        const glow = document.querySelector(section.glow);
-        glow.classList.toggle('active', section.id === id);
-    });
 }
-
-
-// 3. Scroll listener for active domain + active quadrant glow
-window.addEventListener('scroll', () => {
-    const viewportHeight = window.innerHeight;
-
-    // Dynamic detection zone: 35% from top of screen
-    const scrollPos = window.scrollY + viewportHeight * 0.35;
-
-    domainSections.forEach(section => {
-        const el = document.getElementById(section.id);
-        const glow = document.querySelector(section.glow);
-
-        const top = el.offsetTop;
-        const bottom = el.offsetTop + el.offsetHeight;
-
-        const inView = scrollPos >= top && scrollPos < bottom;
-
-        el.classList.toggle('active', inView);
-        glow.classList.toggle('active', inView);
-    });
-});
-
 </script>
 
 

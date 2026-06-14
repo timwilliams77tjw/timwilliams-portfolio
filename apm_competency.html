@@ -1443,7 +1443,26 @@ html, body {
 .cpd-reference a:hover{
     text-decoration:underline;
 } 
-  </style>
+    .cpd-reference{
+    margin:.6rem 0;
+    font-size:.85rem;
+    color:#64748b;
+}
+
+.cpd-reference i{
+    color:#0a66c2;
+    margin-right:6px;
+}
+
+.cpd-reference a{
+    color:#0a66c2;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.cpd-reference a:hover{
+    text-decoration:underline;
+}  </style>
 </head>
 <body class="header-with-logo page-prof-dev">
 <!-- HEADER -->
@@ -1868,40 +1887,29 @@ async function loadCPD() {
         const card = document.createElement("div");
         card.className = `cpd-card ${statusClass}`;
 
-        card.innerHTML = `
-          <div class="cpd-card-title">
-            ${activity}
-            <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
-          </div>
+      card.innerHTML = `
+ <div class="cpd-card-title">
+ ${activity}
+ <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
+ </div>
 
-${
-  competences.length
-    ? `
-      <div class="cpd-reference">
-        <i class="fa-solid fa-link"></i>
-        ${
-          competences
-            .map(c =>
-              `<a href="#${c}">
-                ${competenceNames[c] || c}
-              </a>`
-            )
-            .join(" • ")
-        }
-      </div>
-    `
-    : ""
-}          
-          <div class="cpd-card-meta">
-            <span class="cpd-badge cpd-hours">${hours} hrs</span>
-            <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
-            <span>${start} → ${end || "Ongoing"}</span>
-            <span class="cpd-status ${statusClass}">${statusLabel}</span>
-          </div>
-          <div class="cpd-card-reflection">
-            ${reflection || "<em>No reflective statement provided.</em>"}
-          </div>
-        `;
+ <div class="cpd-reference">
+   <i class="fa-solid fa-link"></i>
+   APM Reference:
+   ${competences.join(" • ")}
+ </div>
+
+ <div class="cpd-card-meta">
+ <span class="cpd-badge cpd-hours">${hours} hrs</span>
+ <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
+ <span>${start} → ${end || "Ongoing"}</span>
+ <span class="cpd-status ${statusClass}">${statusLabel}</span>
+ </div>
+
+ <div class="cpd-card-reflection">
+ ${reflection || "<em>No reflective statement provided.</em>"}
+ </div>
+`;
 
         // ---------- 4. Competence badges ----------
         if (competences.length > 0) {
@@ -2424,7 +2432,24 @@ const competenceNames = {
   "comp-assurance": "Assurance",
   "comp-capability-development": "Capability development"
 };  
-</script>
+  ${
+  competences.length
+    ? `
+      <div class="cpd-reference">
+        <i class="fa-solid fa-link"></i>
+        ${
+          competences
+            .map(c =>
+              `<a href="#${c}">
+                ${competenceNames[c] || c}
+              </a>`
+            )
+            .join(" • ")
+        }
+      </div>
+    `
+    : ""
+}</script>
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section>

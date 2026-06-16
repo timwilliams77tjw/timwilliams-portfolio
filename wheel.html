@@ -786,37 +786,23 @@ body.dark .cta {
     transform: translateY(-2px);
     transition: all 0.25s ease;
 }
+/* TRUE quadrant shapes */
 .q-gov {
-    clip-path: polygon(
-        50% 50%,
-        0% 0%,
-        100% 0%
-    );
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
 }
 
 .q-plan {
-    clip-path: polygon(
-        50% 50%,
-        0% 0%,
-        100% 0%
-    );
-}    
+    clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+}
 
-  .q-people {
-    clip-path: polygon(
-        50% 50%,
-        0% 0%,
-        100% 0%
-    );
-}  
+.q-people {
+    clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+}
 
 .q-value {
-    clip-path: polygon(
-        50% 50%,
-        0% 0%,
-        100% 0%
-    );
-}    
+    clip-path: polygon(0 0, 0 100%, 50% 50%);
+}
+
 .q-gov {
     top:0;
     left:0;
@@ -999,6 +985,33 @@ body.dark .cta {
     text-decoration: underline;
     color: var(--primary-soft);
 }
+/* FINAL BUTTON FIX — clean, compact, distinct from pills */
+.btn-primary,
+.btn-ghost {
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-height: unset;
+    box-shadow: none;
+}
+
+.btn-primary {
+    background: #1f4f7f;
+    color: #fff;
+    border: none;
+}
+
+.btn-ghost {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #1f4f7f;
+}
+
+.btn-ghost:hover {
+    background: #f1f5f9;
+}
+    
   </style>
 </head>
 
@@ -1219,8 +1232,7 @@ body.dark .cta {
 <div class="s-hotspot s-bottom" onclick="scrollToSection('value')"></div>
 <div class="s-hotspot s-left" onclick="scrollToSection('planning')"></div>
 
-<div class="wheel-hotspots">
-</div>   
+ 
         <!-- Wheel image -->
       <div class="quadrant-glow q-gov"></div>
 <div class="quadrant-glow q-plan"></div>
@@ -1306,48 +1318,34 @@ document.addEventListener("DOMContentLoaded", () => {
         if (el) observer.observe(el);
     });
 
-    // Smooth scroll for hotspots + legend
-    window.scrollToSection = function(id) {
-        const el = document.getElementById(id);
-        const headerOffset = 180;
-        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
+   window.scrollToSection = function(id) {
+
+    // Clear all highlights
+    document.querySelectorAll('.domain-card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.quadrant-glow').forEach(g => g.classList.remove('active'));
+
+    const el = document.getElementById(id);
+    const headerOffset = 180;
+    const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+    // Smooth scroll
+    window.scrollTo({ top: y, behavior: "smooth" });
+
+    // Manual highlight override
+    el.classList.add('active');
+
+    const glowMap = {
+        gov: '.q-gov',
+        planning: '.q-plan',
+        people: '.q-people',
+        value: '.q-value'
     };
 
-});
-  const observer = new IntersectionObserver(entries => {
+    const glow = document.querySelector(glowMap[id]);
+    if (glow) glow.classList.add('active');
+};
 
-    let activeEntry = null;
-
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            activeEntry = entry;
-        }
-    });
-
-    if (!activeEntry) return;
-
-    document
-        .querySelectorAll('.domain-card')
-        .forEach(card => card.classList.remove('active'));
-
-    document
-        .querySelectorAll('.quadrant-glow')
-        .forEach(glow => glow.classList.remove('active'));
-
-    activeEntry.target.classList.add('active');
-
-    const section = domainSections.find(
-        s => s.id === activeEntry.target.id
-    );
-
-    document
-        .querySelector(section.glow)
-        .classList.add('active');
-
-}, {
-    threshold: 0.6
-});
+ 
 </script>
 
 

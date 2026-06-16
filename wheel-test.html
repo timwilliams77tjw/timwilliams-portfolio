@@ -911,7 +911,52 @@ body.dark .cta {
 .hotspot:active {
     background:rgba(0,160,168,.15);
 }    
-    
+    .wheel-card {
+    position: relative;
+}
+/* TRUE quadrant shapes */
+.q-gov {
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+}
+
+.q-plan {
+    clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+}
+
+.q-people {
+    clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+}
+
+.q-value {
+    clip-path: polygon(0 0, 0 100%, 50% 50%);
+}
+/* FINAL BUTTON FIX — clean, compact, distinct from pills */
+.btn-primary,
+.btn-ghost {
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-height: unset;
+    box-shadow: none;
+}
+
+.btn-primary {
+    background: #1f4f7f;
+    color: #fff;
+    border: none;
+}
+
+.btn-ghost {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #1f4f7f;
+}
+
+.btn-ghost:hover {
+    background: #f1f5f9;
+}
+
   </style>
 </head>
 
@@ -1126,19 +1171,13 @@ body.dark .cta {
     <div class="wheel-card" style="position: relative;">
       
       <!-- Hotspots overlay -->
-      <div class="wheel-hotspots">
-       <div class="hotspot hotspot-gov"
-     onclick="scrollToSection('gov')"></div>
+<div class="wheel-hotspots">
+    <div class="s-hotspot s-top" onclick="scrollToSection('gov')"></div>
+    <div class="s-hotspot s-right" onclick="scrollToSection('people')"></div>
+    <div class="s-hotspot s-bottom" onclick="scrollToSection('value')"></div>
+    <div class="s-hotspot s-left" onclick="scrollToSection('planning')"></div>
+</div>
 
-<div class="hotspot hotspot-plan"
-     onclick="scrollToSection('planning')"></div>
-
-<div class="hotspot hotspot-people"
-     onclick="scrollToSection('people')"></div>
-
-<div class="hotspot hotspot-value"
-     onclick="scrollToSection('value')"></div>
-      </div>
 
       <!-- Wheel image -->
       <div class="quadrant-glow q-gov"></div>

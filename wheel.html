@@ -786,37 +786,16 @@ body.dark .cta {
     transform: translateY(-2px);
     transition: all 0.25s ease;
 }
-.q-gov {
-    clip-path: polygon(
-        50% 50%,
-        0% 0%,
-        100% 0%
-    );
+ .quadrant-glow {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    border-radius: 0;
 }
 
-.q-plan {
-    clip-path: polygon(
-        50% 50%,
-        0% 0%,
-        100% 0%
-    );
-}    
-
-  .q-people {
-    clip-path: polygon(
-        50% 50%,
-        0% 0%,
-        100% 0%
-    );
-}  
-
-.q-value {
-    clip-path: polygon(
-        50% 50%,
-        0% 0%,
-        100% 0%
-    );
-}    
 .q-gov {
     top:0;
     left:0;
@@ -932,25 +911,40 @@ body.dark .cta {
 .hotspot:active {
     background:rgba(0,160,168,.15);
 }    
+    .wheel-card {
+    position: relative;
+}
+/* TRUE quadrant shapes */
+.q-gov {
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+}
 
+.q-plan {
+    clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+}
+
+.q-people {
+    clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+}
+
+.q-value {
+    clip-path: polygon(0 0, 0 100%, 50% 50%);
+}
+/* FINAL BUTTON FIX — clean, compact, distinct from pills */
 .btn-primary,
 .btn-ghost {
-    border-radius: 12px;
-    padding: 14px 22px;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
     font-weight: 600;
-    min-height: 48px;
+    min-height: unset;
+    box-shadow: none;
 }
 
 .btn-primary {
-    background: var(--primary);
+    background: #1f4f7f;
     color: #fff;
-    box-shadow: 0 6px 16px rgba(31,79,127,.20);
-}
-
-.btn-ghost {
-    background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
+    border: none;
 }
 
 .btn-ghost {
@@ -961,44 +955,8 @@ body.dark .cta {
 
 .btn-ghost:hover {
     background: #f1f5f9;
-    border-color: #94a3b8;
-}
-  .btn-primary {
-    background: linear-gradient(135deg, #1f4f7f, #2f6fa8);
-    color: #fff;
-    border: none;
-    box-shadow: 0 4px 12px rgba(31,79,127,0.25);
-}
-    .hotspot:hover {
-    background: rgba(0,160,168,0.12);
-    backdrop-filter: blur(2px);
-}
-    .hotspot {
-    cursor: pointer;
-}
-    .hotspot:hover {
-    outline: 2px dashed rgba(0,160,168,0.4);
-}
-    .quadrant-glow {
-    z-index: 5;
-}
-.wheel-card img {
-    z-index: 4;
-}
-    .asset-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.9rem;
-    color: var(--primary);
-    text-decoration: none;
-    padding: 4px 0;
 }
 
-.asset-link:hover {
-    text-decoration: underline;
-    color: var(--primary-soft);
-}
   </style>
 </head>
 
@@ -1046,9 +1004,9 @@ body.dark .cta {
         </p>
 
         <div class="hero-meta">
-         <span class="pill">PMO Framework</span>
-<span class="pill">Governance · People · Planning · Value</span>
-<span class="pill">Executive Visual Model</span>
+          <span>PMO Framework</span>
+          <span>Governance • People • Planning • Value</span>
+          <span>Executive Visual Model</span>
         </div>
 
        <div class="hero-cta">
@@ -1213,15 +1171,15 @@ body.dark .cta {
     <div class="wheel-card" style="position: relative;">
       
       <!-- Hotspots overlay -->
-      <div class="wheel-hotspots">
-      <div class="s-hotspot s-top" onclick="scrollToSection('gov')"></div>
-<div class="s-hotspot s-right" onclick="scrollToSection('people')"></div>
-<div class="s-hotspot s-bottom" onclick="scrollToSection('value')"></div>
-<div class="s-hotspot s-left" onclick="scrollToSection('planning')"></div>
-
 <div class="wheel-hotspots">
-</div>   
-        <!-- Wheel image -->
+    <div class="s-hotspot s-top" onclick="scrollToSection('gov')"></div>
+    <div class="s-hotspot s-right" onclick="scrollToSection('people')"></div>
+    <div class="s-hotspot s-bottom" onclick="scrollToSection('value')"></div>
+    <div class="s-hotspot s-left" onclick="scrollToSection('planning')"></div>
+</div>
+
+
+      <!-- Wheel image -->
       <div class="quadrant-glow q-gov"></div>
 <div class="quadrant-glow q-plan"></div>
 <div class="quadrant-glow q-people"></div>
@@ -1297,7 +1255,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, {
         root: null,
-        threshold: 0.75
+        threshold: 0.45
     });
 
     // Observe each domain card
@@ -1315,45 +1273,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 });
-  const observer = new IntersectionObserver(entries => {
-
-    let activeEntry = null;
-
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            activeEntry = entry;
-        }
-    });
-
-    if (!activeEntry) return;
-
-    document
-        .querySelectorAll('.domain-card')
-        .forEach(card => card.classList.remove('active'));
-
-    document
-        .querySelectorAll('.quadrant-glow')
-        .forEach(glow => glow.classList.remove('active'));
-
-    activeEntry.target.classList.add('active');
-
-    const section = domainSections.find(
-        s => s.id === activeEntry.target.id
-    );
-
-    document
-        .querySelector(section.glow)
-        .classList.add('active');
-
-}, {
-    threshold: 0.6
-});
 </script>
 
 
 
-
-    
     <!-- USE CASES & ASSETS -->
     <section class="section" aria-labelledby="usecases-title">
       <div class="section-header">

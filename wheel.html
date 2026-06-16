@@ -1226,54 +1226,39 @@ body.dark .cta {
     </div>
   </div>
 </section>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Map domains to quadrant glows
+    /* -------------------------------
+       1. DOMAIN → QUADRANT MAPPING
+    --------------------------------*/
     const domainSections = [
-        { id: 'gov', glow: '.q-gov' },
+        { id: 'gov',      glow: '.q-gov' },
         { id: 'planning', glow: '.q-plan' },
-        { id: 'people', glow: '.q-people' },
-        { id: 'value', glow: '.q-value' }
+        { id: 'people',   glow: '.q-people' },
+        { id: 'value',    glow: '.q-value' }
     ];
 
-    // Intersection Observer for active domain + quadrant glow
+    /* -------------------------------
+       2. INTERSECTION OBSERVER
+       (Only ONE observer — clean)
+    --------------------------------*/
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const id = entry.target.id;
-            const section = domainSections.find(s => s.id === id);
-            const glow = document.querySelector(section.glow);
 
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                glow.classList.add('active');
-            } else {
-                entry.target.classList.remove('active');
-                glow.classList.remove('active');
-            }
-        });
-    }, {
-        root: null,
-        threshold: 0.45
-    });
+        // Find the one domain that is actually intersecting
+        const active = entries.find(e => e.isIntersecting);
+        if (!active) return;
 
-    // Observe each domain card
-    domainSections.forEach(section => {
-        const el = document.getElementById(section.id);
-        if (el) observer.observe(el);
-    });
+        // Clear all highlights
+        document.querySelectorAll('.domain-card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.quadrant-glow').forEach(g => g.classList.remove('active'));
 
-    // Smooth scroll for hotspots + legend
-    window.scrollToSection = function(id) {
-        const el = document.getElementById(id);
-        const headerOffset = 180;
-        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
-    };
+        // Highlight the active domain
+        const id = active.target.id;
+        active.target.classList.add('active');
 
-});
-</script>
+        // Highlight
+
 
 
 

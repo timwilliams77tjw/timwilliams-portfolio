@@ -911,7 +911,62 @@ body.dark .cta {
 .hotspot:active {
     background:rgba(0,160,168,.15);
 }    
-    
+
+  .btn-primary,
+.btn-ghost,
+.btn-cta {
+    border-radius: var(--radius-pill);
+    padding: 10px 20px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.btn-ghost {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #1f4f7f;
+}
+
+.btn-ghost:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+  .btn-primary {
+    background: linear-gradient(135deg, #1f4f7f, #2f6fa8);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(31,79,127,0.25);
+}
+    .hotspot:hover {
+    background: rgba(0,160,168,0.12);
+    backdrop-filter: blur(2px);
+}
+    .hotspot {
+    cursor: pointer;
+}
+    .hotspot:hover {
+    outline: 2px dashed rgba(0,160,168,0.4);
+}
+    .quadrant-glow {
+    z-index: 5;
+}
+.wheel-card img {
+    z-index: 4;
+}
+    .asset-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 4px 0;
+}
+
+.asset-link:hover {
+    text-decoration: underline;
+    color: var(--primary-soft);
+}
   </style>
 </head>
 
@@ -959,9 +1014,9 @@ body.dark .cta {
         </p>
 
         <div class="hero-meta">
-          <span>PMO Framework</span>
-          <span>Governance • People • Planning • Value</span>
-          <span>Executive Visual Model</span>
+         <span class="pill">PMO Framework</span>
+<span class="pill">Governance · People · Planning · Value</span>
+<span class="pill">Executive Visual Model</span>
         </div>
 
        <div class="hero-cta">
@@ -1127,18 +1182,11 @@ body.dark .cta {
       
       <!-- Hotspots overlay -->
       <div class="wheel-hotspots">
-       <div class="hotspot hotspot-gov"
-     onclick="scrollToSection('gov')"></div>
+      <div class="s-hotspot s-top" onclick="scrollToSection('gov')"></div>
+<div class="s-hotspot s-right" onclick="scrollToSection('planning')"></div>
+<div class="s-hotspot s-bottom" onclick="scrollToSection('people')"></div>
+<div class="s-hotspot s-left" onclick="scrollToSection('value')"></div>
 
-<div class="hotspot hotspot-plan"
-     onclick="scrollToSection('planning')"></div>
-
-<div class="hotspot hotspot-people"
-     onclick="scrollToSection('people')"></div>
-
-<div class="hotspot hotspot-value"
-     onclick="scrollToSection('value')"></div>
-      </div>
 
       <!-- Wheel image -->
       <div class="quadrant-glow q-gov"></div>
@@ -1216,7 +1264,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, {
         root: null,
-        threshold: 0.45
+        threshold: 0.75
     });
 
     // Observe each domain card
@@ -1233,6 +1281,19 @@ document.addEventListener("DOMContentLoaded", () => {
         window.scrollTo({ top: y, behavior: "smooth" });
     };
 
+});
+  entries.forEach(entry => {
+    const id = entry.target.id;
+    const section = domainSections.find(s => s.id === id);
+    const glow = document.querySelector(section.glow);
+
+    if (entry.isIntersecting) {
+        document.querySelectorAll('.domain-card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.quadrant-glow').forEach(g => g.classList.remove('active'));
+
+        entry.target.classList.add('active');
+        glow.classList.add('active');
+    }
 });
 </script>
 
@@ -1267,9 +1328,16 @@ document.addEventListener("DOMContentLoaded", () => {
   </ul>
 
   <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
-    <a href="pmo-operating-model-wheel.pdf" class="btn-ghost">Download PDF</a>
-    <a href="pmo-operating-model-wheel.png" class="btn-ghost">Download PNG</a>
-    <a href="pmo-operating-model-wheel.pptx" class="btn-ghost">Download PPTX</a>
+   <a href="pmo-operating-model-wheel.pdf" class="asset-link">
+    ⬇️ PDF
+</a>
+<a href="pmo-operating-model-wheel.png" class="asset-link">
+    ⬇️ PNG
+</a>
+<a href="pmo-operating-model-wheel.pptx" class="asset-link">
+    ⬇️ PPTX
+</a>
+
   </div>
 </aside>
 

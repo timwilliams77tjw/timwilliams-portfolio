@@ -1400,36 +1400,6 @@ html, body {
 .status-icon.completed { color: #16a34a; }
 .status-icon.inprogress { color: #2563eb; }
 .status-icon.planned { color: #d97706; }
-
-    .collapsible-toggle {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-.collapsible-toggle .chevron {
-    margin-left: auto;
-    transition: transform 0.25s ease;
-}
-
-.collapsible-content {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.35s ease, opacity 0.35s ease;
-}
-
-.collapsible-content.open {
-    max-height: 5000px; /* large enough for content */
-    opacity: 1;
-}
-
-.collapsible-toggle.open .chevron {
-    transform: rotate(90deg);
-}
-
-  
   </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -2321,17 +2291,7 @@ function generateProgressPillars() {
     setPillar("pillar-projected", "pillar-projected-label", projected, "projected");
   }, 300);
 }
-
-  <script>
-document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
-    toggle.addEventListener("click", () => {
-        toggle.classList.toggle("open");
-        const content = toggle.nextElementSibling;
-        content.classList.toggle("open");
-    });
-});
 </script>
-
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section>
@@ -2594,15 +2554,11 @@ document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
   </div>
 </section>
 <!-- PERSONAL ASSESSMENT ACCORDION -->
-<section class="assessment-section">
-<h2 class="section-heading collapsible-toggle">
+<section>
+  <h2 class="section-heading">
     <i class="fa-solid fa-user-check"></i>
     My Competence Assessment (29 competences)
-    <i class="fa-solid fa-chevron-right chevron"></i>
-</h2>
-
-<div class="collapsible-content">
-
+  </h2>
 <div class="apm-progress-bar"></div>
   <p class="section-subtitle">
     This section reflects my personal assessment against the APM Competence Framework (3rd edition), using the APM 0–5 rating scale.

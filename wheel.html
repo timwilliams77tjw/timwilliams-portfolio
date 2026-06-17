@@ -957,6 +957,127 @@ body.dark .cta {
     background: #f1f5f9;
 }
 
+/* ----------------------------------------------------
+   1. FIX HERO PILLS (restore animation + style)
+---------------------------------------------------- */
+.hero-meta span,
+.pill {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #e8f1ff, #ffffff);
+    color: #1f4f7f;
+    border: 1px solid #d0e2ff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-meta span:hover,
+.pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* ----------------------------------------------------
+   2. FIX HERO BUTTONS (distinct from pills)
+---------------------------------------------------- */
+.btn-primary,
+.btn-ghost {
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-height: unset;
+    box-shadow: none;
+}
+
+.btn-primary {
+    background: #1f4f7f;
+    color: #fff;
+    border: none;
+}
+
+.btn-ghost {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #1f4f7f;
+}
+
+.btn-ghost:hover {
+    background: #f1f5f9;
+}
+
+/* ----------------------------------------------------
+   3. FIX HOTSPOT CLICK AREA + ANIMATION
+---------------------------------------------------- */
+.wheel-hotspots {
+    position: absolute;
+    inset: 0;
+    z-index: 5; /* BELOW legend, ABOVE wheel */
+    pointer-events: none; /* prevents blocking legend */
+}
+
+.s-hotspot {
+    pointer-events: auto; /* re-enable click only on hotspots */
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.s-hotspot:hover {
+    background: rgba(0,160,168,0.12);
+    transform: scale(1.05);
+    outline: 2px dashed rgba(0,160,168,0.4);
+}
+
+/* ----------------------------------------------------
+   4. FIX LEGEND CLICKABILITY (hotspots no longer cover)
+---------------------------------------------------- */
+.wheel-legend {
+    position: relative;
+    z-index: 20;
+}
+
+/* ----------------------------------------------------
+   5. FIX QUADRANT GLOW SHAPE + LAYERING
+---------------------------------------------------- */
+.quadrant-glow {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 3;
+}
+
+.q-gov    { top: 0;    left: 0;    clip-path: polygon(0 0, 100% 0, 50% 50%); }
+.q-plan   { top: 0;    right: 0;   clip-path: polygon(100% 0, 100% 100%, 50% 50%); }
+.q-people { bottom: 0; left: 0;    clip-path: polygon(0 100%, 100% 100%, 50% 50%); }
+.q-value  { bottom: 0; right: 0;   clip-path: polygon(0 0, 0 100%, 50% 50%); }
+
+.quadrant-glow.active {
+    opacity: 1;
+    box-shadow: 0 0 40px 20px rgba(31,79,127,0.35);
+}
+
+/* ----------------------------------------------------
+   6. FIX WHEEL IMAGE LAYERING
+---------------------------------------------------- */
+.wheel-card img {
+    position: relative;
+    z-index: 2;
+}
+
+/* ----------------------------------------------------
+   7. FIX DOMAIN HIGHLIGHT STYLE
+---------------------------------------------------- */
+.domain-card.active {
+    border-color: var(--primary-soft);
+    box-shadow: 0 0 12px rgba(31,79,127,0.25);
+    transform: translateY(-2px);
+    transition: all 0.25s ease;
+}
+    
   </style>
 </head>
 

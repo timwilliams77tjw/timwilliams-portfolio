@@ -1377,7 +1377,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -----------------------------------------
-     3. INTERSECTION OBSERVER (CLEAN + CORRECT)
+     3. INTERSECTION OBSERVER (CLEAN)
   ----------------------------------------- */
   const observer = new IntersectionObserver(
     entries => {
@@ -1388,7 +1388,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setActiveDomain(id);
     },
     {
-      threshold: 0.70   // ensures only ONE domain is ever active
+      threshold: 0.70
     }
   );
 
@@ -1398,17 +1398,60 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* -----------------------------------------
-     4. HOTSPOT + LEGEND CLICK HANDLER
-     (Fixes wrong navigation + all domains active)
+     4. SOFT SNAP SCROLL
+     (Triggers AFTER user stops scrolling)
+  ----------------------------------------- */
+  let snapTimeout;
+
+  window.addEventListener("scroll", () => {
+    clearTimeout(snapTimeout);
+
+    snapTimeout = setTimeout(() => {
+      // Find which domain is closest to the top
+      let closestId = null;
+      let closestDistance = Infinity;
+
+      domainSections.forEach(section => {
+        const el = document.getElementById(section.id);
+        if (!el) return;
+
+        const rect = el.getBoundingClientRect();
+        const distance = Math.abs(rect.top);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestId = section.id;
+        }
+      });
+
+      if (!closestId) return;
+
+      // Snap to the closest domain
+      const target = document.getElementById(closestId);
+      const headerOffset = window.innerWidth < 768 ? 120 : 180;
+
+      const y =
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        headerOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+
+      // Ensure highlight matches snapped domain
+      setActiveDomain(closestId);
+
+    }, 150); // soft snap delay
+  });
+
+  /* -----------------------------------------
+     5. HOTSPOT + LEGEND CLICK HANDLER
   ----------------------------------------- */
   window.scrollToSection = function(id) {
     const el = document.getElementById(id);
     if (!el) return;
 
-    // Clear all highlights first
     setActiveDomain(id);
 
-    // Mobile offset fix
     const headerOffset = window.innerWidth < 768 ? 120 : 180;
 
     const y =
@@ -1421,6 +1464,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+
 
 
 

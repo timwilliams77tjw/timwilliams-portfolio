@@ -1230,47 +1230,73 @@ body.dark .cta {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Map domains to quadrant glows
-    const domainSections = [
-        { id: 'gov', glow: '.q-gov' },
-        { id: 'planning', glow: '.q-plan' },
-        { id: 'people', glow: '.q-people' },
-        { id: 'value', glow: '.q-value' }
-    ];
+  /* -----------------------------------------
+     1. DOMAIN → QUADRANT MAPPING
+  ----------------------------------------- */
+  const domainSections = [
+    { id: "gov",      glow: ".q-gov" },
+    { id: "planning", glow: ".q-plan" },
+    { id: "people",   glow: ".q-people" },
+    { id: "value",    glow: ".q-value" }
+  ];
 
-    // Intersection Observer for active domain + quadrant glow
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const id = entry.target.id;
-            const section = domainSections.find(s => s.id === id);
-            const glow = document.querySelector(section.glow);
-
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                glow.classList.add('active');
-            } else {
-                entry.target.classList.remove('active');
-                glow.classList.remove('active');
-            }
-        });
-    }, {
-        root: null,
-        threshold: 0.45
-    });
-
-    // Observe each domain card
+  /* -----------------------------------------
+     2. FORCE ONLY ONE DOMAIN ACTIVE
+  ----------------------------------------- */
+  function setActiveDomain(id) {
     domainSections.forEach(section => {
-        const el = document.getElementById(section.id);
-        if (el) observer.observe(el);
-    });
+      const card = document.getElementById(section.id);
+      const glow = document.querySelector(section.glow);
 
-    // Smooth scroll for hotspots + legend
-    window.scrollToSection = function(id) {
-        const el = document.getElementById(id);
-        const headerOffset = 180;
-        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
-    };
+      const isActive = section.id === id;
+
+      if (card) card.classList.toggle("active", isActive);
+      if (glow) glow.classList.toggle("active", isActive);
+    });
+  }
+
+  /* -----------------------------------------
+     3. INTERSECTION OBSERVER (CLEAN + CORRECT)
+  ----------------------------------------- */
+  const observer = new IntersectionObserver(
+    entries => {
+      const visible = entries.find(e => e.isIntersecting);
+      if (!visible) return;
+
+      const id = visible.target.id;
+      setActiveDomain(id);
+    },
+    {
+      threshold: 0.70   // ensures only ONE domain is ever active
+    }
+  );
+
+  domainSections.forEach(section => {
+    const el = document.getElementById(section.id);
+    if (el) observer.observe(el);
+  });
+
+  /* -----------------------------------------
+     4. HOTSPOT + LEGEND CLICK HANDLER
+     (Fixes wrong navigation + all domains active)
+  ----------------------------------------- */
+  window.scrollToSection = function(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // Clear all highlights first
+    setActiveDomain(id);
+
+    // Mobile offset fix
+    const headerOffset = window.innerWidth < 768 ? 120 : 180;
+
+    const y =
+      el.getBoundingClientRect().top +
+      window.pageYOffset -
+      headerOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
 
 });
 </script>

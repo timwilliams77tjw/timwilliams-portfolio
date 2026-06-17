@@ -2555,10 +2555,14 @@ function generateProgressPillars() {
 </section>
 <!-- PERSONAL ASSESSMENT ACCORDION -->
 <section>
-  <h2 class="section-heading">
-    <i class="fa-solid fa-user-check"></i>
-    My Competence Assessment (29 competences)
-  </h2>
+<h2 class="section-heading collapsible-toggle">
+  <i class="fa-solid fa-user-check"></i>
+  My Competence Assessment (29 competences)
+  <i class="fa-solid fa-chevron-right chevron"></i>
+</h2>
+
+<div class="collapsible-content">
+
 <div class="apm-progress-bar"></div>
   <p class="section-subtitle">
     This section reflects my personal assessment against the APM Competence Framework (3rd edition), using the APM 0–5 rating scale.
@@ -3038,6 +3042,8 @@ function generateProgressPillars() {
     </div>
 
   </div> <!-- end accordion -->
+  </div> <!-- end collapsible-content -->
+
 </section>
 <!-- FLOATING ACTION BUTTONS -->
 <div class="fab fab-scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
@@ -3143,6 +3149,29 @@ function generateProgressPillars() {
 document.addEventListener("DOMContentLoaded", () => {
     loadCPD();
 });
-</script></main>
+</script>
+<script>
+document.querySelectorAll('.cpd-competence-link').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+
+    const header = target.querySelector('.accordion-header');
+    if (header) header.click();
+  });
+});
+</script>
+<script>
+document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
+  toggle.addEventListener("click", () => {
+    toggle.classList.toggle("open");
+    const content = toggle.nextElementSibling;
+    content.classList.toggle("open");
+  });
+});
+</script>
+
+  
+</main>
 </body>
 </html>

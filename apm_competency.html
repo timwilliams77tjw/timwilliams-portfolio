@@ -14,7 +14,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
- /* =========================================
+ 
+
+/* =========================================
    ROOT + GLOBAL
 ========================================= */
 :root {
@@ -68,9 +70,7 @@ body.page-prof-dev {
 }
 
 @media (max-width: 700px) {
-  .hero-section h1 {
-    font-size: 2.1rem;
-  }
+  .hero-section h1 { font-size: 2.1rem; }
   .hero-section img {
     float: none;
     display: block;
@@ -182,11 +182,6 @@ table.cpd-table td {
   vertical-align: top;
 }
 
-table.cpd-table th {
-  font-weight: 600;
-  white-space: nowrap;
-}
-
 table.cpd-table tbody tr:nth-child(even) {
   background: #f8fafc;
 }
@@ -226,6 +221,7 @@ table.cpd-table tbody tr:last-child td {
   box-shadow: var(--apm-shadow);
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
+
 .accordion-header {
   display: flex;
   justify-content: space-between;
@@ -233,43 +229,33 @@ table.cpd-table tbody tr:last-child td {
   gap: 1rem;
   cursor: pointer;
 }
+
 .accordion-content {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
   border-top: 1px solid #e5e5e5;
 }
+
 details summary {
   margin-top: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   padding: 6px 0;
 }
+
 details {
   margin-top: 0.5rem;
   border-top: 1px solid #e5e5e5;
   padding-top: 0.75rem;
 }
+
 /* Colour accordion items by rating */
-.accordion-item:has(.rating-expert) {
-  background: #e6f0ff;
-  border-left: 4px solid #0a66c2;
-}
-.accordion-item:has(.rating-proficient) {
-  background: #e5f7f1;
-  border-left: 4px solid #007b5f;
-}
-.accordion-item:has(.rating-competent) {
-  background: #fff7e5;
-  border-left: 4px solid #b8860b;
-}
-.accordion-item:has(.rating-practised) {
-  background: #f3e9ff;
-  border-left: 4px solid #8a2be2;
-}
-.accordion-item:has(.rating-aware) {
-  background: #f2f2f2;
-  border-left: 4px solid #555;
-}
+.accordion-item:has(.rating-expert) { background: #e6f0ff; border-left: 4px solid #0a66c2; }
+.accordion-item:has(.rating-proficient) { background: #e5f7f1; border-left: 4px solid #007b5f; }
+.accordion-item:has(.rating-competent) { background: #fff7e5; border-left: 4px solid #b8860b; }
+.accordion-item:has(.rating-practised) { background: #f3e9ff; border-left: 4px solid #8a2be2; }
+.accordion-item:has(.rating-aware) { background: #f2f2f2; border-left: 4px solid #555; }
+
 /* =========================================
    CAROUSEL
 ========================================= */
@@ -278,6 +264,7 @@ details {
   width: 100%;
   margin: 2rem 0;
 }
+
 .carousel-track {
   display: flex;
   overflow-x: auto;
@@ -286,14 +273,15 @@ details {
   padding: 1rem 0;
   scroll-behavior: smooth;
 }
-.carousel-track::-webkit-scrollbar {
-  display: none;
-}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
 .carousel-track .info-card {
   min-width: 320px;
   max-width: 320px;
   scroll-snap-align: start;
 }
+
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -313,38 +301,43 @@ details {
   justify-content: center;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
+
 .carousel-btn:hover {
   background: var(--apm-blue);
   color: white;
 }
+
 .carousel-btn.prev { left: -10px; }
 .carousel-btn.next { right: -10px; }
+
 @media (max-width: 600px) {
   .carousel-btn.prev { left: 5px; }
   .carousel-btn.next { right: 5px; }
 }
+
 /* =========================================
    CPD PROGRESS RING
 ========================================= */
 .cpd-progress-section {
   margin: 2rem 0 3rem;
-      margin-bottom: 2.5rem;
   text-align: center;
 }
+
 .cpd-progress-container {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto;
-    position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  position: relative;
 }
-.cpd-progress-ring {
-  transform: rotate(-90deg);
-}
+
+.cpd-progress-ring { transform: rotate(-90deg); }
+
 .cpd-ring-bg {
   fill: none;
   stroke: #e5e7eb;
   stroke-width: 12;
 }
+
 .cpd-ring-fill {
   fill: none;
   stroke: var(--apm-blue);
@@ -353,23 +346,27 @@ details {
   stroke-dasharray: 0 999;
   transition: stroke-dasharray 1s ease;
 }
+
 .cpd-progress-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .cpd-progress-text h3 {
   font-size: 1.1rem;
   margin: 0;
   font-weight: 700;
   color: #0a2540;
 }
+
 .cpd-progress-text p {
   margin: 4px 0 0;
   font-size: 0.85rem;
   color: #555;
 }
+
 /* =========================================
    CPD METRICS
 ========================================= */
@@ -379,6 +376,7 @@ details {
   gap: 1.4rem;
   margin: 2.2rem 0 2.6rem;
 }
+
 .cpd-metric-card {
   background: var(--apm-card-bg);
   padding: 1.6rem 1.4rem;
@@ -386,6 +384,7 @@ details {
   box-shadow: var(--apm-shadow);
   border-top: 4px solid var(--apm-accent);
 }
+
 .cpd-metric-card h4 {
   font-size: 0.95rem;
   font-weight: 600;
@@ -394,23 +393,27 @@ details {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+
 .cpd-metric-card p {
   font-size: 1.6rem;
   font-weight: 800;
   color: var(--apm-blue);
   margin: 0;
 }
+
 /* =========================================
    INSIGHTS
 ========================================= */
 .cpd-insights {
   margin: 3rem 0 3.5rem;
 }
+
 .insights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.6rem;
 }
+
 .insight-card {
   background: var(--apm-card-bg);
   padding: 1.6rem 1.4rem;
@@ -418,27 +421,32 @@ details {
   box-shadow: var(--apm-shadow);
   border-left: 5px solid var(--apm-accent);
 }
+
 .insight-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--apm-blue);
   margin-bottom: 0.7rem;
 }
+
 .insight-card ul {
   margin: 0;
   padding-left: 1.2rem;
   color: var(--apm-subtext);
   line-height: 1.6;
 }
+
 .insight-card li {
   margin-bottom: 0.35rem;
 }
+
 /* =========================================
    FOOTER + FAB
 ========================================= */
 #footer {
   margin-top: 3rem;
 }
+
 body.page-prof-dev #footer,
 body.page-prof-dev #footer footer {
   margin-top: 3rem;
@@ -448,9 +456,11 @@ body.page-prof-dev #footer footer {
   color: #ffffff;
   font-size: 0.9rem;
 }
+
 body.page-prof-dev #footer a {
   color: #ffffff;
 }
+
 .fab {
   position: fixed;
   right: 16px;
@@ -468,9 +478,11 @@ body.page-prof-dev #footer a {
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
   z-index: 9999;
 }
+
 .fab-booking {
   bottom: calc(84px + env(safe-area-inset-bottom));
 }
+
 @media (max-width: 480px) {
   .fab {
     right: 14px;
@@ -484,7 +496,6 @@ body.page-prof-dev #footer a {
 /* =========================================
    CPD HEATMAP
 ========================================= */
-
 .cpd-heatmap {
   margin: 3rem 0;
   overflow-x: auto;
@@ -495,72 +506,48 @@ body.page-prof-dev #footer a {
   height: 12px;
   border-radius: 2px;
 }
-}
-}
 
-.heatmap-cell.level-0 {
-  background: #eef2f7;
-}
+.heatmap-cell.level-0 { background: #eef2f7; }
+.heatmap-cell.level-1 { background: #cfe8ff; }
+.heatmap-cell.level-2 { background: #7ac0f9; }
+.heatmap-cell.level-3 { background: #0a66c2; }
+.heatmap-cell.level-4 { background: #003a73; }
 
-.heatmap-cell.level-1 {
-  background: #cfe8ff;
-}
-
-.heatmap-cell.level-2 {
-  background: #7ac0f9;
-}
-
-.heatmap-cell.level-3 {
-  background: #0a66c2;
-}
-
-.heatmap-cell.level-4 {
-  background: #003a73;
-}
 /* FINAL FIX — APM PROGRESS BAR */
 .apm-progress-bar,
 .apm-progress-bar--static {
-    width: 100% !important;
-    height: 28px !important;
-    border-radius: 6px !important;
-    overflow: hidden !important;
-    display: block !important;
-    background-image: linear-gradient(
-        to right,
-        #d9534f 0%, #d9534f 10%,
-        #f0ad4e 10%, #f0ad4e 30%,
-        #8a2be2 30%, #8a2be2 55%,
-        #b8860b 55%, #b8860b 75%,
-        #007b5f 75%, #007b5f 90%,
-        #0a66c2 90%, #0a66c2 100%
-    ) !important;
-    background-size: 100% 100% !important;
+  width: 100% !important;
+  height: 28px !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  display: block !important;
+  background-image: linear-gradient(
+    to right,
+    #d9534f 0%, #d9534f 10%,
+    #f0ad4e 10%, #f0ad4e 30%,
+    #8a2be2 30%, #8a2be2 55%,
+    #b8860b 55%, #b8860b 75%,
+    #007b5f 75%, #007b5f 90%,
+    #0a66c2 90%, #0a66c2 100%
+  ) !important;
+  background-size: 100% 100% !important;
 }
 
-/* FINAL FIX — HEATMAP */
+/* FINAL FIX — HEATMAP GRID */
 #heatmap-grid {
-    display: grid !important;
-    grid-template-columns: repeat(53, 1fr) !important;
-    grid-auto-rows: 12px !important;
-    gap: 3px !important;
-    overflow-x: scroll !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding-bottom: 0.5rem !important;
-    min-height: 120px !important;
+  display: grid !important;
+  grid-template-columns: repeat(53, 1fr) !important;
+  grid-auto-rows: 12px !important;
+  gap: 3px !important;
+  overflow-x: scroll !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: 0.5rem !important;
+  min-height: 120px !important;
 }
 
-.heatmap-cell {
-    display: block !important;
-    width: 12px !important;
-    height: 12px !important;
-    border-radius: 3px !important;
-}
-
-.heatmap-cell.level-0 { background: #eef2f7 !important; }
-.heatmap-cell.level-1 { background: #cfe8ff !important; }
-.heatmap-cell.level-2 { background: #7ac0f9 !important; }
-.heatmap-cell.level-3 { background: #0a66c2 !important; }
-.heatmap-cell.level-4 { background: #003a73 !important; }
+/* =========================================
+   DONUT CHART
+========================================= */
 .cpd-donut-section {
   margin: 3rem 0;
 }
@@ -627,32 +614,12 @@ body.page-prof-dev #footer a {
   border-radius: 3px;
   margin-right: 0.6rem;
 }
+
+/* =========================================
+   RADAR CHART
+========================================= */
 .cpd-radar-section {
-  margin: 3rem 0;
-}
-
-.radar-wrapper {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-#radar-chart {
-  width: 320px;
-  height: 320px;
-}
-
-.radar-legend {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 0.95rem;
-  color: #444;
-}
-
-.radar-legend li {
-  margin-bottom: 0.4rem;
+  margin: 3
 }
 
 .radar-grid {
@@ -670,6 +637,11 @@ body.page-prof-dev #footer a {
 .radar-point {
   fill: #0a66c2;
 }
+
+/* =========================================
+   PILLARS (BASE SYSTEM)
+========================================= */
+
 .pillars-wrapper {
   display: flex;
   gap: 2rem;
@@ -739,403 +711,10 @@ body.page-prof-dev #footer a {
   color: #0a2540;
 }
 
+/* =========================================
+   PILLAR CARDS — PREMIUM SYSTEM
+========================================= */
 
-html, body {
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: auto !important;
-}
-
-
-   /* ==========================================================
-   FIXED, ISOLATED PILLAR STYLING (NO GLOBAL IMPACT)
-========================================================== */
-
-.cpd-pillars-section .pillars-wrapper {
-  display: flex;
-  gap: 2rem;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 1rem 0 0.5rem;
-  border-bottom: 2px solid #e2e8f0;
-}
-
-.cpd-pillars-section .pillar {
-  flex: 1;
-  min-width: 140px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cpd-pillars-section .pillar-bar-container {
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(to top, #f8fafc, #edf2f7);
-  border-radius: 12px;
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.08);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.cpd-pillars-section .pillar-bar {
-  width: 65%;
-  height: 0;
-  border-radius: 10px 10px 0 0;
-  transition: height 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  position: relative;
-}
-
-.cpd-pillars-section .pillar-bar.completed {
-  background: linear-gradient(to top, #0a66c2, #4da3ff);
-}
-
-.cpd-pillars-section .pillar-bar.remaining {
-  background: linear-gradient(to top, #b8860b, #f0c75e);
-}
-
-.cpd-pillars-section .pillar-bar.projected {
-  background: linear-gradient(to top, #007b5f, #4dd6a8);
-}
-
-.cpd-pillars-section .pillar-value-label {
-  position: absolute;
-  bottom: 6px;
-  width: 100%;
-  text-align: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-}
-
-.cpd-pillars-section .pillar-label {
-  margin-top: 0.6rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #0a2540;
-}
-.pillars-scroll{
-    display:flex;
-    gap:18px;
-    overflow-x:auto;
-    padding:10px 0 20px;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-}
-
-.pillars-scroll::-webkit-scrollbar{
-    height:6px;
-}
-
-.pillars-scroll::-webkit-scrollbar-thumb{
-    background:#cbd5e1;
-    border-radius:20px;
-}
-
-.pillar-card{
-    min-width:220px;
-    flex:0 0 auto;
-
-    background:#fff;
-    border-radius:24px;
-
-    padding:22px;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.08);
-
-    scroll-snap-align:start;
-
-    transition:.3s;
-}
-
-.pillar-card:hover{
-    transform:translateY(-4px);
-}
-
-.pillar-icon{
-    width:56px;
-    height:56px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:16px;
-
-    font-size:22px;
-
-    margin-bottom:16px;
-}
-
-.completed .pillar-icon{
-    background:#dcfce7;
-    color:#16a34a;
-}
-
-.remaining .pillar-icon{
-    background:#fee2e2;
-    color:#dc2626;
-}
-
-.projected .pillar-icon{
-    background:#dbeafe;
-    color:#2563eb;
-}
-
-.pillar-value{
-    font-size:2rem;
-    font-weight:700;
-    margin-bottom:4px;
-}
-
-.pillar-title{
-    font-size:.95rem;
-    color:#64748b;
-    margin-bottom:18px;
-}
-
-.pillar-progress{
-    height:12px;
-    background:#edf2f7;
-    border-radius:999px;
-    overflow:hidden;
-}
-
-.pillar-fill{
-    width:0%;
-    height:100%;
-    border-radius:999px;
-    transition:1.2s ease;
-}
-
-.completed .pillar-fill{
-    background:linear-gradient(90deg,#16a34a,#22c55e);
-}
-
-.remaining .pillar-fill{
-    background:linear-gradient(90deg,#dc2626,#ef4444);
-}
-
-.projected .pillar-fill{
-    background:linear-gradient(90deg,#2563eb,#60a5fa);
-}
-    .pillar-card{
-    min-width:220px;
-    flex:0 0 auto;
-
-    border-radius:24px;
-    padding:22px;
-
-    color:#fff;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.12);
-
-    scroll-snap-align:start;
-
-    transition:.3s;
-}
-
-.pillar-card:hover{
-    transform:translateY(-4px);
-}
-
-/* Completed */
-.pillar-card.completed{
-    background:linear-gradient(
-        135deg,
-        #16a34a,
-        #22c55e
-    );
-}
-
-/* Remaining */
-.pillar-card.remaining{
-    background:linear-gradient(
-        135deg,
-        #dc2626,
-        #ef4444
-    );
-}
-
-/* Projected */
-.pillar-card.projected{
-    background:linear-gradient(
-        135deg,
-        #2563eb,
-        #60a5fa
-    );
-}
-    .pillar-title{
-    color:rgba(255,255,255,.85);
-}
-
-.pillar-value{
-    color:#fff;
-}
-
-.pillar-icon{
-    background:rgba(255,255,255,.18);
-    color:#fff;
-    backdrop-filter:blur(8px);
-}
-    .pillar-progress{
-    height:10px;
-    background:rgba(255,255,255,.25);
-    border-radius:999px;
-    overflow:hidden;
-}
-
-.pillar-fill{
-    height:100%;
-    border-radius:999px;
-}
-    .pillar-card{
-    position:relative;
-}
-
-.pillar-card::after{
-    content:"CPD";
-    position:absolute;
-    top:16px;
-    right:16px;
-
-    padding:4px 10px;
-
-    border-radius:999px;
-
-    background:rgba(255,255,255,.15);
-
-    font-size:.7rem;
-    font-weight:600;
-}
-
-   /* ==========================================================
-   PREMIUM PILLAR CARD ENHANCEMENTS
-========================================================== */
-
-.pillar-card {
-  position: relative;
-  border-radius: 24px;
-  padding: 22px;
-  color: #fff;
-  box-shadow: 0 10px 25px rgba(0,0,0,.12);
-  scroll-snap-align: start;
-  transition: transform .35s ease, box-shadow .35s ease;
-}
-
-/* Hover lift */
-.pillar-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 32px rgba(0,0,0,.18);
-}
-
-/* Completed */
-.pillar-card.completed {
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-}
-
-/* Remaining */
-.pillar-card.remaining {
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-}
-
-/* Projected */
-.pillar-card.projected {
-  background: linear-gradient(135deg, #2563eb, #60a5fa);
-}
-
-/* Icon glow */
-.pillar-icon {
-  background: rgba(255,255,255,.18);
-  color: #fff;
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(255,255,255,.25);
-}
-
-/* Value */
-.pillar-value {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-/* Title */
-.pillar-title {
-  font-size: .95rem;
-  color: rgba(255,255,255,.85);
-  margin-bottom: 18px;
-}
-
-/* Progress bar */
-.pillar-progress {
-  height: 12px;
-  background: rgba(255,255,255,.25);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-/* Animated fill */
-.pillar-fill {
-  height: 100%;
-  width: 0%;
-  border-radius: 999px;
-  transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-/* CPD badge */
-.pillar-card::after {
-  content: "CPD";
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.15);
-  font-size: .7rem;
-  font-weight: 600;
-}
- /* Force correct gradient colours for pillar fills */
-.pillar-card.completed .pillar-fill {
-  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
-}
-
-.pillar-card.remaining .pillar-fill {
-  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
-}
-
-.pillar-card.projected .pillar-fill {
-  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
-}
-/* Pulse animation for projected pillar */
-@keyframes pillarPulse {
-  0%   { transform: scale(1); opacity: 1; }
-  50%  { transform: scale(1.03); opacity: 0.85; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.pillar-card.projected {
-  animation: pillarPulse 2.4s ease-in-out infinite;
-}
-    /* ==========================================================
-   CPD PILLARS — CARD SYSTEM (CLEAN, FINAL, NO CONFLICTS)
-========================================================== */
-
-/* Scroll container */
 .pillars-scroll {
   display: flex;
   gap: 18px;
@@ -1154,7 +733,6 @@ html, body {
   border-radius: 20px;
 }
 
-/* Pillar card container */
 .pillar-card {
   min-width: 220px;
   flex: 0 0 auto;
@@ -1167,28 +745,23 @@ html, body {
   position: relative;
 }
 
-/* Hover lift */
 .pillar-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 14px 32px rgba(0,0,0,.18);
 }
 
-/* Completed */
 .pillar-card.completed {
   background: linear-gradient(135deg, #16a34a, #22c55e);
 }
 
-/* Remaining */
 .pillar-card.remaining {
   background: linear-gradient(135deg, #dc2626, #ef4444);
 }
 
-/* Projected */
 .pillar-card.projected {
   background: linear-gradient(135deg, #2563eb, #60a5fa);
 }
 
-/* Icon */
 .pillar-icon {
   width: 56px;
   height: 56px;
@@ -1204,7 +777,6 @@ html, body {
   box-shadow: 0 4px 12px rgba(255,255,255,.25);
 }
 
-/* Value */
 .pillar-value {
   font-size: 2.2rem;
   font-weight: 700;
@@ -1212,14 +784,12 @@ html, body {
   color: #fff;
 }
 
-/* Title */
 .pillar-title {
   font-size: .95rem;
   color: rgba(255,255,255,.85);
   margin-bottom: 18px;
 }
 
-/* Progress bar container */
 .pillar-progress {
   height: 12px;
   background: rgba(255,255,255,.25);
@@ -1227,7 +797,6 @@ html, body {
   overflow: hidden;
 }
 
-/* Progress fill — animated */
 .pillar-fill {
   height: 100%;
   width: 0%;
@@ -1235,7 +804,6 @@ html, body {
   transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Gradient fills — FINAL, GUARANTEED */
 .pillar-card.completed .pillar-fill {
   background: linear-gradient(90deg, #16a34a, #22c55e);
 }
@@ -1248,7 +816,6 @@ html, body {
   background: linear-gradient(90deg, #2563eb, #60a5fa);
 }
 
-/* CPD badge */
 .pillar-card::after {
   content: "CPD";
   position: absolute;
@@ -1261,7 +828,7 @@ html, body {
   font-weight: 600;
 }
 
-/* Pulse animation for projected pillar */
+/* Pulse animation */
 @keyframes pillarPulse {
   0%   { transform: scale(1); opacity: 1; }
   50%  { transform: scale(1.03); opacity: 0.85; }
@@ -1271,198 +838,135 @@ html, body {
 .pillar-card.projected {
   animation: pillarPulse 2.4s ease-in-out infinite;
 }
-    /* FIX: Ensure pillar-fill gradient is not washed out by card overlay */
-.pillar-card .pillar-progress {
-  background: rgba(0,0,0,0.15) !important;
-}
 
-.pillar-card .pillar-fill {
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-}
-    /* FINAL OVERRIDE — FORCE PILLAR COLOURS */
-#pillar-completed.pillar-fill,
-.pillar-card.completed #pillar-completed {
-  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
-}
-
-#pillar-remaining.pillar-fill,
-.pillar-card.remaining #pillar-remaining {
-  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
-}
-
-#pillar-projected.pillar-fill,
-.pillar-card.projected #pillar-projected {
-  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
-}
-    /* ==========================================================
-   CPD CARD LAYOUT
-========================================================== */
+/* =========================================
+   CPD CARDS
+========================================= */
 
 .cpd-card-container {
-    display: grid;
-    gap: 1.25rem;
-    margin-top: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .cpd-card {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 1.25rem 1.5rem;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: transform .25s ease, box-shadow .25s ease;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .cpd-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
 .cpd-card-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: .5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
 }
 
 .cpd-card-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .75rem;
-    margin-bottom: .75rem;
-    font-size: .9rem;
-    opacity: .9;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-bottom: .75rem;
+  font-size: .9rem;
+  opacity: .9;
 }
 
 .cpd-badge {
-    background: rgba(255,255,255,0.18);
-    padding: .35rem .75rem;
-    border-radius: 999px;
-    font-size: .85rem;
-    font-weight: 600;
+  background: rgba(255,255,255,0.18);
+  padding: .35rem .75rem;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 600;
 }
 
 .cpd-hours {
-    background: linear-gradient(135deg, #2563eb, #60a5fa);
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
 }
 
 .cpd-category {
-    background: linear-gradient(135deg, #9333ea, #c084fc);
+  background: linear-gradient(135deg, #9333ea, #c084fc);
 }
 
 .cpd-card-reflection {
-    margin-top: .75rem;
-    font-size: .9rem;
-    opacity: .85;
-    line-height: 1.4;
-}
-    /* ==========================================================
-   CPD CARD STATUS STYLING
-========================================================== */
-
-/* Left colour band */
-.cpd-card.completed {
-    border-left: 6px solid #16a34a;
+  margin-top: .75rem;
+  font-size: .9rem;
+  opacity: .85;
+  line-height: 1.4;
 }
 
-.cpd-card.inprogress {
-    border-left: 6px solid #2563eb;
-}
+/* =========================================
+   CPD CARD STATUS
+========================================= */
 
-.cpd-card.planned {
-    border-left: 6px solid #d97706;
-}
+.cpd-card.completed { border-left: 6px solid #16a34a; }
+.cpd-card.inprogress { border-left: 6px solid #2563eb; }
+.cpd-card.planned { border-left: 6px solid #d97706; }
 
-/* Status badge */
 .cpd-status {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: .75rem;
-    font-weight: 600;
-    margin-left: auto;
-    color: #fff;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 600;
+  margin-left: auto;
+  color: #fff;
 }
 
 .cpd-status.completed { background: #16a34a; }
 .cpd-status.inprogress { background: #2563eb; }
 .cpd-status.planned { background: #d97706; }
 
-/* Status icon */
 .status-icon {
-    font-size: 1rem;
-    margin-left: auto;
-    opacity: .85;
+  font-size: 1rem;
+  margin-left: auto;
+  opacity: .85;
 }
 
 .status-icon.completed { color: #16a34a; }
 .status-icon.inprogress { color: #2563eb; }
 .status-icon.planned { color: #d97706; }
-  .cpd-card-competence {
-    margin-top: .5rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
+
+/* =========================================
+   COLLAPSIBLE SECTIONS
+========================================= */
+
+.collapsible-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
-.cpd-competence-badge {
-    background: #0a66c2;
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: .8rem;
-    cursor: pointer;
-    font-weight: 600;
+.collapsible-toggle .chevron {
+  margin-left: auto;
+  transition: transform 0.25s ease;
 }
 
-.highlight-competence {
-    outline: 3px solid #0a66c2;
-    border-radius: 12px;
-    transition: outline 0.3s ease;
-}
-  
- .cpd-reference{
-    margin:.6rem 0;
-    font-size:.85rem;
-    color:#64748b;
+.collapsible-content {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
 }
 
-.cpd-reference i{
-    color:#0a66c2;
-    margin-right:6px;
+.collapsible-content.open {
+  max-height: 5000px;
+  opacity: 1;
 }
 
-.cpd-reference a{
-    color:#0a66c2;
-    text-decoration:none;
-    font-weight:600;
+.collapsible-toggle.open .chevron {
+  transform: rotate(90deg);
 }
-
-.cpd-reference a:hover{
-    text-decoration:underline;
-} 
-    .cpd-reference{
-    margin:.6rem 0;
-    font-size:.85rem;
-    color:#64748b;
-}
-
-.cpd-reference i{
-    color:#0a66c2;
-    margin-right:6px;
-}
-
-.cpd-reference a{
-    color:#0a66c2;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.cpd-reference a:hover{
-    text-decoration:underline;
-}  </style>
+</script>
 </head>
 <body class="header-with-logo page-prof-dev">
 <!-- HEADER -->
@@ -1660,19 +1164,19 @@ html, body {
 </div>
 <!-- CPD SECTION -->
 <section class="cpd-log-section">
-    <h2 class="section-heading">
+    <h2 class="section-heading collapsible-toggle">
         <i class="fa-solid fa-graduation-cap"></i>
         Continuing Professional Development (CPD)
+        <i class="fa-solid fa-chevron-right chevron"></i>
     </h2>
 
-    <p class="section-subtitle">
-        Your CPD activities, presented as clean, modern cards.
-    </p>
+    <div class="collapsible-content">
+        <p class="section-subtitle">
+            Your CPD activities, presented as clean, modern cards.
+        </p>
 
-    <div id="cpd-card-container" class="cpd-card-container">
-        <!-- Cards will be injected here -->
+        <div id="cpd-card-container" class="cpd-card-container"></div>
     </div>
-  
 </section>
 
   <!-- INSIGHTS PANEL -->
@@ -1806,142 +1310,128 @@ function parseUSDate(d) {
     const date = new Date(parts[2], parts[0] - 1, parts[1]);
 
     return isNaN(date.getTime()) ? null : date;
-}/* ==========================================================
+}
+/* ==========================================================
    LOAD CPD DATA
 ========================================================== */
 async function loadCPD() {
-  debug("loadCPD: starting");
 
-  const url =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
+    debug("loadCPD: starting");
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("HTTP " + response.status);
+    const url =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
 
-    const csv = await response.text();
-    const lines = csv.trim().split(/\r?\n/);
+    try {
 
-    if (lines.length <= 1) return;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("HTTP " + response.status);
 
-    // remove header row
-    lines.shift();
+        const csv = await response.text();
+        const lines = csv.trim().split(/\r?\n/);
 
-    const tbody = document.getElementById("cpd-body"); // hidden table
-    const cardContainer = document.getElementById("cpd-card-container");
+        if (lines.length <= 1) return;
 
-    if (tbody) tbody.innerHTML = "";
-    if (cardContainer) cardContainer.innerHTML = "";
+        lines.shift(); // remove header row
 
-    lines.forEach(line => {
-      const row = parseCsvLine(line);
+        // Containers
+        const tbody = document.getElementById("cpd-body"); // hidden table
+        const cardContainer = document.getElementById("cpd-card-container");
 
-      const activity   = (row[0] || "").replace(/^"|"$/g, "");
-      const start      = (row[1] || "").replace(/^"|"$/g, "");
-      const end        = (row[2] || "").replace(/^"|"$/g, "");
-      const hours      = (row[3] || "").replace(/^"|"$/g, "");
-      const category   = (row[4] || "").replace(/^"|"$/g, "");
-      const reflection = (row[5] || "").replace(/^"|"$/g, "");
-      const competenceRaw = (row[6] || "").replace(/^"|"$/g, "");
+        if (tbody) tbody.innerHTML = "";
+        if (cardContainer) cardContainer.innerHTML = "";
 
-      const competences = competenceRaw
-        ? competenceRaw.split("|").map(c => c.trim()).filter(Boolean)
-        : [];
+        lines.forEach(line => {
+            const row = parseCsvLine(line);
 
-      // ---------- 1. Status ----------
-      const today = new Date();
-      const startDate = start ? new Date(start) : null;
-      const endDate   = end   ? new Date(end)   : null;
+            const activity   = row[0].replace(/^"|"$/g, "");
+            const start      = row[1].replace(/^"|"$/g, "");
+            const end        = row[2].replace(/^"|"$/g, "");
+            const hours      = row[3].replace(/^"|"$/g, "");
+            const category   = row[4].replace(/^"|"$/g, "");
+            const reflection = row[5].replace(/^"|"$/g, "");
 
-      let statusClass = "";
-      let statusLabel = "";
-      let statusIcon  = "";
+            /* ------------------------------------------------------
+               1. Determine status
+            ------------------------------------------------------ */
+            const today = new Date();
+            const startDate = start ? new Date(start) : null;
+            const endDate   = end   ? new Date(end)   : null;
 
-      if (startDate && startDate > today) {
-        statusClass = "planned";
-        statusLabel = "Planned";
-        statusIcon  = "fa-calendar-plus";
-      } else if (!endDate || endDate >= today) {
-        statusClass = "inprogress";
-        statusLabel = "In Progress";
-        statusIcon  = "fa-hourglass-half";
-      } else {
-        statusClass = "completed";
-        statusLabel = "Completed";
-        statusIcon  = "fa-circle-check";
-      }
+            let statusClass = "";
+            let statusLabel = "";
+            let statusIcon  = "";
 
-      // ---------- 2. Hidden table row (metrics) ----------
-      if (tbody) {
-        const tr = document.createElement("tr");
-        [activity, start, end, hours, category, reflection, competenceRaw].forEach(text => {
-          const td = document.createElement("td");
-          td.textContent = text;
-          tr.appendChild(td);
+            if (startDate && startDate > today) {
+                statusClass = "planned";
+                statusLabel = "Planned";
+                statusIcon  = "fa-calendar-plus";
+            }
+            else if (!endDate || endDate >= today) {
+                statusClass = "inprogress";
+                statusLabel = "In Progress";
+                statusIcon  = "fa-hourglass-half";
+            }
+            else {
+                statusClass = "completed";
+                statusLabel = "Completed";
+                statusIcon  = "fa-circle-check";
+            }
+
+            /* ------------------------------------------------------
+               2. Hidden table row (keeps metrics working)
+            ------------------------------------------------------ */
+            if (tbody) {
+                const tr = document.createElement("tr");
+                [activity, start, end, hours, category, reflection].forEach(text => {
+                    const td = document.createElement("td");
+                    td.textContent = text;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            }
+
+            /* ------------------------------------------------------
+               3. Visible CPD card
+            ------------------------------------------------------ */
+            if (cardContainer) {
+                const card = document.createElement("div");
+                card.className = `cpd-card ${statusClass}`;
+
+                card.innerHTML = `
+                    <div class="cpd-card-title">
+                        ${activity}
+                        <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
+                    </div>
+
+                    <div class="cpd-card-meta">
+                        <span class="cpd-badge cpd-hours">${hours} hrs</span>
+                        <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
+                        <span>${start} → ${end || "Ongoing"}</span>
+                        <span class="cpd-status ${statusClass}">${statusLabel}</span>
+                    </div>
+
+                    <div class="cpd-card-reflection">
+                        ${reflection || "<em>No reflective statement provided.</em>"}
+                    </div>
+                `;
+
+                cardContainer.appendChild(card);
+            }
         });
-        tbody.appendChild(tr);
-      }
 
-      // ---------- 3. Visible CPD card ----------
-      if (cardContainer) {
-        const card = document.createElement("div");
-        card.className = `cpd-card ${statusClass}`;
+        debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
 
-      card.innerHTML = `
- <div class="cpd-card-title">
- ${activity}
- <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
- </div>
+        calculateMetrics();
+        generateInsights();
+        generateHeatmap();
+        generateDonutChart();
+        generateRadarChart();
 
- <div class="cpd-reference">
-   <i class="fa-solid fa-link"></i>
-   APM Reference:
-   ${competences.join(" • ")}
- </div>
-
- <div class="cpd-card-meta">
- <span class="cpd-badge cpd-hours">${hours} hrs</span>
- <span class="cpd-badge cpd-category">${category || "Uncategorised"}</span>
- <span>${start} → ${end || "Ongoing"}</span>
- <span class="cpd-status ${statusClass}">${statusLabel}</span>
- </div>
-
- <div class="cpd-card-reflection">
- ${reflection || "<em>No reflective statement provided.</em>"}
- </div>
-`;
-
-        // ---------- 4. Competence badges ----------
-        if (competences.length > 0) {
-          renderCompetenceBadges(card, competences);
-        }
-
-        cardContainer.appendChild(card);
-      }
-    });
-
-    debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
-
-    // ---------- 5. Metrics & visuals ----------
-    calculateMetrics();
-    generateInsights();
-    generateHeatmap();
-    generateDonutChart();
-    generateRadarChart();
-
-  } catch (err) {
-    console.error(err);
-  }
+    } catch (err) {
+        console.error(err);
+    }
 }
 
-// Call once, then wire links
-loadCPD().then(() => {
-  if (typeof wireCompetenceLinks === "function") {
-    wireCompetenceLinks();
-  }
-});
-
-  
 /* ==========================================================
    METRICS + PROGRESS RING
 ========================================================== */
@@ -2368,88 +1858,16 @@ function generateProgressPillars() {
   }, 300);
 }
 
-function wireCompetenceLinks() {
-    document.querySelectorAll(".cpd-competence-badge").forEach(badge => {
-        badge.addEventListener("click", () => {
-            const target = document.getElementById(badge.dataset.target);
-            if (!target) return;
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-            target.classList.add("highlight-competence");
-            setTimeout(() => target.classList.remove("highlight-competence"), 1500);
-        });
+  <script>
+document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
+    toggle.addEventListener("click", () => {
+        toggle.classList.toggle("open");
+        const content = toggle.nextElementSibling;
+        content.classList.toggle("open");
     });
-}
-function renderCompetenceBadges(card, competenceString) {
-    const raw = competenceString.split("|")
-        .map(c => c.trim())
-        .filter(Boolean);
+});
+</script>
 
-    if (!raw.length) return;
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "cpd-card-competence";
-
-    raw.forEach(id => {
-        const label = id
-            .replace(/^comp-/, "")
-            .replace(/-/g, " ")
-            .replace(/\b\w/g, c => c.toUpperCase());
-
-        const badge = document.createElement("span");
-        badge.className = "cpd-competence-badge";
-        badge.dataset.competenceId = id;
-        badge.textContent = label;
-
-        badge.addEventListener("click", () => {
-            highlightCompetenceCard(id);
-        });
-
-        wrapper.appendChild(badge);
-    });
-
-    card.appendChild(wrapper);
-}
-
-function highlightCompetenceCard(id) {
-    document.querySelectorAll(".info-card.highlight-competence")
-        .forEach(el => el.classList.remove("highlight-competence"));
-
-    const target = document.querySelector(`.info-card.${id}`);
-    if (!target) return;
-
-    target.classList.add("highlight-competence");
-    target.scrollIntoView({ behavior: "smooth", block: "center" });
-}
-const competenceNames = {
-  "comp-life-cycles": "Life cycles",
-  "comp-governance-arrangements": "Governance arrangements",
-  "comp-sustainability": "Sustainability",
-  "comp-financial-management": "Financial management",
-  "comp-business-case": "Business case",
-  "comp-portfolio-shaping": "Portfolio shaping",
-  "comp-procurement": "Procurement",
-  "comp-reviews": "Reviews",
-  "comp-assurance": "Assurance",
-  "comp-capability-development": "Capability development"
-};  
-  ${
-  competences.length
-    ? `
-      <div class="cpd-reference">
-        <i class="fa-solid fa-link"></i>
-        ${
-          competences
-            .map(c =>
-              `<a href="#${c}">
-                ${competenceNames[c] || c}
-              </a>`
-            )
-            .join(" • ")
-        }
-      </div>
-    `
-    : ""
-}</script>
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section>
@@ -2469,274 +1887,215 @@ const competenceNames = {
 
     <div class="carousel-track">
 
-  <!-- 1. Life cycles -->
-<article
-  id="comp-life-cycles"
-  class="info-card comp-life-cycles">
-    <h3><i class="fa-solid fa-layer-group"></i> Life cycles</h3>
-    <p>The ability to structure and organise change initiatives through appropriate life cycle
-    choices that transform ideas into reality in an orderly and efficient manner.</p>
-  </article>
+      <!-- 1. Life cycles -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-layer-group"></i> Life cycles</h3>
+        <p>The ability to structure and organise change initiatives through appropriate life cycle
+        choices that transform ideas into reality in an orderly and efficient manner.</p>
+      </article>
 
-  <!-- 2. Governance arrangements -->
-<article
-  id="comp-governance-arrangements"
-  class="info-card comp-governance-arrangements">
-    <h3><i class="fa-solid fa-sitemap"></i> Governance arrangements</h3>
-    <p>The ability to establish and maintain governance structures that define control of
-    deployment and align with organisational practice to realise value.</p>
-  </article>
+      <!-- 2. Governance arrangements -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-sitemap"></i> Governance arrangements</h3>
+        <p>The ability to establish and maintain governance structures that define control of
+        deployment and align with organisational practice to realise value.</p>
+      </article>
 
-  <!-- 3. Sustainability -->
-<article
-  id="comp-sustainability"
-  class="info-card comp-sustainability">
-    <h3><i class="fa-solid fa-leaf"></i> Sustainability</h3>
-    <p>The ability to balance environmental, social, economic and administrative considerations
-    so that outputs, outcomes and benefits remain sustainable over their life cycles.</p>
-  </article>
+      <!-- 3. Sustainability -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-leaf"></i> Sustainability</h3>
+        <p>The ability to balance environmental, social, economic and administrative considerations
+        so that outputs, outcomes and benefits remain sustainable over their life cycles.</p>
+      </article>
 
-  <!-- 4. Financial management -->
-<article
-  id="comp-financial-management"
-  class="info-card comp-financial-management">
-    <h3><i class="fa-solid fa-sterling-sign"></i> Financial management</h3>
-    <p>The ability to enable financial resource for delivery and to plan and control finances as
-    part of the organisation’s overall financial management to optimise the business case.</p>
-  </article>
+      <!-- 4. Financial management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-sterling-sign"></i> Financial management</h3>
+        <p>The ability to enable financial resource for delivery and to plan and control finances as
+        part of the organisation’s overall financial management to optimise the business case.</p>
+      </article>
 
-  <!-- 5. Business case -->
-<article
-  id="comp-business-case"
-  class="info-card comp-business-case">
-  <h3><i class="fa-solid fa-briefcase"></i> Business case</h3>
-  <p>The ability to prepare, gain approval of, refine and update business cases that justify
-  initiation, investment and continuation of change initiatives in terms of benefits, costs
-  and risks.</p>
-</article>
+      <!-- 5. Business case -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-briefcase"></i> Business case</h3>
+        <p>The ability to prepare, gain approval of, refine and update business cases that justify
+        initiation, investment and continuation of change initiatives in terms of benefits, costs
+        and risks.</p>
+      </article>
 
-<!-- 6. Portfolio shaping -->
-<article
-  id="comp-portfolio-shaping"
-  class="info-card comp-portfolio-shaping">
-  <h3><i class="fa-solid fa-chess-board"></i> Portfolio shaping</h3>
-  <p>The ability to set up portfolios that group and prioritise change initiatives to deliver
-  strategic objectives while balancing business-as-usual and capacity to deliver.</p>
-</article>
+      <!-- 6. Portfolio shaping -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-chess-board"></i> Portfolio shaping</h3>
+        <p>The ability to set up portfolios that group and prioritise change initiatives to deliver
+        strategic objectives while balancing business-as-usual and capacity to deliver.</p>
+      </article>
 
-<!-- 7. Procurement -->
-<article
-  id="comp-procurement"
-  class="info-card comp-procurement">
-  <h3><i class="fa-solid fa-truck-ramp-box"></i> Procurement</h3>
-  <p>The ability to secure the provision of resources by choosing strategies that obtain best
-  value from supply chains and external suppliers.</p>
-</article>
+      <!-- 7. Procurement -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-truck-ramp-box"></i> Procurement</h3>
+        <p>The ability to secure the provision of resources by choosing strategies that obtain best
+        value from supply chains and external suppliers.</p>
+      </article>
 
-<!-- 8. Reviews -->
-<article
-  id="comp-reviews"
-  class="info-card comp-reviews">
-  <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Reviews</h3>
-  <p>The ability to manage progression through the life cycle by planning and conducting
-  reviews that assess status, viability and performance.</p>
-</article>
+      <!-- 8. Reviews -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Reviews</h3>
+        <p>The ability to manage progression through the life cycle by planning and conducting
+        reviews that assess status, viability and performance.</p>
+      </article>
 
-<!-- 9. Assurance -->
-<article
-  id="comp-assurance"
-  class="info-card comp-assurance">
-  <h3><i class="fa-solid fa-shield-halved"></i> Assurance</h3>
-  <p>The ability to provide confidence to governance that the change initiative is on track to
-  deliver objectives and intended value through objective, independent checks.</p>
-</article>
+      <!-- 9. Assurance -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-shield-halved"></i> Assurance</h3>
+        <p>The ability to provide confidence to governance that the change initiative is on track to
+        deliver objectives and intended value through objective, independent checks.</p>
+      </article>
 
-<!-- 10. Capability development -->
-<article
-  id="comp-capability-development"
-  class="info-card comp-capability-development">
-  <h3><i class="fa-solid fa-seedling"></i> Capability development</h3>
-  <p>The ability to assess organisational maturity and improve competences, investing in
-  people and knowledge to enhance predictability and performance.</p>
-</article>
+      <!-- 10. Capability development -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-seedling"></i> Capability development</h3>
+        <p>The ability to assess organisational maturity and improve competences, investing in
+        people and knowledge to enhance predictability and performance.</p>
+      </article>
 
-<!-- 11. Transition management -->
-<article
-  id="comp-transition-management"
-  class="info-card comp-transition-management">
-  <h3><i class="fa-solid fa-right-left"></i> Transition management</h3>
-  <p>The ability to manage the integration of outputs into business-as-usual so that new
-  capabilities enable the intended value.</p>
-</article>
+      <!-- 11. Transition management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-right-left"></i> Transition management</h3>
+        <p>The ability to manage the integration of outputs into business-as-usual so that new
+        capabilities enable the intended value.</p>
+      </article>
 
-<!-- 12. Benefits management -->
-<article
-  id="comp-benefits-management"
-  class="info-card comp-benefits-management">
-  <h3><i class="fa-solid fa-gift"></i> Benefits management</h3>
-  <p>The ability to identify and agree benefits and determine how they will be measured,
-  monitored and managed until they are realised.</p>
-</article>
+      <!-- 12. Benefits management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-gift"></i> Benefits management</h3>
+        <p>The ability to identify and agree benefits and determine how they will be measured,
+        monitored and managed until they are realised.</p>
+      </article>
 
-<!-- 13. Stakeholder engagement & communication -->
-<article
-  id="comp-stakeholder-engagement-communication"
-  class="info-card comp-stakeholder-engagement-communication">
-  <h3><i class="fa-solid fa-users"></i> Stakeholder engagement & communication</h3>
-  <p>The ability to work with people internally and externally to build support, maintain
-  commitment and ensure timely, relevant communication.</p>
-</article>
+      <!-- 13. Stakeholder engagement -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-users"></i> Stakeholder engagement & communication</h3>
+        <p>The ability to work with people internally and externally to build support, maintain
+        commitment and ensure timely, relevant communication.</p>
+      </article>
 
-<!-- 14. Conflict resolution -->
-<article
-  id="comp-conflict-resolution"
-  class="info-card comp-conflict-resolution">
-  <h3><i class="fa-solid fa-handshake-angle"></i> Conflict resolution</h3>
-  <p>The ability to identify, address and resolve differences between individuals and groups
-  so that conflict supports learning rather than harms delivery.</p>
-</article>
+      <!-- 14. Conflict resolution -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-handshake-angle"></i> Conflict resolution</h3>
+        <p>The ability to identify, address and resolve differences between individuals and groups
+        so that conflict supports learning rather than harms delivery.</p>
+      </article>
 
-<!-- 15. Leadership -->
-<article
-  id="comp-leadership"
-  class="info-card comp-leadership">
-  <h3><i class="fa-solid fa-person-chalkboard"></i> Leadership</h3>
-  <p>The ability to empower and inspire others by providing vision, direction, feedback and
-  support so people can deliver successful change initiatives.</p>
-</article>
+      <!-- 15. Leadership -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-person-chalkboard"></i> Leadership</h3>
+        <p>The ability to empower and inspire others by providing vision, direction, feedback and
+        support so people can deliver successful change initiatives.</p>
+      </article>
 
-<!-- 16. Team management -->
-<article
-  id="comp-team-management"
-  class="info-card comp-team-management">
-  <h3><i class="fa-solid fa-people-group"></i> Team management</h3>
-  <p>The ability to select, develop and manage individuals to create and sustain teams that
-  achieve objectives that cannot be realised individually.</p>
-</article>
+      <!-- 16. Team management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-people-group"></i> Team management</h3>
+        <p>The ability to select, develop and manage individuals to create and sustain teams that
+        achieve objectives that cannot be realised individually.</p>
+      </article>
 
-<!-- 17. Diversity & inclusion -->
-<article
-  id="comp-diversity-inclusion"
-  class="info-card comp-diversity-inclusion">
-  <h3><i class="fa-solid fa-people-arrows"></i> Diversity & inclusion</h3>
-  <p>The ability to build and maintain an inclusive environment that embraces a diverse
-  culture and treats people fairly.</p>
-</article>
+      <!-- 17. Diversity & inclusion -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-people-arrows"></i> Diversity & inclusion</h3>
+        <p>The ability to build and maintain an inclusive environment that embraces a diverse
+        culture and treats people fairly.</p>
+      </article>
 
-<!-- 18. Ethics, compliance & professionalism -->
-<article
-  id="comp-ethics-compliance-professionalism"
-  class="info-card comp-ethics-compliance-professionalism">
-  <h3><i class="fa-solid fa-scale-balanced"></i> Ethics, compliance & professionalism</h3>
-  <p>The ability to embody, promote and maintain a trusted profession while navigating
-  cultural, legal and regulatory environments.</p>
-</article>
+      <!-- 18. Ethics, compliance & professionalism -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-scale-balanced"></i> Ethics, compliance & professionalism</h3>
+        <p>The ability to embody, promote and maintain a trusted profession while navigating
+        cultural, legal and regulatory environments.</p>
+      </article>
 
-<!-- 19. Requirements management -->
-<article
-  id="comp-requirements-management"
-  class="info-card comp-requirements-management">
-  <h3><i class="fa-solid fa-list-check"></i> Requirements management</h3>
-  <p>The ability to prepare and maintain clear, measurable definitions of requirements that
-  satisfy identified needs.</p>
-</article>
+      <!-- 19. Requirements management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-list-check"></i> Requirements management</h3>
+        <p>The ability to prepare and maintain clear, measurable definitions of requirements that
+        satisfy identified needs.</p>
+      </article>
 
-<!-- 20. Solutions development -->
-<article
-  id="comp-solutions-development"
-  class="info-card comp-solutions-development">
-  <h3><i class="fa-solid fa-lightbulb"></i> Solutions development</h3>
-  <p>The ability to determine optimal solutions that satisfy agreed requirements by exploring
-  and refining options.</p>
-</article>
+      <!-- 20. Solutions development -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-lightbulb"></i> Solutions development</h3>
+        <p>The ability to determine optimal solutions that satisfy agreed requirements by exploring
+        and refining options.</p>
+      </article>
 
-<!-- 21. Quality management -->
-<article
-  id="comp-quality-management"
-  class="info-card comp-quality-management">
-  <h3><i class="fa-solid fa-check-double"></i> Quality management</h3>
-  <p>The ability to ensure that outputs and processes meet stakeholder requirements and are
-  fit for purpose.</p>
-</article>
+      <!-- 21. Quality management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-check-double"></i> Quality management</h3>
+        <p>The ability to ensure that outputs and processes meet stakeholder requirements and are
+        fit for purpose.</p>
+      </article>
 
-<!-- 22. Integrated planning -->
-<article
-  id="comp-integrated-planning"
-  class="info-card comp-integrated-planning">
-  <h3><i class="fa-solid fa-diagram-project"></i> Integrated planning</h3>
-  <p>The ability to bring together scope, time, cost, risk, resources and benefits into an
-  integrated project management plan.</p>
-</article>
+      <!-- 22. Integrated planning -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-diagram-project"></i> Integrated planning</h3>
+        <p>The ability to bring together scope, time, cost, risk, resources and benefits into an
+        integrated project management plan.</p>
+      </article>
 
-<!-- 23. Schedule management -->
-<article
-  id="comp-schedule-management"
-  class="info-card comp-schedule-management">
-  <h3><i class="fa-solid fa-calendar-days"></i> Schedule management</h3>
-  <p>The ability to develop and maintain schedules that show when work is planned,
-  considering dependencies and resources.</p>
-</article>
+      <!-- 23. Schedule management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-calendar-days"></i> Schedule management</h3>
+        <p>The ability to develop and maintain schedules that show when work is planned,
+        considering dependencies and resources.</p>
+      </article>
 
-<!-- 24. Resource management -->
-<article
-  id="comp-resource-management"
-  class="info-card comp-resource-management">
-  <h3><i class="fa-solid fa-people-carry-box"></i> Resource management</h3>
-  <p>The ability to acquire and deploy internal and external resources, using scarce resources
-  in an optimal way.</p>
-</article>
+      <!-- 24. Resource management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-people-carry-box"></i> Resource management</h3>
+        <p>The ability to acquire and deploy internal and external resources, using scarce resources
+        in an optimal way.</p>
+      </article>
 
-<!-- 25. Resource capacity planning -->
-<article
-  id="comp-resource-capacity-planning"
-  class="info-card comp-resource-capacity-planning">
-  <h3><i class="fa-solid fa-chart-line"></i> Resource capacity planning</h3>
-  <p>The ability to plan resource needs in line with strategic direction so utilisation is
-  maintained at an appropriate level.</p>
-</article>
+      <!-- 25. Resource capacity planning -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-chart-line"></i> Resource capacity planning</h3>
+        <p>The ability to plan resource needs in line with strategic direction so utilisation is
+        maintained at an appropriate level.</p>
+      </article>
 
-<!-- 26. Budgeting & cost control -->
-<article
-  id="comp-budgeting-cost-control"
-  class="info-card comp-budgeting-cost-control">
-  <h3><i class="fa-solid fa-coins"></i> Budgeting & cost control</h3>
-  <p>The ability to estimate costs, set budgets and manage actual and forecast costs against
-  those budgets.</p>
-</article>
+      <!-- 26. Budgeting & cost control -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-coins"></i> Budgeting & cost control</h3>
+        <p>The ability to estimate costs, set budgets and manage actual and forecast costs against
+        those budgets.</p>
+      </article>
 
-<!-- 27. Contract management -->
-<article
-  id="comp-contract-management"
-  class="info-card comp-contract-management">
-  <h3><i class="fa-solid fa-file-contract"></i> Contract management</h3>
-  <p>The ability to monitor and manage supplier performance through proactive, tailored
-  contract management from initiation to closure.</p>
-</article>
+      <!-- 27. Contract management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-file-contract"></i> Contract management</h3>
+        <p>The ability to monitor and manage supplier performance through proactive, tailored
+        contract management from initiation to closure.</p>
+      </article>
 
-<!-- 28. Risk & issue management -->
-<article
-  id="comp-risk-issue-management"
-  class="info-card comp-risk-issue-management">
-  <h3><i class="fa-solid fa-triangle-exclamation"></i> Risk & issue management</h3>
-  <p>The ability to identify, assess and respond to risks and issues so threats are minimised
-  and opportunities are maximised.</p>
-</article>
+      <!-- 28. Risk & issue management -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-triangle-exclamation"></i> Risk & issue management</h3>
+        <p>The ability to identify, assess and respond to risks and issues so threats are minimised
+        and opportunities are maximised.</p>
+      </article>
 
-<!-- 29. Change control -->
-<article
-  id="comp-change-control"
-  class="info-card comp-change-control">
-  <h3><i class="fa-solid fa-arrows-rotate"></i> Change control</h3>
-  <p>The ability to manage variations and change requests in a controlled way, ensuring
-  impacts are assessed and decisions are documented.</p>
-</article>
+      <!-- 29. Change control -->
+      <article class="info-card">
+        <h3><i class="fa-solid fa-arrows-rotate"></i> Change control</h3>
+        <p>The ability to manage variations and change requests in a controlled way, ensuring
+        impacts are assessed and decisions are documented.</p>
+      </article>
 
-</div>
+    </div>
 
-<button class="carousel-btn next">›</button>
-</div>
+    <button class="carousel-btn next">›</button>
+  </div>
 </section>
-
 <!-- DEVELOPMENT PRIORITIES -->
 <section>
   <h2 class="section-heading">
@@ -2771,11 +2130,15 @@ const competenceNames = {
   </div>
 </section>
 <!-- PERSONAL ASSESSMENT ACCORDION -->
-<section>
-  <h2 class="section-heading">
+<section class="assessment-section">
+<h2 class="section-heading collapsible-toggle">
     <i class="fa-solid fa-user-check"></i>
     My Competence Assessment (29 competences)
-  </h2>
+    <i class="fa-solid fa-chevron-right chevron"></i>
+</h2>
+
+<div class="collapsible-content">
+
 <div class="apm-progress-bar"></div>
   <p class="section-subtitle">
     This section reflects my personal assessment against the APM Competence Framework (3rd edition), using the APM 0–5 rating scale.

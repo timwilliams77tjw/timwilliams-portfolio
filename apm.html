@@ -3011,12 +3011,14 @@ function generateProgressPillars() {
     });
 </script>
 <script>
-// Run CPD loader first
+// 1) Run CPD loader first
 document.addEventListener("DOMContentLoaded", () => {
   loadCPD();
 });
+</script>
 
-// Delegated: CPD → Competence linking
+<script>
+// 2) CPD → competence linking (delegated)
 document.addEventListener('click', e => {
   const link = e.target.closest('.cpd-competence-link');
   if (!link) return;
@@ -3030,95 +3032,88 @@ document.addEventListener('click', e => {
   header.click();
   target.scrollIntoView({ behavior: "smooth", block: "start" });
 });
+</script>
 
-// Delegated: Collapsible section toggle
-document.addEventListener('click', e => {
-  const toggle = e.target.closest('.collapsible-toggle');
-  if (!toggle) return;
-
-  toggle.classList.toggle('open');
-  const content = toggle.nextElementSibling;
-  if (content) content.classList.toggle('open');
-});
-
-// Delegated: Accordion item toggle
-document.addEventListener('click', e => {
-  const header = e.target.closest('.accordion-header');
-  if (!header) return;
-
-  const item = header.parentElement;
-  const content = item.querySelector('.accordion-content');
-
-  header.classList.toggle('open');
-  content.classList.toggle('open');
-});
-
-// Rating filter (runs AFTER CPD + accordion exist)
 <script>
-function initRatingFilter() {
-  const items = document.querySelectorAll('.accordion-item');
-  if (!items.length) return; // safety
-
-  // Extract rating from badge
-  items.forEach(item => {
-    const badge = item.querySelector('.rating-badge');
-    if (!badge) return;
-
-    const cls = Array.from(badge.classList)
-      .find(c => c.startsWith('rating-') && c !== 'rating-badge');
-
-    if (cls) item.dataset.rating = cls.replace('rating-', '');
-  });
-
-  const legendBadges = document.querySelectorAll('.section-subtitle .rating-badge');
-  let currentFilter = null;
-
-  function applyFilter(rating) {
-    items.forEach(item => {
-      item.style.display = (!rating || item.dataset.rating === rating) ? '' : 'none';
-    });
-  }
-
-  legendBadges.forEach(badge => {
-    const cls = Array.from(badge.classList)
-      .find(c => c.startsWith('rating-') && c !== 'rating-badge');
-
-    if (!cls) return;
-
-    const rating = cls.replace('rating-', '');
-    badge.style.cursor = 'pointer';
-
-    badge.addEventListener('click', () => {
-      if (currentFilter === rating) {
-        currentFilter = null;
-        legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-        applyFilter(null);
-      } else {
-        currentFilter = rating;
-        legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-        badge.classList.add('rating-filter-active');
-        applyFilter(rating);
-      }
-    });
-  });
-}
-
-// Run CPD loader first, THEN init rating filter
+// 3) Accordion open/close (original behaviour)
 document.addEventListener("DOMContentLoaded", () => {
-  loadCPD();
-
-  // Wait for CPD + accordion to fully render
-  const observer = new MutationObserver(() => {
-    if (document.querySelector('.accordion-item')) {
-      initRatingFilter();
-      observer.disconnect();
-    }
+  document.querySelectorAll(".accordion-header").forEach(header => {
+    header.addEventListener("click", () => {
+      header.parentElement.classList.toggle("open");
+    });
   });
-
-  observer.observe(document.body, { childList: true, subtree: true });
 });
 </script>
 
+<script>
+// 4) Rating filter (original logic)
+(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll('.accordion-item');
+
+    items.forEach(item => {
+      const badge = item.querySelector('.rating-badge');
+      if (!badge) return;
+
+      const cls = Array.from(badge.classList)
+        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
+
+      if (cls) item.dataset.rating = cls.replace('rating-', '');
+    });
+
+    const legendBadges = document.querySelectorAll('.section-subtitle .rating-badge');
+    let currentFilter = null;
+
+    function applyFilter(rating) {
+      items.forEach(item => {
+        if (!rating) {
+          item.style.display = '';
+        } else {
+          item.style.display = (item.dataset.rating === rating) ? '' : 'none';
+        }
+      });
+    }
+
+    legendBadges.forEach(badge => {
+      const cls = Array.from(badge.classList)
+        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
+
+      if (!cls) return;
+
+      const rating = cls.replace('rating-', '');
+      badge.style.cursor = 'pointer';
+
+      badge.addEventListener('click', () => {
+        if (currentFilter === rating) {
+          currentFilter = null;
+          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+          applyFilter(null);
+        } else {
+          currentFilter = rating;
+          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+          badge.classList.add('rating-filter-active');
+          applyFilter(rating);
+        }
+      });
+    });
+  });
+})();
+</script>
+
+<script>
+// 5) Collapsible sections (original behaviour)
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      toggle.classList.toggle("open");
+      const content = toggle.nextElementSibling;
+      if (content) content.classList.toggle("open");
+    });
+  });
+});
+</script>
+</body>
+</html>
 
 
 </main>

@@ -1868,26 +1868,39 @@ async function loadCPD() {
 }
 
 function linkCPDToCompetences() {
+  const competenceMap = {
+    "Mentor, coach and inspire future generations": "leadership",
+    "Increase my networking": "stakeholder-engagement-and-communication",
+    "Contribute to APM": "ethics-compliance-and-professionalism",
+    "Continue my professional development": "ethics-compliance-and-professionalism",
+    "Get a new job": "capability-development",
+    "Contribute to my network": "stakeholder-engagement-and-communication",
+    "Leadership & mentoring": "leadership",
+    "Sustainability in change initiatives": "sustainability",
+    "AI & digital transformation": "solutions-development",
+    "Stakeholder engagement & communication": "stakeholder-engagement-and-communication"
+  };
+
   document.querySelectorAll('.cpd-card').forEach(card => {
+    const devGoal = card.querySelector('.cpd-category')?.textContent?.trim();
+    if (!devGoal) return;
 
-    const competence =
-      card.dataset.competence ||
-      card.querySelector('.cpd-category')?.textContent?.trim()?.toLowerCase();
-
+    const competence = competenceMap[devGoal];
     if (!competence) return;
 
-    const targetId = 'competence-' + competence.replace(/\s+/g, '-');
+    const competenceId = 'competence-' + competence;
 
     if (card.querySelector('.cpd-competence-link')) return;
 
     const link = document.createElement('a');
     link.className = 'cpd-competence-link';
-    link.href = '#' + targetId;
+    link.href = '#' + competenceId;
     link.textContent = 'View related competence →';
 
     card.appendChild(link);
   });
 }
+
 
 document.addEventListener('click', function (e) {
   const link = e.target.closest('.cpd-competence-link');

@@ -3186,25 +3186,28 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 <script>
-document.querySelectorAll('.cpd-competence-link').forEach(link => {
-  link.addEventListener('click', e => {
+document.addEventListener('click', e => {
+    const link = e.target.closest('.cpd-competence-link');
+    if (!link) return;
+
     const target = document.querySelector(link.getAttribute('href'));
     if (!target) return;
 
     const header = target.querySelector('.accordion-header');
     if (header) header.click();
-  });
 });
 </script>
+
 <script>
 document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
-  toggle.addEventListener("click", () => {
-    toggle.classList.toggle("open");
-    const content = toggle.nextElementSibling;
-    content.classList.toggle("open");
-  });
+    toggle.addEventListener("click", () => {
+        toggle.classList.toggle("open");
+        const content = toggle.nextElementSibling;
+        content.classList.toggle("open");
+    });
 });
 </script>
+
 
   
 </main>

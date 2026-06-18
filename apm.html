@@ -3187,16 +3187,27 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 <script>
 document.addEventListener('click', e => {
-    const link = e.target.closest('.cpd-competence-link');
-    if (!link) return;
+  const link = e.target.closest('.cpd-competence-link');
+  if (!link) return;
 
-    const target = document.querySelector(link.getAttribute('href'));
-    if (!target) return;
+  alert("CPD LINK CLICKED: " + link.getAttribute('href'));
 
-    const header = target.querySelector('.accordion-header');
-    if (header) header.click();
+  const target = document.querySelector(link.getAttribute('href'));
+  if (!target) {
+    alert("TARGET NOT FOUND");
+    return;
+  }
+
+  const header = target.querySelector('.accordion-header');
+  if (!header) {
+    alert("HEADER NOT FOUND");
+    return;
+  }
+
+  header.click();
 });
 </script>
+
 
 <script>
 document.querySelectorAll(".collapsible-toggle").forEach(toggle => {

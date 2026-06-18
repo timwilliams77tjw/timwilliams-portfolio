@@ -1400,7 +1400,22 @@ html, body {
 .status-icon.completed { color: #16a34a; }
 .status-icon.inprogress { color: #2563eb; }
 .status-icon.planned { color: #d97706; }
+ 
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+.accordion-content.open {
+  max-height: 500px; /* or more */
+  opacity: 1;
+}
+    
   </style>
+
+
 </head>
 <body class="header-with-logo page-prof-dev">
 <!-- HEADER -->
@@ -3119,8 +3134,19 @@ document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
 });
 </script>
 
+<script>
+document.addEventListener('click', e => {
+  const header = e.target.closest('.accordion-header');
+  if (!header) return;
 
-  
+  const item = header.parentElement;
+  const content = item.querySelector('.accordion-content');
+
+  header.classList.toggle('open');
+  content.classList.toggle('open');
+});
+</script>
+
 </main>
 </body>
 </html>

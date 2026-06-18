@@ -3054,54 +3054,71 @@ document.addEventListener('click', e => {
 });
 
 // Rating filter (runs AFTER CPD + accordion exist)
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    const items = document.querySelectorAll('.accordion-item');
+<script>
+function initRatingFilter() {
+  const items = document.querySelectorAll('.accordion-item');
+  if (!items.length) return; // safety
 
+  // Extract rating from badge
+  items.forEach(item => {
+    const badge = item.querySelector('.rating-badge');
+    if (!badge) return;
+
+    const cls = Array.from(badge.classList)
+      .find(c => c.startsWith('rating-') && c !== 'rating-badge');
+
+    if (cls) item.dataset.rating = cls.replace('rating-', '');
+  });
+
+  const legendBadges = document.querySelectorAll('.section-subtitle .rating-badge');
+  let currentFilter = null;
+
+  function applyFilter(rating) {
     items.forEach(item => {
-      const badge = item.querySelector('.rating-badge');
-      if (!badge) return;
-
-      const cls = Array.from(badge.classList)
-        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
-
-      if (cls) item.dataset.rating = cls.replace('rating-', '');
+      item.style.display = (!rating || item.dataset.rating === rating) ? '' : 'none';
     });
+  }
 
-    const legendBadges = document.querySelectorAll('.section-subtitle .rating-badge');
-    let currentFilter = null;
+  legendBadges.forEach(badge => {
+    const cls = Array.from(badge.classList)
+      .find(c => c.startsWith('rating-') && c !== 'rating-badge');
 
-    function applyFilter(rating) {
-      items.forEach(item => {
-        item.style.display = (!rating || item.dataset.rating === rating) ? '' : 'none';
-      });
+    if (!cls) return;
+
+    const rating = cls.replace('rating-', '');
+    badge.style.cursor = 'pointer';
+
+    badge.addEventListener('click', () => {
+      if (currentFilter === rating) {
+        currentFilter = null;
+        legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+        applyFilter(null);
+      } else {
+        currentFilter = rating;
+        legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+        badge.classList.add('rating-filter-active');
+        applyFilter(rating);
+      }
+    });
+  });
+}
+
+// Run CPD loader first, THEN init rating filter
+document.addEventListener("DOMContentLoaded", () => {
+  loadCPD();
+
+  // Wait for CPD + accordion to fully render
+  const observer = new MutationObserver(() => {
+    if (document.querySelector('.accordion-item')) {
+      initRatingFilter();
+      observer.disconnect();
     }
+  });
 
-    legendBadges.forEach(badge => {
-      const cls = Array.from(badge.classList)
-        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
-
-      if (!cls) return;
-
-      const rating = cls.replace('rating-', '');
-      badge.style.cursor = 'pointer';
-
-      badge.addEventListener('click', () => {
-        if (currentFilter === rating) {
-          currentFilter = null;
-          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-          applyFilter(null);
-        } else {
-          currentFilter = rating;
-          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-          badge.classList.add('rating-filter-active');
-          applyFilter(rating);
-        }
-      });
-    });
-  }, 300); // Wait for CPD + accordion to load
+  observer.observe(document.body, { childList: true, subtree: true });
 });
 </script>
+
 
 
 </main>

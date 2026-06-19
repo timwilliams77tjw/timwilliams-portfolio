@@ -957,6 +957,167 @@ body.dark .cta {
     background: #f1f5f9;
 }
 
+/* ----------------------------------------------------
+   1. FIX HERO PILLS (restore animation + style)
+---------------------------------------------------- */
+.hero-meta span,
+.pill {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #e8f1ff, #ffffff);
+    color: #1f4f7f;
+    border: 1px solid #d0e2ff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-meta span:hover,
+.pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* ----------------------------------------------------
+   2. FIX HERO BUTTONS (distinct from pills)
+---------------------------------------------------- */
+.btn-primary,
+.btn-ghost {
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-height: unset;
+    box-shadow: none;
+}
+
+.btn-primary {
+    background: #1f4f7f;
+    color: #fff;
+    border: none;
+}
+
+.btn-ghost {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #1f4f7f;
+}
+
+.btn-ghost:hover {
+    background: #f1f5f9;
+}
+
+/* ----------------------------------------------------
+   3. FIX HOTSPOT CLICK AREA + ANIMATION
+---------------------------------------------------- */
+.wheel-hotspots {
+    position: absolute;
+    inset: 0;
+    z-index: 5; /* BELOW legend, ABOVE wheel */
+    pointer-events: none; /* prevents blocking legend */
+}
+
+.s-hotspot {
+    pointer-events: auto; /* re-enable click only on hotspots */
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.s-hotspot:hover {
+    background: rgba(0,160,168,0.12);
+    transform: scale(1.05);
+    outline: 2px dashed rgba(0,160,168,0.4);
+}
+
+/* ----------------------------------------------------
+   4. FIX LEGEND CLICKABILITY (hotspots no longer cover)
+---------------------------------------------------- */
+.wheel-legend {
+    position: relative;
+    z-index: 20;
+}
+
+/* ----------------------------------------------------
+   5. FIX QUADRANT GLOW SHAPE + LAYERING
+---------------------------------------------------- */
+.quadrant-glow {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 3;
+}
+
+.q-gov    { top: 0;    left: 0;    clip-path: polygon(0 0, 100% 0, 50% 50%); }
+.q-plan   { top: 0;    right: 0;   clip-path: polygon(100% 0, 100% 100%, 50% 50%); }
+.q-people { bottom: 0; left: 0;    clip-path: polygon(0 100%, 100% 100%, 50% 50%); }
+.q-value  { bottom: 0; right: 0;   clip-path: polygon(0 0, 0 100%, 50% 50%); }
+
+.quadrant-glow.active {
+    opacity: 1;
+    box-shadow: 0 0 40px 20px rgba(31,79,127,0.35);
+}
+
+/* ----------------------------------------------------
+   6. FIX WHEEL IMAGE LAYERING
+---------------------------------------------------- */
+.wheel-card img {
+    position: relative;
+    z-index: 2;
+}
+
+/* ----------------------------------------------------
+   7. FIX DOMAIN HIGHLIGHT STYLE
+---------------------------------------------------- */
+.domain-card.active {
+    border-color: var(--primary-soft);
+    box-shadow: 0 0 12px rgba(31,79,127,0.25);
+    transform: translateY(-2px);
+    transition: all 0.25s ease;
+}
+
+/* FINAL HERO BUTTON STYLE — CLEAN + EXECUTIVE */
+.hero-cta .btn-primary,
+.hero-cta .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+/* Primary (Download) */
+.hero-cta .btn-primary {
+    background: #1f4f7f;
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 10px rgba(31,79,127,0.25);
+}
+
+.hero-cta .btn-primary:hover {
+    background: #2f6fa8;
+    transform: translateY(-2px);
+}
+
+/* Ghost (Discuss) */
+.hero-cta .btn-ghost {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #1f4f7f;
+}
+
+.hero-cta .btn-ghost:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    transform: translateY(-2px);
+}
+    
   </style>
 </head>
 
@@ -1172,11 +1333,12 @@ body.dark .cta {
       
       <!-- Hotspots overlay -->
 <div class="wheel-hotspots">
-    <div class="s-hotspot s-top" onclick="scrollToSection('gov')"></div>
-    <div class="s-hotspot s-right" onclick="scrollToSection('people')"></div>
-    <div class="s-hotspot s-bottom" onclick="scrollToSection('value')"></div>
-    <div class="s-hotspot s-left" onclick="scrollToSection('planning')"></div>
+    <div class="s-hotspot s-top" onclick="scrollToSection('planning')"></div>
+    <div class="s-hotspot s-right" onclick="scrollToSection('value')"></div>
+    <div class="s-hotspot s-bottom" onclick="scrollToSection('people')"></div>
+    <div class="s-hotspot s-left" onclick="scrollToSection('gov')"></div>
 </div>
+
 
 
       <!-- Wheel image -->
@@ -1230,47 +1392,73 @@ body.dark .cta {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Map domains to quadrant glows
-    const domainSections = [
-        { id: 'gov', glow: '.q-gov' },
-        { id: 'planning', glow: '.q-plan' },
-        { id: 'people', glow: '.q-people' },
-        { id: 'value', glow: '.q-value' }
-    ];
+  /* -----------------------------------------
+     1. DOMAIN → QUADRANT MAPPING
+  ----------------------------------------- */
+  const domainSections = [
+    { id: "gov",      glow: ".q-gov" },
+    { id: "planning", glow: ".q-plan" },
+    { id: "people",   glow: ".q-people" },
+    { id: "value",    glow: ".q-value" }
+  ];
 
-    // Intersection Observer for active domain + quadrant glow
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const id = entry.target.id;
-            const section = domainSections.find(s => s.id === id);
-            const glow = document.querySelector(section.glow);
-
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                glow.classList.add('active');
-            } else {
-                entry.target.classList.remove('active');
-                glow.classList.remove('active');
-            }
-        });
-    }, {
-        root: null,
-        threshold: 0.45
-    });
-
-    // Observe each domain card
+  /* -----------------------------------------
+     2. FORCE ONLY ONE DOMAIN ACTIVE
+  ----------------------------------------- */
+  function setActiveDomain(id) {
     domainSections.forEach(section => {
-        const el = document.getElementById(section.id);
-        if (el) observer.observe(el);
-    });
+      const card = document.getElementById(section.id);
+      const glow = document.querySelector(section.glow);
 
-    // Smooth scroll for hotspots + legend
-    window.scrollToSection = function(id) {
-        const el = document.getElementById(id);
-        const headerOffset = 180;
-        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
-    };
+      const isActive = section.id === id;
+
+      if (card) card.classList.toggle("active", isActive);
+      if (glow) glow.classList.toggle("active", isActive);
+    });
+  }
+
+  /* -----------------------------------------
+     3. INTERSECTION OBSERVER (CLEAN + CORRECT)
+  ----------------------------------------- */
+  const observer = new IntersectionObserver(
+    entries => {
+      const visible = entries.find(e => e.isIntersecting);
+      if (!visible) return;
+
+      const id = visible.target.id;
+      setActiveDomain(id);
+    },
+    {
+      threshold: 0.70   // ensures only ONE domain is ever active
+    }
+  );
+
+  domainSections.forEach(section => {
+    const el = document.getElementById(section.id);
+    if (el) observer.observe(el);
+  });
+
+  /* -----------------------------------------
+     4. HOTSPOT + LEGEND CLICK HANDLER
+     (Fixes wrong navigation + all domains active)
+  ----------------------------------------- */
+  window.scrollToSection = function(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // Clear all highlights first
+    setActiveDomain(id);
+
+    // Mobile offset fix
+    const headerOffset = window.innerWidth < 768 ? 120 : 180;
+
+    const y =
+      el.getBoundingClientRect().top +
+      window.pageYOffset -
+      headerOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
 
 });
 </script>

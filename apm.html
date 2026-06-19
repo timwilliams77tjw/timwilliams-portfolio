@@ -1467,6 +1467,19 @@ html, body {
   opacity: 1;
 }
 
+/* FINAL OVERRIDE — CPD COLLAPSIBLE (FULL HEIGHT, NO CUT-OFF) */
+.collapsible-content {
+  max-height: 0 !important;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.45s ease, opacity 0.45s ease;
+}
+
+/* When the header is open, expand the content */
+.collapsible-toggle.open + .collapsible-content {
+  max-height: 5000px !important; /* effectively unlimited */
+  opacity: 1;
+}
     
   </style>
 

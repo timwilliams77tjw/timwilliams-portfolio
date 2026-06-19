@@ -1442,6 +1442,30 @@ html, body {
   max-height: 2000px;
   opacity: 1;
 }
+/* FINAL OVERRIDE — ACCORDION */
+.accordion-content {
+  max-height: 0 !important;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+.accordion-item.open .accordion-content {
+  max-height: 5000px !important; /* unlimited space */
+  opacity: 1;
+}
+/* FINAL OVERRIDE — COLLAPSIBLE */
+.collapsible-content {
+  max-height: 0 !important;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+.collapsible-toggle.open + .collapsible-content {
+  max-height: 5000px !important; /* unlimited space */
+  opacity: 1;
+}
 
     
   </style>

@@ -1546,7 +1546,21 @@ html, body, .header-with-logo, .page-prof-dev, #header-placeholder, #header-plac
     position: static !important;
     contain: none !important;
 }
-    
+ /* FINAL FIX — REMOVE SCROLL JAIL FROM HEADER WRAPPER */
+#header-placeholder,
+#header-placeholder *:not(script),
+.header-container,
+.site-wrapper,
+.header-wrapper,
+body > div:first-child {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    position: static !important;
+    contain: none !important;
+    display: block !important;
+}
+   
   </style>
 
 

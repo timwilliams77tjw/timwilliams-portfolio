@@ -1571,7 +1571,18 @@ body > div:first-child {
     display: block !important;
     contain: none !important;
 }
- 
+ /* REMOVE SCROLL/HEIGHT/FLEX CONTAINMENT FROM TOP-LEVEL WRAPPERS */
+body.header-with-logo.page-prof-dev,
+#header-placeholder {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: auto !important;
+    display: block !important;
+    position: static !important;
+    contain: none !important;
+    flex: none !important;
+}
   </style>
 
 

@@ -604,16 +604,46 @@ body.dark .cta {
   inset: 0;
 }
 
+/* Correct quadrant hit‑areas */
 .s-hotspot {
-  position: absolute;
-  width: 50%;
-  height: 50%;
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
-.s-top { top: 0; left: 25%; }
-.s-right { top: 25%; right: 0; }
-.s-bottom { bottom: 0; left: 25%; }
-.s-left { top: 25%; left: 0; }
+/* Top quadrant = GOV */
+.s-top {
+    top: 0;
+    left: 25%;
+    width: 50%;
+    height: 40%;
+}
+
+/* Right quadrant = PLANNING */
+.s-right {
+    top: 25%;
+    right: 0;
+    width: 40%;
+    height: 50%;
+}
+
+/* Bottom quadrant = PEOPLE */
+.s-bottom {
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 40%;
+}
+
+/* Left quadrant = VALUE */
+.s-left {
+    top: 25%;
+    left: 0;
+    width: 40%;
+    height: 50%;
+}
 
 .wheel-animate {
   animation: slowspin 38s linear infinite;
@@ -1333,10 +1363,10 @@ body.dark .cta {
       
       <!-- Hotspots overlay -->
 <div class="wheel-hotspots">
-    <div class="s-hotspot s-top" onclick="scrollToSection('planning')"></div>
-    <div class="s-hotspot s-right" onclick="scrollToSection('value')"></div>
+    <div class="s-hotspot s-top" onclick="scrollToSection('gov')"></div>
+    <div class="s-hotspot s-right" onclick="scrollToSection('planning')"></div>
     <div class="s-hotspot s-bottom" onclick="scrollToSection('people')"></div>
-    <div class="s-hotspot s-left" onclick="scrollToSection('gov')"></div>
+    <div class="s-hotspot s-left" onclick="scrollToSection('value')"></div>
 </div>
 
 

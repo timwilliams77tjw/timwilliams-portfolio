@@ -1546,6 +1546,31 @@ html, body, .header-with-logo, .page-prof-dev, #header-placeholder, #header-plac
     position: static !important;
     contain: none !important;
 }
+    /* HARD RESET — ignore all previous accordion/collapsible height logic */
+.accordion-content,
+.collapsible-content {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+/* SIMPLE, RELIABLE TOGGLE — NO GAPS, NO OVERLAP */
+
+/* Default: hidden */
+.accordion-content,
+.collapsible-content {
+  display: none !important;
+}
+
+/* When parent/header is "open": show and let it push the page down */
+.accordion-item.open .accordion-content {
+  display: block !important;
+}
+
+.collapsible-content.open {
+  display: block !important;
+}
     
   </style>
 

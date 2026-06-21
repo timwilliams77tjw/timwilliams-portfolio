@@ -14,9 +14,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-/* =========================================
-ROOT + GLOBAL
-========================================= */
+/* ============================================================
+   ROOT + GLOBAL
+   ============================================================ */
 
 :root {
   --apm-card-bg: #ffffff;
@@ -44,9 +44,9 @@ body.page-prof-dev {
   padding: 2.5rem 1.5rem;
 }
 
-/* =========================================
-HERO
-========================================= */
+/* ============================================================
+   HERO
+   ============================================================ */
 
 .hero-section {
   margin-bottom: 2rem;
@@ -89,9 +89,9 @@ HERO
   }
 }
 
-/* =========================================
-SECTION HEADINGS
-========================================= */
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
 
 .section-heading {
   font-size: 1.6rem;
@@ -115,9 +115,9 @@ SECTION HEADINGS
   line-height: 1.6;
 }
 
-/* =========================================
-INFO CARDS
-========================================= */
+/* ============================================================
+   INFO CARDS
+   ============================================================ */
 
 .grid {
   display: grid;
@@ -162,9 +162,9 @@ INFO CARDS
   margin: 0;
 }
 
-/* =========================================
-CPD TABLE
-========================================= */
+/* ============================================================
+   CPD TABLE
+   ============================================================ */
 
 .cpd-table-wrapper {
   margin-top: 1.5rem;
@@ -207,9 +207,9 @@ table.cpd-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* =========================================
-RATING BADGES
-========================================= */
+/* ============================================================
+   RATING BADGES
+   ============================================================ */
 
 .rating-badge {
   display: inline-block;
@@ -228,9 +228,9 @@ RATING BADGES
 .rating-practised { background: #8a2be2; }
 .rating-aware { background: #555; }
 
-/* =========================================
-ACCORDION (COMPETENCE)
-========================================= */
+/* ============================================================
+   ACCORDION (COMPETENCE)
+   ============================================================ */
 
 .accordion-item {
   margin-bottom: 1.4rem;
@@ -264,6 +264,8 @@ ACCORDION (COMPETENCE)
   opacity: 1;
 }
 
+/* Colour accordion items by rating */
+
 .accordion-item:has(.rating-expert) {
   background: #e6f0ff;
   border-left: 4px solid #0a66c2;
@@ -289,9 +291,9 @@ ACCORDION (COMPETENCE)
   border-left: 4px solid #555;
 }
 
-/* =========================================
-CAROUSEL
-========================================= */
+/* ============================================================
+   CAROUSEL
+   ============================================================ */
 
 .carousel-wrapper {
   position: relative;
@@ -351,9 +353,9 @@ CAROUSEL
   .carousel-btn.next { right: 5px; }
 }
 
-/* =========================================
-CPD PROGRESS RING
-========================================= */
+/* ============================================================
+   CPD PROGRESS RING
+   ============================================================ */
 
 .cpd-progress-section {
   margin: 2rem 0 3rem;
@@ -406,9 +408,9 @@ CPD PROGRESS RING
   color: #555;
 }
 
-/* =========================================
-CPD METRICS
-========================================= */
+/* ============================================================
+   CPD METRICS
+   ============================================================ */
 
 .cpd-metrics {
   display: grid;
@@ -441,9 +443,9 @@ CPD METRICS
   margin: 0;
 }
 
-/* =========================================
-INSIGHTS
-========================================= */
+/* ============================================================
+   INSIGHTS
+   ============================================================ */
 
 .cpd-insights {
   margin: 3rem 0 3.5rem;
@@ -481,9 +483,64 @@ INSIGHTS
   margin-bottom: 0.35rem;
 }
 
-/* =========================================
-DONUT CHART (D3 – CURRENT VERSION)
-========================================= */
+/* ============================================================
+   FOOTER + FAB
+   ============================================================ */
+
+#footer {
+  margin-top: 3rem;
+}
+
+body.page-prof-dev #footer,
+body.page-prof-dev #footer footer {
+  margin-top: 3rem;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid #e5e5e5;
+  background: #0a2540;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+body.page-prof-dev #footer a {
+  color: #ffffff;
+}
+
+.fab {
+  position: fixed;
+  right: 16px;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--apm-blue);
+  border: 2px solid var(--apm-blue);
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  z-index: 9999;
+}
+
+.fab-booking {
+  bottom: calc(84px + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 480px) {
+  .fab {
+    right: 14px;
+    bottom: calc(18px + env(safe-area-inset-bottom));
+  }
+
+  .fab-booking {
+    bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ============================================================
+   DONUT CHART (D3 – CURRENT VERSION)
+   ============================================================ */
 
 .cpd-donut-section {
   margin: 3rem 0;
@@ -552,9 +609,9 @@ DONUT CHART (D3 – CURRENT VERSION)
   margin-right: 0.6rem;
 }
 
-/* =========================================
-RADAR CHART (R3 – CURRENT VERSION)
-========================================= */
+/* ============================================================
+   RADAR CHART (R3 – CURRENT VERSION)
+   ============================================================ */
 
 .cpd-radar-section {
   margin: 3rem 0;
@@ -600,9 +657,9 @@ RADAR CHART (R3 – CURRENT VERSION)
   fill: #0a66c2;
 }
 
-/* =========================================
-PREMIUM PILLAR CARDS (P3)
-========================================= */
+/* ============================================================
+   PREMIUM PILLAR CARDS (P3)
+   ============================================================ */
 
 .pillars-scroll {
   display: flex;
@@ -727,9 +784,9 @@ PREMIUM PILLAR CARDS (P3)
   animation: pillarPulse 2.4s ease-in-out infinite;
 }
 
-/* =========================================
-CPD CARD LAYOUT (C4 – CURRENT VERSION)
-========================================= */
+/* ============================================================
+   CPD CARD LAYOUT (C4 – CURRENT VERSION)
+   ============================================================ */
 
 .cpd-card-container {
   display: grid;
@@ -829,9 +886,9 @@ CPD CARD LAYOUT (C4 – CURRENT VERSION)
 .status-icon.inprogress { color: #2563eb; }
 .status-icon.planned { color: #d97706; }
 
-/* =========================================
-COLLAPSIBLE (CPD LOG TOGGLE)
-========================================= */
+/* ============================================================
+   COLLAPSIBLE (CPD LOG TOGGLE)
+   ============================================================ */
 
 .collapsible-toggle {
   cursor: pointer;
@@ -852,9 +909,9 @@ COLLAPSIBLE (CPD LOG TOGGLE)
   opacity: 1;
 }
 
-/* =========================================
-APM PROGRESS BAR (PBAR3 – CURRENT VERSION)
-========================================= */
+/* ============================================================
+   APM PROGRESS BAR (PBAR3 – CURRENT VERSION)
+   ============================================================ */
 
 .apm-progress-bar,
 .apm-progress-bar--static {
@@ -875,65 +932,60 @@ APM PROGRESS BAR (PBAR3 – CURRENT VERSION)
   background-size: 100% 100%;
 }
 
-/* =========================================
-FOOTER
-========================================= */
+  /* === Functional: competence accordion === */
 
-#footer {
-  margin-top: 3rem;
+.accordion-item {
+  margin-bottom: 1.4rem;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
-body.page-prof-dev #footer,
-body.page-prof-dev #footer footer {
-  margin-top: 3rem;
-  padding: 2rem 1.5rem;
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.accordion-content {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
   border-top: 1px solid #e5e5e5;
-  background: #0a2540;
-  color: #ffffff;
-  font-size: 0.9rem;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
 }
 
-body.page-prof-dev #footer a {
-  color: #ffffff;
+.accordion-item.open .accordion-content {
+  max-height: 5000px;
+  opacity: 1;
 }
 
-/* =========================================
-FAB BUTTONS
-========================================= */
+/* === Functional: CPD log collapsible === */
 
-.fab {
-  position: fixed;
-  right: 16px;
-  bottom: calc(20px + env(safe-area-inset-bottom));
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: #ffffff;
-  color: var(--apm-blue);
-  border: 2px solid var(--apm-blue);
-  font-size: 26px;
+.collapsible-toggle {
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  z-index: 9999;
+  justify-content: space-between;
 }
 
-.fab-booking {
-  bottom: calc(84px + env(safe-area-inset-bottom));
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.45s ease, opacity 0.45s ease;
 }
 
-@media (max-width: 480px) {
-  .fab {
-    right: 14px;
-    bottom: calc(18px + env(safe-area-inset-bottom));
-  }
-
-  .fab-booking {
-    bottom: calc(80px + env(safe-area-inset-bottom));
-  }
+.collapsible-content.open {
+  max-height: 5000px;
+  opacity: 1;
 }
-
     
   </style>
 

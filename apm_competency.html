@@ -928,7 +928,25 @@ APM PROGRESS BAR (PBAR3 – CURRENT VERSION)
   );
   background-size: 100% 100%;
 }
+/* FIX: CPD log full height */
+.collapsible-content.open {
+  max-height: 20000px;
+}
 
+/* FIX: Hero float clearing */
+.hero-section::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* FIX: Pillar colours override */
+.pillar-card.completed,
+.pillar-card.remaining,
+.pillar-card.projected {
+  background-size: cover !important;
+}
+  
 </style>
 
 

@@ -970,7 +970,40 @@ APM PROGRESS BAR (PBAR3 – CURRENT VERSION)
 .pillar-card.projected {
   background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
 }
+/* ============================================================
+FINAL OVERRIDES — FORCE CORRECT BEHAVIOUR
+============================================================ */
 
+/* Fix pillar gradients */
+.pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+.pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+.pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+
+/* Fix footer layout */
+.hero-section::after {
+  content: "";
+  display: block;
+  clear: both !important;
+}
+
+/* Fix footer spacing if external CSS collapses layout */
+#footer {
+  margin-top: 3rem !important;
+  padding-top: 2rem !important;
+}
+
+/* Fix CPD log height */
+.collapsible-content.open {
+  max-height: 20000px !important;
+}
   
 </style>
 

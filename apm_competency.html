@@ -14,9 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
- 
-
-/* =========================================
+ /* =========================================
    ROOT + GLOBAL
 ========================================= */
 :root {
@@ -70,7 +68,9 @@ body.page-prof-dev {
 }
 
 @media (max-width: 700px) {
-  .hero-section h1 { font-size: 2.1rem; }
+  .hero-section h1 {
+    font-size: 2.1rem;
+  }
   .hero-section img {
     float: none;
     display: block;
@@ -182,6 +182,11 @@ table.cpd-table td {
   vertical-align: top;
 }
 
+table.cpd-table th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 table.cpd-table tbody tr:nth-child(even) {
   background: #f8fafc;
 }
@@ -221,7 +226,6 @@ table.cpd-table tbody tr:last-child td {
   box-shadow: var(--apm-shadow);
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
-
 .accordion-header {
   display: flex;
   justify-content: space-between;
@@ -229,33 +233,43 @@ table.cpd-table tbody tr:last-child td {
   gap: 1rem;
   cursor: pointer;
 }
-
 .accordion-content {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
   border-top: 1px solid #e5e5e5;
 }
-
 details summary {
   margin-top: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   padding: 6px 0;
 }
-
 details {
   margin-top: 0.5rem;
   border-top: 1px solid #e5e5e5;
   padding-top: 0.75rem;
 }
-
 /* Colour accordion items by rating */
-.accordion-item:has(.rating-expert) { background: #e6f0ff; border-left: 4px solid #0a66c2; }
-.accordion-item:has(.rating-proficient) { background: #e5f7f1; border-left: 4px solid #007b5f; }
-.accordion-item:has(.rating-competent) { background: #fff7e5; border-left: 4px solid #b8860b; }
-.accordion-item:has(.rating-practised) { background: #f3e9ff; border-left: 4px solid #8a2be2; }
-.accordion-item:has(.rating-aware) { background: #f2f2f2; border-left: 4px solid #555; }
-
+.accordion-item:has(.rating-expert) {
+  background: #e6f0ff;
+  border-left: 4px solid #0a66c2;
+}
+.accordion-item:has(.rating-proficient) {
+  background: #e5f7f1;
+  border-left: 4px solid #007b5f;
+}
+.accordion-item:has(.rating-competent) {
+  background: #fff7e5;
+  border-left: 4px solid #b8860b;
+}
+.accordion-item:has(.rating-practised) {
+  background: #f3e9ff;
+  border-left: 4px solid #8a2be2;
+}
+.accordion-item:has(.rating-aware) {
+  background: #f2f2f2;
+  border-left: 4px solid #555;
+}
 /* =========================================
    CAROUSEL
 ========================================= */
@@ -264,7 +278,6 @@ details {
   width: 100%;
   margin: 2rem 0;
 }
-
 .carousel-track {
   display: flex;
   overflow-x: auto;
@@ -273,15 +286,14 @@ details {
   padding: 1rem 0;
   scroll-behavior: smooth;
 }
-
-.carousel-track::-webkit-scrollbar { display: none; }
-
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
 .carousel-track .info-card {
   min-width: 320px;
   max-width: 320px;
   scroll-snap-align: start;
 }
-
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -301,43 +313,38 @@ details {
   justify-content: center;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
-
 .carousel-btn:hover {
   background: var(--apm-blue);
   color: white;
 }
-
 .carousel-btn.prev { left: -10px; }
 .carousel-btn.next { right: -10px; }
-
 @media (max-width: 600px) {
   .carousel-btn.prev { left: 5px; }
   .carousel-btn.next { right: 5px; }
 }
-
 /* =========================================
    CPD PROGRESS RING
 ========================================= */
 .cpd-progress-section {
   margin: 2rem 0 3rem;
+      margin-bottom: 2.5rem;
   text-align: center;
 }
-
 .cpd-progress-container {
-  width: 180px;
-  height: 180px;
-  margin: 0 auto;
-  position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    position: relative;
 }
-
-.cpd-progress-ring { transform: rotate(-90deg); }
-
+.cpd-progress-ring {
+  transform: rotate(-90deg);
+}
 .cpd-ring-bg {
   fill: none;
   stroke: #e5e7eb;
   stroke-width: 12;
 }
-
 .cpd-ring-fill {
   fill: none;
   stroke: var(--apm-blue);
@@ -346,27 +353,23 @@ details {
   stroke-dasharray: 0 999;
   transition: stroke-dasharray 1s ease;
 }
-
 .cpd-progress-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 .cpd-progress-text h3 {
   font-size: 1.1rem;
   margin: 0;
   font-weight: 700;
   color: #0a2540;
 }
-
 .cpd-progress-text p {
   margin: 4px 0 0;
   font-size: 0.85rem;
   color: #555;
 }
-
 /* =========================================
    CPD METRICS
 ========================================= */
@@ -376,7 +379,6 @@ details {
   gap: 1.4rem;
   margin: 2.2rem 0 2.6rem;
 }
-
 .cpd-metric-card {
   background: var(--apm-card-bg);
   padding: 1.6rem 1.4rem;
@@ -384,7 +386,6 @@ details {
   box-shadow: var(--apm-shadow);
   border-top: 4px solid var(--apm-accent);
 }
-
 .cpd-metric-card h4 {
   font-size: 0.95rem;
   font-weight: 600;
@@ -393,27 +394,23 @@ details {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-
 .cpd-metric-card p {
   font-size: 1.6rem;
   font-weight: 800;
   color: var(--apm-blue);
   margin: 0;
 }
-
 /* =========================================
    INSIGHTS
 ========================================= */
 .cpd-insights {
   margin: 3rem 0 3.5rem;
 }
-
 .insights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.6rem;
 }
-
 .insight-card {
   background: var(--apm-card-bg);
   padding: 1.6rem 1.4rem;
@@ -421,32 +418,27 @@ details {
   box-shadow: var(--apm-shadow);
   border-left: 5px solid var(--apm-accent);
 }
-
 .insight-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--apm-blue);
   margin-bottom: 0.7rem;
 }
-
 .insight-card ul {
   margin: 0;
   padding-left: 1.2rem;
   color: var(--apm-subtext);
   line-height: 1.6;
 }
-
 .insight-card li {
   margin-bottom: 0.35rem;
 }
-
 /* =========================================
    FOOTER + FAB
 ========================================= */
 #footer {
   margin-top: 3rem;
 }
-
 body.page-prof-dev #footer,
 body.page-prof-dev #footer footer {
   margin-top: 3rem;
@@ -456,11 +448,9 @@ body.page-prof-dev #footer footer {
   color: #ffffff;
   font-size: 0.9rem;
 }
-
 body.page-prof-dev #footer a {
   color: #ffffff;
 }
-
 .fab {
   position: fixed;
   right: 16px;
@@ -478,11 +468,9 @@ body.page-prof-dev #footer a {
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
   z-index: 9999;
 }
-
 .fab-booking {
   bottom: calc(84px + env(safe-area-inset-bottom));
 }
-
 @media (max-width: 480px) {
   .fab {
     right: 14px;
@@ -496,6 +484,7 @@ body.page-prof-dev #footer a {
 /* =========================================
    CPD HEATMAP
 ========================================= */
+
 .cpd-heatmap {
   margin: 3rem 0;
   overflow-x: auto;
@@ -506,48 +495,72 @@ body.page-prof-dev #footer a {
   height: 12px;
   border-radius: 2px;
 }
+}
+}
 
-.heatmap-cell.level-0 { background: #eef2f7; }
-.heatmap-cell.level-1 { background: #cfe8ff; }
-.heatmap-cell.level-2 { background: #7ac0f9; }
-.heatmap-cell.level-3 { background: #0a66c2; }
-.heatmap-cell.level-4 { background: #003a73; }
+.heatmap-cell.level-0 {
+  background: #eef2f7;
+}
 
+.heatmap-cell.level-1 {
+  background: #cfe8ff;
+}
+
+.heatmap-cell.level-2 {
+  background: #7ac0f9;
+}
+
+.heatmap-cell.level-3 {
+  background: #0a66c2;
+}
+
+.heatmap-cell.level-4 {
+  background: #003a73;
+}
 /* FINAL FIX — APM PROGRESS BAR */
 .apm-progress-bar,
 .apm-progress-bar--static {
-  width: 100% !important;
-  height: 28px !important;
-  border-radius: 6px !important;
-  overflow: hidden !important;
-  display: block !important;
-  background-image: linear-gradient(
-    to right,
-    #d9534f 0%, #d9534f 10%,
-    #f0ad4e 10%, #f0ad4e 30%,
-    #8a2be2 30%, #8a2be2 55%,
-    #b8860b 55%, #b8860b 75%,
-    #007b5f 75%, #007b5f 90%,
-    #0a66c2 90%, #0a66c2 100%
-  ) !important;
-  background-size: 100% 100% !important;
+    width: 100% !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    display: block !important;
+    background-image: linear-gradient(
+        to right,
+        #d9534f 0%, #d9534f 10%,
+        #f0ad4e 10%, #f0ad4e 30%,
+        #8a2be2 30%, #8a2be2 55%,
+        #b8860b 55%, #b8860b 75%,
+        #007b5f 75%, #007b5f 90%,
+        #0a66c2 90%, #0a66c2 100%
+    ) !important;
+    background-size: 100% 100% !important;
 }
 
-/* FINAL FIX — HEATMAP GRID */
+/* FINAL FIX — HEATMAP */
 #heatmap-grid {
-  display: grid !important;
-  grid-template-columns: repeat(53, 1fr) !important;
-  grid-auto-rows: 12px !important;
-  gap: 3px !important;
-  overflow-x: scroll !important;
-  -webkit-overflow-scrolling: touch !important;
-  padding-bottom: 0.5rem !important;
-  min-height: 120px !important;
+    display: grid !important;
+    grid-template-columns: repeat(53, 1fr) !important;
+    grid-auto-rows: 12px !important;
+    gap: 3px !important;
+    overflow-x: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 0.5rem !important;
+    min-height: 120px !important;
 }
 
-/* =========================================
-   DONUT CHART
-========================================= */
+.heatmap-cell {
+    display: block !important;
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 3px !important;
+}
+
+.heatmap-cell.level-0 { background: #eef2f7 !important; }
+.heatmap-cell.level-1 { background: #cfe8ff !important; }
+.heatmap-cell.level-2 { background: #7ac0f9 !important; }
+.heatmap-cell.level-3 { background: #0a66c2 !important; }
+.heatmap-cell.level-4 { background: #003a73 !important; }
 .cpd-donut-section {
   margin: 3rem 0;
 }
@@ -614,12 +627,32 @@ body.page-prof-dev #footer a {
   border-radius: 3px;
   margin-right: 0.6rem;
 }
-
-/* =========================================
-   RADAR CHART
-========================================= */
 .cpd-radar-section {
-  margin: 3
+  margin: 3rem 0;
+}
+
+.radar-wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#radar-chart {
+  width: 320px;
+  height: 320px;
+}
+
+.radar-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.radar-legend li {
+  margin-bottom: 0.4rem;
 }
 
 .radar-grid {
@@ -637,11 +670,6 @@ body.page-prof-dev #footer a {
 .radar-point {
   fill: #0a66c2;
 }
-
-/* =========================================
-   PILLARS (BASE SYSTEM)
-========================================= */
-
 .pillars-wrapper {
   display: flex;
   gap: 2rem;
@@ -711,10 +739,403 @@ body.page-prof-dev #footer a {
   color: #0a2540;
 }
 
-/* =========================================
-   PILLAR CARDS — PREMIUM SYSTEM
-========================================= */
 
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto !important;
+}
+
+
+   /* ==========================================================
+   FIXED, ISOLATED PILLAR STYLING (NO GLOBAL IMPACT)
+========================================================== */
+
+.cpd-pillars-section .pillars-wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1rem 0 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.cpd-pillars-section .pillar {
+  flex: 1;
+  min-width: 140px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cpd-pillars-section .pillar-bar-container {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, #f8fafc, #edf2f7);
+  border-radius: 12px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cpd-pillars-section .pillar-bar {
+  width: 65%;
+  height: 0;
+  border-radius: 10px 10px 0 0;
+  transition: height 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  position: relative;
+}
+
+.cpd-pillars-section .pillar-bar.completed {
+  background: linear-gradient(to top, #0a66c2, #4da3ff);
+}
+
+.cpd-pillars-section .pillar-bar.remaining {
+  background: linear-gradient(to top, #b8860b, #f0c75e);
+}
+
+.cpd-pillars-section .pillar-bar.projected {
+  background: linear-gradient(to top, #007b5f, #4dd6a8);
+}
+
+.cpd-pillars-section .pillar-value-label {
+  position: absolute;
+  bottom: 6px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.cpd-pillars-section .pillar-label {
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a2540;
+}
+.pillars-scroll{
+    display:flex;
+    gap:18px;
+    overflow-x:auto;
+    padding:10px 0 20px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+}
+
+.pillars-scroll::-webkit-scrollbar{
+    height:6px;
+}
+
+.pillars-scroll::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:20px;
+}
+
+.pillar-card{
+    min-width:220px;
+    flex:0 0 auto;
+
+    background:#fff;
+    border-radius:24px;
+
+    padding:22px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
+
+    scroll-snap-align:start;
+
+    transition:.3s;
+}
+
+.pillar-card:hover{
+    transform:translateY(-4px);
+}
+
+.pillar-icon{
+    width:56px;
+    height:56px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    font-size:22px;
+
+    margin-bottom:16px;
+}
+
+.completed .pillar-icon{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.remaining .pillar-icon{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.projected .pillar-icon{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.pillar-value{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:4px;
+}
+
+.pillar-title{
+    font-size:.95rem;
+    color:#64748b;
+    margin-bottom:18px;
+}
+
+.pillar-progress{
+    height:12px;
+    background:#edf2f7;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.pillar-fill{
+    width:0%;
+    height:100%;
+    border-radius:999px;
+    transition:1.2s ease;
+}
+
+.completed .pillar-fill{
+    background:linear-gradient(90deg,#16a34a,#22c55e);
+}
+
+.remaining .pillar-fill{
+    background:linear-gradient(90deg,#dc2626,#ef4444);
+}
+
+.projected .pillar-fill{
+    background:linear-gradient(90deg,#2563eb,#60a5fa);
+}
+    .pillar-card{
+    min-width:220px;
+    flex:0 0 auto;
+
+    border-radius:24px;
+    padding:22px;
+
+    color:#fff;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.12);
+
+    scroll-snap-align:start;
+
+    transition:.3s;
+}
+
+.pillar-card:hover{
+    transform:translateY(-4px);
+}
+
+/* Completed */
+.pillar-card.completed{
+    background:linear-gradient(
+        135deg,
+        #16a34a,
+        #22c55e
+    );
+}
+
+/* Remaining */
+.pillar-card.remaining{
+    background:linear-gradient(
+        135deg,
+        #dc2626,
+        #ef4444
+    );
+}
+
+/* Projected */
+.pillar-card.projected{
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #60a5fa
+    );
+}
+    .pillar-title{
+    color:rgba(255,255,255,.85);
+}
+
+.pillar-value{
+    color:#fff;
+}
+
+.pillar-icon{
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    backdrop-filter:blur(8px);
+}
+    .pillar-progress{
+    height:10px;
+    background:rgba(255,255,255,.25);
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.pillar-fill{
+    height:100%;
+    border-radius:999px;
+}
+    .pillar-card{
+    position:relative;
+}
+
+.pillar-card::after{
+    content:"CPD";
+    position:absolute;
+    top:16px;
+    right:16px;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.15);
+
+    font-size:.7rem;
+    font-weight:600;
+}
+
+   /* ==========================================================
+   PREMIUM PILLAR CARD ENHANCEMENTS
+========================================================== */
+
+.pillar-card {
+  position: relative;
+  border-radius: 24px;
+  padding: 22px;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  scroll-snap-align: start;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+/* Hover lift */
+.pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0,0,0,.18);
+}
+
+/* Completed */
+.pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+/* Remaining */
+.pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+/* Projected */
+.pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* Icon glow */
+.pillar-icon {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(255,255,255,.25);
+}
+
+/* Value */
+.pillar-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* Title */
+.pillar-title {
+  font-size: .95rem;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 18px;
+}
+
+/* Progress bar */
+.pillar-progress {
+  height: 12px;
+  background: rgba(255,255,255,.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Animated fill */
+.pillar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* CPD badge */
+.pillar-card::after {
+  content: "CPD";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.15);
+  font-size: .7rem;
+  font-weight: 600;
+}
+ /* Force correct gradient colours for pillar fills */
+.pillar-card.completed .pillar-fill {
+  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
+}
+
+.pillar-card.remaining .pillar-fill {
+  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
+}
+
+.pillar-card.projected .pillar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
+}
+/* Pulse animation for projected pillar */
+@keyframes pillarPulse {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.03); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pillar-card.projected {
+  animation: pillarPulse 2.4s ease-in-out infinite;
+}
+    /* ==========================================================
+   CPD PILLARS — CARD SYSTEM (CLEAN, FINAL, NO CONFLICTS)
+========================================================== */
+
+/* Scroll container */
 .pillars-scroll {
   display: flex;
   gap: 18px;
@@ -733,6 +1154,7 @@ body.page-prof-dev #footer a {
   border-radius: 20px;
 }
 
+/* Pillar card container */
 .pillar-card {
   min-width: 220px;
   flex: 0 0 auto;
@@ -745,23 +1167,28 @@ body.page-prof-dev #footer a {
   position: relative;
 }
 
+/* Hover lift */
 .pillar-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 14px 32px rgba(0,0,0,.18);
 }
 
+/* Completed */
 .pillar-card.completed {
   background: linear-gradient(135deg, #16a34a, #22c55e);
 }
 
+/* Remaining */
 .pillar-card.remaining {
   background: linear-gradient(135deg, #dc2626, #ef4444);
 }
 
+/* Projected */
 .pillar-card.projected {
   background: linear-gradient(135deg, #2563eb, #60a5fa);
 }
 
+/* Icon */
 .pillar-icon {
   width: 56px;
   height: 56px;
@@ -777,6 +1204,7 @@ body.page-prof-dev #footer a {
   box-shadow: 0 4px 12px rgba(255,255,255,.25);
 }
 
+/* Value */
 .pillar-value {
   font-size: 2.2rem;
   font-weight: 700;
@@ -784,12 +1212,14 @@ body.page-prof-dev #footer a {
   color: #fff;
 }
 
+/* Title */
 .pillar-title {
   font-size: .95rem;
   color: rgba(255,255,255,.85);
   margin-bottom: 18px;
 }
 
+/* Progress bar container */
 .pillar-progress {
   height: 12px;
   background: rgba(255,255,255,.25);
@@ -797,6 +1227,7 @@ body.page-prof-dev #footer a {
   overflow: hidden;
 }
 
+/* Progress fill — animated */
 .pillar-fill {
   height: 100%;
   width: 0%;
@@ -804,6 +1235,7 @@ body.page-prof-dev #footer a {
   transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
+/* Gradient fills — FINAL, GUARANTEED */
 .pillar-card.completed .pillar-fill {
   background: linear-gradient(90deg, #16a34a, #22c55e);
 }
@@ -816,6 +1248,7 @@ body.page-prof-dev #footer a {
   background: linear-gradient(90deg, #2563eb, #60a5fa);
 }
 
+/* CPD badge */
 .pillar-card::after {
   content: "CPD";
   position: absolute;
@@ -828,7 +1261,7 @@ body.page-prof-dev #footer a {
   font-weight: 600;
 }
 
-/* Pulse animation */
+/* Pulse animation for projected pillar */
 @keyframes pillarPulse {
   0%   { transform: scale(1); opacity: 1; }
   50%  { transform: scale(1.03); opacity: 0.85; }
@@ -838,135 +1271,328 @@ body.page-prof-dev #footer a {
 .pillar-card.projected {
   animation: pillarPulse 2.4s ease-in-out infinite;
 }
+    /* FIX: Ensure pillar-fill gradient is not washed out by card overlay */
+.pillar-card .pillar-progress {
+  background: rgba(0,0,0,0.15) !important;
+}
 
-/* =========================================
-   CPD CARDS
-========================================= */
+.pillar-card .pillar-fill {
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
+    /* FINAL OVERRIDE — FORCE PILLAR COLOURS */
+#pillar-completed.pillar-fill,
+.pillar-card.completed #pillar-completed {
+  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
+}
+
+#pillar-remaining.pillar-fill,
+.pillar-card.remaining #pillar-remaining {
+  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
+}
+
+#pillar-projected.pillar-fill,
+.pillar-card.projected #pillar-projected {
+  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
+}
+    /* ==========================================================
+   CPD CARD LAYOUT
+========================================================== */
 
 .cpd-card-container {
-  display: grid;
-  gap: 1.25rem;
-  margin-top: 1.5rem;
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
 }
 
 .cpd-card {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 1.25rem 1.5rem;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: transform .25s ease, box-shadow .25s ease;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .cpd-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
 .cpd-card-title {
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: .5rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
 }
 
 .cpd-card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  margin-bottom: .75rem;
-  font-size: .9rem;
-  opacity: .9;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-bottom: .75rem;
+    font-size: .9rem;
+    opacity: .9;
 }
 
 .cpd-badge {
-  background: rgba(255,255,255,0.18);
-  padding: .35rem .75rem;
-  border-radius: 999px;
-  font-size: .85rem;
-  font-weight: 600;
+    background: rgba(255,255,255,0.18);
+    padding: .35rem .75rem;
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 600;
 }
 
 .cpd-hours {
-  background: linear-gradient(135deg, #2563eb, #60a5fa);
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
 }
 
 .cpd-category {
-  background: linear-gradient(135deg, #9333ea, #c084fc);
+    background: linear-gradient(135deg, #9333ea, #c084fc);
 }
 
 .cpd-card-reflection {
-  margin-top: .75rem;
-  font-size: .9rem;
-  opacity: .85;
-  line-height: 1.4;
+    margin-top: .75rem;
+    font-size: .9rem;
+    opacity: .85;
+    line-height: 1.4;
+}
+    /* ==========================================================
+   CPD CARD STATUS STYLING
+========================================================== */
+
+/* Left colour band */
+.cpd-card.completed {
+    border-left: 6px solid #16a34a;
 }
 
-/* =========================================
-   CPD CARD STATUS
-========================================= */
+.cpd-card.inprogress {
+    border-left: 6px solid #2563eb;
+}
 
-.cpd-card.completed { border-left: 6px solid #16a34a; }
-.cpd-card.inprogress { border-left: 6px solid #2563eb; }
-.cpd-card.planned { border-left: 6px solid #d97706; }
+.cpd-card.planned {
+    border-left: 6px solid #d97706;
+}
 
+/* Status badge */
 .cpd-status {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: .75rem;
-  font-weight: 600;
-  margin-left: auto;
-  color: #fff;
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+    margin-left: auto;
+    color: #fff;
 }
 
 .cpd-status.completed { background: #16a34a; }
 .cpd-status.inprogress { background: #2563eb; }
 .cpd-status.planned { background: #d97706; }
 
+/* Status icon */
 .status-icon {
-  font-size: 1rem;
-  margin-left: auto;
-  opacity: .85;
+    font-size: 1rem;
+    margin-left: auto;
+    opacity: .85;
 }
 
 .status-icon.completed { color: #16a34a; }
 .status-icon.inprogress { color: #2563eb; }
 .status-icon.planned { color: #d97706; }
-
-/* =========================================
-   COLLAPSIBLE SECTIONS
-========================================= */
-
-.collapsible-toggle {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.collapsible-toggle .chevron {
-  margin-left: auto;
-  transition: transform 0.25s ease;
-}
-
-.collapsible-content {
-  overflow: hidden;
+ 
+.accordion-content {
   max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+.accordion-content.open {
+  max-height: 500px; /* or more */
+  opacity: 1;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+.accordion-item.open .accordion-content {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+
+  .collapsible-content {
+  max-height: 0;
+  overflow: hidden;
   opacity: 0;
   transition: max-height 0.35s ease, opacity 0.35s ease;
 }
 
 .collapsible-content.open {
-  max-height: 5000px;
+  max-height: 1000px;
   opacity: 1;
 }
 
-.collapsible-toggle.open .chevron {
-  transform: rotate(90deg);
+    .collapsible-toggle.open + .collapsible-content {
+  max-height: 2000px;
+  opacity: 1;
 }
-</script>
+/* FINAL OVERRIDE — ACCORDION */
+.accordion-content {
+  max-height: 0 !important;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+.accordion-item.open .accordion-content {
+  max-height: 5000px !important; /* unlimited space */
+  opacity: 1;
+}
+/* FINAL OVERRIDE — COLLAPSIBLE */
+.collapsible-content {
+  max-height: 0 !important;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+.collapsible-toggle.open + .collapsible-content {
+  max-height: 5000px !important; /* unlimited space */
+  opacity: 1;
+}
+
+/* FINAL OVERRIDE — CPD COLLAPSIBLE (FULL HEIGHT, NO CUT-OFF) */
+.collapsible-content {
+  max-height: 0 !important;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.45s ease, opacity 0.45s ease;
+}
+
+/* When the header is open, expand the content */
+.collapsible-toggle.open + .collapsible-content {
+  max-height: 5000px !important; /* effectively unlimited */
+  opacity: 1;
+}
+    /* FINAL FIX — CPD LOG FULL HEIGHT */
+.cpd-log-section,
+.cpd-log-section .collapsible-content,
+#cpd-card-container {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+/* FINAL FIX — FORCE CPD LOG TO EXPAND NORMALLY */
+.cpd-log-section,
+.cpd-log-section .collapsible-content,
+.cpd-log-section .collapsible-content > *,
+#cpd-card-container {
+  position: static !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  display: block !important;
+}
+/* FINAL FIX — ALLOW CPD LOG TO EXPAND AND PUSH PAGE DOWN */
+.page-container,
+.cpd-log-section,
+.cpd-log-section .collapsible-content,
+#cpd-card-container {
+  position: static !important;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  display: block !important;
+}
+/* FINAL FIX — RELEASE PAGE CONTAINER CLIPPING */
+.page-container {
+  position: static !important;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  display: block !important;
+  contain: none !important;
+}
+/* FINAL FIX — REMOVE LAYOUT ISOLATION FROM PAGE CONTAINER */
+.page-container {
+    contain: none !important;
+    isolation: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    position: static !important;
+}
+/* FINAL FIX — REMOVE SCROLL/CLIP CONTAINMENT FROM PAGE LAYOUT */
+html, body, .page-container, .page-prof-dev, main {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    contain: none !important;
+    isolation: auto !important;
+    display: block !important;
+    position: static !important;
+}
+/* FINAL FIX — REMOVE SCROLL CONTAINMENT FROM PAGE WRAPPERS */
+html, body, .header-with-logo, .page-prof-dev, #header-placeholder, #header-placeholder + * {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    position: static !important;
+    contain: none !important;
+}
+    /* HARD RESET — ignore all previous accordion/collapsible height logic */
+.accordion-content,
+.collapsible-content {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+/* SIMPLE, RELIABLE TOGGLE — NO GAPS, NO OVERLAP */
+
+/* Default: hidden */
+.accordion-content,
+.collapsible-content {
+  display: none !important;
+}
+
+/* When parent/header is "open": show and let it push the page down */
+.accordion-item.open .accordion-content {
+  display: block !important;
+}
+
+.collapsible-content.open {
+  display: block !important;
+}
+/* RESET CPD LOG TO USE DISPLAY-BASED TOGGLING */
+.collapsible-content {
+    display: none !important;
+}
+
+.collapsible-content.open {
+    display: block !important;
+}
+
+/* CLEAN RESET — CPD LOG COLLAPSIBLE */
+.collapsible-content {
+    display: none !important;
+}
+
+.collapsible-content.open {
+    display: block !important;
+}
+  
+    
+  </style>
+
+
 </head>
 <body class="header-with-logo page-prof-dev">
 <!-- HEADER -->
@@ -1426,12 +2052,60 @@ async function loadCPD() {
         generateHeatmap();
         generateDonutChart();
         generateRadarChart();
+      linkCPDToCompetences();
 
     } catch (err) {
         console.error(err);
     }
 }
 
+function linkCPDToCompetences() {
+  const competenceMap = {
+    "Mentor, coach and inspire future generations": "leadership",
+    "Increase my networking": "stakeholder-engagement-and-communication",
+    "Contribute to APM": "ethics-compliance-and-professionalism",
+    "Continue my professional development": "ethics-compliance-and-professionalism",
+    "Get a new job": "capability-development",
+    "Contribute to my network": "stakeholder-engagement-and-communication",
+    "Leadership & mentoring": "leadership",
+    "Sustainability in change initiatives": "sustainability",
+    "AI & digital transformation": "solutions-development",
+    "Stakeholder engagement & communication": "stakeholder-engagement-and-communication"
+  };
+
+  document.querySelectorAll('.cpd-card').forEach(card => {
+    const devGoal = card.querySelector('.cpd-category')?.textContent?.trim();
+    if (!devGoal) return;
+
+    const competence = competenceMap[devGoal];
+    if (!competence) return;
+
+    const competenceId = 'competence-' + competence;
+
+    if (card.querySelector('.cpd-competence-link')) return;
+
+    const link = document.createElement('a');
+    link.className = 'cpd-competence-link';
+    link.href = '#' + competenceId;
+    link.textContent = 'View related competence →';
+
+    card.appendChild(link);
+  });
+}
+
+
+document.addEventListener('click', function (e) {
+  const link = e.target.closest('.cpd-competence-link');
+  if (!link) return;
+
+  const target = document.querySelector(link.getAttribute('href'));
+  if (!target) return;
+
+  const header = target.querySelector('.accordion-header');
+  if (header) header.click();
+});
+
+  
 /* ==========================================================
    METRICS + PROGRESS RING
 ========================================================== */
@@ -1857,17 +2531,7 @@ function generateProgressPillars() {
     setPillar("pillar-projected", "pillar-projected-label", projected, "projected");
   }, 300);
 }
-
-  <script>
-document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
-    toggle.addEventListener("click", () => {
-        toggle.classList.toggle("open");
-        const content = toggle.nextElementSibling;
-        content.classList.toggle("open");
-    });
-});
 </script>
-
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section>
@@ -2130,11 +2794,11 @@ document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
   </div>
 </section>
 <!-- PERSONAL ASSESSMENT ACCORDION -->
-<section class="assessment-section">
+<section>
 <h2 class="section-heading collapsible-toggle">
-    <i class="fa-solid fa-user-check"></i>
-    My Competence Assessment (29 competences)
-    <i class="fa-solid fa-chevron-right chevron"></i>
+  <i class="fa-solid fa-user-check"></i>
+  My Competence Assessment (29 competences)
+  <i class="fa-solid fa-chevron-right chevron"></i>
 </h2>
 
 <div class="collapsible-content">
@@ -2152,472 +2816,476 @@ document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
 
   <div class="accordion">
 
-    <!-- 1. Life cycles -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-layer-group"></i> Life cycles</span>
-        <span class="rating-badge rating-proficient">Proficient</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You demonstrate strong capability in selecting and applying appropriate life cycle models, adapting based on uncertainty, risk and organisational maturity.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to structure and organise change initiatives.</p>
-          <p>Life cycles are a framework comprising a series of distinct stages required to transform an idea or concept into reality in an orderly and efficient manner. Recognised life cycles include linear, iterative and hybrid approaches.</p>
-        </details>
-      </div>
-    </div>
+<!-- 1. Life cycles -->
+<div id="competence-life-cycles" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-layer-group"></i> Life cycles</span>
+    <span class="rating-badge rating-proficient">Proficient</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You demonstrate strong capability in selecting and applying appropriate life cycle models, adapting based on uncertainty, risk and organisational maturity.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to structure and organise change initiatives.</p>
+      <p>Life cycles are a framework comprising a series of distinct stages required to transform an idea or concept into reality in an orderly and efficient manner. Recognised life cycles include linear, iterative and hybrid approaches.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 2. Governance arrangements -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-sitemap"></i> Governance arrangements</span>
-        <span class="rating-badge rating-expert">Expert</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> Governance is one of your strongest areas. You excel at establishing clear authority, accountability and decision‑making structures.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to establish and maintain governance structures that define control of deployment and align with organisational practice.</p>
-        </details>
-      </div>
-    </div>
+<!-- 2. Governance arrangements -->
+<div id="competence-governance-arrangements" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-sitemap"></i> Governance arrangements</span>
+    <span class="rating-badge rating-expert">Expert</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> Governance is one of your strongest areas. You excel at establishing clear authority, accountability and decision‑making structures.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to establish and maintain governance structures that define control of deployment and align with organisational practice.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 3. Sustainability -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-leaf"></i> Sustainability</span>
-        <span class="rating-badge rating-practised">Practised</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You have a solid working knowledge of sustainability principles and how they influence project outcomes.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to balance environmental, social, economic and administrative considerations that impact a change initiative.</p>
-        </details>
-      </div>
-    </div>
+<!-- 3. Sustainability -->
+<div id="competence-sustainability" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-leaf"></i> Sustainability</span>
+    <span class="rating-badge rating-practised">Practised</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You have a solid working knowledge of sustainability principles and how they influence project outcomes.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to balance environmental, social, economic and administrative considerations that impact a change initiative.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 4. Financial management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-sterling-sign"></i> Financial management</span>
-        <span class="rating-badge rating-proficient">Proficient</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You demonstrate strong financial planning and control skills, ensuring alignment with organisational financial systems.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to enable financial resource for delivery and to plan and control finances as part of the organisation’s overall financial management.</p>
-        </details>
-      </div>
-    </div>
+<!-- 4. Financial management -->
+<div id="competence-financial-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-sterling-sign"></i> Financial management</span>
+    <span class="rating-badge rating-proficient">Proficient</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You demonstrate strong financial planning and control skills, ensuring alignment with organisational financial systems.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to enable financial resource for delivery and to plan and control finances as part of the organisation’s overall financial management.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 5. Business case -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-briefcase"></i> Business case</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You can confidently prepare, justify and maintain business cases, revisiting them as conditions evolve.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to prepare, gain approval of, refine and update business cases that justify initiation and continuation of change initiatives.</p>
-        </details>
-      </div>
-    </div>
+<!-- 5. Business case -->
+<div id="competence-business-case" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-briefcase"></i> Business case</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You can confidently prepare, justify and maintain business cases, revisiting them as conditions evolve.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to prepare, gain approval of, refine and update business cases that justify initiation and continuation of change initiatives.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 6. Portfolio shaping -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-chess-board"></i> Portfolio shaping</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You understand how to align change initiatives with strategic objectives and organisational capacity.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to set up portfolios to ensure efficient delivery of strategic objectives.</p>
-        </details>
-      </div>
-    </div>
+<!-- 6. Portfolio shaping -->
+<div id="competence-portfolio-shaping" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-chess-board"></i> Portfolio shaping</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You understand how to align change initiatives with strategic objectives and organisational capacity.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to set up portfolios to ensure efficient delivery of strategic objectives.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 7. Procurement -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-truck-ramp-box"></i> Procurement</span>
-        <span class="rating-badge rating-practised">Practised</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You have a working understanding of procurement strategies and supplier engagement.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to secure the provision of resources by choosing strategies for obtaining best value from supply chains.</p>
-        </details>
-      </div>
-    </div>
+<!-- 7. Procurement -->
+<div id="competence-procurement" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-truck-ramp-box"></i> Procurement</span>
+    <span class="rating-badge rating-practised">Practised</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You have a working understanding of procurement strategies and supplier engagement.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to secure the provision of resources by choosing strategies for obtaining best value from supply chains.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 8. Reviews -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-magnifying-glass-chart"></i> Reviews</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You can effectively plan and conduct reviews to assess progress, viability and performance.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to manage progression through the life cycle of the change initiative.</p>
-        </details>
-      </div>
-    </div>
+<!-- 8. Reviews -->
+<div id="competence-reviews" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-magnifying-glass-chart"></i> Reviews</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You can effectively plan and conduct reviews to assess progress, viability and performance.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to manage progression through the life cycle of the change initiative.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 9. Assurance -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-shield-halved"></i> Assurance</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You understand assurance principles and can support independent checks that ensure value delivery.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to provide confidence to governance that the change initiative is on track to deliver objectives and intended value.</p>
-        </details>
-      </div>
-    </div>
+<!-- 9. Assurance -->
+<div id="competence-assurance" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-shield-halved"></i> Assurance</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You understand assurance principles and can support independent checks that ensure value delivery.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to provide confidence to governance that the change initiative is on track to deliver objectives and intended value.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 10. Capability development -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-seedling"></i> Capability development</span>
-        <span class="rating-badge rating-practised">Practised</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You understand organisational maturity and how to improve capability and predictability.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to assess organisational maturity and improve competences within an organisation.</p>
-        </details>
-      </div>
-    </div>
+<!-- 10. Capability development -->
+<div id="competence-capability-development" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-seedling"></i> Capability development</span>
+    <span class="rating-badge rating-practised">Practised</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You understand organisational maturity and how to improve capability and predictability.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to assess organisational maturity and improve competences within an organisation.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 11. Transition management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-right-left"></i> Transition management</span>
-        <span class="rating-badge rating-practised">Practised</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You understand how to integrate outputs into BAU and support organisational change.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to manage the integration of outputs into business‑as‑usual so that new capabilities enable intended value.</p>
-        </details>
-      </div>
-    </div>
+<!-- 11. Transition management -->
+<div id="competence-transition-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-right-left"></i> Transition management</span>
+    <span class="rating-badge rating-practised">Practised</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You understand how to integrate outputs into BAU and support organisational change.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to manage the integration of outputs into business‑as‑usual so that new capabilities enable intended value.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 12. Benefits management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-gift"></i> Benefits management</span>
-        <span class="rating-badge rating-aware">Aware</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You have awareness of benefits identification, measurement and tracking.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to identify and agree benefits and determine how they will be measured, monitored and managed until realised.</p>
-        </details>
-      </div>
-    </div>
+<!-- 12. Benefits management -->
+<div id="competence-benefits-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-gift"></i> Benefits management</span>
+    <span class="rating-badge rating-aware">Aware</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You have awareness of benefits identification, measurement and tracking.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to identify and agree benefits and determine how they will be measured, monitored and managed until realised.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 13. Stakeholder engagement -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-users"></i> Stakeholder engagement & communication</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You can identify, analyse and engage stakeholders effectively, building commitment and alignment.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to work with people internally and externally to build support and ensure timely, relevant communication.</p>
-        </details>
-      </div>
-    </div>
+<!-- 13. Stakeholder engagement & communication -->
+<div id="competence-stakeholder-engagement-and-communication" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-users"></i> Stakeholder engagement & communication</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You can identify, analyse and engage stakeholders effectively, building commitment and alignment.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to work with people internally and externally to build support and ensure timely, relevant communication.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 14. Conflict resolution -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-handshake-angle"></i> Conflict resolution</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You can recognise, address and resolve conflict constructively, promoting healthy challenge.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to identify, address and resolve differences between individuals and groups.</p>
-        </details>
-      </div>
-    </div>
+<!-- 14. Conflict resolution -->
+<div id="competence-conflict-resolution" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-handshake-angle"></i> Conflict resolution</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You can recognise, address and resolve conflict constructively, promoting healthy challenge.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to identify, address and resolve differences between individuals and groups.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 15. Leadership -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-person-chalkboard"></i> Leadership</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You can lead teams with clarity, direction and support, adapting leadership style to context.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to empower and inspire others by providing vision, direction, feedback and support.</p>
-        </details>
-      </div>
-    </div>
+<!-- 15. Leadership -->
+<div id="competence-leadership" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-person-chalkboard"></i> Leadership</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You can lead teams with clarity, direction and support, adapting leadership style to context.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to empower and inspire others by providing vision, direction, feedback and support.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 16. Team management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-people-group"></i> Team management</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You can build, motivate and coordinate teams effectively, aligning people to shared goals.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to select, develop and manage individuals to create and sustain teams.</p>
-        </details>
-      </div>
-    </div>
+<!-- 16. Team management -->
+<div id="competence-team-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-people-group"></i> Team management</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You can build, motivate and coordinate teams effectively, aligning people to shared goals.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to select, develop and manage individuals to create and sustain teams.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 17. Diversity & inclusion -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-people-arrows"></i> Diversity & inclusion</span>
-        <span class="rating-badge rating-aware">Aware</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You recognise the importance of inclusive environments and fair treatment.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to build and maintain an inclusive environment that embraces a diverse culture.</p>
-        </details>
-      </div>
-    </div>
+<!-- 17. Diversity & inclusion -->
+<div id="competence-diversity-and-inclusion" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-people-arrows"></i> Diversity & inclusion</span>
+    <span class="rating-badge rating-aware">Aware</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You recognise the importance of inclusive environments and fair treatment.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to build and maintain an inclusive environment that embraces a diverse culture.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 18. Ethics, compliance & professionalism -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-scale-balanced"></i> Ethics, compliance & professionalism</span>
-        <span class="rating-badge rating-aware">Aware</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You understand the importance of ethical behaviour, legal compliance and professional standards.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to embody, promote and maintain a trusted profession while navigating cultural, legal and regulatory environments.</p>
-        </details>
-      </div>
-    </div>
+<!-- 18. Ethics, compliance & professionalism -->
+<div id="competence-ethics-compliance-and-professionalism" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-scale-balanced"></i> Ethics, compliance & professionalism</span>
+    <span class="rating-badge rating-aware">Aware</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You understand the importance of ethical behaviour, legal compliance and professional standards.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to embody, promote and maintain a trusted profession while navigating cultural, legal and regulatory environments.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 19. Requirements management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-list-check"></i> Requirements management</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You can capture, assess and justify stakeholder needs effectively.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to prepare and maintain definitions of the requirements of change initiatives.</p>
-        </details>
-      </div>
-    </div>
+<!-- 19. Requirements management -->
+<div id="competence-requirements-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-list-check"></i> Requirements management</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You can capture, assess and justify stakeholder needs effectively.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to prepare and maintain definitions of the requirements of change initiatives.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 20. Solutions development -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-lightbulb"></i> Solutions development</span>
-        <span class="rating-badge rating-aware">Aware</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You have awareness of how to explore solution options and clarify the problem to be solved.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to determine the optimal solution to satisfy agreed requirements.</p>
-        </details>
-      </div>
-    </div>
+<!-- 20. Solutions development -->
+<div id="competence-solutions-development" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-lightbulb"></i> Solutions development</span>
+    <span class="rating-badge rating-aware">Aware</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You have awareness of how to explore solution options and clarify the problem to be solved.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to determine the optimal solution to satisfy agreed requirements.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 21. Quality management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-check-double"></i> Quality management</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You ensure outputs meet defined requirements and stakeholder expectations.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to ensure that outputs are delivered in accordance with requirements.</p>
-        </details>
-      </div>
-    </div>
+<!-- 21. Quality management -->
+<div id="competence-quality-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-check-double"></i> Quality management</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You ensure outputs meet defined requirements and stakeholder expectations.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to ensure that outputs are delivered in accordance with requirements.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 22. Integrated planning -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-diagram-project"></i> Integrated planning</span>
-        <span class="rating-badge rating-practised">Practised</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You develop integrated plans that bring together scope, schedule, cost, risk, resources and benefits.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to take forward the definition of outputs into detailed planning incorporating multiple areas into the integrated project management plan.</p>
-        </details>
-      </div>
-    </div>
+<!-- 22. Integrated planning -->
+<div id="competence-integrated-planning" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-diagram-project"></i> Integrated planning</span>
+    <span class="rating-badge rating-practised">Practised</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You develop integrated plans that bring together scope, schedule, cost, risk, resources and benefits.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to take forward the definition of outputs into detailed planning incorporating multiple areas into the integrated project management plan.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 23. Schedule management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-calendar-days"></i> Schedule management</span>
-        <span class="rating-badge rating-proficient">Proficient</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You demonstrate strong capability in developing and maintaining schedules.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to undertake time‑based planning with an emphasis on activities and resources.</p>
-        </details>
-      </div>
-    </div>
+<!-- 23. Schedule management -->
+<div id="competence-schedule-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-calendar-days"></i> Schedule management</span>
+    <span class="rating-badge rating-proficient">Proficient</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You demonstrate strong capability in developing and maintaining schedules.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to undertake time‑based planning with an emphasis on activities and resources.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 24. Resource management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-people-carry-box"></i> Resource management</span>
-        <span class="rating-badge rating-proficient">Proficient</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You identify, acquire and deploy resources effectively.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to acquire and deploy internal and external resources.</p>
-        </details>
-      </div>
-    </div>
+<!-- 24. Resource management -->
+<div id="competence-resource-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-people-carry-box"></i> Resource management</span>
+    <span class="rating-badge rating-proficient">Proficient</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You identify, acquire and deploy resources effectively.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to acquire and deploy internal and external resources.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 25. Resource capacity planning -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-chart-line"></i> Resource capacity planning</span>
-        <span class="rating-badge rating-practised">Practised</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You forecast future resource needs based on organisational strategy.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to plan resource needs in line with strategic direction to maintain optimal utilisation.</p>
-        </details>
-      </div>
-    </div>
+<!-- 25. Resource capacity planning -->
+<div id="competence-resource-capacity-planning" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-chart-line"></i> Resource capacity planning</span>
+    <span class="rating-badge rating-practised">Practised</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You forecast future resource needs based on organisational strategy.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to plan resource needs in line with strategic direction to maintain optimal utilisation.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 26. Budgeting & cost control -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-coins"></i> Budgeting & cost control</span>
-        <span class="rating-badge rating-expert">Expert</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You excel in cost estimation, budgeting and financial control.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to develop and agree budgets, and manage actual and forecast costs against them.</p>
-        </details>
-      </div>
-    </div>
+<!-- 26. Budgeting & cost control -->
+<div id="competence-budgeting-and-cost-control" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-coins"></i> Budgeting & cost control</span>
+    <span class="rating-badge rating-expert">Expert</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You excel in cost estimation, budgeting and financial control.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to develop and agree budgets, and manage actual and forecast costs against them.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 27. Contract management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-file-contract"></i> Contract management</span>
-        <span class="rating-badge rating-competent">Competent</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You manage supplier performance and maintain effective commercial relationships.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to monitor and manage supplier performance throughout the contract lifecycle.</p>
-        </details>
-      </div>
-    </div>
+<!-- 27. Contract management -->
+<div id="competence-contract-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-file-contract"></i> Contract management</span>
+    <span class="rating-badge rating-competent">Competent</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You manage supplier performance and maintain effective commercial relationships.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to monitor and manage supplier performance throughout the contract lifecycle.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 28. Risk & issue management -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-triangle-exclamation"></i> Risk & issue management</span>
-        <span class="rating-badge rating-expert">Expert</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You demonstrate expert capability in identifying, assessing and responding to risks and issues.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to identify, assess and respond appropriately to risks and issues.</p>
-        </details>
-      </div>
-    </div>
+<!-- 28. Risk & issue management -->
+<div id="competence-risk-and-issue-management" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-triangle-exclamation"></i> Risk & issue management</span>
+    <span class="rating-badge rating-expert">Expert</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You demonstrate expert capability in identifying, assessing and responding to risks and issues.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to identify, assess and respond appropriately to risks and issues.</p>
+    </details>
+  </div>
+</div>
 
-    <!-- 29. Change control -->
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="fa-solid fa-arrows-rotate"></i> Change control</span>
-        <span class="rating-badge rating-expert">Expert</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-      <div class="accordion-content">
-        <p><strong>Summary:</strong> You excel at managing scope changes in a controlled and transparent way.</p>
-        <details>
-          <summary>Show full description</summary>
-          <p>The ability to manage variations and change requests in a controlled way.</p>
-        </details>
-      </div>
-    </div>
+<!-- 29. Change control -->
+<div id="competence-change-control" class="accordion-item">
+  <div class="accordion-header">
+    <span><i class="fa-solid fa-arrows-rotate"></i> Change control</span>
+    <span class="rating-badge rating-expert">Expert</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="accordion-content">
+    <p><strong>Summary:</strong> You excel at managing scope changes in a controlled and transparent way.</p>
+    <details>
+      <summary>Show full description</summary>
+      <p>The ability to manage variations and change requests in a controlled way.</p>
+    </details>
+  </div>
+</div>
+
+
 
   </div> <!-- end accordion -->
+  </div> <!-- end collapsible-content -->
+
 </section>
 <!-- FLOATING ACTION BUTTONS -->
 <div class="fab fab-scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
@@ -2634,95 +3302,144 @@ document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
       if (footer) footer.innerHTML = h;
     });
 </script>
-<!-- ACCORDION OPEN/CLOSE -->
 <script>
-  document.querySelectorAll(".accordion-header").forEach(header => {
-    header.addEventListener("click", () => {
-      header.parentElement.classList.toggle("open");
-    });
-  });
-</script>
-
-<!-- RATING FILTER LOGIC -->
-<script>
-(function () {
-  const items = document.querySelectorAll('.accordion-item');
-
-  // Extract rating from badge
-  items.forEach(item => {
-    const badge = item.querySelector('.rating-badge');
-    if (!badge) return;
-
-    const cls = Array.from(badge.classList)
-      .find(c => c.startsWith('rating-') && c !== 'rating-badge');
-
-    if (cls) item.dataset.rating = cls.replace('rating-', '');
-  });
-
-  const legendBadges = document.querySelectorAll('.section-subtitle .rating-badge');
-  let currentFilter = null;
-
-  function applyFilter(rating) {
-    items.forEach(item => {
-      if (!rating) {
-        item.style.display = '';
-      } else {
-        item.style.display = (item.dataset.rating === rating) ? '' : 'none';
-      }
-    });
-  }
-
-  legendBadges.forEach(badge => {
-    const cls = Array.from(badge.classList)
-      .find(c => c.startsWith('rating-') && c !== 'rating-badge');
-
-    if (!cls) return;
-
-    const rating = cls.replace('rating-', '');
-    badge.style.cursor = 'pointer';
-
-    badge.addEventListener('click', () => {
-      if (currentFilter === rating) {
-        currentFilter = null;
-        legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-        applyFilter(null);
-      } else {
-        currentFilter = rating;
-        legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-        badge.classList.add('rating-filter-active');
-        applyFilter(rating);
-      }
-    });
-  });
-})();
-</script>
-
-<!-- CAROUSEL BUTTON SCROLL -->
-<script>
-(function() {
-  const wrapper = document.querySelector('.carousel-wrapper');
-  if (!wrapper) return;
-
-  const track = wrapper.querySelector('.carousel-track');
-  const btnPrev = wrapper.querySelector('.carousel-btn.prev');
-  const btnNext = wrapper.querySelector('.carousel-btn.next');
-  const cardWidth = 340; // card width + gap
-
-  btnPrev.addEventListener('click', () => {
-    track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-  });
-
-  btnNext.addEventListener('click', () => {
-    track.scrollBy({ left: cardWidth, behavior: 'smooth' });
-  });
-})();
-</script>
-
-
-<script>
+// 1) Run CPD loader first
 document.addEventListener("DOMContentLoaded", () => {
-    loadCPD();
+  loadCPD();
 });
-</script></main>
+</script>
+<script>
+/* ============================================================
+   CLEAN JS — CPD LOG + COMPETENCE ACCORDION + LINKING
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. CPD LOG COLLAPSIBLE
+   ------------------------------------------------------------ */
+
+document.addEventListener("click", e => {
+    const toggle = e.target.closest(".collapsible-toggle");
+    if (!toggle) return;
+
+    const content = toggle.nextElementSibling;
+    if (!content || !content.classList.contains("collapsible-content")) return;
+
+    // Toggle open/closed
+    content.classList.toggle("open");
+});
+
+
+/* ------------------------------------------------------------
+   2. COMPETENCE ACCORDION
+   ------------------------------------------------------------ */
+
+document.addEventListener("click", e => {
+    const header = e.target.closest(".accordion-header");
+    if (!header) return;
+
+    const item = header.closest(".accordion-item");
+    if (!item) return;
+
+    // Toggle accordion item
+    item.classList.toggle("open");
+});
+
+
+/* ------------------------------------------------------------
+   3. CPD → COMPETENCE LINKING
+   (Works even when accordion is closed)
+   ------------------------------------------------------------ */
+
+document.addEventListener("click", e => {
+    const link = e.target.closest(".cpd-competence-link");
+    if (!link) return;
+
+    e.stopPropagation(); // Prevent accordion header from hijacking click
+
+    const targetSelector = link.getAttribute("href");
+    if (!targetSelector) return;
+
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
+
+    // Force accordion open
+    target.classList.add("open");
+
+    // Scroll to the competence item
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+
+/* ------------------------------------------------------------
+   4. Prevent competence links inside accordion from toggling it
+   ------------------------------------------------------------ */
+
+document.addEventListener("click", e => {
+    if (e.target.closest(".competence-link")) {
+        e.stopPropagation();
+    }
+});
+</script>
+
+
+
+<script>
+// 4) Rating filter (original logic)
+(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll('.accordion-item');
+
+    items.forEach(item => {
+      const badge = item.querySelector('.rating-badge');
+      if (!badge) return;
+
+      const cls = Array.from(badge.classList)
+        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
+
+      if (cls) item.dataset.rating = cls.replace('rating-', '');
+    });
+
+    const legendBadges = document.querySelectorAll('.section-subtitle .rating-badge');
+    let currentFilter = null;
+
+    function applyFilter(rating) {
+      items.forEach(item => {
+        if (!rating) {
+          item.style.display = '';
+        } else {
+          item.style.display = (item.dataset.rating === rating) ? '' : 'none';
+        }
+      });
+    }
+
+    legendBadges.forEach(badge => {
+      const cls = Array.from(badge.classList)
+        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
+
+      if (!cls) return;
+
+      const rating = cls.replace('rating-', '');
+      badge.style.cursor = 'pointer';
+
+      badge.addEventListener('click', () => {
+        if (currentFilter === rating) {
+          currentFilter = null;
+          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+          applyFilter(null);
+        } else {
+          currentFilter = rating;
+          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+          badge.classList.add('rating-filter-active');
+          applyFilter(rating);
+        }
+      });
+    });
+  });
+})();
+</script>
+
+
+
+</main>
 </body>
 </html>

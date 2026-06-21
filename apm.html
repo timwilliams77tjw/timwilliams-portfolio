@@ -1579,6 +1579,16 @@ html, body, .header-with-logo, .page-prof-dev, #header-placeholder, #header-plac
 .collapsible-content.open {
     display: block !important;
 }
+
+/* CLEAN RESET — CPD LOG COLLAPSIBLE */
+.collapsible-content {
+    display: none !important;
+}
+
+.collapsible-content.open {
+    display: block !important;
+}
+  
     
   </style>
 
@@ -3315,7 +3325,13 @@ document.addEventListener('click', e => {
   target.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 </script>
-
+<script>
+document.querySelectorAll(".competence-link").forEach(link => {
+    link.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+});
+</script> 
 <script>
 // 3) Accordion open/close (original behaviour)
 document.addEventListener("DOMContentLoaded", () => {

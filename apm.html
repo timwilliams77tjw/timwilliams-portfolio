@@ -3318,12 +3318,13 @@ document.addEventListener('click', e => {
   const target = document.querySelector(link.getAttribute('href'));
   if (!target) return;
 
-  const header = target.querySelector('.accordion-header');
-  if (!header) return;
+  // Force accordion open
+  target.classList.add("open");
 
-  header.click();
+  // Scroll to it
   target.scrollIntoView({ behavior: "smooth", block: "start" });
 });
+
 </script>
 <script>
 document.querySelectorAll(".competence-link").forEach(link => {

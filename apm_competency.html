@@ -1031,6 +1031,58 @@ FINAL OVERRIDES — FORCE CORRECT BEHAVIOUR
   max-height: 20000px !important;
 }
 
+/* ============================================================
+FINAL PATCH — RESTORE PILLAR COLOURS + FOOTER LAYOUT
+============================================================ */
+
+/* 1 — Force correct pillar gradients (overrides the white background) */
+.pillar-card.completed {
+    background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+.pillar-card.remaining {
+    background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+.pillar-card.projected {
+    background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+
+/* 2 — Ensure icon glow + text colours are restored */
+.pillar-card .pillar-icon,
+.pillar-card .pillar-value,
+.pillar-card .pillar-title {
+    color: #fff !important;
+}
+
+/* 3 — Ensure progress bar background + fill are correct */
+.pillar-card .pillar-progress {
+    background: rgba(255,255,255,.25) !important;
+}
+
+.pillar-card .pillar-fill {
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+}
+
+/* 4 — Fix hero float so footer sits correctly */
+.hero-section::after {
+    content: "";
+    display: block;
+    clear: both !important;
+}
+
+/* 5 — Fix CPD log height (keeps expand/collapse working) */
+.collapsible-content.open {
+    max-height: 20000px !important;
+    opacity: 1 !important;
+}
+
+/* 6 — Fix stray-brace fallout (ensures CSS below still applies) */
+#footer {
+    position: relative !important;
+    z-index: 10 !important;
+}
   
 </style>
 

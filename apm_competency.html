@@ -1083,6 +1083,164 @@ FINAL PATCH — RESTORE PILLAR COLOURS + FOOTER LAYOUT
     position: relative !important;
     z-index: 10 !important;
 }
+/* ==========================================================
+   CPD PILLARS — FINAL, ISOLATED STYLING
+   (Paste at the very end of the page <style> block)
+========================================================== */
+
+section.cpd-pillars-section {
+  margin: 3rem 0 2rem;
+}
+
+/* Scroll container */
+section.cpd-pillars-section .pillars-scroll {
+  display: flex !important;
+  gap: 18px !important;
+  overflow-x: auto !important;
+  padding: 10px 0 20px !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+section.cpd-pillars-section .pillars-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+section.cpd-pillars-section .pillars-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+/* Pillar card container */
+section.cpd-pillars-section .pillar-card {
+  min-width: 220px !important;
+  flex: 0 0 auto !important;
+  border-radius: 24px !important;
+  padding: 22px !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12) !important;
+  scroll-snap-align: start !important;
+  transition: transform .35s ease, box-shadow .35s ease !important;
+  position: relative !important;
+}
+
+/* Hover lift */
+section.cpd-pillars-section .pillar-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 14px 32px rgba(0,0,0,.18) !important;
+}
+
+/* Completed / Remaining / Projected card backgrounds */
+section.cpd-pillars-section .pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+section.cpd-pillars-section .pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+section.cpd-pillars-section .pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+
+/* Icon */
+section.cpd-pillars-section .pillar-icon {
+  width: 56px !important;
+  height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 16px !important;
+  font-size: 22px !important;
+  margin-bottom: 16px !important;
+  background: rgba(255,255,255,.18) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 4px 12px rgba(255,255,255,.25) !important;
+}
+
+/* Value */
+section.cpd-pillars-section .pillar-value {
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 4px !important;
+  color: #ffffff !important;
+}
+
+/* Title */
+section.cpd-pillars-section .pillar-title {
+  font-size: .95rem !important;
+  color: rgba(255,255,255,.85) !important;
+  margin-bottom: 18px !important;
+}
+
+/* Progress bar container */
+section.cpd-pillars-section .pillar-progress {
+  height: 12px !important;
+  background: rgba(255,255,255,.25) !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+}
+
+/* Progress fill — animated */
+section.cpd-pillars-section .pillar-fill {
+  height: 100% !important;
+  width: 0% !important;
+  border-radius: 999px !important;
+  transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+}
+
+/* Gradient fills */
+section.cpd-pillars-section .pillar-card.completed .pillar-fill {
+  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
+}
+
+section.cpd-pillars-section .pillar-card.remaining .pillar-fill {
+  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
+}
+
+section.cpd-pillars-section .pillar-card.projected .pillar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
+}
+
+/* ID-based hard overrides (in case anything else targets the IDs) */
+section.cpd-pillars-section #pillar-completed.pillar-fill {
+  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
+}
+
+section.cpd-pillars-section #pillar-remaining.pillar-fill {
+  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
+}
+
+section.cpd-pillars-section #pillar-projected.pillar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
+}
+
+/* CPD badge in top-right of each card */
+section.cpd-pillars-section .pillar-card::after {
+  content: "CPD";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.15);
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+/* Optional: subtle pulse on projected card */
+@keyframes pillarPulse {
+  0%   { transform: scale(1);   opacity: 1;   }
+  50%  { transform: scale(1.03); opacity: 0.85; }
+  100% { transform: scale(1);   opacity: 1;   }
+}
+
+section.cpd-pillars-section .pillar-card.projected {
+  animation: pillarPulse 2.4s ease-in-out infinite;
+}
+
+
   
 </style>
 

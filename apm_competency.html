@@ -1243,6 +1243,42 @@ section.cpd-pillars-section .pillar-card.projected {
 .cpd-pillars-section .pillar-card.projected {
     background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
 }
+
+/* ============================================================
+   SAFE VISUAL UPGRADE FOR CPD + COMPETENCY HEADERS
+   (No pseudo-elements, no layout changes, no JS conflicts)
+============================================================ */
+
+.cpd-log-section .collapsible-toggle,
+.accordion-item .accordion-header {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom: 0.75rem;
+}
+
+.cpd-log-section .collapsible-toggle h2,
+.accordion-item .accordion-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0a2540;
+}
+
+/* Keep your existing chevron working */
+.cpd-log-section .chevron,
+.accordion-item .chevron {
+  font-size: 1rem;
+  color: #64748b;
+  transition: transform 0.3s ease;
+}
+
+.cpd-log-section .collapsible-toggle.open .chevron,
+.accordion-item.open .accordion-header .chevron {
+  transform: rotate(90deg);
+}
   
 </style>
 

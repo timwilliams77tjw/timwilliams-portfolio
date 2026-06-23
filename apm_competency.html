@@ -491,19 +491,7 @@ FOOTER + FAB
   margin-top: 3rem;
 }
 
-body.page-prof-dev #footer,
-body.page-prof-dev #footer footer {
-  margin-top: 3rem;
-  padding: 2rem 1.5rem;
-  border-top: 1px solid #e5e5e5;
-  background: #0a2540;
-  color: #ffffff;
-  font-size: 0.9rem;
-}
 
-body.page-prof-dev #footer a {
-  color: #ffffff;
-}
 
 .fab {
   position: fixed;
@@ -1255,6 +1243,96 @@ section.cpd-pillars-section .pillar-card.projected {
 .cpd-pillars-section .pillar-card.projected {
     background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
 }
+
+/* FINAL OVERRIDE — CPD Pillars on APM page */
+
+section.cpd-pillars-section .pillar-card {
+  min-width: 220px !important;
+  border-radius: 24px !important;
+  padding: 22px !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12) !important;
+  scroll-snap-align: start !important;
+  position: relative !important;
+}
+
+section.cpd-pillars-section .pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+section.cpd-pillars-section .pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+section.cpd-pillars-section .pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+
+section.cpd-pillars-section .pillar-icon,
+section.cpd-pillars-section .pillar-value,
+section.cpd-pillars-section .pillar-title {
+  color: #ffffff !important;
+}
+
+section.cpd-pillars-section .pillar-progress {
+  background: rgba(255,255,255,.25) !important;
+}
+
+section.cpd-pillars-section .pillar-fill {
+  height: 100% !important;
+  border-radius: 999px !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+
+section.cpd-pillars-section .pillar-card.completed .pillar-fill {
+  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
+}
+
+section.cpd-pillars-section .pillar-card.remaining .pillar-fill {
+  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
+}
+
+section.cpd-pillars-section .pillar-card.projected .pillar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
+}
+
+/* Collapsible headers – make them look like interactive cards */
+
+.collapsible-toggle,
+.accordion-header {
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 1px solid #e5e7eb;
+  margin-bottom: 0.75rem;
+}
+
+.collapsible-toggle h3,
+.accordion-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a2540;
+}
+
+/* Add a chevron on the right */
+
+.collapsible-toggle::after,
+.accordion-header::after {
+  content: "▾";
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-left: auto;
+}
+
+/* When open, rotate chevron */
+
+.collapsible-toggle.open::after,
+.accordion-item.open .accordion-header::after {
+  content: "▴";
+}
   
 </style>
 
@@ -1462,7 +1540,7 @@ section.cpd-pillars-section .pillar-card.projected {
         Continuing Professional Development (CPD)
         <i class="fa-solid fa-chevron-right chevron"></i>
     </h2>
-
+<p class="section-subtitle">Tap to expand CPD log and reflections.</p>
     <div class="collapsible-content">
         <p class="section-subtitle">
             Your CPD activities, presented as clean, modern cards.
@@ -2467,7 +2545,7 @@ function generateProgressPillars() {
   My Competence Assessment (29 competences)
   <i class="fa-solid fa-chevron-right chevron"></i>
 </h2>
-
+<p class="section-subtitle">Tap to expand my Competency Assessment.</p>
 <div class="collapsible-content">
 
 <div class="apm-progress-bar"></div>

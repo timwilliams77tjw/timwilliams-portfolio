@@ -1279,6 +1279,48 @@ section.cpd-pillars-section .pillar-card.projected {
 .accordion-item.open .accordion-header .chevron {
   transform: rotate(90deg);
 }
+
+  /* CPD header helper text inside the toggle */
+.section-helper {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: #6b7280; /* soft grey */
+}
+
+/* Make the text block stack nicely */
+.collapsible-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-item .accordion-header {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.accordion-item .accordion-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a2540;
+}
+
+.accordion-item .chevron {
+  font-size: 1rem;
+  color: #64748b;
+  transition: transform 0.25s ease;
+}
+
+.accordion-item.open .accordion-header .chevron {
+  transform: rotate(90deg);
+}
   
 </style>
 
@@ -1481,20 +1523,28 @@ section.cpd-pillars-section .pillar-card.projected {
 </div>
 <!-- CPD SECTION -->
 <section class="cpd-log-section">
-    <h2 class="section-heading collapsible-toggle">
+  <div class="collapsible-toggle">
+    <div class="collapsible-text">
+      <h2 class="section-heading">
         <i class="fa-solid fa-graduation-cap"></i>
         Continuing Professional Development (CPD)
-        <i class="fa-solid fa-chevron-right chevron"></i>
-    </h2>
-
-    <div class="collapsible-content">
-        <p class="section-subtitle">
-            Your CPD activities, presented as clean, modern cards.
-        </p>
-
-        <div id="cpd-card-container" class="cpd-card-container"></div>
+      </h2>
+      <p class="section-helper">
+        Tap to expand CPD log and reflections.
+      </p>
     </div>
+    <i class="fa-solid fa-chevron-right chevron"></i>
+  </div>
+
+  <div class="collapsible-content">
+    <p class="section-subtitle">
+      Your CPD activities, presented as clean, modern cards.
+    </p>
+
+    <div id="cpd-card-container" class="cpd-card-container"></div>
+  </div>
 </section>
+
 
   <!-- INSIGHTS PANEL -->
   <section class="cpd-insights">

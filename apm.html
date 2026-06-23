@@ -13,16 +13,24 @@
   <!-- ICONS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
- /* =========================================
-   ROOT + GLOBAL
-========================================= */
+<style>
+
+/* ============================================================
+ROOT + GLOBAL
+============================================================ */
+
 :root {
   --apm-card-bg: #ffffff;
   --apm-shadow: 0 4px 14px rgba(0,0,0,0.06);
   --apm-accent: #0a66c2;
   --apm-blue: #0a66c2;
   --apm-subtext: #444;
+}
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
 }
 
 body.page-prof-dev {
@@ -37,9 +45,10 @@ body.page-prof-dev {
   padding: 2.5rem 1.5rem;
 }
 
-/* =========================================
-   HERO
-========================================= */
+/* ============================================================
+HERO
+============================================================ */
+
 .hero-section {
   margin-bottom: 2rem;
 }
@@ -71,6 +80,7 @@ body.page-prof-dev {
   .hero-section h1 {
     font-size: 2.1rem;
   }
+
   .hero-section img {
     float: none;
     display: block;
@@ -80,9 +90,10 @@ body.page-prof-dev {
   }
 }
 
-/* =========================================
-   SECTION HEADINGS
-========================================= */
+/* ============================================================
+SECTION HEADINGS
+============================================================ */
+
 .section-heading {
   font-size: 1.6rem;
   font-weight: 700;
@@ -105,9 +116,10 @@ body.page-prof-dev {
   line-height: 1.6;
 }
 
-/* =========================================
-   INFO CARDS
-========================================= */
+/* ============================================================
+INFO CARDS
+============================================================ */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -151,9 +163,10 @@ body.page-prof-dev {
   margin: 0;
 }
 
-/* =========================================
-   CPD TABLE
-========================================= */
+/* ============================================================
+CPD TABLE
+============================================================ */
+
 .cpd-table-wrapper {
   margin-top: 1.5rem;
   overflow-x: auto;
@@ -195,9 +208,10 @@ table.cpd-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* =========================================
-   RATING BADGES
-========================================= */
+/* ============================================================
+RATING BADGES
+============================================================ */
+
 .rating-badge {
   display: inline-block;
   padding: 6px 14px;
@@ -215,9 +229,10 @@ table.cpd-table tbody tr:last-child td {
 .rating-practised { background: #8a2be2; }
 .rating-aware { background: #555; }
 
-/* =========================================
-   ACCORDION
-========================================= */
+/* ============================================================
+ACCORDION (COMPETENCE)
+============================================================ */
+
 .accordion-item {
   margin-bottom: 1.4rem;
   padding: 1rem 1.2rem;
@@ -226,6 +241,7 @@ table.cpd-table tbody tr:last-child td {
   box-shadow: var(--apm-shadow);
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
+
 .accordion-header {
   display: flex;
   justify-content: space-between;
@@ -233,51 +249,58 @@ table.cpd-table tbody tr:last-child td {
   gap: 1rem;
   cursor: pointer;
 }
+
 .accordion-content {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
   border-top: 1px solid #e5e5e5;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
 }
-details summary {
-  margin-top: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 6px 0;
+
+.accordion-item.open .accordion-content {
+  max-height: 5000px;
+  opacity: 1;
 }
-details {
-  margin-top: 0.5rem;
-  border-top: 1px solid #e5e5e5;
-  padding-top: 0.75rem;
-}
+
 /* Colour accordion items by rating */
+
 .accordion-item:has(.rating-expert) {
   background: #e6f0ff;
   border-left: 4px solid #0a66c2;
 }
+
 .accordion-item:has(.rating-proficient) {
   background: #e5f7f1;
   border-left: 4px solid #007b5f;
 }
+
 .accordion-item:has(.rating-competent) {
   background: #fff7e5;
   border-left: 4px solid #b8860b;
 }
+
 .accordion-item:has(.rating-practised) {
   background: #f3e9ff;
   border-left: 4px solid #8a2be2;
 }
+
 .accordion-item:has(.rating-aware) {
   background: #f2f2f2;
   border-left: 4px solid #555;
 }
-/* =========================================
-   CAROUSEL
-========================================= */
+/* ============================================================
+CAROUSEL
+============================================================ */
+
 .carousel-wrapper {
   position: relative;
   width: 100%;
   margin: 2rem 0;
 }
+
 .carousel-track {
   display: flex;
   overflow-x: auto;
@@ -286,14 +309,17 @@ details {
   padding: 1rem 0;
   scroll-behavior: smooth;
 }
+
 .carousel-track::-webkit-scrollbar {
   display: none;
 }
+
 .carousel-track .info-card {
   min-width: 320px;
   max-width: 320px;
   scroll-snap-align: start;
 }
+
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -313,38 +339,46 @@ details {
   justify-content: center;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
+
 .carousel-btn:hover {
   background: var(--apm-blue);
   color: white;
 }
+
 .carousel-btn.prev { left: -10px; }
 .carousel-btn.next { right: -10px; }
+
 @media (max-width: 600px) {
   .carousel-btn.prev { left: 5px; }
   .carousel-btn.next { right: 5px; }
 }
-/* =========================================
-   CPD PROGRESS RING
-========================================= */
+
+/* ============================================================
+CPD PROGRESS RING
+============================================================ */
+
 .cpd-progress-section {
   margin: 2rem 0 3rem;
-      margin-bottom: 2.5rem;
   text-align: center;
 }
+
 .cpd-progress-container {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto;
-    position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  position: relative;
 }
+
 .cpd-progress-ring {
   transform: rotate(-90deg);
 }
+
 .cpd-ring-bg {
   fill: none;
   stroke: #e5e7eb;
   stroke-width: 12;
 }
+
 .cpd-ring-fill {
   fill: none;
   stroke: var(--apm-blue);
@@ -353,32 +387,38 @@ details {
   stroke-dasharray: 0 999;
   transition: stroke-dasharray 1s ease;
 }
+
 .cpd-progress-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .cpd-progress-text h3 {
   font-size: 1.1rem;
   margin: 0;
   font-weight: 700;
   color: #0a2540;
 }
+
 .cpd-progress-text p {
   margin: 4px 0 0;
   font-size: 0.85rem;
   color: #555;
 }
-/* =========================================
-   CPD METRICS
-========================================= */
+
+/* ============================================================
+CPD METRICS
+============================================================ */
+
 .cpd-metrics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.4rem;
   margin: 2.2rem 0 2.6rem;
 }
+
 .cpd-metric-card {
   background: var(--apm-card-bg);
   padding: 1.6rem 1.4rem;
@@ -386,6 +426,7 @@ details {
   box-shadow: var(--apm-shadow);
   border-top: 4px solid var(--apm-accent);
 }
+
 .cpd-metric-card h4 {
   font-size: 0.95rem;
   font-weight: 600;
@@ -394,23 +435,28 @@ details {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+
 .cpd-metric-card p {
   font-size: 1.6rem;
   font-weight: 800;
   color: var(--apm-blue);
   margin: 0;
 }
-/* =========================================
-   INSIGHTS
-========================================= */
+
+/* ============================================================
+INSIGHTS
+============================================================ */
+
 .cpd-insights {
   margin: 3rem 0 3.5rem;
 }
+
 .insights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.6rem;
 }
+
 .insight-card {
   background: var(--apm-card-bg);
   padding: 1.6rem 1.4rem;
@@ -418,39 +464,35 @@ details {
   box-shadow: var(--apm-shadow);
   border-left: 5px solid var(--apm-accent);
 }
+
 .insight-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--apm-blue);
   margin-bottom: 0.7rem;
 }
+
 .insight-card ul {
   margin: 0;
   padding-left: 1.2rem;
   color: var(--apm-subtext);
   line-height: 1.6;
 }
+
 .insight-card li {
   margin-bottom: 0.35rem;
 }
-/* =========================================
-   FOOTER + FAB
-========================================= */
+
+/* ============================================================
+FOOTER + FAB
+============================================================ */
+
 #footer {
   margin-top: 3rem;
 }
-body.page-prof-dev #footer,
-body.page-prof-dev #footer footer {
-  margin-top: 3rem;
-  padding: 2rem 1.5rem;
-  border-top: 1px solid #e5e5e5;
-  background: #0a2540;
-  color: #ffffff;
-  font-size: 0.9rem;
-}
-body.page-prof-dev #footer a {
-  color: #ffffff;
-}
+
+
+
 .fab {
   position: fixed;
   right: 16px;
@@ -468,99 +510,25 @@ body.page-prof-dev #footer a {
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
   z-index: 9999;
 }
+
 .fab-booking {
   bottom: calc(84px + env(safe-area-inset-bottom));
 }
+
 @media (max-width: 480px) {
   .fab {
     right: 14px;
     bottom: calc(18px + env(safe-area-inset-bottom));
   }
+
   .fab-booking {
     bottom: calc(80px + env(safe-area-inset-bottom));
   }
 }
+/* ============================================================
+DONUT CHART (D3 – CURRENT VERSION)
+============================================================ */
 
-/* =========================================
-   CPD HEATMAP
-========================================= */
-
-.cpd-heatmap {
-  margin: 3rem 0;
-  overflow-x: auto;
-}
-
-.heatmap-cell {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-}
-}
-}
-
-.heatmap-cell.level-0 {
-  background: #eef2f7;
-}
-
-.heatmap-cell.level-1 {
-  background: #cfe8ff;
-}
-
-.heatmap-cell.level-2 {
-  background: #7ac0f9;
-}
-
-.heatmap-cell.level-3 {
-  background: #0a66c2;
-}
-
-.heatmap-cell.level-4 {
-  background: #003a73;
-}
-/* FINAL FIX — APM PROGRESS BAR */
-.apm-progress-bar,
-.apm-progress-bar--static {
-    width: 100% !important;
-    height: 28px !important;
-    border-radius: 6px !important;
-    overflow: hidden !important;
-    display: block !important;
-    background-image: linear-gradient(
-        to right,
-        #d9534f 0%, #d9534f 10%,
-        #f0ad4e 10%, #f0ad4e 30%,
-        #8a2be2 30%, #8a2be2 55%,
-        #b8860b 55%, #b8860b 75%,
-        #007b5f 75%, #007b5f 90%,
-        #0a66c2 90%, #0a66c2 100%
-    ) !important;
-    background-size: 100% 100% !important;
-}
-
-/* FINAL FIX — HEATMAP */
-#heatmap-grid {
-    display: grid !important;
-    grid-template-columns: repeat(53, 1fr) !important;
-    grid-auto-rows: 12px !important;
-    gap: 3px !important;
-    overflow-x: scroll !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding-bottom: 0.5rem !important;
-    min-height: 120px !important;
-}
-
-.heatmap-cell {
-    display: block !important;
-    width: 12px !important;
-    height: 12px !important;
-    border-radius: 3px !important;
-}
-
-.heatmap-cell.level-0 { background: #eef2f7 !important; }
-.heatmap-cell.level-1 { background: #cfe8ff !important; }
-.heatmap-cell.level-2 { background: #7ac0f9 !important; }
-.heatmap-cell.level-3 { background: #0a66c2 !important; }
-.heatmap-cell.level-4 { background: #003a73 !important; }
 .cpd-donut-section {
   margin: 3rem 0;
 }
@@ -627,6 +595,11 @@ body.page-prof-dev #footer a {
   border-radius: 3px;
   margin-right: 0.6rem;
 }
+
+/* ============================================================
+RADAR CHART (R3 – CURRENT VERSION)
+============================================================ */
+
 .cpd-radar-section {
   margin: 3rem 0;
 }
@@ -670,472 +643,11 @@ body.page-prof-dev #footer a {
 .radar-point {
   fill: #0a66c2;
 }
-.pillars-wrapper {
-  display: flex;
-  gap: 2rem;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 1rem 0 0.5rem;
-  border-bottom: 2px solid #e2e8f0;
-}
 
-.pillar {
-  flex: 1;
-  min-width: 140px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/* ============================================================
+PREMIUM PILLAR CARDS (P3)
+============================================================ */
 
-.pillar-bar-container {
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(to top, #f8fafc, #edf2f7);
-  border-radius: 12px;
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.08);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.pillar-bar {
-  width: 65%;
-  height: 0;
-  border-radius: 10px 10px 0 0;
-  transition: height 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  position: relative;
-}
-
-.pillar-bar.completed {
-  background: linear-gradient(to top, #0a66c2, #4da3ff);
-}
-
-.pillar-bar.remaining {
-  background: linear-gradient(to top, #b8860b, #f0c75e);
-}
-
-.pillar-bar.projected {
-  background: linear-gradient(to top, #007b5f, #4dd6a8);
-}
-
-.pillar-value-label {
-  position: absolute;
-  bottom: 6px;
-  width: 100%;
-  text-align: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-}
-
-.pillar-label {
-  margin-top: 0.6rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #0a2540;
-}
-
-
-html, body {
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: auto !important;
-}
-
-
-   /* ==========================================================
-   FIXED, ISOLATED PILLAR STYLING (NO GLOBAL IMPACT)
-========================================================== */
-
-.cpd-pillars-section .pillars-wrapper {
-  display: flex;
-  gap: 2rem;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 1rem 0 0.5rem;
-  border-bottom: 2px solid #e2e8f0;
-}
-
-.cpd-pillars-section .pillar {
-  flex: 1;
-  min-width: 140px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cpd-pillars-section .pillar-bar-container {
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(to top, #f8fafc, #edf2f7);
-  border-radius: 12px;
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.08);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.cpd-pillars-section .pillar-bar {
-  width: 65%;
-  height: 0;
-  border-radius: 10px 10px 0 0;
-  transition: height 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  position: relative;
-}
-
-.cpd-pillars-section .pillar-bar.completed {
-  background: linear-gradient(to top, #0a66c2, #4da3ff);
-}
-
-.cpd-pillars-section .pillar-bar.remaining {
-  background: linear-gradient(to top, #b8860b, #f0c75e);
-}
-
-.cpd-pillars-section .pillar-bar.projected {
-  background: linear-gradient(to top, #007b5f, #4dd6a8);
-}
-
-.cpd-pillars-section .pillar-value-label {
-  position: absolute;
-  bottom: 6px;
-  width: 100%;
-  text-align: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-}
-
-.cpd-pillars-section .pillar-label {
-  margin-top: 0.6rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #0a2540;
-}
-.pillars-scroll{
-    display:flex;
-    gap:18px;
-    overflow-x:auto;
-    padding:10px 0 20px;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-}
-
-.pillars-scroll::-webkit-scrollbar{
-    height:6px;
-}
-
-.pillars-scroll::-webkit-scrollbar-thumb{
-    background:#cbd5e1;
-    border-radius:20px;
-}
-
-.pillar-card{
-    min-width:220px;
-    flex:0 0 auto;
-
-    background:#fff;
-    border-radius:24px;
-
-    padding:22px;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.08);
-
-    scroll-snap-align:start;
-
-    transition:.3s;
-}
-
-.pillar-card:hover{
-    transform:translateY(-4px);
-}
-
-.pillar-icon{
-    width:56px;
-    height:56px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:16px;
-
-    font-size:22px;
-
-    margin-bottom:16px;
-}
-
-.completed .pillar-icon{
-    background:#dcfce7;
-    color:#16a34a;
-}
-
-.remaining .pillar-icon{
-    background:#fee2e2;
-    color:#dc2626;
-}
-
-.projected .pillar-icon{
-    background:#dbeafe;
-    color:#2563eb;
-}
-
-.pillar-value{
-    font-size:2rem;
-    font-weight:700;
-    margin-bottom:4px;
-}
-
-.pillar-title{
-    font-size:.95rem;
-    color:#64748b;
-    margin-bottom:18px;
-}
-
-.pillar-progress{
-    height:12px;
-    background:#edf2f7;
-    border-radius:999px;
-    overflow:hidden;
-}
-
-.pillar-fill{
-    width:0%;
-    height:100%;
-    border-radius:999px;
-    transition:1.2s ease;
-}
-
-.completed .pillar-fill{
-    background:linear-gradient(90deg,#16a34a,#22c55e);
-}
-
-.remaining .pillar-fill{
-    background:linear-gradient(90deg,#dc2626,#ef4444);
-}
-
-.projected .pillar-fill{
-    background:linear-gradient(90deg,#2563eb,#60a5fa);
-}
-    .pillar-card{
-    min-width:220px;
-    flex:0 0 auto;
-
-    border-radius:24px;
-    padding:22px;
-
-    color:#fff;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.12);
-
-    scroll-snap-align:start;
-
-    transition:.3s;
-}
-
-.pillar-card:hover{
-    transform:translateY(-4px);
-}
-
-/* Completed */
-.pillar-card.completed{
-    background:linear-gradient(
-        135deg,
-        #16a34a,
-        #22c55e
-    );
-}
-
-/* Remaining */
-.pillar-card.remaining{
-    background:linear-gradient(
-        135deg,
-        #dc2626,
-        #ef4444
-    );
-}
-
-/* Projected */
-.pillar-card.projected{
-    background:linear-gradient(
-        135deg,
-        #2563eb,
-        #60a5fa
-    );
-}
-    .pillar-title{
-    color:rgba(255,255,255,.85);
-}
-
-.pillar-value{
-    color:#fff;
-}
-
-.pillar-icon{
-    background:rgba(255,255,255,.18);
-    color:#fff;
-    backdrop-filter:blur(8px);
-}
-    .pillar-progress{
-    height:10px;
-    background:rgba(255,255,255,.25);
-    border-radius:999px;
-    overflow:hidden;
-}
-
-.pillar-fill{
-    height:100%;
-    border-radius:999px;
-}
-    .pillar-card{
-    position:relative;
-}
-
-.pillar-card::after{
-    content:"CPD";
-    position:absolute;
-    top:16px;
-    right:16px;
-
-    padding:4px 10px;
-
-    border-radius:999px;
-
-    background:rgba(255,255,255,.15);
-
-    font-size:.7rem;
-    font-weight:600;
-}
-
-   /* ==========================================================
-   PREMIUM PILLAR CARD ENHANCEMENTS
-========================================================== */
-
-.pillar-card {
-  position: relative;
-  border-radius: 24px;
-  padding: 22px;
-  color: #fff;
-  box-shadow: 0 10px 25px rgba(0,0,0,.12);
-  scroll-snap-align: start;
-  transition: transform .35s ease, box-shadow .35s ease;
-}
-
-/* Hover lift */
-.pillar-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 32px rgba(0,0,0,.18);
-}
-
-/* Completed */
-.pillar-card.completed {
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-}
-
-/* Remaining */
-.pillar-card.remaining {
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-}
-
-/* Projected */
-.pillar-card.projected {
-  background: linear-gradient(135deg, #2563eb, #60a5fa);
-}
-
-/* Icon glow */
-.pillar-icon {
-  background: rgba(255,255,255,.18);
-  color: #fff;
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(255,255,255,.25);
-}
-
-/* Value */
-.pillar-value {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-/* Title */
-.pillar-title {
-  font-size: .95rem;
-  color: rgba(255,255,255,.85);
-  margin-bottom: 18px;
-}
-
-/* Progress bar */
-.pillar-progress {
-  height: 12px;
-  background: rgba(255,255,255,.25);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-/* Animated fill */
-.pillar-fill {
-  height: 100%;
-  width: 0%;
-  border-radius: 999px;
-  transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-/* CPD badge */
-.pillar-card::after {
-  content: "CPD";
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.15);
-  font-size: .7rem;
-  font-weight: 600;
-}
- /* Force correct gradient colours for pillar fills */
-.pillar-card.completed .pillar-fill {
-  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
-}
-
-.pillar-card.remaining .pillar-fill {
-  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
-}
-
-.pillar-card.projected .pillar-fill {
-  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
-}
-/* Pulse animation for projected pillar */
-@keyframes pillarPulse {
-  0%   { transform: scale(1); opacity: 1; }
-  50%  { transform: scale(1.03); opacity: 0.85; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.pillar-card.projected {
-  animation: pillarPulse 2.4s ease-in-out infinite;
-}
-    /* ==========================================================
-   CPD PILLARS — CARD SYSTEM (CLEAN, FINAL, NO CONFLICTS)
-========================================================== */
-
-/* Scroll container */
 .pillars-scroll {
   display: flex;
   gap: 18px;
@@ -1154,7 +666,6 @@ html, body {
   border-radius: 20px;
 }
 
-/* Pillar card container */
 .pillar-card {
   min-width: 220px;
   flex: 0 0 auto;
@@ -1167,28 +678,23 @@ html, body {
   position: relative;
 }
 
-/* Hover lift */
 .pillar-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 14px 32px rgba(0,0,0,.18);
 }
 
-/* Completed */
 .pillar-card.completed {
   background: linear-gradient(135deg, #16a34a, #22c55e);
 }
 
-/* Remaining */
 .pillar-card.remaining {
   background: linear-gradient(135deg, #dc2626, #ef4444);
 }
 
-/* Projected */
 .pillar-card.projected {
   background: linear-gradient(135deg, #2563eb, #60a5fa);
 }
 
-/* Icon */
 .pillar-icon {
   width: 56px;
   height: 56px;
@@ -1204,7 +710,6 @@ html, body {
   box-shadow: 0 4px 12px rgba(255,255,255,.25);
 }
 
-/* Value */
 .pillar-value {
   font-size: 2.2rem;
   font-weight: 700;
@@ -1212,14 +717,12 @@ html, body {
   color: #fff;
 }
 
-/* Title */
 .pillar-title {
   font-size: .95rem;
   color: rgba(255,255,255,.85);
   margin-bottom: 18px;
 }
 
-/* Progress bar container */
 .pillar-progress {
   height: 12px;
   background: rgba(255,255,255,.25);
@@ -1227,7 +730,6 @@ html, body {
   overflow: hidden;
 }
 
-/* Progress fill — animated */
 .pillar-fill {
   height: 100%;
   width: 0%;
@@ -1235,7 +737,6 @@ html, body {
   transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Gradient fills — FINAL, GUARANTEED */
 .pillar-card.completed .pillar-fill {
   background: linear-gradient(90deg, #16a34a, #22c55e);
 }
@@ -1248,7 +749,6 @@ html, body {
   background: linear-gradient(90deg, #2563eb, #60a5fa);
 }
 
-/* CPD badge */
 .pillar-card::after {
   content: "CPD";
   position: absolute;
@@ -1261,336 +761,569 @@ html, body {
   font-weight: 600;
 }
 
-/* Pulse animation for projected pillar */
 @keyframes pillarPulse {
-  0%   { transform: scale(1); opacity: 1; }
-  50%  { transform: scale(1.03); opacity: 0.85; }
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.85; }
   100% { transform: scale(1); opacity: 1; }
 }
 
 .pillar-card.projected {
   animation: pillarPulse 2.4s ease-in-out infinite;
 }
-    /* FIX: Ensure pillar-fill gradient is not washed out by card overlay */
-.pillar-card .pillar-progress {
-  background: rgba(0,0,0,0.15) !important;
-}
 
-.pillar-card .pillar-fill {
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-}
-    /* FINAL OVERRIDE — FORCE PILLAR COLOURS */
-#pillar-completed.pillar-fill,
-.pillar-card.completed #pillar-completed {
-  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
-}
-
-#pillar-remaining.pillar-fill,
-.pillar-card.remaining #pillar-remaining {
-  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
-}
-
-#pillar-projected.pillar-fill,
-.pillar-card.projected #pillar-projected {
-  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
-}
-    /* ==========================================================
-   CPD CARD LAYOUT
-========================================================== */
+/* ============================================================
+CPD CARD LAYOUT (C4 – CURRENT VERSION)
+============================================================ */
 
 .cpd-card-container {
-    display: grid;
-    gap: 1.25rem;
-    margin-top: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .cpd-card {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 1.25rem 1.5rem;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: transform .25s ease, box-shadow .25s ease;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .cpd-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
 .cpd-card-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: .5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
 }
 
 .cpd-card-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .75rem;
-    margin-bottom: .75rem;
-    font-size: .9rem;
-    opacity: .9;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-bottom: .75rem;
+  font-size: .9rem;
+  opacity: .9;
 }
 
 .cpd-badge {
-    background: rgba(255,255,255,0.18);
-    padding: .35rem .75rem;
-    border-radius: 999px;
-    font-size: .85rem;
-    font-weight: 600;
+  background: rgba(255,255,255,0.18);
+  padding: .35rem .75rem;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 600;
 }
 
 .cpd-hours {
-    background: linear-gradient(135deg, #2563eb, #60a5fa);
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
 }
 
 .cpd-category {
-    background: linear-gradient(135deg, #9333ea, #c084fc);
+  background: linear-gradient(135deg, #9333ea, #c084fc);
 }
 
 .cpd-card-reflection {
-    margin-top: .75rem;
-    font-size: .9rem;
-    opacity: .85;
-    line-height: 1.4;
+  margin-top: .75rem;
+  font-size: .9rem;
+  opacity: .85;
+  line-height: 1.4;
 }
-    /* ==========================================================
-   CPD CARD STATUS STYLING
-========================================================== */
 
-/* Left colour band */
 .cpd-card.completed {
-    border-left: 6px solid #16a34a;
+  border-left: 6px solid #16a34a;
 }
 
 .cpd-card.inprogress {
-    border-left: 6px solid #2563eb;
+  border-left: 6px solid #2563eb;
 }
 
 .cpd-card.planned {
-    border-left: 6px solid #d97706;
+  border-left: 6px solid #d97706;
 }
 
-/* Status badge */
 .cpd-status {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: .75rem;
-    font-weight: 600;
-    margin-left: auto;
-    color: #fff;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 600;
+  margin-left: auto;
+  color: #fff;
 }
 
 .cpd-status.completed { background: #16a34a; }
 .cpd-status.inprogress { background: #2563eb; }
 .cpd-status.planned { background: #d97706; }
 
-/* Status icon */
 .status-icon {
-    font-size: 1rem;
-    margin-left: auto;
-    opacity: .85;
+  font-size: 1rem;
+  margin-left: auto;
+  opacity: .85;
 }
 
 .status-icon.completed { color: #16a34a; }
 .status-icon.inprogress { color: #2563eb; }
 .status-icon.planned { color: #d97706; }
- 
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.35s ease, opacity 0.35s ease;
+
+/* ============================================================
+COLLAPSIBLE (CPD LOG TOGGLE)
+============================================================ */
+
+.collapsible-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.accordion-content.open {
-  max-height: 500px; /* or more */
-  opacity: 1;
-}
-
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.35s ease, opacity 0.35s ease;
-}
-
-.accordion-item.open .accordion-content {
-  max-height: 2000px;
-  opacity: 1;
-}
-
-
-  .collapsible-content {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.35s ease, opacity 0.35s ease;
-}
-
-.collapsible-content.open {
-  max-height: 1000px;
-  opacity: 1;
-}
-
-    .collapsible-toggle.open + .collapsible-content {
-  max-height: 2000px;
-  opacity: 1;
-}
-/* FINAL OVERRIDE — ACCORDION */
-.accordion-content {
-  max-height: 0 !important;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.35s ease, opacity 0.35s ease;
-}
-
-.accordion-item.open .accordion-content {
-  max-height: 5000px !important; /* unlimited space */
-  opacity: 1;
-}
-/* FINAL OVERRIDE — COLLAPSIBLE */
 .collapsible-content {
-  max-height: 0 !important;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.35s ease, opacity 0.35s ease;
-}
-
-.collapsible-toggle.open + .collapsible-content {
-  max-height: 5000px !important; /* unlimited space */
-  opacity: 1;
-}
-
-/* FINAL OVERRIDE — CPD COLLAPSIBLE (FULL HEIGHT, NO CUT-OFF) */
-.collapsible-content {
-  max-height: 0 !important;
+  max-height: 0;
   overflow: hidden;
   opacity: 0;
   transition: max-height 0.45s ease, opacity 0.45s ease;
 }
 
-/* When the header is open, expand the content */
-.collapsible-toggle.open + .collapsible-content {
-  max-height: 5000px !important; /* effectively unlimited */
+.collapsible-content.open {
+  max-height: 5000px;
   opacity: 1;
 }
-    /* FINAL FIX — CPD LOG FULL HEIGHT */
-.cpd-log-section,
-.cpd-log-section .collapsible-content,
-#cpd-card-container {
-  max-height: none !important;
-  height: auto !important;
-  overflow: visible !important;
-}
-/* FINAL FIX — FORCE CPD LOG TO EXPAND NORMALLY */
-.cpd-log-section,
-.cpd-log-section .collapsible-content,
-.cpd-log-section .collapsible-content > *,
-#cpd-card-container {
-  position: static !important;
-  height: auto !important;
-  max-height: none !important;
-  overflow: visible !important;
-  display: block !important;
-}
-/* FINAL FIX — ALLOW CPD LOG TO EXPAND AND PUSH PAGE DOWN */
-.page-container,
-.cpd-log-section,
-.cpd-log-section .collapsible-content,
-#cpd-card-container {
-  position: static !important;
-  overflow: visible !important;
-  height: auto !important;
-  max-height: none !important;
-  display: block !important;
-}
-/* FINAL FIX — RELEASE PAGE CONTAINER CLIPPING */
-.page-container {
-  position: static !important;
-  overflow: visible !important;
-  height: auto !important;
-  max-height: none !important;
-  display: block !important;
-  contain: none !important;
-}
-/* FINAL FIX — REMOVE LAYOUT ISOLATION FROM PAGE CONTAINER */
-.page-container {
-    contain: none !important;
-    isolation: auto !important;
-    overflow: visible !important;
-    height: auto !important;
-    max-height: none !important;
-    position: static !important;
-}
-/* FINAL FIX — REMOVE SCROLL/CLIP CONTAINMENT FROM PAGE LAYOUT */
-html, body, .page-container, .page-prof-dev, main {
-    overflow: visible !important;
-    height: auto !important;
-    max-height: none !important;
-    contain: none !important;
-    isolation: auto !important;
-    display: block !important;
-    position: static !important;
-}
-/* FINAL FIX — REMOVE SCROLL CONTAINMENT FROM PAGE WRAPPERS */
-html, body, .header-with-logo, .page-prof-dev, #header-placeholder, #header-placeholder + * {
-    overflow: visible !important;
-    height: auto !important;
-    max-height: none !important;
-    position: static !important;
-    contain: none !important;
-}
-    /* HARD RESET — ignore all previous accordion/collapsible height logic */
-.accordion-content,
-.collapsible-content {
-  max-height: none !important;
-  height: auto !important;
-  overflow: visible !important;
-  opacity: 1 !important;
-  transition: none !important;
-}
-/* SIMPLE, RELIABLE TOGGLE — NO GAPS, NO OVERLAP */
 
-/* Default: hidden */
-.accordion-content,
-.collapsible-content {
-  display: none !important;
-}
+/* ============================================================
+APM PROGRESS BAR (PBAR3 – CURRENT VERSION)
+============================================================ */
 
-/* When parent/header is "open": show and let it push the page down */
-.accordion-item.open .accordion-content {
-  display: block !important;
+.apm-progress-bar,
+.apm-progress-bar--static {
+  width: 100%;
+  height: 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: block;
+  background-image: linear-gradient(
+    to right,
+    #d9534f 0%, #d9534f 10%,
+    #f0ad4e 10%, #f0ad4e 30%,
+    #8a2be2 30%, #8a2be2 55%,
+    #b8860b 55%, #b8860b 75%,
+    #007b5f 75%, #007b5f 90%,
+    #0a66c2 90%, #0a66c2 100%
+  );
+  background-size: 100% 100%;
 }
-
+/* FIX: CPD log full height */
 .collapsible-content.open {
-  display: block !important;
-}
-/* RESET CPD LOG TO USE DISPLAY-BASED TOGGLING */
-.collapsible-content {
-    display: none !important;
+  max-height: 20000px;
 }
 
+/* FIX: Hero float clearing */
+.hero-section::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* FIX: Pillar colours override */
+.pillar-card.completed,
+.pillar-card.remaining,
+.pillar-card.projected {
+  background-size: cover !important;
+}
+/* FIX: CPD log full height */
 .collapsible-content.open {
-    display: block !important;
+  max-height: 20000px;
 }
 
-/* CLEAN RESET — CPD LOG COLLAPSIBLE */
-.collapsible-content {
-    display: none !important;
+/* FIX: Clear hero image float so footer sits correctly */
+.hero-section::after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
+/* FIX: Force pillar gradients to override earlier rules */
+.pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+.pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+.pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+/* ============================================================
+FINAL OVERRIDES — FORCE CORRECT BEHAVIOUR
+============================================================ */
+
+/* Fix pillar gradients */
+.pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+.pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+.pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+
+/* Fix footer layout */
+.hero-section::after {
+  content: "";
+  display: block;
+  clear: both !important;
+}
+
+/* Fix footer spacing if external CSS collapses layout */
+#footer {
+  margin-top: 3rem !important;
+  padding-top: 2rem !important;
+}
+
+/* Fix CPD log height */
 .collapsible-content.open {
-    display: block !important;
+  max-height: 20000px !important;
+}
+/* === FINAL FIXES — OVERRIDE DUPLICATES IN THIS PAGE ONLY === */
+
+/* Fix pillar gradients */
+.pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+.pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+.pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+
+/* Fix hero float so footer sits correctly */
+.hero-section::after {
+  content: "";
+  display: block;
+  clear: both !important;
+}
+
+/* Fix CPD log height */
+.collapsible-content.open {
+  max-height: 20000px !important;
+}
+
+/* ============================================================
+FINAL PATCH — RESTORE PILLAR COLOURS + FOOTER LAYOUT
+============================================================ */
+
+/* 1 — Force correct pillar gradients (overrides the white background) */
+.pillar-card.completed {
+    background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+.pillar-card.remaining {
+    background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+.pillar-card.projected {
+    background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+
+/* 2 — Ensure icon glow + text colours are restored */
+.pillar-card .pillar-icon,
+.pillar-card .pillar-value,
+.pillar-card .pillar-title {
+    color: #fff !important;
+}
+
+/* 3 — Ensure progress bar background + fill are correct */
+.pillar-card .pillar-progress {
+    background: rgba(255,255,255,.25) !important;
+}
+
+.pillar-card .pillar-fill {
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+}
+
+/* 4 — Fix hero float so footer sits correctly */
+.hero-section::after {
+    content: "";
+    display: block;
+    clear: both !important;
+}
+
+/* 5 — Fix CPD log height (keeps expand/collapse working) */
+.collapsible-content.open {
+    max-height: 20000px !important;
+    opacity: 1 !important;
+}
+
+/* 6 — Fix stray-brace fallout (ensures CSS below still applies) */
+#footer {
+    position: relative !important;
+    z-index: 10 !important;
+}
+/* ==========================================================
+   CPD PILLARS — FINAL, ISOLATED STYLING
+   (Paste at the very end of the page <style> block)
+========================================================== */
+
+section.cpd-pillars-section {
+  margin: 3rem 0 2rem;
+}
+
+/* Scroll container */
+section.cpd-pillars-section .pillars-scroll {
+  display: flex !important;
+  gap: 18px !important;
+  overflow-x: auto !important;
+  padding: 10px 0 20px !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+section.cpd-pillars-section .pillars-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+section.cpd-pillars-section .pillars-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+/* Pillar card container */
+section.cpd-pillars-section .pillar-card {
+  min-width: 220px !important;
+  flex: 0 0 auto !important;
+  border-radius: 24px !important;
+  padding: 22px !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12) !important;
+  scroll-snap-align: start !important;
+  transition: transform .35s ease, box-shadow .35s ease !important;
+  position: relative !important;
+}
+
+/* Hover lift */
+section.cpd-pillars-section .pillar-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 14px 32px rgba(0,0,0,.18) !important;
+}
+
+/* Completed / Remaining / Projected card backgrounds */
+section.cpd-pillars-section .pillar-card.completed {
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+section.cpd-pillars-section .pillar-card.remaining {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+section.cpd-pillars-section .pillar-card.projected {
+  background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+
+/* Icon */
+section.cpd-pillars-section .pillar-icon {
+  width: 56px !important;
+  height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 16px !important;
+  font-size: 22px !important;
+  margin-bottom: 16px !important;
+  background: rgba(255,255,255,.18) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 4px 12px rgba(255,255,255,.25) !important;
+}
+
+/* Value */
+section.cpd-pillars-section .pillar-value {
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 4px !important;
+  color: #ffffff !important;
+}
+
+/* Title */
+section.cpd-pillars-section .pillar-title {
+  font-size: .95rem !important;
+  color: rgba(255,255,255,.85) !important;
+  margin-bottom: 18px !important;
+}
+
+/* Progress bar container */
+section.cpd-pillars-section .pillar-progress {
+  height: 12px !important;
+  background: rgba(255,255,255,.25) !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+}
+
+/* Progress fill — animated */
+section.cpd-pillars-section .pillar-fill {
+  height: 100% !important;
+  width: 0% !important;
+  border-radius: 999px !important;
+  transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+}
+
+/* Gradient fills */
+section.cpd-pillars-section .pillar-card.completed .pillar-fill {
+  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
+}
+
+section.cpd-pillars-section .pillar-card.remaining .pillar-fill {
+  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
+}
+
+section.cpd-pillars-section .pillar-card.projected .pillar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
+}
+
+/* ID-based hard overrides (in case anything else targets the IDs) */
+section.cpd-pillars-section #pillar-completed.pillar-fill {
+  background: linear-gradient(90deg, #16a34a, #22c55e) !important;
+}
+
+section.cpd-pillars-section #pillar-remaining.pillar-fill {
+  background: linear-gradient(90deg, #dc2626, #ef4444) !important;
+}
+
+section.cpd-pillars-section #pillar-projected.pillar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
+}
+
+/* CPD badge in top-right of each card */
+section.cpd-pillars-section .pillar-card::after {
+  content: "CPD";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.15);
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+/* Optional: subtle pulse on projected card */
+@keyframes pillarPulse {
+  0%   { transform: scale(1);   opacity: 1;   }
+  50%  { transform: scale(1.03); opacity: 0.85; }
+  100% { transform: scale(1);   opacity: 1;   }
+}
+
+section.cpd-pillars-section .pillar-card.projected {
+  animation: pillarPulse 2.4s ease-in-out infinite;
+}
+
+/* ============================================================
+   FINAL OVERRIDE — FORCE PREMIUM PILLAR BACKGROUNDS
+============================================================ */
+
+.cpd-pillars-section .pillar-card.completed {
+    background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+.cpd-pillars-section .pillar-card.remaining {
+    background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+.cpd-pillars-section .pillar-card.projected {
+    background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
+}
+
+/* ============================================================
+   SAFE VISUAL UPGRADE FOR CPD + COMPETENCY HEADERS
+   (No pseudo-elements, no layout changes, no JS conflicts)
+============================================================ */
+
+.cpd-log-section .collapsible-toggle,
+.accordion-item .accordion-header {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom: 0.75rem;
+}
+
+.cpd-log-section .collapsible-toggle h2,
+.accordion-item .accordion-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0a2540;
+}
+
+/* Keep your existing chevron working */
+.cpd-log-section .chevron,
+.accordion-item .chevron {
+  font-size: 1rem;
+  color: #64748b;
+  transition: transform 0.3s ease;
+}
+
+.cpd-log-section .collapsible-toggle.open .chevron,
+.accordion-item.open .accordion-header .chevron {
+  transform: rotate(90deg);
+}
+
+  /* CPD header helper text inside the toggle */
+.section-helper {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: #6b7280; /* soft grey */
+}
+
+/* Make the text block stack nicely */
+.collapsible-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-item .accordion-header {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.accordion-item .accordion-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a2540;
+}
+
+.accordion-item .chevron {
+  font-size: 1rem;
+  color: #64748b;
+  transition: transform 0.25s ease;
+}
+
+.accordion-item.open .accordion-header .chevron {
+  transform: rotate(90deg);
 }
   
-    
-  </style>
+</style>
+
 
 
 </head>
@@ -1790,20 +1523,28 @@ html, body, .header-with-logo, .page-prof-dev, #header-placeholder, #header-plac
 </div>
 <!-- CPD SECTION -->
 <section class="cpd-log-section">
-    <h2 class="section-heading collapsible-toggle">
+  <div class="collapsible-toggle">
+    <div class="collapsible-text">
+      <h2 class="section-heading">
         <i class="fa-solid fa-graduation-cap"></i>
         Continuing Professional Development (CPD)
-        <i class="fa-solid fa-chevron-right chevron"></i>
-    </h2>
-
-    <div class="collapsible-content">
-        <p class="section-subtitle">
-            Your CPD activities, presented as clean, modern cards.
-        </p>
-
-        <div id="cpd-card-container" class="cpd-card-container"></div>
+      </h2>
+      <p class="section-helper">
+        Tap to expand CPD log and reflections.
+      </p>
     </div>
+    <i class="fa-solid fa-chevron-right chevron"></i>
+  </div>
+
+  <div class="collapsible-content">
+    <p class="section-subtitle">
+      Your CPD activities, presented as clean, modern cards.
+    </p>
+
+    <div id="cpd-card-container" class="cpd-card-container"></div>
+  </div>
 </section>
+
 
   <!-- INSIGHTS PANEL -->
   <section class="cpd-insights">
@@ -2794,12 +2535,21 @@ function generateProgressPillars() {
   </div>
 </section>
 <!-- PERSONAL ASSESSMENT ACCORDION -->
-<section>
-<h2 class="section-heading collapsible-toggle">
-  <i class="fa-solid fa-user-check"></i>
-  My Competence Assessment (29 competences)
+<div class="collapsible-toggle">
+  <div class="collapsible-text">
+    <h2 class="section-heading">
+      <i class="fa-solid fa-user-check"></i>
+      My Competence Assessment (29 competences)
+    </h2>
+
+    <p class="section-helper">
+      Tap to expand my Competency Assessment.
+    </p>
+  </div>
+
   <i class="fa-solid fa-chevron-right chevron"></i>
-</h2>
+</div>
+
 
 <div class="collapsible-content">
 
@@ -3308,40 +3058,80 @@ document.addEventListener("DOMContentLoaded", () => {
   loadCPD();
 });
 </script>
-
 <script>
-// 2) CPD → competence linking (delegated)
-document.addEventListener('click', e => {
-  const link = e.target.closest('.cpd-competence-link');
-  if (!link) return;
+/* ============================================================
+   CLEAN JS — CPD LOG + COMPETENCE ACCORDION + LINKING
+   ============================================================ */
 
-  const target = document.querySelector(link.getAttribute('href'));
-  if (!target) return;
+/* ------------------------------------------------------------
+   1. CPD LOG COLLAPSIBLE
+   ------------------------------------------------------------ */
 
-  const header = target.querySelector('.accordion-header');
-  if (!header) return;
+document.addEventListener("click", e => {
+    const toggle = e.target.closest(".collapsible-toggle");
+    if (!toggle) return;
 
-  header.click();
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
+    const content = toggle.nextElementSibling;
+    if (!content || !content.classList.contains("collapsible-content")) return;
+
+    // Toggle open/closed
+    content.classList.toggle("open");
 });
-</script>
-<script>
-document.querySelectorAll(".competence-link").forEach(link => {
-    link.addEventListener("click", (e) => {
+
+
+/* ------------------------------------------------------------
+   2. COMPETENCE ACCORDION
+   ------------------------------------------------------------ */
+
+document.addEventListener("click", e => {
+    const header = e.target.closest(".accordion-header");
+    if (!header) return;
+
+    const item = header.closest(".accordion-item");
+    if (!item) return;
+
+    // Toggle accordion item
+    item.classList.toggle("open");
+});
+
+
+/* ------------------------------------------------------------
+   3. CPD → COMPETENCE LINKING
+   (Works even when accordion is closed)
+   ------------------------------------------------------------ */
+
+document.addEventListener("click", e => {
+    const link = e.target.closest(".cpd-competence-link");
+    if (!link) return;
+
+    e.stopPropagation(); // Prevent accordion header from hijacking click
+
+    const targetSelector = link.getAttribute("href");
+    if (!targetSelector) return;
+
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
+
+    // Force accordion open
+    target.classList.add("open");
+
+    // Scroll to the competence item
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+
+/* ------------------------------------------------------------
+   4. Prevent competence links inside accordion from toggling it
+   ------------------------------------------------------------ */
+
+document.addEventListener("click", e => {
+    if (e.target.closest(".competence-link")) {
         e.stopPropagation();
-    });
-});
-</script> 
-<script>
-// 3) Accordion open/close (original behaviour)
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".accordion-header").forEach(header => {
-    header.addEventListener("click", () => {
-      header.parentElement.classList.toggle("open");
-    });
-  });
+    }
 });
 </script>
+
+
 
 <script>
 // 4) Rating filter (original logic)
@@ -3398,18 +3188,6 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
-<script>
-// 5) Collapsible sections (original behaviour)
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".collapsible-toggle").forEach(toggle => {
-    toggle.addEventListener("click", () => {
-      toggle.classList.toggle("open");
-      const content = toggle.nextElementSibling;
-      if (content) content.classList.toggle("open");
-    });
-  });
-});
-</script>
 
 
 </main>

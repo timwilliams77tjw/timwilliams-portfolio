@@ -1507,11 +1507,16 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   font-weight: 700;
 }
 
-.rating-expert { background: #0a66c2 !important; }
-.rating-proficient { background: #007b5f !important; }
-.rating-competent { background: #b8860b !important; }
-.rating-practised { background: #8a2be2 !important; }
-.rating-aware { background: #555 !important; }
+/* ============================================================
+   FIX: Allow rating badges to show their true colour
+   ============================================================ */
+
+.rating-badge {
+  isolation: isolate !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  background-blend-mode: normal !important;
+}
 
 
   
@@ -2763,14 +2768,7 @@ function generateProgressPillars() {
 
   <div class="accordion">
 
-<hr>
-<p>Rating badge colour test:</p>
-<span class="rating-badge rating-expert">Expert (test)</span>
-<span class="rating-badge rating-proficient">Proficient (test)</span>
-<span class="rating-badge rating-competent">Competent (test)</span>
-<span class="rating-badge rating-practised">Practised (test)</span>
-<span class="rating-badge rating-aware">Aware (test)</span>
-<hr>
+
 
 
     

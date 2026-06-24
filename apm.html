@@ -1644,6 +1644,28 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
+/* ============================================================
+   RATING SUMMARY — TOOLTIP
+   ============================================================ */
+
+.rating-tooltip {
+  position: fixed;
+  padding: 6px 10px;
+  background: #0a2540;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transform: translate(-50%, -120%);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
   
 </style>
 
@@ -3396,6 +3418,7 @@ function generateProgressPillars() {
 
   </div> <!-- end accordion -->
   </div> <!-- end collapsible-content -->
+<div id="rating-tooltip" class="rating-tooltip" style="display:none;"></div>
 
 </section>
 <!-- FLOATING ACTION BUTTONS -->
@@ -3668,7 +3691,85 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
-  
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  const counts = {
+    expert: 0,
+    proficient: 0,
+    competent: 0,
+    practised: 0,
+    aware: 0
+  };
+
+  // Count rating badges inside accordion items
+  document.querySelectorAll('.accordion-item .rating-badge').forEach(badge => {
+    if (badge.classList.contains('rating-expert')) counts.expert++;
+    if (badge.classList.contains('rating-proficient')) counts.proficient++;
+    if (badge.classList.contains('rating-competent')) counts.competent++;
+    if (badge.classList.contains('rating-practised')) counts.practised++;
+    if (badge.classList.contains('rating-aware')) counts.aware++;
+  });
+
+  const total = Object.values(counts).reduce((a, b) => a + b, 0);
+
+  const colours = {
+    expert: '#0a66c2',
+    proficient: '#007b5f',
+    competent: '#b8860b',
+    practised: '#8a2be2',
+    aware: '#555'
+  };
+
+  let x = 0;
+  let svg = `<svg id="rating-bar-svg" viewBox="0 0 100 10" preserveAspectRatio="none">`;
+
+  for (const key of ['expert','proficient','competent','practised','aware']) {
+    const pct = total ? (counts[key] / total) * 100 : 0;
+
+    svg += `
+      <rect 
+        class="rating-segment" 
+        data-type="${key}" 
+        data-count="${counts[key]}" 
+        x="${x}" 
+        y="0" 
+        width="${pct}" 
+        height="10" 
+        fill="${colours[key]}">
+      </rect>
+    `;
+
+    x += pct;
+  }
+
+  svg += `</svg>`;
+  document.getElementById('rating-summary-svg').innerHTML = svg;
+
+  // Tooltip logic
+  const tooltip = document.getElementById('rating-tooltip');
+
+  document.querySelectorAll('.rating-segment').forEach(seg => {
+    seg.addEventListener('mousemove', e => {
+      const type = seg.dataset.type;
+      const count = seg.dataset.count;
+
+      tooltip.innerHTML = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${count}`;
+      tooltip.style.left = e.clientX + 'px';
+      tooltip.style.top = e.clientY + 'px';
+      tooltip.style.display = 'block';
+      tooltip.style.opacity = '1';
+    });
+
+    seg.addEventListener('mouseleave', () => {
+      tooltip.style.opacity = '0';
+      tooltip.style.display = 'none';
+    });
+  });
+
+});
+</script>
+
 </main>
 </body>
 </html>

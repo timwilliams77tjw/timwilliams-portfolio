@@ -1459,7 +1459,63 @@ body.page-prof-dev #footer footer.footer .footer-row-copy {
   display: flex !important;
   align-items: center !important;
 }
+/* ============================================================
+   APM PAGE — OVERRIDE FOOTER.HTML + GLOBAL RESTORE
+============================================================ */
 
+/* Force blue banner */
+body.page-prof-dev #footer footer.footer {
+  background: #0a2540 !important;
+}
+
+/* Force white copyright text + alignment */
+body.page-prof-dev #footer footer.footer .footer-row-copy {
+  color: #ffffff !important;
+  line-height: 1.4 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Force cyan links */
+body.page-prof-dev #footer footer.footer .footer-row-links a {
+  color: #7ac0f9 !important;
+}
+
+/* Prevent nested resets */
+body.page-prof-dev #footer footer.footer .footer-row-links a * {
+  color: #7ac0f9 !important;
+}
+
+/* Restore logo + QR visibility (white logo must NOT be inverted) */
+body.page-prof-dev #footer footer.footer .footer-logo img,
+body.page-prof-dev #footer footer.footer .footer-qr img {
+  filter: none !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  display: block !important;
+}
+
+/* Fix iPad alignment of bottom row */
+@media (min-width: 601px) {
+  body.page-prof-dev #footer footer.footer .footer-row-bottom {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+  }
+}
+/* Centre FAB icon perfectly on all devices */
+body.page-prof-dev .fab > * {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
   
 </style>
 

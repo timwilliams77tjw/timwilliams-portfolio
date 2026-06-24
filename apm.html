@@ -3569,16 +3569,17 @@ document.addEventListener("click", e => {
     // Add persistent highlight
     target.classList.add("highlighted");
 });
+</script>
 
-document.addEventListener("click", e => {
+<script>
+  document.addEventListener("click", e => {
     const header = e.target.closest(".accordion-header");
     if (!header) return;
 
     // Remove highlight when user manually selects another accordion
     document.querySelectorAll(".accordion-item.highlighted")
         .forEach(item => item.classList.remove("highlighted"));
-});
-  
+});  
 </script>
 
 <script>

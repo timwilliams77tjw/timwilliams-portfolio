@@ -1357,40 +1357,42 @@ body.page-prof-dev #footer footer svg {
   justify-content: space-between;
 }
 /* ============================================================
-   APM FOOTER — FINAL FIX (colour, alignment, logo, links)
+   APM FOOTER — FINAL, CORRECT, NON‑BREAKING FIX
 ============================================================ */
 
-/* Blue banner */
+/* Blue banner background */
 body.page-prof-dev #footer .footer {
   background: #0a2540 !important;
 }
 
-/* White text for copyright */
+/* Fix text alignment + line height */
 body.page-prof-dev #footer .footer-row-copy {
   color: #ffffff !important;
-  display: flex;
-  align-items: center;
+  line-height: 1.4 !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-/* Cyan links (matching your other pages) */
+/* Cyan links (same as other pages) */
 body.page-prof-dev #footer .footer-row-links a {
   color: #7ac0f9 !important;
 }
 
-/* Ensure links don't inherit black from resets */
+/* Prevent global resets from overriding link colour */
 body.page-prof-dev #footer .footer-row-links a * {
   color: #7ac0f9 !important;
 }
 
-/* Restore logo + QR visibility */
+/* Restore logo + QR visibility (white logo must NOT be inverted) */
 body.page-prof-dev #footer .footer-logo img,
 body.page-prof-dev #footer .footer-qr img {
   filter: none !important;
   opacity: 1 !important;
+  mix-blend-mode: normal !important;
   display: block !important;
 }
 
-/* Align logo + QR row properly on iPad */
+/* Fix iPad alignment of bottom row */
 @media (min-width: 601px) {
   body.page-prof-dev #footer .footer-row-bottom {
     display: flex !important;
@@ -1399,16 +1401,17 @@ body.page-prof-dev #footer .footer-qr img {
   }
 }
 
-/* Centre the FAB icon perfectly on all devices */
+
+/* Centre the FAB icon perfectly */
 .fab > * {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   line-height: 1 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
   

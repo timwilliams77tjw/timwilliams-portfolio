@@ -3584,6 +3584,7 @@ document.addEventListener("click", e => {
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+
   const counts = {
     expert: 0,
     proficient: 0,
@@ -3592,11 +3593,8 @@ document.addEventListener('DOMContentLoaded', function () {
     aware: 0
   };
 
-  // Count ratings in accordion
-  document.querySelectorAll('.accordion-item').forEach(item => {
-    const badge = item.querySelector('.rating-badge');
-    if (!badge) return;
-
+  // Find ALL rating badges anywhere on the page
+  document.querySelectorAll('.rating-badge').forEach(badge => {
     if (badge.classList.contains('rating-expert')) counts.expert++;
     if (badge.classList.contains('rating-proficient')) counts.proficient++;
     if (badge.classList.contains('rating-competent')) counts.competent++;
@@ -3614,8 +3612,10 @@ document.addEventListener('DOMContentLoaded', function () {
     seg.style.width = width + '%';
     seg.dataset.count = count;
   });
+
 });
 </script>
+
   
 </main>
 </body>

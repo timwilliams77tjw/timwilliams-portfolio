@@ -3484,21 +3484,21 @@ function generateProgressPillars() {
       if (footer) footer.innerHTML = h;
     });
 </script>
-<script>
-// 1) Run CPD loader first
-document.addEventListener("DOMContentLoaded", () => {
-  loadCPD();
-});
-</script>
+
+
 <script>
 /* ============================================================
-   CLEAN JS — CPD LOG + COMPETENCE ACCORDION + LINKING
-   ============================================================ */
+   1. LOAD CPD ON PAGE LOAD
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+    loadCPD();
+});
+</script>
 
-/* ------------------------------------------------------------
-   1. CPD LOG COLLAPSIBLE
-   ------------------------------------------------------------ */
-
+<script>
+/* ============================================================
+   2. CPD LOG COLLAPSIBLE
+============================================================ */
 document.addEventListener("click", e => {
     const toggle = e.target.closest(".collapsible-toggle");
     if (!toggle) return;
@@ -3506,15 +3506,14 @@ document.addEventListener("click", e => {
     const content = toggle.nextElementSibling;
     if (!content || !content.classList.contains("collapsible-content")) return;
 
-    // Toggle open/closed
     content.classList.toggle("open");
 });
+</script>
 
-
-/* ------------------------------------------------------------
-   2. COMPETENCE ACCORDION
-   ------------------------------------------------------------ */
-
+<script>
+/* ============================================================
+   3. COMPETENCE ACCORDION
+============================================================ */
 document.addEventListener("click", e => {
     const header = e.target.closest(".accordion-header");
     if (!header) return;
@@ -3522,56 +3521,50 @@ document.addEventListener("click", e => {
     const item = header.closest(".accordion-item");
     if (!item) return;
 
-    // Toggle accordion item
     item.classList.toggle("open");
 });
+</script>
 
-
-/* ------------------------------------------------------------
-   3. CPD → COMPETENCE LINKING
-   (Works even when accordion is closed)
-   ------------------------------------------------------------ */
-
+<script>
+/* ============================================================
+   4. CPD → COMPETENCE LINKING + HIGHLIGHT
+============================================================ */
 document.addEventListener("click", e => {
-  const link = e.target.closest(".cpd-competence-link");
-  if (!link) return;
+    const link = e.target.closest(".cpd-competence-link");
+    if (!link) return;
 
-  e.stopPropagation(); // Prevent accordion header from hijacking click
+    e.stopPropagation();
 
-  const targetSelector = link.getAttribute("href");
-  if (!targetSelector) return;
+    const targetSelector = link.getAttribute("href");
+    if (!targetSelector) return;
 
-  const target = document.querySelector(targetSelector);
-  if (!target) return;
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
 
-  // Force accordion open
-  target.classList.add("open");
+    // Open accordion
+    target.classList.add("open");
 
-  // Scroll to the competence item
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Scroll smoothly
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
 
-  // ---------------------------------------------
-  // ⭐ ADD THE HIGHLIGHT EFFECT HERE
-  // ---------------------------------------------
+    // Remove previous highlights
+    document.querySelectorAll(".accordion-item.highlighted")
+        .forEach(item => item.classList.remove("highlighted"));
 
-  // Remove any previous highlight
-  document.querySelectorAll('.accordion-item.highlighted')
-    .forEach(item => item.classList.remove('highlighted'));
+    // Add highlight
+    target.classList.add("highlighted");
 
-  // Add highlight class
-  target.classList.add('highlighted');
-
-  // Auto-remove highlight after animation
-  setTimeout(() => {
-    target.classList.remove('highlighted');
-  }, 2200);
+    // Auto-remove highlight
+    setTimeout(() => {
+        target.classList.remove("highlighted");
+    }, 2200);
 });
+</script>
 
-
-/* ------------------------------------------------------------
-   4. Prevent competence links inside accordion from toggling it
-   ------------------------------------------------------------ */
-
+<script>
+/* ============================================================
+   5. PREVENT INNER LINKS FROM TOGGLING ACCORDION
+============================================================ */
 document.addEventListener("click", e => {
     if (e.target.closest(".competence-link")) {
         e.stopPropagation();
@@ -3580,318 +3573,176 @@ document.addEventListener("click", e => {
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-
-  // When a CPD link is clicked, highlight the target competence
-  document.querySelectorAll('[data-competence-target]').forEach(link => {
-    link.addEventListener('click', function () {
-      const targetId = this.getAttribute('data-competence-target');
-      const target = document.getElementById(targetId);
-
-      if (!target) return;
-
-      // Remove previous highlights
-      document.querySelectorAll('.accordion-item.highlighted')
-        .forEach(item => item.classList.remove('highlighted'));
-
-      // Add highlight class
-      target.classList.add('highlighted');
-
-      // Auto-remove after animation
-      setTimeout(() => {
-        target.classList.remove('highlighted');
-      }, 2200);
-    });
-  });
-
-});
-</script>
-
-<script>
-// 4) Rating filter (original logic)
-(function () {
-  document.addEventListener("DOMContentLoaded", () => {
+/* ============================================================
+   6. RATING FILTER
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
     const items = document.querySelectorAll('.accordion-item');
 
     items.forEach(item => {
-      const badge = item.querySelector('.rating-badge');
-      if (!badge) return;
+        const badge = item.querySelector('.rating-badge');
+        if (!badge) return;
 
-      const cls = Array.from(badge.classList)
-        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
+        const cls = Array.from(badge.classList)
+            .find(c => c.startsWith('rating-') && c !== 'rating-badge');
 
-      if (cls) item.dataset.rating = cls.replace('rating-', '');
+        if (cls) item.dataset.rating = cls.replace('rating-', '');
     });
 
     const legendBadges = document.querySelectorAll('.section-subtitle .rating-badge');
     let currentFilter = null;
 
     function applyFilter(rating) {
-      items.forEach(item => {
-        if (!rating) {
-          item.style.display = '';
-        } else {
-          item.style.display = (item.dataset.rating === rating) ? '' : 'none';
-        }
-      });
+        items.forEach(item => {
+            if (!rating) {
+                item.style.display = '';
+            } else {
+                item.style.display = (item.dataset.rating === rating) ? '' : 'none';
+            }
+        });
     }
 
     legendBadges.forEach(badge => {
-      const cls = Array.from(badge.classList)
-        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
+        const cls = Array.from(badge.classList)
+            .find(c => c.startsWith('rating-') && c !== 'rating-badge');
+        if (!cls) return;
 
-      if (!cls) return;
+        const rating = cls.replace('rating-', '');
+        badge.style.cursor = 'pointer';
 
-      const rating = cls.replace('rating-', '');
-      badge.style.cursor = 'pointer';
-
-      badge.addEventListener('click', () => {
-        if (currentFilter === rating) {
-          currentFilter = null;
-          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-          applyFilter(null);
-        } else {
-          currentFilter = rating;
-          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-          badge.classList.add('rating-filter-active');
-          applyFilter(rating);
-        }
-      });
+        badge.addEventListener('click', () => {
+            if (currentFilter === rating) {
+                currentFilter = null;
+                legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+                applyFilter(null);
+            } else {
+                currentFilter = rating;
+                legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+                badge.classList.add('rating-filter-active');
+                applyFilter(rating);
+            }
+        });
     });
-  });
-})();
+});
 </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const counts = {
-      expert: 0,
-      proficient: 0,
-      competent: 0,
-      practised: 0,
-      aware: 0
-    };
+/* ============================================================
+   7. RATING SUMMARY COUNTS
+============================================================ */
+document.addEventListener('DOMContentLoaded', function () {
+    const counts = { expert: 0, proficient: 0, competent: 0, practised: 0, aware: 0 };
 
-    // Scan accordion items and count ratings
-    document.querySelectorAll('.accordion-item').forEach(item => {
-      const badge = item.querySelector('.rating-badge');
-      if (!badge) return;
-
-      if (badge.classList.contains('rating-expert')) counts.expert++;
-      if (badge.classList.contains('rating-proficient')) counts.proficient++;
-      if (badge.classList.contains('rating-competent')) counts.competent++;
-      if (badge.classList.contains('rating-practised')) counts.practised++;
-      if (badge.classList.contains('rating-aware')) counts.aware++;
+    document.querySelectorAll('.accordion-item .rating-badge').forEach(badge => {
+        if (badge.classList.contains('rating-expert')) counts.expert++;
+        if (badge.classList.contains('rating-proficient')) counts.proficient++;
+        if (badge.classList.contains('rating-competent')) counts.competent++;
+        if (badge.classList.contains('rating-practised')) counts.practised++;
+        if (badge.classList.contains('rating-aware')) counts.aware++;
     });
 
-    // Update summary counts
     const map = [
-      { key: 'expert', selector: '.rating-summary-segment.rating-expert .count' },
-      { key: 'proficient', selector: '.rating-summary-segment.rating-proficient .count' },
-      { key: 'competent', selector: '.rating-summary-segment.rating-competent .count' },
-      { key: 'practised', selector: '.rating-summary-segment.rating-practised .count' },
-      { key: 'aware', selector: '.rating-summary-segment.rating-aware .count' }
+        { key: 'expert', selector: '.rating-summary-segment.rating-expert .count' },
+        { key: 'proficient', selector: '.rating-summary-segment.rating-proficient .count' },
+        { key: 'competent', selector: '.rating-summary-segment.rating-competent .count' },
+        { key: 'practised', selector: '.rating-summary-segment.rating-practised .count' },
+        { key: 'aware', selector: '.rating-summary-segment.rating-aware .count' }
     ];
 
     map.forEach(entry => {
-      const el = document.querySelector(entry.selector);
-      if (el) el.textContent = counts[entry.key];
+        const el = document.querySelector(entry.selector);
+        if (el) el.textContent = counts[entry.key];
     });
-  });
+});
 </script>
 
 <script>
+/* ============================================================
+   8. PREMIUM GRADIENT SVG BAR + TOOLTIP
+============================================================ */
 document.addEventListener('DOMContentLoaded', function () {
 
-  const counts = {
-    expert: 0,
-    proficient: 0,
-    competent: 0,
-    practised: 0,
-    aware: 0
-  };
+    const counts = { expert: 0, proficient: 0, competent: 0, practised: 0, aware: 0 };
 
-  // Find ALL rating badges anywhere on the page
-  document.querySelectorAll('.rating-badge').forEach(badge => {
-    if (badge.classList.contains('rating-expert')) counts.expert++;
-    if (badge.classList.contains('rating-proficient')) counts.proficient++;
-    if (badge.classList.contains('rating-competent')) counts.competent++;
-    if (badge.classList.contains('rating-practised')) counts.practised++;
-    if (badge.classList.contains('rating-aware')) counts.aware++;
-  });
+    document.querySelectorAll('.accordion-item .rating-badge').forEach(badge => {
+        if (badge.classList.contains('rating-expert')) counts.expert++;
+        if (badge.classList.contains('rating-proficient')) counts.proficient++;
+        if (badge.classList.contains('rating-competent')) counts.competent++;
+        if (badge.classList.contains('rating-practised')) counts.practised++;
+        if (badge.classList.contains('rating-aware')) counts.aware++;
+    });
 
-  const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
-  // Update stacked bar widths
-  document.querySelectorAll('.stack-segment').forEach(seg => {
-    const type = [...seg.classList].find(c => c.startsWith('rating-')).replace('rating-', '');
-    const count = counts[type] || 0;
-    const width = total > 0 ? (count / total) * 100 : 0;
-    seg.style.width = width + '%';
-    seg.dataset.count = count;
-  });
+    let x = 0;
 
-});
-</script>
-
-  <script>
-document.addEventListener('DOMContentLoaded', function () {
-
-  const counts = {
-    expert: 0,
-    proficient: 0,
-    competent: 0,
-    practised: 0,
-    aware: 0
-  };
-
-  // Count all rating badges
-  document.querySelectorAll('.accordion-item .rating-badge').forEach(badge => {
-    if (badge.classList.contains('rating-expert')) counts.expert++;
-    if (badge.classList.contains('rating-proficient')) counts.proficient++;
-    if (badge.classList.contains('rating-competent')) counts.competent++;
-    if (badge.classList.contains('rating-practised')) counts.practised++;
-    if (badge.classList.contains('rating-aware')) counts.aware++;
-  });
-
-  const total = Object.values(counts).reduce((a, b) => a + b, 0);
-
-const colours = {
-  expert: 'url(#grad-expert)',
-  proficient: 'url(#grad-proficient)',
-  competent: 'url(#grad-competent)',
-  practised: 'url(#grad-practised)',
-  aware: 'url(#grad-aware)'
-};
-
-
-  let x = 0;
-  let svg = `<svg viewBox="0 0 100 10" preserveAspectRatio="none">`;
-
-  for (const key of ['expert','proficient','competent','practised','aware']) {
-    const pct = total ? (counts[key] / total) * 100 : 0;
-    svg += `
-      <rect x="${x}" y="0" width="${pct}" height="10" fill="${colours[key]}"></rect>
-    `;
-    x += pct;
-  }
-
-  svg += `</svg>`;
-
-  document.getElementById('rating-summary-svg').innerHTML = svg;
-
-});
-</script>
-  <script>
-document.addEventListener('DOMContentLoaded', function () {
-
-  const counts = {
-    expert: 0,
-    proficient: 0,
-    competent: 0,
-    practised: 0,
-    aware: 0
-  };
-
-  // Count rating badges inside accordion items
-  document.querySelectorAll('.accordion-item .rating-badge').forEach(badge => {
-    if (badge.classList.contains('rating-expert')) counts.expert++;
-    if (badge.classList.contains('rating-proficient')) counts.proficient++;
-    if (badge.classList.contains('rating-competent')) counts.competent++;
-    if (badge.classList.contains('rating-practised')) counts.practised++;
-    if (badge.classList.contains('rating-aware')) counts.aware++;
-  });
-
-  const total = Object.values(counts).reduce((a, b) => a + b, 0);
-
-const colours = {
-  expert: 'url(#grad-expert)',
-  proficient: 'url(#grad-proficient)',
-  competent: 'url(#grad-competent)',
-  practised: 'url(#grad-practised)',
-  aware: 'url(#grad-aware)'
-};
-
-
- let x = 0;
-
-let svg = `
+    let svg = `
 <svg id="rating-bar-svg" viewBox="0 0 100 10" preserveAspectRatio="none">
-  <defs>
-    <linearGradient id="grad-expert" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0d74e7"/>
-      <stop offset="100%" stop-color="#084a96"/>
-    </linearGradient>
-
-    <linearGradient id="grad-proficient" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0a8f72"/>
-      <stop offset="100%" stop-color="#005f46"/>
-    </linearGradient>
-
-    <linearGradient id="grad-competent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#d9a441"/>
-      <stop offset="100%" stop-color="#8a6500"/>
-    </linearGradient>
-
-    <linearGradient id="grad-practised" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#a46bff"/>
-      <stop offset="100%" stop-color="#6a2bb8"/>
-    </linearGradient>
-
-    <linearGradient id="grad-aware" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#777"/>
-      <stop offset="100%" stop-color="#444"/>
-    </linearGradient>
-  </defs>
+<defs>
+<linearGradient id="grad-expert" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#0d74e7"/>
+<stop offset="100%" stop-color="#084a96"/>
+</linearGradient>
+<linearGradient id="grad-proficient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#0a8f72"/>
+<stop offset="100%" stop-color="#005f46"/>
+</linearGradient>
+<linearGradient id="grad-competent" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#d9a441"/>
+<stop offset="100%" stop-color="#8a6500"/>
+</linearGradient>
+<linearGradient id="grad-practised" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#a46bff"/>
+<stop offset="100%" stop-color="#6a2bb8"/>
+</linearGradient>
+<linearGradient id="grad-aware" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#777"/>
+<stop offset="100%" stop-color="#444"/>
+</linearGradient>
+</defs>
 `;
 
-for (const key of ['expert','proficient','competent','practised','aware']) {
-  const pct = total ? (counts[key] / total) * 100 : 0;
+    for (const key of ['expert','proficient','competent','practised','aware']) {
+        const pct = total ? (counts[key] / total) * 100 : 0;
 
-  svg += `
-    <rect 
-      class="rating-segment" 
-      data-type="${key}" 
-      data-count="${counts[key]}" 
-      x="${x}" 
-      y="0" 
-      width="${pct}" 
-      height="10" 
-      fill="url(#grad-${key})">
-    </rect>
-  `;
+        svg += `
+<rect class="rating-segment"
+      data-type="${key}"
+      data-count="${counts[key]}"
+      x="${x}"
+      y="0"
+      width="${pct}"
+      height="10"
+      fill="url(#grad-${key})"></rect>
+`;
+        x += pct;
+    }
 
-  x += pct;
-}
+    svg += `</svg>`;
 
-svg += `</svg>`;
-document.getElementById('rating-summary-svg').innerHTML = svg;
+    document.getElementById('rating-summary-svg').innerHTML = svg;
 
+    const tooltip = document.getElementById('rating-tooltip');
 
-  // Tooltip logic
-  const tooltip = document.getElementById('rating-tooltip');
+    document.querySelectorAll('.rating-segment').forEach(seg => {
+        seg.addEventListener('mousemove', e => {
+            const type = seg.dataset.type;
+            const count = seg.dataset.count;
 
-  document.querySelectorAll('.rating-segment').forEach(seg => {
-    seg.addEventListener('mousemove', e => {
-      const type = seg.dataset.type;
-      const count = seg.dataset.count;
+            tooltip.innerHTML = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${count}`;
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = e.clientY + 'px';
+            tooltip.style.display = 'block';
+            tooltip.style.opacity = '1';
+        });
 
-      tooltip.innerHTML = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${count}`;
-      tooltip.style.left = e.clientX + 'px';
-      tooltip.style.top = e.clientY + 'px';
-      tooltip.style.display = 'block';
-      tooltip.style.opacity = '1';
+        seg.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+            tooltip.style.display = 'none';
+        });
     });
-
-    seg.addEventListener('mouseleave', () => {
-      tooltip.style.opacity = '0';
-      tooltip.style.display = 'none';
-    });
-  });
-
 });
 </script>
-
 </main>
 </body>
 </html>

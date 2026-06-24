@@ -1680,6 +1680,34 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   background: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0));
   pointer-events: none;
 }
+
+/* ============================================================
+   COMPETENCE HIGHLIGHT ON CPD LINK CLICK
+   ============================================================ */
+
+.accordion-item.highlighted {
+  position: relative;
+  animation: competenceHighlight 2.2s ease-out;
+  z-index: 5;
+}
+
+@keyframes competenceHighlight {
+  0% {
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    background: rgba(255,255,255,0.25);
+    border-color: #fff;
+  }
+  20% {
+    box-shadow: 0 0 18px rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.35);
+    border-color: #fff;
+  }
+  100% {
+    box-shadow: none;
+    background: inherit;
+    border-color: inherit;
+  }
+}
   
 </style>
 
@@ -3529,7 +3557,33 @@ document.addEventListener("click", e => {
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
 
+  // When a CPD link is clicked, highlight the target competence
+  document.querySelectorAll('[data-competence-target]').forEach(link => {
+    link.addEventListener('click', function () {
+      const targetId = this.getAttribute('data-competence-target');
+      const target = document.getElementById(targetId);
+
+      if (!target) return;
+
+      // Remove previous highlights
+      document.querySelectorAll('.accordion-item.highlighted')
+        .forEach(item => item.classList.remove('highlighted'));
+
+      // Add highlight class
+      target.classList.add('highlighted');
+
+      // Auto-remove after animation
+      setTimeout(() => {
+        target.classList.remove('highlighted');
+      }, 2200);
+    });
+  });
+
+});
+</script>
 
 <script>
 // 4) Rating filter (original logic)

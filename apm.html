@@ -1357,30 +1357,53 @@ body.page-prof-dev #footer footer svg {
   justify-content: space-between;
 }
 /* ============================================================
-   APM FOOTER — COLOUR, ALIGNMENT, LINKS, LOGO
+   APM FOOTER — FINAL FIX (colour, alignment, logo, links)
 ============================================================ */
 
-body.page-prof-dev #footer footer {
+/* Blue banner */
+body.page-prof-dev #footer .footer {
   background: #0a2540 !important;
 }
 
-/* Text + copyright line */
-body.page-prof-dev #footer footer p,
-body.page-prof-dev #footer footer span {
+/* White text for copyright */
+body.page-prof-dev #footer .footer-row-copy {
   color: #ffffff !important;
-  vertical-align: middle;
+  display: flex;
+  align-items: center;
 }
 
-/* Links: cyan like other pages */
-body.page-prof-dev #footer footer a {
-  color: #38bdf8 !important; /* adjust if your exact cyan differs */
+/* Cyan links (matching your other pages) */
+body.page-prof-dev #footer .footer-row-links a {
+  color: #7ac0f9 !important;
 }
 
-/* Centre whatever is inside the circular FAB on all devices */
+/* Ensure links don't inherit black from resets */
+body.page-prof-dev #footer .footer-row-links a * {
+  color: #7ac0f9 !important;
+}
+
+/* Restore logo + QR visibility */
+body.page-prof-dev #footer .footer-logo img,
+body.page-prof-dev #footer .footer-qr img {
+  filter: none !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Align logo + QR row properly on iPad */
+@media (min-width: 601px) {
+  body.page-prof-dev #footer .footer-row-bottom {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+}
+
+/* Centre the FAB icon perfectly on all devices */
 .fab > * {
   margin: 0;
   padding: 0;
-  line-height: 1;
+  line-height: 1 !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1388,7 +1411,7 @@ body.page-prof-dev #footer footer a {
   height: 100%;
 }
 
-
+  
 </style>
 
 

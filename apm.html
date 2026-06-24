@@ -3527,22 +3527,38 @@ document.addEventListener("click", e => {
    ------------------------------------------------------------ */
 
 document.addEventListener("click", e => {
-    const link = e.target.closest(".cpd-competence-link");
-    if (!link) return;
+  const link = e.target.closest(".cpd-competence-link");
+  if (!link) return;
 
-    e.stopPropagation(); // Prevent accordion header from hijacking click
+  e.stopPropagation(); // Prevent accordion header from hijacking click
 
-    const targetSelector = link.getAttribute("href");
-    if (!targetSelector) return;
+  const targetSelector = link.getAttribute("href");
+  if (!targetSelector) return;
 
-    const target = document.querySelector(targetSelector);
-    if (!target) return;
+  const target = document.querySelector(targetSelector);
+  if (!target) return;
 
-    // Force accordion open
-    target.classList.add("open");
+  // Force accordion open
+  target.classList.add("open");
 
-    // Scroll to the competence item
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  // Scroll to the competence item
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // ---------------------------------------------
+  // ⭐ ADD THE HIGHLIGHT EFFECT HERE
+  // ---------------------------------------------
+
+  // Remove any previous highlight
+  document.querySelectorAll('.accordion-item.highlighted')
+    .forEach(item => item.classList.remove('highlighted'));
+
+  // Add highlight class
+  target.classList.add('highlighted');
+
+  // Auto-remove highlight after animation
+  setTimeout(() => {
+    target.classList.remove('highlighted');
+  }, 2200);
 });
 
 

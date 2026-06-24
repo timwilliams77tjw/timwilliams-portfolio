@@ -1666,6 +1666,20 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   transition: opacity 0.15s ease;
 }
 
+#rating-summary-svg {
+  margin-bottom: 1.8rem;
+}
+  
+#rating-summary-svg svg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0));
+  pointer-events: none;
+}
   
 </style>
 
@@ -3666,13 +3680,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
-  const colours = {
-    expert: '#0a66c2',
-    proficient: '#007b5f',
-    competent: '#b8860b',
-    practised: '#8a2be2',
-    aware: '#555'
-  };
+const colours = {
+  expert: 'url(#grad-expert)',
+  proficient: 'url(#grad-proficient)',
+  competent: 'url(#grad-competent)',
+  practised: 'url(#grad-practised)',
+  aware: 'url(#grad-aware)'
+};
+
 
   let x = 0;
   let svg = `<svg viewBox="0 0 100 10" preserveAspectRatio="none">`;
@@ -3713,38 +3728,69 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
-  const colours = {
-    expert: '#0a66c2',
-    proficient: '#007b5f',
-    competent: '#b8860b',
-    practised: '#8a2be2',
-    aware: '#555'
-  };
+const colours = {
+  expert: 'url(#grad-expert)',
+  proficient: 'url(#grad-proficient)',
+  competent: 'url(#grad-competent)',
+  practised: 'url(#grad-practised)',
+  aware: 'url(#grad-aware)'
+};
 
-  let x = 0;
-  let svg = `<svg id="rating-bar-svg" viewBox="0 0 100 10" preserveAspectRatio="none">`;
 
-  for (const key of ['expert','proficient','competent','practised','aware']) {
-    const pct = total ? (counts[key] / total) * 100 : 0;
+ let x = 0;
 
-    svg += `
-      <rect 
-        class="rating-segment" 
-        data-type="${key}" 
-        data-count="${counts[key]}" 
-        x="${x}" 
-        y="0" 
-        width="${pct}" 
-        height="10" 
-        fill="${colours[key]}">
-      </rect>
-    `;
+let svg = `
+<svg id="rating-bar-svg" viewBox="0 0 100 10" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="grad-expert" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d74e7"/>
+      <stop offset="100%" stop-color="#084a96"/>
+    </linearGradient>
 
-    x += pct;
-  }
+    <linearGradient id="grad-proficient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a8f72"/>
+      <stop offset="100%" stop-color="#005f46"/>
+    </linearGradient>
 
-  svg += `</svg>`;
-  document.getElementById('rating-summary-svg').innerHTML = svg;
+    <linearGradient id="grad-competent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d9a441"/>
+      <stop offset="100%" stop-color="#8a6500"/>
+    </linearGradient>
+
+    <linearGradient id="grad-practised" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a46bff"/>
+      <stop offset="100%" stop-color="#6a2bb8"/>
+    </linearGradient>
+
+    <linearGradient id="grad-aware" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#777"/>
+      <stop offset="100%" stop-color="#444"/>
+    </linearGradient>
+  </defs>
+`;
+
+for (const key of ['expert','proficient','competent','practised','aware']) {
+  const pct = total ? (counts[key] / total) * 100 : 0;
+
+  svg += `
+    <rect 
+      class="rating-segment" 
+      data-type="${key}" 
+      data-count="${counts[key]}" 
+      x="${x}" 
+      y="0" 
+      width="${pct}" 
+      height="10" 
+      fill="url(#grad-${key})">
+    </rect>
+  `;
+
+  x += pct;
+}
+
+svg += `</svg>`;
+document.getElementById('rating-summary-svg').innerHTML = svg;
+
 
   // Tooltip logic
   const tooltip = document.getElementById('rating-tooltip');

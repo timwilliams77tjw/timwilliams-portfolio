@@ -1322,28 +1322,6 @@ section.cpd-pillars-section .pillar-card.projected {
   transform: rotate(90deg);
 }
 
-/* ============================================================
-   APM FOOTER — KEEP LAYOUT, RESTORE BLUE BANNER
-============================================================ */
-
-/* ============================================================
-   APM FOOTER — FIX TEXT + LOGO VISIBILITY
-============================================================ */
-
-body.page-prof-dev #footer footer {
-  background: #0a2540 !important;
-  color: #ffffff !important;
-}
-
-body.page-prof-dev #footer footer a {
-  color: #ffffff !important;
-}
-
-body.page-prof-dev #footer footer img,
-body.page-prof-dev #footer footer svg {
-  filter: none !important;
-  opacity: 1 !important;
-}
 /* Competency header styled like CPD header */
 .competence-header {
   background: #ffffff;
@@ -1357,165 +1335,110 @@ body.page-prof-dev #footer footer svg {
   justify-content: space-between;
 }
 /* ============================================================
-   APM FOOTER — FINAL, CORRECT, NON‑BREAKING FIX
+   APM FOOTER — CLEAN, FINAL OVERRIDES
 ============================================================ */
 
-/* Blue banner background */
+/* Blue banner + base text */
 body.page-prof-dev #footer .footer {
   background: #0a2540 !important;
+  color: #ffffff !important;
 }
 
-/* Fix text alignment + line height */
+/* Copyright row: keep on one baseline */
 body.page-prof-dev #footer .footer-row-copy {
-  color: #ffffff !important;
-  line-height: 1.4 !important;
   display: flex !important;
   align-items: center !important;
+  justify-content: flex-start !important;
+  color: #ffffff !important;
+  line-height: 1.4 !important;
 }
 
-/* Cyan links (same as other pages) */
+/* Links: cyan, like other pages */
 body.page-prof-dev #footer .footer-row-links a {
   color: #7ac0f9 !important;
+  text-decoration: none !important;
 }
 
-/* Prevent global resets from overriding link colour */
-body.page-prof-dev #footer .footer-row-links a * {
-  color: #7ac0f9 !important;
-}
-
-/* Restore logo + QR visibility (white logo must NOT be inverted) */
+/* Logo + QR: fully visible on dark background */
 body.page-prof-dev #footer .footer-logo img,
 body.page-prof-dev #footer .footer-qr img {
-  filter: none !important;
-  opacity: 1 !important;
-  mix-blend-mode: normal !important;
+  width: 70px !important;
+  max-width: 70px !important;
+  height: auto !important;
   display: block !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
 }
 
-/* Fix iPad alignment of bottom row */
+/* Desktop / iPad layout */
 @media (min-width: 601px) {
+  body.page-prof-dev #footer .footer-inner {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  body.page-prof-dev #footer .footer-row-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    flex-wrap: nowrap !important;
+  }
+
   body.page-prof-dev #footer .footer-row-bottom {
     display: flex !important;
     align-items: center !important;
     gap: 20px !important;
+    margin-left: auto !important;
   }
 }
 
-
-/* Centre the FAB icon perfectly */
-.fab > * {
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-/* Centre FAB icon on all devices */
-body.page-prof-dev .fab > * {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
-  line-height: 1 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-/* ============================================================
-   APM PAGE — OVERRIDE FOOTER.HTML STYLES
-============================================================ */
-
-body.page-prof-dev #footer footer.footer,
-body.page-prof-dev #footer footer.footer * {
-  color: #ffffff !important;
-  line-height: 1.4 !important;
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* Footer background */
-body.page-prof-dev #footer footer.footer {
-  background: #0a2540 !important;
-}
-
-/* Footer links cyan */
-body.page-prof-dev #footer footer.footer a {
-  color: #7ac0f9 !important;
-}
-
-/* Logo + QR visible */
-body.page-prof-dev #footer footer.footer .footer-logo img,
-body.page-prof-dev #footer footer.footer .footer-qr img {
-  filter: none !important;
-  opacity: 1 !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Align copyright text */
-body.page-prof-dev #footer footer.footer .footer-row-copy {
-  display: flex !important;
-  align-items: center !important;
-}
-/* ============================================================
-   APM PAGE — OVERRIDE FOOTER.HTML + GLOBAL RESTORE
-============================================================ */
-
-/* Force blue banner */
-body.page-prof-dev #footer footer.footer {
-  background: #0a2540 !important;
-}
-
-/* Force white copyright text + alignment */
-body.page-prof-dev #footer footer.footer .footer-row-copy {
-  color: #ffffff !important;
-  line-height: 1.4 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Force cyan links */
-body.page-prof-dev #footer footer.footer .footer-row-links a {
-  color: #7ac0f9 !important;
-}
-
-/* Prevent nested resets */
-body.page-prof-dev #footer footer.footer .footer-row-links a * {
-  color: #7ac0f9 !important;
-}
-
-/* Restore logo + QR visibility (white logo must NOT be inverted) */
-body.page-prof-dev #footer footer.footer .footer-logo img,
-body.page-prof-dev #footer footer.footer .footer-qr img {
-  filter: none !important;
-  opacity: 1 !important;
-  mix-blend-mode: normal !important;
-  display: block !important;
-}
-
-/* Fix iPad alignment of bottom row */
-@media (min-width: 601px) {
-  body.page-prof-dev #footer footer.footer .footer-row-bottom {
+/* iPhone layout */
+@media (max-width: 600px) {
+  body.page-prof-dev #footer .footer-inner {
     display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
+    gap: 18px !important;
+    width: 100% !important;
+  }
+
+  body.page-prof-dev #footer .footer-row-copy {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  body.page-prof-dev #footer .footer-row-links {
+    width: 100% !important;
+    display: flex !important;
     justify-content: center !important;
+    gap: 18px !important;
+    flex-wrap: wrap !important;
+    text-align: center !important;
+  }
+
+  body.page-prof-dev #footer .footer-row-bottom {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
     gap: 20px !important;
   }
 }
-/* Centre FAB icon perfectly on all devices */
-body.page-prof-dev .fab > * {
+
+/* FAB centring (calendar + booking) */
+.fab,
+.fab-booking {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
   line-height: 1 !important;
-  margin: 0 !important;
-  padding: 0 !important;
 }
+
   
 </style>
 

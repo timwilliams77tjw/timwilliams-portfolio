@@ -1540,6 +1540,67 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   background-blend-mode: normal !important;
 }
 
+/* Rating summary bar */
+
+.rating-summary-bar {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  margin: 1rem 0 2rem;
+}
+
+.rating-summary-segment {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  transform: translateY(0);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rating-summary-segment .label {
+  font-weight: 600;
+}
+
+.rating-summary-segment .count {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* Colours aligned to your rating palette */
+
+.rating-summary-segment.rating-expert {
+  background: #0a66c2;
+}
+
+.rating-summary-segment.rating-proficient {
+  background: #007b5f;
+}
+
+.rating-summary-segment.rating-competent {
+  background: #b8860b;
+}
+
+.rating-summary-segment.rating-practised {
+  background: #8a2be2;
+}
+
+.rating-summary-segment.rating-aware {
+  background: #555;
+}
+
+/* Subtle hover */
+
+.rating-summary-segment:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
 
 </style>
 
@@ -2784,6 +2845,34 @@ function generateProgressPillars() {
     <span class="rating-badge rating-aware">Aware</span>
   </p>
 
+<section class="rating-summary">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-chart-bar"></i> Rating summary
+  </h2>
+  <div class="rating-summary-bar">
+    <div class="rating-summary-segment rating-expert">
+      <span class="label">Expert</span>
+      <span class="count">0</span>
+    </div>
+    <div class="rating-summary-segment rating-proficient">
+      <span class="label">Proficient</span>
+      <span class="count">0</span>
+    </div>
+    <div class="rating-summary-segment rating-competent">
+      <span class="label">Competent</span>
+      <span class="count">0</span>
+    </div>
+    <div class="rating-summary-segment rating-practised">
+      <span class="label">Practised</span>
+      <span class="count">0</span>
+    </div>
+    <div class="rating-summary-segment rating-aware">
+      <span class="label">Aware</span>
+      <span class="count">0</span>
+    </div>
+  </div>
+</section>
+  
   <div class="accordion">
 
 
@@ -3412,7 +3501,43 @@ document.addEventListener("click", e => {
 })();
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const counts = {
+      expert: 0,
+      proficient: 0,
+      competent: 0,
+      practised: 0,
+      aware: 0
+    };
 
+    // Scan accordion items and count ratings
+    document.querySelectorAll('.accordion-item').forEach(item => {
+      const badge = item.querySelector('.rating-badge');
+      if (!badge) return;
+
+      if (badge.classList.contains('rating-expert')) counts.expert++;
+      if (badge.classList.contains('rating-proficient')) counts.proficient++;
+      if (badge.classList.contains('rating-competent')) counts.competent++;
+      if (badge.classList.contains('rating-practised')) counts.practised++;
+      if (badge.classList.contains('rating-aware')) counts.aware++;
+    });
+
+    // Update summary counts
+    const map = [
+      { key: 'expert', selector: '.rating-summary-segment.rating-expert .count' },
+      { key: 'proficient', selector: '.rating-summary-segment.rating-proficient .count' },
+      { key: 'competent', selector: '.rating-summary-segment.rating-competent .count' },
+      { key: 'practised', selector: '.rating-summary-segment.rating-practised .count' },
+      { key: 'aware', selector: '.rating-summary-segment.rating-aware .count' }
+    ];
+
+    map.forEach(entry => {
+      const el = document.querySelector(entry.selector);
+      if (el) el.textContent = counts[entry.key];
+    });
+  });
+</script>
 
 </main>
 </body>

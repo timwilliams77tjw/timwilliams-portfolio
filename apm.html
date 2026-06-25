@@ -1752,7 +1752,22 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   position: relative;
   z-index: 1;
 }
+/* Force horizontal scroll for the rating bar on iPhone */
+#rating-summary-svg {
+  width: 100%;
+  display: block;
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: 8px; /* prevents clipping */
+}
 
+/* Ensure the SVG is wider than the screen */
+#rating-summary-svg svg {
+  min-width: 700px; /* 5 segments always fit */
+  height: 40px;
+  display: block;
+}
   
 </style>
 

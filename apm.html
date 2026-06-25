@@ -2894,18 +2894,19 @@ const allCards = [...document.querySelectorAll(".accordion-item[id^='competence-
   if (allCards.length === 0) return;
 
   // Extract name + rating
-  const allData = allCards.map(card => {
-    const titleEl = card.querySelector(".accordion-header span");
-    const badgeEl = card.querySelector(".rating-badge");
+const allData = allCards.map(card => {
+  const titleEl = card.querySelector(".accordion-header span:first-child");
+  const badgeEl = card.querySelector(".accordion-header .rating-badge");
 
-    const title = titleEl ? titleEl.innerText.trim() : "Unknown";
-    const ratingText = badgeEl ? badgeEl.innerText.trim() : "Competent";
+  const title = titleEl ? titleEl.textContent.replace(/^\s*[\S\s]*?>\s*/, "").trim() : "Unknown";
+  const ratingText = badgeEl ? badgeEl.textContent.trim() : "Competent";
 
-    return {
-      label: title,
-      value: ratingMap[ratingText] || 0
-    };
-  });
+  return {
+    label: title,
+    value: ratingMap[ratingText] || 0
+  };
+});
+
 
   // Sort by rating DESC
   allData.sort((a, b) => b.value - a.value);

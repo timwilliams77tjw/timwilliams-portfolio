@@ -3063,25 +3063,16 @@ function generateDualRadar() {
   const top6 = allData.slice(0, 6);
 
   // Build target data: remove Experts, bump others by 1
-  const targetRaw = top6
-    .filter(d => d.value < 5)
-    .map(d => ({
-      label: d.label,
-      value: d.value + 1
-    }));
-
-  // Keep 6 spokes by inserting placeholders
-  const target6 = [];
-  let idx = 0;
-
-  for (let i = 0; i < 6; i++) {
-    if (top6[i].value === 5) {
-      target6.push({ label: "", value: 0, placeholder: true });
-    } else {
-      target6.push(targetRaw[idx]);
-      idx++;
+  const target6 = top6.map(d => {
+    if (d.value === 5) {
+      return { label: "", value: 0, placeholder: true };
     }
-  }
+    return {
+      label: d.label,
+      value: d.value + 1,
+      placeholder: false
+    };
+  });
 
   drawRadar("radar-current", top6, colourMap, false);
   drawRadar("radar-target", target6, colourMap, true);
@@ -3108,14 +3099,12 @@ function drawRadar(svgId, data, colourMap, isTarget) {
     svg.innerHTML += `<polygon class="radar-grid-ring" points="${points}"></polygon>`;
   }
 
-  // Polygon points (skip placeholders)
-  const polyPoints = data
-    .filter(d => !d.placeholder)
-    .map((d, i) => {
-      const r = (radius / maxValue) * d.value;
-      const angle = i * angleStep - Math.PI / 2;
-      return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
-    }).join(" ");
+  // Polygon points (use ALL 6 spokes, even placeholders)
+  const polyPoints = data.map((d, i) => {
+    const r = (radius / maxValue) * d.value;
+    const angle = i * angleStep - Math.PI / 2;
+    return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
+  }).join(" ");
 
   // Draw polygon FIRST
   svg.innerHTML += `
@@ -3125,7 +3114,7 @@ function drawRadar(svgId, data, colourMap, isTarget) {
     </polygon>
   `;
 
-  // Points only (no labels)
+  // Draw points (skip placeholders)
   data.forEach((d, i) => {
 
     if (d.placeholder) return;
@@ -3166,7 +3155,6 @@ function drawRadar(svgId, data, colourMap, isTarget) {
 
 // Run after CPD loads
 setTimeout(generateDualRadar, 800);
-
 
 function generateProgressPillars() {
   const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;

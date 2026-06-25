@@ -3099,7 +3099,7 @@ function drawRadar(svgId, data, colourMap, isTarget) {
     svg.innerHTML += `<polygon class="radar-grid-ring" points="${points}"></polygon>`;
   }
 
-  // Polygon points (use ALL 6 spokes, even placeholders)
+  // Polygon points (use ALL 6 spokes)
   const polyPoints = data.map((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
@@ -3155,6 +3155,7 @@ function drawRadar(svgId, data, colourMap, isTarget) {
 
 // Run after CPD loads
 setTimeout(generateDualRadar, 800);
+
 
 function generateProgressPillars() {
   const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;

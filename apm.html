@@ -3062,13 +3062,26 @@ function generateDualRadar() {
   allData.sort((a, b) => b.value - a.value);
   const top6 = allData.slice(0, 6);
 
-  // Target = next level up, but EXCLUDE Experts entirely
-  const target6 = top6
-    .filter(d => d.value < 5) // remove Experts
+  // Build target data: remove Experts, bump others by 1
+  const targetRaw = top6
+    .filter(d => d.value < 5)
     .map(d => ({
       label: d.label,
       value: d.value + 1
     }));
+
+  // Keep 6 spokes by inserting placeholders
+  const target6 = [];
+  let idx = 0;
+
+  for (let i = 0; i < 6; i++) {
+    if (top6[i].value === 5) {
+      target6.push({ label: "", value: 0, placeholder: true });
+    } else {
+      target6.push(targetRaw[idx]);
+      idx++;
+    }
+  }
 
   drawRadar("radar-current", top6, colourMap, false);
   drawRadar("radar-target", target6, colourMap, true);
@@ -3078,6 +3091,8 @@ function drawRadar(svgId, data, colourMap, isTarget) {
 
   const svg = document.getElementById(svgId);
   svg.innerHTML = "";
+
+  const tooltip = document.getElementById("radar-tooltip");
 
   const maxValue = 5;
   const radius = 50;
@@ -3093,14 +3108,16 @@ function drawRadar(svgId, data, colourMap, isTarget) {
     svg.innerHTML += `<polygon class="radar-grid-ring" points="${points}"></polygon>`;
   }
 
-  // Polygon points
-  const polyPoints = data.map((d, i) => {
-    const r = (radius / maxValue) * d.value;
-    const angle = i * angleStep - Math.PI / 2;
-    return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
-  }).join(" ");
+  // Polygon points (skip placeholders)
+  const polyPoints = data
+    .filter(d => !d.placeholder)
+    .map((d, i) => {
+      const r = (radius / maxValue) * d.value;
+      const angle = i * angleStep - Math.PI / 2;
+      return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
+    }).join(" ");
 
-  // Draw polygon FIRST so points appear on top
+  // Draw polygon FIRST
   svg.innerHTML += `
     <polygon 
       class="${isTarget ? "radar-area-target" : "radar-area-current"}" 
@@ -3108,42 +3125,47 @@ function drawRadar(svgId, data, colourMap, isTarget) {
     </polygon>
   `;
 
-  // Points + labels
+  // Points only (no labels)
   data.forEach((d, i) => {
+
+    if (d.placeholder) return;
+
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
     const x = Math.cos(angle) * r;
     const y = Math.sin(angle) * r;
 
-    // Draw point
-    svg.innerHTML += `
-      <circle 
-        class="radar-point" 
-        cx="${x}" cy="${y}" 
-        fill="${colourMap[d.value]}">
-      </circle>
-    `;
+    const point = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    point.setAttribute("class", "radar-point");
+    point.setAttribute("cx", x);
+    point.setAttribute("cy", y);
+    point.setAttribute("r", 4);
+    point.setAttribute("fill", colourMap[d.value]);
 
-    // Label position
-    const lx = Math.cos(angle) * (radius + 12);
-    const ly = Math.sin(angle) * (radius + 12);
+    // Tooltip behaviour
+    point.addEventListener("mouseenter", () => {
+      tooltip.innerHTML = `
+        <strong>${d.label}</strong><br>
+        ${isTarget ? "Target level: " : "Current level: "} ${d.value}
+      `;
+      tooltip.style.opacity = 1;
+    });
 
-    // Dynamic alignment
-    let anchor = "middle";
-    if (angle > -Math.PI/2 && angle < Math.PI/2) anchor = "start";
-    else if (angle < -Math.PI/2 || angle > Math.PI/2) anchor = "end";
+    point.addEventListener("mousemove", (e) => {
+      tooltip.style.left = (e.pageX + 12) + "px";
+      tooltip.style.top = (e.pageY - 12) + "px";
+    });
 
-    svg.innerHTML += `
-      <text class="radar-label" x="${lx}" y="${ly}" text-anchor="${anchor}">
-        ${d.label}
-      </text>
-    `;
+    point.addEventListener("mouseleave", () => {
+      tooltip.style.opacity = 0;
+    });
+
+    svg.appendChild(point);
   });
 }
 
 // Run after CPD loads
 setTimeout(generateDualRadar, 800);
-
 
 
 function generateProgressPillars() {

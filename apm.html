@@ -1902,7 +1902,100 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-  
+ /* ================================
+   HERO TITLE
+================================ */
+
+.hero-title h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 1rem 0 2rem;
+  color: #0a2540;
+}
+
+/* ================================
+   HERO GRID LAYOUT
+================================ */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 0 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+/* LEFT LOGO */
+.hero-left img {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* CENTRE TEXT */
+.hero-centre p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  opacity: 0.85;
+  text-align: center;
+}
+
+/* RIGHT PROGRESS RING */
+.hero-right {
+  display: flex;
+  justify-content: center;
+}
+
+.cpd-progress-container {
+  text-align: center;
+}
+
+.cpd-progress-ring {
+  display: block;
+  margin: 0 auto 0.5rem auto;
+}
+
+/* ================================
+   RESPONSIVE (iPhone / iPad)
+================================ */
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "left right"
+      "centre centre";
+  }
+
+  .hero-left { grid-area: left; }
+  .hero-centre { grid-area: centre; }
+  .hero-right { grid-area: right; }
+}
+
+@media (max-width: 600px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "left"
+      "centre"
+      "right";
+    text-align: center;
+  }
+
+  .hero-right {
+    justify-content: center;
+  }
+
+  .hero-left img {
+    margin: 0 auto;
+  }
+}
+ 
   
 </style>
 
@@ -1941,17 +2034,21 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
+<!-- HERO TITLE -->
+<section class="hero-title">
+  <h1>Professional Development &amp; Competence</h1>
+</section>
+
 <!-- HERO GRID -->
 <section class="hero-grid">
 
-  <!-- LEFT: CPD IMAGE -->
+  <!-- LEFT: LOGO -->
   <div class="hero-left">
     <img src="apm-cpd-thumbnail.jpg" alt="APM CPD & Competence Framework Thumbnail">
   </div>
 
-  <!-- CENTRE: TITLE + INTRO -->
+  <!-- CENTRE: INTRO TEXT -->
   <div class="hero-centre">
-    <h1>Professional Development &amp; Competence</h1>
     <p>
       A consolidated view of ongoing CPD activity and alignment to the APM Competence Framework (3rd edition),
       demonstrating sustained professional growth and reflective practice.

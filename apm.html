@@ -3042,7 +3042,7 @@ function generateDualRadar() {
     5: "#0a66c2"
   };
 
-  // Extract competence cards
+  // Extract all competence cards
   const cards = [...document.querySelectorAll(".accordion-item[id^='competence-']")];
 
   const allData = cards.map(card => {
@@ -3058,23 +3058,27 @@ function generateDualRadar() {
     };
   });
 
-  // Sort + take top 6
-  allData.sort((a, b) => b.value - a.value);
-  const top6 = allData.slice(0, 6);
+  // -----------------------------
+  // RADAR 1: Top 6 overall
+  // -----------------------------
+  const sortedAll = [...allData].sort((a, b) => b.value - a.value);
+  const current6 = sortedAll.slice(0, 6);
 
-  // Build target data: remove Experts, bump others by 1
-  const target6 = top6.map(d => {
-    if (d.value === 5) {
-      return { label: "", value: 0, placeholder: true };
-    }
-    return {
-      label: d.label,
-      value: d.value + 1,
-      placeholder: false
-    };
-  });
+  // -----------------------------
+  // RADAR 2: Top 6 NON-EXPERT
+  // -----------------------------
+  const nonExpert = allData.filter(d => d.value < 5);
+  const sortedNonExpert = nonExpert.sort((a, b) => b.value - a.value);
+  const targetBase6 = sortedNonExpert.slice(0, 6);
 
-  drawRadar("radar-current", top6, colourMap, false);
+  // Build target = +1 level (max Expert)
+  const target6 = targetBase6.map(d => ({
+    label: d.label,
+    value: Math.min(d.value + 1, 5)
+  }));
+
+  // Draw both radars
+  drawRadar("radar-current", current6, colourMap, false);
   drawRadar("radar-target", target6, colourMap, true);
 }
 
@@ -3089,7 +3093,7 @@ function drawRadar(svgId, data, colourMap, isTarget) {
   const radius = 50;
   const angleStep = (Math.PI * 2) / data.length;
 
-  // Draw grid rings
+  // Grid rings
   for (let level = 1; level <= maxValue; level++) {
     const r = (radius / maxValue) * level;
     const points = data.map((_, i) => {
@@ -3099,14 +3103,13 @@ function drawRadar(svgId, data, colourMap, isTarget) {
     svg.innerHTML += `<polygon class="radar-grid-ring" points="${points}"></polygon>`;
   }
 
-  // Polygon points (use ALL 6 spokes)
+  // Polygon (all 6 axes)
   const polyPoints = data.map((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
     return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
   }).join(" ");
 
-  // Draw polygon FIRST
   svg.innerHTML += `
     <polygon 
       class="${isTarget ? "radar-area-target" : "radar-area-current"}" 
@@ -3114,11 +3117,8 @@ function drawRadar(svgId, data, colourMap, isTarget) {
     </polygon>
   `;
 
-  // Draw points (skip placeholders)
+  // Points + hover tooltip
   data.forEach((d, i) => {
-
-    if (d.placeholder) return;
-
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
     const x = Math.cos(angle) * r;
@@ -3131,7 +3131,6 @@ function drawRadar(svgId, data, colourMap, isTarget) {
     point.setAttribute("r", 4);
     point.setAttribute("fill", colourMap[d.value]);
 
-    // Tooltip behaviour
     point.addEventListener("mouseenter", () => {
       tooltip.innerHTML = `
         <strong>${d.label}</strong><br>

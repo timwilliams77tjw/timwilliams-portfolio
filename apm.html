@@ -2010,6 +2010,139 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   padding-bottom: 0.4rem;
 }
 
+  /* ============================
+   RADAR LAYOUT
+============================ */
+
+.dual-radar-section {
+  margin: 40px 0;
+}
+
+.radar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 800px) {
+  .radar-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.radar-box {
+  text-align: center;
+}
+
+.radar-heading {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.radar-svg {
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* ============================
+   COLOUR CODING (MATCH BADGES)
+============================ */
+
+.legend-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.legend-dot.expert { background: #0a66c2; }
+.legend-dot.proficient { background: #007b5f; }
+.legend-dot.competent { background: #b8860b; }
+.legend-dot.practised { background: #8a2be2; }
+.legend-dot.aware { background: #555; }
+
+/* ============================
+   POLYGON STYLES
+============================ */
+
+.radar-area-current {
+  fill: rgba(13, 116, 231, 0.25);
+  stroke: #0a66c2;
+  stroke-width: 2;
+  animation: grow 0.8s ease-out forwards;
+}
+
+.radar-area-target {
+  fill: rgba(13, 116, 231, 0.08);
+  stroke: #0a66c2;
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+  animation: grow 0.8s ease-out forwards;
+}
+
+@keyframes grow {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ============================
+   GRID RINGS
+============================ */
+
+.radar-grid-ring {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 0.5;
+}
+
+/* ============================
+   POINTS + LABELS
+============================ */
+
+.radar-point {
+  r: 3.5;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.radar-label {
+  font-size: 10px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: #333;
+}
+
+/* ============================
+   LEGEND POLYGON ICONS
+============================ */
+
+.legend-polygons {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.legend-poly {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.legend-poly.current {
+  background: rgba(13, 116, 231, 0.25);
+  border: 2px solid #0a66c2;
+}
+
+.legend-poly.target {
+  background: rgba(13, 116, 231, 0.08);
+  border: 2px dashed #0a66c2;
+}
   
 </style>
 
@@ -2873,15 +3006,7 @@ if (document.readyState === "loading") {
     loadCPD();
 
 }
-function generateRadarChart() {
-  const svg = document.getElementById("radar-chart");
-  if (!svg) return;
-
-  svg.innerHTML = "";
-
-  // 1. Extract ALL competence cards
-const allCards = [...document.querySelectorAll(".accordion-item[id^='competence-']")];
-
+function generateDualRadar() {
 
   const ratingMap = {
     "Aware": 1,
@@ -2891,71 +3016,106 @@ const allCards = [...document.querySelectorAll(".accordion-item[id^='competence-
     "Expert": 5
   };
 
-  if (allCards.length === 0) return;
-
-  // Extract name + rating
-// Extract name + rating
-const allData = allCards.map(card => {
-  const titleEl = card.querySelector(".accordion-header span:first-child");
-  const badgeEl = card.querySelector(".accordion-header .rating-badge");
-
-  const title = titleEl ? titleEl.textContent.trim() : "Unknown";
-  const ratingText = badgeEl ? badgeEl.textContent.trim() : "Competent";
-
-  return {
-    label: title,
-    value: ratingMap[ratingText] || 0
+  const colourMap = {
+    1: "#555",
+    2: "#8a2be2",
+    3: "#b8860b",
+    4: "#007b5f",
+    5: "#0a66c2"
   };
-});
 
+  // Extract competence cards
+  const cards = [...document.querySelectorAll(".accordion-item[id^='competence-']")];
 
-  // Sort by rating DESC
+  const allData = cards.map(card => {
+    const titleEl = card.querySelector(".accordion-header span:first-child");
+    const badgeEl = card.querySelector(".accordion-header .rating-badge");
+
+    const title = titleEl ? titleEl.textContent.trim() : "Unknown";
+    const ratingText = badgeEl ? badgeEl.textContent.trim() : "Competent";
+
+    return {
+      label: title,
+      value: ratingMap[ratingText] || 0
+    };
+  });
+
+  // Sort + take top 6
   allData.sort((a, b) => b.value - a.value);
+  const top6 = allData.slice(0, 6);
 
-  // Top 6
-  const data = allData.slice(0, 6);
+  // Build target data (next level up)
+  const target6 = top6.map(d => ({
+    label: d.label,
+    value: Math.min(d.value + 1, 5)
+  }));
 
-  // Legend
-  const legend = document.getElementById("radar-legend");
-  if (legend) {
-    legend.innerHTML = data
-      .map(d => `<li>${d.label}: ${d.value}/5</li>`)
-      .join("");
-  }
+  drawRadar("radar-current", top6, colourMap, false);
+  drawRadar("radar-target", target6, colourMap, true);
+}
 
-  // Geometry
+function drawRadar(svgId, data, colourMap, isTarget) {
+
+  const svg = document.getElementById(svgId);
+  svg.innerHTML = "";
+
   const maxValue = 5;
   const radius = 50;
   const angleStep = (Math.PI * 2) / data.length;
 
-  // Grid rings
+  // Draw grid rings
   for (let level = 1; level <= maxValue; level++) {
     const r = (radius / maxValue) * level;
     const points = data.map((_, i) => {
       const angle = i * angleStep - Math.PI / 2;
       return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
     }).join(" ");
-    svg.innerHTML += `<polygon class="radar-grid" points="${points}"></polygon>`;
+    svg.innerHTML += `<polygon class="radar-grid-ring" points="${points}"></polygon>`;
   }
 
-  // Data area
-  const areaPoints = data.map((d, i) => {
+  // Polygon points
+  const polyPoints = data.map((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
     return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
   }).join(" ");
 
-  svg.innerHTML += `<polygon class="radar-area" points="${areaPoints}"></polygon>`;
+  svg.innerHTML += `
+    <polygon 
+      class="${isTarget ? "radar-area-target" : "radar-area-current"}" 
+      points="${polyPoints}">
+    </polygon>
+  `;
 
-  // Data points
+  // Points + labels
   data.forEach((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
     const x = Math.cos(angle) * r;
     const y = Math.sin(angle) * r;
-    svg.innerHTML += `<circle class="radar-point" cx="${x}" cy="${y}" r="2.5"></circle>`;
+
+    svg.innerHTML += `
+      <circle 
+        class="radar-point" 
+        cx="${x}" cy="${y}" 
+        fill="${colourMap[d.value]}">
+      </circle>
+    `;
+
+    // Label position (slightly outside)
+    const lx = Math.cos(angle) * (radius + 10);
+    const ly = Math.sin(angle) * (radius + 10);
+
+    svg.innerHTML += `
+      <text class="radar-label" x="${lx}" y="${ly}">
+        ${d.label}
+      </text>
+    `;
   });
 }
+
+// Run after CPD loads
+setTimeout(generateDualRadar, 800);
 
 
 function generateProgressPillars() {
@@ -3301,21 +3461,63 @@ function generateProgressPillars() {
 
 <div id="rating-summary-svg"></div>
   
-<section class="cpd-radar-section">
-  <h2 class="section-heading">
-    <i class="fa-solid fa-chart-radar"></i>
-    APM Competence Radar
-  </h2>
-  <p class="section-subtitle">
-My top 6 competencies automatically generated from my competence ratings.
-  </p>
+<section class="dual-radar-section">
 
-  <div class="radar-wrapper">
-    <svg id="radar-chart" viewBox="-60 -60 120 120"></svg>
+  <div class="radar-grid">
 
-    <ul id="radar-legend" class="radar-legend"></ul>
+    <!-- CURRENT RADAR -->
+    <div class="radar-box">
+      <h3 class="radar-heading">My Top 6 Competencies</h3>
+      <svg id="radar-current" class="radar-svg" viewBox="-60 -60 120 120"></svg>
+    </div>
+
+    <!-- TARGET RADAR -->
+    <div class="radar-box">
+      <h3 class="radar-heading">Target Levels (Next Step Up)</h3>
+      <svg id="radar-target" class="radar-svg" viewBox="-60 -60 120 120"></svg>
+    </div>
+
   </div>
+
+  <!-- COMBINED LEGEND -->
+  <div class="radar-legend-combined">
+    <h4>Legend</h4>
+
+    <ul>
+      <li>
+        <span class="legend-dot expert"></span>
+        Expert
+      </li>
+      <li>
+        <span class="legend-dot proficient"></span>
+        Proficient
+      </li>
+      <li>
+        <span class="legend-dot competent"></span>
+        Competent
+      </li>
+      <li>
+        <span class="legend-dot practised"></span>
+        Practised
+      </li>
+      <li>
+        <span class="legend-dot aware"></span>
+        Aware
+      </li>
+    </ul>
+
+    <div class="legend-polygons">
+      <div class="legend-poly current"></div>
+      <span>Current level</span>
+
+      <div class="legend-poly target"></div>
+      <span>Target level</span>
+    </div>
+
+  </div>
+
 </section>
+
   <div class="accordion">
 
 

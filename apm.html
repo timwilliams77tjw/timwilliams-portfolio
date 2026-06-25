@@ -2877,8 +2877,10 @@ function generateRadarChart() {
   const svg = document.getElementById("radar-chart");
   if (!svg) return;
 
+  svg.innerHTML = "";
+
   // 1. Extract ALL competence cards
-  const allCards = [...document.querySelectorAll(".info-card")];
+  const allCards = [...document.querySelectorAll(".accordion-item")];
 
   const ratingMap = {
     "Aware": 1,
@@ -2888,34 +2890,42 @@ function generateRadarChart() {
     "Expert": 5
   };
 
-  // Extract name + rating for ALL competences
+  if (allCards.length === 0) return;
+
+  // Extract name + rating
   const allData = allCards.map(card => {
-    const title = card.querySelector("h3").innerText.trim();
-    const ratingText = card.querySelector(".rating-badge").innerText.trim();
+    const titleEl = card.querySelector(".accordion-header span");
+    const badgeEl = card.querySelector(".rating-badge");
+
+    const title = titleEl ? titleEl.innerText.trim() : "Unknown";
+    const ratingText = badgeEl ? badgeEl.innerText.trim() : "Competent";
+
     return {
       label: title,
       value: ratingMap[ratingText] || 0
     };
   });
 
-  // Sort by rating DESCENDING
+  // Sort by rating DESC
   allData.sort((a, b) => b.value - a.value);
 
-  // Take the TOP 6 competences
+  // Top 6
   const data = allData.slice(0, 6);
 
-  // Update legend
+  // Legend
   const legend = document.getElementById("radar-legend");
-  legend.innerHTML = data
-    .map(d => `<li>${d.label}: ${d.value}/5</li>`)
-    .join("");
+  if (legend) {
+    legend.innerHTML = data
+      .map(d => `<li>${d.label}: ${d.value}/5</li>`)
+      .join("");
+  }
 
-  // 2. Radar chart geometry
+  // Geometry
   const maxValue = 5;
   const radius = 50;
   const angleStep = (Math.PI * 2) / data.length;
 
-  // Draw grid rings
+  // Grid rings
   for (let level = 1; level <= maxValue; level++) {
     const r = (radius / maxValue) * level;
     const points = data.map((_, i) => {
@@ -2925,7 +2935,7 @@ function generateRadarChart() {
     svg.innerHTML += `<polygon class="radar-grid" points="${points}"></polygon>`;
   }
 
-  // 3. Draw data area
+  // Data area
   const areaPoints = data.map((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
@@ -2934,7 +2944,7 @@ function generateRadarChart() {
 
   svg.innerHTML += `<polygon class="radar-area" points="${areaPoints}"></polygon>`;
 
-  // 4. Draw data points
+  // Data points
   data.forEach((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
@@ -2943,6 +2953,7 @@ function generateRadarChart() {
     svg.innerHTML += `<circle class="radar-point" cx="${x}" cy="${y}" r="2.5"></circle>`;
   });
 }
+
 
 function generateProgressPillars() {
   const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
@@ -3229,7 +3240,7 @@ function generateProgressPillars() {
     APM Competence Radar
   </h2>
   <p class="section-subtitle">
-    Automatically generated from my competence ratings.
+My top 6 competencies automatically generated from my competence ratings.
   </p>
 
   <div class="radar-wrapper">

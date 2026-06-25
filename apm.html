@@ -2880,7 +2880,8 @@ function generateRadarChart() {
   svg.innerHTML = "";
 
   // 1. Extract ALL competence cards
-  const allCards = [...document.querySelectorAll(".accordion-item")];
+const allCards = [...document.querySelectorAll(".accordion-item[id^='competence-']")];
+
 
   const ratingMap = {
     "Aware": 1,
@@ -3234,21 +3235,7 @@ function generateProgressPillars() {
     <li><strong>Sustainability in change initiatives:</strong> embed sustainability criteria into business cases, governance and benefits management.</li>
   </ul>
 </section>
-<section class="cpd-radar-section">
-  <h2 class="section-heading">
-    <i class="fa-solid fa-chart-radar"></i>
-    APM Competence Radar
-  </h2>
-  <p class="section-subtitle">
-My top 6 competencies automatically generated from my competence ratings.
-  </p>
 
-  <div class="radar-wrapper">
-    <svg id="radar-chart" viewBox="-60 -60 120 120"></svg>
-
-    <ul id="radar-legend" class="radar-legend"></ul>
-  </div>
-</section>
 <!-- PERSONAL ASSESSMENT ACCORDION -->
 <div class="collapsible-toggle competence-header">
   <div class="collapsible-text">
@@ -3311,8 +3298,21 @@ My top 6 competencies automatically generated from my competence ratings.
 
 <div id="rating-summary-svg"></div>
   
+<section class="cpd-radar-section">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-chart-radar"></i>
+    APM Competence Radar
+  </h2>
+  <p class="section-subtitle">
+My top 6 competencies automatically generated from my competence ratings.
+  </p>
 
+  <div class="radar-wrapper">
+    <svg id="radar-chart" viewBox="-60 -60 120 120"></svg>
 
+    <ul id="radar-legend" class="radar-legend"></ul>
+  </div>
+</section>
   <div class="accordion">
 
 

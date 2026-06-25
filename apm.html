@@ -1788,6 +1788,94 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   display: block;
 }
 
+/* ================================
+   HERO GRID LAYOUT
+================================ */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 2.5rem 1rem;
+  margin-bottom: 2rem;
+}
+
+/* LEFT IMAGE */
+.hero-left img {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* CENTRE TEXT */
+.hero-centre h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.hero-centre p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+/* RIGHT PROGRESS RING */
+.hero-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cpd-progress-container {
+  text-align: center;
+}
+
+.cpd-progress-ring {
+  display: block;
+  margin: 0 auto 0.5rem auto;
+}
+
+/* ================================
+   RESPONSIVE (iPhone / iPad)
+================================ */
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "left right"
+      "centre centre";
+  }
+
+  .hero-left { grid-area: left; }
+  .hero-centre { grid-area: centre; text-align: center; }
+  .hero-right { grid-area: right; justify-content: center; }
+}
+
+@media (max-width: 600px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "left"
+      "centre"
+      "right";
+    text-align: center;
+  }
+
+  .hero-right {
+    justify-content: center;
+  }
+
+  .hero-left img {
+    margin: 0 auto;
+  }
+}
+
+  
   
 </style>
 
@@ -1826,17 +1914,42 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
-<!-- HERO -->
-<section class="hero-section">
-  <img src="apm-cpd-thumbnail.jpg" alt="APM CPD & Competence Framework Thumbnail">
-  <h1>Professional Development &amp; Competence</h1>
-  <p>
-    A consolidated view of ongoing CPD activity and alignment to the APM Competence Framework (3rd edition),
-    demonstrating sustained professional growth and reflective practice.
-  </p>
+<!-- HERO GRID -->
+<section class="hero-grid">
+
+  <!-- LEFT: CPD IMAGE -->
+  <div class="hero-left">
+    <img src="apm-cpd-thumbnail.jpg" alt="APM CPD & Competence Framework Thumbnail">
+  </div>
+
+  <!-- CENTRE: TITLE + INTRO -->
+  <div class="hero-centre">
+    <h1>Professional Development &amp; Competence</h1>
+    <p>
+      A consolidated view of ongoing CPD activity and alignment to the APM Competence Framework (3rd edition),
+      demonstrating sustained professional growth and reflective practice.
+    </p>
+  </div>
+
+  <!-- RIGHT: PROGRESS RING -->
+  <div class="hero-right">
+    <div class="cpd-progress-container">
+      <svg class="cpd-progress-ring" width="160" height="160">
+        <circle class="cpd-ring-bg" cx="80" cy="80" r="70" />
+        <circle class="cpd-ring-fill" cx="80" cy="80" r="70" />
+      </svg>
+
+      <div class="cpd-progress-text">
+        <h3 id="cpd-wheel-completed">Completed hours</h3>
+        <p id="cpd-wheel-remaining">Hours needed before 30 Sep 2026</p>
+      </div>
+    </div>
+  </div>
+
 </section>
 
-<!-- OVERVIEW -->
+
+<!-- OVERVIEW (unchanged) -->
 <section>
   <h2 class="section-heading">
     <i class="fa-solid fa-circle-info"></i>
@@ -1849,28 +1962,6 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   </p>
 </section>
 
-<!-- PROGRESS RING -->
-<section class="cpd-progress-section">
-
-  <div class="cpd-progress-container">
-
-    <svg class="cpd-progress-ring" width="180" height="180">
-      <circle class="cpd-ring-bg" cx="90" cy="90" r="80" />
-      <circle class="cpd-ring-fill" cx="90" cy="90" r="80" />
-    </svg>
-
-    <div class="cpd-progress-text">
-      <h3 id="cpd-wheel-completed">Completed hours</h3>
-      <p id="cpd-wheel-remaining">Hours needed before 30 Sep 2026</p>
-    </div>
-
-  </div>
-
-  <h2 class="cpd-progress-heading">Development Goals</h2>
-
-
-
-</section>
 
 <!-- METRICS -->
 <section class="cpd-metrics">

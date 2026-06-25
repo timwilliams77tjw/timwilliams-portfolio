@@ -3074,7 +3074,9 @@ function generateDualRadar() {
   const cards = [...document.querySelectorAll(".accordion-item[id^='competence-']")];
 
   const allData = cards.map(card => {
-    const titleEl = card.querySelector(".accordion-header span:first-child");
+const titleEl = card.querySelector(".accordion-header span");
+const title = titleEl ? titleEl.childNodes[1].textContent.trim() : "Unknown";
+
     const badgeEl = card.querySelector(".accordion-header .rating-badge");
 
     const title = titleEl ? titleEl.textContent.trim() : "Unknown";

@@ -3123,7 +3123,16 @@ const allData = cards.map(card => {
   drawRadar("radar-target", target6, colourMap, true);
 }
 
-function drawRadar(svgId, data, colourMap, isTarget) {
+function waitForAccordion() {
+  const cards = document.querySelectorAll(".accordion-item[id^='competence-']");
+  if (cards.length < 6) {
+    return setTimeout(waitForAccordion, 200);
+  }
+  generateDualRadar();
+}
+
+waitForAccordion();
+ drawRadar(svgId, data, colourMap, isTarget) {
 
   const svg = document.getElementById(svgId);
   svg.innerHTML = "";
@@ -3194,7 +3203,16 @@ function drawRadar(svgId, data, colourMap, isTarget) {
 }
 
 // Run after CPD loads
-setTimeout(generateDualRadar, 800);
+function waitForAccordion() {
+  const cards = document.querySelectorAll(".accordion-item[id^='competence-']");
+  if (cards.length < 6) {
+    return setTimeout(waitForAccordion, 200);
+  }
+  generateDualRadar();
+}
+
+waitForAccordion();
+
 
 
 function generateProgressPillars() {

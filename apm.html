@@ -2006,247 +2006,198 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 .cpd-log-section .collapsible-text {
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
+}/* ==========================================================
+   RADAR CHARTS
+========================================================== */
+
+.dual-radar-section{
+    margin:40px 0;
 }
 
-  /* ============================
-   RADAR LAYOUT
-============================ */
-
-.dual-radar-section {
-  margin: 40px 0;
+.radar-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:start;
 }
 
-.radar-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+@media (max-width:800px){
+    .radar-grid{
+        grid-template-columns:1fr;
+    }
 }
 
-@media (max-width: 800px) {
-  .radar-grid {
-    grid-template-columns: 1fr;
-  }
+.radar-box{
+    text-align:center;
 }
 
-.radar-box {
-  text-align: center;
+.radar-heading{
+    margin-bottom:12px;
+    font-size:1.25rem;
+    font-weight:600;
+    color:#0a2540;
 }
 
-.radar-heading {
-  margin-bottom: 12px;
-  font-size: 1.2rem;
-  font-weight: 600;
+.radar-svg{
+    width:280px;
+    height:280px;
+    margin:auto;
+    overflow:visible;
 }
 
-.radar-svg {
-  width: 280px;
-  height: 280px;
-  margin: 0 auto;
-  overflow: visible;
+
+/* ==========================================================
+   RADAR GRID
+========================================================== */
+
+.radar-grid-ring{
+    fill:none;
+    stroke:#d1d5db;
+    stroke-width:.6;
 }
 
-/* ============================
-   COLOUR CODING (MATCH BADGES)
-============================ */
 
-.legend-dot {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-right: 6px;
+/* ==========================================================
+   RADAR POLYGONS
+========================================================== */
+
+.radar-area-current{
+    fill:rgba(10,102,194,.10);
+    stroke:#0a66c2;
+    stroke-width:2;
 }
 
-.legend-dot.expert { background: #0a66c2; }
-.legend-dot.proficient { background: #007b5f; }
-.legend-dot.competent { background: #b8860b; }
-.legend-dot.practised { background: #8a2be2; }
-.legend-dot.aware { background: #555; }
-
-/* ============================
-   POLYGON STYLES
-============================ */
-
-.radar-area-current {
-  fill: rgba(13, 116, 231, 0.25);
-  stroke: #0a66c2;
-  stroke-width: 2;
-  animation: grow 0.8s ease-out forwards;
+.radar-area-target{
+    fill:rgba(10,102,194,.04);
+    stroke:#0a66c2;
+    stroke-width:2;
+    stroke-dasharray:5 5;
 }
 
-.radar-area-target {
-  fill: rgba(13, 116, 231, 0.08);
-  stroke: #0a66c2;
-  stroke-width: 2;
-  stroke-dasharray: 4 4;
-  animation: grow 0.8s ease-out forwards;
+
+/* ==========================================================
+   RADAR POINTS
+========================================================== */
+
+.radar-point{
+    stroke:#fff;
+    stroke-width:2;
+    cursor:pointer;
+    transition:r .2s ease;
 }
 
-@keyframes grow {
-  from { transform: scale(0); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.radar-point:hover{
+    r:6.5;
 }
 
-/* ============================
-   GRID RINGS
-============================ */
 
-.radar-grid-ring {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 0.5;
+/* ==========================================================
+   TOOLTIP
+========================================================== */
+
+.radar-tooltip{
+    position:absolute;
+    background:#fff;
+    color:#333;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    padding:8px 10px;
+    font-size:.85rem;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+    pointer-events:none;
+    white-space:nowrap;
+    opacity:0;
+    transition:opacity .15s;
+    z-index:9999;
 }
 
-/* ============================
-   POINTS + LABELS
-============================ */
 
-.radar-point {
-  r: 3.5;
-  stroke: #fff;
-  stroke-width: 1;
+/* ==========================================================
+   RADAR LEGEND
+========================================================== */
+
+.radar-legend-combined{
+    margin-top:2rem;
 }
 
-.radar-label {
-  font-size: 10px;
-  text-anchor: middle;
-  dominant-baseline: middle;
-  fill: #333;
+.radar-legend-combined h4{
+    margin-bottom:1rem;
+    color:#0a2540;
 }
 
-/* ============================
-   LEGEND POLYGON ICONS
-============================ */
-
-.legend-polygons {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+.radar-legend-combined ul{
+    list-style:none;
+    padding:0;
+    margin:0;
 }
 
-.legend-poly {
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
+.radar-legend-combined li{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+    font-weight:500;
 }
 
-.legend-poly.current {
-  background: rgba(13, 116, 231, 0.25);
-  border: 2px solid #0a66c2;
+
+/* coloured dots */
+
+.radar-legend-combined .legend-dot{
+    width:14px !important;
+    height:14px !important;
+    border-radius:50% !important;
+    display:inline-block !important;
+    flex-shrink:0;
 }
 
-.legend-poly.target {
-  background: rgba(13, 116, 231, 0.08);
-  border: 2px dashed #0a66c2;
+.radar-legend-combined .legend-dot.expert{
+    background:#0a66c2 !important;
 }
 
-/* Tooltip */
-.radar-tooltip {
-  position: absolute;
-  background: #fff;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  color: #333;
-  border: 1px solid #ccc;
-  pointer-events: none;
-  white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  opacity: 0;
-  transition: opacity 0.15s ease;
-  z-index: 20;
+.radar-legend-combined .legend-dot.proficient{
+    background:#007b5f !important;
 }
 
-.radar-area-current {
-  fill: rgba(13, 116, 231, 0.10);  /* lighter */
-  stroke: #0a66c2;
-  stroke-width: 1.5;
+.radar-legend-combined .legend-dot.competent{
+    background:#b8860b !important;
 }
 
-.radar-area-target {
-  fill: rgba(13, 116, 231, 0.04);  /* very light */
-  stroke: #0a66c2;
-  stroke-width: 1.5;
-  stroke-dasharray: 4 4;
+.radar-legend-combined .legend-dot.practised{
+    background:#8a2be2 !important;
 }
 
-.radar-point {
-  r: 5;                 /* bigger */
-  stroke: #fff;
-  stroke-width: 2;
+.radar-legend-combined .legend-dot.aware{
+    background:#555 !important;
 }
 
-.legend-dot {
-  background: red !important;
+
+/* ==========================================================
+   CURRENT / TARGET LEGEND
+========================================================== */
+
+.legend-polygons{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:18px;
 }
 
-.legend-dot.expert { background: #0a66c2 !important; }
-.legend-dot.proficient { background: #007b5f !important; }
-.legend-dot.competent { background: #b8860b !important; }
-.legend-dot.practised { background: #8a2be2 !important; }
-.legend-dot.aware { background: #555 !important; }
-
-
-  .radar-legend .legend-dot {
-  background-color: currentColor !important;
-  color: transparent !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
+.legend-poly{
+    width:22px;
+    height:22px;
+    border-radius:4px;
 }
 
-.radar-legend .legend-dot.expert { color: #0a66c2 !important; }
-.radar-legend .legend-dot.proficient { color: #007b5f !important; }
-.radar-legend .legend-dot.competent { color: #b8860b !important; }
-.radar-legend .legend-dot.practised { color: #8a2be2 !important; }
-.radar-legend .legend-dot.aware { color: #555 !important; }
-
-.radar-legend li i {
-  display: none !important;
+.legend-poly.current{
+    background:rgba(10,102,194,.10);
+    border:2px solid #0a66c2;
 }
 
-.radar-legend .legend-dot {
-  display: inline-block !important;
-  width: 14px !important;
-  height: 14px !important;
-  border-radius: 50% !important;
-  margin-right: 6px !important;
+.legend-poly.target{
+    background:rgba(10,102,194,.04);
+    border:2px dashed #0a66c2;
 }
-
-.radar-legend .legend-dot.expert { background: #0a66c2 !important; }
-.radar-legend .legend-dot.proficient { background: #007b5f !important; }
-.radar-legend .legend-dot.competent { background: #b8860b !important; }
-.radar-legend .legend-dot.practised { background: #8a2be2 !important; }
-.radar-legend .legend-dot.aware { background: #555 !important; }
-  
-.radar-legend .legend-dot {
-  position: relative !important;
-  z-index: 10 !important;
-  background-clip: padding-box !important;
-}
-
-.radar-legend .legend-dot.expert { background: #0a66c2 !important; }
-.radar-legend .legend-dot.proficient { background: #007b5f !important; }
-.radar-legend .legend-dot.competent { background: #b8860b !important; }
-.radar-legend .legend-dot.practised { background: #8a2be2 !important; }
-.radar-legend .legend-dot.aware { background: #555 !important; }
-
-.radar-legend .legend-dot {
-  position: relative !important;
-  z-index: 999 !important;
-  background-clip: padding-box !important;
-  isolation: isolate !important;
-  will-change: transform !important;
-  transform: translateZ(0) !important;
-}
-
-.radar-legend .legend-dot.expert { background: #0a66c2 !important; }
-.radar-legend .legend-dot.proficient { background: #007b5f !important; }
-.radar-legend .legend-dot.competent { background: #b8860b !important; }
-.radar-legend .legend-dot.practised { background: #8a2be2 !important; }
-.radar-legend .legend-dot.aware { background: #555 !important; }
-  
 </style>
 
 
@@ -3647,31 +3598,13 @@ function generateProgressPillars() {
   <div class="radar-legend-combined">
     <h4>Legend</h4>
 
-    <ul>
-<li>
-  <span class="legend-dot expert"
-        style="background:red;width:14px;height:14px;display:inline-block;border-radius:50%;"></span>
-  Expert
-</li>
-
-      <li>
-        <span class="legend-dot proficient"></span>
-        Proficient
-      </li>
-      <li>
-        <span class="legend-dot competent"></span>
-        Competent
-      </li>
-      <li>
-        <span class="legend-dot practised"></span>
-        Practised
-      </li>
-      <li>
-        <span class="legend-dot aware"></span>
-        Aware
-      </li>
-    </ul>
-
+ <ul>
+    <li><span class="legend-dot expert"></span> Expert</li>
+    <li><span class="legend-dot proficient"></span> Proficient</li>
+    <li><span class="legend-dot competent"></span> Competent</li>
+    <li><span class="legend-dot practised"></span> Practised</li>
+    <li><span class="legend-dot aware"></span> Aware</li>
+</ul>
     <div class="legend-polygons">
       <div class="legend-poly current"></div>
       <span>Current level</span>

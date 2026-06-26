@@ -3073,20 +3073,31 @@ function generateDualRadar() {
   // Extract all competence cards
   const cards = [...document.querySelectorAll(".accordion-item[id^='competence-']")];
 
-  const allData = cards.map(card => {
-const titleEl = card.querySelector(".accordion-header span");
-const title = titleEl ? titleEl.childNodes[1].textContent.trim() : "Unknown";
+const allData = cards.map(card => {
 
-    const badgeEl = card.querySelector(".accordion-header .rating-badge");
+  // Get the span containing icon + text
+  const titleEl = card.querySelector(".accordion-header span");
 
-    const title = titleEl ? titleEl.textContent.trim() : "Unknown";
-    const ratingText = badgeEl ? badgeEl.textContent.trim() : "Competent";
+  // Extract ONLY the text, ignoring the <i> icon
+  let title = "Unknown";
+  if (titleEl) {
+    title = [...titleEl.childNodes]
+      .filter(n => n.nodeType === Node.TEXT_NODE)
+      .map(n => n.textContent.trim())
+      .join(" ")
+      .trim();
+  }
 
-    return {
-      label: title,
-      value: ratingMap[ratingText] || 0
-    };
-  });
+  // Rating badge
+  const badgeEl = card.querySelector(".accordion-header .rating-badge");
+  const ratingText = badgeEl ? badgeEl.textContent.trim() : "Competent";
+
+  return {
+    label: title,
+    value: ratingMap[ratingText] || 0
+  };
+});
+
 
   // -----------------------------
   // RADAR 1: Top 6 overall

@@ -2161,12 +2161,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 .radar-point {
   fill: unset !important;
 }
-svg.radar-svg circle.radar-point {
-  fill: unset !important;
-}
-svg.radar-svg circle {
-  fill: unset !important;
-}
+
 .radar-area-current {
   fill: rgba(13, 116, 231, 0.10);  /* lighter */
   stroke: #0a66c2;
@@ -3052,6 +3047,10 @@ if (document.readyState === "loading") {
     loadCPD();
 
 }
+/* ============================================================
+   DUAL RADAR GENERATION
+============================================================ */
+
 function generateDualRadar() {
 
   const ratingMap = {
@@ -3073,41 +3072,39 @@ function generateDualRadar() {
   // Extract all competence cards
   const cards = [...document.querySelectorAll(".accordion-item[id^='competence-']")];
 
-const allData = cards.map(card => {
+  const allData = cards.map(card => {
 
-  // Get the span containing icon + text
-  const titleEl = card.querySelector(".accordion-header span");
+    // Extract title text (ignore icon)
+    const titleEl = card.querySelector(".accordion-header span");
 
-  // Extract ONLY the text, ignoring the <i> icon
-  let title = "Unknown";
-  if (titleEl) {
-    title = [...titleEl.childNodes]
-      .filter(n => n.nodeType === Node.TEXT_NODE)
-      .map(n => n.textContent.trim())
-      .join(" ")
-      .trim();
-  }
+    let title = "Unknown";
+    if (titleEl) {
+      title = [...titleEl.childNodes]
+        .filter(n => n.nodeType === Node.TEXT_NODE)
+        .map(n => n.textContent.trim())
+        .join(" ")
+        .trim();
+    }
 
-  // Rating badge
-  const badgeEl = card.querySelector(".accordion-header .rating-badge");
-  const ratingText = badgeEl ? badgeEl.textContent.trim() : "Competent";
+    // Extract rating
+    const badgeEl = card.querySelector(".accordion-header .rating-badge");
+    const ratingText = badgeEl ? badgeEl.textContent.trim() : "Competent";
 
-  return {
-    label: title,
-    value: ratingMap[ratingText] || 0
-  };
-});
+    return {
+      label: title,
+      value: ratingMap[ratingText] || 0
+    };
+  });
 
-
-  // -----------------------------
-  // RADAR 1: Top 6 overall
-  // -----------------------------
+  /* -----------------------------
+     RADAR 1: Top 6 overall
+  ----------------------------- */
   const sortedAll = [...allData].sort((a, b) => b.value - a.value);
   const current6 = sortedAll.slice(0, 6);
 
-  // -----------------------------
-  // RADAR 2: Top 6 NON-EXPERT
-  // -----------------------------
+  /* -----------------------------
+     RADAR 2: Top 6 NON-EXPERT
+  ----------------------------- */
   const nonExpert = allData.filter(d => d.value < 5);
   const sortedNonExpert = nonExpert.sort((a, b) => b.value - a.value);
   const targetBase6 = sortedNonExpert.slice(0, 6);
@@ -3123,16 +3120,12 @@ const allData = cards.map(card => {
   drawRadar("radar-target", target6, colourMap, true);
 }
 
-function waitForAccordion() {
-  const cards = document.querySelectorAll(".accordion-item[id^='competence-']");
-  if (cards.length < 6) {
-    return setTimeout(waitForAccordion, 200);
-  }
-  generateDualRadar();
-}
 
-waitForAccordion();
- drawRadar(svgId, data, colourMap, isTarget) {
+/* ============================================================
+   DRAW A SINGLE RADAR
+============================================================ */
+
+function drawRadar(svgId, data, colourMap, isTarget) {
 
   const svg = document.getElementById(svgId);
   svg.innerHTML = "";
@@ -3143,7 +3136,9 @@ waitForAccordion();
   const radius = 50;
   const angleStep = (Math.PI * 2) / data.length;
 
-  // Grid rings
+  /* -----------------------------
+     GRID RINGS
+  ----------------------------- */
   for (let level = 1; level <= maxValue; level++) {
     const r = (radius / maxValue) * level;
     const points = data.map((_, i) => {
@@ -3153,7 +3148,9 @@ waitForAccordion();
     svg.innerHTML += `<polygon class="radar-grid-ring" points="${points}"></polygon>`;
   }
 
-  // Polygon (all 6 axes)
+  /* -----------------------------
+     POLYGON
+  ----------------------------- */
   const polyPoints = data.map((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
@@ -3167,7 +3164,9 @@ waitForAccordion();
     </polygon>
   `;
 
-  // Points + hover tooltip
+  /* -----------------------------
+     POINTS + TOOLTIP
+  ----------------------------- */
   data.forEach((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
@@ -3178,7 +3177,7 @@ waitForAccordion();
     point.setAttribute("class", "radar-point");
     point.setAttribute("cx", x);
     point.setAttribute("cy", y);
-    point.setAttribute("r", 4);
+    point.setAttribute("r", 5);
     point.setAttribute("fill", colourMap[d.value]);
 
     point.addEventListener("mouseenter", () => {
@@ -3202,7 +3201,11 @@ waitForAccordion();
   });
 }
 
-// Run after CPD loads
+
+/* ============================================================
+   WAIT FOR ACCORDION TO LOAD (iPhone-safe)
+============================================================ */
+
 function waitForAccordion() {
   const cards = document.querySelectorAll(".accordion-item[id^='competence-']");
   if (cards.length < 6) {
@@ -3212,7 +3215,6 @@ function waitForAccordion() {
 }
 
 waitForAccordion();
-
 
 
 function generateProgressPillars() {

@@ -2062,16 +2062,13 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 ========================================================== */
 
 .radar-area-current{
-    fill:rgba(10,102,194,.10);
-    stroke:#0a66c2;
-    stroke-width:2;
+    fill:rgba(15,157,138,.08);
+    stroke:#0f9d8a;
 }
 
 .radar-area-target{
-    fill:rgba(10,102,194,.04);
-    stroke:#0a66c2;
-    stroke-width:2;
-    stroke-dasharray:5 5;
+    fill:rgba(15,157,138,.03);
+    stroke:#0f9d8a;
 }
 
 
@@ -2111,92 +2108,99 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     z-index:9999;
 }
 
-
-/* ==========================================================
+/* ============================
    RADAR LEGEND
-========================================================== */
+============================ */
 
 .radar-legend-combined{
     margin-top:2rem;
 }
 
 .radar-legend-combined h4{
+    font-size:2rem;
     margin-bottom:1rem;
     color:#0a2540;
 }
 
-.radar-legend-combined ul{
-    list-style:none;
-    padding:0;
-    margin:0;
+.legend-layout{
+    display:grid;
+    grid-template-columns:2fr 1px 1fr;
+    gap:40px;
+    align-items:start;
 }
 
-.radar-legend-combined li{
-    display:flex;
+.legend-divider{
+    background:#ddd;
+    width:1px;
+    align-self:stretch;
+}
+
+.legend-row{
+    display:grid;
+    grid-template-columns:28px 140px auto;
     align-items:center;
-    gap:10px;
-    margin-bottom:10px;
-    font-weight:500;
+    gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid #eee;
 }
 
-
-/* coloured dots */
-
-.radar-legend-combined .legend-dot{
-    width:14px !important;
-    height:14px !important;
-    border-radius:50% !important;
-    display:inline-block !important;
-    flex-shrink:0;
+.legend-dot{
+    width:22px;
+    height:22px;
+    border-radius:50%;
 }
 
-.radar-legend-combined .legend-dot.expert{
-    background:#0a66c2 !important;
+.legend-dot.expert{
+    background:#0a66c2;
 }
 
-.radar-legend-combined .legend-dot.proficient{
-    background:#007b5f !important;
+.legend-dot.proficient{
+    background:#007b5f;
 }
 
-.radar-legend-combined .legend-dot.competent{
-    background:#b8860b !important;
+.legend-dot.competent{
+    background:#b8860b;
 }
 
-.radar-legend-combined .legend-dot.practised{
-    background:#8a2be2 !important;
+.legend-dot.practised{
+    background:#8a2be2;
 }
 
-.radar-legend-combined .legend-dot.aware{
-    background:#555 !important;
+.legend-dot.aware{
+    background:#777;
 }
 
+.legend-title{
+    font-weight:700;
+    font-size:1.05rem;
+}
 
-/* ==========================================================
-   CURRENT / TARGET LEGEND
-========================================================== */
+.legend-desc{
+    color:#555;
+}
 
 .legend-polygons{
-    display:flex;
+    display:grid;
+    grid-template-columns:40px auto;
+    gap:22px 14px;
     align-items:center;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:18px;
+    margin-top:20px;
 }
 
 .legend-poly{
-    width:22px;
-    height:22px;
-    border-radius:4px;
+    width:28px;
+    height:28px;
+    border-radius:6px;
 }
 
 .legend-poly.current{
-    background:rgba(10,102,194,.10);
-    border:2px solid #0a66c2;
+    border:3px solid #0f9d8a;
+    background:rgba(15,157,138,.08);
 }
 
 .legend-poly.target{
-    background:rgba(10,102,194,.04);
-    border:2px dashed #0a66c2;
+    border:3px dashed #0f9d8a;
+    background:rgba(15,157,138,.03);
 }
 </style>
 
@@ -3595,27 +3599,61 @@ function generateProgressPillars() {
 <div id="radar-tooltip" class="radar-tooltip"></div>
   
   <!-- COMBINED LEGEND -->
-  <div class="radar-legend-combined">
-    <h4>Legend</h4>
+ <div class="radar-legend-combined">
 
- <ul>
-    <li><span class="legend-dot expert"></span> Expert</li>
-    <li><span class="legend-dot proficient"></span> Proficient</li>
-    <li><span class="legend-dot competent"></span> Competent</li>
-    <li><span class="legend-dot practised"></span> Practised</li>
-    <li><span class="legend-dot aware"></span> Aware</li>
-</ul>
-    <div class="legend-polygons">
-      <div class="legend-poly current"></div>
-      <span>Current level</span>
+<h4>Legend</h4>
 
-      <div class="legend-poly target"></div>
-      <span>Target level</span>
-    </div>
+<div class="legend-layout">
 
-  </div>
+<div class="legend-ratings">
 
-</section>
+<div class="legend-row">
+<div class="legend-dot expert"></div>
+<div class="legend-title">Expert</div>
+<div class="legend-desc">Extensive experience and can advise others</div>
+</div>
+
+<div class="legend-row">
+<div class="legend-dot proficient"></div>
+<div class="legend-title">Proficient</div>
+<div class="legend-desc">Solid experience and works independently</div>
+</div>
+
+<div class="legend-row">
+<div class="legend-dot competent"></div>
+<div class="legend-title">Competent</div>
+<div class="legend-desc">Good understanding and works with support</div>
+</div>
+
+<div class="legend-row">
+<div class="legend-dot practised"></div>
+<div class="legend-title">Practised</div>
+<div class="legend-desc">Basic experience and building confidence</div>
+</div>
+
+<div class="legend-row">
+<div class="legend-dot aware"></div>
+<div class="legend-title">Aware</div>
+<div class="legend-desc">Awareness of the area</div>
+</div>
+
+</div>
+
+<div class="legend-divider"></div>
+
+<div class="legend-polygons">
+
+<div class="legend-poly current"></div>
+<span>Current level</span>
+
+<div class="legend-poly target"></div>
+<span>Target level</span>
+
+</div>
+
+</div>
+
+</div>
 
   <div class="accordion">
 

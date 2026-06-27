@@ -2308,7 +2308,78 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     padding: 0 !important;
     margin: 0 !important;
 }
+
+/* ============================
+   FINAL LEGEND DOT FIX
+============================ */
+
+.legend-row {
+    display: grid !important;
+    grid-template-columns: 28px 140px auto !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+
+.legend-dot {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+}
+
+/* APM colour palette */
+.legend-dot.expert { background: #0a66c2 !important; }
+.legend-dot.proficient { background: #007b5f !important; }
+.legend-dot.competent { background: #b8860b !important; }
+.legend-dot.practised { background: #8a2be2 !important; }
+.legend-dot.aware { background: #777 !important; }
+
+/* ============================
+   TARGET DASHED OUTLINE (GREEN)
+============================ */
+
+.radar-area-target {
+    fill: rgba(15,157,138,.03) !important;
+    stroke: #0f9d8a !important;        /* green */
+    stroke-width: 2 !important;
+    stroke-dasharray: 4 4 !important;
+}
+
+/* ============================
+   RADAR SPACING
+============================ */
+
+.radar-grid {
+    gap: 60px !important;   /* more space between radars */
+}
+
+.radar-svg {
+    width: 320px !important;
+    height: 320px !important;
+}
   
+.radar-legend-combined {
+    margin-top: 1rem !important;   /* reduce gap */
+}
+.radar-legend-combined {
+    margin-bottom: 2rem !important;
+}
+
+  /* ============================
+   FIX FOOTER SCROLL BUG
+============================ */
+
+.accordion-item:not(.open) .radar-wrapper {
+    max-height: 0 !important;
+    overflow: hidden !important;
+}
+
+.accordion-item:not(.open) {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
   
 </style>
 

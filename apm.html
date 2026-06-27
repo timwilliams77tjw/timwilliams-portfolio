@@ -2006,7 +2006,8 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 .cpd-log-section .collapsible-text {
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
-}/* ==========================================================
+}
+  /* ==========================================================
    RADAR CHARTS
 ========================================================== */
 
@@ -2202,122 +2203,55 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     border:3px dashed #0f9d8a;
     background:rgba(15,157,138,.03);
 }
+/* ==========================================================
+   1. RADAR SPACING (fix radars too close)
+========================================================== */
 
-/* ============================
-   Legend Colours (APM Palette)
-============================ */
-
-.legend-dot{
-    width:20px;
-    height:20px;
-    border-radius:50%;
-    display:block;
-    flex-shrink:0;
+.radar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px !important; /* wider spacing */
+    align-items: start;
 }
 
-/* Match your rating badges/progress bar */
-.legend-dot.expert{
-    background:#0a66c2;
+@media (max-width: 800px) {
+    .radar-grid {
+        grid-template-columns: 1fr;
+        gap: 40px !important;
+    }
 }
 
-.legend-dot.proficient{
-    background:#007b5f;
+.radar-svg {
+    width: 320px !important;
+    height: 320px !important;
+    margin: auto;
+    overflow: visible;
 }
 
-.legend-dot.competent{
-    background:#b8860b;
-}
 
-.legend-dot.practised{
-    background:#8a2be2;
-}
+/* ==========================================================
+   2. TARGET DASHED OUTLINE (green, not blue)
+========================================================== */
 
-.legend-dot.aware{
-    background:#555;
-}
-
-.legend-dot {
-    width: 12px !important;
-    height: 100% !important;
-    min-height: 14px !important;
-    border-radius: 3px !important;
-    margin-right: 10px !important;
-}
-
-.legend-dot.expert { background: #0a66c2 !important; }
-.legend-dot.proficient { background: #007b5f !important; }
-.legend-dot.competent { background: #b8860b !important; }
-.legend-dot.practised { background: #8a2be2 !important; }
-.legend-dot.aware { background: #555 !important; }
-
-  /* FORCE LEGEND DOTS TO BE VISIBLE */
-.legend-row {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-}
-
-.legend-dot {
-    width: 16px !important;
-    height: 16px !important;
-    min-width: 16px !important;
-    min-height: 16px !important;
-    max-width: 16px !important;
-    max-height: 16px !important;
-
-    flex: 0 0 16px !important;
-    display: block !important;
-
-    border-radius: 4px !important;
-    background: #000 !important; /* test colour */
-}
-/* --- FIX LEGEND COLOURS --- */
-.legend-row {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-}
-
-.legend-dot {
-    width: 16px !important;
-    height: 16px !important;
-    min-width: 16px !important;
-    min-height: 16px !important;
-    flex-shrink: 0 !important;
-    border-radius: 4px !important;
-    background: #000 !important; /* test colour */
-}
-.legend-dot.expert { background: #0a66c2 !important; }
-.legend-dot.proficient { background: #007b5f !important; }
-.legend-dot.competent { background: #b8860b !important; }
-.legend-dot.practised { background: #8a2be2 !important; }
-.legend-dot.aware { background: #555 !important; }
-
-  /* --- FIX TARGET DASHED OUTLINE --- */
 .radar-area-target {
-    fill: rgba(10, 102, 194, 0.15) !important;
-    stroke: #0a66c2 !important;
+    fill: rgba(15,157,138,.03) !important;
+    stroke: #0f9d8a !important; /* green */
     stroke-width: 2 !important;
     stroke-dasharray: 4 4 !important;
 }
 
-/* --- FIX FOOTER GAP WHEN ACCORDION COLLAPSED --- */
-.accordion-item:not(.open) .radar-wrapper {
-    max-height: 0 !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
 
-/* ============================
-   FINAL LEGEND DOT FIX
-============================ */
+/* ==========================================================
+   3. LEGEND COLOURS (final, stable, no conflicts)
+========================================================== */
 
 .legend-row {
     display: grid !important;
     grid-template-columns: 28px 140px auto !important;
     align-items: center !important;
     gap: 14px !important;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .legend-dot {
@@ -2329,47 +2263,27 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     flex-shrink: 0 !important;
 }
 
-/* APM colour palette */
+/* APM palette */
 .legend-dot.expert { background: #0a66c2 !important; }
 .legend-dot.proficient { background: #007b5f !important; }
 .legend-dot.competent { background: #b8860b !important; }
 .legend-dot.practised { background: #8a2be2 !important; }
 .legend-dot.aware { background: #777 !important; }
 
-/* ============================
-   TARGET DASHED OUTLINE (GREEN)
-============================ */
 
-.radar-area-target {
-    fill: rgba(15,157,138,.03) !important;
-    stroke: #0f9d8a !important;        /* green */
-    stroke-width: 2 !important;
-    stroke-dasharray: 4 4 !important;
-}
+/* ==========================================================
+   4. GAP BETWEEN RADARS AND LEGEND
+========================================================== */
 
-/* ============================
-   RADAR SPACING
-============================ */
-
-.radar-grid {
-    gap: 60px !important;   /* more space between radars */
-}
-
-.radar-svg {
-    width: 320px !important;
-    height: 320px !important;
-}
-  
 .radar-legend-combined {
-    margin-top: 1rem !important;   /* reduce gap */
-}
-.radar-legend-combined {
-    margin-bottom: 2rem !important;
+    margin-top: 1rem !important; /* reduce gap */
+    margin-bottom: 2rem !important; /* add gap before accordion */
 }
 
-  /* ============================
-   FIX FOOTER SCROLL BUG
-============================ */
+
+/* ==========================================================
+   5. FOOTER SCROLL BUG (final fix)
+========================================================== */
 
 .accordion-item:not(.open) .radar-wrapper {
     max-height: 0 !important;
@@ -2380,6 +2294,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
 }
+
   
 </style>
 

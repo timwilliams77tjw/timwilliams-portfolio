@@ -2271,6 +2271,42 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     border-radius: 4px !important;
     background: #000 !important; /* test colour */
 }
+/* --- FIX LEGEND COLOURS --- */
+.legend-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.legend-dot {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    flex-shrink: 0 !important;
+    border-radius: 4px !important;
+    background: #000 !important; /* test colour */
+}
+.legend-dot.expert { background: #0a66c2 !important; }
+.legend-dot.proficient { background: #007b5f !important; }
+.legend-dot.competent { background: #b8860b !important; }
+.legend-dot.practised { background: #8a2be2 !important; }
+.legend-dot.aware { background: #555 !important; }
+/* --- FIX TARGET DASHED OUTLINE --- */
+.radar-area-target {
+    fill: rgba(10, 102, 194, 0.15) !important;
+    stroke: #0a66c2 !important;
+    stroke-width: 2 !important;
+    stroke-dasharray: 4 4 !important;
+}
+/* --- FIX FOOTER GAP WHEN ACCORDION COLLAPSED --- */
+.accordion-item:not(.open) .radar-wrapper {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
   
 </style>
 
@@ -3707,42 +3743,104 @@ function generateProgressPillars() {
                 <div class="legend-title">Practised</div>
                 <div class="legend-description">
                     Basic experience and building confidence
+                </<section class="dual-radar-section">
+
+  <div class="radar-wrapper">
+
+      <div class="radar-grid">
+
+        <!-- CURRENT RADAR -->
+        <div class="radar-box">
+          <h3 class="radar-heading">My Top 6 Competencies</h3>
+          <svg id="radar-current" class="radar-svg" viewBox="-60 -60 120 120"></svg>
+        </div>
+
+        <!-- TARGET RADAR -->
+        <div class="radar-box">
+          <h3 class="radar-heading">Target Levels (Next Step Up)</h3>
+          <svg id="radar-target" class="radar-svg" viewBox="-60 -60 120 120"></svg>
+        </div>
+
+      </div>
+
+      <div id="radar-tooltip" class="radar-tooltip"></div>
+
+      <!-- COMBINED LEGEND -->
+      <div class="radar-legend-combined">
+
+        <h4>Legend</h4>
+
+        <div class="legend-layout">
+
+            <!-- LEFT SIDE -->
+            <div class="legend-ratings">
+
+                <div class="legend-row">
+                    <div class="legend-dot expert"></div>
+                    <div class="legend-title">Expert</div>
+                    <div class="legend-description">
+                        Extensive experience and can advise others
+                    </div>
                 </div>
+
+                <div class="legend-row">
+                    <div class="legend-dot proficient"></div>
+                    <div class="legend-title">Proficient</div>
+                    <div class="legend-description">
+                        Solid experience and works independently
+                    </div>
+                </div>
+
+                <div class="legend-row">
+                    <div class="legend-dot competent"></div>
+                    <div class="legend-title">Competent</div>
+                    <div class="legend-description">
+                        Good understanding and works with support
+                    </div>
+                </div>
+
+                <div class="legend-row">
+                    <div class="legend-dot practised"></div>
+                    <div class="legend-title">Practised</div>
+                    <div class="legend-description">
+                        Basic experience and building confidence
+                    </div>
+                </div>
+
+                <div class="legend-row">
+                    <div class="legend-dot aware"></div>
+                    <div class="legend-title">Aware</div>
+                    <div class="legend-description">
+                        Awareness of the area
+                    </div>
+                </div>
+
             </div>
 
-            <div class="legend-row">
-                <div class="legend-dot aware"></div>
-                <div class="legend-title">Aware</div>
-                <div class="legend-description">
-                    Awareness of the area
+            <div class="legend-divider"></div>
+
+            <div class="legend-levels">
+
+                <div class="legend-level">
+                    <div class="legend-poly current"></div>
+                    <span>Current level</span>
                 </div>
+
+                <div class="legend-level">
+                    <div class="legend-poly target"></div>
+                    <span>Target level</span>
+                </div>
+
             </div>
 
         </div>
 
-        <!-- DIVIDER -->
+      </div>
 
-        <div class="legend-divider"></div>
+  </div>
 
-        <!-- RIGHT SIDE -->
+</section>
 
-        <div class="legend-levels">
-
-            <div class="legend-level">
-                <div class="legend-poly current"></div>
-                <span>Current level</span>
-            </div>
-
-            <div class="legend-level">
-                <div class="legend-poly target"></div>
-                <span>Target level</span>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
   <div class="accordion">
 
 

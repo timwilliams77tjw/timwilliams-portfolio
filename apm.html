@@ -2384,6 +2384,62 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 .accordion-content {
     overflow: visible !important;
 }
+
+.radar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.radar-box:nth-child(2) {
+    justify-self: end;
+}
+
+.legend-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* Match your JS colourMap */
+.legend-dot.expert {
+    background-color: #0a66c2;
+}
+
+.legend-dot.proficient {
+    background-color: #007b5f;
+}
+
+.legend-dot.competent {
+    background-color: #b8860b;
+}
+
+.legend-dot.practised {
+    background-color: #8a2be2;
+}
+
+.legend-dot.aware {
+    background-color: #555;
+}
+
+@media (max-width: 768px) {
+    .radar-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+
+    .radar-box {
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 0 auto !important;
+    }
+
+    .radar-svg {
+        width: 260px !important;
+        height: 260px !important;
+    }
+}
   
 </style>
 

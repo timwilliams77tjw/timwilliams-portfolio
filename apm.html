@@ -4586,19 +4586,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-  <script>
+<script>
 document.addEventListener("click", e => {
-    const toggle = e.target.closest(".collapsible-toggle.competence-header");
+    const toggle = e.target.closest(".collapsible-toggle");
     if (!toggle) return;
 
     const content = toggle.nextElementSibling;
     if (!content) return;
 
-    // When competence section opens, redraw radars (iPhone-safe)
+    // When ANY collapsible opens, redraw radars (iPhone-safe)
     if (content.querySelector("#radar-current") && content.querySelector("#radar-target")) {
         setTimeout(() => {
             generateDualRadar();
-        }, 80); // iPhone Safari needs a tiny delay
+        }, 120); // iPhone Safari needs a slightly longer delay
     }
 });
 </script>

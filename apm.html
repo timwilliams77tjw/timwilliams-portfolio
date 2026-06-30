@@ -3387,19 +3387,6 @@ function drawRadar(svgId, data, colourMap, isTarget) {
 }
 
 
-/* ============================================================
-   WAIT FOR ACCORDION TO LOAD (iPhone-safe)
-============================================================ */
-
-function waitForAccordion() {
-  const cards = document.querySelectorAll(".accordion-item[id^='competence-']");
-  if (cards.length < 6) {
-    return setTimeout(waitForAccordion, 200);
-  }
-  generateDualRadar();
-}
-
-waitForAccordion();
 
 
 function generateProgressPillars() {
@@ -4599,6 +4586,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+  <script>
+document.addEventListener("click", e => {
+    const toggle = e.target.closest(".collapsible-toggle.competence-header");
+    if (!toggle) return;
+
+    const content = toggle.nextElementSibling;
+    if (!content) return;
+
+    // When competence section opens, redraw radars (iPhone-safe)
+    if (content.querySelector("#radar-current") && content.querySelector("#radar-target")) {
+        setTimeout(() => {
+            generateDualRadar();
+        }, 80); // iPhone Safari needs a tiny delay
+    }
+});
+</script>
+
 </main>
 
 <style>

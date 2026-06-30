@@ -4589,20 +4589,23 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <script>
 document.addEventListener("click", e => {
-    const toggle = e.target.closest(".collapsible-toggle");
-    if (!toggle) return;
+    const header = e.target.closest(".accordion-header");
+    if (!header) return;
 
-    const content = toggle.nextElementSibling;
-    if (!content) return;
+    const item = header.closest(".accordion-item");
+    if (!item) return;
 
-    // When ANY collapsible opens, redraw radars (iPhone-safe)
-    if (content.querySelector("#radar-current") && content.querySelector("#radar-target")) {
+    // When the competence accordion opens, redraw radars
+    if (document.getElementById("radar-current") &&
+        document.getElementById("radar-target")) {
+
         setTimeout(() => {
             generateDualRadar();
-        }, 120); // iPhone Safari needs a slightly longer delay
+        }, 150); // iPhone Safari needs a small delay
     }
 });
 </script>
+
 
 </main>
 

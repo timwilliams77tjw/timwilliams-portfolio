@@ -4586,24 +4586,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-<script>
-document.addEventListener("click", e => {
-    const header = e.target.closest(".accordion-header");
-    if (!header) return;
-
-    const item = header.closest(".accordion-item");
-    if (!item) return;
-
-    // When the competence accordion opens, redraw radars
-    if (document.getElementById("radar-current") &&
-        document.getElementById("radar-target")) {
-
-        setTimeout(() => {
-            generateDualRadar();
-        }, 150); // iPhone Safari needs a small delay
-    }
-});
-</script>
 
 
 </main>

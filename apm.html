@@ -2191,6 +2191,82 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     overflow: visible !important;
 }
 
+/* ============================================================
+   DUAL RADAR LAYOUT
+============================================================ */
+
+.dual-radar-section .radar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Right-align target radar on iPad/desktop */
+.dual-radar-section .radar-box:nth-child(2) {
+    justify-self: end;
+}
+
+.dual-radar-section .radar-box {
+    text-align: center;
+}
+
+.dual-radar-section .radar-svg {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    overflow: visible;
+}
+
+/* iPhone: stack radars vertically */
+@media (max-width: 768px) {
+    .dual-radar-section .radar-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .dual-radar-section .radar-box {
+        justify-self: center;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .dual-radar-section .radar-svg {
+        width: 260px;
+        height: 260px;
+    }
+}
+
+/* ============================================================
+   LEGEND COLOURS
+============================================================ */
+
+.legend-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.legend-dot.expert     { background: #0a66c2; }
+.legend-dot.proficient { background: #007b5f; }
+.legend-dot.competent  { background: #b8860b; }
+.legend-dot.practised  { background: #8a2be2; }
+.legend-dot.aware      { background: #555; }
+
+/* ============================================================
+   SAFARI OVERFLOW FIXES
+============================================================ */
+
+.rating-summary-bar,
+.dual-radar-section,
+.radar-wrapper,
+.radar-grid,
+.legend-layout {
+    overflow: visible !important;
+}
+
   
 </style>
 

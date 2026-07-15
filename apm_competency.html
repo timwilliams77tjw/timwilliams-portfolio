@@ -28,7 +28,7 @@ ROOT + GLOBAL
 }
 
 html, body {
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: auto;
   height: auto;
 }
@@ -640,7 +640,9 @@ RADAR CHART (R3 – CURRENT VERSION)
   stroke-width: 2;
 }
 
-
+.radar-point {
+  fill: #0a66c2;
+}
 
 /* ============================================================
 PREMIUM PILLAR CARDS (P3)
@@ -1319,1133 +1321,6 @@ section.cpd-pillars-section .pillar-card.projected {
 .accordion-item.open .accordion-header .chevron {
   transform: rotate(90deg);
 }
-
-/* Competency header styled like CPD header */
-.competence-header {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 0.9rem 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-/* ============================================================
-   APM FOOTER — CLEAN, FINAL OVERRIDES
-============================================================ */
-
-/* Blue banner + base text */
-body.page-prof-dev #footer .footer {
-  background: #0a2540 !important;
-  color: #ffffff !important;
-}
-
-/* Copyright row: keep on one baseline */
-body.page-prof-dev #footer .footer-row-copy {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  color: #ffffff !important;
-  line-height: 1.4 !important;
-}
-
-/* Links: cyan, like other pages */
-body.page-prof-dev #footer .footer-row-links a {
-  color: #7ac0f9 !important;
-  text-decoration: none !important;
-}
-
-/* Logo + QR: fully visible on dark background */
-body.page-prof-dev #footer .footer-logo img,
-body.page-prof-dev #footer .footer-qr img {
-  width: 70px !important;
-  max-width: 70px !important;
-  height: auto !important;
-  display: block !important;
-  opacity: 1 !important;
-  filter: none !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Desktop / iPad layout */
-@media (min-width: 601px) {
-  body.page-prof-dev #footer .footer-inner {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 20px !important;
-    width: 100% !important;
-  }
-
-  body.page-prof-dev #footer .footer-row-links {
-    display: flex !important;
-    align-items: center !important;
-    gap: 18px !important;
-    flex-wrap: nowrap !important;
-  }
-
-  body.page-prof-dev #footer .footer-row-bottom {
-    display: flex !important;
-    align-items: center !important;
-    gap: 20px !important;
-    margin-left: auto !important;
-  }
-}
-
-/* iPhone layout */
-@media (max-width: 600px) {
-  body.page-prof-dev #footer .footer-inner {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 18px !important;
-    width: 100% !important;
-  }
-
-  body.page-prof-dev #footer .footer-row-copy {
-    width: 100% !important;
-    text-align: center !important;
-  }
-
-  body.page-prof-dev #footer .footer-row-links {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 18px !important;
-    flex-wrap: wrap !important;
-    text-align: center !important;
-  }
-
-  body.page-prof-dev #footer .footer-row-bottom {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 20px !important;
-  }
-}
-
-/* FAB centring (calendar + booking) */
-.fab,
-.fab-booking {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  line-height: 1 !important;
-}
-
-/* ============================================================
-   FILTER SHAPES — PULSE ANIMATION
-   (These are the rating badges shown in the section header)
-   ============================================================ */
-
-.section-subtitle .rating-badge {
-  animation: filterPulse 2.4s ease-in-out infinite;
-  box-shadow: 0 0 6px rgba(0,0,0,0.25);
-}
-
-@keyframes filterPulse {
-  0%   { transform: scale(1); opacity: 1; }
-  50%  { transform: scale(1.12); opacity: 0.85; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* ============================================================
-   FORCE RATING BADGE COLOURS (override all previous rules)
-   ============================================================ */
-
-.rating-expert { background: #0a66c2 !important; }
-.rating-proficient { background: #007b5f !important; }
-.rating-competent { background: #b8860b !important; }
-.rating-practised { background: #8a2be2 !important; }
-.rating-aware { background: #555 !important; }
-
-/* FINAL, HIGH-SPECIFICITY OVERRIDE FOR RATING BADGES */
-
-body.page-prof-dev .section-subtitle .rating-badge.rating-expert,
-body.page-prof-dev .accordion-item .rating-badge.rating-expert {
-  background: #0a66c2 !important;
-  background-color: #0a66c2 !important;
-}
-
-body.page-prof-dev .section-subtitle .rating-badge.rating-proficient,
-body.page-prof-dev .accordion-item .rating-badge.rating-proficient {
-  background: #007b5f !important;
-  background-color: #007b5f !important;
-}
-
-body.page-prof-dev .section-subtitle .rating-badge.rating-competent,
-body.page-prof-dev .accordion-item .rating-badge.rating-competent {
-  background: #b8860b !important;
-  background-color: #b8860b !important;
-}
-
-body.page-prof-dev .section-subtitle .rating-badge.rating-practised,
-body.page-prof-dev .accordion-item .rating-badge.rating-practised {
-  background: #8a2be2 !important;
-  background-color: #8a2be2 !important;
-}
-
-body.page-prof-dev .section-subtitle .rating-badge.rating-aware,
-body.page-prof-dev .accordion-item .rating-badge.rating-aware {
-  background: #555 !important;
-  background-color: #555 !important;
-}
-
-
-
-  .rating-badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  color: #fff;
-  font-weight: 700;
-}
-
-/* ============================================================
-   FIX: Allow rating badges to show their true colour
-   ============================================================ */
-
-.rating-badge {
-  isolation: isolate !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-  background-blend-mode: normal !important;
-}
-
-/* ============================================================
-   FIX: Allow filter badges to show true colour
-   ============================================================ */
-
-.section-subtitle {
-  isolation: isolate !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-  background-blend-mode: normal !important;
-}
-  
-/* ============================================================
-   FIX: Allow accordion rating badges to show true colour
-   ============================================================ */
-
-.accordion-header {
-  isolation: isolate !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-  background-blend-mode: normal !important;
-}
-
-/* Rating summary bar */
-
-.rating-summary-bar {
-  display: flex;
-  gap: 8px;
-  align-items: stretch;
-  margin: 1rem 0 2rem;
-}
-
-.rating-summary-segment {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0.6rem 0.7rem;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 0.85rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-  transform: translateY(0);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.rating-summary-segment .label {
-  font-weight: 600;
-}
-
-.rating-summary-segment .count {
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-align: right;
-}
-
-/* Colours aligned to your rating palette */
-
-.rating-summary-segment.rating-expert {
-  background: #0a66c2;
-}
-
-.rating-summary-segment.rating-proficient {
-  background: #007b5f;
-}
-
-.rating-summary-segment.rating-competent {
-  background: #b8860b;
-}
-
-.rating-summary-segment.rating-practised {
-  background: #8a2be2;
-}
-
-.rating-summary-segment.rating-aware {
-  background: #555;
-}
-
-/* Subtle hover */
-
-.rating-summary-segment:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-}
-
-/* ============================================================
-   RATING SUMMARY — STACKED BAR CHART
-   ============================================================ */
-
-.rating-summary-stacked {
-  display: flex;
-  width: 100%;
-  height: 32px;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 1rem 0 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.stack-segment {
-  height: 100%;
-  transition: width 0.8s ease;
-}
-
-/* Colours aligned to your APM palette */
-.stack-segment.rating-expert { background: #0a66c2; }
-.stack-segment.rating-proficient { background: #007b5f; }
-.stack-segment.rating-competent { background: #b8860b; }
-.stack-segment.rating-practised { background: #8a2be2; }
-.stack-segment.rating-aware { background: #555; }
-
-.stack-segment::after {
-  content: attr(data-count);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding-left: 6px;
-  line-height: 32px;
-}
-
-
-
-/* ============================================================
-   RATING SUMMARY — TOOLTIP
-   ============================================================ */
-
-.rating-tooltip {
-  position: fixed;
-  padding: 6px 10px;
-  background: #0a2540;
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border-radius: 6px;
-  pointer-events: none;
-  z-index: 9999;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  transform: translate(-50%, -120%);
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-
-
-
-/* ============================================================
-   COMPETENCE HIGHLIGHT ON CPD LINK CLICK
-   ============================================================ */
-
-.accordion-item.highlighted {
-  position: relative;
-  animation: competenceHighlight 2.2s ease-out;
-  z-index: 5;
-}
-
-@keyframes competenceHighlight {
-  0% {
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-    background: rgba(255,255,255,0.25);
-    border-color: #fff;
-  }
-  20% {
-    box-shadow: 0 0 18px rgba(255,255,255,0.55);
-    background: rgba(255,255,255,0.35);
-    border-color: #fff;
-  }
-  100% {
-    box-shadow: none;
-    background: inherit;
-    border-color: inherit;
-  }
-}
-
-.accordion-item.highlighted .accordion-header {
-  background: rgba(255,255,255,0.35);
-  border-left: 4px solid #0d74e7;
-  box-shadow: 0 0 16px rgba(13,116,231,0.55);
-}
-
-.accordion {
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  max-height: 80vh; /* prevents page lock */
-}
-
-.accordion-controls {
-  position: relative;
-  z-index: 50;
-}
-.accordion {
-  position: relative;
-  z-index: 1;
-}
-
-
-
-
-
-/* ================================
-   HERO GRID LAYOUT
-================================ */
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 2rem;
-  align-items: center;
-  padding: 2.5rem 1rem;
-  margin-bottom: 2rem;
-}
-
-/* LEFT IMAGE */
-.hero-left img {
-  width: 100%;
-  max-width: 160px;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-}
-
-/* CENTRE TEXT */
-.hero-centre h1 {
-  margin: 0 0 0.5rem 0;
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-.hero-centre p {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.5;
-  opacity: 0.85;
-}
-
-/* RIGHT PROGRESS RING */
-.hero-right {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.cpd-progress-container {
-  text-align: center;
-}
-
-.cpd-progress-ring {
-  display: block;
-  margin: 0 auto 0.5rem auto;
-}
-
-/* ================================
-   RESPONSIVE (iPhone / iPad)
-================================ */
-
-@media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "left right"
-      "centre centre";
-  }
-
-  .hero-left { grid-area: left; }
-  .hero-centre { grid-area: centre; text-align: center; }
-  .hero-right { grid-area: right; justify-content: center; }
-}
-
-@media (max-width: 600px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "left"
-      "centre"
-      "right";
-    text-align: center;
-  }
-
-  .hero-right {
-    justify-content: center;
-  }
-
-  .hero-left img {
-    margin: 0 auto;
-  }
-}
-.hero-centre {
-  text-align: center;
-}
-  .cpd-log-section .section-heading {
-  font-size: 1.6rem;   /* match your global section-heading size */
-  line-height: 1.2;
-  margin: 0;
-}
-.collapsible-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.cpd-log-section .section-heading {
-  font-size: inherit !important;
-  line-height: inherit !important;
-  font-weight: inherit !important;
-}
-.cpd-log-section .section-heading {
-  margin-top: 1.5rem !important;
-  margin-bottom: 0.4rem !important;
-  font-size: 1.6rem !important; /* matches your global size */
-}
-.cpd-log-section .collapsible-text {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
- /* ================================
-   HERO TITLE
-================================ */
-
-.hero-title h1 {
-  text-align: center;
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin: 1rem 0 2rem;
-  color: #0a2540;
-}
-
-/* ================================
-   HERO GRID LAYOUT
-================================ */
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 2rem;
-  align-items: center;
-  padding: 0 1rem 2rem;
-  margin-bottom: 2rem;
-}
-
-/* LEFT LOGO */
-.hero-left img {
-  width: 100%;
-  max-width: 160px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-/* CENTRE TEXT */
-.hero-centre p {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.5;
-  opacity: 0.85;
-  text-align: center;
-}
-
-/* RIGHT PROGRESS RING */
-.hero-right {
-  display: flex;
-  justify-content: center;
-}
-
-.cpd-progress-container {
-  text-align: center;
-}
-
-.cpd-progress-ring {
-  display: block;
-  margin: 0 auto 0.5rem auto;
-}
-
-/* ================================
-   RESPONSIVE (iPhone / iPad)
-================================ */
-
-@media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "left right"
-      "centre centre";
-  }
-
-  .hero-left { grid-area: left; }
-  .hero-centre { grid-area: centre; }
-  .hero-right { grid-area: right; }
-}
-
-@media (max-width: 600px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "left"
-      "centre"
-      "right";
-    text-align: center;
-  }
-
-  .hero-right {
-    justify-content: center;
-  }
-
-  .hero-left img {
-    margin: 0 auto;
-  }
-}
-
-  .cpd-log-section .section-heading {
-  font-size: 1.6rem !important;
-  font-weight: 700 !important;
-  font-family: inherit !important;
-  color: #0a2540 !important;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-.cpd-log-section .collapsible-text {
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
-}
-
-/* ==========================================================
-   RADAR GRID
-========================================================== */
-
-.radar-grid-ring{
-    fill:none;
-    stroke:#d1d5db;
-    stroke-width:.6;
-}
-
-
-/* ==========================================================
-   RADAR POLYGONS
-========================================================== */
-
-.radar-area-current{
-    fill:rgba(15,157,138,.08);
-    stroke:#0f9d8a;
-}
-
-.radar-area-target{
-    fill:rgba(15,157,138,.03);
-    stroke:#0f9d8a;
-}
-
-
-/* ==========================================================
-   RADAR POINTS
-========================================================== */
-
-.radar-point{
-    stroke:#fff;
-    stroke-width:2;
-    cursor:pointer;
-    transition:r .2s ease;
-}
-
-.radar-point:hover{
-    r:6.5;
-}
-
-
-/* ==========================================================
-   TOOLTIP
-========================================================== */
-
-.radar-tooltip{
-    position:absolute;
-    background:#fff;
-    color:#333;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    padding:8px 10px;
-    font-size:.85rem;
-    box-shadow:0 4px 12px rgba(0,0,0,.18);
-    pointer-events:none;
-    white-space:nowrap;
-    opacity:0;
-    transition:opacity .15s;
-    z-index:9999;
-}
-
-
-
-
-/* ==========================================================
-   2. TARGET DASHED OUTLINE (green, not blue)
-========================================================== */
-
-.radar-area-target {
-    fill: rgba(15,157,138,.03) !important;
-    stroke: #0f9d8a !important; /* green */
-    stroke-width: 2 !important;
-    stroke-dasharray: 4 4 !important;
-}
-
-
-
-/* ==========================================================
-   5. FOOTER SCROLL BUG (final fix)
-========================================================== */
-
-.accordion-item:not(.open) .radar-wrapper {
-    max-height: 0 !important;
-    overflow: hidden !important;
-}
-
-.accordion-item:not(.open) {
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-
-
-/* FOOTER SCROLL FIX — final */
-.accordion-item:not(.open) .radar-wrapper {
-    max-height: 0 !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-
-
-.accordion-item,
-.accordion-content {
-    overflow: visible !important;
-}
-
-.dual-radar-section {
-  margin: 40px 0;
-}
-
-.radar-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
-}
-
-/* iPad/desktop: right-align second radar */
-.radar-box:nth-child(2) {
-  justify-self: end;
-}
-
-.radar-box {
-  text-align: center;
-}
-
-.radar-svg {
-  width: 280px;
-  height: 280px;
-  margin: 0 auto;
-  overflow: visible;
-}
-
-/* iPhone: stack radars vertically */
-@media (max-width: 768px) {
-  .radar-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .radar-box {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-  }
-
-  .radar-svg {
-    width: 260px;
-    height: 260px;
-  }
-}
-
-
-  .radar-legend-combined {
-  margin-top: 2rem;
-}
-
-.radar-legend-combined h4 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #0a2540;
-}
-
-.legend-layout {
-  display: grid;
-  grid-template-columns: 2fr 1px 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-.legend-divider {
-  background: #ddd;
-  width: 1px;
-  align-self: stretch;
-}
-
-.legend-row {
-  display: grid;
-  grid-template-columns: 28px 140px auto;
-  align-items: center;
-  gap: 14px;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.legend-dot {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-}
-
-/* APM palette – matches your JS colourMap */
-.legend-dot.expert     { background: #0a66c2; }
-.legend-dot.proficient { background: #007b5f; }
-.legend-dot.competent  { background: #b8860b; }
-.legend-dot.practised  { background: #8a2be2; }
-.legend-dot.aware      { background: #555; }
-
-.legend-title {
-  font-weight: 700;
-  font-size: 1.05rem;
-}
-
-.legend-description {
-  color: #555;
-}
-
-.legend-levels {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.legend-level {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.legend-poly {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-}
-
-.legend-poly.current {
-  border: 3px solid #0f9d8a;
-  background: rgba(15,157,138,.08);
-}
-
-.legend-poly.target {
-  border: 3px dashed #0f9d8a;
-  background: rgba(15,157,138,.03);
-}
-
-  #rating-summary-svg {
-  width: 100%;
-  margin: 1.2rem 0 2rem;
-}
-
-#rating-summary-svg svg {
-  height: 40px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-.rating-summary-bar,
-.radar-grid,
-.legend-layout {
-    overflow: visible !important;
-}
-
-/* ============================================================
-   DUAL RADAR LAYOUT
-============================================================ */
-
-.dual-radar-section .radar-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-}
-
-/* Right-align target radar on iPad/desktop */
-.dual-radar-section .radar-box:nth-child(2) {
-    justify-self: end;
-}
-
-.dual-radar-section .radar-box {
-    text-align: center;
-}
-
-.dual-radar-section .radar-svg {
-    width: 280px;
-    height: 280px;
-    margin: 0 auto;
-    overflow: visible;
-}
-
-/* iPhone: stack radars vertically */
-@media (max-width: 768px) {
-    .dual-radar-section .radar-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-
-    .dual-radar-section .radar-box {
-        justify-self: center;
-        max-width: 320px;
-        margin: 0 auto;
-    }
-
-    .dual-radar-section .radar-svg {
-        width: 260px;
-        height: 260px;
-    }
-}
-
-/* ============================================================
-   LEGEND COLOURS
-============================================================ */
-
-.legend-dot {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.legend-dot.expert     { background: #0a66c2; }
-.legend-dot.proficient { background: #007b5f; }
-.legend-dot.competent  { background: #b8860b; }
-.legend-dot.practised  { background: #8a2be2; }
-.legend-dot.aware      { background: #555; }
-
-/* ============================================================
-   SAFARI OVERFLOW FIXES
-============================================================ */
-
-.rating-summary-bar,
-.dual-radar-section,
-.radar-wrapper,
-.radar-grid,
-.legend-layout {
-    overflow: visible !important;
-}
-/* ============================================================
-   DUAL RADAR LAYOUT — CORE
-============================================================ */
-
-.dual-radar-section {
-    margin: 2.5rem 0;
-}
-
-.dual-radar-section .radar-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-    justify-items: center;
-    overflow: visible;
-}
-
-.dual-radar-section .radar-box {
-    text-align: center;
-}
-
-.dual-radar-section .radar-box:nth-child(2) {
-    justify-self: end;
-}
-
-.dual-radar-section .radar-svg {
-    width: 280px;
-    height: 280px;
-    margin: 0 auto;
-    overflow: visible;
-}
-
-/* ============================================================
-   MOBILE RADAR STACKING — iPhone
-============================================================ */
-
-@media (max-width: 768px) {
-    .dual-radar-section .radar-grid {
-        grid-template-columns: 1fr !important;
-        gap: 32px !important;
-    }
-
-    .dual-radar-section .radar-box {
-        justify-self: center !important;
-        max-width: 320px !important;
-        margin: 0 auto !important;
-    }
-
-    .dual-radar-section .radar-svg {
-        width: 260px !important;
-        height: 260px !important;
-    }
-}
-
-/* ============================================================
-   LEGEND — COLOURS + LAYOUT
-============================================================ */
-
-.legend-layout {
-    display: grid;
-    grid-template-columns: 2fr 1px 1fr;
-    gap: 40px;
-    align-items: start;
-    overflow: visible;
-}
-
-.legend-divider {
-    background: #ddd;
-    width: 1px;
-    align-self: stretch;
-}
-
-.legend-row {
-    display: grid;
-    grid-template-columns: 28px 140px auto;
-    align-items: center;
-    gap: 14px;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.legend-dot {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 10px;
-}
-
-/* APM palette */
-.legend-dot.expert     { background: #0a66c2; }
-.legend-dot.proficient { background: #007b5f; }
-.legend-dot.competent  { background: #b8860b; }
-.legend-dot.practised  { background: #8a2be2; }
-.legend-dot.aware      { background: #555; }
-
-.legend-title {
-    font-weight: 700;
-    font-size: 1.05rem;
-}
-
-.legend-description {
-    color: #555;
-}
-
-.legend-levels {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.legend-poly {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-}
-
-.legend-poly.current {
-    border: 3px solid #0f9d8a;
-    background: rgba(15,157,138,.08);
-}
-
-.legend-poly.target {
-    border: 3px dashed #0f9d8a;
-    background: rgba(15,157,138,.03);
-}
-
-/* ============================================================
-   SAFARI OVERFLOW FIXES — CRITICAL
-============================================================ */
-
-.dual-radar-section,
-.radar-wrapper,
-.radar-grid,
-.legend-layout,
-.rating-summary-bar {
-    overflow: visible !important;
-}
-
-/* Prevent parent containers from clipping */
-.accordion,
-.accordion-content,
-.page-container {
-    overflow: visible !important;
-}
-
-/* Additional Safari overflow fixes — required */
-.radar-legend-combined,
-.radar-legend-combined *,
-.rating-summary-svg,
-.rating-summary-svg *,
-.rating-summary-stacked,
-.rating-summary-stacked *,
-.stack-segment,
-.stack-segment * {
-    overflow: visible !important;
-    max-width: none !important;
-}
-
-.accordion-item,
-.accordion-content {
-    overflow: visible !important;
-    max-height: none !important;
-}
-
-/* Container: allows horizontal scroll */
-#rating-summary-svg {
-  width: 100%;
-  display: block;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 8px;
-}
-
-/* Inner SVG: wider than the viewport so scroll is needed */
-#rating-summary-svg svg {
-  min-width: 700px;   /* or 650px if you prefer */
-  height: 40px;
-  display: block;
-}
   
 </style>
 
@@ -2484,46 +1359,17 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
-<!-- HERO TITLE -->
-<section class="hero-title">
+<!-- HERO -->
+<section class="hero-section">
+  <img src="apm-cpd-thumbnail.jpg" alt="APM CPD & Competence Framework Thumbnail">
   <h1>Professional Development &amp; Competence</h1>
+  <p>
+    A consolidated view of ongoing CPD activity and alignment to the APM Competence Framework (3rd edition),
+    demonstrating sustained professional growth and reflective practice.
+  </p>
 </section>
 
-<!-- HERO GRID -->
-<section class="hero-grid">
-
-  <!-- LEFT: LOGO -->
-  <div class="hero-left">
-    <img src="apm-cpd-thumbnail.jpg" alt="APM CPD & Competence Framework Thumbnail">
-  </div>
-
-  <!-- CENTRE: INTRO TEXT -->
-  <div class="hero-centre">
-    <p>
-      A consolidated view of ongoing CPD activity and alignment to the APM Competence Framework (3rd edition),
-      demonstrating sustained professional growth and reflective practice.
-    </p>
-  </div>
-
-  <!-- RIGHT: PROGRESS RING -->
-  <div class="hero-right">
-    <div class="cpd-progress-container">
-      <svg class="cpd-progress-ring" width="160" height="160">
-        <circle class="cpd-ring-bg" cx="80" cy="80" r="70" />
-        <circle class="cpd-ring-fill" cx="80" cy="80" r="70" />
-      </svg>
-
-      <div class="cpd-progress-text">
-        <h3 id="cpd-wheel-completed">Completed hours</h3>
-        <p id="cpd-wheel-remaining">Hours needed before 30 Sep 2026</p>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-
-<!-- OVERVIEW (unchanged) -->
+<!-- OVERVIEW -->
 <section>
   <h2 class="section-heading">
     <i class="fa-solid fa-circle-info"></i>
@@ -2536,6 +1382,28 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   </p>
 </section>
 
+<!-- PROGRESS RING -->
+<section class="cpd-progress-section">
+
+  <div class="cpd-progress-container">
+
+    <svg class="cpd-progress-ring" width="180" height="180">
+      <circle class="cpd-ring-bg" cx="90" cy="90" r="80" />
+      <circle class="cpd-ring-fill" cx="90" cy="90" r="80" />
+    </svg>
+
+    <div class="cpd-progress-text">
+      <h3 id="cpd-wheel-completed">Completed hours</h3>
+      <p id="cpd-wheel-remaining">Hours needed before 30 Sep 2026</p>
+    </div>
+
+  </div>
+
+  <h2 class="cpd-progress-heading">Development Goals</h2>
+
+
+
+</section>
 
 <!-- METRICS -->
 <section class="cpd-metrics">
@@ -2572,7 +1440,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     </h2>
 
     <p class="section-subtitle">
-        A visual summary of my completed, remaining and projected CPD hours.
+        A visual summary of your completed, remaining and projected CPD hours.
     </p>
 
     <div class="pillars-scroll">
@@ -2628,7 +1496,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     CPD Category Distribution
   </h2>
   <p class="section-subtitle">
-    Automatically generated from my CPD log.
+    Automatically generated from your CPD log.
   </p>
 
   <div class="donut-wrapper">
@@ -2670,7 +1538,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 
   <div class="collapsible-content">
     <p class="section-subtitle">
-      My CPD activities, presented as clean, modern cards.
+      Your CPD activities, presented as clean, modern cards.
     </p>
 
     <div id="cpd-card-container" class="cpd-card-container"></div>
@@ -2686,7 +1554,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     </h2>
 
     <p class="section-subtitle">
-      Automatically generated insights based on my reflective statements and activity patterns.
+      Automatically generated insights based on your reflective statements and activity patterns.
     </p>
 
     <div class="insights-grid">
@@ -2924,9 +1792,9 @@ async function loadCPD() {
         generateInsights();
         generateHeatmap();
         generateDonutChart();
+        generateRadarChart();
       linkCPDToCompetences();
-generateDualRadar();
-      
+
     } catch (err) {
         console.error(err);
     }
@@ -3309,11 +2177,12 @@ if (document.readyState === "loading") {
     loadCPD();
 
 }
-/* ============================================================
-   DUAL RADAR GENERATION
-============================================================ */
+function generateRadarChart() {
+  const svg = document.getElementById("radar-chart");
+  if (!svg) return;
 
-function generateDualRadar() {
+  // 1. Extract competence names + ratings from your page
+  const items = [...document.querySelectorAll(".info-card")].slice(0, 6);
 
   const ratingMap = {
     "Aware": 1,
@@ -3323,238 +2192,54 @@ function generateDualRadar() {
     "Expert": 5
   };
 
-  const colourMap = {
-    1: "#555",
-    2: "#8a2be2",
-    3: "#b8860b",
-    4: "#007b5f",
-    5: "#0a66c2"
-  };
-
-  // Extract all competence cards
-  const cards = [...document.querySelectorAll(".accordion-item[id^='competence-']")];
-
-  const allData = cards.map(card => {
-
-    // Extract title text (ignore icon)
-    const titleEl = card.querySelector(".accordion-header span");
-
-    let title = "Unknown";
-    if (titleEl) {
-      title = [...titleEl.childNodes]
-        .filter(n => n.nodeType === Node.TEXT_NODE)
-        .map(n => n.textContent.trim())
-        .join(" ")
-        .trim();
-    }
-
-    // Extract rating
-    const badgeEl = card.querySelector(".accordion-header .rating-badge");
-    const ratingText = badgeEl ? badgeEl.textContent.trim() : "Competent";
-
+  const data = items.map(card => {
+    const title = card.querySelector("h3").innerText.trim();
+    const ratingBadge = card.querySelector(".rating-badge");
+    const ratingText = ratingBadge ? ratingBadge.innerText.trim() : "Competent";
     return {
       label: title,
-      value: ratingMap[ratingText] || 0
+      value: ratingMap[ratingText] || 3
     };
   });
 
-  /* -----------------------------
-     RADAR 1: Top 6 overall
-  ----------------------------- */
-  const sortedAll = [...allData].sort((a, b) => b.value - a.value);
-  const current6 = sortedAll.slice(0, 6);
+  const legend = document.getElementById("radar-legend");
+  legend.innerHTML = data
+    .map(d => `<li>${d.label}: ${d.value}/5</li>`)
+    .join("");
 
-  /* -----------------------------
-     RADAR 2: Top 6 NON-EXPERT
-  ----------------------------- */
-  const nonExpert = allData.filter(d => d.value < 5);
-  const sortedNonExpert = nonExpert.sort((a, b) => b.value - a.value);
-  const targetBase6 = sortedNonExpert.slice(0, 6);
-
-  // Build target = +1 level (max Expert)
-  const target6 = targetBase6.map(d => ({
-    label: d.label,
-    value: Math.min(d.value + 1, 5)
-  }));
-
-  // Draw both radars
-  drawRadar("radar-current", current6, colourMap, false);
-  drawRadar("radar-target", target6, colourMap, true);
-}
-
-
-/* ============================================================
-   DRAW A SINGLE RADAR
-============================================================ */
-function drawRadar(svgId, data, colourMap, isTarget) {
-
-  const svg = document.getElementById(svgId);
-
-  // Safari-safe clear
-  while (svg.firstChild) {
-    svg.removeChild(svg.firstChild);
-  }
-
-  const tooltip = document.getElementById("radar-tooltip");
-
+  // 2. Radar chart geometry
   const maxValue = 5;
   const radius = 50;
-
-  if (!data || data.length === 0) return;
-
   const angleStep = (Math.PI * 2) / data.length;
 
-  const SVG_NS = "http://www.w3.org/2000/svg";
-
-  /* -----------------------------
-     GRID RINGS
-  ----------------------------- */
+  // Draw grid rings
   for (let level = 1; level <= maxValue; level++) {
-
     const r = (radius / maxValue) * level;
-
     const points = data.map((_, i) => {
       const angle = i * angleStep - Math.PI / 2;
       return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
     }).join(" ");
-
-    const ring = document.createElementNS(SVG_NS, "polygon");
-    ring.setAttribute("class", "radar-grid-ring");
-    ring.setAttribute("points", points);
-
-    svg.appendChild(ring);
+    svg.innerHTML += `<polygon class="radar-grid" points="${points}"></polygon>`;
   }
 
-  /* -----------------------------
-     MAIN POLYGON
-  ----------------------------- */
-
-  const polyPoints = data.map((d, i) => {
-
-    const r = (radius / maxValue) * d.value;
-    const angle = i * angleStep - Math.PI / 2;
-
-    return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
-
-  }).join(" ");
-
-  const polygon = document.createElementNS(SVG_NS, "polygon");
-
-  polygon.setAttribute(
-    "class",
-    isTarget ? "radar-area-target" : "radar-area-current"
-  );
-
-  polygon.setAttribute("points", polyPoints);
-
-  svg.appendChild(polygon);
-
-  /* -----------------------------
-     POINTS + TOOLTIP
-  ----------------------------- */
-
-  data.forEach((d, i) => {
-
-    const r = (radius / maxValue) * d.value;
-    const angle = i * angleStep - Math.PI / 2;
-
-    const x = Math.cos(angle) * r;
-    const y = Math.sin(angle) * r;
-
-    const point = document.createElementNS(SVG_NS, "circle");
-
-    point.setAttribute("class", "radar-point");
-    point.setAttribute("cx", x);
-    point.setAttribute("cy", y);
-    point.setAttribute("r", 5);
-    point.setAttribute("fill", colourMap[d.value]);
-
-    point.addEventListener("mouseenter", () => {
-
-      tooltip.innerHTML =
-        `<strong>${d.label}</strong><br>${
-          isTarget ? "Target level: " : "Current level: "
-        }${d.value}`;
-
-      tooltip.style.opacity = 1;
-
-    });
-
-    point.addEventListener("mousemove", (e) => {
-
-      tooltip.style.left = (e.pageX + 12) + "px";
-      tooltip.style.top = (e.pageY - 12) + "px";
-
-    });
-
-    point.addEventListener("mouseleave", () => {
-
-      tooltip.style.opacity = 0;
-
-    });
-
-    svg.appendChild(point);
-
-  });
-
-}
-
-  /* -----------------------------
-     POLYGON
-  ----------------------------- */
-  const polyPoints = data.map((d, i) => {
+  // 3. Draw data area
+  const areaPoints = data.map((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
     return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
   }).join(" ");
 
-  svg.innerHTML += `
-    <polygon 
-      class="${isTarget ? "radar-area-target" : "radar-area-current"}" 
-      points="${polyPoints}">
-    </polygon>
-  `;
+  svg.innerHTML += `<polygon class="radar-area" points="${areaPoints}"></polygon>`;
 
-  /* -----------------------------
-     POINTS + TOOLTIP
-  ----------------------------- */
+  // 4. Draw data points
   data.forEach((d, i) => {
     const r = (radius / maxValue) * d.value;
     const angle = i * angleStep - Math.PI / 2;
     const x = Math.cos(angle) * r;
     const y = Math.sin(angle) * r;
-
-    const point = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    point.setAttribute("class", "radar-point");
-    point.setAttribute("cx", x);
-    point.setAttribute("cy", y);
-    point.setAttribute("r", 5);
-    point.setAttribute("fill", colourMap[d.value]);
-
-    point.addEventListener("mouseenter", () => {
-      tooltip.innerHTML = `
-        <strong>${d.label}</strong><br>
-        ${isTarget ? "Target level: " : "Current level: "} ${d.value}
-      `;
-      tooltip.style.opacity = 1;
-    });
-
-    point.addEventListener("mousemove", (e) => {
-      tooltip.style.left = (e.pageX + 12) + "px";
-      tooltip.style.top = (e.pageY - 12) + "px";
-    });
-
-    point.addEventListener("mouseleave", () => {
-      tooltip.style.opacity = 0;
-    });
-
-    svg.appendChild(point);
+    svg.innerHTML += `<circle class="radar-point" cx="${x}" cy="${y}" r="2.5"></circle>`;
   });
 }
-
-
-
-
 function generateProgressPillars() {
   const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
   const remaining = parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
@@ -3827,15 +2512,39 @@ function generateProgressPillars() {
     Drawing on the CPD log and competence review, the following areas are prioritised for focused development over the coming year.
   </p>
 
- <ul class="dev-list">
-  <li><strong>Leadership & mentoring:</strong> strengthen coaching practice and structured support for early‑career professionals.</li>
-  <li><strong>Stakeholder engagement & communication:</strong> sharpen narrative, influence and conflict‑resolution across complex programmes.</li>
-  <li><strong>AI & digital transformation:</strong> deepen practical use of AI tools (including Microsoft 365 Copilot) in delivery and governance.</li>
-  <li><strong>Sustainability in change:</strong> embed sustainability criteria into business cases, governance and benefits management.</li>
-</ul>
-
+  <ul class="dev-list">
+    <li><strong>Leadership & mentoring:</strong> deepen coaching practice and structured support for apprentices and early‑career professionals.</li>
+    <li><strong>Stakeholder engagement & communication:</strong> refine narrative, influence and conflict‑resolution skills across complex programmes.</li>
+    <li><strong>AI & digital transformation:</strong> expand practical application of AI tools (including Microsoft 365 Copilot) in project delivery and governance.</li>
+    <li><strong>Sustainability in change initiatives:</strong> embed sustainability criteria into business cases, governance and benefits management.</li>
+  </ul>
 </section>
+<section class="cpd-radar-section">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-chart-radar"></i>
+    APM Competence Radar
+  </h2>
+  <p class="section-subtitle">
+    Automatically generated from your competence ratings.
+  </p>
 
+  <div class="radar-wrapper">
+    <svg id="radar-chart" viewBox="-60 -60 120 120"></svg>
+
+    <ul id="radar-legend" class="radar-legend"></ul>
+  </div>
+</section>
+<!-- PERSONAL ASSESSMENT ACCORDION -->
+<section>
+<h2 class="section-heading collapsible-toggle">
+  <i class="fa-solid fa-user-check"></i>
+  My Competence Assessment (29 competences)
+  <i class="fa-solid fa-chevron-right chevron"></i>
+</h2>
+
+<div class="collapsible-content">
+
+<div class="apm-progress-bar"></div>
   <p class="section-subtitle">
     This section reflects my personal assessment against the APM Competence Framework (3rd edition), using the APM 0–5 rating scale.
     Ratings shown:
@@ -3846,160 +2555,8 @@ function generateProgressPillars() {
     <span class="rating-badge rating-aware">Aware</span>
   </p>
 
-<section class="rating-summary">
-  <h2 class="section-heading">
-    <i class="fa-solid fa-chart-bar"></i> Rating summary
-  </h2>
-  <div class="rating-summary-bar">
-    <div class="rating-summary-segment rating-expert">
-      <span class="label">Expert</span>
-      <span class="count">0</span>
-    </div>
-    <div class="rating-summary-segment rating-proficient">
-      <span class="label">Proficient</span>
-      <span class="count">0</span>
-    </div>
-    <div class="rating-summary-segment rating-competent">
-      <span class="label">Competent</span>
-      <span class="count">0</span>
-    </div>
-    <div class="rating-summary-segment rating-practised">
-      <span class="label">Practised</span>
-      <span class="count">0</span>
-    </div>
-    <div class="rating-summary-segment rating-aware">
-      <span class="label">Aware</span>
-      <span class="count">0</span>
-    </div>
-  </div>
-</section>
-
-
-<div id="rating-summary-svg"></div>
-  
-<section class="dual-radar-section">
-<div class="radar-wrapper">
-  <div class="radar-grid">
-
-    <!-- CURRENT RADAR -->
-    <div class="radar-box">
-      <h3 class="radar-heading">My Top 6 Competencies</h3>
-      <svg id="radar-current" class="radar-svg" viewBox="-60 -60 120 120"></svg>
-    </div>
-
-    <!-- TARGET RADAR -->
-    <div class="radar-box">
-      <h3 class="radar-heading">Target Levels (Next Step Up)</h3>
-      <svg id="radar-target" class="radar-svg" viewBox="-60 -60 120 120"></svg>
-    </div>
-
-  </div>
-  
-<div id="radar-tooltip" class="radar-tooltip"></div>
-  
-  <!-- COMBINED LEGEND -->
- <div class="radar-legend-combined">
-
-    <h4>Legend</h4>
-
-    <div class="legend-layout">
-
-        <!-- LEFT SIDE -->
-        <div class="legend-ratings">
-
-            <div class="legend-row">
-                <div class="legend-dot expert"></div>
-                <div class="legend-title">Expert</div>
-                <div class="legend-description">
-                    Extensive experience and can advise others
-                </div>
-            </div>
-
-            <div class="legend-row">
-                <div class="legend-dot proficient"></div>
-                <div class="legend-title">Proficient</div>
-                <div class="legend-description">
-                    Solid experience and works independently
-                </div>
-            </div>
-
-            <div class="legend-row">
-                <div class="legend-dot competent"></div>
-                <div class="legend-title">Competent</div>
-                <div class="legend-description">
-                    Good understanding and works with support
-                </div>
-            </div>
-
-            <div class="legend-row">
-                <div class="legend-dot practised"></div>
-                <div class="legend-title">Practised</div>
-                <div class="legend-description">
-                    Basic experience and building confidence
-                </div>
-            </div>
-
-            <div class="legend-row">
-                <div class="legend-dot aware"></div>
-                <div class="legend-title">Aware</div>
-                <div class="legend-description">
-                    Awareness of the area
-                </div>
-            </div>
-
-        </div>
-
-        <!-- DIVIDER -->
-
-        <div class="legend-divider"></div>
-
-        <!-- RIGHT SIDE -->
-
-        <div class="legend-levels">
-
-            <div class="legend-level">
-                <div class="legend-poly current"></div>
-                <span>Current level</span>
-            </div>
-
-            <div class="legend-level">
-                <div class="legend-poly target"></div>
-                <span>Target level</span>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-</div>  
-<!-- PERSONAL ASSESSMENT ACCORDION -->
-<div class="collapsible-toggle competence-header">
-  <div class="collapsible-text">
-    <h2 class="section-heading">
-      <i class="fa-solid fa-user-check"></i>
-      My Competence Assessment (29 competences)
-    </h2>
-
-    <p class="section-helper">
-      Tap to expand my Competency Assessment.
-    </p>
-  </div>
-
-  <i class="fa-solid fa-chevron-right chevron"></i>
-</div>
-
-
-
-<div class="collapsible-content">
-
-
   <div class="accordion">
 
-
-
-
-    
 <!-- 1. Life cycles -->
 <div id="competence-life-cycles" class="accordion-item">
   <div class="accordion-header">
@@ -4469,7 +3026,6 @@ function generateProgressPillars() {
 
   </div> <!-- end accordion -->
   </div> <!-- end collapsible-content -->
-<div id="rating-tooltip" class="rating-tooltip" style="display:none;"></div>
 
 </section>
 <!-- FLOATING ACTION BUTTONS -->
@@ -4487,11 +3043,21 @@ function generateProgressPillars() {
       if (footer) footer.innerHTML = h;
     });
 </script>
-
+<script>
+// 1) Run CPD loader first
+document.addEventListener("DOMContentLoaded", () => {
+  loadCPD();
+});
+</script>
 <script>
 /* ============================================================
-   2. CPD LOG COLLAPSIBLE
-============================================================ */
+   CLEAN JS — CPD LOG + COMPETENCE ACCORDION + LINKING
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. CPD LOG COLLAPSIBLE
+   ------------------------------------------------------------ */
+
 document.addEventListener("click", e => {
     const toggle = e.target.closest(".collapsible-toggle");
     if (!toggle) return;
@@ -4499,14 +3065,15 @@ document.addEventListener("click", e => {
     const content = toggle.nextElementSibling;
     if (!content || !content.classList.contains("collapsible-content")) return;
 
+    // Toggle open/closed
     content.classList.toggle("open");
 });
-</script>
 
-<script>
-/* ============================================================
-   3. COMPETENCE ACCORDION
-============================================================ */
+
+/* ------------------------------------------------------------
+   2. COMPETENCE ACCORDION
+   ------------------------------------------------------------ */
+
 document.addEventListener("click", e => {
     const header = e.target.closest(".accordion-header");
     if (!header) return;
@@ -4514,19 +3081,21 @@ document.addEventListener("click", e => {
     const item = header.closest(".accordion-item");
     if (!item) return;
 
+    // Toggle accordion item
     item.classList.toggle("open");
 });
-</script>
 
-<script>
-/* ============================================================
-   4. CPD → COMPETENCE LINKING + HIGHLIGHT
-============================================================ */
+
+/* ------------------------------------------------------------
+   3. CPD → COMPETENCE LINKING
+   (Works even when accordion is closed)
+   ------------------------------------------------------------ */
+
 document.addEventListener("click", e => {
     const link = e.target.closest(".cpd-competence-link");
     if (!link) return;
 
-    e.stopPropagation();
+    e.stopPropagation(); // Prevent accordion header from hijacking click
 
     const targetSelector = link.getAttribute("href");
     if (!targetSelector) return;
@@ -4534,36 +3103,18 @@ document.addEventListener("click", e => {
     const target = document.querySelector(targetSelector);
     if (!target) return;
 
-    // Open accordion
+    // Force accordion open
     target.classList.add("open");
 
-    // Scroll smoothly
+    // Scroll to the competence item
     target.scrollIntoView({ behavior: "smooth", block: "start" });
-
-    // Remove previous highlights
-    document.querySelectorAll(".accordion-item.highlighted")
-        .forEach(item => item.classList.remove("highlighted"));
-
-    // Add persistent highlight
-    target.classList.add("highlighted");
 });
-</script>
 
-<script>
-  document.addEventListener("click", e => {
-    const header = e.target.closest(".accordion-header");
-    if (!header) return;
 
-    // Remove highlight when user manually selects another accordion
-    document.querySelectorAll(".accordion-item.highlighted")
-        .forEach(item => item.classList.remove("highlighted"));
-});  
-</script>
+/* ------------------------------------------------------------
+   4. Prevent competence links inside accordion from toggling it
+   ------------------------------------------------------------ */
 
-<script>
-/* ============================================================
-   5. PREVENT INNER LINKS FROM TOGGLING ACCORDION
-============================================================ */
 document.addEventListener("click", e => {
     if (e.target.closest(".competence-link")) {
         e.stopPropagation();
@@ -4571,210 +3122,65 @@ document.addEventListener("click", e => {
 });
 </script>
 
+
+
 <script>
-/* ============================================================
-   6. RATING FILTER
-============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
+// 4) Rating filter (original logic)
+(function () {
+  document.addEventListener("DOMContentLoaded", () => {
     const items = document.querySelectorAll('.accordion-item');
 
     items.forEach(item => {
-        const badge = item.querySelector('.rating-badge');
-        if (!badge) return;
+      const badge = item.querySelector('.rating-badge');
+      if (!badge) return;
 
-        const cls = Array.from(badge.classList)
-            .find(c => c.startsWith('rating-') && c !== 'rating-badge');
+      const cls = Array.from(badge.classList)
+        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
 
-        if (cls) item.dataset.rating = cls.replace('rating-', '');
+      if (cls) item.dataset.rating = cls.replace('rating-', '');
     });
 
     const legendBadges = document.querySelectorAll('.section-subtitle .rating-badge');
     let currentFilter = null;
 
     function applyFilter(rating) {
-        items.forEach(item => {
-            if (!rating) {
-                item.style.display = '';
-            } else {
-                item.style.display = (item.dataset.rating === rating) ? '' : 'none';
-            }
-        });
+      items.forEach(item => {
+        if (!rating) {
+          item.style.display = '';
+        } else {
+          item.style.display = (item.dataset.rating === rating) ? '' : 'none';
+        }
+      });
     }
 
     legendBadges.forEach(badge => {
-        const cls = Array.from(badge.classList)
-            .find(c => c.startsWith('rating-') && c !== 'rating-badge');
-        if (!cls) return;
+      const cls = Array.from(badge.classList)
+        .find(c => c.startsWith('rating-') && c !== 'rating-badge');
 
-        const rating = cls.replace('rating-', '');
-        badge.style.cursor = 'pointer';
+      if (!cls) return;
 
-        badge.addEventListener('click', () => {
-            if (currentFilter === rating) {
-                currentFilter = null;
-                legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-                applyFilter(null);
-            } else {
-                currentFilter = rating;
-                legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
-                badge.classList.add('rating-filter-active');
-                applyFilter(rating);
-            }
-        });
+      const rating = cls.replace('rating-', '');
+      badge.style.cursor = 'pointer';
+
+      badge.addEventListener('click', () => {
+        if (currentFilter === rating) {
+          currentFilter = null;
+          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+          applyFilter(null);
+        } else {
+          currentFilter = rating;
+          legendBadges.forEach(b => b.classList.remove('rating-filter-active'));
+          badge.classList.add('rating-filter-active');
+          applyFilter(rating);
+        }
+      });
     });
-});
+  });
+})();
 </script>
 
-<script>
-/* ============================================================
-   7. RATING SUMMARY COUNTS
-============================================================ */
-document.addEventListener('DOMContentLoaded', function () {
-    const counts = { expert: 0, proficient: 0, competent: 0, practised: 0, aware: 0 };
-
-    document.querySelectorAll('.accordion-item .rating-badge').forEach(badge => {
-        if (badge.classList.contains('rating-expert')) counts.expert++;
-        if (badge.classList.contains('rating-proficient')) counts.proficient++;
-        if (badge.classList.contains('rating-competent')) counts.competent++;
-        if (badge.classList.contains('rating-practised')) counts.practised++;
-        if (badge.classList.contains('rating-aware')) counts.aware++;
-    });
-
-    const map = [
-        { key: 'expert', selector: '.rating-summary-segment.rating-expert .count' },
-        { key: 'proficient', selector: '.rating-summary-segment.rating-proficient .count' },
-        { key: 'competent', selector: '.rating-summary-segment.rating-competent .count' },
-        { key: 'practised', selector: '.rating-summary-segment.rating-practised .count' },
-        { key: 'aware', selector: '.rating-summary-segment.rating-aware .count' }
-    ];
-
-    map.forEach(entry => {
-        const el = document.querySelector(entry.selector);
-        if (el) el.textContent = counts[entry.key];
-    });
-});
-</script>
-
-<script>
-/* ============================================================
-   8. PREMIUM GRADIENT SVG BAR + TOOLTIP
-============================================================ */
-document.addEventListener('DOMContentLoaded', function () {
-
-    const counts = { expert: 0, proficient: 0, competent: 0, practised: 0, aware: 0 };
-
-    document.querySelectorAll('.accordion-item .rating-badge').forEach(badge => {
-        if (badge.classList.contains('rating-expert')) counts.expert++;
-        if (badge.classList.contains('rating-proficient')) counts.proficient++;
-        if (badge.classList.contains('rating-competent')) counts.competent++;
-        if (badge.classList.contains('rating-practised')) counts.practised++;
-        if (badge.classList.contains('rating-aware')) counts.aware++;
-    });
-
-    const total = Object.values(counts).reduce((a, b) => a + b, 0);
-
-    let x = 0;
-
-    let svg = `
-<svg id="rating-bar-svg" viewBox="0 0 100 10" preserveAspectRatio="none">
-<defs>
-<linearGradient id="grad-expert" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#0d74e7"/>
-<stop offset="100%" stop-color="#084a96"/>
-</linearGradient>
-<linearGradient id="grad-proficient" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#0a8f72"/>
-<stop offset="100%" stop-color="#005f46"/>
-</linearGradient>
-<linearGradient id="grad-competent" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#d9a441"/>
-<stop offset="100%" stop-color="#8a6500"/>
-</linearGradient>
-<linearGradient id="grad-practised" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#a46bff"/>
-<stop offset="100%" stop-color="#6a2bb8"/>
-</linearGradient>
-<linearGradient id="grad-aware" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#777"/>
-<stop offset="100%" stop-color="#444"/>
-</linearGradient>
-</defs>
-`;
-
-    for (const key of ['expert','proficient','competent','practised','aware']) {
-        const pct = total ? (counts[key] / total) * 100 : 0;
-
-        svg += `
-<rect class="rating-segment"
-      data-type="${key}"
-      data-count="${counts[key]}"
-      x="${x}"
-      y="0"
-      width="${pct}"
-      height="10"
-      fill="url(#grad-${key})"></rect>
-`;
-        x += pct;
-    }
-
-    svg += `</svg>`;
-
-    document.getElementById('rating-summary-svg').innerHTML = svg;
-
-    const tooltip = document.getElementById('rating-tooltip');
-
-    document.querySelectorAll('.rating-segment').forEach(seg => {
-        seg.addEventListener('mousemove', e => {
-            const type = seg.dataset.type;
-            const count = seg.dataset.count;
-
-            tooltip.innerHTML = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${count}`;
-            tooltip.style.left = e.clientX + 'px';
-            tooltip.style.top = e.clientY + 'px';
-            tooltip.style.display = 'block';
-            tooltip.style.opacity = '1';
-        });
-
-        seg.addEventListener('mouseleave', () => {
-            tooltip.style.opacity = '0';
-            tooltip.style.display = 'none';
-        });
-    });
-});
-</script>
 
 
 </main>
-
-<style>
-
-/* ============================================
-   FINAL RADAR SPACING OVERRIDE
-=============================================== */
-
-section.dual-radar-section .radar-grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 80px !important;
-    justify-items: center !important;
-    align-items: start !important;
-}
-
-section.dual-radar-section .radar-svg {
-    width: 300px !important;
-    height: 300px !important;
-    margin: 0 auto !important;
-}
-
-section.dual-radar-section .radar-box {
-    text-align: center !important;
-}
-
-section.dual-radar-section .radar-legend-combined {
-    margin-top: 40px !important;
-}
-
-</style>
-  
 </body>
 </html>

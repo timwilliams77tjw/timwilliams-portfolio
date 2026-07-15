@@ -28,7 +28,7 @@ ROOT + GLOBAL
 }
 
 html, body {
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: auto;
   height: auto;
 }
@@ -2179,6 +2179,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 }
 
 #rating-summary-svg svg {
+  width: 100%;
   height: 40px;
   border-radius: 8px;
   overflow: hidden;
@@ -2422,29 +2423,6 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 .stack-segment * {
     overflow: visible !important;
     max-width: none !important;
-}
-
-.accordion-item,
-.accordion-content {
-    overflow: visible !important;
-    max-height: none !important;
-}
-
-/* Container: allows horizontal scroll */
-#rating-summary-svg {
-  width: 100%;
-  display: block;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 8px;
-}
-
-/* Inner SVG: wider than the viewport so scroll is needed */
-#rating-summary-svg svg {
-  min-width: 700px;   /* or 650px if you prefer */
-  height: 40px;
-  display: block;
 }
   
 </style>

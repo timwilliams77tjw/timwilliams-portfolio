@@ -1635,7 +1635,13 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   line-height: 32px;
 }
 
-
+#rating-summary-svg svg {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
 /* ============================================================
    RATING SUMMARY — TOOLTIP
@@ -1658,7 +1664,20 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   transition: opacity 0.15s ease;
 }
 
-
+#rating-summary-svg {
+  margin-bottom: 1.8rem;
+}
+  
+#rating-summary-svg svg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0));
+  pointer-events: none;
+}
 
 /* ============================================================
    COMPETENCE HIGHLIGHT ON CPD LINK CLICK
@@ -1693,13 +1712,36 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   border-left: 4px solid #0d74e7;
   box-shadow: 0 0 16px rgba(13,116,231,0.55);
 }
+#rating-summary-svg {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: 6px; /* avoids clipping */
+}
 
+#rating-summary-svg svg {
+  min-width: 600px; /* ensures all 5 segments fit */
+  display: block;
+}
 .accordion {
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch !important;
   max-height: 80vh; /* prevents page lock */
 }
+#rating-summary-svg {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  display: block;
+  width: 100%;
+}
 
+#rating-summary-svg svg {
+  min-width: 650px; /* ensures all 5 segments fit */
+  height: 40px;
+  display: block;
+}
+#rating-summary-svg {
+  padding-bottom: 6px;
+}
 .accordion-controls {
   position: relative;
   z-index: 50;
@@ -1708,10 +1750,41 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   position: relative;
   z-index: 1;
 }
+/* Force horizontal scroll for the rating bar on iPhone */
+#rating-summary-svg {
+  width: 100%;
+  display: block;
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: 8px; /* prevents clipping */
+}
 
+/* Ensure the SVG is wider than the screen */
+#rating-summary-svg svg {
+  min-width: 700px; /* 5 segments always fit */
+  height: 40px;
+  display: block;
+}
+.rating-summary {
+  min-width: 100%;
+}
+.rating-summary-bar {
+  flex-shrink: 0;
+}
+#rating-summary-svg {
+  width: 100%;
+  display: block;
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: 8px;
+}
 
-
-
+#rating-summary-svg svg {
+  min-width: 700px;
+  display: block;
+}
 
 /* ================================
    HERO GRID LAYOUT
@@ -1934,6 +2007,45 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
 }
+  /* ==========================================================
+   RADAR CHARTS
+========================================================== */
+
+.dual-radar-section{
+    margin:40px 0;
+}
+
+.radar-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:start;
+}
+
+@media (max-width:800px){
+    .radar-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+.radar-box{
+    text-align:center;
+}
+
+.radar-heading{
+    margin-bottom:12px;
+    font-size:1.25rem;
+    font-weight:600;
+    color:#0a2540;
+}
+
+.radar-svg{
+    width:280px;
+    height:280px;
+    margin:auto;
+    overflow:visible;
+}
+
 
 /* ==========================================================
    RADAR GRID
@@ -1997,7 +2109,124 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     z-index:9999;
 }
 
+/* ============================
+   RADAR LEGEND
+============================ */
 
+.radar-legend-combined{
+    margin-top:2rem;
+}
+
+.radar-legend-combined h4{
+    font-size:2rem;
+    margin-bottom:1rem;
+    color:#0a2540;
+}
+
+.legend-layout{
+    display:grid;
+    grid-template-columns:2fr 1px 1fr;
+    gap:40px;
+    align-items:start;
+}
+
+.legend-divider{
+    background:#ddd;
+    width:1px;
+    align-self:stretch;
+}
+
+.legend-row{
+    display:grid;
+    grid-template-columns:28px 140px auto;
+    align-items:center;
+    gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid #eee;
+}
+
+.legend-dot{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+}
+
+.legend-dot.expert{
+    background:#0a66c2;
+}
+
+.legend-dot.proficient{
+    background:#007b5f;
+}
+
+.legend-dot.competent{
+    background:#b8860b;
+}
+
+.legend-dot.practised{
+    background:#8a2be2;
+}
+
+.legend-dot.aware{
+    background:#777;
+}
+
+.legend-title{
+    font-weight:700;
+    font-size:1.05rem;
+}
+
+.legend-desc{
+    color:#555;
+}
+
+.legend-polygons{
+    display:grid;
+    grid-template-columns:40px auto;
+    gap:22px 14px;
+    align-items:center;
+    margin-top:20px;
+}
+
+.legend-poly{
+    width:28px;
+    height:28px;
+    border-radius:6px;
+}
+
+.legend-poly.current{
+    border:3px solid #0f9d8a;
+    background:rgba(15,157,138,.08);
+}
+
+.legend-poly.target{
+    border:3px dashed #0f9d8a;
+    background:rgba(15,157,138,.03);
+}
+/* ==========================================================
+   1. RADAR SPACING (fix radars too close)
+========================================================== */
+
+.radar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px !important; /* wider spacing */
+    align-items: start;
+}
+
+@media (max-width: 800px) {
+    .radar-grid {
+        grid-template-columns: 1fr;
+        gap: 40px !important;
+    }
+}
+
+.radar-svg {
+    width: 320px !important;
+    height: 320px !important;
+    margin: auto;
+    overflow: visible;
+}
 
 
 /* ==========================================================
@@ -2011,6 +2240,45 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     stroke-dasharray: 4 4 !important;
 }
 
+
+/* ==========================================================
+   3. LEGEND COLOURS (final, stable, no conflicts)
+========================================================== */
+
+.legend-row {
+    display: grid !important;
+    grid-template-columns: 28px 140px auto !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.legend-dot {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+}
+
+/* APM palette */
+.legend-dot.expert { background: #0a66c2 !important; }
+.legend-dot.proficient { background: #007b5f !important; }
+.legend-dot.competent { background: #b8860b !important; }
+.legend-dot.practised { background: #8a2be2 !important; }
+.legend-dot.aware { background: #777 !important; }
+
+
+/* ==========================================================
+   4. GAP BETWEEN RADARS AND LEGEND
+========================================================== */
+
+.radar-legend-combined {
+    margin-top: 1rem !important; /* reduce gap */
+    margin-bottom: 2rem !important; /* add gap before accordion */
+}
 
 
 /* ==========================================================
@@ -2027,7 +2295,44 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     margin-bottom: 0 !important;
 }
 
+/* RADAR GRID — final */
+.radar-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 50px !important;
+    align-items: start !important;
+    justify-items: center !important;
+}
 
+.radar-svg {
+    width: 260px !important;
+    height: 260px !important;
+}
+
+/* LEGEND DOT — final */
+.legend-row {
+    display: grid !important;
+    grid-template-columns: 28px 140px auto !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+
+.legend-dot {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+}
+
+/* APM palette */
+.legend-dot.expert { background: #0a66c2 !important; }
+.legend-dot.proficient { background: #007b5f !important; }
+.legend-dot.competent { background: #b8860b !important; }
+.legend-dot.practised { background: #8a2be2 !important; }
+.legend-dot.aware { background: #777 !important; }
+  
 
 /* FOOTER SCROLL FIX — final */
 .accordion-item:not(.open) .radar-wrapper {
@@ -2037,158 +2342,30 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     margin: 0 !important;
 }
 
-
-
-.accordion-item,
-.accordion-content {
-    overflow: visible !important;
-}
-
-.dual-radar-section {
-  margin: 40px 0;
-}
+/* ============================
+   RADAR SPACING — FINAL FIX
+============================ */
 
 .radar-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
-}
-
-/* iPad/desktop: right-align second radar */
-.radar-box:nth-child(2) {
-  justify-self: end;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 70px !important;              /* wider spacing between radars */
+    justify-items: center !important;  /* centre each radar box */
+    align-items: start !important;
 }
 
 .radar-box {
-  text-align: center;
+    text-align: center !important;
 }
 
 .radar-svg {
-  width: 280px;
-  height: 280px;
-  margin: 0 auto;
-  overflow: visible;
+    width: 300px !important;           /* balanced size */
+    height: 300px !important;
+    margin: 0 auto !important;
 }
 
-/* iPhone: stack radars vertically */
-@media (max-width: 768px) {
-  .radar-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .radar-box {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-  }
-
-  .radar-svg {
-    width: 260px;
-    height: 260px;
-  }
-}
-
-
-  .radar-legend-combined {
-  margin-top: 2rem;
-}
-
-.radar-legend-combined h4 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #0a2540;
-}
-
-.legend-layout {
-  display: grid;
-  grid-template-columns: 2fr 1px 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-.legend-divider {
-  background: #ddd;
-  width: 1px;
-  align-self: stretch;
-}
-
-.legend-row {
-  display: grid;
-  grid-template-columns: 28px 140px auto;
-  align-items: center;
-  gap: 14px;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.legend-dot {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-}
-
-/* APM palette – matches your JS colourMap */
-.legend-dot.expert     { background: #0a66c2; }
-.legend-dot.proficient { background: #007b5f; }
-.legend-dot.competent  { background: #b8860b; }
-.legend-dot.practised  { background: #8a2be2; }
-.legend-dot.aware      { background: #555; }
-
-.legend-title {
-  font-weight: 700;
-  font-size: 1.05rem;
-}
-
-.legend-description {
-  color: #555;
-}
-
-.legend-levels {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.legend-level {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.legend-poly {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-}
-
-.legend-poly.current {
-  border: 3px solid #0f9d8a;
-  background: rgba(15,157,138,.08);
-}
-
-.legend-poly.target {
-  border: 3px dashed #0f9d8a;
-  background: rgba(15,157,138,.03);
-}
-
-  #rating-summary-svg {
-  width: 100%;
-  margin: 1.2rem 0 2rem;
-}
-
-#rating-summary-svg svg {
-  width: 100%;
-  height: 40px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-.rating-summary-bar,
-.radar-grid,
-.legend-layout {
-    overflow: visible !important;
+.radar-legend-combined {
+    margin-top: 30px !important;       /* add breathing room below radars */
 }
 
   
@@ -2669,9 +2846,10 @@ async function loadCPD() {
         generateInsights();
         generateHeatmap();
         generateDonutChart();
-      linkCPDToCompetences();
 generateDualRadar();
-      
+
+      linkCPDToCompetences();
+
     } catch (err) {
         console.error(err);
     }
@@ -3209,6 +3387,19 @@ function drawRadar(svgId, data, colourMap, isTarget) {
 }
 
 
+/* ============================================================
+   WAIT FOR ACCORDION TO LOAD (iPhone-safe)
+============================================================ */
+
+function waitForAccordion() {
+  const cards = document.querySelectorAll(".accordion-item[id^='competence-']");
+  if (cards.length < 6) {
+    return setTimeout(waitForAccordion, 200);
+  }
+  generateDualRadar();
+}
+
+waitForAccordion();
 
 
 function generateProgressPillars() {
@@ -3492,6 +3683,27 @@ function generateProgressPillars() {
 
 </section>
 
+<!-- PERSONAL ASSESSMENT ACCORDION -->
+<div class="collapsible-toggle competence-header">
+  <div class="collapsible-text">
+    <h2 class="section-heading">
+      <i class="fa-solid fa-user-check"></i>
+      My Competence Assessment (29 competences)
+    </h2>
+
+    <p class="section-helper">
+      Tap to expand my Competency Assessment.
+    </p>
+  </div>
+
+  <i class="fa-solid fa-chevron-right chevron"></i>
+</div>
+
+
+
+<div class="collapsible-content">
+
+<div class="apm-progress-bar"></div>
   <p class="section-subtitle">
     This section reflects my personal assessment against the APM Competence Framework (3rd edition), using the APM 0–5 rating scale.
     Ratings shown:
@@ -3628,28 +3840,7 @@ function generateProgressPillars() {
     </div>
 
 </div>
-</div>  
-<!-- PERSONAL ASSESSMENT ACCORDION -->
-<div class="collapsible-toggle competence-header">
-  <div class="collapsible-text">
-    <h2 class="section-heading">
-      <i class="fa-solid fa-user-check"></i>
-      My Competence Assessment (29 competences)
-    </h2>
-
-    <p class="section-helper">
-      Tap to expand my Competency Assessment.
-    </p>
-  </div>
-
-  <i class="fa-solid fa-chevron-right chevron"></i>
 </div>
-
-
-
-<div class="collapsible-content">
-
-
   <div class="accordion">
 
 
@@ -4144,6 +4335,16 @@ function generateProgressPillars() {
     });
 </script>
 
+
+<script>
+/* ============================================================
+   1. LOAD CPD ON PAGE LOAD
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+    loadCPD();
+});
+</script>
+
 <script>
 /* ============================================================
    2. CPD LOG COLLAPSIBLE
@@ -4398,8 +4599,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
-
 </main>
 
 <style>

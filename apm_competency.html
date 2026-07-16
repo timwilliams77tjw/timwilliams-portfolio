@@ -2842,26 +2842,13 @@ async function loadCPD() {
 
         debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
 
-console.log("Calling calculateMetrics...");
-calculateMetrics();
-console.log("calculateMetrics finished");
-
-console.log("Calling generateInsights...");
-generateInsights();
-
-console.log("Calling generateHeatmap...");
-generateHeatmap();
-
-console.log("Calling generateDonutChart...");
-generateDonutChart();
-
-console.log("Calling generateDualRadar...");
+        calculateMetrics();
+        generateInsights();
+        generateHeatmap();
+        generateDonutChart();
 generateDualRadar();
 
-console.log("Calling linkCPDToCompetences...");
-linkCPDToCompetences();
-
-console.log("All complete");
+      linkCPDToCompetences();
 
     } catch (err) {
         console.error(err);

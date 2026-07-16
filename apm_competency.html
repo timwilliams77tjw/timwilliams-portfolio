@@ -88,7 +88,7 @@ HERO
     width: 100%;
     max-width: 260px;
   }
-
+}
 
 /* ============================================================
 SECTION HEADINGS
@@ -265,6 +265,7 @@ ACCORDION (COMPETENCE)
   opacity: 1;
 }
 
+/* Colour accordion items by rating */
 
 .accordion-item:has(.rating-expert) {
   background: #e6f0ff;
@@ -523,7 +524,7 @@ FOOTER + FAB
   .fab-booking {
     bottom: calc(80px + env(safe-area-inset-bottom));
   }
-
+}
 /* ============================================================
 DONUT CHART (D3 – CURRENT VERSION)
 ============================================================ */
@@ -918,27 +919,32 @@ APM PROGRESS BAR (PBAR3 – CURRENT VERSION)
   max-height: 20000px;
 }
 
+/* FIX: Hero float clearing */
 .hero-section::after {
   content: "";
   display: block;
   clear: both;
 }
 
+/* FIX: Pillar colours override */
 .pillar-card.completed,
 .pillar-card.remaining,
 .pillar-card.projected {
   background-size: cover !important;
 }
+/* FIX: CPD log full height */
 .collapsible-content.open {
   max-height: 20000px;
 }
 
+/* FIX: Clear hero image float so footer sits correctly */
 .hero-section::after {
   content: "";
   display: block;
   clear: both;
 }
 
+/* FIX: Force pillar gradients to override earlier rules */
 .pillar-card.completed {
   background: linear-gradient(135deg, #16a34a, #22c55e) !important;
 }
@@ -954,6 +960,7 @@ APM PROGRESS BAR (PBAR3 – CURRENT VERSION)
 FINAL OVERRIDES — FORCE CORRECT BEHAVIOUR
 ============================================================ */
 
+/* Fix pillar gradients */
 .pillar-card.completed {
   background: linear-gradient(135deg, #16a34a, #22c55e) !important;
 }
@@ -966,21 +973,26 @@ FINAL OVERRIDES — FORCE CORRECT BEHAVIOUR
   background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
 }
 
+/* Fix footer layout */
 .hero-section::after {
   content: "";
   display: block;
   clear: both !important;
 }
 
+/* Fix footer spacing if external CSS collapses layout */
 #footer {
   margin-top: 3rem !important;
   padding-top: 2rem !important;
 }
 
+/* Fix CPD log height */
 .collapsible-content.open {
   max-height: 20000px !important;
 }
+/* === FINAL FIXES — OVERRIDE DUPLICATES IN THIS PAGE ONLY === */
 
+/* Fix pillar gradients */
 .pillar-card.completed {
   background: linear-gradient(135deg, #16a34a, #22c55e) !important;
 }
@@ -993,12 +1005,14 @@ FINAL OVERRIDES — FORCE CORRECT BEHAVIOUR
   background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
 }
 
+/* Fix hero float so footer sits correctly */
 .hero-section::after {
   content: "";
   display: block;
   clear: both !important;
 }
 
+/* Fix CPD log height */
 .collapsible-content.open {
   max-height: 20000px !important;
 }
@@ -1007,6 +1021,7 @@ FINAL OVERRIDES — FORCE CORRECT BEHAVIOUR
 FINAL PATCH — RESTORE PILLAR COLOURS + FOOTER LAYOUT
 ============================================================ */
 
+/* 1 — Force correct pillar gradients (overrides the white background) */
 .pillar-card.completed {
     background: linear-gradient(135deg, #16a34a, #22c55e) !important;
 }
@@ -1019,12 +1034,14 @@ FINAL PATCH — RESTORE PILLAR COLOURS + FOOTER LAYOUT
     background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
 }
 
+/* 2 — Ensure icon glow + text colours are restored */
 .pillar-card .pillar-icon,
 .pillar-card .pillar-value,
 .pillar-card .pillar-title {
     color: #fff !important;
 }
 
+/* 3 — Ensure progress bar background + fill are correct */
 .pillar-card .pillar-progress {
     background: rgba(255,255,255,.25) !important;
 }
@@ -1034,17 +1051,20 @@ FINAL PATCH — RESTORE PILLAR COLOURS + FOOTER LAYOUT
     mix-blend-mode: normal !important;
 }
 
+/* 4 — Fix hero float so footer sits correctly */
 .hero-section::after {
     content: "";
     display: block;
     clear: both !important;
 }
 
+/* 5 — Fix CPD log height (keeps expand/collapse working) */
 .collapsible-content.open {
     max-height: 20000px !important;
     opacity: 1 !important;
 }
 
+/* 6 — Fix stray-brace fallout (ensures CSS below still applies) */
 #footer {
     position: relative !important;
     z-index: 10 !important;
@@ -1058,6 +1078,7 @@ section.cpd-pillars-section {
   margin: 3rem 0 2rem;
 }
 
+/* Scroll container */
 section.cpd-pillars-section .pillars-scroll {
   display: flex !important;
   gap: 18px !important;
@@ -1076,6 +1097,7 @@ section.cpd-pillars-section .pillars-scroll::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
+/* Pillar card container */
 section.cpd-pillars-section .pillar-card {
   min-width: 220px !important;
   flex: 0 0 auto !important;
@@ -1088,11 +1110,13 @@ section.cpd-pillars-section .pillar-card {
   position: relative !important;
 }
 
+/* Hover lift */
 section.cpd-pillars-section .pillar-card:hover {
   transform: translateY(-6px) !important;
   box-shadow: 0 14px 32px rgba(0,0,0,.18) !important;
 }
 
+/* Completed / Remaining / Projected card backgrounds */
 section.cpd-pillars-section .pillar-card.completed {
   background: linear-gradient(135deg, #16a34a, #22c55e) !important;
 }
@@ -1105,6 +1129,7 @@ section.cpd-pillars-section .pillar-card.projected {
   background: linear-gradient(135deg, #2563eb, #60a5fa) !important;
 }
 
+/* Icon */
 section.cpd-pillars-section .pillar-icon {
   width: 56px !important;
   height: 56px !important;
@@ -1120,6 +1145,7 @@ section.cpd-pillars-section .pillar-icon {
   box-shadow: 0 4px 12px rgba(255,255,255,.25) !important;
 }
 
+/* Value */
 section.cpd-pillars-section .pillar-value {
   font-size: 2.2rem !important;
   font-weight: 700 !important;
@@ -1127,12 +1153,14 @@ section.cpd-pillars-section .pillar-value {
   color: #ffffff !important;
 }
 
+/* Title */
 section.cpd-pillars-section .pillar-title {
   font-size: .95rem !important;
   color: rgba(255,255,255,.85) !important;
   margin-bottom: 18px !important;
 }
 
+/* Progress bar container */
 section.cpd-pillars-section .pillar-progress {
   height: 12px !important;
   background: rgba(255,255,255,.25) !important;
@@ -1140,6 +1168,7 @@ section.cpd-pillars-section .pillar-progress {
   overflow: hidden !important;
 }
 
+/* Progress fill — animated */
 section.cpd-pillars-section .pillar-fill {
   height: 100% !important;
   width: 0% !important;
@@ -1147,6 +1176,7 @@ section.cpd-pillars-section .pillar-fill {
   transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
 }
 
+/* Gradient fills */
 section.cpd-pillars-section .pillar-card.completed .pillar-fill {
   background: linear-gradient(90deg, #16a34a, #22c55e) !important;
 }
@@ -1159,6 +1189,7 @@ section.cpd-pillars-section .pillar-card.projected .pillar-fill {
   background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
 }
 
+/* ID-based hard overrides (in case anything else targets the IDs) */
 section.cpd-pillars-section #pillar-completed.pillar-fill {
   background: linear-gradient(90deg, #16a34a, #22c55e) !important;
 }
@@ -1171,6 +1202,7 @@ section.cpd-pillars-section #pillar-projected.pillar-fill {
   background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
 }
 
+/* CPD badge in top-right of each card */
 section.cpd-pillars-section .pillar-card::after {
   content: "CPD";
   position: absolute;
@@ -1183,6 +1215,7 @@ section.cpd-pillars-section .pillar-card::after {
   font-weight: 600;
 }
 
+/* Optional: subtle pulse on projected card */
 @keyframes pillarPulse {
   0%   { transform: scale(1);   opacity: 1;   }
   50%  { transform: scale(1.03); opacity: 0.85; }
@@ -1232,6 +1265,7 @@ section.cpd-pillars-section .pillar-card.projected {
   color: #0a2540;
 }
 
+/* Keep your existing chevron working */
 .cpd-log-section .chevron,
 .accordion-item .chevron {
   font-size: 1rem;
@@ -1244,12 +1278,14 @@ section.cpd-pillars-section .pillar-card.projected {
   transform: rotate(90deg);
 }
 
+  /* CPD header helper text inside the toggle */
 .section-helper {
   margin: 0.15rem 0 0;
   font-size: 0.85rem;
   color: #6b7280; /* soft grey */
 }
 
+/* Make the text block stack nicely */
 .collapsible-text {
   display: flex;
   flex-direction: column;
@@ -1284,6 +1320,7 @@ section.cpd-pillars-section .pillar-card.projected {
   transform: rotate(90deg);
 }
 
+/* Competency header styled like CPD header */
 .competence-header {
   background: #ffffff;
   border: 1px solid #e5e7eb;
@@ -1299,11 +1336,13 @@ section.cpd-pillars-section .pillar-card.projected {
    APM FOOTER — CLEAN, FINAL OVERRIDES
 ============================================================ */
 
+/* Blue banner + base text */
 body.page-prof-dev #footer .footer {
   background: #0a2540 !important;
   color: #ffffff !important;
 }
 
+/* Copyright row: keep on one baseline */
 body.page-prof-dev #footer .footer-row-copy {
   display: flex !important;
   align-items: center !important;
@@ -1312,11 +1351,13 @@ body.page-prof-dev #footer .footer-row-copy {
   line-height: 1.4 !important;
 }
 
+/* Links: cyan, like other pages */
 body.page-prof-dev #footer .footer-row-links a {
   color: #7ac0f9 !important;
   text-decoration: none !important;
 }
 
+/* Logo + QR: fully visible on dark background */
 body.page-prof-dev #footer .footer-logo img,
 body.page-prof-dev #footer .footer-qr img {
   width: 70px !important;
@@ -1328,6 +1369,7 @@ body.page-prof-dev #footer .footer-qr img {
   mix-blend-mode: normal !important;
 }
 
+/* Desktop / iPad layout */
 @media (min-width: 601px) {
   body.page-prof-dev #footer .footer-inner {
     display: flex !important;
@@ -1351,8 +1393,9 @@ body.page-prof-dev #footer .footer-qr img {
     gap: 20px !important;
     margin-left: auto !important;
   }
+}
 
-
+/* iPhone layout */
 @media (max-width: 600px) {
   body.page-prof-dev #footer .footer-inner {
     display: flex !important;
@@ -1383,8 +1426,9 @@ body.page-prof-dev #footer .footer-qr img {
     align-items: center !important;
     gap: 20px !important;
   }
+}
 
-
+/* FAB centring (calendar + booking) */
 .fab,
 .fab-booking {
   display: flex !important;
@@ -1419,6 +1463,7 @@ body.page-prof-dev #footer .footer-qr img {
 .rating-practised { background: #8a2be2 !important; }
 .rating-aware { background: #555 !important; }
 
+/* FINAL, HIGH-SPECIFICITY OVERRIDE FOR RATING BADGES */
 
 body.page-prof-dev .section-subtitle .rating-badge.rating-expert,
 body.page-prof-dev .accordion-item .rating-badge.rating-expert {
@@ -1493,6 +1538,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   background-blend-mode: normal !important;
 }
 
+/* Rating summary bar */
 
 .rating-summary-bar {
   display: flex;
@@ -1525,6 +1571,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   text-align: right;
 }
 
+/* Colours aligned to your rating palette */
 
 .rating-summary-segment.rating-expert {
   background: #0a66c2;
@@ -1546,6 +1593,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   background: #555;
 }
 
+/* Subtle hover */
 
 .rating-summary-segment:hover {
   transform: translateY(-3px);
@@ -1571,6 +1619,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   transition: width 0.8s ease;
 }
 
+/* Colours aligned to your APM palette */
 .stack-segment.rating-expert { background: #0a66c2; }
 .stack-segment.rating-proficient { background: #007b5f; }
 .stack-segment.rating-competent { background: #b8860b; }
@@ -1701,6 +1750,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   position: relative;
   z-index: 1;
 }
+/* Force horizontal scroll for the rating bar on iPhone */
 #rating-summary-svg {
   width: 100%;
   display: block;
@@ -1710,6 +1760,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   padding-bottom: 8px; /* prevents clipping */
 }
 
+/* Ensure the SVG is wider than the screen */
 #rating-summary-svg svg {
   min-width: 700px; /* 5 segments always fit */
   height: 40px;
@@ -1748,6 +1799,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   margin-bottom: 2rem;
 }
 
+/* LEFT IMAGE */
 .hero-left img {
   width: 100%;
   max-width: 160px;
@@ -1756,6 +1808,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   border-radius: 8px;
 }
 
+/* CENTRE TEXT */
 .hero-centre h1 {
   margin: 0 0 0.5rem 0;
   font-size: 2rem;
@@ -1769,6 +1822,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   opacity: 0.85;
 }
 
+/* RIGHT PROGRESS RING */
 .hero-right {
   display: flex;
   justify-content: flex-end;
@@ -1817,7 +1871,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   .hero-left img {
     margin: 0 auto;
   }
-
+}
 .hero-centre {
   text-align: center;
 }
@@ -1871,6 +1925,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   margin-bottom: 2rem;
 }
 
+/* LEFT LOGO */
 .hero-left img {
   width: 100%;
   max-width: 160px;
@@ -1879,6 +1934,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   margin: 0 auto;
 }
 
+/* CENTRE TEXT */
 .hero-centre p {
   margin: 0;
   font-size: 1.05rem;
@@ -1887,6 +1943,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   text-align: center;
 }
 
+/* RIGHT PROGRESS RING */
 .hero-right {
   display: flex;
   justify-content: center;
@@ -1935,7 +1992,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
   .hero-left img {
     margin: 0 auto;
   }
-
+}
 
   .cpd-log-section .section-heading {
   font-size: 1.6rem !important;
@@ -1969,7 +2026,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     .radar-grid{
         grid-template-columns:1fr;
     }
-
+}
 
 .radar-box{
     text-align:center;
@@ -2162,7 +2219,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
         grid-template-columns: 1fr;
         gap: 40px !important;
     }
-
+}
 
 .radar-svg {
     width: 320px !important;
@@ -2206,6 +2263,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     flex-shrink: 0 !important;
 }
 
+/* APM palette */
 .legend-dot.expert { background: #0a66c2 !important; }
 .legend-dot.proficient { background: #007b5f !important; }
 .legend-dot.competent { background: #b8860b !important; }
@@ -2237,6 +2295,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     margin-bottom: 0 !important;
 }
 
+/* RADAR GRID — final */
 .radar-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
@@ -2250,6 +2309,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     height: 260px !important;
 }
 
+/* LEGEND DOT — final */
 .legend-row {
     display: grid !important;
     grid-template-columns: 28px 140px auto !important;
@@ -2266,6 +2326,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     flex-shrink: 0 !important;
 }
 
+/* APM palette */
 .legend-dot.expert { background: #0a66c2 !important; }
 .legend-dot.proficient { background: #007b5f !important; }
 .legend-dot.competent { background: #b8860b !important; }
@@ -2273,6 +2334,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 .legend-dot.aware { background: #777 !important; }
   
 
+/* FOOTER SCROLL FIX — final */
 .accordion-item:not(.open) .radar-wrapper {
     max-height: 0 !important;
     overflow: hidden !important;
@@ -2780,13 +2842,26 @@ async function loadCPD() {
 
         debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
 
-        calculateMetrics();
-        generateInsights();
-        generateHeatmap();
-        generateDonutChart();
+console.log("Calling calculateMetrics...");
+calculateMetrics();
+console.log("calculateMetrics finished");
+
+console.log("Calling generateInsights...");
+generateInsights();
+
+console.log("Calling generateHeatmap...");
+generateHeatmap();
+
+console.log("Calling generateDonutChart...");
+generateDonutChart();
+
+console.log("Calling generateDualRadar...");
 generateDualRadar();
 
-      linkCPDToCompetences();
+console.log("Calling linkCPDToCompetences...");
+linkCPDToCompetences();
+
+console.log("All complete");
 
     } catch (err) {
         console.error(err);

@@ -2368,78 +2368,6 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     margin-top: 30px !important;       /* add breathing room below radars */
 }
 
-@media (max-width: 700px) {
-  section.dual-radar-section .radar-grid {
-    grid-template-columns: 1fr !important;
-    gap: 32px !important;
-  }
-
-  section.dual-radar-section .radar-svg {
-    width: 260px !important;
-    height: 260px !important;
-  }
-}
-
-.accordion-item,
-.accordion-content {
-    overflow: visible !important;
-}
-
-.radar-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.radar-box:nth-child(2) {
-    justify-self: end;
-}
-
-.legend-dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    display: inline-block;
-    margin-right: 8px;
-}
-
-/* Match your JS colourMap */
-.legend-dot.expert {
-    background-color: #0a66c2;
-}
-
-.legend-dot.proficient {
-    background-color: #007b5f;
-}
-
-.legend-dot.competent {
-    background-color: #b8860b;
-}
-
-.legend-dot.practised {
-    background-color: #8a2be2;
-}
-
-.legend-dot.aware {
-    background-color: #555;
-}
-
-@media (max-width: 768px) {
-    .radar-grid {
-        grid-template-columns: 1fr !important;
-        gap: 40px !important;
-    }
-
-    .radar-box {
-        width: 100% !important;
-        max-width: 320px !important;
-        margin: 0 auto !important;
-    }
-
-    .radar-svg {
-        width: 260px !important;
-        height: 260px !important;
-    }
-}
   
 </style>
 
@@ -2480,7 +2408,7 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 
 <!-- HERO TITLE -->
 <section class="hero-title">
-  <h1>Professional Development &amp; Competence</h1>
+  <h1>Professional Development &amp; Competence - UNDER RECONSTTRUCTION</h1>
 </section>
 
 <!-- HERO GRID -->
@@ -2914,13 +2842,27 @@ async function loadCPD() {
 
         debug("Rows loaded: " + (tbody ? tbody.rows.length : 0));
 
-        calculateMetrics();
-        generateInsights();
-        generateHeatmap();
-        generateDonutChart();
-      linkCPDToCompetences();
+console.log("Calling calculateMetrics...");
+calculateMetrics();
+console.log("calculateMetrics finished");
+
+console.log("Calling generateInsights...");
+generateInsights();
+
+console.log("Calling generateHeatmap...");
+generateHeatmap();
+
+console.log("Calling generateDonutChart...");
+generateDonutChart();
+
+console.log("Calling generateDualRadar...");
 generateDualRadar();
-      
+
+console.log("Calling linkCPDToCompetences...");
+linkCPDToCompetences();
+
+console.log("All complete");
+
     } catch (err) {
         console.error(err);
     }
@@ -3458,6 +3400,19 @@ function drawRadar(svgId, data, colourMap, isTarget) {
 }
 
 
+/* ============================================================
+   WAIT FOR ACCORDION TO LOAD (iPhone-safe)
+============================================================ */
+
+function waitForAccordion() {
+  const cards = document.querySelectorAll(".accordion-item[id^='competence-']");
+  if (cards.length < 6) {
+    return setTimeout(waitForAccordion, 200);
+  }
+  generateDualRadar();
+}
+
+waitForAccordion();
 
 
 function generateProgressPillars() {
@@ -3741,6 +3696,27 @@ function generateProgressPillars() {
 
 </section>
 
+<!-- PERSONAL ASSESSMENT ACCORDION -->
+<div class="collapsible-toggle competence-header">
+  <div class="collapsible-text">
+    <h2 class="section-heading">
+      <i class="fa-solid fa-user-check"></i>
+      My Competence Assessment (29 competences)
+    </h2>
+
+    <p class="section-helper">
+      Tap to expand my Competency Assessment.
+    </p>
+  </div>
+
+  <i class="fa-solid fa-chevron-right chevron"></i>
+</div>
+
+
+
+<div class="collapsible-content">
+
+<div class="apm-progress-bar"></div>
   <p class="section-subtitle">
     This section reflects my personal assessment against the APM Competence Framework (3rd edition), using the APM 0–5 rating scale.
     Ratings shown:
@@ -3877,28 +3853,7 @@ function generateProgressPillars() {
     </div>
 
 </div>
-</div>  
-<!-- PERSONAL ASSESSMENT ACCORDION -->
-<div class="collapsible-toggle competence-header">
-  <div class="collapsible-text">
-    <h2 class="section-heading">
-      <i class="fa-solid fa-user-check"></i>
-      My Competence Assessment (29 competences)
-    </h2>
-
-    <p class="section-helper">
-      Tap to expand my Competency Assessment.
-    </p>
-  </div>
-
-  <i class="fa-solid fa-chevron-right chevron"></i>
 </div>
-
-
-
-<div class="collapsible-content">
-
-
   <div class="accordion">
 
 
@@ -4393,6 +4348,16 @@ function generateProgressPillars() {
     });
 </script>
 
+
+<script>
+/* ============================================================
+   1. LOAD CPD ON PAGE LOAD
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+    loadCPD();
+});
+</script>
+
 <script>
 /* ============================================================
    2. CPD LOG COLLAPSIBLE
@@ -4647,8 +4612,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
-
 </main>
 
 <style>

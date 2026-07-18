@@ -2370,126 +2370,227 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
 
 /* ============================================================
    MOBILE & iPAD FIXES
-   (Add at the very end of your CSS)
+   (Replace previous mobile patch with this version)
 ============================================================ */
 
-@media (max-width: 900px) {
+@media (max-width:900px) {
 
   /* ==========================================================
-     1. Rating legend
+     1. Rating Badge Legend
   ========================================================== */
 
-  .section-subtitle {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+  .section-subtitle{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
   }
 
-  .section-subtitle .rating-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    min-width: 110px;
-    color: #fff !important;
-    font-weight: 600;
+  .section-subtitle .rating-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:110px;
+      white-space:nowrap;
+      color:#fff !important;
+      font-weight:600;
   }
 
-  .rating-badge.rating-expert {
-    background: #0a66c2 !important;
+  .rating-badge.rating-expert{
+      background:#0a66c2 !important;
   }
 
-  .rating-badge.rating-proficient {
-    background: #007b5f !important;
+  .rating-badge.rating-proficient{
+      background:#007b5f !important;
   }
 
-  .rating-badge.rating-competent {
-    background: #b8860b !important;
+  .rating-badge.rating-competent{
+      background:#b8860b !important;
   }
 
-  .rating-badge.rating-practised {
-    background: #8a2be2 !important;
+  .rating-badge.rating-practised{
+      background:#8a2be2 !important;
   }
 
-  .rating-badge.rating-aware {
-    background: #555 !important;
+  .rating-badge.rating-aware{
+      background:#555 !important;
   }
 
 
   /* ==========================================================
-     2. Dual radar layout
+     2. Dual Radar Layout
   ========================================================== */
 
-  .radar-wrapper,
-  .dual-radar-container,
-  .radar-container {
-    display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
+  .dual-radar-section{
+      overflow:visible;
   }
 
-  .radar-card {
-    width: 100%;
-    max-width: 380px;
+  .radar-wrapper{
+      width:100%;
+      overflow:visible;
   }
 
-  .radar-card svg,
-  .radar-card svg[id^="radar"] {
-    width: 100%;
-    height: auto;
-    display: block;
+  .radar-grid{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:32px;
+      width:100%;
+  }
+
+  .radar-box{
+      width:100%;
+      max-width:380px;
+      margin:0 auto;
+  }
+
+  .radar-heading{
+      text-align:center;
+  }
+
+  .radar-svg{
+      display:block;
+      width:100%;
+      max-width:320px;
+      height:auto;
+      margin:0 auto;
+      overflow:visible;
+  }
+
+  #radar-current,
+  #radar-target{
+      display:block;
+      width:100%;
+      max-width:320px;
+      height:auto;
+      overflow:visible;
   }
 
 
   /* ==========================================================
-     3. Rating summary cards
+     3. Radar Legend
   ========================================================== */
 
-  .rating-summary {
-    display: flex;
-    overflow-x: auto;
-    gap: 12px;
-    padding-bottom: 10px;
-
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+  .radar-legend-combined{
+      width:100%;
+      margin-top:20px;
   }
 
-  .rating-summary-segment {
-    flex: 0 0 135px;
+  .legend-layout{
+      display:flex;
+      flex-direction:column;
+      gap:24px;
+  }
+
+  .legend-divider{
+      display:none;
+  }
+
+  .legend-ratings,
+  .legend-levels{
+      width:100%;
+  }
+
+  .legend-row{
+      display:grid;
+      grid-template-columns:20px 90px 1fr;
+      gap:10px;
+      align-items:center;
+      margin-bottom:10px;
+  }
+
+  .legend-level{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
   }
 
 
   /* ==========================================================
-     4. SVG rating bar
+     4. Legend Colours
   ========================================================== */
 
-  #rating-summary-svg {
-    width: 100%;
-    overflow-x: auto;
+  .legend-dot{
+      width:14px;
+      height:14px;
+      border-radius:50%;
+      flex-shrink:0;
   }
 
-  #rating-bar-svg {
-    width: 100%;
-    display: block;
+  .legend-dot.expert{
+      background:#0a66c2;
+  }
+
+  .legend-dot.proficient{
+      background:#007b5f;
+  }
+
+  .legend-dot.competent{
+      background:#b8860b;
+  }
+
+  .legend-dot.practised{
+      background:#8a2be2;
+  }
+
+  .legend-dot.aware{
+      background:#555;
   }
 
 
   /* ==========================================================
-     5. Prevent clipping
+     5. Rating Summary
+  ========================================================== */
+
+  .rating-summary{
+      display:flex;
+      overflow-x:auto;
+      gap:12px;
+      padding-bottom:10px;
+
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:thin;
+  }
+
+  .rating-summary-segment{
+      flex:0 0 135px;
+  }
+
+
+  /* ==========================================================
+     6. SVG Rating Bar
+  ========================================================== */
+
+  #rating-summary-svg{
+      width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+  }
+
+  #rating-bar-svg{
+      width:100%;
+      display:block;
+  }
+
+
+  /* ==========================================================
+     7. Prevent Mobile Clipping
   ========================================================== */
 
   .section-card,
-  .card,
   .dashboard-card,
-  .radar-card {
-    overflow: visible;
+  .card,
+  .dual-radar-section,
+  .radar-wrapper,
+  .radar-grid,
+  .radar-box{
+      overflow:visible;
   }
 
 }
-  
   
 </style>
 

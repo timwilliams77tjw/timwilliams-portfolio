@@ -2368,6 +2368,128 @@ body.page-prof-dev .accordion-item .rating-badge.rating-aware {
     margin-top: 30px !important;       /* add breathing room below radars */
 }
 
+/* ============================================================
+   MOBILE & iPAD FIXES
+   (Add at the very end of your CSS)
+============================================================ */
+
+@media (max-width: 900px) {
+
+  /* ==========================================================
+     1. Rating legend
+  ========================================================== */
+
+  .section-subtitle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .section-subtitle .rating-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    min-width: 110px;
+    color: #fff !important;
+    font-weight: 600;
+  }
+
+  .rating-badge.rating-expert {
+    background: #0a66c2 !important;
+  }
+
+  .rating-badge.rating-proficient {
+    background: #007b5f !important;
+  }
+
+  .rating-badge.rating-competent {
+    background: #b8860b !important;
+  }
+
+  .rating-badge.rating-practised {
+    background: #8a2be2 !important;
+  }
+
+  .rating-badge.rating-aware {
+    background: #555 !important;
+  }
+
+
+  /* ==========================================================
+     2. Dual radar layout
+  ========================================================== */
+
+  .radar-wrapper,
+  .dual-radar-container,
+  .radar-container {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .radar-card {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .radar-card svg,
+  .radar-card svg[id^="radar"] {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  /* ==========================================================
+     3. Rating summary cards
+  ========================================================== */
+
+  .rating-summary {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 10px;
+
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .rating-summary-segment {
+    flex: 0 0 135px;
+  }
+
+
+  /* ==========================================================
+     4. SVG rating bar
+  ========================================================== */
+
+  #rating-summary-svg {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  #rating-bar-svg {
+    width: 100%;
+    display: block;
+  }
+
+
+  /* ==========================================================
+     5. Prevent clipping
+  ========================================================== */
+
+  .section-card,
+  .card,
+  .dashboard-card,
+  .radar-card {
+    overflow: visible;
+  }
+
+}
+  
   
 </style>
 

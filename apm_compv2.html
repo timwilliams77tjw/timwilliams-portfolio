@@ -4199,16 +4199,51 @@ function linkCPDToCompetences() {
   });
 }
 
+/* ============================================================
+   CPD → COMPETENCE LINK (FINAL)
+============================================================ */
 
-document.addEventListener('click', function (e) {
-  const link = e.target.closest('.cpd-competence-link');
-  if (!link) return;
+document.addEventListener("click", function(e){
 
-  const target = document.querySelector(link.getAttribute('href'));
-  if (!target) return;
+    const link = e.target.closest(".cpd-competence-link");
+    if(!link) return;
 
-  const header = target.querySelector('.accordion-header');
-  if (header) header.click();
+    e.preventDefault();
+    e.stopPropagation();
+
+    const target=document.querySelector(link.getAttribute("href"));
+    if(!target) return;
+
+    /* Open accordion if closed */
+
+    if(!target.classList.contains("open")){
+
+        target.classList.add("open");
+
+    }
+
+    /* remove previous highlight */
+
+    document.querySelectorAll(".accordion-item.highlighted")
+        .forEach(item=>item.classList.remove("highlighted"));
+
+    target.classList.add("highlighted");
+
+    /* wait until accordion has expanded */
+
+    requestAnimationFrame(()=>{
+
+        setTimeout(()=>{
+
+            target.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+        },300);
+
+    });
+
 });
 
   
@@ -5698,7 +5733,9 @@ document.addEventListener("click", e => {
     const content = toggle.nextElementSibling;
     if (!content || !content.classList.contains("collapsible-content")) return;
 
-    content.classList.toggle("open");
+const open=content.classList.toggle("open");
+
+toggle.classList.toggle("open",open);
 });
 </script>
 
@@ -5706,57 +5743,19 @@ document.addEventListener("click", e => {
 /* ============================================================
    3. COMPETENCE ACCORDION
 ============================================================ */
-document.addEventListener("click", e => {
-    const header = e.target.closest(".accordion-header");
-    if (!header) return;
+document.addEventListener("click", function(e){
 
-    const item = header.closest(".accordion-item");
-    if (!item) return;
+    const header=e.target.closest(".accordion-header");
+    if(!header) return;
+
+    const item=header.closest(".accordion-item");
+    if(!item) return;
 
     item.classList.toggle("open");
+
+    item.classList.remove("highlighted");
+
 });
-</script>
-
-<script>
-/* ============================================================
-   4. CPD → COMPETENCE LINKING + HIGHLIGHT
-============================================================ */
-document.addEventListener("click", e => {
-    const link = e.target.closest(".cpd-competence-link");
-    if (!link) return;
-
-    e.stopPropagation();
-
-    const targetSelector = link.getAttribute("href");
-    if (!targetSelector) return;
-
-    const target = document.querySelector(targetSelector);
-    if (!target) return;
-
-    // Open accordion
-    target.classList.add("open");
-
-    // Scroll smoothly
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-
-    // Remove previous highlights
-    document.querySelectorAll(".accordion-item.highlighted")
-        .forEach(item => item.classList.remove("highlighted"));
-
-    // Add persistent highlight
-    target.classList.add("highlighted");
-});
-</script>
-
-<script>
-  document.addEventListener("click", e => {
-    const header = e.target.closest(".accordion-header");
-    if (!header) return;
-
-    // Remove highlight when user manually selects another accordion
-    document.querySelectorAll(".accordion-item.highlighted")
-        .forEach(item => item.classList.remove("highlighted"));
-});  
 </script>
 
 <script>
@@ -5928,8 +5927,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const count = seg.dataset.count;
 
             tooltip.innerHTML = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${count}`;
-            tooltip.style.left = e.clientX + 'px';
-            tooltip.style.top = e.clientY + 'px';
+            tooltip.style.left = (e.pageX + 10) + "px";
+tooltip.style.top = (e.pageY - 35) + "px";
             tooltip.style.display = 'block';
             tooltip.style.opacity = '1';
         });

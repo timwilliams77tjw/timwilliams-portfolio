@@ -3078,9 +3078,6 @@ generateHeatmap();
 console.log("Calling generateDonutChart...");
 generateDonutChart();
 
-console.log("Calling generateDualRadar...");
-generateDualRadar();
-
 console.log("Calling linkCPDToCompetences...");
 linkCPDToCompetences();
 
@@ -3548,94 +3545,126 @@ function generateDualRadar() {
 
 function drawRadar(svgId, data, colourMap, isTarget) {
 
-  const svg = document.getElementById(svgId);
-  svg.innerHTML = "";
+    const svg = document.getElementById(svgId);
 
-  const tooltip = document.getElementById("radar-tooltip");
+    if (!svg || !data || !data.length) return;
 
-  const maxValue = 5;
-  const radius = 50;
-  const angleStep = (Math.PI * 2) / data.length;
+    while (svg.firstChild) {
+        svg.removeChild(svg.firstChild);
+    }
 
-  /* -----------------------------
-     GRID RINGS
-  ----------------------------- */
-  for (let level = 1; level <= maxValue; level++) {
-    const r = (radius / maxValue) * level;
-    const points = data.map((_, i) => {
-      const angle = i * angleStep - Math.PI / 2;
-      return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
-    }).join(" ");
-    svg.innerHTML += `<polygon class="radar-grid-ring" points="${points}"></polygon>`;
-  }
+    const tooltip = document.getElementById("radar-tooltip");
 
-  /* -----------------------------
-     POLYGON
-  ----------------------------- */
-  const polyPoints = data.map((d, i) => {
-    const r = (radius / maxValue) * d.value;
-    const angle = i * angleStep - Math.PI / 2;
-    return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
-  }).join(" ");
+    const maxValue = 5;
+    const radius = 50;
+    const angleStep = (Math.PI * 2) / data.length;
 
-  svg.innerHTML += `
-    <polygon 
-      class="${isTarget ? "radar-area-target" : "radar-area-current"}" 
-      points="${polyPoints}">
-    </polygon>
-  `;
+    // Grid rings
+    for (let level = 1; level <= maxValue; level++) {
 
-  /* -----------------------------
-     POINTS + TOOLTIP
-  ----------------------------- */
-  data.forEach((d, i) => {
-    const r = (radius / maxValue) * d.value;
-    const angle = i * angleStep - Math.PI / 2;
-    const x = Math.cos(angle) * r;
-    const y = Math.sin(angle) * r;
+        const r = radius * (level / maxValue);
 
-    const point = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    point.setAttribute("class", "radar-point");
-    point.setAttribute("cx", x);
-    point.setAttribute("cy", y);
-    point.setAttribute("r", 5);
-    point.setAttribute("fill", colourMap[d.value]);
+        const polygon = document.createElementNS("http://www.w3.org/2000/svg","polygon");
 
-    point.addEventListener("mouseenter", () => {
-      tooltip.innerHTML = `
-        <strong>${d.label}</strong><br>
-        ${isTarget ? "Target level: " : "Current level: "} ${d.value}
-      `;
-      tooltip.style.opacity = 1;
+        polygon.setAttribute("class","radar-grid-ring");
+
+        polygon.setAttribute(
+            "points",
+            data.map((d,i)=>{
+                const angle=i*angleStep-Math.PI/2;
+                return `${Math.cos(angle)*r},${Math.sin(angle)*r}`;
+            }).join(" ")
+        );
+
+        svg.appendChild(polygon);
+    }
+
+    // Radar polygon
+    const radarPolygon = document.createElementNS("http://www.w3.org/2000/svg","polygon");
+
+    radarPolygon.setAttribute(
+        "class",
+        isTarget ? "radar-area-target" : "radar-area-current"
+    );
+
+    radarPolygon.setAttribute(
+        "points",
+        data.map((d,i)=>{
+            const angle=i*angleStep-Math.PI/2;
+            const r=radius*(d.value/maxValue);
+            return `${Math.cos(angle)*r},${Math.sin(angle)*r}`;
+        }).join(" ")
+    );
+
+    svg.appendChild(radarPolygon);
+
+    // Points
+    data.forEach((d,i)=>{
+
+        const angle=i*angleStep-Math.PI/2;
+        const r=radius*(d.value/maxValue);
+
+        const x=Math.cos(angle)*r;
+        const y=Math.sin(angle)*r;
+
+        const point=document.createElementNS("http://www.w3.org/2000/svg","circle");
+
+        point.setAttribute("cx",x);
+        point.setAttribute("cy",y);
+        point.setAttribute("r",5);
+        point.setAttribute("class","radar-point");
+        point.setAttribute("fill",colourMap[d.value]);
+
+        point.addEventListener("mouseenter",()=>{
+            tooltip.innerHTML=`<strong>${d.label}</strong><br>${isTarget?"Target":"Current"} level: ${d.value}`;
+            tooltip.style.opacity=1;
+        });
+
+        point.addEventListener("mousemove",(e)=>{
+            tooltip.style.left=(e.pageX+12)+"px";
+            tooltip.style.top=(e.pageY-12)+"px";
+        });
+
+        point.addEventListener("mouseleave",()=>{
+            tooltip.style.opacity=0;
+        });
+
+        svg.appendChild(point);
+
     });
 
-    point.addEventListener("mousemove", (e) => {
-      tooltip.style.left = (e.pageX + 12) + "px";
-      tooltip.style.top = (e.pageY - 12) + "px";
-    });
-
-    point.addEventListener("mouseleave", () => {
-      tooltip.style.opacity = 0;
-    });
-
-    svg.appendChild(point);
-  });
 }
-
 
 /* ============================================================
    WAIT FOR ACCORDION TO LOAD (iPhone-safe)
 ============================================================ */
 
-function waitForAccordion() {
-  const cards = document.querySelectorAll(".accordion-item[id^='competence-']");
-  if (cards.length < 6) {
-    return setTimeout(waitForAccordion, 200);
-  }
-  generateDualRadar();
+function waitForAccordion(retries = 30) {
+
+    const cards = document.querySelectorAll(".accordion-item[id^='competence-']");
+
+    if (cards.length >= 6) {
+
+        requestAnimationFrame(() => {
+            generateDualRadar();
+        });
+
+        return;
+    }
+
+    if (retries > 0) {
+
+        setTimeout(() => waitForAccordion(retries - 1), 200);
+
+    } else {
+
+        console.warn("Timed out waiting for competence cards.");
+
+    }
+
 }
 
-waitForAccordion();
+document.addEventListener("DOMContentLoaded", waitForAccordion);
 
 
 function generateProgressPillars() {

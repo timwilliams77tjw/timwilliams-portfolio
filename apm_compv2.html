@@ -3468,6 +3468,208 @@ section.cpd-pillars-section {
 
 }
 
+/* ============================================================
+   FINAL PATCH - POST CONSOLIDATION FIXES
+   Version 1.0
+============================================================ */
+
+
+/* ============================================================
+   1. FOOTER RESTORATION
+   - Restore blue footer
+   - Remove excess mobile gap
+============================================================ */
+
+body.page-prof-dev #footer,
+body.page-prof-dev #footer .footer {
+    background: #0a2540 !important;
+    color: #ffffff !important;
+}
+
+body.page-prof-dev #footer {
+    margin-top: 2rem !important;
+    margin-bottom: 0 !important;
+    padding-top: 2rem !important;
+    padding-bottom: 0 !important;
+    position: relative;
+    z-index: 10;
+}
+
+body.page-prof-dev #footer a {
+    color: #7ac0f9 !important;
+}
+
+@media (max-width:600px){
+
+    html,
+    body{
+        padding-bottom:0 !important;
+        margin-bottom:0 !important;
+    }
+
+    main{
+        padding-bottom:0 !important;
+        margin-bottom:0 !important;
+    }
+
+    body.page-prof-dev #footer{
+        margin-bottom:0 !important;
+        padding-bottom:env(safe-area-inset-bottom) !important;
+    }
+
+}
+
+
+/* ============================================================
+   2. MOBILE RADAR / LEGEND SPACING
+============================================================ */
+
+@media (max-width:900px){
+
+    .radar-legend-combined{
+        margin-top:24px !important;
+        margin-bottom:3rem !important;
+    }
+
+    .radar-legend-combined + .accordion,
+    .radar-legend-combined + .accordion-container,
+    .radar-legend-combined + .competency-section{
+        margin-top:2rem !important;
+    }
+
+}
+
+
+/* ============================================================
+   3. COLOURED LEGEND TEXT
+============================================================ */
+
+.legend-title.expert{
+    color:#0a66c2 !important;
+}
+
+.legend-title.proficient{
+    color:#007b5f !important;
+}
+
+.legend-title.competent{
+    color:#b8860b !important;
+}
+
+.legend-title.practised{
+    color:#8a2be2 !important;
+}
+
+.legend-title.aware{
+    color:#555 !important;
+}
+
+
+/* ============================================================
+   4. ASSESSMENT BAR TOOLTIP RESTORE
+============================================================ */
+
+#rating-summary-svg{
+    position:relative !important;
+    overflow:visible !important;
+}
+
+.rating-tooltip{
+    position:absolute !important;
+    z-index:99999 !important;
+    pointer-events:none !important;
+}
+
+
+/* ============================================================
+   5. ASSESSMENT BAR WIDTH
+============================================================ */
+
+#rating-summary-svg{
+    width:100% !important;
+    display:block !important;
+    overflow-x:auto !important;
+    overflow-y:visible !important;
+    -webkit-overflow-scrolling:touch !important;
+}
+
+#rating-summary-svg svg{
+    width:100% !important;
+    height:40px !important;
+    display:block !important;
+}
+
+@media (max-width:767px){
+
+    #rating-summary-svg svg{
+        min-width:650px !important;
+    }
+
+}
+
+@media (min-width:768px){
+
+    #rating-summary-svg svg{
+        min-width:100% !important;
+    }
+
+}
+
+
+/* ============================================================
+   6. RATING FILTERS
+   Prevent wrapping on iPad
+============================================================ */
+
+@media (max-width:900px){
+
+    .section-subtitle{
+
+        display:flex !important;
+        flex-wrap:nowrap !important;
+        overflow-x:auto !important;
+        overflow-y:hidden !important;
+
+        justify-content:flex-start !important;
+        align-items:center !important;
+
+        gap:8px !important;
+
+        -webkit-overflow-scrolling:touch;
+
+        padding-bottom:6px;
+
+    }
+
+    .section-subtitle .rating-badge{
+
+        flex:0 0 auto !important;
+
+        min-width:auto !important;
+
+        white-space:nowrap !important;
+
+        padding:5px 12px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   7. SAFETY - Prevent clipping of radar & legend
+============================================================ */
+
+.dual-radar-section,
+.radar-wrapper,
+.radar-grid,
+.radar-box,
+.radar-legend-combined{
+
+    overflow:visible !important;
+
+}
+  
 </style>
 
 

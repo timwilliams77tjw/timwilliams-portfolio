@@ -1408,13 +1408,10 @@ RADAR TOOLTIP
 
 
 .collapsible-content.open {
-
- max-height:20000px !important;
-
- opacity:1 !important;
-
+  max-height: none !important;
+  overflow: visible;
+  opacity: 1 !important;
 }
-
 
 
 /* ============================================================
@@ -3677,8 +3674,66 @@ body.page-prof-dev #footer a {
     box-shadow:0 8px 24px rgba(0,0,0,.08);
     margin-top:40px;
 }
-  
-  
+@media (max-width: 767px) {
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .page-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cpd-log-section,
+  .collapsible-toggle,
+  .collapsible-content,
+  .cpd-card-container,
+  .cpd-card {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+}  
+/* ============================================================
+   PREMIUM RATING SUMMARY TOOLTIP
+   Styling only - does not alter existing JavaScript behaviour
+============================================================ */
+
+#rating-tooltip {
+    position: absolute;
+    z-index: 99999;
+
+    min-width: 170px;
+
+    padding: 10px 14px;
+
+    background: #0a2540;
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.20),
+        0 2px 6px rgba(0, 0, 0, 0.12);
+
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    box-sizing: border-box;
+
+    transition: opacity 0.15s ease;
+}
 </style>
 
 
@@ -3936,7 +3991,6 @@ body.page-prof-dev #footer a {
         <ul id="insight-growth"></ul>
       </div>
     </div>
-  </section>
 </section>
 <script>
 /* ==========================================================

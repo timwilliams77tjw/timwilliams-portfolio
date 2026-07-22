@@ -3734,6 +3734,86 @@ body.page-prof-dev #footer a {
 
     transition: opacity 0.15s ease;
 }
+
+/* ============================================================
+   CPD PROGRESS RING
+============================================================ */
+
+.cpd-progress-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+
+  /* Ensures the ring and text share exactly the same centre */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+}
+
+/* SVG ring */
+.cpd-progress-ring {
+  position: absolute;
+  inset: 0;
+
+  width: 160px;
+  height: 160px;
+
+  display: block;
+}
+
+/* Text positioned exactly in centre of ring */
+.cpd-progress-text {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 125px;
+
+  margin: 0;
+  padding: 0;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+/* Completed hours */
+.cpd-progress-text h3 {
+  margin: 0;
+  padding: 0;
+
+  font-size: 18px;
+  line-height: 1.15;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+/* Remaining hours */
+.cpd-progress-text p {
+  margin: 8px 0 0;
+  padding: 0;
+
+  font-size: 14px;
+  line-height: 1.25;
+
+  font-weight: 400;
+
+  text-align: center;
+}  
 </style>
 
 

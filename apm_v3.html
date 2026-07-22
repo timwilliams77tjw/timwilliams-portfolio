@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -3698,47 +3698,166 @@ body.page-prof-dev #footer a {
   }
 
 }  
+
 /* ============================================================
-   FOOTER DIAGNOSTIC RESET
-   TEMPORARY
+   RATING SUMMARY TOOLTIP
 ============================================================ */
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-}
+#rating-tooltip {
+    position: fixed;
+    z-index: 99999;
 
-#footer {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    margin: 0;
-    padding: 0;
-    position: relative;
+    min-width: 180px;
+    max-width: 260px;
+
+    padding: 12px 14px;
+
+    background: rgba(10, 37, 64, 0.97);
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.22),
+        0 3px 8px rgba(0, 0, 0, 0.12);
+
+    font-size: 0.82rem;
+    line-height: 1.4;
+
+    pointer-events: none;
+
+    opacity: 0;
+    display: none;
+
+    transition:
+        opacity 0.18s ease;
+
     box-sizing: border-box;
 }
 
-#footer > * {
-    box-sizing: border-box;
+
+/* ============================================================
+   TOOLTIP HEADER
+============================================================ */
+
+.rating-tooltip-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding-bottom: 8px;
+
+    margin-bottom: 8px;
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.15);
+
 }
 
-#footer footer {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    margin: 0;
-    position: relative;
-    box-sizing: border-box;
-}
-/* TEMPORARY DEBUG */
-#footer {
-    outline: 3px solid red;
+
+.rating-tooltip-header strong {
+
+    font-size: 0.95rem;
+
+    font-weight: 700;
+
+    color: #ffffff;
+
 }
 
-#footer footer {
-    outline: 3px solid blue;
+
+/* ============================================================
+   RATING COLOUR DOT
+============================================================ */
+
+.rating-tooltip-dot {
+
+    width: 10px;
+    height: 10px;
+
+    flex: 0 0 10px;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 2px rgba(255, 255, 255, 0.18);
+
+}
+
+
+/* ============================================================
+   TOOLTIP BODY
+============================================================ */
+
+.rating-tooltip-body {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.rating-tooltip-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color: rgba(255, 255, 255, 0.75);
+
+}
+
+
+.rating-tooltip-row strong {
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+    #rating-tooltip {
+
+        min-width: 160px;
+
+        max-width:
+            calc(100vw - 24px);
+
+        padding: 10px 12px;
+
+        font-size: 0.78rem;
+
+        border-radius: 9px;
+
+    }
+
+    .rating-tooltip-header strong {
+
+        font-size: 0.88rem;
+
+    }
+
 }  
+  
+  
 </style>
 
 
@@ -5924,89 +6043,316 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <script>
 /* ============================================================
-   8. PREMIUM GRADIENT SVG BAR + TOOLTIP
+   8. PREMIUM GRADIENT SVG BAR + STYLED TOOLTIP
 ============================================================ */
 document.addEventListener('DOMContentLoaded', function () {
 
-    const counts = { expert: 0, proficient: 0, competent: 0, practised: 0, aware: 0 };
+    const counts = {
+        expert: 0,
+        proficient: 0,
+        competent: 0,
+        practised: 0,
+        aware: 0
+    };
 
     document.querySelectorAll('.accordion-item .rating-badge').forEach(badge => {
-        if (badge.classList.contains('rating-expert')) counts.expert++;
-        if (badge.classList.contains('rating-proficient')) counts.proficient++;
-        if (badge.classList.contains('rating-competent')) counts.competent++;
-        if (badge.classList.contains('rating-practised')) counts.practised++;
-        if (badge.classList.contains('rating-aware')) counts.aware++;
+
+        if (badge.classList.contains('rating-expert')) {
+            counts.expert++;
+        }
+
+        if (badge.classList.contains('rating-proficient')) {
+            counts.proficient++;
+        }
+
+        if (badge.classList.contains('rating-competent')) {
+            counts.competent++;
+        }
+
+        if (badge.classList.contains('rating-practised')) {
+            counts.practised++;
+        }
+
+        if (badge.classList.contains('rating-aware')) {
+            counts.aware++;
+        }
+
     });
 
-    const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    const total =
+        Object.values(counts).reduce((a, b) => a + b, 0);
 
     let x = 0;
 
     let svg = `
-<svg id="rating-bar-svg" viewBox="0 0 100 10" preserveAspectRatio="none">
+<svg id="rating-bar-svg"
+     viewBox="0 0 100 10"
+     preserveAspectRatio="none">
+
 <defs>
+
 <linearGradient id="grad-expert" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#0d74e7"/>
-<stop offset="100%" stop-color="#084a96"/>
+    <stop offset="0%" stop-color="#0d74e7"/>
+    <stop offset="100%" stop-color="#084a96"/>
 </linearGradient>
+
 <linearGradient id="grad-proficient" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#0a8f72"/>
-<stop offset="100%" stop-color="#005f46"/>
+    <stop offset="0%" stop-color="#0a8f72"/>
+    <stop offset="100%" stop-color="#005f46"/>
 </linearGradient>
+
 <linearGradient id="grad-competent" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#d9a441"/>
-<stop offset="100%" stop-color="#8a6500"/>
+    <stop offset="0%" stop-color="#d9a441"/>
+    <stop offset="100%" stop-color="#8a6500"/>
 </linearGradient>
+
 <linearGradient id="grad-practised" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#a46bff"/>
-<stop offset="100%" stop-color="#6a2bb8"/>
+    <stop offset="0%" stop-color="#a46bff"/>
+    <stop offset="100%" stop-color="#6a2bb8"/>
 </linearGradient>
+
 <linearGradient id="grad-aware" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#777"/>
-<stop offset="100%" stop-color="#444"/>
+    <stop offset="0%" stop-color="#777"/>
+    <stop offset="100%" stop-color="#444"/>
 </linearGradient>
+
 </defs>
 `;
 
-    for (const key of ['expert','proficient','competent','practised','aware']) {
-        const pct = total ? (counts[key] / total) * 100 : 0;
+    for (const key of [
+        'expert',
+        'proficient',
+        'competent',
+        'practised',
+        'aware'
+    ]) {
+
+        const pct =
+            total
+                ? (counts[key] / total) * 100
+                : 0;
 
         svg += `
-<rect class="rating-segment"
-      data-type="${key}"
-      data-count="${counts[key]}"
-      x="${x}"
-      y="0"
-      width="${pct}"
-      height="10"
-      fill="url(#grad-${key})"></rect>
+<rect
+    class="rating-segment"
+    data-type="${key}"
+    data-count="${counts[key]}"
+    data-percent="${pct.toFixed(1)}"
+    x="${x}"
+    y="0"
+    width="${pct}"
+    height="10"
+    fill="url(#grad-${key})">
+</rect>
 `;
+
         x += pct;
     }
 
     svg += `</svg>`;
 
-    document.getElementById('rating-summary-svg').innerHTML = svg;
+    const ratingContainer =
+        document.getElementById('rating-summary-svg');
 
-    const tooltip = document.getElementById('rating-tooltip');
+    if (!ratingContainer) return;
+
+    ratingContainer.innerHTML = svg;
+
+
+    /* ============================================================
+       TOOLTIP
+    ============================================================ */
+
+    const tooltip =
+        document.getElementById('rating-tooltip');
+
+    if (!tooltip) return;
+
+
+    /* Rating display names */
+
+    const ratingNames = {
+        expert: 'Expert',
+        proficient: 'Proficient',
+        competent: 'Competent',
+        practised: 'Practised',
+        aware: 'Aware'
+    };
+
+
+    /* Rating colours */
+
+    const ratingColours = {
+        expert: '#0a66c2',
+        proficient: '#007b5f',
+        competent: '#b8860b',
+        practised: '#8a2be2',
+        aware: '#555'
+    };
+
+
+    /* ============================================================
+       SHOW TOOLTIP
+    ============================================================ */
 
     document.querySelectorAll('.rating-segment').forEach(seg => {
-        seg.addEventListener('mousemove', e => {
-            const type = seg.dataset.type;
-            const count = seg.dataset.count;
 
-            tooltip.innerHTML = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${count}`;
-            tooltip.style.left = (e.pageX + 10) + "px";
-tooltip.style.top = (e.pageY - 35) + "px";
+        seg.addEventListener('mousemove', e => {
+
+            const type =
+                seg.dataset.type;
+
+            const count =
+                parseInt(seg.dataset.count, 10) || 0;
+
+            const percent =
+                parseFloat(seg.dataset.percent) || 0;
+
+            const name =
+                ratingNames[type] || type;
+
+            const colour =
+                ratingColours[type] || '#555';
+
+
+            tooltip.innerHTML = `
+                <div class="rating-tooltip-header">
+                    <span
+                        class="rating-tooltip-dot"
+                        style="background:${colour}">
+                    </span>
+
+                    <strong>${name}</strong>
+                </div>
+
+                <div class="rating-tooltip-body">
+
+                    <div class="rating-tooltip-row">
+                        <span>Competencies</span>
+                        <strong>${count}</strong>
+                    </div>
+
+                    <div class="rating-tooltip-row">
+                        <span>Percentage</span>
+                        <strong>${percent.toFixed(1)}%</strong>
+                    </div>
+
+                </div>
+            `;
+
+
+            /* ====================================================
+               POSITION TOOLTIP
+            ==================================================== */
+
+            const offset = 14;
+
+            let left =
+                e.clientX + offset;
+
+            let top =
+                e.clientY + offset;
+
+
+            /* Make visible temporarily so dimensions
+               can be calculated correctly */
+
             tooltip.style.display = 'block';
-            tooltip.style.opacity = '1';
+            tooltip.style.opacity = '0';
+
+            const tooltipWidth =
+                tooltip.offsetWidth;
+
+            const tooltipHeight =
+                tooltip.offsetHeight;
+
+
+            /* Prevent right-edge overflow */
+
+            if (
+                left + tooltipWidth >
+                window.innerWidth - 12
+            ) {
+
+                left =
+                    e.clientX -
+                    tooltipWidth -
+                    offset;
+
+            }
+
+
+            /* Prevent bottom-edge overflow */
+
+            if (
+                top + tooltipHeight >
+                window.innerHeight - 12
+            ) {
+
+                top =
+                    e.clientY -
+                    tooltipHeight -
+                    offset;
+
+            }
+
+
+            /* Prevent left-edge overflow */
+
+            if (left < 12) {
+                left = 12;
+            }
+
+
+            /* Prevent top-edge overflow */
+
+            if (top < 12) {
+                top = 12;
+            }
+
+
+            tooltip.style.left =
+                left + 'px';
+
+            tooltip.style.top =
+                top + 'px';
+
+
+            /* Show */
+
+            requestAnimationFrame(() => {
+
+                tooltip.style.opacity = '1';
+
+            });
+
         });
+
+
+        /* ========================================================
+           HIDE TOOLTIP
+        ======================================================== */
 
         seg.addEventListener('mouseleave', () => {
+
             tooltip.style.opacity = '0';
-            tooltip.style.display = 'none';
+
+            setTimeout(() => {
+
+                if (
+                    tooltip.style.opacity === '0'
+                ) {
+
+                    tooltip.style.display = 'none';
+
+                }
+
+            }, 180);
+
         });
+
     });
+
 });
 </script>
 </main>

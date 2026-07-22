@@ -3940,6 +3940,104 @@ body.page-prof-dev #footer a {
     white-space: nowrap;
   }
 }
+
+/* ============================================================
+   APM RATING SCALE DESCRIPTION + BADGES
+   Keeps the explanatory text separate from the badges
+   and prevents mobile/iPad layout collapse.
+============================================================ */
+
+.rating-scale-description {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.rating-scale-description .section-subtitle {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 1rem 0;
+  box-sizing: border-box;
+}
+
+/* Badge row */
+.rating-scale-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Keep badges compact and consistent */
+.rating-scale-badges .rating-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   TABLET / iPAD
+============================================================ */
+
+@media (min-width: 768px) and (max-width: 1100px) {
+
+  .rating-scale-description {
+    width: 100%;
+  }
+
+  .rating-scale-description .section-subtitle {
+    width: 100%;
+  }
+
+  .rating-scale-badges {
+    justify-content: flex-start;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 767px) {
+
+  .rating-scale-description {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .rating-scale-description .section-subtitle {
+    width: 100%;
+    max-width: 100%;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .rating-scale-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .rating-scale-badges .rating-badge {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+}  
 </style>
 
 
@@ -5351,15 +5449,20 @@ function generateProgressPillars() {
 <div class="collapsible-content">
 
 <div class="apm-progress-bar"></div>
+
+<div class="rating-scale-description">
   <p class="section-subtitle">
     This section reflects my personal assessment against the APM Competence Framework (3rd edition), using the APM 0–5 rating scale.
-    Ratings shown:
+  </p>
+
+  <div class="rating-scale-badges">
     <span class="rating-badge rating-expert">Expert</span>
     <span class="rating-badge rating-proficient">Proficient</span>
     <span class="rating-badge rating-competent">Competent</span>
     <span class="rating-badge rating-practised">Practised</span>
     <span class="rating-badge rating-aware">Aware</span>
-  </p>
+  </div>
+</div>
 
 <section class="rating-summary">
 

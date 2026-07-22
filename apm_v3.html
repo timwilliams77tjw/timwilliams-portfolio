@@ -3814,6 +3814,191 @@ body.page-prof-dev #footer a {
 
   text-align: center;
 }  
+
+/* ============================================================
+   APM RATING BADGES + RATING SUMMARY RESPONSIVE FIX
+============================================================ */
+
+/* ------------------------------------------------------------
+   1. INTRODUCTORY RATING BADGES
+   Keep the badges together and allow clean wrapping
+------------------------------------------------------------ */
+
+.section-subtitle {
+  line-height: 1.7;
+}
+
+/* Put the badges into a flexible inline group */
+.section-subtitle .rating-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  margin: 0.3rem 0.25rem;
+}
+
+/* ------------------------------------------------------------
+   2. RATING SUMMARY CONTAINER
+------------------------------------------------------------ */
+
+.rating-summary {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* ------------------------------------------------------------
+   3. RATING SUMMARY CARDS
+------------------------------------------------------------ */
+
+.rating-summary-bar {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: stretch;
+}
+
+/* Each individual rating card */
+.rating-summary-segment {
+  min-width: 0;
+  width: 100%;
+  min-height: 76px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  padding: 0.9rem 1rem;
+
+  border-radius: 12px;
+  background: #ffffff;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+}
+
+/* Rating label */
+.rating-summary-segment .label {
+  min-width: 0;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Rating count */
+.rating-summary-segment .count {
+  flex: 0 0 auto;
+
+  font-size: 1.25rem;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+/* ============================================================
+   TABLET / IPAD
+   Keep all five cards on one row where possible
+============================================================ */
+
+@media (min-width: 768px) and (max-width: 1100px) {
+
+  .rating-summary-bar {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .rating-summary-segment {
+    padding: 0.8rem 0.7rem;
+  }
+
+  .rating-summary-segment .label {
+    font-size: 0.9rem;
+  }
+
+  .rating-summary-segment .count {
+    font-size: 1.15rem;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   Stack cards cleanly rather than squashing them
+============================================================ */
+
+@media (max-width: 767px) {
+
+  /* Introductory text */
+  .section-subtitle {
+    line-height: 1.6;
+  }
+
+  /* Rating badges become a proper flexible row */
+  .section-subtitle .rating-badge {
+    display: inline-flex;
+    margin: 0.35rem 0.2rem;
+  }
+
+  /* Rating summary cards */
+  .rating-summary-bar {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .rating-summary-segment {
+    width: 100%;
+    min-height: 64px;
+    padding: 0.85rem 1rem;
+  }
+
+  .rating-summary-segment .label {
+    font-size: 1rem;
+  }
+
+  .rating-summary-segment .count {
+    font-size: 1.25rem;
+  }
+
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+============================================================ */
+
+@media (max-width: 480px) {
+
+  .section-subtitle .rating-badge {
+    margin: 0.3rem 0.15rem;
+    padding: 0.55rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .rating-summary-bar {
+    gap: 0.65rem;
+  }
+
+  .rating-summary-segment {
+    min-height: 60px;
+    padding: 0.75rem 0.9rem;
+  }
+
+}  
 </style>
 
 

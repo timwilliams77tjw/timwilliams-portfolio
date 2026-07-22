@@ -3814,6 +3814,230 @@ body.page-prof-dev #footer a {
 
   text-align: center;
 }  
+/* ============================================================
+   APM RATING INTRO + BADGE GROUP
+   Prevents rating badges from interfering with paragraph flow
+============================================================ */
+
+.rating-intro {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+.rating-intro-text {
+  display: inline;
+}
+
+.rating-label {
+  display: inline;
+  margin-left: .35rem;
+}
+
+/* Keep the five rating badges together as a controlled group */
+.rating-badge-group {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: .65rem;
+  margin-left: .6rem;
+  vertical-align: middle;
+}
+
+/* Ensure badges don't shrink or get clipped */
+.rating-badge-group .rating-badge {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   TABLET / iPAD
+============================================================ */
+
+@media (min-width: 768px) and (max-width: 1100px) {
+
+  .rating-intro {
+    display: block;
+  }
+
+  .rating-intro-text {
+    display: inline;
+  }
+
+  .rating-label {
+    display: inline;
+    margin-left: .35rem;
+  }
+
+  .rating-badge-group {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    margin-left: .6rem;
+    gap: .55rem;
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 767px) {
+
+  .rating-intro {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    line-height: 1.55;
+  }
+
+  .rating-intro-text {
+    display: block;
+    width: 100%;
+    margin-bottom: .75rem;
+  }
+
+  .rating-label {
+    display: block;
+    margin: 0 0 .65rem 0;
+    font-weight: 600;
+  }
+
+  /*
+     Put the badges on their own horizontal scrolling row.
+     This prevents them from being squeezed into a narrow
+     column or forcing the paragraph into one-word lines.
+  */
+  .rating-badge-group {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: .65rem;
+
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding: .25rem .1rem .75rem .1rem;
+
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .rating-badge-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rating-badge-group .rating-badge {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+/* ============================================================
+   APM RATING SCALE DESCRIPTION + BADGES
+   Keeps the explanatory text separate from the badges
+   and prevents mobile/iPad layout collapse.
+============================================================ */
+
+.rating-scale-description {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.rating-scale-description .section-subtitle {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 1rem 0;
+  box-sizing: border-box;
+}
+
+/* Badge row */
+.rating-scale-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Keep badges compact and consistent */
+.rating-scale-badges .rating-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   TABLET / iPAD
+============================================================ */
+
+@media (min-width: 768px) and (max-width: 1100px) {
+
+  .rating-scale-description {
+    width: 100%;
+  }
+
+  .rating-scale-description .section-subtitle {
+    width: 100%;
+  }
+
+  .rating-scale-badges {
+    justify-content: flex-start;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 767px) {
+
+  .rating-scale-description {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .rating-scale-description .section-subtitle {
+    width: 100%;
+    max-width: 100%;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .rating-scale-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .rating-scale-badges .rating-badge {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+}  
 </style>
 
 
@@ -5225,42 +5449,57 @@ function generateProgressPillars() {
 <div class="collapsible-content">
 
 <div class="apm-progress-bar"></div>
+
+<div class="rating-scale-description">
   <p class="section-subtitle">
     This section reflects my personal assessment against the APM Competence Framework (3rd edition), using the APM 0–5 rating scale.
-    Ratings shown:
+  </p>
+
+  <div class="rating-scale-badges">
     <span class="rating-badge rating-expert">Expert</span>
     <span class="rating-badge rating-proficient">Proficient</span>
     <span class="rating-badge rating-competent">Competent</span>
     <span class="rating-badge rating-practised">Practised</span>
     <span class="rating-badge rating-aware">Aware</span>
-  </p>
+  </div>
+</div>
 
 <section class="rating-summary">
+
   <h2 class="section-heading">
-    <i class="fa-solid fa-chart-bar"></i> Rating summary
+    <i class="fa-solid fa-chart-bar"></i>
+    Rating summary
   </h2>
+
   <div class="rating-summary-bar">
+
     <div class="rating-summary-segment rating-expert">
       <span class="label">Expert</span>
       <span class="count">0</span>
     </div>
+
     <div class="rating-summary-segment rating-proficient">
       <span class="label">Proficient</span>
       <span class="count">0</span>
     </div>
+
     <div class="rating-summary-segment rating-competent">
       <span class="label">Competent</span>
       <span class="count">0</span>
     </div>
+
     <div class="rating-summary-segment rating-practised">
       <span class="label">Practised</span>
       <span class="count">0</span>
     </div>
+
     <div class="rating-summary-segment rating-aware">
       <span class="label">Aware</span>
       <span class="count">0</span>
     </div>
+
   </div>
+
 </section>
 
 

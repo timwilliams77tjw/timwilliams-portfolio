@@ -3677,7 +3677,55 @@ body.page-prof-dev #footer a {
     box-shadow:0 8px 24px rgba(0,0,0,.08);
     margin-top:40px;
 }
-  
+/* ============================================================
+   FOOTER / PAGE HEIGHT FIX
+   Prevents blank space below footer when CPD accordion
+   is collapsed.
+============================================================ */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content must grow naturally */
+main.page-container {
+    flex: 0 1 auto;
+    min-height: 0;
+    height: auto;
+}
+
+/* Do not force the final content section to create
+   additional space below the footer */
+.page-container > section:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Remove any accidental bottom spacing from the
+   development priorities section */
+.page-container > section:last-of-type {
+    margin-bottom: 0 !important;
+}
+
+/* Footer follows actual document content */
+footer {
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+/* Prevent hidden accordion content from reserving space */
+.collapsible-content[hidden] {
+    display: none !important;
+}  
   
 </style>
 
@@ -3936,7 +3984,6 @@ body.page-prof-dev #footer a {
         <ul id="insight-growth"></ul>
       </div>
     </div>
-  </section>
 </section>
 <script>
 /* ==========================================================

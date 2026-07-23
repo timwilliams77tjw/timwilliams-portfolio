@@ -4481,6 +4481,96 @@ section.cpd-pillars-section .pillar-card::after {
     opacity: 0.8;
     stroke-width: 4;
 }  
+
+/* ============================================================
+   CPD DONUT TOOLTIP
+============================================================ */
+
+section.cpd-donut-section {
+    position: relative;
+}
+
+#donut-tooltip {
+    position: fixed !important;
+    display: none;
+    pointer-events: none;
+    z-index: 999999 !important;
+
+    padding: 10px 14px;
+    border-radius: 10px;
+
+    background: rgba(10, 31, 68, 0.96);
+    color: #ffffff !important;
+
+    font-size: 14px;
+    line-height: 1.45;
+    font-weight: 500;
+
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+
+    white-space: nowrap;
+}
+
+#donut-tooltip strong {
+    color: #ffffff !important;
+    font-weight: 700;
+}  
+
+/* ============================================================
+   APM CPD PILLARS — FINAL COLOUR OVERRIDE
+   Scoped ONLY to the CPD Pillars section
+============================================================ */
+
+section.cpd-pillars-section .pillar-card.completed {
+    background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%) !important;
+    color: #ffffff !important;
+}
+
+section.cpd-pillars-section .pillar-card.remaining {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%) !important;
+    color: #ffffff !important;
+}
+
+section.cpd-pillars-section .pillar-card.projected {
+    background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%) !important;
+    color: #ffffff !important;
+}
+
+/* Text inside coloured pillars */
+section.cpd-pillars-section .pillar-card .pillar-value,
+section.cpd-pillars-section .pillar-card .pillar-title {
+    color: #ffffff !important;
+}
+
+/* Icons */
+section.cpd-pillars-section .pillar-card .pillar-icon,
+section.cpd-pillars-section .pillar-card .pillar-icon i {
+    color: #ffffff !important;
+}
+
+/* CPD badge in top-right */
+section.cpd-pillars-section .pillar-card::after {
+    color: #ffffff !important;
+    background: rgba(255,255,255,0.18) !important;
+}
+
+/* Progress track */
+section.cpd-pillars-section .pillar-progress {
+    background: rgba(255,255,255,0.25) !important;
+}
+
+/* Progress fill colours */
+section.cpd-pillars-section .pillar-card.completed .pillar-fill {
+    background: #22c55e !important;
+}
+
+section.cpd-pillars-section .pillar-card.remaining .pillar-fill {
+    background: #ef4444 !important;
+}
+
+section.cpd-pillars-section .pillar-card.projected .pillar-fill {
+    background: #60a5fa !important;
+}  
 </style>
 
 
@@ -4830,8 +4920,7 @@ function generateDonutChart() {
 
         if (cells.length < 5) return;
 
-        const category =
-            cells[4].textContent.trim();
+        const category = cells[4].textContent.trim();
 
         if (!category) return;
 
@@ -4849,7 +4938,7 @@ function generateDonutChart() {
 
 
     /* ============================================================
-       GET DONUT SEGMENTS + LEGEND + TOOLTIP
+       GET DONUT ELEMENTS
     ============================================================ */
 
     const segments =
@@ -4863,13 +4952,18 @@ function generateDonutChart() {
 
     if (!segments.length) return;
 
+
+    /* ============================================================
+       CLEAR EXISTING LEGEND
+    ============================================================ */
+
     if (legend) {
         legend.innerHTML = "";
     }
 
 
     /* ============================================================
-       RESET SEGMENTS
+       RESET ALL DONUT SEGMENTS
     ============================================================ */
 
     segments.forEach(segment => {
@@ -4879,6 +4973,11 @@ function generateDonutChart() {
 
         segment.dataset.category = "";
         segment.dataset.count = "0";
+
+        /* Remove any previous tooltip handlers */
+        segment.onmouseenter = null;
+        segment.onmousemove = null;
+        segment.onmouseleave = null;
 
     });
 
@@ -4896,18 +4995,25 @@ function generateDonutChart() {
             /* Maximum of four visual segments */
             if (index >= 4) return;
 
-            const percent =
-                (count / total) * 100;
-
-            const segment =
-                segments[index];
+            const segment = segments[index];
 
             if (!segment) return;
 
+            const percent =
+                (count / total) * 100;
 
-            /* ----------------------------------------------------
-               Configure SVG segment
-            ---------------------------------------------------- */
+
+            /* ====================================================
+               STORE DATA ON SVG SEGMENT
+            ==================================================== */
+
+            segment.dataset.category = category;
+            segment.dataset.count = count;
+
+
+            /* ====================================================
+               CONFIGURE SVG SEGMENT
+            ==================================================== */
 
             segment.style.strokeDasharray =
                 `${percent} ${100 - percent}`;
@@ -4916,20 +5022,9 @@ function generateDonutChart() {
                 `-${offset}`;
 
 
-            /* ----------------------------------------------------
-               Store tooltip information
-            ---------------------------------------------------- */
-
-            segment.dataset.category =
-                category;
-
-            segment.dataset.count =
-                count;
-
-
-            /* ----------------------------------------------------
-               Add legend item
-            ---------------------------------------------------- */
+            /* ====================================================
+               ADD LEGEND ITEM
+            ==================================================== */
 
             if (legend) {
 
@@ -4943,74 +5038,69 @@ function generateDonutChart() {
             }
 
 
-            /* ----------------------------------------------------
-               Hover tooltip
-            ---------------------------------------------------- */
+            /* ====================================================
+               HOVER TOOLTIP
+            ==================================================== */
 
-            segment.onmouseenter = function (e) {
+            if (tooltip) {
 
-                if (!tooltip) return;
+                segment.onmouseenter = function(e) {
 
-                tooltip.innerHTML = `
-                    <strong>${category}</strong>
-                    <br>
-                    ${count} ${count === 1 ? "activity" : "activities"}
-                    <br>
-                    ${percent.toFixed(1)}% of CPD log
-                `;
+                    tooltip.innerHTML = `
+                        <strong>${category}</strong>
+                        <br>
+                        ${count}
+                        ${count === 1 ? "activity" : "activities"}
+                        <br>
+                        ${percent.toFixed(1)}% of CPD log
+                    `;
 
-                tooltip.style.display = "block";
-                tooltip.style.opacity = "1";
+                    tooltip.style.display = "block";
+                    tooltip.style.opacity = "1";
 
-                tooltip.setAttribute(
-                    "aria-hidden",
-                    "false"
-                );
+                    tooltip.setAttribute(
+                        "aria-hidden",
+                        "false"
+                    );
 
-                tooltip.style.left =
-                    (e.pageX + 12) + "px";
+                    tooltip.style.left =
+                        (e.pageX + 12) + "px";
 
-                tooltip.style.top =
-                    (e.pageY - 12) + "px";
+                    tooltip.style.top =
+                        (e.pageY - 12) + "px";
 
-            };
-
-
-            /* ----------------------------------------------------
-               Move tooltip with pointer
-            ---------------------------------------------------- */
-
-            segment.onmousemove = function (e) {
-
-                if (!tooltip) return;
-
-                tooltip.style.left =
-                    (e.pageX + 12) + "px";
-
-                tooltip.style.top =
-                    (e.pageY - 12) + "px";
-
-            };
+                };
 
 
-            /* ----------------------------------------------------
-               Hide tooltip
-            ---------------------------------------------------- */
+                segment.onmousemove = function(e) {
 
-            segment.onmouseleave = function () {
+                    tooltip.style.left =
+                        (e.pageX + 12) + "px";
 
-                if (!tooltip) return;
+                    tooltip.style.top =
+                        (e.pageY - 12) + "px";
 
-                tooltip.style.opacity = "0";
-                tooltip.style.display = "none";
+                };
 
-                tooltip.setAttribute(
-                    "aria-hidden",
-                    "true"
-                );
 
-            };
+                segment.onmouseleave = function() {
 
+                    tooltip.style.opacity = "0";
+                    tooltip.style.display = "none";
+
+                    tooltip.setAttribute(
+                        "aria-hidden",
+                        "true"
+                    );
+
+                };
+
+            }
+
+
+            /* ====================================================
+               MOVE TO NEXT SEGMENT
+            ==================================================== */
 
             offset += percent;
             index++;

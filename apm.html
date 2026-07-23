@@ -5362,26 +5362,43 @@ segment.onpointerleave = null;
             segment.style.pointerEvents =
                 "stroke";
 
+/* ====================================================
+   ADD LEGEND
+==================================================== */
 
-            /* ====================================================
-               ADD LEGEND
-            ==================================================== */
+if (legend) {
 
-            if (legend) {
+    const li =
+        document.createElement("li");
 
-                const li =
-                    document.createElement("li");
+    const legendColours = [
+        "#0a66c2",  // seg-1 — Blue
+        "#007b5f",  // seg-2 — Green
+        "#b8860b",  // seg-3 — Gold
+        "#8a2be2"   // seg-4 — Purple
+    ];
 
-                li.innerHTML = `
-                    <span class="legend-box seg-${index + 1}"></span>
-                    ${category} (${count})
-                `;
+    li.innerHTML = `
+        <span
+            class="legend-box seg-${index + 1}"
+            style="
+                background-color: ${legendColours[index]} !important;
+                background: ${legendColours[index]} !important;
+                display: inline-block;
+                width: 14px;
+                height: 14px;
+                min-width: 14px;
+                border-radius: 3px;
+                border: 1px solid rgba(0,0,0,0.15);
+            "
+        ></span>
 
-                legend.appendChild(li);
+        <span>${category} (${count})</span>
+    `;
 
-            }
+    legend.appendChild(li);
 
-
+}
             /* ====================================================
                TOOLTIP CONTENT
             ==================================================== */

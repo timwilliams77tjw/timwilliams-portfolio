@@ -4713,6 +4713,57 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
 #pillar-projected {
     background: #0a66c2 !important;
 }
+
+/* ============================================================
+   CPD DONUT TOOLTIP
+============================================================ */
+
+.donut-wrapper {
+    position: relative;
+}
+
+.donut-tooltip {
+    position: fixed;
+    z-index: 99999;
+
+    display: none;
+
+    pointer-events: none;
+
+    padding: 10px 14px;
+
+    min-width: 150px;
+    max-width: 240px;
+
+    background: rgba(20, 28, 40, 0.96);
+    color: #ffffff;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.25);
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    white-space: nowrap;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.15s ease;
+
+    transform: translate3d(0, 0, 0);
+}
+
+.donut-tooltip strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
   
 </style>
 
@@ -4942,7 +4993,12 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
 
     <ul class="donut-legend" id="donut-legend"></ul>
   </div>
-<div id="donut-tooltip" class="donut-tooltip"></div>
+<div
+  id="donut-tooltip"
+  class="donut-tooltip"
+  role="tooltip"
+  aria-hidden="true">
+</div>
 </section>
 
 <div class="cpd-table-wrapper" style="display:none">
@@ -5086,15 +5142,33 @@ function generateDonutChart() {
     ============================================================ */
 
     const segments =
-        document.querySelectorAll(".donut-segment");
+        document.querySelectorAll(
+            ".donut-segment"
+        );
 
     const legend =
-        document.getElementById("donut-legend");
+        document.getElementById(
+            "donut-legend"
+        );
 
     const tooltip =
-        document.getElementById("donut-tooltip");
+        document.getElementById(
+            "donut-tooltip"
+        );
 
-    if (!segments.length) return;
+    if (!segments.length) {
+        console.warn(
+            "[CPD] Donut segments not found."
+        );
+        return;
+    }
+
+    if (!tooltip) {
+        console.warn(
+            "[CPD] #donut-tooltip not found."
+        );
+        return;
+    }
 
 
     /* ============================================================
@@ -5121,12 +5195,35 @@ function generateDonutChart() {
         segment.dataset.category = "";
         segment.dataset.count = "0";
 
-        /* Remove old event handlers */
+        segment.style.pointerEvents =
+            "none";
+
         segment.onmouseenter = null;
         segment.onmousemove = null;
         segment.onmouseleave = null;
 
+        segment.ontouchstart = null;
+        segment.ontouchmove = null;
+        segment.ontouchend = null;
+
     });
+
+
+    /* ============================================================
+       TOOLTIP POSITIONING
+    ============================================================ */
+
+    function positionTooltip(x, y) {
+
+        const offset = 14;
+
+        tooltip.style.left =
+            (x + offset) + "px";
+
+        tooltip.style.top =
+            (y + offset) + "px";
+
+    }
 
 
     /* ============================================================
@@ -5152,7 +5249,7 @@ function generateDonutChart() {
 
 
             /* ====================================================
-               STORE SEGMENT DATA
+               STORE DATA
             ==================================================== */
 
             segment.dataset.category =
@@ -5160,6 +5257,9 @@ function generateDonutChart() {
 
             segment.dataset.count =
                 count;
+
+            segment.dataset.percent =
+                percent.toFixed(1);
 
 
             /* ====================================================
@@ -5172,81 +5272,164 @@ function generateDonutChart() {
             segment.style.strokeDashoffset =
                 `-${offset}`;
 
+            segment.style.pointerEvents =
+                "stroke";
+
 
             /* ====================================================
-               LEGEND
+               ADD LEGEND
             ==================================================== */
 
             if (legend) {
 
-                legend.innerHTML += `
-                    <li>
-                        <span class="legend-box seg-${index + 1}"></span>
-                        ${category} (${count})
-                    </li>
+                const li =
+                    document.createElement("li");
+
+                li.innerHTML = `
+                    <span class="legend-box seg-${index + 1}"></span>
+                    ${category} (${count})
                 `;
+
+                legend.appendChild(li);
 
             }
 
 
             /* ====================================================
-               DONUT TOOLTIP
+               TOOLTIP CONTENT
             ==================================================== */
 
-            if (tooltip) {
+            function showTooltip(x, y) {
 
-                segment.onmouseenter =
-                    function(e) {
+                tooltip.innerHTML = `
+                    <strong>${category}</strong>
+                    <br>
+                    ${count}
+                    ${count === 1
+                        ? "activity"
+                        : "activities"}
+                    <br>
+                    ${percent.toFixed(1)}% of CPD log
+                `;
 
-                        tooltip.innerHTML = `
-                            <strong>${category}</strong>
-                            <br>
-                            ${count}
-                            ${count === 1
-                                ? "activity"
-                                : "activities"}
-                            <br>
-                            ${percent.toFixed(1)}% of CPD log
-                        `;
+                positionTooltip(x, y);
 
-                        tooltip.style.display =
-                            "block";
+                tooltip.style.display =
+                    "block";
 
-                        tooltip.style.opacity =
-                            "1";
+                requestAnimationFrame(() => {
 
-                        tooltip.setAttribute(
-                            "aria-hidden",
-                            "false"
-                        );
+                    tooltip.style.opacity =
+                        "1";
 
-                        /*
-                           Use viewport coordinates because the
-                           tooltip CSS uses position: fixed.
-                        */
-                        tooltip.style.left =
-                            (e.clientX + 14) + "px";
+                });
 
-                        tooltip.style.top =
-                            (e.clientY + 14) + "px";
+                tooltip.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
 
-                    };
+            }
 
 
-                segment.onmousemove =
-                    function(e) {
+            /* ====================================================
+               DESKTOP MOUSE
+            ==================================================== */
 
-                        tooltip.style.left =
-                            (e.clientX + 14) + "px";
+            segment.addEventListener(
+                "mouseenter",
+                function(e) {
 
-                        tooltip.style.top =
-                            (e.clientY + 14) + "px";
+                    showTooltip(
+                        e.clientX,
+                        e.clientY
+                    );
 
-                    };
+                }
+            );
 
 
-                segment.onmouseleave =
-                    function() {
+            segment.addEventListener(
+                "mousemove",
+                function(e) {
+
+                    positionTooltip(
+                        e.clientX,
+                        e.clientY
+                    );
+
+                }
+            );
+
+
+            segment.addEventListener(
+                "mouseleave",
+                function() {
+
+                    tooltip.style.opacity =
+                        "0";
+
+                    tooltip.style.display =
+                        "none";
+
+                    tooltip.setAttribute(
+                        "aria-hidden",
+                        "true"
+                    );
+
+                }
+            );
+
+
+            /* ====================================================
+               MOBILE / TOUCH
+            ==================================================== */
+
+            segment.addEventListener(
+                "touchstart",
+                function(e) {
+
+                    const touch =
+                        e.touches[0];
+
+                    if (!touch) return;
+
+                    showTooltip(
+                        touch.clientX,
+                        touch.clientY
+                    );
+
+                    e.preventDefault();
+
+                },
+                { passive: false }
+            );
+
+
+            segment.addEventListener(
+                "touchmove",
+                function(e) {
+
+                    const touch =
+                        e.touches[0];
+
+                    if (!touch) return;
+
+                    positionTooltip(
+                        touch.clientX,
+                        touch.clientY
+                    );
+
+                },
+                { passive: true }
+            );
+
+
+            segment.addEventListener(
+                "touchend",
+                function() {
+
+                    setTimeout(() => {
 
                         tooltip.style.opacity =
                             "0";
@@ -5259,9 +5442,10 @@ function generateDonutChart() {
                             "true"
                         );
 
-                    };
+                    }, 1500);
 
-            }
+                }
+            );
 
 
             /* ====================================================
@@ -5275,7 +5459,7 @@ function generateDonutChart() {
         }
     );
 
-}
+}  
 /* ==========================================================
    DATE PARSER (US FORMAT MM/DD/YYYY)
 ========================================================== */

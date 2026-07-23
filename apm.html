@@ -4764,6 +4764,43 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     font-size: 14px;
     font-weight: 700;
 }
+
+/* ============================================================
+   CPD DONUT TOOLTIP
+============================================================ */
+
+.donut-tooltip {
+    position: fixed;
+    display: none;
+    visibility: hidden;
+
+    z-index: 999999;
+
+    padding: 10px 14px;
+
+    background: rgba(20, 25, 35, 0.96);
+    color: #ffffff;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    white-space: nowrap;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.15s ease;
+}
+
+.donut-tooltip strong {
+    font-weight: 700;
+}
   
 </style>
 
@@ -5198,9 +5235,14 @@ function generateDonutChart() {
         segment.style.pointerEvents =
             "none";
 
-        segment.onmouseenter = null;
-        segment.onmousemove = null;
-        segment.onmouseleave = null;
+       /* Remove any previous tooltip handlers */
+segment.onmouseenter = null;
+segment.onmousemove = null;
+segment.onmouseleave = null;
+
+segment.onpointerenter = null;
+segment.onpointermove = null;
+segment.onpointerleave = null;
 
         segment.ontouchstart = null;
         segment.ontouchmove = null;
@@ -5332,120 +5374,107 @@ function generateDonutChart() {
             }
 
 
-            /* ====================================================
-               DESKTOP MOUSE
-            ==================================================== */
+  /* ====================================================
+   POINTER TOOLTIP
+   Works with mouse, trackpad, iPad and touch
+==================================================== */
 
-            segment.addEventListener(
-                "mouseenter",
-                function(e) {
+function hideTooltip() {
 
-                    showTooltip(
-                        e.clientX,
-                        e.clientY
-                    );
+    tooltip.style.opacity =
+        "0";
 
-                }
+    tooltip.style.display =
+        "none";
+
+    tooltip.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+}
+
+
+/* ====================================================
+   POINTER ENTER
+==================================================== */
+
+segment.addEventListener(
+    "pointerenter",
+    function(e) {
+
+        showTooltip(
+            e.clientX,
+            e.clientY
+        );
+
+    }
+);
+
+
+/* ====================================================
+   POINTER MOVE
+==================================================== */
+
+segment.addEventListener(
+    "pointermove",
+    function(e) {
+
+        positionTooltip(
+            e.clientX,
+            e.clientY
+        );
+
+    }
+);
+
+
+/* ====================================================
+   POINTER LEAVE
+==================================================== */
+
+segment.addEventListener(
+    "pointerleave",
+    function(e) {
+
+        /*
+         * Mouse and pen:
+         * hide immediately.
+         */
+
+        if (
+            e.pointerType !== "touch"
+        ) {
+
+            hideTooltip();
+
+        }
+
+    }
+);
+
+
+/* ====================================================
+   TOUCH / POINTER UP
+==================================================== */
+
+segment.addEventListener(
+    "pointerup",
+    function(e) {
+
+        if (
+            e.pointerType === "touch"
+        ) {
+
+            setTimeout(
+                hideTooltip,
+                1800
             );
 
+        }
 
-            segment.addEventListener(
-                "mousemove",
-                function(e) {
-
-                    positionTooltip(
-                        e.clientX,
-                        e.clientY
-                    );
-
-                }
-            );
-
-
-            segment.addEventListener(
-                "mouseleave",
-                function() {
-
-                    tooltip.style.opacity =
-                        "0";
-
-                    tooltip.style.display =
-                        "none";
-
-                    tooltip.setAttribute(
-                        "aria-hidden",
-                        "true"
-                    );
-
-                }
-            );
-
-
-            /* ====================================================
-               MOBILE / TOUCH
-            ==================================================== */
-
-            segment.addEventListener(
-                "touchstart",
-                function(e) {
-
-                    const touch =
-                        e.touches[0];
-
-                    if (!touch) return;
-
-                    showTooltip(
-                        touch.clientX,
-                        touch.clientY
-                    );
-
-                    e.preventDefault();
-
-                },
-                { passive: false }
-            );
-
-
-            segment.addEventListener(
-                "touchmove",
-                function(e) {
-
-                    const touch =
-                        e.touches[0];
-
-                    if (!touch) return;
-
-                    positionTooltip(
-                        touch.clientX,
-                        touch.clientY
-                    );
-
-                },
-                { passive: true }
-            );
-
-
-            segment.addEventListener(
-                "touchend",
-                function() {
-
-                    setTimeout(() => {
-
-                        tooltip.style.opacity =
-                            "0";
-
-                        tooltip.style.display =
-                            "none";
-
-                        tooltip.setAttribute(
-                            "aria-hidden",
-                            "true"
-                        );
-
-                    }, 1500);
-
-                }
-            );
+    }
+);
 
 
             /* ====================================================

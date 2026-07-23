@@ -4038,6 +4038,226 @@ body.page-prof-dev #footer a {
   }
 
 }  
+
+/* ============================================================
+   APM PAGE ONLY — MOBILE STICKY BAR VISUAL FIX
+   Does NOT affect global-restore.css or other pages
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+    /* Blue container */
+    footer.footer .mobile-sticky-bar {
+        position: fixed !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+
+        gap: 10px !important;
+        padding: 10px !important;
+
+        background: #0A1F44 !important;
+
+        z-index: 99999 !important;
+    }
+
+    /* White pill buttons */
+    footer.footer .mobile-sticky-bar .sticky-btn {
+        flex: 1 1 0 !important;
+        width: auto !important;
+        max-width: none !important;
+        min-width: 0 !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        box-sizing: border-box !important;
+
+        padding: 10px 12px !important;
+
+        background: #ffffff !important;
+        color: #0A1F44 !important;
+
+        border-radius: 999px !important;
+
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+
+        text-align: center !important;
+        text-decoration: none !important;
+
+        white-space: nowrap !important;
+    }
+
+    /* Keep icon and text together */
+    footer.footer .mobile-sticky-bar .sticky-btn::first-letter {
+        white-space: nowrap !important;
+    }
+}  
+
+/* ============================================================
+   APM — CPD PROGRESS PILLARS
+   PAGE-SPECIFIC OVERRIDE
+============================================================ */
+
+section.cpd-pillars-section {
+    margin: 3rem 0 2rem;
+}
+
+/* Horizontal scrolling container */
+section.cpd-pillars-section .pillars-scroll {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 10px 0 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Base pillar card */
+section.cpd-pillars-section .pillar-card {
+    min-width: 220px;
+    flex: 0 0 220px;
+    border-radius: 24px;
+    padding: 22px;
+    color: #fff !important;
+    position: relative;
+    scroll-snap-align: start;
+    box-shadow: 0 10px 25px rgba(0,0,0,.12);
+
+    /* Prevent generic card styles from overriding */
+    background-color: transparent !important;
+}
+
+/* ============================================================
+   PILLAR COLOURS
+============================================================ */
+
+/* COMPLETED — GREEN */
+section.cpd-pillars-section .pillar-card.completed {
+    background: linear-gradient(
+        135deg,
+        #16a34a 0%,
+        #22c55e 100%
+    ) !important;
+}
+
+/* REMAINING — RED */
+section.cpd-pillars-section .pillar-card.remaining {
+    background: linear-gradient(
+        135deg,
+        #dc2626 0%,
+        #ef4444 100%
+    ) !important;
+}
+
+/* PROJECTED — BLUE */
+section.cpd-pillars-section .pillar-card.projected {
+    background: linear-gradient(
+        135deg,
+        #2563eb 0%,
+        #60a5fa 100%
+    ) !important;
+}
+
+/* ============================================================
+   ICON
+============================================================ */
+
+section.cpd-pillars-section .pillar-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: rgba(255,255,255,.18) !important;
+    color: #fff !important;
+    margin-bottom: 16px;
+}
+
+/* ============================================================
+   VALUE
+============================================================ */
+
+section.cpd-pillars-section .pillar-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+/* ============================================================
+   TITLE
+============================================================ */
+
+section.cpd-pillars-section .pillar-title {
+    color: rgba(255,255,255,.85) !important;
+    margin-bottom: 18px;
+}
+
+/* ============================================================
+   PROGRESS TRACK
+============================================================ */
+
+section.cpd-pillars-section .pillar-progress {
+    height: 12px;
+    background: rgba(255,255,255,.25) !important;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+/* ============================================================
+   PROGRESS FILL
+============================================================ */
+
+section.cpd-pillars-section .pillar-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    transition: width 1.2s ease;
+}
+
+/* Green fill */
+section.cpd-pillars-section .pillar-card.completed .pillar-fill {
+    background: #22c55e !important;
+}
+
+/* Red fill */
+section.cpd-pillars-section .pillar-card.remaining .pillar-fill {
+    background: #ef4444 !important;
+}
+
+/* Blue fill */
+section.cpd-pillars-section .pillar-card.projected .pillar-fill {
+    background: #60a5fa !important;
+}
+
+/* ============================================================
+   CPD LABEL
+============================================================ */
+
+section.cpd-pillars-section .pillar-card::after {
+    content: "CPD";
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.15) !important;
+    color: #fff !important;
+    font-size: .7rem;
+}  
 </style>
 
 
@@ -4701,23 +4921,51 @@ function calculateMetrics() {
         if (el) el.textContent = value;
     };
 
-         // Use completedHours for "Total Hours" (completed CPD)
-setText("metric-total-hours", totalHours.toFixed(1));
+    /* ============================================================
+   FINAL CPD METRICS
+============================================================ */
 
+/*
+   Completed = activities whose end date is in the past
+   Remaining = ongoing / future activities
+   Projected = completed + remaining
+*/
 
-    setText("metric-hours-remaining", hoursRemaining.toFixed(1));
-    setText("metric-activities", activityCount);
-    setText("metric-hours-month", avgHoursPerMonth.toFixed(1));
-    setText("metric-top-category", topCategory);
+const projectedTotal = completedHours + hoursRemaining;
 
-    // Correct projected hours (completed + remaining)
-const projectedTotal = totalHours;
+/* Main metrics */
+setText(
+    "metric-total-hours",
+    completedHours.toFixed(1)
+);
 
-    setText("metric-projected-hours", projectedTotal.toFixed(1));
+setText(
+    "metric-hours-remaining",
+    hoursRemaining.toFixed(1)
+);
 
-    // Progress ring target
-const targetHours = Math.max(totalHours, 1);
+setText(
+    "metric-projected-hours",
+    projectedTotal.toFixed(1)
+);
 
+setText(
+    "metric-activities",
+    activityCount
+);
+
+setText(
+    "metric-hours-month",
+    avgHoursPerMonth.toFixed(1)
+);
+
+setText(
+    "metric-top-category",
+    topCategory
+);
+
+/* Progress ring target */
+const targetHours = Math.max(projectedTotal, 1);
 
 
     setText(
@@ -5147,36 +5395,116 @@ document.addEventListener("DOMContentLoaded", waitForAccordion);
 
 
 function generateProgressPillars() {
-  const completed = parseFloat(document.getElementById("metric-total-hours").textContent) || 0;
-  const remaining = parseFloat(document.getElementById("metric-hours-remaining").textContent) || 0;
-  const projected = parseFloat(document.getElementById("metric-projected-hours").textContent) || 0;
 
-  const max = Math.max(completed, remaining, projected, 1);
+    const completedEl =
+        document.getElementById("metric-total-hours");
 
-  const setPillar = (id, labelId, value, className) => {
-    const fill = document.getElementById(id);
-    const label = document.getElementById(labelId);
-    if (!fill || !label) return;
+    const remainingEl =
+        document.getElementById("metric-hours-remaining");
 
-    const card = fill.closest(".pillar-card");
-    if (!card) return;
+    const projectedEl =
+        document.getElementById("metric-projected-hours");
 
-    card.classList.remove("completed", "remaining", "projected");
-    card.classList.add(className);
+    if (!completedEl || !remainingEl || !projectedEl) {
+        console.warn(
+            "[CPD] Progress pillar metric elements not found."
+        );
+        return;
+    }
 
-    const percent = (value / max) * 100;
-    label.textContent = value.toFixed(1);
+    const completed =
+        parseFloat(completedEl.textContent) || 0;
 
-    requestAnimationFrame(() => {
-      fill.style.width = percent + "%";
-    });
-  };
+    const remaining =
+        parseFloat(remainingEl.textContent) || 0;
 
-  setTimeout(() => {
-    setPillar("pillar-completed", "pillar-completed-label", completed, "completed");
-    setPillar("pillar-remaining", "pillar-remaining-label", remaining, "remaining");
-    setPillar("pillar-projected", "pillar-projected-label", projected, "projected");
-  }, 300);
+    const projected =
+        parseFloat(projectedEl.textContent) || 0;
+
+    /*
+       Scale all three bars against projected total.
+       This means projected = 100%.
+    */
+    const max =
+        Math.max(projected, completed, remaining, 1);
+
+    function setPillar(
+        fillId,
+        labelId,
+        value,
+        className
+    ) {
+
+        const fill =
+            document.getElementById(fillId);
+
+        const label =
+            document.getElementById(labelId);
+
+        if (!fill || !label) return;
+
+        const card =
+            fill.closest(".pillar-card");
+
+        if (!card) return;
+
+        /* Ensure correct colour class */
+        card.classList.remove(
+            "completed",
+            "remaining",
+            "projected"
+        );
+
+        card.classList.add(className);
+
+        /* Update number */
+        label.textContent =
+            value.toFixed(1);
+
+        /* Calculate percentage */
+        const percent =
+            Math.min(
+                (value / max) * 100,
+                100
+            );
+
+        /* Animate bar */
+        requestAnimationFrame(() => {
+
+            fill.style.width =
+                percent + "%";
+
+        });
+    }
+
+    /*
+       Small delay ensures metric DOM has
+       finished updating before reading values.
+    */
+    setTimeout(() => {
+
+        setPillar(
+            "pillar-completed",
+            "pillar-completed-label",
+            completed,
+            "completed"
+        );
+
+        setPillar(
+            "pillar-remaining",
+            "pillar-remaining-label",
+            remaining,
+            "remaining"
+        );
+
+        setPillar(
+            "pillar-projected",
+            "pillar-projected-label",
+            projected,
+            "projected"
+        );
+
+    }, 100);
 }
 </script>
 

@@ -4603,6 +4603,117 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.remaining .pillar-fill {
 body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     background: #60a5fa !important;
 }
+
+/* ============================================================
+   CPD DONUT TOOLTIP
+============================================================ */
+
+#donut-tooltip {
+    position: fixed !important;
+
+    display: none;
+
+    z-index: 99999;
+
+    pointer-events: none;
+
+    max-width: 240px;
+
+    padding: 10px 14px;
+
+    border-radius: 8px;
+
+    background: rgba(20, 30, 45, 0.96);
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.25);
+
+    opacity: 0;
+
+    transition:
+        opacity 0.15s ease;
+
+    transform:
+        translate3d(0, 0, 0);
+}
+
+#donut-tooltip strong {
+    font-weight: 700;
+    color: #ffffff;
+}  
+
+/* ============================================================
+   CPD PROGRESS PILLARS
+   Completed / In Progress / Projected
+============================================================ */
+
+/* COMPLETED */
+.pillar-card.pillar-completed {
+    --pillar-colour: #007b5f;
+}
+
+.pillar-card.pillar-completed
+.pillar-fill,
+.pillar-card.pillar-completed
+.pillar-progress-fill,
+.pillar-card.pillar-completed
+.pillar-bar-fill {
+    background: #007b5f !important;
+}
+
+
+/* IN PROGRESS / REMAINING */
+.pillar-card.pillar-remaining {
+    --pillar-colour: #b8860b;
+}
+
+.pillar-card.pillar-remaining
+.pillar-fill,
+.pillar-card.pillar-remaining
+.pillar-progress-fill,
+.pillar-card.pillar-remaining
+.pillar-bar-fill {
+    background: #b8860b !important;
+}
+
+
+/* PROJECTED */
+.pillar-card.pillar-projected {
+    --pillar-colour: #0a66c2;
+}
+
+.pillar-card.pillar-projected
+.pillar-fill,
+.pillar-card.pillar-projected
+.pillar-progress-fill,
+.pillar-card.pillar-projected
+.pillar-bar-fill {
+    background: #0a66c2 !important;
+} 
+/* ============================================================
+   DIRECT PILLAR FILL COLOURS
+============================================================ */
+
+#pillar-completed {
+    background: #007b5f !important;
+}
+
+#pillar-remaining {
+    background: #b8860b !important;
+}
+
+#pillar-projected {
+    background: #0a66c2 !important;
+}
+  
 </style>
 
 
@@ -4952,7 +5063,8 @@ function generateDonutChart() {
 
         if (cells.length < 5) return;
 
-        const category = cells[4].textContent.trim();
+        const category =
+            cells[4].textContent.trim();
 
         if (!category) return;
 
@@ -4995,18 +5107,21 @@ function generateDonutChart() {
 
 
     /* ============================================================
-       RESET ALL DONUT SEGMENTS
+       RESET DONUT SEGMENTS
     ============================================================ */
 
     segments.forEach(segment => {
 
-        segment.style.strokeDasharray = "0 100";
-        segment.style.strokeDashoffset = "0";
+        segment.style.strokeDasharray =
+            "0 100";
+
+        segment.style.strokeDashoffset =
+            "0";
 
         segment.dataset.category = "";
         segment.dataset.count = "0";
 
-        /* Remove any previous tooltip handlers */
+        /* Remove old event handlers */
         segment.onmouseenter = null;
         segment.onmousemove = null;
         segment.onmouseleave = null;
@@ -5027,7 +5142,8 @@ function generateDonutChart() {
             /* Maximum of four visual segments */
             if (index >= 4) return;
 
-            const segment = segments[index];
+            const segment =
+                segments[index];
 
             if (!segment) return;
 
@@ -5036,11 +5152,14 @@ function generateDonutChart() {
 
 
             /* ====================================================
-               STORE DATA ON SVG SEGMENT
+               STORE SEGMENT DATA
             ==================================================== */
 
-            segment.dataset.category = category;
-            segment.dataset.count = count;
+            segment.dataset.category =
+                category;
+
+            segment.dataset.count =
+                count;
 
 
             /* ====================================================
@@ -5055,7 +5174,7 @@ function generateDonutChart() {
 
 
             /* ====================================================
-               ADD LEGEND ITEM
+               LEGEND
             ==================================================== */
 
             if (legend) {
@@ -5071,61 +5190,76 @@ function generateDonutChart() {
 
 
             /* ====================================================
-               HOVER TOOLTIP
+               DONUT TOOLTIP
             ==================================================== */
 
             if (tooltip) {
 
-                segment.onmouseenter = function(e) {
+                segment.onmouseenter =
+                    function(e) {
 
-                    tooltip.innerHTML = `
-                        <strong>${category}</strong>
-                        <br>
-                        ${count}
-                        ${count === 1 ? "activity" : "activities"}
-                        <br>
-                        ${percent.toFixed(1)}% of CPD log
-                    `;
+                        tooltip.innerHTML = `
+                            <strong>${category}</strong>
+                            <br>
+                            ${count}
+                            ${count === 1
+                                ? "activity"
+                                : "activities"}
+                            <br>
+                            ${percent.toFixed(1)}% of CPD log
+                        `;
 
-                    tooltip.style.display = "block";
-                    tooltip.style.opacity = "1";
+                        tooltip.style.display =
+                            "block";
 
-                    tooltip.setAttribute(
-                        "aria-hidden",
-                        "false"
-                    );
+                        tooltip.style.opacity =
+                            "1";
 
-                    tooltip.style.left =
-                        (e.pageX + 12) + "px";
+                        tooltip.setAttribute(
+                            "aria-hidden",
+                            "false"
+                        );
 
-                    tooltip.style.top =
-                        (e.pageY - 12) + "px";
+                        /*
+                           Use viewport coordinates because the
+                           tooltip CSS uses position: fixed.
+                        */
+                        tooltip.style.left =
+                            (e.clientX + 14) + "px";
 
-                };
+                        tooltip.style.top =
+                            (e.clientY + 14) + "px";
 
-
-                segment.onmousemove = function(e) {
-
-                    tooltip.style.left =
-                        (e.pageX + 12) + "px";
-
-                    tooltip.style.top =
-                        (e.pageY - 12) + "px";
-
-                };
+                    };
 
 
-                segment.onmouseleave = function() {
+                segment.onmousemove =
+                    function(e) {
 
-                    tooltip.style.opacity = "0";
-                    tooltip.style.display = "none";
+                        tooltip.style.left =
+                            (e.clientX + 14) + "px";
 
-                    tooltip.setAttribute(
-                        "aria-hidden",
-                        "true"
-                    );
+                        tooltip.style.top =
+                            (e.clientY + 14) + "px";
 
-                };
+                    };
+
+
+                segment.onmouseleave =
+                    function() {
+
+                        tooltip.style.opacity =
+                            "0";
+
+                        tooltip.style.display =
+                            "none";
+
+                        tooltip.setAttribute(
+                            "aria-hidden",
+                            "true"
+                        );
+
+                    };
 
             }
 
@@ -5135,6 +5269,7 @@ function generateDonutChart() {
             ==================================================== */
 
             offset += percent;
+
             index++;
 
         }

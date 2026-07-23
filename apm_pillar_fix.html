@@ -4141,36 +4141,35 @@ section.cpd-pillars-section .pillar-card {
 }
 
 /* ============================================================
-   PILLAR COLOURS
+   APM CPD PILLAR COLOURS — UNIQUE CLASS NAMES
 ============================================================ */
 
-/* COMPLETED — GREEN */
-section.cpd-pillars-section .pillar-card.completed {
+section.cpd-pillars-section .pillar-card.pillar-completed {
     background: linear-gradient(
         135deg,
         #16a34a 0%,
         #22c55e 100%
     ) !important;
+    background-color: #16a34a !important;
 }
 
-/* REMAINING — RED */
-section.cpd-pillars-section .pillar-card.remaining {
+section.cpd-pillars-section .pillar-card.pillar-remaining {
     background: linear-gradient(
         135deg,
         #dc2626 0%,
         #ef4444 100%
     ) !important;
+    background-color: #dc2626 !important;
 }
 
-/* PROJECTED — BLUE */
-section.cpd-pillars-section .pillar-card.projected {
+section.cpd-pillars-section .pillar-card.pillar-projected {
     background: linear-gradient(
         135deg,
         #2563eb 0%,
         #60a5fa 100%
     ) !important;
+    background-color: #2563eb !important;
 }
-
 /* ============================================================
    ICON
 ============================================================ */
@@ -4257,6 +4256,112 @@ section.cpd-pillars-section .pillar-card::after {
     background: rgba(255,255,255,.15) !important;
     color: #fff !important;
     font-size: .7rem;
+}  
+
+/* ============================================================
+   CPD DONUT RING TOOLTIP
+============================================================ */
+
+#donut-tooltip {
+    position: fixed;
+    z-index: 999999;
+
+    display: none;
+
+    min-width: 150px;
+    max-width: 240px;
+
+    padding: 12px 15px;
+
+    border-radius: 12px;
+
+    background: rgba(10, 31, 68, 0.96);
+    color: #fff;
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.25);
+
+    font-size: 13px;
+    line-height: 1.45;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transform: translateY(-2px);
+
+    transition:
+        opacity .15s ease,
+        transform .15s ease;
+}
+
+#donut-tooltip strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #fff;
+}
+
+#donut-tooltip span {
+    display: block;
+
+    color: rgba(255,255,255,.85);
+}  
+
+/* ============================================================
+   CPD DONUT TOOLTIP
+============================================================ */
+
+.donut-tooltip {
+    position: fixed;
+    z-index: 999999;
+
+    display: none;
+    pointer-events: none;
+
+    padding: 10px 14px;
+
+    background: rgba(10, 31, 68, 0.96);
+    color: #ffffff;
+
+    border: 1px solid rgba(122, 192, 249, 0.65);
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.25);
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    white-space: nowrap;
+
+    opacity: 0;
+    transform: translateY(4px);
+
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+}
+
+.donut-tooltip.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.donut-tooltip strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: #ffffff;
+}
+
+.donut-tooltip span {
+    color: #cfe8ff;
 }  
 </style>
 
@@ -4387,7 +4492,7 @@ section.cpd-pillars-section .pillar-card::after {
 
     <div class="pillars-scroll">
 
-        <div class="pillar-card completed">
+<div class="pillar-card pillar-completed">
             <div class="pillar-icon">
                 <i class="fa-solid fa-circle-check"></i>
             </div>
@@ -4403,7 +4508,7 @@ section.cpd-pillars-section .pillar-card::after {
             </div>
         </div>
 
-        <div class="pillar-card remaining">
+<div class="pillar-card pillar-remaining">
             <div class="pillar-icon">
                 <i class="fa-solid fa-hourglass-half"></i>
             </div>
@@ -4419,7 +4524,7 @@ section.cpd-pillars-section .pillar-card::after {
             </div>
         </div>
 
-       <div class="pillar-card projected">
+<div class="pillar-card pillar-projected">
   <div class="pillar-icon">
     <i class="fa-solid fa-chart-line"></i>
   </div>
@@ -4446,16 +4551,48 @@ section.cpd-pillars-section .pillar-card::after {
       <circle class="donut-ring" cx="21" cy="21" r="15.915"></circle>
 
       <!-- Dynamic segments -->
-      <circle class="donut-segment seg-1" cx="21" cy="21" r="15.915"></circle>
-      <circle class="donut-segment seg-2" cx="21" cy="21" r="15.915"></circle>
-      <circle class="donut-segment seg-3" cx="21" cy="21" r="15.915"></circle>
-      <circle class="donut-segment seg-4" cx="21" cy="21" r="15.915"></circle>
+     <!-- Dynamic segments -->
+<circle
+    class="donut-segment seg-1"
+    cx="21"
+    cy="21"
+    r="15.915"
+    data-category=""
+    data-count="0">
+</circle>
 
+<circle
+    class="donut-segment seg-2"
+    cx="21"
+    cy="21"
+    r="15.915"
+    data-category=""
+    data-count="0">
+</circle>
+
+<circle
+    class="donut-segment seg-3"
+    cx="21"
+    cy="21"
+    r="15.915"
+    data-category=""
+    data-count="0">
+</circle>
+
+<circle
+    class="donut-segment seg-4"
+    cx="21"
+    cy="21"
+    r="15.915"
+    data-category=""
+    data-count="0">
+</circle>
       <text x="50%" y="50%" class="donut-text">CPD</text>
     </svg>
 
     <ul class="donut-legend" id="donut-legend"></ul>
   </div>
+<div id="donut-tooltip" class="donut-tooltip"></div>
 </section>
 
 <div class="cpd-table-wrapper" style="display:none">
@@ -4557,53 +4694,172 @@ function parseCsvLine(line) {
     return cells.map(c => c.trim());
 }
 function generateDonutChart() {
-  const rows = [...document.querySelectorAll("#cpd-body tr")];
-  if (!rows.length) return;
 
-  const categoryCounts = {};
+    const rows = [
+        ...document.querySelectorAll("#cpd-body tr")
+    ];
 
-  rows.forEach(row => {
-    const cells = row.querySelectorAll("td");
-    if (cells.length < 5) return;
+    if (!rows.length) return;
 
-    const category = cells[4].textContent.trim();
-    if (!category) return;
+    const categoryCounts = {};
 
-    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
-  });
+    rows.forEach(row => {
 
-  const total = Object.values(categoryCounts).reduce((a, b) => a + b, 0);
-  if (total === 0) return;
+        const cells = row.querySelectorAll("td");
 
-  const segments = document.querySelectorAll(".donut-segment");
-  const legend = document.getElementById("donut-legend");
+        if (cells.length < 5) return;
 
-  legend.innerHTML = "";
+        const category =
+            cells[4].textContent.trim();
 
-  let offset = 0;
-  let index = 0;
+        if (!category) return;
 
-  Object.entries(categoryCounts).forEach(([category, count]) => {
-    if (index > 3) return; // limit to 4 segments
+        categoryCounts[category] =
+            (categoryCounts[category] || 0) + 1;
+    });
 
-    const percent = (count / total) * 100;
-    const dash = percent;
-    const gap = 100 - dash;
+    const total =
+        Object.values(categoryCounts)
+        .reduce((a, b) => a + b, 0);
 
-    const seg = segments[index];
-    seg.style.strokeDasharray = `${dash} ${gap}`;
-    seg.style.strokeDashoffset = `-${offset}`;
+    if (total === 0) return;
 
-    offset += dash;
-    index++;
+    const segments =
+        document.querySelectorAll(".donut-segment");
 
-    legend.innerHTML += `
-      <li>
-        <span class="legend-box seg-${index}"></span>
-        ${category} (${count})
-      </li>
-    `;
-  });
+    const legend =
+        document.getElementById("donut-legend");
+
+    if (!segments.length) return;
+
+    if (legend) {
+        legend.innerHTML = "";
+    }
+
+    const tooltip =
+        document.getElementById("donut-tooltip");
+
+    let offset = 0;
+    let index = 0;
+
+    Object.entries(categoryCounts).forEach(
+        ([category, count]) => {
+
+            /*
+             * Only display the first four
+             * categories because the SVG
+             * contains four segments.
+             */
+            if (index >= segments.length) return;
+
+            const percent =
+                (count / total) * 100;
+
+            const seg =
+                segments[index];
+
+            /*
+             * Update donut segment
+             */
+            seg.style.strokeDasharray =
+                `${percent} ${100 - percent}`;
+
+            seg.style.strokeDashoffset =
+                `-${offset}`;
+
+            /*
+             * Store tooltip information
+             */
+            seg.dataset.category =
+                category;
+
+            seg.dataset.count =
+                count;
+
+            seg.dataset.percent =
+                percent.toFixed(1);
+
+            /*
+             * Create legend item
+             */
+            if (legend) {
+
+                legend.innerHTML += `
+                    <li>
+                        <span class="legend-box seg-${index + 1}"></span>
+                        ${category} (${count})
+                    </li>
+                `;
+            }
+
+            offset += percent;
+
+            index++;
+        }
+    );
+
+
+    /* ========================================================
+       DONUT TOOLTIP EVENTS
+    ======================================================== */
+
+    if (!tooltip) return;
+
+    segments.forEach(segment => {
+
+        segment.addEventListener(
+            "mouseenter",
+            function () {
+
+                const category =
+                    this.dataset.category;
+
+                const count =
+                    this.dataset.count;
+
+                const percent =
+                    this.dataset.percent;
+
+                if (!category) return;
+
+                tooltip.innerHTML = `
+                    <strong>${category}</strong>
+                    <span>
+                        ${count} ${count == 1 ? "activity" : "activities"}
+                        · ${percent}%
+                    </span>
+                `;
+
+                tooltip.classList.add("visible");
+            }
+        );
+
+
+        segment.addEventListener(
+            "mousemove",
+            function (e) {
+
+                tooltip.style.left =
+                    (e.clientX + 14) + "px";
+
+                tooltip.style.top =
+                    (e.clientY - 12) + "px";
+            }
+        );
+
+
+        segment.addEventListener(
+            "mouseleave",
+            function () {
+
+                tooltip.classList.remove(
+                    "visible"
+                );
+            }
+        );
+
+    });
+
 }
 
 /* ==========================================================
@@ -5449,13 +5705,13 @@ function generateProgressPillars() {
         if (!card) return;
 
         /* Ensure correct colour class */
-        card.classList.remove(
-            "completed",
-            "remaining",
-            "projected"
-        );
+     card.classList.remove(
+    "pillar-completed",
+    "pillar-remaining",
+    "pillar-projected"
+);
 
-        card.classList.add(className);
+card.classList.add(className);
 
         /* Update number */
         label.textContent =
@@ -5484,25 +5740,25 @@ function generateProgressPillars() {
     setTimeout(() => {
 
         setPillar(
-            "pillar-completed",
-            "pillar-completed-label",
-            completed,
-            "completed"
-        );
+    "pillar-completed",
+    "pillar-completed-label",
+    completed,
+    "pillar-completed"
+);
 
-        setPillar(
-            "pillar-remaining",
-            "pillar-remaining-label",
-            remaining,
-            "remaining"
-        );
+setPillar(
+    "pillar-remaining",
+    "pillar-remaining-label",
+    remaining,
+    "pillar-remaining"
+);
 
-        setPillar(
-            "pillar-projected",
-            "pillar-projected-label",
-            projected,
-            "projected"
-        );
+setPillar(
+    "pillar-projected",
+    "pillar-projected-label",
+    projected,
+    "pillar-projected"
+);
 
     }, 100);
 }

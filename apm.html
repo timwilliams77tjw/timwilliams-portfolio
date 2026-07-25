@@ -5445,7 +5445,79 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     padding:20px;
     margin-top:30px;
     border:1px solid #e5e9ef;
-}</style>
+}
+
+/* ============================================================
+   RATINGS SUMMARY BAR TOOLTIP
+============================================================ */
+
+.rating-tooltip,
+.summary-tooltip {
+
+    background:#0a2540 !important;
+
+    color:#ffffff !important;
+
+    padding:12px 16px;
+
+    border-radius:8px;
+
+    font-size:0.9rem;
+
+    line-height:1.4;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,0.25);
+
+    border:none;
+
+    z-index:9999;
+
+}
+
+#rating-tooltip {
+    background:#0a2540 !important;
+    color:#fff !important;
+}
+  /* ============================================================
+   RATING SUMMARY TOOLTIP RESTORE
+============================================================ */
+
+.rating-tooltip {
+
+    background:#0a2540 !important;
+    color:#ffffff !important;
+
+    border-radius:8px;
+
+    padding:12px 16px;
+
+    font-size:0.9rem;
+
+    font-weight:500;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.25);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    z-index:9999;
+
+}
+/* ============================================================
+   FORCE COMPETENCY CARD TO MATCH MAIN SECTION CARDS
+============================================================ */
+
+section.competency-section > .competency-card {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    opacity: 1 !important;
+    border-radius: 22px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08) !important;
+}
+
+  
+</style>
 
 
 </head>
@@ -7540,25 +7612,18 @@ document.addEventListener("DOMContentLoaded", function () {
 </section>
 
 <!-- PERSONAL ASSESSMENT ACCORDION -->
+  <section class="competency-section">
     <div class="section-card competency-card">
-      <div class="collapsible-toggle competence-header">
-  <div class="collapsible-text">
     <h2 class="section-heading">
       <i class="fa-solid fa-user-check"></i>
       My Competence Assessment (29 competences)
     </h2>
 
-    <p class="section-helper">
-      Tap to expand my Competency Assessment.
-    </p>
-  </div>
-
-  <i class="fa-solid fa-chevron-right chevron"></i>
-</div>
+ 
 
 
 
-<div class="collapsible-content">
+
 
 <div class="apm-progress-bar"></div>
 
@@ -8187,8 +8252,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   </div> <!-- end accordion -->
-  </div> <!-- end collapsible-content -->
 <div id="rating-tooltip" class="rating-tooltip" style="display:none;"></div>
+
+</div> <!-- end section-card competency-card -->
 
 </section>
 <!-- FLOATING ACTION BUTTONS -->

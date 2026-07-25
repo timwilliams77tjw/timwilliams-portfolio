@@ -5343,8 +5343,109 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
 
     border-radius:12px;
 
+} 
+/* ============================================================
+   CPD LOG INNER COLLAPSIBLE CARD
+   Differentiates it from the main CPD section card
+============================================================ */
+
+.cpd-log-section .collapsible-toggle {
+
+    background:#f5f7fa;
+
+    border:1px solid #d9e1ea;
+
+    border-radius:14px;
+
+    padding:18px 20px;
+
+    box-shadow:none;
+
+}
+
+
+.cpd-log-section .collapsible-content {
+
+    background:#f8fafc;
+
+    border-left:1px solid #d9e1ea;
+
+    border-right:1px solid #d9e1ea;
+
+    border-bottom:1px solid #d9e1ea;
+
+    border-radius:0 0 14px 14px;
+
+    padding:20px;
+
+}
+
+
+/* Add breathing space before and after log */
+
+.cpd-log-section .collapsible-toggle {
+
+    margin-top:30px;
+
+}
+
+
+.cpd-log-section .collapsible-content {
+
+    margin-bottom:30px;
+
 }  
-</style>
+
+.framework-scroll {
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    background:#0a66c2;
+
+    color:white;
+
+    border:none;
+
+    cursor:pointer;
+
+}
+
+
+.framework-scroll:hover {
+
+    opacity:.85;
+
+}  
+
+/* ============================================================
+   FRAMEWORK CAROUSEL BUTTONS
+============================================================ */
+
+.carousel-btn {
+    cursor:pointer;
+    z-index:5;
+    transition:all .2s ease;
+}
+
+.carousel-btn:hover {
+    transform:scale(1.1);
+}  
+
+
+  /* ============================================================
+   CPD LOG INNER CARD
+============================================================ */
+
+.cpd-log-section {
+    background:#f7f9fb;
+    border-radius:16px;
+    padding:20px;
+    margin-top:30px;
+    border:1px solid #e5e9ef;
+}</style>
 
 
 </head>
@@ -6987,6 +7088,46 @@ setPillar(
 
     }, 100);
 }
+
+/* ============================================================
+   APM FRAMEWORK CAROUSEL CONTROLS
+============================================================ */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const track = document.querySelector(".carousel-track");
+    const prevBtn = document.querySelector(".carousel-btn.prev");
+    const nextBtn = document.querySelector(".carousel-btn.next");
+
+    if (!track || !prevBtn || !nextBtn) {
+        console.warn("[APM] Framework carousel elements not found.");
+        return;
+    }
+
+
+    const scrollAmount = 320;
+
+
+    nextBtn.addEventListener("click", function () {
+
+        track.scrollBy({
+            left: scrollAmount,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    prevBtn.addEventListener("click", function () {
+
+        track.scrollBy({
+            left: -scrollAmount,
+            behavior: "smooth"
+        });
+
+    });
+
+});  
 </script>
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->

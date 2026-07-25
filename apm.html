@@ -5146,6 +5146,204 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     }
 
 }  
+
+/* ============================================================
+   CPD MASTER SECTION
+============================================================ */
+
+.cpd-section-card {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 40px;
+    margin: 40px 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(10, 102, 194, 0.08);
+}
+
+/* Main section heading */
+
+.cpd-section-header {
+    margin-bottom: 35px;
+}
+
+.cpd-section-header .section-heading {
+    margin-bottom: 8px;
+}
+
+/* Internal subsections */
+
+.cpd-subsection {
+    padding: 30px 0;
+}
+
+.cpd-subsection + .cpd-subsection {
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Internal headings */
+
+.cpd-subsection-heading {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0a2540;
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Progress pillars */
+
+.cpd-progress-section .pillar-grid {
+    margin-top: 20px;
+}
+
+/* Donut section */
+
+.cpd-distribution-section {
+    padding-bottom: 35px;
+}
+
+.cpd-distribution-section .donut-wrapper {
+    margin-top: 20px;
+}
+
+/* CPD log */
+
+.cpd-log-section {
+    padding-bottom: 10px;
+}
+
+/* ============================================================
+   MOBILE CPD CARD
+============================================================ */
+
+@media (max-width: 600px) {
+
+    .cpd-section-card {
+        padding: 24px 18px;
+        border-radius: 18px;
+        margin: 25px 0;
+    }
+
+    .cpd-subsection {
+        padding: 25px 0;
+    }
+
+    .cpd-subsection-heading {
+        font-size: 1.15rem;
+    }
+
+}  
+/* ============================================================
+   CPD INTERNAL SECTION SPACING
+============================================================ */
+
+.cpd-section-card > .section-heading {
+    margin-top:0;
+}
+
+
+/* Separate each CPD component */
+
+.cpd-section-card > .section-heading:not(:first-child),
+.cpd-section-card > .cpd-log-inner,
+.cpd-section-card > .cpd-insights {
+    margin-top:3rem;
+    padding-top:2rem;
+    border-top:1px solid #e5e7eb;
+}
+
+
+/* Make internal headings stronger */
+
+.cpd-section-card .section-heading {
+    font-size:1.45rem;
+    font-weight:700;
+    color:#0a2540;
+}
+
+
+/* Subtitle spacing */
+
+.cpd-section-card .section-subtitle {
+    margin-bottom:1.5rem;
+}  
+
+.cpd-section-card {
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:2rem;
+
+    box-shadow:
+    0 6px 20px rgba(0,0,0,.08);
+
+}  
+/* ============================================================
+   CPD MASTER CARD STRUCTURE
+============================================================ */
+
+.cpd-section-card {
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:2rem;
+
+    box-shadow:
+    0 6px 20px rgba(0,0,0,.08);
+
+}
+
+
+/* spacing between internal sections */
+
+.cpd-divider {
+
+    height:1px;
+
+    background:#e5e7eb;
+
+    margin:3rem 0;
+
+}
+
+
+/* remove nested card appearance */
+
+.cpd-section-card section {
+
+    margin:0;
+
+    padding:0;
+
+}
+
+
+/* stronger section headings */
+
+.cpd-section-card .section-heading {
+
+    font-size:1.45rem;
+
+    font-weight:700;
+
+    color:#0a2540;
+
+}
+
+
+/* keep collapsible log inside main card */
+
+.cpd-log-inner {
+
+    border-radius:12px;
+
+}  
 </style>
 
 
@@ -5262,8 +5460,31 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     <p id="metric-projected-hours">–</p>
   </div>
 </section>
-<section class="cpd-pillars-section">
 
+
+<div class="cpd-table-wrapper" style="display:none">
+  <table class="cpd-table">
+    <tbody id="cpd-body"></tbody>
+  </table>
+</div>
+<!-- CPD SECTION -->
+<section class="cpd-log-section">
+
+<div class="cpd-section-card">
+
+
+<h2 class="section-heading">
+    <i class="fa-solid fa-graduation-cap"></i>
+    Continuing Professional Development (CPD)
+</h2>
+
+<p class="section-subtitle">
+    A consolidated view of CPD progress, activity distribution and reflections.
+</p>
+
+
+
+<section class="cpd-pillars-inner">
     <h2 class="section-heading">
         <i class="fa-solid fa-chart-simple"></i>
         CPD Progress Pillars
@@ -5317,10 +5538,12 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     <div class="pillar-fill" id="pillar-projected"></div>
   </div>
 </div>
-
+    </div> <!-- /.pillars-scroll -->
 </section>
 
-<section class="cpd-donut-section">
+<div class="cpd-divider"></div>
+
+<section class="cpd-donut-inner">
   <h2 class="section-heading">
     <i class="fa-solid fa-chart-pie"></i>
     CPD Category Distribution - Top 4
@@ -5373,7 +5596,8 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     </svg>
 
     <ul class="donut-legend" id="donut-legend"></ul>
-  </div>
+
+  </div> <!-- /.donut-wrapper -->    
 <div
   id="donut-tooltip"
   class="donut-tooltip"
@@ -5382,37 +5606,46 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
 </div>
 </section>
 
-<div class="cpd-table-wrapper" style="display:none">
-  <table class="cpd-table">
-    <tbody id="cpd-body"></tbody>
-  </table>
-</div>
-<!-- CPD SECTION -->
-<section class="cpd-log-section">
-  <div class="collapsible-toggle">
-    <div class="collapsible-text">
-      <h2 class="section-heading">
-        <i class="fa-solid fa-graduation-cap"></i>
-        Continuing Professional Development (CPD Log)
-      </h2>
-      <p class="section-helper">
-        Tap to expand CPD log and reflections.
-      </p>
+<div class="cpd-divider"></div>
+  
+ <section class="cpd-log-inner">
+
+    <div class="collapsible-toggle">
+
+        <div class="collapsible-text">
+
+            <h2 class="section-heading">
+                <i class="fa-solid fa-graduation-cap"></i>
+                Continuing Professional Development Log
+            </h2>
+
+            <p class="section-helper">
+                Tap to expand CPD log and reflections.
+            </p>
+
+        </div>
+
+        <i class="fa-solid fa-chevron-right chevron"></i>
+
     </div>
-    <i class="fa-solid fa-chevron-right chevron"></i>
-  </div>
 
-  <div class="collapsible-content">
-    <p class="section-subtitle">
-      My CPD activities, presented as clean, modern cards.
-    </p>
 
-    <div id="cpd-card-container" class="cpd-card-container"></div>
-  </div>
+    <div class="collapsible-content">
+
+        <p class="section-subtitle">
+            My CPD activities, presented as clean, modern cards.
+        </p>
+
+        <div id="cpd-card-container" 
+             class="cpd-card-container">
+        </div>
+
+    </div>
+
 </section>
-
-
-  <!-- INSIGHTS PANEL -->
+<div class="cpd-divider"></div>
+  
+ <!-- INSIGHTS PANEL -->
   <section class="cpd-insights">
     <h2 class="section-heading">
       <i class="fa-solid fa-lightbulb"></i>
@@ -5438,8 +5671,12 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
         <h3>Growth Opportunities</h3>
         <ul id="insight-growth"></ul>
       </div>
-    </div>
+    </div>    
 </section>
+</div>
+</section>
+
+
 <script>
 /* ==========================================================
    DEBUG LOGGER

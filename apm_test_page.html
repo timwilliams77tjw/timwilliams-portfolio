@@ -5235,6 +5235,53 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     }
 
 }  
+/* ============================================================
+   CPD INTERNAL SECTION SPACING
+============================================================ */
+
+.cpd-section-card > .section-heading {
+    margin-top:0;
+}
+
+
+/* Separate each CPD component */
+
+.cpd-section-card > .section-heading:not(:first-child),
+.cpd-section-card > .cpd-log-inner,
+.cpd-section-card > .cpd-insights {
+    margin-top:3rem;
+    padding-top:2rem;
+    border-top:1px solid #e5e7eb;
+}
+
+
+/* Make internal headings stronger */
+
+.cpd-section-card .section-heading {
+    font-size:1.45rem;
+    font-weight:700;
+    color:#0a2540;
+}
+
+
+/* Subtitle spacing */
+
+.cpd-section-card .section-subtitle {
+    margin-bottom:1.5rem;
+}  
+
+.cpd-section-card {
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:2rem;
+
+    box-shadow:
+    0 6px 20px rgba(0,0,0,.08);
+
+}  
 </style>
 
 
@@ -5360,7 +5407,7 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
 </div>
 <!-- CPD SECTION -->
 <section class="cpd-log-section">
-  <div class="collapsible-toggle">
+<div class="cpd-section-card">
     <div class="collapsible-text">
       <h2 class="section-heading">
         <i class="fa-solid fa-graduation-cap"></i>
@@ -5373,7 +5420,6 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     <i class="fa-solid fa-chevron-right chevron"></i>
   </div>
 
-  <div class="collapsible-content">
 
 
 
@@ -5493,11 +5539,41 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
   aria-hidden="true">
 </div>
 
-  <p class="section-subtitle">
-      My CPD activities, presented as clean, modern cards.
-    </p>
+ <section class="cpd-log-inner">
 
-    <div id="cpd-card-container" class="cpd-card-container"></div>
+    <div class="collapsible-toggle">
+
+        <div class="collapsible-text">
+
+            <h2 class="section-heading">
+                <i class="fa-solid fa-graduation-cap"></i>
+                Continuing Professional Development (CPD Log)
+            </h2>
+
+            <p class="section-helper">
+                Tap to expand CPD log and reflections.
+            </p>
+
+        </div>
+
+        <i class="fa-solid fa-chevron-right chevron"></i>
+
+    </div>
+
+
+    <div class="collapsible-content">
+
+        <p class="section-subtitle">
+            My CPD activities, presented as clean, modern cards.
+        </p>
+
+        <div id="cpd-card-container" 
+             class="cpd-card-container">
+        </div>
+
+    </div>
+
+</section>
 
 
  <!-- INSIGHTS PANEL -->

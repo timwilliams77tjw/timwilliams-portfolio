@@ -5419,7 +5419,33 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     opacity:.85;
 
 }  
-</style>
+
+/* ============================================================
+   FRAMEWORK CAROUSEL BUTTONS
+============================================================ */
+
+.carousel-btn {
+    cursor:pointer;
+    z-index:5;
+    transition:all .2s ease;
+}
+
+.carousel-btn:hover {
+    transform:scale(1.1);
+}  
+
+
+  /* ============================================================
+   CPD LOG INNER CARD
+============================================================ */
+
+.cpd-log-section {
+    background:#f7f9fb;
+    border-radius:16px;
+    padding:20px;
+    margin-top:30px;
+    border:1px solid #e5e9ef;
+}</style>
 
 
 </head>
@@ -7062,6 +7088,46 @@ setPillar(
 
     }, 100);
 }
+
+/* ============================================================
+   APM FRAMEWORK CAROUSEL CONTROLS
+============================================================ */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const track = document.querySelector(".carousel-track");
+    const prevBtn = document.querySelector(".carousel-btn.prev");
+    const nextBtn = document.querySelector(".carousel-btn.next");
+
+    if (!track || !prevBtn || !nextBtn) {
+        console.warn("[APM] Framework carousel elements not found.");
+        return;
+    }
+
+
+    const scrollAmount = 320;
+
+
+    nextBtn.addEventListener("click", function () {
+
+        track.scrollBy({
+            left: scrollAmount,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    prevBtn.addEventListener("click", function () {
+
+        track.scrollBy({
+            left: -scrollAmount,
+            behavior: "smooth"
+        });
+
+    });
+
+});  
 </script>
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->

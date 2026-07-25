@@ -4894,11 +4894,12 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
 .radar-legend-combined .legend-title.aware {
     color: #555 !important;
 }  
-
 /* ============================================================
    RADAR LEGEND — SOLID COLOUR SQUARES
+   Uses the existing legend-dot elements
 ============================================================ */
 
+/* Keep the existing square itself */
 .radar-legend-combined .legend-dot {
     width: 14px !important;
     height: 14px !important;
@@ -4906,31 +4907,47 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     min-height: 14px !important;
     border-radius: 3px !important;
     display: block !important;
-    opacity: 1 !important;
+    position: relative !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
+    padding: 0 !important;
 }
 
-/* Solid rating colours */
-
-.radar-legend-combined .legend-dot.expert {
-    background: #0a66c2 !important;
+/* Force the interior to be solid colour */
+.radar-legend-combined .legend-dot::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 3px !important;
 }
 
-.radar-legend-combined .legend-dot.proficient {
-    background: #007b5f !important;
+/* Expert — Blue */
+.radar-legend-combined .legend-dot.expert::after {
+    background-color: #0a66c2 !important;
 }
 
-.radar-legend-combined .legend-dot.competent {
-    background: #b8860b !important;
+/* Proficient — Green */
+.radar-legend-combined .legend-dot.proficient::after {
+    background-color: #007b5f !important;
 }
 
-.radar-legend-combined .legend-dot.practised {
-    background: #8a2be2 !important;
+/* Competent — Gold */
+.radar-legend-combined .legend-dot.competent::after {
+    background-color: #b8860b !important;
 }
 
-.radar-legend-combined .legend-dot.aware {
-    background: #555 !important;
-}  
+/* Practised — Purple */
+.radar-legend-combined .legend-dot.practised::after {
+    background-color: #8a2be2 !important;
+}
+
+/* Aware — Dark Grey */
+.radar-legend-combined .legend-dot.aware::after {
+    background-color: #555 !important;
+}
 </style>
 
 

@@ -5581,147 +5581,345 @@ section.competency-section > .competency-card {
 }
 
 /* ============================================================
-   CPD LOG - LIGHT GREY INNER CARD
-   Keep the main CPD section white, but visually separate
-   the collapsible CPD Log
-============================================================ */
+   EVIDENCE OF PROFESSIONAL PRACTICE
+   ============================================================ */
 
-.cpd-section-card .cpd-log-inner {
-    background: #f3f4f6 !important;
-    border-radius: 16px !important;
-    border: 1px solid rgba(0, 0, 0, 0.06) !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
+/* ------------------------------------------------------------
+   OUTER SECTION
+   Matches the main high-level white section cards
+------------------------------------------------------------ */
+
+.professional-evidence-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 3rem 0;
+    box-sizing: border-box;
 }
 
-/* Make sure the clickable log header is also grey */
-.cpd-section-card .cpd-log-inner .collapsible-toggle {
-    background: #f3f4f6 !important;
+
+/* ------------------------------------------------------------
+   MAIN SECTION CARD
+------------------------------------------------------------ */
+
+.professional-evidence-card {
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* Keep the expanded content the same grey */
-.cpd-section-card .cpd-log-inner .collapsible-content {
-    background: #f3f4f6 !important;
+
+/* ------------------------------------------------------------
+   SECTION HEADER
+------------------------------------------------------------ */
+
+.professional-evidence-header {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 2rem;
+}
+
+.professional-evidence-header .section-heading {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+.professional-evidence-header .section-subtitle {
+    margin-bottom: 0;
+    line-height: 1.7;
+}
+
+
+/* ------------------------------------------------------------
+   SIX-CARD GRID
+------------------------------------------------------------ */
+
+.professional-evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------
+   INDIVIDUAL EVIDENCE CARD
+------------------------------------------------------------ */
+
+.professional-evidence-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    padding: 1.5rem;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   CARD HOVER
+------------------------------------------------------------ */
+
+.professional-evidence-item:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    border-color: rgba(10, 102, 194, 0.25);
+}
+
+
+/* ------------------------------------------------------------
+   EVIDENCE ICON
+------------------------------------------------------------ */
+
+.professional-evidence-icon {
+    flex: 0 0 48px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0a66c2;
+    color: #ffffff;
+
+    border-radius: 12px;
+
+    font-size: 1.25rem;
+
+    box-shadow:
+        0 4px 10px rgba(10, 102, 194, 0.2);
+}
+
+
+/* ------------------------------------------------------------
+   CARD CONTENT
+------------------------------------------------------------ */
+
+.professional-evidence-content {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+
+/* ------------------------------------------------------------
+   CARD TITLE
+------------------------------------------------------------ */
+
+.professional-evidence-content h3 {
+    margin: 0 0 0.65rem;
+
+    font-size: 1.15rem;
+    line-height: 1.35;
+
+    color: #0f172a;
+}
+
+
+/* ------------------------------------------------------------
+   CARD DESCRIPTION
+------------------------------------------------------------ */
+
+.professional-evidence-summary {
+    margin: 0 0 1.25rem;
+
+    color: #475569;
+
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+
+/* ------------------------------------------------------------
+   "COMPETENCES DEMONSTRATED" LABEL
+------------------------------------------------------------ */
+
+.professional-evidence-label {
+    margin-bottom: 0.65rem;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+
+    color: #64748b;
+}
+
+
+/* ------------------------------------------------------------
+   COMPETENCE TAG CONTAINER
+------------------------------------------------------------ */
+
+.professional-evidence-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    width: 100%;
+}
+
+
+/* ------------------------------------------------------------
+   COMPETENCE TAGS
+------------------------------------------------------------ */
+
+.evidence-tag {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 0.4rem 0.7rem;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe2ea;
+    border-radius: 999px;
+
+    color: #0a66c2;
+
+    font-size: 0.78rem;
+    font-weight: 600;
+
+    line-height: 1.3;
+
+    white-space: normal;
+}
+
+
+/* ------------------------------------------------------------
+   TABLET
+------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+
+    .professional-evidence-card {
+        padding: 24px;
+    }
+
+    .professional-evidence-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    .professional-evidence-section {
+        margin: 2rem 0;
+    }
+
+    .professional-evidence-card {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .professional-evidence-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .professional-evidence-item {
+        gap: 1rem;
+        padding: 1.15rem;
+        border-radius: 14px;
+    }
+
+    .professional-evidence-icon {
+        flex: 0 0 42px;
+
+        width: 42px;
+        height: 42px;
+
+        border-radius: 10px;
+
+        font-size: 1.05rem;
+    }
+
+    .professional-evidence-content h3 {
+        font-size: 1.05rem;
+    }
+
+    .professional-evidence-summary {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .evidence-tag {
+        font-size: 0.74rem;
+        padding: 0.35rem 0.6rem;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   VERY SMALL MOBILE DEVICES
+------------------------------------------------------------ */
+
+@media (max-width: 400px) {
+
+    .professional-evidence-card {
+        padding: 14px;
+    }
+
+    .professional-evidence-item {
+        flex-direction: column;
+    }
+
+    .professional-evidence-icon {
+        width: 42px;
+        height: 42px;
+    }
+
 }
 
 /* ============================================================
-   CPD LOG - GREY INNER CARD
-   Only the CPD Log is grey.
-   The main .cpd-section-card remains white.
+   CPD ACTIVITY HIGHLIGHT
+   Used when navigating from Evidence of Professional Practice
+   to a specific CPD activity.
 ============================================================ */
 
-/* The complete CPD Log container */
-.cpd-log-inner {
-    background: #f3f4f6 !important;
-    background-color: #f3f4f6 !important;
-    border-radius: 16px !important;
-    border: 1px solid #e1e4e8 !important;
-    box-shadow: none !important;
-    overflow: hidden !important;
+.cpd-card.cpd-activity-highlighted {
+
+    outline: 3px solid #0a66c2 !important;
+
+    outline-offset: 4px;
+
+    box-shadow:
+        0 0 0 5px rgba(10, 102, 194, 0.12),
+        0 8px 24px rgba(10, 102, 194, 0.18) !important;
+
+    transition:
+        outline 0.25s ease,
+        box-shadow 0.25s ease;
+
 }
-
-/* The clickable CPD Log header */
-.cpd-log-inner > .collapsible-toggle {
-    background: #f3f4f6 !important;
-    background-color: #f3f4f6 !important;
-    border-radius: 16px 16px 0 0 !important;
-    box-shadow: none !important;
-}
-
-/* The expanded CPD Log content */
-.cpd-log-inner > .collapsible-content {
-    background: #f3f4f6 !important;
-    background-color: #f3f4f6 !important;
-    box-shadow: none !important;
-}
-
-/* Ensure the generated CPD cards remain visually distinct */
-.cpd-log-inner .cpd-card-container {
-    background: transparent !important;
-}
-
-
-/* ============================================================
-   CPD LOG - SINGLE GREY INNER CARD
-   Main CPD section remains white.
-   Only the CPD Log is light grey.
-============================================================ */
-
-/* The complete CPD Log card */
-.cpd-section-card > .cpd-log-inner {
-    background: #f3f4f6 !important;
-    background-color: #f3f4f6 !important;
-
-    border: 1px solid #dfe4e9 !important;
-    border-radius: 16px !important;
-
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04) !important;
-
-    overflow: hidden !important;
-
-    padding: 0 !important;
-}
-
-/* The clickable CPD Log heading */
-.cpd-section-card > .cpd-log-inner > .collapsible-toggle {
-    background: #f3f4f6 !important;
-    background-color: #f3f4f6 !important;
-
-    border: none !important;
-    border-radius: 16px 16px 0 0 !important;
-
-    box-shadow: none !important;
-
-    margin: 0 !important;
-}
-
-/* Expanded CPD Log content */
-.cpd-section-card > .cpd-log-inner > .collapsible-content {
-    background: #f3f4f6 !important;
-    background-color: #f3f4f6 !important;
-
-    border: none !important;
-    border-radius: 0 0 16px 16px !important;
-
-    box-shadow: none !important;
-
-    margin: 0 !important;
-}
-
-/* Keep the generated CPD activity cards visually distinct */
-.cpd-section-card > .cpd-log-inner .cpd-card-container {
-    background: transparent !important;
-}
-
-body.header-with-logo.page-prof-dev .mobile-menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    background: #111;
-    padding: 8px 0;
-    z-index: 9999;
-}
-body.header-with-logo.page-prof-dev .mobile-menu button,
-body.header-with-logo.page-prof-dev .mobile-menu a {
-    background: transparent;
-    border: none;
-    color: #fff;
-    padding: 10px 12px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-}
-
-body.header-with-logo.page-prof-dev .mobile-menu img {
-    width: 22px;
-    height: 22px;
-}
-body.header-with-logo.page-prof-dev .menu-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-  
 </style>
 
 
@@ -6604,6 +6802,9 @@ generateDonutChart();
 console.log("Calling linkCPDToCompetences...");
 linkCPDToCompetences();
 
+      console.log("Calling populateEvidenceCPDRelationships...");
+populateEvidenceCPDRelationships();
+      
 console.log("All complete");
 
     } catch (err) {
@@ -6645,54 +6846,347 @@ function linkCPDToCompetences() {
   });
 }
 
+
 /* ============================================================
-   CPD → COMPETENCE LINK (FINAL)
+   CPD / EVIDENCE → COMPETENCE NAVIGATION
 ============================================================ */
 
-document.addEventListener("click", function(e){
+document.addEventListener("click", function(e) {
 
-    const link = e.target.closest(".cpd-competence-link");
-    if(!link) return;
+    /*
+       Handle both:
+
+       1. CPD → Competence
+          .cpd-competence-link
+
+       2. Evidence → Competence
+          .evidence-tag
+    */
+
+    const link =
+        e.target.closest(
+            ".cpd-competence-link, .evidence-tag"
+        );
+
+
+    /* Not a competence link */
+    if (!link) return;
+
+
+    /*
+       Make sure this is actually a competence link.
+       This prevents unrelated .evidence-tag elements
+       from being intercepted if you add other tags later.
+    */
+
+    const href =
+        link.getAttribute("href");
+
+
+    if (
+        !href ||
+        !href.startsWith("#competence-")
+    ) {
+        return;
+    }
+
 
     e.preventDefault();
     e.stopPropagation();
 
-    const target=document.querySelector(link.getAttribute("href"));
-    if(!target) return;
 
-    /* Open accordion if closed */
+    /*
+       Find target competence accordion.
+    */
 
-    if(!target.classList.contains("open")){
+    const target =
+        document.querySelector(href);
+
+
+    if (!target) {
+
+        console.warn(
+            "[CPD] Competence target not found:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Close any previously highlighted competence.
+    */
+
+    document
+        .querySelectorAll(
+            ".accordion-item.highlighted"
+        )
+        .forEach(item => {
+
+            item.classList.remove(
+                "highlighted"
+            );
+
+        });
+
+
+    /*
+       Open the target competence accordion.
+    */
+
+    if (
+        !target.classList.contains("open")
+    ) {
 
         target.classList.add("open");
 
     }
 
-    /* remove previous highlight */
 
-    document.querySelectorAll(".accordion-item.highlighted")
-        .forEach(item=>item.classList.remove("highlighted"));
+    /*
+       Highlight the target competence.
+    */
 
-    target.classList.add("highlighted");
+    target.classList.add(
+        "highlighted"
+    );
 
-    /* wait until accordion has expanded */
 
-    requestAnimationFrame(()=>{
+    /*
+       Wait for the accordion to open,
+       then scroll to it.
+    */
 
-        setTimeout(()=>{
+    requestAnimationFrame(() => {
+
+        setTimeout(() => {
 
             target.scrollIntoView({
-                behavior:"smooth",
-                block:"center"
+
+                behavior: "smooth",
+
+                block: "center"
+
             });
 
-        },300);
+        }, 300);
 
     });
 
 });
 
-  
+/* ============================================================
+   EVIDENCE → CPD ACTIVITY NAVIGATION
+============================================================ */
+
+document.addEventListener("click", function(e) {
+
+    const link =
+        e.target.closest(
+            ".supporting-cpd-activity"
+        );
+
+
+    if (!link) return;
+
+
+    e.preventDefault();
+    e.stopPropagation();
+
+
+    /*
+       Get the target CPD activity ID.
+    */
+
+    const href =
+        link.getAttribute("href");
+
+
+    if (
+        !href ||
+        !href.startsWith("#cpd-activity-")
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+       Find the dynamically generated CPD card.
+    */
+
+    const target =
+        document.querySelector(href);
+
+
+    if (!target) {
+
+        console.warn(
+            "[CPD] CPD activity target not found:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Find the CPD Log content that contains
+       the dynamic CPD cards.
+
+       This is more reliable than assuming that
+       #cpd-card-container itself is the collapsible.
+    */
+
+    const cpdCardContainer =
+        document.getElementById(
+            "cpd-card-container"
+        );
+
+
+    if (!cpdCardContainer) {
+
+        console.warn(
+            "[CPD] #cpd-card-container not found."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Find the closest collapsible content
+       containing the CPD cards.
+    */
+
+    const cpdLogContent =
+        cpdCardContainer.closest(
+            ".collapsible-content"
+        );
+
+
+    /*
+       If the CPD Log is collapsed,
+       open the correct collapsible.
+    */
+
+    if (
+        cpdLogContent &&
+        !cpdLogContent.classList.contains("open")
+    ) {
+
+
+        /*
+           Find the toggle immediately associated
+           with this collapsible content.
+        */
+
+        const cpdLogToggle =
+            cpdLogContent.previousElementSibling;
+
+
+        if (
+            cpdLogToggle &&
+            cpdLogToggle.classList.contains(
+                "collapsible-toggle"
+            )
+        ) {
+
+            /*
+               IMPORTANT:
+
+               Use the same class changes as your
+               existing collapsible functionality.
+            */
+
+            cpdLogContent.classList.add(
+                "open"
+            );
+
+            cpdLogToggle.classList.add(
+                "open"
+            );
+
+
+        } else {
+
+            console.warn(
+                "[CPD] CPD Log toggle not found."
+            );
+
+        }
+
+    }
+
+
+    /*
+       Remove previous CPD activity highlights.
+    */
+
+    document
+        .querySelectorAll(
+            ".cpd-card.cpd-activity-highlighted"
+        )
+        .forEach(card => {
+
+            card.classList.remove(
+                "cpd-activity-highlighted"
+            );
+
+        });
+
+
+    /*
+       Wait for the CPD Log to expand before
+       calculating the target's position.
+    */
+
+    setTimeout(() => {
+
+
+        /*
+           Highlight selected CPD activity.
+        */
+
+        target.classList.add(
+            "cpd-activity-highlighted"
+        );
+
+
+        /*
+           Scroll directly to the activity.
+        */
+
+        target.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+
+        });
+
+
+        /*
+           Remove highlight after 3 seconds.
+        */
+
+        setTimeout(() => {
+
+            target.classList.remove(
+                "cpd-activity-highlighted"
+            );
+
+        }, 3000);
+
+
+    }, 600);
+
+});  
 /* ==========================================================
    METRICS + PROGRESS RING
 ========================================================== */
@@ -7366,6 +7860,510 @@ setPillar(
     }, 100);
 }
 
+
+/* ============================================================
+   EVIDENCE OF PROFESSIONAL PRACTICE
+   GOAL → EVIDENCE RELATIONSHIP MAP
+
+   The CPD "category" is the APM Goal selected against each
+   activity in the APM CPD log.
+
+   This mapping connects stable APM Goals to the relevant
+   Evidence of Professional Practice cards.
+
+   CPD activities remain fully dynamic and are NOT listed here.
+   ============================================================ */
+
+const evidenceGoalRelationships = {
+
+    /* =========================================================
+       1. CYBER SECURITY UPLIFT
+       ========================================================= */
+
+    "evidence-cyber-security-uplift": [
+
+        "AI & digital transformation",
+
+        "Leadership & mentoring"
+
+    ],
+
+
+    /* =========================================================
+       2. NHS DIGITAL TRANSFORMATION
+       ========================================================= */
+
+    "evidence-nhs-digital-transformation": [
+
+        "Stakeholder engagement & communication",
+
+        "AI & digital transformation"
+
+    ],
+
+
+    /* =========================================================
+       3. 126K DEVICE MIGRATION
+       ========================================================= */
+
+    "evidence-126k-device-migration": [
+
+        "AI & digital transformation"
+
+    ],
+
+
+    /* =========================================================
+       4. CLOUD TRANSFORMATION
+       ========================================================= */
+
+    "evidence-cloud-transformation": [
+
+        "AI & digital transformation"
+
+    ],
+
+
+    /* =========================================================
+       5. PMO TURNAROUND
+       ========================================================= */
+
+    "evidence-pmo-turnaround": [
+
+        "Leadership & mentoring",
+
+        "Stakeholder engagement & communication"
+
+    ],
+
+
+    /* =========================================================
+       6. PROGRAMME GOVERNANCE
+       ========================================================= */
+
+    "evidence-programme-governance": [
+
+        "Stakeholder engagement & communication",
+
+        "Leadership & mentoring"
+
+    ]
+
+};
+
+
+/* ============================================================
+   APM GOALS CURRENTLY NOT MAPPED TO PROFESSIONAL EVIDENCE
+
+   These remain valid CPD goals but are not forced into an
+   Evidence of Professional Practice area.
+
+   They can still appear normally within the CPD Log.
+   ============================================================ */
+
+const unmappedEvidenceGoals = [
+
+    "Sustainability in change initiatives",
+
+    "Contribute to my network",
+
+    "Get a new job",
+
+    "Continue my professional development",
+
+    "Contribute to APM",
+
+    "Increase my networking",
+
+    "Mentor, coach and inspire future generations"
+
+];
+
+  
+/* ============================================================
+   EVIDENCE → CPD RELATIONSHIP LAYER
+   ============================================================
+
+   PURPOSE:
+   Connects dynamically generated CPD activities to the relevant
+   Evidence of Professional Practice cards.
+
+   RELATIONSHIP:
+
+   APM CPD Activity
+        ↓
+   CPD Goal / Category
+        ↓
+   Evidence of Professional Practice
+
+   The CPD activities themselves remain completely dynamic.
+   No CPD activity IDs or manual changes are required in the
+   Google Sheet or APM CPD log.
+
+   The website generates a stable ID from the activity title.
+============================================================ */
+
+
+/* ============================================================
+   1. CREATE A STABLE ID FOR A CPD ACTIVITY
+============================================================ */
+
+function createCPDActivityId(activityName) {
+
+    if (!activityName) {
+        return "";
+    }
+
+    return "cpd-activity-" +
+        activityName
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+}
+
+
+/* ============================================================
+   2. POPULATE EVIDENCE → CPD RELATIONSHIPS
+============================================================ */
+
+function populateEvidenceCPDRelationships() {
+
+    console.log(
+        "[CPD] Starting Evidence → CPD relationship layer..."
+    );
+
+
+    /* --------------------------------------------------------
+       FIND DYNAMICALLY GENERATED CPD CARDS
+    -------------------------------------------------------- */
+
+    const cpdCards =
+        document.querySelectorAll(".cpd-card");
+
+
+    if (!cpdCards.length) {
+
+        console.warn(
+            "[CPD] No dynamically generated CPD cards found."
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "[CPD] CPD cards found:",
+        cpdCards.length
+    );
+
+
+    /* --------------------------------------------------------
+       REMOVE PREVIOUSLY GENERATED SUPPORTING CPD SECTIONS
+
+       This prevents duplicates if the relationship layer
+       is run more than once.
+    -------------------------------------------------------- */
+
+    document
+        .querySelectorAll(
+            ".supporting-cpd-activities"
+        )
+        .forEach(section => {
+
+            section.remove();
+
+        });
+
+
+    /* --------------------------------------------------------
+       LOOP THROUGH EACH EVIDENCE CARD
+    -------------------------------------------------------- */
+
+    Object.entries(
+        evidenceGoalRelationships
+    ).forEach(
+        ([evidenceId, evidenceGoals]) => {
+
+
+        /* ----------------------------------------------------
+           FIND THE EVIDENCE CARD
+        ---------------------------------------------------- */
+
+        const evidenceCard =
+            document.getElementById(
+                evidenceId
+            );
+
+
+        if (!evidenceCard) {
+
+            console.warn(
+                "[CPD] Evidence card not found:",
+                evidenceId
+            );
+
+            return;
+
+        }
+
+
+        /* ----------------------------------------------------
+           FIND CONTENT AREA OF EVIDENCE CARD
+        ---------------------------------------------------- */
+
+        const evidenceContent =
+            evidenceCard.querySelector(
+                ".professional-evidence-content"
+            );
+
+
+        if (!evidenceContent) {
+
+            console.warn(
+                "[CPD] Evidence content area not found:",
+                evidenceId
+            );
+
+            return;
+
+        }
+
+
+        /* ----------------------------------------------------
+           CREATE SUPPORTING CPD SECTION
+        ---------------------------------------------------- */
+
+        const wrapper =
+            document.createElement("div");
+
+
+        wrapper.className =
+            "supporting-cpd-activities";
+
+
+        wrapper.innerHTML = `
+
+            <div class="professional-evidence-label">
+                Supporting CPD activities
+            </div>
+
+            <div class="supporting-cpd-list"></div>
+
+        `;
+
+
+        const list =
+            wrapper.querySelector(
+                ".supporting-cpd-list"
+            );
+
+
+        /* ----------------------------------------------------
+           LOOP THROUGH ALL DYNAMIC CPD ACTIVITIES
+        ---------------------------------------------------- */
+
+        cpdCards.forEach(card => {
+
+
+            /* ------------------------------------------------
+               GET THE CPD GOAL / CATEGORY
+
+               Your existing CPD card uses:
+
+               .cpd-category
+
+               This is the APM Goal selected against the
+               activity in the APM CPD portal.
+            ------------------------------------------------ */
+
+            const categoryElement =
+                card.querySelector(
+                    ".cpd-category"
+                );
+
+
+            if (!categoryElement) {
+
+                return;
+
+            }
+
+
+            const activityGoal =
+                categoryElement
+                    .textContent
+                    .trim()
+                    .toLowerCase();
+
+
+            if (!activityGoal) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               CHECK WHETHER THE CPD GOAL MATCHES
+               THIS EVIDENCE CARD
+            ------------------------------------------------ */
+
+            const matchesGoal =
+                evidenceGoals.some(
+                    goal =>
+                        goal
+                            .trim()
+                            .toLowerCase() ===
+                        activityGoal
+                );
+
+
+            if (!matchesGoal) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               GET CPD ACTIVITY TITLE
+
+               The status icon is removed before extracting
+               the activity name.
+            ------------------------------------------------ */
+
+            const titleElement =
+                card.querySelector(
+                    ".cpd-card-title"
+                );
+
+
+            if (!titleElement) {
+
+                return;
+
+            }
+
+
+            const titleClone =
+                titleElement.cloneNode(true);
+
+
+            titleClone
+                .querySelectorAll("i")
+                .forEach(icon => {
+
+                    icon.remove();
+
+                });
+
+
+            const activityName =
+                titleClone
+                    .textContent
+                    .trim();
+
+
+            if (!activityName) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               CREATE WEBSITE-GENERATED CPD ACTIVITY ID
+            ------------------------------------------------ */
+
+            const activityId =
+                createCPDActivityId(
+                    activityName
+                );
+
+
+            if (!activityId) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               ASSIGN ID TO DYNAMIC CPD CARD
+
+               Example:
+
+               Halesowen College Lecture
+
+               becomes:
+
+               id="cpd-activity-halesowen-college-lecture"
+            ------------------------------------------------ */
+
+            card.id =
+                activityId;
+
+
+            /* ------------------------------------------------
+               CREATE EVIDENCE → CPD LINK
+            ------------------------------------------------ */
+
+            const link =
+                document.createElement("a");
+
+
+            link.className =
+                "supporting-cpd-activity";
+
+
+            link.href =
+                "#" + activityId;
+
+
+            link.innerHTML = `
+
+                <span class="supporting-cpd-activity-title">
+                    ${activityName}
+                </span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            `;
+
+
+            list.appendChild(link);
+
+
+        });
+
+
+        /* ----------------------------------------------------
+           ONLY ADD SECTION IF CPD ACTIVITIES WERE FOUND
+        ---------------------------------------------------- */
+
+        if (
+            list.children.length > 0
+        ) {
+
+            evidenceContent
+                .appendChild(
+                    wrapper
+                );
+
+        }
+
+
+    });
+
+
+    console.log(
+        "[CPD] Evidence → CPD relationship layer complete."
+    );
+
+}
 /* ============================================================
    APM FRAMEWORK CAROUSEL CONTROLS
 ============================================================ */
@@ -7634,187 +8632,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <button class="carousel-btn next">›</button>
   </div>
-</section>
-<!-- DEVELOPMENT PRIORITIES -->
-<section class="development-priorities-section">
 
-    <!-- ========================================================
-         SECTION HEADER
-    ========================================================= -->
-
-    <div class="development-priorities-header">
-
-        <h2 class="section-heading">
-            <i class="fa-solid fa-bullseye"></i>
-            Development Priorities
-            <span class="development-period">
-                Next 12 months
-            </span>
-        </h2>
-
-        <p class="section-subtitle">
-            Drawing on my CPD activity and competence assessment,
-            the following areas are prioritised for focused development
-            over the coming year.
-        </p>
-
-    </div>
-
-
-    <!-- ========================================================
-         DEVELOPMENT PRIORITY CARDS
-    ========================================================= -->
-
-    <div class="development-priority-grid">
-
-
-        <!-- ====================================================
-             1. LEADERSHIP & MENTORING
-        ===================================================== -->
-
-        <article class="development-priority-card">
-
-            <div class="development-priority-icon">
-                <i class="fa-solid fa-people-arrows"></i>
-            </div>
-
-            <div class="development-priority-content">
-
-                <h3>
-                    Leadership &amp; Mentoring
-                </h3>
-
-                <span class="development-focus">
-                    Coaching &amp; leadership development
-                </span>
-
-                <p>
-                    Strengthen coaching practice and structured support
-                    for early-career professionals.
-                </p>
-
-                <div class="development-tags">
-                    <span>Coaching</span>
-                    <span>Mentoring</span>
-                    <span>Leadership</span>
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- ====================================================
-             2. STAKEHOLDER ENGAGEMENT
-        ===================================================== -->
-
-        <article class="development-priority-card">
-
-            <div class="development-priority-icon">
-                <i class="fa-solid fa-handshake"></i>
-            </div>
-
-            <div class="development-priority-content">
-
-                <h3>
-                    Stakeholder Engagement &amp; Communication
-                </h3>
-
-                <span class="development-focus">
-                    Influence &amp; communication
-                </span>
-
-                <p>
-                    Sharpen narrative, influence and conflict-resolution
-                    across complex programmes.
-                </p>
-
-                <div class="development-tags">
-                    <span>Influencing</span>
-                    <span>Communication</span>
-                    <span>Conflict resolution</span>
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- ====================================================
-             3. AI & DIGITAL TRANSFORMATION
-        ===================================================== -->
-
-        <article class="development-priority-card">
-
-            <div class="development-priority-icon">
-                <i class="fa-solid fa-robot"></i>
-            </div>
-
-            <div class="development-priority-content">
-
-                <h3>
-                    AI &amp; Digital Transformation
-                </h3>
-
-                <span class="development-focus">
-                    Practical application of AI
-                </span>
-
-                <p>
-                    Deepen practical use of AI tools, including
-                    Microsoft 365 Copilot, across delivery and governance.
-                </p>
-
-                <div class="development-tags">
-                    <span>AI</span>
-                    <span>Automation</span>
-                    <span>Digital transformation</span>
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- ====================================================
-             4. SUSTAINABILITY
-        ===================================================== -->
-
-        <article class="development-priority-card">
-
-            <div class="development-priority-icon">
-                <i class="fa-solid fa-leaf"></i>
-            </div>
-
-            <div class="development-priority-content">
-
-                <h3>
-                    Sustainability in Change
-                </h3>
-
-                <span class="development-focus">
-                    Sustainable programme delivery
-                </span>
-
-                <p>
-                    Embed sustainability criteria into business cases,
-                    governance and benefits management.
-                </p>
-
-                <div class="development-tags">
-                    <span>Sustainability</span>
-                    <span>Benefits</span>
-                    <span>Governance</span>
-                </div>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
-</section>
 
 <!-- PERSONAL ASSESSMENT ACCORDION -->
   <section class="competency-section">
@@ -8462,6 +9280,519 @@ document.addEventListener("DOMContentLoaded", function () {
 </div> <!-- end section-card competency-card -->
 
 </section>
+
+<!-- ============================================================
+     EVIDENCE OF PROFESSIONAL PRACTICE
+============================================================ -->
+
+<section class="professional-evidence-section">
+
+  <div class="section-card professional-evidence-card">
+
+    <div class="professional-evidence-header">
+
+      <h2 class="section-heading">
+        <i class="fa-solid fa-folder-open"></i>
+        Evidence of Professional Practice
+      </h2>
+
+      <p class="section-subtitle">
+        Selected examples demonstrating the practical application of
+        project, programme and portfolio management competences across
+        complex transformation, technology and organisational change
+        environments.
+      </p>
+
+    </div>
+
+    <div class="professional-evidence-grid">
+
+
+      <!-- ======================================================
+           1. CYBER SECURITY UPLIFT
+      ======================================================= -->
+
+     <article
+    class="professional-evidence-item"
+    id="evidence-cyber-security-uplift">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>Cyber Security Uplift</h3>
+
+          <p class="professional-evidence-summary">
+            Led a major cyber security uplift programme, coordinating
+            governance, risk management and assurance activities across
+            a complex and highly regulated environment.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+         <div class="professional-evidence-tags">
+
+  <a href="#competence-governance-arrangements" class="evidence-tag">
+    Governance
+  </a>
+
+  <a href="#competence-risk-and-issue-management" class="evidence-tag">
+    Risk &amp; Issue Management
+  </a>
+
+  <a href="#competence-assurance" class="evidence-tag">
+    Assurance
+  </a>
+
+  <a href="#competence-leadership" class="evidence-tag">
+    Leadership
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+      <!-- ======================================================
+           2. NHS DIGITAL TRANSFORMATION
+      ======================================================= -->
+
+<article
+    class="professional-evidence-item"
+    id="evidence-nhs-digital-transformation">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-hospital"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>NHS Digital Transformation</h3>
+
+          <p class="professional-evidence-summary">
+            Delivered complex digital transformation initiatives within
+            a large-scale healthcare environment, integrating planning,
+            stakeholder engagement and controlled organisational change.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+       <div class="professional-evidence-tags">
+
+  <a href="#competence-integrated-planning" class="evidence-tag">
+    Integrated Planning
+  </a>
+
+  <a href="#competence-stakeholder-engagement-and-communication" class="evidence-tag">
+    Stakeholder Engagement
+  </a>
+
+  <a href="#competence-change-control" class="evidence-tag">
+    Change Control
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+
+      <!-- ======================================================
+           3. 126K DEVICE MIGRATION
+      ======================================================= -->
+
+<article
+    class="professional-evidence-item"
+    id="evidence-126k-device-migration">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-laptop"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>126k Device Migration</h3>
+
+          <p class="professional-evidence-summary">
+            Led the planning and delivery of a large-scale Windows
+            device migration involving approximately 126,000 devices,
+            coordinating resources, managing delivery risks and
+            overseeing transition into the new operating environment.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+      <div class="professional-evidence-tags">
+
+  <a href="#competence-integrated-planning" class="evidence-tag">
+    Integrated Planning
+  </a>
+
+  <a href="#competence-resource-management" class="evidence-tag">
+    Resource Management
+  </a>
+
+  <a href="#competence-risk-and-issue-management" class="evidence-tag">
+    Risk &amp; Issue Management
+  </a>
+
+  <a href="#competence-transition-management" class="evidence-tag">
+    Transition Management
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+      <!-- ======================================================
+           4. CLOUD TRANSFORMATION
+      ======================================================= -->
+
+<article
+    class="professional-evidence-item"
+    id="evidence-cloud-transformation">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-cloud"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>Cloud Transformation</h3>
+
+          <p class="professional-evidence-summary">
+            Led cloud transformation initiatives across enterprise
+            environments, developing appropriate technical and delivery
+            solutions while aligning investment with financial objectives
+            and measurable business benefits.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+         <div class="professional-evidence-tags">
+
+  <a href="#competence-solutions-development" class="evidence-tag">
+    Solutions Development
+  </a>
+
+  <a href="#competence-financial-management" class="evidence-tag">
+    Financial Management
+  </a>
+
+  <a href="#competence-benefits-management" class="evidence-tag">
+    Benefits Management
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+
+      <!-- ======================================================
+           5. PMO TURNAROUND
+      ======================================================= -->
+
+
+<article
+    class="professional-evidence-item"
+    id="evidence-pmo-turnaround">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-chart-line"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>PMO Turnaround</h3>
+
+          <p class="professional-evidence-summary">
+            Established and strengthened programme governance and PMO
+            controls, improving portfolio visibility, delivery confidence
+            and executive oversight across a challenged change environment.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+        <div class="professional-evidence-tags">
+
+  <a href="#competence-governance-arrangements" class="evidence-tag">
+    Governance
+  </a>
+
+  <a href="#competence-portfolio-shaping" class="evidence-tag">
+    Portfolio Shaping
+  </a>
+
+  <a href="#competence-reviews" class="evidence-tag">
+    Reviews
+  </a>
+
+  <a href="#competence-assurance" class="evidence-tag">
+    Assurance
+  </a>
+
+</div>
+        </div>
+
+      </article>
+
+
+      <!-- ======================================================
+           6. PROGRAMME GOVERNANCE
+      ======================================================= -->
+
+<article
+    class="professional-evidence-item"
+    id="evidence-programme-governance">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-sitemap"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>Programme Governance</h3>
+
+          <p class="professional-evidence-summary">
+            Designed and implemented governance structures and review
+            mechanisms that strengthened decision-making, improved risk
+            visibility and provided effective oversight of programme delivery.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+        <div class="professional-evidence-tags">
+
+  <a href="#competence-governance-arrangements" class="evidence-tag">
+    Governance
+  </a>
+
+  <a href="#competence-reviews" class="evidence-tag">
+    Reviews
+  </a>
+
+  <a href="#competence-risk-and-issue-management" class="evidence-tag">
+    Risk &amp; Issue Management
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+
+    </div>
+    <!-- /.professional-evidence-grid -->
+
+  </div>
+  <!-- /.professional-evidence-card -->
+
+</section>
+<!-- /.professional-evidence-section -->  
+
+</section>
+<!-- DEVELOPMENT PRIORITIES -->
+<section class="development-priorities-section">
+
+    <!-- ========================================================
+         SECTION HEADER
+    ========================================================= -->
+
+    <div class="development-priorities-header">
+
+        <h2 class="section-heading">
+            <i class="fa-solid fa-bullseye"></i>
+            Development Priorities
+            <span class="development-period">
+                Next 12 months
+            </span>
+        </h2>
+
+        <p class="section-subtitle">
+            Drawing on my CPD activity and competence assessment,
+            the following areas are prioritised for focused development
+            over the coming year.
+        </p>
+
+    </div>
+
+
+    <!-- ========================================================
+         DEVELOPMENT PRIORITY CARDS
+    ========================================================= -->
+
+    <div class="development-priority-grid">
+
+
+        <!-- ====================================================
+             1. LEADERSHIP & MENTORING
+        ===================================================== -->
+
+        <article class="development-priority-card">
+
+            <div class="development-priority-icon">
+                <i class="fa-solid fa-people-arrows"></i>
+            </div>
+
+            <div class="development-priority-content">
+
+                <h3>
+                    Leadership &amp; Mentoring
+                </h3>
+
+                <span class="development-focus">
+                    Coaching &amp; leadership development
+                </span>
+
+                <p>
+                    Strengthen coaching practice and structured support
+                    for early-career professionals.
+                </p>
+
+                <div class="development-tags">
+                    <span>Coaching</span>
+                    <span>Mentoring</span>
+                    <span>Leadership</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ====================================================
+             2. STAKEHOLDER ENGAGEMENT
+        ===================================================== -->
+
+        <article class="development-priority-card">
+
+            <div class="development-priority-icon">
+                <i class="fa-solid fa-handshake"></i>
+            </div>
+
+            <div class="development-priority-content">
+
+                <h3>
+                    Stakeholder Engagement &amp; Communication
+                </h3>
+
+                <span class="development-focus">
+                    Influence &amp; communication
+                </span>
+
+                <p>
+                    Sharpen narrative, influence and conflict-resolution
+                    across complex programmes.
+                </p>
+
+                <div class="development-tags">
+                    <span>Influencing</span>
+                    <span>Communication</span>
+                    <span>Conflict resolution</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ====================================================
+             3. AI & DIGITAL TRANSFORMATION
+        ===================================================== -->
+
+        <article class="development-priority-card">
+
+            <div class="development-priority-icon">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+
+            <div class="development-priority-content">
+
+                <h3>
+                    AI &amp; Digital Transformation
+                </h3>
+
+                <span class="development-focus">
+                    Practical application of AI
+                </span>
+
+                <p>
+                    Deepen practical use of AI tools, including
+                    Microsoft 365 Copilot, across delivery and governance.
+                </p>
+
+                <div class="development-tags">
+                    <span>AI</span>
+                    <span>Automation</span>
+                    <span>Digital transformation</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ====================================================
+             4. SUSTAINABILITY
+        ===================================================== -->
+
+        <article class="development-priority-card">
+
+            <div class="development-priority-icon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div class="development-priority-content">
+
+                <h3>
+                    Sustainability in Change
+                </h3>
+
+                <span class="development-focus">
+                    Sustainable programme delivery
+                </span>
+
+                <p>
+                    Embed sustainability criteria into business cases,
+                    governance and benefits management.
+                </p>
+
+                <div class="development-tags">
+                    <span>Sustainability</span>
+                    <span>Benefits</span>
+                    <span>Governance</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>  
+
 <!-- FLOATING ACTION BUTTONS -->
 <div class="fab fab-scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
 <a href="calendar.html" class="fab fab-booking">📅</a>
@@ -8478,15 +9809,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 </script>
 
-
-<script>
-/* ============================================================
-   1. LOAD CPD ON PAGE LOAD
-============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
-    loadCPD();
-});
-</script>
 
 <script>
 /* ============================================================

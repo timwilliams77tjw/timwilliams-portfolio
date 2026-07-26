@@ -5899,26 +5899,27 @@ section.competency-section > .competency-card {
 
 }
 
-<div class="professional-evidence-tags">
+/* ============================================================
+   CPD ACTIVITY HIGHLIGHT
+   Used when navigating from Evidence of Professional Practice
+   to a specific CPD activity.
+============================================================ */
 
-  <a href="#competence-governance-arrangements" class="evidence-tag">
-    Governance
-  </a>
+.cpd-card.cpd-activity-highlighted {
 
-  <a href="#competence-risk-and-issue-management" class="evidence-tag">
-    Risk &amp; Issue Management
-  </a>
+    outline: 3px solid #0a66c2 !important;
 
-  <a href="#competence-assurance" class="evidence-tag">
-    Assurance
-  </a>
+    outline-offset: 4px;
 
-  <a href="#competence-leadership" class="evidence-tag">
-    Leadership
-  </a>
+    box-shadow:
+        0 0 0 5px rgba(10, 102, 194, 0.12),
+        0 8px 24px rgba(10, 102, 194, 0.18) !important;
 
-</div>
-  
+    transition:
+        outline 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
 </style>
 
 
@@ -6801,6 +6802,9 @@ generateDonutChart();
 console.log("Calling linkCPDToCompetences...");
 linkCPDToCompetences();
 
+      console.log("Calling populateEvidenceCPDRelationships...");
+populateEvidenceCPDRelationships();
+      
 console.log("All complete");
 
     } catch (err) {
@@ -6842,54 +6846,347 @@ function linkCPDToCompetences() {
   });
 }
 
+
 /* ============================================================
-   CPD → COMPETENCE LINK (FINAL)
+   CPD / EVIDENCE → COMPETENCE NAVIGATION
 ============================================================ */
 
-document.addEventListener("click", function(e){
+document.addEventListener("click", function(e) {
 
-    const link = e.target.closest(".cpd-competence-link");
-    if(!link) return;
+    /*
+       Handle both:
+
+       1. CPD → Competence
+          .cpd-competence-link
+
+       2. Evidence → Competence
+          .evidence-tag
+    */
+
+    const link =
+        e.target.closest(
+            ".cpd-competence-link, .evidence-tag"
+        );
+
+
+    /* Not a competence link */
+    if (!link) return;
+
+
+    /*
+       Make sure this is actually a competence link.
+       This prevents unrelated .evidence-tag elements
+       from being intercepted if you add other tags later.
+    */
+
+    const href =
+        link.getAttribute("href");
+
+
+    if (
+        !href ||
+        !href.startsWith("#competence-")
+    ) {
+        return;
+    }
+
 
     e.preventDefault();
     e.stopPropagation();
 
-    const target=document.querySelector(link.getAttribute("href"));
-    if(!target) return;
 
-    /* Open accordion if closed */
+    /*
+       Find target competence accordion.
+    */
 
-    if(!target.classList.contains("open")){
+    const target =
+        document.querySelector(href);
+
+
+    if (!target) {
+
+        console.warn(
+            "[CPD] Competence target not found:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Close any previously highlighted competence.
+    */
+
+    document
+        .querySelectorAll(
+            ".accordion-item.highlighted"
+        )
+        .forEach(item => {
+
+            item.classList.remove(
+                "highlighted"
+            );
+
+        });
+
+
+    /*
+       Open the target competence accordion.
+    */
+
+    if (
+        !target.classList.contains("open")
+    ) {
 
         target.classList.add("open");
 
     }
 
-    /* remove previous highlight */
 
-    document.querySelectorAll(".accordion-item.highlighted")
-        .forEach(item=>item.classList.remove("highlighted"));
+    /*
+       Highlight the target competence.
+    */
 
-    target.classList.add("highlighted");
+    target.classList.add(
+        "highlighted"
+    );
 
-    /* wait until accordion has expanded */
 
-    requestAnimationFrame(()=>{
+    /*
+       Wait for the accordion to open,
+       then scroll to it.
+    */
 
-        setTimeout(()=>{
+    requestAnimationFrame(() => {
+
+        setTimeout(() => {
 
             target.scrollIntoView({
-                behavior:"smooth",
-                block:"center"
+
+                behavior: "smooth",
+
+                block: "center"
+
             });
 
-        },300);
+        }, 300);
 
     });
 
 });
 
-  
+/* ============================================================
+   EVIDENCE → CPD ACTIVITY NAVIGATION
+============================================================ */
+
+document.addEventListener("click", function(e) {
+
+    const link =
+        e.target.closest(
+            ".supporting-cpd-activity"
+        );
+
+
+    if (!link) return;
+
+
+    e.preventDefault();
+    e.stopPropagation();
+
+
+    /*
+       Get the target CPD activity ID.
+    */
+
+    const href =
+        link.getAttribute("href");
+
+
+    if (
+        !href ||
+        !href.startsWith("#cpd-activity-")
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+       Find the dynamically generated CPD card.
+    */
+
+    const target =
+        document.querySelector(href);
+
+
+    if (!target) {
+
+        console.warn(
+            "[CPD] CPD activity target not found:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Find the CPD Log content that contains
+       the dynamic CPD cards.
+
+       This is more reliable than assuming that
+       #cpd-card-container itself is the collapsible.
+    */
+
+    const cpdCardContainer =
+        document.getElementById(
+            "cpd-card-container"
+        );
+
+
+    if (!cpdCardContainer) {
+
+        console.warn(
+            "[CPD] #cpd-card-container not found."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Find the closest collapsible content
+       containing the CPD cards.
+    */
+
+    const cpdLogContent =
+        cpdCardContainer.closest(
+            ".collapsible-content"
+        );
+
+
+    /*
+       If the CPD Log is collapsed,
+       open the correct collapsible.
+    */
+
+    if (
+        cpdLogContent &&
+        !cpdLogContent.classList.contains("open")
+    ) {
+
+
+        /*
+           Find the toggle immediately associated
+           with this collapsible content.
+        */
+
+        const cpdLogToggle =
+            cpdLogContent.previousElementSibling;
+
+
+        if (
+            cpdLogToggle &&
+            cpdLogToggle.classList.contains(
+                "collapsible-toggle"
+            )
+        ) {
+
+            /*
+               IMPORTANT:
+
+               Use the same class changes as your
+               existing collapsible functionality.
+            */
+
+            cpdLogContent.classList.add(
+                "open"
+            );
+
+            cpdLogToggle.classList.add(
+                "open"
+            );
+
+
+        } else {
+
+            console.warn(
+                "[CPD] CPD Log toggle not found."
+            );
+
+        }
+
+    }
+
+
+    /*
+       Remove previous CPD activity highlights.
+    */
+
+    document
+        .querySelectorAll(
+            ".cpd-card.cpd-activity-highlighted"
+        )
+        .forEach(card => {
+
+            card.classList.remove(
+                "cpd-activity-highlighted"
+            );
+
+        });
+
+
+    /*
+       Wait for the CPD Log to expand before
+       calculating the target's position.
+    */
+
+    setTimeout(() => {
+
+
+        /*
+           Highlight selected CPD activity.
+        */
+
+        target.classList.add(
+            "cpd-activity-highlighted"
+        );
+
+
+        /*
+           Scroll directly to the activity.
+        */
+
+        target.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+
+        });
+
+
+        /*
+           Remove highlight after 3 seconds.
+        */
+
+        setTimeout(() => {
+
+            target.classList.remove(
+                "cpd-activity-highlighted"
+            );
+
+        }, 3000);
+
+
+    }, 600);
+
+});  
 /* ==========================================================
    METRICS + PROGRESS RING
 ========================================================== */
@@ -7563,6 +7860,510 @@ setPillar(
     }, 100);
 }
 
+
+/* ============================================================
+   EVIDENCE OF PROFESSIONAL PRACTICE
+   GOAL → EVIDENCE RELATIONSHIP MAP
+
+   The CPD "category" is the APM Goal selected against each
+   activity in the APM CPD log.
+
+   This mapping connects stable APM Goals to the relevant
+   Evidence of Professional Practice cards.
+
+   CPD activities remain fully dynamic and are NOT listed here.
+   ============================================================ */
+
+const evidenceGoalRelationships = {
+
+    /* =========================================================
+       1. CYBER SECURITY UPLIFT
+       ========================================================= */
+
+    "evidence-cyber-security-uplift": [
+
+        "AI & digital transformation",
+
+        "Leadership & mentoring"
+
+    ],
+
+
+    /* =========================================================
+       2. NHS DIGITAL TRANSFORMATION
+       ========================================================= */
+
+    "evidence-nhs-digital-transformation": [
+
+        "Stakeholder engagement & communication",
+
+        "AI & digital transformation"
+
+    ],
+
+
+    /* =========================================================
+       3. 126K DEVICE MIGRATION
+       ========================================================= */
+
+    "evidence-126k-device-migration": [
+
+        "AI & digital transformation"
+
+    ],
+
+
+    /* =========================================================
+       4. CLOUD TRANSFORMATION
+       ========================================================= */
+
+    "evidence-cloud-transformation": [
+
+        "AI & digital transformation"
+
+    ],
+
+
+    /* =========================================================
+       5. PMO TURNAROUND
+       ========================================================= */
+
+    "evidence-pmo-turnaround": [
+
+        "Leadership & mentoring",
+
+        "Stakeholder engagement & communication"
+
+    ],
+
+
+    /* =========================================================
+       6. PROGRAMME GOVERNANCE
+       ========================================================= */
+
+    "evidence-programme-governance": [
+
+        "Stakeholder engagement & communication",
+
+        "Leadership & mentoring"
+
+    ]
+
+};
+
+
+/* ============================================================
+   APM GOALS CURRENTLY NOT MAPPED TO PROFESSIONAL EVIDENCE
+
+   These remain valid CPD goals but are not forced into an
+   Evidence of Professional Practice area.
+
+   They can still appear normally within the CPD Log.
+   ============================================================ */
+
+const unmappedEvidenceGoals = [
+
+    "Sustainability in change initiatives",
+
+    "Contribute to my network",
+
+    "Get a new job",
+
+    "Continue my professional development",
+
+    "Contribute to APM",
+
+    "Increase my networking",
+
+    "Mentor, coach and inspire future generations"
+
+];
+
+  
+/* ============================================================
+   EVIDENCE → CPD RELATIONSHIP LAYER
+   ============================================================
+
+   PURPOSE:
+   Connects dynamically generated CPD activities to the relevant
+   Evidence of Professional Practice cards.
+
+   RELATIONSHIP:
+
+   APM CPD Activity
+        ↓
+   CPD Goal / Category
+        ↓
+   Evidence of Professional Practice
+
+   The CPD activities themselves remain completely dynamic.
+   No CPD activity IDs or manual changes are required in the
+   Google Sheet or APM CPD log.
+
+   The website generates a stable ID from the activity title.
+============================================================ */
+
+
+/* ============================================================
+   1. CREATE A STABLE ID FOR A CPD ACTIVITY
+============================================================ */
+
+function createCPDActivityId(activityName) {
+
+    if (!activityName) {
+        return "";
+    }
+
+    return "cpd-activity-" +
+        activityName
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+}
+
+
+/* ============================================================
+   2. POPULATE EVIDENCE → CPD RELATIONSHIPS
+============================================================ */
+
+function populateEvidenceCPDRelationships() {
+
+    console.log(
+        "[CPD] Starting Evidence → CPD relationship layer..."
+    );
+
+
+    /* --------------------------------------------------------
+       FIND DYNAMICALLY GENERATED CPD CARDS
+    -------------------------------------------------------- */
+
+    const cpdCards =
+        document.querySelectorAll(".cpd-card");
+
+
+    if (!cpdCards.length) {
+
+        console.warn(
+            "[CPD] No dynamically generated CPD cards found."
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "[CPD] CPD cards found:",
+        cpdCards.length
+    );
+
+
+    /* --------------------------------------------------------
+       REMOVE PREVIOUSLY GENERATED SUPPORTING CPD SECTIONS
+
+       This prevents duplicates if the relationship layer
+       is run more than once.
+    -------------------------------------------------------- */
+
+    document
+        .querySelectorAll(
+            ".supporting-cpd-activities"
+        )
+        .forEach(section => {
+
+            section.remove();
+
+        });
+
+
+    /* --------------------------------------------------------
+       LOOP THROUGH EACH EVIDENCE CARD
+    -------------------------------------------------------- */
+
+    Object.entries(
+        evidenceGoalRelationships
+    ).forEach(
+        ([evidenceId, evidenceGoals]) => {
+
+
+        /* ----------------------------------------------------
+           FIND THE EVIDENCE CARD
+        ---------------------------------------------------- */
+
+        const evidenceCard =
+            document.getElementById(
+                evidenceId
+            );
+
+
+        if (!evidenceCard) {
+
+            console.warn(
+                "[CPD] Evidence card not found:",
+                evidenceId
+            );
+
+            return;
+
+        }
+
+
+        /* ----------------------------------------------------
+           FIND CONTENT AREA OF EVIDENCE CARD
+        ---------------------------------------------------- */
+
+        const evidenceContent =
+            evidenceCard.querySelector(
+                ".professional-evidence-content"
+            );
+
+
+        if (!evidenceContent) {
+
+            console.warn(
+                "[CPD] Evidence content area not found:",
+                evidenceId
+            );
+
+            return;
+
+        }
+
+
+        /* ----------------------------------------------------
+           CREATE SUPPORTING CPD SECTION
+        ---------------------------------------------------- */
+
+        const wrapper =
+            document.createElement("div");
+
+
+        wrapper.className =
+            "supporting-cpd-activities";
+
+
+        wrapper.innerHTML = `
+
+            <div class="professional-evidence-label">
+                Supporting CPD activities
+            </div>
+
+            <div class="supporting-cpd-list"></div>
+
+        `;
+
+
+        const list =
+            wrapper.querySelector(
+                ".supporting-cpd-list"
+            );
+
+
+        /* ----------------------------------------------------
+           LOOP THROUGH ALL DYNAMIC CPD ACTIVITIES
+        ---------------------------------------------------- */
+
+        cpdCards.forEach(card => {
+
+
+            /* ------------------------------------------------
+               GET THE CPD GOAL / CATEGORY
+
+               Your existing CPD card uses:
+
+               .cpd-category
+
+               This is the APM Goal selected against the
+               activity in the APM CPD portal.
+            ------------------------------------------------ */
+
+            const categoryElement =
+                card.querySelector(
+                    ".cpd-category"
+                );
+
+
+            if (!categoryElement) {
+
+                return;
+
+            }
+
+
+            const activityGoal =
+                categoryElement
+                    .textContent
+                    .trim()
+                    .toLowerCase();
+
+
+            if (!activityGoal) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               CHECK WHETHER THE CPD GOAL MATCHES
+               THIS EVIDENCE CARD
+            ------------------------------------------------ */
+
+            const matchesGoal =
+                evidenceGoals.some(
+                    goal =>
+                        goal
+                            .trim()
+                            .toLowerCase() ===
+                        activityGoal
+                );
+
+
+            if (!matchesGoal) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               GET CPD ACTIVITY TITLE
+
+               The status icon is removed before extracting
+               the activity name.
+            ------------------------------------------------ */
+
+            const titleElement =
+                card.querySelector(
+                    ".cpd-card-title"
+                );
+
+
+            if (!titleElement) {
+
+                return;
+
+            }
+
+
+            const titleClone =
+                titleElement.cloneNode(true);
+
+
+            titleClone
+                .querySelectorAll("i")
+                .forEach(icon => {
+
+                    icon.remove();
+
+                });
+
+
+            const activityName =
+                titleClone
+                    .textContent
+                    .trim();
+
+
+            if (!activityName) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               CREATE WEBSITE-GENERATED CPD ACTIVITY ID
+            ------------------------------------------------ */
+
+            const activityId =
+                createCPDActivityId(
+                    activityName
+                );
+
+
+            if (!activityId) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               ASSIGN ID TO DYNAMIC CPD CARD
+
+               Example:
+
+               Halesowen College Lecture
+
+               becomes:
+
+               id="cpd-activity-halesowen-college-lecture"
+            ------------------------------------------------ */
+
+            card.id =
+                activityId;
+
+
+            /* ------------------------------------------------
+               CREATE EVIDENCE → CPD LINK
+            ------------------------------------------------ */
+
+            const link =
+                document.createElement("a");
+
+
+            link.className =
+                "supporting-cpd-activity";
+
+
+            link.href =
+                "#" + activityId;
+
+
+            link.innerHTML = `
+
+                <span class="supporting-cpd-activity-title">
+                    ${activityName}
+                </span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            `;
+
+
+            list.appendChild(link);
+
+
+        });
+
+
+        /* ----------------------------------------------------
+           ONLY ADD SECTION IF CPD ACTIVITIES WERE FOUND
+        ---------------------------------------------------- */
+
+        if (
+            list.children.length > 0
+        ) {
+
+            evidenceContent
+                .appendChild(
+                    wrapper
+                );
+
+        }
+
+
+    });
+
+
+    console.log(
+        "[CPD] Evidence → CPD relationship layer complete."
+    );
+
+}
 /* ============================================================
    APM FRAMEWORK CAROUSEL CONTROLS
 ============================================================ */
@@ -8511,7 +9312,9 @@ document.addEventListener("DOMContentLoaded", function () {
            1. CYBER SECURITY UPLIFT
       ======================================================= -->
 
-      <article class="professional-evidence-item">
+     <article
+    class="professional-evidence-item"
+    id="evidence-cyber-security-uplift">
 
         <div class="professional-evidence-icon">
           <i class="fa-solid fa-shield-halved"></i>
@@ -8559,7 +9362,9 @@ document.addEventListener("DOMContentLoaded", function () {
            2. NHS DIGITAL TRANSFORMATION
       ======================================================= -->
 
-      <article class="professional-evidence-item">
+<article
+    class="professional-evidence-item"
+    id="evidence-nhs-digital-transformation">
 
         <div class="professional-evidence-icon">
           <i class="fa-solid fa-hospital"></i>
@@ -8604,7 +9409,9 @@ document.addEventListener("DOMContentLoaded", function () {
            3. 126K DEVICE MIGRATION
       ======================================================= -->
 
-      <article class="professional-evidence-item">
+<article
+    class="professional-evidence-item"
+    id="evidence-126k-device-migration">
 
         <div class="professional-evidence-icon">
           <i class="fa-solid fa-laptop"></i>
@@ -8653,7 +9460,9 @@ document.addEventListener("DOMContentLoaded", function () {
            4. CLOUD TRANSFORMATION
       ======================================================= -->
 
-      <article class="professional-evidence-item">
+<article
+    class="professional-evidence-item"
+    id="evidence-cloud-transformation">
 
         <div class="professional-evidence-icon">
           <i class="fa-solid fa-cloud"></i>
@@ -8699,7 +9508,10 @@ document.addEventListener("DOMContentLoaded", function () {
            5. PMO TURNAROUND
       ======================================================= -->
 
-      <article class="professional-evidence-item">
+
+<article
+    class="professional-evidence-item"
+    id="evidence-pmo-turnaround">
 
         <div class="professional-evidence-icon">
           <i class="fa-solid fa-chart-line"></i>
@@ -8747,7 +9559,9 @@ document.addEventListener("DOMContentLoaded", function () {
            6. PROGRAMME GOVERNANCE
       ======================================================= -->
 
-      <article class="professional-evidence-item">
+<article
+    class="professional-evidence-item"
+    id="evidence-programme-governance">
 
         <div class="professional-evidence-icon">
           <i class="fa-solid fa-sitemap"></i>
@@ -8995,15 +9809,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 </script>
 
-
-<script>
-/* ============================================================
-   1. LOAD CPD ON PAGE LOAD
-============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
-    loadCPD();
-});
-</script>
 
 <script>
 /* ============================================================

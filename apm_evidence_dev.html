@@ -7686,8 +7686,390 @@ const unmappedEvidenceGoals = [
 ];
 
   
+/* ============================================================
+   EVIDENCE → CPD RELATIONSHIP LAYER
+   ============================================================
+
+   PURPOSE:
+   Connects dynamically generated CPD activities to the relevant
+   Evidence of Professional Practice cards.
+
+   RELATIONSHIP:
+
+   APM CPD Activity
+        ↓
+   CPD Goal / Category
+        ↓
+   Evidence of Professional Practice
+
+   The CPD activities themselves remain completely dynamic.
+   No CPD activity IDs or manual changes are required in the
+   Google Sheet or APM CPD log.
+
+   The website generates a stable ID from the activity title.
+============================================================ */
 
 
+/* ============================================================
+   1. CREATE A STABLE ID FOR A CPD ACTIVITY
+============================================================ */
+
+function createCPDActivityId(activityName) {
+
+    if (!activityName) {
+        return "";
+    }
+
+    return "cpd-activity-" +
+        activityName
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+}
+
+
+/* ============================================================
+   2. POPULATE EVIDENCE → CPD RELATIONSHIPS
+============================================================ */
+
+function populateEvidenceCPDRelationships() {
+
+    console.log(
+        "[CPD] Starting Evidence → CPD relationship layer..."
+    );
+
+
+    /* --------------------------------------------------------
+       FIND DYNAMICALLY GENERATED CPD CARDS
+    -------------------------------------------------------- */
+
+    const cpdCards =
+        document.querySelectorAll(".cpd-card");
+
+
+    if (!cpdCards.length) {
+
+        console.warn(
+            "[CPD] No dynamically generated CPD cards found."
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "[CPD] CPD cards found:",
+        cpdCards.length
+    );
+
+
+    /* --------------------------------------------------------
+       REMOVE PREVIOUSLY GENERATED SUPPORTING CPD SECTIONS
+
+       This prevents duplicates if the relationship layer
+       is run more than once.
+    -------------------------------------------------------- */
+
+    document
+        .querySelectorAll(
+            ".supporting-cpd-activities"
+        )
+        .forEach(section => {
+
+            section.remove();
+
+        });
+
+
+    /* --------------------------------------------------------
+       LOOP THROUGH EACH EVIDENCE CARD
+    -------------------------------------------------------- */
+
+    Object.entries(
+        evidenceGoalRelationships
+    ).forEach(
+        ([evidenceId, evidenceGoals]) => {
+
+
+        /* ----------------------------------------------------
+           FIND THE EVIDENCE CARD
+        ---------------------------------------------------- */
+
+        const evidenceCard =
+            document.getElementById(
+                evidenceId
+            );
+
+
+        if (!evidenceCard) {
+
+            console.warn(
+                "[CPD] Evidence card not found:",
+                evidenceId
+            );
+
+            return;
+
+        }
+
+
+        /* ----------------------------------------------------
+           FIND CONTENT AREA OF EVIDENCE CARD
+        ---------------------------------------------------- */
+
+        const evidenceContent =
+            evidenceCard.querySelector(
+                ".professional-evidence-content"
+            );
+
+
+        if (!evidenceContent) {
+
+            console.warn(
+                "[CPD] Evidence content area not found:",
+                evidenceId
+            );
+
+            return;
+
+        }
+
+
+        /* ----------------------------------------------------
+           CREATE SUPPORTING CPD SECTION
+        ---------------------------------------------------- */
+
+        const wrapper =
+            document.createElement("div");
+
+
+        wrapper.className =
+            "supporting-cpd-activities";
+
+
+        wrapper.innerHTML = `
+
+            <div class="professional-evidence-label">
+                Supporting CPD activities
+            </div>
+
+            <div class="supporting-cpd-list"></div>
+
+        `;
+
+
+        const list =
+            wrapper.querySelector(
+                ".supporting-cpd-list"
+            );
+
+
+        /* ----------------------------------------------------
+           LOOP THROUGH ALL DYNAMIC CPD ACTIVITIES
+        ---------------------------------------------------- */
+
+        cpdCards.forEach(card => {
+
+
+            /* ------------------------------------------------
+               GET THE CPD GOAL / CATEGORY
+
+               Your existing CPD card uses:
+
+               .cpd-category
+
+               This is the APM Goal selected against the
+               activity in the APM CPD portal.
+            ------------------------------------------------ */
+
+            const categoryElement =
+                card.querySelector(
+                    ".cpd-category"
+                );
+
+
+            if (!categoryElement) {
+
+                return;
+
+            }
+
+
+            const activityGoal =
+                categoryElement
+                    .textContent
+                    .trim()
+                    .toLowerCase();
+
+
+            if (!activityGoal) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               CHECK WHETHER THE CPD GOAL MATCHES
+               THIS EVIDENCE CARD
+            ------------------------------------------------ */
+
+            const matchesGoal =
+                evidenceGoals.some(
+                    goal =>
+                        goal
+                            .trim()
+                            .toLowerCase() ===
+                        activityGoal
+                );
+
+
+            if (!matchesGoal) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               GET CPD ACTIVITY TITLE
+
+               The status icon is removed before extracting
+               the activity name.
+            ------------------------------------------------ */
+
+            const titleElement =
+                card.querySelector(
+                    ".cpd-card-title"
+                );
+
+
+            if (!titleElement) {
+
+                return;
+
+            }
+
+
+            const titleClone =
+                titleElement.cloneNode(true);
+
+
+            titleClone
+                .querySelectorAll("i")
+                .forEach(icon => {
+
+                    icon.remove();
+
+                });
+
+
+            const activityName =
+                titleClone
+                    .textContent
+                    .trim();
+
+
+            if (!activityName) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               CREATE WEBSITE-GENERATED CPD ACTIVITY ID
+            ------------------------------------------------ */
+
+            const activityId =
+                createCPDActivityId(
+                    activityName
+                );
+
+
+            if (!activityId) {
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               ASSIGN ID TO DYNAMIC CPD CARD
+
+               Example:
+
+               Halesowen College Lecture
+
+               becomes:
+
+               id="cpd-activity-halesowen-college-lecture"
+            ------------------------------------------------ */
+
+            card.id =
+                activityId;
+
+
+            /* ------------------------------------------------
+               CREATE EVIDENCE → CPD LINK
+            ------------------------------------------------ */
+
+            const link =
+                document.createElement("a");
+
+
+            link.className =
+                "supporting-cpd-activity";
+
+
+            link.href =
+                "#" + activityId;
+
+
+            link.innerHTML = `
+
+                <span class="supporting-cpd-activity-title">
+                    ${activityName}
+                </span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            `;
+
+
+            list.appendChild(link);
+
+
+        });
+
+
+        /* ----------------------------------------------------
+           ONLY ADD SECTION IF CPD ACTIVITIES WERE FOUND
+        ---------------------------------------------------- */
+
+        if (
+            list.children.length > 0
+        ) {
+
+            evidenceContent
+                .appendChild(
+                    wrapper
+                );
+
+        }
+
+
+    });
+
+
+    console.log(
+        "[CPD] Evidence → CPD relationship layer complete."
+    );
+
+}
 /* ============================================================
    APM FRAMEWORK CAROUSEL CONTROLS
 ============================================================ */

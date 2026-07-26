@@ -7075,71 +7075,102 @@ console.log("All complete");
     }
 }
 
+function linkCPDToCompetences() {
+  const competenceMap = {
+    "Mentor, coach and inspire future generations": "leadership",
+    "Increase my networking": "stakeholder-engagement-and-communication",
+    "Contribute to APM": "ethics-compliance-and-professionalism",
+    "Continue my professional development": "ethics-compliance-and-professionalism",
+    "Get a new job": "capability-development",
+    "Contribute to my network": "stakeholder-engagement-and-communication",
+    "Leadership & mentoring": "leadership",
+    "Sustainability in change initiatives": "sustainability",
+    "AI & digital transformation": "solutions-development",
+    "Stakeholder engagement & communication": "stakeholder-engagement-and-communication"
+  };
+
+  document.querySelectorAll('.cpd-card').forEach(card => {
+    const devGoal = card.querySelector('.cpd-category')?.textContent?.trim();
+    if (!devGoal) return;
+
+    const competence = competenceMap[devGoal];
+    if (!competence) return;
+
+    const competenceId = 'competence-' + competence;
+
+    if (card.querySelector('.cpd-competence-link')) return;
+
+    const link = document.createElement('a');
+    link.className = 'cpd-competence-link';
+    link.href = '#' + competenceId;
+    link.textContent = 'View related competence →';
+
+    card.appendChild(link);
+  });
+}
+
+
 /* ============================================================
-   CPD → COMPETENCE + CPD → EVIDENCE LINKS
+   CPD / EVIDENCE → COMPETENCE NAVIGATION
 ============================================================ */
 
-function linkCPDToCompetences() {
+document.addEventListener("click", function(e) {
 
-    console.log(
-        "[CPD] Creating CPD → Competence and CPD → Evidence links..."
-    );
+    /*
+       Handle both:
 
+       1. CPD → Competence
+          .cpd-competence-link
 
-    /* ============================================================
-       CPD GOAL → COMPETENCE MAPPING
+       2. Evidence → Competence
+          .evidence-tag
+    */
 
-       The CPD category is the APM Goal selected against
-       each activity in the APM CPD log.
-    ============================================================ */
-
-    const competenceMap = {
-
-        "Mentor, coach and inspire future generations":
-            "leadership",
-
-        "Increase my networking":
-            "stakeholder-engagement-and-communication",
-
-        "Contribute to APM":
-            "ethics-compliance-and-professionalism",
-
-        "Continue my professional development":
-            "ethics-compliance-and-professionalism",
-
-        "Get a new job":
-            "capability-development",
-
-        "Contribute to my network":
-            "stakeholder-engagement-and-communication",
-
-        "Leadership & mentoring":
-            "leadership",
-
-        "Sustainability in change initiatives":
-            "sustainability",
-
-        "AI & digital transformation":
-            "solutions-development",
-
-        "Stakeholder engagement & communication":
-            "stakeholder-engagement-and-communication"
-
-    };
+    const link =
+        e.target.closest(
+            ".cpd-competence-link, .evidence-tag"
+        );
 
 
-    /* ============================================================
-       FIND ALL DYNAMIC CPD CARDS
-    ============================================================ */
-
-    const cpdCards =
-        document.querySelectorAll(".cpd-card");
+    /* Not a competence link */
+    if (!link) return;
 
 
-    if (!cpdCards.length) {
+    /*
+       Make sure this is actually a competence link.
+       This prevents unrelated .evidence-tag elements
+       from being intercepted if you add other tags later.
+    */
+
+    const href =
+        link.getAttribute("href");
+
+
+    if (
+        !href ||
+        !href.startsWith("#competence-")
+    ) {
+        return;
+    }
+
+
+    e.preventDefault();
+    e.stopPropagation();
+
+
+    /*
+       Find target competence accordion.
+    */
+
+    const target =
+        document.querySelector(href);
+
+
+    if (!target) {
 
         console.warn(
-            "[CPD] No CPD cards found."
+            "[CPD] Competence target not found:",
+            href
         );
 
         return;
@@ -7147,290 +7178,278 @@ function linkCPDToCompetences() {
     }
 
 
-    console.log(
-        "[CPD] CPD cards found:",
-        cpdCards.length
+    /*
+       Close any previously highlighted competence.
+    */
+
+    document
+        .querySelectorAll(
+            ".accordion-item.highlighted"
+        )
+        .forEach(item => {
+
+            item.classList.remove(
+                "highlighted"
+            );
+
+        });
+
+
+    /*
+       Open the target competence accordion.
+    */
+
+    if (
+        !target.classList.contains("open")
+    ) {
+
+        target.classList.add("open");
+
+    }
+
+
+    /*
+       Highlight the target competence.
+    */
+
+    target.classList.add(
+        "highlighted"
     );
 
 
-    /* ============================================================
-       PROCESS EACH CPD ACTIVITY
-    ============================================================ */
+    /*
+       Wait for the accordion to open,
+       then scroll to it.
+    */
 
-    cpdCards.forEach(card => {
+    requestAnimationFrame(() => {
 
+        setTimeout(() => {
 
-        /* ========================================================
-           GET THE APM GOAL / CATEGORY
-        ======================================================== */
+            target.scrollIntoView({
 
-        const categoryElement =
-            card.querySelector(".cpd-category");
+                behavior: "smooth",
 
-
-        if (!categoryElement) {
-
-            console.warn(
-                "[CPD] No category found for CPD card."
-            );
-
-            return;
-
-        }
-
-
-        const devGoal =
-            categoryElement
-                .textContent
-                .trim();
-
-
-        if (!devGoal) return;
-
-
-        /* ========================================================
-           GET ACTIVITY TITLE
-        ======================================================== */
-
-        const titleElement =
-            card.querySelector(".cpd-card-title");
-
-
-        if (!titleElement) return;
-
-
-        /*
-         * Clone the title so the status icon
-         * does not become part of the activity name.
-         */
-
-        const titleClone =
-            titleElement.cloneNode(true);
-
-
-        titleClone
-            .querySelectorAll("i")
-            .forEach(icon => {
-
-                icon.remove();
+                block: "center"
 
             });
 
-
-        const activityName =
-            titleClone
-                .textContent
-                .trim();
-
-
-        if (!activityName) return;
-
-
-        /* ========================================================
-           CREATE / REUSE DYNAMIC CPD ACTIVITY ID
-
-           Example:
-
-           Halesowen College Lecture
-
-           becomes:
-
-           #cpd-activity-halesowen-college-lecture
-        ======================================================== */
-
-        const activityId =
-            createCPDActivityId(
-                activityName
-            );
-
-
-        if (activityId) {
-
-            card.id =
-                activityId;
-
-        }
-
-
-        /* ========================================================
-           REMOVE PREVIOUSLY GENERATED RELATIONSHIP LINKS
-
-           This prevents duplicates if this function is called
-           more than once.
-        ======================================================== */
-
-        card
-            .querySelectorAll(
-                ".cpd-competence-link, .cpd-evidence-link"
-            )
-            .forEach(link => {
-
-                link.remove();
-
-            });
-
-
-        /* ========================================================
-           CREATE CPD → COMPETENCE LINK
-
-           This retains your existing functionality.
-        ======================================================== */
-
-        const competence =
-            competenceMap[devGoal];
-
-
-        if (competence) {
-
-            const competenceId =
-                "competence-" +
-                competence;
-
-
-            const competenceLink =
-                document.createElement("a");
-
-
-            competenceLink.className =
-                "cpd-competence-link";
-
-
-            competenceLink.href =
-                "#" + competenceId;
-
-
-            competenceLink.textContent =
-                "View related competence →";
-
-
-            card.appendChild(
-                competenceLink
-            );
-
-        }
-
-
-        /* ========================================================
-           CREATE CPD → EVIDENCE LINK
-
-           Find all Evidence cards whose configured
-           Goals supported section contains this CPD Goal.
-
-           This means the CPD activity itself remains
-           completely dynamic.
-
-           The relationship is:
-
-           CPD Activity
-                ↓
-           APM Goal / Category
-                ↓
-           Evidence of Professional Practice
-        ======================================================== */
-
-        const matchingEvidenceIds = [];
-
-
-        Object.entries(
-            evidenceGoalRelationships
-        ).forEach(
-            ([evidenceId, evidenceGoals]) => {
-
-
-            const matchesGoal =
-                evidenceGoals.some(
-                    goal =>
-
-                        goal
-                            .trim()
-                            .toLowerCase() ===
-
-                        devGoal
-                            .trim()
-                            .toLowerCase()
-                );
-
-
-            if (matchesGoal) {
-
-                matchingEvidenceIds.push(
-                    evidenceId
-                );
-
-            }
-
-        });
-
-
-        /* ========================================================
-           CREATE EVIDENCE LINKS
-
-           A single CPD activity may legitimately support
-           more than one Evidence area if its APM Goal is
-           mapped to multiple Evidence cards.
-        ======================================================== */
-
-        matchingEvidenceIds.forEach(
-            evidenceId => {
-
-
-            const evidenceCard =
-                document.getElementById(
-                    evidenceId
-                );
-
-
-            if (!evidenceCard) return;
-
-
-            const evidenceTitle =
-                evidenceCard.querySelector(
-                    "h3"
-                );
-
-
-            if (!evidenceTitle) return;
-
-
-            const evidenceLink =
-                document.createElement("a");
-
-
-            evidenceLink.className =
-                "cpd-evidence-link";
-
-
-            evidenceLink.href =
-                "#" + evidenceId;
-
-
-            evidenceLink.textContent =
-                "View related evidence: " +
-                evidenceTitle
-                    .textContent
-                    .trim() +
-                " →";
-
-
-            card.appendChild(
-                evidenceLink
-            );
-
-        });
-
+        }, 300);
 
     });
 
+});
 
-    console.log(
-        "[CPD] CPD → Competence links created."
-    );
+/* ============================================================
+   EVIDENCE → CPD ACTIVITY NAVIGATION
+============================================================ */
 
-    console.log(
-        "[CPD] CPD → Evidence links created."
-    );
+document.addEventListener("click", function(e) {
 
-}
+    const link =
+        e.target.closest(
+            ".supporting-cpd-activity"
+        );
+
+
+    if (!link) return;
+
+
+    e.preventDefault();
+    e.stopPropagation();
+
+
+    /*
+       Get the target CPD activity ID.
+    */
+
+    const href =
+        link.getAttribute("href");
+
+
+    if (
+        !href ||
+        !href.startsWith("#cpd-activity-")
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+       Find the dynamically generated CPD card.
+    */
+
+    const target =
+        document.querySelector(href);
+
+
+    if (!target) {
+
+        console.warn(
+            "[CPD] CPD activity target not found:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Find the CPD Log content that contains
+       the dynamic CPD cards.
+
+       This is more reliable than assuming that
+       #cpd-card-container itself is the collapsible.
+    */
+
+    const cpdCardContainer =
+        document.getElementById(
+            "cpd-card-container"
+        );
+
+
+    if (!cpdCardContainer) {
+
+        console.warn(
+            "[CPD] #cpd-card-container not found."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Find the closest collapsible content
+       containing the CPD cards.
+    */
+
+    const cpdLogContent =
+        cpdCardContainer.closest(
+            ".collapsible-content"
+        );
+
+
+    /*
+       If the CPD Log is collapsed,
+       open the correct collapsible.
+    */
+
+    if (
+        cpdLogContent &&
+        !cpdLogContent.classList.contains("open")
+    ) {
+
+
+        /*
+           Find the toggle immediately associated
+           with this collapsible content.
+        */
+
+        const cpdLogToggle =
+            cpdLogContent.previousElementSibling;
+
+
+        if (
+            cpdLogToggle &&
+            cpdLogToggle.classList.contains(
+                "collapsible-toggle"
+            )
+        ) {
+
+            /*
+               IMPORTANT:
+
+               Use the same class changes as your
+               existing collapsible functionality.
+            */
+
+            cpdLogContent.classList.add(
+                "open"
+            );
+
+            cpdLogToggle.classList.add(
+                "open"
+            );
+
+
+        } else {
+
+            console.warn(
+                "[CPD] CPD Log toggle not found."
+            );
+
+        }
+
+    }
+
+
+    /*
+       Remove previous CPD activity highlights.
+    */
+
+    document
+        .querySelectorAll(
+            ".cpd-card.cpd-activity-highlighted"
+        )
+        .forEach(card => {
+
+            card.classList.remove(
+                "cpd-activity-highlighted"
+            );
+
+        });
+
+
+    /*
+       Wait for the CPD Log to expand before
+       calculating the target's position.
+    */
+
+    setTimeout(() => {
+
+
+        /*
+           Highlight selected CPD activity.
+        */
+
+        target.classList.add(
+            "cpd-activity-highlighted"
+        );
+
+
+        /*
+           Scroll directly to the activity.
+        */
+
+        target.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+
+        });
+
+
+        /*
+           Remove highlight after 3 seconds.
+        */
+
+        setTimeout(() => {
+
+            target.classList.remove(
+                "cpd-activity-highlighted"
+            );
+
+        }, 3000);
+
+
+    }, 600);
+
+});  
 /* ==========================================================
    METRICS + PROGRESS RING
 ========================================================== */

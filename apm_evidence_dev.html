@@ -5446,26 +5446,478 @@ body.page-prof-dev .cpd-pillars-section .pillar-card.projected .pillar-fill {
     margin-top:30px;
     border:1px solid #e5e9ef;
 }
-body.header-with-logo.page-prof-dev footer.footer .mobile-sticky-bar .sticky-btn {
-    border-radius: 8px !important;         /* undo pill shape */
-    background: white !important;          /* keep correct colour */
-    color: #0A1F44 !important;
 
-    padding: 12px 10px !important;         /* restore spacing */
-    font-size: 15px !important;
-    font-weight: 600 !important;
+/* ============================================================
+   RATINGS SUMMARY BAR TOOLTIP
+============================================================ */
 
-    white-space: normal !important;        /* fix text wrapping */
-    overflow-wrap: break-word !important;
+.rating-tooltip,
+.summary-tooltip {
 
-    flex: 1 1 auto !important;             /* restore equal sizing */
-    max-width: none !important;
+    background:#0a2540 !important;
+
+    color:#ffffff !important;
+
+    padding:12px 16px;
+
+    border-radius:8px;
+
+    font-size:0.9rem;
+
+    line-height:1.4;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,0.25);
+
+    border:none;
+
+    z-index:9999;
+
 }
-body.header-with-logo.page-prof-dev .mobile-sticky-bar {
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    gap: 10px !important;
+
+#rating-tooltip {
+    background:#0a2540 !important;
+    color:#fff !important;
 }
+  /* ============================================================
+   RATING SUMMARY TOOLTIP RESTORE
+============================================================ */
+
+.rating-tooltip {
+
+    background:#0a2540 !important;
+    color:#ffffff !important;
+
+    border-radius:8px;
+
+    padding:12px 16px;
+
+    font-size:0.9rem;
+
+    font-weight:500;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.25);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    z-index:9999;
+
+}
+/* ============================================================
+   FORCE COMPETENCY CARD TO MATCH MAIN SECTION CARDS
+============================================================ */
+
+section.competency-section > .competency-card {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    opacity: 1 !important;
+    border-radius: 22px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08) !important;
+}
+
+/* ============================================================
+   CPD OUTER WRAPPER
+   Remove the unwanted extra card around the main CPD card
+============================================================ */
+
+.cpd-log-section {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+/* ============================================================
+   MAIN CPD CARD
+   This is the ONE main white card
+============================================================ */
+
+.cpd-section-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+
+/* ============================================================
+   CPD LOG
+   The ONLY grey card inside the main CPD card
+============================================================ */
+
+.cpd-section-card .cpd-log-inner {
+    background: #f3f5f7 !important;
+    border: 1px solid #dfe4e9 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04) !important;
+}
+
+
+/* Keep the log header and content the same grey card */
+.cpd-section-card .cpd-log-inner .collapsible-toggle,
+.cpd-section-card .cpd-log-inner .collapsible-content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* ============================================================
+   PILLARS, DONUT & INSIGHTS
+   These are NOT separate cards
+============================================================ */
+
+.cpd-section-card .cpd-pillars-inner,
+.cpd-section-card .cpd-donut-inner,
+.cpd-section-card .cpd-insights {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* ============================================================
+   EVIDENCE OF PROFESSIONAL PRACTICE
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   OUTER SECTION
+   Matches the main high-level white section cards
+------------------------------------------------------------ */
+
+.professional-evidence-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 3rem 0;
+    box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------
+   MAIN SECTION CARD
+------------------------------------------------------------ */
+
+.professional-evidence-card {
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ------------------------------------------------------------
+   SECTION HEADER
+------------------------------------------------------------ */
+
+.professional-evidence-header {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 2rem;
+}
+
+.professional-evidence-header .section-heading {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+.professional-evidence-header .section-subtitle {
+    margin-bottom: 0;
+    line-height: 1.7;
+}
+
+
+/* ------------------------------------------------------------
+   SIX-CARD GRID
+------------------------------------------------------------ */
+
+.professional-evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------
+   INDIVIDUAL EVIDENCE CARD
+------------------------------------------------------------ */
+
+.professional-evidence-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    padding: 1.5rem;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   CARD HOVER
+------------------------------------------------------------ */
+
+.professional-evidence-item:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    border-color: rgba(10, 102, 194, 0.25);
+}
+
+
+/* ------------------------------------------------------------
+   EVIDENCE ICON
+------------------------------------------------------------ */
+
+.professional-evidence-icon {
+    flex: 0 0 48px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0a66c2;
+    color: #ffffff;
+
+    border-radius: 12px;
+
+    font-size: 1.25rem;
+
+    box-shadow:
+        0 4px 10px rgba(10, 102, 194, 0.2);
+}
+
+
+/* ------------------------------------------------------------
+   CARD CONTENT
+------------------------------------------------------------ */
+
+.professional-evidence-content {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+
+/* ------------------------------------------------------------
+   CARD TITLE
+------------------------------------------------------------ */
+
+.professional-evidence-content h3 {
+    margin: 0 0 0.65rem;
+
+    font-size: 1.15rem;
+    line-height: 1.35;
+
+    color: #0f172a;
+}
+
+
+/* ------------------------------------------------------------
+   CARD DESCRIPTION
+------------------------------------------------------------ */
+
+.professional-evidence-summary {
+    margin: 0 0 1.25rem;
+
+    color: #475569;
+
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+
+/* ------------------------------------------------------------
+   "COMPETENCES DEMONSTRATED" LABEL
+------------------------------------------------------------ */
+
+.professional-evidence-label {
+    margin-bottom: 0.65rem;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+
+    color: #64748b;
+}
+
+
+/* ------------------------------------------------------------
+   COMPETENCE TAG CONTAINER
+------------------------------------------------------------ */
+
+.professional-evidence-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    width: 100%;
+}
+
+
+/* ------------------------------------------------------------
+   COMPETENCE TAGS
+------------------------------------------------------------ */
+
+.evidence-tag {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 0.4rem 0.7rem;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe2ea;
+    border-radius: 999px;
+
+    color: #0a66c2;
+
+    font-size: 0.78rem;
+    font-weight: 600;
+
+    line-height: 1.3;
+
+    white-space: normal;
+}
+
+
+/* ------------------------------------------------------------
+   TABLET
+------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+
+    .professional-evidence-card {
+        padding: 24px;
+    }
+
+    .professional-evidence-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    .professional-evidence-section {
+        margin: 2rem 0;
+    }
+
+    .professional-evidence-card {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .professional-evidence-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .professional-evidence-item {
+        gap: 1rem;
+        padding: 1.15rem;
+        border-radius: 14px;
+    }
+
+    .professional-evidence-icon {
+        flex: 0 0 42px;
+
+        width: 42px;
+        height: 42px;
+
+        border-radius: 10px;
+
+        font-size: 1.05rem;
+    }
+
+    .professional-evidence-content h3 {
+        font-size: 1.05rem;
+    }
+
+    .professional-evidence-summary {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .evidence-tag {
+        font-size: 0.74rem;
+        padding: 0.35rem 0.6rem;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   VERY SMALL MOBILE DEVICES
+------------------------------------------------------------ */
+
+@media (max-width: 400px) {
+
+    .professional-evidence-card {
+        padding: 14px;
+    }
+
+    .professional-evidence-item {
+        flex-direction: column;
+    }
+
+    .professional-evidence-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+}
+
+<div class="professional-evidence-tags">
+
+  <a href="#competence-governance-arrangements" class="evidence-tag">
+    Governance
+  </a>
+
+  <a href="#competence-risk-and-issue-management" class="evidence-tag">
+    Risk &amp; Issue Management
+  </a>
+
+  <a href="#competence-assurance" class="evidence-tag">
+    Assurance
+  </a>
+
+  <a href="#competence-leadership" class="evidence-tag">
+    Leadership
+  </a>
+
+</div>
   
 </style>
 
@@ -7379,208 +7831,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <button class="carousel-btn next">›</button>
   </div>
-</section>
-<!-- DEVELOPMENT PRIORITIES -->
-<section class="development-priorities-section">
 
-    <!-- ========================================================
-         SECTION HEADER
-    ========================================================= -->
-
-    <div class="development-priorities-header">
-
-        <h2 class="section-heading">
-            <i class="fa-solid fa-bullseye"></i>
-            Development Priorities
-            <span class="development-period">
-                Next 12 months
-            </span>
-        </h2>
-
-        <p class="section-subtitle">
-            Drawing on my CPD activity and competence assessment,
-            the following areas are prioritised for focused development
-            over the coming year.
-        </p>
-
-    </div>
-
-
-    <!-- ========================================================
-         DEVELOPMENT PRIORITY CARDS
-    ========================================================= -->
-
-    <div class="development-priority-grid">
-
-
-        <!-- ====================================================
-             1. LEADERSHIP & MENTORING
-        ===================================================== -->
-
-        <article class="development-priority-card">
-
-            <div class="development-priority-icon">
-                <i class="fa-solid fa-people-arrows"></i>
-            </div>
-
-            <div class="development-priority-content">
-
-                <h3>
-                    Leadership &amp; Mentoring
-                </h3>
-
-                <span class="development-focus">
-                    Coaching &amp; leadership development
-                </span>
-
-                <p>
-                    Strengthen coaching practice and structured support
-                    for early-career professionals.
-                </p>
-
-                <div class="development-tags">
-                    <span>Coaching</span>
-                    <span>Mentoring</span>
-                    <span>Leadership</span>
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- ====================================================
-             2. STAKEHOLDER ENGAGEMENT
-        ===================================================== -->
-
-        <article class="development-priority-card">
-
-            <div class="development-priority-icon">
-                <i class="fa-solid fa-handshake"></i>
-            </div>
-
-            <div class="development-priority-content">
-
-                <h3>
-                    Stakeholder Engagement &amp; Communication
-                </h3>
-
-                <span class="development-focus">
-                    Influence &amp; communication
-                </span>
-
-                <p>
-                    Sharpen narrative, influence and conflict-resolution
-                    across complex programmes.
-                </p>
-
-                <div class="development-tags">
-                    <span>Influencing</span>
-                    <span>Communication</span>
-                    <span>Conflict resolution</span>
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- ====================================================
-             3. AI & DIGITAL TRANSFORMATION
-        ===================================================== -->
-
-        <article class="development-priority-card">
-
-            <div class="development-priority-icon">
-                <i class="fa-solid fa-robot"></i>
-            </div>
-
-            <div class="development-priority-content">
-
-                <h3>
-                    AI &amp; Digital Transformation
-                </h3>
-
-                <span class="development-focus">
-                    Practical application of AI
-                </span>
-
-                <p>
-                    Deepen practical use of AI tools, including
-                    Microsoft 365 Copilot, across delivery and governance.
-                </p>
-
-                <div class="development-tags">
-                    <span>AI</span>
-                    <span>Automation</span>
-                    <span>Digital transformation</span>
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- ====================================================
-             4. SUSTAINABILITY
-        ===================================================== -->
-
-        <article class="development-priority-card">
-
-            <div class="development-priority-icon">
-                <i class="fa-solid fa-leaf"></i>
-            </div>
-
-            <div class="development-priority-content">
-
-                <h3>
-                    Sustainability in Change
-                </h3>
-
-                <span class="development-focus">
-                    Sustainable programme delivery
-                </span>
-
-                <p>
-                    Embed sustainability criteria into business cases,
-                    governance and benefits management.
-                </p>
-
-                <div class="development-tags">
-                    <span>Sustainability</span>
-                    <span>Benefits</span>
-                    <span>Governance</span>
-                </div>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
-</section>
 
 <!-- PERSONAL ASSESSMENT ACCORDION -->
+  <section class="competency-section">
     <div class="section-card competency-card">
-      <div class="collapsible-toggle competence-header">
-  <div class="collapsible-text">
     <h2 class="section-heading">
       <i class="fa-solid fa-user-check"></i>
       My Competence Assessment (29 competences)
     </h2>
 
-    <p class="section-helper">
-      Tap to expand my Competency Assessment.
-    </p>
-  </div>
-
-  <i class="fa-solid fa-chevron-right chevron"></i>
-</div>
+ 
 
 
 
-<div class="collapsible-content">
+
 
 <div class="apm-progress-bar"></div>
 
@@ -8209,10 +8474,524 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   </div> <!-- end accordion -->
-  </div> <!-- end collapsible-content -->
 <div id="rating-tooltip" class="rating-tooltip" style="display:none;"></div>
 
+</div> <!-- end section-card competency-card -->
+
 </section>
+
+<!-- ============================================================
+     EVIDENCE OF PROFESSIONAL PRACTICE
+============================================================ -->
+
+<section class="professional-evidence-section">
+
+  <div class="section-card professional-evidence-card">
+
+    <div class="professional-evidence-header">
+
+      <h2 class="section-heading">
+        <i class="fa-solid fa-folder-open"></i>
+        Evidence of Professional Practice
+      </h2>
+
+      <p class="section-subtitle">
+        Selected examples demonstrating the practical application of
+        project, programme and portfolio management competences across
+        complex transformation, technology and organisational change
+        environments.
+      </p>
+
+    </div>
+
+    <div class="professional-evidence-grid">
+
+
+      <!-- ======================================================
+           1. CYBER SECURITY UPLIFT
+      ======================================================= -->
+
+     <article
+    class="professional-evidence-item"
+    id="evidence-cyber-security-uplift">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>Cyber Security Uplift</h3>
+
+          <p class="professional-evidence-summary">
+            Led a major cyber security uplift programme, coordinating
+            governance, risk management and assurance activities across
+            a complex and highly regulated environment.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+         <div class="professional-evidence-tags">
+
+  <a href="#competence-governance-arrangements" class="evidence-tag">
+    Governance
+  </a>
+
+  <a href="#competence-risk-and-issue-management" class="evidence-tag">
+    Risk &amp; Issue Management
+  </a>
+
+  <a href="#competence-assurance" class="evidence-tag">
+    Assurance
+  </a>
+
+  <a href="#competence-leadership" class="evidence-tag">
+    Leadership
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+      <!-- ======================================================
+           2. NHS DIGITAL TRANSFORMATION
+      ======================================================= -->
+
+<article
+    class="professional-evidence-item"
+    id="evidence-nhs-digital-transformation">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-hospital"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>NHS Digital Transformation</h3>
+
+          <p class="professional-evidence-summary">
+            Delivered complex digital transformation initiatives within
+            a large-scale healthcare environment, integrating planning,
+            stakeholder engagement and controlled organisational change.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+       <div class="professional-evidence-tags">
+
+  <a href="#competence-integrated-planning" class="evidence-tag">
+    Integrated Planning
+  </a>
+
+  <a href="#competence-stakeholder-engagement-and-communication" class="evidence-tag">
+    Stakeholder Engagement
+  </a>
+
+  <a href="#competence-change-control" class="evidence-tag">
+    Change Control
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+
+      <!-- ======================================================
+           3. 126K DEVICE MIGRATION
+      ======================================================= -->
+
+<article
+    class="professional-evidence-item"
+    id="evidence-126k-device-migration">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-laptop"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>126k Device Migration</h3>
+
+          <p class="professional-evidence-summary">
+            Led the planning and delivery of a large-scale Windows
+            device migration involving approximately 126,000 devices,
+            coordinating resources, managing delivery risks and
+            overseeing transition into the new operating environment.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+      <div class="professional-evidence-tags">
+
+  <a href="#competence-integrated-planning" class="evidence-tag">
+    Integrated Planning
+  </a>
+
+  <a href="#competence-resource-management" class="evidence-tag">
+    Resource Management
+  </a>
+
+  <a href="#competence-risk-and-issue-management" class="evidence-tag">
+    Risk &amp; Issue Management
+  </a>
+
+  <a href="#competence-transition-management" class="evidence-tag">
+    Transition Management
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+      <!-- ======================================================
+           4. CLOUD TRANSFORMATION
+      ======================================================= -->
+
+<article
+    class="professional-evidence-item"
+    id="evidence-cloud-transformation">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-cloud"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>Cloud Transformation</h3>
+
+          <p class="professional-evidence-summary">
+            Led cloud transformation initiatives across enterprise
+            environments, developing appropriate technical and delivery
+            solutions while aligning investment with financial objectives
+            and measurable business benefits.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+         <div class="professional-evidence-tags">
+
+  <a href="#competence-solutions-development" class="evidence-tag">
+    Solutions Development
+  </a>
+
+  <a href="#competence-financial-management" class="evidence-tag">
+    Financial Management
+  </a>
+
+  <a href="#competence-benefits-management" class="evidence-tag">
+    Benefits Management
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+
+      <!-- ======================================================
+           5. PMO TURNAROUND
+      ======================================================= -->
+
+
+<article
+    class="professional-evidence-item"
+    id="evidence-pmo-turnaround">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-chart-line"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>PMO Turnaround</h3>
+
+          <p class="professional-evidence-summary">
+            Established and strengthened programme governance and PMO
+            controls, improving portfolio visibility, delivery confidence
+            and executive oversight across a challenged change environment.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+        <div class="professional-evidence-tags">
+
+  <a href="#competence-governance-arrangements" class="evidence-tag">
+    Governance
+  </a>
+
+  <a href="#competence-portfolio-shaping" class="evidence-tag">
+    Portfolio Shaping
+  </a>
+
+  <a href="#competence-reviews" class="evidence-tag">
+    Reviews
+  </a>
+
+  <a href="#competence-assurance" class="evidence-tag">
+    Assurance
+  </a>
+
+</div>
+        </div>
+
+      </article>
+
+
+      <!-- ======================================================
+           6. PROGRAMME GOVERNANCE
+      ======================================================= -->
+
+<article
+    class="professional-evidence-item"
+    id="evidence-programme-governance">
+
+        <div class="professional-evidence-icon">
+          <i class="fa-solid fa-sitemap"></i>
+        </div>
+
+        <div class="professional-evidence-content">
+
+          <h3>Programme Governance</h3>
+
+          <p class="professional-evidence-summary">
+            Designed and implemented governance structures and review
+            mechanisms that strengthened decision-making, improved risk
+            visibility and provided effective oversight of programme delivery.
+          </p>
+
+          <div class="professional-evidence-label">
+            Competences demonstrated
+          </div>
+
+        <div class="professional-evidence-tags">
+
+  <a href="#competence-governance-arrangements" class="evidence-tag">
+    Governance
+  </a>
+
+  <a href="#competence-reviews" class="evidence-tag">
+    Reviews
+  </a>
+
+  <a href="#competence-risk-and-issue-management" class="evidence-tag">
+    Risk &amp; Issue Management
+  </a>
+
+</div>
+
+        </div>
+
+      </article>
+
+
+    </div>
+    <!-- /.professional-evidence-grid -->
+
+  </div>
+  <!-- /.professional-evidence-card -->
+
+</section>
+<!-- /.professional-evidence-section -->  
+
+</section>
+<!-- DEVELOPMENT PRIORITIES -->
+<section class="development-priorities-section">
+
+    <!-- ========================================================
+         SECTION HEADER
+    ========================================================= -->
+
+    <div class="development-priorities-header">
+
+        <h2 class="section-heading">
+            <i class="fa-solid fa-bullseye"></i>
+            Development Priorities
+            <span class="development-period">
+                Next 12 months
+            </span>
+        </h2>
+
+        <p class="section-subtitle">
+            Drawing on my CPD activity and competence assessment,
+            the following areas are prioritised for focused development
+            over the coming year.
+        </p>
+
+    </div>
+
+
+    <!-- ========================================================
+         DEVELOPMENT PRIORITY CARDS
+    ========================================================= -->
+
+    <div class="development-priority-grid">
+
+
+        <!-- ====================================================
+             1. LEADERSHIP & MENTORING
+        ===================================================== -->
+
+        <article class="development-priority-card">
+
+            <div class="development-priority-icon">
+                <i class="fa-solid fa-people-arrows"></i>
+            </div>
+
+            <div class="development-priority-content">
+
+                <h3>
+                    Leadership &amp; Mentoring
+                </h3>
+
+                <span class="development-focus">
+                    Coaching &amp; leadership development
+                </span>
+
+                <p>
+                    Strengthen coaching practice and structured support
+                    for early-career professionals.
+                </p>
+
+                <div class="development-tags">
+                    <span>Coaching</span>
+                    <span>Mentoring</span>
+                    <span>Leadership</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ====================================================
+             2. STAKEHOLDER ENGAGEMENT
+        ===================================================== -->
+
+        <article class="development-priority-card">
+
+            <div class="development-priority-icon">
+                <i class="fa-solid fa-handshake"></i>
+            </div>
+
+            <div class="development-priority-content">
+
+                <h3>
+                    Stakeholder Engagement &amp; Communication
+                </h3>
+
+                <span class="development-focus">
+                    Influence &amp; communication
+                </span>
+
+                <p>
+                    Sharpen narrative, influence and conflict-resolution
+                    across complex programmes.
+                </p>
+
+                <div class="development-tags">
+                    <span>Influencing</span>
+                    <span>Communication</span>
+                    <span>Conflict resolution</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ====================================================
+             3. AI & DIGITAL TRANSFORMATION
+        ===================================================== -->
+
+        <article class="development-priority-card">
+
+            <div class="development-priority-icon">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+
+            <div class="development-priority-content">
+
+                <h3>
+                    AI &amp; Digital Transformation
+                </h3>
+
+                <span class="development-focus">
+                    Practical application of AI
+                </span>
+
+                <p>
+                    Deepen practical use of AI tools, including
+                    Microsoft 365 Copilot, across delivery and governance.
+                </p>
+
+                <div class="development-tags">
+                    <span>AI</span>
+                    <span>Automation</span>
+                    <span>Digital transformation</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ====================================================
+             4. SUSTAINABILITY
+        ===================================================== -->
+
+        <article class="development-priority-card">
+
+            <div class="development-priority-icon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div class="development-priority-content">
+
+                <h3>
+                    Sustainability in Change
+                </h3>
+
+                <span class="development-focus">
+                    Sustainable programme delivery
+                </span>
+
+                <p>
+                    Embed sustainability criteria into business cases,
+                    governance and benefits management.
+                </p>
+
+                <div class="development-tags">
+                    <span>Sustainability</span>
+                    <span>Benefits</span>
+                    <span>Governance</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>  
+
 <!-- FLOATING ACTION BUTTONS -->
 <div class="fab fab-scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
 <a href="calendar.html" class="fab fab-booking">📅</a>

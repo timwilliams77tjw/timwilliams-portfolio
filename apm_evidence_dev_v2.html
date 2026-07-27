@@ -10350,136 +10350,143 @@ function populateCompetencyRelationships() {
     );
 
 }  
-
 /* ============================================================
-   COLLAPSIBLE SUPPORTING CPD / EVIDENCE RELATIONSHIPS
+   STEP 2 — DYNAMIC RELATIONSHIP COLLAPSIBLES
    ------------------------------------------------------------
-   This enhancement works on the already-generated DOM.
+   Enhances already-generated relationship sections.
 
-   It does NOT:
-   - regenerate relationships
-   - remove relationships
-   - reorder relationships
-   - change navigation
-   - alter CPD → Competence links
-   - alter Evidence → CPD links
-   - alter Competency → CPD links
+   Handles:
+   • Evidence → CPD Activities
+   • Competency → CPD Activities
+   • Competency → Supporting Evidence
+
+   Uses MutationObserver because the relationship sections
+   are generated dynamically after the page loads.
 ============================================================ */
 
-function initialiseRelationshipCollapsibles() {
+(function initialiseRelationshipCollapsibles() {
 
     console.log(
-        "[CPD] Initialising relationship collapsibles..."
+        "[CPD] Starting dynamic relationship collapsible observer..."
     );
 
 
     /* ========================================================
-       1. COMPETENCY → CPD ACTIVITIES
+       1. ENHANCE A SINGLE RELATIONSHIP SECTION
     ======================================================== */
 
-    document
-        .querySelectorAll(
-            ".competency-supporting-relationships .competency-related-section"
-        )
-        .forEach(section => {
+    function enhanceSection(section) {
 
+        if (!section) return;
 
         /*
-           Find the existing relationship title.
-        */
-
-        const title =
-            section.querySelector(
-                ".competency-related-title"
-            );
-
-
-        if (!title) return;
-
-
-        /*
-           Find the existing list.
-
-           This supports both:
-           - CPD lists
-           - Evidence lists
-        */
-
-        const list =
-            section.querySelector(
-                ".competency-related-cpd-list, .competency-related-evidence-list"
-            );
-
-
-        if (!list) return;
-
-
-        /*
-           Prevent the enhancement from
-           being applied more than once.
+           Prevent the same section being enhanced twice.
         */
 
         if (
-            section.dataset.collapsibleInitialised === "true"
+            section.dataset.relationshipCollapsible === "true"
         ) {
+            return;
+        }
+
+
+        /* ====================================================
+           DETECT THE LIST INSIDE THE SECTION
+        ==================================================== */
+
+        const list =
+            section.querySelector(
+                ".supporting-cpd-list, " +
+                ".competency-related-cpd-list, " +
+                ".competency-related-evidence-list"
+            );
+
+
+        if (!list) {
+
+            console.log(
+                "[CPD] Relationship section found, but no list yet."
+            );
 
             return;
 
         }
 
 
-        section.dataset.collapsibleInitialised =
-            "true";
-
-
-        /*
-           Count existing relationship links.
-        */
-
-        const count =
+        const itemCount =
             list.children.length;
 
 
-        if (!count) return;
+        if (!itemCount) {
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           FIND EXISTING TITLE
+        ==================================================== */
+
+        const title =
+            section.querySelector(
+                ".professional-evidence-label, " +
+                ".competency-related-title"
+            );
+
+
+        if (!title) {
+
+            console.warn(
+                "[CPD] Relationship title not found."
+            );
+
+            return;
+
+        }
 
 
         /*
-           Create header wrapper.
+           Mark as initialised.
         */
 
+        section.dataset.relationshipCollapsible =
+            "true";
+
+
+        /* ====================================================
+           CREATE COLLAPSIBLE HEADER
+        ==================================================== */
+
         const header =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         header.className =
             "relationship-collapse-header";
 
 
-        /*
-           Create count element.
-        */
+        /* ====================================================
+           CREATE COUNT
+        ==================================================== */
 
-        const countElement =
-            document.createElement(
-                "span"
-            );
+        const count =
+            document.createElement("span");
 
 
-        countElement.className =
+        count.className =
             "relationship-collapse-count";
 
 
-        countElement.textContent =
-            count === 1
+        count.textContent =
+            itemCount === 1
                 ? "1 activity"
-                : `${count} activities`;
+                : `${itemCount} activities`;
 
 
         /*
-           Evidence sections use "item"
-           rather than "activity".
+           If this is the Evidence list inside a
+           Competency card, change the wording.
         */
 
         if (
@@ -10488,22 +10495,20 @@ function initialiseRelationshipCollapsibles() {
             )
         ) {
 
-            countElement.textContent =
-                count === 1
+            count.textContent =
+                itemCount === 1
                     ? "1 item"
-                    : `${count} items`;
+                    : `${itemCount} items`;
 
         }
 
 
-        /*
-           Create Show / Hide button.
-        */
+        /* ====================================================
+           CREATE TOGGLE BUTTON
+        ==================================================== */
 
         const toggle =
-            document.createElement(
-                "button"
-            );
+            document.createElement("button");
 
 
         toggle.type =
@@ -10531,10 +10536,9 @@ function initialiseRelationshipCollapsibles() {
         `;
 
 
-        /*
-           Move the existing title
-           into the new header.
-        */
+        /* ====================================================
+           INSERT HEADER
+        ==================================================== */
 
         section.insertBefore(
             header,
@@ -10542,13 +10546,17 @@ function initialiseRelationshipCollapsibles() {
         );
 
 
+        /*
+           Move existing title into header.
+        */
+
         header.appendChild(
             title
         );
 
 
         header.appendChild(
-            countElement
+            count
         );
 
 
@@ -10557,18 +10565,23 @@ function initialiseRelationshipCollapsibles() {
         );
 
 
-        /*
-           Initially collapse the list.
-        */
+        /* ====================================================
+           COLLAPSE LIST INITIALLY
+        ==================================================== */
 
         list.classList.add(
             "relationship-list-collapsed"
         );
 
 
-        /*
-           Toggle behaviour.
-        */
+        list.classList.remove(
+            "relationship-list-expanded"
+        );
+
+
+        /* ====================================================
+           TOGGLE CLICK
+        ==================================================== */
 
         toggle.addEventListener(
             "click",
@@ -10579,44 +10592,86 @@ function initialiseRelationshipCollapsibles() {
                 e.stopPropagation();
 
 
-                const expanded =
-                    list.classList.toggle(
+                const isExpanded =
+                    list.classList.contains(
                         "relationship-list-expanded"
                     );
 
 
-                list.classList.toggle(
-                    "relationship-list-collapsed",
-                    !expanded
-                );
+                if (isExpanded) {
 
+                    /*
+                       COLLAPSE
+                    */
 
-                toggle.setAttribute(
-                    "aria-expanded",
-                    expanded
-                        ? "true"
-                        : "false"
-                );
+                    list.classList.remove(
+                        "relationship-list-expanded"
+                    );
 
+                    list.classList.add(
+                        "relationship-list-collapsed"
+                    );
 
-                toggle.classList.toggle(
-                    "expanded",
-                    expanded
-                );
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
-
-                const label =
-                    toggle.querySelector(
-                        ".relationship-toggle-label"
+                    toggle.classList.remove(
+                        "expanded"
                     );
 
 
-                if (label) {
+                    const label =
+                        toggle.querySelector(
+                            ".relationship-toggle-label"
+                        );
 
-                    label.textContent =
-                        expanded
-                            ? "Hide"
-                            : "Show";
+
+                    if (label) {
+
+                        label.textContent =
+                            "Show";
+
+                    }
+
+
+                } else {
+
+                    /*
+                       EXPAND
+                    */
+
+                    list.classList.remove(
+                        "relationship-list-collapsed"
+                    );
+
+                    list.classList.add(
+                        "relationship-list-expanded"
+                    );
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
+
+                    toggle.classList.add(
+                        "expanded"
+                    );
+
+
+                    const label =
+                        toggle.querySelector(
+                            ".relationship-toggle-label"
+                        );
+
+
+                    if (label) {
+
+                        label.textContent =
+                            "Hide";
+
+                    }
 
                 }
 
@@ -10624,228 +10679,131 @@ function initialiseRelationshipCollapsibles() {
         );
 
 
-    });
+        console.log(
+            "[CPD] Relationship collapsible created:",
+            title.textContent.trim(),
+            "| Items:",
+            itemCount
+        );
+
+    }
 
 
     /* ========================================================
-       2. EVIDENCE → CPD ACTIVITIES
+       2. SCAN ALL EXISTING RELATIONSHIP SECTIONS
     ======================================================== */
 
-    document
-        .querySelectorAll(
-            ".supporting-cpd-activities"
-        )
-        .forEach(section => {
+    function scanRelationshipSections() {
 
-
-        /*
-           Prevent duplicate enhancement.
-        */
-
-        if (
-            section.dataset.collapsibleInitialised === "true"
-        ) {
-
-            return;
-
-        }
-
-
-        /*
-           Find existing CPD list.
-        */
-
-        const list =
-            section.querySelector(
-                ".supporting-cpd-list"
+        document
+            .querySelectorAll(
+                ".supporting-cpd-activities, " +
+                ".competency-related-section"
+            )
+            .forEach(
+                enhanceSection
             );
 
-
-        if (!list) return;
-
-
-        const count =
-            list.children.length;
+    }
 
 
-        if (!count) return;
+    /* ========================================================
+       3. INITIAL SCAN
+    ======================================================== */
+
+    scanRelationshipSections();
 
 
-        section.dataset.collapsibleInitialised =
-            "true";
+    /* ========================================================
+       4. WATCH FOR DYNAMICALLY GENERATED RELATIONSHIPS
+    ======================================================== */
+
+    const observer =
+        new MutationObserver(
+            function(mutations) {
+
+                let relationshipChanged =
+                    false;
 
 
-        /*
-           Find existing title.
-        */
+                mutations.forEach(
+                    mutation => {
 
-        const title =
-            section.querySelector(
-                ".professional-evidence-label"
-            );
-
-
-        if (!title) return;
+                        if (
+                            mutation.type !==
+                            "childList"
+                        ) {
+                            return;
+                        }
 
 
-        /*
-           Create header.
-        */
+                        mutation.addedNodes.forEach(
+                            node => {
 
-        const header =
-            document.createElement(
-                "div"
-            );
-
-
-        header.className =
-            "relationship-collapse-header";
+                                if (
+                                    node.nodeType !==
+                                    Node.ELEMENT_NODE
+                                ) {
+                                    return;
+                                }
 
 
-        /*
-           Create count.
-        */
+                                /*
+                                   Directly added relationship
+                                   section.
+                                */
 
-        const countElement =
-            document.createElement(
-                "span"
-            );
+                                if (
+                                    node.matches &&
+                                    node.matches(
+                                        ".supporting-cpd-activities, " +
+                                        ".competency-related-section"
+                                    )
+                                ) {
 
+                                    relationshipChanged =
+                                        true;
 
-        countElement.className =
-            "relationship-collapse-count";
-
-
-        countElement.textContent =
-            count === 1
-                ? "1 activity"
-                : `${count} activities`;
-
-
-        /*
-           Create toggle.
-        */
-
-        const toggle =
-            document.createElement(
-                "button"
-            );
+                                }
 
 
-        toggle.type =
-            "button";
+                                /*
+                                   Relationship section nested
+                                   inside newly added content.
+                                */
+
+                                if (
+                                    node.querySelector &&
+                                    node.querySelector(
+                                        ".supporting-cpd-activities, " +
+                                        ".competency-related-section"
+                                    )
+                                ) {
+
+                                    relationshipChanged =
+                                        true;
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
 
 
-        toggle.className =
-            "relationship-collapse-toggle";
+                if (
+                    relationshipChanged
+                ) {
 
+                    /*
+                       Allow the browser to finish
+                       inserting the generated DOM.
+                    */
 
-        toggle.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-
-        toggle.innerHTML = `
-
-            <span class="relationship-toggle-label">
-                Show
-            </span>
-
-            <i class="fa-solid fa-chevron-down"></i>
-
-        `;
-
-
-        /*
-           Insert header before existing title.
-        */
-
-        section.insertBefore(
-            header,
-            title
-        );
-
-
-        /*
-           Move title into header.
-        */
-
-        header.appendChild(
-            title
-        );
-
-
-        header.appendChild(
-            countElement
-        );
-
-
-        header.appendChild(
-            toggle
-        );
-
-
-        /*
-           Collapse existing list.
-        */
-
-        list.classList.add(
-            "relationship-list-collapsed"
-        );
-
-
-        /*
-           Toggle behaviour.
-        */
-
-        toggle.addEventListener(
-            "click",
-            function(e) {
-
-                e.preventDefault();
-
-                e.stopPropagation();
-
-
-                const expanded =
-                    list.classList.toggle(
-                        "relationship-list-expanded"
+                    requestAnimationFrame(
+                        scanRelationshipSections
                     );
-
-
-                list.classList.toggle(
-                    "relationship-list-collapsed",
-                    !expanded
-                );
-
-
-                toggle.setAttribute(
-                    "aria-expanded",
-                    expanded
-                        ? "true"
-                        : "false"
-                );
-
-
-                toggle.classList.toggle(
-                    "expanded",
-                    expanded
-                );
-
-
-                const label =
-                    toggle.querySelector(
-                        ".relationship-toggle-label"
-                    );
-
-
-                if (label) {
-
-                    label.textContent =
-                        expanded
-                            ? "Hide"
-                            : "Show";
 
                 }
 
@@ -10853,14 +10811,24 @@ function initialiseRelationshipCollapsibles() {
         );
 
 
-    });
+    /* ========================================================
+       5. OBSERVE THE PAGE
+    ======================================================== */
+
+    observer.observe(
+        document.body,
+        {
+            childList: true,
+            subtree: true
+        }
+    );
 
 
     console.log(
-        "[CPD] Relationship collapsibles initialised."
+        "[CPD] Dynamic relationship collapsible observer active."
     );
 
-}  
+})();
 /* ============================================================
    COMPETENCY → CPD ACTIVITY NAVIGATION
 ============================================================ */

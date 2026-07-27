@@ -7109,42 +7109,16 @@ function linkCPDToCompetences() {
   });
 }
 
-
 /* ============================================================
-   CPD / EVIDENCE → COMPETENCE NAVIGATION
+   CONSOLIDATED EVIDENCE ↔ CPD ↔ COMPETENCE NAVIGATION
 ============================================================ */
 
-document.addEventListener("click", function(e) {
 
-    /*
-       Handle both:
+/* ============================================================
+   1. SHARED COMPETENCE NAVIGATION
+============================================================ */
 
-       1. CPD → Competence
-          .cpd-competence-link
-
-       2. Evidence → Competence
-          .evidence-tag
-    */
-
-    const link =
-        e.target.closest(
-            ".cpd-competence-link, .evidence-tag"
-        );
-
-
-    /* Not a competence link */
-    if (!link) return;
-
-
-    /*
-       Make sure this is actually a competence link.
-       This prevents unrelated .evidence-tag elements
-       from being intercepted if you add other tags later.
-    */
-
-    const href =
-        link.getAttribute("href");
-
+function navigateToCompetence(href) {
 
     if (
         !href ||
@@ -7153,14 +7127,6 @@ document.addEventListener("click", function(e) {
         return;
     }
 
-
-    e.preventDefault();
-    e.stopPropagation();
-
-
-    /*
-       Find target competence accordion.
-    */
 
     const target =
         document.querySelector(href);
@@ -7178,9 +7144,9 @@ document.addEventListener("click", function(e) {
     }
 
 
-    /*
-       Close any previously highlighted competence.
-    */
+    /* --------------------------------------------------------
+       REMOVE PREVIOUS COMPETENCE HIGHLIGHTS
+    -------------------------------------------------------- */
 
     document
         .querySelectorAll(
@@ -7195,32 +7161,33 @@ document.addEventListener("click", function(e) {
         });
 
 
-    /*
-       Open the target competence accordion.
-    */
+    /* --------------------------------------------------------
+       OPEN TARGET COMPETENCE
+    -------------------------------------------------------- */
 
     if (
         !target.classList.contains("open")
     ) {
 
-        target.classList.add("open");
+        target.classList.add(
+            "open"
+        );
 
     }
 
 
-    /*
-       Highlight the target competence.
-    */
+    /* --------------------------------------------------------
+       HIGHLIGHT TARGET
+    -------------------------------------------------------- */
 
     target.classList.add(
         "highlighted"
     );
 
 
-    /*
-       Wait for the accordion to open,
-       then scroll to it.
-    */
+    /* --------------------------------------------------------
+       SCROLL AFTER ACCORDION HAS OPENED
+    -------------------------------------------------------- */
 
     requestAnimationFrame(() => {
 
@@ -7238,218 +7205,253 @@ document.addEventListener("click", function(e) {
 
     });
 
-});
+}
+
 
 /* ============================================================
-   EVIDENCE → CPD ACTIVITY NAVIGATION
+   2. EVIDENCE / CPD → COMPETENCE
 ============================================================ */
 
-document.addEventListener("click", function(e) {
-
-    const link =
-        e.target.closest(
-            ".supporting-cpd-activity"
-        );
+document.addEventListener(
+    "click",
+    function(e) {
 
 
-    if (!link) return;
+        const link =
+            e.target.closest(
+                ".cpd-competence-link, .evidence-tag"
+            );
 
 
-    e.preventDefault();
-    e.stopPropagation();
+        if (!link) return;
 
 
-    /*
-       Get the target CPD activity ID.
-    */
-
-    const href =
-        link.getAttribute("href");
-
-
-    if (
-        !href ||
-        !href.startsWith("#cpd-activity-")
-    ) {
-
-        return;
-
-    }
-
-
-    /*
-       Find the dynamically generated CPD card.
-    */
-
-    const target =
-        document.querySelector(href);
-
-
-    if (!target) {
-
-        console.warn(
-            "[CPD] CPD activity target not found:",
-            href
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Find the CPD Log content that contains
-       the dynamic CPD cards.
-
-       This is more reliable than assuming that
-       #cpd-card-container itself is the collapsible.
-    */
-
-    const cpdCardContainer =
-        document.getElementById(
-            "cpd-card-container"
-        );
-
-
-    if (!cpdCardContainer) {
-
-        console.warn(
-            "[CPD] #cpd-card-container not found."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Find the closest collapsible content
-       containing the CPD cards.
-    */
-
-    const cpdLogContent =
-        cpdCardContainer.closest(
-            ".collapsible-content"
-        );
-
-
-    /*
-       If the CPD Log is collapsed,
-       open the correct collapsible.
-    */
-
-    if (
-        cpdLogContent &&
-        !cpdLogContent.classList.contains("open")
-    ) {
-
-
-        /*
-           Find the toggle immediately associated
-           with this collapsible content.
-        */
-
-        const cpdLogToggle =
-            cpdLogContent.previousElementSibling;
+        const href =
+            link.getAttribute(
+                "href"
+            );
 
 
         if (
-            cpdLogToggle &&
-            cpdLogToggle.classList.contains(
-                "collapsible-toggle"
+            !href ||
+            !href.startsWith(
+                "#competence-"
             )
         ) {
+            return;
+        }
 
-            /*
-               IMPORTANT:
 
-               Use the same class changes as your
-               existing collapsible functionality.
-            */
+        /*
+           Stop the competence accordion's own
+           click handler from toggling the wrong item.
+        */
 
-            cpdLogContent.classList.add(
-                "open"
+        e.preventDefault();
+
+        e.stopPropagation();
+
+
+        navigateToCompetence(
+            href
+        );
+
+    },
+    true
+);
+
+
+/* ============================================================
+   3. EVIDENCE → CPD
+============================================================ */
+
+document.addEventListener(
+    "click",
+    function(e) {
+
+
+        const link =
+            e.target.closest(
+                ".supporting-cpd-activity"
             );
 
-            cpdLogToggle.classList.add(
-                "open"
+
+        if (!link) return;
+
+
+        const href =
+            link.getAttribute(
+                "href"
             );
 
 
-        } else {
+        if (
+            !href ||
+            !href.startsWith(
+                "#cpd-activity-"
+            )
+        ) {
+            return;
+        }
+
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+
+        /* ----------------------------------------------------
+           FIND CPD ACTIVITY
+        ---------------------------------------------------- */
+
+        const target =
+            document.querySelector(
+                href
+            );
+
+
+        if (!target) {
 
             console.warn(
-                "[CPD] CPD Log toggle not found."
+                "[CPD] CPD activity target not found:",
+                href
             );
+
+            return;
 
         }
 
-    }
 
+        /* ----------------------------------------------------
+           FIND CPD CARD CONTAINER
+        ---------------------------------------------------- */
 
-    /*
-       Remove previous CPD activity highlights.
-    */
-
-    document
-        .querySelectorAll(
-            ".cpd-card.cpd-activity-highlighted"
-        )
-        .forEach(card => {
-
-            card.classList.remove(
-                "cpd-activity-highlighted"
+        const cpdCardContainer =
+            document.getElementById(
+                "cpd-card-container"
             );
 
-        });
+
+        if (!cpdCardContainer) {
+
+            console.warn(
+                "[CPD] #cpd-card-container not found."
+            );
+
+            return;
+
+        }
 
 
-    /*
-       Wait for the CPD Log to expand before
-       calculating the target's position.
-    */
+        /* ----------------------------------------------------
+           FIND COLLAPSIBLE CPD LOG
+        ---------------------------------------------------- */
 
-    setTimeout(() => {
-
-
-        /*
-           Highlight selected CPD activity.
-        */
-
-        target.classList.add(
-            "cpd-activity-highlighted"
-        );
+        const cpdLogContent =
+            cpdCardContainer.closest(
+                ".collapsible-content"
+            );
 
 
-        /*
-           Scroll directly to the activity.
-        */
+        /* ----------------------------------------------------
+           OPEN CPD LOG IF COLLAPSED
+        ---------------------------------------------------- */
 
-        target.scrollIntoView({
+        if (
+            cpdLogContent &&
+            !cpdLogContent.classList.contains(
+                "open"
+            )
+        ) {
 
-            behavior: "smooth",
 
-            block: "center"
-
-        });
+            const cpdLogToggle =
+                cpdLogContent.previousElementSibling;
 
 
-        /*
-           Remove highlight after 3 seconds.
-        */
+            if (
+                cpdLogToggle &&
+                cpdLogToggle.classList.contains(
+                    "collapsible-toggle"
+                )
+            ) {
+
+                /*
+                   IMPORTANT:
+                   Preserve the same mechanism that
+                   fixed your previous CPD expansion issue.
+                */
+
+                cpdLogContent.classList.add(
+                    "open"
+                );
+
+                cpdLogToggle.classList.add(
+                    "open"
+                );
+
+            }
+
+        }
+
+
+        /* ----------------------------------------------------
+           REMOVE PREVIOUS CPD HIGHLIGHTS
+        ---------------------------------------------------- */
+
+        document
+            .querySelectorAll(
+                ".cpd-card.cpd-activity-highlighted"
+            )
+            .forEach(card => {
+
+                card.classList.remove(
+                    "cpd-activity-highlighted"
+                );
+
+            });
+
+
+        /* ----------------------------------------------------
+           WAIT FOR CPD LOG EXPANSION
+        ---------------------------------------------------- */
 
         setTimeout(() => {
 
-            target.classList.remove(
+
+            target.classList.add(
                 "cpd-activity-highlighted"
             );
 
-        }, 3000);
+
+            target.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "center"
+
+            });
 
 
-    }, 600);
+            /* ------------------------------------------------
+               REMOVE HIGHLIGHT
+            ------------------------------------------------ */
 
-});  
+            setTimeout(() => {
+
+                target.classList.remove(
+                    "cpd-activity-highlighted"
+                );
+
+            }, 3000);
+
+
+        }, 600);
+
+    },
+    true
+);
+  
 /* ==========================================================
    METRICS + PROGRESS RING
 ========================================================== */
@@ -8734,7 +8736,103 @@ function populateEvidenceCPDRelationships() {
     );
 
 }
-/* ============================================================
+
+  /* ============================================================
+   4. EVIDENCE → EVIDENCE NAVIGATION
+============================================================ */
+
+document.addEventListener(
+    "click",
+    function(e) {
+
+
+        const link =
+            e.target.closest(
+                'a[href^="#evidence-"]'
+            );
+
+
+        if (!link) return;
+
+
+        const href =
+            link.getAttribute(
+                "href"
+            );
+
+
+        if (!href) return;
+
+
+        const target =
+            document.querySelector(
+                href
+            );
+
+
+        if (!target) return;
+
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+
+        /* ----------------------------------------------------
+           REMOVE PREVIOUS EVIDENCE HIGHLIGHTS
+        ---------------------------------------------------- */
+
+        document
+            .querySelectorAll(
+                ".professional-evidence-item.evidence-highlighted"
+            )
+            .forEach(card => {
+
+                card.classList.remove(
+                    "evidence-highlighted"
+                );
+
+            });
+
+
+        /* ----------------------------------------------------
+           HIGHLIGHT TARGET
+        ---------------------------------------------------- */
+
+        target.classList.add(
+            "evidence-highlighted"
+        );
+
+
+        /* ----------------------------------------------------
+           SCROLL TO EVIDENCE
+        ---------------------------------------------------- */
+
+        target.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+
+        });
+
+
+        /* ----------------------------------------------------
+           REMOVE HIGHLIGHT
+        ---------------------------------------------------- */
+
+        setTimeout(() => {
+
+            target.classList.remove(
+                "evidence-highlighted"
+            );
+
+        }, 3000);
+
+    },
+    true
+);  
+  /* ============================================================
    APM FRAMEWORK CAROUSEL CONTROLS
 ============================================================ */
 
@@ -10006,57 +10104,103 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </article>
 
-
-      <!-- ======================================================
-           3. 126K DEVICE MIGRATION
-      ======================================================= -->
+<!-- ======================================================
+     3. 126K DEVICE MIGRATION
+======================================================= -->
 
 <article
     class="professional-evidence-item"
     id="evidence-126k-device-migration">
 
-        <div class="professional-evidence-icon">
-          <i class="fa-solid fa-laptop"></i>
+    <div class="professional-evidence-icon">
+        <i class="fa-solid fa-laptop"></i>
+    </div>
+
+    <div class="professional-evidence-content">
+
+        <h3>126K Device Migration</h3>
+
+        <p class="professional-evidence-summary">
+            Led a large-scale Windows device migration programme,
+            coordinating the transition of approximately 126,000
+            devices while managing technology, operational and
+            stakeholder dependencies.
+        </p>
+
+
+        <!-- CASE STUDY -->
+
+        <div class="professional-evidence-label">
+            Case Study
         </div>
 
-        <div class="professional-evidence-content">
+        <div class="professional-evidence-detail">
 
-          <h3>126k Device Migration</h3>
-
-          <p class="professional-evidence-summary">
-            Led the planning and delivery of a large-scale Windows
-            device migration involving approximately 126,000 devices,
-            coordinating resources, managing delivery risks and
-            overseeing transition into the new operating environment.
-          </p>
-
-          <div class="professional-evidence-label">
-            Competences demonstrated
-          </div>
-
-      <div class="professional-evidence-tags">
-
-  <a href="#competence-integrated-planning" class="evidence-tag">
-    Integrated Planning
-  </a>
-
-  <a href="#competence-resource-management" class="evidence-tag">
-    Resource Management
-  </a>
-
-  <a href="#competence-risk-and-issue-management" class="evidence-tag">
-    Risk &amp; Issue Management
-  </a>
-
-  <a href="#competence-transition-management" class="evidence-tag">
-    Transition Management
-  </a>
-
-</div>
+            <p class="professional-evidence-placeholder">
+                Case study content to be added.
+            </p>
 
         </div>
 
-</article>
+
+        <!-- KEY OUTCOMES -->
+
+        <div class="professional-evidence-label">
+            Key Outcomes
+        </div>
+
+        <ul class="professional-evidence-outcomes">
+
+            <li>
+                Key outcome to be added.
+            </li>
+
+            <li>
+                Key outcome to be added.
+            </li>
+
+            <li>
+                Key outcome to be added.
+            </li>
+
+        </ul>
+
+
+        <!-- SUPPORTING EVIDENCE -->
+
+        <div class="professional-evidence-label">
+            Supporting Evidence
+        </div>
+
+        <div class="professional-evidence-assets">
+
+            <p class="professional-evidence-placeholder">
+                Presentations, documents, videos and other supporting
+                evidence to be added.
+            </p>
+
+        </div>
+
+
+        <!-- COMPETENCES -->
+
+        <div class="professional-evidence-label">
+            Competences Demonstrated
+        </div>
+
+        <div class="professional-evidence-tags">
+
+            <a
+                href="#competence-solutions-development"
+                class="evidence-tag">
+                AI &amp; Digital Transformation
+            </a>
+
+        </div>
+
+    </div>
+
+</article>     
 
 <!-- ======================================================
      4. CLOUD TRANSFORMATION

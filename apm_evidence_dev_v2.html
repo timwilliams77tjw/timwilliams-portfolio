@@ -6183,6 +6183,451 @@ section.competency-section > .competency-card {
     }
 
 }  
+
+/* ============================================================
+   CPD ↔ EVIDENCE ↔ COMPETENCY RELATIONSHIP LINKS
+   Visual relationship cards
+============================================================ */
+
+/* ------------------------------------------------------------
+   SHARED RELATIONSHIP CONTAINER
+------------------------------------------------------------ */
+
+.relationship-links,
+.supporting-cpd-activities {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(10, 37, 64, 0.10);
+}
+
+
+/* ------------------------------------------------------------
+   SECTION LABEL
+------------------------------------------------------------ */
+
+.relationship-section-label,
+.professional-evidence-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    margin-bottom: 0.7rem;
+
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    color: #64748b;
+}
+
+
+/* ------------------------------------------------------------
+   RELATIONSHIP LIST
+------------------------------------------------------------ */
+
+.relationship-list,
+.supporting-cpd-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+
+/* ------------------------------------------------------------
+   BASE RELATIONSHIP LINK
+------------------------------------------------------------ */
+
+.relationship-link,
+.supporting-cpd-activity,
+.cpd-competence-link,
+.competency-evidence-link,
+.competency-cpd-link {
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 0.75rem 0.9rem;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+
+    color: #0a2540;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+
+/* ------------------------------------------------------------
+   HOVER
+------------------------------------------------------------ */
+
+.relationship-link:hover,
+.supporting-cpd-activity:hover,
+.cpd-competence-link:hover,
+.competency-evidence-link:hover,
+.competency-cpd-link:hover {
+
+    transform: translateY(-1px);
+
+    background: #ffffff;
+
+    border-color: #b8c7d9;
+
+    box-shadow:
+        0 4px 12px rgba(10, 37, 64, 0.08);
+
+}
+
+
+/* ------------------------------------------------------------
+   LINK TEXT
+------------------------------------------------------------ */
+
+.relationship-link-title,
+.supporting-cpd-activity-title {
+
+    flex: 1;
+
+    min-width: 0;
+
+    line-height: 1.35;
+}
+
+
+/* ------------------------------------------------------------
+   ARROW
+------------------------------------------------------------ */
+
+.relationship-link i,
+.supporting-cpd-activity i,
+.cpd-competence-link::after,
+.competency-evidence-link::after,
+.competency-cpd-link::after {
+
+    flex-shrink: 0;
+
+    font-size: 0.8rem;
+
+    color: #64748b;
+
+    transition:
+        transform 0.18s ease,
+        color 0.18s ease;
+}
+
+
+.relationship-link:hover i,
+.supporting-cpd-activity:hover i {
+
+    transform: translateX(3px);
+
+    color: #0a66c2;
+
+}
+
+
+/* ============================================================
+   RELATIONSHIP TYPE COLOUR CODING
+============================================================ */
+
+
+/* ------------------------------------------------------------
+   COMPETENCY
+------------------------------------------------------------ */
+
+.relationship-link.competency,
+.cpd-competence-link,
+.evidence-tag[href^="#competence-"] {
+
+    border-left: 4px solid #0a66c2;
+
+}
+
+
+.relationship-link.competency::before,
+.cpd-competence-link::before {
+
+    content: "COMPETENCY";
+
+    display: inline-flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    padding: 0.2rem 0.45rem;
+
+    border-radius: 5px;
+
+    background: rgba(10, 102, 194, 0.10);
+
+    color: #0a66c2;
+
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+
+/* ------------------------------------------------------------
+   EVIDENCE
+------------------------------------------------------------ */
+
+.relationship-link.evidence,
+.competency-evidence-link {
+
+    border-left: 4px solid #007b5f;
+
+}
+
+
+.relationship-link.evidence::before,
+.competency-evidence-link::before {
+
+    content: "EVIDENCE";
+
+    display: inline-flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    padding: 0.2rem 0.45rem;
+
+    border-radius: 5px;
+
+    background: rgba(0, 123, 95, 0.10);
+
+    color: #007b5f;
+
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+
+/* ------------------------------------------------------------
+   CPD ACTIVITY
+------------------------------------------------------------ */
+
+.relationship-link.cpd,
+.supporting-cpd-activity,
+.competency-cpd-link {
+
+    border-left: 4px solid #8a2be2;
+
+}
+
+
+.relationship-link.cpd::before,
+.supporting-cpd-activity::before,
+.competency-cpd-link::before {
+
+    content: "CPD";
+
+    display: inline-flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    padding: 0.2rem 0.45rem;
+
+    border-radius: 5px;
+
+    background: rgba(138, 43, 226, 0.10);
+
+    color: #8a2be2;
+
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   SUPPORTING CPD ACTIVITIES
+============================================================ */
+
+.supporting-cpd-activities {
+
+    margin-top: 1.5rem;
+
+    padding: 1rem;
+
+    border-top: none;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+}
+
+
+.supporting-cpd-activities
+.professional-evidence-label {
+
+    color: #8a2be2;
+}
+
+
+/* ============================================================
+   CPD → COMPETENCY LINK
+============================================================ */
+
+.cpd-competence-link {
+
+    margin-top: 1rem;
+
+    padding: 0.7rem 0.85rem;
+
+    border-left-width: 4px;
+}
+
+
+/* ============================================================
+   COMPETENCY → EVIDENCE / CPD
+============================================================ */
+
+.competency-evidence-link,
+.competency-cpd-link {
+
+    margin-top: 0.45rem;
+
+}
+
+
+/* ============================================================
+   EVIDENCE TAGS
+============================================================ */
+
+.evidence-tag {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    padding: 0.35rem 0.65rem;
+
+    border-radius: 999px;
+
+    background: rgba(10, 102, 194, 0.08);
+
+    color: #0a66c2;
+
+    border: 1px solid rgba(10, 102, 194, 0.18);
+
+    font-size: 0.8rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.evidence-tag:hover {
+
+    background: rgba(10, 102, 194, 0.14);
+
+    transform: translateY(-1px);
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .relationship-link,
+    .supporting-cpd-activity,
+    .cpd-competence-link,
+    .competency-evidence-link,
+    .competency-cpd-link {
+
+        padding: 0.7rem 0.75rem;
+
+        font-size: 0.84rem;
+
+        gap: 0.65rem;
+
+    }
+
+
+    .relationship-link::before,
+    .supporting-cpd-activity::before,
+    .cpd-competence-link::before,
+    .competency-evidence-link::before,
+    .competency-cpd-link::before {
+
+        font-size: 0.56rem;
+
+        padding: 0.18rem 0.35rem;
+
+    }
+
+
+    .supporting-cpd-activities {
+
+        padding: 0.75rem;
+
+    }
+
+}
+
+
+/* ============================================================
+   CPD ACTIVITY HIGHLIGHT
+============================================================ */
+
+.cpd-card.cpd-activity-highlighted {
+
+    animation:
+        cpdActivityHighlight 3s ease;
+
+}
+
+
+@keyframes cpdActivityHighlight {
+
+    0% {
+
+        box-shadow:
+            0 0 0 3px rgba(138, 43, 226, 0.45),
+            0 8px 24px rgba(138, 43, 226, 0.18);
+
+    }
+
+    100% {
+
+        box-shadow:
+            0 0 0 0 transparent,
+            0 4px 14px rgba(0, 0, 0, 0.06);
+
+    }
+
+}  
 </style>
 
 

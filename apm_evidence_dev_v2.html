@@ -6950,8 +6950,24 @@ section.competency-section > .competency-card {
     margin-bottom: 1.25rem;
 }  
 
+.relationship-collapse-toggle {
+    margin-left: auto;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+}
 
+.relationship-collapse-toggle i {
+    transition: transform 0.2s ease;
+}
 
+.relationship-collapse-toggle.expanded i {
+    transform: rotate(180deg);
+}
 </style>
 
 
@@ -8034,197 +8050,252 @@ document.addEventListener(
     true
 );
 
+/* ========================================================
+   2. EVIDENCE → CPD ACTIVITIES
+   --------------------------------------------------------
+   DOM-ONLY COLLAPSIBLE ENHANCEMENT
 
-/* ============================================================
-   3. EVIDENCE → CPD
-============================================================ */
+   Important:
+   - Does not move existing elements
+   - Does not rebuild Evidence cards
+   - Does not change Evidence card ordering
+   - Does not alter CPD relationships
+   - Does not alter navigation
+======================================================== */
 
-document.addEventListener(
-    "click",
-    function(e) {
-
-
-        const link =
-            e.target.closest(
-                ".supporting-cpd-activity"
-            );
-
-
-        if (!link) return;
-
-
-        const href =
-            link.getAttribute(
-                "href"
-            );
+document
+    .querySelectorAll(
+        ".supporting-cpd-activities"
+    )
+    .forEach(section => {
 
 
-        if (
-            !href ||
-            !href.startsWith(
-                "#cpd-activity-"
-            )
-        ) {
-            return;
-        }
+    /*
+       Prevent duplicate initialisation.
+    */
+
+    if (
+        section.dataset.collapsibleInitialised === "true"
+    ) {
+
+        return;
+
+    }
 
 
-        e.preventDefault();
+    /*
+       Find the existing CPD list.
+    */
 
-        e.stopPropagation();
-
-
-        /* ----------------------------------------------------
-           FIND CPD ACTIVITY
-        ---------------------------------------------------- */
-
-        const target =
-            document.querySelector(
-                href
-            );
+    const list =
+        section.querySelector(
+            ".supporting-cpd-list"
+        );
 
 
-        if (!target) {
+    if (!list) {
 
-            console.warn(
-                "[CPD] CPD activity target not found:",
-                href
-            );
+        console.warn(
+            "[CPD] Supporting CPD list not found:",
+            section
+        );
 
-            return;
+        return;
 
-        }
-
-
-        /* ----------------------------------------------------
-           FIND CPD CARD CONTAINER
-        ---------------------------------------------------- */
-
-        const cpdCardContainer =
-            document.getElementById(
-                "cpd-card-container"
-            );
+    }
 
 
-        if (!cpdCardContainer) {
+    /*
+       Count existing activities.
+    */
 
-            console.warn(
-                "[CPD] #cpd-card-container not found."
-            );
-
-            return;
-
-        }
+    const count =
+        list.children.length;
 
 
-        /* ----------------------------------------------------
-           FIND COLLAPSIBLE CPD LOG
-        ---------------------------------------------------- */
-
-        const cpdLogContent =
-            cpdCardContainer.closest(
-                ".collapsible-content"
-            );
+    if (!count) return;
 
 
-        /* ----------------------------------------------------
-           OPEN CPD LOG IF COLLAPSED
-        ---------------------------------------------------- */
+    /*
+       Mark as initialised.
+    */
 
-        if (
-            cpdLogContent &&
-            !cpdLogContent.classList.contains(
-                "open"
-            )
-        ) {
+    section.dataset.collapsibleInitialised =
+        "true";
 
 
-            const cpdLogToggle =
-                cpdLogContent.previousElementSibling;
+    /*
+       Find the existing section title.
+    */
+
+    const title =
+        section.querySelector(
+            ".professional-evidence-label"
+        );
 
 
-            if (
-                cpdLogToggle &&
-                cpdLogToggle.classList.contains(
-                    "collapsible-toggle"
-                )
-            ) {
+    if (!title) {
+
+        console.warn(
+            "[CPD] Supporting CPD title not found:",
+            section
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Create a toggle button only.
+
+       We deliberately DO NOT move the existing
+       title or rebuild the section layout.
+    */
+
+    const toggle =
+        document.createElement(
+            "button"
+        );
+
+
+    toggle.type =
+        "button";
+
+
+    toggle.className =
+        "relationship-collapse-toggle";
+
+
+    toggle.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+
+    toggle.innerHTML = `
+
+        <span class="relationship-toggle-label">
+            Show
+        </span>
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    `;
+
+
+    /*
+       Add toggle directly to the existing title.
+
+       This preserves the Evidence card's
+       existing DOM order.
+    */
+
+    title.appendChild(
+        toggle
+    );
+
+
+    /*
+       Start collapsed.
+    */
+
+    list.classList.add(
+        "relationship-list-collapsed"
+    );
+
+
+    /*
+       Toggle existing list only.
+    */
+
+    toggle.addEventListener(
+        "click",
+        function(e) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+
+            const isExpanded =
+                toggle.getAttribute(
+                    "aria-expanded"
+                ) === "true";
+
+
+            if (isExpanded) {
 
                 /*
-                   IMPORTANT:
-                   Preserve the same mechanism that
-                   fixed your previous CPD expansion issue.
+                   COLLAPSE
                 */
 
-                cpdLogContent.classList.add(
-                    "open"
+                list.classList.remove(
+                    "relationship-list-expanded"
                 );
 
-                cpdLogToggle.classList.add(
-                    "open"
+
+                list.classList.add(
+                    "relationship-list-collapsed"
                 );
+
+
+                toggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+
+                toggle.innerHTML = `
+
+                    <span class="relationship-toggle-label">
+                        Show
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                `;
+
+
+            } else {
+
+                /*
+                   EXPAND
+                */
+
+                list.classList.remove(
+                    "relationship-list-collapsed"
+                );
+
+
+                list.classList.add(
+                    "relationship-list-expanded"
+                );
+
+
+                toggle.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+
+                toggle.innerHTML = `
+
+                    <span class="relationship-toggle-label">
+                        Hide
+                    </span>
+
+                    <i class="fa-solid fa-chevron-up"></i>
+
+                `;
 
             }
 
         }
+    );
 
 
-        /* ----------------------------------------------------
-           REMOVE PREVIOUS CPD HIGHLIGHTS
-        ---------------------------------------------------- */
-
-        document
-            .querySelectorAll(
-                ".cpd-card.cpd-activity-highlighted"
-            )
-            .forEach(card => {
-
-                card.classList.remove(
-                    "cpd-activity-highlighted"
-                );
-
-            });
-
-
-        /* ----------------------------------------------------
-           WAIT FOR CPD LOG EXPANSION
-        ---------------------------------------------------- */
-
-        setTimeout(() => {
-
-
-            target.classList.add(
-                "cpd-activity-highlighted"
-            );
-
-
-            target.scrollIntoView({
-
-                behavior: "smooth",
-
-                block: "center"
-
-            });
-
-
-            /* ------------------------------------------------
-               REMOVE HIGHLIGHT
-            ------------------------------------------------ */
-
-            setTimeout(() => {
-
-                target.classList.remove(
-                    "cpd-activity-highlighted"
-                );
-
-            }, 3000);
-
-
-        }, 600);
-
-    },
-    true
-);
+});
 
 /* ============================================================
    COMPETENCY → CPD ACTIVITY NAVIGATION

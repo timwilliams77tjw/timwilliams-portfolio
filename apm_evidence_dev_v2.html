@@ -9511,6 +9511,169 @@ function populateCompetencyRelationships() {
     );
 
 }  
+
+/* ============================================================
+   COMPETENCY → CPD ACTIVITY NAVIGATION
+============================================================ */
+
+document.addEventListener(
+    "click",
+    function(e) {
+
+        const link =
+            e.target.closest(
+                ".competency-cpd-activity"
+            );
+
+        if (!link) return;
+
+        const href =
+            link.getAttribute("href");
+
+        if (
+            !href ||
+            !href.startsWith("#cpd-activity-")
+        ) {
+            return;
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        /* ----------------------------------------------------
+           FIND CPD ACTIVITY
+        ---------------------------------------------------- */
+
+        const target =
+            document.querySelector(href);
+
+        if (!target) {
+
+            console.warn(
+                "[CPD] Competency → CPD target not found:",
+                href
+            );
+
+            return;
+
+        }
+
+        /* ----------------------------------------------------
+           FIND CPD CARD CONTAINER
+        ---------------------------------------------------- */
+
+        const cpdCardContainer =
+            document.getElementById(
+                "cpd-card-container"
+            );
+
+        if (!cpdCardContainer) {
+
+            console.warn(
+                "[CPD] #cpd-card-container not found."
+            );
+
+            return;
+
+        }
+
+        /* ----------------------------------------------------
+           FIND CPD LOG COLLAPSIBLE
+        ---------------------------------------------------- */
+
+        const cpdLogContent =
+            cpdCardContainer.closest(
+                ".collapsible-content"
+            );
+
+        /* ----------------------------------------------------
+           OPEN CPD LOG IF COLLAPSED
+        ---------------------------------------------------- */
+
+        if (
+            cpdLogContent &&
+            !cpdLogContent.classList.contains("open")
+        ) {
+
+            const cpdLogToggle =
+                cpdLogContent.previousElementSibling;
+
+            if (
+                cpdLogToggle &&
+                cpdLogToggle.classList.contains(
+                    "collapsible-toggle"
+                )
+            ) {
+
+                /*
+                   Use the same mechanism that fixed
+                   the original CPD expansion problem.
+                */
+
+                cpdLogContent.classList.add(
+                    "open"
+                );
+
+                cpdLogToggle.classList.add(
+                    "open"
+                );
+
+            }
+
+        }
+
+        /* ----------------------------------------------------
+           REMOVE PREVIOUS CPD HIGHLIGHTS
+        ---------------------------------------------------- */
+
+        document
+            .querySelectorAll(
+                ".cpd-card.cpd-activity-highlighted"
+            )
+            .forEach(card => {
+
+                card.classList.remove(
+                    "cpd-activity-highlighted"
+                );
+
+            });
+
+        /* ----------------------------------------------------
+           WAIT FOR CPD LOG TO OPEN
+        ---------------------------------------------------- */
+
+        setTimeout(() => {
+
+            target.classList.add(
+                "cpd-activity-highlighted"
+            );
+
+            target.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "center"
+
+            });
+
+            /* ------------------------------------------------
+               REMOVE HIGHLIGHT
+            ------------------------------------------------ */
+
+            setTimeout(() => {
+
+                target.classList.remove(
+                    "cpd-activity-highlighted"
+                );
+
+            }, 3000);
+
+        }, 600);
+
+    },
+    true
+);
+  
   /* ============================================================
    APM FRAMEWORK CAROUSEL CONTROLS
 ============================================================ */

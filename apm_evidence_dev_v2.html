@@ -7062,8 +7062,14 @@ generateHeatmap();
 console.log("Calling generateDonutChart...");
 generateDonutChart();
 
+  console.log("Calling populateEvidenceCPDRelationships...");
+populateEvidenceCPDRelationships();
+
 console.log("Calling linkCPDToCompetences...");
 linkCPDToCompetences();
+
+console.log("Calling populateCompetencyRelationships...");
+populateCompetencyRelationships();
 
 console.log(
     "[TEST] CPD cards before Evidence relationship:",
@@ -7073,17 +7079,14 @@ console.log(
 console.log(
     "[TEST] Evidence cards:",
     Object.keys(evidenceGoalRelationships || {}).length
-);      
-      console.log("Calling populateEvidenceCPDRelationships...");
-populateEvidenceCPDRelationships();
-      
+);
+
 console.log("All complete");
 
-    } catch (err) {
-        console.error(err);
-    }
+} catch (err) {
+    console.error(err);
 }
-
+}
 function linkCPDToCompetences() {
   const competenceMap = {
     "Mentor, coach and inspire future generations": "leadership",
@@ -8959,6 +8962,555 @@ function populateEvidenceCPDRelationships() {
     );
 
 }
+
+/* ============================================================
+   COMPETENCY → CPD + EVIDENCE RELATIONSHIPS
+============================================================ */
+
+function populateCompetencyRelationships() {
+
+    console.log(
+        "[CPD] Starting Competency relationship layer..."
+    );
+
+
+    /* --------------------------------------------------------
+       FIND COMPETENCY CARDS
+    -------------------------------------------------------- */
+
+    const competenceItems =
+        document.querySelectorAll(
+            ".accordion-item[id^='competence-']"
+        );
+
+
+    if (!competenceItems.length) {
+
+        console.warn(
+            "[CPD] No competency accordion items found."
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "[CPD] Competency cards found:",
+        competenceItems.length
+    );
+
+
+    /* --------------------------------------------------------
+       REMOVE PREVIOUSLY GENERATED RELATIONSHIP SECTIONS
+    -------------------------------------------------------- */
+
+    document
+        .querySelectorAll(
+            ".competency-supporting-relationships"
+        )
+        .forEach(section => {
+
+            section.remove();
+
+        });
+
+
+    /* --------------------------------------------------------
+       LOOP THROUGH EACH COMPETENCY
+    -------------------------------------------------------- */
+
+    competenceItems.forEach(
+        competenceItem => {
+
+
+        const competenceId =
+            competenceItem.id;
+
+
+        if (!competenceId) return;
+
+
+        /*
+           Remove "competence-" prefix.
+
+           Example:
+
+           competence-leadership
+
+           becomes:
+
+           leadership
+        */
+
+        const competenceKey =
+            competenceId.replace(
+                "competence-",
+                ""
+            );
+
+
+        /* ----------------------------------------------------
+           FIND ACCORDION CONTENT
+        ---------------------------------------------------- */
+
+        const accordionContent =
+            competenceItem.querySelector(
+                ".accordion-content"
+            );
+
+
+        if (!accordionContent) {
+
+            console.warn(
+                "[CPD] Accordion content not found:",
+                competenceId
+            );
+
+            return;
+
+        }
+
+
+        /* ----------------------------------------------------
+           CREATE RELATIONSHIP WRAPPER
+        ---------------------------------------------------- */
+
+        const wrapper =
+            document.createElement(
+                "div"
+            );
+
+
+        wrapper.className =
+            "competency-supporting-relationships";
+
+
+        wrapper.innerHTML = `
+
+            <div class="competency-related-section">
+
+                <div class="competency-related-title">
+                    Supporting CPD Activities
+                </div>
+
+                <div class="competency-related-cpd-list">
+                </div>
+
+            </div>
+
+
+            <div class="competency-related-section">
+
+                <div class="competency-related-title">
+                    Supporting Evidence
+                </div>
+
+                <div class="competency-related-evidence-list">
+                </div>
+
+            </div>
+
+        `;
+
+
+        const cpdList =
+            wrapper.querySelector(
+                ".competency-related-cpd-list"
+            );
+
+
+        const evidenceList =
+            wrapper.querySelector(
+                ".competency-related-evidence-list"
+            );
+
+
+        /* ====================================================
+           1. FIND CPD ACTIVITIES LINKED TO THIS COMPETENCY
+        ==================================================== */
+
+        document
+            .querySelectorAll(
+                ".cpd-card"
+            )
+            .forEach(card => {
+
+
+                /*
+                   CPD → Competency links are already generated
+                   by linkCPDToCompetences().
+                */
+
+                const competenceLink =
+                    card.querySelector(
+                        ".cpd-competence-link"
+                    );
+
+
+                if (!competenceLink) return;
+
+
+                const href =
+                    competenceLink.getAttribute(
+                        "href"
+                    );
+
+
+                if (
+                    href !==
+                    "#" + competenceId
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                   Get CPD activity title.
+                */
+
+                const titleElement =
+                    card.querySelector(
+                        ".cpd-card-title"
+                    );
+
+
+                if (!titleElement) return;
+
+
+                const titleClone =
+                    titleElement.cloneNode(
+                        true
+                    );
+
+
+                /*
+                   Remove icons from title.
+                */
+
+                titleClone
+                    .querySelectorAll(
+                        "i"
+                    )
+                    .forEach(icon => {
+
+                        icon.remove();
+
+                    });
+
+
+                const activityName =
+                    titleClone
+                        .textContent
+                        .trim();
+
+
+                if (!activityName) return;
+
+
+                /*
+                   CPD card already receives its
+                   dynamic ID from the Evidence → CPD
+                   relationship layer.
+
+                   If it doesn't have one, create it.
+                */
+
+                if (!card.id) {
+
+                    card.id =
+                        createCPDActivityId(
+                            activityName
+                        );
+
+                }
+
+
+                if (!card.id) return;
+
+
+                /*
+                   Prevent duplicate CPD links.
+                */
+
+                if (
+                    cpdList.querySelector(
+                        `[data-cpd-target="#${card.id}"]`
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                   CREATE CPD LINK
+                */
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.className =
+                    "competency-cpd-link";
+
+
+                link.href =
+                    "#" + card.id;
+
+
+                link.dataset.cpdTarget =
+                    "#" + card.id;
+
+
+                link.innerHTML = `
+
+                    <span>
+                        ${activityName}
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                `;
+
+
+                cpdList.appendChild(
+                    link
+                );
+
+
+            });
+
+
+        /* ====================================================
+           2. FIND EVIDENCE LINKED TO THIS COMPETENCY
+        ==================================================== */
+
+        document
+            .querySelectorAll(
+                ".professional-evidence-card"
+            )
+            .forEach(
+                evidenceCard => {
+
+
+                /*
+                   Find competency links within
+                   this evidence card.
+                */
+
+                const competenceLinks =
+                    evidenceCard.querySelectorAll(
+                        'a[href^="#competence-"]'
+                    );
+
+
+                let matches =
+                    false;
+
+
+                competenceLinks.forEach(
+                    link => {
+
+                        if (
+                            link.getAttribute(
+                                "href"
+                            ) ===
+                            "#" + competenceId
+                        ) {
+
+                            matches =
+                                true;
+
+                        }
+
+                    }
+                );
+
+
+                if (!matches) return;
+
+
+                /*
+                   Evidence card needs an ID for
+                   reverse navigation.
+
+                   If an ID already exists,
+                   preserve it.
+                */
+
+                let evidenceId =
+                    evidenceCard.id;
+
+
+                if (!evidenceId) {
+
+                    const heading =
+                        evidenceCard.querySelector(
+                            "h3, h4"
+                        );
+
+
+                    if (!heading) return;
+
+
+                    evidenceId =
+                        "evidence-" +
+                        createCPDActivityId(
+                            heading.textContent
+                        )
+                        .replace(
+                            "cpd-activity-",
+                            ""
+                        );
+
+
+                    evidenceCard.id =
+                        evidenceId;
+
+                }
+
+
+                /*
+                   Get evidence title.
+                */
+
+                const heading =
+                    evidenceCard.querySelector(
+                        "h3, h4"
+                    );
+
+
+                if (!heading) return;
+
+
+                const evidenceName =
+                    heading.textContent
+                        .trim();
+
+
+                if (!evidenceName) return;
+
+
+                /*
+                   Prevent duplicates.
+                */
+
+                if (
+                    evidenceList.querySelector(
+                        `[data-evidence-target="#${evidenceId}"]`
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                   CREATE EVIDENCE LINK
+                */
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.className =
+                    "competency-evidence-link";
+
+
+                link.href =
+                    "#" + evidenceId;
+
+
+                link.dataset.evidenceTarget =
+                    "#" + evidenceId;
+
+
+                link.innerHTML = `
+
+                    <span>
+                        ${evidenceName}
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                `;
+
+
+                evidenceList.appendChild(
+                    link
+                );
+
+
+            });
+
+
+        /* ====================================================
+           3. ONLY SHOW NON-EMPTY RELATIONSHIP SECTIONS
+        ==================================================== */
+
+        const cpdSection =
+            wrapper.querySelector(
+                ".competency-related-section:first-child"
+            );
+
+
+        const evidenceSection =
+            wrapper.querySelector(
+                ".competency-related-section:last-child"
+            );
+
+
+        if (
+            !cpdList.children.length
+        ) {
+
+            cpdSection.remove();
+
+        }
+
+
+        if (
+            !evidenceList.children.length
+        ) {
+
+            evidenceSection.remove();
+
+        }
+
+
+        /*
+           Only add the wrapper if at least
+           one relationship exists.
+        */
+
+        if (
+            wrapper.children.length
+        ) {
+
+            accordionContent.appendChild(
+                wrapper
+            );
+
+        }
+
+
+    });
+
+
+    console.log(
+        "[CPD] Competency relationship layer complete."
+    );
+
+}  
   /* ============================================================
    APM FRAMEWORK CAROUSEL CONTROLS
 ============================================================ */

@@ -8049,253 +8049,203 @@ document.addEventListener(
     },
     true
 );
-
-/* ========================================================
-   2. EVIDENCE → CPD ACTIVITIES
-   --------------------------------------------------------
-   DOM-ONLY COLLAPSIBLE ENHANCEMENT
-
-   Important:
-   - Does not move existing elements
-   - Does not rebuild Evidence cards
-   - Does not change Evidence card ordering
-   - Does not alter CPD relationships
-   - Does not alter navigation
-======================================================== */
+/* ============================================================
+   2. EVIDENCE → CPD ACTIVITIES COLLAPSIBLE ENHANCEMENT
+   Works on the already-generated DOM.
+   Does NOT rebuild or move CPD activity links.
+============================================================ */
 
 document
-    .querySelectorAll(
-        ".supporting-cpd-activities"
-    )
+    .querySelectorAll(".supporting-cpd-activities")
     .forEach(section => {
 
+        /* ----------------------------------------------------
+           FIND EXISTING CPD ACTIVITY LIST
+        ---------------------------------------------------- */
 
-    /*
-       Prevent duplicate initialisation.
-    */
+        const list =
+            section.querySelector(
+                ".supporting-cpd-list"
+            );
 
-    if (
-        section.dataset.collapsibleInitialised === "true"
-    ) {
-
-        return;
-
-    }
+        if (!list) return;
 
 
-    /*
-       Find the existing CPD list.
-    */
+        const count =
+            list.querySelectorAll(
+                ".supporting-cpd-activity"
+            ).length;
 
-    const list =
-        section.querySelector(
-            ".supporting-cpd-list"
+
+        if (!count) return;
+
+
+        /* ----------------------------------------------------
+           FIND EXISTING SECTION TITLE
+        ---------------------------------------------------- */
+
+        const title =
+            section.querySelector(
+                ".professional-evidence-label"
+            );
+
+        if (!title) return;
+
+
+        /*
+           Prevent this enhancement from being
+           applied more than once.
+        */
+
+        if (
+            section.dataset.cpdToggleAdded === "true"
+        ) {
+            return;
+        }
+
+        section.dataset.cpdToggleAdded = "true";
+
+
+        /* ----------------------------------------------------
+           CREATE TOGGLE BUTTON
+        ---------------------------------------------------- */
+
+        const toggle =
+            document.createElement("button");
+
+        toggle.type = "button";
+
+        toggle.className =
+            "relationship-collapse-toggle";
+
+
+        toggle.setAttribute(
+            "aria-expanded",
+            "false"
         );
 
 
-    if (!list) {
-
-        console.warn(
-            "[CPD] Supporting CPD list not found:",
-            section
-        );
-
-        return;
-
-    }
+        toggle.innerHTML = `
+            <span class="relationship-toggle-label">
+                Show CPD activities (${count})
+            </span>
+            <i class="fa-solid fa-chevron-down"></i>
+        `;
 
 
-    /*
-       Count existing activities.
-    */
+        /* ----------------------------------------------------
+           INSERT TOGGLE AFTER EXISTING TITLE
 
-    const count =
-        list.children.length;
+           IMPORTANT:
+           We do NOT move the title.
+           We do NOT move the list.
+           This preserves the existing Evidence card layout.
+        ---------------------------------------------------- */
 
-
-    if (!count) return;
-
-
-    /*
-       Mark as initialised.
-    */
-
-    section.dataset.collapsibleInitialised =
-        "true";
-
-
-    /*
-       Find the existing section title.
-    */
-
-    const title =
-        section.querySelector(
-            ".professional-evidence-label"
+        title.insertAdjacentElement(
+            "afterend",
+            toggle
         );
 
 
-    if (!title) {
+        /* ----------------------------------------------------
+           START COLLAPSED
+        ---------------------------------------------------- */
 
-        console.warn(
-            "[CPD] Supporting CPD title not found:",
-            section
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Create a toggle button only.
-
-       We deliberately DO NOT move the existing
-       title or rebuild the section layout.
-    */
-
-    const toggle =
-        document.createElement(
-            "button"
+        list.classList.add(
+            "relationship-list-collapsed"
         );
 
 
-    toggle.type =
-        "button";
+        /* ----------------------------------------------------
+           TOGGLE CPD LIST
+        ---------------------------------------------------- */
+
+        toggle.addEventListener(
+            "click",
+            function(e) {
+
+                e.preventDefault();
+
+                e.stopPropagation();
 
 
-    toggle.className =
-        "relationship-collapse-toggle";
+                const isExpanded =
+                    list.classList.contains(
+                        "relationship-list-expanded"
+                    );
 
 
-    toggle.setAttribute(
-        "aria-expanded",
-        "false"
-    );
+                if (isExpanded) {
+
+                    /* COLLAPSE */
+
+                    list.classList.remove(
+                        "relationship-list-expanded"
+                    );
+
+                    list.classList.add(
+                        "relationship-list-collapsed"
+                    );
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    toggle.classList.remove(
+                        "expanded"
+                    );
 
 
-    toggle.innerHTML = `
-
-        <span class="relationship-toggle-label">
-            Show
-        </span>
-
-        <i class="fa-solid fa-chevron-down"></i>
-
-    `;
+                    toggle.innerHTML = `
+                        <span class="relationship-toggle-label">
+                            Show CPD activities (${count})
+                        </span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    `;
 
 
-    /*
-       Add toggle directly to the existing title.
+                } else {
 
-       This preserves the Evidence card's
-       existing DOM order.
-    */
+                    /* EXPAND */
 
-    title.appendChild(
-        toggle
-    );
+                    list.classList.remove(
+                        "relationship-list-collapsed"
+                    );
 
+                    list.classList.add(
+                        "relationship-list-expanded"
+                    );
 
-    /*
-       Start collapsed.
-    */
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
 
-    list.classList.add(
-        "relationship-list-collapsed"
-    );
-
-
-    /*
-       Toggle existing list only.
-    */
-
-    toggle.addEventListener(
-        "click",
-        function(e) {
-
-            e.preventDefault();
-
-            e.stopPropagation();
+                    toggle.classList.add(
+                        "expanded"
+                    );
 
 
-            const isExpanded =
-                toggle.getAttribute(
-                    "aria-expanded"
-                ) === "true";
+                    toggle.innerHTML = `
+                        <span class="relationship-toggle-label">
+                            Hide CPD activities (${count})
+                        </span>
+                        <i class="fa-solid fa-chevron-up"></i>
+                    `;
 
-
-            if (isExpanded) {
-
-                /*
-                   COLLAPSE
-                */
-
-                list.classList.remove(
-                    "relationship-list-expanded"
-                );
-
-
-                list.classList.add(
-                    "relationship-list-collapsed"
-                );
-
-
-                toggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-
-                toggle.innerHTML = `
-
-                    <span class="relationship-toggle-label">
-                        Show
-                    </span>
-
-                    <i class="fa-solid fa-chevron-down"></i>
-
-                `;
-
-
-            } else {
-
-                /*
-                   EXPAND
-                */
-
-                list.classList.remove(
-                    "relationship-list-collapsed"
-                );
-
-
-                list.classList.add(
-                    "relationship-list-expanded"
-                );
-
-
-                toggle.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
-
-                toggle.innerHTML = `
-
-                    <span class="relationship-toggle-label">
-                        Hide
-                    </span>
-
-                    <i class="fa-solid fa-chevron-up"></i>
-
-                `;
+                }
 
             }
+        );
 
-        }
-    );
+    });
 
 
-});
+console.log(
+    "[CPD] Evidence → CPD collapsible enhancement applied."
+);
 
 /* ============================================================
    COMPETENCY → CPD ACTIVITY NAVIGATION

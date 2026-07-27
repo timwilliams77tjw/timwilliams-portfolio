@@ -7065,6 +7065,15 @@ generateDonutChart();
 console.log("Calling linkCPDToCompetences...");
 linkCPDToCompetences();
 
+console.log(
+    "[TEST] CPD cards before Evidence relationship:",
+    document.querySelectorAll(".cpd-card").length
+);
+
+console.log(
+    "[TEST] Evidence cards:",
+    Object.keys(evidenceGoalRelationships || {}).length
+);      
       console.log("Calling populateEvidenceCPDRelationships...");
 populateEvidenceCPDRelationships();
       
@@ -8362,10 +8371,12 @@ function populateEvidenceCPDRelationships() {
     }
 
 
-    console.log(
-        "[CPD] CPD cards found:",
-        cpdCards.length
-    );
+   alert(
+    "CPD → Evidence test\n\n" +
+    "CPD cards found: " + cpdCards.length + "\n" +
+    "Evidence relationships: " +
+    Object.keys(evidenceGoalRelationships || {}).length
+);
 
 
     /* ============================================================

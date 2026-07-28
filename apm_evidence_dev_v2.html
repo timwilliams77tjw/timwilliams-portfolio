@@ -7302,6 +7302,10 @@ section.competency-section > .competency-card {
 <script>
 
 /* ==========================================================
+   CPD MASTER SCRIPT
+   ========================================================== */
+
+/* ==========================================================
    DEBUG LOGGER
 ========================================================== */
 
@@ -7379,25 +7383,19 @@ function parseUSDate(d) {
         return null;
     }
 
-    const parts =
-        d.split("/");
+    const parts = d.split("/");
 
-    if (
-        parts.length !== 3
-    ) {
+    if (parts.length !== 3) {
         return null;
     }
 
-    const date =
-        new Date(
-            parts[2],
-            parts[0] - 1,
-            parts[1]
-        );
+    const date = new Date(
+        parts[2],
+        parts[0] - 1,
+        parts[1]
+    );
 
-    return isNaN(
-        date.getTime()
-    )
+    return isNaN(date.getTime())
         ? null
         : date;
 
@@ -7405,14 +7403,7 @@ function parseUSDate(d) {
 
 
 /* ==========================================================
-   CPD LOG OPEN / CLOSE HELPERS
-   ----------------------------------------------------------
-   IMPORTANT:
-   These functions use the actual CPD HTML structure:
-
-   .cpd-log-inner
-       .collapsible-toggle
-       .collapsible-content
+   CPD LOG ELEMENT HELPERS
 ========================================================== */
 
 function getCPDLogSection() {
@@ -7457,7 +7448,12 @@ function getCPDLogContent() {
 
 
 /* ==========================================================
-   OPEN CPD LOG
+   FORCE CPD LOG OPEN
+   ----------------------------------------------------------
+   This is intentionally independent of the page's
+   existing accordion click handler.
+
+   It directly forces the content to be visible.
 ========================================================== */
 
 function openCPDLog() {
@@ -7478,7 +7474,7 @@ function openCPDLog() {
     ) {
 
         console.warn(
-            "[CPD] Unable to find CPD Log toggle/content."
+            "[CPD] CPD Log elements not found."
         );
 
         return false;
@@ -7486,50 +7482,68 @@ function openCPDLog() {
     }
 
 
-    /*
-       Check whether CPD Log is already open.
+    /* Open classes */
 
-       We check both the content and toggle
-       because different versions of the
-       accordion code may use either state.
+    section.classList.add(
+        "open"
+    );
+
+    toggle.classList.add(
+        "open"
+    );
+
+    content.classList.add(
+        "open"
+    );
+
+
+    /* Accessibility */
+
+    toggle.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+
+    /* Remove native hidden state */
+
+    content.hidden = false;
+
+    content.removeAttribute(
+        "hidden"
+    );
+
+
+    /*
+       Force visibility.
+
+       This is important because the existing
+       accordion CSS may use display:none,
+       max-height, visibility or opacity.
     */
 
-    const isOpen =
-        content.classList.contains("open") ||
-        toggle.classList.contains("open") ||
-        section.classList.contains("open");
+    content.style.display =
+        "block";
+
+    content.style.visibility =
+        "visible";
+
+    content.style.opacity =
+        "1";
+
+    content.style.height =
+        "auto";
+
+    content.style.maxHeight =
+        "none";
+
+    content.style.overflow =
+        "visible";
 
 
-    if (!isOpen) {
-
-        /*
-           Open CPD Log.
-
-           We deliberately do NOT dispatch a click
-           event here. This avoids triggering other
-           document-level click handlers.
-        */
-
-        content.classList.add("open");
-
-        toggle.classList.add("open");
-
-        section.classList.add("open");
-
-        toggle.setAttribute(
-            "aria-expanded",
-            "true"
-        );
-
-        /*
-           If the page's existing accordion CSS
-           relies on a hidden/display state, ensure
-           the content is visible.
-        */
-
-        content.hidden = false;
-
-    }
+    debug(
+        "CPD Log forced open."
+    );
 
 
     return true;
@@ -7538,7 +7552,7 @@ function openCPDLog() {
 
 
 /* ==========================================================
-   CLOSE CPD LOG
+   FORCE CPD LOG CLOSED
 ========================================================== */
 
 function closeCPDLog() {
@@ -7560,7 +7574,8 @@ function closeCPDLog() {
         return false;
     }
 
-    content.classList.remove(
+
+    section.classList.remove(
         "open"
     );
 
@@ -7568,16 +7583,48 @@ function closeCPDLog() {
         "open"
     );
 
-    section.classList.remove(
+    content.classList.remove(
         "open"
     );
+
 
     toggle.setAttribute(
         "aria-expanded",
         "false"
     );
 
-    content.hidden = true;
+
+    content.hidden =
+        true;
+
+
+    /*
+       We deliberately do not set
+       display:none here.
+
+       The existing accordion CSS
+       remains responsible for the
+       normal closed state.
+    */
+
+    content.style.display =
+        "";
+
+    content.style.visibility =
+        "";
+
+    content.style.opacity =
+        "";
+
+    content.style.height =
+        "";
+
+    content.style.maxHeight =
+        "";
+
+    content.style.overflow =
+        "";
+
 
     return true;
 
@@ -7585,12 +7632,14 @@ function closeCPDLog() {
 
 
 /* ==========================================================
-   CPD LOG NATIVE TOGGLE
+   CPD LOG NORMAL USER TOGGLE
    ----------------------------------------------------------
-   Handles ONLY the main CPD Log accordion.
+   ONLY handles:
+       .cpd-log-inner > .collapsible-toggle
 
-   This does not interfere with Evidence cards,
-   Competency cards, or relationship lists.
+   It does NOT handle Evidence cards.
+   It does NOT handle Competency cards.
+   It does NOT handle generated relationship lists.
 ========================================================== */
 
 document.addEventListener(
@@ -7602,20 +7651,118 @@ document.addEventListener(
                 ".cpd-log-inner > .collapsible-toggle"
             );
 
+
         if (!toggle) {
             return;
         }
 
+
+        const section =
+            toggle.closest(
+                ".cpd-log-inner"
+            );
+
+
+        if (!section) {
+            return;
+        }
+
+
+        const content =
+            section.querySelector(
+                ":scope > .collapsible-content"
+            );
+
+
+        if (!content) {
+            return;
+        }
+
+
         /*
-           Allow the normal CPD accordion behaviour
-           if the page already has one.
+           If another existing handler on the page
+           is responsible for this accordion, we do
+           not prevent it here.
 
-           We only use this handler if the native
-           accordion has not already been handled
-           elsewhere.
-
-           Do not stop propagation here.
+           Instead we synchronise the state after
+           the existing handler has had a chance to
+           run.
         */
+
+        setTimeout(
+            function() {
+
+                const currentlyOpen =
+                    content.classList.contains(
+                        "open"
+                    ) ||
+                    toggle.classList.contains(
+                        "open"
+                    ) ||
+                    section.classList.contains(
+                        "open"
+                    ) ||
+                    content.hidden === false;
+
+
+                if (currentlyOpen) {
+
+                    /*
+                       Keep open.
+                    */
+
+                    section.classList.add(
+                        "open"
+                    );
+
+                    toggle.classList.add(
+                        "open"
+                    );
+
+                    content.classList.add(
+                        "open"
+                    );
+
+                    content.hidden =
+                        false;
+
+                    content.style.display =
+                        "block";
+
+                    content.style.visibility =
+                        "visible";
+
+                    content.style.opacity =
+                        "1";
+
+                    content.style.height =
+                        "auto";
+
+                    content.style.maxHeight =
+                        "none";
+
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
+
+                } else {
+
+                    /*
+                       Keep closed.
+                    */
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            },
+            50
+        );
 
     },
     false
@@ -7631,6 +7778,7 @@ async function loadCPD() {
     debug(
         "loadCPD: starting"
     );
+
 
     const url =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
@@ -7665,7 +7813,13 @@ async function loadCPD() {
         if (
             lines.length <= 1
         ) {
+
+            console.warn(
+                "[CPD] No CPD data rows found."
+            );
+
             return;
+
         }
 
 
@@ -7694,14 +7848,16 @@ async function loadCPD() {
 
         if (tbody) {
 
-            tbody.innerHTML = "";
+            tbody.innerHTML =
+                "";
 
         }
 
 
         if (cardContainer) {
 
-            cardContainer.innerHTML = "";
+            cardContainer.innerHTML =
+                "";
 
         }
 
@@ -7719,32 +7875,50 @@ async function loadCPD() {
 
                 const activity =
                     (row[0] || "")
-                        .replace(/^"|"$/g, "");
+                        .replace(
+                            /^"|"$/g,
+                            ""
+                        );
 
 
                 const start =
                     (row[1] || "")
-                        .replace(/^"|"$/g, "");
+                        .replace(
+                            /^"|"$/g,
+                            ""
+                        );
 
 
                 const end =
                     (row[2] || "")
-                        .replace(/^"|"$/g, "");
+                        .replace(
+                            /^"|"$/g,
+                            ""
+                        );
 
 
                 const hours =
                     (row[3] || "")
-                        .replace(/^"|"$/g, "");
+                        .replace(
+                            /^"|"$/g,
+                            ""
+                        );
 
 
                 const category =
                     (row[4] || "")
-                        .replace(/^"|"$/g, "");
+                        .replace(
+                            /^"|"$/g,
+                            ""
+                        );
 
 
                 const reflection =
                     (row[5] || "")
-                        .replace(/^"|"$/g, "");
+                        .replace(
+                            /^"|"$/g,
+                            ""
+                        );
 
 
                 /* ------------------------------------------------
@@ -7767,13 +7941,19 @@ async function loadCPD() {
                         : null;
 
 
-                let statusClass = "";
-                let statusLabel = "";
-                let statusIcon = "";
+                let statusClass =
+                    "";
+
+                let statusLabel =
+                    "";
+
+                let statusIcon =
+                    "";
 
 
                 if (
                     startDate &&
+                    !isNaN(startDate.getTime()) &&
                     startDate > today
                 ) {
 
@@ -7790,6 +7970,7 @@ async function loadCPD() {
 
                 else if (
                     !endDate ||
+                    isNaN(endDate.getTime()) ||
                     endDate >= today
                 ) {
 
@@ -7883,7 +8064,7 @@ async function loadCPD() {
                     card.innerHTML = `
 
                         <div class="cpd-card-title">
-                            ${activity}
+                            <span class="cpd-card-activity-name"></span>
                             <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
                         </div>
 
@@ -7893,9 +8074,7 @@ async function loadCPD() {
                                 ${hours} hrs
                             </span>
 
-                            <span class="cpd-badge cpd-category">
-                                ${category || "Uncategorised"}
-                            </span>
+                            <span class="cpd-badge cpd-category"></span>
 
                             <span>
                                 ${start} → ${end || "Ongoing"}
@@ -7907,14 +8086,61 @@ async function loadCPD() {
 
                         </div>
 
-                        <div class="cpd-card-reflection">
-                            ${
-                                reflection ||
-                                "<em>No reflective statement provided.</em>"
-                            }
-                        </div>
+                        <div class="cpd-card-reflection"></div>
 
                     `;
+
+
+                    const activityNameEl =
+                        card.querySelector(
+                            ".cpd-card-activity-name"
+                        );
+
+
+                    const categoryEl =
+                        card.querySelector(
+                            ".cpd-category"
+                        );
+
+
+                    const reflectionEl =
+                        card.querySelector(
+                            ".cpd-card-reflection"
+                        );
+
+
+                    if (activityNameEl) {
+
+                        activityNameEl.textContent =
+                            activity;
+
+                    }
+
+
+                    if (categoryEl) {
+
+                        categoryEl.textContent =
+                            category ||
+                            "Uncategorised";
+
+                    }
+
+
+                    if (reflectionEl) {
+
+                        if (reflection) {
+
+                            reflectionEl.textContent =
+                                reflection;
+
+                        } else {
+
+                            reflectionEl.innerHTML =
+                                "<em>No reflective statement provided.</em>";
+
+                        }
+
+                    }
 
 
                     cardContainer.appendChild(
@@ -7938,7 +8164,7 @@ async function loadCPD() {
 
 
         /*
-           Generate all dependent content
+           Generate dependent content
            in the correct order.
         */
 
@@ -7950,17 +8176,35 @@ async function loadCPD() {
 
         generateDonutChart();
 
-        populateEvidenceCPDRelationships();
+        /*
+           CPD cards now exist.
+        */
 
         linkCPDToCompetences();
 
+
+        /*
+           Evidence relationships now use
+           the generated CPD cards.
+        */
+
+        populateEvidenceCPDRelationships();
+
+
+        /*
+           Competency relationships use
+           CPD + evidence relationships.
+        */
+
         populateCompetencyRelationships();
+
 
         initialiseRelationshipCollapsibles();
 
+
         /*
-           Generate radar after competency cards
-           are available.
+           Generate radar after competency
+           cards are available.
         */
 
         waitForAccordion();
@@ -8233,7 +8477,7 @@ function populateEvidenceCPDRelationships() {
 
 
     /*
-       Remove previously generated sections.
+       Remove previous generated sections.
     */
 
     document
@@ -8362,6 +8606,22 @@ function populateEvidenceCPDRelationships() {
 
             list.className =
                 "supporting-cpd-list";
+
+
+            /*
+               Explicit initial closed state.
+            */
+
+            list.classList.add(
+                "relationship-list-collapsed"
+            );
+
+            list.classList.remove(
+                "relationship-list-expanded"
+            );
+
+            list.style.display =
+                "none";
 
 
             cpdCards.forEach(
@@ -9014,14 +9274,6 @@ function populateCompetencyRelationships() {
 
 /* ============================================================
    RELATIONSHIP COLLAPSIBLE INITIALISATION
-   ------------------------------------------------------------
-   IMPORTANT:
-   This ONLY controls generated relationship lists.
-
-   It does NOT control:
-   • Evidence card accordion
-   • Competency accordion
-   • CPD Log accordion
 ============================================================ */
 
 function initialiseRelationshipCollapsibles() {
@@ -9058,17 +9310,9 @@ function initialiseRelationshipCollapsibles() {
                 }
 
 
-                const title =
-                    section.querySelector(
-                        ".professional-evidence-label, " +
-                        ".competency-related-title"
-                    );
-
-
                 /*
                    Supporting CPD generated sections
-                   already contain their own header and
-                   toggle. Do not add another toggle.
+                   already have their own toggle.
                 */
 
                 if (
@@ -9087,7 +9331,7 @@ function initialiseRelationshipCollapsibles() {
 
                 /*
                    Competency relationship sections
-                   receive a generated toggle.
+                   receive their own toggle.
                 */
 
                 if (
@@ -9102,6 +9346,12 @@ function initialiseRelationshipCollapsibles() {
                     return;
 
                 }
+
+
+                const title =
+                    section.querySelector(
+                        ".competency-related-title"
+                    );
 
 
                 if (!title) {
@@ -9184,6 +9434,11 @@ function initialiseRelationshipCollapsibles() {
                 `;
 
 
+                /*
+                   Put generated header before
+                   the title.
+                */
+
                 section.insertBefore(
                     header,
                     title
@@ -9205,14 +9460,20 @@ function initialiseRelationshipCollapsibles() {
                 );
 
 
+                /*
+                   Force initial closed state.
+                */
+
                 list.classList.add(
                     "relationship-list-collapsed"
                 );
 
-
                 list.classList.remove(
                     "relationship-list-expanded"
                 );
+
+                list.style.display =
+                    "none";
 
 
                 section.dataset.relationshipReady =
@@ -9225,187 +9486,28 @@ function initialiseRelationshipCollapsibles() {
 
 
 /* ============================================================
-   SINGLE CONSOLIDATED RELATIONSHIP CLICK HANDLER
+   CONSOLIDATED RELATIONSHIP CLICK HANDLER
    ------------------------------------------------------------
    IMPORTANT:
-   This uses normal bubbling phase.
+   This handler ONLY intercepts generated relationship
+   elements.
 
-   It deliberately does NOT use:
-       true
+   It deliberately does NOT intercept:
+       .professional-evidence-card
+       .accordion-header
+       .collapsible-toggle
 
-   This prevents it from blocking the Evidence card's
-   own accordion click handler.
+   Therefore the native Evidence and Competency accordions
+   remain independent.
 ============================================================ */
 
 document.addEventListener(
     "click",
     function(e) {
 
-        /* ======================================================
-           1. CPD → COMPETENCY
-        ====================================================== */
-
-        const competenceLink =
-            e.target.closest(
-                ".cpd-competence-link, .evidence-tag"
-            );
-
-
-        if (
-            competenceLink &&
-            competenceLink
-                .getAttribute("href")
-                ?.startsWith(
-                    "#competence-"
-                )
-        ) {
-
-            e.preventDefault();
-
-            e.stopPropagation();
-
-
-            navigateToCompetence(
-                competenceLink
-                    .getAttribute(
-                        "href"
-                    )
-            );
-
-
-            return;
-
-        }
-
 
         /* ======================================================
-           2. EVIDENCE → CPD
-        ====================================================== */
-
-        const evidenceCPDLink =
-            e.target.closest(
-                ".supporting-cpd-activity"
-            );
-
-
-        if (evidenceCPDLink) {
-
-            const href =
-                evidenceCPDLink.getAttribute(
-                    "href"
-                );
-
-
-            if (
-                href &&
-                href.startsWith(
-                    "#cpd-activity-"
-                )
-            ) {
-
-                e.preventDefault();
-
-                e.stopPropagation();
-
-
-                navigateToCPDActivity(
-                    href
-                );
-
-
-                return;
-
-            }
-
-        }
-
-
-        /* ======================================================
-           3. COMPETENCY → CPD
-        ====================================================== */
-
-        const competencyCPDLink =
-            e.target.closest(
-                ".competency-cpd-link, .competency-cpd-activity"
-            );
-
-
-        if (competencyCPDLink) {
-
-            const href =
-                competencyCPDLink.getAttribute(
-                    "href"
-                );
-
-
-            if (
-                href &&
-                href.startsWith(
-                    "#cpd-activity-"
-                )
-            ) {
-
-                e.preventDefault();
-
-                e.stopPropagation();
-
-
-                navigateToCPDActivity(
-                    href
-                );
-
-
-                return;
-
-            }
-
-        }
-
-
-        /* ======================================================
-           4. COMPETENCY → EVIDENCE
-        ====================================================== */
-
-        const competencyEvidenceLink =
-            e.target.closest(
-                ".competency-evidence-link"
-            );
-
-
-        if (competencyEvidenceLink) {
-
-            const href =
-                competencyEvidenceLink.getAttribute(
-                    "href"
-                );
-
-
-            if (
-                href &&
-                href.startsWith(
-                    "#evidence-"
-                )
-            ) {
-
-                e.preventDefault();
-
-                e.stopPropagation();
-
-
-                navigateToEvidence(
-                    href
-                );
-
-
-                return;
-
-            }
-
-        }
-
-
-        /* ======================================================
-           5. EVIDENCE → CPD LIST TOGGLE
+           1. EVIDENCE → CPD LIST TOGGLE
         ====================================================== */
 
         const evidenceToggle =
@@ -9451,6 +9553,10 @@ document.addEventListener(
 
             if (isOpen) {
 
+                /*
+                   CLOSE
+                */
+
                 list.classList.remove(
                     "relationship-list-expanded"
                 );
@@ -9459,10 +9565,16 @@ document.addEventListener(
                     "relationship-list-collapsed"
                 );
 
+
+                list.style.display =
+                    "none";
+
+
                 evidenceToggle.setAttribute(
                     "aria-expanded",
                     "false"
                 );
+
 
                 evidenceToggle.innerHTML = `
                     Show
@@ -9471,6 +9583,10 @@ document.addEventListener(
 
             } else {
 
+                /*
+                   OPEN
+                */
+
                 list.classList.remove(
                     "relationship-list-collapsed"
                 );
@@ -9479,10 +9595,39 @@ document.addEventListener(
                     "relationship-list-expanded"
                 );
 
+
+                /*
+                   Explicit display override.
+
+                   This is the important fix for the
+                   Show → Hide but no content problem.
+                */
+
+                list.style.display =
+                    "block";
+
+
+                list.style.visibility =
+                    "visible";
+
+
+                list.style.opacity =
+                    "1";
+
+
+                list.style.height =
+                    "auto";
+
+
+                list.style.maxHeight =
+                    "none";
+
+
                 evidenceToggle.setAttribute(
                     "aria-expanded",
                     "true"
                 );
+
 
                 evidenceToggle.innerHTML = `
                     Hide
@@ -9498,7 +9643,7 @@ document.addEventListener(
 
 
         /* ======================================================
-           6. COMPETENCY RELATIONSHIP TOGGLE
+           2. COMPETENCY RELATIONSHIP TOGGLE
         ====================================================== */
 
         const relationshipToggle =
@@ -9559,10 +9704,16 @@ document.addEventListener(
                     "relationship-list-collapsed"
                 );
 
+
+                list.style.display =
+                    "none";
+
+
                 relationshipToggle.setAttribute(
                     "aria-expanded",
                     "false"
                 );
+
 
                 relationshipToggle.classList.remove(
                     "expanded"
@@ -9576,7 +9727,6 @@ document.addEventListener(
 
                 }
 
-
             } else {
 
                 list.classList.remove(
@@ -9587,10 +9737,32 @@ document.addEventListener(
                     "relationship-list-expanded"
                 );
 
+
+                list.style.display =
+                    "block";
+
+
+                list.style.visibility =
+                    "visible";
+
+
+                list.style.opacity =
+                    "1";
+
+
+                list.style.height =
+                    "auto";
+
+
+                list.style.maxHeight =
+                    "none";
+
+
                 relationshipToggle.setAttribute(
                     "aria-expanded",
                     "true"
                 );
+
 
                 relationshipToggle.classList.add(
                     "expanded"
@@ -9608,6 +9780,168 @@ document.addEventListener(
 
 
             return;
+
+        }
+
+
+        /* ======================================================
+           3. CPD → COMPETENCY
+        ====================================================== */
+
+        const competenceLink =
+            e.target.closest(
+                ".cpd-competence-link, .evidence-tag"
+            );
+
+
+        if (
+            competenceLink &&
+            competenceLink
+                .getAttribute("href")
+                ?.startsWith(
+                    "#competence-"
+                )
+        ) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+
+            navigateToCompetence(
+                competenceLink.getAttribute(
+                    "href"
+                )
+            );
+
+
+            return;
+
+        }
+
+
+        /* ======================================================
+           4. EVIDENCE → CPD
+        ====================================================== */
+
+        const evidenceCPDLink =
+            e.target.closest(
+                ".supporting-cpd-activity"
+            );
+
+
+        if (evidenceCPDLink) {
+
+            const href =
+                evidenceCPDLink.getAttribute(
+                    "href"
+                );
+
+
+            if (
+                href &&
+                href.startsWith(
+                    "#cpd-activity-"
+                )
+            ) {
+
+                e.preventDefault();
+
+                e.stopPropagation();
+
+
+                navigateToCPDActivity(
+                    href
+                );
+
+
+                return;
+
+            }
+
+        }
+
+
+        /* ======================================================
+           5. COMPETENCY → CPD
+        ====================================================== */
+
+        const competencyCPDLink =
+            e.target.closest(
+                ".competency-cpd-link, .competency-cpd-activity"
+            );
+
+
+        if (competencyCPDLink) {
+
+            const href =
+                competencyCPDLink.getAttribute(
+                    "href"
+                );
+
+
+            if (
+                href &&
+                href.startsWith(
+                    "#cpd-activity-"
+                )
+            ) {
+
+                e.preventDefault();
+
+                e.stopPropagation();
+
+
+                navigateToCPDActivity(
+                    href
+                );
+
+
+                return;
+
+            }
+
+        }
+
+
+        /* ======================================================
+           6. COMPETENCY → EVIDENCE
+        ====================================================== */
+
+        const competencyEvidenceLink =
+            e.target.closest(
+                ".competency-evidence-link"
+            );
+
+
+        if (competencyEvidenceLink) {
+
+            const href =
+                competencyEvidenceLink.getAttribute(
+                    "href"
+                );
+
+
+            if (
+                href &&
+                href.startsWith(
+                    "#evidence-"
+                )
+            ) {
+
+                e.preventDefault();
+
+                e.stopPropagation();
+
+
+                navigateToEvidence(
+                    href
+                );
+
+
+                return;
+
+            }
 
         }
 
@@ -9652,10 +9986,6 @@ function navigateToCompetence(
     }
 
 
-    /*
-       Remove previous highlights.
-    */
-
     document
         .querySelectorAll(
             ".accordion-item.highlighted"
@@ -9670,12 +10000,6 @@ function navigateToCompetence(
             }
         );
 
-
-    /*
-       Open competence.
-
-       We do not trigger a click.
-    */
 
     target.classList.add(
         "open"
@@ -9694,8 +10018,11 @@ function navigateToCompetence(
                 () => {
 
                     target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center"
+                        behavior:
+                            "smooth",
+
+                        block:
+                            "center"
                     });
 
                 },
@@ -9745,15 +10072,14 @@ function navigateToCPDActivity(
 
 
     /*
-       FIRST:
-       Open the main CPD Log.
+       Force CPD Log open.
     */
 
-    const cpdOpened =
+    const opened =
         openCPDLog();
 
 
-    if (!cpdOpened) {
+    if (!opened) {
 
         console.warn(
             "[CPD] CPD Log could not be opened."
@@ -9763,7 +10089,7 @@ function navigateToCPDActivity(
 
 
     /*
-       Remove previous CPD highlights.
+       Remove previous highlights.
     */
 
     document
@@ -9782,37 +10108,45 @@ function navigateToCPDActivity(
 
 
     /*
-       Wait for the CPD Log expansion to
-       complete before scrolling.
+       Allow layout to update before scrolling.
     */
 
-    setTimeout(
+    requestAnimationFrame(
         () => {
-
-            target.classList.add(
-                "cpd-activity-highlighted"
-            );
-
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
 
             setTimeout(
                 () => {
 
-                    target.classList.remove(
+                    target.classList.add(
                         "cpd-activity-highlighted"
                     );
 
+
+                    target.scrollIntoView({
+                        behavior:
+                            "smooth",
+
+                        block:
+                            "center"
+                    });
+
+
+                    setTimeout(
+                        () => {
+
+                            target.classList.remove(
+                                "cpd-activity-highlighted"
+                            );
+
+                        },
+                        3000
+                    );
+
                 },
-                3000
+                150
             );
 
-        },
-        500
+        }
     );
 
 }
@@ -9855,13 +10189,11 @@ function navigateToEvidence(
 
 
     /*
-       Do NOT manually manipulate the Evidence
-       card accordion here.
+       Do NOT manually manipulate the
+       Evidence card accordion.
 
-       The Evidence card's own accordion handler
+       The Evidence card's own handler
        remains responsible for opening it.
-
-       We only scroll and highlight.
     */
 
     target.classList.add(
@@ -9873,8 +10205,11 @@ function navigateToEvidence(
         () => {
 
             target.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
+                behavior:
+                    "smooth",
+
+                block:
+                    "center"
             });
 
         },
@@ -10014,7 +10349,8 @@ function generateDonutChart() {
 
     if (legend) {
 
-        legend.innerHTML = "";
+        legend.innerHTML =
+            "";
 
     }
 
@@ -10036,25 +10372,6 @@ function generateDonutChart() {
 
             segment.style.pointerEvents =
                 "none";
-
-
-            segment.onmouseenter =
-                null;
-
-            segment.onmousemove =
-                null;
-
-            segment.onmouseleave =
-                null;
-
-            segment.ontouchstart =
-                null;
-
-            segment.ontouchmove =
-                null;
-
-            segment.ontouchend =
-                null;
 
         }
     );
@@ -10103,9 +10420,12 @@ function generateDonutChart() {
     }
 
 
-    let offset = 0;
+    let offset =
+        0;
 
-    let index = 0;
+
+    let index =
+        0;
 
 
     Object.entries(
@@ -10362,13 +10682,20 @@ function calculateMetrics() {
     }
 
 
-    let totalHours = 0;
+    let totalHours =
+        0;
 
-    let completedHours = 0;
 
-    let ongoingHours = 0;
+    let completedHours =
+        0;
 
-    let activityCount = 0;
+
+    let ongoingHours =
+        0;
+
+
+    let activityCount =
+        0;
 
 
     const categoryCounts = {};
@@ -10857,7 +11184,8 @@ function generateHeatmap() {
             count >= 4
         ) {
 
-            level = 4;
+            level =
+                4;
 
         }
 
@@ -10865,7 +11193,8 @@ function generateHeatmap() {
             count === 3
         ) {
 
-            level = 3;
+            level =
+                3;
 
         }
 
@@ -10873,7 +11202,8 @@ function generateHeatmap() {
             count === 2
         ) {
 
-            level = 2;
+            level =
+                2;
 
         }
 
@@ -10881,7 +11211,8 @@ function generateHeatmap() {
             count === 1
         ) {
 
-            level = 1;
+            level =
+                1;
 
         }
 
@@ -11357,30 +11688,40 @@ function generateDualRadar() {
 
     const ratingMap = {
 
-        "Aware": 1,
+        "Aware":
+            1,
 
-        "Practised": 2,
+        "Practised":
+            2,
 
-        "Competent": 3,
+        "Competent":
+            3,
 
-        "Proficient": 4,
+        "Proficient":
+            4,
 
-        "Expert": 5
+        "Expert":
+            5
 
     };
 
 
     const colourMap = {
 
-        1: "#555",
+        1:
+            "#555",
 
-        2: "#8a2be2",
+        2:
+            "#8a2be2",
 
-        3: "#b8860b",
+        3:
+            "#b8860b",
 
-        4: "#007b5f",
+        4:
+            "#007b5f",
 
-        5: "#0a66c2"
+        5:
+            "#0a66c2"
 
     };
 
@@ -11834,7 +12175,7 @@ function drawRadar(
 
 
                         tooltip.style.opacity =
-                            1;
+                            "1";
 
                     }
                 );
@@ -11868,7 +12209,7 @@ function drawRadar(
                     () => {
 
                         tooltip.style.opacity =
-                            0;
+                            "0";
 
                     }
                 );

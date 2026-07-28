@@ -7299,132 +7299,58 @@ section.competency-section > .competency-card {
 </section>
 </div>
 </section>
-
 <script>
-/* ==========================================================
-   CPD / EVIDENCE / COMPETENCY SYSTEM
-   CONSOLIDATED VERSION
-
-   This version consolidates:
-   - CPD data loading
-   - Metrics
-   - Progress ring
-   - Progress pillars
-   - Heatmap
-   - Insights
-   - Donut chart
-   - Dual radar
-   - CPD ↔ Competency navigation
-   - CPD ↔ Evidence navigation
-   - Evidence ↔ Competency navigation
-   - Relationship collapsibles
-
-   IMPORTANT:
-   Navigation and collapsible behaviour is deliberately
-   centralised to prevent competing event handlers.
-========================================================== */
-
 
 /* ==========================================================
-   1. DEBUG LOGGER
+   DEBUG LOGGER
 ========================================================== */
 
-function debug(msg, data) {
-
-    if (typeof data !== "undefined") {
-
-        console.log(
-            "[CPD]",
-            msg,
-            data
-        );
-
-    } else {
-
-        console.log(
-            "[CPD]",
-            msg
-        );
-
-    }
-
+function debug(msg) {
+    console.log("[CPD]", msg);
 }
 
 
 /* ==========================================================
-   2. CSV PARSER
+   CSV PARSER
 ========================================================== */
 
 function parseCsvLine(line) {
 
     const cells = [];
-
     let current = "";
-
     let inQuotes = false;
 
+    for (let i = 0; i < line.length; i++) {
 
-    for (
-        let i = 0;
-        i < line.length;
-        i++
-    ) {
-
-        const ch =
-            line[i];
-
+        const ch = line[i];
         const next =
             i + 1 < line.length
                 ? line[i + 1]
                 : "";
 
-
-        if (
-            ch === '"' &&
-            !inQuotes
-        ) {
+        if (ch === '"' && !inQuotes) {
 
             inQuotes = true;
 
-        }
+        } else if (ch === '"' && inQuotes) {
 
-        else if (
-            ch === '"' &&
-            inQuotes
-        ) {
-
-            if (
-                next === '"'
-            ) {
+            if (next === '"') {
 
                 current += '"';
-
                 i++;
 
-            }
-
-            else {
+            } else {
 
                 inQuotes = false;
 
             }
 
-        }
+        } else if (ch === ',' && !inQuotes) {
 
-        else if (
-            ch === ',' &&
-            !inQuotes
-        ) {
-
-            cells.push(
-                current
-            );
-
+            cells.push(current);
             current = "";
 
-        }
-
-        else {
+        } else {
 
             current += ch;
 
@@ -7432,21 +7358,15 @@ function parseCsvLine(line) {
 
     }
 
+    cells.push(current);
 
-    cells.push(
-        current
-    );
-
-
-    return cells.map(
-        c => c.trim()
-    );
+    return cells.map(c => c.trim());
 
 }
 
 
 /* ==========================================================
-   3. DATE PARSER
+   DATE PARSER
    US FORMAT MM/DD/YYYY
 ========================================================== */
 
@@ -7456,24 +7376,17 @@ function parseUSDate(d) {
         !d ||
         typeof d !== "string"
     ) {
-
         return null;
-
     }
-
 
     const parts =
         d.split("/");
 
-
     if (
         parts.length !== 3
     ) {
-
         return null;
-
     }
-
 
     const date =
         new Date(
@@ -7481,7 +7394,6 @@ function parseUSDate(d) {
             parts[0] - 1,
             parts[1]
         );
-
 
     return isNaN(
         date.getTime()
@@ -7493,117 +7405,80 @@ function parseUSDate(d) {
 
 
 /* ==========================================================
-   4. CREATE STABLE CPD ACTIVITY ID
-========================================================== */
-
-function createCPDActivityId(
-    activityName
-) {
-
-    if (
-        !activityName
-    ) {
-
-        return "";
-
-    }
-
-
-    return (
-        "cpd-activity-" +
-        activityName
-            .toLowerCase()
-            .trim()
-            .replace(
-                /[^a-z0-9]+/g,
-                "-"
-            )
-            .replace(
-                /^-+|-+$/g,
-                ""
-            )
-    );
-
-}
-
-
-/* ==========================================================
-   5. OPEN CPD LOG
+   CPD LOG OPEN / CLOSE HELPERS
    ----------------------------------------------------------
-   Uses the actual CPD Log accordion:
+   IMPORTANT:
+   These functions use the actual CPD HTML structure:
 
    .cpd-log-inner
        .collapsible-toggle
        .collapsible-content
-           #cpd-card-container
+========================================================== */
 
-   IMPORTANT:
-   We trigger the real toggle by clicking it rather than
-   manually adding .open classes.
+function getCPDLogSection() {
 
-   This allows the site's original accordion handler to
-   perform all of its normal behaviour.
+    return document.querySelector(
+        ".cpd-log-inner"
+    );
+
+}
+
+
+function getCPDLogToggle() {
+
+    const section =
+        getCPDLogSection();
+
+    if (!section) {
+        return null;
+    }
+
+    return section.querySelector(
+        ":scope > .collapsible-toggle"
+    );
+
+}
+
+
+function getCPDLogContent() {
+
+    const section =
+        getCPDLogSection();
+
+    if (!section) {
+        return null;
+    }
+
+    return section.querySelector(
+        ":scope > .collapsible-content"
+    );
+
+}
+
+
+/* ==========================================================
+   OPEN CPD LOG
 ========================================================== */
 
 function openCPDLog() {
 
-    const cpdCardContainer =
-        document.getElementById(
-            "cpd-card-container"
-        );
+    const section =
+        getCPDLogSection();
 
+    const toggle =
+        getCPDLogToggle();
+
+    const content =
+        getCPDLogContent();
 
     if (
-        !cpdCardContainer
+        !section ||
+        !toggle ||
+        !content
     ) {
 
         console.warn(
-            "[CPD] #cpd-card-container not found."
-        );
-
-        return false;
-
-    }
-
-
-    const cpdLogInner =
-        cpdCardContainer.closest(
-            ".cpd-log-inner"
-        );
-
-
-    if (
-        !cpdLogInner
-    ) {
-
-        console.warn(
-            "[CPD] .cpd-log-inner not found."
-        );
-
-        return false;
-
-    }
-
-
-    const cpdLogContent =
-        cpdLogInner.querySelector(
-            ".collapsible-content"
-        );
-
-
-    const cpdLogToggle =
-        cpdLogInner.querySelector(
-            ".collapsible-toggle"
-        );
-
-
-    if (
-        !cpdLogContent ||
-        !cpdLogToggle
-    ) {
-
-        console.warn(
-            "[CPD] CPD Log toggle/content not found."
+            "[CPD] Unable to find CPD Log toggle/content."
         );
 
         return false;
@@ -7612,422 +7487,49 @@ function openCPDLog() {
 
 
     /*
-       Determine whether CPD Log is currently open.
+       Check whether CPD Log is already open.
 
-       The primary state is .open.
-
-       We also check the computed display state as
-       a fallback.
+       We check both the content and toggle
+       because different versions of the
+       accordion code may use either state.
     */
 
     const isOpen =
-        cpdLogContent.classList.contains(
-            "open"
-        );
+        content.classList.contains("open") ||
+        toggle.classList.contains("open") ||
+        section.classList.contains("open");
 
 
-    if (
-        isOpen
-    ) {
-
-        debug(
-            "CPD Log already open."
-        );
-
-        return true;
-
-    }
-
-
-    debug(
-        "CPD Log is collapsed. Triggering actual accordion toggle."
-    );
-
-
-    /*
-       IMPORTANT:
-
-       Do NOT manually add .open here.
-
-       Trigger the actual click handler belonging
-       to the CPD Log accordion.
-    */
-
-    cpdLogToggle.click();
-
-
-    return true;
-
-}
-
-
-/* ==========================================================
-   6. OPEN RELATIONSHIP LIST
-   ----------------------------------------------------------
-   Used when navigating from a relationship link.
-
-   This opens:
-   - Evidence → Supporting CPD Activities
-   - Competency → Supporting CPD Activities
-
-   The relationship list is opened using the same
-   relationship toggle system used elsewhere.
-========================================================== */
-
-function openRelationshipList(
-    list
-) {
-
-    if (
-        !list
-    ) {
-
-        return false;
-
-    }
-
-
-    const section =
-        list.closest(
-            ".supporting-cpd-activities, " +
-            ".competency-related-section"
-        );
-
-
-    if (
-        !section
-    ) {
-
-        return false;
-
-    }
-
-
-    const toggle =
-        section.querySelector(
-            ".relationship-collapse-toggle, " +
-            ".supporting-cpd-toggle"
-        );
-
-
-    const isExpanded =
-        list.classList.contains(
-            "relationship-list-expanded"
-        );
-
-
-    if (
-        isExpanded
-    ) {
-
-        return true;
-
-    }
-
-
-    /*
-       If the relationship collapsible system has
-       already created the toggle, use it.
-    */
-
-    if (
-        toggle
-    ) {
-
-        toggle.click();
-
-        return true;
-
-    }
-
-
-    /*
-       Fallback for older relationship markup.
-    */
-
-    list.classList.remove(
-        "relationship-list-collapsed"
-    );
-
-    list.classList.add(
-        "relationship-list-expanded"
-    );
-
-
-    return true;
-
-}
-
-
-/* ==========================================================
-   7. HIGHLIGHT CPD ACTIVITY
-========================================================== */
-
-function highlightCPDActivity(
-    target
-) {
-
-    if (
-        !target
-    ) {
-
-        return;
-
-    }
-
-
-    document
-        .querySelectorAll(
-            ".cpd-card.cpd-activity-highlighted"
-        )
-        .forEach(
-            card => {
-
-                card.classList.remove(
-                    "cpd-activity-highlighted"
-                );
-
-            }
-        );
-
-
-    target.classList.add(
-        "cpd-activity-highlighted"
-    );
-
-
-    target.scrollIntoView({
-
-        behavior: "smooth",
-
-        block: "center"
-
-    });
-
-
-    setTimeout(
-        function() {
-
-            target.classList.remove(
-                "cpd-activity-highlighted"
-            );
-
-        },
-        3000
-    );
-
-}
-
-
-/* ==========================================================
-   8. NAVIGATE TO CPD ACTIVITY
-   ----------------------------------------------------------
-   Central navigation function for:
-
-   Evidence → CPD
-   Competency → CPD
-
-   Also handles any future CPD activity links.
-========================================================== */
-
-function navigateToCPDActivity(
-    href
-) {
-
-    if (
-        !href ||
-        !href.startsWith(
-            "#cpd-activity-"
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    const target =
-        document.querySelector(
-            href
-        );
-
-
-    if (
-        !target
-    ) {
-
-        console.warn(
-            "[CPD] CPD activity target not found:",
-            href
-        );
-
-        return false;
-
-    }
-
-
-    debug(
-        "Navigating to CPD activity:",
-        href
-    );
-
-
-    /*
-       STEP 1
-       Open the main CPD Log if collapsed.
-    */
-
-    openCPDLog();
-
-
-    /*
-       STEP 2
-       Wait briefly for the accordion to open.
-    */
-
-    setTimeout(
-        function() {
-
-            highlightCPDActivity(
-                target
-            );
-
-        },
-        500
-    );
-
-
-    return true;
-
-}
-
-
-/* ==========================================================
-   9. NAVIGATE TO COMPETENCE
-========================================================== */
-
-function navigateToCompetence(
-    href
-) {
-
-    if (
-        !href ||
-        !href.startsWith(
-            "#competence-"
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    const target =
-        document.querySelector(
-            href
-        );
-
-
-    if (
-        !target
-    ) {
-
-        console.warn(
-            "[CPD] Competence target not found:",
-            href
-        );
-
-        return false;
-
-    }
-
-
-    /*
-       Remove previous highlights.
-    */
-
-    document
-        .querySelectorAll(
-            ".accordion-item.highlighted"
-        )
-        .forEach(
-            item => {
-
-                item.classList.remove(
-                    "highlighted"
-                );
-
-            }
-        );
-
-
-    /*
-       Open target competence if necessary.
-    */
-
-    if (
-        !target.classList.contains(
-            "open"
-        )
-    ) {
+    if (!isOpen) {
 
         /*
-           Prefer the actual accordion toggle
-           if one exists.
+           Open CPD Log.
+
+           We deliberately do NOT dispatch a click
+           event here. This avoids triggering other
+           document-level click handlers.
         */
 
-        const toggle =
-            target.querySelector(
-                ".accordion-header"
-            );
+        content.classList.add("open");
 
+        toggle.classList.add("open");
 
-        if (
-            toggle
-        ) {
+        section.classList.add("open");
 
-            toggle.click();
+        toggle.setAttribute(
+            "aria-expanded",
+            "true"
+        );
 
-        }
+        /*
+           If the page's existing accordion CSS
+           relies on a hidden/display state, ensure
+           the content is visible.
+        */
 
-        else {
-
-            target.classList.add(
-                "open"
-            );
-
-        }
+        content.hidden = false;
 
     }
-
-
-    /*
-       Highlight target.
-    */
-
-    target.classList.add(
-        "highlighted"
-    );
-
-
-    /*
-       Scroll after opening.
-    */
-
-    setTimeout(
-        function() {
-
-            target.scrollIntoView({
-
-                behavior: "smooth",
-
-                block: "center"
-
-            });
-
-        },
-        300
-    );
 
 
     return true;
@@ -8036,141 +7538,46 @@ function navigateToCompetence(
 
 
 /* ==========================================================
-   10. NAVIGATE TO EVIDENCE
+   CLOSE CPD LOG
 ========================================================== */
 
-function navigateToEvidence(
-    href
-) {
+function closeCPDLog() {
 
-    if (
-        !href ||
-        !href.startsWith(
-            "#evidence-"
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    const target =
-        document.querySelector(
-            href
-        );
-
-
-    if (
-        !target
-    ) {
-
-        console.warn(
-            "[CPD] Evidence target not found:",
-            href
-        );
-
-        return false;
-
-    }
-
-
-    /*
-       Remove previous evidence highlights.
-    */
-
-    document
-        .querySelectorAll(
-            ".professional-evidence-card.highlighted, " +
-            ".professional-evidence-card.evidence-highlighted"
-        )
-        .forEach(
-            card => {
-
-                card.classList.remove(
-                    "highlighted"
-                );
-
-                card.classList.remove(
-                    "evidence-highlighted"
-                );
-
-            }
-        );
-
-
-    /*
-       Evidence cards may themselves be
-       collapsible.
-
-       Try to open the actual card toggle
-       if one exists.
-    */
+    const section =
+        getCPDLogSection();
 
     const toggle =
-        target.querySelector(
-            ".professional-evidence-header, " +
-            ".professional-evidence-toggle"
-        );
+        getCPDLogToggle();
 
+    const content =
+        getCPDLogContent();
 
     if (
-        toggle
+        !section ||
+        !toggle ||
+        !content
     ) {
-
-        const isOpen =
-            target.classList.contains(
-                "open"
-            );
-
-
-        if (
-            !isOpen
-        ) {
-
-            toggle.click();
-
-        }
-
+        return false;
     }
 
-
-    /*
-       Highlight.
-    */
-
-    target.classList.add(
-        "evidence-highlighted"
+    content.classList.remove(
+        "open"
     );
 
-
-    setTimeout(
-        function() {
-
-            target.scrollIntoView({
-
-                behavior: "smooth",
-
-                block: "center"
-
-            });
-
-        },
-        300
+    toggle.classList.remove(
+        "open"
     );
 
-
-    setTimeout(
-        function() {
-
-            target.classList.remove(
-                "evidence-highlighted"
-            );
-
-        },
-        3000
+    section.classList.remove(
+        "open"
     );
 
+    toggle.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+    content.hidden = true;
 
     return true;
 
@@ -8178,172 +7585,407 @@ function navigateToEvidence(
 
 
 /* ==========================================================
-   11. UNIFIED RELATIONSHIP NAVIGATION
+   CPD LOG NATIVE TOGGLE
    ----------------------------------------------------------
-   ONE event handler handles all relationship navigation.
+   Handles ONLY the main CPD Log accordion.
 
-   CPD → Competency
-   CPD → Evidence
-   Competency → CPD
-   Competency → Evidence
-   Evidence → Competency
-   Evidence → CPD
+   This does not interfere with Evidence cards,
+   Competency cards, or relationship lists.
 ========================================================== */
 
 document.addEventListener(
     "click",
     function(e) {
 
-        const link =
+        const toggle =
             e.target.closest(
-                "a"
+                ".cpd-log-inner > .collapsible-toggle"
             );
 
-
-        if (
-            !link
-        ) {
-
+        if (!toggle) {
             return;
-
         }
-
-
-        const href =
-            link.getAttribute(
-                "href"
-            );
-
-
-        if (
-            !href
-        ) {
-
-            return;
-
-        }
-
 
         /*
-           CPD activity navigation
+           Allow the normal CPD accordion behaviour
+           if the page already has one.
+
+           We only use this handler if the native
+           accordion has not already been handled
+           elsewhere.
+
+           Do not stop propagation here.
         */
-
-        if (
-            href.startsWith(
-                "#cpd-activity-"
-            )
-        ) {
-
-            /*
-               Only intercept relationship
-               links pointing to CPD cards.
-
-               This includes:
-               .supporting-cpd-activity
-               .competency-cpd-link
-            */
-
-            if (
-                link.classList.contains(
-                    "supporting-cpd-activity"
-                ) ||
-                link.classList.contains(
-                    "competency-cpd-link"
-                )
-            ) {
-
-                e.preventDefault();
-
-                e.stopPropagation();
-
-                navigateToCPDActivity(
-                    href
-                );
-
-                return;
-
-            }
-
-        }
-
-
-        /*
-           Competency navigation
-        */
-
-        if (
-            href.startsWith(
-                "#competence-"
-            )
-        ) {
-
-            if (
-                link.classList.contains(
-                    "cpd-competence-link"
-                ) ||
-                link.classList.contains(
-                    "evidence-tag"
-                ) ||
-                link.classList.contains(
-                    "competency-evidence-link"
-                )
-            ) {
-
-                e.preventDefault();
-
-                e.stopPropagation();
-
-                navigateToCompetence(
-                    href
-                );
-
-                return;
-
-            }
-
-        }
-
-
-        /*
-           Evidence navigation
-        */
-
-        if (
-            href.startsWith(
-                "#evidence-"
-            )
-        ) {
-
-            if (
-                link.classList.contains(
-                    "competency-evidence-link"
-                ) ||
-                link.classList.contains(
-                    "cpd-evidence-link"
-                )
-            ) {
-
-                e.preventDefault();
-
-                e.stopPropagation();
-
-                navigateToEvidence(
-                    href
-                );
-
-                return;
-
-            }
-
-        }
 
     },
-    true
+    false
 );
 
 
 /* ==========================================================
-   12. LINK CPD ACTIVITIES TO COMPETENCES
+   LOAD CPD DATA
+========================================================== */
+
+async function loadCPD() {
+
+    debug(
+        "loadCPD: starting"
+    );
+
+    const url =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
+
+
+    try {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
+
+        }
+
+
+        const csv =
+            await response.text();
+
+
+        const lines =
+            csv
+                .trim()
+                .split(/\r?\n/);
+
+
+        if (
+            lines.length <= 1
+        ) {
+            return;
+        }
+
+
+        /*
+           Remove header row.
+        */
+
+        lines.shift();
+
+
+        /*
+           Containers.
+        */
+
+        const tbody =
+            document.getElementById(
+                "cpd-body"
+            );
+
+
+        const cardContainer =
+            document.getElementById(
+                "cpd-card-container"
+            );
+
+
+        if (tbody) {
+
+            tbody.innerHTML = "";
+
+        }
+
+
+        if (cardContainer) {
+
+            cardContainer.innerHTML = "";
+
+        }
+
+
+        /*
+           Build CPD activities.
+        */
+
+        lines.forEach(
+            line => {
+
+                const row =
+                    parseCsvLine(line);
+
+
+                const activity =
+                    (row[0] || "")
+                        .replace(/^"|"$/g, "");
+
+
+                const start =
+                    (row[1] || "")
+                        .replace(/^"|"$/g, "");
+
+
+                const end =
+                    (row[2] || "")
+                        .replace(/^"|"$/g, "");
+
+
+                const hours =
+                    (row[3] || "")
+                        .replace(/^"|"$/g, "");
+
+
+                const category =
+                    (row[4] || "")
+                        .replace(/^"|"$/g, "");
+
+
+                const reflection =
+                    (row[5] || "")
+                        .replace(/^"|"$/g, "");
+
+
+                /* ------------------------------------------------
+                   DETERMINE STATUS
+                ------------------------------------------------ */
+
+                const today =
+                    new Date();
+
+
+                const startDate =
+                    start
+                        ? new Date(start)
+                        : null;
+
+
+                const endDate =
+                    end
+                        ? new Date(end)
+                        : null;
+
+
+                let statusClass = "";
+                let statusLabel = "";
+                let statusIcon = "";
+
+
+                if (
+                    startDate &&
+                    startDate > today
+                ) {
+
+                    statusClass =
+                        "planned";
+
+                    statusLabel =
+                        "Planned";
+
+                    statusIcon =
+                        "fa-calendar-plus";
+
+                }
+
+                else if (
+                    !endDate ||
+                    endDate >= today
+                ) {
+
+                    statusClass =
+                        "inprogress";
+
+                    statusLabel =
+                        "In Progress";
+
+                    statusIcon =
+                        "fa-hourglass-half";
+
+                }
+
+                else {
+
+                    statusClass =
+                        "completed";
+
+                    statusLabel =
+                        "Completed";
+
+                    statusIcon =
+                        "fa-circle-check";
+
+                }
+
+
+                /* ------------------------------------------------
+                   HIDDEN TABLE
+                ------------------------------------------------ */
+
+                if (tbody) {
+
+                    const tr =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    [
+                        activity,
+                        start,
+                        end,
+                        hours,
+                        category,
+                        reflection
+                    ]
+                    .forEach(
+                        text => {
+
+                            const td =
+                                document.createElement(
+                                    "td"
+                                );
+
+                            td.textContent =
+                                text;
+
+                            tr.appendChild(
+                                td
+                            );
+
+                        }
+                    );
+
+
+                    tbody.appendChild(
+                        tr
+                    );
+
+                }
+
+
+                /* ------------------------------------------------
+                   CPD CARD
+                ------------------------------------------------ */
+
+                if (cardContainer) {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        `cpd-card ${statusClass}`;
+
+
+                    card.innerHTML = `
+
+                        <div class="cpd-card-title">
+                            ${activity}
+                            <i class="fa-solid ${statusIcon} status-icon ${statusClass}"></i>
+                        </div>
+
+                        <div class="cpd-card-meta">
+
+                            <span class="cpd-badge cpd-hours">
+                                ${hours} hrs
+                            </span>
+
+                            <span class="cpd-badge cpd-category">
+                                ${category || "Uncategorised"}
+                            </span>
+
+                            <span>
+                                ${start} → ${end || "Ongoing"}
+                            </span>
+
+                            <span class="cpd-status ${statusClass}">
+                                ${statusLabel}
+                            </span>
+
+                        </div>
+
+                        <div class="cpd-card-reflection">
+                            ${
+                                reflection ||
+                                "<em>No reflective statement provided.</em>"
+                            }
+                        </div>
+
+                    `;
+
+
+                    cardContainer.appendChild(
+                        card
+                    );
+
+                }
+
+            }
+        );
+
+
+        debug(
+            "Rows loaded: " +
+            (
+                tbody
+                    ? tbody.rows.length
+                    : 0
+            )
+        );
+
+
+        /*
+           Generate all dependent content
+           in the correct order.
+        */
+
+        calculateMetrics();
+
+        generateInsights();
+
+        generateHeatmap();
+
+        generateDonutChart();
+
+        populateEvidenceCPDRelationships();
+
+        linkCPDToCompetences();
+
+        populateCompetencyRelationships();
+
+        initialiseRelationshipCollapsibles();
+
+        /*
+           Generate radar after competency cards
+           are available.
+        */
+
+        waitForAccordion();
+
+
+        debug(
+            "All CPD processing complete."
+        );
+
+
+    }
+    catch (err) {
+
+        console.error(
+            "[CPD] loadCPD error:",
+            err
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   CPD → COMPETENCY
 ========================================================== */
 
 function linkCPDToCompetences() {
@@ -8399,12 +8041,8 @@ function linkCPDToCompetences() {
                         ?.trim();
 
 
-                if (
-                    !devGoal
-                ) {
-
+                if (!devGoal) {
                     return;
-
                 }
 
 
@@ -8414,12 +8052,8 @@ function linkCPDToCompetences() {
                     ];
 
 
-                if (
-                    !competence
-                ) {
-
+                if (!competence) {
                     return;
-
                 }
 
 
@@ -8433,9 +8067,7 @@ function linkCPDToCompetences() {
                         ".cpd-competence-link"
                     )
                 ) {
-
                     return;
-
                 }
 
 
@@ -8468,32 +8100,1822 @@ function linkCPDToCompetences() {
 }
 
 
-/* ==========================================================
-   13. DONUT CHART
-========================================================== */
+/* ============================================================
+   EVIDENCE GOAL RELATIONSHIPS
+============================================================ */
 
-function generateDonutChart() {
+const evidenceGoalRelationships = {
 
-    const rows = [
+    "evidence-cyber-security-uplift": [
 
-        ...document.querySelectorAll(
-            "#cpd-body tr"
-        )
+        "AI & digital transformation",
 
-    ];
+        "Leadership & mentoring"
+
+    ],
+
+    "evidence-nhs-digital-transformation": [
+
+        "Stakeholder engagement & communication",
+
+        "AI & digital transformation"
+
+    ],
+
+    "evidence-126k-device-migration": [
+
+        "AI & digital transformation"
+
+    ],
+
+    "evidence-cloud-transformation": [
+
+        "AI & digital transformation"
+
+    ],
+
+    "evidence-pmo-turnaround": [
+
+        "Leadership & mentoring",
+
+        "Stakeholder engagement & communication"
+
+    ],
+
+    "evidence-programme-governance": [
+
+        "Stakeholder engagement & communication",
+
+        "Leadership & mentoring"
+
+    ]
+
+};
 
 
-    if (
-        !rows.length
-    ) {
+/* ============================================================
+   UNMAPPED EVIDENCE GOALS
+============================================================ */
+
+const unmappedEvidenceGoals = [
+
+    "Sustainability in change initiatives",
+
+    "Contribute to my network",
+
+    "Get a new job",
+
+    "Continue my professional development",
+
+    "Contribute to APM",
+
+    "Increase my networking",
+
+    "Mentor, coach and inspire future generations"
+
+];
+
+
+/* ============================================================
+   STABLE CPD ACTIVITY ID
+============================================================ */
+
+function createCPDActivityId(
+    activityName
+) {
+
+    if (!activityName) {
+        return "";
+    }
+
+
+    return "cpd-activity-" +
+        activityName
+            .toLowerCase()
+            .trim()
+            .replace(
+                /[^a-z0-9]+/g,
+                "-"
+            )
+            .replace(
+                /^-+|-+$/g,
+                "");
+
+}
+
+
+/* ============================================================
+   EVIDENCE → CPD RELATIONSHIPS
+============================================================ */
+
+function populateEvidenceCPDRelationships() {
+
+    console.log(
+        "[CPD] Starting Evidence → CPD relationship layer..."
+    );
+
+
+    const cpdCards =
+        document.querySelectorAll(
+            ".cpd-card"
+        );
+
+
+    if (!cpdCards.length) {
+
+        console.warn(
+            "[CPD] No CPD cards found."
+        );
 
         return;
 
     }
 
 
-    const categoryCounts =
-        {};
+    /*
+       Remove previously generated sections.
+    */
+
+    document
+        .querySelectorAll(
+            ".supporting-cpd-activities"
+        )
+        .forEach(
+            section => {
+
+                section.remove();
+
+            }
+        );
+
+
+    Object.entries(
+        evidenceGoalRelationships
+    )
+    .forEach(
+        (
+            [
+                evidenceId,
+                evidenceGoals
+            ]
+        ) => {
+
+            const evidenceCard =
+                document.getElementById(
+                    evidenceId
+                );
+
+
+            if (!evidenceCard) {
+
+                console.warn(
+                    "[CPD] Evidence card not found:",
+                    evidenceId
+                );
+
+                return;
+
+            }
+
+
+            const evidenceContent =
+                evidenceCard.querySelector(
+                    ".professional-evidence-content"
+                );
+
+
+            if (!evidenceContent) {
+
+                return;
+
+            }
+
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+
+            wrapper.className =
+                "supporting-cpd-activities";
+
+
+            const header =
+                document.createElement(
+                    "div"
+                );
+
+
+            header.className =
+                "supporting-cpd-header";
+
+
+            const title =
+                document.createElement(
+                    "div"
+                );
+
+
+            title.className =
+                "supporting-cpd-title";
+
+
+            title.innerHTML = `
+                <span>
+                    Supporting CPD Activities
+                </span>
+            `;
+
+
+            const toggle =
+                document.createElement(
+                    "button"
+                );
+
+
+            toggle.type =
+                "button";
+
+
+            toggle.className =
+                "supporting-cpd-toggle";
+
+
+            toggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            toggle.innerHTML = `
+                Show
+                <i class="fa-solid fa-chevron-down"></i>
+            `;
+
+
+            const list =
+                document.createElement(
+                    "div"
+                );
+
+
+            list.className =
+                "supporting-cpd-list";
+
+
+            cpdCards.forEach(
+                card => {
+
+                    const categoryElement =
+                        card.querySelector(
+                            ".cpd-category"
+                        );
+
+
+                    if (!categoryElement) {
+                        return;
+                    }
+
+
+                    const activityGoal =
+                        categoryElement
+                            .textContent
+                            .trim()
+                            .toLowerCase();
+
+
+                    const matchesGoal =
+                        evidenceGoals.some(
+                            goal =>
+                                goal
+                                    .trim()
+                                    .toLowerCase() ===
+                                activityGoal
+                        );
+
+
+                    if (!matchesGoal) {
+                        return;
+                    }
+
+
+                    const titleElement =
+                        card.querySelector(
+                            ".cpd-card-title"
+                        );
+
+
+                    if (!titleElement) {
+                        return;
+                    }
+
+
+                    const titleClone =
+                        titleElement.cloneNode(
+                            true
+                        );
+
+
+                    titleClone
+                        .querySelectorAll(
+                            "i"
+                        )
+                        .forEach(
+                            icon => {
+
+                                icon.remove();
+
+                            }
+                        );
+
+
+                    const activityName =
+                        titleClone
+                            .textContent
+                            .trim();
+
+
+                    if (!activityName) {
+                        return;
+                    }
+
+
+                    const activityId =
+                        createCPDActivityId(
+                            activityName
+                        );
+
+
+                    if (!activityId) {
+                        return;
+                    }
+
+
+                    card.id =
+                        activityId;
+
+
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    link.className =
+                        "supporting-cpd-activity";
+
+
+                    link.href =
+                        "#" +
+                        activityId;
+
+
+                    link.innerHTML = `
+
+                        <span class="supporting-cpd-activity-title">
+                            ${activityName}
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    `;
+
+
+                    list.appendChild(
+                        link
+                    );
+
+                }
+            );
+
+
+            if (
+                !list.children.length
+            ) {
+
+                return;
+
+            }
+
+
+            const count =
+                document.createElement(
+                    "span"
+                );
+
+
+            count.className =
+                "supporting-cpd-count";
+
+
+            const activityCount =
+                list.children.length;
+
+
+            count.textContent =
+                `${activityCount} ${
+                    activityCount === 1
+                        ? "activity"
+                        : "activities"
+                }`;
+
+
+            title.appendChild(
+                count
+            );
+
+
+            header.appendChild(
+                title
+            );
+
+
+            header.appendChild(
+                toggle
+            );
+
+
+            wrapper.appendChild(
+                header
+            );
+
+
+            wrapper.appendChild(
+                list
+            );
+
+
+            evidenceContent.appendChild(
+                wrapper
+            );
+
+        }
+    );
+
+
+    console.log(
+        "[CPD] Evidence → CPD relationship layer complete."
+    );
+
+}
+
+
+/* ============================================================
+   COMPETENCY → CPD + EVIDENCE RELATIONSHIPS
+============================================================ */
+
+function populateCompetencyRelationships() {
+
+    console.log(
+        "[CPD] Starting Competency relationship layer..."
+    );
+
+
+    const competenceItems =
+        document.querySelectorAll(
+            ".accordion-item[id^='competence-']"
+        );
+
+
+    if (!competenceItems.length) {
+
+        console.warn(
+            "[CPD] No competency cards found."
+        );
+
+        return;
+
+    }
+
+
+    document
+        .querySelectorAll(
+            ".competency-supporting-relationships"
+        )
+        .forEach(
+            section => {
+
+                section.remove();
+
+            }
+        );
+
+
+    competenceItems.forEach(
+        competenceItem => {
+
+            const competenceId =
+                competenceItem.id;
+
+
+            if (!competenceId) {
+                return;
+            }
+
+
+            const competenceKey =
+                competenceId.replace(
+                    "competence-",
+                    ""
+                );
+
+
+            const accordionContent =
+                competenceItem.querySelector(
+                    ".accordion-content"
+                );
+
+
+            if (!accordionContent) {
+                return;
+            }
+
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+
+            wrapper.className =
+                "competency-supporting-relationships";
+
+
+            wrapper.innerHTML = `
+
+                <div class="competency-related-section">
+
+                    <div class="competency-related-title">
+                        Supporting CPD Activities
+                    </div>
+
+                    <div class="competency-related-cpd-list">
+                    </div>
+
+                </div>
+
+
+                <div class="competency-related-section">
+
+                    <div class="competency-related-title">
+                        Supporting Evidence
+                    </div>
+
+                    <div class="competency-related-evidence-list">
+                    </div>
+
+                </div>
+
+            `;
+
+
+            const cpdList =
+                wrapper.querySelector(
+                    ".competency-related-cpd-list"
+                );
+
+
+            const evidenceList =
+                wrapper.querySelector(
+                    ".competency-related-evidence-list"
+                );
+
+
+            /*
+               CPD relationships.
+            */
+
+            document
+                .querySelectorAll(
+                    ".cpd-card"
+                )
+                .forEach(
+                    card => {
+
+                        const competenceLink =
+                            card.querySelector(
+                                ".cpd-competence-link"
+                            );
+
+
+                        if (!competenceLink) {
+                            return;
+                        }
+
+
+                        const href =
+                            competenceLink.getAttribute(
+                                "href"
+                            );
+
+
+                        if (
+                            href !==
+                            "#" +
+                            competenceId
+                        ) {
+                            return;
+                        }
+
+
+                        const titleElement =
+                            card.querySelector(
+                                ".cpd-card-title"
+                            );
+
+
+                        if (!titleElement) {
+                            return;
+                        }
+
+
+                        const titleClone =
+                            titleElement.cloneNode(
+                                true
+                            );
+
+
+                        titleClone
+                            .querySelectorAll(
+                                "i"
+                            )
+                            .forEach(
+                                icon => {
+
+                                    icon.remove();
+
+                                }
+                            );
+
+
+                        const activityName =
+                            titleClone
+                                .textContent
+                                .trim();
+
+
+                        if (!activityName) {
+                            return;
+                        }
+
+
+                        if (!card.id) {
+
+                            card.id =
+                                createCPDActivityId(
+                                    activityName
+                                );
+
+                        }
+
+
+                        if (!card.id) {
+                            return;
+                        }
+
+
+                        const link =
+                            document.createElement(
+                                "a"
+                            );
+
+
+                        link.className =
+                            "competency-cpd-link";
+
+
+                        link.href =
+                            "#" +
+                            card.id;
+
+
+                        link.dataset.cpdTarget =
+                            "#" +
+                            card.id;
+
+
+                        link.innerHTML = `
+
+                            <span>
+                                ${activityName}
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        `;
+
+
+                        cpdList.appendChild(
+                            link
+                        );
+
+                    }
+                );
+
+
+            /*
+               Evidence relationships.
+            */
+
+            document
+                .querySelectorAll(
+                    ".professional-evidence-card"
+                )
+                .forEach(
+                    evidenceCard => {
+
+                        const competenceLinks =
+                            evidenceCard.querySelectorAll(
+                                'a[href^="#competence-"]'
+                            );
+
+
+                        let matches =
+                            false;
+
+
+                        competenceLinks.forEach(
+                            link => {
+
+                                if (
+                                    link.getAttribute(
+                                        "href"
+                                    ) ===
+                                    "#" +
+                                    competenceId
+                                ) {
+
+                                    matches =
+                                        true;
+
+                                }
+
+                            }
+                        );
+
+
+                        if (!matches) {
+                            return;
+                        }
+
+
+                        let evidenceId =
+                            evidenceCard.id;
+
+
+                        if (!evidenceId) {
+
+                            const heading =
+                                evidenceCard.querySelector(
+                                    "h3, h4"
+                                );
+
+
+                            if (!heading) {
+                                return;
+                            }
+
+
+                            evidenceId =
+                                "evidence-" +
+                                heading.textContent
+                                    .toLowerCase()
+                                    .trim()
+                                    .replace(
+                                        /[^a-z0-9]+/g,
+                                        "-"
+                                    )
+                                    .replace(
+                                        /^-+|-+$/g,
+                                        "");
+
+
+                            evidenceCard.id =
+                                evidenceId;
+
+                        }
+
+
+                        const heading =
+                            evidenceCard.querySelector(
+                                "h3, h4"
+                            );
+
+
+                        if (!heading) {
+                            return;
+                        }
+
+
+                        const evidenceName =
+                            heading.textContent
+                                .trim();
+
+
+                        if (!evidenceName) {
+                            return;
+                        }
+
+
+                        const link =
+                            document.createElement(
+                                "a"
+                            );
+
+
+                        link.className =
+                            "competency-evidence-link";
+
+
+                        link.href =
+                            "#" +
+                            evidenceId;
+
+
+                        link.dataset.evidenceTarget =
+                            "#" +
+                            evidenceId;
+
+
+                        link.innerHTML = `
+
+                            <span>
+                                ${evidenceName}
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        `;
+
+
+                        evidenceList.appendChild(
+                            link
+                        );
+
+                    }
+                );
+
+
+            /*
+               Remove empty relationship sections.
+            */
+
+            const cpdSection =
+                wrapper.querySelector(
+                    ".competency-related-section:first-child"
+                );
+
+
+            const evidenceSection =
+                wrapper.querySelector(
+                    ".competency-related-section:last-child"
+                );
+
+
+            if (
+                !cpdList.children.length
+            ) {
+
+                cpdSection.remove();
+
+            }
+
+
+            if (
+                !evidenceList.children.length
+            ) {
+
+                evidenceSection.remove();
+
+            }
+
+
+            if (
+                wrapper.children.length
+            ) {
+
+                accordionContent.appendChild(
+                    wrapper
+                );
+
+            }
+
+        }
+    );
+
+
+    console.log(
+        "[CPD] Competency relationship layer complete."
+    );
+
+}
+
+
+/* ============================================================
+   RELATIONSHIP COLLAPSIBLE INITIALISATION
+   ------------------------------------------------------------
+   IMPORTANT:
+   This ONLY controls generated relationship lists.
+
+   It does NOT control:
+   • Evidence card accordion
+   • Competency accordion
+   • CPD Log accordion
+============================================================ */
+
+function initialiseRelationshipCollapsibles() {
+
+    document
+        .querySelectorAll(
+            ".supporting-cpd-activities, " +
+            ".competency-related-section"
+        )
+        .forEach(
+            section => {
+
+                if (
+                    section.dataset.relationshipReady ===
+                    "true"
+                ) {
+                    return;
+                }
+
+
+                const list =
+                    section.querySelector(
+                        ".supporting-cpd-list, " +
+                        ".competency-related-cpd-list, " +
+                        ".competency-related-evidence-list"
+                    );
+
+
+                if (
+                    !list ||
+                    !list.children.length
+                ) {
+                    return;
+                }
+
+
+                const title =
+                    section.querySelector(
+                        ".professional-evidence-label, " +
+                        ".competency-related-title"
+                    );
+
+
+                /*
+                   Supporting CPD generated sections
+                   already contain their own header and
+                   toggle. Do not add another toggle.
+                */
+
+                if (
+                    section.classList.contains(
+                        "supporting-cpd-activities"
+                    )
+                ) {
+
+                    section.dataset.relationshipReady =
+                        "true";
+
+                    return;
+
+                }
+
+
+                /*
+                   Competency relationship sections
+                   receive a generated toggle.
+                */
+
+                if (
+                    section.querySelector(
+                        ".relationship-collapse-toggle"
+                    )
+                ) {
+
+                    section.dataset.relationshipReady =
+                        "true";
+
+                    return;
+
+                }
+
+
+                if (!title) {
+                    return;
+                }
+
+
+                const header =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                header.className =
+                    "relationship-collapse-header";
+
+
+                const count =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                count.className =
+                    "relationship-collapse-count";
+
+
+                const isEvidenceList =
+                    list.classList.contains(
+                        "competency-related-evidence-list"
+                    );
+
+
+                const itemCount =
+                    list.children.length;
+
+
+                count.textContent =
+                    isEvidenceList
+                        ? (
+                            itemCount === 1
+                                ? "1 item"
+                                : `${itemCount} items`
+                        )
+                        : (
+                            itemCount === 1
+                                ? "1 activity"
+                                : `${itemCount} activities`
+                        );
+
+
+                const toggle =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                toggle.type =
+                    "button";
+
+
+                toggle.className =
+                    "relationship-collapse-toggle";
+
+
+                toggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+
+                toggle.innerHTML = `
+
+                    <span class="relationship-toggle-label">
+                        Show
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                `;
+
+
+                section.insertBefore(
+                    header,
+                    title
+                );
+
+
+                header.appendChild(
+                    title
+                );
+
+
+                header.appendChild(
+                    count
+                );
+
+
+                header.appendChild(
+                    toggle
+                );
+
+
+                list.classList.add(
+                    "relationship-list-collapsed"
+                );
+
+
+                list.classList.remove(
+                    "relationship-list-expanded"
+                );
+
+
+                section.dataset.relationshipReady =
+                    "true";
+
+            }
+        );
+
+}
+
+
+/* ============================================================
+   SINGLE CONSOLIDATED RELATIONSHIP CLICK HANDLER
+   ------------------------------------------------------------
+   IMPORTANT:
+   This uses normal bubbling phase.
+
+   It deliberately does NOT use:
+       true
+
+   This prevents it from blocking the Evidence card's
+   own accordion click handler.
+============================================================ */
+
+document.addEventListener(
+    "click",
+    function(e) {
+
+        /* ======================================================
+           1. CPD → COMPETENCY
+        ====================================================== */
+
+        const competenceLink =
+            e.target.closest(
+                ".cpd-competence-link, .evidence-tag"
+            );
+
+
+        if (
+            competenceLink &&
+            competenceLink
+                .getAttribute("href")
+                ?.startsWith(
+                    "#competence-"
+                )
+        ) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+
+            navigateToCompetence(
+                competenceLink
+                    .getAttribute(
+                        "href"
+                    )
+            );
+
+
+            return;
+
+        }
+
+
+        /* ======================================================
+           2. EVIDENCE → CPD
+        ====================================================== */
+
+        const evidenceCPDLink =
+            e.target.closest(
+                ".supporting-cpd-activity"
+            );
+
+
+        if (evidenceCPDLink) {
+
+            const href =
+                evidenceCPDLink.getAttribute(
+                    "href"
+                );
+
+
+            if (
+                href &&
+                href.startsWith(
+                    "#cpd-activity-"
+                )
+            ) {
+
+                e.preventDefault();
+
+                e.stopPropagation();
+
+
+                navigateToCPDActivity(
+                    href
+                );
+
+
+                return;
+
+            }
+
+        }
+
+
+        /* ======================================================
+           3. COMPETENCY → CPD
+        ====================================================== */
+
+        const competencyCPDLink =
+            e.target.closest(
+                ".competency-cpd-link, .competency-cpd-activity"
+            );
+
+
+        if (competencyCPDLink) {
+
+            const href =
+                competencyCPDLink.getAttribute(
+                    "href"
+                );
+
+
+            if (
+                href &&
+                href.startsWith(
+                    "#cpd-activity-"
+                )
+            ) {
+
+                e.preventDefault();
+
+                e.stopPropagation();
+
+
+                navigateToCPDActivity(
+                    href
+                );
+
+
+                return;
+
+            }
+
+        }
+
+
+        /* ======================================================
+           4. COMPETENCY → EVIDENCE
+        ====================================================== */
+
+        const competencyEvidenceLink =
+            e.target.closest(
+                ".competency-evidence-link"
+            );
+
+
+        if (competencyEvidenceLink) {
+
+            const href =
+                competencyEvidenceLink.getAttribute(
+                    "href"
+                );
+
+
+            if (
+                href &&
+                href.startsWith(
+                    "#evidence-"
+                )
+            ) {
+
+                e.preventDefault();
+
+                e.stopPropagation();
+
+
+                navigateToEvidence(
+                    href
+                );
+
+
+                return;
+
+            }
+
+        }
+
+
+        /* ======================================================
+           5. EVIDENCE → CPD LIST TOGGLE
+        ====================================================== */
+
+        const evidenceToggle =
+            e.target.closest(
+                ".supporting-cpd-toggle"
+            );
+
+
+        if (evidenceToggle) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+
+            const wrapper =
+                evidenceToggle.closest(
+                    ".supporting-cpd-activities"
+                );
+
+
+            if (!wrapper) {
+                return;
+            }
+
+
+            const list =
+                wrapper.querySelector(
+                    ".supporting-cpd-list"
+                );
+
+
+            if (!list) {
+                return;
+            }
+
+
+            const isOpen =
+                list.classList.contains(
+                    "relationship-list-expanded"
+                );
+
+
+            if (isOpen) {
+
+                list.classList.remove(
+                    "relationship-list-expanded"
+                );
+
+                list.classList.add(
+                    "relationship-list-collapsed"
+                );
+
+                evidenceToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                evidenceToggle.innerHTML = `
+                    Show
+                    <i class="fa-solid fa-chevron-down"></i>
+                `;
+
+            } else {
+
+                list.classList.remove(
+                    "relationship-list-collapsed"
+                );
+
+                list.classList.add(
+                    "relationship-list-expanded"
+                );
+
+                evidenceToggle.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+                evidenceToggle.innerHTML = `
+                    Hide
+                    <i class="fa-solid fa-chevron-up"></i>
+                `;
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* ======================================================
+           6. COMPETENCY RELATIONSHIP TOGGLE
+        ====================================================== */
+
+        const relationshipToggle =
+            e.target.closest(
+                ".relationship-collapse-toggle"
+            );
+
+
+        if (relationshipToggle) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+
+            const section =
+                relationshipToggle.closest(
+                    ".competency-related-section"
+                );
+
+
+            if (!section) {
+                return;
+            }
+
+
+            const list =
+                section.querySelector(
+                    ".competency-related-cpd-list, " +
+                    ".competency-related-evidence-list"
+                );
+
+
+            if (!list) {
+                return;
+            }
+
+
+            const isExpanded =
+                list.classList.contains(
+                    "relationship-list-expanded"
+                );
+
+
+            const label =
+                relationshipToggle.querySelector(
+                    ".relationship-toggle-label"
+                );
+
+
+            if (isExpanded) {
+
+                list.classList.remove(
+                    "relationship-list-expanded"
+                );
+
+                list.classList.add(
+                    "relationship-list-collapsed"
+                );
+
+                relationshipToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                relationshipToggle.classList.remove(
+                    "expanded"
+                );
+
+
+                if (label) {
+
+                    label.textContent =
+                        "Show";
+
+                }
+
+
+            } else {
+
+                list.classList.remove(
+                    "relationship-list-collapsed"
+                );
+
+                list.classList.add(
+                    "relationship-list-expanded"
+                );
+
+                relationshipToggle.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+                relationshipToggle.classList.add(
+                    "expanded"
+                );
+
+
+                if (label) {
+
+                    label.textContent =
+                        "Hide";
+
+                }
+
+            }
+
+
+            return;
+
+        }
+
+    },
+    false
+);
+
+
+/* ============================================================
+   NAVIGATE TO COMPETENCY
+============================================================ */
+
+function navigateToCompetence(
+    href
+) {
+
+    if (
+        !href ||
+        !href.startsWith(
+            "#competence-"
+        )
+    ) {
+        return;
+    }
+
+
+    const target =
+        document.querySelector(
+            href
+        );
+
+
+    if (!target) {
+
+        console.warn(
+            "[CPD] Competence target not found:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Remove previous highlights.
+    */
+
+    document
+        .querySelectorAll(
+            ".accordion-item.highlighted"
+        )
+        .forEach(
+            item => {
+
+                item.classList.remove(
+                    "highlighted"
+                );
+
+            }
+        );
+
+
+    /*
+       Open competence.
+
+       We do not trigger a click.
+    */
+
+    target.classList.add(
+        "open"
+    );
+
+
+    target.classList.add(
+        "highlighted"
+    );
+
+
+    requestAnimationFrame(
+        () => {
+
+            setTimeout(
+                () => {
+
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                },
+                300
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   NAVIGATE TO CPD ACTIVITY
+============================================================ */
+
+function navigateToCPDActivity(
+    href
+) {
+
+    if (
+        !href ||
+        !href.startsWith(
+            "#cpd-activity-"
+        )
+    ) {
+        return;
+    }
+
+
+    const target =
+        document.querySelector(
+            href
+        );
+
+
+    if (!target) {
+
+        console.warn(
+            "[CPD] CPD activity target not found:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    /*
+       FIRST:
+       Open the main CPD Log.
+    */
+
+    const cpdOpened =
+        openCPDLog();
+
+
+    if (!cpdOpened) {
+
+        console.warn(
+            "[CPD] CPD Log could not be opened."
+        );
+
+    }
+
+
+    /*
+       Remove previous CPD highlights.
+    */
+
+    document
+        .querySelectorAll(
+            ".cpd-card.cpd-activity-highlighted"
+        )
+        .forEach(
+            card => {
+
+                card.classList.remove(
+                    "cpd-activity-highlighted"
+                );
+
+            }
+        );
+
+
+    /*
+       Wait for the CPD Log expansion to
+       complete before scrolling.
+    */
+
+    setTimeout(
+        () => {
+
+            target.classList.add(
+                "cpd-activity-highlighted"
+            );
+
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+
+            setTimeout(
+                () => {
+
+                    target.classList.remove(
+                        "cpd-activity-highlighted"
+                    );
+
+                },
+                3000
+            );
+
+        },
+        500
+    );
+
+}
+
+
+/* ============================================================
+   NAVIGATE TO EVIDENCE
+============================================================ */
+
+function navigateToEvidence(
+    href
+) {
+
+    if (
+        !href ||
+        !href.startsWith(
+            "#evidence-"
+        )
+    ) {
+        return;
+    }
+
+
+    const target =
+        document.querySelector(
+            href
+        );
+
+
+    if (!target) {
+
+        console.warn(
+            "[CPD] Evidence target not found:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Do NOT manually manipulate the Evidence
+       card accordion here.
+
+       The Evidence card's own accordion handler
+       remains responsible for opening it.
+
+       We only scroll and highlight.
+    */
+
+    target.classList.add(
+        "highlighted"
+    );
+
+
+    setTimeout(
+        () => {
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        },
+        150
+    );
+
+
+    setTimeout(
+        () => {
+
+            target.classList.remove(
+                "highlighted"
+            );
+
+        },
+        3000
+    );
+
+}
+
+
+/* ============================================================
+   DONUT CHART
+============================================================ */
+
+function generateDonutChart() {
+
+    const rows =
+        [
+            ...document.querySelectorAll(
+                "#cpd-body tr"
+            )
+        ];
+
+
+    if (!rows.length) {
+        return;
+    }
+
+
+    const categoryCounts = {};
 
 
     rows.forEach(
@@ -8508,9 +9930,7 @@ function generateDonutChart() {
             if (
                 cells.length < 5
             ) {
-
                 return;
-
             }
 
 
@@ -8520,22 +9940,14 @@ function generateDonutChart() {
                     .trim();
 
 
-            if (
-                !category
-            ) {
-
+            if (!category) {
                 return;
-
             }
 
 
-            categoryCounts[
-                category
-            ] =
+            categoryCounts[category] =
                 (
-                    categoryCounts[
-                        category
-                    ] ||
+                    categoryCounts[category] ||
                     0
                 ) + 1;
 
@@ -8544,22 +9956,19 @@ function generateDonutChart() {
 
 
     const total =
-        Object
-            .values(
-                categoryCounts
-            )
-            .reduce(
-                (a,b) => a + b,
-                0
-            );
+        Object.values(
+            categoryCounts
+        )
+        .reduce(
+            (a, b) => a + b,
+            0
+        );
 
 
     if (
         total === 0
     ) {
-
         return;
-
     }
 
 
@@ -8581,9 +9990,7 @@ function generateDonutChart() {
         );
 
 
-    if (
-        !segments.length
-    ) {
+    if (!segments.length) {
 
         console.warn(
             "[CPD] Donut segments not found."
@@ -8594,9 +10001,7 @@ function generateDonutChart() {
     }
 
 
-    if (
-        !tooltip
-    ) {
+    if (!tooltip) {
 
         console.warn(
             "[CPD] #donut-tooltip not found."
@@ -8607,12 +10012,9 @@ function generateDonutChart() {
     }
 
 
-    if (
-        legend
-    ) {
+    if (legend) {
 
-        legend.innerHTML =
-            "";
+        legend.innerHTML = "";
 
     }
 
@@ -8634,6 +10036,25 @@ function generateDonutChart() {
 
             segment.style.pointerEvents =
                 "none";
+
+
+            segment.onmouseenter =
+                null;
+
+            segment.onmousemove =
+                null;
+
+            segment.onmouseleave =
+                null;
+
+            segment.ontouchstart =
+                null;
+
+            segment.ontouchmove =
+                null;
+
+            segment.ontouchend =
+                null;
 
         }
     );
@@ -8682,805 +10103,248 @@ function generateDonutChart() {
     }
 
 
-    let offset =
-        0;
+    let offset = 0;
+
+    let index = 0;
 
 
-    let index =
-        0;
+    Object.entries(
+        categoryCounts
+    )
+    .forEach(
+        (
+            [
+                category,
+                count
+            ]
+        ) => {
+
+            if (
+                index >= 4
+            ) {
+                return;
+            }
 
 
-    Object
-        .entries(
-            categoryCounts
-        )
-        .forEach(
-            (
-                [
-                    category,
-                    count
-                ]
-            ) => {
-
-                if (
-                    index >= 4
-                ) {
-
-                    return;
-
-                }
+            const segment =
+                segments[index];
 
 
-                const segment =
-                    segments[
-                        index
-                    ];
+            if (!segment) {
+                return;
+            }
 
 
-                if (
-                    !segment
-                ) {
-
-                    return;
-
-                }
-
-
-                const percent =
-                    (
-                        count /
-                        total
-                    ) *
-                    100;
+            const percent =
+                (
+                    count /
+                    total
+                ) *
+                100;
 
 
-                segment.dataset.category =
-                    category;
+            segment.dataset.category =
+                category;
 
 
-                segment.dataset.count =
-                    count;
+            segment.dataset.count =
+                count;
 
 
-                segment.dataset.percent =
-                    percent.toFixed(
-                        1
+            segment.dataset.percent =
+                percent.toFixed(1);
+
+
+            segment.style.strokeDasharray =
+                `${percent} ${100 - percent}`;
+
+
+            segment.style.strokeDashoffset =
+                `-${offset}`;
+
+
+            segment.style.pointerEvents =
+                "stroke";
+
+
+            if (legend) {
+
+                const li =
+                    document.createElement(
+                        "li"
                     );
 
 
-                segment.style.strokeDasharray =
-                    `${percent} ${100 - percent}`;
+                const legendColours = [
+
+                    "#0a66c2",
+
+                    "#007b5f",
+
+                    "#b8860b",
+
+                    "#8a2be2"
+
+                ];
 
 
-                segment.style.strokeDashoffset =
-                    `-${offset}`;
+                li.innerHTML = `
+
+                    <span
+                        class="legend-box seg-${index + 1}"
+                        style="
+                            background-color: ${legendColours[index]} !important;
+                            background: ${legendColours[index]} !important;
+                            display: inline-block;
+                            width: 14px;
+                            height: 14px;
+                            min-width: 14px;
+                            border-radius: 3px;
+                            border: 1px solid rgba(0,0,0,0.15);
+                        "
+                    ></span>
+
+                    <span>
+                        ${category} (${count})
+                    </span>
+
+                `;
 
 
-                segment.style.pointerEvents =
-                    "stroke";
+                legend.appendChild(
+                    li
+                );
+
+            }
 
 
-                if (
-                    legend
-                ) {
+            function showTooltip(
+                x,
+                y
+            ) {
 
-                    const li =
-                        document.createElement(
-                            "li"
-                        );
+                tooltip.innerHTML = `
 
+                    <strong>
+                        ${category}
+                    </strong>
 
-                    const legendColours = [
+                    <br>
 
-                        "#0a66c2",
+                    ${count}
+                    ${
+                        count === 1
+                            ? "activity"
+                            : "activities"
+                    }
 
-                        "#007b5f",
+                    <br>
 
-                        "#b8860b",
+                    ${percent.toFixed(1)}%
+                    of CPD log
 
-                        "#8a2be2"
-
-                    ];
-
-
-                    li.innerHTML = `
-
-                        <span
-                            class="legend-box seg-${index + 1}"
-                            style="
-                                background-color: ${legendColours[index]} !important;
-                                background: ${legendColours[index]} !important;
-                                display: inline-block;
-                                width: 14px;
-                                height: 14px;
-                                min-width: 14px;
-                                border-radius: 3px;
-                                border: 1px solid rgba(0,0,0,0.15);
-                            "
-                        ></span>
-
-                        <span>
-                            ${category} (${count})
-                        </span>
-
-                    `;
+                `;
 
 
-                    legend.appendChild(
-                        li
-                    );
-
-                }
-
-
-                function showTooltip(
+                positionTooltip(
                     x,
                     y
-                ) {
+                );
 
-                    tooltip.innerHTML = `
 
-                        <strong>
-                            ${category}
-                        </strong>
+                tooltip.style.display =
+                    "block";
 
-                        <br>
 
-                        ${count}
-                        ${
-                            count === 1
-                                ? "activity"
-                                : "activities"
-                        }
+                tooltip.style.opacity =
+                    "1";
 
-                        <br>
 
-                        ${percent.toFixed(1)}%
-                        of CPD log
+                tooltip.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
 
-                    `;
+            }
 
+
+            segment.addEventListener(
+                "pointerenter",
+                function(e) {
+
+                    showTooltip(
+                        e.clientX,
+                        e.clientY
+                    );
+
+                }
+            );
+
+
+            segment.addEventListener(
+                "pointermove",
+                function(e) {
 
                     positionTooltip(
-                        x,
-                        y
-                    );
-
-
-                    tooltip.style.display =
-                        "block";
-
-
-                    requestAnimationFrame(
-                        () => {
-
-                            tooltip.style.opacity =
-                                "1";
-
-                        }
-                    );
-
-
-                    tooltip.setAttribute(
-                        "aria-hidden",
-                        "false"
+                        e.clientX,
+                        e.clientY
                     );
 
                 }
+            );
 
 
-                segment.addEventListener(
-                    "pointerenter",
-                    function(e) {
+            segment.addEventListener(
+                "pointerleave",
+                function(e) {
 
-                        showTooltip(
-                            e.clientX,
-                            e.clientY
+                    if (
+                        e.pointerType !==
+                        "touch"
+                    ) {
+
+                        hideTooltip();
+
+                    }
+
+                }
+            );
+
+
+            segment.addEventListener(
+                "pointerup",
+                function(e) {
+
+                    if (
+                        e.pointerType ===
+                        "touch"
+                    ) {
+
+                        setTimeout(
+                            hideTooltip,
+                            1800
                         );
 
                     }
-                );
+
+                }
+            );
 
 
-                segment.addEventListener(
-                    "pointermove",
-                    function(e) {
-
-                        positionTooltip(
-                            e.clientX,
-                            e.clientY
-                        );
-
-                    }
-                );
+            offset +=
+                percent;
 
 
-                segment.addEventListener(
-                    "pointerleave",
-                    function(e) {
+            index++;
 
-                        if (
-                            e.pointerType !==
-                            "touch"
-                        ) {
-
-                            hideTooltip();
-
-                        }
-
-                    }
-                );
-
-
-                segment.addEventListener(
-                    "pointerup",
-                    function(e) {
-
-                        if (
-                            e.pointerType ===
-                            "touch"
-                        ) {
-
-                            setTimeout(
-                                hideTooltip,
-                                1800
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                offset +=
-                    percent;
-
-
-                index++;
-
-            }
-        );
-
-}
-
-
-/* ==========================================================
-   14. LOAD CPD DATA
-========================================================== */
-
-async function loadCPD() {
-
-    debug(
-        "loadCPD: starting"
+        }
     );
 
-
-    const url =
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE3kPYGyXe8fopDAxNwUMtYRz13UeQ-iquZ13ammE3-y5enimfGfXo0aTsxEt56atCuYg5UgmZHh7o/pub?gid=1070686003&single=true&output=csv";
-
-
-    try {
-
-        const response =
-            await fetch(
-                url
-            );
-
-
-        if (
-            !response.ok
-        ) {
-
-            throw new Error(
-                "HTTP " +
-                response.status
-            );
-
-        }
-
-
-        const csv =
-            await response.text();
-
-
-        const lines =
-            csv
-                .trim()
-                .split(
-                    /\r?\n/
-                );
-
-
-        if (
-            lines.length <= 1
-        ) {
-
-            console.warn(
-                "[CPD] No CPD data rows found."
-            );
-
-            return;
-
-        }
-
-
-        lines.shift();
-
-
-        const tbody =
-            document.getElementById(
-                "cpd-body"
-            );
-
-
-        const cardContainer =
-            document.getElementById(
-                "cpd-card-container"
-            );
-
-
-        if (
-            tbody
-        ) {
-
-            tbody.innerHTML =
-                "";
-
-        }
-
-
-        if (
-            cardContainer
-        ) {
-
-            cardContainer.innerHTML =
-                "";
-
-        }
-
-
-        lines.forEach(
-            line => {
-
-                const row =
-                    parseCsvLine(
-                        line
-                    );
-
-
-                const activity =
-                    (
-                        row[0] ||
-                        ""
-                    )
-                    .replace(
-                        /^"|"$/g,
-                        ""
-                    );
-
-
-                const start =
-                    (
-                        row[1] ||
-                        ""
-                    )
-                    .replace(
-                        /^"|"$/g,
-                        ""
-                    );
-
-
-                const end =
-                    (
-                        row[2] ||
-                        ""
-                    )
-                    .replace(
-                        /^"|"$/g,
-                        ""
-                    );
-
-
-                const hours =
-                    (
-                        row[3] ||
-                        ""
-                    )
-                    .replace(
-                        /^"|"$/g,
-                        ""
-                    );
-
-
-                const category =
-                    (
-                        row[4] ||
-                        ""
-                    )
-                    .replace(
-                        /^"|"$/g,
-                        ""
-                    );
-
-
-                const reflection =
-                    (
-                        row[5] ||
-                        ""
-                    )
-                    .replace(
-                        /^"|"$/g,
-                        ""
-                    );
-
-
-                const today =
-                    new Date();
-
-
-                const startDate =
-                    start
-                        ? new Date(
-                            start
-                        )
-                        : null;
-
-
-                const endDate =
-                    end
-                        ? new Date(
-                            end
-                        )
-                        : null;
-
-
-                let statusClass =
-                    "";
-
-
-                let statusLabel =
-                    "";
-
-
-                let statusIcon =
-                    "";
-
-
-                if (
-                    startDate &&
-                    startDate > today
-                ) {
-
-                    statusClass =
-                        "planned";
-
-
-                    statusLabel =
-                        "Planned";
-
-
-                    statusIcon =
-                        "fa-calendar-plus";
-
-                }
-
-                else if (
-                    !endDate ||
-                    endDate >= today
-                ) {
-
-                    statusClass =
-                        "inprogress";
-
-
-                    statusLabel =
-                        "In Progress";
-
-
-                    statusIcon =
-                        "fa-hourglass-half";
-
-                }
-
-                else {
-
-                    statusClass =
-                        "completed";
-
-
-                    statusLabel =
-                        "Completed";
-
-
-                    statusIcon =
-                        "fa-circle-check";
-
-                }
-
-
-                /*
-                   Hidden metrics table
-                */
-
-                if (
-                    tbody
-                ) {
-
-                    const tr =
-                        document.createElement(
-                            "tr"
-                        );
-
-
-                    [
-                        activity,
-                        start,
-                        end,
-                        hours,
-                        category,
-                        reflection
-                    ]
-                    .forEach(
-                        text => {
-
-                            const td =
-                                document.createElement(
-                                    "td"
-                                );
-
-
-                            td.textContent =
-                                text;
-
-
-                            tr.appendChild(
-                                td
-                            );
-
-                        }
-                    );
-
-
-                    tbody.appendChild(
-                        tr
-                    );
-
-                }
-
-
-                /*
-                   Visible CPD card
-                */
-
-                if (
-                    cardContainer
-                ) {
-
-                    const card =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    card.className =
-                        `cpd-card ${statusClass}`;
-
-
-                    card.innerHTML = `
-
-                        <div class="cpd-card-title">
-
-                            ${activity}
-
-                            <i
-                                class="fa-solid ${statusIcon}
-                                status-icon ${statusClass}"
-                            ></i>
-
-                        </div>
-
-
-                        <div class="cpd-card-meta">
-
-                            <span
-                                class="cpd-badge cpd-hours"
-                            >
-                                ${hours} hrs
-                            </span>
-
-
-                            <span
-                                class="cpd-badge cpd-category"
-                            >
-                                ${
-                                    category ||
-                                    "Uncategorised"
-                                }
-                            </span>
-
-
-                            <span>
-                                ${start}
-                                →
-                                ${
-                                    end ||
-                                    "Ongoing"
-                                }
-                            </span>
-
-
-                            <span
-                                class="cpd-status ${statusClass}"
-                            >
-                                ${statusLabel}
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="cpd-card-reflection"
-                        >
-
-                            ${
-                                reflection ||
-                                "<em>No reflective statement provided.</em>"
-                            }
-
-                        </div>
-
-                    `;
-
-
-                    cardContainer.appendChild(
-                        card
-                    );
-
-                }
-
-            }
-        );
-
-
-        debug(
-            "Rows loaded:",
-            tbody
-                ? tbody.rows.length
-                : 0
-        );
-
-
-        /*
-           Build all dependent systems
-           in a deliberate order.
-        */
-
-        calculateMetrics();
-
-        generateInsights();
-
-        generateHeatmap();
-
-        generateDonutChart();
-
-
-        /*
-           Create stable CPD activity IDs and
-           Evidence → CPD relationships.
-        */
-
-        populateEvidenceCPDRelationships();
-
-
-        /*
-           Add CPD → Competency links.
-        */
-
-        linkCPDToCompetences();
-
-
-        /*
-           Build Competency → CPD and
-           Competency → Evidence relationships.
-        */
-
-        populateCompetencyRelationships();
-
-
-        /*
-           Relationship collapsible enhancement
-           is handled by MutationObserver.
-        */
-
-        if (
-            typeof refreshRelationshipCollapsibles ===
-            "function"
-        ) {
-
-            refreshRelationshipCollapsibles();
-
-        }
-
-
-        /*
-           Diagnostic information.
-
-           These replace the old test calls and give
-           us useful information without relying on
-           undeclared variables.
-        */
-
-        console.log(
-            "[CPD DEBUG] CPD cards:",
-            document.querySelectorAll(
-                ".cpd-card"
-            ).length
-        );
-
-
-        console.log(
-            "[CPD DEBUG] Evidence cards:",
-            document.querySelectorAll(
-                ".professional-evidence-card"
-            ).length
-        );
-
-
-        console.log(
-            "[CPD DEBUG] Evidence → CPD sections:",
-            document.querySelectorAll(
-                ".supporting-cpd-activities"
-            ).length
-        );
-
-
-        console.log(
-            "[CPD DEBUG] Competency relationship sections:",
-            document.querySelectorAll(
-                ".competency-supporting-relationships"
-            ).length
-        );
-
-
-        console.log(
-            "[CPD DEBUG] Competency → CPD links:",
-            document.querySelectorAll(
-                ".competency-cpd-link"
-            ).length
-        );
-
-
-        console.log(
-            "[CPD DEBUG] Evidence → CPD links:",
-            document.querySelectorAll(
-                ".supporting-cpd-activity"
-            ).length
-        );
-
-
-        debug(
-            "loadCPD complete."
-        );
-
-
-    }
-
-    catch (
-        err
-    ) {
-
-        console.error(
-            "[CPD] loadCPD error:",
-            err
-        );
-
-    }
-
 }
 
 
 /* ==========================================================
-   15. METRICS + PROGRESS RING
+   METRICS
 ========================================================== */
 
 function calculateMetrics() {
@@ -9493,33 +10357,21 @@ function calculateMetrics() {
         ];
 
 
-    if (
-        !rows.length
-    ) {
-
+    if (!rows.length) {
         return;
-
     }
 
 
-    let totalHours =
-        0;
+    let totalHours = 0;
+
+    let completedHours = 0;
+
+    let ongoingHours = 0;
+
+    let activityCount = 0;
 
 
-    let completedHours =
-        0;
-
-
-    let ongoingHours =
-        0;
-
-
-    let activityCount =
-        0;
-
-
-    const categoryCounts =
-        {};
+    const categoryCounts = {};
 
 
     const today =
@@ -9546,9 +10398,7 @@ function calculateMetrics() {
             if (
                 cells.length < 6
             ) {
-
                 return;
-
             }
 
 
@@ -9573,13 +10423,9 @@ function calculateMetrics() {
 
 
             if (
-                isNaN(
-                    hours
-                )
+                isNaN(hours)
             ) {
-
                 return;
-
             }
 
 
@@ -9590,17 +10436,11 @@ function calculateMetrics() {
             activityCount++;
 
 
-            if (
-                category
-            ) {
+            if (category) {
 
-                categoryCounts[
-                    category
-                ] =
+                categoryCounts[category] =
                     (
-                        categoryCounts[
-                            category
-                        ] ||
+                        categoryCounts[category] ||
                         0
                     ) + 1;
 
@@ -9613,9 +10453,7 @@ function calculateMetrics() {
                 );
 
 
-            if (
-                !endDate
-            ) {
+            if (!endDate) {
 
                 ongoingHours +=
                     hours;
@@ -9633,7 +10471,8 @@ function calculateMetrics() {
 
 
                 if (
-                    endDate < today
+                    endDate <
+                    today
                 ) {
 
                     completedHours +=
@@ -9674,15 +10513,14 @@ function calculateMetrics() {
     ) {
 
         topCategory =
-            Object
-                .entries(
-                    categoryCounts
-                )
-                .sort(
-                    (a,b) =>
-                        b[1] -
-                        a[1]
-                )[0][0];
+            Object.entries(
+                categoryCounts
+            )
+            .sort(
+                (a, b) =>
+                    b[1] -
+                    a[1]
+            )[0][0];
 
     }
 
@@ -9699,9 +10537,7 @@ function calculateMetrics() {
                 );
 
 
-            if (
-                el
-            ) {
+            if (el) {
 
                 el.textContent =
                     value;
@@ -9718,25 +10554,19 @@ function calculateMetrics() {
 
     setText(
         "metric-total-hours",
-        completedHours.toFixed(
-            1
-        )
+        completedHours.toFixed(1)
     );
 
 
     setText(
         "metric-hours-remaining",
-        hoursRemaining.toFixed(
-            1
-        )
+        hoursRemaining.toFixed(1)
     );
 
 
     setText(
         "metric-projected-hours",
-        projectedTotal.toFixed(
-            1
-        )
+        projectedTotal.toFixed(1)
     );
 
 
@@ -9748,9 +10578,7 @@ function calculateMetrics() {
 
     setText(
         "metric-hours-month",
-        avgHoursPerMonth.toFixed(
-            1
-        )
+        avgHoursPerMonth.toFixed(1)
     );
 
 
@@ -9760,29 +10588,25 @@ function calculateMetrics() {
     );
 
 
+    const targetHours =
+        Math.max(
+            projectedTotal,
+            1
+        );
+
+
     setText(
         "cpd-wheel-completed",
-        completedHours.toFixed(
-            1
-        ) +
+        completedHours.toFixed(1) +
         " completed hours"
     );
 
 
     setText(
         "cpd-wheel-remaining",
-        hoursRemaining.toFixed(
-            1
-        ) +
+        hoursRemaining.toFixed(1) +
         " hours remaining"
     );
-
-
-    const targetHours =
-        Math.max(
-            projectedTotal,
-            1
-        );
 
 
     updateProgressRing(
@@ -9795,14 +10619,14 @@ function calculateMetrics() {
 
 
     debug(
-        "Metrics calculated."
+        "Metrics calculated"
     );
 
 }
 
 
 /* ==========================================================
-   16. PROGRESS RING
+   PROGRESS RING
 ========================================================== */
 
 function updateProgressRing(
@@ -9820,9 +10644,7 @@ function updateProgressRing(
         !ring ||
         target <= 0
     ) {
-
         return;
-
     }
 
 
@@ -9861,7 +10683,7 @@ function updateProgressRing(
 
 
 /* ==========================================================
-   17. HEATMAP
+   HEATMAP
 ========================================================== */
 
 function generateHeatmap() {
@@ -9874,12 +10696,8 @@ function generateHeatmap() {
         ];
 
 
-    if (
-        !rows.length
-    ) {
-
+    if (!rows.length) {
         return;
-
     }
 
 
@@ -9913,8 +10731,7 @@ function generateHeatmap() {
     );
 
 
-    const activityMap =
-        {};
+    const activityMap = {};
 
 
     rows.forEach(
@@ -9929,9 +10746,7 @@ function generateHeatmap() {
             if (
                 cells.length < 2
             ) {
-
                 return;
-
             }
 
 
@@ -9947,12 +10762,8 @@ function generateHeatmap() {
                 );
 
 
-            if (
-                !date
-            ) {
-
+            if (!date) {
                 return;
-
             }
 
 
@@ -9965,21 +10776,19 @@ function generateHeatmap() {
 
 
             if (
-                date < oneYearAgo ||
-                date > today
+                date <
+                oneYearAgo ||
+                date >
+                today
             ) {
-
                 return;
-
             }
 
 
             const key =
                 date
                     .toISOString()
-                    .split(
-                        "T"
-                    )[0];
+                    .split("T")[0];
 
 
             activityMap[key] =
@@ -9998,12 +10807,8 @@ function generateHeatmap() {
         );
 
 
-    if (
-        !heatmap
-    ) {
-
+    if (!heatmap) {
         return;
-
     }
 
 
@@ -10036,9 +10841,7 @@ function generateHeatmap() {
         const key =
             d
                 .toISOString()
-                .split(
-                    "T"
-                )[0];
+                .split("T")[0];
 
 
         const count =
@@ -10054,8 +10857,7 @@ function generateHeatmap() {
             count >= 4
         ) {
 
-            level =
-                4;
+            level = 4;
 
         }
 
@@ -10063,8 +10865,7 @@ function generateHeatmap() {
             count === 3
         ) {
 
-            level =
-                3;
+            level = 3;
 
         }
 
@@ -10072,8 +10873,7 @@ function generateHeatmap() {
             count === 2
         ) {
 
-            level =
-                2;
+            level = 2;
 
         }
 
@@ -10081,8 +10881,7 @@ function generateHeatmap() {
             count === 1
         ) {
 
-            level =
-                1;
+            level = 1;
 
         }
 
@@ -10115,7 +10914,7 @@ function generateHeatmap() {
 
 
 /* ==========================================================
-   18. INSIGHTS
+   INSIGHTS
 ========================================================== */
 
 function generateInsights() {
@@ -10128,17 +10927,12 @@ function generateInsights() {
         ];
 
 
-    if (
-        !rows.length
-    ) {
-
+    if (!rows.length) {
         return;
-
     }
 
 
-    const reflections =
-        [];
+    const reflections = [];
 
 
     rows.forEach(
@@ -10153,9 +10947,7 @@ function generateInsights() {
             if (
                 cells.length < 6
             ) {
-
                 return;
-
             }
 
 
@@ -10165,9 +10957,7 @@ function generateInsights() {
                     .trim();
 
 
-            if (
-                reflection
-            ) {
+            if (reflection) {
 
                 reflections.push(
                     reflection.toLowerCase()
@@ -10179,12 +10969,8 @@ function generateInsights() {
     );
 
 
-    if (
-        !reflections.length
-    ) {
-
+    if (!reflections.length) {
         return;
-
     }
 
 
@@ -10194,16 +10980,11 @@ function generateInsights() {
         );
 
 
-    const themes =
-        [];
+    const themes = [];
 
+    const strengths = [];
 
-    const strengths =
-        [];
-
-
-    const growth =
-        [];
+    const growth = [];
 
 
     if (
@@ -10215,7 +10996,6 @@ function generateInsights() {
         themes.push(
             "Leadership"
         );
-
 
         strengths.push(
             "Leadership & mentoring"
@@ -10234,7 +11014,6 @@ function generateInsights() {
             "Communication"
         );
 
-
         strengths.push(
             "Stakeholder engagement"
         );
@@ -10252,7 +11031,6 @@ function generateInsights() {
             "Planning"
         );
 
-
         strengths.push(
             "Planning & organisation"
         );
@@ -10269,7 +11047,6 @@ function generateInsights() {
         themes.push(
             "Risk management"
         );
-
 
         strengths.push(
             "Risk awareness & mitigation"
@@ -10342,12 +11119,8 @@ function generateInsights() {
                 );
 
 
-            if (
-                !el
-            ) {
-
+            if (!el) {
                 return;
-
             }
 
 
@@ -10357,9 +11130,7 @@ function generateInsights() {
                         i =>
                             `<li>${i}</li>`
                     )
-                    .join(
-                        ""
-                    );
+                    .join("");
 
         };
 
@@ -10395,15 +11166,15 @@ function generateInsights() {
 
 
     debug(
-        "Insights generated."
+        "Insights generated"
     );
 
 }
 
 
-/* ==========================================================
-   19. PROGRESS PILLARS
-========================================================== */
+/* ============================================================
+   PROGRESS PILLARS
+============================================================ */
 
 function generateProgressPillars() {
 
@@ -10432,7 +11203,7 @@ function generateProgressPillars() {
     ) {
 
         console.warn(
-            "[CPD] Progress pillar metric elements not found."
+            "[CPD] Progress pillar elements not found."
         );
 
         return;
@@ -10443,22 +11214,19 @@ function generateProgressPillars() {
     const completed =
         parseFloat(
             completedEl.textContent
-        ) ||
-        0;
+        ) || 0;
 
 
     const remaining =
         parseFloat(
             remainingEl.textContent
-        ) ||
-        0;
+        ) || 0;
 
 
     const projected =
         parseFloat(
             projectedEl.textContent
-        ) ||
-        0;
+        ) || 0;
 
 
     const max =
@@ -10493,9 +11261,7 @@ function generateProgressPillars() {
             !fill ||
             !label
         ) {
-
             return;
-
         }
 
 
@@ -10505,23 +11271,15 @@ function generateProgressPillars() {
             );
 
 
-        if (
-            !card
-        ) {
-
+        if (!card) {
             return;
-
         }
 
 
         card.classList.remove(
-
             "pillar-completed",
-
             "pillar-remaining",
-
             "pillar-projected"
-
         );
 
 
@@ -10531,9 +11289,7 @@ function generateProgressPillars() {
 
 
         label.textContent =
-            value.toFixed(
-                1
-            );
+            value.toFixed(1);
 
 
         const percent =
@@ -10561,7 +11317,7 @@ function generateProgressPillars() {
 
 
     setTimeout(
-        function() {
+        () => {
 
             setPillar(
                 "pillar-completed",
@@ -10593,1584 +11349,38 @@ function generateProgressPillars() {
 }
 
 
-/* ==========================================================
-   20. EVIDENCE GOAL RELATIONSHIPS
-========================================================== */
-
-const evidenceGoalRelationships = {
-
-    "evidence-cyber-security-uplift": [
-
-        "AI & digital transformation",
-
-        "Leadership & mentoring"
-
-    ],
-
-
-    "evidence-nhs-digital-transformation": [
-
-        "Stakeholder engagement & communication",
-
-        "AI & digital transformation"
-
-    ],
-
-
-    "evidence-126k-device-migration": [
-
-        "AI & digital transformation"
-
-    ],
-
-
-    "evidence-cloud-transformation": [
-
-        "AI & digital transformation"
-
-    ],
-
-
-    "evidence-pmo-turnaround": [
-
-        "Leadership & mentoring",
-
-        "Stakeholder engagement & communication"
-
-    ],
-
-
-    "evidence-programme-governance": [
-
-        "Stakeholder engagement & communication",
-
-        "Leadership & mentoring"
-
-    ]
-
-};
-
-
-const unmappedEvidenceGoals = [
-
-    "Sustainability in change initiatives",
-
-    "Contribute to my network",
-
-    "Get a new job",
-
-    "Continue my professional development",
-
-    "Contribute to APM",
-
-    "Increase my networking",
-
-    "Mentor, coach and inspire future generations"
-
-];
-
-
-/* ==========================================================
-   21. POPULATE EVIDENCE → CPD RELATIONSHIPS
-========================================================== */
-
-function populateEvidenceCPDRelationships() {
-
-    debug(
-        "Starting Evidence → CPD relationship layer."
-    );
-
-
-    const cpdCards =
-        document.querySelectorAll(
-            ".cpd-card"
-        );
-
-
-    if (
-        !cpdCards.length
-    ) {
-
-        console.warn(
-            "[CPD] No CPD cards found."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Remove old generated relationship sections.
-    */
-
-    document
-        .querySelectorAll(
-            ".supporting-cpd-activities"
-        )
-        .forEach(
-            section => {
-
-                section.remove();
-
-            }
-        );
-
-
-    Object
-        .entries(
-            evidenceGoalRelationships
-        )
-        .forEach(
-            (
-                [
-                    evidenceId,
-                    evidenceGoals
-                ]
-            ) => {
-
-                const evidenceCard =
-                    document.getElementById(
-                        evidenceId
-                    );
-
-
-                if (
-                    !evidenceCard
-                ) {
-
-                    console.warn(
-                        "[CPD] Evidence card not found:",
-                        evidenceId
-                    );
-
-                    return;
-
-                }
-
-
-                const evidenceContent =
-                    evidenceCard.querySelector(
-                        ".professional-evidence-content"
-                    );
-
-
-                if (
-                    !evidenceContent
-                ) {
-
-                    console.warn(
-                        "[CPD] Evidence content not found:",
-                        evidenceId
-                    );
-
-                    return;
-
-                }
-
-
-                const wrapper =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                wrapper.className =
-                    "supporting-cpd-activities";
-
-
-                const header =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                header.className =
-                    "supporting-cpd-header";
-
-
-                const title =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                title.className =
-                    "supporting-cpd-title";
-
-
-                title.innerHTML =
-                    `
-                        <span>
-                            Supporting CPD Activities
-                        </span>
-                    `;
-
-
-                const toggle =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                toggle.type =
-                    "button";
-
-
-                toggle.className =
-                    "supporting-cpd-toggle";
-
-
-                toggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-
-                toggle.innerHTML =
-                    `
-                        Show
-                        <i class="fa-solid fa-chevron-down"></i>
-                    `;
-
-
-                const list =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                list.className =
-                    "supporting-cpd-list";
-
-
-                let matchedCount =
-                    0;
-
-
-                cpdCards.forEach(
-                    card => {
-
-                        const categoryElement =
-                            card.querySelector(
-                                ".cpd-category"
-                            );
-
-
-                        if (
-                            !categoryElement
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const activityGoal =
-                            categoryElement
-                                .textContent
-                                .trim()
-                                .toLowerCase();
-
-
-                        if (
-                            !activityGoal
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const matchesGoal =
-                            evidenceGoals.some(
-                                goal =>
-                                    goal
-                                        .trim()
-                                        .toLowerCase() ===
-                                    activityGoal
-                            );
-
-
-                        if (
-                            !matchesGoal
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const titleElement =
-                            card.querySelector(
-                                ".cpd-card-title"
-                            );
-
-
-                        if (
-                            !titleElement
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const titleClone =
-                            titleElement.cloneNode(
-                                true
-                            );
-
-
-                        titleClone
-                            .querySelectorAll(
-                                "i"
-                            )
-                            .forEach(
-                                icon => {
-
-                                    icon.remove();
-
-                                }
-                            );
-
-
-                        const activityName =
-                            titleClone
-                                .textContent
-                                .trim();
-
-
-                        if (
-                            !activityName
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const activityId =
-                            createCPDActivityId(
-                                activityName
-                            );
-
-
-                        if (
-                            !activityId
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        card.id =
-                            activityId;
-
-
-                        const link =
-                            document.createElement(
-                                "a"
-                            );
-
-
-                        link.className =
-                            "supporting-cpd-activity";
-
-
-                        link.href =
-                            "#" +
-                            activityId;
-
-
-                        link.innerHTML =
-                            `
-
-                                <span
-                                    class="supporting-cpd-activity-title"
-                                >
-                                    ${activityName}
-                                </span>
-
-                                <i
-                                    class="fa-solid fa-arrow-right"
-                                ></i>
-
-                            `;
-
-
-                        list.appendChild(
-                            link
-                        );
-
-
-                        matchedCount++;
-
-                    }
-                );
-
-
-                if (
-                    matchedCount === 0
-                ) {
-
-                    return;
-
-                }
-
-
-                const count =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                count.className =
-                    "supporting-cpd-count";
-
-
-                count.textContent =
-                    `${matchedCount} ${
-                        matchedCount === 1
-                            ? "activity"
-                            : "activities"
-                    }`;
-
-
-                title.appendChild(
-                    count
-                );
-
-
-                header.appendChild(
-                    title
-                );
-
-
-                header.appendChild(
-                    toggle
-                );
-
-
-                wrapper.appendChild(
-                    header
-                );
-
-
-                wrapper.appendChild(
-                    list
-                );
-
-
-                evidenceContent.appendChild(
-                    wrapper
-                );
-
-
-                debug(
-                    "Evidence → CPD relationship created:",
-                    evidenceId +
-                    " | " +
-                    matchedCount +
-                    " activities"
-                );
-
-            }
-        );
-
-
-    debug(
-        "Evidence → CPD relationship layer complete."
-    );
-
-}
-
-
-/* ==========================================================
-   22. POPULATE COMPETENCY RELATIONSHIPS
-========================================================== */
-
-function populateCompetencyRelationships() {
-
-    debug(
-        "Starting Competency relationship layer."
-    );
-
-
-    const competenceItems =
-        document.querySelectorAll(
-            ".accordion-item[id^='competence-']"
-        );
-
-
-    if (
-        !competenceItems.length
-    ) {
-
-        console.warn(
-            "[CPD] No competency cards found."
-        );
-
-        return;
-
-    }
-
-
-    document
-        .querySelectorAll(
-            ".competency-supporting-relationships"
-        )
-        .forEach(
-            section => {
-
-                section.remove();
-
-            }
-        );
-
-
-    competenceItems.forEach(
-        competenceItem => {
-
-            const competenceId =
-                competenceItem.id;
-
-
-            if (
-                !competenceId
-            ) {
-
-                return;
-
-            }
-
-
-            const accordionContent =
-                competenceItem.querySelector(
-                    ".accordion-content"
-                );
-
-
-            if (
-                !accordionContent
-            ) {
-
-                console.warn(
-                    "[CPD] Accordion content not found:",
-                    competenceId
-                );
-
-                return;
-
-            }
-
-
-            const wrapper =
-                document.createElement(
-                    "div"
-                );
-
-
-            wrapper.className =
-                "competency-supporting-relationships";
-
-
-            wrapper.innerHTML =
-                `
-
-                    <div
-                        class="competency-related-section"
-                    >
-
-                        <div
-                            class="competency-related-title"
-                        >
-                            Supporting CPD Activities
-                        </div>
-
-                        <div
-                            class="competency-related-cpd-list"
-                        ></div>
-
-                    </div>
-
-
-                    <div
-                        class="competency-related-section"
-                    >
-
-                        <div
-                            class="competency-related-title"
-                        >
-                            Supporting Evidence
-                        </div>
-
-                        <div
-                            class="competency-related-evidence-list"
-                        ></div>
-
-                    </div>
-
-                `;
-
-
-            const cpdList =
-                wrapper.querySelector(
-                    ".competency-related-cpd-list"
-                );
-
-
-            const evidenceList =
-                wrapper.querySelector(
-                    ".competency-related-evidence-list"
-                );
-
-
-            /*
-               CPD → Competency
-            */
-
-            document
-                .querySelectorAll(
-                    ".cpd-card"
-                )
-                .forEach(
-                    card => {
-
-                        const competenceLink =
-                            card.querySelector(
-                                ".cpd-competence-link"
-                            );
-
-
-                        if (
-                            !competenceLink
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        if (
-                            competenceLink.getAttribute(
-                                "href"
-                            ) !==
-                            "#" +
-                            competenceId
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const titleElement =
-                            card.querySelector(
-                                ".cpd-card-title"
-                            );
-
-
-                        if (
-                            !titleElement
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const titleClone =
-                            titleElement.cloneNode(
-                                true
-                            );
-
-
-                        titleClone
-                            .querySelectorAll(
-                                "i"
-                            )
-                            .forEach(
-                                icon => {
-
-                                    icon.remove();
-
-                                }
-                            );
-
-
-                        const activityName =
-                            titleClone
-                                .textContent
-                                .trim();
-
-
-                        if (
-                            !activityName
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        if (
-                            !card.id
-                        ) {
-
-                            card.id =
-                                createCPDActivityId(
-                                    activityName
-                                );
-
-                        }
-
-
-                        if (
-                            cpdList.querySelector(
-                                `[data-cpd-target="#${card.id}"]`
-                            )
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const link =
-                            document.createElement(
-                                "a"
-                            );
-
-
-                        link.className =
-                            "competency-cpd-link";
-
-
-                        link.href =
-                            "#" +
-                            card.id;
-
-
-                        link.dataset.cpdTarget =
-                            "#" +
-                            card.id;
-
-
-                        link.innerHTML =
-                            `
-
-                                <span>
-                                    ${activityName}
-                                </span>
-
-                                <i
-                                    class="fa-solid fa-arrow-right"
-                                ></i>
-
-                            `;
-
-
-                        cpdList.appendChild(
-                            link
-                        );
-
-                    }
-                );
-
-
-            /*
-               Evidence → Competency
-            */
-
-            document
-                .querySelectorAll(
-                    ".professional-evidence-card"
-                )
-                .forEach(
-                    evidenceCard => {
-
-                        const competenceLinks =
-                            evidenceCard.querySelectorAll(
-                                'a[href^="#competence-"]'
-                            );
-
-
-                        let matches =
-                            false;
-
-
-                        competenceLinks.forEach(
-                            link => {
-
-                                if (
-                                    link.getAttribute(
-                                        "href"
-                                    ) ===
-                                    "#" +
-                                    competenceId
-                                ) {
-
-                                    matches =
-                                        true;
-
-                                }
-
-                            }
-                        );
-
-
-                        if (
-                            !matches
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        let evidenceId =
-                            evidenceCard.id;
-
-
-                        if (
-                            !evidenceId
-                        ) {
-
-                            const heading =
-                                evidenceCard.querySelector(
-                                    "h3, h4"
-                                );
-
-
-                            if (
-                                !heading
-                            ) {
-
-                                return;
-
-                            }
-
-
-                            evidenceId =
-                                "evidence-" +
-                                createCPDActivityId(
-                                    heading.textContent
-                                )
-                                .replace(
-                                    "cpd-activity-",
-                                    ""
-                                );
-
-
-                            evidenceCard.id =
-                                evidenceId;
-
-                        }
-
-
-                        const heading =
-                            evidenceCard.querySelector(
-                                "h3, h4"
-                            );
-
-
-                        if (
-                            !heading
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const evidenceName =
-                            heading
-                                .textContent
-                                .trim();
-
-
-                        if (
-                            !evidenceName
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        if (
-                            evidenceList.querySelector(
-                                `[data-evidence-target="#${evidenceId}"]`
-                            )
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const link =
-                            document.createElement(
-                                "a"
-                            );
-
-
-                        link.className =
-                            "competency-evidence-link";
-
-
-                        link.href =
-                            "#" +
-                            evidenceId;
-
-
-                        link.dataset.evidenceTarget =
-                            "#" +
-                            evidenceId;
-
-
-                        link.innerHTML =
-                            `
-
-                                <span>
-                                    ${evidenceName}
-                                </span>
-
-                                <i
-                                    class="fa-solid fa-arrow-right"
-                                ></i>
-
-                            `;
-
-
-                        evidenceList.appendChild(
-                            link
-                        );
-
-                    }
-                );
-
-
-            const cpdSection =
-                wrapper.querySelector(
-                    ".competency-related-section:first-child"
-                );
-
-
-            const evidenceSection =
-                wrapper.querySelector(
-                    ".competency-related-section:last-child"
-                );
-
-
-            if (
-                !cpdList.children.length
-            ) {
-
-                cpdSection.remove();
-
-            }
-
-
-            if (
-                !evidenceList.children.length
-            ) {
-
-                evidenceSection.remove();
-
-            }
-
-
-            if (
-                wrapper.children.length
-            ) {
-
-                accordionContent.appendChild(
-                    wrapper
-                );
-
-            }
-
-        }
-    );
-
-
-    debug(
-        "Competency relationship layer complete."
-    );
-
-}
-
-
-/* ==========================================================
-   23. RELATIONSHIP COLLAPSIBLE SYSTEM
-   ----------------------------------------------------------
-   One system only.
-
-   Handles:
-   - Evidence → Supporting CPD Activities
-   - Competency → Supporting CPD Activities
-   - Competency → Supporting Evidence
-========================================================== */
-
-(function initialiseRelationshipCollapsibles() {
-
-    debug(
-        "Relationship collapsible system initialising."
-    );
-
-
-    const SECTION_SELECTOR = [
-
-        ".supporting-cpd-activities",
-
-        ".competency-related-section"
-
-    ].join(
-        ","
-    );
-
-
-    function enhanceSection(
-        section
-    ) {
-
-        if (
-            !section
-        ) {
-
-            return;
-
-        }
-
-
-        if (
-            section.dataset.relationshipCollapsible ===
-            "true"
-        ) {
-
-            return;
-
-        }
-
-
-        const list =
-            section.querySelector(
-
-                ".supporting-cpd-list, " +
-
-                ".competency-related-cpd-list, " +
-
-                ".competency-related-evidence-list"
-
-            );
-
-
-        if (
-            !list
-        ) {
-
-            return;
-
-        }
-
-
-        const itemCount =
-            list.children.length;
-
-
-        if (
-            !itemCount
-        ) {
-
-            return;
-
-        }
-
-
-        const title =
-            section.querySelector(
-
-                ".supporting-cpd-title, " +
-
-                ".professional-evidence-label, " +
-
-                ".competency-related-title"
-
-            );
-
-
-        if (
-            !title
-        ) {
-
-            return;
-
-        }
-
-
-        section.dataset.relationshipCollapsible =
-            "true";
-
-
-        const isEvidenceList =
-            list.classList.contains(
-                "competency-related-evidence-list"
-            );
-
-
-        const header =
-            document.createElement(
-                "div"
-            );
-
-
-        header.className =
-            "relationship-collapse-header";
-
-
-        const count =
-            document.createElement(
-                "span"
-            );
-
-
-        count.className =
-            "relationship-collapse-count";
-
-
-        count.textContent =
-            isEvidenceList
-
-                ? (
-                    itemCount === 1
-                        ? "1 item"
-                        : `${itemCount} items`
-                )
-
-                : (
-                    itemCount === 1
-                        ? "1 activity"
-                        : `${itemCount} activities`
-                );
-
-
-        const toggle =
-            document.createElement(
-                "button"
-            );
-
-
-        toggle.type =
-            "button";
-
-
-        toggle.className =
-            "relationship-collapse-toggle";
-
-
-        toggle.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-
-        toggle.innerHTML =
-            `
-
-                <span
-                    class="relationship-toggle-label"
-                >
-                    Show
-                </span>
-
-                <i
-                    class="fa-solid fa-chevron-down"
-                ></i>
-
-            `;
-
-
-        section.insertBefore(
-            header,
-            title
-        );
-
-
-        header.appendChild(
-            title
-        );
-
-
-        header.appendChild(
-            count
-        );
-
-
-        header.appendChild(
-            toggle
-        );
-
-
-        list.classList.add(
-            "relationship-list-collapsed"
-        );
-
-
-        list.classList.remove(
-            "relationship-list-expanded"
-        );
-
-
-        debug(
-            "Relationship section enhanced:",
-            title.textContent.trim()
-        );
-
-    }
-
-
-    function enhanceAllExistingSections() {
-
-        document
-            .querySelectorAll(
-                SECTION_SELECTOR
-            )
-            .forEach(
-                enhanceSection
-            );
-
-    }
-
-
-    /*
-       Expose refresh function to loadCPD().
-    */
-
-    window.refreshRelationshipCollapsibles =
-        enhanceAllExistingSections;
-
-
-    /*
-       MutationObserver catches relationship
-       sections created dynamically.
-    */
-
-    const observer =
-        new MutationObserver(
-            function(
-                mutations
-            ) {
-
-                mutations.forEach(
-                    mutation => {
-
-                        mutation.addedNodes
-                            .forEach(
-                                node => {
-
-                                    if (
-                                        node.nodeType !==
-                                        1
-                                    ) {
-
-                                        return;
-
-                                    }
-
-
-                                    if (
-                                        node.matches &&
-                                        node.matches(
-                                            SECTION_SELECTOR
-                                        )
-                                    ) {
-
-                                        enhanceSection(
-                                            node
-                                        );
-
-                                    }
-
-
-                                    if (
-                                        node.querySelectorAll
-                                    ) {
-
-                                        node
-                                            .querySelectorAll(
-                                                SECTION_SELECTOR
-                                            )
-                                            .forEach(
-                                                enhanceSection
-                                            );
-
-                                    }
-
-                                }
-                            );
-
-                    }
-                );
-
-            }
-        );
-
-
-    /*
-       Start observer.
-    */
-
-    if (
-        document.body
-    ) {
-
-        observer.observe(
-            document.body,
-            {
-                childList: true,
-                subtree: true
-            }
-        );
-
-    }
-
-
-    /*
-       Delegated relationship toggle handler.
-    */
-
-    document.addEventListener(
-        "click",
-        function(e) {
-
-            const toggle =
-                e.target.closest(
-                    ".relationship-collapse-toggle"
-                );
-
-
-            if (
-                !toggle
-            ) {
-
-                return;
-
-            }
-
-
-            e.preventDefault();
-
-            e.stopPropagation();
-
-
-            const section =
-                toggle.closest(
-
-                    ".supporting-cpd-activities, " +
-
-                    ".competency-related-section"
-
-                );
-
-
-            if (
-                !section
-            ) {
-
-                return;
-
-            }
-
-
-            const list =
-                section.querySelector(
-
-                    ".supporting-cpd-list, " +
-
-                    ".competency-related-cpd-list, " +
-
-                    ".competency-related-evidence-list"
-
-                );
-
-
-            if (
-                !list
-            ) {
-
-                return;
-
-            }
-
-
-            const isExpanded =
-                list.classList.contains(
-                    "relationship-list-expanded"
-                );
-
-
-            const label =
-                toggle.querySelector(
-                    ".relationship-toggle-label"
-                );
-
-
-            const icon =
-                toggle.querySelector(
-                    "i"
-                );
-
-
-            if (
-                isExpanded
-            ) {
-
-                list.classList.remove(
-                    "relationship-list-expanded"
-                );
-
-
-                list.classList.add(
-                    "relationship-list-collapsed"
-                );
-
-
-                toggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-
-                toggle.classList.remove(
-                    "expanded"
-                );
-
-
-                if (
-                    label
-                ) {
-
-                    label.textContent =
-                        "Show";
-
-                }
-
-
-                if (
-                    icon
-                ) {
-
-                    icon.className =
-                        "fa-solid fa-chevron-down";
-
-                }
-
-            }
-
-            else {
-
-                list.classList.remove(
-                    "relationship-list-collapsed"
-                );
-
-
-                list.classList.add(
-                    "relationship-list-expanded"
-                );
-
-
-                toggle.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
-
-                toggle.classList.add(
-                    "expanded"
-                );
-
-
-                if (
-                    label
-                ) {
-
-                    label.textContent =
-                        "Hide";
-
-                }
-
-
-                if (
-                    icon
-                ) {
-
-                    icon.className =
-                        "fa-solid fa-chevron-up";
-
-                }
-
-            }
-
-        },
-        true
-    );
-
-
-    enhanceAllExistingSections();
-
-
-    debug(
-        "Relationship collapsible system ready."
-    );
-
-})();
-
-
-/* ==========================================================
-   24. DUAL RADAR
-========================================================== */
+/* ============================================================
+   DUAL RADAR
+============================================================ */
 
 function generateDualRadar() {
 
     const ratingMap = {
 
-        "Aware":
-            1,
+        "Aware": 1,
 
-        "Practised":
-            2,
+        "Practised": 2,
 
-        "Competent":
-            3,
+        "Competent": 3,
 
-        "Proficient":
-            4,
+        "Proficient": 4,
 
-        "Expert":
-            5
+        "Expert": 5
 
     };
 
 
     const colourMap = {
 
-        1:
-            "#555",
+        1: "#555",
 
-        2:
-            "#8a2be2",
+        2: "#8a2be2",
 
-        3:
-            "#b8860b",
+        3: "#b8860b",
 
-        4:
-            "#007b5f",
+        4: "#007b5f",
 
-        5:
-            "#0a66c2"
+        5: "#0a66c2"
 
     };
 
@@ -12197,9 +11407,7 @@ function generateDualRadar() {
                     "Unknown";
 
 
-                if (
-                    titleEl
-                ) {
+                if (titleEl) {
 
                     title =
                         [
@@ -12212,7 +11420,8 @@ function generateDualRadar() {
                         )
                         .map(
                             n =>
-                                n.textContent.trim()
+                                n.textContent
+                                    .trim()
                         )
                         .join(
                             " "
@@ -12242,8 +11451,7 @@ function generateDualRadar() {
                     value:
                         ratingMap[
                             ratingText
-                        ] ||
-                        0
+                        ] || 0
 
                 };
 
@@ -12256,7 +11464,7 @@ function generateDualRadar() {
             ...allData
         ]
         .sort(
-            (a,b) =>
+            (a, b) =>
                 b.value -
                 a.value
         );
@@ -12278,7 +11486,7 @@ function generateDualRadar() {
 
     const sortedNonExpert =
         nonExpert.sort(
-            (a,b) =>
+            (a, b) =>
                 b.value -
                 a.value
         );
@@ -12300,8 +11508,7 @@ function generateDualRadar() {
 
                 value:
                     Math.min(
-                        d.value +
-                        1,
+                        d.value + 1,
                         5
                     )
 
@@ -12327,9 +11534,9 @@ function generateDualRadar() {
 }
 
 
-/* ==========================================================
-   25. DRAW RADAR
-========================================================== */
+/* ============================================================
+   DRAW RADAR
+============================================================ */
 
 function drawRadar(
     svgId,
@@ -12349,9 +11556,7 @@ function drawRadar(
         !data ||
         !data.length
     ) {
-
         return;
-
     }
 
 
@@ -12431,25 +11636,20 @@ function drawRadar(
                             2;
 
 
-                        return (
-
-                            Math.cos(
-                                angle
-                            ) *
-                            r
-
-                        ) +
-
-                        "," +
-
-                        (
-
-                            Math.sin(
-                                angle
-                            ) *
-                            r
-
-                        );
+                        return `
+                            ${
+                                Math.cos(
+                                    angle
+                                ) *
+                                r
+                            },
+                            ${
+                                Math.sin(
+                                    angle
+                                ) *
+                                r
+                            }
+                        `;
 
                     }
                 )
@@ -12505,25 +11705,20 @@ function drawRadar(
                         );
 
 
-                    return (
-
-                        Math.cos(
-                            angle
-                        ) *
-                        r
-
-                    ) +
-
-                    "," +
-
-                    (
-
-                        Math.sin(
-                            angle
-                        ) *
-                        r
-
-                    );
+                    return `
+                        ${
+                            Math.cos(
+                                angle
+                            ) *
+                            r
+                        },
+                        ${
+                            Math.sin(
+                                angle
+                            ) *
+                            r
+                        }
+                    `;
 
                 }
             )
@@ -12612,32 +11807,30 @@ function drawRadar(
             );
 
 
-            if (
-                tooltip
-            ) {
+            if (tooltip) {
 
                 point.addEventListener(
                     "mouseenter",
                     () => {
 
-                        tooltip.innerHTML =
-                            `
+                        tooltip.innerHTML = `
 
-                                <strong>
-                                    ${d.label}
-                                </strong>
+                            <strong>
+                                ${d.label}
+                            </strong>
 
-                                <br>
+                            <br>
 
-                                ${
-                                    isTarget
-                                        ? "Target"
-                                        : "Current"
-                                }
-                                level:
-                                ${d.value}
+                            ${
+                                isTarget
+                                    ? "Target"
+                                    : "Current"
+                            }
 
-                            `;
+                            level:
+                            ${d.value}
+
+                        `;
 
 
                         tooltip.style.opacity =
@@ -12693,9 +11886,9 @@ function drawRadar(
 }
 
 
-/* ==========================================================
-   26. WAIT FOR COMPETENCY ACCORDION
-========================================================== */
+/* ============================================================
+   WAIT FOR COMPETENCY ACCORDION
+============================================================ */
 
 function waitForAccordion(
     retries = 30
@@ -12754,112 +11947,9 @@ function waitForAccordion(
 }
 
 
-/* ==========================================================
-   27. APM FRAMEWORK CAROUSEL
-========================================================== */
-
-function initialiseAPMCarousel() {
-
-    const track =
-        document.querySelector(
-            ".carousel-track"
-        );
-
-
-    const prevBtn =
-        document.querySelector(
-            ".carousel-btn.prev"
-        );
-
-
-    const nextBtn =
-        document.querySelector(
-            ".carousel-btn.next"
-        );
-
-
-    if (
-        !track ||
-        !prevBtn ||
-        !nextBtn
-    ) {
-
-        console.warn(
-            "[APM] Framework carousel elements not found."
-        );
-
-        return;
-
-    }
-
-
-    const scrollAmount =
-        320;
-
-
-    nextBtn.addEventListener(
-        "click",
-        function() {
-
-            track.scrollBy({
-
-                left:
-                    scrollAmount,
-
-                behavior:
-                    "smooth"
-
-            });
-
-        }
-    );
-
-
-    prevBtn.addEventListener(
-        "click",
-        function() {
-
-            track.scrollBy({
-
-                left:
-                    -scrollAmount,
-
-                behavior:
-                    "smooth"
-
-            });
-
-        }
-    );
-
-}
-
-
-/* ==========================================================
-   28. PAGE INITIALISATION
-========================================================== */
-
-function initialiseCPDPage() {
-
-    debug(
-        "Initialising CPD page."
-    );
-
-
-    loadCPD();
-
-
-    waitForAccordion();
-
-
-    initialiseAPMCarousel();
-
-}
-
-
-/* ==========================================================
-   29. START
-========================================================== */
+/* ============================================================
+   PAGE INITIALISATION
+============================================================ */
 
 if (
     document.readyState ===
@@ -12868,16 +11958,100 @@ if (
 
     document.addEventListener(
         "DOMContentLoaded",
-        initialiseCPDPage
+        loadCPD
     );
 
 }
 
 else {
 
-    initialiseCPDPage();
+    loadCPD();
 
 }
+
+
+/* ============================================================
+   APM FRAMEWORK CAROUSEL
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const track =
+            document.querySelector(
+                ".carousel-track"
+            );
+
+
+        const prevBtn =
+            document.querySelector(
+                ".carousel-btn.prev"
+            );
+
+
+        const nextBtn =
+            document.querySelector(
+                ".carousel-btn.next"
+            );
+
+
+        if (
+            !track ||
+            !prevBtn ||
+            !nextBtn
+        ) {
+
+            console.warn(
+                "[APM] Framework carousel elements not found."
+            );
+
+            return;
+
+        }
+
+
+        const scrollAmount =
+            320;
+
+
+        nextBtn.addEventListener(
+            "click",
+            function() {
+
+                track.scrollBy({
+
+                    left:
+                        scrollAmount,
+
+                    behavior:
+                        "smooth"
+
+                });
+
+            }
+        );
+
+
+        prevBtn.addEventListener(
+            "click",
+            function() {
+
+                track.scrollBy({
+
+                    left:
+                        -scrollAmount,
+
+                    behavior:
+                        "smooth"
+
+                });
+
+            }
+        );
+
+    }
+);
 
 </script>
   <!-- APM COMPETENCE FRAMEWORK GRID -->

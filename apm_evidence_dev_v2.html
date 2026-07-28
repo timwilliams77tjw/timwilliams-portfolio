@@ -7908,7 +7908,7 @@ function getCPDLogToggle() {
     }
 
     return section.querySelector(
-        ":scope > .collapsible-toggle"
+        ".collapsible-toggle"
     );
 
 }
@@ -7924,26 +7924,23 @@ function getCPDLogContent() {
     }
 
     return section.querySelector(
-        ":scope > .collapsible-content"
+        ".collapsible-content"
     );
 
 }
-
 /* ==========================================================
-   OPEN CPD LOG PROGRAMMATICALLY
+   OPEN CPD LOG FOR PROGRAMMATIC NAVIGATION
    ----------------------------------------------------------
-   Used when navigating to a CPD activity from:
-       - Evidence → CPD
-       - Competency → CPD
+   Used by:
+       - Evidence → CPD Activity
+       - Competency → CPD Activity
 
-   The CPD Log is opened programmatically, but the inline
-   styles used to force it open are removed immediately
-   after the existing accordion has processed the opening.
+   IMPORTANT:
+   This function only opens the CPD Log when it is closed.
 
-   This allows:
-       1. Automatic expansion to work.
-       2. The existing accordion handler to remain in control.
-       3. The user to manually collapse the CPD Log afterwards.
+   It does NOT permanently force the CPD Log open.
+   It does NOT add a second click handler.
+   It does NOT modify the normal manual accordion behaviour.
 ========================================================== */
 
 function openCPDLog() {
@@ -7974,10 +7971,12 @@ function openCPDLog() {
 
 
     /*
-       Check whether the CPD Log is already open.
+       ======================================================
+       CHECK CURRENT STATE
+       ======================================================
     */
 
-    const isAlreadyOpen =
+    const isOpen =
         section.classList.contains(
             "open"
         ) ||
@@ -7991,11 +7990,17 @@ function openCPDLog() {
 
 
     /*
-       If already open, do not click the toggle.
-       Clicking it would close the CPD Log.
+       If already open, leave it alone.
+
+       This is essential because we do not want to
+       accidentally toggle an already-open CPD Log closed.
     */
 
-    if (isAlreadyOpen) {
+    if (isOpen) {
+
+        console.log(
+            "[CPD] CPD Log already open."
+        );
 
         return true;
 
@@ -8004,149 +8009,147 @@ function openCPDLog() {
 
     /*
        ======================================================
-       FORCE OPEN
+       OPEN USING THE EXISTING ACCORDION TOGGLE
        ======================================================
+
+       Do not permanently apply inline styles.
+       Do not permanently force max-height.
+       Do not create a second click handler.
+
+       The existing accordion system remains responsible
+       for the actual state.
     */
 
-    section.classList.add(
-        "open"
-    );
-
-    toggle.classList.add(
-        "open"
-    );
-
-    content.classList.add(
-        "open"
-    );
-
-
-    toggle.setAttribute(
-        "aria-expanded",
-        "true"
-    );
-
-
-    content.hidden =
-        false;
-
-
-    content.removeAttribute(
-        "hidden"
+    console.log(
+        "[CPD] CPD Log is closed. Triggering accordion toggle."
     );
 
 
     /*
-       Force visibility so the target CPD activity
-       can be located and scrolled into view.
+       Dispatch a real click event.
+
+       This is deliberately done instead of manually
+       modifying classes/styles.
     */
 
-    content.style.display =
-        "block";
+    toggle.dispatchEvent(
+        new MouseEvent(
+            "click",
+            {
+                bubbles:
+                    true,
 
-    content.style.visibility =
-        "visible";
+                cancelable:
+                    true,
 
-    content.style.opacity =
-        "1";
-
-    content.style.height =
-        "auto";
-
-    content.style.maxHeight =
-        "none";
-
-    content.style.overflow =
-        "visible";
+                view:
+                    window
+            }
+        )
+    );
 
 
     /*
        ======================================================
-       HAND CONTROL BACK TO THE EXISTING ACCORDION
+       VERIFY AFTER ACCORDION HANDLER HAS RUN
        ======================================================
-
-       The important part is that the forced inline styles
-       are removed after the browser has had an opportunity
-       to render the opened state.
-
-       The .open classes remain so the existing accordion
-       knows the section is open.
-
-       The next manual click can therefore close it.
     */
 
-    requestAnimationFrame(
+    setTimeout(
         () => {
 
-            requestAnimationFrame(
-                () => {
-
-                    /*
-                       Only remove the inline styles.
-
-                       Do NOT remove the .open classes here.
-                    */
-
-                    content.style.display =
-                        "";
-
-                    content.style.visibility =
-                        "";
-
-                    content.style.opacity =
-                        "";
-
-                    content.style.height =
-                        "";
-
-                    content.style.maxHeight =
-                        "";
-
-                    content.style.overflow =
-                        "";
+            const nowOpen =
+                section.classList.contains(
+                    "open"
+                ) ||
+                toggle.classList.contains(
+                    "open"
+                ) ||
+                content.classList.contains(
+                    "open"
+                ) ||
+                content.hidden === false;
 
 
-                    /*
-                       Keep the CPD Log logically open.
-                    */
-
-                    section.classList.add(
-                        "open"
-                    );
-
-                    toggle.classList.add(
-                        "open"
-                    );
-
-                    content.classList.add(
-                        "open"
-                    );
-
-                    content.hidden =
-                        false;
-
-                    toggle.setAttribute(
-                        "aria-expanded",
-                        "true"
-                    );
-
-
-                    debug(
-                        "CPD Log automatically opened and accordion control restored."
-                    );
-
-                }
+            console.log(
+                "[CPD] CPD Log state after navigation:",
+                nowOpen
+                    ? "OPEN"
+                    : "CLOSED"
             );
 
-        }
+
+            /*
+               If the existing accordion handler did not
+               open the section, use a controlled fallback.
+
+               This fallback is only used when the normal
+               toggle event failed.
+            */
+
+            if (!nowOpen) {
+
+                console.warn(
+                    "[CPD] Existing accordion toggle did not open CPD Log. Applying controlled fallback."
+                );
+
+
+                section.classList.add(
+                    "open"
+                );
+
+                toggle.classList.add(
+                    "open"
+                );
+
+                content.classList.add(
+                    "open"
+                );
+
+
+                content.hidden =
+                    false;
+
+
+                toggle.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+
+                /*
+                   Use CSS class state rather than permanent
+                   inline display/max-height overrides.
+                */
+
+                content.style.display =
+                    "";
+
+                content.style.visibility =
+                    "";
+
+                content.style.opacity =
+                    "";
+
+                content.style.height =
+                    "";
+
+                content.style.maxHeight =
+                    "";
+
+                content.style.overflow =
+                    "";
+
+            }
+
+        },
+        100
     );
 
 
     return true;
 
 }
-
-
 /* ==========================================================
    CLOSE CPD LOG PROGRAMMATICALLY
    ----------------------------------------------------------

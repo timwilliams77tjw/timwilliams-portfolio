@@ -8580,29 +8580,13 @@ async function loadCPD() {
         linkCPDToCompetences();
 
 
-        /*
-           Evidence relationships now use
-           the generated CPD cards.
-        */
+      populateEvidenceCPDRelationships();
 
-        populateEvidenceCPDRelationships();
+populateCPDEvidenceRelationships();
 
+populateCompetencyRelationships();
 
-        /*
-           Competency relationships use
-           CPD + evidence relationships.
-        */
-
-        populateCompetencyRelationships();
-
-
-        initialiseRelationshipCollapsibles();
-
-
-        /*
-           Generate radar after competency
-           cards are available.
-        */
+initialiseRelationshipCollapsibles();
 
         waitForAccordion();
 
@@ -9217,7 +9201,353 @@ function populateEvidenceCPDRelationships() {
 
 }
 
+/* ============================================================
+   CPD → EVIDENCE RELATIONSHIPS
+   ------------------------------------------------------------
+   Adds a Supporting Evidence section to each CPD card
+   based on the evidenceGoalRelationships mapping.
 
+   This creates the missing:
+
+       CPD → Evidence
+
+   relationship.
+
+   It does NOT remove or modify:
+       Evidence → CPD
+       Competency → CPD
+       Competency → Evidence
+============================================================ */
+
+function populateCPDEvidenceRelationships() {
+
+    console.log(
+        "[CPD] Starting CPD → Evidence relationship layer..."
+    );
+
+
+    /* -----------------------------------------------
+       Remove previously generated sections
+    ----------------------------------------------- */
+
+    document
+        .querySelectorAll(
+            ".cpd-supporting-evidence"
+        )
+        .forEach(
+            section => {
+
+                section.remove();
+
+            }
+        );
+
+
+    /* -----------------------------------------------
+       Process each CPD card
+    ----------------------------------------------- */
+
+    document
+        .querySelectorAll(
+            ".cpd-card"
+        )
+        .forEach(
+            card => {
+
+                const categoryElement =
+                    card.querySelector(
+                        ".cpd-category"
+                    );
+
+
+                if (!categoryElement) {
+                    return;
+                }
+
+
+                const activityGoal =
+                    categoryElement
+                        .textContent
+                        .trim()
+                        .toLowerCase();
+
+
+                if (!activityGoal) {
+                    return;
+                }
+
+
+                /* -----------------------------------
+                   Find matching evidence cards
+                ----------------------------------- */
+
+                const matchingEvidence = [];
+
+
+                Object.entries(
+                    evidenceGoalRelationships
+                )
+                .forEach(
+                    (
+                        [
+                            evidenceId,
+                            evidenceGoals
+                        ]
+                    ) => {
+
+                        const matchesGoal =
+                            evidenceGoals.some(
+                                goal =>
+                                    goal
+                                        .trim()
+                                        .toLowerCase() ===
+                                    activityGoal
+                            );
+
+
+                        if (!matchesGoal) {
+                            return;
+                        }
+
+
+                        const evidenceCard =
+                            document.getElementById(
+                                evidenceId
+                            );
+
+
+                        if (!evidenceCard) {
+                            return;
+                        }
+
+
+                        const heading =
+                            evidenceCard.querySelector(
+                                "h3"
+                            );
+
+
+                        if (!heading) {
+                            return;
+                        }
+
+
+                        matchingEvidence.push({
+
+                            id:
+                                evidenceId,
+
+                            name:
+                                heading
+                                    .textContent
+                                    .trim()
+
+                        });
+
+                    }
+                );
+
+
+                /* -----------------------------------
+                   No matching evidence
+                ----------------------------------- */
+
+                if (
+                    !matchingEvidence.length
+                ) {
+                    return;
+                }
+
+
+                /* -----------------------------------
+                   Create wrapper
+                ----------------------------------- */
+
+                const wrapper =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                wrapper.className =
+                    "cpd-supporting-evidence";
+
+
+                /* -----------------------------------
+                   Header
+                ----------------------------------- */
+
+                const header =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                header.className =
+                    "cpd-supporting-evidence-header";
+
+
+                const title =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                title.className =
+                    "cpd-supporting-evidence-title";
+
+
+                title.textContent =
+                    "Supporting Evidence";
+
+
+                const count =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                count.className =
+                    "cpd-supporting-evidence-count";
+
+
+                count.textContent =
+                    matchingEvidence.length === 1
+                        ? "1 item"
+                        : `${matchingEvidence.length} items`;
+
+
+                const toggle =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                toggle.type =
+                    "button";
+
+
+                toggle.className =
+                    "cpd-supporting-evidence-toggle";
+
+
+                toggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+
+                toggle.innerHTML = `
+                    <span class="cpd-supporting-evidence-toggle-label">
+                        Show
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+                `;
+
+
+                header.appendChild(
+                    title
+                );
+
+                header.appendChild(
+                    count
+                );
+
+                header.appendChild(
+                    toggle
+                );
+
+
+                /* -----------------------------------
+                   Evidence list
+                ----------------------------------- */
+
+                const list =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                list.className =
+                    "cpd-supporting-evidence-list";
+
+
+                list.style.display =
+                    "none";
+
+
+                matchingEvidence.forEach(
+                    evidence => {
+
+                        const link =
+                            document.createElement(
+                                "a"
+                            );
+
+
+                        link.className =
+                            "cpd-supporting-evidence-link";
+
+
+                        link.href =
+                            "#" +
+                            evidence.id;
+
+
+                        link.dataset.evidenceTarget =
+                            "#" +
+                            evidence.id;
+
+
+                        link.innerHTML = `
+
+                            <span>
+                                ${evidence.name}
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        `;
+
+
+                        list.appendChild(
+                            link
+                        );
+
+                    }
+                );
+
+
+                wrapper.appendChild(
+                    header
+                );
+
+
+                wrapper.appendChild(
+                    list
+                );
+
+
+                /*
+                   Append to CPD card.
+                */
+
+                card.appendChild(
+                    wrapper
+                );
+
+            }
+        );
+
+
+    console.log(
+        "[CPD] CPD → Evidence relationship layer complete."
+    );
+
+}
+
+  
 /* ============================================================
    COMPETENCY → CPD + EVIDENCE RELATIONSHIPS
 ============================================================ */
@@ -10300,7 +10630,146 @@ document.addEventListener(
 
         }
 
+/* ======================================================
+   CPD → EVIDENCE LIST TOGGLE
+====================================================== */
 
+const cpdEvidenceToggle =
+    e.target.closest(
+        ".cpd-supporting-evidence-toggle"
+    );
+
+
+if (cpdEvidenceToggle) {
+
+    e.preventDefault();
+
+    e.stopPropagation();
+
+
+    const wrapper =
+        cpdEvidenceToggle.closest(
+            ".cpd-supporting-evidence"
+        );
+
+
+    if (!wrapper) {
+        return;
+    }
+
+
+    const list =
+        wrapper.querySelector(
+            ".cpd-supporting-evidence-list"
+        );
+
+
+    if (!list) {
+        return;
+    }
+
+
+    const isOpen =
+        list.style.display ===
+        "block";
+
+
+    if (isOpen) {
+
+        list.style.display =
+            "none";
+
+
+        cpdEvidenceToggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+
+        cpdEvidenceToggle.innerHTML = `
+            <span class="cpd-supporting-evidence-toggle-label">
+                Show
+            </span>
+
+            <i class="fa-solid fa-chevron-down"></i>
+        `;
+
+    } else {
+
+        list.style.display =
+            "block";
+
+
+        list.style.visibility =
+            "visible";
+
+
+        list.style.opacity =
+            "1";
+
+
+        cpdEvidenceToggle.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+
+        cpdEvidenceToggle.innerHTML = `
+            <span class="cpd-supporting-evidence-toggle-label">
+                Hide
+            </span>
+
+            <i class="fa-solid fa-chevron-up"></i>
+        `;
+
+    }
+
+
+    return;
+
+}      
+
+/* ======================================================
+   CPD → EVIDENCE LINK
+====================================================== */
+
+const cpdEvidenceLink =
+    e.target.closest(
+        ".cpd-supporting-evidence-link"
+    );
+
+
+if (cpdEvidenceLink) {
+
+    const href =
+        cpdEvidenceLink.getAttribute(
+            "href"
+        );
+
+
+    if (
+        href &&
+        href.startsWith(
+            "#evidence-"
+        )
+    ) {
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+
+        navigateToEvidence(
+            href
+        );
+
+
+        return;
+
+    }
+
+}
+      
         /* ======================================================
            6. COMPETENCY → EVIDENCE
         ====================================================== */

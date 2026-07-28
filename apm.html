@@ -7364,6 +7364,93 @@ section.competency-section > .competency-card {
     }
 
 }
+
+/* ==========================================================
+   COMPETENCY SUPPORTING RELATIONSHIPS
+   ----------------------------------------------------------
+   Provides clear visual separation between:
+       - Supporting CPD Activities
+       - Supporting Evidence
+========================================================== */
+
+.competency-supporting-relationships {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(10, 102, 194, 0.15);
+}
+
+
+/* ==========================================================
+   INDIVIDUAL RELATIONSHIP SECTIONS
+========================================================== */
+
+.competency-related-section {
+    display: block;
+    width: 100%;
+}
+
+
+/* ==========================================================
+   SECTION TITLES
+========================================================== */
+
+.competency-related-title {
+    margin-bottom: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+
+/* ==========================================================
+   CPD / EVIDENCE LISTS
+========================================================== */
+
+.competency-related-cpd-list,
+.competency-related-evidence-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* ==========================================================
+   RELATIONSHIP COLLAPSE HEADER
+========================================================== */
+
+.relationship-collapse-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+
+/* ==========================================================
+   COLLAPSE TOGGLE
+========================================================== */
+
+.relationship-collapse-toggle {
+    margin-left: auto;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 700px) {
+
+    .competency-supporting-relationships {
+        gap: 22px;
+        margin-top: 22px;
+        padding-top: 20px;
+    }
+
+}
   
 </style>
 
@@ -7799,7 +7886,16 @@ function parseUSDate(d) {
 }
 
 /* ==========================================================
-   CPD LOG ELEMENT HELPERS
+   CPD LOG STATE + NAVIGATION HELPERS
+   ----------------------------------------------------------
+   IMPORTANT:
+   - The CPD Log's existing/native accordion handler remains
+     responsible for normal manual opening and closing.
+   - These functions only synchronise the state when we need
+     to navigate to a CPD activity.
+   - We do NOT permanently force the CPD Log open.
+   - After automatic navigation, the user can manually close
+     the CPD Log again.
 ========================================================== */
 
 function getCPDLogSection() {
@@ -7844,15 +7940,16 @@ function getCPDLogContent() {
 
 
 /* ==========================================================
-   OPEN CPD LOG PROGRAMMATICALLY
+   OPEN CPD LOG FOR PROGRAMMATIC NAVIGATION
    ----------------------------------------------------------
-   Used ONLY when another part of the page needs to navigate
-   to a CPD activity.
+   This is ONLY called when navigating from:
+       Competency → CPD
+       Evidence → CPD
 
-   IMPORTANT:
-   This does NOT install another click handler.
-   The existing accordion click handler remains the sole
-   controller of normal user open/close behaviour.
+   It opens the log without installing a persistent
+   "force open" behaviour.
+
+   The user remains free to manually collapse it afterwards.
 ========================================================== */
 
 function openCPDLog() {
@@ -7866,6 +7963,7 @@ function openCPDLog() {
     const content =
         getCPDLogContent();
 
+
     if (
         !section ||
         !toggle ||
@@ -7873,13 +7971,17 @@ function openCPDLog() {
     ) {
 
         console.warn(
-            "[CPD] CPD Log elements not found."
+            "[CPD] Cannot open CPD Log - elements not found."
         );
 
         return false;
 
     }
 
+
+    /* ----------------------------------------------
+       Synchronise open state
+    ---------------------------------------------- */
 
     section.classList.add(
         "open"
@@ -7894,11 +7996,19 @@ function openCPDLog() {
     );
 
 
+    /* ----------------------------------------------
+       Accessibility state
+    ---------------------------------------------- */
+
     toggle.setAttribute(
         "aria-expanded",
         "true"
     );
 
+
+    /* ----------------------------------------------
+       Remove native hidden state
+    ---------------------------------------------- */
 
     content.hidden =
         false;
@@ -7908,34 +8018,41 @@ function openCPDLog() {
     );
 
 
-    /*
-       Force the programmatic navigation state open.
-
-       This is used when a relationship link needs to
-       reveal a CPD activity.
-    */
+    /* ----------------------------------------------
+       Clear any inline styles that could prevent
+       the normal accordion from subsequently
+       closing.
+    ---------------------------------------------- */
 
     content.style.display =
-        "block";
+        "";
 
     content.style.visibility =
-        "visible";
+        "";
 
     content.style.opacity =
-        "1";
+        "";
 
     content.style.height =
-        "auto";
+        "";
 
     content.style.maxHeight =
-        "none";
+        "";
 
     content.style.overflow =
-        "visible";
+        "";
+
+
+    /*
+       IMPORTANT:
+       We do not add a click handler here.
+       We do not force the CPD Log to remain open.
+       We do not use setTimeout to re-open it.
+    */
 
 
     console.log(
-        "[CPD] CPD Log opened programmatically."
+        "[CPD] CPD Log opened for navigation."
     );
 
 
@@ -7945,12 +8062,13 @@ function openCPDLog() {
 
 
 /* ==========================================================
-   CLOSE CPD LOG PROGRAMMATICALLY
+   CLOSE CPD LOG
    ----------------------------------------------------------
-   Used only when another automated function explicitly
-   needs to close the CPD Log.
+   Used only if another script explicitly needs to close
+   the CPD Log.
 
-   It does NOT listen for clicks.
+   Normal manual closing should continue to be handled by
+   the existing/native accordion handler.
 ========================================================== */
 
 function closeCPDLog() {
@@ -7963,6 +8081,7 @@ function closeCPDLog() {
 
     const content =
         getCPDLogContent();
+
 
     if (
         !section ||
@@ -7998,15 +8117,6 @@ function closeCPDLog() {
         true;
 
 
-    /*
-       Clear all inline overrides added by
-       openCPDLog().
-
-       This allows the original accordion CSS
-       and existing accordion handler to regain
-       control of the closed state.
-    */
-
     content.style.display =
         "";
 
@@ -8027,11 +8137,263 @@ function closeCPDLog() {
 
 
     console.log(
-        "[CPD] CPD Log closed programmatically."
+        "[CPD] CPD Log closed."
     );
 
 
     return true;
+
+}
+/* ==========================================================
+   NORMALISE CPD LOG AFTER NAVIGATION
+   ----------------------------------------------------------
+   This runs after the page's other accordion handlers
+   have completed.
+
+   It ensures the CPD Log is still open after navigation,
+   but does NOT install a permanent handler that prevents
+   manual closing.
+========================================================== */
+
+function finaliseCPDLogNavigationOpen() {
+
+    const section =
+        getCPDLogSection();
+
+    const toggle =
+        getCPDLogToggle();
+
+    const content =
+        getCPDLogContent();
+
+
+    if (
+        !section ||
+        !toggle ||
+        !content
+    ) {
+        return false;
+    }
+
+
+    section.classList.add(
+        "open"
+    );
+
+    toggle.classList.add(
+        "open"
+    );
+
+    content.classList.add(
+        "open"
+    );
+
+
+    content.hidden =
+        false;
+
+    content.removeAttribute(
+        "hidden"
+    );
+
+
+    content.style.display =
+        "block";
+
+    content.style.visibility =
+        "visible";
+
+    content.style.opacity =
+        "1";
+
+    content.style.height =
+        "auto";
+
+    content.style.maxHeight =
+        "none";
+
+    content.style.overflow =
+        "visible";
+
+
+    toggle.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+    content.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    return true;
+
+}
+
+
+/* ==========================================================
+   CLEAR PROGRAMMATIC NAVIGATION FLAG
+========================================================== */
+
+function clearCPDNavigationState() {
+
+    const section =
+        getCPDLogSection();
+
+    if (!section) {
+        return;
+    }
+
+    delete section.dataset.navigationOpened;
+
+}
+
+
+/* ============================================================
+   NAVIGATE TO CPD ACTIVITY
+   ------------------------------------------------------------
+   Works for:
+       Evidence → CPD
+       Competency → CPD
+
+   Behaviour:
+       1. Find the CPD activity.
+       2. Open the CPD Log.
+       3. Allow the browser to recalculate layout.
+       4. Scroll to the activity.
+       5. Highlight the activity.
+       6. User can manually collapse the CPD Log afterwards.
+============================================================ */
+
+function navigateToCPDActivity(
+    href
+) {
+
+    if (
+        !href ||
+        !href.startsWith(
+            "#cpd-activity-"
+        )
+    ) {
+
+        console.warn(
+            "[CPD] Invalid CPD activity link:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    const target =
+        document.querySelector(
+            href
+        );
+
+
+    if (!target) {
+
+        console.warn(
+            "[CPD] CPD activity target not found:",
+            href
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "[CPD] Navigating to:",
+        href
+    );
+
+
+    /*
+       Open CPD Log.
+    */
+
+    const opened =
+        openCPDLog();
+
+
+    if (!opened) {
+
+        console.warn(
+            "[CPD] CPD Log could not be opened."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Remove previous highlights.
+    */
+
+    document
+        .querySelectorAll(
+            ".cpd-card.cpd-activity-highlighted"
+        )
+        .forEach(
+            card => {
+
+                card.classList.remove(
+                    "cpd-activity-highlighted"
+                );
+
+            }
+        );
+
+
+    /*
+       Wait for the CPD Log to become part of the
+       document layout before scrolling.
+    */
+
+    requestAnimationFrame(
+        () => {
+
+            requestAnimationFrame(
+                () => {
+
+                    target.classList.add(
+                        "cpd-activity-highlighted"
+                    );
+
+
+                    target.scrollIntoView({
+                        behavior:
+                            "smooth",
+
+                        block:
+                            "center"
+                    });
+
+
+                    /*
+                       Remove highlight after 3 seconds.
+                    */
+
+                    setTimeout(
+                        () => {
+
+                            target.classList.remove(
+                                "cpd-activity-highlighted"
+                            );
+
+                        },
+                        3000
+                    );
+
+                }
+            );
+
+        }
+    );
 
 }
 

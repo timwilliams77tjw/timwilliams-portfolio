@@ -7798,7 +7798,6 @@ function parseUSDate(d) {
 
 }
 
-
 /* ==========================================================
    CPD LOG ELEMENT HELPERS
 ========================================================== */
@@ -7845,12 +7844,15 @@ function getCPDLogContent() {
 
 
 /* ==========================================================
-   FORCE CPD LOG OPEN
+   OPEN CPD LOG PROGRAMMATICALLY
    ----------------------------------------------------------
-   This is intentionally independent of the page's
-   existing accordion click handler.
+   Used ONLY when another part of the page needs to navigate
+   to a CPD activity.
 
-   It directly forces the content to be visible.
+   IMPORTANT:
+   This does NOT install another click handler.
+   The existing accordion click handler remains the sole
+   controller of normal user open/close behaviour.
 ========================================================== */
 
 function openCPDLog() {
@@ -7879,8 +7881,6 @@ function openCPDLog() {
     }
 
 
-    /* Open classes */
-
     section.classList.add(
         "open"
     );
@@ -7894,17 +7894,14 @@ function openCPDLog() {
     );
 
 
-    /* Accessibility */
-
     toggle.setAttribute(
         "aria-expanded",
         "true"
     );
 
 
-    /* Remove native hidden state */
-
-    content.hidden = false;
+    content.hidden =
+        false;
 
     content.removeAttribute(
         "hidden"
@@ -7912,11 +7909,10 @@ function openCPDLog() {
 
 
     /*
-       Force visibility.
+       Force the programmatic navigation state open.
 
-       This is important because the existing
-       accordion CSS may use display:none,
-       max-height, visibility or opacity.
+       This is used when a relationship link needs to
+       reveal a CPD activity.
     */
 
     content.style.display =
@@ -7938,8 +7934,8 @@ function openCPDLog() {
         "visible";
 
 
-    debug(
-        "CPD Log forced open."
+    console.log(
+        "[CPD] CPD Log opened programmatically."
     );
 
 
@@ -7949,7 +7945,12 @@ function openCPDLog() {
 
 
 /* ==========================================================
-   FORCE CPD LOG CLOSED
+   CLOSE CPD LOG PROGRAMMATICALLY
+   ----------------------------------------------------------
+   Used only when another automated function explicitly
+   needs to close the CPD Log.
+
+   It does NOT listen for clicks.
 ========================================================== */
 
 function closeCPDLog() {
@@ -7968,7 +7969,9 @@ function closeCPDLog() {
         !toggle ||
         !content
     ) {
+
         return false;
+
     }
 
 
@@ -7996,12 +7999,12 @@ function closeCPDLog() {
 
 
     /*
-       We deliberately do not set
-       display:none here.
+       Clear all inline overrides added by
+       openCPDLog().
 
-       The existing accordion CSS
-       remains responsible for the
-       normal closed state.
+       This allows the original accordion CSS
+       and existing accordion handler to regain
+       control of the closed state.
     */
 
     content.style.display =
@@ -8023,147 +8026,15 @@ function closeCPDLog() {
         "";
 
 
+    console.log(
+        "[CPD] CPD Log closed programmatically."
+    );
+
+
     return true;
 
 }
 
-
-/* ==========================================================
-   CPD LOG NORMAL USER TOGGLE
-   ----------------------------------------------------------
-   ONLY handles:
-       .cpd-log-inner > .collapsible-toggle
-
-   It does NOT handle Evidence cards.
-   It does NOT handle Competency cards.
-   It does NOT handle generated relationship lists.
-========================================================== */
-
-document.addEventListener(
-    "click",
-    function(e) {
-
-        const toggle =
-            e.target.closest(
-                ".cpd-log-inner > .collapsible-toggle"
-            );
-
-
-        if (!toggle) {
-            return;
-        }
-
-
-        const section =
-            toggle.closest(
-                ".cpd-log-inner"
-            );
-
-
-        if (!section) {
-            return;
-        }
-
-
-        const content =
-            section.querySelector(
-                ":scope > .collapsible-content"
-            );
-
-
-        if (!content) {
-            return;
-        }
-
-
-        /*
-           If another existing handler on the page
-           is responsible for this accordion, we do
-           not prevent it here.
-
-           Instead we synchronise the state after
-           the existing handler has had a chance to
-           run.
-        */
-
-        setTimeout(
-            function() {
-
-                const currentlyOpen =
-                    content.classList.contains(
-                        "open"
-                    ) ||
-                    toggle.classList.contains(
-                        "open"
-                    ) ||
-                    section.classList.contains(
-                        "open"
-                    ) ||
-                    content.hidden === false;
-
-
-                if (currentlyOpen) {
-
-                    /*
-                       Keep open.
-                    */
-
-                    section.classList.add(
-                        "open"
-                    );
-
-                    toggle.classList.add(
-                        "open"
-                    );
-
-                    content.classList.add(
-                        "open"
-                    );
-
-                    content.hidden =
-                        false;
-
-                    content.style.display =
-                        "block";
-
-                    content.style.visibility =
-                        "visible";
-
-                    content.style.opacity =
-                        "1";
-
-                    content.style.height =
-                        "auto";
-
-                    content.style.maxHeight =
-                        "none";
-
-
-                    toggle.setAttribute(
-                        "aria-expanded",
-                        "true"
-                    );
-
-                } else {
-
-                    /*
-                       Keep closed.
-                    */
-
-                    toggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-            },
-            50
-        );
-
-    },
-    false
-);
 
 
 /* ==========================================================

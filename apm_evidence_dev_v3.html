@@ -7886,18 +7886,16 @@ function parseUSDate(d) {
 }
 
 /* ==========================================================
-   CPD LOG STATE CONTROLLER
+   CPD LOG STATE + NAVIGATION HELPERS
    ----------------------------------------------------------
-   Single controller for:
-   1. Manual user opening
-   2. Manual user closing
-   3. Evidence → CPD navigation
-   4. Competency → CPD navigation
-
    IMPORTANT:
-   This does NOT permanently force the CPD Log open.
-   It only forces it open when navigation to a CPD
-   activity requires it.
+   - The CPD Log's existing/native accordion handler remains
+     responsible for normal manual opening and closing.
+   - These functions only synchronise the state when we need
+     to navigate to a CPD activity.
+   - We do NOT permanently force the CPD Log open.
+   - After automatic navigation, the user can manually close
+     the CPD Log again.
 ========================================================== */
 
 function getCPDLogSection() {
@@ -7942,17 +7940,19 @@ function getCPDLogContent() {
 
 
 /* ==========================================================
-   OPEN CPD LOG FOR NAVIGATION
+   OPEN CPD LOG FOR PROGRAMMATIC NAVIGATION
    ----------------------------------------------------------
-   This function is ONLY used when navigating to a CPD
-   activity from another part of the page.
+   This is ONLY called when navigating from:
+       Competency → CPD
+       Evidence → CPD
 
-   It deliberately does not install a permanent click
-   handler and does not prevent the user from subsequently
-   closing the CPD Log manually.
+   It opens the log without installing a persistent
+   "force open" behaviour.
+
+   The user remains free to manually collapse it afterwards.
 ========================================================== */
 
-function openCPDLogForNavigation() {
+function openCPDLog() {
 
     const section =
         getCPDLogSection();
@@ -7971,7 +7971,7 @@ function openCPDLogForNavigation() {
     ) {
 
         console.warn(
-            "[CPD] Cannot open CPD Log for navigation."
+            "[CPD] Cannot open CPD Log - elements not found."
         );
 
         return false;
@@ -7979,9 +7979,9 @@ function openCPDLogForNavigation() {
     }
 
 
-    /*
-       First establish the intended open state.
-    */
+    /* ----------------------------------------------
+       Synchronise open state
+    ---------------------------------------------- */
 
     section.classList.add(
         "open"
@@ -7996,15 +7996,19 @@ function openCPDLogForNavigation() {
     );
 
 
+    /* ----------------------------------------------
+       Accessibility state
+    ---------------------------------------------- */
+
     toggle.setAttribute(
         "aria-expanded",
         "true"
     );
 
 
-    /*
-       Remove native hidden state.
-    */
+    /* ----------------------------------------------
+       Remove native hidden state
+    ---------------------------------------------- */
 
     content.hidden =
         false;
@@ -8014,53 +8018,37 @@ function openCPDLogForNavigation() {
     );
 
 
-    /*
-       Force visible state.
-
-       These are temporary inline values only.
-       They do NOT create a permanent "always open"
-       state because the manual toggle remains untouched.
-    */
+    /* ----------------------------------------------
+       Clear any inline styles that could prevent
+       the normal accordion from subsequently
+       closing.
+    ---------------------------------------------- */
 
     content.style.display =
-        "block";
+        "";
 
     content.style.visibility =
-        "visible";
+        "";
 
     content.style.opacity =
-        "1";
+        "";
 
     content.style.height =
-        "auto";
+        "";
 
     content.style.maxHeight =
-        "none";
+        "";
 
     content.style.overflow =
-        "visible";
+        "";
 
 
     /*
-       Some accordion implementations use
-       aria-hidden instead of hidden.
+       IMPORTANT:
+       We do not add a click handler here.
+       We do not force the CPD Log to remain open.
+       We do not use setTimeout to re-open it.
     */
-
-    content.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-
-    /*
-       Mark that the log was opened programmatically.
-
-       This is informational only and allows us to
-       distinguish navigation-opened state if needed.
-    */
-
-    section.dataset.navigationOpened =
-        "true";
 
 
     console.log(
@@ -8073,6 +8061,89 @@ function openCPDLogForNavigation() {
 }
 
 
+/* ==========================================================
+   CLOSE CPD LOG
+   ----------------------------------------------------------
+   Used only if another script explicitly needs to close
+   the CPD Log.
+
+   Normal manual closing should continue to be handled by
+   the existing/native accordion handler.
+========================================================== */
+
+function closeCPDLog() {
+
+    const section =
+        getCPDLogSection();
+
+    const toggle =
+        getCPDLogToggle();
+
+    const content =
+        getCPDLogContent();
+
+
+    if (
+        !section ||
+        !toggle ||
+        !content
+    ) {
+
+        return false;
+
+    }
+
+
+    section.classList.remove(
+        "open"
+    );
+
+    toggle.classList.remove(
+        "open"
+    );
+
+    content.classList.remove(
+        "open"
+    );
+
+
+    toggle.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+
+    content.hidden =
+        true;
+
+
+    content.style.display =
+        "";
+
+    content.style.visibility =
+        "";
+
+    content.style.opacity =
+        "";
+
+    content.style.height =
+        "";
+
+    content.style.maxHeight =
+        "";
+
+    content.style.overflow =
+        "";
+
+
+    console.log(
+        "[CPD] CPD Log closed."
+    );
+
+
+    return true;
+
+}
 /* ==========================================================
    NORMALISE CPD LOG AFTER NAVIGATION
    ----------------------------------------------------------
@@ -8179,9 +8250,21 @@ function clearCPDNavigationState() {
 }
 
 
-/* ==========================================================
+/* ============================================================
    NAVIGATE TO CPD ACTIVITY
-========================================================== */
+   ------------------------------------------------------------
+   Works for:
+       Evidence → CPD
+       Competency → CPD
+
+   Behaviour:
+       1. Find the CPD activity.
+       2. Open the CPD Log.
+       3. Allow the browser to recalculate layout.
+       4. Scroll to the activity.
+       5. Highlight the activity.
+       6. User can manually collapse the CPD Log afterwards.
+============================================================ */
 
 function navigateToCPDActivity(
     href
@@ -8193,7 +8276,14 @@ function navigateToCPDActivity(
             "#cpd-activity-"
         )
     ) {
+
+        console.warn(
+            "[CPD] Invalid CPD activity link:",
+            href
+        );
+
         return;
+
     }
 
 
@@ -8215,12 +8305,18 @@ function navigateToCPDActivity(
     }
 
 
+    console.log(
+        "[CPD] Navigating to:",
+        href
+    );
+
+
     /*
-       Open the CPD Log.
+       Open CPD Log.
     */
 
     const opened =
-        openCPDLogForNavigation();
+        openCPDLog();
 
 
     if (!opened) {
@@ -8254,42 +8350,20 @@ function navigateToCPDActivity(
 
 
     /*
-       Give the accordion / browser layout time
-       to settle before scrolling.
-
-       IMPORTANT:
-       We re-open the CPD Log after the delay because
-       another accordion handler may have changed its
-       state during the click event.
+       Wait for the CPD Log to become part of the
+       document layout before scrolling.
     */
 
     requestAnimationFrame(
         () => {
 
-            setTimeout(
+            requestAnimationFrame(
                 () => {
-
-
-                    /*
-                       Re-establish the open state
-                       immediately before scrolling.
-                    */
-
-                    finaliseCPDLogNavigationOpen();
-
-
-                    /*
-                       Highlight target.
-                    */
 
                     target.classList.add(
                         "cpd-activity-highlighted"
                     );
 
-
-                    /*
-                       Scroll to activity.
-                    */
 
                     target.scrollIntoView({
                         behavior:
@@ -8315,31 +8389,7 @@ function navigateToCPDActivity(
                         3000
                     );
 
-
-                    /*
-                       Clear our navigation flag.
-
-                       This is critical.
-
-                       We do NOT continue forcing the log
-                       open after navigation has completed.
-
-                       Therefore the user can now manually
-                       close the CPD Log normally.
-                    */
-
-                    setTimeout(
-                        () => {
-
-                            clearCPDNavigationState();
-
-                        },
-                        100
-                    );
-
-
-                },
-                250
+                }
             );
 
         }

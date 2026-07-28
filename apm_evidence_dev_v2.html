@@ -7861,7 +7861,18 @@ initialiseRelationshipCollapsibles();
 
 if (typeof refreshRelationshipCollapsibles === "function") {
     refreshRelationshipCollapsibles();
-}      
+} 
+
+
+   console.log(
+    "[TEST] CPD cards before Evidence relationship:",
+    document.querySelectorAll(".cpd-card").length
+);
+
+console.log(
+    "[TEST] Evidence cards:",
+    Object.keys(evidenceGoalRelationships || {}).length
+);   
 console.log("All complete");
 
 } catch (err) {

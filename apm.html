@@ -7451,6 +7451,128 @@ section.competency-section > .competency-card {
     }
 
 }
+
+/* ============================================================
+   CPD METRICS SECTION
+============================================================ */
+
+.cpd-metrics-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 24px;
+  border-top: 8px solid #0a66c2;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+/* Section title */
+.cpd-metrics-title {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: 0.5px;
+}
+
+/* Metrics grid */
+.cpd-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Individual metric cards */
+.cpd-metric-card {
+  min-height: 150px;
+  padding: 28px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #d9e2ec;
+  border-top: 5px solid #0a66c2;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Metric heading */
+.cpd-metric-card h4 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Metric value */
+.cpd-metric-card p {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #111111;
+}
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 900px) {
+
+  .cpd-metrics-section {
+    padding: 24px;
+  }
+
+  .cpd-metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .cpd-metrics-section {
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .cpd-metrics-title {
+    margin-bottom: 22px;
+    font-size: 24px;
+  }
+
+  .cpd-metrics {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .cpd-metric-card {
+    min-height: 140px;
+    padding: 24px;
+  }
+
+  .cpd-metric-card h4 {
+    font-size: 16px;
+  }
+
+  .cpd-metric-card p {
+    font-size: 34px;
+  }
+
+}
+
   
 </style>
 
@@ -14132,35 +14254,46 @@ document.addEventListener(
 
 
 
-<!-- METRICS -->
-<section class="cpd-metrics">
-  <div class="cpd-metric-card">
-    <h4>Total Hours</h4>
-    <p id="metric-total-hours">–</p>
+<!-- CPD METRICS -->
+<section class="cpd-metrics-section">
+
+  <h3 class="cpd-metrics-title">CPD Metrics</h3>
+
+  <div class="cpd-metrics">
+
+    <div class="cpd-metric-card">
+      <h4>Total Hours</h4>
+      <p id="metric-total-hours">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Hours Remaining</h4>
+      <p id="metric-hours-remaining">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Activities Logged</h4>
+      <p id="metric-activities">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Avg Hours / Month</h4>
+      <p id="metric-hours-month">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Top Category</h4>
+      <p id="metric-top-category">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Projected Hours</h4>
+      <p id="metric-projected-hours">–</p>
+    </div>
+
   </div>
-  <div class="cpd-metric-card">
-    <h4>Hours Remaining</h4>
-    <p id="metric-hours-remaining">–</p>
-  </div>
-  <div class="cpd-metric-card">
-    <h4>Activities Logged</h4>
-    <p id="metric-activities">–</p>
-  </div>
-  <div class="cpd-metric-card">
-    <h4>Avg Hours / Month</h4>
-    <p id="metric-hours-month">–</p>
-  </div>
-  <div class="cpd-metric-card">
-    <h4>Top Category</h4>
-    <p id="metric-top-category">–</p>
-  </div>
-  <div class="cpd-metric-card">
-    <h4>Projected Hours</h4>
-    <p id="metric-projected-hours">–</p>
-  </div>
+
 </section>
-
-
 <div class="cpd-table-wrapper" style="display:none">
   <table class="cpd-table">
     <tbody id="cpd-body"></tbody>

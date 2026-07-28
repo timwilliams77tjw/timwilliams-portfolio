@@ -7929,18 +7929,21 @@ function getCPDLogContent() {
 
 }
 
-
 /* ==========================================================
    OPEN CPD LOG PROGRAMMATICALLY
    ----------------------------------------------------------
-   Opens the CPD Log by using the EXISTING accordion toggle.
-
-   This is important because the existing accordion handler
-   remains the single owner of the CPD Log open/closed state.
-
    Used when navigating to a CPD activity from:
        - Evidence → CPD
        - Competency → CPD
+
+   The CPD Log is opened programmatically, but the inline
+   styles used to force it open are removed immediately
+   after the existing accordion has processed the opening.
+
+   This allows:
+       1. Automatic expansion to work.
+       2. The existing accordion handler to remain in control.
+       3. The user to manually collapse the CPD Log afterwards.
 ========================================================== */
 
 function openCPDLog() {
@@ -7972,12 +7975,9 @@ function openCPDLog() {
 
     /*
        Check whether the CPD Log is already open.
-
-       We use the existing accordion state rather than
-       forcing styles ourselves.
     */
 
-    const isOpen =
+    const isAlreadyOpen =
         section.classList.contains(
             "open"
         ) ||
@@ -7991,13 +7991,11 @@ function openCPDLog() {
 
 
     /*
-       If already open, do nothing.
-
-       This is important because clicking the existing
-       toggle when already open would CLOSE it.
+       If already open, do not click the toggle.
+       Clicking it would close the CPD Log.
     */
 
-    if (isOpen) {
+    if (isAlreadyOpen) {
 
         return true;
 
@@ -8005,49 +8003,142 @@ function openCPDLog() {
 
 
     /*
-       The CPD Log is closed.
-
-       Trigger the existing accordion toggle.
-
-       This allows the page's native accordion handler
-       to perform the opening and maintain complete
-       control over the state.
+       ======================================================
+       FORCE OPEN
+       ======================================================
     */
 
-    toggle.click();
+    section.classList.add(
+        "open"
+    );
+
+    toggle.classList.add(
+        "open"
+    );
+
+    content.classList.add(
+        "open"
+    );
+
+
+    toggle.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+
+    content.hidden =
+        false;
+
+
+    content.removeAttribute(
+        "hidden"
+    );
 
 
     /*
-       Allow the existing accordion handler to process
-       the click before checking the resulting state.
+       Force visibility so the target CPD activity
+       can be located and scrolled into view.
     */
 
-    setTimeout(
-        function() {
+    content.style.display =
+        "block";
 
-            const nowOpen =
-                section.classList.contains(
-                    "open"
-                ) ||
-                toggle.classList.contains(
-                    "open"
-                ) ||
-                content.classList.contains(
-                    "open"
-                ) ||
-                content.hidden === false;
+    content.style.visibility =
+        "visible";
+
+    content.style.opacity =
+        "1";
+
+    content.style.height =
+        "auto";
+
+    content.style.maxHeight =
+        "none";
+
+    content.style.overflow =
+        "visible";
 
 
-            if (!nowOpen) {
+    /*
+       ======================================================
+       HAND CONTROL BACK TO THE EXISTING ACCORDION
+       ======================================================
 
-                console.warn(
-                    "[CPD] CPD Log toggle was triggered but the section did not open."
-                );
+       The important part is that the forced inline styles
+       are removed after the browser has had an opportunity
+       to render the opened state.
 
-            }
+       The .open classes remain so the existing accordion
+       knows the section is open.
 
-        },
-        50
+       The next manual click can therefore close it.
+    */
+
+    requestAnimationFrame(
+        () => {
+
+            requestAnimationFrame(
+                () => {
+
+                    /*
+                       Only remove the inline styles.
+
+                       Do NOT remove the .open classes here.
+                    */
+
+                    content.style.display =
+                        "";
+
+                    content.style.visibility =
+                        "";
+
+                    content.style.opacity =
+                        "";
+
+                    content.style.height =
+                        "";
+
+                    content.style.maxHeight =
+                        "";
+
+                    content.style.overflow =
+                        "";
+
+
+                    /*
+                       Keep the CPD Log logically open.
+                    */
+
+                    section.classList.add(
+                        "open"
+                    );
+
+                    toggle.classList.add(
+                        "open"
+                    );
+
+                    content.classList.add(
+                        "open"
+                    );
+
+                    content.hidden =
+                        false;
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
+
+
+                    debug(
+                        "CPD Log automatically opened and accordion control restored."
+                    );
+
+                }
+            );
+
+        }
     );
 
 

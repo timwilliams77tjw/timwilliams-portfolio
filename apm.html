@@ -7599,77 +7599,6 @@ section.competency-section > .competency-card {
 .professional-evidence-section {
   background-color: #ffffff !important;
 }
-.cpd-metrics-section{
-    background:#fff;
-    border-radius:28px;
-    padding:36px;
-    box-shadow:0 8px 28px rgba(0,0,0,.06);
-}
-.metric-card{
-
-    background:#fff;
-    border:1px solid #d9e6f7;
-    border-radius:20px;
-
-    padding:24px;
-
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.05);
-
-    transition:.25s;
-}
-
-.metric-card:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 24px rgba(0,0,0,.08);
-}
-.metric-card::before{
-
-    content:"";
-
-    display:block;
-
-    width:42px;
-    height:5px;
-
-    border-radius:6px;
-
-    background:#0a66c2;
-
-    margin-bottom:18px;
-}
-.metric-title{
-
-    font-size:.9rem;
-    font-weight:700;
-    letter-spacing:.08em;
-
-    text-transform:uppercase;
-
-    color:#5d6673;
-
-    margin-bottom:14px;
-}
-
-.metric-value{
-
-    font-size:3rem;
-    font-weight:800;
-    line-height:1;
-
-    color:#111;
-}
-
-.metric-subtitle{
-
-    margin-top:10px;
-    color:#666;
-}  
-.metrics-heading{
-
-    text-align:center;
-    margin-bottom:32px;
-}  
 
 .evidence-section-divider{
     margin:26px 0;
@@ -7797,6 +7726,123 @@ section.competency-section > .competency-card {
     margin-bottom:22px;
 
     line-height:1.8;
+}  
+
+.cpd-metrics-section{
+
+    background:#fff;
+
+    border-radius:28px;
+
+    padding:40px;
+
+    margin:40px 0;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+.cpd-metrics-title{
+
+    text-align:center;
+
+    font-size:2.2rem;
+
+    font-weight:800;
+
+    margin:0 0 36px;
+
+    color:#111;
+}
+.cpd-metrics{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:28px;
+}  
+.cpd-metric-card{
+
+    position:relative;
+
+    background:#fff;
+
+    border:1px solid #dce6f4;
+
+    border-radius:22px;
+
+    padding:26px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+
+    transition:.25s;
+}
+
+.cpd-metric-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 16px 30px rgba(0,0,0,.08);
+}  
+.cpd-metric-card::before{
+
+    content:"";
+
+    display:block;
+
+    width:46px;
+
+    height:5px;
+
+    border-radius:6px;
+
+    background:#0a66c2;
+
+    margin-bottom:18px;
+}
+.cpd-metric-card h4{
+
+    margin:0 0 16px;
+
+    font-size:.9rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+    color:#666;
+}  
+.cpd-metric-card p{
+
+    margin:0;
+
+    font-size:3rem;
+
+    font-weight:800;
+
+    line-height:1.05;
+
+    color:#111;
+}  
+
+.evidence-inline-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0;
+
+    margin-top:0;
+
+    background:none;
+
+    border:none;
+
+    box-shadow:none;
 }  
 </style>
 
@@ -9202,17 +9248,7 @@ function populateEvidenceCPDRelationships() {
        Remove previous generated sections.
     */
 
-    document
-        .querySelectorAll(
-            ".supporting-cpd-activities"
-        )
-        .forEach(
-            section => {
-
-                section.remove();
-
-            }
-        );
+  
 
 
     Object.entries(
@@ -9257,24 +9293,23 @@ function populateEvidenceCPDRelationships() {
             }
 
 
-            const wrapper =
-                document.createElement(
-                    "div"
-                );
+       const wrapper =
+    evidenceContent.querySelector(
+        ".supporting-cpd-activities"
+    );
+
+if (!wrapper) {
+    return;
+}
+
+wrapper.innerHTML = "";
 
 
-            wrapper.className =
-                "supporting-cpd-activities";
+        const header =
+    document.createElement("div");
 
-
-            const header =
-                document.createElement(
-                    "div"
-                );
-
-
-            header.className =
-                "supporting-cpd-header";
+header.className =
+    "supporting-cpd-header evidence-inline-header";
 
 
             const title =
@@ -9528,9 +9563,7 @@ function populateEvidenceCPDRelationships() {
             );
 
 
-            evidenceContent.appendChild(
-                wrapper
-            );
+          
 
         }
     );

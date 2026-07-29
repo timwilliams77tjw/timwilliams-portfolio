@@ -7960,6 +7960,93 @@ section.competency-section > .competency-card {
 .cpd-metric-card:nth-child(5)::before { mask-image: url('/icons/category.svg'); }
 .cpd-metric-card:nth-child(6)::before { mask-image: url('/icons/trending-up.svg'); }
 
+/* ================================
+   CPD METRICS — MAIN SECTION
+   ================================ */
+
+.cpd-metrics-section {
+  background: #ffffff;              /* stays white */
+  padding: 28px;
+  border-radius: 24px;
+  border-top: 5px solid var(--apm-accent);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
+  margin-bottom: 32px;
+}
+
+.cpd-metrics-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 24px;
+  color: #1a202c;
+}
+
+
+/* ================================
+   METRIC GRID LAYOUT
+   ================================ */
+
+.cpd-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+
+/* ================================
+   INDIVIDUAL METRIC CARDS
+   ================================ */
+
+.cpd-metric-card {
+  min-height: 150px;
+  padding: 28px;
+  background: #f7f9fc;             /* subtle grey tint ONLY on inner cards */
+  border-radius: 20px;
+  border: 1px solid #e3e9f1;
+  border-top: none !important;     /* remove blue border */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover / press effect */
+.cpd-metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+
+/* ================================
+   TYPOGRAPHY
+   ================================ */
+
+.cpd-metric-card h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 8px;
+}
+
+.cpd-metric-card p {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+
+/* ================================
+   ICONS REMOVED
+   ================================ */
+
+.cpd-metric-card::before {
+  content: none !important;
+}
 
   
 </style>

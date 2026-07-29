@@ -8107,7 +8107,188 @@ section.competency-section > .competency-card {
 /* Hover / press effect */
 .cpd-metric-card:hover {
   transform
-  
+
+/* ================================
+   CPD METRICS — MAIN SECTION
+   ================================ */
+
+section.cpd-metrics-section {
+  background: #ffffff !important;   /* force pure white */
+  padding: 28px;
+  border-radius: 24px;
+  border-top: 5px solid var(--apm-accent);
+  box-shadow: none !important;      /* remove grey tint */
+  margin-bottom: 32px;
+}
+
+.cpd-metrics-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 24px;
+  color: #1a202c;
+}
+
+
+/* ================================
+   METRIC GRID LAYOUT
+   ================================ */
+
+.cpd-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+
+/* ================================
+   INDIVIDUAL METRIC CARDS
+   ================================ */
+
+.cpd-metric-card {
+  min-height: 150px;
+  padding: 28px;
+
+  /* force grey inner cards */
+  background: #f7f9fc !important;
+
+  border-radius: 20px;
+  border: 1px solid #e3e9f1;
+  border-top: none !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cpd-metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+
+/* ================================
+   TYPOGRAPHY
+   ================================ */
+
+.cpd-metric-card h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 8px;
+}
+
+.cpd-metric-card p {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+/* ================================
+   CPD METRICS — MAIN SECTION
+   ================================ */
+
+.cpd-metrics-section {
+  background: #ffffff !important;   /* pure white */
+  padding: 28px;
+  border-radius: 24px;
+  border-top: 5px solid var(--apm-accent);
+  box-shadow: none !important;
+  margin-bottom: 32px;
+}
+
+.cpd-metrics-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 24px;
+  color: #1a202c;
+}
+
+
+/* ================================
+   METRIC GRID
+   ================================ */
+
+.cpd-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+
+/* ================================
+   INDIVIDUAL CARDS
+   ================================ */
+
+.cpd-metric-card {
+  min-height: 150px;
+  padding: 28px;
+  background: #f7f9fc !important;   /* grey inner cards */
+  border-radius: 20px;
+  border: 1px solid #e3e9f1;
+  border-top: none !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cpd-metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+
+/* ================================
+   TYPOGRAPHY
+   ================================ */
+
+.cpd-metric-card h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 8px;
+}
+
+.cpd-metric-card p {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+
+/* ================================
+   ICONS — NOW WORKING
+   ================================ */
+
+.cpd-metric-card::before {
+  content: "" !important;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 28px;
+  height: 28px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.25;
+}
+
+/* Assign icons */
+.cpd-metric-card:nth-child(1)::before { background-image: url('/icons/time.svg') !important; }
+.cpd-metric-card:nth-child(2)::before { background-image: url('/icons/hourglass.svg') !important; }
+.cpd-metric-card:nth-child(3)::before { background-image: url('/icons/checklist.svg') !important; }
+.cpd-metric-card:nth-child(4)::before { background-image: url('/icons/calendar.svg') !important; }
+.cpd-metric-card:nth-child(5)::before { background-image: url('/icons/category.svg') !important; }
+.cpd-metric-card:nth-child(6)::before { background-image: url('/icons/trending-up.svg') !important; }
+
 </style>
 
 

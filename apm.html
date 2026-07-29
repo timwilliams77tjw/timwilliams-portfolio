@@ -8289,6 +8289,79 @@ section.cpd-metrics-section {
 .cpd-metric-card:nth-child(5)::before { background-image: url('/icons/category.svg') !important; }
 .cpd-metric-card:nth-child(6)::before { background-image: url('/icons/trending-up.svg') !important; }
 
+
+/* ================================
+   FORCE MAIN CARD WHITE
+   ================================ */
+
+section.cpd-metrics-section {
+  background: #ffffff !important;
+  border-top: 5px solid var(--apm-accent);
+  padding: 28px;
+  border-radius: 24px;
+  box-shadow: none !important;
+}
+
+
+/* ================================
+   FORCE INNER CARDS GREY
+   ================================ */
+
+section.cpd-metrics-section .cpd-metric-card {
+  background: #f7f9fc !important;      /* grey tint */
+  border: 1px solid #e3e9f1 !important;
+  border-top: none !important;
+  position: relative !important;
+}
+
+
+/* ================================
+   ICONS — GUARANTEED TO DISPLAY
+   ================================ */
+
+section.cpd-metrics-section .cpd-metric-card::before {
+  content: "" !important;              /* force pseudo-element */
+  display: block !important;           /* ensure it renders */
+  position: absolute !important;
+  top: 18px;
+  right: 18px;
+  width: 28px;
+  height: 28px;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  opacity: 0.25 !important;
+}
+
+
+/* ================================
+   ICON ASSIGNMENTS
+   ================================ */
+
+section.cpd-metrics-section .cpd-metric-card:nth-child(1)::before {
+  background-image: url('/icons/time.svg') !important;
+}
+
+section.cpd-metrics-section .cpd-metric-card:nth-child(2)::before {
+  background-image: url('/icons/hourglass.svg') !important;
+}
+
+section.cpd-metrics-section .cpd-metric-card:nth-child(3)::before {
+  background-image: url('/icons/checklist.svg') !important;
+}
+
+section.cpd-metrics-section .cpd-metric-card:nth-child(4)::before {
+  background-image: url('/icons/calendar.svg') !important;
+}
+
+section.cpd-metrics-section .cpd-metric-card:nth-child(5)::before {
+  background-image: url('/icons/category.svg') !important;
+}
+
+section.cpd-metrics-section .cpd-metric-card:nth-child(6)::before {
+  background-image: url('/icons/trending-up.svg') !important;
+}
+  
 </style>
 
 

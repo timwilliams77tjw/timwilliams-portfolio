@@ -8813,26 +8813,43 @@ section.cpd-metrics-section .cpd-metric-card {
 
 }  
 
- /* Main CPD Log container remains white */
-.cpd-log-inner {
-    background-color: #ffffff !important;
-}
-
-/* Actual visible CPD Log card/header becomes grey */
-.cpd-log-inner .collapsible-toggle {
-    background-color: #f3f4f6 !important;
-    background-image: none !important;
-} 
-
 /* ============================================================
-   CPD LOG — HEADER CARD ONLY
-   Main CPD section remains white.
-   CPD activity cards remain unaffected.
+   CPD LOG — FINAL COLOUR STRUCTURE
 ============================================================ */
 
-.cpd-log-inner .collapsible-toggle {
+/* Main CPD Log container remains WHITE */
+.cpd-log-inner {
+    background: #ffffff !important;
+    background-image: none !important;
+}
+
+
+/* ============================================================
+   CPD LOG HEADER CARD — GREY
+============================================================ */
+
+.cpd-log-inner > .collapsible-toggle {
     background: #f3f4f6 !important;
     background-image: none !important;
+}
+
+
+/* ============================================================
+   CPD LOG CONTENT — WHITE
+============================================================ */
+
+.cpd-log-inner > .collapsible-content {
+    background: #ffffff !important;
+    background-image: none !important;
+}
+
+
+/* ============================================================
+   INDIVIDUAL CPD CARDS — KEEP THEIR EXISTING STYLING
+============================================================ */
+
+.cpd-log-inner .cpd-card {
+    /* deliberately no background override here */
 }
 
   

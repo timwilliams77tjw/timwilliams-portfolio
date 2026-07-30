@@ -8676,7 +8676,142 @@ section.cpd-metrics-section .cpd-metric-card {
   background: #f3f5f7 !important;
   border-top: none !important;
 }
-  
+/* ============================================================
+   CPD LOG — MAIN CARD
+   ============================================================ */
+
+.cpd-log-inner {
+    background: #f5f6f8;
+}  
+
+/* ============================================================
+   CPD SUPPORTING EVIDENCE
+   Scoped ONLY to dynamically generated CPD evidence links
+   ============================================================ */
+
+.cpd-card .cpd-supporting-evidence {
+    margin-top: 16px;
+}
+
+
+/* ------------------------------------------------------------
+   Evidence list
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-list {
+    margin-top: 8px;
+}
+
+
+/* ------------------------------------------------------------
+   Individual evidence links
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-link {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+    margin: 8px 0;
+
+    background: #f7f9fc;
+
+    border: 1px solid #dbe3ec;
+    border-left: 4px solid #0a66c2;
+
+    border-radius: 10px;
+
+    color: #1f2937;
+
+    text-decoration: none;
+
+    font-size: 0.92rem;
+    font-weight: 600;
+
+    line-height: 1.35;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   Evidence title
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-link span {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* ------------------------------------------------------------
+   Arrow
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-link i {
+    flex: 0 0 auto;
+
+    color: #0a66c2;
+
+    font-size: 0.85rem;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   Hover / tap state
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-link:hover {
+
+    background: #eef5fc;
+
+    border-color: #c5d7e9;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+
+    transform: translateY(-1px);
+}
+
+
+.cpd-card .cpd-supporting-evidence-link:hover i {
+    transform: translateX(3px);
+}
+
+
+/* ------------------------------------------------------------
+   Mobile
+------------------------------------------------------------ */
+
+@media (max-width: 700px) {
+
+    .cpd-card .cpd-supporting-evidence-link {
+
+        padding: 11px 12px;
+
+        font-size: 0.9rem;
+
+        border-radius: 9px;
+
+        gap: 10px;
+    }
+
+}  
 </style>
 
 

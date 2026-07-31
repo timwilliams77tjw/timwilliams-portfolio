@@ -7877,816 +7877,199 @@ section.competency-section > .competency-card {
 }
 
 
-/* ================================
-   METRIC GRID LAYOUT
-   ================================ */
+/* ============================================================
+   CPD METRICS — CLEAN CONSOLIDATED STYLING
+   ============================================================ */
 
-.cpd-metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
-}
-
-
-/* ================================
-   INDIVIDUAL METRIC CARDS
-   ================================ */
-
-.cpd-metric-card {
-  min-height: 150px;
-  padding: 28px;
-  border-radius: 20px;
-  border: 1px solid #e3e9f1;
-  border-top: none !important; /* override blue border */
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Hover / press effect */
-.cpd-metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-
-/* ================================
-   TYPOGRAPHY
-   ================================ */
-
-.cpd-metric-card h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 8px;
-}
-
-.cpd-metric-card p {
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin: 0;
-}
-
-
-/* ================================
-   ICONS (OPTIONAL)
-   ================================ */
-
-.cpd-metric-card::before {
-  content: "";
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 28px;
-  height: 28px;
-  background: var(--apm-accent);
-  mask-size: cover;
-  mask-repeat: no-repeat;
-  opacity: 0.15;
-}
-
-/* Assign icons per card */
-.cpd-metric-card:nth-child(1)::before { mask-image: url('/icons/time.svg'); }
-.cpd-metric-card:nth-child(2)::before { mask-image: url('/icons/hourglass.svg'); }
-.cpd-metric-card:nth-child(3)::before { mask-image: url('/icons/checklist.svg'); }
-.cpd-metric-card:nth-child(4)::before { mask-image: url('/icons/calendar.svg'); }
-.cpd-metric-card:nth-child(5)::before { mask-image: url('/icons/category.svg'); }
-.cpd-metric-card:nth-child(6)::before { mask-image: url('/icons/trending-up.svg'); }
-
-/* ================================
-   CPD METRICS — MAIN SECTION
-   ================================ */
-
-.cpd-metrics-section {
-  background: #ffffff;              /* stays white */
-  padding: 28px;
-  border-radius: 24px;
-  border-top: 5px solid var(--apm-accent);
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
-  margin-bottom: 32px;
-}
-
-.cpd-metrics-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #e2e8f0;
-  margin-bottom: 24px;
-  color: #1a202c;
-}
-
-
-/* ================================
-   METRIC GRID LAYOUT
-   ================================ */
-
-.cpd-metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
-}
-
-
-/* ================================
-   INDIVIDUAL METRIC CARDS
-   ================================ */
-
-.cpd-metric-card {
-  min-height: 150px;
-  padding: 28px;
-  background: #f7f9fc;             /* subtle grey tint ONLY on inner cards */
-  border-radius: 20px;
-  border: 1px solid #e3e9f1;
-  border-top: none !important;     /* remove blue border */
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Hover / press effect */
-.cpd-metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-
-/* ================================
-   TYPOGRAPHY
-   ================================ */
-
-.cpd-metric-card h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 8px;
-}
-
-.cpd-metric-card p {
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin: 0;
-}
-
-/* ================================
-   CPD METRICS — MAIN SECTION
-   ================================ */
-
-.cpd-metrics-section {
-  background: #ffffff;              /* pure white main card */
-  padding: 28px;
-  border-radius: 24px;
-  border-top: 5px solid var(--apm-accent);
-  box-shadow: none;                 /* remove grey tint */
-  margin-bottom: 32px;
-}
-
-.cpd-metrics-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #e2e8f0;
-  margin-bottom: 24px;
-  color: #1a202c;
-}
-
-
-/* ================================
-   METRIC GRID LAYOUT
-   ================================ */
-
-.cpd-metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
-}
-
-
-/* ================================
-   INDIVIDUAL METRIC CARDS
-   ================================ */
-
-.cpd-metric-card {
-  min-height: 150px;
-  padding: 28px;
-
-  /* inner cards get subtle grey tint */
-  background: #f7f9fc;
-
-  border-radius: 20px;
-  border: 1px solid #e3e9f1;
-  border-top: none !important;     /* remove blue border */
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cpd-metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-
-/* ================================
-   CPD METRICS — MAIN SECTION
-   ================================ */
+/* ------------------------------------------------------------
+   MAIN CPD METRICS SECTION
+------------------------------------------------------------ */
 
 section.cpd-metrics-section {
-  background: #ffffff !important;   /* force pure white */
-  padding: 28px;
-  border-radius: 24px;
-  border-top: 5px solid var(--apm-accent);
-  box-shadow: none !important;      /* remove grey tint */
-  margin-bottom: 32px;
-}
-
-.cpd-metrics-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #e2e8f0;
-  margin-bottom: 24px;
-  color: #1a202c;
+    background: #ffffff !important;
+    padding: 28px;
+    border-radius: 24px;
+    border-top: 5px solid var(--apm-accent) !important;
+    box-shadow: none !important;
+    margin-bottom: 32px;
+    box-sizing: border-box;
 }
 
 
-/* ================================
-   METRIC GRID LAYOUT
-   ================================ */
+/* ------------------------------------------------------------
+   SECTION TITLE
+------------------------------------------------------------ */
 
-.cpd-metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
+section.cpd-metrics-section .cpd-metrics-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 24px;
+    color: #1a202c;
 }
 
 
-/* ================================
-   INDIVIDUAL METRIC CARDS
-   ================================ */
-
-.cpd-metric-card {
-  min-height: 150px;
-  padding: 28px;
-
-  /* force grey inner cards */
-  background: #f7f9fc !important;
-
-  border-radius: 20px;
-  border: 1px solid #e3e9f1;
-  border-top: none !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cpd-metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-
-/* ================================
-   TYPOGRAPHY
-   ================================ */
-
-.cpd-metric-card h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 8px;
-}
-
-.cpd-metric-card p {
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin: 0;
-}
-
-/* ================================
-   CPD METRICS — MAIN SECTION
-   ================================ */
-
-.cpd-metrics-section {
-  background: #ffffff !important;   /* pure white */
-  padding: 28px;
-  border-radius: 24px;
-  border-top: 5px solid var(--apm-accent);
-  box-shadow: none !important;
-  margin-bottom: 32px;
-}
-
-.cpd-metrics-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #e2e8f0;
-  margin-bottom: 24px;
-  color: #1a202c;
-}
-
-
-/* ================================
+/* ------------------------------------------------------------
    METRIC GRID
-   ================================ */
+------------------------------------------------------------ */
 
-.cpd-metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
+section.cpd-metrics-section .cpd-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
 }
 
 
-/* ================================
-   INDIVIDUAL CARDS
-   ================================ */
-
-.cpd-metric-card {
-  min-height: 150px;
-  padding: 28px;
-  background: #f7f9fc !important;   /* grey inner cards */
-  border-radius: 20px;
-  border: 1px solid #e3e9f1;
-  border-top: none !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cpd-metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-
-/* ================================
-   TYPOGRAPHY
-   ================================ */
-
-.cpd-metric-card h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 8px;
-}
-
-.cpd-metric-card p {
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin: 0;
-}
-
-
-/* ================================
-   ICONS — NOW WORKING
-   ================================ */
-
-.cpd-metric-card::before {
-  content: "" !important;
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 28px;
-  height: 28px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.25;
-}
-
-/* Assign icons */
-.cpd-metric-card:nth-child(1)::before { background-image: url('/icons/time.svg') !important; }
-.cpd-metric-card:nth-child(2)::before { background-image: url('/icons/hourglass.svg') !important; }
-.cpd-metric-card:nth-child(3)::before { background-image: url('/icons/checklist.svg') !important; }
-.cpd-metric-card:nth-child(4)::before { background-image: url('/icons/calendar.svg') !important; }
-.cpd-metric-card:nth-child(5)::before { background-image: url('/icons/category.svg') !important; }
-.cpd-metric-card:nth-child(6)::before { background-image: url('/icons/trending-up.svg') !important; }
-
-
-/* ================================
-   FORCE MAIN CARD WHITE
-   ================================ */
-
-section.cpd-metrics-section {
-  background: #ffffff !important;
-  border-top: 5px solid var(--apm-accent);
-  padding: 28px;
-  border-radius: 24px;
-  box-shadow: none !important;
-}
-
-
-/* ================================
-   FORCE INNER CARDS GREY
-   ================================ */
+/* ------------------------------------------------------------
+   INDIVIDUAL METRIC CARDS
+   No blue top border
+------------------------------------------------------------ */
 
 section.cpd-metrics-section .cpd-metric-card {
-  background: #f7f9fc !important;      /* grey tint */
-  border: 1px solid #e3e9f1 !important;
-  border-top: none !important;
-  position: relative !important;
+
+    min-height: 150px;
+    padding: 28px;
+
+    background: #f3f5f7 !important;
+
+    border: 1px solid #e3e9f1 !important;
+    border-top: none !important;
+
+    border-radius: 20px;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    position: relative;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
-/* ================================
-   ICONS — GUARANTEED TO DISPLAY
-   ================================ */
-
-section.cpd-metrics-section .cpd-metric-card::before {
-  content: "" !important;              /* force pseudo-element */
-  display: block !important;           /* ensure it renders */
-  position: absolute !important;
-  top: 18px;
-  right: 18px;
-  width: 28px;
-  height: 28px;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  opacity: 0.25 !important;
-}
-
-
-/* ================================
-   ICON ASSIGNMENTS
-   ================================ */
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(1)::before {
-  background-image: url('/icons/time.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(2)::before {
-  background-image: url('/icons/hourglass.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(3)::before {
-  background-image: url('/icons/checklist.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(4)::before {
-  background-image: url('/icons/calendar.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(5)::before {
-  background-image: url('/icons/category.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(6)::before {
-  background-image: url('/icons/trending-up.svg') !important;
-}
-
-/* =========================================
-   FORCE MAIN CARD WHITE
-   ========================================= */
-
-section.cpd-metrics-section {
-  background: #ffffff !important;
-  border-top: 5px solid var(--apm-accent);
-  padding: 28px;
-  border-radius: 24px;
-  box-shadow: none !important;
-}
-
-
-/* =========================================
-   FORCE INNER CARDS GREY
-   ========================================= */
-
-section.cpd-metrics-section .cpd-metric-card {
-  background: #f7f9fc !important;      /* grey tint */
-  border: 1px solid #e3e9f1 !important;
-  border-top: none !important;
-  position: relative !important;
-}
-
-
-/* =========================================
-   ICONS — GUARANTEED TO DISPLAY
-   ========================================= */
-
-section.cpd-metrics-section .cpd-metric-card::before {
-  content: "" !important;              /* override earlier content:none */
-  display: block !important;           /* override earlier display:none */
-  position: absolute !important;
-  top: 18px;
-  right: 18px;
-  width: 28px;
-  height: 28px;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  opacity: 0.25 !important;
-}
-
-
-/* =========================================
-   ICON ASSIGNMENTS
-   ========================================= */
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(1)::before {
-  background-image: url('/icons/time.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(2)::before {
-  background-image: url('/icons/hourglass.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(3)::before {
-  background-image: url('/icons/checklist.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(4)::before {
-  background-image: url('/icons/calendar.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(5)::before {
-  background-image: url('/icons/category.svg') !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card:nth-child(6)::before {
-  background-image: url('/icons/trending-up.svg') !important;
-}
-/* FINAL OVERRIDES — DO NOT PLACE ABOVE ANYTHING ELSE */
-
-/* Inner cards grey */
-section.cpd-metrics-section .cpd-metric-card {
-  background: #f7f9fc !important;
-}
-
-/* Restore icons */
-section.cpd-metrics-section .cpd-metric-card::before {
-  content: "" !important;
-  display: block !important;
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 28px;
-  height: 28px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.25;
-}
-
-/* Icon assignments */
-section.cpd-metrics-section .cpd-metric-card:nth-child(1)::before {
-  background-image: url('/icons/time.svg') !important;
-}
-section.cpd-metrics-section .cpd-metric-card:nth-child(2)::before {
-  background-image: url('/icons/hourglass.svg') !important;
-}
-section.cpd-metrics-section .cpd-metric-card:nth-child(3)::before {
-  background-image: url('/icons/checklist.svg') !important;
-}
-section.cpd-metrics-section .cpd-metric-card:nth-child(4)::before {
-  background-image: url('/icons/calendar.svg') !important;
-}
-section.cpd-metrics-section .cpd-metric-card:nth-child(5)::before {
-  background-image: url('/icons/category.svg') !important;
-}
-section.cpd-metrics-section .cpd-metric-card:nth-child(6)::before {
-  background-image: url('/icons/trending-up.svg') !important;
-}
-
-section.cpd-metrics-section {
-  background: #ffffff;
-  padding: 28px;
-  border-radius: 24px;
-  border-top: 5px solid var(--apm-accent);
-  box-shadow: none;
-  margin-bottom: 32px;
-}
-
-.cpd-metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
-}
-
-section.cpd-metrics-section .cpd-metric-card {
-  min-height: 150px;
-  padding: 28px;
-  background: #f7f9fc;              /* grey inner cards */
-  border-radius: 20px;
-  border: 1px solid #e3e9f1;
-  border-top: none;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+/* ------------------------------------------------------------
+   METRIC CARD HOVER
+------------------------------------------------------------ */
 
 section.cpd-metrics-section .cpd-metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.08);
 }
+
+
+/* ------------------------------------------------------------
+   METRIC CARD LABEL
+------------------------------------------------------------ */
 
 section.cpd-metrics-section .cpd-metric-card h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 8px;
+
+    font-size: 0.85rem !important;
+    font-weight: 600;
+
+    color: #4a5568 !important;
+
+    margin: 0 0 8px 0;
 }
+
+
+/* ------------------------------------------------------------
+   METRIC VALUE
+------------------------------------------------------------ */
 
 section.cpd-metrics-section .cpd-metric-card p {
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin: 0;
+
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+
+    color: #1a202c !important;
+
+    margin: 0;
 }
 
-/* icons */
+
+/* ------------------------------------------------------------
+   METRIC ICON
+------------------------------------------------------------ */
+
 section.cpd-metrics-section .cpd-metric-card::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 28px;
-  height: 28px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.25;
+
+    content: "" !important;
+
+    display: block !important;
+
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 28px;
+    height: 28px;
+
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+
+    opacity: 0.25 !important;
+
+    pointer-events: none;
 }
 
-section.cpd-metrics-section .cpd-metric-card:nth-child(1)::before { background-image: url('/icons/time.svg'); }
-section.cpd-metrics-section .cpd-metric-card:nth-child(2)::before { background-image: url('/icons/hourglass.svg'); }
-section.cpd-metrics-section .cpd-metric-card:nth-child(3)::before { background-image: url('/icons/checklist.svg'); }
-section.cpd-metrics-section .cpd-metric-card:nth-child(4)::before { background-image: url('/icons/calendar.svg'); }
-section.cpd-metrics-section .cpd-metric-card:nth-child(5)::before { background-image: url('/icons/category.svg'); }
-section.cpd-metrics-section .cpd-metric-card:nth-child(6)::before { background-image: url('/icons/trending-up.svg'); }
 
-/* FINAL OVERRIDES — MUST BE LAST */
+/* ------------------------------------------------------------
+   ICON ASSIGNMENTS
+------------------------------------------------------------ */
 
-/* Inner cards grey */
-section.cpd-metrics-section .cpd-metric-card {
-  background: #f7f9fc !important;
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(1)::before {
+    background-image: url('/icons/time.svg') !important;
 }
 
-/* Smaller text */
-section.cpd-metrics-section .cpd-metric-card h4 {
-  font-size: 0.85rem !important;
-  color: #4a5568 !important;
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(2)::before {
+    background-image: url('/icons/hourglass.svg') !important;
 }
 
-section.cpd-metrics-section .cpd-metric-card p {
-  font-size: 1.6rem !important;
-  font-weight: 700 !important;
-  color: #1a202c !important;
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(3)::before {
+    background-image: url('/icons/checklist.svg') !important;
 }
 
-/* Icons */
-section.cpd-metrics-section .cpd-metric-card::before {
-  content: "" !important;
-  display: block !important;
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 28px;
-  height: 28px;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  opacity: 0.25 !important;
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(4)::before {
+    background-image: url('/icons/calendar.svg') !important;
 }
 
-/* Icon assignments */
-section.cpd-metrics-section .cpd-metric-card:nth-child(1)::before { background-image: url('/icons/time.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(2)::before { background-image: url('/icons/hourglass.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(3)::before { background-image: url('/icons/checklist.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(4)::before { background-image: url('/icons/calendar.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(5)::before { background-image: url('/icons/category.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(6)::before { background-image: url('/icons/trending-up.svg') !important; }
-
-  /* FINAL OVERRIDES — MUST BE LAST */
-
-/* Inner cards grey */
-section.cpd-metrics-section .cpd-metric-card {
-  background: #f7f9fc !important;
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(5)::before {
+    background-image: url('/icons/category.svg') !important;
 }
 
-/* Smaller text */
-section.cpd-metrics-section .cpd-metric-card h4 {
-  font-size: 0.85rem !important;
-  color: #4a5568 !important;
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(6)::before {
+    background-image: url('/icons/trending-up.svg') !important;
 }
 
-section.cpd-metrics-section .cpd-metric-card p {
-  font-size: 1.6rem !important;
-  font-weight: 700 !important;
-  color: #1a202c !important;
-}
-
-/* Icons */
-section.cpd-metrics-section .cpd-metric-card::before {
-  content: "" !important;
-  display: block !important;
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 28px;
-  height: 28px;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  opacity: 0.25 !important;
-}
-
-/* Icon assignments */
-section.cpd-metrics-section .cpd-metric-card:nth-child(1)::before { background-image: url('/icons/time.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(2)::before { background-image: url('/icons/hourglass.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(3)::before { background-image: url('/icons/checklist.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(4)::before { background-image: url('/icons/calendar.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(5)::before { background-image: url('/icons/category.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(6)::before { background-image: url('/icons/trending-up.svg') !important; }
-
-/* FINAL OVERRIDES — MUST BE LAST */
-
-/* Inner cards grey */
-section.cpd-metrics-section .cpd-metric-card {
-  background: #f7f9fc !important;
-}
-
-/* Smaller text */
-section.cpd-metrics-section .cpd-metric-card h4 {
-  font-size: 0.85rem !important;
-  color: #4a5568 !important;
-}
-
-section.cpd-metrics-section .cpd-metric-card p {
-  font-size: 1.6rem !important;
-  font-weight: 700 !important;
-  color: #1a202c !important;
-}
-
-/* Icons */
-section.cpd-metrics-section .cpd-metric-card::before {
-  content: "" !important;
-  display: block !important;
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 28px;
-  height: 28px;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  opacity: 0.25 !important;
-}
-
-/* Icon assignments */
-section.cpd-metrics-section .cpd-metric-card:nth-child(1)::before { background-image: url('/icons/time.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(2)::before { background-image: url('/icons/hourglass.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(3)::before { background-image: url('/icons/checklist.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(4)::before { background-image: url('/icons/calendar.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(5)::before { background-image: url('/icons/category.svg') !important; }
-section.cpd-metrics-section .cpd-metric-card:nth-child(6)::before { background-image: url('/icons/trending-up.svg') !important; }
 
 /* ============================================================
-   FINAL CPD METRIC CARD COLOUR
-   Outer section remains white
-   Individual metric cards are light grey
-============================================================ */
-
-section.cpd-metrics-section {
-  background: #ffffff !important;
-}
-
-/* Individual metric cards */
-section.cpd-metrics-section .cpd-metric-card {
-  background: #f3f5f7 !important;
-  border-top: none !important;
-}
-/* ============================================================
-   CPD LOG — MAIN CARD
+   CPD LOG — MAIN INNER CARD
    ============================================================ */
 
 .cpd-log-inner {
     background: #f5f6f8;
-}  
+}
+
 
 /* ============================================================
    CPD SUPPORTING EVIDENCE
-   Scoped ONLY to dynamically generated CPD evidence links
    ============================================================ */
 
 .cpd-card .cpd-supporting-evidence {
@@ -8712,6 +8095,7 @@ section.cpd-metrics-section .cpd-metric-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 12px;
 
     width: 100%;
@@ -8757,10 +8141,11 @@ section.cpd-metrics-section .cpd-metric-card {
 
 
 /* ------------------------------------------------------------
-   Arrow
+   Evidence arrow
 ------------------------------------------------------------ */
 
 .cpd-card .cpd-supporting-evidence-link i {
+
     flex: 0 0 auto;
 
     color: #0a66c2;
@@ -8774,7 +8159,7 @@ section.cpd-metrics-section .cpd-metric-card {
 
 
 /* ------------------------------------------------------------
-   Hover / tap state
+   Evidence hover
 ------------------------------------------------------------ */
 
 .cpd-card .cpd-supporting-evidence-link:hover {
@@ -8794,11 +8179,88 @@ section.cpd-metrics-section .cpd-metric-card {
 }
 
 
+/* ============================================================
+   CPD LOG — DEFINITIVE INNER CARD STYLING
+   Main .cpd-section-card remains white
+   ============================================================ */
+
+.cpd-section-card > .cpd-log-inner {
+
+    background-color: #f3f4f6 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+
 /* ------------------------------------------------------------
-   Mobile
+   CPD LOG HEADER
 ------------------------------------------------------------ */
 
+.cpd-section-card
+> .cpd-log-inner
+> .collapsible-toggle {
+
+    background-color: #f3f4f6 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+
+/* ------------------------------------------------------------
+   CPD LOG EXPANDED AREA
+------------------------------------------------------------ */
+
+.cpd-section-card
+> .cpd-log-inner
+> .collapsible-content {
+
+    background-color: #f3f4f6 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+
+/* ------------------------------------------------------------
+   Individual CPD activity cards remain independent
+------------------------------------------------------------ */
+
+.cpd-section-card
+> .cpd-log-inner
+.cpd-card {
+
+    background-color: inherit;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
 @media (max-width: 700px) {
+
+    section.cpd-metrics-section {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    section.cpd-metrics-section .cpd-metrics {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    section.cpd-metrics-section .cpd-metric-card {
+        min-height: 130px;
+        padding: 22px;
+        border-top: none !important;
+    }
+
+    section.cpd-metrics-section .cpd-metric-card h4 {
+        font-size: 0.82rem !important;
+    }
+
+    section.cpd-metrics-section .cpd-metric-card p {
+        font-size: 1.5rem !important;
+    }
 
     .cpd-card .cpd-supporting-evidence-link {
 
@@ -8810,39 +8272,6 @@ section.cpd-metrics-section .cpd-metric-card {
 
         gap: 10px;
     }
-
-}  
-/* ============================================================
-   CPD LOG — DEFINITIVE INNER CARD STYLING
-   Main .cpd-section-card remains white.
-============================================================ */
-
-.cpd-section-card > .cpd-log-inner {
-    background-color: #f3f4f6 !important;
-    background-image: none !important;
-    box-shadow: none !important;
-}
-
-
-/* CPD LOG HEADER */
-.cpd-section-card > .cpd-log-inner > .collapsible-toggle {
-    background-color: #f3f4f6 !important;
-    background-image: none !important;
-    box-shadow: none !important;
-}
-
-
-/* CPD LOG EXPANDED AREA */
-.cpd-section-card > .cpd-log-inner > .collapsible-content {
-    background-color: #f3f4f6 !important;
-    background-image: none !important;
-    box-shadow: none !important;
-}
-
-
-/* Keep individual CPD activity cards independent */
-.cpd-section-card > .cpd-log-inner .cpd-card {
-    background-color: inherit;
 }
 </style>
 

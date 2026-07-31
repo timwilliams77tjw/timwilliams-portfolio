@@ -7453,38 +7453,805 @@ section.competency-section > .competency-card {
 }
 
 /* ============================================================
-   CPD LOG — DEFINITIVE INNER CARD STYLING
-   Main .cpd-section-card remains white.
+   CPD METRICS SECTION
 ============================================================ */
 
-.cpd-section-card > .cpd-log-inner {
-    background-color: #f3f4f6 !important;
+.cpd-metrics-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 24px;
+  border-top: 8px solid #0a66c2;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+/* Section title */
+.cpd-metrics-title {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: 0.5px;
+}
+
+/* Metrics grid */
+.cpd-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Individual metric cards */
+.cpd-metric-card {
+  min-height: 150px;
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid #d9e2ec;
+  border-top: 5px solid #0a66c2;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Metric heading */
+.cpd-metric-card h4 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Metric value */
+.cpd-metric-card p {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #111111;
+}
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 900px) {
+
+  .cpd-metrics-section {
+    padding: 24px;
+  }
+
+  .cpd-metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .cpd-metrics-section {
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .cpd-metrics-title {
+    margin-bottom: 22px;
+    font-size: 24px;
+  }
+
+  .cpd-metrics {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .cpd-metric-card {
+    min-height: 140px;
+    padding: 24px;
+  }
+
+  .cpd-metric-card h4 {
+    font-size: 16px;
+  }
+
+  .cpd-metric-card p {
+    font-size: 34px;
+  }
+
+}
+/* ============================================================
+   OVERVIEW SECTION
+============================================================ */
+
+.overview-section {
+  text-align: center;
+}
+
+.overview-section .section-heading {
+  justify-content: center;
+  text-align: center;
+}
+
+.overview-section .section-subtitle {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   MATCH COMPETENCY & PROFESSIONAL EVIDENCE CARD BACKGROUNDS
+============================================================ */
+
+.competency-section,
+.professional-evidence-section {
+  background-color: #ffffff !important;
+}
+
+.evidence-section-divider{
+    margin:26px 0;
+    border:none;
+    border-top:1px solid #e8edf5;
+}
+.evidence-title{
+
+    font-size:2rem;
+    font-weight:800;
+
+    margin-bottom:6px;
+}
+
+.evidence-subtitle{
+
+    color:#5f6773;
+
+    font-size:1rem;
+
+    margin-bottom:22px;
+}
+.case-study-label{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    background:#eef5ff;
+
+    color:#0a66c2;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+}
+.supporting-document{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    border:1px solid #dfe8f5;
+
+    border-radius:14px;
+
+    background:#fafcff;
+
+    transition:.25s;
+}
+
+.supporting-document:hover{
+
+    background:#eef5ff;
+}
+.competency-tag{
+
+    border-radius:999px;
+
+    padding:8px 18px;
+
+    background:#fff;
+
+    border:2px solid #0a66c2;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.competency-tag:hover{
+
+    background:#0a66c2;
+    color:#fff;
+}
+.professional-evidence-card{
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.professional-evidence-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:6px;
+
+    background:linear-gradient(
+        90deg,
+        #0a66c2,
+        #1d7ce2
+    );
+}
+.professional-evidence-card{
+
+    padding:34px;
+}
+
+.professional-evidence-card h3{
+
+    margin-bottom:12px;
+}
+
+.professional-evidence-card p{
+
+    margin-bottom:22px;
+
+    line-height:1.8;
+}  
+
+.cpd-metrics-section{
+
+    background:#fff;
+
+    border-radius:28px;
+
+    padding:40px;
+
+    margin:40px 0;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+.cpd-metrics-title{
+
+    text-align:center;
+
+    font-size:2.2rem;
+
+    font-weight:800;
+
+    margin:0 0 36px;
+
+    color:#111;
+}
+.cpd-metrics{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:28px;
+}  
+.cpd-metric-card p{
+
+    margin:0;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    color:#111;
+
+    text-align:center;
+}
+
+.cpd-metric-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 16px 30px rgba(0,0,0,.08);
+}  
+
+.cpd-metric-card h4{
+
+    margin:0 0 16px;
+
+    font-size:.9rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+    color:#666;
+}  
+.cpd-metric-card p{
+
+    margin:0;
+
+    font-size:3rem;
+
+    font-weight:800;
+
+    line-height:1.05;
+
+    color:#111;
+}  
+
+.evidence-inline-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0;
+
+    margin-top:0;
+
+    background:none;
+
+    border:none;
+
+    box-shadow:none;
+}  
+.cpd-metric-card h4{
+    margin:0 0 10px;
+    font-size:0.85rem;
+    font-weight:600;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:#6b7280;
+    text-align:center;
+}
+
+.cpd-metric-card p{
+    margin:0;
+    font-size:1.5rem;
+    font-weight:700;
+    line-height:1.2;
+    color:#111827;
+    text-align:center;
+    word-break:break-word;
+}
+/* Remove blue border from individual metric cards */
+.cpd-metric-card {
+  border-left: none !important;
+}
+/* Remove blue top border from individual metric cards */
+.cpd-metrics-section .cpd-metric-card {
+  border-top: none !important;
+}
+
+/* ================================
+   CPD METRICS — MAIN SECTION
+   ================================ */
+
+.cpd-metrics-section {
+  background: linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
+  padding: 28px;
+  border-radius: 24px;
+  border-top: 5px solid var(--apm-accent);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
+  margin-bottom: 32px;
+}
+
+.cpd-metrics-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 24px;
+  color: #1a202c;
+}
+
+
+/* ============================================================
+   CPD METRICS — CLEAN CONSOLIDATED STYLING
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   MAIN CPD METRICS SECTION
+------------------------------------------------------------ */
+
+section.cpd-metrics-section {
+    background: #ffffff !important;
+    padding: 28px;
+    border-radius: 24px;
+    border-top: 5px solid var(--apm-accent) !important;
+    box-shadow: none !important;
+    margin-bottom: 32px;
+    box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------
+   SECTION TITLE
+------------------------------------------------------------ */
+
+section.cpd-metrics-section .cpd-metrics-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 24px;
+    color: #1a202c;
+}
+
+
+/* ------------------------------------------------------------
+   METRIC GRID
+------------------------------------------------------------ */
+
+section.cpd-metrics-section .cpd-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+}
+
+
+/* ------------------------------------------------------------
+   INDIVIDUAL METRIC CARDS
+   No blue top border
+------------------------------------------------------------ */
+
+section.cpd-metrics-section .cpd-metric-card {
+
+    min-height: 150px;
+    padding: 28px;
+
+    background: #f3f5f7 !important;
+
+    border: 1px solid #e3e9f1 !important;
+    border-top: none !important;
+
+    border-radius: 20px;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    position: relative;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   METRIC CARD HOVER
+------------------------------------------------------------ */
+
+section.cpd-metrics-section .cpd-metric-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ------------------------------------------------------------
+   METRIC CARD LABEL
+------------------------------------------------------------ */
+
+section.cpd-metrics-section .cpd-metric-card h4 {
+
+    font-size: 0.85rem !important;
+    font-weight: 600;
+
+    color: #4a5568 !important;
+
+    margin: 0 0 8px 0;
+}
+
+
+/* ------------------------------------------------------------
+   METRIC VALUE
+------------------------------------------------------------ */
+
+section.cpd-metrics-section .cpd-metric-card p {
+
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+
+    color: #1a202c !important;
+
+    margin: 0;
+}
+
+
+/* ------------------------------------------------------------
+   METRIC ICON
+------------------------------------------------------------ */
+
+section.cpd-metrics-section .cpd-metric-card::before {
+
+    content: "" !important;
+
+    display: block !important;
+
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 28px;
+    height: 28px;
+
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+
+    opacity: 0.25 !important;
+
+    pointer-events: none;
+}
+
+
+/* ------------------------------------------------------------
+   ICON ASSIGNMENTS
+------------------------------------------------------------ */
+
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(1)::before {
+    background-image: url('/icons/time.svg') !important;
+}
+
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(2)::before {
+    background-image: url('/icons/hourglass.svg') !important;
+}
+
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(3)::before {
+    background-image: url('/icons/checklist.svg') !important;
+}
+
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(4)::before {
+    background-image: url('/icons/calendar.svg') !important;
+}
+
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(5)::before {
+    background-image: url('/icons/category.svg') !important;
+}
+
+section.cpd-metrics-section
+.cpd-metric-card:nth-child(6)::before {
+    background-image: url('/icons/trending-up.svg') !important;
+}
+
+
+
+
+
+/* ============================================================
+   CPD SUPPORTING EVIDENCE
+   ============================================================ */
+
+.cpd-card .cpd-supporting-evidence {
+    margin-top: 16px;
+}
+
+
+/* ------------------------------------------------------------
+   Evidence list
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-list {
+    margin-top: 8px;
+}
+
+
+/* ------------------------------------------------------------
+   Individual evidence links
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-link {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+    margin: 8px 0;
+
+    background: #f7f9fc;
+
+    border: 1px solid #dbe3ec;
+    border-left: 4px solid #0a66c2;
+
+    border-radius: 10px;
+
+    color: #1f2937;
+
+    text-decoration: none;
+
+    font-size: 0.92rem;
+    font-weight: 600;
+
+    line-height: 1.35;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   Evidence title
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-link span {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* ------------------------------------------------------------
+   Evidence arrow
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-link i {
+
+    flex: 0 0 auto;
+
+    color: #0a66c2;
+
+    font-size: 0.85rem;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   Evidence hover
+------------------------------------------------------------ */
+
+.cpd-card .cpd-supporting-evidence-link:hover {
+
+    background: #eef5fc;
+
+    border-color: #c5d7e9;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+
+    transform: translateY(-1px);
+}
+
+
+.cpd-card .cpd-supporting-evidence-link:hover i {
+    transform: translateX(3px);
+}
+
+
+
+
+
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    section.cpd-metrics-section {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    section.cpd-metrics-section .cpd-metrics {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    section.cpd-metrics-section .cpd-metric-card {
+        min-height: 130px;
+        padding: 22px;
+        border-top: none !important;
+    }
+
+    section.cpd-metrics-section .cpd-metric-card h4 {
+        font-size: 0.82rem !important;
+    }
+
+    section.cpd-metrics-section .cpd-metric-card p {
+        font-size: 1.5rem !important;
+    }
+
+    .cpd-card .cpd-supporting-evidence-link {
+
+        padding: 11px 12px;
+
+        font-size: 0.9rem;
+
+        border-radius: 9px;
+
+        gap: 10px;
+    }
+}
+
+/* ============================================================
+   CPD LOG — LIGHT GREY INNER CARD
+   Main CPD section remains WHITE
+============================================================ */
+
+/* Main CPD section */
+.cpd-section-card {
+    background: #ffffff !important;
+}
+
+/* CPD LOG expandable card */
+.cpd-section-card .cpd-log-inner {
+    background: #f3f5f7 !important;
+    background-color: #f3f5f7 !important;
     background-image: none !important;
     box-shadow: none !important;
 }
 
-
-/* CPD LOG HEADER */
-.cpd-section-card > .cpd-log-inner > .collapsible-toggle {
-    background-color: #f3f4f6 !important;
+/* CPD LOG header / expandable button */
+.cpd-section-card .cpd-log-inner .collapsible-toggle {
+    background: #f3f5f7 !important;
+    background-color: #f3f5f7 !important;
     background-image: none !important;
-    box-shadow: none !important;
 }
 
-
-/* CPD LOG EXPANDED AREA */
-.cpd-section-card > .cpd-log-inner > .collapsible-content {
-    background-color: #f3f4f6 !important;
+/* CPD LOG expanded content */
+.cpd-section-card .cpd-log-inner .collapsible-content {
+    background: #f3f5f7 !important;
+    background-color: #f3f5f7 !important;
     background-image: none !important;
-    box-shadow: none !important;
 }
 
-
-/* Keep individual CPD activity cards independent */
-.cpd-section-card > .cpd-log-inner .cpd-card {
-    background-color: inherit;
-}
-  
 </style>
 
 
@@ -7560,17 +8327,20 @@ section.competency-section > .competency-card {
 </section>
 
 
-<!-- OVERVIEW (unchanged) -->
-<section>
+<!-- OVERVIEW -->
+<section class="overview-section">
+
   <h2 class="section-heading">
     <i class="fa-solid fa-circle-info"></i>
     Overview
   </h2>
+
   <p class="section-subtitle">
     This page provides a comprehensive view of continuing professional development activities and competence
     alignment with the APM Competence Framework (3rd edition). It brings together a detailed CPD activity log,
     reflective themes, and a structured summary of key competence areas.
   </p>
+
 </section>
 
 
@@ -8886,17 +9656,7 @@ function populateEvidenceCPDRelationships() {
        Remove previous generated sections.
     */
 
-    document
-        .querySelectorAll(
-            ".supporting-cpd-activities"
-        )
-        .forEach(
-            section => {
-
-                section.remove();
-
-            }
-        );
+  
 
 
     Object.entries(
@@ -8941,24 +9701,23 @@ function populateEvidenceCPDRelationships() {
             }
 
 
-            const wrapper =
-                document.createElement(
-                    "div"
-                );
+       const wrapper =
+    evidenceContent.querySelector(
+        ".supporting-cpd-activities"
+    );
+
+if (!wrapper) {
+    return;
+}
+
+wrapper.innerHTML = "";
 
 
-            wrapper.className =
-                "supporting-cpd-activities";
+        const header =
+    document.createElement("div");
 
-
-            const header =
-                document.createElement(
-                    "div"
-                );
-
-
-            header.className =
-                "supporting-cpd-header";
+header.className =
+    "supporting-cpd-header evidence-inline-header";
 
 
             const title =
@@ -9212,9 +9971,7 @@ function populateEvidenceCPDRelationships() {
             );
 
 
-            evidenceContent.appendChild(
-                wrapper
-            );
+          
 
         }
     );
@@ -14165,35 +14922,46 @@ document.addEventListener(
 
 
 
-<!-- METRICS -->
-<section class="cpd-metrics">
-  <div class="cpd-metric-card">
-    <h4>Total Hours</h4>
-    <p id="metric-total-hours">–</p>
+<!-- CPD METRICS -->
+<section class="cpd-metrics-section">
+
+  <h3 class="cpd-metrics-title">CPD Metrics</h3>
+
+  <div class="cpd-metrics">
+
+    <div class="cpd-metric-card">
+      <h4>Total Hours</h4>
+      <p id="metric-total-hours">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Hours Remaining</h4>
+      <p id="metric-hours-remaining">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Activities Logged</h4>
+      <p id="metric-activities">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Avg Hours / Month</h4>
+      <p id="metric-hours-month">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Top Category</h4>
+      <p id="metric-top-category">–</p>
+    </div>
+
+    <div class="cpd-metric-card">
+      <h4>Projected Hours</h4>
+      <p id="metric-projected-hours">–</p>
+    </div>
+
   </div>
-  <div class="cpd-metric-card">
-    <h4>Hours Remaining</h4>
-    <p id="metric-hours-remaining">–</p>
-  </div>
-  <div class="cpd-metric-card">
-    <h4>Activities Logged</h4>
-    <p id="metric-activities">–</p>
-  </div>
-  <div class="cpd-metric-card">
-    <h4>Avg Hours / Month</h4>
-    <p id="metric-hours-month">–</p>
-  </div>
-  <div class="cpd-metric-card">
-    <h4>Top Category</h4>
-    <p id="metric-top-category">–</p>
-  </div>
-  <div class="cpd-metric-card">
-    <h4>Projected Hours</h4>
-    <p id="metric-projected-hours">–</p>
-  </div>
+
 </section>
-
-
 <div class="cpd-table-wrapper" style="display:none">
   <table class="cpd-table">
     <tbody id="cpd-body"></tbody>
@@ -14518,8 +15286,7 @@ document.addEventListener(
                         </li>
 
                     </ul>
-
-
+<hr class="evidence-section-divider">
                     <!-- ==========================================
                          SUPPORTING EVIDENCE
                     =========================================== -->
@@ -14623,7 +15390,7 @@ document.addEventListener(
                                 </p>
 
                                 <a
-                                    href="#"
+                                    href="https://www.twc-ltd.uk/delivering-cyber-security-transformation"
                                     class="evidence-resource-link"
                                     target="_blank"
                                     rel="noopener">
@@ -14640,8 +15407,8 @@ document.addEventListener(
 
                     </div>
 
-
-                    <!-- ==========================================
+<hr class="evidence-section-divider">
+  <!-- ==========================================
                          COMPETENCES DEMONSTRATED
                     =========================================== -->
 
@@ -14676,8 +15443,7 @@ document.addEventListener(
                         </a>
 
                     </div>
-
-
+<hr class="evidence-section-divider">
                     <!-- ==========================================
                          SUPPORTING CPD ACTIVITIES
 
@@ -14766,8 +15532,8 @@ document.addEventListener(
 
                     </ul>
 
-
-                    <!-- SUPPORTING EVIDENCE -->
+<hr class="evidence-section-divider">
+                  <!-- SUPPORTING EVIDENCE -->
 
                     <div class="professional-evidence-label">
                         Supporting Evidence
@@ -14781,8 +15547,7 @@ document.addEventListener(
                         </p>
 
                     </div>
-
-
+<hr class="evidence-section-divider">
                     <!-- COMPETENCES -->
 
                     <div class="professional-evidence-label">
@@ -14804,8 +15569,7 @@ document.addEventListener(
                         </a>
 
                     </div>
-
-
+<hr class="evidence-section-divider">
                     <!-- SUPPORTING CPD ACTIVITIES -->
 
                     <div class="supporting-cpd-activities"
@@ -14885,8 +15649,7 @@ document.addEventListener(
                         </li>
 
                     </ul>
-
-
+<hr class="evidence-section-divider">
                     <!-- SUPPORTING EVIDENCE -->
 
                     <div class="professional-evidence-label">
@@ -14902,8 +15665,8 @@ document.addEventListener(
 
                     </div>
 
-
-                    <!-- COMPETENCES -->
+<hr class="evidence-section-divider">
+                  <!-- COMPETENCES -->
 
                     <div class="professional-evidence-label">
                         Competences Demonstrated
@@ -14919,8 +15682,8 @@ document.addEventListener(
 
                     </div>
 
-
-                    <!-- SUPPORTING CPD ACTIVITIES -->
+<hr class="evidence-section-divider">
+                  <!-- SUPPORTING CPD ACTIVITIES -->
 
                     <div class="supporting-cpd-activities"
                          data-evidence-id="evidence-126k-device-migration">
@@ -14999,8 +15762,7 @@ document.addEventListener(
                         </li>
 
                     </ul>
-
-
+<hr class="evidence-section-divider">
                     <!-- SUPPORTING EVIDENCE -->
 
                     <div class="professional-evidence-label">
@@ -15015,8 +15777,7 @@ document.addEventListener(
                         </p>
 
                     </div>
-
-
+<hr class="evidence-section-divider">
                     <!-- COMPETENCES -->
 
                     <div class="professional-evidence-label">
@@ -15032,8 +15793,7 @@ document.addEventListener(
                         </a>
 
                     </div>
-
-
+<hr class="evidence-section-divider">
                     <!-- SUPPORTING CPD ACTIVITIES -->
 
                     <div class="supporting-cpd-activities"
@@ -15113,8 +15873,7 @@ document.addEventListener(
                         </li>
 
                     </ul>
-
-
+<hr class="evidence-section-divider">
                     <!-- SUPPORTING EVIDENCE -->
 
                     <div class="professional-evidence-label">
@@ -15129,8 +15888,7 @@ document.addEventListener(
                         </p>
 
                     </div>
-
-
+<hr class="evidence-section-divider">
                     <!-- COMPETENCES -->
 
                     <div class="professional-evidence-label">
@@ -15152,8 +15910,7 @@ document.addEventListener(
                         </a>
 
                     </div>
-
-
+<hr class="evidence-section-divider">
                     <!-- SUPPORTING CPD ACTIVITIES -->
 
                     <div class="supporting-cpd-activities"
@@ -15233,8 +15990,7 @@ document.addEventListener(
                         </li>
 
                     </ul>
-
-
+<hr class="evidence-section-divider">
                     <!-- SUPPORTING EVIDENCE -->
 
                     <div class="professional-evidence-label">
@@ -15249,8 +16005,7 @@ document.addEventListener(
                         </p>
 
                     </div>
-
-
+<hr class="evidence-section-divider">
                     <!-- COMPETENCES -->
 
                     <div class="professional-evidence-label">
@@ -15272,8 +16027,7 @@ document.addEventListener(
                         </a>
 
                     </div>
-
-
+<hr class="evidence-section-divider">
                     <!-- SUPPORTING CPD ACTIVITIES -->
 
                     <div class="supporting-cpd-activities"
@@ -15407,104 +16161,35 @@ document.addEventListener(
         <!-- ====================================================
              3. AI & DIGITAL TRANSFORMATION
         ===================================================== -->
+  <article class="development-priority-card">
 
-      <!-- ======================================================
-     3. 126K DEVICE MIGRATION
-======================================================= -->
+            <div class="development-priority-icon">
+                <i class="fa-solid fa-handshake"></i>
+            </div>
 
-<article
-    class="professional-evidence-item"
-    id="evidence-126k-device-migration">
+            <div class="development-priority-content">
 
-    <div class="professional-evidence-icon">
-        <i class="fa-solid fa-laptop"></i>
-    </div>
+                <h3>
+                    AI & digital transformation
+                </h3>
 
-    <div class="professional-evidence-content">
+                <span class="development-focus">
+AI‑Augmented Decision Making — Using AI to enhance risk forecasting, scenario modelling, benefits tracking, and stakeholder insight. This is the highest‑value area for project and programme environments because it directly improves planning accuracy and governance outcomes.
+                </span>
 
-        <h3>126K Device Migration</h3>
+                <p>
+                   Deepen practical use of AI tools (including Microsoft 365 Copilot) in delivery and governance.
+                </p>
 
-        <p class="professional-evidence-summary">
-            Led a large-scale Windows device migration programme,
-            coordinating the transition of approximately 126,000
-            devices while managing technology, operational and
-            stakeholder dependencies.
-        </p>
+                <div class="development-tags">
+                    <span>Process Integration & Automation — Embedding AI into workflows, decision gates, PMO governance, reporting cycles, and delivery tooling to reduce manual effort and increase consistency.</span>
+                    <span>Data Quality & Governance — Strengthening data pipelines, metadata standards, access controls, and lifecycle management so AI outputs are reliable, compliant, and auditable.</span>
+                    <span>AI Literacy & Upskilling — Building foundational understanding of AI concepts, risks, ethics, and practical use across teams. This includes prompt engineering, model behaviour awareness, and responsible‑use principles./span>
+                </div>
 
+            </div>
 
-        <!-- CASE STUDY -->
-
-        <div class="professional-evidence-label">
-            Case Study
-        </div>
-
-        <div class="professional-evidence-detail">
-
-            <p class="professional-evidence-placeholder">
-                Case study content to be added.
-            </p>
-
-        </div>
-
-
-        <!-- KEY OUTCOMES -->
-
-        <div class="professional-evidence-label">
-            Key Outcomes
-        </div>
-
-        <ul class="professional-evidence-outcomes">
-
-            <li>
-                Key outcome to be added.
-            </li>
-
-            <li>
-                Key outcome to be added.
-            </li>
-
-            <li>
-                Key outcome to be added.
-            </li>
-
-        </ul>
-
-
-        <!-- SUPPORTING EVIDENCE -->
-
-        <div class="professional-evidence-label">
-            Supporting Evidence
-        </div>
-
-        <div class="professional-evidence-assets">
-
-            <p class="professional-evidence-placeholder">
-                Presentations, documents, videos and other supporting
-                evidence to be added.
-            </p>
-
-        </div>
-
-
-        <!-- COMPETENCES -->
-
-        <div class="professional-evidence-label">
-            Competences Demonstrated
-        </div>
-
-        <div class="professional-evidence-tags">
-
-            <a
-                href="#competence-solutions-development"
-                class="evidence-tag">
-                AI &amp; Digital Transformation
-            </a>
-
-        </div>
-
-    </div>
-
-</article>
+        </article>
 
         <!-- ====================================================
              4. SUSTAINABILITY

@@ -9940,6 +9940,54 @@ i.fa-solid {
   }
 }
 
+  .competency-arc-box {
+  text-align: center;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.arc-wheel {
+  width: 100%;
+  height: auto;
+}
+
+.arc-label {
+  font-size: 14px;
+  font-weight: 600;
+  fill: #222;
+  text-anchor: middle;
+}
+
+/* Inline with radars */
+.competency-flex {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* Match radar container style */
+.radar-box,
+.competency-arc-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 320px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .competency-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
   
 </style>
 
@@ -16087,32 +16135,34 @@ document.addEventListener(
         <svg id="radar-target" class="radar-svg" viewBox="-60 -60 120 120"></svg>
       </div>
 
-      <!-- COMPETENCY WHEEL -->
-      <div class="radar-box wheel-box">
-        <h3 class="radar-heading">Competency Assessment Wheel</h3>
+<div class="competency-arc-box">
+  <h3 class="radar-heading">Competency Assessment Wheel</h3>
 
-        <svg viewBox="0 0 400 400" class="wheel-svg">
+  <svg viewBox="0 0 400 220" class="arc-wheel">
 
-          <!-- Segments -->
-          <path d="M200,200 L200,20 A180,180 0 0,1 340,80 Z" fill="#0a66c2"></path>
-          <path d="M200,200 L340,80 A180,180 0 0,1 380,200 Z" fill="#007b5f"></path>
-          <path d="M200,200 L380,200 A180,180 0 0,1 340,320 Z" fill="#b8860b"></path>
-          <path d="M200,200 L340,320 A180,180 0 0,1 60,320 Z" fill="#8a2be2"></path>
-          <path d="M200,200 L60,320 A180,180 0 0,1 60,80 Z" fill="#555555"></path>
+    <!-- Expert -->
+    <path d="M20,200 A180,180 0 0,1 140,40" stroke="#0a66c2" stroke-width="40" fill="none" />
+    <text x="80" y="120" class="arc-label">Expert</text>
 
-          <!-- Radar polygon -->
-          <polygon points="200,80 320,160 280,260 120,260 80,160"
-                   fill="rgba(10,102,194,0.4)" stroke="#0a66c2" stroke-width="2"></polygon>
+    <!-- Proficient -->
+    <path d="M140,40 A180,180 0 0,1 260,40" stroke="#007b5f" stroke-width="40" fill="none" />
+    <text x="200" y="70" class="arc-label">Proficient</text>
 
-          <!-- Labels -->
-          <text x="200" y="40" text-anchor="middle" class="label">Expert</text>
-          <text x="330" y="120" text-anchor="middle" class="label">Proficient</text>
-          <text x="330" y="280" text-anchor="middle" class="label">Competent</text>
-          <text x="70" y="280" text-anchor="middle" class="label">Practised</text>
-          <text x="70" y="120" text-anchor="middle" class="label">Aware</text>
+    <!-- Competent -->
+    <path d="M260,40 A180,180 0 0,1 380,200" stroke="#b8860b" stroke-width="40" fill="none" />
+    <text x="310" y="120" class="arc-label">Competent</text>
 
-        </svg>
-      </div>
+    <!-- Practised -->
+    <path d="M380,200 A180,180 0 0,1 260,360" stroke="#8a2be2" stroke-width="40" fill="none" />
+    <text x="310" y="200" class="arc-label">Practised</text>
+
+    <!-- Aware -->
+    <path d="M260,360 A180,180 0 0,1 140,360" stroke="#555555" stroke-width="40" fill="none" />
+    <text x="200" y="240" class="arc-label">Aware</text>
+
+  </svg>
+</div>
+
 
     </div>
 

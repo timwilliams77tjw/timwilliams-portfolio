@@ -9220,59 +9220,144 @@ section.cpd-metrics-section
 
 /* ============================================================
    BCS PROFESSIONAL DEVELOPMENT
-   DEFINITIVE OVERRIDE
    ============================================================ */
+
+/*
+   The BCS section remains INSIDE the main CPD section card.
+   Only the spacing and visual styling are controlled here.
+*/
 
 
 /* ============================================================
-   SPACE BETWEEN CPD CONTENT AND BCS SECTION
+   GAP BETWEEN CPD INSIGHTS AND BCS SECTION
    ============================================================ */
 
-.cpd-log-section > .bcs-development-section {
-    margin-top: 40px !important;
+/*
+   Creates a clear visual separation after the Insights panel
+   before the BCS Professional Development heading.
+*/
+.bcs-development-section {
+    margin-top: 32px !important;
 }
 
 
 /* ============================================================
-   BCS MAIN SECTION
+   BCS SECTION TITLE
    ============================================================ */
 
-.cpd-log-section > .bcs-development-section {
-    background: #ffffff !important;
-    padding: 28px !important;
-    border-radius: 24px !important;
-    box-sizing: border-box !important;
-}
-
-
-/* ============================================================
-   BCS TITLE
-   ============================================================ */
-
-.cpd-log-section > .bcs-development-section
 .bcs-development-title {
-    margin: 0 0 12px 0 !important;
-    color: #1a202c !important;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0 0 20px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.bcs-development-title i {
+    color: var(--apm-accent);
+    margin-right: 8px;
 }
 
 
 /* ============================================================
-   BCS INTRO
+   BCS INTRODUCTION
    ============================================================ */
 
-.cpd-log-section > .bcs-development-section
 .bcs-development-intro {
-    margin-bottom: 28px !important;
+    background: #f7f9fc;
+    border: 1px solid #e3e9f1;
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 24px;
+    box-sizing: border-box;
 }
 
-.cpd-log-section > .bcs-development-section
 .bcs-development-intro h3 {
-    color: #1a202c !important;
+    margin: 0 0 10px 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1a202c;
 }
 
-.cpd-log-section > .bcs-development-section
 .bcs-development-intro p {
-    color: #4a5568 !important;
+    margin: 0 0 18px 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #4a5568;
+}
+
+
+/* ============================================================
+   BCS REPORT BUTTON
+   ============================================================ */
+
+.bcs-report-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 11px 16px;
+
+    background: #0a66c2;
+    color: #ffffff;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.bcs-report-button:hover {
+    background: #084f96;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+.bcs-report-button > i:first-child {
+    font-size: 0.95rem;
+}
+
+.bcs-report-arrow {
+    font-size: 0.75rem;
+    margin-left: 2px;
+}
+
+
+/* ============================================================
+   PROFESSIONAL DEVELOPMENT ECOSYSTEM
+   ============================================================ */
+
+.bcs-ecosystem {
+    margin-top: 24px;
+}
+
+.bcs-ecosystem-heading {
+    margin-bottom: 18px;
+}
+
+.bcs-ecosystem-heading h3 {
+    margin: 0 0 6px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.bcs-ecosystem-heading p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #4a5568;
 }
 
 
@@ -9280,228 +9365,178 @@ section.cpd-metrics-section
    ECOSYSTEM GRID
    ============================================================ */
 
-.cpd-log-section > .bcs-development-section
 .bcs-ecosystem-grid {
-
-    display: grid !important;
+    display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr)) !important;
+        repeat(auto-fit, minmax(220px, 1fr));
 
-    gap: 16px !important;
+    gap: 16px;
 }
 
 
 /* ============================================================
-   BASE CARD
+   ECOSYSTEM CARDS
    ============================================================ */
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
 .bcs-ecosystem-card {
+    display: flex;
+    align-items: center;
 
-    display: flex !important;
-    align-items: center !important;
+    gap: 14px;
 
-    min-height: 105px !important;
+    padding: 17px 18px;
 
-    padding: 18px 20px !important;
+    background: #f7f9fc;
 
-    border-radius: 16px !important;
+    border: 1px solid #e3e9f1;
 
-    box-sizing: border-box !important;
+    border-radius: 14px;
+
+    box-sizing: border-box;
 
     transition:
         transform 0.2s ease,
-        box-shadow 0.2s ease !important;
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.bcs-ecosystem-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.07);
+
+    border-color: #d2dce8;
 }
 
 
 /* ============================================================
-   1 — LEARNING
+   ECOSYSTEM ICON CONTAINER
    ============================================================ */
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
-.bcs-ecosystem-card:nth-child(1) {
+.bcs-ecosystem-icon {
+    flex: 0 0 42px;
 
-    background: #eaf3fc !important;
-    border: 1px solid #bcd8ef !important;
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e9f1;
+
+    font-size: 1.2rem;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
 }
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
+.bcs-ecosystem-card:hover .bcs-ecosystem-icon {
+    transform: scale(1.05);
+}
+
+
+/* ============================================================
+   ECOSYSTEM ICON COLOURS
+   Existing Font Awesome icons are retained.
+   Only their colours are changed.
+   ============================================================ */
+
+
+/* 1 — Learning
+   Graduation cap — blue
+------------------------------------------------------------ */
+
 .bcs-ecosystem-card:nth-child(1)
 .bcs-ecosystem-icon {
-
-    background: #cfe5f8 !important;
-    color: #0a66c2 !important;
+    color: #4a90e2 !important;
 }
 
 
-/* ============================================================
-   2 — AI
-   ============================================================ */
+/* 2 — AI
+   Robot — blue / teal
+------------------------------------------------------------ */
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
-.bcs-ecosystem-card:nth-child(2) {
-
-    background: #f2ecfa !important;
-    border: 1px solid #d8c6ed !important;
-}
-
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
 .bcs-ecosystem-card:nth-child(2)
 .bcs-ecosystem-icon {
-
-    background: #e3d4f4 !important;
-    color: #7b4bb3 !important;
+    color: #4aa3b8 !important;
 }
 
 
-/* ============================================================
-   3 — MENTORING
-   ============================================================ */
+/* 3 — Mentoring
+   User group — light blue
+------------------------------------------------------------ */
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
-.bcs-ecosystem-card:nth-child(3) {
-
-    background: #eaf7f1 !important;
-    border: 1px solid #bfe2d1 !important;
-}
-
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
 .bcs-ecosystem-card:nth-child(3)
 .bcs-ecosystem-icon {
-
-    background: #d0ecdd !important;
-    color: #16805c !important;
+    color: #6fa8dc !important;
 }
 
 
-/* ============================================================
-   4 — COMMUNITY
-   ============================================================ */
+/* 4 — Community
+   Globe — light blue
+------------------------------------------------------------ */
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
-.bcs-ecosystem-card:nth-child(4) {
-
-    background: #eaf7f8 !important;
-    border: 1px solid #b9dfe2 !important;
-}
-
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
 .bcs-ecosystem-card:nth-child(4)
 .bcs-ecosystem-icon {
-
-    background: #d0ebed !important;
-    color: #087f8c !important;
+    color: #5dade2 !important;
 }
 
 
-/* ============================================================
-   5 — PUBLISHING
-   ============================================================ */
+/* 5 — Publishing
+   Pen — yellow / gold
+------------------------------------------------------------ */
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
-.bcs-ecosystem-card:nth-child(5) {
-
-    background: #fff7e5 !important;
-    border: 1px solid #eed9a8 !important;
-}
-
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
 .bcs-ecosystem-card:nth-child(5)
 .bcs-ecosystem-icon {
-
-    background: #ffedc2 !important;
-    color: #b77900 !important;
+    color: #e6b800 !important;
 }
 
 
-/* ============================================================
-   6 — VOLUNTEERING
-   ============================================================ */
+/* 6 — Volunteering
+   Handshake — yellow / gold
+------------------------------------------------------------ */
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
-.bcs-ecosystem-card:nth-child(6) {
-
-    background: #fff1e8 !important;
-    border: 1px solid #efcfb8 !important;
-}
-
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-grid
 .bcs-ecosystem-card:nth-child(6)
 .bcs-ecosystem-icon {
-
-    background: #ffe0cc !important;
-    color: #c45a18 !important;
+    color: #e0a800 !important;
 }
 
 
 /* ============================================================
-   ICON CONTAINERS
+   ECOSYSTEM CONTENT
    ============================================================ */
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-card
-.bcs-ecosystem-icon {
-
-    flex: 0 0 58px !important;
-
-    width: 58px !important;
-    height: 58px !important;
-
-    display: flex !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    margin-right: 18px !important;
-
-    border-radius: 50% !important;
-
-    font-size: 1.45rem !important;
+.bcs-ecosystem-content {
+    flex: 1;
+    min-width: 0;
 }
 
-
-/* ============================================================
-   CARD TEXT
-   ============================================================ */
-
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-card
 .bcs-ecosystem-content h4 {
+    margin: 0 0 4px 0;
 
-    margin: 0 0 5px 0 !important;
+    font-size: 0.95rem;
+    font-weight: 700;
 
-    color: #1a202c !important;
-
-    font-size: 1rem !important;
-    font-weight: 700 !important;
+    color: #1a202c;
 }
 
-.cpd-log-section > .bcs-development-section
-.bcs-ecosystem-card
 .bcs-ecosystem-content p {
+    margin: 0;
 
-    margin: 0 !important;
+    font-size: 0.82rem;
+    line-height: 1.4;
 
-    color: #4a5568 !important;
-
-    font-size: 0.9rem !important;
-
-    line-height: 1.45 !important;
+    color: #4a5568;
 }
 
 
@@ -9511,36 +9546,84 @@ section.cpd-metrics-section
 
 @media (max-width: 700px) {
 
-    .cpd-log-section > .bcs-development-section {
-        margin-top: 32px !important;
-        padding: 22px !important;
+    /*
+       Maintain the visible gap between Insights
+       and the BCS section on smaller screens.
+    */
+
+    .bcs-development-section {
+        margin-top: 28px !important;
     }
 
-    .cpd-log-section > .bcs-development-section
+
+    .bcs-development-title {
+        font-size: 1.2rem;
+        margin-bottom: 18px;
+    }
+
+
+    .bcs-development-intro {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+
+    .bcs-development-intro p {
+        font-size: 0.9rem;
+        line-height: 1.55;
+    }
+
+
+    .bcs-report-button {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+
+    .bcs-ecosystem {
+        margin-top: 20px;
+    }
+
+
     .bcs-ecosystem-grid {
-
-        grid-template-columns: 1fr !important;
-        gap: 14px !important;
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
-    .cpd-log-section > .bcs-development-section
+
     .bcs-ecosystem-card {
-
-        min-height: 100px !important;
-        padding: 16px !important;
+        padding: 15px;
     }
 
-    .cpd-log-section > .bcs-development-section
-    .bcs-ecosystem-card
+
     .bcs-ecosystem-icon {
-
-        flex: 0 0 52px !important;
-
-        width: 52px !important;
-        height: 52px !important;
-
-        margin-right: 15px !important;
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
     }
+
+}
+
+
+/* ============================================================
+   VERY SMALL SCREENS
+   ============================================================ */
+
+@media (max-width: 400px) {
+
+    .bcs-development-title {
+        font-size: 1.1rem;
+    }
+
+    .bcs-ecosystem-content h4 {
+        font-size: 0.9rem;
+    }
+
+    .bcs-ecosystem-content p {
+        font-size: 0.78rem;
+    }
+
 }
 </style>
 

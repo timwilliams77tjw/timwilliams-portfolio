@@ -9773,8 +9773,93 @@ i.fa-solid {
   font-size: 24px;
   color: #888;
 }
+.competency-wheel {
+  text-align: center;
+  margin: 40px auto;
+  max-width: 700px;
+}
 
+.wheel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.wheel-svg {
+  width: 320px;
+  height: 320px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  fill: #222;
+}
+
+.legend {
+  text-align: left;
+}
+
+.legend h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.dot.expert { background: #0a66c2; }
+.dot.proficient { background: #007b5f; }
+.dot.competent { background: #b8860b; }
+.dot.practised { background: #8a2be2; }
+.dot.aware { background: #555555; }
   
+.competency-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.competency-wheel-svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wheel-svg {
+  width: 260px;
+  height: 260px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  fill: #222;
+}
+
+
 </style>
 
 
@@ -15905,22 +15990,63 @@ document.addEventListener(
 <div id="rating-summary-svg"></div>
   
 <section class="dual-radar-section">
-<div class="radar-wrapper">
-  <div class="radar-grid">
+  <div class="radar-wrapper">
 
-    <!-- CURRENT RADAR -->
-    <div class="radar-box">
-      <h3 class="radar-heading">My Top 6 Competencies</h3>
-      <svg id="radar-current" class="radar-svg" viewBox="-60 -60 120 120"></svg>
+    <div class="competency-layout">
+
+      <!-- CURRENT RADAR -->
+      <div class="radar-box">
+        <h3 class="radar-heading">My Top 6 Competencies</h3>
+        <svg id="radar-current" class="radar-svg" viewBox="-60 -60 120 120"></svg>
+      </div>
+
+      <!-- TARGET RADAR -->
+      <div class="radar-box">
+        <h3 class="radar-heading">Target Levels (Next Step Up)</h3>
+        <svg id="radar-target" class="radar-svg" viewBox="-60 -60 120 120"></svg>
+      </div>
+
+      <!-- COMPETENCY WHEEL -->
+      <div class="competency-wheel-svg">
+        <svg viewBox="0 0 400 400" class="wheel-svg">
+
+          <!-- Segments -->
+          <path d="M200,200 L200,20 A180,180 0 0,1 340,80 Z" fill="#0a66c2"></path>
+          <path d="M200,200 L340,80 A180,180 0 0,1 380,200 Z" fill="#007b5f"></path>
+          <path d="M200,200 L380,200 A180,180 0 0,1 340,320 Z" fill="#b8860b"></path>
+          <path d="M200,200 L340,320 A180,180 0 0,1 60,320 Z" fill="#8a2be2"></path>
+          <path d="M200,200 L60,320 A180,180 0 0,1 60,80 Z" fill="#555555"></path>
+
+          <!-- Radar polygon -->
+          <polygon points="200,80 320,160 280,260 120,260 80,160"
+                   fill="rgba(10,102,194,0.4)" stroke="#0a66c2" stroke-width="2"></polygon>
+
+          <!-- Labels -->
+          <text x="200" y="40" text-anchor="middle" class="label">Expert</text>
+          <text x="330" y="120" text-anchor="middle" class="label">Proficient</text>
+          <text x="330" y="280" text-anchor="middle" class="label">Competent</text>
+          <text x="70" y="280" text-anchor="middle" class="label">Practised</text>
+          <text x="70" y="120" text-anchor="middle" class="label">Aware</text>
+
+        </svg>
+      </div>
+
     </div>
 
-    <!-- TARGET RADAR -->
-    <div class="radar-box">
-      <h3 class="radar-heading">Target Levels (Next Step Up)</h3>
-      <svg id="radar-target" class="radar-svg" viewBox="-60 -60 120 120"></svg>
-    </div>
 
+    <div class="legend">
+      <h3>My Ratings</h3>
+      <ul>
+        <li><span class="dot expert"></span>Expert</li>
+        <li><span class="dot proficient"></span>Proficient</li>
+        <li><span class="dot competent"></span>Competent</li>
+        <li><span class="dot practised"></span>Practised</li>
+        <li><span class="dot aware"></span>Aware</li>
+      </ul>
+    </div>
   </div>
+
+
   
 <div id="radar-tooltip" class="radar-tooltip"></div>
   

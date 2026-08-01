@@ -9899,6 +9899,48 @@ i.fa-solid {
   margin-bottom: 12px;
 }
 
+/* FLEX instead of GRID */
+.competency-flex {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap; /* mobile fix */
+  margin-top: 30px;
+}
+
+/* Match radar-box styling */
+.wheel-box {
+  text-align: center;
+}
+
+/* Wheel sizing tuned to match radar size */
+.wheel-svg {
+  width: 240px;
+  height: 240px;
+}
+
+/* Label styling */
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  fill: #222;
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 900px) {
+  .competency-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wheel-svg {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+  
 </style>
 
 
@@ -16031,7 +16073,7 @@ document.addEventListener(
 <section class="dual-radar-section">
   <div class="radar-wrapper">
 
-    <div class="competency-layout">
+    <div class="competency-flex">
 
       <!-- CURRENT RADAR -->
       <div class="radar-box">
@@ -16046,7 +16088,7 @@ document.addEventListener(
       </div>
 
       <!-- COMPETENCY WHEEL -->
-      <div class="wheel-box">
+      <div class="radar-box wheel-box">
         <h3 class="radar-heading">Competency Assessment Wheel</h3>
 
         <svg viewBox="0 0 400 400" class="wheel-svg">

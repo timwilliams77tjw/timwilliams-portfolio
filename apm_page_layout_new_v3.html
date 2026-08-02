@@ -9773,269 +9773,393 @@ i.fa-solid {
   font-size: 24px;
   color: #888;
 }
-.competency-wheel {
-  text-align: center;
-  margin: 40px auto;
-  max-width: 700px;
-}
 
-.wheel-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
+/* ============================================================
+   COMPETENCY ASSESSMENT WHEEL
+============================================================ */
 
-.wheel-svg {
-  width: 320px;
-  height: 320px;
-}
+.competency-wheel-container {
+    width: 100%;
+    max-width: 560px;
 
-.label {
-  font-size: 14px;
-  font-weight: 600;
-  fill: #222;
-}
+    margin: 0 auto;
 
-.legend {
-  text-align: left;
-}
-
-.legend h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.legend ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.legend li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 6px;
-  font-size: 15px;
-}
-
-.dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.dot.expert { background: #0a66c2; }
-.dot.proficient { background: #007b5f; }
-.dot.competent { background: #b8860b; }
-.dot.practised { background: #8a2be2; }
-.dot.aware { background: #555555; }
-  
-.competency-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 30px;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.competency-wheel-svg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.wheel-svg {
-  width: 260px;
-  height: 260px;
-}
-
-.label {
-  font-size: 14px;
-  font-weight: 600;
-  fill: #222;
-}
-/* 3-column layout */
-.competency-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-  margin-top: 30px;
-}
-
-/* Radar boxes */
-.radar-box {
-  text-align: center;
-}
-
-/* Wheel box */
-.wheel-box {
-  text-align: center;
-}
-
-/* Wheel sizing */
-.wheel-svg {
-  width: 260px;
-  height: 260px;
-  display: block;
-  margin: 0 auto;
-}
-
-/* Labels inside wheel */
-.label {
-  font-size: 14px;
-  font-weight: 600;
-  fill: #222;
-}
-
-/* Match radar headings */
-.radar-heading {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-/* FLEX instead of GRID */
-.competency-flex {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  flex-wrap: wrap; /* mobile fix */
-  margin-top: 30px;
-}
-
-/* Match radar-box styling */
-.wheel-box {
-  text-align: center;
-}
-
-/* Wheel sizing tuned to match radar size */
-.wheel-svg {
-  width: 240px;
-  height: 240px;
-}
-
-/* Label styling */
-.label {
-  font-size: 14px;
-  font-weight: 600;
-  fill: #222;
-}
-
-/* Mobile: stack vertically */
-@media (max-width: 900px) {
-  .competency-flex {
-    flex-direction: column;
+    display: flex;
+    justify-content: center;
     align-items: center;
-  }
 
-  .wheel-svg {
-    width: 260px;
-    height: 260px;
-  }
+    box-sizing: border-box;
+
+    /* Keeps the wheel compact like the radar cards */
+    padding: 8px 12px 18px;
+
+    overflow: hidden;
 }
 
-  .competency-arc-box {
-  text-align: center;
-  max-width: 360px;
-  margin: 0 auto;
+
+/* SVG itself */
+
+#competencyAssessmentWheel {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 520px;
+    max-height: 520px;
+
+    overflow: visible;
+
+    touch-action: manipulation;
 }
 
-.arc-wheel {
-  width: 100%;
-  height: auto;
+
+/* ============================================================
+   WHEEL SEGMENTS
+============================================================ */
+
+.competency-wheel-segment {
+    cursor: pointer;
+
+    stroke: #ffffff;
+    stroke-width: 5;
+
+    stroke-linejoin: round;
+
+    transition:
+        opacity 0.2s ease,
+        filter 0.2s ease,
+        transform 0.2s ease;
 }
 
-.arc-label {
-  font-size: 14px;
-  font-weight: 600;
-  fill: #222;
-  text-anchor: middle;
+
+/* Rating colours */
+
+.competency-wheel-segment.expert {
+    fill: #0a66c2;
 }
 
-/* Inline with radars */
+.competency-wheel-segment.proficient {
+    fill: #007b5f;
+}
+
+.competency-wheel-segment.competent {
+    fill: #b8860b;
+}
+
+.competency-wheel-segment.practised {
+    fill: #8a2be2;
+}
+
+.competency-wheel-segment.aware {
+    fill: #555555;
+}
+
+
+/* ============================================================
+   HOVER / ACTIVE EFFECT
+============================================================ */
+
+.competency-wheel-segment:hover,
+.competency-wheel-segment.active {
+    filter:
+        brightness(1.10)
+        drop-shadow(
+            0 5px 8px rgba(0,0,0,0.20)
+        );
+}
+
+
+/* ============================================================
+   LABELS
+============================================================ */
+
+.competency-wheel-label {
+    pointer-events: none;
+
+    fill: #ffffff;
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    text-anchor: middle;
+
+    dominant-baseline: middle;
+
+    paint-order: stroke;
+
+    stroke: rgba(0,0,0,0.18);
+    stroke-width: 1.5px;
+}
+
+
+/* ============================================================
+   CENTRE
+============================================================ */
+
+.competency-wheel-centre {
+    fill: #ffffff;
+
+    stroke: #e1e5e9;
+
+    stroke-width: 2;
+
+    filter:
+        drop-shadow(
+            0 4px 10px rgba(0,0,0,0.10)
+        );
+}
+
+.competency-wheel-centre-title {
+    fill: #111827;
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    text-anchor: middle;
+}
+
+.competency-wheel-centre-subtitle {
+    fill: #6b7280;
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-anchor: middle;
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .competency-wheel-container {
+        width: 100%;
+
+        max-width: 100%;
+
+        padding:
+            4px
+            6px
+            14px;
+    }
+
+    #competencyAssessmentWheel {
+        width: 100%;
+
+        max-width: 440px;
+    }
+
+    .competency-wheel-label {
+        font-size: 18px;
+    }
+
+    .competency-wheel-centre-title {
+        font-size: 20px;
+    }
+
+    .competency-wheel-centre-subtitle {
+        font-size: 13px;
+    }
+}
+
+
+/* ============================================================
+   SMALL IPHONE
+============================================================ */
+
+@media (max-width: 390px) {
+
+    .competency-wheel-container {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    #competencyAssessmentWheel {
+        max-width: 360px;
+    }
+
+    .competency-wheel-label {
+        font-size: 16px;
+    }
+
+    .competency-wheel-centre-title {
+        font-size: 18px;
+    }
+
+    .competency-wheel-centre-subtitle {
+        font-size: 12px;
+    }
+}
+
+/* ============================================================
+   THREE VISUALISATION CARDS
+============================================================ */
+
 .competency-flex {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-top: 20px;
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+
+    width: 100%;
+
+    align-items: stretch;
+
+    box-sizing: border-box;
 }
 
-/* Match radar container style */
-.radar-box,
-.competency-arc-box {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  width: 100%;
-  max-width: 320px;
-}
 
-/* Mobile */
-@media (max-width: 900px) {
-  .competency-flex {
+/* All three visual cards behave identically */
+
+.competency-flex > .radar-box {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
     flex-direction: column;
+
     align-items: center;
-  }
-}
-/* Card styling */
-.competency-wheel-card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  text-align: center;
-  max-width: 360px;
 }
 
-/* Full wheel sizing */
-.full-wheel-svg {
-  width: 100%;
-  height: auto;
-  display: block;
+
+/* ============================================================
+   WHEEL CARD
+============================================================ */
+
+.competency-wheel-box {
+    overflow: hidden;
 }
 
-/* Segment labels */
-.wheel-label {
-  font-size: 13px;
-  font-weight: 600;
-  fill: #222;
-  text-anchor: middle;
-}
 
-/* Centre text */
-.wheel-center {
-  font-size: 14px;
-  font-weight: 700;
-  fill: #222;
-  text-anchor: middle;
-}
+/* Wheel area fills the remaining card space */
 
-/* Inline with radars */
-.competency-flex {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
+.competency-wheel-box
+.competency-wheel-container {
 
-@media (max-width: 900px) {
-  .competency-flex {
-    flex-direction: column;
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    justify-content: center;
+
     align-items: center;
-  }
+
+    box-sizing: border-box;
+
+    padding:
+        4px
+        8px
+        12px;
+
+    margin: 0;
+
+    background: transparent;
+
+    box-shadow: none;
+
+    border-radius: 0;
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   WHEEL SVG
+============================================================ */
+
+.competency-wheel-box
+#competencyAssessmentWheel {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    max-width: 100%;
+
+    max-height: 100%;
+
+    margin: 0 auto;
+}
+
+
+/* ============================================================
+   MAKE WHEEL HEADING MATCH RADAR HEADINGS
+============================================================ */
+
+.competency-wheel-box .radar-heading {
+
+    width: 100%;
+
+    text-align: center;
+
+    margin-bottom: 4px;
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .competency-flex {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .competency-flex {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
 }
   
 </style>
@@ -13701,6 +13825,833 @@ function navigateToEvidence(
 
 }
 
+/* ============================================================
+   COMPETENCY ASSESSMENT WHEEL
+   EXACT DISTRIBUTION:
+
+   Expert       4
+   Proficient   4
+   Competent   11
+   Practised    6
+   Aware        4
+
+   TOTAL       29
+============================================================ */
+
+function generateCompetencyAssessmentWheel() {
+
+    const svg =
+        document.getElementById(
+            "competencyAssessmentWheel"
+        );
+
+    if (!svg) {
+        console.warn(
+            "[Competency Wheel] SVG not found."
+        );
+        return;
+    }
+
+
+    /* --------------------------------------------------------
+       DATA
+    -------------------------------------------------------- */
+
+    const ratings = [
+        {
+            name: "Expert",
+            value: 4,
+            className: "expert",
+            colour: "#0a66c2"
+        },
+
+        {
+            name: "Proficient",
+            value: 4,
+            className: "proficient",
+            colour: "#007b5f"
+        },
+
+        {
+            name: "Competent",
+            value: 11,
+            className: "competent",
+            colour: "#b8860b"
+        },
+
+        {
+            name: "Practised",
+            value: 6,
+            className: "practised",
+            colour: "#8a2be2"
+        },
+
+        {
+            name: "Aware",
+            value: 4,
+            className: "aware",
+            colour: "#555555"
+        }
+    ];
+
+
+    const total =
+        ratings.reduce(
+            (sum, rating) =>
+                sum + rating.value,
+            0
+        );
+
+
+    /* --------------------------------------------------------
+       SVG NAMESPACE
+    -------------------------------------------------------- */
+
+    const SVG_NS =
+        "http://www.w3.org/2000/svg";
+
+
+    /* --------------------------------------------------------
+       CLEAR EXISTING CONTENT
+    -------------------------------------------------------- */
+
+    svg.innerHTML = "";
+
+
+    /* --------------------------------------------------------
+       SVG HELPERS
+    -------------------------------------------------------- */
+
+    function createSVG(
+        elementName,
+        attributes = {}
+    ) {
+
+        const element =
+            document.createElementNS(
+                SVG_NS,
+                elementName
+            );
+
+        Object.entries(
+            attributes
+        ).forEach(
+            ([key, value]) => {
+
+                element.setAttribute(
+                    key,
+                    value
+                );
+            }
+        );
+
+        return element;
+    }
+
+
+    function pointOnCircle(
+        cx,
+        cy,
+        radius,
+        angle
+    ) {
+
+        const radians =
+            (angle - 90) *
+            Math.PI /
+            180;
+
+        return {
+            x:
+                cx +
+                radius *
+                Math.cos(radians),
+
+            y:
+                cy +
+                radius *
+                Math.sin(radians)
+        };
+    }
+
+
+    function createSectorPath(
+        cx,
+        cy,
+        outerRadius,
+        innerRadius,
+        startAngle,
+        endAngle
+    ) {
+
+        const outerStart =
+            pointOnCircle(
+                cx,
+                cy,
+                outerRadius,
+                startAngle
+            );
+
+        const outerEnd =
+            pointOnCircle(
+                cx,
+                cy,
+                outerRadius,
+                endAngle
+            );
+
+        const innerStart =
+            pointOnCircle(
+                cx,
+                cy,
+                innerRadius,
+                startAngle
+            );
+
+        const innerEnd =
+            pointOnCircle(
+                cx,
+                cy,
+                innerRadius,
+                endAngle
+            );
+
+
+        const angle =
+            endAngle -
+            startAngle;
+
+
+        const largeArc =
+            angle > 180
+                ? 1
+                : 0;
+
+
+        return [
+            "M",
+            outerStart.x,
+            outerStart.y,
+
+            "A",
+            outerRadius,
+            outerRadius,
+            0,
+            largeArc,
+            1,
+            outerEnd.x,
+            outerEnd.y,
+
+            "L",
+            innerEnd.x,
+            innerEnd.y,
+
+            "A",
+            innerRadius,
+            innerRadius,
+            0,
+            largeArc,
+            0,
+            innerStart.x,
+            innerStart.y,
+
+            "Z"
+        ].join(" ");
+    }
+
+
+    /* --------------------------------------------------------
+       WHEEL GEOMETRY
+    -------------------------------------------------------- */
+
+    const cx = 300;
+    const cy = 300;
+
+    const outerRadius = 245;
+    const innerRadius = 125;
+
+    /*
+       This is deliberately small.
+
+       It separates the sectors visually without
+       creating large gaps.
+    */
+    const gap = 1.5;
+
+
+    /* --------------------------------------------------------
+       CREATE GROUP
+    -------------------------------------------------------- */
+
+    const segmentGroup =
+        createSVG("g");
+
+    segmentGroup.setAttribute(
+        "class",
+        "competency-wheel-segments"
+    );
+
+    svg.appendChild(
+        segmentGroup
+    );
+
+
+    const labelGroup =
+        createSVG("g");
+
+    labelGroup.setAttribute(
+        "class",
+        "competency-wheel-labels"
+    );
+
+    svg.appendChild(
+        labelGroup
+    );
+
+
+    /* --------------------------------------------------------
+       GENERATE EXACTLY FIVE SEGMENTS
+    -------------------------------------------------------- */
+
+    let angle = 0;
+
+
+    ratings.forEach(
+        rating => {
+
+            const segmentAngle =
+                (
+                    rating.value /
+                    total
+                ) * 360;
+
+
+            const startAngle =
+                angle +
+                gap / 2;
+
+
+            const endAngle =
+                angle +
+                segmentAngle -
+                gap / 2;
+
+
+            /* ----------------------------------------------
+               SECTOR
+            ---------------------------------------------- */
+
+            const sector =
+                createSVG(
+                    "path",
+                    {
+                        d:
+                            createSectorPath(
+                                cx,
+                                cy,
+                                outerRadius,
+                                innerRadius,
+                                startAngle,
+                                endAngle
+                            ),
+
+                        class:
+                            `competency-wheel-segment ${rating.className}`,
+
+                        "data-rating":
+                            rating.name,
+
+                        "data-value":
+                            rating.value,
+
+                        tabindex:
+                            "0"
+                    }
+                );
+
+
+            /* ----------------------------------------------
+               INTERACTION
+            ---------------------------------------------- */
+
+            function activateSegment() {
+
+                segmentGroup
+                    .querySelectorAll(
+                        ".competency-wheel-segment"
+                    )
+                    .forEach(
+                        other => {
+
+                            other.classList.remove(
+                                "active"
+                            );
+
+                            other.style.opacity =
+                                "0.45";
+                        }
+                    );
+
+
+                sector.classList.add(
+                    "active"
+                );
+
+                sector.style.opacity =
+                    "1";
+            }
+
+
+            function resetSegments() {
+
+                segmentGroup
+                    .querySelectorAll(
+                        ".competency-wheel-segment"
+                    )
+                    .forEach(
+                        other => {
+
+                            other.classList.remove(
+                                "active"
+                            );
+
+                            other.style.opacity =
+                                "1";
+                        }
+                    );
+            }
+
+
+            /* Desktop */
+
+            sector.addEventListener(
+                "mouseenter",
+                activateSegment
+            );
+
+
+            sector.addEventListener(
+                "mouseleave",
+                resetSegments
+            );
+
+
+            /* Mobile */
+sector.addEventListener(
+    "click",
+    event => {
+
+        event.stopPropagation();
+
+
+        const alreadyActive =
+            sector.classList.contains(
+                "active"
+            );
+
+
+        /*
+         * Clicking the currently selected
+         * segment again clears the filter.
+         */
+        if (alreadyActive) {
+
+            resetSegments();
+
+            showAllCompetencies();
+
+            return;
+        }
+
+
+        /*
+         * Highlight selected wheel segment.
+         */
+        activateSegment();
+
+
+        /*
+         * Filter accordion.
+         */
+        filterCompetenciesByRating(
+            rating.name
+        );
+
+    }
+);
+
+
+            /* Keyboard */
+
+            sector.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        activateSegment();
+                    }
+                }
+            );
+
+
+            segmentGroup.appendChild(
+                sector
+            );
+
+
+            /* ----------------------------------------------
+               LABEL
+            ---------------------------------------------- */
+
+            const labelAngle =
+                angle +
+                (
+                    segmentAngle /
+                    2
+                );
+
+
+            /*
+               Put the label slightly closer to
+               the centre so even the smaller
+               segments have room.
+
+               Competent automatically gets
+               the centre of its 11-value sector.
+            */
+
+            let labelRadius =
+                185;
+
+
+            if (
+                rating.name ===
+                "Competent"
+            ) {
+
+                labelRadius =
+                    182;
+            }
+
+
+            const labelPosition =
+                pointOnCircle(
+                    cx,
+                    cy,
+                    labelRadius,
+                    labelAngle
+                );
+
+
+            const label =
+                createSVG(
+                    "text",
+                    {
+                        x:
+                            labelPosition.x,
+
+                        y:
+                            labelPosition.y,
+
+                        class:
+                            "competency-wheel-label"
+                    }
+                );
+
+
+            label.textContent =
+                rating.name;
+
+
+            labelGroup.appendChild(
+                label
+            );
+
+
+            angle +=
+                segmentAngle;
+        }
+    );
+
+
+    /* --------------------------------------------------------
+       CENTRE CIRCLE
+    -------------------------------------------------------- */
+
+    const centre =
+        createSVG(
+            "circle",
+            {
+                cx: cx,
+                cy: cy,
+                r: innerRadius - 2,
+
+                class:
+                    "competency-wheel-centre"
+            }
+        );
+
+
+    svg.appendChild(
+        centre
+    );
+
+
+    /* --------------------------------------------------------
+       CENTRE TITLE
+    -------------------------------------------------------- */
+
+    const title =
+        createSVG(
+            "text",
+            {
+                x: cx,
+                y: cy - 8,
+
+                class:
+                    "competency-wheel-centre-title"
+            }
+        );
+
+
+    title.textContent =
+        "Competency";
+
+
+    svg.appendChild(
+        title
+    );
+
+
+    const title2 =
+        createSVG(
+            "text",
+            {
+                x: cx,
+                y: cy + 20,
+
+                class:
+                    "competency-wheel-centre-title"
+            }
+        );
+
+
+    title2.textContent =
+        "Assessment";
+
+
+    svg.appendChild(
+        title2
+    );
+
+
+    const subtitle =
+        createSVG(
+            "text",
+            {
+                x: cx,
+                y: cy + 47,
+
+                class:
+                    "competency-wheel-centre-subtitle"
+            }
+        );
+
+
+    subtitle.textContent =
+        `${total} competencies`;
+
+
+    svg.appendChild(
+        subtitle
+    );
+
+
+    console.log(
+        "[Competency Wheel] Generated:",
+        ratings.length,
+        "segments;",
+        total,
+        "competencies."
+    );
+}
+
+
+/* ============================================================
+   INITIALISE
+
+   This also works if your CPD page loads its content
+   dynamically.
+============================================================ */
+
+function initialiseCompetencyWheel() {
+
+    if (
+        document.getElementById(
+            "competencyAssessmentWheel"
+        )
+    ) {
+
+        generateCompetencyAssessmentWheel();
+
+    } else {
+
+        /*
+           If the page has not yet created the wheel,
+           wait briefly and try once more.
+        */
+
+        setTimeout(
+            () => {
+
+                if (
+                    document.getElementById(
+                        "competencyAssessmentWheel"
+                    )
+                ) {
+
+                    generateCompetencyAssessmentWheel();
+                }
+
+            },
+            300
+        );
+    }
+}
+
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initialiseCompetencyWheel,
+        {
+            once: true
+        }
+    );
+
+} else {
+
+    initialiseCompetencyWheel();
+}
+
+/* ============================================================
+   COMPETENCY WHEEL → COMPETENCY ACCORDION FILTER
+============================================================ */
+
+function filterCompetenciesByRating(rating) {
+
+    const accordionItems =
+        document.querySelectorAll(
+            ".competency-section .accordion-item"
+        );
+
+
+    accordionItems.forEach(item => {
+
+        const badge =
+            item.querySelector(
+                ".rating-badge"
+            );
+
+
+        if (!badge) {
+            return;
+        }
+
+
+        const matches =
+            badge.textContent
+                .trim()
+                .toLowerCase() ===
+            rating
+                .trim()
+                .toLowerCase();
+
+
+        if (matches) {
+
+            item.style.display = "";
+
+        } else {
+
+            item.style.display = "none";
+
+            /*
+             * Also close anything that happened
+             * to be open before filtering.
+             */
+            item.classList.remove(
+                "active",
+                "open"
+            );
+
+            const content =
+                item.querySelector(
+                    ".accordion-content"
+                );
+
+            if (content) {
+
+                content.style.display =
+                    "none";
+            }
+        }
+
+    });
+
+
+    /*
+     * Scroll the accordion into view so that
+     * the filtered results are immediately visible.
+     */
+    const accordion =
+        document.querySelector(
+            ".competency-section .accordion"
+        );
+
+
+    if (accordion) {
+
+        setTimeout(() => {
+
+            accordion.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }, 100);
+    }
+}
+
+
+/* ============================================================
+   SHOW ALL COMPETENCIES
+============================================================ */
+
+function showAllCompetencies() {
+
+    const accordionItems =
+        document.querySelectorAll(
+            ".competency-section .accordion-item"
+        );
+
+
+    accordionItems.forEach(item => {
+
+        item.style.display = "";
+
+    });
+}  
 
 /* ============================================================
    DONUT CHART
@@ -16184,42 +17135,27 @@ document.addEventListener(
         <svg id="radar-target" class="radar-svg" viewBox="-60 -60 120 120"></svg>
       </div>
 
-<div class="radar-box competency-wheel-card">
-  <h3 class="radar-heading">Competency Assessment Wheel</h3>
 
-  <svg viewBox="0 0 400 400" class="full-wheel-svg">
+  <div class="radar-box competency-wheel-box">
 
-    <!-- Expert -->
-    <path d="M200,200 L200,20 A180,180 0 0,1 340,80 Z" fill="#0a66c2"></path>
-    <text x="260" y="70" class="wheel-label">Expert</text>
+    <h3 class="radar-heading">
+        Competency Assessment Wheel
+    </h3>
 
-    <!-- Proficient -->
-    <path d="M200,200 L340,80 A180,180 0 0,1 380,200 Z" fill="#007b5f"></path>
-    <text x="350" y="200" class="wheel-label">Proficient</text>
+    <div class="competency-wheel-container">
 
-    <!-- Competent -->
-    <path d="M200,200 L380,200 A180,180 0 0,1 340,320 Z" fill="#b8860b"></path>
-    <text x="260" y="330" class="wheel-label">Competent</text>
+        <svg
+            id="competencyAssessmentWheel"
+            viewBox="0 0 600 600"
+            preserveAspectRatio="xMidYMid meet"
+            aria-label="Competency Assessment Wheel">
+        </svg>
 
-    <!-- Practised -->
-    <path d="M200,200 L340,320 A180,180 0 0,1 60,320 Z" fill="#8a2be2"></path>
-    <text x="140" y="330" class="wheel-label">Practised</text>
+    </div>
 
-    <!-- Aware -->
-    <path d="M200,200 L60,320 A180,180 0 0,1 60,80 Z" fill="#555555"></path>
-    <text x="80" y="200" class="wheel-label">Aware</text>
-
-    <!-- Centre circle -->
-    <circle cx="200" cy="200" r="90" fill="#ffffff"></circle>
-    <text x="200" y="205" class="wheel-center">Competency</text>
-    <text x="200" y="225" class="wheel-center">Assessment</text>
-
-  </svg>
 </div>
 
 
-
-    </div>
 
 
   

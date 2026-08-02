@@ -10259,6 +10259,70 @@ i.fa-solid {
   display: block;
   position: relative;
 }
+/* 1. Force the coloured segments */
+.cpd-lifecycle-wheel {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  margin: 30px auto;
+}
+
+.lifecycle-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #0a66c2 0deg 45deg,       /* APM Framework */
+      #007b5f 45deg 90deg,      /* APM Competencies */
+      #b8860b 90deg 135deg,     /* My Ratings */
+      #8a2be2 135deg 180deg,    /* Performance Metrics */
+      #555555 180deg 225deg,    /* APM CPD Log */
+      #ff7f50 225deg 270deg,    /* BCS CPD Log */
+      #4682b4 270deg 315deg,    /* Supporting Evidence */
+      #2e8b57 315deg 360deg     /* Development Priorities */
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 2. Make the labels clickable and keep layout */
+.lifecycle-labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.lifecycle-labels li {
+  position: absolute;
+  text-align: center;
+  width: 120px;
+}
+
+.lifecycle-labels a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 3. Position labels around the circle */
+.seg-framework      { top: 4%;   left: 50%; transform: translateX(-50%); }
+.seg-competencies   { top: 18%;  right: 4%; transform: translateY(-50%); }
+.seg-ratings        { top: 50%;  right: -4%; transform: translateY(-50%); }
+.seg-metrics        { bottom: 18%; right: 4%; transform: translateY(50%); }
+.seg-apm-log        { bottom: 4%; left: 50%; transform: translateX(-50%); }
+.seg-bcs-log        { bottom: 18%; left: 4%; transform: translateY(50%); }
+.seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%); }
+.seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%); }
+
+  
 </style>
 
 

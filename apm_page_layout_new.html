@@ -10037,146 +10037,6 @@ i.fa-solid {
     align-items: center;
   }
 }
-
-/* Card */
-.competency-wheel-card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  text-align: center;
-  max-width: 360px;
-  margin: 0 auto;
-}
-
-/* Layout with radars */
-.competency-flex {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-@media (max-width: 900px) {
-  .competency-flex {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-/* Wheel container */
-.wheel-wrapper {
-  position: relative;
-  width: 260px;
-  height: 260px;
-  margin: 0 auto;
-}
-
-/* Full circular wheel using conic-gradient
-   Weights: 4, 4, 11, 6, 4 (total 29)
-   Each unit ≈ 12.41°
-   Expert:     4  → ~49.7°
-   Proficient: 4  → ~49.7°
-   Competent:  11 → ~136.5°
-   Practised:  6  → ~74.5°
-   Aware:      4  → ~49.7°
-*/
-.wheel-circle {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background:
-    conic-gradient(
-      #0a66c2 0deg 49.7deg,          /* Expert */
-      #007b5f 49.7deg 99.4deg,       /* Proficient */
-      #b8860b 99.4deg 235.9deg,      /* Competent */
-      #8a2be2 235.9deg 310.4deg,     /* Practised */
-      #555555 310.4deg 360deg        /* Aware */
-    );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-/* Center text */
-.wheel-center {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 0 1px #e5e5e5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
-  color: #222;
-}
-
-/* Labels around wheel */
-.wheel-labels {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  font-size: 12px;
-  font-weight: 600;
-  color: #222;
-}
-
-.wheel-labels li {
-  position: absolute;
-  text-align: center;
-}
-
-/* Position each label roughly at its segment center */
-.label-expert {
-  top: 8%;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-.label-proficient {
-  top: 24%;
-  right: 6%;
-  transform: translate(0, -50%);
-}
-
-.label-competent {
-  bottom: 10%;
-  right: 18%;
-  transform: translate(0, 0);
-}
-
-.label-practised {
-  bottom: 10%;
-  left: 18%;
-  transform: translate(0, 0);
-}
-
-.label-aware {
-  top: 24%;
-  left: 6%;
-  transform: translate(0, -50%);
-}
-
-/* Interactive feel: hover/focus highlight */
-.competency-wheel-card:hover .wheel-circle {
-  transform: scale(1.02);
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-.competency-wheel-card:hover .wheel-center {
-  box-shadow: 0 0 0 1px #0a66c2;
-}
   
 </style>
 
@@ -16327,22 +16187,34 @@ document.addEventListener(
 <div class="radar-box competency-wheel-card">
   <h3 class="radar-heading">Competency Assessment Wheel</h3>
 
-  <div class="wheel-wrapper">
-    <div class="wheel-circle">
-      <div class="wheel-center">
-        <div>Competency</div>
-        <div>Assessment</div>
-      </div>
-    </div>
+  <svg viewBox="0 0 400 400" class="full-wheel-svg">
 
-    <ul class="wheel-labels">
-      <li class="label-expert">Expert</li>
-      <li class="label-proficient">Proficient</li>
-      <li class="label-competent">Competent</li>
-      <li class="label-practised">Practised</li>
-      <li class="label-aware">Aware</li>
-    </ul>
-  </div>
+    <!-- Expert -->
+    <path d="M200,200 L200,20 A180,180 0 0,1 340,80 Z" fill="#0a66c2"></path>
+    <text x="260" y="70" class="wheel-label">Expert</text>
+
+    <!-- Proficient -->
+    <path d="M200,200 L340,80 A180,180 0 0,1 380,200 Z" fill="#007b5f"></path>
+    <text x="350" y="200" class="wheel-label">Proficient</text>
+
+    <!-- Competent -->
+    <path d="M200,200 L380,200 A180,180 0 0,1 340,320 Z" fill="#b8860b"></path>
+    <text x="260" y="330" class="wheel-label">Competent</text>
+
+    <!-- Practised -->
+    <path d="M200,200 L340,320 A180,180 0 0,1 60,320 Z" fill="#8a2be2"></path>
+    <text x="140" y="330" class="wheel-label">Practised</text>
+
+    <!-- Aware -->
+    <path d="M200,200 L60,320 A180,180 0 0,1 60,80 Z" fill="#555555"></path>
+    <text x="80" y="200" class="wheel-label">Aware</text>
+
+    <!-- Centre circle -->
+    <circle cx="200" cy="200" r="90" fill="#ffffff"></circle>
+    <text x="200" y="205" class="wheel-center">Competency</text>
+    <text x="200" y="225" class="wheel-center">Assessment</text>
+
+  </svg>
 </div>
 
 

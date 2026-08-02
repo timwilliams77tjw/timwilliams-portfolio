@@ -10322,6 +10322,209 @@ i.fa-solid {
 .seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%); }
 .seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%); }
 
+
+  /* ============================================================
+   CPD LIFECYCLE NAVIGATION WHEEL
+============================================================ */
+
+.cpd-lifecycle-section {
+    width: 100%;
+    margin: 0 auto 40px;
+    padding: 10px 0 20px;
+}
+
+.cpd-lifecycle-wheel {
+    width: min(760px, 100%);
+    margin: 0 auto;
+    position: relative;
+}
+
+.cpd-lifecycle-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+}
+
+
+/* ============================================================
+   SEGMENTS
+============================================================ */
+
+.lifecycle-segment {
+    cursor: pointer;
+    outline: none;
+}
+
+.lifecycle-segment-shape {
+    stroke: #ffffff;
+    stroke-width: 6;
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        opacity 0.2s ease;
+    transform-origin: 350px 350px;
+}
+
+
+/* Seven colours */
+
+.lifecycle-segment[data-target="apm-framework"]
+.lifecycle-segment-shape {
+    fill: #0a66c2;
+}
+
+.lifecycle-segment[data-target="apm-competencies"]
+.lifecycle-segment-shape {
+    fill: #007b5f;
+}
+
+.lifecycle-segment[data-target="my-ratings"]
+.lifecycle-segment-shape {
+    fill: #b8860b;
+}
+
+.lifecycle-segment[data-target="performance-metrics"]
+.lifecycle-segment-shape {
+    fill: #8a2be2;
+}
+
+.lifecycle-segment[data-target="apm-cpd-log"]
+.lifecycle-segment-shape {
+    fill: #e76f51;
+}
+
+.lifecycle-segment[data-target="supporting-evidence"]
+.lifecycle-segment-shape {
+    fill: #457b9d;
+}
+
+.lifecycle-segment[data-target="development-priorities"]
+.lifecycle-segment-shape {
+    fill: #555555;
+}
+
+
+/* Hover */
+
+.lifecycle-segment:hover
+.lifecycle-segment-shape,
+.lifecycle-segment:focus
+.lifecycle-segment-shape {
+    filter: brightness(1.12)
+            drop-shadow(0 5px 7px rgba(0,0,0,0.18));
+
+    stroke-width: 8;
+}
+
+
+/* ============================================================
+   LABELS
+============================================================ */
+
+.lifecycle-label {
+    fill: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+.lifecycle-label-small {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   CENTRE
+============================================================ */
+
+.lifecycle-centre-shadow {
+    fill: rgba(0,0,0,0.08);
+}
+
+.lifecycle-centre {
+    fill: #ffffff;
+    stroke: #e1e5e9;
+    stroke-width: 2;
+    filter: url(#wheelShadow);
+}
+
+.lifecycle-centre-title {
+    fill: #111111;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    text-anchor: middle;
+}
+
+
+/* ============================================================
+   DIRECTIONAL ARROWS
+============================================================ */
+
+.lifecycle-arrows path {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 5;
+    stroke-linecap: round;
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .cpd-lifecycle-section {
+        padding: 0 5px 20px;
+    }
+
+    .cpd-lifecycle-wheel {
+        width: 100%;
+    }
+
+    .lifecycle-label {
+        font-size: 17px;
+    }
+
+    .lifecycle-label-small {
+        font-size: 12px;
+    }
+
+    .lifecycle-centre-title {
+        font-size: 27px;
+    }
+
+    .lifecycle-segment-shape {
+        stroke-width: 5;
+    }
+
+}
+
+
+/* Small phones */
+
+@media (max-width: 420px) {
+
+    .lifecycle-label {
+        font-size: 15px;
+    }
+
+    .lifecycle-label-small {
+        font-size: 10.5px;
+    }
+
+    .lifecycle-centre-title {
+        font-size: 25px;
+    }
+
+}
   
 </style>
 
@@ -10414,38 +10617,407 @@ i.fa-solid {
 
 </section>
 
-<section class="cpd-flow-map">
-  <h2 class="section-heading">CPD Lifecycle Navigation Map</h2>
-
-  <p class="section-subtitle">
-    A connected visual showing how each part of my CPD process fits together.
-  </p>
-
-  <div class="cpd-wheel-wrapper">
+<!-- ============================================================
+     CPD LIFECYCLE NAVIGATION WHEEL
+============================================================ -->
+<section class="cpd-lifecycle-section">
 
     <div class="cpd-lifecycle-wheel">
 
-      <div class="lifecycle-circle">
-        <div class="lifecycle-center">
-          <div>CPD</div>
-          <div>Lifecycle</div>
-        </div>
-      </div>
+        <svg
+            id="cpdLifecycleWheel"
+            class="cpd-lifecycle-svg"
+            viewBox="0 0 700 700"
+            role="img"
+            aria-label="CPD Lifecycle Navigation"
+        >
 
-      <ul class="lifecycle-labels">
-        <li class="seg-framework"><a href="#apm-framework">APM Framework</a></li>
-        <li class="seg-competencies"><a href="#apm-competencies">APM Competencies</a></li>
-        <li class="seg-ratings"><a href="#my-ratings">My Ratings</a></li>
-        <li class="seg-metrics"><a href="#performance-metrics">Performance Metrics</a></li>
-        <li class="seg-apm-log"><a href="#apm-cpd-log">APM CPD Log</a></li>
-        <li class="seg-bcs-log"><a href="#bcs-cpd-log">BCS CPD Log</a></li>
-        <li class="seg-evidence"><a href="#supporting-evidence">Supporting Evidence</a></li>
-        <li class="seg-priorities"><a href="#development-priorities">Development Priorities</a></li>
-      </ul>
+            <!-- DEFINITIONS -->
+            <defs>
+
+                <!-- Subtle shadow -->
+                <filter id="wheelShadow"
+                        x="-30%"
+                        y="-30%"
+                        width="160%"
+                        height="160%">
+                    <feDropShadow
+                        dx="0"
+                        dy="5"
+                        stdDeviation="7"
+                        flood-opacity="0.15"
+                    />
+                </filter>
+
+                <!-- Arrow marker -->
+                <marker
+                    id="cycleArrow"
+                    markerWidth="12"
+                    markerHeight="12"
+                    refX="9"
+                    refY="6"
+                    orient="auto"
+                    markerUnits="strokeWidth"
+                >
+                    <path
+                        d="M0,0 L12,6 L0,12 Z"
+                        fill="#ffffff"
+                    />
+                </marker>
+
+            </defs>
+
+
+            <!-- =================================================
+                 WHEEL SEGMENTS
+            ================================================== -->
+
+            <!-- 1. APM FRAMEWORK -->
+            <g
+                class="lifecycle-segment"
+                data-target="apm-framework"
+                tabindex="0"
+                role="button"
+                aria-label="APM Framework"
+            >
+
+                <path
+                    class="lifecycle-segment-shape"
+                    data-segment="1"
+                    d="M350 75
+                       A275 275 0 0 1 566 180
+                       L497 249
+                       A178 178 0 0 0 350 178
+                       Z"
+                />
+
+                <text
+                    x="455"
+                    y="135"
+                    class="lifecycle-label"
+                >
+                    APM
+                </text>
+
+                <text
+                    x="455"
+                    y="162"
+                    class="lifecycle-label lifecycle-label-small"
+                >
+                    FRAMEWORK
+                </text>
+
+            </g>
+
+
+            <!-- 2. APM COMPETENCIES -->
+            <g
+                class="lifecycle-segment"
+                data-target="apm-competencies"
+                tabindex="0"
+                role="button"
+                aria-label="APM Competencies"
+            >
+
+                <path
+                    class="lifecycle-segment-shape"
+                    data-segment="2"
+                    d="M566 180
+                       A275 275 0 0 1 625 350
+                       L528 350
+                       A178 178 0 0 0 497 249
+                       Z"
+                />
+
+                <text
+                    x="570"
+                    y="260"
+                    class="lifecycle-label"
+                    transform="rotate(45 570 260)"
+                >
+                    APM
+                </text>
+
+                <text
+                    x="575"
+                    y="286"
+                    class="lifecycle-label lifecycle-label-small"
+                    transform="rotate(45 575 286)"
+                >
+                    COMPETENCIES
+                </text>
+
+            </g>
+
+
+            <!-- 3. MY RATINGS -->
+            <g
+                class="lifecycle-segment"
+                data-target="my-ratings"
+                tabindex="0"
+                role="button"
+                aria-label="My Ratings"
+            >
+
+                <path
+                    class="lifecycle-segment-shape"
+                    data-segment="3"
+                    d="M625 350
+                       A275 275 0 0 1 566 520
+                       L497 451
+                       A178 178 0 0 0 528 350
+                       Z"
+                />
+
+                <text
+                    x="566"
+                    y="440"
+                    class="lifecycle-label"
+                    transform="rotate(45 566 440)"
+                >
+                    MY
+                </text>
+
+                <text
+                    x="555"
+                    y="466"
+                    class="lifecycle-label lifecycle-label-small"
+                    transform="rotate(45 555 466)"
+                >
+                    RATINGS
+                </text>
+
+            </g>
+
+
+            <!-- 4. PERFORMANCE METRICS -->
+            <g
+                class="lifecycle-segment"
+                data-target="performance-metrics"
+                tabindex="0"
+                role="button"
+                aria-label="Performance Metrics"
+            >
+
+                <path
+                    class="lifecycle-segment-shape"
+                    data-segment="4"
+                    d="M566 520
+                       A275 275 0 0 1 350 625
+                       L350 528
+                       A178 178 0 0 0 497 451
+                       Z"
+                />
+
+                <text
+                    x="450"
+                    y="565"
+                    class="lifecycle-label"
+                    transform="rotate(-20 450 565)"
+                >
+                    PERFORMANCE
+                </text>
+
+                <text
+                    x="455"
+                    y="592"
+                    class="lifecycle-label lifecycle-label-small"
+                    transform="rotate(-20 455 592)"
+                >
+                    METRICS
+                </text>
+
+            </g>
+
+
+            <!-- 5. APM CPD LOG -->
+            <g
+                class="lifecycle-segment"
+                data-target="apm-cpd-log"
+                tabindex="0"
+                role="button"
+                aria-label="APM CPD Log"
+            >
+
+                <path
+                    class="lifecycle-segment-shape"
+                    data-segment="5"
+                    d="M350 625
+                       A275 275 0 0 1 134 520
+                       L203 451
+                       A178 178 0 0 0 350 528
+                       Z"
+                />
+
+                <text
+                    x="250"
+                    y="565"
+                    class="lifecycle-label"
+                    transform="rotate(20 250 565)"
+                >
+                    APM CPD
+                </text>
+
+                <text
+                    x="250"
+                    y="592"
+                    class="lifecycle-label lifecycle-label-small"
+                    transform="rotate(20 250 592)"
+                >
+                    LOG
+                </text>
+
+            </g>
+
+
+            <!-- 6. SUPPORTING EVIDENCE -->
+            <g
+                class="lifecycle-segment"
+                data-target="supporting-evidence"
+                tabindex="0"
+                role="button"
+                aria-label="Supporting Evidence"
+            >
+
+                <path
+                    class="lifecycle-segment-shape"
+                    data-segment="6"
+                    d="M134 520
+                       A275 275 0 0 1 75 350
+                       L172 350
+                       A178 178 0 0 0 203 451
+                       Z"
+                />
+
+                <text
+                    x="135"
+                    y="430"
+                    class="lifecycle-label"
+                    transform="rotate(-45 135 430)"
+                >
+                    SUPPORTING
+                </text>
+
+                <text
+                    x="130"
+                    y="457"
+                    class="lifecycle-label lifecycle-label-small"
+                    transform="rotate(-45 130 457)"
+                >
+                    EVIDENCE
+                </text>
+
+            </g>
+
+
+            <!-- 7. DEVELOPMENT PRIORITIES -->
+            <g
+                class="lifecycle-segment"
+                data-target="development-priorities"
+                tabindex="0"
+                role="button"
+                aria-label="Development Priorities"
+            >
+
+                <path
+                    class="lifecycle-segment-shape"
+                    data-segment="7"
+                    d="M75 350
+                       A275 275 0 0 1 134 180
+                       L203 249
+                       A178 178 0 0 0 172 350
+                       Z"
+                />
+
+                <text
+                    x="135"
+                    y="260"
+                    class="lifecycle-label"
+                    transform="rotate(45 135 260)"
+                >
+                    DEVELOPMENT
+                </text>
+
+                <text
+                    x="145"
+                    y="287"
+                    class="lifecycle-label lifecycle-label-small"
+                    transform="rotate(45 145 287)"
+                >
+                    PRIORITIES
+                </text>
+
+            </g>
+
+
+            <!-- =================================================
+                 DIRECTIONAL ARROWS
+            ================================================== -->
+
+            <g class="lifecycle-arrows">
+
+                <path d="M515 152 L535 170"
+                      marker-end="url(#cycleArrow)" />
+
+                <path d="M600 305 L600 330"
+                      marker-end="url(#cycleArrow)" />
+
+                <path d="M535 485 L515 505"
+                      marker-end="url(#cycleArrow)" />
+
+                <path d="M385 595 L360 595"
+                      marker-end="url(#cycleArrow)" />
+
+                <path d="M185 505 L165 485"
+                      marker-end="url(#cycleArrow)" />
+
+                <path d="M100 330 L100 305"
+                      marker-end="url(#cycleArrow)" />
+
+                <path d="M165 170 L185 152"
+                      marker-end="url(#cycleArrow)" />
+
+            </g>
+
+
+            <!-- =================================================
+                 CENTRE
+            ================================================== -->
+
+            <circle
+                cx="350"
+                cy="350"
+                r="178"
+                class="lifecycle-centre-shadow"
+            />
+
+            <circle
+                cx="350"
+                cy="350"
+                r="170"
+                class="lifecycle-centre"
+            />
+
+            <text
+                x="350"
+                y="340"
+                class="lifecycle-centre-title"
+            >
+                CPD
+            </text>
+
+            <text
+                x="350"
+                y="375"
+                class="lifecycle-centre-title"
+            >
+                Lifecycle
+            </text>
+
+        </svg>
 
     </div>
 
-  </div>
 </section>
 
 
@@ -15241,7 +15813,169 @@ function generateDonutChart() {
 
 }
 
+/* ============================================================
+   CPD LIFECYCLE WHEEL NAVIGATION
+============================================================ */
 
+(function initialiseCPDLifecycleWheel() {
+
+    function initialiseWheel() {
+
+        const wheel = document.getElementById("cpdLifecycleWheel");
+
+        if (!wheel) {
+            return;
+        }
+
+        const segments = wheel.querySelectorAll(".lifecycle-segment");
+
+        /*
+         * IMPORTANT:
+         *
+         * These are the targets the wheel will navigate to.
+         *
+         * The first two use the section IDs already established
+         * on your page.
+         *
+         * If your other existing section IDs differ, only change
+         * the values here — nothing else in the wheel needs changing.
+         */
+
+        const targets = {
+
+            "apm-framework":
+                "#apm-framework-section",
+
+            "apm-competencies":
+                "#competency-section",
+
+            "my-ratings":
+                "#radar-section",
+
+            "performance-metrics":
+                "#cpd-metrics-section",
+
+            "apm-cpd-log":
+                "#cpd-log-section",
+
+            "supporting-evidence":
+                "#professional-evidence-section",
+
+            "development-priorities":
+                "#development-priorities-section"
+        };
+
+
+        function navigateToTarget(targetName) {
+
+            const selector = targets[targetName];
+
+            if (!selector) {
+                console.warn(
+                    "CPD Lifecycle: No target defined for",
+                    targetName
+                );
+                return;
+            }
+
+            const target = document.querySelector(selector);
+
+            if (!target) {
+                console.warn(
+                    "CPD Lifecycle: Target section not found:",
+                    selector
+                );
+                return;
+            }
+
+
+            /*
+             * Account for the site's sticky/fixed header.
+             */
+
+            const header =
+                document.querySelector(
+                    "header, .site-header, .sticky-header, .header"
+                );
+
+            const headerHeight =
+                header
+                    ? header.getBoundingClientRect().height
+                    : 0;
+
+
+            const targetPosition =
+                target.getBoundingClientRect().top +
+                window.pageYOffset -
+                headerHeight -
+                20;
+
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* Mouse / touch */
+
+        segments.forEach(segment => {
+
+            segment.addEventListener("click", function () {
+
+                navigateToTarget(
+                    this.dataset.target
+                );
+
+            });
+
+
+            /* Keyboard accessibility */
+
+            segment.addEventListener("keydown", function (event) {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    navigateToTarget(
+                        this.dataset.target
+                    );
+
+                }
+
+            });
+
+        });
+
+    }
+
+
+    /*
+     * Initialise when DOM is ready.
+     */
+
+    if (document.readyState === "loading") {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialiseWheel
+        );
+
+    } else {
+
+        initialiseWheel();
+
+    }
+
+})();
+
+  
 /* ==========================================================
    METRICS
 ========================================================== */

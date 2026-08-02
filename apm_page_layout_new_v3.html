@@ -15813,169 +15813,7 @@ function generateDonutChart() {
 
 }
 
-/* ============================================================
-   CPD LIFECYCLE WHEEL NAVIGATION
-============================================================ */
 
-(function initialiseCPDLifecycleWheel() {
-
-    function initialiseWheel() {
-
-        const wheel = document.getElementById("cpdLifecycleWheel");
-
-        if (!wheel) {
-            return;
-        }
-
-        const segments = wheel.querySelectorAll(".lifecycle-segment");
-
-        /*
-         * IMPORTANT:
-         *
-         * These are the targets the wheel will navigate to.
-         *
-         * The first two use the section IDs already established
-         * on your page.
-         *
-         * If your other existing section IDs differ, only change
-         * the values here — nothing else in the wheel needs changing.
-         */
-
-        const targets = {
-
-            "apm-framework":
-                "#apm-framework-section",
-
-            "apm-competencies":
-                "#competency-section",
-
-            "my-ratings":
-                "#radar-section",
-
-            "performance-metrics":
-                "#cpd-metrics-section",
-
-            "apm-cpd-log":
-                "#cpd-log-section",
-
-            "supporting-evidence":
-                "#professional-evidence-section",
-
-            "development-priorities":
-                "#development-priorities-section"
-        };
-
-
-        function navigateToTarget(targetName) {
-
-            const selector = targets[targetName];
-
-            if (!selector) {
-                console.warn(
-                    "CPD Lifecycle: No target defined for",
-                    targetName
-                );
-                return;
-            }
-
-            const target = document.querySelector(selector);
-
-            if (!target) {
-                console.warn(
-                    "CPD Lifecycle: Target section not found:",
-                    selector
-                );
-                return;
-            }
-
-
-            /*
-             * Account for the site's sticky/fixed header.
-             */
-
-            const header =
-                document.querySelector(
-                    "header, .site-header, .sticky-header, .header"
-                );
-
-            const headerHeight =
-                header
-                    ? header.getBoundingClientRect().height
-                    : 0;
-
-
-            const targetPosition =
-                target.getBoundingClientRect().top +
-                window.pageYOffset -
-                headerHeight -
-                20;
-
-
-            window.scrollTo({
-                top: targetPosition,
-                behavior: "smooth"
-            });
-
-        }
-
-
-        /* Mouse / touch */
-
-        segments.forEach(segment => {
-
-            segment.addEventListener("click", function () {
-
-                navigateToTarget(
-                    this.dataset.target
-                );
-
-            });
-
-
-            /* Keyboard accessibility */
-
-            segment.addEventListener("keydown", function (event) {
-
-                if (
-                    event.key === "Enter" ||
-                    event.key === " "
-                ) {
-
-                    event.preventDefault();
-
-                    navigateToTarget(
-                        this.dataset.target
-                    );
-
-                }
-
-            });
-
-        });
-
-    }
-
-
-    /*
-     * Initialise when DOM is ready.
-     */
-
-    if (document.readyState === "loading") {
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            initialiseWheel
-        );
-
-    } else {
-
-        initialiseWheel();
-
-    }
-
-})();
-
-  
 /* ==========================================================
    METRICS
 ========================================================== */
@@ -17707,6 +17545,170 @@ document.addEventListener(
     }
 );
 
+/* ============================================================
+   CPD LIFECYCLE WHEEL NAVIGATION
+============================================================ */
+
+(function initialiseCPDLifecycleWheel() {
+
+    function initialiseWheel() {
+
+        const wheel = document.getElementById("cpdLifecycleWheel");
+
+        if (!wheel) {
+            return;
+        }
+
+        const segments = wheel.querySelectorAll(".lifecycle-segment");
+
+        /*
+         * IMPORTANT:
+         *
+         * These are the targets the wheel will navigate to.
+         *
+         * The first two use the section IDs already established
+         * on your page.
+         *
+         * If your other existing section IDs differ, only change
+         * the values here — nothing else in the wheel needs changing.
+         */
+
+        const targets = {
+
+            "apm-framework":
+                "#apm-framework-section",
+
+            "apm-competencies":
+                "#competency-section",
+
+            "my-ratings":
+                "#radar-section",
+
+            "performance-metrics":
+                "#cpd-metrics-section",
+
+            "apm-cpd-log":
+                "#cpd-log-section",
+
+            "supporting-evidence":
+                "#professional-evidence-section",
+
+            "development-priorities":
+                "#development-priorities-section"
+        };
+
+
+        function navigateToTarget(targetName) {
+
+            const selector = targets[targetName];
+
+            if (!selector) {
+                console.warn(
+                    "CPD Lifecycle: No target defined for",
+                    targetName
+                );
+                return;
+            }
+
+            const target = document.querySelector(selector);
+
+            if (!target) {
+                console.warn(
+                    "CPD Lifecycle: Target section not found:",
+                    selector
+                );
+                return;
+            }
+
+
+            /*
+             * Account for the site's sticky/fixed header.
+             */
+
+            const header =
+                document.querySelector(
+                    "header, .site-header, .sticky-header, .header"
+                );
+
+            const headerHeight =
+                header
+                    ? header.getBoundingClientRect().height
+                    : 0;
+
+
+            const targetPosition =
+                target.getBoundingClientRect().top +
+                window.pageYOffset -
+                headerHeight -
+                20;
+
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* Mouse / touch */
+
+        segments.forEach(segment => {
+
+            segment.addEventListener("click", function () {
+
+                navigateToTarget(
+                    this.dataset.target
+                );
+
+            });
+
+
+            /* Keyboard accessibility */
+
+            segment.addEventListener("keydown", function (event) {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    navigateToTarget(
+                        this.dataset.target
+                    );
+
+                }
+
+            });
+
+        });
+
+    }
+
+
+    /*
+     * Initialise when DOM is ready.
+     */
+
+    if (document.readyState === "loading") {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialiseWheel
+        );
+
+    } else {
+
+        initialiseWheel();
+
+    }
+
+})();
+
+  
+  
 </script>
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->

@@ -10019,8 +10019,7 @@ i.fa-solid {
 }
 
 /* ============================================================
-   RADARS + COMPETENCY WHEEL
-   THREE VISUALS IN ONE ROW
+   THREE VISUALISATION CARDS
 ============================================================ */
 
 .competency-flex {
@@ -10039,59 +10038,99 @@ i.fa-solid {
 }
 
 
-/* Keep each visual inside its own column */
+/* All three visual cards behave identically */
 
-.competency-flex > .radar-box,
-.competency-flex > .competency-wheel-container {
+.competency-flex > .radar-box {
     min-width: 0;
     width: 100%;
     max-width: 100%;
+
     box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
 }
 
 
 /* ============================================================
-   WHEEL CARD — MATCH RADAR CARD
+   WHEEL CARD
 ============================================================ */
 
-.competency-flex > .competency-wheel-container {
-    display: flex;
+.competency-wheel-box {
+    overflow: hidden;
+}
 
-    flex-direction: column;
+
+/* Wheel area fills the remaining card space */
+
+.competency-wheel-box
+.competency-wheel-container {
+
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
 
     justify-content: center;
 
     align-items: center;
 
-    margin: 0;
-
-    padding: 10px;
-
     box-sizing: border-box;
 
+    padding:
+        4px
+        8px
+        12px;
+
+    margin: 0;
+
+    background: transparent;
+
+    box-shadow: none;
+
+    border-radius: 0;
+
     overflow: hidden;
-
-    background: #ffffff;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 4px 14px rgba(0,0,0,0.06);
 }
 
 
-/* Wheel fills its column */
+/* ============================================================
+   WHEEL SVG
+============================================================ */
 
-.competency-flex
+.competency-wheel-box
 #competencyAssessmentWheel {
 
     display: block;
 
     width: 100%;
 
+    height: auto;
+
     max-width: 100%;
 
-    height: auto;
+    max-height: 100%;
+
+    margin: 0 auto;
+}
+
+
+/* ============================================================
+   MAKE WHEEL HEADING MATCH RADAR HEADINGS
+============================================================ */
+
+.competency-wheel-box .radar-heading {
+
+    width: 100%;
+
+    text-align: center;
+
+    margin-bottom: 4px;
 }
 
 
@@ -10119,11 +10158,6 @@ i.fa-solid {
         grid-template-columns: 1fr;
 
         gap: 16px;
-    }
-
-    .competency-flex > .radar-box,
-    .competency-flex > .competency-wheel-container {
-        width: 100%;
     }
 
 }
@@ -17102,19 +17136,26 @@ document.addEventListener(
       </div>
 
 
-   <div class="competency-wheel-container">
+  <div class="radar-box competency-wheel-box">
 
-    <svg
-        id="competencyAssessmentWheel"
-        viewBox="0 0 600 600"
-        preserveAspectRatio="xMidYMid meet"
-        aria-label="Competency Assessment Wheel">
-    </svg>
+    <h3 class="radar-heading">
+        Competency Assessment Wheel
+    </h3>
+
+    <div class="competency-wheel-container">
+
+        <svg
+            id="competencyAssessmentWheel"
+            viewBox="0 0 600 600"
+            preserveAspectRatio="xMidYMid meet"
+            aria-label="Competency Assessment Wheel">
+        </svg>
+
+    </div>
 
 </div>
 
 
-    </div>
 
 
   

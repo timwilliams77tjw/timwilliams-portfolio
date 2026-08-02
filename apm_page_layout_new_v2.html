@@ -9774,82 +9774,39 @@ i.fa-solid {
   color: #888;
 }
 
-
 /* ============================================================
    COMPETENCY ASSESSMENT WHEEL
-   Five-segment responsive interactive wheel
 ============================================================ */
 
-.competency-wheel-section {
+.competency-wheel-container {
     width: 100%;
+    max-width: 560px;
+
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     box-sizing: border-box;
-}
 
-.competency-wheel-card {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-
-    background: #ffffff;
-    border-radius: 18px;
-
-    padding: 32px 28px 30px;
-
-    box-shadow:
-        0 4px 14px rgba(0, 0, 0, 0.06);
-
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    /* Keeps the wheel compact like the radar cards */
+    padding: 8px 12px 18px;
 
     overflow: hidden;
 }
 
-.competency-wheel-title {
-    margin: 0 0 24px;
 
-    text-align: center;
+/* SVG itself */
 
-    font-size: clamp(1.45rem, 3vw, 2rem);
-    line-height: 1.2;
-
-    font-weight: 700;
-
-    color: #111827;
-}
-
-
-/* ============================================================
-   WHEEL WRAPPER
-============================================================ */
-
-.competency-wheel-wrapper {
-    position: relative;
-
-    width: min(100%, 600px);
-
-    margin: 0 auto;
-
-    aspect-ratio: 1 / 1;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    box-sizing: border-box;
-}
-
-
-/* ============================================================
-   SVG
-============================================================ */
-
-.competency-assessment-wheel {
+#competencyAssessmentWheel {
     display: block;
 
     width: 100%;
-    height: 100%;
+    height: auto;
 
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 520px;
+    max-height: 520px;
 
     overflow: visible;
 
@@ -9858,7 +9815,7 @@ i.fa-solid {
 
 
 /* ============================================================
-   OUTER RATING SEGMENTS
+   WHEEL SEGMENTS
 ============================================================ */
 
 .competency-wheel-segment {
@@ -9870,27 +9827,13 @@ i.fa-solid {
     stroke-linejoin: round;
 
     transition:
-        transform 180ms ease,
-        filter 180ms ease,
-        opacity 180ms ease;
-}
-
-.competency-wheel-segment:hover {
-    filter:
-        brightness(1.08)
-        drop-shadow(0 5px 8px rgba(0, 0, 0, 0.16));
-}
-
-.competency-wheel-segment.is-active {
-    filter:
-        brightness(1.08)
-        drop-shadow(0 7px 12px rgba(0, 0, 0, 0.20));
+        opacity 0.2s ease,
+        filter 0.2s ease,
+        transform 0.2s ease;
 }
 
 
-/* ============================================================
-   SEGMENT COLOURS
-============================================================ */
+/* Rating colours */
 
 .competency-wheel-segment.expert {
     fill: #0a66c2;
@@ -9914,6 +9857,20 @@ i.fa-solid {
 
 
 /* ============================================================
+   HOVER / ACTIVE EFFECT
+============================================================ */
+
+.competency-wheel-segment:hover,
+.competency-wheel-segment.active {
+    filter:
+        brightness(1.10)
+        drop-shadow(
+            0 5px 8px rgba(0,0,0,0.20)
+        );
+}
+
+
+/* ============================================================
    LABELS
 ============================================================ */
 
@@ -9929,7 +9886,7 @@ i.fa-solid {
         "Segoe UI",
         sans-serif;
 
-    font-size: 20px;
+    font-size: 21px;
 
     font-weight: 700;
 
@@ -9939,8 +9896,8 @@ i.fa-solid {
 
     paint-order: stroke;
 
-    stroke: rgba(0, 0, 0, 0.12);
-    stroke-width: 1px;
+    stroke: rgba(0,0,0,0.18);
+    stroke-width: 1.5px;
 }
 
 
@@ -9951,12 +9908,14 @@ i.fa-solid {
 .competency-wheel-centre {
     fill: #ffffff;
 
-    stroke: #e5e7eb;
+    stroke: #e1e5e9;
 
     stroke-width: 2;
 
     filter:
-        drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+        drop-shadow(
+            0 4px 10px rgba(0,0,0,0.10)
+        );
 }
 
 .competency-wheel-centre-title {
@@ -9995,224 +9954,69 @@ i.fa-solid {
 
 
 /* ============================================================
-   INTERACTIVE INFO PANEL
-============================================================ */
-
-.competency-wheel-info {
-    position: absolute;
-
-    left: 50%;
-    bottom: 7%;
-
-    transform: translateX(-50%);
-
-    width: min(68%, 300px);
-
-    box-sizing: border-box;
-
-    padding: 10px 16px;
-
-    border-radius: 14px;
-
-    background: rgba(255, 255, 255, 0.94);
-
-    border: 1px solid rgba(0, 0, 0, 0.08);
-
-    box-shadow:
-        0 5px 16px rgba(0, 0, 0, 0.10);
-
-    text-align: center;
-
-    pointer-events: none;
-
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-
-    transition:
-        opacity 180ms ease,
-        transform 180ms ease;
-}
-
-.competency-wheel-info-title {
-    font-size: 15px;
-
-    font-weight: 700;
-
-    color: #111827;
-}
-
-.competency-wheel-info-subtitle {
-    margin-top: 2px;
-
-    font-size: 12px;
-
-    color: #6b7280;
-}
-
-
-/* ============================================================
-   LEGEND
-============================================================ */
-
-.competency-wheel-legend {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    justify-content: center;
-
-    gap: 9px 18px;
-
-    margin-top: 20px;
-}
-
-.competency-wheel-legend-item {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    border: 0;
-
-    background: transparent;
-
-    padding: 4px 2px;
-
-    font: inherit;
-
-    color: #374151;
-
-    cursor: pointer;
-
-    transition:
-        opacity 150ms ease,
-        transform 150ms ease;
-}
-
-.competency-wheel-legend-item:hover {
-    transform: translateY(-1px);
-}
-
-.competency-wheel-legend-item.is-active {
-    font-weight: 700;
-}
-
-.wheel-legend-dot {
-    width: 11px;
-    height: 11px;
-
-    flex: 0 0 11px;
-
-    border-radius: 50%;
-}
-
-.wheel-legend-dot.rating-expert {
-    background: #0a66c2;
-}
-
-.wheel-legend-dot.rating-proficient {
-    background: #007b5f;
-}
-
-.wheel-legend-dot.rating-competent {
-    background: #b8860b;
-}
-
-.wheel-legend-dot.rating-practised {
-    background: #8a2be2;
-}
-
-.wheel-legend-dot.rating-aware {
-    background: #555555;
-}
-
-
-/* ============================================================
    MOBILE
 ============================================================ */
 
 @media (max-width: 700px) {
 
-    .competency-wheel-card {
-        padding:
-            24px
-            14px
-            24px;
-    }
-
-    .competency-wheel-title {
-        margin-bottom: 16px;
-
-        font-size: 1.45rem;
-    }
-
-    .competency-wheel-wrapper {
+    .competency-wheel-container {
         width: 100%;
-        max-width: 470px;
+
+        max-width: 100%;
+
+        padding:
+            4px
+            6px
+            14px;
+    }
+
+    #competencyAssessmentWheel {
+        width: 100%;
+
+        max-width: 440px;
     }
 
     .competency-wheel-label {
-        font-size: 17px;
+        font-size: 18px;
     }
 
     .competency-wheel-centre-title {
-        font-size: 19px;
+        font-size: 20px;
     }
 
     .competency-wheel-centre-subtitle {
-        font-size: 12px;
-    }
-
-    .competency-wheel-info {
-        width: 64%;
-
-        bottom: 5%;
-
-        padding: 8px 12px;
-    }
-
-    .competency-wheel-legend {
-        gap: 7px 14px;
-
-        margin-top: 15px;
+        font-size: 13px;
     }
 }
 
 
 /* ============================================================
-   SMALL IPHONES
+   SMALL IPHONE
 ============================================================ */
 
 @media (max-width: 390px) {
 
-    .competency-wheel-card {
-        padding-left: 8px;
-        padding-right: 8px;
+    .competency-wheel-container {
+        padding-left: 2px;
+        padding-right: 2px;
     }
 
-    .competency-wheel-wrapper {
-        width: 100%;
+    #competencyAssessmentWheel {
+        max-width: 360px;
     }
 
     .competency-wheel-label {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .competency-wheel-centre-title {
-        font-size: 17px;
+        font-size: 18px;
     }
 
     .competency-wheel-centre-subtitle {
-        font-size: 11px;
+        font-size: 12px;
     }
-
-    .competency-wheel-info {
-        width: 67%;
-
-        bottom: 4%;
-    }
-}  
+}
 </style>
 
 
@@ -13878,36 +13682,37 @@ function navigateToEvidence(
 
 /* ============================================================
    COMPETENCY ASSESSMENT WHEEL
-   Five proportional interactive segments
+   EXACT DISTRIBUTION:
+
+   Expert       4
+   Proficient   4
+   Competent   11
+   Practised    6
+   Aware        4
+
+   TOTAL       29
 ============================================================ */
 
-(function initialiseCompetencyAssessmentWheel() {
+function generateCompetencyAssessmentWheel() {
 
-    const svg = document.getElementById(
-        "competencyAssessmentWheel"
-    );
+    const svg =
+        document.getElementById(
+            "competencyAssessmentWheel"
+        );
 
     if (!svg) {
         console.warn(
-            "[Competency Wheel] SVG element not found."
+            "[Competency Wheel] SVG not found."
         );
         return;
     }
 
 
-    /* ========================================================
-       COMPETENCY DATA
+    /* --------------------------------------------------------
+       DATA
+    -------------------------------------------------------- */
 
-       TOTAL = 29
-
-       Expert      = 4
-       Proficient  = 4
-       Competent   = 11
-       Practised   = 6
-       Aware       = 4
-    ======================================================== */
-
-    const wheelData = [
+    const ratings = [
         {
             name: "Expert",
             value: 4,
@@ -13945,30 +13750,49 @@ function navigateToEvidence(
     ];
 
 
-    const TOTAL = wheelData.reduce(
-        (sum, item) => sum + item.value,
-        0
-    );
+    const total =
+        ratings.reduce(
+            (sum, rating) =>
+                sum + rating.value,
+            0
+        );
 
 
-    /* ========================================================
-       SVG HELPERS
-    ======================================================== */
+    /* --------------------------------------------------------
+       SVG NAMESPACE
+    -------------------------------------------------------- */
 
     const SVG_NS =
         "http://www.w3.org/2000/svg";
 
 
-    function createSVGElement(type, attributes = {}) {
+    /* --------------------------------------------------------
+       CLEAR EXISTING CONTENT
+    -------------------------------------------------------- */
+
+    svg.innerHTML = "";
+
+
+    /* --------------------------------------------------------
+       SVG HELPERS
+    -------------------------------------------------------- */
+
+    function createSVG(
+        elementName,
+        attributes = {}
+    ) {
 
         const element =
             document.createElementNS(
                 SVG_NS,
-                type
+                elementName
             );
 
-        Object.entries(attributes).forEach(
+        Object.entries(
+            attributes
+        ).forEach(
             ([key, value]) => {
+
                 element.setAttribute(
                     key,
                     value
@@ -13980,7 +13804,7 @@ function navigateToEvidence(
     }
 
 
-    function polarToCartesian(
+    function pointOnCircle(
         cx,
         cy,
         radius,
@@ -14006,7 +13830,7 @@ function navigateToEvidence(
     }
 
 
-    function describeArc(
+    function createSectorPath(
         cx,
         cy,
         outerRadius,
@@ -14016,41 +13840,45 @@ function navigateToEvidence(
     ) {
 
         const outerStart =
-            polarToCartesian(
+            pointOnCircle(
                 cx,
                 cy,
                 outerRadius,
-                endAngle
+                startAngle
             );
 
         const outerEnd =
-            polarToCartesian(
+            pointOnCircle(
                 cx,
                 cy,
                 outerRadius,
-                startAngle
+                endAngle
             );
 
         const innerStart =
-            polarToCartesian(
+            pointOnCircle(
+                cx,
+                cy,
+                innerRadius,
+                startAngle
+            );
+
+        const innerEnd =
+            pointOnCircle(
                 cx,
                 cy,
                 innerRadius,
                 endAngle
             );
 
-        const innerEnd =
-            polarToCartesian(
-                cx,
-                cy,
-                innerRadius,
-                startAngle
-            );
+
+        const angle =
+            endAngle -
+            startAngle;
 
 
-        const largeArcFlag =
-            endAngle - startAngle >
-            180
+        const largeArc =
+            angle > 180
                 ? 1
                 : 0;
 
@@ -14064,8 +13892,8 @@ function navigateToEvidence(
             outerRadius,
             outerRadius,
             0,
-            largeArcFlag,
-            0,
+            largeArc,
+            1,
             outerEnd.x,
             outerEnd.y,
 
@@ -14077,8 +13905,8 @@ function navigateToEvidence(
             innerRadius,
             innerRadius,
             0,
-            largeArcFlag,
-            1,
+            largeArc,
+            0,
             innerStart.x,
             innerStart.y,
 
@@ -14087,80 +13915,48 @@ function navigateToEvidence(
     }
 
 
-    /* ========================================================
-       CLEAR SVG
-    ======================================================== */
+    /* --------------------------------------------------------
+       WHEEL GEOMETRY
+    -------------------------------------------------------- */
 
-    while (svg.firstChild) {
-        svg.removeChild(svg.firstChild);
-    }
+    const cx = 300;
+    const cy = 300;
 
+    const outerRadius = 245;
+    const innerRadius = 125;
 
-    /* ========================================================
-       SVG DEFINITIONS
-    ======================================================== */
+    /*
+       This is deliberately small.
 
-    const defs =
-        createSVGElement("defs");
-
-
-    const shadow =
-        createSVGElement(
-            "filter",
-            {
-                id:
-                    "competencyWheelShadow",
-                x: "-30%",
-                y: "-30%",
-                width: "160%",
-                height: "160%"
-            }
-        );
+       It separates the sectors visually without
+       creating large gaps.
+    */
+    const gap = 1.5;
 
 
-    const shadowOffset =
-        createSVGElement(
-            "feDropShadow",
-            {
-                dx: "0",
-                dy: "5",
-                stdDeviation: "6",
-                "flood-opacity": "0.13"
-            }
-        );
-
-
-    shadow.appendChild(
-        shadowOffset
-    );
-
-    defs.appendChild(
-        shadow
-    );
-
-    svg.appendChild(
-        defs
-    );
-
-
-    /* ========================================================
-       GROUPS
-    ======================================================== */
+    /* --------------------------------------------------------
+       CREATE GROUP
+    -------------------------------------------------------- */
 
     const segmentGroup =
-        createSVGElement("g", {
-            class:
-                "competency-wheel-segments"
-        });
+        createSVG("g");
 
-    const labelGroup =
-        createSVGElement("g", {
-            class:
-                "competency-wheel-labels"
-        });
+    segmentGroup.setAttribute(
+        "class",
+        "competency-wheel-segments"
+    );
 
     svg.appendChild(
         segmentGroup
+    );
+
+
+    const labelGroup =
+        createSVG("g");
+
+    labelGroup.setAttribute(
+        "class",
+        "competency-wheel-labels"
     );
 
     svg.appendChild(
@@ -14168,494 +13964,162 @@ function navigateToEvidence(
     );
 
 
-    /* ========================================================
-       GEOMETRY
-    ======================================================== */
+    /* --------------------------------------------------------
+       GENERATE EXACTLY FIVE SEGMENTS
+    -------------------------------------------------------- */
 
-    const CX = 300;
-    const CY = 300;
-
-    const OUTER_RADIUS = 245;
-    const INNER_RADIUS = 125;
-
-    const LABEL_RADIUS = 185;
-
-    /*
-       Small angular gap between sectors.
-       This creates the clean separated appearance.
-    */
-    const GAP = 1.4;
+    let angle = 0;
 
 
-    /* ========================================================
-       CREATE FIVE SEGMENTS
-    ======================================================== */
-
-    let currentAngle = 0;
-
-    wheelData.forEach(
-        (item, index) => {
-
-            const percentage =
-                item.value /
-                TOTAL;
+    ratings.forEach(
+        rating => {
 
             const segmentAngle =
-                percentage * 360;
+                (
+                    rating.value /
+                    total
+                ) * 360;
 
-            const rawStart =
-                currentAngle;
-
-            const rawEnd =
-                currentAngle +
-                segmentAngle;
 
             const startAngle =
-                rawStart + GAP / 2;
+                angle +
+                gap / 2;
+
 
             const endAngle =
-                rawEnd - GAP / 2;
+                angle +
+                segmentAngle -
+                gap / 2;
 
 
             /* ----------------------------------------------
-               Segment
+               SECTOR
             ---------------------------------------------- */
 
-            const path =
-                createSVGElement(
+            const sector =
+                createSVG(
                     "path",
                     {
                         d:
-                            describeArc(
-                                CX,
-                                CY,
-                                OUTER_RADIUS,
-                                INNER_RADIUS,
+                            createSectorPath(
+                                cx,
+                                cy,
+                                outerRadius,
+                                innerRadius,
                                 startAngle,
                                 endAngle
                             ),
 
                         class:
-                            `competency-wheel-segment ${item.className}`,
+                            `competency-wheel-segment ${rating.className}`,
 
                         "data-rating":
-                            item.name,
+                            rating.name,
 
                         "data-value":
-                            item.value,
-
-                        "data-index":
-                            index,
+                            rating.value,
 
                         tabindex:
-                            "0",
-
-                        role:
-                            "button",
-
-                        "aria-label":
-                            `${item.name}: ${item.value} competencies`
+                            "0"
                     }
                 );
-
-
-            path.style.transformOrigin =
-                `${CX}px ${CY}px`;
-
-            path.style.filter =
-                "drop-shadow(0 3px 5px rgba(0,0,0,.08))";
-
-
-            segmentGroup.appendChild(
-                path
-            );
 
 
             /* ----------------------------------------------
-               Label position
-
-               Important:
-               Competent is automatically positioned
-               in the centre of its much larger 11-value
-               sector.
+               INTERACTION
             ---------------------------------------------- */
 
-            const labelAngle =
-                (
-                    startAngle +
-                    endAngle
-                ) / 2;
-
-
-            const labelPosition =
-                polarToCartesian(
-                    CX,
-                    CY,
-                    LABEL_RADIUS,
-                    labelAngle
-                );
-
-
-            const label =
-                createSVGElement(
-                    "text",
-                    {
-                        x:
-                            labelPosition.x,
-
-                        y:
-                            labelPosition.y,
-
-                        class:
-                            "competency-wheel-label",
-
-                        "data-rating":
-                            item.name
-                    }
-                );
-
-
-            /*
-               Keep labels readable even on the
-               larger Competent sector.
-            */
-
-            const text =
-                document.createTextNode(
-                    item.name
-                );
-
-            label.appendChild(
-                text
-            );
-
-            labelGroup.appendChild(
-                label
-            );
-
-
-            currentAngle =
-                rawEnd;
-        }
-    );
-
-
-    /* ========================================================
-       CENTRE CIRCLE
-    ======================================================== */
-
-    const centre =
-        createSVGElement(
-            "circle",
-            {
-                cx: CX,
-                cy: CY,
-                r: 122,
-                class:
-                    "competency-wheel-centre",
-                filter:
-                    "url(#competencyWheelShadow)"
-            }
-        );
-
-    svg.appendChild(
-        centre
-    );
-
-
-    const centreTitle =
-        createSVGElement(
-            "text",
-            {
-                x: CX,
-                y: CY - 8,
-                class:
-                    "competency-wheel-centre-title"
-            }
-        );
-
-    centreTitle.textContent =
-        "Competency";
-
-    svg.appendChild(
-        centreTitle
-    );
-
-
-    const centreTitle2 =
-        createSVGElement(
-            "text",
-            {
-                x: CX,
-                y: CY + 19,
-                class:
-                    "competency-wheel-centre-title"
-            }
-        );
-
-    centreTitle2.textContent =
-        "Assessment";
-
-    svg.appendChild(
-        centreTitle2
-    );
-
-
-    const centreSubtitle =
-        createSVGElement(
-            "text",
-            {
-                x: CX,
-                y: CY + 46,
-                class:
-                    "competency-wheel-centre-subtitle"
-            }
-        );
-
-    centreSubtitle.textContent =
-        `${TOTAL} competencies`;
-
-    svg.appendChild(
-        centreSubtitle
-    );
-
-
-    /* ========================================================
-       INFORMATION PANEL
-    ======================================================== */
-
-    const info =
-        document.getElementById(
-            "competencyWheelInfo"
-        );
-
-    const infoTitle =
-        info?.querySelector(
-            ".competency-wheel-info-title"
-        );
-
-    const infoSubtitle =
-        info?.querySelector(
-            ".competency-wheel-info-subtitle"
-        );
-
-
-    function showRating(item) {
-
-        if (!infoTitle ||
-            !infoSubtitle) {
-            return;
-        }
-
-
-        const percentage =
-            (
-                item.value /
-                TOTAL
-            ) * 100;
-
-
-        infoTitle.textContent =
-            `${item.name} — ${item.value} competencies`;
-
-
-        infoSubtitle.textContent =
-            `${percentage.toFixed(1)}% of the assessment`;
-    }
-
-
-    function resetInfo() {
-
-        if (!infoTitle ||
-            !infoSubtitle) {
-            return;
-        }
-
-        infoTitle.textContent =
-            "Competency Assessment";
-
-        infoSubtitle.textContent =
-            "Tap a segment to explore";
-    }
-
-
-    /* ========================================================
-       ACTIVE SEGMENT
-    ======================================================== */
-
-    function activateRating(
-        rating
-    ) {
-
-        const segments =
-            svg.querySelectorAll(
-                ".competency-wheel-segment"
-            );
-
-        const labels =
-            svg.querySelectorAll(
-                ".competency-wheel-label"
-            );
-
-        segments.forEach(
-            segment => {
-
-                const active =
-                    segment.dataset.rating ===
-                    rating;
-
-                segment.classList.toggle(
-                    "is-active",
-                    active
-                );
-
-                segment.style.opacity =
-                    active
-                        ? "1"
-                        : "0.42";
-            }
-        );
-
-
-        labels.forEach(
-            label => {
-
-                const active =
-                    label.dataset.rating ===
-                    rating;
-
-                label.style.opacity =
-                    active
-                        ? "1"
-                        : "0.42";
-            }
-        );
-
-
-        const item =
-            wheelData.find(
-                entry =>
-                    entry.name ===
-                    rating
-            );
-
-
-        if (item) {
-            showRating(item);
-        }
-
-
-        document
-            .querySelectorAll(
-                ".competency-wheel-legend-item"
-            )
-            .forEach(
-                button => {
-
-                    button.classList.toggle(
-                        "is-active",
-                        button.dataset
-                            .wheelRating ===
-                            rating
+            function activateSegment() {
+
+                segmentGroup
+                    .querySelectorAll(
+                        ".competency-wheel-segment"
+                    )
+                    .forEach(
+                        other => {
+
+                            other.classList.remove(
+                                "active"
+                            );
+
+                            other.style.opacity =
+                                "0.45";
+                        }
                     );
-                }
-            );
-    }
 
 
-    function clearActiveRating() {
-
-        svg.querySelectorAll(
-            ".competency-wheel-segment"
-        ).forEach(
-            segment => {
-
-                segment.classList.remove(
-                    "is-active"
+                sector.classList.add(
+                    "active"
                 );
 
-                segment.style.opacity =
+                sector.style.opacity =
                     "1";
             }
-        );
 
 
-        svg.querySelectorAll(
-            ".competency-wheel-label"
-        ).forEach(
-            label => {
+            function resetSegments() {
 
-                label.style.opacity =
-                    "1";
-            }
-        );
+                segmentGroup
+                    .querySelectorAll(
+                        ".competency-wheel-segment"
+                    )
+                    .forEach(
+                        other => {
 
+                            other.classList.remove(
+                                "active"
+                            );
 
-        document
-            .querySelectorAll(
-                ".competency-wheel-legend-item"
-            )
-            .forEach(
-                button => {
-
-                    button.classList.remove(
-                        "is-active"
+                            other.style.opacity =
+                                "1";
+                        }
                     );
-                }
-            );
+            }
 
 
-        resetInfo();
-    }
+            /* Desktop */
 
-
-    /* ========================================================
-       SEGMENT INTERACTION
-    ======================================================== */
-
-    svg.querySelectorAll(
-        ".competency-wheel-segment"
-    ).forEach(
-        segment => {
-
-            segment.addEventListener(
+            sector.addEventListener(
                 "mouseenter",
-                () => {
-
-                    activateRating(
-                        segment.dataset.rating
-                    );
-                }
+                activateSegment
             );
 
 
-            segment.addEventListener(
+            sector.addEventListener(
                 "mouseleave",
-                () => {
-
-                    /*
-                       Don't clear immediately on desktop
-                       because the user may move onto the
-                       information/legend area.
-                    */
-                }
+                resetSegments
             );
 
 
-            segment.addEventListener(
+            /* Mobile */
+
+            sector.addEventListener(
                 "click",
                 event => {
 
                     event.stopPropagation();
 
-                    activateRating(
-                        segment.dataset.rating
-                    );
+                    const alreadyActive =
+                        sector.classList.contains(
+                            "active"
+                        );
+
+
+                    if (alreadyActive) {
+
+                        resetSegments();
+
+                    } else {
+
+                        activateSegment();
+                    }
                 }
             );
 
 
-            segment.addEventListener(
+            /* Keyboard */
+
+            sector.addEventListener(
                 "keydown",
                 event => {
 
@@ -14666,69 +14130,255 @@ function navigateToEvidence(
 
                         event.preventDefault();
 
-                        activateRating(
-                            segment.dataset.rating
-                        );
+                        activateSegment();
                     }
                 }
             );
+
+
+            segmentGroup.appendChild(
+                sector
+            );
+
+
+            /* ----------------------------------------------
+               LABEL
+            ---------------------------------------------- */
+
+            const labelAngle =
+                angle +
+                (
+                    segmentAngle /
+                    2
+                );
+
+
+            /*
+               Put the label slightly closer to
+               the centre so even the smaller
+               segments have room.
+
+               Competent automatically gets
+               the centre of its 11-value sector.
+            */
+
+            let labelRadius =
+                185;
+
+
+            if (
+                rating.name ===
+                "Competent"
+            ) {
+
+                labelRadius =
+                    182;
+            }
+
+
+            const labelPosition =
+                pointOnCircle(
+                    cx,
+                    cy,
+                    labelRadius,
+                    labelAngle
+                );
+
+
+            const label =
+                createSVG(
+                    "text",
+                    {
+                        x:
+                            labelPosition.x,
+
+                        y:
+                            labelPosition.y,
+
+                        class:
+                            "competency-wheel-label"
+                    }
+                );
+
+
+            label.textContent =
+                rating.name;
+
+
+            labelGroup.appendChild(
+                label
+            );
+
+
+            angle +=
+                segmentAngle;
         }
     );
 
 
-    /* ========================================================
-       LEGEND INTERACTION
-    ======================================================== */
+    /* --------------------------------------------------------
+       CENTRE CIRCLE
+    -------------------------------------------------------- */
 
-    document
-        .querySelectorAll(
-            ".competency-wheel-legend-item"
-        )
-        .forEach(
-            button => {
+    const centre =
+        createSVG(
+            "circle",
+            {
+                cx: cx,
+                cy: cy,
+                r: innerRadius - 2,
 
-                button.addEventListener(
-                    "click",
-                    event => {
-
-                        event.stopPropagation();
-
-                        activateRating(
-                            button.dataset
-                                .wheelRating
-                        );
-                    }
-                );
+                class:
+                    "competency-wheel-centre"
             }
         );
 
 
-    /* ========================================================
-       CLICK OUTSIDE = RESET
-    ======================================================== */
+    svg.appendChild(
+        centre
+    );
 
-    document.addEventListener(
-        "click",
-        event => {
 
-            if (
-                !event.target.closest(
-                    ".competency-wheel-card"
-                )
-            ) {
+    /* --------------------------------------------------------
+       CENTRE TITLE
+    -------------------------------------------------------- */
 
-                clearActiveRating();
+    const title =
+        createSVG(
+            "text",
+            {
+                x: cx,
+                y: cy - 8,
+
+                class:
+                    "competency-wheel-centre-title"
             }
-        }
+        );
+
+
+    title.textContent =
+        "Competency";
+
+
+    svg.appendChild(
+        title
+    );
+
+
+    const title2 =
+        createSVG(
+            "text",
+            {
+                x: cx,
+                y: cy + 20,
+
+                class:
+                    "competency-wheel-centre-title"
+            }
+        );
+
+
+    title2.textContent =
+        "Assessment";
+
+
+    svg.appendChild(
+        title2
+    );
+
+
+    const subtitle =
+        createSVG(
+            "text",
+            {
+                x: cx,
+                y: cy + 47,
+
+                class:
+                    "competency-wheel-centre-subtitle"
+            }
+        );
+
+
+    subtitle.textContent =
+        `${total} competencies`;
+
+
+    svg.appendChild(
+        subtitle
     );
 
 
     console.log(
-        "[Competency Wheel] Initialised successfully:",
-        `${wheelData.length} segments / ${TOTAL} competencies`
+        "[Competency Wheel] Generated:",
+        ratings.length,
+        "segments;",
+        total,
+        "competencies."
+    );
+}
+
+
+/* ============================================================
+   INITIALISE
+
+   This also works if your CPD page loads its content
+   dynamically.
+============================================================ */
+
+function initialiseCompetencyWheel() {
+
+    if (
+        document.getElementById(
+            "competencyAssessmentWheel"
+        )
+    ) {
+
+        generateCompetencyAssessmentWheel();
+
+    } else {
+
+        /*
+           If the page has not yet created the wheel,
+           wait briefly and try once more.
+        */
+
+        setTimeout(
+            () => {
+
+                if (
+                    document.getElementById(
+                        "competencyAssessmentWheel"
+                    )
+                ) {
+
+                    generateCompetencyAssessmentWheel();
+                }
+
+            },
+            300
+        );
+    }
+}
+
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initialiseCompetencyWheel,
+        {
+            once: true
+        }
     );
 
-})();  
+} else {
+
+    initialiseCompetencyWheel();
+}
 
 /* ============================================================
    DONUT CHART
@@ -17212,77 +16862,17 @@ document.addEventListener(
         <svg id="radar-target" class="radar-svg" viewBox="-60 -60 120 120"></svg>
       </div>
 
-<!-- ============================================================
-     COMPETENCY ASSESSMENT WHEEL
-============================================================ -->
-<section class="competency-wheel-section">
 
-  <div class="competency-wheel-card">
+   <div class="competency-wheel-container">
 
-    <h2 class="competency-wheel-title">
-      Competency Assessment Wheel
-    </h2>
-
-    <div class="competency-wheel-wrapper">
-
-      <svg
+    <svg
         id="competencyAssessmentWheel"
-        class="competency-assessment-wheel"
         viewBox="0 0 600 600"
-        role="img"
-        aria-label="Competency Assessment Wheel"
-      ></svg>
+        preserveAspectRatio="xMidYMid meet"
+        aria-label="Competency Assessment Wheel">
+    </svg>
 
-      <!-- Interactive information panel -->
-      <div
-        id="competencyWheelInfo"
-        class="competency-wheel-info"
-        aria-live="polite"
-      >
-        <div class="competency-wheel-info-title">
-          Competency Assessment
-        </div>
-
-        <div class="competency-wheel-info-subtitle">
-          Tap a segment to explore
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Accessible legend -->
-    <div class="competency-wheel-legend">
-
-      <button class="competency-wheel-legend-item" data-wheel-rating="Expert">
-        <span class="wheel-legend-dot rating-expert"></span>
-        <span>Expert</span>
-      </button>
-
-      <button class="competency-wheel-legend-item" data-wheel-rating="Proficient">
-        <span class="wheel-legend-dot rating-proficient"></span>
-        <span>Proficient</span>
-      </button>
-
-      <button class="competency-wheel-legend-item" data-wheel-rating="Competent">
-        <span class="wheel-legend-dot rating-competent"></span>
-        <span>Competent</span>
-      </button>
-
-      <button class="competency-wheel-legend-item" data-wheel-rating="Practised">
-        <span class="wheel-legend-dot rating-practised"></span>
-        <span>Practised</span>
-      </button>
-
-      <button class="competency-wheel-legend-item" data-wheel-rating="Aware">
-        <span class="wheel-legend-dot rating-aware"></span>
-        <span>Aware</span>
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
+</div>
 
 
     </div>

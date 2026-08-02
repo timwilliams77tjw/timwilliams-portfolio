@@ -17754,236 +17754,157 @@ document.addEventListener(
          * We first try known IDs, then look for headings/text.
          */
 
-        function findTarget(stage) {
+function findTarget(stage) {
 
-            const possibleIds = {
+    const targets = {
 
-                "apm-framework": [
-                    "apm-framework-section",
-                    "framework-section",
-                    "apm-framework"
-                ],
+        /* APM Framework */
+        "apm-framework":
+            ".apm-framework-section",
 
-                "apm-competencies": [
-                    "competency-section",
-                    "apm-competencies",
-                    "competencies-section"
-                ],
+        /* My Competence Assessment */
+        "apm-competencies":
+            ".competency-section",
 
-                "my-ratings": [
-                    "ratings-section",
-                    "my-ratings",
-                    "radar-section",
-                    "competency-ratings"
-                ],
+        /* Rating Summary / My Ratings */
+        "my-ratings":
+            ".rating-summary",
 
-                "performance-metrics": [
-                    "cpd-metrics-section",
-                    "metrics-section",
-                    "performance-metrics"
-                ],
+        /* Continuing Professional Development Log */
+        "apm-cpd-log":
+            ".cpd-log-inner",
 
-                "apm-cpd-log": [
-                    "cpd-log-section",
-                    "cpd-log",
-                    "apm-cpd-log"
-                ],
+        /* Supporting Evidence */
+        "supporting-evidence":
+            ".professional-evidence-section",
 
-                "supporting-evidence": [
-                    "professional-evidence-section",
-                    "supporting-evidence",
-                    "evidence-section"
-                ],
+        /*
+         * These are already working, so leave their
+         * existing mappings in place.
+         */
+        "performance-metrics":
+            "#cpd-metrics-section",
 
-                "development-priorities": [
-                    "development-priorities-section",
-                    "development-priorities",
-                    "priorities-section"
-                ]
-
-            };
+        "development-priorities":
+            "#development-priorities-section"
+    };
 
 
-            /* ----------------------------------------------
-               Try IDs first
-            ---------------------------------------------- */
+    const selector = targets[stage];
 
-            const ids =
-                possibleIds[stage] || [];
-
-
-            for (
-                let i = 0;
-                i < ids.length;
-                i++
-            ) {
-
-                const element =
-                    document.getElementById(
-                        ids[i]
-                    );
-
-                if (element) {
-                    return element;
-                }
-
-            }
+    if (!selector) {
+        console.warn(
+            "CPD Lifecycle: No target defined for:",
+            stage
+        );
+        return null;
+    }
 
 
-            /* ----------------------------------------------
-               Fallback: search headings
-            ---------------------------------------------- */
-
-            const keywords = {
-
-                "apm-framework":
-                    ["APM Framework"],
-
-                "apm-competencies":
-                    [
-                        "APM Competence Framework",
-                        "APM Competencies"
-                    ],
-
-                "my-ratings":
-                    [
-                        "My Ratings",
-                        "Current Rating",
-                        "Target Rating"
-                    ],
-
-                "performance-metrics":
-                    [
-                        "Performance Metrics",
-                        "CPD Metrics",
-                        "Metrics"
-                    ],
-
-                "apm-cpd-log":
-                    [
-                        "APM CPD Log",
-                        "CPD Log"
-                    ],
-
-                "supporting-evidence":
-                    [
-                        "Supporting Evidence",
-                        "Professional Evidence"
-                    ],
-
-                "development-priorities":
-                    [
-                        "Development Priorities"
-                    ]
-
-            };
+    const target =
+        document.querySelector(selector);
 
 
-            const terms =
-                keywords[stage] || [];
+    if (!target) {
+        console.warn(
+            "CPD Lifecycle: Target not found:",
+            selector
+        );
+        return null;
+    }
 
 
-            const headings =
-                document.querySelectorAll(
-                    "h1, h2, h3, h4, h5"
-                );
-
-
-            for (
-                let i = 0;
-                i < headings.length;
-                i++
-            ) {
-
-                const headingText =
-                    headings[i]
-                        .textContent
-                        .trim()
-                        .toLowerCase();
-
-
-                for (
-                    let j = 0;
-                    j < terms.length;
-                    j++
-                ) {
-
-                    if (
-                        headingText.includes(
-                            terms[j].toLowerCase()
-                        )
-                    ) {
-
-                        return (
-                            headings[i]
-                                .closest("section") ||
-                            headings[i]
-                        );
-
-                    }
-
-                }
-
-            }
-
-
-            return null;
-
-        }
+    return target;
+}
 
 
         function navigateToTarget(stage) {
 
-            const target =
-                findTarget(stage);
+    const target =
+        findTarget(stage);
+
+    if (!target) {
+        return;
+    }
 
 
-            if (!target) {
+    /* ========================================================
+       OPEN CPD LOG IF IT IS COLLAPSED
+    ======================================================== */
 
-                console.warn(
-                    "CPD Lifecycle: Could not find destination for:",
-                    stage
-                );
+    if (stage === "apm-cpd-log") {
 
-                return;
+        const toggle =
+            target.querySelector(".collapsible-toggle");
+
+        /*
+         * If the section itself is the toggle, use it.
+         */
+        const clickable =
+            toggle ||
+            target.closest(".collapsible-toggle");
+
+
+        if (clickable) {
+
+            const isExpanded =
+                clickable.classList.contains("active") ||
+                clickable.classList.contains("expanded") ||
+                clickable.getAttribute("aria-expanded") === "true";
+
+
+            if (!isExpanded) {
+
+                clickable.click();
 
             }
 
-
-            /*
-             * Work with the site's sticky header.
-             */
-
-            const header =
-                document.querySelector(
-                    "header, .site-header, .sticky-header"
-                );
-
-
-            const headerHeight =
-                header
-                    ? header.getBoundingClientRect().height
-                    : 0;
-
-
-            const position =
-                target.getBoundingClientRect().top +
-                window.pageYOffset -
-                headerHeight -
-                20;
-
-
-            window.scrollTo({
-
-                top: position,
-
-                behavior: "smooth"
-
-            });
-
         }
 
+    }
 
+
+    /* ========================================================
+       ACCOUNT FOR STICKY HEADER
+    ======================================================== */
+
+    const header =
+        document.querySelector(
+            "header, .site-header, .sticky-header"
+        );
+
+
+    const headerHeight =
+        header
+            ? header.getBoundingClientRect().height
+            : 0;
+
+
+    /*
+     * Recalculate after opening the CPD log because its
+     * position may change when expanded.
+     */
+
+    setTimeout(function () {
+
+        const position =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            headerHeight -
+            20;
+
+
+        window.scrollTo({
+
+            top: position,
+
+            behavior: "smooth"
+
+        });
+
+    }, 100);
+
+}
         /* ========================================================
            CLICK + KEYBOARD
         ======================================================== */

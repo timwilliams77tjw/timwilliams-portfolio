@@ -10161,6 +10161,407 @@ i.fa-solid {
     }
 
 }
+
+/* Wheel container */
+.cpd-lifecycle-wheel {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  margin: 0 auto;
+}
+
+/* Circle with segments */
+.lifecycle-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #0a66c2 0deg 45deg,       /* APM Framework */
+      #007b5f 45deg 90deg,      /* APM Competencies */
+      #b8860b 90deg 135deg,     /* My Ratings */
+      #8a2be2 135deg 180deg,    /* Performance Metrics */
+      #555555 180deg 225deg,    /* APM CPD Log */
+      #ff7f50 225deg 270deg,    /* BCS CPD Log */
+      #4682b4 270deg 315deg,    /* Supporting Evidence */
+      #2e8b57 315deg 360deg     /* Development Priorities */
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Centre text */
+.lifecycle-center {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Labels around wheel */
+.lifecycle-labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.lifecycle-labels li {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+}
+
+/* Position each label */
+.seg-framework      { top: 5%;   left: 50%; transform: translateX(-50%); }
+.seg-competencies   { top: 18%;  right: 5%; transform: translateY(-50%); }
+.seg-ratings        { top: 50%;  right: 0%;  transform: translateY(-50%); }
+.seg-metrics        { bottom: 18%; right: 5%; transform: translateY(50%); }
+.seg-apm-log        { bottom: 5%; left: 50%; transform: translateX(-50%); }
+.seg-bcs-log        { bottom: 18%; left: 5%; transform: translateY(50%); }
+.seg-evidence       { top: 50%;  left: 0%;  transform: translateY(-50%); }
+.seg-priorities     { top: 18%;  left: 5%;  transform: translateY(-50%); }
+
+/* Hover interaction */
+.cpd-lifecycle-wheel:hover .lifecycle-circle {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Container */
+.cpd-flow-map {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Wheel wrapper */
+.cpd-lifecycle-wheel {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  margin: 30px auto 0;
+}
+
+/* Coloured circular segments */
+.lifecycle-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #0a66c2 0deg 45deg,       /* APM Framework */
+      #007b5f 45deg 90deg,      /* APM Competencies */
+      #b8860b 90deg 135deg,     /* My Ratings */
+      #8a2be2 135deg 180deg,    /* Performance Metrics */
+      #555555 180deg 225deg,    /* APM CPD Log */
+      #ff7f50 225deg 270deg,    /* BCS CPD Log */
+      #4682b4 270deg 315deg,    /* Supporting Evidence */
+      #2e8b57 315deg 360deg     /* Development Priorities */
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Centre disc */
+.lifecycle-center {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Labels around wheel */
+.lifecycle-labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.lifecycle-labels li {
+  position: absolute;
+  text-align: center;
+  width: 110px;
+}
+
+/* Positions */
+.seg-framework      { top: 4%;   left: 50%; transform: translateX(-50%); }
+.seg-competencies   { top: 18%;  right: 4%; transform: translateY(-50%); }
+.seg-ratings        { top: 50%;  right: -4%; transform: translateY(-50%); }
+.seg-metrics        { bottom: 18%; right: 4%; transform: translateY(50%); }
+.seg-apm-log        { bottom: 4%; left: 50%; transform: translateX(-50%); }
+.seg-bcs-log        { bottom: 18%; left: 4%; transform: translateY(50%); }
+.seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%); }
+.seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%); }
+
+/* Direction arrows (small chevrons) */
+.lifecycle-labels li::after {
+  content: "➜";
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  color: #666;
+}
+
+/* Interactive hover */
+.cpd-lifecycle-wheel:hover .lifecycle-circle {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.cpd-lifecycle-wheel:hover .lifecycle-center {
+  box-shadow: 0 0 0 1px #0a66c2;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .cpd-lifecycle-wheel {
+    width: 280px;
+    height: 280px;
+  }
+}
+  /* Wheel container */
+.cpd-lifecycle-wheel {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  margin: 30px auto;
+}
+
+/* Coloured circular segments */
+.lifecycle-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #0a66c2 0deg 45deg,       /* APM Framework */
+      #007b5f 45deg 90deg,      /* APM Competencies */
+      #b8860b 90deg 135deg,     /* My Ratings */
+      #8a2be2 135deg 180deg,    /* Performance Metrics */
+      #555555 180deg 225deg,    /* APM CPD Log */
+      #ff7f50 225deg 270deg,    /* BCS CPD Log */
+      #4682b4 270deg 315deg,    /* Supporting Evidence */
+      #2e8b57 315deg 360deg     /* Development Priorities */
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Centre disc */
+.lifecycle-center {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Labels around wheel */
+.lifecycle-labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.lifecycle-labels li {
+  position: absolute;
+  text-align: center;
+  width: 120px;
+}
+
+/* Cyclic arrow directions */
+.lifecycle-labels li::after {
+  content: "➜";
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 12px;
+  color: #444;
+}
+
+/* Position each label around the circle */
+.seg-framework      { top: 4%;   left: 50%; transform: translateX(-50%) rotate(0deg); }
+.seg-competencies   { top: 18%;  right: 4%; transform: translateY(-50%) rotate(45deg); }
+.seg-ratings        { top: 50%;  right: -4%; transform: translateY(-50%) rotate(90deg); }
+.seg-metrics        { bottom: 18%; right: 4%; transform: translateY(50%) rotate(135deg); }
+.seg-apm-log        { bottom: 4%; left: 50%; transform: translateX(-50%) rotate(180deg); }
+.seg-bcs-log        { bottom: 18%; left: 4%; transform: translateY(50%) rotate(225deg); }
+.seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%) rotate(270deg); }
+.seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%) rotate(315deg); }
+
+/* Hover interaction */
+.cpd-lifecycle-wheel:hover .lifecycle-circle {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.cpd-lifecycle-wheel:hover .lifecycle-center {
+  box-shadow: 0 0 0 1px #0a66c2;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .cpd-lifecycle-wheel {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* Wheel container */
+.cpd-lifecycle-wheel {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  margin: 30px auto;
+}
+
+/* Coloured circular segments */
+.lifecycle-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #0a66c2 0deg 45deg,       /* APM Framework */
+      #007b5f 45deg 90deg,      /* APM Competencies */
+      #b8860b 90deg 135deg,     /* My Ratings */
+      #8a2be2 135deg 180deg,    /* Performance Metrics */
+      #555555 180deg 225deg,    /* APM CPD Log */
+      #ff7f50 225deg 270deg,    /* BCS CPD Log */
+      #4682b4 270deg 315deg,    /* Supporting Evidence */
+      #2e8b57 315deg 360deg     /* Development Priorities */
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Centre disc */
+.lifecycle-center {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Labels around wheel */
+.lifecycle-labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.lifecycle-labels li {
+  position: absolute;
+  text-align: center;
+  width: 120px;
+}
+
+/* Cyclic arrow directions */
+.lifecycle-labels li::after {
+  content: "➜";
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 12px;
+  color: #444;
+}
+
+/* Position each label around the circle */
+.seg-framework      { top: 4%;   left: 50%; transform: translateX(-50%) rotate(0deg); }
+.seg-competencies   { top: 18%;  right: 4%; transform: translateY(-50%) rotate(45deg); }
+.seg-ratings        { top: 50%;  right: -4%; transform: translateY(-50%) rotate(90deg); }
+.seg-metrics        { bottom: 18%; right: 4%; transform: translateY(50%) rotate(135deg); }
+.seg-apm-log        { bottom: 4%; left: 50%; transform: translateX(-50%) rotate(180deg); }
+.seg-bcs-log        { bottom: 18%; left: 4%; transform: translateY(50%) rotate(225deg); }
+.seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%) rotate(270deg); }
+.seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%) rotate(315deg); }
+
+/* Hover interaction */
+.cpd-lifecycle-wheel:hover .lifecycle-circle {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.cpd-lifecycle-wheel:hover .lifecycle-center {
+  box-shadow: 0 0 0 1px #0a66c2;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .cpd-lifecycle-wheel {
+    width: 300px;
+    height: 300px;
+  }
+
+  .lifecycle-labels li {
+    width: 100px;
+    font-size: 11px;
+  }
+}
+
   
 </style>
 
@@ -10262,34 +10663,28 @@ i.fa-solid {
     A connected visual showing how each part of my CPD process fits together.
   </p>
 
-  <div class="cpd-flow-container">
+  <div class="cpd-lifecycle-wheel">
 
-    <!-- ROW 1 -->
-    <div class="cpd-flow-row">
-      <a href="#apm-framework" class="cpd-block">APM Framework</a>
-      <span class="cpd-arrow">➜</span>
-      <a href="#apm-competencies" class="cpd-block">APM Competencies</a>
-      <span class="cpd-arrow">➜</span>
-      <a href="#my-ratings" class="cpd-block">My Ratings</a>
+  <div class="lifecycle-circle">
+    <div class="lifecycle-center">
+      <div>CPD</div>
+      <div>Lifecycle</div>
     </div>
-
-    <!-- ROW 2 -->
-    <div class="cpd-flow-row">
-      <a href="#performance-metrics" class="cpd-block">Performance Metrics</a>
-      <span class="cpd-arrow">➜</span>
-      <a href="#apm-cpd-log" class="cpd-block">APM CPD Log</a>
-      <span class="cpd-arrow">➜</span>
-      <a href="#bcs-cpd-log" class="cpd-block">BCS CPD Log</a>
-    </div>
-
-    <!-- ROW 3 -->
-    <div class="cpd-flow-row">
-      <a href="#supporting-evidence" class="cpd-block">Supporting Evidence</a>
-      <span class="cpd-arrow">➜</span>
-      <a href="#development-priorities" class="cpd-block">Development Priorities</a>
-    </div>
-
   </div>
+
+  <ul class="lifecycle-labels">
+    <li class="seg-framework">APM Framework</li>
+    <li class="seg-competencies">APM Competencies</li>
+    <li class="seg-ratings">My Ratings</li>
+    <li class="seg-metrics">Performance Metrics</li>
+    <li class="seg-apm-log">APM CPD Log</li>
+    <li class="seg-bcs-log">BCS CPD Log</li>
+    <li class="seg-evidence">Supporting Evidence</li>
+    <li class="seg-priorities">Development Priorities</li>
+  </ul>
+
+</div>
+
 </section>
 
 <script>

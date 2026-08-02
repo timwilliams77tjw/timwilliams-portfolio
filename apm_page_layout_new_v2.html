@@ -10017,6 +10017,117 @@ i.fa-solid {
         font-size: 12px;
     }
 }
+
+/* ============================================================
+   RADARS + COMPETENCY WHEEL
+   THREE VISUALS IN ONE ROW
+============================================================ */
+
+.competency-flex {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+
+    width: 100%;
+
+    align-items: stretch;
+
+    box-sizing: border-box;
+}
+
+
+/* Keep each visual inside its own column */
+
+.competency-flex > .radar-box,
+.competency-flex > .competency-wheel-container {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   WHEEL CARD — MATCH RADAR CARD
+============================================================ */
+
+.competency-flex > .competency-wheel-container {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: 0;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,0.06);
+}
+
+
+/* Wheel fills its column */
+
+.competency-flex
+#competencyAssessmentWheel {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 100%;
+
+    height: auto;
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .competency-flex {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .competency-flex {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .competency-flex > .radar-box,
+    .competency-flex > .competency-wheel-container {
+        width: 100%;
+    }
+
+}
+  
 </style>
 
 
@@ -14092,29 +14203,48 @@ function generateCompetencyAssessmentWheel() {
 
 
             /* Mobile */
+sector.addEventListener(
+    "click",
+    event => {
 
-            sector.addEventListener(
-                "click",
-                event => {
-
-                    event.stopPropagation();
-
-                    const alreadyActive =
-                        sector.classList.contains(
-                            "active"
-                        );
+        event.stopPropagation();
 
 
-                    if (alreadyActive) {
-
-                        resetSegments();
-
-                    } else {
-
-                        activateSegment();
-                    }
-                }
+        const alreadyActive =
+            sector.classList.contains(
+                "active"
             );
+
+
+        /*
+         * Clicking the currently selected
+         * segment again clears the filter.
+         */
+        if (alreadyActive) {
+
+            resetSegments();
+
+            showAllCompetencies();
+
+            return;
+        }
+
+
+        /*
+         * Highlight selected wheel segment.
+         */
+        activateSegment();
+
+
+        /*
+         * Filter accordion.
+         */
+        filterCompetenciesByRating(
+            rating.name
+        );
+
+    }
+);
 
 
             /* Keyboard */
@@ -14379,6 +14509,115 @@ if (
 
     initialiseCompetencyWheel();
 }
+
+/* ============================================================
+   COMPETENCY WHEEL → COMPETENCY ACCORDION FILTER
+============================================================ */
+
+function filterCompetenciesByRating(rating) {
+
+    const accordionItems =
+        document.querySelectorAll(
+            ".competency-section .accordion-item"
+        );
+
+
+    accordionItems.forEach(item => {
+
+        const badge =
+            item.querySelector(
+                ".rating-badge"
+            );
+
+
+        if (!badge) {
+            return;
+        }
+
+
+        const matches =
+            badge.textContent
+                .trim()
+                .toLowerCase() ===
+            rating
+                .trim()
+                .toLowerCase();
+
+
+        if (matches) {
+
+            item.style.display = "";
+
+        } else {
+
+            item.style.display = "none";
+
+            /*
+             * Also close anything that happened
+             * to be open before filtering.
+             */
+            item.classList.remove(
+                "active",
+                "open"
+            );
+
+            const content =
+                item.querySelector(
+                    ".accordion-content"
+                );
+
+            if (content) {
+
+                content.style.display =
+                    "none";
+            }
+        }
+
+    });
+
+
+    /*
+     * Scroll the accordion into view so that
+     * the filtered results are immediately visible.
+     */
+    const accordion =
+        document.querySelector(
+            ".competency-section .accordion"
+        );
+
+
+    if (accordion) {
+
+        setTimeout(() => {
+
+            accordion.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }, 100);
+    }
+}
+
+
+/* ============================================================
+   SHOW ALL COMPETENCIES
+============================================================ */
+
+function showAllCompetencies() {
+
+    const accordionItems =
+        document.querySelectorAll(
+            ".competency-section .accordion-item"
+        );
+
+
+    accordionItems.forEach(item => {
+
+        item.style.display = "";
+
+    });
+}  
 
 /* ============================================================
    DONUT CHART

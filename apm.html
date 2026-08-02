@@ -10242,6 +10242,115 @@ i.fa-solid {
   transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
+
+/* Container */
+.cpd-flow-map {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Wheel wrapper */
+.cpd-lifecycle-wheel {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  margin: 30px auto 0;
+}
+
+/* Coloured circular segments */
+.lifecycle-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #0a66c2 0deg 45deg,       /* APM Framework */
+      #007b5f 45deg 90deg,      /* APM Competencies */
+      #b8860b 90deg 135deg,     /* My Ratings */
+      #8a2be2 135deg 180deg,    /* Performance Metrics */
+      #555555 180deg 225deg,    /* APM CPD Log */
+      #ff7f50 225deg 270deg,    /* BCS CPD Log */
+      #4682b4 270deg 315deg,    /* Supporting Evidence */
+      #2e8b57 315deg 360deg     /* Development Priorities */
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Centre disc */
+.lifecycle-center {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Labels around wheel */
+.lifecycle-labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.lifecycle-labels li {
+  position: absolute;
+  text-align: center;
+  width: 110px;
+}
+
+/* Positions */
+.seg-framework      { top: 4%;   left: 50%; transform: translateX(-50%); }
+.seg-competencies   { top: 18%;  right: 4%; transform: translateY(-50%); }
+.seg-ratings        { top: 50%;  right: -4%; transform: translateY(-50%); }
+.seg-metrics        { bottom: 18%; right: 4%; transform: translateY(50%); }
+.seg-apm-log        { bottom: 4%; left: 50%; transform: translateX(-50%); }
+.seg-bcs-log        { bottom: 18%; left: 4%; transform: translateY(50%); }
+.seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%); }
+.seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%); }
+
+/* Direction arrows (small chevrons) */
+.lifecycle-labels li::after {
+  content: "➜";
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  color: #666;
+}
+
+/* Interactive hover */
+.cpd-lifecycle-wheel:hover .lifecycle-circle {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.cpd-lifecycle-wheel:hover .lifecycle-center {
+  box-shadow: 0 0 0 1px #0a66c2;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .cpd-lifecycle-wheel {
+    width: 280px;
+    height: 280px;
+  }
+}
   
 </style>
 

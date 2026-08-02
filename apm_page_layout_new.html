@@ -9987,46 +9987,7 @@ i.fa-solid {
     align-items: center;
   }
 }
-.competency-gauge-box {
-  text-align: center;
-  max-width: 360px;
-  margin: 0 auto;
-}
 
-.competency-gauge {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.gauge-label {
-  font-size: 13px;
-  font-weight: 600;
-  fill: #222;
-  text-anchor: middle;
-}
-
-.aware-label {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-/* Inline with radars */
-.competency-flex {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-@media (max-width: 900px) {
-  .competency-flex {
-    flex-direction: column;
-    align-items: center;
-  }
-}
   
 </style>
 
@@ -16174,44 +16135,33 @@ document.addEventListener(
         <svg id="radar-target" class="radar-svg" viewBox="-60 -60 120 120"></svg>
       </div>
 
-<div class="competency-gauge-box">
+<div class="competency-arc-box">
   <h3 class="radar-heading">Competency Assessment Wheel</h3>
 
-  <svg viewBox="0 0 400 240" class="competency-gauge">
-
-    <!-- Background semi-circle -->
-    <path d="M40,200 A160,160 0 0,1 360,200"
-          fill="none" stroke="#f0f0f0" stroke-width="40" />
+  <svg viewBox="0 0 400 220" class="arc-wheel">
 
     <!-- Expert -->
-    <path d="M40,200 A160,160 0 0,1 136,80"
-          fill="none" stroke="#0a66c2" stroke-width="40" />
-    <text x="90" y="130" class="gauge-label">Expert</text>
+    <path d="M20,200 A180,180 0 0,1 140,40" stroke="#0a66c2" stroke-width="40" fill="none" />
+    <text x="80" y="120" class="arc-label">Expert</text>
 
     <!-- Proficient -->
-    <path d="M136,80 A160,160 0 0,1 200,60"
-          fill="none" stroke="#007b5f" stroke-width="40" />
-    <text x="170" y="95" class="gauge-label">Proficient</text>
+    <path d="M140,40 A180,180 0 0,1 260,40" stroke="#007b5f" stroke-width="40" fill="none" />
+    <text x="200" y="70" class="arc-label">Proficient</text>
 
     <!-- Competent -->
-    <path d="M200,60 A160,160 0 0,1 264,80"
-          fill="none" stroke="#b8860b" stroke-width="40" />
-    <text x="230" y="95" class="gauge-label">Competent</text>
+    <path d="M260,40 A180,180 0 0,1 380,200" stroke="#b8860b" stroke-width="40" fill="none" />
+    <text x="310" y="120" class="arc-label">Competent</text>
 
     <!-- Practised -->
-    <path d="M264,80 A160,160 0 0,1 360,200"
-          fill="none" stroke="#8a2be2" stroke-width="40" />
-    <text x="310" y="130" class="gauge-label">Practised</text>
+    <path d="M380,200 A180,180 0 0,1 260,360" stroke="#8a2be2" stroke-width="40" fill="none" />
+    <text x="310" y="200" class="arc-label">Practised</text>
 
-    <!-- Aware (base text) -->
-    <text x="200" y="210" class="gauge-label aware-label">Aware</text>
-
-    <!-- Pointer (current level) -->
-    <circle cx="136" cy="80" r="6" fill="#555555" />
+    <!-- Aware -->
+    <path d="M260,360 A180,180 0 0,1 140,360" stroke="#555555" stroke-width="40" fill="none" />
+    <text x="200" y="240" class="arc-label">Aware</text>
 
   </svg>
 </div>
-
 
 
     </div>

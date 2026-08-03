@@ -7463,7 +7463,7 @@ section.competency-section > .competency-card {
   padding: 30px;
   background: #ffffff;
   border-radius: 24px;
-  border-top: 8px solid #0a66c2;
+   border-top:6px solid #0a66c2;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
 }
@@ -7851,7 +7851,7 @@ section.competency-section > .competency-card {
 }
 /* Remove blue top border from individual metric cards */
 .cpd-metrics-section .cpd-metric-card {
-  border-top: none !important;
+border-top:6px solid #0a66c2;
 }
 
 /* ================================
@@ -7862,7 +7862,7 @@ section.competency-section > .competency-card {
   background: linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
   padding: 28px;
   border-radius: 24px;
-  border-top: 5px solid var(--apm-accent);
+border-top:6px solid #0a66c2;
   box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
   margin-bottom: 32px;
 }
@@ -7889,7 +7889,7 @@ section.cpd-metrics-section {
     background: #ffffff !important;
     padding: 28px;
     border-radius: 24px;
-    border-top: 5px solid var(--apm-accent) !important;
+border-top:6px solid #0a66c2;
     box-shadow: none !important;
     margin-bottom: 32px;
     box-sizing: border-box;
@@ -8251,7 +8251,7 @@ section.cpd-metrics-section
     section.cpd-metrics-section .cpd-metric-card {
         min-height: 130px;
         padding: 22px;
-        border-top: none !important;
+border-top:6px solid #0a66c2;
     }
 
     section.cpd-metrics-section .cpd-metric-card h4 {
@@ -10527,8 +10527,74 @@ i.fa-solid {
 }
 
 
+.cpd-lifecycle-wheel {
+    width: min(92vw, 520px);
+    margin: 2rem auto;
+}
 
-  
+.cpd-lifecycle-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* iPhone */
+@media (max-width: 767px) {
+    .cpd-lifecycle-wheel {
+        width: min(92vw, 420px);
+    }
+}
+
+/* iPad */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .cpd-lifecycle-wheel {
+        width: 480px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+    .cpd-lifecycle-wheel {
+        width: 560px;
+    }
+}  
+/* ============================================================
+   MAIN CONTENT CARDS
+============================================================ */
+
+.apm-framework-section,
+.competency-section,
+.cpd-metrics-section,
+.cpd-section-card,
+.development-priorities-section {
+
+    background: #fff;
+
+    border-top: 6px solid #0a66c2;
+
+    border-radius: 18px;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,.06);
+
+    overflow: hidden;
+
+    margin-bottom: 2rem;
+}  
+
+  /* ============================================================
+   MAIN SECTION TOP ACCENT
+============================================================ */
+
+.apm-framework-section,
+.competency-section,
+.cpd-metrics-section,
+.cpd-section-card,
+.development-priorities-section {
+    border-top: 6px solid #0a66c2 !important;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
 </style>
 
 
@@ -17783,10 +17849,10 @@ function findTarget(stage) {
          * existing mappings in place.
          */
         "performance-metrics":
-            "#cpd-metrics-section",
+            ".cpd-metrics-section",
 
         "development-priorities":
-            "#development-priorities-section"
+            ".development-priorities-section"
     };
 
 

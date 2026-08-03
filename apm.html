@@ -10161,16 +10161,112 @@ i.fa-solid {
     }
 
 }
-
-/* Wheel container */
 .cpd-lifecycle-wheel {
   position: relative;
   width: 360px;
   height: 360px;
-  margin: 0 auto;
+  margin: 30px auto;
 }
 
-/* Circle with segments */
+.lifecycle-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #0a66c2 0deg 45deg,
+      #007b5f 45deg 90deg,
+      #b8860b 90deg 135deg,
+      #8a2be2 135deg 180deg,
+      #555555 180deg 225deg,
+      #ff7f50 225deg 270deg,
+      #4682b4 270deg 315deg,
+      #2e8b57 315deg 360deg
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.lifecycle-center {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+.lifecycle-labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.lifecycle-labels li {
+  position: absolute;
+  text-align: center;
+  width: 120px;
+}
+
+.lifecycle-labels li::after {
+  content: "➜";
+  margin-left: 6px;
+  font-size: 12px;
+  color: #444;
+}
+
+.seg-framework      { top: 4%;   left: 50%; transform: translateX(-50%) rotate(0deg); }
+.seg-competencies   { top: 18%;  right: 4%; transform: translateY(-50%) rotate(45deg); }
+.seg-ratings        { top: 50%;  right: -4%; transform: translateY(-50%) rotate(90deg); }
+.seg-metrics        { bottom: 18%; right: 4%; transform: translateY(50%) rotate(135deg); }
+.seg-apm-log        { bottom: 4%; left: 50%; transform: translateX(-50%) rotate(180deg); }
+.seg-bcs-log        { bottom: 18%; left: 4%; transform: translateY(50%) rotate(225deg); }
+.seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%) rotate(270deg); }
+.seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%) rotate(315deg); }
+
+.lifecycle-labels a {
+  pointer-events: auto;
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 900px) {
+  .cpd-lifecycle-wheel {
+    width: 300px;
+    height: 300px;
+  }
+  .lifecycle-labels li {
+    width: 100px;
+    font-size: 11px;
+  }
+}
+.cpd-wheel-wrapper {
+  all: unset;
+  display: block;
+  position: relative;
+}
+/* 1. Force the coloured segments */
+.cpd-lifecycle-wheel {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  margin: 30px auto;
+}
+
 .lifecycle-circle {
   width: 100%;
   height: 100%;
@@ -10189,32 +10285,16 @@ i.fa-solid {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-/* Centre text */
-.lifecycle-center {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 0 1px #e5e5e5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  font-weight: 700;
-  color: #222;
-}
-
-/* Labels around wheel */
+/* 2. Make the labels clickable and keep layout */
 .lifecycle-labels {
   list-style: none;
   padding: 0;
   margin: 0;
   position: absolute;
   inset: 0;
-  pointer-events: none;
   font-size: 12px;
   font-weight: 600;
   color: #222;
@@ -10223,98 +10303,16 @@ i.fa-solid {
 .lifecycle-labels li {
   position: absolute;
   text-align: center;
-  width: 100px;
+  width: 120px;
 }
 
-/* Position each label */
-.seg-framework      { top: 5%;   left: 50%; transform: translateX(-50%); }
-.seg-competencies   { top: 18%;  right: 5%; transform: translateY(-50%); }
-.seg-ratings        { top: 50%;  right: 0%;  transform: translateY(-50%); }
-.seg-metrics        { bottom: 18%; right: 5%; transform: translateY(50%); }
-.seg-apm-log        { bottom: 5%; left: 50%; transform: translateX(-50%); }
-.seg-bcs-log        { bottom: 18%; left: 5%; transform: translateY(50%); }
-.seg-evidence       { top: 50%;  left: 0%;  transform: translateY(-50%); }
-.seg-priorities     { top: 18%;  left: 5%;  transform: translateY(-50%); }
-
-/* Hover interaction */
-.cpd-lifecycle-wheel:hover .lifecycle-circle {
-  transform: scale(1.02);
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+.lifecycle-labels a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Container */
-.cpd-flow-map {
-  text-align: center;
-  margin-top: 40px;
-}
-
-/* Wheel wrapper */
-.cpd-lifecycle-wheel {
-  position: relative;
-  width: 360px;
-  height: 360px;
-  margin: 30px auto 0;
-}
-
-/* Coloured circular segments */
-.lifecycle-circle {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background:
-    conic-gradient(
-      #0a66c2 0deg 45deg,       /* APM Framework */
-      #007b5f 45deg 90deg,      /* APM Competencies */
-      #b8860b 90deg 135deg,     /* My Ratings */
-      #8a2be2 135deg 180deg,    /* Performance Metrics */
-      #555555 180deg 225deg,    /* APM CPD Log */
-      #ff7f50 225deg 270deg,    /* BCS CPD Log */
-      #4682b4 270deg 315deg,    /* Supporting Evidence */
-      #2e8b57 315deg 360deg     /* Development Priorities */
-    );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-/* Centre disc */
-.lifecycle-center {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 0 1px #e5e5e5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  font-weight: 700;
-  color: #222;
-}
-
-/* Labels around wheel */
-.lifecycle-labels {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  font-size: 12px;
-  font-weight: 600;
-  color: #222;
-}
-
-.lifecycle-labels li {
-  position: absolute;
-  text-align: center;
-  width: 110px;
-}
-
-/* Positions */
+/* 3. Position labels around the circle */
 .seg-framework      { top: 4%;   left: 50%; transform: translateX(-50%); }
 .seg-competencies   { top: 18%;  right: 4%; transform: translateY(-50%); }
 .seg-ratings        { top: 50%;  right: -4%; transform: translateY(-50%); }
@@ -10324,243 +10322,211 @@ i.fa-solid {
 .seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%); }
 .seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%); }
 
-/* Direction arrows (small chevrons) */
-.lifecycle-labels li::after {
-  content: "➜";
-  display: inline-block;
-  margin-left: 6px;
-  font-size: 11px;
-  color: #666;
+
+  /* ============================================================
+   CPD LIFECYCLE NAVIGATION WHEEL
+============================================================ */
+
+.cpd-lifecycle-section {
+    width: 100%;
+    margin: 0 auto 40px;
+    padding: 10px 0 20px;
 }
 
-/* Interactive hover */
-.cpd-lifecycle-wheel:hover .lifecycle-circle {
-  transform: scale(1.02);
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-.cpd-lifecycle-wheel:hover .lifecycle-center {
-  box-shadow: 0 0 0 1px #0a66c2;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-  .cpd-lifecycle-wheel {
-    width: 280px;
-    height: 280px;
-  }
-}
-  /* Wheel container */
 .cpd-lifecycle-wheel {
-  position: relative;
-  width: 360px;
-  height: 360px;
-  margin: 30px auto;
+    width: min(760px, 100%);
+    margin: 0 auto;
+    position: relative;
 }
 
-/* Coloured circular segments */
-.lifecycle-circle {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background:
-    conic-gradient(
-      #0a66c2 0deg 45deg,       /* APM Framework */
-      #007b5f 45deg 90deg,      /* APM Competencies */
-      #b8860b 90deg 135deg,     /* My Ratings */
-      #8a2be2 135deg 180deg,    /* Performance Metrics */
-      #555555 180deg 225deg,    /* APM CPD Log */
-      #ff7f50 225deg 270deg,    /* BCS CPD Log */
-      #4682b4 270deg 315deg,    /* Supporting Evidence */
-      #2e8b57 315deg 360deg     /* Development Priorities */
-    );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+.cpd-lifecycle-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
 }
 
-/* Centre disc */
-.lifecycle-center {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 0 1px #e5e5e5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  font-weight: 700;
-  color: #222;
+
+/* ============================================================
+   SEGMENTS
+============================================================ */
+
+.lifecycle-segment {
+    cursor: pointer;
+    outline: none;
 }
 
-/* Labels around wheel */
-.lifecycle-labels {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  font-size: 12px;
-  font-weight: 600;
-  color: #222;
+.lifecycle-segment-shape {
+    stroke: #ffffff;
+    stroke-width: 6;
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        opacity 0.2s ease;
+    transform-origin: 350px 350px;
 }
 
-.lifecycle-labels li {
-  position: absolute;
-  text-align: center;
-  width: 120px;
+
+/* Seven colours */
+
+.lifecycle-segment[data-target="apm-framework"]
+.lifecycle-segment-shape {
+    fill: #0a66c2;
 }
 
-/* Cyclic arrow directions */
-.lifecycle-labels li::after {
-  content: "➜";
-  display: inline-block;
-  margin-left: 6px;
-  font-size: 12px;
-  color: #444;
+.lifecycle-segment[data-target="apm-competencies"]
+.lifecycle-segment-shape {
+    fill: #007b5f;
 }
 
-/* Position each label around the circle */
-.seg-framework      { top: 4%;   left: 50%; transform: translateX(-50%) rotate(0deg); }
-.seg-competencies   { top: 18%;  right: 4%; transform: translateY(-50%) rotate(45deg); }
-.seg-ratings        { top: 50%;  right: -4%; transform: translateY(-50%) rotate(90deg); }
-.seg-metrics        { bottom: 18%; right: 4%; transform: translateY(50%) rotate(135deg); }
-.seg-apm-log        { bottom: 4%; left: 50%; transform: translateX(-50%) rotate(180deg); }
-.seg-bcs-log        { bottom: 18%; left: 4%; transform: translateY(50%) rotate(225deg); }
-.seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%) rotate(270deg); }
-.seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%) rotate(315deg); }
-
-/* Hover interaction */
-.cpd-lifecycle-wheel:hover .lifecycle-circle {
-  transform: scale(1.02);
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+.lifecycle-segment[data-target="my-ratings"]
+.lifecycle-segment-shape {
+    fill: #b8860b;
 }
 
-.cpd-lifecycle-wheel:hover .lifecycle-center {
-  box-shadow: 0 0 0 1px #0a66c2;
+.lifecycle-segment[data-target="performance-metrics"]
+.lifecycle-segment-shape {
+    fill: #8a2be2;
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-  .cpd-lifecycle-wheel {
-    width: 280px;
-    height: 280px;
-  }
+.lifecycle-segment[data-target="apm-cpd-log"]
+.lifecycle-segment-shape {
+    fill: #e76f51;
 }
 
-/* Wheel container */
-.cpd-lifecycle-wheel {
-  position: relative;
-  width: 360px;
-  height: 360px;
-  margin: 30px auto;
+.lifecycle-segment[data-target="supporting-evidence"]
+.lifecycle-segment-shape {
+    fill: #457b9d;
 }
 
-/* Coloured circular segments */
-.lifecycle-circle {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background:
-    conic-gradient(
-      #0a66c2 0deg 45deg,       /* APM Framework */
-      #007b5f 45deg 90deg,      /* APM Competencies */
-      #b8860b 90deg 135deg,     /* My Ratings */
-      #8a2be2 135deg 180deg,    /* Performance Metrics */
-      #555555 180deg 225deg,    /* APM CPD Log */
-      #ff7f50 225deg 270deg,    /* BCS CPD Log */
-      #4682b4 270deg 315deg,    /* Supporting Evidence */
-      #2e8b57 315deg 360deg     /* Development Priorities */
-    );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+.lifecycle-segment[data-target="development-priorities"]
+.lifecycle-segment-shape {
+    fill: #555555;
 }
 
-/* Centre disc */
-.lifecycle-center {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 0 1px #e5e5e5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  font-weight: 700;
-  color: #222;
+
+/* Hover */
+
+.lifecycle-segment:hover
+.lifecycle-segment-shape,
+.lifecycle-segment:focus
+.lifecycle-segment-shape {
+    filter: brightness(1.12)
+            drop-shadow(0 5px 7px rgba(0,0,0,0.18));
+
+    stroke-width: 8;
 }
 
-/* Labels around wheel */
-.lifecycle-labels {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  font-size: 12px;
-  font-weight: 600;
-  color: #222;
+
+/* ============================================================
+   LABELS
+============================================================ */
+
+.lifecycle-label {
+    fill: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-anchor: middle;
+    pointer-events: none;
 }
 
-.lifecycle-labels li {
-  position: absolute;
-  text-align: center;
-  width: 120px;
+.lifecycle-label-small {
+    font-size: 15px;
+    font-weight: 600;
 }
 
-/* Cyclic arrow directions */
-.lifecycle-labels li::after {
-  content: "➜";
-  display: inline-block;
-  margin-left: 6px;
-  font-size: 12px;
-  color: #444;
+
+/* ============================================================
+   CENTRE
+============================================================ */
+
+.lifecycle-centre-shadow {
+    fill: rgba(0,0,0,0.08);
 }
 
-/* Position each label around the circle */
-.seg-framework      { top: 4%;   left: 50%; transform: translateX(-50%) rotate(0deg); }
-.seg-competencies   { top: 18%;  right: 4%; transform: translateY(-50%) rotate(45deg); }
-.seg-ratings        { top: 50%;  right: -4%; transform: translateY(-50%) rotate(90deg); }
-.seg-metrics        { bottom: 18%; right: 4%; transform: translateY(50%) rotate(135deg); }
-.seg-apm-log        { bottom: 4%; left: 50%; transform: translateX(-50%) rotate(180deg); }
-.seg-bcs-log        { bottom: 18%; left: 4%; transform: translateY(50%) rotate(225deg); }
-.seg-evidence       { top: 50%;  left: -4%; transform: translateY(-50%) rotate(270deg); }
-.seg-priorities     { top: 18%;  left: 4%; transform: translateY(-50%) rotate(315deg); }
-
-/* Hover interaction */
-.cpd-lifecycle-wheel:hover .lifecycle-circle {
-  transform: scale(1.02);
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+.lifecycle-centre {
+    fill: #ffffff;
+    stroke: #e1e5e9;
+    stroke-width: 2;
+    filter: url(#wheelShadow);
 }
 
-.cpd-lifecycle-wheel:hover .lifecycle-center {
-  box-shadow: 0 0 0 1px #0a66c2;
+.lifecycle-centre-title {
+    fill: #111111;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    text-anchor: middle;
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-  .cpd-lifecycle-wheel {
-    width: 300px;
-    height: 300px;
-  }
 
-  .lifecycle-labels li {
-    width: 100px;
-    font-size: 11px;
-  }
+/* ============================================================
+   LIFECYCLE DIRECTION ARROWS
+============================================================ */
+
+.lifecycle-direction-arrow {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 5;
+    stroke-linecap: round;
+    opacity: 0.95;
+    pointer-events: none;
 }
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .cpd-lifecycle-section {
+        padding: 0 5px 20px;
+    }
+
+    .cpd-lifecycle-wheel {
+        width: 100%;
+    }
+
+    .lifecycle-label {
+        font-size: 17px;
+    }
+
+    .lifecycle-label-small {
+        font-size: 12px;
+    }
+
+    .lifecycle-centre-title {
+        font-size: 27px;
+    }
+
+    .lifecycle-segment-shape {
+        stroke-width: 5;
+    }
+
+}
+
+
+/* Small phones */
+
+@media (max-width: 420px) {
+
+    .lifecycle-label {
+        font-size: 15px;
+    }
+
+    .lifecycle-label-small {
+        font-size: 10.5px;
+    }
+
+    .lifecycle-centre-title {
+        font-size: 25px;
+    }
+
+}
+
+
 
   
 </style>
@@ -10654,38 +10620,97 @@ i.fa-solid {
 
 </section>
 
-<section class="cpd-flow-map">
-  <h2 class="section-heading">
-    CPD Lifecycle Navigation Map
-  </h2>
+<!-- ============================================================
+     CPD LIFECYCLE NAVIGATION WHEEL
+============================================================ -->
+<section class="cpd-lifecycle-section">
 
-  <p class="section-subtitle">
-    A connected visual showing how each part of my CPD process fits together.
-  </p>
+    <div class="cpd-lifecycle-wheel">
 
-  <div class="cpd-lifecycle-wheel">
+     <svg
+    id="cpdLifecycleWheel"
+    class="cpd-lifecycle-svg"
+    viewBox="0 0 700 700"
+    role="img"
+    aria-label="CPD Lifecycle Navigation"
+>
 
-  <div class="lifecycle-circle">
-    <div class="lifecycle-center">
-      <div>CPD</div>
-      <div>Lifecycle</div>
+    <defs>
+
+        <filter id="wheelShadow"
+                x="-30%"
+                y="-30%"
+                width="160%"
+                height="160%">
+            <feDropShadow
+                dx="0"
+                dy="5"
+                stdDeviation="7"
+                flood-opacity="0.15"
+            />
+        </filter>
+
+        <marker
+            id="cycleArrow"
+            markerWidth="14"
+            markerHeight="14"
+            refX="10"
+            refY="7"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+        >
+            <path
+                d="M0 0 L14 7 L0 14 Z"
+                fill="#ffffff"
+            />
+        </marker>
+
+    </defs>
+
+
+    <!-- Segments are generated by JavaScript -->
+
+
+    <!-- Centre of wheel -->
+
+    <circle
+        cx="350"
+        cy="350"
+        r="181"
+        class="lifecycle-centre-shadow"
+    />
+
+    <circle
+        cx="350"
+        cy="350"
+        r="174"
+        class="lifecycle-centre"
+    />
+
+    <text
+        x="350"
+        y="340"
+        class="lifecycle-centre-title"
+    >
+        CPD
+    </text>
+
+    <text
+        x="350"
+        y="377"
+        class="lifecycle-centre-title"
+    >
+        Lifecycle
+    </text>
+
+</svg>
+      
+
+
     </div>
-  </div>
-
-  <ul class="lifecycle-labels">
-    <li class="seg-framework">APM Framework</li>
-    <li class="seg-competencies">APM Competencies</li>
-    <li class="seg-ratings">My Ratings</li>
-    <li class="seg-metrics">Performance Metrics</li>
-    <li class="seg-apm-log">APM CPD Log</li>
-    <li class="seg-bcs-log">BCS CPD Log</li>
-    <li class="seg-evidence">Supporting Evidence</li>
-    <li class="seg-priorities">Development Priorities</li>
-  </ul>
-
-</div>
 
 </section>
+
 
 <script>
 
@@ -17211,6 +17236,735 @@ document.addEventListener(
     }
 );
 
+/* ============================================================
+   CPD LIFECYCLE NAVIGATION WHEEL
+   VERSION 2
+============================================================ */
+
+(function initialiseCPDLifecycleWheel() {
+
+    function initialiseWheel() {
+
+        const svg = document.getElementById("cpdLifecycleWheel");
+
+        if (!svg) {
+            return;
+        }
+
+
+        /* ========================================================
+           LIFECYCLE STAGES
+        ======================================================== */
+
+        const stages = [
+
+            {
+                key: "apm-framework",
+                title: ["APM", "FRAMEWORK"],
+                colour: "#0a66c2"
+            },
+
+            {
+                key: "apm-competencies",
+                title: ["APM", "COMPETENCIES"],
+                colour: "#007b5f"
+            },
+
+            {
+                key: "my-ratings",
+                title: ["MY", "RATINGS"],
+                colour: "#b8860b"
+            },
+
+            {
+                key: "performance-metrics",
+                title: ["PERFORMANCE", "METRICS"],
+                colour: "#8a2be2"
+            },
+
+            {
+                key: "apm-cpd-log",
+                title: ["APM CPD", "LOG"],
+                colour: "#e76f51"
+            },
+
+            {
+                key: "supporting-evidence",
+                title: ["SUPPORTING", "EVIDENCE"],
+                colour: "#457b9d"
+            },
+
+            {
+                key: "development-priorities",
+                title: ["DEVELOPMENT", "PRIORITIES"],
+                colour: "#555555"
+            }
+
+        ];
+
+
+        /* ========================================================
+           WHEEL GEOMETRY
+        ======================================================== */
+
+        const cx = 350;
+        const cy = 350;
+
+        const outerRadius = 275;
+        const innerRadius = 178;
+
+        const numberOfSegments = stages.length;
+
+        const segmentAngle =
+            (Math.PI * 2) / numberOfSegments;
+
+        /*
+         * Small gap between segments.
+         *
+         * This creates the visual separation seen in the
+         * reference image without leaving any actual empty
+         * section of the wheel.
+         */
+
+        const gap =
+            0.025;
+
+
+        function polarToCartesian(
+            centreX,
+            centreY,
+            radius,
+            angle
+        ) {
+
+            return {
+                x:
+                    centreX +
+                    radius *
+                    Math.cos(angle),
+
+                y:
+                    centreY +
+                    radius *
+                    Math.sin(angle)
+            };
+
+        }
+
+
+        function createSegmentPath(
+            startAngle,
+            endAngle
+        ) {
+
+            const outerStart =
+                polarToCartesian(
+                    cx,
+                    cy,
+                    outerRadius,
+                    startAngle
+                );
+
+            const outerEnd =
+                polarToCartesian(
+                    cx,
+                    cy,
+                    outerRadius,
+                    endAngle
+                );
+
+            const innerEnd =
+                polarToCartesian(
+                    cx,
+                    cy,
+                    innerRadius,
+                    endAngle
+                );
+
+            const innerStart =
+                polarToCartesian(
+                    cx,
+                    cy,
+                    innerRadius,
+                    startAngle
+                );
+
+
+            return [
+
+                `M ${outerStart.x} ${outerStart.y}`,
+
+                `A ${outerRadius} ${outerRadius} 0 0 1
+                 ${outerEnd.x} ${outerEnd.y}`,
+
+                `L ${innerEnd.x} ${innerEnd.y}`,
+
+                `A ${innerRadius} ${innerRadius} 0 0 0
+                 ${innerStart.x} ${innerStart.y}`,
+
+                "Z"
+
+            ].join(" ");
+
+        }
+
+
+        /* ========================================================
+           CREATE SEGMENTS
+        ======================================================== */
+
+        const segmentContainer =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "g"
+            );
+
+        segmentContainer.setAttribute(
+            "class",
+            "lifecycle-generated-segments"
+        );
+
+
+        /*
+         * Start at the top of the wheel.
+         */
+
+        const startOffset =
+            -Math.PI / 2;
+
+
+        stages.forEach((stage, index) => {
+
+            const startAngle =
+                startOffset +
+                index * segmentAngle +
+                gap;
+
+            const endAngle =
+                startOffset +
+                (index + 1) * segmentAngle -
+                gap;
+
+
+            const middleAngle =
+                startOffset +
+                (index + 0.5) *
+                segmentAngle;
+
+
+            /* ----------------------------------------------
+               Segment group
+            ---------------------------------------------- */
+
+            const group =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "g"
+                );
+
+            group.setAttribute(
+                "class",
+                "lifecycle-segment"
+            );
+
+            group.setAttribute(
+                "data-target",
+                stage.key
+            );
+
+            group.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+            group.setAttribute(
+                "role",
+                "button"
+            );
+
+            group.setAttribute(
+                "aria-label",
+                stage.title.join(" ")
+            );
+
+
+            /* ----------------------------------------------
+               Segment
+            ---------------------------------------------- */
+
+            const path =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "path"
+                );
+
+            path.setAttribute(
+                "d",
+                createSegmentPath(
+                    startAngle,
+                    endAngle
+                )
+            );
+
+            path.setAttribute(
+                "class",
+                "lifecycle-segment-shape"
+            );
+
+            path.style.fill =
+                stage.colour;
+
+
+            group.appendChild(path);
+
+
+            /* ----------------------------------------------
+               Segment text
+            ---------------------------------------------- */
+
+            const textPosition =
+                polarToCartesian(
+                    cx,
+                    cy,
+                    228,
+                    middleAngle
+                );
+
+
+            const text =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "text"
+                );
+
+            text.setAttribute(
+                "x",
+                textPosition.x
+            );
+
+            text.setAttribute(
+                "y",
+                textPosition.y
+            );
+
+            text.setAttribute(
+                "class",
+                "lifecycle-label"
+            );
+
+            text.setAttribute(
+                "text-anchor",
+                "middle"
+            );
+
+            /*
+             * Rotate text so it follows the wheel.
+             */
+
+            let rotation =
+                middleAngle *
+                180 /
+                Math.PI +
+                90;
+
+
+            /*
+             * Keep text upright on the left side.
+             */
+
+            if (
+                rotation > 90 &&
+                rotation < 270
+            ) {
+
+                rotation += 180;
+
+            }
+
+
+            text.setAttribute(
+                "transform",
+                `rotate(${rotation} ${textPosition.x} ${textPosition.y})`
+            );
+
+
+            const line1 =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "tspan"
+                );
+
+            line1.setAttribute(
+                "x",
+                textPosition.x
+            );
+
+            line1.setAttribute(
+                "dy",
+                "-4"
+            );
+
+            line1.textContent =
+                stage.title[0];
+
+
+            const line2 =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "tspan"
+                );
+
+            line2.setAttribute(
+                "x",
+                textPosition.x
+            );
+
+            line2.setAttribute(
+                "dy",
+                "23"
+            );
+
+            line2.setAttribute(
+                "class",
+                "lifecycle-label-small"
+            );
+
+            line2.textContent =
+                stage.title[1];
+
+
+            text.appendChild(line1);
+            text.appendChild(line2);
+
+            group.appendChild(text);
+
+            segmentContainer.appendChild(group);
+
+        });
+
+
+        /*
+         * Insert segments BEFORE centre circle.
+         */
+
+        svg.insertBefore(
+            segmentContainer,
+            svg.querySelector(
+                ".lifecycle-centre-shadow"
+            )
+        );
+
+
+        /* ========================================================
+           DIRECTIONAL ARROWS
+        ======================================================== */
+
+        const arrowContainer =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "g"
+            );
+
+        arrowContainer.setAttribute(
+            "class",
+            "lifecycle-arrows"
+        );
+
+
+        stages.forEach((stage, index) => {
+
+            const angle =
+                startOffset +
+                (index + 1) *
+                segmentAngle;
+
+
+            const arrowRadius =
+                226;
+
+
+            const arrowStart =
+                polarToCartesian(
+                    cx,
+                    cy,
+                    arrowRadius,
+                    angle - 0.065
+                );
+
+            const arrowEnd =
+                polarToCartesian(
+                    cx,
+                    cy,
+                    arrowRadius,
+                    angle + 0.065
+                );
+
+
+            const arrow =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "path"
+                );
+
+            arrow.setAttribute(
+                "d",
+                `M ${arrowStart.x} ${arrowStart.y}
+                 L ${arrowEnd.x} ${arrowEnd.y}`
+            );
+
+            arrow.setAttribute(
+                "class",
+                "lifecycle-direction-arrow"
+            );
+
+            arrow.setAttribute(
+                "marker-end",
+                "url(#cycleArrow)"
+            );
+
+
+            arrowContainer.appendChild(
+                arrow
+            );
+
+        });
+
+
+        svg.insertBefore(
+            arrowContainer,
+            svg.querySelector(
+                ".lifecycle-centre-shadow"
+            )
+        );
+
+
+        /* ========================================================
+           NAVIGATION
+        ======================================================== */
+
+        const segments =
+            svg.querySelectorAll(
+                ".lifecycle-segment"
+            );
+
+
+        /*
+         * Find a page section intelligently.
+         *
+         * We first try known IDs, then look for headings/text.
+         */
+
+function findTarget(stage) {
+
+    const targets = {
+
+        /* APM Framework */
+        "apm-framework":
+            ".apm-framework-section",
+
+        /* My Competence Assessment */
+        "apm-competencies":
+            ".competency-section",
+
+        /* Rating Summary / My Ratings */
+        "my-ratings":
+            ".rating-summary",
+
+        /* Continuing Professional Development Log */
+        "apm-cpd-log":
+            ".cpd-log-inner",
+
+        /* Supporting Evidence */
+        "supporting-evidence":
+            ".professional-evidence-section",
+
+        /*
+         * These are already working, so leave their
+         * existing mappings in place.
+         */
+        "performance-metrics":
+            "#cpd-metrics-section",
+
+        "development-priorities":
+            "#development-priorities-section"
+    };
+
+
+    const selector = targets[stage];
+
+    if (!selector) {
+        console.warn(
+            "CPD Lifecycle: No target defined for:",
+            stage
+        );
+        return null;
+    }
+
+
+    const target =
+        document.querySelector(selector);
+
+
+    if (!target) {
+        console.warn(
+            "CPD Lifecycle: Target not found:",
+            selector
+        );
+        return null;
+    }
+
+
+    return target;
+}
+
+
+        function navigateToTarget(stage) {
+
+    const target =
+        findTarget(stage);
+
+    if (!target) {
+        return;
+    }
+
+
+    /* ========================================================
+       OPEN CPD LOG IF IT IS COLLAPSED
+    ======================================================== */
+
+    if (stage === "apm-cpd-log") {
+
+        const toggle =
+            target.querySelector(".collapsible-toggle");
+
+        /*
+         * If the section itself is the toggle, use it.
+         */
+        const clickable =
+            toggle ||
+            target.closest(".collapsible-toggle");
+
+
+        if (clickable) {
+
+            const isExpanded =
+                clickable.classList.contains("active") ||
+                clickable.classList.contains("expanded") ||
+                clickable.getAttribute("aria-expanded") === "true";
+
+
+            if (!isExpanded) {
+
+                clickable.click();
+
+            }
+
+        }
+
+    }
+
+
+    /* ========================================================
+       ACCOUNT FOR STICKY HEADER
+    ======================================================== */
+
+    const header =
+        document.querySelector(
+            "header, .site-header, .sticky-header"
+        );
+
+
+    const headerHeight =
+        header
+            ? header.getBoundingClientRect().height
+            : 0;
+
+
+    /*
+     * Recalculate after opening the CPD log because its
+     * position may change when expanded.
+     */
+
+    setTimeout(function () {
+
+        const position =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            headerHeight -
+            20;
+
+
+        window.scrollTo({
+
+            top: position,
+
+            behavior: "smooth"
+
+        });
+
+    }, 100);
+
+}
+        /* ========================================================
+           CLICK + KEYBOARD
+        ======================================================== */
+
+        segments.forEach(segment => {
+
+            segment.addEventListener(
+                "click",
+                function () {
+
+                    navigateToTarget(
+                        this.dataset.target
+                    );
+
+                }
+            );
+
+
+            segment.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        navigateToTarget(
+                            this.dataset.target
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+    }
+
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialiseWheel
+        );
+
+    } else {
+
+        initialiseWheel();
+
+    }
+
+})();
 </script>
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->

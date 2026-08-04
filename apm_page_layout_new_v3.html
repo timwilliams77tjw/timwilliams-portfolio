@@ -11323,7 +11323,67 @@ i.fa-solid {
     font-size: 0.6rem;
     color: #98A2B3;
 }
-  
+  /* ============================================================
+   DEVELOPMENT ROADMAP — AREA COLOURS
+============================================================ */
+
+/* AI & Digital Transformation */
+.development-roadmap-ai-digital-transformation {
+    --roadmap-area-colour: #0a66c2;
+}
+
+/* Leadership & Mentoring */
+.development-roadmap-leadership-mentoring {
+    --roadmap-area-colour: #007b5f;
+}
+
+/* Stakeholder Engagement */
+.development-roadmap-stakeholder-engagement {
+    --roadmap-area-colour: #b8860b;
+}
+
+/* Sustainability */
+.development-roadmap-sustainability {
+    --roadmap-area-colour: #8a2be2;
+}
+
+
+/* Matching top border */
+.development-roadmap-item {
+    border-top: 4px solid var(--roadmap-area-colour);
+}
+
+
+/* Timeline track */
+.development-roadmap-item
+.roadmap-timeline-track {
+    position: relative;
+}
+
+
+/* Timeline progress */
+.development-roadmap-item
+.roadmap-timeline-progress {
+    background: var(--roadmap-area-colour);
+}
+
+
+/* Timeline points */
+.development-roadmap-item
+.roadmap-timeline-point::before {
+    background: var(--roadmap-area-colour);
+    border-color: var(--roadmap-area-colour);
+}
+
+
+/* Timeline labels */
+.development-roadmap-item
+.roadmap-timeline-point {
+    color: #667085;
+}
+
+
+
 </style>
 
 
@@ -18273,8 +18333,7 @@ function generateDevelopmentRoadmap() {
 
 
         card.className =
-            "development-roadmap-item";
-
+    `development-roadmap-item development-roadmap-${area.key}`;
 
         card.dataset.priority =
             area.priority.toLowerCase();

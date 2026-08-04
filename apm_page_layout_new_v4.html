@@ -11770,6 +11770,159 @@ i.fa-solid {
 
 }
 
+/* ============================================================
+   DEVELOPMENT ROADMAP — VISUAL SUMMARY
+============================================================ */
+
+/* Summary container */
+.development-roadmap-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin: 22px 0 28px;
+}
+
+
+/* Individual KPI cards */
+.development-roadmap-summary-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 105px;
+    padding: 16px 14px;
+
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+
+    text-align: center;
+    overflow: hidden;
+}
+
+
+/* Coloured top accent */
+.development-roadmap-summary-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+
+/* High priority */
+.development-roadmap-summary-item:nth-child(1)::before {
+    background: #0a66c2;
+}
+
+
+/* Active development */
+.development-roadmap-summary-item:nth-child(2)::before {
+    background: #007b5f;
+}
+
+
+/* Strategic development */
+.development-roadmap-summary-item:nth-child(3)::before {
+    background: #8a2be2;
+}
+
+
+/* Large numerical value */
+.development-roadmap-summary-item strong {
+    display: block;
+
+    margin: 3px 0 4px;
+
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 800;
+
+    color: #1f2937;
+}
+
+
+/* Label */
+.development-roadmap-summary-item span {
+    display: block;
+
+    font-size: 0.78rem;
+    line-height: 1.25;
+    font-weight: 700;
+
+    color: #667085;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+
+/* Match number colour to priority */
+.development-roadmap-summary-item:nth-child(1) strong {
+    color: #0a66c2;
+}
+
+.development-roadmap-summary-item:nth-child(2) strong {
+    color: #007b5f;
+}
+
+.development-roadmap-summary-item:nth-child(3) strong {
+    color: #8a2be2;
+}
+
+
+/* ============================================================
+   TABLET / iPAD
+============================================================ */
+
+@media (max-width: 900px) {
+
+    .development-roadmap-summary {
+        gap: 12px;
+    }
+
+    .development-roadmap-summary-item {
+        min-height: 100px;
+        padding: 15px 10px;
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+    .development-roadmap-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin: 18px 0 24px;
+    }
+
+    .development-roadmap-summary-item {
+        min-height: 88px;
+        padding: 13px 5px;
+        border-radius: 10px;
+    }
+
+    .development-roadmap-summary-item strong {
+        font-size: 1.6rem;
+        margin-bottom: 5px;
+    }
+
+    .development-roadmap-summary-item span {
+        font-size: 0.62rem;
+        line-height: 1.2;
+    }
+
+}  
 </style>
 
 

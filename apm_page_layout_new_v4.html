@@ -18353,13 +18353,16 @@ function generateDevelopmentRoadmap() {
     const developmentAreas = [
 
         {
-            key: "ai-digital-transformation",
+    key: "ai-digital-transformation",
 
-            title:
-                "AI & Digital Transformation",
+    title:
+        "AI & Digital Transformation",
 
-            icon:
-                "fa-solid fa-microchip",
+    icon:
+        "fa-solid fa-microchip",
+
+    priority:
+        "High",
 
             competencies: [
 
@@ -18372,15 +18375,17 @@ function generateDevelopmentRoadmap() {
         },
 
 
-        {
-            key: "leadership-mentoring",
+       {
+    key: "leadership-mentoring",
 
-            title:
-                "Leadership & Mentoring",
+    title:
+        "Leadership & Mentoring",
 
-            icon:
-                "fa-solid fa-people-arrows",
+    icon:
+        "fa-solid fa-people-arrows",
 
+    priority:
+        "Active",
             competencies: [
 
                 "leadership",
@@ -18400,6 +18405,9 @@ function generateDevelopmentRoadmap() {
             icon:
                 "fa-solid fa-handshake",
 
+          priority:
+    "Active",
+          
             competencies: [
 
                 "stakeholder-engagement-and-communication",
@@ -18420,6 +18428,9 @@ function generateDevelopmentRoadmap() {
             icon:
                 "fa-solid fa-leaf",
 
+          priority:
+    "Strategic",
+          
             competencies: [
 
                 "sustainability",
@@ -18609,31 +18620,7 @@ function generateDevelopmentRoadmap() {
             area.currentAverage;
 
 
-        /*
-         * Development priority is driven by the
-         * size of the current development opportunity.
-         */
-
-        if (area.gap >= 0.75) {
-
-            area.priority =
-                "High";
-
-        }
-
-        else if (area.gap >= 0.4) {
-
-            area.priority =
-                "Medium";
-
-        }
-
-        else {
-
-            area.priority =
-                "Maintain";
-
-        }
+      
 
     });
 
@@ -19297,70 +19284,79 @@ function generateDevelopmentRoadmap() {
     );
 
 
-    /* ========================================================
-       UPDATE ROADMAP SUMMARY COUNTERS
-    ======================================================== */
+  /* ========================================================
+   UPDATE ROADMAP SUMMARY COUNTERS
+======================================================== */
 
-    const highCount =
-        developmentAreas.filter(
-            area =>
-                area.priority === "High"
-        ).length;
+const highCount =
+    developmentAreas.filter(
+        area => area.priority === "High"
+    ).length;
 
+const activeCount =
+    developmentAreas.filter(
+        area => area.priority === "Active"
+    ).length;
 
-    const activeCount =
-        developmentAreas.filter(
-            area =>
-                area.priority === "Medium"
-        ).length;
-
-
-    const strategicCount =
-        developmentAreas.filter(
-            area =>
-                area.priority === "Maintain"
-        ).length;
+const strategicCount =
+    developmentAreas.filter(
+        area => area.priority === "Strategic"
+    ).length;
 
 
-    const highElement =
-        document.getElementById(
-            "development-roadmap-high-count"
-        );
+/* --------------------------------------------------------
+   Update the three visual summary counters
+-------------------------------------------------------- */
 
-    const activeElement =
-        document.getElementById(
-            "development-roadmap-active-count"
-        );
-
-    const strategicElement =
-        document.getElementById(
-            "development-roadmap-strategic-count"
-        );
-
-
-    if (highElement) {
-        highElement.textContent =
-            highCount;
-    }
-
-    if (activeElement) {
-        activeElement.textContent =
-            activeCount;
-    }
-
-    if (strategicElement) {
-        strategicElement.textContent =
-            strategicCount;
-    }
-
-
-    console.log(
-        "[CPD] Development roadmap generated:",
-        developmentAreas
+const highElement =
+    document.getElementById(
+        "development-roadmap-high-count"
     );
 
+const activeElement =
+    document.getElementById(
+        "development-roadmap-active-count"
+    );
+
+const strategicElement =
+    document.getElementById(
+        "development-roadmap-strategic-count"
+    );
+
+
+if (highElement) {
+    highElement.textContent =
+        highCount;
 }
-  
+
+if (activeElement) {
+    activeElement.textContent =
+        activeCount;
+}
+
+if (strategicElement) {
+    strategicElement.textContent =
+        strategicCount;
+}
+
+
+console.log(
+    "[CPD] Development roadmap summary:",
+    {
+        high: highCount,
+        active: activeCount,
+        strategic: strategicCount
+    }
+);
+
+
+console.log(
+    "[CPD] Development roadmap generated:",
+    developmentAreas
+);
+
+
+}  
 /* ============================================================
    WAIT FOR COMPETENCY ACCORDION
 ============================================================ */

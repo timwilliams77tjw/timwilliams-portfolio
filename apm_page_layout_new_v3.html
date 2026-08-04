@@ -10934,6 +10934,352 @@ i.fa-solid {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0,0,0,0.09);
 }  
+
+/* ============================================================
+   DEVELOPMENT ROADMAP
+   ============================================================ */
+
+.development-roadmap {
+    position: relative;
+    margin: 28px 0 34px;
+    padding: 24px 26px 22px;
+    background: #f8fafc;
+    border: 1px solid #e3e8ee;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.045);
+}
+
+/* ------------------------------------------------------------
+   ROADMAP HEADER
+   ------------------------------------------------------------ */
+
+.development-roadmap-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.development-roadmap-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.development-roadmap-header h3 i {
+    color: #6c63a8;
+}
+
+.development-roadmap-header p {
+    margin: 2px 0 0;
+    max-width: 520px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #667085;
+}
+
+/* ------------------------------------------------------------
+   TIMELINE
+   ------------------------------------------------------------ */
+
+.development-roadmap-timeline {
+    position: relative;
+    padding-top: 2px;
+}
+
+/* Main horizontal timeline */
+
+.development-roadmap-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0 30px 28px;
+    padding-bottom: 22px;
+}
+
+.development-roadmap-track::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    height: 3px;
+    background: #d9dee7;
+    border-radius: 10px;
+}
+
+/* Timeline periods */
+
+.development-roadmap-period {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.development-roadmap-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #6c63a8;
+    box-sizing: border-box;
+}
+
+.development-roadmap-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #596273;
+    white-space: nowrap;
+}
+
+/* ------------------------------------------------------------
+   ROADMAP ITEMS
+   ------------------------------------------------------------ */
+
+.development-roadmap-items {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.development-roadmap-item {
+    position: relative;
+    min-width: 0;
+    padding: 15px 15px 14px;
+    background: #ffffff;
+    border: 1px solid #e1e6ed;
+    border-top: 3px solid #6c63a8;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.035);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.development-roadmap-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.075);
+}
+
+/* Item heading */
+
+.development-roadmap-item-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.development-roadmap-item-icon {
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(108, 99, 168, 0.10);
+    color: #6c63a8;
+    font-size: 0.82rem;
+}
+
+.development-roadmap-item-title {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.3;
+    font-weight: 700;
+    color: #263241;
+}
+
+/* Priority badge */
+
+.development-roadmap-priority {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.development-roadmap-priority.high {
+    background: rgba(10, 102, 194, 0.10);
+    color: #0a66c2;
+}
+
+.development-roadmap-priority.medium {
+    background: rgba(0, 123, 95, 0.10);
+    color: #007b5f;
+}
+
+.development-roadmap-priority.strategic {
+    background: rgba(138, 43, 226, 0.10);
+    color: #7a25c7;
+}
+
+/* Current -> Target */
+
+.development-roadmap-rating {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 0.68rem;
+    color: #667085;
+}
+
+.development-roadmap-rating strong {
+    color: #303846;
+    font-weight: 700;
+}
+
+.development-roadmap-arrow {
+    color: #9aa3af;
+    font-size: 0.65rem;
+}
+
+/* Progress */
+
+.development-roadmap-progress {
+    height: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+    background: #e9edf2;
+    border-radius: 10px;
+}
+
+.development-roadmap-progress-bar {
+    height: 100%;
+    width: 0;
+    background: #6c63a8;
+    border-radius: inherit;
+    transition: width 0.6s ease;
+}
+
+/* Timing */
+
+.development-roadmap-timing {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 0.66rem;
+    color: #737d8d;
+}
+
+.development-roadmap-timing i {
+    color: #6c63a8;
+}
+
+/* ------------------------------------------------------------
+   SUMMARY
+   ------------------------------------------------------------ */
+
+.development-roadmap-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #e4e8ee;
+}
+
+.development-roadmap-summary-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 7px;
+    text-align: center;
+}
+
+.development-roadmap-summary-item strong {
+    font-size: 1rem;
+    color: #303846;
+}
+
+.development-roadmap-summary-item span {
+    font-size: 0.67rem;
+    color: #737d8d;
+}
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+
+    .development-roadmap {
+        padding: 21px 18px 18px;
+    }
+
+    .development-roadmap-header {
+        display: block;
+    }
+
+    .development-roadmap-header p {
+        margin-top: 6px;
+    }
+
+    .development-roadmap-items {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .development-roadmap {
+        margin: 22px 0 28px;
+        padding: 18px 14px 16px;
+        border-radius: 12px;
+    }
+
+    .development-roadmap-header h3 {
+        font-size: 0.98rem;
+    }
+
+    .development-roadmap-header p {
+        font-size: 0.76rem;
+    }
+
+    .development-roadmap-track {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .development-roadmap-label {
+        font-size: 0.64rem;
+    }
+
+    .development-roadmap-items {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .development-roadmap-item {
+        padding: 13px;
+    }
+
+    .development-roadmap-summary {
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+
+}
+
 </style>
 
 
@@ -11018,8 +11364,7 @@ i.fa-solid {
   </h2>
 
   <p class="section-subtitle">
-    This page provides a comprehensive view of continuing professional development activities and competence
-    alignment with the APM Competence Framework (3rd edition). It brings together a detailed CPD activity log,
+    This page provides a comprehensive view of continuing professional development activities and competence alignment with the APM Competence Framework (3rd edition). It brings together a detailed CPD activity log,
     reflective themes, and a structured summary of key competence areas.
   </p>
 
@@ -18374,6 +18719,315 @@ function findTarget(stage) {
     }
 
 })();
+
+/* ============================================================
+   DEVELOPMENT ROADMAP
+   VERSION 1
+   ============================================================ */
+
+(function initialiseDevelopmentRoadmap() {
+
+    function buildDevelopmentRoadmap() {
+
+        const roadmap =
+            document.getElementById(
+                "development-roadmap"
+            );
+
+        const container =
+            document.getElementById(
+                "development-roadmap-items"
+            );
+
+        if (!roadmap || !container) {
+            return;
+        }
+
+
+        /* ========================================================
+           SOURCE DEVELOPMENT PRIORITIES
+        ======================================================== */
+
+        const sourceCards =
+            document.querySelectorAll(
+                ".development-priority-card"
+            );
+
+        if (!sourceCards.length) {
+            return;
+        }
+
+
+        /* ========================================================
+           ROADMAP CONFIGURATION
+           
+           This controls sequencing only.
+           Competency/rating data will be connected later.
+        ======================================================== */
+
+        const roadmapConfig = [
+
+            {
+                index: 2,
+                priority: "high",
+                timing: "Now → 3 months",
+                progress: 25,
+                icon: "fa-robot"
+            },
+
+            {
+                index: 0,
+                priority: "medium",
+                timing: "3 → 6 months",
+                progress: 15,
+                icon: "fa-people-arrows"
+            },
+
+            {
+                index: 1,
+                priority: "medium",
+                timing: "Ongoing",
+                progress: 20,
+                icon: "fa-handshake"
+            },
+
+            {
+                index: 3,
+                priority: "strategic",
+                timing: "6 → 12 months",
+                progress: 10,
+                icon: "fa-leaf"
+            }
+
+        ];
+
+
+        /* ========================================================
+           CLEAR EXISTING ITEMS
+        ======================================================== */
+
+        container.innerHTML = "";
+
+
+        /* ========================================================
+           CREATE ROADMAP ITEMS
+        ======================================================== */
+
+        roadmapConfig.forEach(function(config) {
+
+            const source =
+                sourceCards[config.index];
+
+            if (!source) {
+                return;
+            }
+
+
+            const titleElement =
+                source.querySelector("h3");
+
+            const title =
+                titleElement
+                    ? titleElement.textContent.trim()
+                    : "Development priority";
+
+
+            const item =
+                document.createElement("article");
+
+            item.className =
+                "development-roadmap-item";
+
+
+            /* ----------------------------------------------------
+               HEADER
+            ---------------------------------------------------- */
+
+            const header =
+                document.createElement("div");
+
+            header.className =
+                "development-roadmap-item-header";
+
+
+            const icon =
+                document.createElement("div");
+
+            icon.className =
+                "development-roadmap-item-icon";
+
+            icon.innerHTML =
+                `<i class="fa-solid ${config.icon}"></i>`;
+
+
+            const heading =
+                document.createElement("h4");
+
+            heading.className =
+                "development-roadmap-item-title";
+
+            heading.textContent =
+                title;
+
+
+            header.appendChild(icon);
+            header.appendChild(heading);
+
+
+            /* ----------------------------------------------------
+               PRIORITY
+            ---------------------------------------------------- */
+
+            const priority =
+                document.createElement("span");
+
+            priority.className =
+                `development-roadmap-priority ${config.priority}`;
+
+            priority.textContent =
+                config.priority === "high"
+                    ? "High priority"
+                    : config.priority === "strategic"
+                        ? "Strategic"
+                        : "Active";
+
+
+            /* ----------------------------------------------------
+               CURRENT → TARGET
+               
+               Temporary representation until the existing
+               competence rating data is connected.
+            ---------------------------------------------------- */
+
+            const rating =
+                document.createElement("div");
+
+            rating.className =
+                "development-roadmap-rating";
+
+            rating.innerHTML = `
+                <strong>Development gap</strong>
+                <span class="development-roadmap-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+                <span>Target capability</span>
+            `;
+
+
+            /* ----------------------------------------------------
+               PROGRESS
+            ---------------------------------------------------- */
+
+            const progress =
+                document.createElement("div");
+
+            progress.className =
+                "development-roadmap-progress";
+
+
+            const progressBar =
+                document.createElement("div");
+
+            progressBar.className =
+                "development-roadmap-progress-bar";
+
+            progressBar.style.width =
+                `${config.progress}%`;
+
+
+            progress.appendChild(
+                progressBar
+            );
+
+
+            /* ----------------------------------------------------
+               TIMING
+            ---------------------------------------------------- */
+
+            const timing =
+                document.createElement("div");
+
+            timing.className =
+                "development-roadmap-timing";
+
+            timing.innerHTML = `
+                <i class="fa-regular fa-clock"></i>
+                <span>${config.timing}</span>
+            `;
+
+
+            /* ----------------------------------------------------
+               ASSEMBLE
+            ---------------------------------------------------- */
+
+            item.appendChild(header);
+            item.appendChild(priority);
+            item.appendChild(rating);
+            item.appendChild(progress);
+            item.appendChild(timing);
+
+            container.appendChild(item);
+
+        });
+
+
+        /* ========================================================
+           ROADMAP SUMMARY
+        ======================================================== */
+
+        const highCount =
+            document.getElementById(
+                "development-roadmap-high-count"
+            );
+
+        const activeCount =
+            document.getElementById(
+                "development-roadmap-active-count"
+            );
+
+        const strategicCount =
+            document.getElementById(
+                "development-roadmap-strategic-count"
+            );
+
+
+        if (highCount) {
+            highCount.textContent = "1";
+        }
+
+        if (activeCount) {
+            activeCount.textContent = "2";
+        }
+
+        if (strategicCount) {
+            strategicCount.textContent = "1";
+        }
+
+    }
+
+
+    /* ========================================================
+       INITIALISE
+    ======================================================== */
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            buildDevelopmentRoadmap
+        );
+
+    } else {
+
+        buildDevelopmentRoadmap();
+
+    }
+
+})();
+
 </script>
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->

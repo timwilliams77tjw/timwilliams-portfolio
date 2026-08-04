@@ -17818,7 +17818,758 @@ function drawRadar(
 
 }
 
+/* ============================================================
+   DEVELOPMENT ROADMAP
+   DATA-DRIVEN FROM PERSONAL COMPETENCE RATINGS
+============================================================ */
 
+function generateDevelopmentRoadmap() {
+
+    /* --------------------------------------------------------
+       RATING SCALE
+    -------------------------------------------------------- */
+
+    const ratingMap = {
+
+        "Aware": 1,
+        "Practised": 2,
+        "Competent": 3,
+        "Proficient": 4,
+        "Expert": 5
+
+    };
+
+
+    const ratingNames = {
+
+        1: "Aware",
+        2: "Practised",
+        3: "Competent",
+        4: "Proficient",
+        5: "Expert"
+
+    };
+
+
+    /* --------------------------------------------------------
+       DEVELOPMENT PRIORITY → COMPETENCY RELATIONSHIPS
+    -------------------------------------------------------- */
+
+    const developmentAreas = [
+
+        {
+            key: "ai-digital-transformation",
+
+            title:
+                "AI & Digital Transformation",
+
+            icon:
+                "fa-solid fa-microchip",
+
+            competencies: [
+
+                "solutions-development",
+                "requirements-management",
+                "integrated-planning",
+                "transition-management"
+
+            ]
+        },
+
+
+        {
+            key: "leadership-mentoring",
+
+            title:
+                "Leadership & Mentoring",
+
+            icon:
+                "fa-solid fa-people-arrows",
+
+            competencies: [
+
+                "leadership",
+                "team-management",
+                "capability-development"
+
+            ]
+        },
+
+
+        {
+            key: "stakeholder-engagement",
+
+            title:
+                "Stakeholder Engagement & Communication",
+
+            icon:
+                "fa-solid fa-handshake",
+
+            competencies: [
+
+                "stakeholder-engagement-and-communication",
+                "conflict-resolution",
+                "diversity-and-inclusion",
+                "ethics-compliance-and-professionalism"
+
+            ]
+        },
+
+
+        {
+            key: "sustainability",
+
+            title:
+                "Sustainability in Change",
+
+            icon:
+                "fa-solid fa-leaf",
+
+            competencies: [
+
+                "sustainability",
+                "benefits-management",
+                "business-case",
+                "governance-arrangements"
+
+            ]
+        }
+
+    ];
+
+
+    /* --------------------------------------------------------
+       READ CURRENT COMPETENCY RATINGS
+    -------------------------------------------------------- */
+
+    const competencyData = {};
+
+
+    document
+        .querySelectorAll(
+            ".accordion-item[id^='competence-']"
+        )
+        .forEach(card => {
+
+            const id =
+                card.id.replace(
+                    "competence-",
+                    ""
+                );
+
+
+            const badge =
+                card.querySelector(
+                    ".accordion-header .rating-badge"
+                );
+
+
+            const title =
+                card.querySelector(
+                    ".accordion-header span"
+                );
+
+
+            if (!badge) {
+                return;
+            }
+
+
+            const rating =
+                badge.textContent
+                    .trim();
+
+
+            const value =
+                ratingMap[rating];
+
+
+            if (!value) {
+                return;
+            }
+
+
+            let label =
+                id;
+
+
+            if (title) {
+
+                label =
+                    [
+                        ...title.childNodes
+                    ]
+                    .filter(
+                        node =>
+                            node.nodeType ===
+                            Node.TEXT_NODE
+                    )
+                    .map(
+                        node =>
+                            node.textContent
+                                .trim()
+                    )
+                    .join(" ")
+                    .trim();
+
+            }
+
+
+            competencyData[id] = {
+
+                id:
+                    id,
+
+                label:
+                    label,
+
+                rating:
+                    rating,
+
+                value:
+                    value,
+
+                target:
+                    Math.min(
+                        value + 1,
+                        5
+                    ),
+
+                gap:
+                    Math.max(
+                        0,
+                        Math.min(
+                            value + 1,
+                            5
+                        ) - value
+                    )
+
+            };
+
+        });
+
+
+    /* --------------------------------------------------------
+       CALCULATE DEVELOPMENT AREA DATA
+    -------------------------------------------------------- */
+
+    developmentAreas.forEach(area => {
+
+        area.items =
+            area.competencies
+                .map(
+                    id =>
+                        competencyData[id]
+                )
+                .filter(Boolean);
+
+
+        if (!area.items.length) {
+
+            area.currentAverage = 0;
+            area.targetAverage = 0;
+            area.gap = 0;
+
+            return;
+
+        }
+
+
+        const totalCurrent =
+            area.items.reduce(
+                (
+                    total,
+                    item
+                ) =>
+                    total +
+                    item.value,
+                0
+            );
+
+
+        const totalTarget =
+            area.items.reduce(
+                (
+                    total,
+                    item
+                ) =>
+                    total +
+                    item.target,
+                0
+            );
+
+
+        area.currentAverage =
+            totalCurrent /
+            area.items.length;
+
+
+        area.targetAverage =
+            totalTarget /
+            area.items.length;
+
+
+        area.gap =
+            area.targetAverage -
+            area.currentAverage;
+
+
+        /*
+         * Development priority is driven by the
+         * size of the current development opportunity.
+         */
+
+        if (area.gap >= 0.75) {
+
+            area.priority =
+                "High";
+
+        }
+
+        else if (area.gap >= 0.4) {
+
+            area.priority =
+                "Medium";
+
+        }
+
+        else {
+
+            area.priority =
+                "Maintain";
+
+        }
+
+    });
+
+
+    /* --------------------------------------------------------
+       SORT DEVELOPMENT AREAS
+    -------------------------------------------------------- */
+
+    developmentAreas.sort(
+        (
+            a,
+            b
+        ) =>
+            b.gap -
+            a.gap
+    );
+
+
+    /* --------------------------------------------------------
+       FIND ROADMAP CONTAINER
+    -------------------------------------------------------- */
+
+    const roadmap =
+        document.querySelector(
+            ".development-roadmap"
+        );
+
+
+    if (!roadmap) {
+
+        console.warn(
+            "[CPD] Development roadmap container not found."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Create a dedicated data container.
+     *
+     * This means the existing roadmap structure does
+     * not need to be destroyed or replaced.
+     */
+
+    let container =
+        roadmap.querySelector(
+            ".development-roadmap-data"
+        );
+
+
+    if (!container) {
+
+        container =
+            document.createElement(
+                "div"
+            );
+
+        container.className =
+            "development-roadmap-data";
+
+        roadmap.appendChild(
+            container
+        );
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    /* --------------------------------------------------------
+       CREATE ROADMAP ITEMS
+    -------------------------------------------------------- */
+
+    developmentAreas.forEach(area => {
+
+        const card =
+            document.createElement(
+                "article"
+            );
+
+
+        card.className =
+            "development-roadmap-item";
+
+
+        card.dataset.priority =
+            area.priority.toLowerCase();
+
+
+        /* ----------------------------------------------
+           HEADER
+        ---------------------------------------------- */
+
+        const header =
+            document.createElement(
+                "div"
+            );
+
+
+        header.className =
+            "development-roadmap-item-header";
+
+
+        const icon =
+            document.createElement(
+                "div"
+            );
+
+
+        icon.className =
+            "development-roadmap-icon";
+
+
+        icon.innerHTML =
+            `<i class="${area.icon}"></i>`;
+
+
+        const title =
+            document.createElement(
+                "div"
+            );
+
+
+        title.className =
+            "development-roadmap-item-title";
+
+
+        title.innerHTML = `
+
+            <h3>
+                ${area.title}
+            </h3>
+
+            <span class="
+                development-roadmap-priority
+            ">
+                ${area.priority === "Maintain"
+                    ? "MAINTAIN"
+                    : area.priority.toUpperCase()
+                }
+            </span>
+
+        `;
+
+
+        header.appendChild(
+            icon
+        );
+
+        header.appendChild(
+            title
+        );
+
+
+        card.appendChild(
+            header
+        );
+
+
+        /* ----------------------------------------------
+           CURRENT → TARGET
+        ---------------------------------------------- */
+
+        const levels =
+            document.createElement(
+                "div"
+            );
+
+
+        levels.className =
+            "development-roadmap-levels";
+
+
+        const current =
+            document.createElement(
+                "div"
+            );
+
+
+        current.className =
+            "development-roadmap-level current";
+
+
+        const currentAverage =
+            area.currentAverage
+                .toFixed(1);
+
+
+        current.innerHTML = `
+
+            <span class="roadmap-level-label">
+                Current
+            </span>
+
+            <strong>
+                ${currentAverage}
+            </strong>
+
+        `;
+
+
+        const arrow =
+            document.createElement(
+                "div"
+            );
+
+
+        arrow.className =
+            "development-roadmap-level-arrow";
+
+
+        arrow.innerHTML =
+            `<i class="fa-solid fa-arrow-right"></i>`;
+
+
+        const target =
+            document.createElement(
+                "div"
+            );
+
+
+        target.className =
+            "development-roadmap-level target";
+
+
+        const targetAverage =
+            area.targetAverage
+                .toFixed(1);
+
+
+        target.innerHTML = `
+
+            <span class="roadmap-level-label">
+                Next target
+            </span>
+
+            <strong>
+                ${targetAverage}
+            </strong>
+
+        `;
+
+
+        levels.appendChild(
+            current
+        );
+
+        levels.appendChild(
+            arrow
+        );
+
+        levels.appendChild(
+            target
+        );
+
+
+        card.appendChild(
+            levels
+        );
+
+
+        /* ----------------------------------------------
+           DEVELOPMENT GAP
+        ---------------------------------------------- */
+
+        const gap =
+            document.createElement(
+                "div"
+            );
+
+
+        gap.className =
+            "development-roadmap-gap";
+
+
+        gap.innerHTML = `
+
+            <span>
+                Development gap
+            </span>
+
+            <strong>
+                ${area.gap.toFixed(1)} level
+                ${area.gap === 1 ? "" : "s"}
+            </strong>
+
+        `;
+
+
+        card.appendChild(
+            gap
+        );
+
+
+        /* ----------------------------------------------
+           COMPETENCY DETAIL
+        ---------------------------------------------- */
+
+        const details =
+            document.createElement(
+                "div"
+            );
+
+
+        details.className =
+            "development-roadmap-competencies";
+
+
+        area.items.forEach(
+            item => {
+
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "development-roadmap-competency";
+
+
+                row.innerHTML = `
+
+                    <span>
+                        ${item.label}
+                    </span>
+
+                    <span class="
+                        development-roadmap-rating
+                    ">
+                        ${item.rating}
+                        <i class="
+                            fa-solid
+                            fa-arrow-right
+                        "></i>
+                        ${ratingNames[item.target]}
+                    </span>
+
+                `;
+
+
+                details.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+        card.appendChild(
+            details
+        );
+
+
+        /* ----------------------------------------------
+           TIMELINE POSITION
+        ---------------------------------------------- */
+
+        const timeline =
+            document.createElement(
+                "div"
+            );
+
+
+        timeline.className =
+            "development-roadmap-timeline";
+
+
+        timeline.innerHTML = `
+
+            <div class="roadmap-timeline-track">
+
+                <div class="
+                    roadmap-timeline-progress
+                "></div>
+
+                <span class="
+                    roadmap-timeline-point
+                    roadmap-now
+                ">
+                    Now
+                </span>
+
+                <span class="
+                    roadmap-timeline-point
+                    roadmap-three-months
+                ">
+                    3 months
+                </span>
+
+                <span class="
+                    roadmap-timeline-point
+                    roadmap-six-months
+                ">
+                    6 months
+                </span>
+
+                <span class="
+                    roadmap-timeline-point
+                    roadmap-twelve-months
+                ">
+                    12 months
+                </span>
+
+            </div>
+
+        `;
+
+
+        card.appendChild(
+            timeline
+        );
+
+
+        container.appendChild(
+            card
+        );
+
+    });
+
+
+    console.log(
+        "[CPD] Development roadmap generated:",
+        developmentAreas
+    );
+
+}
+  
 /* ============================================================
    WAIT FOR COMPETENCY ACCORDION
 ============================================================ */

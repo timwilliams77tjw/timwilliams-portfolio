@@ -19057,6 +19057,303 @@ function generateDevelopmentRoadmap() {
     });
 
 
+       /* ========================================================
+       POPULATE MAIN DEVELOPMENT PRIORITY CARDS
+       Uses the existing four cards in the HTML.
+       Does NOT create another set of cards.
+    ======================================================== */
+
+    const priorityCards =
+        document.querySelectorAll(
+            ".development-priority-card"
+        );
+
+
+    developmentAreas.forEach(
+        (area, index) => {
+
+            const card =
+                priorityCards[index];
+
+            if (!card) {
+                return;
+            }
+
+
+            /* ------------------------------------------------
+               Store development area
+            ------------------------------------------------ */
+
+            card.dataset.developmentArea =
+                area.key;
+
+            card.dataset.priority =
+                area.priority.toLowerCase();
+
+
+            /* ------------------------------------------------
+               Find existing content
+            ------------------------------------------------ */
+
+            const content =
+                card.querySelector(
+                    ".development-priority-content"
+                );
+
+            if (!content) {
+                return;
+            }
+
+
+            /* ------------------------------------------------
+               Remove previously generated data
+               so repeated CPD processing does not duplicate it.
+            ------------------------------------------------ */
+
+            const oldData =
+                content.querySelector(
+                    ".development-priority-data"
+                );
+
+            if (oldData) {
+                oldData.remove();
+            }
+
+
+            /* ------------------------------------------------
+               Current / Target / Gap panel
+            ------------------------------------------------ */
+
+            const dataPanel =
+                document.createElement(
+                    "div"
+                );
+
+            dataPanel.className =
+                "development-priority-data";
+
+
+            const current =
+                area.currentAverage.toFixed(1);
+
+            const target =
+                area.targetAverage.toFixed(1);
+
+            const gap =
+                area.gap.toFixed(1);
+
+
+            dataPanel.innerHTML = `
+
+                <div class="development-priority-status">
+
+                    <span class="
+                        development-priority-status-label
+                    ">
+                        ${area.priority === "Maintain"
+                            ? "Strategic development"
+                            : area.priority === "High"
+                                ? "High priority"
+                                : "Active development"
+                        }
+                    </span>
+
+                </div>
+
+
+                <div class="development-priority-levels">
+
+                    <div class="
+                        development-priority-level
+                        current
+                    ">
+
+                        <span>
+                            Current
+                        </span>
+
+                        <strong>
+                            ${current}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="
+                        development-priority-level-arrow
+                    ">
+                        <i class="
+                            fa-solid
+                            fa-arrow-right
+                        "></i>
+                    </div>
+
+
+                    <div class="
+                        development-priority-level
+                        target
+                    ">
+
+                        <span>
+                            Target
+                        </span>
+
+                        <strong>
+                            ${target}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="
+                        development-priority-gap
+                    ">
+
+                        <span>
+                            Development gap
+                        </span>
+
+                        <strong>
+                            +${gap}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="
+                    development-priority-competencies
+                ">
+
+                    <div class="
+                        development-priority-competencies-heading
+                    ">
+                        <i class="
+                            fa-solid
+                            fa-chart-line
+                        "></i>
+
+                        Competency development
+                    </div>
+
+                    <div class="
+                        development-priority-competency-list
+                    ">
+
+                        ${area.items.map(
+                            item => `
+
+                            <div class="
+                                development-priority-competency
+                            ">
+
+                                <span class="
+                                    development-priority-competency-name
+                                ">
+                                    ${item.label}
+                                </span>
+
+                                <span class="
+                                    development-priority-competency-rating
+                                ">
+
+                                    <span class="
+                                        development-priority-current-rating
+                                    ">
+                                        ${item.rating}
+                                    </span>
+
+                                    <i class="
+                                        fa-solid
+                                        fa-arrow-right
+                                    "></i>
+
+                                    <span class="
+                                        development-priority-target-rating
+                                    ">
+                                        ${ratingNames[item.target]}
+                                    </span>
+
+                                </span>
+
+                            </div>
+
+                        `
+                        ).join("")}
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            content.appendChild(
+                dataPanel
+            );
+
+        }
+    );
+
+
+    /* ========================================================
+       UPDATE ROADMAP SUMMARY COUNTERS
+    ======================================================== */
+
+    const highCount =
+        developmentAreas.filter(
+            area =>
+                area.priority === "High"
+        ).length;
+
+
+    const activeCount =
+        developmentAreas.filter(
+            area =>
+                area.priority === "Medium"
+        ).length;
+
+
+    const strategicCount =
+        developmentAreas.filter(
+            area =>
+                area.priority === "Maintain"
+        ).length;
+
+
+    const highElement =
+        document.getElementById(
+            "development-roadmap-high-count"
+        );
+
+    const activeElement =
+        document.getElementById(
+            "development-roadmap-active-count"
+        );
+
+    const strategicElement =
+        document.getElementById(
+            "development-roadmap-strategic-count"
+        );
+
+
+    if (highElement) {
+        highElement.textContent =
+            highCount;
+    }
+
+    if (activeElement) {
+        activeElement.textContent =
+            activeCount;
+    }
+
+    if (strategicElement) {
+        strategicElement.textContent =
+            strategicCount;
+    }
+
+
     console.log(
         "[CPD] Development roadmap generated:",
         developmentAreas

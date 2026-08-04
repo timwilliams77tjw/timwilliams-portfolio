@@ -19604,64 +19604,12 @@ function generateDevelopmentRoadmap() {
         );
 
 
-        /* ----------------------------------------------
-           TIMELINE POSITION
-        ---------------------------------------------- */
-
-        const timeline =
-            document.createElement(
-                "div"
-            );
-
-
-        timeline.className =
-            "development-roadmap-timeline";
-
-
-        timeline.innerHTML = `
-
-            <div class="roadmap-timeline-track">
-
-                <div class="
-                    roadmap-timeline-progress
-                "></div>
-
-                <span class="
-                    roadmap-timeline-point
-                    roadmap-now
-                ">
-                    Now
-                </span>
-
-                <span class="
-                    roadmap-timeline-point
-                    roadmap-three-months
-                ">
-                    3 months
-                </span>
-
-                <span class="
-                    roadmap-timeline-point
-                    roadmap-six-months
-                ">
-                    6 months
-                </span>
-
-                <span class="
-                    roadmap-timeline-point
-                    roadmap-twelve-months
-                ">
-                    12 months
-                </span>
-
-            </div>
-
-        `;
-
-
-        card.appendChild(
-            timeline
-        );
+      /* ----------------------------------------------
+   TIMELINE
+   The main roadmap already provides the
+   overall 12-month timeline, so do not
+   duplicate it inside each development card.
+---------------------------------------------- */
 
 
         container.appendChild(

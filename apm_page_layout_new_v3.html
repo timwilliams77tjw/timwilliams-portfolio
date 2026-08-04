@@ -18468,25 +18468,25 @@ function generateDevelopmentRoadmap() {
                     "development-roadmap-competency";
 
 
-                row.innerHTML = `
+               row.innerHTML = `
 
-                    <span>
-                        ${item.label}
-                    </span>
+    <span class="development-roadmap-competency-name">
+        ${item.label}
+    </span>
 
-                    <span class="
-                        development-roadmap-rating
-                    ">
-                        ${item.rating}
-                        <i class="
-                            fa-solid
-                            fa-arrow-right
-                        "></i>
-                        ${ratingNames[item.target]}
-                    </span>
+    <span class="development-roadmap-rating">
+        <span class="roadmap-current-rating">
+            ${item.rating}
+        </span>
 
-                `;
+        <i class="fa-solid fa-arrow-right"></i>
 
+        <span class="roadmap-target-rating">
+            ${ratingNames[item.target]}
+        </span>
+    </span>
+
+`;
 
                 details.appendChild(
                     row

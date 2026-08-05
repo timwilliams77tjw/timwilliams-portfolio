@@ -12743,38 +12743,76 @@ i.fa-solid {
 
 }
 
-.development-roadmap-rating{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
-    align-items:center;
-    gap:10px;
-    width:100%;
-    font-size:.82rem;
-    font-weight:600;
+/* ============================================================
+   ROADMAP COMPETENCY RATINGS — FINAL
+============================================================ */
+
+.development-roadmap-competency {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.development-roadmap-competency-name {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.development-roadmap-rating {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: auto;
+    flex: 0 0 auto;
+
+    gap: 6px;
+    white-space: nowrap;
+
+    font-size: .68rem;
+    font-weight: 600;
 }
 
 .roadmap-current-rating,
-.roadmap-target-rating{
-    white-space:nowrap;
+.roadmap-target-rating {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 62px;
+
+    padding: 4px 7px;
+
+    border-radius: 999px;
+
+    white-space: nowrap;
 }
 
-.roadmap-current-rating{
-    text-align:right;
+.roadmap-current-rating {
+    background: #f2f4f7;
+    color: #475467;
 }
 
-.roadmap-target-rating{
-    text-align:left;
+.roadmap-target-rating {
+    background: #eaf3ff;
+    color: #0a66c2;
 }
 
-.development-roadmap-rating i{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:20px;
-    font-size:.9rem;
-    color:#64748b;
-    flex-shrink:0;
-}  
+.development-roadmap-rating i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 14px;
+
+    flex: 0 0 14px;
+
+    color: #98a2b3;
+    font-size: .65rem;
+}
 .professional-evidence-detail{
     background:#f8fbff;
     border-left:4px solid var(--apm-blue);
@@ -12798,6 +12836,60 @@ i.fa-solid {
     text-transform:uppercase;
 
     color:#667085;
+}
+
+/* ============================================================
+   EVIDENCE SECTION ICONS
+============================================================ */
+
+.professional-evidence-label::before {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 26px;
+    height: 26px;
+
+    flex: 0 0 26px;
+
+    border-radius: 7px;
+
+    background: #eef5ff;
+    color: #0a66c2;
+
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: .72rem;
+}
+
+
+/* Case Study */
+.evidence-label-case-study::before {
+    content: "\f02d";
+}
+
+
+/* Key Outcomes */
+.evidence-label-outcomes::before {
+    content: "\f201";
+}
+
+
+/* Supporting Evidence */
+.evidence-label-supporting::before {
+    content: "\f0c6";
+}
+
+
+/* Competences */
+.evidence-label-competences::before {
+    content: "\f084";
+}
+
+
+/* CPD */
+.evidence-label-cpd::before {
+    content: "\f19d";
 }
 .professional-evidence-outcomes{
     list-style:none;
@@ -12892,23 +12984,56 @@ i.fa-solid {
     gap:10px;
 }
 
-.evidence-tag{
+/* ============================================================
+   EVIDENCE — COMPETENCY BADGES
+============================================================ */
 
-    padding:8px 16px;
+.professional-evidence-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
 
-    border-radius:999px;
+.evidence-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
 
-    background:#eef5ff;
+    padding: 7px 12px;
 
-    border:1px solid #cfe3ff;
+    border-radius: 999px;
 
-    color:var(--apm-blue);
+    background: #eef5ff;
+    border: 1px solid #cfe3ff;
 
-    font-weight:600;
+    color: #0a66c2;
 
-    text-decoration:none;
+    font-size: .72rem;
+    line-height: 1.2;
+    font-weight: 650;
 
-    transition:.2s;
+    text-decoration: none;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.evidence-tag::before {
+    content: "\f00c";
+
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+
+    font-size: .62rem;
+}
+
+.evidence-tag:hover {
+    background: #0a66c2;
+    border-color: #0a66c2;
+    color: #ffffff;
+    transform: translateY(-1px);
 }
 
 .evidence-tag:hover{
@@ -12965,53 +13090,32 @@ i.fa-solid {
 
     box-shadow:0 14px 30px rgba(15,23,42,.10);
 }  
-@media (max-width: 600px){
+/* ============================================================
+   ROADMAP — MOBILE
+============================================================ */
 
-.development-roadmap-competency{
+@media (max-width: 700px) {
 
-    display:flex;
+    .development-roadmap-competency {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 7px;
+    }
 
-    flex-direction:column;
+    .development-roadmap-competency-name {
+        width: 100%;
+    }
 
-    align-items:flex-start;
+    .development-roadmap-rating {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 7px;
+    }
 
-    gap:8px;
 }
 
-.development-roadmap-rating{
 
-    width:100%;
-
-    justify-content:flex-start;
-
-    display:flex;
-
-    gap:10px;
-
-    font-size:.8rem;
-}
-
-}  
-
-.evidence-tag{
-
-display:inline-flex;
-align-items:center;
-gap:8px;
-
-padding:8px 14px;
-
-border-radius:20px;
-
-background:#eef5ff;
-
-border:none;
-
-font-weight:600;
-
-color:#0a66c2;
-
-}  
 .professional-evidence-placeholder span {
     display: block;
     margin-bottom: 1rem;
@@ -13028,6 +13132,37 @@ color:#0a66c2;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
 }
+
+/* ============================================================
+   EVIDENCE SECTION DIVIDERS
+============================================================ */
+
+hr.evidence-section-divider {
+    display: block !important;
+
+    width: 100%;
+
+    height: 1px !important;
+
+    margin: 26px 0 !important;
+
+    padding: 0;
+
+    border: 0 !important;
+
+    background: #d9e2ec !important;
+
+    opacity: 1 !important;
+}
+  
+
+  
+
+
+
+  
+
+
 </style>
 
 
@@ -23192,9 +23327,9 @@ function findTarget(stage) {
                          CASE STUDY
                     =========================================== -->
 
-                    <div class="professional-evidence-label">
-                        Case Study
-                    </div>
+                    <div class="professional-evidence-label evidence-label-case-study">
+    Case Study
+</div>
 
                     <div class="professional-evidence-detail">
 
@@ -23209,9 +23344,9 @@ function findTarget(stage) {
                          KEY OUTCOMES
                     =========================================== -->
 
-                    <div class="professional-evidence-label">
-                        Key Outcomes
-                    </div>
+            <div class="professional-evidence-label evidence-label-outcomes">
+    Key Outcomes
+</div>
 
                     <ul class="professional-evidence-outcomes">
 
@@ -23233,9 +23368,9 @@ function findTarget(stage) {
                          SUPPORTING EVIDENCE
                     =========================================== -->
 
-                    <div class="professional-evidence-label">
-                        Supporting Evidence
-                    </div>
+                   <div class="professional-evidence-label evidence-label-supporting">
+    Supporting Evidence
+</div>
 
                     <div class="professional-evidence-support">
 
@@ -23354,9 +23489,9 @@ function findTarget(stage) {
                          COMPETENCES DEMONSTRATED
                     =========================================== -->
 
-                    <div class="professional-evidence-label">
-                        Competences Demonstrated
-                    </div>
+                  <div class="professional-evidence-label evidence-label-competences">
+    Competences Demonstrated
+</div>
 
                     <div class="professional-evidence-tags">
 
@@ -23439,9 +23574,9 @@ function findTarget(stage) {
 
                     <!-- CASE STUDY -->
 
-                    <div class="professional-evidence-label">
-                        Case Study
-                    </div>
+                  <div class="professional-evidence-label evidence-label-case-study">
+    Case Study
+</div>
 
                     <div class="professional-evidence-detail">
 
@@ -23458,9 +23593,9 @@ function findTarget(stage) {
 
                     <!-- KEY OUTCOMES -->
 
-                    <div class="professional-evidence-label">
-                        Key Outcomes
-                    </div>
+                  <div class="professional-evidence-label evidence-label-outcomes">
+    Key Outcomes
+</div>
 
                     <ul class="professional-evidence-outcomes">
 
@@ -23498,9 +23633,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 <hr class="evidence-section-divider">
                   <!-- SUPPORTING EVIDENCE -->
 
-                    <div class="professional-evidence-label">
-                        Supporting Evidence
-                    </div>
+                    <div class="professional-evidence-label evidence-label-supporting">
+    Supporting Evidence
+</div>
 
                     <div class="professional-evidence-assets">
 
@@ -23517,9 +23652,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 <hr class="evidence-section-divider">
                     <!-- COMPETENCES -->
 
-                    <div class="professional-evidence-label">
-                        Competences Demonstrated
-                    </div>
+                   <div class="professional-evidence-label evidence-label-competences">
+    Competences Demonstrated
+</div>
 
                     <div class="professional-evidence-tags">
 
@@ -23587,9 +23722,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
                     <!-- CASE STUDY -->
 
-                    <div class="professional-evidence-label">
-                        Case Study
-                    </div>
+                  <div class="professional-evidence-label evidence-label-case-study">
+    Case Study
+</div>
 
                     <div class="professional-evidence-detail">
 
@@ -23602,10 +23737,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
                     <!-- KEY OUTCOMES -->
 
-                    <div class="professional-evidence-label">
-                        Key Outcomes
-                    </div>
-
+                   <div class="professional-evidence-label evidence-label-outcomes">
+    Key Outcomes
+</div>
                     <ul class="professional-evidence-outcomes">
 
                         <li>
@@ -23624,9 +23758,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 <hr class="evidence-section-divider">
                     <!-- SUPPORTING EVIDENCE -->
 
-                    <div class="professional-evidence-label">
-                        Supporting Evidence
-                    </div>
+                <div class="professional-evidence-label evidence-label-supporting">
+    Supporting Evidence
+</div>
 
                     <div class="professional-evidence-assets">
 
@@ -23640,9 +23774,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 <hr class="evidence-section-divider">
                   <!-- COMPETENCES -->
 
-                    <div class="professional-evidence-label">
-                        Competences Demonstrated
-                    </div>
+                 <div class="professional-evidence-label evidence-label-competences">
+    Competences Demonstrated
+</div>
 
                     <div class="professional-evidence-tags">
 
@@ -23700,9 +23834,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
                     <!-- CASE STUDY -->
 
-                    <div class="professional-evidence-label">
-                        Case Study
-                    </div>
+                 <div class="professional-evidence-label evidence-label-case-study">
+    Case Study
+</div>
 
                     <div class="professional-evidence-detail">
 
@@ -23715,9 +23849,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
                     <!-- KEY OUTCOMES -->
 
-                    <div class="professional-evidence-label">
-                        Key Outcomes
-                    </div>
+                  <div class="professional-evidence-label evidence-label-outcomes">
+    Key Outcomes
+</div>
 
                     <ul class="professional-evidence-outcomes">
 
@@ -23737,9 +23871,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 <hr class="evidence-section-divider">
                     <!-- SUPPORTING EVIDENCE -->
 
-                    <div class="professional-evidence-label">
-                        Supporting Evidence
-                    </div>
+                   <div class="professional-evidence-label evidence-label-supporting">
+    Supporting Evidence
+</div>
 
                     <div class="professional-evidence-assets">
 
@@ -23752,9 +23886,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 <hr class="evidence-section-divider">
                     <!-- COMPETENCES -->
 
-                    <div class="professional-evidence-label">
-                        Competences Demonstrated
-                    </div>
+                <div class="professional-evidence-label evidence-label-competences">
+    Competences Demonstrated
+</div>
 
                     <div class="professional-evidence-tags">
 
@@ -23808,9 +23942,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
         <!-- CASE STUDY -->
 
-        <div class="professional-evidence-label">
-            Case Study
-        </div>
+     <div class="professional-evidence-label evidence-label-case-study">
+    Case Study
+</div>
 
         <div class="professional-evidence-detail">
 
@@ -23862,9 +23996,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
         <!-- KEY OUTCOMES -->
 
-        <div class="professional-evidence-label">
-            Key Outcomes
-        </div>
+   <div class="professional-evidence-label evidence-label-outcomes">
+    Key Outcomes
+</div>
 
         <ul class="professional-evidence-outcomes">
 
@@ -23890,9 +24024,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
         <!-- SUPPORTING EVIDENCE -->
 
-        <div class="professional-evidence-label">
-            Supporting Evidence
-        </div>
+      <div class="professional-evidence-label evidence-label-supporting">
+    Supporting Evidence
+</div>
 
         <div class="professional-evidence-assets">
                         <p class="professional-evidence-placeholder">            <a
@@ -23909,10 +24043,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
         <!-- COMPETENCES -->
 
-        <div class="professional-evidence-label">
-            Competences Demonstrated
-        </div>
-
+      <div class="professional-evidence-label evidence-label-competences">
+    Competences Demonstrated
+</div>
         <div class="professional-evidence-tags">
 
             <a
@@ -23973,9 +24106,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
         <!-- CASE STUDY -->
 
-        <div class="professional-evidence-label">
-            Case Study
-        </div>
+        <div class="professional-evidence-label evidence-label-case-study">
+    Case Study
+</div>
 <div class="professional-evidence-detail">
 
                        <p class="professional-evidence-placeholder">
@@ -24003,9 +24136,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
         <!-- KEY OUTCOMES -->
 
-        <div class="professional-evidence-label">
-            Key Outcomes
-        </div>
+     <div class="professional-evidence-label evidence-label-outcomes">
+    Key Outcomes
+</div>
 
         <ul class="professional-evidence-outcomes">
 
@@ -24031,9 +24164,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
         <!-- SUPPORTING EVIDENCE -->
 
-        <div class="professional-evidence-label">
-            Supporting Evidence
-        </div>
+      <div class="professional-evidence-label evidence-label-supporting">
+    Supporting Evidence
+</div>
 
         <div class="professional-evidence-assets">
                         <p class="professional-evidence-placeholder">            <a
@@ -24050,9 +24183,9 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
         <!-- COMPETENCES -->
 
-        <div class="professional-evidence-label">
-            Competences Demonstrated
-        </div>
+        <div class="professional-evidence-label evidence-label-competences">
+    Competences Demonstrated
+</div>
 
         <div class="professional-evidence-tags">
 

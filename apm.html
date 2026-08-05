@@ -13518,8 +13518,278 @@ hr.evidence-section-divider {
 
 }
   
+/* ============================================================
+   SUPPORTING CPD ACTIVITIES — REFINED COLLAPSIBLE PANEL
+============================================================ */
+
+.supporting-cpd-activities {
+    margin-top: 18px;
+    padding: 0;
+
+    background: #f8fafc;
+
+    border: 1px solid #e1e8f0;
+    border-radius: 12px;
+
+    overflow: hidden;
+}
 
 
+/* ============================================================
+   CPD HEADER
+============================================================ */
+
+.supporting-cpd-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    background: #f8fafc;
+
+    cursor: default;
+}
+
+
+/* Title + count */
+
+.supporting-cpd-title {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 0;
+
+    font-size: 0.74rem;
+    font-weight: 750;
+
+    color: #344054;
+}
+
+
+/* Small CPD icon */
+
+.supporting-cpd-title::before {
+    content: "\f19d";
+
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    flex: 0 0 24px;
+
+    border-radius: 7px;
+
+    background: #eaf3ff;
+    color: #0a66c2;
+
+    font-size: 0.65rem;
+}
+
+
+/* Activity count */
+
+.supporting-cpd-count {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 3px 7px;
+
+    border-radius: 999px;
+
+    background: #eaf3ff;
+    color: #0a66c2;
+
+    font-size: 0.59rem;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   SHOW / HIDE BUTTON
+============================================================ */
+
+.supporting-cpd-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    flex: 0 0 auto;
+
+    padding: 6px 10px;
+
+    border: 1px solid #d7e3f0;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #0a66c2;
+
+    font-family: inherit;
+    font-size: 0.65rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.supporting-cpd-toggle:hover {
+    background: #eef5ff;
+    border-color: #bcd4ee;
+}
+
+
+.supporting-cpd-toggle i {
+    font-size: 0.55rem;
+
+    transition: transform 0.2s ease;
+}
+
+
+/* ============================================================
+   EXPANDED STATE
+============================================================ */
+
+.supporting-cpd-toggle[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+
+/* ============================================================
+   CPD ACTIVITY LIST
+============================================================ */
+
+.supporting-cpd-list {
+    padding: 0 12px 12px;
+}
+
+
+/* Individual activity */
+
+.supporting-cpd-activity {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 9px 11px;
+
+    margin-top: 6px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8edf3;
+    border-radius: 8px;
+
+    color: #475467;
+
+    text-decoration: none;
+
+    font-size: 0.68rem;
+    line-height: 1.35;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.supporting-cpd-activity:hover {
+    background: #f4f8fc;
+    border-color: #cbdbea;
+    transform: translateX(2px);
+}
+
+
+/* Activity title */
+
+.supporting-cpd-activity-title {
+    min-width: 0;
+}
+
+
+/* Arrow */
+
+.supporting-cpd-activity > i {
+    flex: 0 0 auto;
+
+    color: #0a66c2;
+
+    font-size: 0.58rem;
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+    .supporting-cpd-activities {
+        margin-top: 12px;
+        border-radius: 10px;
+    }
+
+    .supporting-cpd-header {
+        padding: 11px 12px;
+        gap: 8px;
+    }
+
+    .supporting-cpd-title {
+        gap: 6px;
+        font-size: 0.68rem;
+    }
+
+    .supporting-cpd-title::before {
+        width: 22px;
+        height: 22px;
+        flex-basis: 22px;
+        font-size: 0.58rem;
+    }
+
+    .supporting-cpd-count {
+        padding: 3px 6px;
+        font-size: 0.55rem;
+    }
+
+    .supporting-cpd-toggle {
+        padding: 5px 8px;
+        font-size: 0.60rem;
+    }
+
+    .supporting-cpd-list {
+        padding: 0 9px 9px;
+    }
+
+    .supporting-cpd-activity {
+        padding: 8px 9px;
+        margin-top: 5px;
+
+        font-size: 0.63rem;
+    }
+
+}
 </style>
 
 

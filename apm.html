@@ -16736,7 +16736,6 @@ document.addEventListener(
         if (evidenceToggle) {
 
             e.preventDefault();
-
             e.stopPropagation();
 
 
@@ -16857,6 +16856,7 @@ document.addEventListener(
             return;
 
         }
+
 
 
         /* ======================================================
@@ -22223,25 +22223,35 @@ function findTarget(stage) {
 
     setTimeout(function () {
 
-        const position =
-            target.getBoundingClientRect().top +
-            window.pageYOffset -
-            headerHeight -
-            20;
+    /*
+     * Recalculate the target position after all
+     * dynamically generated CPD / evidence content
+     * has had time to establish its final height.
+     */
 
+    const currentHeader =
+        document.querySelector(
+            "header, .site-header, .sticky-header"
+        );
 
-        window.scrollTo({
+    const currentHeaderHeight =
+        currentHeader
+            ? currentHeader.getBoundingClientRect().height
+            : 0;
 
-            top: position,
+    const position =
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        currentHeaderHeight -
+        20;
 
-            behavior: "smooth"
+    window.scrollTo({
+        top: position,
+        behavior: "smooth"
+    });
 
-        });
-
-    }, 100);
-
-}
-        /* ========================================================
+}, 500);       
+ /* ========================================================
            CLICK + KEYBOARD
         ======================================================== */
 

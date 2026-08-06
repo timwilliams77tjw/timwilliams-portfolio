@@ -13915,6 +13915,15 @@ hr.evidence-section-divider {
     outline: none;
     box-shadow: none !important;
 }  
+
+.supporting-cpd-toggle > i {
+    transition: transform 0.2s ease !important;
+    transform: rotate(0deg);
+}
+
+.supporting-cpd-toggle[aria-expanded="true"] > i {
+    transform: rotate(180deg) !important;
+}  
 </style>
 
 
@@ -15409,13 +15418,6 @@ function populateEvidenceCPDRelationships() {
     }
 
 
-    /*
-       Remove previous generated sections.
-    */
-
-  
-
-
     Object.entries(
         evidenceGoalRelationships
     )
@@ -15426,6 +15428,7 @@ function populateEvidenceCPDRelationships() {
                 evidenceGoals
             ]
         ) => {
+
 
             const evidenceCard =
                 document.getElementById(
@@ -15452,29 +15455,33 @@ function populateEvidenceCPDRelationships() {
 
 
             if (!evidenceContent) {
-
                 return;
-
             }
 
 
-       const wrapper =
-    evidenceContent.querySelector(
-        ".supporting-cpd-activities"
-    );
-
-if (!wrapper) {
-    return;
-}
-
-wrapper.innerHTML = "";
+            const wrapper =
+                evidenceContent.querySelector(
+                    ".supporting-cpd-activities"
+                );
 
 
-        const header =
-    document.createElement("div");
+            if (!wrapper) {
+                return;
+            }
 
-header.className =
-    "supporting-cpd-header evidence-inline-header";
+
+            wrapper.innerHTML = "";
+
+
+            const header =
+                document.createElement(
+                    "div"
+                );
+
+
+            header.className =
+                "supporting-cpd-header evidence-inline-header";
+
 
 
             const title =
@@ -15492,6 +15499,7 @@ header.className =
                     Supporting CPD Activities
                 </span>
             `;
+
 
 
             const toggle =
@@ -15515,9 +15523,12 @@ header.className =
 
 
             toggle.innerHTML = `
-                Show
+                <span class="supporting-cpd-toggle-text">
+                    Show
+                </span>
                 <i class="fa-solid fa-chevron-down"></i>
             `;
+
 
 
             const list =
@@ -15530,24 +15541,14 @@ header.className =
                 "supporting-cpd-list";
 
 
-            /*
-               Explicit initial closed state.
-            */
-
-            list.classList.add(
-                "relationship-list-collapsed"
-            );
-
-            list.classList.remove(
-                "relationship-list-expanded"
-            );
-
             list.style.display =
                 "none";
 
 
+
             cpdCards.forEach(
                 card => {
+
 
                     const categoryElement =
                         card.querySelector(
@@ -15567,6 +15568,7 @@ header.className =
                             .toLowerCase();
 
 
+
                     const matchesGoal =
                         evidenceGoals.some(
                             goal =>
@@ -15582,6 +15584,7 @@ header.className =
                     }
 
 
+
                     const titleElement =
                         card.querySelector(
                             ".cpd-card-title"
@@ -15591,6 +15594,7 @@ header.className =
                     if (!titleElement) {
                         return;
                     }
+
 
 
                     const titleClone =
@@ -15605,11 +15609,10 @@ header.className =
                         )
                         .forEach(
                             icon => {
-
                                 icon.remove();
-
                             }
                         );
+
 
 
                     const activityName =
@@ -15618,9 +15621,11 @@ header.className =
                             .trim();
 
 
+
                     if (!activityName) {
                         return;
                     }
+
 
 
                     const activityId =
@@ -15629,13 +15634,16 @@ header.className =
                         );
 
 
+
                     if (!activityId) {
                         return;
                     }
 
 
+
                     card.id =
                         activityId;
+
 
 
                     const link =
@@ -15649,8 +15657,8 @@ header.className =
 
 
                     link.href =
-                        "#" +
-                        activityId;
+                        "#" + activityId;
+
 
 
                     link.innerHTML = `
@@ -15664,21 +15672,21 @@ header.className =
                     `;
 
 
+
                     list.appendChild(
                         link
                     );
+
 
                 }
             );
 
 
-            if (
-                !list.children.length
-            ) {
 
+            if (!list.children.length) {
                 return;
-
             }
+
 
 
             const count =
@@ -15703,9 +15711,11 @@ header.className =
                 }`;
 
 
+
             title.appendChild(
                 count
             );
+
 
 
             header.appendChild(
@@ -15728,7 +15738,68 @@ header.className =
             );
 
 
-          
+
+            /* ============================================================
+               TOGGLE SUPPORTING CPD ACTIVITIES
+            ============================================================ */
+
+
+            toggle.addEventListener(
+                "click",
+                () => {
+
+
+                    const expanded =
+                        toggle.getAttribute(
+                            "aria-expanded"
+                        ) === "true";
+
+
+
+                    const newState =
+                        !expanded;
+
+
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        String(newState)
+                    );
+
+
+
+                    const text =
+                        toggle.querySelector(
+                            ".supporting-cpd-toggle-text"
+                        );
+
+
+
+                    if (newState) {
+
+                        list.style.display =
+                            "block";
+
+
+                        text.textContent =
+                            "Hide";
+
+
+                    } else {
+
+                        list.style.display =
+                            "none";
+
+
+                        text.textContent =
+                            "Show";
+
+                    }
+
+
+                }
+            );
+
 
         }
     );

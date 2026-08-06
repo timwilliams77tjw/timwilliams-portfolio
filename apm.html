@@ -13865,6 +13865,102 @@ hr.evidence-section-divider {
 .supporting-cpd-toggle[aria-expanded="true"] i {
     transform: rotate(180deg);
     transition: transform 0.2s ease;
+} 
+
+/* ============================================================
+   EVIDENCE CPD TOGGLE — MATCH CPD / COMPETENCY TOGGLES
+============================================================ */
+
+.supporting-cpd-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 0 !important;
+
+    margin: 0;
+
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    color: #1f2937;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+
+/* Arrow */
+
+.supporting-cpd-toggle i {
+    display: inline-flex !important;
+
+    align-items: center;
+    justify-content: center;
+
+    width: auto !important;
+    height: auto !important;
+
+    margin: 0;
+
+    font-size: 0.65rem;
+
+    color: #1f2937;
+
+    transition: transform 0.2s ease;
+}
+
+
+/* Open state */
+
+.supporting-cpd-toggle[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+
+/* Closed state */
+
+.supporting-cpd-toggle[aria-expanded="false"] i {
+    transform: rotate(0deg);
+}
+
+
+/* Remove browser/focus button styling */
+
+.supporting-cpd-toggle:focus,
+.supporting-cpd-toggle:focus-visible {
+    outline: none;
+    box-shadow: none !important;
+}
+
+
+/* Keep the evidence CPD header layout */
+
+.supporting-cpd-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+/* Keep title and activity count together */
+
+.supporting-cpd-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
 }  
 </style>
 

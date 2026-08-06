@@ -15389,12 +15389,12 @@ header.className =
             );
 
 
-       toggle.innerHTML = `
-    <span>Show</span>
-    <i class="fa-solid fa-chevron-down"></i>
-`;
+            toggle.innerHTML = `
+                Show
+                <i class="fa-solid fa-chevron-down"></i>
+            `;
 
-        
+
             const list =
                 document.createElement(
                     "div"
@@ -15602,33 +15602,11 @@ header.className =
                 list
             );
 
-toggle.addEventListener("click", function () {
 
-    const isExpanded =
-        toggle.getAttribute("aria-expanded") === "true";
+          
 
-    toggle.setAttribute(
-        "aria-expanded",
-        String(!isExpanded)
+        }
     );
-
-    if (isExpanded) {
-
-        list.style.display = "none";
-
-        toggle.querySelector("span").textContent = "Show";
-
-    } else {
-
-        list.style.display = "flex";
-
-        toggle.querySelector("span").textContent = "Hide";
-
-    }
-
-});            
-
-        
 
 
     console.log(

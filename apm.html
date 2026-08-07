@@ -13821,65 +13821,38 @@ hr.evidence-section-divider {
     visibility: visible !important;
     box-sizing: border-box !important;
 }
-/* ============================================================
-   EVIDENCE CPD TOGGLE — ARROW STATE
-============================================================ */
 
-.supporting-cpd-toggle {
-    display: inline-flex;
+/* Keep the evidence CPD header layout */
+
+.supporting-cpd-header {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
+    justify-content: space-between;
+
+    gap: 15px;
 }
 
-/* Closed */
-.supporting-cpd-toggle[aria-expanded="false"] i {
-    transform: rotate(0deg);
-    transition: transform 0.2s ease;
-}
 
-/* Open */
-.supporting-cpd-toggle[aria-expanded="true"] i {
-    transform: rotate(180deg);
-    transition: transform 0.2s ease;
-}
+/* Keep title and activity count together */
 
-/* ============================================================
-   EVIDENCE CPD TOGGLE — ARROW STATE
-============================================================ */
-
-.supporting-cpd-toggle {
-    display: inline-flex;
+.supporting-cpd-title {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
+    gap: 10px;
 
-/* Closed */
-.supporting-cpd-toggle[aria-expanded="false"] i {
-    transform: rotate(0deg);
-    transition: transform 0.2s ease;
-}
-
-/* Open */
-.supporting-cpd-toggle[aria-expanded="true"] i {
-    transform: rotate(180deg);
-    transition: transform 0.2s ease;
-} 
-
+    min-width: 0;
+}  
 /* ============================================================
-   EVIDENCE CPD TOGGLE — MATCH CPD / COMPETENCY TOGGLES
+   EVIDENCE CPD TOGGLE — FINAL ARROW CONTROL
 ============================================================ */
 
 .supporting-cpd-toggle {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-
     gap: 6px;
 
     padding: 0 !important;
-
     margin: 0;
 
     background: transparent !important;
@@ -13902,105 +13875,55 @@ hr.evidence-section-divider {
 
 .supporting-cpd-toggle i {
     display: inline-flex !important;
-
-    align-items: center;
-    justify-content: center;
-
-    width: auto !important;
-    height: auto !important;
-
-    margin: 0;
-
-    font-size: 0.65rem;
-
-    color: #1f2937;
-
-    transition: transform 0.2s ease;
-}
-
-
-/* Open state */
-
-.supporting-cpd-toggle[aria-expanded="true"] i {
-    transform: rotate(180deg);
-}
-
-
-/* Closed state */
-
-.supporting-cpd-toggle[aria-expanded="false"] i {
-    transform: rotate(0deg);
-}
-
-
-/* Remove browser/focus button styling */
-
-.supporting-cpd-toggle:focus,
-.supporting-cpd-toggle:focus-visible {
-    outline: none;
-    box-shadow: none !important;
-}
-
-
-/* Keep the evidence CPD header layout */
-
-.supporting-cpd-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 15px;
-}
-
-
-/* Keep title and activity count together */
-
-.supporting-cpd-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    min-width: 0;
-}  
-
-/* ============================================================
-   EVIDENCE CPD TOGGLE — ARROW DIRECTION
-============================================================ */
-
-.supporting-cpd-toggle i {
-    display: inline-flex !important;
     align-items: center;
     justify-content: center;
 
     width: 14px !important;
     height: 14px !important;
 
-    margin: 0 !important;
-
     flex: 0 0 14px;
 
-    color: #1f2937;
+    margin: 0 !important;
 
+    color: #1f2937;
     font-size: 0.65rem;
 
     transform: rotate(0deg);
-    transition: transform 0.2s ease;
-
     transform-origin: center;
+    transition: transform 0.2s ease;
 }
 
 
-/* CLOSED — arrow points down */
+/* CLOSED — ▼ */
+
 .supporting-cpd-toggle[aria-expanded="false"] i {
     transform: rotate(0deg) !important;
 }
 
 
-/* OPEN — arrow points up */
+/* OPEN — ▲ */
+
 .supporting-cpd-toggle[aria-expanded="true"] i {
     transform: rotate(180deg) !important;
 }
-  
+
+
+/* Remove browser focus styling */
+
+.supporting-cpd-toggle:focus,
+.supporting-cpd-toggle:focus-visible {
+    outline: none;
+    box-shadow: none !important;
+}  
+
+.supporting-cpd-toggle > i {
+    transition: transform 0.2s ease !important;
+    transform: rotate(0deg);
+}
+
+.supporting-cpd-toggle[aria-expanded="true"] > i {
+    transform: rotate(180deg) !important;
+}  
 </style>
 
 
@@ -15495,13 +15418,6 @@ function populateEvidenceCPDRelationships() {
     }
 
 
-    /*
-       Remove previous generated sections.
-    */
-
-  
-
-
     Object.entries(
         evidenceGoalRelationships
     )
@@ -15512,6 +15428,7 @@ function populateEvidenceCPDRelationships() {
                 evidenceGoals
             ]
         ) => {
+
 
             const evidenceCard =
                 document.getElementById(
@@ -15538,29 +15455,33 @@ function populateEvidenceCPDRelationships() {
 
 
             if (!evidenceContent) {
-
                 return;
-
             }
 
 
-       const wrapper =
-    evidenceContent.querySelector(
-        ".supporting-cpd-activities"
-    );
-
-if (!wrapper) {
-    return;
-}
-
-wrapper.innerHTML = "";
+            const wrapper =
+                evidenceContent.querySelector(
+                    ".supporting-cpd-activities"
+                );
 
 
-        const header =
-    document.createElement("div");
+            if (!wrapper) {
+                return;
+            }
 
-header.className =
-    "supporting-cpd-header evidence-inline-header";
+
+            wrapper.innerHTML = "";
+
+
+            const header =
+                document.createElement(
+                    "div"
+                );
+
+
+            header.className =
+                "supporting-cpd-header evidence-inline-header";
+
 
 
             const title =
@@ -15578,6 +15499,7 @@ header.className =
                     Supporting CPD Activities
                 </span>
             `;
+
 
 
             const toggle =
@@ -15601,9 +15523,12 @@ header.className =
 
 
             toggle.innerHTML = `
-                Show
+                <span class="supporting-cpd-toggle-text">
+                    Show
+                </span>
                 <i class="fa-solid fa-chevron-down"></i>
             `;
+
 
 
             const list =
@@ -15616,24 +15541,14 @@ header.className =
                 "supporting-cpd-list";
 
 
-            /*
-               Explicit initial closed state.
-            */
-
-            list.classList.add(
-                "relationship-list-collapsed"
-            );
-
-            list.classList.remove(
-                "relationship-list-expanded"
-            );
-
             list.style.display =
                 "none";
 
 
+
             cpdCards.forEach(
                 card => {
+
 
                     const categoryElement =
                         card.querySelector(
@@ -15653,6 +15568,7 @@ header.className =
                             .toLowerCase();
 
 
+
                     const matchesGoal =
                         evidenceGoals.some(
                             goal =>
@@ -15668,6 +15584,7 @@ header.className =
                     }
 
 
+
                     const titleElement =
                         card.querySelector(
                             ".cpd-card-title"
@@ -15677,6 +15594,7 @@ header.className =
                     if (!titleElement) {
                         return;
                     }
+
 
 
                     const titleClone =
@@ -15691,11 +15609,10 @@ header.className =
                         )
                         .forEach(
                             icon => {
-
                                 icon.remove();
-
                             }
                         );
+
 
 
                     const activityName =
@@ -15704,9 +15621,11 @@ header.className =
                             .trim();
 
 
+
                     if (!activityName) {
                         return;
                     }
+
 
 
                     const activityId =
@@ -15715,13 +15634,16 @@ header.className =
                         );
 
 
+
                     if (!activityId) {
                         return;
                     }
 
 
+
                     card.id =
                         activityId;
+
 
 
                     const link =
@@ -15735,8 +15657,8 @@ header.className =
 
 
                     link.href =
-                        "#" +
-                        activityId;
+                        "#" + activityId;
+
 
 
                     link.innerHTML = `
@@ -15750,21 +15672,21 @@ header.className =
                     `;
 
 
+
                     list.appendChild(
                         link
                     );
+
 
                 }
             );
 
 
-            if (
-                !list.children.length
-            ) {
 
+            if (!list.children.length) {
                 return;
-
             }
+
 
 
             const count =
@@ -15789,9 +15711,11 @@ header.className =
                 }`;
 
 
+
             title.appendChild(
                 count
             );
+
 
 
             header.appendChild(
@@ -15814,7 +15738,68 @@ header.className =
             );
 
 
-          
+
+            /* ============================================================
+               TOGGLE SUPPORTING CPD ACTIVITIES
+            ============================================================ */
+
+
+            toggle.addEventListener(
+                "click",
+                () => {
+
+
+                    const expanded =
+                        toggle.getAttribute(
+                            "aria-expanded"
+                        ) === "true";
+
+
+
+                    const newState =
+                        !expanded;
+
+
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        String(newState)
+                    );
+
+
+
+                    const text =
+                        toggle.querySelector(
+                            ".supporting-cpd-toggle-text"
+                        );
+
+
+
+                    if (newState) {
+
+                        list.style.display =
+                            "block";
+
+
+                        text.textContent =
+                            "Hide";
+
+
+                    } else {
+
+                        list.style.display =
+                            "none";
+
+
+                        text.textContent =
+                            "Show";
+
+                    }
+
+
+                }
+            );
+
 
         }
     );

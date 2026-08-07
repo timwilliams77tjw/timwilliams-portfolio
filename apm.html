@@ -13915,6 +13915,15 @@ hr.evidence-section-divider {
     outline: none;
     box-shadow: none !important;
 }  
+
+.supporting-cpd-toggle > i {
+    transition: transform 0.2s ease !important;
+    transform: rotate(0deg);
+}
+
+.supporting-cpd-toggle[aria-expanded="true"] > i {
+    transform: rotate(180deg) !important;
+}  
 </style>
 
 
@@ -16785,6 +16794,7 @@ document.addEventListener(
         if (evidenceToggle) {
 
             e.preventDefault();
+
             e.stopPropagation();
 
 
@@ -16905,7 +16915,6 @@ document.addEventListener(
             return;
 
         }
-
 
 
         /* ======================================================
@@ -22272,35 +22281,25 @@ function findTarget(stage) {
 
     setTimeout(function () {
 
-    /*
-     * Recalculate the target position after all
-     * dynamically generated CPD / evidence content
-     * has had time to establish its final height.
-     */
+        const position =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            headerHeight -
+            20;
 
-    const currentHeader =
-        document.querySelector(
-            "header, .site-header, .sticky-header"
-        );
 
-    const currentHeaderHeight =
-        currentHeader
-            ? currentHeader.getBoundingClientRect().height
-            : 0;
+        window.scrollTo({
 
-    const position =
-        target.getBoundingClientRect().top +
-        window.pageYOffset -
-        currentHeaderHeight -
-        20;
+            top: position,
 
-    window.scrollTo({
-        top: position,
-        behavior: "smooth"
-    });
+            behavior: "smooth"
 
-}, 500);       
- /* ========================================================
+        });
+
+    }, 100);
+
+}
+        /* ========================================================
            CLICK + KEYBOARD
         ======================================================== */
 
@@ -22670,6 +22669,7 @@ function findTarget(stage) {
 })();
 
 </script>
+
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section class="apm-framework-section">

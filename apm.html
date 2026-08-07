@@ -13821,38 +13821,65 @@ hr.evidence-section-divider {
     visibility: visible !important;
     box-sizing: border-box !important;
 }
+/* ============================================================
+   EVIDENCE CPD TOGGLE — ARROW STATE
+============================================================ */
 
-/* Keep the evidence CPD header layout */
-
-.supporting-cpd-header {
-    display: flex;
+.supporting-cpd-toggle {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-
-    gap: 15px;
+    justify-content: center;
+    gap: 6px;
 }
 
+/* Closed */
+.supporting-cpd-toggle[aria-expanded="false"] i {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
 
-/* Keep title and activity count together */
+/* Open */
+.supporting-cpd-toggle[aria-expanded="true"] i {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+}
 
-.supporting-cpd-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    min-width: 0;
-}  
 /* ============================================================
-   EVIDENCE CPD TOGGLE — FINAL ARROW CONTROL
+   EVIDENCE CPD TOGGLE — ARROW STATE
+============================================================ */
+
+.supporting-cpd-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* Closed */
+.supporting-cpd-toggle[aria-expanded="false"] i {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
+
+/* Open */
+.supporting-cpd-toggle[aria-expanded="true"] i {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+} 
+
+/* ============================================================
+   EVIDENCE CPD TOGGLE — MATCH CPD / COMPETENCY TOGGLES
 ============================================================ */
 
 .supporting-cpd-toggle {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
+
     gap: 6px;
 
     padding: 0 !important;
+
     margin: 0;
 
     background: transparent !important;
@@ -13875,46 +13902,105 @@ hr.evidence-section-divider {
 
 .supporting-cpd-toggle i {
     display: inline-flex !important;
+
+    align-items: center;
+    justify-content: center;
+
+    width: auto !important;
+    height: auto !important;
+
+    margin: 0;
+
+    font-size: 0.65rem;
+
+    color: #1f2937;
+
+    transition: transform 0.2s ease;
+}
+
+
+/* Open state */
+
+.supporting-cpd-toggle[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+
+/* Closed state */
+
+.supporting-cpd-toggle[aria-expanded="false"] i {
+    transform: rotate(0deg);
+}
+
+
+/* Remove browser/focus button styling */
+
+.supporting-cpd-toggle:focus,
+.supporting-cpd-toggle:focus-visible {
+    outline: none;
+    box-shadow: none !important;
+}
+
+
+/* Keep the evidence CPD header layout */
+
+.supporting-cpd-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+/* Keep title and activity count together */
+
+.supporting-cpd-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+}  
+
+/* ============================================================
+   EVIDENCE CPD TOGGLE — ARROW DIRECTION
+============================================================ */
+
+.supporting-cpd-toggle i {
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
 
     width: 14px !important;
     height: 14px !important;
 
-    flex: 0 0 14px;
-
     margin: 0 !important;
 
+    flex: 0 0 14px;
+
     color: #1f2937;
+
     font-size: 0.65rem;
 
     transform: rotate(0deg);
-    transform-origin: center;
     transition: transform 0.2s ease;
+
+    transform-origin: center;
 }
 
 
-/* CLOSED — ▼ */
-
+/* CLOSED — arrow points down */
 .supporting-cpd-toggle[aria-expanded="false"] i {
     transform: rotate(0deg) !important;
 }
 
 
-/* OPEN — ▲ */
-
+/* OPEN — arrow points up */
 .supporting-cpd-toggle[aria-expanded="true"] i {
     transform: rotate(180deg) !important;
 }
-
-
-/* Remove browser focus styling */
-
-.supporting-cpd-toggle:focus,
-.supporting-cpd-toggle:focus-visible {
-    outline: none;
-    box-shadow: none !important;
-}  
+  
 </style>
 
 

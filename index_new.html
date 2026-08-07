@@ -746,513 +746,269 @@
       gap: var(--space-sm);
       flex-wrap: wrap;
     }
+
+/* HERO */
+.hero-section {
+  padding: 40px 0;
+  background: #ffffff;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-primary {
+  background: #0A66C2;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+}
+
+.btn-secondary {
+  background: #f5f5f5;
+  padding: 10px 18px;
+  border-radius: 6px;
+}
+
+/* CREDENTIAL STRIP */
+.credential-strip {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+.cred-pill {
+  background: #f5f5f5;
+  padding: 8px 14px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* SECTIONS */
+.section {
+  padding: 40px 0;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+/* CARD GRID */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #0A66C2;
+}
+
+    
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="page__inner">
-      <!-- NAVIGATION -->
-      <header class="nav">
-        <div class="nav__brand">
-          <div class="nav__logo"></div>
-          <div class="nav__title">TWC Ltd · Tim Williams Consulting</div>
+ <div class="page-container">
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>SC‑Cleared Senior IT Programme Manager</h1>
+        <p class="hero-sub">
+          Delivering complex, high‑risk cyber, cloud and infrastructure programmes
+          with predictable outcomes across NHS England, Defence and global enterprise.
+        </p>
+
+        <div class="hero-cta">
+          <a href="/calendar" class="btn-primary">Book a Consultation</a>
+          <a href="/portfolio" class="btn-secondary">View Portfolio</a>
         </div>
-        <nav class="nav__links">
-          <a href="/apm" class="nav__link">APM & Programme Wheel</a>
-          <a href="/about" class="nav__link">About</a>
-          <a href="/engagement-models" class="nav__link">Engagement Models</a>
-          <a href="/playbooks" class="nav__link">Playbooks</a>
-          <a href="/downloads" class="nav__link">Downloads</a>
-          <a href="/contact" class="nav__cta">
-            Book a Consultation
-            <span>↗</span>
-          </a>
-        </nav>
-      </header>
+      </div>
 
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero__content">
-          <div class="hero__eyebrow">SC‑Cleared Senior IT Programme Manager</div>
-          <h1 class="hero__title">
-            Delivering complex, high‑risk
-            <span>cyber, cloud & infrastructure programmes</span>
-            with predictable outcomes.
-          </h1>
-          <p class="hero__subtitle">
-            30+ years delivering secure, large‑scale IT, cyber security and
-            cloud transformation programmes across NHS England, Defence and
-            global enterprise organisations.
-          </p>
-          <div class="hero__meta">
-            <div class="hero__meta-pill">NHS England · Defence · Global Enterprise</div>
-            <div class="hero__meta-pill">Programme leadership · Recovery · Governance</div>
-          </div>
-          <div class="hero__actions">
-            <a href="/calendar" class="btn btn--primary">
-              Book a Consultation
-              <span>↗</span>
-            </a>
-            <a href="/portfolio" class="btn btn--ghost">
-              View Portfolio
-            </a>
-          </div>
-          <div class="hero__note">
-            Fractional or full‑time programme leadership for organisations
-            needing senior delivery discipline without permanent overhead.
-          </div>
-        </div>
-        <aside class="hero__visual" aria-hidden="true">
-          <div class="hero__visual-inner">
-            <div class="hero__visual-header">
-              <div>Active Programmes Snapshot</div>
-              <div class="hero__visual-tag">SC‑Cleared · High‑Risk Environments</div>
-            </div>
-            <div class="hero__visual-grid">
-              <div class="hero__visual-card">
-                <div class="hero__visual-card-title">NHS England Cyber Uplift</div>
-                <div class="hero__visual-card-meta">
-                  CAF‑aligned identity, access, monitoring and resilience.
-                </div>
-              </div>
-              <div class="hero__visual-card">
-                <div class="hero__visual-card-title">Global Workplace Transformation</div>
-                <div class="hero__visual-card-meta">
-                  Windows 10/11 across 126,000 devices in 42 countries.
-                </div>
-              </div>
-              <div class="hero__visual-card">
-                <div class="hero__visual-card-title">Enterprise Cloud Transformation</div>
-                <div class="hero__visual-card-meta">
-                  Azure & AWS programmes across global organisations.
-                </div>
-              </div>
-              <div class="hero__visual-card">
-                <div class="hero__visual-card-title">Programme Recovery & Governance</div>
-                <div class="hero__visual-card-meta">
-                  Stabilising failing programmes and restoring predictable delivery.
-                </div>
-              </div>
-            </div>
-            <div class="hero__visual-footer">
-              <div class="hero__visual-status">
-                <span class="hero__visual-status-dot"></span>
-                Delivery stabilised · Risk reduced
-              </div>
-              <div>Hands‑on leadership · Measurable outcomes</div>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- CREDENTIAL STRIP -->
-      <section class="section" aria-label="Professional credentials">
-        <div class="section__header">
-          <div class="section__title">Credentials</div>
-          <p class="section__subtitle">
-            Trusted to lead secure, high‑risk programmes with full clearance,
-            recognised delivery frameworks and modern cloud expertise.
-          </p>
-        </div>
-        <div class="credentials">
-          <div class="credential-pill">
-            <div class="credential-pill__icon"></div>
-            <div>SC Cleared</div>
-          </div>
-          <div class="credential-pill">
-            <div class="credential-pill__icon"></div>
-            <div>PRINCE2 Practitioner</div>
-          </div>
-          <div class="credential-pill">
-            <div class="credential-pill__icon"></div>
-            <div>AgilePM</div>
-          </div>
-          <div class="credential-pill">
-            <div class="credential-pill__icon"></div>
-            <div>Azure Fundamentals</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SERVICE PILLARS -->
-      <section class="section" aria-label="Core services">
-        <div class="section__header">
-          <div class="section__title">Core Services</div>
-          <p class="section__subtitle">
-            End‑to‑end programme leadership, recovery and transformation across
-            cyber security, cloud, infrastructure and modern workplace estates.
-          </p>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <div class="card__eyebrow">Programme Leadership</div>
-            <h2 class="card__title">Fractional or Full‑Time Programme Leadership</h2>
-            <p class="card__body">
-              End‑to‑end leadership for complex transformation programmes,
-              providing structure, clarity and predictable delivery aligned to
-              business outcomes.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Best for organisations needing senior leadership without full‑time overhead.</div>
-              <a href="/engagement-models#programme-leadership" class="card__cta">
-                Explore model
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__eyebrow">Programme Recovery</div>
-            <h2 class="card__title">Recovery of Failing or High‑Risk Programmes</h2>
-            <p class="card__body">
-              Rapid assessment, stabilisation and recovery of programmes at
-              risk, restoring confidence, momentum and delivery discipline.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Best for initiatives facing delays, misalignment or delivery uncertainty.</div>
-              <a href="/playbooks#programme-recovery" class="card__cta">
-                View recovery playbook
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__eyebrow">Cyber Security</div>
-            <h2 class="card__title">Cyber Security Transformation</h2>
-            <p class="card__body">
-              Delivering enterprise cyber security programmes including CAF,
-              IAM, SIEM and resilience frameworks, aligned to regulatory and
-              operational requirements.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Best for regulated environments needing rapid uplift and measurable risk reduction.</div>
-              <a href="/apm#cyber" class="card__cta">
-                View cyber wheel
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__eyebrow">Cloud & Infrastructure</div>
-            <h2 class="card__title">Cloud & Infrastructure Transformation</h2>
-            <p class="card__body">
-              Leading Azure, AWS and enterprise infrastructure programmes to
-              improve scalability, resilience and operational readiness across
-              global estates.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Best for organisations scaling cloud usage or modernising legacy estates.</div>
-              <a href="/apm#cloud" class="card__cta">
-                Explore cloud wheel
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__eyebrow">Modern Workplace</div>
-            <h2 class="card__title">Modern Workplace Transformation</h2>
-            <p class="card__body">
-              Landing M365, endpoint and collaboration changes with
-              adoption‑ready teams, stable operations and clear ownership
-              across global device estates.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Best for organisations modernising user experience and productivity tooling.</div>
-              <a href="/apm#workplace" class="card__cta">
-                View workplace wheel
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__eyebrow">Governance & PMO</div>
-            <h2 class="card__title">Programme Governance & PMO Leadership</h2>
-            <p class="card__body">
-              Practical governance, reporting and cadence patterns that enable
-              delivery rather than slow it down, built for pace and clarity.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Best for organisations needing clarity, rhythm and predictable delivery flow.</div>
-              <a href="/playbooks#pmo-operating-model" class="card__cta">
-                View PMO playbook
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- CASE STUDIES -->
-      <section class="section" aria-label="Programme case studies">
-        <div class="section__header">
-          <div class="section__title">Programme Case Studies</div>
-          <p class="section__subtitle">
-            Real programmes, real constraints, real outcomes — demonstrating
-            delivery discipline across cyber, workplace and cloud
-            transformations.
-          </p>
-        </div>
-        <div class="case-grid">
-          <article class="case-card">
-            <h2 class="case-card__title">NHS England Cyber Security Programme</h2>
-            <div class="case-card__meta">
-              CAF‑aligned cyber security uplift implementing MFA, CyberArk,
-              Splunk and Azure security controls.
-            </div>
-            <p>
-              Delivered identity, access, monitoring and resilience patterns
-              across a complex, regulated environment with high operational
-              sensitivity.
-            </p>
-          </article>
-
-          <article class="case-card">
-            <h2 class="case-card__title">Global Workplace Transformation</h2>
-            <div class="case-card__meta">
-              Windows 10/11 transformation across 126,000 devices in 42
-              countries.
-            </div>
-            <p>
-              Led global device estate modernisation, balancing user experience,
-              operational stability and security requirements across multiple
-              regions.
-            </p>
-          </article>
-
-          <article class="case-card">
-            <h2 class="case-card__title">Enterprise Cloud Transformation</h2>
-            <div class="case-card__meta">
-              Azure and AWS programmes across global organisations.
-            </div>
-            <p>
-              Delivered cloud adoption and migration programmes aligning people,
-              process and technology to predictable outcomes without disruption.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- WHO I WORK WITH -->
-      <section class="section" aria-label="Who I work with">
-        <div class="section__header">
-          <div class="section__title">Who I Work With</div>
-          <p class="section__subtitle">
-            Organisations delivering complex technology change that need senior
-            programme leadership, recovery and governance in high‑risk
-            environments.
-          </p>
-        </div>
-        <div class="who-grid">
-          <article class="who-card">
-            <h2 class="who-card__title">Complex Cyber & Cloud Programmes</h2>
-            <p>
-              Organisations delivering complex cyber security or cloud
-              transformation programmes needing clear leadership, governance and
-              measurable outcomes.
-            </p>
-          </article>
-          <article class="who-card">
-            <h2 class="who-card__title">Delayed or Failing Programmes</h2>
-            <p>
-              Businesses with delayed, high‑risk or failing IT programmes
-              requiring stabilisation, recovery and restored confidence in
-              delivery.
-            </p>
-          </article>
-          <article class="who-card">
-            <h2 class="who-card__title">Enterprises Needing Senior Leadership</h2>
-            <p>
-              Enterprises needing senior programme leadership, PMO governance
-              and delivery assurance across large‑scale transformation
-              portfolios.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- EXECUTIVE PROFILE -->
-      <section class="section" aria-label="Executive profile">
-        <div class="section__header">
-          <div class="section__title">Executive Profile</div>
-          <p class="section__subtitle">
-            Hands‑on programme manager specialising in stabilising complex
-            programmes, improving delivery performance and ensuring successful
-            outcomes across high‑risk environments.
-          </p>
-        </div>
-        <div class="profile">
-          <div class="profile__text">
-            <h3>SC‑Cleared Senior IT Programme Manager</h3>
-            <p>
-              Delivering large‑scale cyber security, cloud transformation and
-              enterprise infrastructure programmes across NHS England, Defence
-              and global organisations.
-            </p>
-            <ul class="profile__list">
-              <li>30+ years of real‑world programme delivery.</li>
-              <li>Specialist in programme recovery and stabilisation.</li>
-              <li>Hands‑on leadership — not just advisory oversight.</li>
-              <li>Practical governance and PMO patterns built for pace.</li>
-              <li>Comfortable in regulated, high‑security environments.</li>
-            </ul>
-          </div>
-          <aside class="profile__visual" aria-hidden="true">
-            <div class="profile__visual-header">
-              <div>Delivery Operating View</div>
-              <div class="profile__visual-tag">Programme Wheel · APM‑Aligned</div>
-            </div>
-            <div class="profile__visual-body">
-              <div class="profile__visual-row">
-                <div class="profile__visual-col">
-                  <strong>Programme Delivery</strong><br />
-                  Structure, cadence and governance aligned to outcomes.
-                </div>
-                <div class="profile__visual-col">
-                  <strong>Risk & Recovery</strong><br />
-                  Early warning, stabilisation and recovery patterns.
-                </div>
-              </div>
-              <div class="profile__visual-row">
-                <div class="profile__visual-col">
-                  <strong>Cyber & Cloud</strong><br />
-                  CAF, IAM, SIEM, Azure, AWS and resilience frameworks.
-                </div>
-                <div class="profile__visual-col">
-                  <strong>Modern Workplace</strong><br />
-                  M365, endpoint, collaboration and global device estates.
-                </div>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <!-- PLAYBOOKS & ENGAGEMENT PREVIEW -->
-      <section class="section" aria-label="Playbooks and engagement models">
-        <div class="section__header">
-          <div class="section__title">Playbooks & Engagement Models</div>
-          <p class="section__subtitle">
-            Structured, repeatable delivery frameworks and engagement models
-            built from real programmes, designed for pace, clarity and measurable
-            outcomes.
-          </p>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <div class="card__eyebrow">Playbook</div>
-            <h2 class="card__title">Programme Recovery Playbook</h2>
-            <p class="card__body">
-              Rapid assessment, stabilisation and recovery of programmes at
-              risk, restoring confidence and momentum.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Best for initiatives facing delays or delivery uncertainty.</div>
-              <a href="/playbooks#programme-recovery" class="card__cta">
-                View playbook
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__eyebrow">Playbook</div>
-            <h2 class="card__title">Service Transition Playbook</h2>
-            <p class="card__body">
-              Ensuring new services land smoothly with clear ownership,
-              documentation and operational readiness.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Best for programmes introducing new platforms or major capability changes.</div>
-              <a href="/playbooks#service-transition" class="card__cta">
-                View playbook
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__eyebrow">Engagement Model</div>
-            <h2 class="card__title">Fractional Programme Leadership</h2>
-            <p class="card__body">
-              Senior programme leadership on a fractional basis, providing
-              delivery discipline without full‑time overhead.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Best for organisations needing senior leadership at critical phases.</div>
-              <a href="/engagement-models#fractional" class="card__cta">
-                Explore model
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- DOWNLOADS PREVIEW -->
-      <section class="section" aria-label="Downloads preview">
-        <div class="section__header">
-          <div class="section__title">Downloads</div>
-          <p class="section__subtitle">
-            Access CVs, portfolio documents and playbooks designed for Safari
-            and modern devices, ready for stakeholders and hiring managers.
-          </p>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <div class="card__eyebrow">CV</div>
-            <h2 class="card__title">Executive CV (PDF)</h2>
-            <p class="card__body">
-              Detailed CV covering programme leadership, cyber, cloud and
-              infrastructure delivery across NHS, Defence and global
-              organisations.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Opens in a new window.</div>
-              <a href="/downloads#cv-pdf" class="card__cta">
-                Open PDF
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__eyebrow">Portfolio</div>
-            <h2 class="card__title">Portfolio Presentation</h2>
-            <p class="card__body">
-              Visual portfolio presentation summarising key programmes, case
-              studies and delivery patterns.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Available as PDF, PPSX and Safari‑compatible package.</div>
-              <a href="/downloads#portfolio" class="card__cta">
-                View options
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__eyebrow">Playbooks</div>
-            <h2 class="card__title">PMO & Stakeholder Playbooks</h2>
-            <p class="card__body">
-              Practical playbooks covering PMO operating models, stakeholder
-              transformation and cyber & IAM pitfalls.
-            </p>
-            <div class="card__footer">
-              <div class="card__meta">Optimised for modern teams and remote‑friendly delivery.</div>
-              <a href="/downloads#playbooks" class="card__cta">
-                Open playbooks
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-        </div>
-      </section>
+      <div class="hero-image">
+        <img src="/assets/hero-office.jpg" alt="Professional workspace">
+      </div>
     </div>
+  </section>
+
+  <!-- CREDENTIAL STRIP -->
+  <section class="credential-strip">
+    <div class="cred-pill"><span class="icon"></span>SC Cleared</div>
+    <div class="cred-pill"><span class="icon"></span>PRINCE2 Practitioner</div>
+    <div class="cred-pill"><span class="icon"></span>AgilePM</div>
+    <div class="cred-pill"><span class="icon"></span>Azure Fundamentals</div>
+  </section>
+
+  <!-- SERVICE PILLARS -->
+  <section class="section">
+    <h2 class="section-title">Core Services</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Programme Leadership</h3>
+        <p>End‑to‑end leadership for complex transformation programmes.</p>
+        <a href="/engagement-models" class="card-link">Explore ↗</a>
+      </div>
+
+      <div class="card">
+        <h3>Programme Recovery</h3>
+        <p>Stabilising failing or high‑risk programmes and restoring delivery.</p>
+        <a href="/playbooks" class="card-link">View Playbook ↗</a>
+      </div>
+
+      <div class="card">
+        <h3>Cyber Security Transformation</h3>
+        <p>CAF, IAM, SIEM and resilience frameworks for regulated environments.</p>
+        <a href="/apm" class="card-link">Cyber Wheel ↗</a>
+      </div>
+
+      <div class="card">
+        <h3>Cloud & Infrastructure</h3>
+        <p>Azure, AWS and enterprise infrastructure modernisation.</p>
+        <a href="/apm" class="card-link">Cloud Wheel ↗</a>
+      </div>
+
+      <div class="card">
+        <h3>Modern Workplace</h3>
+        <p>M365, endpoint and collaboration transformation.</p>
+        <a href="/apm" class="card-link">Workplace Wheel ↗</a>
+      </div>
+
+      <div class="card">
+        <h3>Governance & PMO</h3>
+        <p>Practical governance and cadence patterns built for pace.</p>
+        <a href="/playbooks" class="card-link">PMO Playbook ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section class="section">
+    <h2 class="section-title">Programme Case Studies</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>NHS England Cyber Programme</h3>
+        <p>CAF‑aligned uplift implementing MFA, CyberArk, Splunk and Azure controls.</p>
+      </div>
+
+      <div class="card">
+        <h3>Global Workplace Transformation</h3>
+        <p>Windows 10/11 across 126,000 devices in 42 countries.</p>
+      </div>
+
+      <div class="card">
+        <h3>Enterprise Cloud Transformation</h3>
+        <p>Azure & AWS programmes across global organisations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO I WORK WITH -->
+  <section class="section">
+    <h2 class="section-title">Who I Work With</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Cyber & Cloud Programmes</h3>
+        <p>Organisations delivering complex cyber or cloud transformation.</p>
+      </div>
+
+      <div class="card">
+        <h3>Failing Programmes</h3>
+        <p>Businesses needing stabilisation and recovery.</p>
+      </div>
+
+      <div class="card">
+        <h3>Enterprise Leadership</h3>
+        <p>Enterprises needing senior programme governance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAYBOOKS -->
+  <section class="section">
+    <h2 class="section-title">Playbooks & Engagement Models</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Programme Recovery Playbook</h3>
+        <p>Rapid stabilisation and recovery of programmes at risk.</p>
+        <a href="/playbooks" class="card-link">View ↗</a>
+      </div>
+
+      <div class="card">
+        <h3>Service Transition Playbook</h3>
+        <p>Landing new services with clear ownership and readiness.</p>
+        <a href="/playbooks" class="card-link">View ↗</a>
+      </div>
+
+      <div class="card">
+        <h3>Fractional Leadership</h3>
+        <p>Senior programme leadership without full‑time overhead.</p>
+        <a href="/engagement-models" class="card-link">Explore ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOADS -->
+  <section class="section">
+    <h2 class="section-title">Downloads</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Executive CV</h3>
+        <p>Programme leadership, cyber, cloud and infrastructure delivery.</p>
+        <a href="/downloads" class="card-link">Open PDF ↗</a>
+      </div>
+
+      <div class="card">
+        <h3>Portfolio Presentation</h3>
+        <p>Visual summary of key programmes and delivery patterns.</p>
+        <a href="/downloads" class="card-link">View Options ↗</a>
+      </div>
+
+      <div class="card">
+        <h3>PMO & Stakeholder Playbooks</h3>
+        <p>Practical frameworks for modern delivery teams.</p>
+        <a href="/downloads" class="card-link">Open ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
 
     <!-- FOOTER -->
     <footer class="footer">

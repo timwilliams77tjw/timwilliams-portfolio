@@ -15418,6 +15418,13 @@ function populateEvidenceCPDRelationships() {
     }
 
 
+    /*
+       Remove previous generated sections.
+    */
+
+  
+
+
     Object.entries(
         evidenceGoalRelationships
     )
@@ -15428,7 +15435,6 @@ function populateEvidenceCPDRelationships() {
                 evidenceGoals
             ]
         ) => {
-
 
             const evidenceCard =
                 document.getElementById(
@@ -15455,33 +15461,29 @@ function populateEvidenceCPDRelationships() {
 
 
             if (!evidenceContent) {
+
                 return;
+
             }
 
 
-            const wrapper =
-                evidenceContent.querySelector(
-                    ".supporting-cpd-activities"
-                );
+       const wrapper =
+    evidenceContent.querySelector(
+        ".supporting-cpd-activities"
+    );
+
+if (!wrapper) {
+    return;
+}
+
+wrapper.innerHTML = "";
 
 
-            if (!wrapper) {
-                return;
-            }
+        const header =
+    document.createElement("div");
 
-
-            wrapper.innerHTML = "";
-
-
-            const header =
-                document.createElement(
-                    "div"
-                );
-
-
-            header.className =
-                "supporting-cpd-header evidence-inline-header";
-
+header.className =
+    "supporting-cpd-header evidence-inline-header";
 
 
             const title =
@@ -15499,7 +15501,6 @@ function populateEvidenceCPDRelationships() {
                     Supporting CPD Activities
                 </span>
             `;
-
 
 
             const toggle =
@@ -15523,12 +15524,9 @@ function populateEvidenceCPDRelationships() {
 
 
             toggle.innerHTML = `
-                <span class="supporting-cpd-toggle-text">
-                    Show
-                </span>
+                Show
                 <i class="fa-solid fa-chevron-down"></i>
             `;
-
 
 
             const list =
@@ -15541,14 +15539,24 @@ function populateEvidenceCPDRelationships() {
                 "supporting-cpd-list";
 
 
+            /*
+               Explicit initial closed state.
+            */
+
+            list.classList.add(
+                "relationship-list-collapsed"
+            );
+
+            list.classList.remove(
+                "relationship-list-expanded"
+            );
+
             list.style.display =
                 "none";
 
 
-
             cpdCards.forEach(
                 card => {
-
 
                     const categoryElement =
                         card.querySelector(
@@ -15568,7 +15576,6 @@ function populateEvidenceCPDRelationships() {
                             .toLowerCase();
 
 
-
                     const matchesGoal =
                         evidenceGoals.some(
                             goal =>
@@ -15584,7 +15591,6 @@ function populateEvidenceCPDRelationships() {
                     }
 
 
-
                     const titleElement =
                         card.querySelector(
                             ".cpd-card-title"
@@ -15594,7 +15600,6 @@ function populateEvidenceCPDRelationships() {
                     if (!titleElement) {
                         return;
                     }
-
 
 
                     const titleClone =
@@ -15609,10 +15614,11 @@ function populateEvidenceCPDRelationships() {
                         )
                         .forEach(
                             icon => {
+
                                 icon.remove();
+
                             }
                         );
-
 
 
                     const activityName =
@@ -15621,11 +15627,9 @@ function populateEvidenceCPDRelationships() {
                             .trim();
 
 
-
                     if (!activityName) {
                         return;
                     }
-
 
 
                     const activityId =
@@ -15634,16 +15638,13 @@ function populateEvidenceCPDRelationships() {
                         );
 
 
-
                     if (!activityId) {
                         return;
                     }
 
 
-
                     card.id =
                         activityId;
-
 
 
                     const link =
@@ -15657,8 +15658,8 @@ function populateEvidenceCPDRelationships() {
 
 
                     link.href =
-                        "#" + activityId;
-
+                        "#" +
+                        activityId;
 
 
                     link.innerHTML = `
@@ -15672,21 +15673,21 @@ function populateEvidenceCPDRelationships() {
                     `;
 
 
-
                     list.appendChild(
                         link
                     );
-
 
                 }
             );
 
 
+            if (
+                !list.children.length
+            ) {
 
-            if (!list.children.length) {
                 return;
-            }
 
+            }
 
 
             const count =
@@ -15711,11 +15712,9 @@ function populateEvidenceCPDRelationships() {
                 }`;
 
 
-
             title.appendChild(
                 count
             );
-
 
 
             header.appendChild(
@@ -15738,68 +15737,7 @@ function populateEvidenceCPDRelationships() {
             );
 
 
-
-            /* ============================================================
-               TOGGLE SUPPORTING CPD ACTIVITIES
-            ============================================================ */
-
-
-            toggle.addEventListener(
-                "click",
-                () => {
-
-
-                    const expanded =
-                        toggle.getAttribute(
-                            "aria-expanded"
-                        ) === "true";
-
-
-
-                    const newState =
-                        !expanded;
-
-
-
-                    toggle.setAttribute(
-                        "aria-expanded",
-                        String(newState)
-                    );
-
-
-
-                    const text =
-                        toggle.querySelector(
-                            ".supporting-cpd-toggle-text"
-                        );
-
-
-
-                    if (newState) {
-
-                        list.style.display =
-                            "block";
-
-
-                        text.textContent =
-                            "Hide";
-
-
-                    } else {
-
-                        list.style.display =
-                            "none";
-
-
-                        text.textContent =
-                            "Show";
-
-                    }
-
-
-                }
-            );
-
+          
 
         }
     );
@@ -16856,6 +16794,7 @@ document.addEventListener(
         if (evidenceToggle) {
 
             e.preventDefault();
+
             e.stopPropagation();
 
 
@@ -16976,7 +16915,6 @@ document.addEventListener(
             return;
 
         }
-
 
 
         /* ======================================================
@@ -22343,35 +22281,25 @@ function findTarget(stage) {
 
     setTimeout(function () {
 
-    /*
-     * Recalculate the target position after all
-     * dynamically generated CPD / evidence content
-     * has had time to establish its final height.
-     */
+        const position =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            headerHeight -
+            20;
 
-    const currentHeader =
-        document.querySelector(
-            "header, .site-header, .sticky-header"
-        );
 
-    const currentHeaderHeight =
-        currentHeader
-            ? currentHeader.getBoundingClientRect().height
-            : 0;
+        window.scrollTo({
 
-    const position =
-        target.getBoundingClientRect().top +
-        window.pageYOffset -
-        currentHeaderHeight -
-        20;
+            top: position,
 
-    window.scrollTo({
-        top: position,
-        behavior: "smooth"
-    });
+            behavior: "smooth"
 
-}, 500);       
- /* ========================================================
+        });
+
+    }, 100);
+
+}
+        /* ========================================================
            CLICK + KEYBOARD
         ======================================================== */
 
@@ -22741,6 +22669,7 @@ function findTarget(stage) {
 })();
 
 </script>
+
 
 <!-- APM COMPETENCE FRAMEWORK GRID -->
 <section class="apm-framework-section">

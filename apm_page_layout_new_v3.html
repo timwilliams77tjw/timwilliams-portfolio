@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -13518,450 +13518,8 @@ hr.evidence-section-divider {
 
 }
   
-/* ============================================================
-   SUPPORTING CPD ACTIVITIES — REFINED COLLAPSIBLE PANEL
-============================================================ */
 
-.supporting-cpd-activities {
-    margin-top: 18px;
-    padding: 0;
 
-    background: #f8fafc;
-
-    border: 1px solid #e1e8f0;
-    border-radius: 12px;
-
-    overflow: hidden;
-}
-
-
-/* ============================================================
-   CPD HEADER
-============================================================ */
-
-.supporting-cpd-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 12px;
-
-    padding: 13px 15px;
-
-    background: #f8fafc;
-
-    cursor: default;
-}
-
-
-/* Title + count */
-
-.supporting-cpd-title {
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-
-    min-width: 0;
-
-    font-size: 0.74rem;
-    font-weight: 750;
-
-    color: #344054;
-}
-
-
-/* Small CPD icon */
-
-.supporting-cpd-title::before {
-    content: "\f19d";
-
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 24px;
-    height: 24px;
-
-    flex: 0 0 24px;
-
-    border-radius: 7px;
-
-    background: #eaf3ff;
-    color: #0a66c2;
-
-    font-size: 0.65rem;
-}
-
-
-/* Activity count */
-
-.supporting-cpd-count {
-    display: inline-flex;
-    align-items: center;
-
-    padding: 3px 7px;
-
-    border-radius: 999px;
-
-    background: #eaf3ff;
-    color: #0a66c2;
-
-    font-size: 0.59rem;
-    font-weight: 700;
-
-    white-space: nowrap;
-}
-
-
-/* ============================================================
-   SHOW / HIDE BUTTON
-============================================================ */
-
-.supporting-cpd-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 6px;
-
-    flex: 0 0 auto;
-
-    padding: 6px 10px;
-
-    border: 1px solid #d7e3f0;
-    border-radius: 7px;
-
-    background: #ffffff;
-
-    color: #0a66c2;
-
-    font-family: inherit;
-    font-size: 0.65rem;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.supporting-cpd-toggle:hover {
-    background: #eef5ff;
-    border-color: #bcd4ee;
-}
-
-
-.supporting-cpd-toggle i {
-    font-size: 0.55rem;
-
-    transition: transform 0.2s ease;
-}
-
-
-/* ============================================================
-   EXPANDED STATE
-============================================================ */
-
-.supporting-cpd-toggle[aria-expanded="true"] i {
-    transform: rotate(180deg);
-}
-
-
-/* ============================================================
-   CPD ACTIVITY LIST
-============================================================ */
-
-.supporting-cpd-list {
-    padding: 0 12px 12px;
-}
-
-
-/* Individual activity */
-
-.supporting-cpd-activity {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 10px;
-
-    padding: 9px 11px;
-
-    margin-top: 6px;
-
-    background: #ffffff;
-
-    border: 1px solid #e8edf3;
-    border-radius: 8px;
-
-    color: #475467;
-
-    text-decoration: none;
-
-    font-size: 0.68rem;
-    line-height: 1.35;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.supporting-cpd-activity:hover {
-    background: #f4f8fc;
-    border-color: #cbdbea;
-    transform: translateX(2px);
-}
-
-
-/* Activity title */
-
-.supporting-cpd-activity-title {
-    min-width: 0;
-}
-
-
-/* Arrow */
-
-.supporting-cpd-activity > i {
-    flex: 0 0 auto;
-
-    color: #0a66c2;
-
-    font-size: 0.58rem;
-}
-
-
-/* ============================================================
-   MOBILE
-============================================================ */
-
-@media (max-width: 600px) {
-
-    .supporting-cpd-activities {
-        margin-top: 12px;
-        border-radius: 10px;
-    }
-
-    .supporting-cpd-header {
-        padding: 11px 12px;
-        gap: 8px;
-    }
-
-    .supporting-cpd-title {
-        gap: 6px;
-        font-size: 0.68rem;
-    }
-
-    .supporting-cpd-title::before {
-        width: 22px;
-        height: 22px;
-        flex-basis: 22px;
-        font-size: 0.58rem;
-    }
-
-    .supporting-cpd-count {
-        padding: 3px 6px;
-        font-size: 0.55rem;
-    }
-
-    .supporting-cpd-toggle {
-        padding: 5px 8px;
-        font-size: 0.60rem;
-    }
-
-    .supporting-cpd-list {
-        padding: 0 9px 9px;
-    }
-
-    .supporting-cpd-activity {
-        padding: 8px 9px;
-        margin-top: 5px;
-
-        font-size: 0.63rem;
-    }
-
-}
-.supporting-cpd-toggle i {
-    display: inline-block;
-    transition: transform 0.2s ease;
-}
-
-.supporting-cpd-toggle[aria-expanded="true"] i {
-    transform: rotate(180deg);
-}
-/* ============================================================
-   EVIDENCE CARD — SECTION DIVIDERS
-   Force existing <hr> elements to display
-============================================================ */
-
-.professional-evidence-item hr.evidence-section-divider {
-    display: block !important;
-    width: 100% !important;
-    height: 1px !important;
-    min-height: 1px !important;
-
-    margin: 28px 0 !important;
-    padding: 0 !important;
-
-    border: 0 !important;
-    border-top: 1px solid #d9e2ec !important;
-
-    background: transparent !important;
-
-    opacity: 1 !important;
-    visibility: visible !important;
-    box-sizing: border-box !important;
-}
-/* ============================================================
-   EVIDENCE CPD TOGGLE — ARROW STATE
-============================================================ */
-
-.supporting-cpd-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-/* Closed */
-.supporting-cpd-toggle[aria-expanded="false"] i {
-    transform: rotate(0deg);
-    transition: transform 0.2s ease;
-}
-
-/* Open */
-.supporting-cpd-toggle[aria-expanded="true"] i {
-    transform: rotate(180deg);
-    transition: transform 0.2s ease;
-}
-
-/* ============================================================
-   EVIDENCE CPD TOGGLE — ARROW STATE
-============================================================ */
-
-.supporting-cpd-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-/* Closed */
-.supporting-cpd-toggle[aria-expanded="false"] i {
-    transform: rotate(0deg);
-    transition: transform 0.2s ease;
-}
-
-/* Open */
-.supporting-cpd-toggle[aria-expanded="true"] i {
-    transform: rotate(180deg);
-    transition: transform 0.2s ease;
-} 
-
-/* ============================================================
-   EVIDENCE CPD TOGGLE — MATCH CPD / COMPETENCY TOGGLES
-============================================================ */
-
-.supporting-cpd-toggle {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-
-    gap: 6px;
-
-    padding: 0 !important;
-
-    margin: 0;
-
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-
-    color: #1f2937;
-
-    font-size: 0.78rem;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-
-/* Arrow */
-
-.supporting-cpd-toggle i {
-    display: inline-flex !important;
-
-    align-items: center;
-    justify-content: center;
-
-    width: auto !important;
-    height: auto !important;
-
-    margin: 0;
-
-    font-size: 0.65rem;
-
-    color: #1f2937;
-
-    transition: transform 0.2s ease;
-}
-
-
-/* Open state */
-
-.supporting-cpd-toggle[aria-expanded="true"] i {
-    transform: rotate(180deg);
-}
-
-
-/* Closed state */
-
-.supporting-cpd-toggle[aria-expanded="false"] i {
-    transform: rotate(0deg);
-}
-
-
-/* Remove browser/focus button styling */
-
-.supporting-cpd-toggle:focus,
-.supporting-cpd-toggle:focus-visible {
-    outline: none;
-    box-shadow: none !important;
-}
-
-
-/* Keep the evidence CPD header layout */
-
-.supporting-cpd-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 15px;
-}
-
-
-/* Keep title and activity count together */
-
-.supporting-cpd-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    min-width: 0;
-}  
 </style>
 
 
@@ -16832,6 +16390,7 @@ document.addEventListener(
         if (evidenceToggle) {
 
             e.preventDefault();
+
             e.stopPropagation();
 
 
@@ -16952,7 +16511,6 @@ document.addEventListener(
             return;
 
         }
-
 
 
         /* ======================================================
@@ -22319,35 +21877,25 @@ function findTarget(stage) {
 
     setTimeout(function () {
 
-    /*
-     * Recalculate the target position after all
-     * dynamically generated CPD / evidence content
-     * has had time to establish its final height.
-     */
+        const position =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            headerHeight -
+            20;
 
-    const currentHeader =
-        document.querySelector(
-            "header, .site-header, .sticky-header"
-        );
 
-    const currentHeaderHeight =
-        currentHeader
-            ? currentHeader.getBoundingClientRect().height
-            : 0;
+        window.scrollTo({
 
-    const position =
-        target.getBoundingClientRect().top +
-        window.pageYOffset -
-        currentHeaderHeight -
-        20;
+            top: position,
 
-    window.scrollTo({
-        top: position,
-        behavior: "smooth"
-    });
+            behavior: "smooth"
 
-}, 500);       
- /* ========================================================
+        });
+
+    }, 100);
+
+}
+        /* ========================================================
            CLICK + KEYBOARD
         ======================================================== */
 
@@ -24147,7 +23695,7 @@ function findTarget(stage) {
                         </p>
 
                     </div>
-          <hr class="evidence-section-divider">  
+
 
                     <!-- ==========================================
                          KEY OUTCOMES
@@ -24173,71 +23721,6 @@ function findTarget(stage) {
 
                     </ul>
 <hr class="evidence-section-divider">
-
-<!-- HIGHLIGHTS -->
-
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-star"></i>
-    Highlights
-</div>
-
-<div class="professional-evidence-highlights">
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-     TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
- TBC
-        </span>
-    </div>
-
-</div>        
-<hr class="evidence-section-divider">                  
-<!-- EVIDENCE METRICS -->
-
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-chart-line"></i>
-    Evidence Metrics
-</div>
-
-<div class="professional-evidence-metrics">
-
-    <div class="evidence-metric">
-        <strong>Multi-trust</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Digital</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Secure</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>5</strong>
-        <span>TBC</span>
-    </div>
-
-</div>                  
-               <hr class="evidence-section-divider">              
-
                     <!-- ==========================================
                          SUPPORTING EVIDENCE
                     =========================================== -->
@@ -24463,7 +23946,7 @@ TBC
                         </p>
 
                     </div>
-          <hr class="evidence-section-divider">  
+
 
                     <!-- KEY OUTCOMES -->
 
@@ -24674,7 +24157,7 @@ High adoption across clinical teams — Achieved strong uptake through structure
                         </p>
 
                     </div>
-          <hr class="evidence-section-divider">  
+
 
                     <!-- KEY OUTCOMES -->
 
@@ -24697,69 +24180,6 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
                     </ul>
 <hr class="evidence-section-divider">
-<!-- HIGHLIGHTS -->
-
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-star"></i>
-    Highlights
-</div>
-
-<div class="professional-evidence-highlights">
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-     TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
- TBC
-        </span>
-    </div>
-
-</div>        
-<hr class="evidence-section-divider">                  
-<!-- EVIDENCE METRICS -->
-
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-chart-line"></i>
-    Evidence Metrics
-</div>
-
-<div class="professional-evidence-metrics">
-
-    <div class="evidence-metric">
-        <strong>Multi-trust</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Digital</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Secure</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>5</strong>
-        <span>TBC</span>
-    </div>
-
-</div>                  
-               <hr class="evidence-section-divider">  
                     <!-- SUPPORTING EVIDENCE -->
 
                 <div class="professional-evidence-label evidence-label-supporting">
@@ -24849,7 +24269,7 @@ TBC
                         </p>
 
                     </div>
-          <hr class="evidence-section-divider">  
+
 
                     <!-- KEY OUTCOMES -->
 
@@ -24873,70 +24293,6 @@ TBC
 
                     </ul>
 <hr class="evidence-section-divider">
-<!-- HIGHLIGHTS -->
-
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-star"></i>
-    Highlights
-</div>
-
-<div class="professional-evidence-highlights">
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-     TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
- TBC
-        </span>
-    </div>
-
-</div>        
-<hr class="evidence-section-divider">                  
-<!-- EVIDENCE METRICS -->
-
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-chart-line"></i>
-    Evidence Metrics
-</div>
-
-<div class="professional-evidence-metrics">
-
-    <div class="evidence-metric">
-        <strong>Multi-trust</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Digital</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Secure</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>5</strong>
-        <span>TBC</span>
-    </div>
-
-</div>                  
-               <hr class="evidence-section-divider">  
-
                     <!-- SUPPORTING EVIDENCE -->
 
                    <div class="professional-evidence-label evidence-label-supporting">
@@ -25061,7 +24417,7 @@ TBC
 
 
         </div>
-          <hr class="evidence-section-divider">  
+
         <!-- KEY OUTCOMES -->
 
    <div class="professional-evidence-label evidence-label-outcomes">
@@ -25089,69 +24445,7 @@ TBC
         </ul>
 
         <hr class="evidence-section-divider">
-<!-- HIGHLIGHTS -->
 
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-star"></i>
-    Highlights
-</div>
-
-<div class="professional-evidence-highlights">
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-     TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
- TBC
-        </span>
-    </div>
-
-</div>        
-<hr class="evidence-section-divider">                  
-<!-- EVIDENCE METRICS -->
-
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-chart-line"></i>
-    Evidence Metrics
-</div>
-
-<div class="professional-evidence-metrics">
-
-    <div class="evidence-metric">
-        <strong>Multi-trust</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Digital</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Secure</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>5</strong>
-        <span>TBC</span>
-    </div>
-
-</div>                  
-               <hr class="evidence-section-divider">  
         <!-- SUPPORTING EVIDENCE -->
 
       <div class="professional-evidence-label evidence-label-supporting">
@@ -25263,7 +24557,7 @@ TBC
 </p>
 
         </div>
-          <hr class="evidence-section-divider">  
+
         <!-- KEY OUTCOMES -->
 
      <div class="professional-evidence-label evidence-label-outcomes">
@@ -25291,69 +24585,7 @@ TBC
         </ul>
 
         <hr class="evidence-section-divider">
-<!-- HIGHLIGHTS -->
 
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-star"></i>
-    Highlights
-</div>
-
-<div class="professional-evidence-highlights">
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-     TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
-TBC
-        </span>
-    </div>
-
-    <div class="evidence-highlight">
-        <i class="fa-solid fa-check"></i>
-        <span>
- TBC
-        </span>
-    </div>
-
-</div>        
-<hr class="evidence-section-divider">                  
-<!-- EVIDENCE METRICS -->
-
-<div class="professional-evidence-label">
-    <i class="fa-solid fa-chart-line"></i>
-    Evidence Metrics
-</div>
-
-<div class="professional-evidence-metrics">
-
-    <div class="evidence-metric">
-        <strong>Multi-trust</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Digital</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>Secure</strong>
-        <span>TBC</span>
-    </div>
-
-    <div class="evidence-metric">
-        <strong>5</strong>
-        <span>TBC</span>
-    </div>
-
-</div>                  
-               <hr class="evidence-section-divider">  
         <!-- SUPPORTING EVIDENCE -->
 
       <div class="professional-evidence-label evidence-label-supporting">

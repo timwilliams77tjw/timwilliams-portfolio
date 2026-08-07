@@ -850,9 +850,44 @@
 
     
   </style>
+ <script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
 </head>
-<body>
- <div class="page-container">
+
+<body class="header-with-logo">
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/service-worker.js");
+  }
+</script>
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+<script>
+  fetch("header.html")
+    .then(r => r.text())
+    .then(h => {
+      document.getElementById("header-placeholder").innerHTML = h;
+
+      const siteSearch = document.createElement("script");
+      siteSearch.src = "site-search.js";
+      siteSearch.defer = true;
+      siteSearch.onload = () => { if (typeof initSiteSearch === "function") initSiteSearch(); };
+      document.body.appendChild(siteSearch);
+
+      const headerJS = document.createElement("script");
+      headerJS.src = "header-standard-v4.js";
+      headerJS.defer = true;
+      headerJS.onload = () => {
+        initHeader();
+        initHeaderEnhancements();
+        initA2HS();
+      };
+      document.body.appendChild(headerJS);
+    });
+</script>
+
+<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+<script src="analytics-tracker.js" defer></script>
 
   <!-- HERO -->
   <section class="hero-section">

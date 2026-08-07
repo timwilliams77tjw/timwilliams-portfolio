@@ -13821,38 +13821,65 @@ hr.evidence-section-divider {
     visibility: visible !important;
     box-sizing: border-box !important;
 }
+/* ============================================================
+   EVIDENCE CPD TOGGLE — ARROW STATE
+============================================================ */
 
-/* Keep the evidence CPD header layout */
-
-.supporting-cpd-header {
-    display: flex;
+.supporting-cpd-toggle {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-
-    gap: 15px;
+    justify-content: center;
+    gap: 6px;
 }
 
+/* Closed */
+.supporting-cpd-toggle[aria-expanded="false"] i {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
 
-/* Keep title and activity count together */
+/* Open */
+.supporting-cpd-toggle[aria-expanded="true"] i {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+}
 
-.supporting-cpd-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    min-width: 0;
-}  
 /* ============================================================
-   EVIDENCE CPD TOGGLE — FINAL ARROW CONTROL
+   EVIDENCE CPD TOGGLE — ARROW STATE
+============================================================ */
+
+.supporting-cpd-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* Closed */
+.supporting-cpd-toggle[aria-expanded="false"] i {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
+
+/* Open */
+.supporting-cpd-toggle[aria-expanded="true"] i {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+} 
+
+/* ============================================================
+   EVIDENCE CPD TOGGLE — MATCH CPD / COMPETENCY TOGGLES
 ============================================================ */
 
 .supporting-cpd-toggle {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
+
     gap: 6px;
 
     padding: 0 !important;
+
     margin: 0;
 
     background: transparent !important;
@@ -13875,54 +13902,65 @@ hr.evidence-section-divider {
 
 .supporting-cpd-toggle i {
     display: inline-flex !important;
+
     align-items: center;
     justify-content: center;
 
-    width: 14px !important;
-    height: 14px !important;
+    width: auto !important;
+    height: auto !important;
 
-    flex: 0 0 14px;
+    margin: 0;
 
-    margin: 0 !important;
-
-    color: #1f2937;
     font-size: 0.65rem;
 
-    transform: rotate(0deg);
-    transform-origin: center;
+    color: #1f2937;
+
     transition: transform 0.2s ease;
 }
 
 
-/* CLOSED — ▼ */
-
-.supporting-cpd-toggle[aria-expanded="false"] i {
-    transform: rotate(0deg) !important;
-}
-
-
-/* OPEN — ▲ */
+/* Open state */
 
 .supporting-cpd-toggle[aria-expanded="true"] i {
-    transform: rotate(180deg) !important;
+    transform: rotate(180deg);
 }
 
 
-/* Remove browser focus styling */
+/* Closed state */
+
+.supporting-cpd-toggle[aria-expanded="false"] i {
+    transform: rotate(0deg);
+}
+
+
+/* Remove browser/focus button styling */
 
 .supporting-cpd-toggle:focus,
 .supporting-cpd-toggle:focus-visible {
     outline: none;
     box-shadow: none !important;
-}  
-
-.supporting-cpd-toggle > i {
-    transition: transform 0.2s ease !important;
-    transform: rotate(0deg);
 }
 
-.supporting-cpd-toggle[aria-expanded="true"] > i {
-    transform: rotate(180deg) !important;
+
+/* Keep the evidence CPD header layout */
+
+.supporting-cpd-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+/* Keep title and activity count together */
+
+.supporting-cpd-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
 }  
 </style>
 
@@ -15418,6 +15456,13 @@ function populateEvidenceCPDRelationships() {
     }
 
 
+    /*
+       Remove previous generated sections.
+    */
+
+  
+
+
     Object.entries(
         evidenceGoalRelationships
     )
@@ -15428,7 +15473,6 @@ function populateEvidenceCPDRelationships() {
                 evidenceGoals
             ]
         ) => {
-
 
             const evidenceCard =
                 document.getElementById(
@@ -15455,33 +15499,29 @@ function populateEvidenceCPDRelationships() {
 
 
             if (!evidenceContent) {
+
                 return;
+
             }
 
 
-            const wrapper =
-                evidenceContent.querySelector(
-                    ".supporting-cpd-activities"
-                );
+       const wrapper =
+    evidenceContent.querySelector(
+        ".supporting-cpd-activities"
+    );
+
+if (!wrapper) {
+    return;
+}
+
+wrapper.innerHTML = "";
 
 
-            if (!wrapper) {
-                return;
-            }
+        const header =
+    document.createElement("div");
 
-
-            wrapper.innerHTML = "";
-
-
-            const header =
-                document.createElement(
-                    "div"
-                );
-
-
-            header.className =
-                "supporting-cpd-header evidence-inline-header";
-
+header.className =
+    "supporting-cpd-header evidence-inline-header";
 
 
             const title =
@@ -15499,7 +15539,6 @@ function populateEvidenceCPDRelationships() {
                     Supporting CPD Activities
                 </span>
             `;
-
 
 
             const toggle =
@@ -15523,12 +15562,9 @@ function populateEvidenceCPDRelationships() {
 
 
             toggle.innerHTML = `
-                <span class="supporting-cpd-toggle-text">
-                    Show
-                </span>
+                Show
                 <i class="fa-solid fa-chevron-down"></i>
             `;
-
 
 
             const list =
@@ -15541,14 +15577,24 @@ function populateEvidenceCPDRelationships() {
                 "supporting-cpd-list";
 
 
+            /*
+               Explicit initial closed state.
+            */
+
+            list.classList.add(
+                "relationship-list-collapsed"
+            );
+
+            list.classList.remove(
+                "relationship-list-expanded"
+            );
+
             list.style.display =
                 "none";
 
 
-
             cpdCards.forEach(
                 card => {
-
 
                     const categoryElement =
                         card.querySelector(
@@ -15568,7 +15614,6 @@ function populateEvidenceCPDRelationships() {
                             .toLowerCase();
 
 
-
                     const matchesGoal =
                         evidenceGoals.some(
                             goal =>
@@ -15584,7 +15629,6 @@ function populateEvidenceCPDRelationships() {
                     }
 
 
-
                     const titleElement =
                         card.querySelector(
                             ".cpd-card-title"
@@ -15594,7 +15638,6 @@ function populateEvidenceCPDRelationships() {
                     if (!titleElement) {
                         return;
                     }
-
 
 
                     const titleClone =
@@ -15609,10 +15652,11 @@ function populateEvidenceCPDRelationships() {
                         )
                         .forEach(
                             icon => {
+
                                 icon.remove();
+
                             }
                         );
-
 
 
                     const activityName =
@@ -15621,11 +15665,9 @@ function populateEvidenceCPDRelationships() {
                             .trim();
 
 
-
                     if (!activityName) {
                         return;
                     }
-
 
 
                     const activityId =
@@ -15634,16 +15676,13 @@ function populateEvidenceCPDRelationships() {
                         );
 
 
-
                     if (!activityId) {
                         return;
                     }
 
 
-
                     card.id =
                         activityId;
-
 
 
                     const link =
@@ -15657,8 +15696,8 @@ function populateEvidenceCPDRelationships() {
 
 
                     link.href =
-                        "#" + activityId;
-
+                        "#" +
+                        activityId;
 
 
                     link.innerHTML = `
@@ -15672,21 +15711,21 @@ function populateEvidenceCPDRelationships() {
                     `;
 
 
-
                     list.appendChild(
                         link
                     );
-
 
                 }
             );
 
 
+            if (
+                !list.children.length
+            ) {
 
-            if (!list.children.length) {
                 return;
-            }
 
+            }
 
 
             const count =
@@ -15711,11 +15750,9 @@ function populateEvidenceCPDRelationships() {
                 }`;
 
 
-
             title.appendChild(
                 count
             );
-
 
 
             header.appendChild(
@@ -15738,68 +15775,7 @@ function populateEvidenceCPDRelationships() {
             );
 
 
-
-            /* ============================================================
-               TOGGLE SUPPORTING CPD ACTIVITIES
-            ============================================================ */
-
-
-            toggle.addEventListener(
-                "click",
-                () => {
-
-
-                    const expanded =
-                        toggle.getAttribute(
-                            "aria-expanded"
-                        ) === "true";
-
-
-
-                    const newState =
-                        !expanded;
-
-
-
-                    toggle.setAttribute(
-                        "aria-expanded",
-                        String(newState)
-                    );
-
-
-
-                    const text =
-                        toggle.querySelector(
-                            ".supporting-cpd-toggle-text"
-                        );
-
-
-
-                    if (newState) {
-
-                        list.style.display =
-                            "block";
-
-
-                        text.textContent =
-                            "Hide";
-
-
-                    } else {
-
-                        list.style.display =
-                            "none";
-
-
-                        text.textContent =
-                            "Show";
-
-                    }
-
-
-                }
-            );
-
+          
 
         }
     );
@@ -22747,7 +22723,7 @@ function findTarget(stage) {
   <div class="apm-framework-heeader">
   <h2 class="section-heading">
     <i class="fa-solid fa-diagram-project"></i>
-    TEST****APM Competence Framework (3rd edition)
+    APM Competence Framework (3rd edition)
   </h2>
 
   <p class="section-subtitle">
@@ -25234,7 +25210,7 @@ TBC
 
 
            <!-- ==================================================
-             6. PROGRAMME GOVERNANCE test page
+             6. PROGRAMME GOVERNANCE
 =================================================== -->
 
 <article

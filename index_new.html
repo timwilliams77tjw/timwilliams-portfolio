@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TWC Ltd – SC‑Cleared Senior IT Programme Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="SC‑Cleared Senior IT Programme Manager delivering complex cyber, cloud and infrastructure programmes across NHS England, Defence and global organisations." />
+  <style>
+    :root {
+      --color-bg: #0b1220;
+      --color-bg-alt: #0f172a;
+      --color-surface: #111827;
+      --color-surface-alt: #020617;
+      --color-accent: #38bdf8;
+      --color-accent-soft: rgba(56, 189, 248, 0.12);
+      --color-text: #e5e7eb;
+      --color-text-muted: #9ca3af;
+      --color-border: #1f2937;
+      --color-danger: #f97373;
+
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.65);
+      --shadow-subtle: 0 10px 24px rgba(15, 23, 42, 0.55);
+
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1.25rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+      --space-2xl: 4rem;
+
+      --max-width: 1120px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at top left, #1e293b 0, #020617 55%);
+      color: var(--color-text);
+    }
+
+    body {
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page__inner {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-lg) var(--space-md) var(--space-2xl);
+    }
+
+    /* Top navigation */
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-sm) 0 var(--space-md);
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .nav__logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: conic-gradient(
+        from 180deg,
+        #38bdf8,
+        #22c55e,
+        #6366f1,
+        #38bdf8
+      );
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8);
+    }
+
+    .nav__title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .nav__link {
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav__link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #38bdf8, #6366f1);
+      transition: width 0.18s ease-out;
+    }
+
+    .nav__link:hover::after {
+      width: 100%;
+    }
+
+    .nav__cta {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--color-text);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .nav__cta span {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav__links {
+        display: none;
+      }
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: var(--space-xl);
+      padding: var(--space-xl) 0 var(--space-lg);
+      align-items: center;
+    }
+
+    .hero__eyebrow {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-xs);
+    }
+
+    .hero__title {
+      font-size: clamp(2.1rem, 3vw, 2.6rem);
+      line-height: 1.15;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .hero__title span {
+      color: var(--color-accent);
+    }
+
+    .hero__subtitle {
+      font-size: 0.98rem;
+      color: var(--color-text-muted);
+      max-width: 32rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .hero__meta-pill {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
+        background 0.12s ease-out, border-color 0.12s ease-out;
+    }
+
+    .btn--primary {
+      background: radial-gradient(circle at top left, #38bdf8 0, #0ea5e9 40%);
+      border-color: rgba(56, 189, 248, 0.8);
+      color: #0b1120;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn--primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.85);
+    }
+
+    .btn--ghost {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.6);
+      color: var(--color-text);
+    }
+
+    .btn--ghost:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-subtle);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .hero__note {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .hero__visual {
+      position: relative;
+      padding: var(--space-md);
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, #1e293b 0, #020617 55%);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero__visual-inner {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: linear-gradient(135deg, #020617 0, #0b1120 40%, #111827 100%);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .hero__visual-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .hero__visual-tag {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.75rem;
+    }
+
+    .hero__visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-sm);
+      font-size: 0.8rem;
+    }
+
+    .hero__visual-card {
+      padding: 0.6rem 0.7rem;
+      border-radius: var(--radius-sm);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .hero__visual-card-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .hero__visual-card-meta {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .hero__visual-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .hero__visual-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.12);
+      border: 1px solid rgba(22, 163, 74, 0.6);
+      color: #bbf7d0;
+    }
+
+    .hero__visual-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Section wrapper */
+
+    .section {
+      padding: var(--space-xl) 0 var(--space-lg);
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .section__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .section__title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .section__subtitle {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      max-width: 28rem;
+    }
+
+    @media (max-width: 768px) {
+      .section__header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Credential strip */
+
+    .credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .credential-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 0.85rem;
+    }
+
+    .credential-pill__icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #38bdf8 0, #6366f1 60%);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    /* Card grid */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      position: relative;
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: var(--shadow-subtle);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top left,
+        rgba(56, 189, 248, 0.12),
+        transparent 55%
+      );
+      opacity: 0;
+      transition: opacity 0.18s ease-out;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card__eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .card__title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .card__body {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-sm);
+    }
+
+    .card__meta {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .card__footer {
+      margin-top: var(--space-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .card__cta {
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* Case study carousel (simple grid for now) */
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 1024px) {
+      .case-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .case-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .case-card {
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: var(--shadow-subtle);
+      font-size: 0.85rem;
+    }
+
+    .case-card__title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .case-card__meta {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    /* Who I work with */
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 1024px) {
+      .who-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .who-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .who-card {
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: var(--shadow-subtle);
+      font-size: 0.85rem;
+    }
+
+    .who-card__title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    /* Executive profile */
+
+    .profile {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: var(--space-md);
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      .profile {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .profile__text {
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: var(--shadow-subtle);
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .profile__text h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 var(--space-sm);
+      color: var(--color-text);
+    }
+
+    .profile__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.85rem;
+    }
+
+    .profile__list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .profile__visual {
+      position: relative;
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at top left, #1e293b 0, #020617 55%);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: var(--shadow-soft);
+      padding: var(--space-md);
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .profile__visual-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-sm);
+    }
+
+    .profile__visual-tag {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.75rem;
+    }
+
+    .profile__visual-body {
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      padding: var(--space-sm);
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .profile__visual-row {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .profile__visual-col {
+      font-size: 0.8rem;
+    }
+
+    /* Footer */
+
+    .footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      padding: var(--space-lg) var(--space-md) var(--space-xl);
+      background: rgba(2, 6, 23, 0.98);
+    }
+
+    .footer__inner {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 2.5fr) minmax(0, 1.5fr) minmax(0, 1.5fr);
+      gap: var(--space-md);
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    @media (max-width: 900px) {
+      .footer__inner {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer__inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .footer__title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--color-text);
+    }
+
+    .footer__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer__list li {
+      margin-bottom: 0.3rem;
+    }
+
+    .footer__brand {
+      font-size: 0.8rem;
+      margin-top: var(--space-sm);
+      color: var(--color-text-muted);
+    }
+
+    .footer__bottom {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: var(--space-md) auto 0;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page__inner">
+      <!-- NAVIGATION -->
+      <header class="nav">
+        <div class="nav__brand">
+          <div class="nav__logo"></div>
+          <div class="nav__title">TWC Ltd · Tim Williams Consulting</div>
+        </div>
+        <nav class="nav__links">
+          <a href="/apm" class="nav__link">APM & Programme Wheel</a>
+          <a href="/about" class="nav__link">About</a>
+          <a href="/engagement-models" class="nav__link">Engagement Models</a>
+          <a href="/playbooks" class="nav__link">Playbooks</a>
+          <a href="/downloads" class="nav__link">Downloads</a>
+          <a href="/contact" class="nav__cta">
+            Book a Consultation
+            <span>↗</span>
+          </a>
+        </nav>
+      </header>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero__content">
+          <div class="hero__eyebrow">SC‑Cleared Senior IT Programme Manager</div>
+          <h1 class="hero__title">
+            Delivering complex, high‑risk
+            <span>cyber, cloud & infrastructure programmes</span>
+            with predictable outcomes.
+          </h1>
+          <p class="hero__subtitle">
+            30+ years delivering secure, large‑scale IT, cyber security and
+            cloud transformation programmes across NHS England, Defence and
+            global enterprise organisations.
+          </p>
+          <div class="hero__meta">
+            <div class="hero__meta-pill">NHS England · Defence · Global Enterprise</div>
+            <div class="hero__meta-pill">Programme leadership · Recovery · Governance</div>
+          </div>
+          <div class="hero__actions">
+            <a href="/calendar" class="btn btn--primary">
+              Book a Consultation
+              <span>↗</span>
+            </a>
+            <a href="/portfolio" class="btn btn--ghost">
+              View Portfolio
+            </a>
+          </div>
+          <div class="hero__note">
+            Fractional or full‑time programme leadership for organisations
+            needing senior delivery discipline without permanent overhead.
+          </div>
+        </div>
+        <aside class="hero__visual" aria-hidden="true">
+          <div class="hero__visual-inner">
+            <div class="hero__visual-header">
+              <div>Active Programmes Snapshot</div>
+              <div class="hero__visual-tag">SC‑Cleared · High‑Risk Environments</div>
+            </div>
+            <div class="hero__visual-grid">
+              <div class="hero__visual-card">
+                <div class="hero__visual-card-title">NHS England Cyber Uplift</div>
+                <div class="hero__visual-card-meta">
+                  CAF‑aligned identity, access, monitoring and resilience.
+                </div>
+              </div>
+              <div class="hero__visual-card">
+                <div class="hero__visual-card-title">Global Workplace Transformation</div>
+                <div class="hero__visual-card-meta">
+                  Windows 10/11 across 126,000 devices in 42 countries.
+                </div>
+              </div>
+              <div class="hero__visual-card">
+                <div class="hero__visual-card-title">Enterprise Cloud Transformation</div>
+                <div class="hero__visual-card-meta">
+                  Azure & AWS programmes across global organisations.
+                </div>
+              </div>
+              <div class="hero__visual-card">
+                <div class="hero__visual-card-title">Programme Recovery & Governance</div>
+                <div class="hero__visual-card-meta">
+                  Stabilising failing programmes and restoring predictable delivery.
+                </div>
+              </div>
+            </div>
+            <div class="hero__visual-footer">
+              <div class="hero__visual-status">
+                <span class="hero__visual-status-dot"></span>
+                Delivery stabilised · Risk reduced
+              </div>
+              <div>Hands‑on leadership · Measurable outcomes</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- CREDENTIAL STRIP -->
+      <section class="section" aria-label="Professional credentials">
+        <div class="section__header">
+          <div class="section__title">Credentials</div>
+          <p class="section__subtitle">
+            Trusted to lead secure, high‑risk programmes with full clearance,
+            recognised delivery frameworks and modern cloud expertise.
+          </p>
+        </div>
+        <div class="credentials">
+          <div class="credential-pill">
+            <div class="credential-pill__icon"></div>
+            <div>SC Cleared</div>
+          </div>
+          <div class="credential-pill">
+            <div class="credential-pill__icon"></div>
+            <div>PRINCE2 Practitioner</div>
+          </div>
+          <div class="credential-pill">
+            <div class="credential-pill__icon"></div>
+            <div>AgilePM</div>
+          </div>
+          <div class="credential-pill">
+            <div class="credential-pill__icon"></div>
+            <div>Azure Fundamentals</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICE PILLARS -->
+      <section class="section" aria-label="Core services">
+        <div class="section__header">
+          <div class="section__title">Core Services</div>
+          <p class="section__subtitle">
+            End‑to‑end programme leadership, recovery and transformation across
+            cyber security, cloud, infrastructure and modern workplace estates.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="card__eyebrow">Programme Leadership</div>
+            <h2 class="card__title">Fractional or Full‑Time Programme Leadership</h2>
+            <p class="card__body">
+              End‑to‑end leadership for complex transformation programmes,
+              providing structure, clarity and predictable delivery aligned to
+              business outcomes.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Best for organisations needing senior leadership without full‑time overhead.</div>
+              <a href="/engagement-models#programme-leadership" class="card__cta">
+                Explore model
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Programme Recovery</div>
+            <h2 class="card__title">Recovery of Failing or High‑Risk Programmes</h2>
+            <p class="card__body">
+              Rapid assessment, stabilisation and recovery of programmes at
+              risk, restoring confidence, momentum and delivery discipline.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Best for initiatives facing delays, misalignment or delivery uncertainty.</div>
+              <a href="/playbooks#programme-recovery" class="card__cta">
+                View recovery playbook
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Cyber Security</div>
+            <h2 class="card__title">Cyber Security Transformation</h2>
+            <p class="card__body">
+              Delivering enterprise cyber security programmes including CAF,
+              IAM, SIEM and resilience frameworks, aligned to regulatory and
+              operational requirements.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Best for regulated environments needing rapid uplift and measurable risk reduction.</div>
+              <a href="/apm#cyber" class="card__cta">
+                View cyber wheel
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Cloud & Infrastructure</div>
+            <h2 class="card__title">Cloud & Infrastructure Transformation</h2>
+            <p class="card__body">
+              Leading Azure, AWS and enterprise infrastructure programmes to
+              improve scalability, resilience and operational readiness across
+              global estates.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Best for organisations scaling cloud usage or modernising legacy estates.</div>
+              <a href="/apm#cloud" class="card__cta">
+                Explore cloud wheel
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Modern Workplace</div>
+            <h2 class="card__title">Modern Workplace Transformation</h2>
+            <p class="card__body">
+              Landing M365, endpoint and collaboration changes with
+              adoption‑ready teams, stable operations and clear ownership
+              across global device estates.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Best for organisations modernising user experience and productivity tooling.</div>
+              <a href="/apm#workplace" class="card__cta">
+                View workplace wheel
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Governance & PMO</div>
+            <h2 class="card__title">Programme Governance & PMO Leadership</h2>
+            <p class="card__body">
+              Practical governance, reporting and cadence patterns that enable
+              delivery rather than slow it down, built for pace and clarity.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Best for organisations needing clarity, rhythm and predictable delivery flow.</div>
+              <a href="/playbooks#pmo-operating-model" class="card__cta">
+                View PMO playbook
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CASE STUDIES -->
+      <section class="section" aria-label="Programme case studies">
+        <div class="section__header">
+          <div class="section__title">Programme Case Studies</div>
+          <p class="section__subtitle">
+            Real programmes, real constraints, real outcomes — demonstrating
+            delivery discipline across cyber, workplace and cloud
+            transformations.
+          </p>
+        </div>
+        <div class="case-grid">
+          <article class="case-card">
+            <h2 class="case-card__title">NHS England Cyber Security Programme</h2>
+            <div class="case-card__meta">
+              CAF‑aligned cyber security uplift implementing MFA, CyberArk,
+              Splunk and Azure security controls.
+            </div>
+            <p>
+              Delivered identity, access, monitoring and resilience patterns
+              across a complex, regulated environment with high operational
+              sensitivity.
+            </p>
+          </article>
+
+          <article class="case-card">
+            <h2 class="case-card__title">Global Workplace Transformation</h2>
+            <div class="case-card__meta">
+              Windows 10/11 transformation across 126,000 devices in 42
+              countries.
+            </div>
+            <p>
+              Led global device estate modernisation, balancing user experience,
+              operational stability and security requirements across multiple
+              regions.
+            </p>
+          </article>
+
+          <article class="case-card">
+            <h2 class="case-card__title">Enterprise Cloud Transformation</h2>
+            <div class="case-card__meta">
+              Azure and AWS programmes across global organisations.
+            </div>
+            <p>
+              Delivered cloud adoption and migration programmes aligning people,
+              process and technology to predictable outcomes without disruption.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- WHO I WORK WITH -->
+      <section class="section" aria-label="Who I work with">
+        <div class="section__header">
+          <div class="section__title">Who I Work With</div>
+          <p class="section__subtitle">
+            Organisations delivering complex technology change that need senior
+            programme leadership, recovery and governance in high‑risk
+            environments.
+          </p>
+        </div>
+        <div class="who-grid">
+          <article class="who-card">
+            <h2 class="who-card__title">Complex Cyber & Cloud Programmes</h2>
+            <p>
+              Organisations delivering complex cyber security or cloud
+              transformation programmes needing clear leadership, governance and
+              measurable outcomes.
+            </p>
+          </article>
+          <article class="who-card">
+            <h2 class="who-card__title">Delayed or Failing Programmes</h2>
+            <p>
+              Businesses with delayed, high‑risk or failing IT programmes
+              requiring stabilisation, recovery and restored confidence in
+              delivery.
+            </p>
+          </article>
+          <article class="who-card">
+            <h2 class="who-card__title">Enterprises Needing Senior Leadership</h2>
+            <p>
+              Enterprises needing senior programme leadership, PMO governance
+              and delivery assurance across large‑scale transformation
+              portfolios.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- EXECUTIVE PROFILE -->
+      <section class="section" aria-label="Executive profile">
+        <div class="section__header">
+          <div class="section__title">Executive Profile</div>
+          <p class="section__subtitle">
+            Hands‑on programme manager specialising in stabilising complex
+            programmes, improving delivery performance and ensuring successful
+            outcomes across high‑risk environments.
+          </p>
+        </div>
+        <div class="profile">
+          <div class="profile__text">
+            <h3>SC‑Cleared Senior IT Programme Manager</h3>
+            <p>
+              Delivering large‑scale cyber security, cloud transformation and
+              enterprise infrastructure programmes across NHS England, Defence
+              and global organisations.
+            </p>
+            <ul class="profile__list">
+              <li>30+ years of real‑world programme delivery.</li>
+              <li>Specialist in programme recovery and stabilisation.</li>
+              <li>Hands‑on leadership — not just advisory oversight.</li>
+              <li>Practical governance and PMO patterns built for pace.</li>
+              <li>Comfortable in regulated, high‑security environments.</li>
+            </ul>
+          </div>
+          <aside class="profile__visual" aria-hidden="true">
+            <div class="profile__visual-header">
+              <div>Delivery Operating View</div>
+              <div class="profile__visual-tag">Programme Wheel · APM‑Aligned</div>
+            </div>
+            <div class="profile__visual-body">
+              <div class="profile__visual-row">
+                <div class="profile__visual-col">
+                  <strong>Programme Delivery</strong><br />
+                  Structure, cadence and governance aligned to outcomes.
+                </div>
+                <div class="profile__visual-col">
+                  <strong>Risk & Recovery</strong><br />
+                  Early warning, stabilisation and recovery patterns.
+                </div>
+              </div>
+              <div class="profile__visual-row">
+                <div class="profile__visual-col">
+                  <strong>Cyber & Cloud</strong><br />
+                  CAF, IAM, SIEM, Azure, AWS and resilience frameworks.
+                </div>
+                <div class="profile__visual-col">
+                  <strong>Modern Workplace</strong><br />
+                  M365, endpoint, collaboration and global device estates.
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PLAYBOOKS & ENGAGEMENT PREVIEW -->
+      <section class="section" aria-label="Playbooks and engagement models">
+        <div class="section__header">
+          <div class="section__title">Playbooks & Engagement Models</div>
+          <p class="section__subtitle">
+            Structured, repeatable delivery frameworks and engagement models
+            built from real programmes, designed for pace, clarity and measurable
+            outcomes.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="card__eyebrow">Playbook</div>
+            <h2 class="card__title">Programme Recovery Playbook</h2>
+            <p class="card__body">
+              Rapid assessment, stabilisation and recovery of programmes at
+              risk, restoring confidence and momentum.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Best for initiatives facing delays or delivery uncertainty.</div>
+              <a href="/playbooks#programme-recovery" class="card__cta">
+                View playbook
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Playbook</div>
+            <h2 class="card__title">Service Transition Playbook</h2>
+            <p class="card__body">
+              Ensuring new services land smoothly with clear ownership,
+              documentation and operational readiness.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Best for programmes introducing new platforms or major capability changes.</div>
+              <a href="/playbooks#service-transition" class="card__cta">
+                View playbook
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Engagement Model</div>
+            <h2 class="card__title">Fractional Programme Leadership</h2>
+            <p class="card__body">
+              Senior programme leadership on a fractional basis, providing
+              delivery discipline without full‑time overhead.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Best for organisations needing senior leadership at critical phases.</div>
+              <a href="/engagement-models#fractional" class="card__cta">
+                Explore model
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- DOWNLOADS PREVIEW -->
+      <section class="section" aria-label="Downloads preview">
+        <div class="section__header">
+          <div class="section__title">Downloads</div>
+          <p class="section__subtitle">
+            Access CVs, portfolio documents and playbooks designed for Safari
+            and modern devices, ready for stakeholders and hiring managers.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="card__eyebrow">CV</div>
+            <h2 class="card__title">Executive CV (PDF)</h2>
+            <p class="card__body">
+              Detailed CV covering programme leadership, cyber, cloud and
+              infrastructure delivery across NHS, Defence and global
+              organisations.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Opens in a new window.</div>
+              <a href="/downloads#cv-pdf" class="card__cta">
+                Open PDF
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Portfolio</div>
+            <h2 class="card__title">Portfolio Presentation</h2>
+            <p class="card__body">
+              Visual portfolio presentation summarising key programmes, case
+              studies and delivery patterns.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Available as PDF, PPSX and Safari‑compatible package.</div>
+              <a href="/downloads#portfolio" class="card__cta">
+                View options
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Playbooks</div>
+            <h2 class="card__title">PMO & Stakeholder Playbooks</h2>
+            <p class="card__body">
+              Practical playbooks covering PMO operating models, stakeholder
+              transformation and cyber & IAM pitfalls.
+            </p>
+            <div class="card__footer">
+              <div class="card__meta">Optimised for modern teams and remote‑friendly delivery.</div>
+              <a href="/downloads#playbooks" class="card__cta">
+                Open playbooks
+                <span>↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__title">TWC Ltd · Tim Williams Consulting Ltd</div>
+          <p>
+            SC‑Cleared Senior IT Programme Manager providing programme
+            leadership, recovery and governance for complex technology
+            transformation programmes.
+          </p>
+          <div class="footer__brand">
+            Built for clarity, delivery discipline and measurable outcomes.
+          </div>
+        </div>
+        <div>
+          <div class="footer__title">Contact</div>
+          <ul class="footer__list">
+            <li>Email: timwilliams07@outlook.com</li>
+            <li>Email: info@twc-ltd.uk</li>
+            <li>Phone: 07801 453322</li>
+            <li><a href="https://www.linkedin.com">LinkedIn: Tim Williams</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__title">Quick Links</div>
+          <ul class="footer__list">
+            <li><a href="/apm">APM & Programme Wheel</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/engagement-models">Engagement Models</a></li>
+            <li><a href="/playbooks">Playbooks</a></li>
+            <li><a href="/downloads">Downloads</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <div>© TWC Ltd · Tim Williams Consulting Ltd</div>
+        <div>SC‑Cleared · PRINCE2 Practitioner · AgilePM · Azure Fundamentals</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

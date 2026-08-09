@@ -12,517 +12,745 @@
 
 <style>
 /* =========================================================
-   PROFESSIONAL PRESENCE HUB
-   Complete page stylesheet
+   PROFESSIONAL PRESENCE
+   Complete page-specific stylesheet
    ========================================================= */
 
-/* ---------------------------------------------------------
-   PAGE VARIABLES
-   --------------------------------------------------------- */
-
-:root {
-    --presence-bg: #f5f7fa;
-    --presence-card: #ffffff;
-    --presence-card-soft: #f8fafc;
-
-    --presence-text: #111827;
-    --presence-heading: #0a2540;
-    --presence-subtext: #4b5563;
-    --presence-muted: #667085;
-
-    --presence-accent: #0a66c2;
-    --presence-accent-light: #7ac0f9;
-    --presence-accent-soft: rgba(10, 102, 194, 0.08);
-
-    --presence-border: #e5e7eb;
-    --presence-border-strong: #d7dde5;
-
-    --presence-shadow:
-        0 4px 14px rgba(15, 23, 42, 0.06);
-
-    --presence-shadow-hover:
-        0 12px 28px rgba(15, 23, 42, 0.11);
-
-    --presence-radius: 14px;
-}
-
-
-/* ---------------------------------------------------------
-   DARK MODE
-   --------------------------------------------------------- */
-
-body.dark {
-    --presence-bg: #0f172a;
-    --presence-card: #111827;
-    --presence-card-soft: #172033;
-
-    --presence-text: #e5e7eb;
-    --presence-heading: #f1f5f9;
-    --presence-subtext: #cbd5e1;
-    --presence-muted: #94a3b8;
-
-    --presence-accent: #38bdf8;
-    --presence-accent-light: #7dd3fc;
-    --presence-accent-soft: rgba(56, 189, 248, 0.10);
-
-    --presence-border: #273449;
-    --presence-border-strong: #334155;
-
-    --presence-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.28);
-
-    --presence-shadow-hover:
-        0 14px 30px rgba(0, 0, 0, 0.38);
-}
-
-
-/* ---------------------------------------------------------
-   PAGE
-   --------------------------------------------------------- */
-
 body.page-presence {
-    background: var(--presence-bg);
-    color: var(--presence-text);
-    transition:
-        background 0.3s ease,
-        color 0.3s ease;
+    background: var(--bg);
+    color: var(--text-main);
 }
 
+/* =========================================================
+   PAGE CONTAINER
+   ========================================================= */
 
-/* ---------------------------------------------------------
-   MAIN CONTAINER
-   --------------------------------------------------------- */
-
-.page-container {
-    width: min(1100px, calc(100% - 40px));
+.presence-page {
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 48px 0 70px;
+    padding: 32px 24px 70px;
 }
 
-
-/* ---------------------------------------------------------
+/* =========================================================
    HERO
-   --------------------------------------------------------- */
+   ========================================================= */
 
-.hero-section {
-    margin-bottom: 42px;
-    padding: 0 4px;
+.presence-hero {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+    padding: 42px 44px;
+    border-radius: 22px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10, 66, 110, 0.98),
+            rgba(0, 31, 63, 0.98)
+        );
+    color: #ffffff;
+    box-shadow: 0 12px 32px rgba(0, 31, 63, 0.16);
 }
 
-.hero-section h1 {
-    margin: 0 0 12px;
-    color: var(--presence-heading);
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    line-height: 1.15;
-    font-weight: 750;
-    letter-spacing: -0.025em;
+.presence-hero::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -80px;
+    top: -110px;
+    border-radius: 50%;
+    background: rgba(122, 192, 249, 0.16);
 }
 
-.hero-section p {
-    max-width: 760px;
+.presence-hero::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    right: 90px;
+    bottom: -120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.presence-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+}
+
+.presence-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding: 7px 13px;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.09);
+    color: #dcefff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.presence-hero h1 {
+    margin: 0 0 14px;
+    color: #ffffff;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.presence-hero p {
     margin: 0;
-    color: var(--presence-subtext);
+    max-width: 720px;
+    color: rgba(255,255,255,0.86);
     font-size: 1.08rem;
     line-height: 1.65;
 }
 
+/* =========================================================
+   INTRO / IDENTITY AREA
+   ========================================================= */
 
-/* ---------------------------------------------------------
-   HERO UNDERLINE / ACCENT
-   --------------------------------------------------------- */
-
-.hero-section::after {
-    content: "";
-    display: block;
-    width: 64px;
-    height: 4px;
-    margin-top: 22px;
-    border-radius: 999px;
-    background: var(--presence-accent);
-}
-
-
-/* ---------------------------------------------------------
-   PROFILE GRID
-   --------------------------------------------------------- */
-
-.grid {
+.identity-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.8fr);
     gap: 22px;
+    margin-bottom: 38px;
 }
 
+.identity-card,
+.verification-card {
+    border-radius: 18px;
+    background: var(--card-bg, #ffffff);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.07);
+}
 
-/* ---------------------------------------------------------
-   PRESENCE CARD
-   --------------------------------------------------------- */
+.identity-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 28px;
+}
+
+.identity-icon {
+    flex: 0 0 72px;
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: #e7f2ff;
+    color: #0a66c2;
+    font-size: 30px;
+}
+
+.identity-content {
+    min-width: 0;
+}
+
+.identity-label {
+    margin: 0 0 5px;
+    color: #667085;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.identity-card h2 {
+    margin: 0 0 7px;
+    color: var(--text-main);
+    font-size: 1.5rem;
+}
+
+.identity-card p {
+    margin: 0;
+    color: var(--text-sub, #555);
+    line-height: 1.55;
+}
+
+.identity-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 13px;
+    color: #0a66c2;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.identity-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   VERIFICATION CARD
+   ========================================================= */
+
+.verification-card {
+    padding: 25px;
+    background: linear-gradient(
+        145deg,
+        #f7fbff,
+        #eef6ff
+    );
+}
+
+.verification-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    background: #dceeff;
+    color: #0a66c2;
+    font-size: 19px;
+}
+
+.verification-card h3 {
+    margin: 0 0 8px;
+    color: #003a73;
+    font-size: 1.05rem;
+}
+
+.verification-card p {
+    margin: 0;
+    color: #52606d;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+/* =========================================================
+   SECTION HEADERS
+   ========================================================= */
+
+.presence-section {
+    margin-bottom: 40px;
+}
+
+.presence-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 17px;
+}
+
+.presence-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-marker {
+    width: 8px;
+    height: 34px;
+    border-radius: 8px;
+    background: #0a66c2;
+}
+
+.presence-section h2 {
+    margin: 0;
+    color: var(--text-main);
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -0.25px;
+}
+
+.presence-section-intro {
+    margin: 5px 0 0 20px;
+    color: var(--text-sub, #667085);
+    font-size: 0.92rem;
+}
+
+/* =========================================================
+   CREDENTIAL GRID
+   ========================================================= */
+
+.presence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* =========================================================
+   PRESENCE CARDS
+   ========================================================= */
 
 .presence-card {
     position: relative;
-
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-
-    min-height: 150px;
-
-    padding: 25px 26px;
-
-    background: var(--presence-card);
-
-    border: 1px solid var(--presence-border);
-    border-left: 4px solid var(--presence-accent);
-
-    border-radius: var(--presence-radius);
-
-    box-shadow: var(--presence-shadow);
-
+    min-height: 205px;
+    padding: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 17px;
+    background: var(--card-bg, #ffffff);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.055);
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease,
         border-color 0.25s ease;
 }
 
-
-/* ---------------------------------------------------------
-   CARD HOVER
-   --------------------------------------------------------- */
+.presence-card::after {
+    content: "";
+    position: absolute;
+    right: -45px;
+    bottom: -55px;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    background: rgba(10,102,194,0.035);
+    pointer-events: none;
+}
 
 .presence-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--presence-shadow-hover);
-    border-color: var(--presence-border-strong);
-    border-left-color: var(--presence-accent);
+    transform: translateY(-5px);
+    border-color: rgba(10,102,194,0.18);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.10);
 }
 
+/* =========================================================
+   CARD TOP
+   ========================================================= */
 
-/* ---------------------------------------------------------
-   CARD HEADING
-   --------------------------------------------------------- */
+.presence-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
 
-.presence-card h3 {
+.presence-card-icon {
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
-    gap: 11px;
-
-    margin: 0 0 20px;
-
-    color: var(--presence-heading);
-
-    font-size: 1.12rem;
-    line-height: 1.35;
-    font-weight: 700;
-}
-
-
-/* ---------------------------------------------------------
-   CARD ICON
-   --------------------------------------------------------- */
-
-.presence-card .presence-icon {
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
-
-    width: 38px;
-    height: 38px;
-
-    flex: 0 0 38px;
-
-    border-radius: 10px;
-
-    background: var(--presence-accent-soft);
-
-    color: var(--presence-accent);
-
-    font-size: 1.15rem;
+    flex: 0 0 48px;
+    border-radius: 13px;
+    font-size: 21px;
 }
 
-
-/* ---------------------------------------------------------
-   CARD DESCRIPTION
-   --------------------------------------------------------- */
-
-.presence-card p {
-    margin: 0 0 18px;
-
-    color: var(--presence-subtext);
-
-    font-size: 0.96rem;
-    line-height: 1.55;
+.icon-linkedin {
+    background: #e6f3ff;
+    color: #0a66c2;
 }
 
+.icon-company {
+    background: #edf2f7;
+    color: #243b53;
+}
 
-/* ---------------------------------------------------------
-   CARD LINK
-   --------------------------------------------------------- */
+.icon-credly {
+    background: #f2ebff;
+    color: #6b35c9;
+}
 
-.presence-card a {
+.icon-apm {
+    background: #fff3dc;
+    color: #a86d00;
+}
+
+.icon-pmi {
+    background: #eaf7ef;
+    color: #14783f;
+}
+
+.icon-microsoft {
+    background: #eaf2ff;
+    color: #2563c7;
+}
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.presence-status {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 5px;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475467;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.35px;
+    text-transform: uppercase;
+}
 
-    width: fit-content;
+.presence-status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22a06b;
+}
 
-    color: var(--presence-accent);
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
 
-    font-size: 0.95rem;
-    font-weight: 650;
+.presence-card h3 {
+    margin: 20px 0 7px;
+    color: var(--text-main);
+    font-size: 1.05rem;
+    line-height: 1.3;
+}
 
+.presence-card-description {
+    margin: 0;
+    color: var(--text-sub, #667085);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.presence-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 18px;
+}
+
+.presence-card-link {
+    color: #0a66c2;
+    font-size: 0.82rem;
+    font-weight: 700;
     text-decoration: none;
-
-    transition:
-        color 0.2s ease,
-        gap 0.2s ease;
+    word-break: break-word;
 }
 
-.presence-card a::after {
-    content: "→";
-    font-size: 1rem;
-    transition: transform 0.2s ease;
+.presence-card-link:hover {
+    text-decoration: underline;
 }
 
-.presence-card a:hover {
-    color: var(--presence-heading);
+.open-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    color: #001f3f;
+    font-size: 0.78rem;
+    font-weight: 800;
     text-decoration: none;
 }
 
-.presence-card a:hover::after {
-    transform: translateX(4px);
+.open-link:hover {
+    color: #0a66c2;
 }
 
+/* =========================================================
+   PROFESSIONAL NETWORK SECTION
+   ========================================================= */
 
-/* ---------------------------------------------------------
-   CTA AREA
-   --------------------------------------------------------- */
+.network-section .section-marker {
+    background: #0a66c2;
+}
+
+/* =========================================================
+   CREDENTIALS SECTION
+   ========================================================= */
+
+.credentials-section .section-marker {
+    background: #6b35c9;
+}
+
+/* =========================================================
+   BUSINESS SECTION
+   ========================================================= */
+
+.business-section .section-marker {
+    background: #14783f;
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
 
 .presence-cta {
-    margin-top: 48px;
-    padding: 34px 28px;
-
-    background: var(--presence-card);
-
-    border: 1px solid var(--presence-border);
-    border-radius: var(--presence-radius);
-
-    box-shadow: var(--presence-shadow);
-
+    position: relative;
+    overflow: hidden;
+    margin-top: 46px;
+    padding: 34px 38px;
+    border-radius: 20px;
+    background: #f1f7fd;
+    border: 1px solid #d8e9f8;
     text-align: center;
 }
 
-
-/* ---------------------------------------------------------
-   CTA HEADING
-   --------------------------------------------------------- */
+.presence-cta::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    left: -80px;
+    bottom: -100px;
+    border-radius: 50%;
+    background: rgba(10,102,194,0.07);
+}
 
 .presence-cta h2 {
-    margin: 0 0 10px;
-
-    color: var(--presence-heading);
-
-    font-size: 1.45rem;
-    font-weight: 700;
+    position: relative;
+    z-index: 1;
+    margin: 0 0 9px;
+    color: #001f3f;
+    font-size: 1.55rem;
 }
 
 .presence-cta p {
+    position: relative;
+    z-index: 1;
     max-width: 650px;
-    margin: 0 auto 24px;
-
-    color: var(--presence-subtext);
-
-    line-height: 1.6;
+    margin: 0 auto 21px;
+    color: #52606d;
+    line-height: 1.55;
 }
 
-
-/* ---------------------------------------------------------
+/* =========================================================
    CTA BUTTON
-   --------------------------------------------------------- */
+   ========================================================= */
 
-.cta-btn {
+.presence-cta-btn {
+    position: relative;
+    z-index: 2;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 9px;
-
+    gap: 8px;
     padding: 12px 25px;
-
+    border: 2px solid #001f3f;
+    border-radius: 999px;
     background: #ffffff;
     color: #000000;
-
-    border: 2px solid #000000;
-    border-radius: 999px;
-
     font-size: 0.95rem;
-    font-weight: 650;
-
+    font-weight: 700;
     text-decoration: none;
-
-    transition:
-        background 0.25s ease,
-        color 0.25s ease,
-        border-color 0.25s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: all 0.25s ease;
 }
 
-.cta-btn::after {
-    content: "→";
-    transition: transform 0.2s ease;
-}
-
-.cta-btn:hover {
+.presence-cta-btn:hover {
     background: #7ac0f9;
     border-color: #001f3f;
     color: #ffffff;
-
     transform: translateY(-2px);
-
-    box-shadow: 0 6px 16px rgba(0, 31, 63, 0.18);
 }
 
-.cta-btn:hover::after {
-    transform: translateX(4px);
+/* =========================================================
+   FLOATING BUTTONS
+   ========================================================= */
+
+.presence-page ~ .fab,
+body.page-presence .fab {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #001f3f;
+    color: #ffffff;
+    font-size: 21px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    z-index: 9999;
 }
 
-
-/* ---------------------------------------------------------
-   DARK MODE CTA
-   --------------------------------------------------------- */
-
-body.dark .cta-btn {
-    background: transparent;
-    color: #f1f5f9;
-    border-color: #cbd5e1;
+body.page-presence .fab:hover {
+    background: #0078ff;
 }
 
-body.dark .cta-btn:hover {
-    background: #38bdf8;
-    color: #07111f;
-    border-color: #38bdf8;
+body.page-presence .fab-booking {
+    bottom: 80px;
+    background: #0078ff;
 }
 
+body.page-presence .fab-booking:hover {
+    background: #005fcc;
+}
 
-/* ---------------------------------------------------------
-   RESPONSIVE — TABLET
-   --------------------------------------------------------- */
+/* =========================================================
+   DARK MODE
+   ========================================================= */
 
-@media (max-width: 800px) {
+body.dark.page-presence .identity-card,
+body.dark.page-presence .presence-card {
+    background: var(--card-bg, #1f2937);
+    border-color: rgba(255,255,255,0.08);
+}
 
-    .page-container {
-        width: min(100% - 32px, 680px);
-        padding-top: 38px;
-        padding-bottom: 55px;
+body.dark.page-presence .verification-card {
+    background: #172b40;
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark.page-presence .verification-card h3,
+body.dark.page-presence .presence-cta h2 {
+    color: #dcefff;
+}
+
+body.dark.page-presence .verification-card p,
+body.dark.page-presence .presence-cta p {
+    color: #b7c3d0;
+}
+
+body.dark.page-presence .presence-cta {
+    background: #172b40;
+    border-color: rgba(122,192,249,0.18);
+}
+
+body.dark.page-presence .presence-card::after {
+    background: rgba(122,192,249,0.035);
+}
+
+body.dark.page-presence .identity-label {
+    color: #aab7c4;
+}
+
+body.dark.page-presence .presence-status {
+    background: rgba(255,255,255,0.07);
+    color: #cbd5df;
+}
+
+body.dark.page-presence .open-link {
+    color: #dcefff;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .presence-page {
+        padding: 26px 20px 60px;
     }
 
-    .hero-section {
-        margin-bottom: 32px;
+    .presence-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .grid {
+    .identity-grid {
         grid-template-columns: 1fr;
-        gap: 18px;
     }
 
-    .presence-card {
-        min-height: auto;
+    .presence-hero {
+        padding: 34px 30px;
     }
 }
 
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-/* ---------------------------------------------------------
-   RESPONSIVE — MOBILE
-   --------------------------------------------------------- */
+@media (max-width: 600px) {
 
-@media (max-width: 480px) {
-
-    .page-container {
-        width: calc(100% - 24px);
-        padding-top: 28px;
-        padding-bottom: 45px;
+    .presence-page {
+        padding: 20px 14px 50px;
     }
 
-    .hero-section {
-        padding: 0 2px;
-        margin-bottom: 28px;
+    .presence-hero {
+        padding: 28px 22px;
+        border-radius: 17px;
+        margin-bottom: 22px;
     }
 
-    .hero-section h1 {
+    .presence-hero h1 {
         font-size: 2rem;
-        line-height: 1.18;
     }
 
-    .hero-section p {
-        font-size: 1rem;
-        line-height: 1.55;
+    .presence-hero p {
+        font-size: 0.96rem;
     }
 
-    .hero-section::after {
-        margin-top: 18px;
-    }
-
-    .grid {
+    .identity-card {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 23px;
         gap: 16px;
     }
 
-    .presence-card {
-        padding: 21px 20px;
-        border-left-width: 4px;
-        border-radius: 12px;
+    .identity-icon {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+        font-size: 24px;
     }
 
-    .presence-card h3 {
-        margin-bottom: 17px;
-        font-size: 1.05rem;
-    }
-
-    .presence-card .presence-icon {
-        width: 35px;
-        height: 35px;
-        flex-basis: 35px;
-        font-size: 1rem;
-    }
-
-    .presence-card a {
-        font-size: 0.92rem;
-        overflow-wrap: anywhere;
-    }
-
-    .presence-cta {
-        margin-top: 32px;
-        padding: 28px 20px;
-    }
-
-    .presence-cta h2 {
+    .identity-card h2 {
         font-size: 1.3rem;
     }
 
-    .presence-cta p {
-        font-size: 0.95rem;
+    .presence-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
     }
 
-    .cta-btn {
-        width: 100%;
-        box-sizing: border-box;
+    .presence-card {
+        min-height: 190px;
+        padding: 20px;
+    }
+
+    .presence-section-header {
+        display: block;
+    }
+
+    .presence-section h2 {
+        font-size: 1.35rem;
+    }
+
+    .presence-section-intro {
+        margin: 7px 0 0 20px;
+    }
+
+    .presence-cta {
+        padding: 28px 20px;
+        border-radius: 17px;
+    }
+
+    .presence-cta h2 {
+        font-size: 1.35rem;
+    }
+
+    body.page-presence .fab {
+        right: 14px;
+        bottom: 14px;
+    }
+
+    body.page-presence .fab-booking {
+        bottom: 72px;
     }
 }
 
-
-/* ---------------------------------------------------------
+/* =========================================================
    REDUCED MOTION
-   --------------------------------------------------------- */
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     .presence-card,
-    .presence-card a,
-    .presence-card a::after,
-    .cta-btn,
-    .cta-btn::after {
+    .presence-cta-btn {
         transition: none;
     }
 
     .presence-card:hover,
-    .cta-btn:hover {
+    .presence-cta-btn:hover {
         transform: none;
     }
 }
@@ -548,183 +776,602 @@ fetch("header.html")
 });
 </script>
 
-<main class="page-container">
+
+<main class="presence-page">
 
 
-    <!-- =================================================
-         HERO
-         ================================================= -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-    <section class="hero-section">
+<section class="presence-hero">
+
+    <div class="presence-hero-content">
+
+        <div class="presence-kicker">
+            <i class="fa-solid fa-circle-check"></i>
+            Professional credentials &amp; profiles
+        </div>
 
         <h1>Professional Presence Hub</h1>
 
         <p>
-            Your verified professional profiles, memberships,
-            certifications and learning records — all in one place.
+            A central view of my professional identity, memberships,
+            certifications, learning records and business presence
+            across recognised professional platforms.
         </p>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- =================================================
-         PROFESSIONAL PROFILES
-         ================================================= -->
 
-    <section class="grid"
-             aria-label="Professional profiles and credentials">
+<!-- =====================================================
+     PROFESSIONAL IDENTITY
+===================================================== -->
+
+<section class="identity-grid">
 
 
-        <!-- LINKEDIN -->
-        <article class="presence-card">
+    <article class="identity-card">
 
-            <h3>
-                <span class="presence-icon">🌐</span>
-                LinkedIn Profile
-            </h3>
+        <div class="identity-icon">
+            <i class="fa-solid fa-user-tie"></i>
+        </div>
+
+        <div class="identity-content">
+
+            <p class="identity-label">
+                Professional Identity
+            </p>
+
+            <h2>Tim Williams</h2>
+
+            <p>
+                Senior IT Programme Manager and IT Transformation Leader
+                specialising in cyber security, cloud transformation,
+                enterprise infrastructure and digital workplace programmes.
+            </p>
 
             <a
+                class="identity-link"
                 href="https://linkedin.com/in/timwilliams77"
                 target="_blank"
                 rel="noopener noreferrer">
 
-                linkedin.com/in/timwilliams77
+                View professional profile
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
             </a>
 
+        </div>
+
+    </article>
+
+
+
+    <article class="verification-card">
+
+        <div class="verification-icon">
+            <i class="fa-solid fa-shield-check"></i>
+        </div>
+
+        <h3>Independent Verification</h3>
+
+        <p>
+            These links provide direct access to recognised professional
+            platforms where memberships, credentials, learning records
+            and professional activity can be independently reviewed.
+        </p>
+
+    </article>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROFESSIONAL NETWORKS
+===================================================== -->
+
+<section class="presence-section network-section">
+
+    <div class="presence-section-header">
+
+        <div>
+
+            <div class="presence-section-heading">
+
+                <span class="section-marker"></span>
+
+                <h2>Professional Networks</h2>
+
+            </div>
+
+            <p class="presence-section-intro">
+                Professional profiles and industry memberships.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="presence-grid">
+
+
+        <!-- LINKEDIN -->
+
+        <article class="presence-card">
+
+            <div class="presence-card-top">
+
+                <div class="presence-card-icon icon-linkedin">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+
+                <span class="presence-status">
+                    Professional Profile
+                </span>
+
+            </div>
+
+            <h3>LinkedIn Profile</h3>
+
+            <p class="presence-card-description">
+                Professional career profile, experience, programme
+                leadership background and industry network.
+            </p>
+
+            <div class="presence-card-footer">
+
+                <a
+                    class="presence-card-link"
+                    href="https://linkedin.com/in/timwilliams77"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    linkedin.com/in/timwilliams77
+
+                </a>
+
+                <a
+                    class="open-link"
+                    href="https://linkedin.com/in/timwilliams77"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    Open
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+            </div>
+
         </article>
+
 
 
         <!-- COMPANY LINKEDIN -->
+
         <article class="presence-card">
 
-            <h3>
-                <span class="presence-icon">🏢</span>
-                Company LinkedIn
-            </h3>
+            <div class="presence-card-top">
 
-            <a
-                href="https://www.linkedin.com/company/tim-williams-consulting/"
-                target="_blank"
-                rel="noopener noreferrer">
+                <div class="presence-card-icon icon-company">
+                    <i class="fa-brands fa-linkedin"></i>
+                </div>
 
-                Tim Williams Consulting
+                <span class="presence-status">
+                    Business
+                </span>
 
-            </a>
+            </div>
+
+            <h3>Tim Williams Consulting</h3>
+
+            <p class="presence-card-description">
+                Company presence for TWC Ltd, consulting services,
+                transformation expertise and business activity.
+            </p>
+
+            <div class="presence-card-footer">
+
+                <a
+                    class="presence-card-link"
+                    href="https://www.linkedin.com/company/tim-williams-consulting/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    Tim Williams Consulting
+
+                </a>
+
+                <a
+                    class="open-link"
+                    href="https://www.linkedin.com/company/tim-williams-consulting/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    Open
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+            </div>
 
         </article>
 
-
-        <!-- CREDLY -->
-        <article class="presence-card">
-
-            <h3>
-                <span class="presence-icon">🎓</span>
-                Credly Certifications
-            </h3>
-
-            <a
-                href="https://www.credly.com/users/tim-williams.e51205ae/badges#credly"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                View Credly Profile
-
-            </a>
-
-        </article>
-
-
-        <!-- APM -->
-        <article class="presence-card">
-
-            <h3>
-                <span class="presence-icon">🛡️</span>
-                APM Dashboard
-            </h3>
-
-            <a
-                href="https://www.apm.org.uk/myapm/my-dashboard/"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                APM Member Dashboard
-
-            </a>
-
-        </article>
 
 
         <!-- PMI -->
+
         <article class="presence-card">
 
-            <h3>
-                <span class="presence-icon">📘</span>
-                PMI Community
-            </h3>
+            <div class="presence-card-top">
 
-            <a
-                href="https://community.pmi.org/profile/Timwilliams77"
-                target="_blank"
-                rel="noopener noreferrer">
+                <div class="presence-card-icon icon-pmi">
+                    <i class="fa-solid fa-people-group"></i>
+                </div>
 
-                PMI Profile
+                <span class="presence-status">
+                    Membership
+                </span>
 
-            </a>
+            </div>
+
+            <h3>PMI Community</h3>
+
+            <p class="presence-card-description">
+                Professional profile and participation within the
+                Project Management Institute community.
+            </p>
+
+            <div class="presence-card-footer">
+
+                <a
+                    class="presence-card-link"
+                    href="https://community.pmi.org/profile/Timwilliams77"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    PMI Community Profile
+
+                </a>
+
+                <a
+                    class="open-link"
+                    href="https://community.pmi.org/profile/Timwilliams77"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    Open
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+            </div>
 
         </article>
+
+
+
+        <!-- APM -->
+
+        <article class="presence-card">
+
+            <div class="presence-card-top">
+
+                <div class="presence-card-icon icon-apm">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <span class="presence-status">
+                    Membership
+                </span>
+
+            </div>
+
+            <h3>APM Dashboard</h3>
+
+            <p class="presence-card-description">
+                Association for Project Management member dashboard
+                and professional development record.
+            </p>
+
+            <div class="presence-card-footer">
+
+                <a
+                    class="presence-card-link"
+                    href="https://www.apm.org.uk/myapm/my-dashboard/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    APM Member Dashboard
+
+                </a>
+
+                <a
+                    class="open-link"
+                    href="https://www.apm.org.uk/myapm/my-dashboard/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    Open
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CERTIFICATIONS & LEARNING
+===================================================== -->
+
+<section class="presence-section credentials-section">
+
+    <div class="presence-section-header">
+
+        <div>
+
+            <div class="presence-section-heading">
+
+                <span class="section-marker"></span>
+
+                <h2>Certifications &amp; Learning</h2>
+
+            </div>
+
+            <p class="presence-section-intro">
+                External records supporting professional development
+                and technical learning.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="presence-grid">
+
+
+        <!-- CREDLY -->
+
+        <article class="presence-card">
+
+            <div class="presence-card-top">
+
+                <div class="presence-card-icon icon-credly">
+                    <i class="fa-solid fa-certificate"></i>
+                </div>
+
+                <span class="presence-status">
+                    Certifications
+                </span>
+
+            </div>
+
+            <h3>Credly Certifications</h3>
+
+            <p class="presence-card-description">
+                Digital certification badges and externally verifiable
+                professional credentials.
+            </p>
+
+            <div class="presence-card-footer">
+
+                <a
+                    class="presence-card-link"
+                    href="https://www.credly.com/users/tim-williams.e51205ae"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    View Credly Profile
+
+                </a>
+
+                <a
+                    class="open-link"
+                    href="https://www.credly.com/users/tim-williams.e51205ae"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    Open
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+            </div>
+
+        </article>
+
 
 
         <!-- MICROSOFT -->
+
         <article class="presence-card">
 
-            <h3>
-                <span class="presence-icon">💼</span>
-                Microsoft Learn
-            </h3>
+            <div class="presence-card-top">
+
+                <div class="presence-card-icon icon-microsoft">
+                    <i class="fa-brands fa-microsoft"></i>
+                </div>
+
+                <span class="presence-status">
+                    Learning Record
+                </span>
+
+            </div>
+
+            <h3>Microsoft Learn</h3>
+
+            <p class="presence-card-description">
+                Microsoft learning transcript covering technical,
+                cloud and enterprise technology development.
+            </p>
+
+            <div class="presence-card-footer">
+
+                <a
+                    class="presence-card-link"
+                    href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    Microsoft Transcript
+
+                </a>
+
+                <a
+                    class="open-link"
+                    href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    Open
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROFESSIONAL DEVELOPMENT SUMMARY
+===================================================== -->
+
+<section class="presence-section">
+
+    <div class="presence-section-header">
+
+        <div>
+
+            <div class="presence-section-heading">
+
+                <span class="section-marker"></span>
+
+                <h2>Professional Development</h2>
+
+            </div>
+
+            <p class="presence-section-intro">
+                A broader view of the professional ecosystem supporting
+                my programme leadership practice.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="identity-grid">
+
+        <article class="identity-card">
+
+            <div class="identity-icon">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+
+            <div class="identity-content">
+
+                <p class="identity-label">
+                    Professional Portfolio
+                </p>
+
+                <h2>Experience, capability &amp; evidence</h2>
+
+                <p>
+                    Explore my wider professional portfolio, including
+                    programme experience, capabilities, achievements,
+                    professional development and supporting evidence.
+                </p>
+
+                <a
+                    class="identity-link"
+                    href="cv.html">
+
+                    Explore professional portfolio
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <article class="verification-card">
+
+            <div class="verification-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <h3>Digital Presence</h3>
+
+            <p>
+                View the wider collection of professional, business,
+                volunteering and community platforms.
+            </p>
 
             <a
-                href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j"
-                target="_blank"
-                rel="noopener noreferrer">
+                class="identity-link"
+                href="sites.html">
 
-                Microsoft Transcript
+                View digital presence
+                <i class="fa-solid fa-arrow-right"></i>
 
             </a>
 
         </article>
 
+    </div>
 
-    </section>
+</section>
 
 
-    <!-- =================================================
-         CTA
-         ================================================= -->
 
-    <section class="presence-cta">
+<!-- =====================================================
+     CTA
+===================================================== -->
 
-        <h2>Explore the wider digital presence</h2>
+<section class="presence-cta">
 
-        <p>
-            View the wider professional ecosystem including
-            profiles, publications, resources and other digital
-            touchpoints.
-        </p>
+    <h2>Want to explore my wider professional profile?</h2>
 
-        <a
-            href="sites.html"
-            class="cta-btn">
+    <p>
+        Explore my experience, consulting capabilities, programme
+        achievements and supporting professional evidence.
+    </p>
 
-            View Digital Presence
+    <a
+        href="cv.html"
+        class="presence-cta-btn">
 
-        </a>
+        View Professional Profile
+        <i class="fa-solid fa-arrow-right"></i>
 
-    </section>
+    </a>
+
+</section>
 
 
 </main>
-
 <!-- FOOTER -->
 <div id="footer"></div>
 <script>

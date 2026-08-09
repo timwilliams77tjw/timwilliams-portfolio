@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Frequently Asked Questions – Tim Williams</title>
+
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="faq.css">
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
+
+  <style>
+ /* =========================================================
+   FAQ PAGE — TWC LTD
+   ========================================================= */
+
+/* PAGE
+   ========================================================= */
+
+body.page-site-search {
+    background: var(--bg);
+    color: var(--text-main);
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* PAGE CONTAINER
+   ========================================================= */
+
+.page-container {
+    width: min(960px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 2rem 0 4rem;
+}
+
+
+/* HERO
+   ========================================================= */
+
+.hero-section {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.hero-section h1 {
+    margin: 0 0 12px;
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
+}
+
+.hero-section p {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: var(--text-sub);
+}
+
+
+/* LOCAL SEARCH
+   ========================================================= */
+
+.search-bar-local {
+    width: 100%;
+    margin: 0 auto 28px;
+}
+
+#faq-search {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 18px;
+
+    background: var(--card-bg, #ffffff);
+    color: var(--text-main);
+
+    border: 1px solid #d7dde5;
+    border-radius: 10px;
+
+    font-size: 1rem;
+    line-height: 1.4;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+#faq-search::placeholder {
+    color: #7a8491;
+}
+
+#faq-search:focus {
+    outline: none;
+    border-color: #0a66c2;
+    box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.12);
+}
+
+
+/* FAQ LIST
+   ========================================================= */
+
+#faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+
+/* FAQ CARD
+   ========================================================= */
+
+.faq-card {
+    position: relative;
+
+    background: var(--card-bg, #ffffff);
+
+    border: 1px solid #e1e5ea;
+    border-radius: 12px;
+
+    padding: 20px 22px 19px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.faq-card:hover {
+    transform: translateY(-2px);
+    border-color: #cbd5e1;
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* FAQ QUESTION
+   ========================================================= */
+
+.faq-card h3 {
+    margin: 0 0 10px;
+
+    color: var(--text-main);
+
+    font-size: 1.05rem;
+    line-height: 1.45;
+    font-weight: 700;
+}
+
+
+/* QUESTION ACCENT
+   ========================================================= */
+
+.faq-card h3::before {
+    content: "?";
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    margin-right: 10px;
+
+    background: #e8f2fc;
+    color: #0a66c2;
+
+    border-radius: 50%;
+
+    font-size: 0.8rem;
+    font-weight: 800;
+
+    vertical-align: -2px;
+}
+
+
+/* FAQ ANSWER
+   ========================================================= */
+
+.faq-card p {
+    margin: 0;
+
+    color: var(--text-sub);
+    font-size: 0.96rem;
+    line-height: 1.65;
+}
+
+
+/* CTA SECTION
+   ========================================================= */
+
+.cta-section {
+    margin-top: 42px;
+    padding: 30px 24px;
+
+    text-align: center;
+
+    background: #f5f8fb;
+    border: 1px solid #e1e7ee;
+    border-radius: 14px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.cta-section h2 {
+    margin: 0 0 10px;
+
+    color: var(--text-main);
+
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
+
+.cta-section p {
+    margin: 0 auto 20px;
+
+    max-width: 620px;
+
+    color: var(--text-sub);
+    line-height: 1.6;
+}
+
+
+/* CTA BUTTON
+   ========================================================= */
+
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+    box-sizing: border-box;
+
+    padding: 10px 24px;
+
+    background: #ffffff;
+    color: #000000;
+
+    border: 2px solid #000000;
+    border-radius: 50px;
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+
+    text-decoration: none;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.2s ease;
+}
+
+.cta-btn:hover {
+    background: #7ac0f9;
+    border-color: #001f3f;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+
+/* DARK MODE
+   ========================================================= */
+
+body.dark .faq-card {
+    background: var(--card-bg, #1e1e1e);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark .faq-card:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+body.dark #faq-search {
+    background: var(--card-bg, #1e1e1e);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+body.dark .faq-card h3::before {
+    background: rgba(10, 102, 194, 0.2);
+}
+
+body.dark .cta-section {
+    background: rgba(255, 255, 255, 0.045);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .cta-btn {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+}
+
+body.dark .cta-btn:hover {
+    background: #7ac0f9;
+    border-color: #001f3f;
+    color: #ffffff;
+}
+
+
+/* FLOATING BUTTONS
+   ========================================================= */
+
+.fab {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #001f3f;
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-size: 21px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+
+    z-index: 9999;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.fab:hover {
+    background: #0078ff;
+    transform: translateY(-2px);
+}
+
+.fab-booking {
+    bottom: 80px;
+    background: #0078ff;
+}
+
+.fab-booking:hover {
+    background: #005fcc;
+}
+
+
+/* MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .page-container {
+        width: min(100% - 24px, 960px);
+        padding-top: 1.5rem;
+        padding-bottom: 3rem;
+    }
+
+    .hero-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+        line-height: 1.55;
+    }
+
+    #faq-search {
+        padding: 13px 15px;
+        font-size: 16px;
+    }
+
+    #faq-list {
+        gap: 12px;
+    }
+
+    .faq-card {
+        padding: 17px 16px;
+        border-radius: 11px;
+    }
+
+    .faq-card h3 {
+        font-size: 1rem;
+    }
+
+    .faq-card h3::before {
+        width: 22px;
+        height: 22px;
+        margin-right: 8px;
+        font-size: 0.75rem;
+    }
+
+    .faq-card p {
+        font-size: 0.94rem;
+        line-height: 1.6;
+    }
+
+    .cta-section {
+        margin-top: 32px;
+        padding: 25px 18px;
+        border-radius: 12px;
+    }
+
+    .cta-section h2 {
+        font-size: 1.35rem;
+    }
+
+    .fab {
+        right: 16px;
+        bottom: 16px;
+    }
+
+    .fab-booking {
+        bottom: 76px;
+    }
+}
+
+
+/* VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .page-container {
+        width: calc(100% - 20px);
+    }
+
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+
+    .faq-card {
+        padding: 16px 14px;
+    }
+}
+  </style>
+  
+</head>
+
+<body class="header-with-logo page-site-search">
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+
+    const siteSearch = document.createElement("script");
+    siteSearch.src = "site-search.js";
+    siteSearch.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(siteSearch);
+
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+  });
+</script>
+<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+<script src="analytics-tracker.js" defer></script>
+
+
+<!-- ============================
+PAGE CONTENT
+============================ -->
+
+<main class="page-container">
+
+
+    <!-- HERO -->
+
+    <section class="hero-section">
+
+        <h1>
+            Frequently Asked Questions
+        </h1>
+
+        <p>
+            Quick answers to common questions about my services,
+            experience and ways of working.
+        </p>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-bar-local">
+
+        <input
+            type="search"
+            id="faq-search"
+            placeholder="Search FAQs…"
+            aria-label="Search frequently asked questions"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- FAQ LIST -->
+
+    <div id="faq-list">
+
+
+        <article class="faq-card">
+
+            <h3>
+                What industries do you specialise in?
+            </h3>
+
+            <p>
+                I specialise in public sector, healthcare, financial
+                services, global enterprise and regulated environments.
+            </p>
+
+        </article>
+
+
+        <article class="faq-card">
+
+            <h3>
+                Do you work on fixed-price or day-rate engagements?
+            </h3>
+
+            <p>
+                I offer both, depending on scope, delivery model
+                and programme complexity.
+            </p>
+
+        </article>
+
+
+        <article class="faq-card">
+
+            <h3>
+                Do you support remote or hybrid delivery?
+            </h3>
+
+            <p>
+                Yes — I lead programmes across fully remote,
+                hybrid and on-site models.
+            </p>
+
+        </article>
+
+
+        <article class="faq-card">
+
+            <h3>
+                Can you support pre-sales or bid work?
+            </h3>
+
+            <p>
+                Yes — I regularly support RFP responses, solution
+                shaping, delivery planning and programme mobilisation.
+            </p>
+
+        </article>
+
+
+        <article class="faq-card">
+
+            <h3>
+                Are you available for short-term advisory work?
+            </h3>
+
+            <p>
+                Yes — I provide advisory sessions, programme reviews
+                and delivery assurance assessments.
+            </p>
+
+        </article>
+
+
+        <article class="faq-card">
+
+            <h3>
+                What size programmes do you typically lead?
+            </h3>
+
+            <p>
+                From £1m–£50m+ programmes, including cyber uplift,
+                cloud transformation, modern workplace and service transition.
+            </p>
+
+        </article>
+
+
+        <article class="faq-card">
+
+            <h3>
+                Do you work with third-party suppliers and MSPs?
+            </h3>
+
+            <p>
+                Yes — I regularly lead multi-supplier delivery
+                environments and manage complex vendor landscapes.
+            </p>
+
+        </article>
+
+
+        <article class="faq-card">
+
+            <h3>
+                Can you recover failing or challenged programmes?
+            </h3>
+
+            <p>
+                Yes — programme recovery and delivery assurance
+                are core parts of my service offering.
+            </p>
+
+        </article>
+
+
+    </div>
+
+
+    <!-- CTA -->
+
+    <section class="cta-section">
+
+        <h2>
+            Still Have a Question?
+        </h2>
+
+        <p>
+            If you'd like to discuss your programme or request
+            more details, feel free to get in touch.
+        </p>
+
+        <a
+            href="contact.html"
+            class="cta-btn">
+            Get in Touch
+        </a>
+
+    </section>
+
+
+</main>
+<!-- FLOATING BUTTONS -->
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- LOCAL FAQ SEARCH -->
+<script>
+const faqSearch = document.getElementById("faq-search");
+if (faqSearch) {
+  faqSearch.addEventListener("input", () => {
+    const term = faqSearch.value.toLowerCase();
+    document.querySelectorAll(".faq-card").forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(term) ? "" : "none";
+    });
+  });
+}
+</script>
+
+</body>
+</html>

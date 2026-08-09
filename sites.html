@@ -1097,6 +1097,24 @@ body.dark .digital-category-toggle {
         animation: none !important;
     }
 }      
+
+  @media (max-width: 767px) {
+
+    .category-section .card-list {
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    .category-section.open .card-list {
+        max-height: 5000px !important;
+        overflow: visible !important;
+    }
+
+    .category-section.open .website-card {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}    
       
 </style>
 
@@ -2569,24 +2587,10 @@ document.addEventListener("DOMContentLoaded", () => {
             let visibleCards = 0;
 
 
-            document
-                .querySelectorAll(".website-card")
-                .forEach(card => {
-
-                    const text =
-                        card.innerText.toLowerCase();
-
-                    const match =
-                        !term || text.includes(term);
-
-                    card.style.display =
-                        match ? "" : "none";
-
-                    if (match) {
-                        visibleCards++;
-                    }
-
-                });
+           document.querySelectorAll(".website-card").forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(term) ? "" : "none";
+});
 
 
             document

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Professional Presence Hub – Tim Williams</title>
+
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
+
+<style>
+/* =========================================================
+   PROFESSIONAL PRESENCE HUB
+   Complete page stylesheet
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   PAGE VARIABLES
+   --------------------------------------------------------- */
+
+:root {
+    --presence-bg: #f5f7fa;
+    --presence-card: #ffffff;
+    --presence-card-soft: #f8fafc;
+
+    --presence-text: #111827;
+    --presence-heading: #0a2540;
+    --presence-subtext: #4b5563;
+    --presence-muted: #667085;
+
+    --presence-accent: #0a66c2;
+    --presence-accent-light: #7ac0f9;
+    --presence-accent-soft: rgba(10, 102, 194, 0.08);
+
+    --presence-border: #e5e7eb;
+    --presence-border-strong: #d7dde5;
+
+    --presence-shadow:
+        0 4px 14px rgba(15, 23, 42, 0.06);
+
+    --presence-shadow-hover:
+        0 12px 28px rgba(15, 23, 42, 0.11);
+
+    --presence-radius: 14px;
+}
+
+
+/* ---------------------------------------------------------
+   DARK MODE
+   --------------------------------------------------------- */
+
+body.dark {
+    --presence-bg: #0f172a;
+    --presence-card: #111827;
+    --presence-card-soft: #172033;
+
+    --presence-text: #e5e7eb;
+    --presence-heading: #f1f5f9;
+    --presence-subtext: #cbd5e1;
+    --presence-muted: #94a3b8;
+
+    --presence-accent: #38bdf8;
+    --presence-accent-light: #7dd3fc;
+    --presence-accent-soft: rgba(56, 189, 248, 0.10);
+
+    --presence-border: #273449;
+    --presence-border-strong: #334155;
+
+    --presence-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.28);
+
+    --presence-shadow-hover:
+        0 14px 30px rgba(0, 0, 0, 0.38);
+}
+
+
+/* ---------------------------------------------------------
+   PAGE
+   --------------------------------------------------------- */
+
+body.page-presence {
+    background: var(--presence-bg);
+    color: var(--presence-text);
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN CONTAINER
+   --------------------------------------------------------- */
+
+.page-container {
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 48px 0 70px;
+}
+
+
+/* ---------------------------------------------------------
+   HERO
+   --------------------------------------------------------- */
+
+.hero-section {
+    margin-bottom: 42px;
+    padding: 0 4px;
+}
+
+.hero-section h1 {
+    margin: 0 0 12px;
+    color: var(--presence-heading);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    font-weight: 750;
+    letter-spacing: -0.025em;
+}
+
+.hero-section p {
+    max-width: 760px;
+    margin: 0;
+    color: var(--presence-subtext);
+    font-size: 1.08rem;
+    line-height: 1.65;
+}
+
+
+/* ---------------------------------------------------------
+   HERO UNDERLINE / ACCENT
+   --------------------------------------------------------- */
+
+.hero-section::after {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 4px;
+    margin-top: 22px;
+    border-radius: 999px;
+    background: var(--presence-accent);
+}
+
+
+/* ---------------------------------------------------------
+   PROFILE GRID
+   --------------------------------------------------------- */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+
+/* ---------------------------------------------------------
+   PRESENCE CARD
+   --------------------------------------------------------- */
+
+.presence-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: 150px;
+
+    padding: 25px 26px;
+
+    background: var(--presence-card);
+
+    border: 1px solid var(--presence-border);
+    border-left: 4px solid var(--presence-accent);
+
+    border-radius: var(--presence-radius);
+
+    box-shadow: var(--presence-shadow);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* ---------------------------------------------------------
+   CARD HOVER
+   --------------------------------------------------------- */
+
+.presence-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--presence-shadow-hover);
+    border-color: var(--presence-border-strong);
+    border-left-color: var(--presence-accent);
+}
+
+
+/* ---------------------------------------------------------
+   CARD HEADING
+   --------------------------------------------------------- */
+
+.presence-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    margin: 0 0 20px;
+
+    color: var(--presence-heading);
+
+    font-size: 1.12rem;
+    line-height: 1.35;
+    font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   CARD ICON
+   --------------------------------------------------------- */
+
+.presence-card .presence-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    border-radius: 10px;
+
+    background: var(--presence-accent-soft);
+
+    color: var(--presence-accent);
+
+    font-size: 1.15rem;
+}
+
+
+/* ---------------------------------------------------------
+   CARD DESCRIPTION
+   --------------------------------------------------------- */
+
+.presence-card p {
+    margin: 0 0 18px;
+
+    color: var(--presence-subtext);
+
+    font-size: 0.96rem;
+    line-height: 1.55;
+}
+
+
+/* ---------------------------------------------------------
+   CARD LINK
+   --------------------------------------------------------- */
+
+.presence-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    width: fit-content;
+
+    color: var(--presence-accent);
+
+    font-size: 0.95rem;
+    font-weight: 650;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        gap 0.2s ease;
+}
+
+.presence-card a::after {
+    content: "→";
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.presence-card a:hover {
+    color: var(--presence-heading);
+    text-decoration: none;
+}
+
+.presence-card a:hover::after {
+    transform: translateX(4px);
+}
+
+
+/* ---------------------------------------------------------
+   CTA AREA
+   --------------------------------------------------------- */
+
+.presence-cta {
+    margin-top: 48px;
+    padding: 34px 28px;
+
+    background: var(--presence-card);
+
+    border: 1px solid var(--presence-border);
+    border-radius: var(--presence-radius);
+
+    box-shadow: var(--presence-shadow);
+
+    text-align: center;
+}
+
+
+/* ---------------------------------------------------------
+   CTA HEADING
+   --------------------------------------------------------- */
+
+.presence-cta h2 {
+    margin: 0 0 10px;
+
+    color: var(--presence-heading);
+
+    font-size: 1.45rem;
+    font-weight: 700;
+}
+
+.presence-cta p {
+    max-width: 650px;
+    margin: 0 auto 24px;
+
+    color: var(--presence-subtext);
+
+    line-height: 1.6;
+}
+
+
+/* ---------------------------------------------------------
+   CTA BUTTON
+   --------------------------------------------------------- */
+
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 12px 25px;
+
+    background: #ffffff;
+    color: #000000;
+
+    border: 2px solid #000000;
+    border-radius: 999px;
+
+    font-size: 0.95rem;
+    font-weight: 650;
+
+    text-decoration: none;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.cta-btn::after {
+    content: "→";
+    transition: transform 0.2s ease;
+}
+
+.cta-btn:hover {
+    background: #7ac0f9;
+    border-color: #001f3f;
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 16px rgba(0, 31, 63, 0.18);
+}
+
+.cta-btn:hover::after {
+    transform: translateX(4px);
+}
+
+
+/* ---------------------------------------------------------
+   DARK MODE CTA
+   --------------------------------------------------------- */
+
+body.dark .cta-btn {
+    background: transparent;
+    color: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+body.dark .cta-btn:hover {
+    background: #38bdf8;
+    color: #07111f;
+    border-color: #38bdf8;
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE — TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 800px) {
+
+    .page-container {
+        width: min(100% - 32px, 680px);
+        padding-top: 38px;
+        padding-bottom: 55px;
+    }
+
+    .hero-section {
+        margin-bottom: 32px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .presence-card {
+        min-height: auto;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE — MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+    .page-container {
+        width: calc(100% - 24px);
+        padding-top: 28px;
+        padding-bottom: 45px;
+    }
+
+    .hero-section {
+        padding: 0 2px;
+        margin-bottom: 28px;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+        line-height: 1.18;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+        line-height: 1.55;
+    }
+
+    .hero-section::after {
+        margin-top: 18px;
+    }
+
+    .grid {
+        gap: 16px;
+    }
+
+    .presence-card {
+        padding: 21px 20px;
+        border-left-width: 4px;
+        border-radius: 12px;
+    }
+
+    .presence-card h3 {
+        margin-bottom: 17px;
+        font-size: 1.05rem;
+    }
+
+    .presence-card .presence-icon {
+        width: 35px;
+        height: 35px;
+        flex-basis: 35px;
+        font-size: 1rem;
+    }
+
+    .presence-card a {
+        font-size: 0.92rem;
+        overflow-wrap: anywhere;
+    }
+
+    .presence-cta {
+        margin-top: 32px;
+        padding: 28px 20px;
+    }
+
+    .presence-cta h2 {
+        font-size: 1.3rem;
+    }
+
+    .presence-cta p {
+        font-size: 0.95rem;
+    }
+
+    .cta-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .presence-card,
+    .presence-card a,
+    .presence-card a::after,
+    .cta-btn,
+    .cta-btn::after {
+        transition: none;
+    }
+
+    .presence-card:hover,
+    .cta-btn:hover {
+        transform: none;
+    }
+}
+</style>
+</head>
+
+<body class="header-with-logo page-presence">
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+<script>
+fetch("header.html")
+.then(r => r.text())
+.then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+        initHeader();
+        initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+});
+</script>
+
+<main class="page-container">
+
+
+    <!-- =================================================
+         HERO
+         ================================================= -->
+
+    <section class="hero-section">
+
+        <h1>Professional Presence Hub</h1>
+
+        <p>
+            Your verified professional profiles, memberships,
+            certifications and learning records — all in one place.
+        </p>
+
+    </section>
+
+
+    <!-- =================================================
+         PROFESSIONAL PROFILES
+         ================================================= -->
+
+    <section class="grid"
+             aria-label="Professional profiles and credentials">
+
+
+        <!-- LINKEDIN -->
+        <article class="presence-card">
+
+            <h3>
+                <span class="presence-icon">🌐</span>
+                LinkedIn Profile
+            </h3>
+
+            <a
+                href="https://linkedin.com/in/timwilliams77"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                linkedin.com/in/timwilliams77
+
+            </a>
+
+        </article>
+
+
+        <!-- COMPANY LINKEDIN -->
+        <article class="presence-card">
+
+            <h3>
+                <span class="presence-icon">🏢</span>
+                Company LinkedIn
+            </h3>
+
+            <a
+                href="https://www.linkedin.com/company/tim-williams-consulting/"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                Tim Williams Consulting
+
+            </a>
+
+        </article>
+
+
+        <!-- CREDLY -->
+        <article class="presence-card">
+
+            <h3>
+                <span class="presence-icon">🎓</span>
+                Credly Certifications
+            </h3>
+
+            <a
+                href="https://www.credly.com/users/tim-williams.e51205ae/badges#credly"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                View Credly Profile
+
+            </a>
+
+        </article>
+
+
+        <!-- APM -->
+        <article class="presence-card">
+
+            <h3>
+                <span class="presence-icon">🛡️</span>
+                APM Dashboard
+            </h3>
+
+            <a
+                href="https://www.apm.org.uk/myapm/my-dashboard/"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                APM Member Dashboard
+
+            </a>
+
+        </article>
+
+
+        <!-- PMI -->
+        <article class="presence-card">
+
+            <h3>
+                <span class="presence-icon">📘</span>
+                PMI Community
+            </h3>
+
+            <a
+                href="https://community.pmi.org/profile/Timwilliams77"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                PMI Profile
+
+            </a>
+
+        </article>
+
+
+        <!-- MICROSOFT -->
+        <article class="presence-card">
+
+            <h3>
+                <span class="presence-icon">💼</span>
+                Microsoft Learn
+            </h3>
+
+            <a
+                href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                Microsoft Transcript
+
+            </a>
+
+        </article>
+
+
+    </section>
+
+
+    <!-- =================================================
+         CTA
+         ================================================= -->
+
+    <section class="presence-cta">
+
+        <h2>Explore the wider digital presence</h2>
+
+        <p>
+            View the wider professional ecosystem including
+            profiles, publications, resources and other digital
+            touchpoints.
+        </p>
+
+        <a
+            href="sites.html"
+            class="cta-btn">
+
+            View Digital Presence
+
+        </a>
+
+    </section>
+
+
+</main>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+.then(r => r.text())
+.then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+</body>
+</html>

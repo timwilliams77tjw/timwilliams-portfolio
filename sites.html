@@ -1038,6 +1038,66 @@ body.dark .digital-category-toggle {
         transition-duration: .01ms !important;
     }
 }
+
+/* =========================================================
+   DIGITAL PRESENCE — MOBILE CARD CONTENT FIX
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .category-section .card-list,
+    .category-section.open .card-list {
+        overflow: visible !important;
+        max-height: none !important;
+        height: auto !important;
+    }
+
+    .category-section .grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    .website-card {
+        display: block !important;
+        position: relative !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        transform: none !important;
+    }
+
+    .website-card h3,
+    .website-card h3 i,
+    .website-card p,
+    .website-card a,
+    .website-card button,
+    .website-card img,
+    .website-card div {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .website-card h3 {
+        display: flex !important;
+    }
+
+    .website-card a {
+        display: inline-block !important;
+    }
+
+    .website-card .copy-btn {
+        display: inline-flex !important;
+    }
+
+    /* Prevent animation from leaving cards visually hidden */
+    .website-card {
+        animation: none !important;
+    }
+}      
+      
 </style>
 
 </head>

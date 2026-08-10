@@ -14,22 +14,29 @@
 <link rel="stylesheet" href="certifications.css">
 <link rel="stylesheet" href="global-restore.css">
 
-<!-- ============================================================
-     CV PAGE-SPECIFIC CSS — TWC EXECUTIVE STYLE
-     ============================================================ -->
 <style>
 
 /* ============================================================
-   CV PAGE FOUNDATION
+   TWC CV — CONSOLIDATED EXECUTIVE PAGE STYLE
+   Portfolio visual language / CV-specific implementation
    ============================================================ */
 
 body.page-site-search {
+
     --cv-navy: #001f3f;
     --cv-blue: #7ac0f9;
+    --cv-blue-dark: #5daeea;
+
     --cv-border: #dbe4ec;
     --cv-card: #ffffff;
+    --cv-surface: #f7f9fc;
     --cv-muted: #667085;
-    --cv-shadow: 0 3px 10px rgba(0,0,0,0.07);
+
+    --cv-shadow:
+        0 4px 14px rgba(0,0,0,0.06);
+
+    --cv-shadow-hover:
+        0 7px 20px rgba(0,0,0,0.09);
 }
 
 
@@ -52,21 +59,29 @@ body.page-site-search .page-search-bar-inner {
 body.page-site-search .page-search-bar-inner input {
     width: 100%;
     box-sizing: border-box;
+
     padding: 12px 16px;
+
     border: 1px solid var(--cv-border);
-    border-radius: 8px;
+    border-radius: 9px;
+
     background: #fff;
     color: var(--text-main, #1f2937);
+
     font-size: 15px;
     outline: none;
+
     transition:
         border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
 body.page-site-search .page-search-bar-inner input:focus {
     border-color: var(--cv-blue);
-    box-shadow: 0 0 0 3px rgba(122,192,249,0.15);
+
+    box-shadow:
+        0 0 0 3px rgba(122,192,249,0.15);
 }
 
 
@@ -77,8 +92,276 @@ body.page-site-search .page-search-bar-inner input:focus {
 body.page-site-search #noResultsMessage {
     width: min(100% - 32px, 620px);
     margin: 4px auto 12px !important;
+
     text-align: center;
+
     color: var(--cv-muted);
+}
+
+
+/* ============================================================
+   CV HERO
+   GLASS / EXECUTIVE STYLE
+   ============================================================ */
+
+body.page-site-search .cv-hero {
+
+    max-width: 1180px;
+
+    margin: 8px auto 24px;
+    padding: 0 16px;
+
+    box-sizing: border-box;
+}
+
+
+/* HERO PANEL */
+
+body.page-site-search .cv-hero-content {
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 30px 34px 28px;
+
+    border-radius: 16px;
+
+    /*
+       Light executive glass surface rather than
+       solid blue block.
+    */
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.97),
+            rgba(247,250,253,0.94)
+        );
+
+    border:
+        1px solid rgba(122,192,249,0.28);
+
+    box-shadow:
+        0 8px 24px rgba(0,31,63,0.08);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    color: var(--cv-navy);
+}
+
+
+/* subtle decorative glass element */
+
+body.page-site-search .cv-hero-content::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -135px;
+    top: -155px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(122,192,249,0.20) 0%,
+            rgba(122,192,249,0.07) 45%,
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* secondary decorative line */
+
+body.page-site-search .cv-hero-content::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 34px;
+    bottom: 0;
+
+    width: 110px;
+    height: 3px;
+
+    border-radius: 3px 3px 0 0;
+
+    background: var(--cv-blue);
+
+    pointer-events: none;
+}
+
+
+/* eyebrow */
+
+body.page-site-search .cv-hero-eyebrow {
+
+    position: relative;
+    z-index: 1;
+
+    margin-bottom: 7px;
+
+    color: var(--cv-blue-dark);
+
+    font-size: 0.73rem;
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+}
+
+
+/* name */
+
+body.page-site-search .cv-hero h1 {
+
+    position: relative;
+    z-index: 1;
+
+    margin: 0 0 5px;
+
+    color: var(--cv-navy);
+
+    font-size: clamp(2rem, 4vw, 3rem);
+
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+
+/* role */
+
+body.page-site-search .cv-hero-role {
+
+    position: relative;
+    z-index: 1;
+
+    margin: 0 0 15px;
+
+    color: #334e68;
+
+    font-size: 1.04rem;
+    font-weight: 650;
+}
+
+body.page-site-search .cv-hero-role span {
+
+    margin: 0 8px;
+
+    color: var(--cv-blue-dark);
+}
+
+
+/* introduction */
+
+body.page-site-search .cv-hero-intro {
+
+    position: relative;
+    z-index: 1;
+
+    max-width: 850px;
+
+    margin: 0;
+
+    color: #526579;
+
+    font-size: 0.97rem;
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   HERO METRIC CARDS
+   ============================================================ */
+
+body.page-site-search .cv-hero-highlights {
+
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 23px;
+}
+
+
+body.page-site-search .cv-hero-highlight {
+
+    position: relative;
+
+    padding: 13px 15px;
+
+    /*
+       Glass cards
+    */
+
+    background:
+        rgba(255,255,255,0.72);
+
+    border:
+        1px solid rgba(122,192,249,0.25);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 10px rgba(0,31,63,0.045);
+
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+body.page-site-search .cv-hero-highlight:hover {
+
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(122,192,249,0.50);
+
+    box-shadow:
+        0 6px 15px rgba(0,31,63,0.08);
+}
+
+
+body.page-site-search .cv-hero-highlight strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--cv-navy);
+
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+
+body.page-site-search .cv-hero-highlight span {
+
+    display: block;
+
+    color: #667085;
+
+    font-size: 0.76rem;
+    line-height: 1.35;
 }
 
 
@@ -87,28 +370,40 @@ body.page-site-search #noResultsMessage {
    ============================================================ */
 
 body.page-site-search .cv-download-wrapper {
+
     width: 100%;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     gap: 14px;
-    margin: 12px 0 22px;
+
+    margin: 14px 0 20px;
 }
 
+
 body.page-site-search .cv-icon-btn {
+
     width: 46px;
     height: 46px;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     background: var(--cv-navy);
     color: #fff;
 
-    border: 1px solid var(--cv-navy);
-    border-radius: 8px;
+    border:
+        1px solid var(--cv-navy);
 
-    font-size: 24px;
+    border-radius: 9px;
+
+    font-size: 23px;
+
     text-decoration: none;
 
     position: relative;
@@ -117,14 +412,23 @@ body.page-site-search .cv-icon-btn {
         background 0.2s ease,
         color 0.2s ease,
         border-color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
+
 body.page-site-search .cv-icon-btn:hover {
+
     background: #fff;
+
     color: var(--cv-navy);
+
     border-color: var(--cv-blue);
+
     transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.08);
 }
 
 
@@ -133,10 +437,14 @@ body.page-site-search .cv-icon-btn:hover {
    ============================================================ */
 
 body.page-site-search .cv-icon-btn[data-tip]:hover::after {
+
     content: attr(data-tip);
+
     position: absolute;
+
     left: 50%;
     bottom: -40px;
+
     transform: translateX(-50%);
 
     padding: 6px 10px;
@@ -148,22 +456,30 @@ body.page-site-search .cv-icon-btn[data-tip]:hover::after {
 
     font-size: 12px;
     line-height: 1.3;
+
     white-space: nowrap;
 
-    box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+    box-shadow:
+        0 3px 8px rgba(0,0,0,0.18);
 
     z-index: 50;
 }
 
+
 body.page-site-search .cv-icon-btn[data-tip]:hover::before {
+
     content: "";
+
     position: absolute;
+
     left: 50%;
     bottom: -10px;
+
     transform: translateX(-50%);
 
     border-width: 6px;
     border-style: solid;
+
     border-color:
         var(--cv-navy)
         transparent
@@ -176,56 +492,104 @@ body.page-site-search .cv-icon-btn[data-tip]:hover::before {
 
 /* ============================================================
    FILTER / CONTROL BAR
+   PORTFOLIO-STYLE
    ============================================================ */
 
 body.page-site-search .sticky-bar {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
     display: flex;
     flex-wrap: wrap;
+
     justify-content: center;
     align-items: center;
 
-    gap: 9px;
+    gap: 8px;
 
-    padding: 14px 16px 20px;
+    padding: 12px 16px 20px;
 
-    border-bottom: none !important;
+    border: none !important;
+
+    background: transparent;
 }
 
-body.page-site-search .filter-btn {
-    padding: 7px 15px;
 
-    background: var(--cv-navy);
-    color: #fff;
+/* filter buttons */
 
-    border: 1px solid var(--cv-navy);
-    border-radius: 7px;
+body.page-site-search .sticky-bar .filter-btn {
 
-    font-size: 13px;
-    font-weight: 600;
+    min-height: 36px;
+
+    padding: 8px 15px;
+
+    background:
+        rgba(255,255,255,0.92);
+
+    color: var(--cv-navy);
+
+    border:
+        1px solid #cbd8e3;
+
+    border-radius: 18px;
+
+    font-size: 12.5px;
+    font-weight: 650;
+
+    line-height: 1;
 
     cursor: pointer;
+
+    box-shadow:
+        0 2px 5px rgba(0,31,63,0.035);
 
     transition:
         background 0.2s ease,
         color 0.2s ease,
         border-color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-body.page-site-search .filter-btn:hover {
+
+/* hover */
+
+body.page-site-search .sticky-bar .filter-btn:hover {
+
     background: #fff;
+
     color: var(--cv-navy);
+
     border-color: var(--cv-blue);
+
     transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 9px rgba(0,31,63,0.07);
 }
 
-body.page-site-search .filter-btn.active-filter {
-    background: #fff;
-    color: var(--cv-navy);
-    border-color: var(--cv-blue);
+
+/* active */
+
+body.page-site-search .sticky-bar .filter-btn.active-filter {
+
+    background: var(--cv-navy);
+
+    color: #fff;
+
+    border-color: var(--cv-navy);
+
+    box-shadow:
+        0 3px 8px rgba(0,31,63,0.14);
 }
 
-body.page-site-search .special-btn {
+
+/* expand / collapse */
+
+body.page-site-search .sticky-bar .special-btn {
+
     font-weight: 700;
 }
 
@@ -253,69 +617,129 @@ body.page-site-search .cv-section {
 
 
 /* ============================================================
-   ACCORDION HEADERS
+   PORTFOLIO-STYLE SECTION HEADERS
    ============================================================ */
 
 body.page-site-search .cv-section .category-header {
+
+    position: relative;
+
     display: flex;
+
     align-items: center;
     justify-content: space-between;
 
     width: 100%;
+
     box-sizing: border-box;
 
-    padding: 15px 4px 13px;
+    padding: 15px 2px 13px;
 
     margin: 22px 0 14px;
 
     background: transparent !important;
 
     border: none !important;
-    border-bottom: 2px solid var(--cv-navy) !important;
 
-    color: var(--cv-blue) !important;
+    border-bottom:
+        2px solid var(--cv-navy) !important;
+
+    color: var(--cv-blue-dark) !important;
 
     font-size: 1.45rem;
-    font-weight: 700;
+
+    font-weight: 750;
+
     line-height: 1.25;
 
     cursor: pointer;
 }
 
+
+/* blue accent */
+
+body.page-site-search .cv-section .category-header::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -2px;
+
+    width: 58px;
+    height: 2px;
+
+    background: var(--cv-blue);
+
+    transition:
+        width 0.25s ease;
+}
+
+
 body.page-site-search .cv-section .category-header:hover {
-    color: #5daeea !important;
+
+    color: var(--cv-blue-dark) !important;
+}
+
+
+body.page-site-search .cv-section .category-header:hover::before {
+
+    width: 105px;
 }
 
 
 /* ============================================================
-   ACCORDION TOGGLE
+   BLUE CIRCULAR ACCORDION CONTROL
    ============================================================ */
 
 body.page-site-search .cv-section .category-toggle {
-    flex: 0 0 auto;
 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    flex: 0 0 auto;
 
     width: 30px;
     height: 30px;
 
     margin-left: 16px;
 
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--cv-blue);
+
     color: var(--cv-navy);
 
-    font-size: 1.45rem;
-    font-weight: 700;
+    font-size: 1.22rem;
+
+    font-weight: 800;
+
     line-height: 1;
 
+    box-shadow:
+        0 2px 6px rgba(0,31,63,0.12);
+
     transition:
+        background 0.2s ease,
+        color 0.2s ease,
         transform 0.2s ease,
-        color 0.2s ease;
+        box-shadow 0.2s ease;
 }
 
+
 body.page-site-search .cv-section .category-header:hover .category-toggle {
-    color: var(--cv-blue);
+
+    background: var(--cv-navy);
+
+    color: #fff;
+
+    transform: scale(1.06);
+
+    box-shadow:
+        0 4px 9px rgba(0,31,63,0.16);
 }
 
 
@@ -333,6 +757,7 @@ body.page-site-search .cv-section .card-list {
    ============================================================ */
 
 body.page-site-search .cv-section .grid {
+
     display: grid;
 
     grid-template-columns:
@@ -347,13 +772,15 @@ body.page-site-search .cv-section .grid {
    ============================================================ */
 
 body.page-site-search .cv-section .card {
+
     box-sizing: border-box;
 
     width: 100%;
 
     background: var(--cv-card) !important;
 
-    border: 1px solid var(--cv-border);
+    border:
+        1px solid var(--cv-border);
 
     border-radius: 10px;
 
@@ -361,9 +788,11 @@ body.page-site-search .cv-section .card {
 
     margin-bottom: 0;
 
-    box-shadow: var(--cv-shadow);
+    box-shadow:
+        var(--cv-shadow);
 
     opacity: 0;
+
     transform: translateY(8px);
 
     transition:
@@ -373,13 +802,20 @@ body.page-site-search .cv-section .card {
         border-color 0.2s ease;
 }
 
+
 body.page-site-search .cv-section .card:hover {
+
     border-color: #c8d6e2;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.09);
+
+    box-shadow:
+        var(--cv-shadow-hover);
 }
 
+
 body.page-site-search .cv-section .card.card-visible {
+
     opacity: 1;
+
     transform: translateY(0);
 }
 
@@ -389,13 +825,26 @@ body.page-site-search .cv-section .card.card-visible {
    ============================================================ */
 
 body.page-site-search .cv-section .card-title {
+
     margin: 0 0 9px;
 
-    color: var(--cv-blue) !important;
+    color: var(--cv-blue-dark) !important;
 
     font-size: 1.08rem !important;
+
     font-weight: 700 !important;
+
     line-height: 1.35;
+}
+
+
+/* achievement result emphasis */
+
+body.page-site-search
+.cv-section[data-category="achievements"]
+.card-title:nth-of-type(4) {
+
+    color: var(--cv-navy) !important;
 }
 
 
@@ -404,6 +853,7 @@ body.page-site-search .cv-section .card-title {
    ============================================================ */
 
 body.page-site-search .cv-section .card p {
+
     margin: 0 0 14px;
 
     line-height: 1.6;
@@ -419,12 +869,16 @@ body.page-site-search .cv-section .card p:last-child {
    ============================================================ */
 
 body.page-site-search .cv-section .card ul {
+
     margin: 0;
+
     padding-left: 20px;
 }
 
 body.page-site-search .cv-section .card li {
+
     margin-bottom: 7px;
+
     line-height: 1.5;
 }
 
@@ -442,6 +896,7 @@ body.page-site-search .cv-section .card p,
 body.page-site-search .cv-section .card ul,
 body.page-site-search .cv-section .card li,
 body.page-site-search .cv-section .card-title {
+
     text-align: left !important;
 }
 
@@ -451,8 +906,12 @@ body.page-site-search .cv-section .card-title {
    ============================================================ */
 
 body.page-site-search .orgs-columns {
+
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
     gap: 12px 32px;
 }
 
@@ -466,21 +925,17 @@ body.page-site-search .orgs-columns ul {
    ============================================================ */
 
 body.page-site-search
-.cv-section[data-category="achievements"] .card-title {
+.cv-section[data-category="achievements"]
+.card-title {
+
     margin-top: 0;
 }
 
 body.page-site-search
-.cv-section[data-category="achievements"] .card-title:not(:first-child) {
+.cv-section[data-category="achievements"]
+.card-title:not(:first-child) {
+
     margin-top: 16px;
-}
-
-
-/* STAR RESULT — SLIGHT EMPHASIS */
-
-body.page-site-search
-.cv-section[data-category="achievements"] .card-title:nth-of-type(4) {
-    color: var(--cv-navy) !important;
 }
 
 
@@ -489,36 +944,46 @@ body.page-site-search
    ============================================================ */
 
 body.page-site-search
-.cv-section[data-category="experience"] .searchable-item {
+.cv-section[data-category="experience"]
+.searchable-item {
+
     width: 100%;
 }
 
 body.page-site-search
-.cv-section[data-category="experience"] .card-title {
+.cv-section[data-category="experience"]
+.card-title {
+
     font-size: 1.12rem !important;
+
     line-height: 1.45;
 }
 
 
 /* ============================================================
-   SKILLS / CERTIFICATIONS CARDS
+   SKILLS / CERTIFICATIONS
    ============================================================ */
 
 body.page-site-search
 .cv-section[data-category="skills"] .card,
 body.page-site-search
 .cv-section[data-category="certifications"] .card {
+
     min-height: 125px;
 }
 
 
 /* ============================================================
-   AWARDS LAYOUT
+   AWARDS
    ============================================================ */
 
 body.page-site-search .awards-columns {
+
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
     gap: 28px;
 }
 
@@ -528,51 +993,254 @@ body.page-site-search .awards-columns {
    ============================================================ */
 
 body.dark-mode.page-site-search {
+
     --cv-card: var(--bg-alt, #18212b);
-    --cv-border: rgba(255,255,255,0.12);
-    --cv-shadow: 0 3px 12px rgba(0,0,0,0.22);
+
+    --cv-border:
+        rgba(255,255,255,0.12);
+
+    --cv-surface:
+        #141d26;
+
+    --cv-shadow:
+        0 3px 12px rgba(0,0,0,0.22);
 }
 
-body.dark-mode.page-site-search .page-search-bar-inner input {
-    background: var(--bg-alt, #18212b);
-    color: var(--text-main, #f3f4f6);
-    border-color: rgba(255,255,255,0.18);
+
+body.dark-mode.page-site-search
+.page-search-bar-inner input {
+
+    background:
+        var(--bg-alt, #18212b);
+
+    color:
+        var(--text-main, #f3f4f6);
+
+    border-color:
+        rgba(255,255,255,0.18);
 }
 
-body.dark-mode.page-site-search .filter-btn {
-    background: var(--bg-alt, #18212b);
-    color: var(--text-main, #f3f4f6);
-    border-color: rgba(255,255,255,0.16);
+
+/* dark filter buttons */
+
+body.dark-mode.page-site-search
+.sticky-bar .filter-btn {
+
+    background:
+        var(--bg-alt, #18212b);
+
+    color:
+        var(--text-main, #f3f4f6);
+
+    border-color:
+        rgba(255,255,255,0.16);
 }
 
-body.dark-mode.page-site-search .filter-btn:hover,
-body.dark-mode.page-site-search .filter-btn.active-filter {
-    background: #7ac0f9;
-    color: #001f3f;
-    border-color: #7ac0f9;
+
+body.dark-mode.page-site-search
+.sticky-bar .filter-btn:hover {
+
+    background:
+        #243342;
+
+    color:
+        #fff;
+
+    border-color:
+        #7ac0f9;
 }
 
-body.dark-mode.page-site-search .cv-section .category-header {
-    border-bottom-color: rgba(122,192,249,0.5) !important;
-    color: #7ac0f9 !important;
+
+body.dark-mode.page-site-search
+.sticky-bar .filter-btn.active-filter {
+
+    background:
+        #7ac0f9;
+
+    color:
+        #001f3f;
+
+    border-color:
+        #7ac0f9;
 }
 
-body.dark-mode.page-site-search .cv-section .category-toggle {
-    color: #7ac0f9;
+
+/* dark hero */
+
+body.dark-mode.page-site-search
+.cv-hero-content {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(24,33,43,0.97),
+            rgba(17,34,49,0.95)
+        );
+
+    border-color:
+        rgba(122,192,249,0.22);
+
+    box-shadow:
+        0 7px 20px rgba(0,0,0,0.28);
 }
 
-body.dark-mode.page-site-search .cv-section .card {
-    background: var(--cv-card) !important;
-    border-color: var(--cv-border);
-    box-shadow: var(--cv-shadow);
+
+body.dark-mode.page-site-search
+.cv-hero h1 {
+
+    color: #f3f4f6;
 }
 
-body.dark-mode.page-site-search .cv-section .card:hover {
-    border-color: rgba(122,192,249,0.35);
+
+body.dark-mode.page-site-search
+.cv-hero-role {
+
+    color: #c8d5e1;
 }
 
-body.dark-mode.page-site-search .cv-section .card-title {
-    color: #7ac0f9 !important;
+
+body.dark-mode.page-site-search
+.cv-hero-intro {
+
+    color: #b7c4d1;
+}
+
+
+body.dark-mode.page-site-search
+.cv-hero-highlight {
+
+    background:
+        rgba(255,255,255,0.055);
+
+    border-color:
+        rgba(122,192,249,0.20);
+}
+
+
+body.dark-mode.page-site-search
+.cv-hero-highlight strong {
+
+    color:
+        #7ac0f9;
+}
+
+
+body.dark-mode.page-site-search
+.cv-hero-highlight span {
+
+    color:
+        #b7c4d1;
+}
+
+
+/* dark section headers */
+
+body.dark-mode.page-site-search
+.cv-section .category-header {
+
+    border-bottom-color:
+        rgba(122,192,249,0.50) !important;
+
+    color:
+        #7ac0f9 !important;
+}
+
+
+body.dark-mode.page-site-search
+.cv-section .category-header::before {
+
+    background:
+        #7ac0f9;
+}
+
+
+body.dark-mode.page-site-search
+.cv-section .category-toggle {
+
+    background:
+        #7ac0f9;
+
+    color:
+        #001f3f;
+}
+
+
+body.dark-mode.page-site-search
+.cv-section .card {
+
+    background:
+        var(--cv-card) !important;
+
+    border-color:
+        var(--cv-border);
+
+    box-shadow:
+        var(--cv-shadow);
+}
+
+
+body.dark-mode.page-site-search
+.cv-section .card:hover {
+
+    border-color:
+        rgba(122,192,249,0.35);
+}
+
+
+body.dark-mode.page-site-search
+.cv-section .card-title {
+
+    color:
+        #7ac0f9 !important;
+}
+
+
+/* dark download buttons */
+
+body.dark-mode.page-site-search
+.cv-icon-btn {
+
+    background:
+        var(--bg-alt);
+
+    color:
+        var(--text-main);
+
+    border-color:
+        #7ac0f9;
+}
+
+
+body.dark-mode.page-site-search
+.cv-icon-btn:hover {
+
+    background:
+        #7ac0f9;
+
+    color:
+        #001f3f;
+}
+
+
+body.dark-mode.page-site-search
+.cv-icon-btn[data-tip]:hover::after {
+
+    background:
+        #7ac0f9;
+
+    color:
+        #001f3f;
+}
+
+
+body.dark-mode.page-site-search
+.cv-icon-btn[data-tip]:hover::before {
+
+    border-color:
+        #7ac0f9
+        transparent
+        transparent
+        transparent;
 }
 
 
@@ -582,8 +1250,13 @@ body.dark-mode.page-site-search .cv-section .card-title {
 
 @media (max-width: 700px) {
 
+    /* SEARCH */
+
     body.page-site-search .page-search-bar {
-        padding: 16px 12px 10px;
+
+        padding:
+            16px 12px 10px;
+
         box-sizing: border-box;
     }
 
@@ -591,77 +1264,236 @@ body.dark-mode.page-site-search .cv-section .card-title {
         width: 100%;
     }
 
-    body.page-site-search .sticky-bar {
-        gap: 7px;
-        padding: 10px 10px 16px;
+
+    /* HERO */
+
+    body.page-site-search .cv-hero {
+
+        margin:
+            4px auto 18px;
+
+        padding:
+            0 12px;
     }
 
-    body.page-site-search .filter-btn {
-        padding: 7px 11px;
-        font-size: 12px;
+
+    body.page-site-search .cv-hero-content {
+
+        padding:
+            24px 20px 21px;
+
+        border-radius:
+            13px;
     }
+
+
+    body.page-site-search .cv-hero h1 {
+
+        font-size:
+            2rem;
+    }
+
+
+    body.page-site-search .cv-hero-role {
+
+        font-size:
+            0.9rem;
+
+        line-height:
+            1.5;
+    }
+
+
+    body.page-site-search .cv-hero-role span {
+
+        margin:
+            0 4px;
+    }
+
+
+    body.page-site-search .cv-hero-intro {
+
+        font-size:
+            0.9rem;
+
+        line-height:
+            1.55;
+    }
+
+
+    body.page-site-search .cv-hero-highlights {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap:
+            8px;
+
+        margin-top:
+            18px;
+    }
+
+
+    body.page-site-search .cv-hero-highlight {
+
+        padding:
+            11px 12px;
+    }
+
+
+    /* DOWNLOAD */
 
     body.page-site-search .cv-download-wrapper {
-        margin: 10px 0 18px;
+
+        margin:
+            10px 0 18px;
     }
+
 
     body.page-site-search .cv-icon-btn {
-        width: 44px;
-        height: 44px;
-        font-size: 22px;
+
+        width:
+            44px;
+
+        height:
+            44px;
+
+        font-size:
+            22px;
     }
 
-    body.page-site-search .cv-section {
-        margin-bottom: 18px;
+
+    /* FILTER BAR */
+
+    body.page-site-search .sticky-bar {
+
+        gap:
+            7px;
+
+        padding:
+            9px 10px 16px;
     }
 
-    body.page-site-search .cv-section .category-header {
-        padding: 13px 2px 11px;
-        margin: 18px 0 12px;
 
-        font-size: 1.2rem;
+    body.page-site-search
+    .sticky-bar .filter-btn {
+
+        min-height:
+            34px;
+
+        padding:
+            7px 11px;
+
+        font-size:
+            12px;
     }
 
-    body.page-site-search .cv-section .category-toggle {
-        width: 26px;
-        height: 26px;
-        font-size: 1.3rem;
-        margin-left: 10px;
+
+    /* SECTION HEADERS */
+
+    body.page-site-search
+    .cv-section .category-header {
+
+        padding:
+            13px 2px 11px;
+
+        margin:
+            18px 0 12px;
+
+        font-size:
+            1.2rem;
     }
 
-    body.page-site-search .cv-section .grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
+
+    body.page-site-search
+    .cv-section .category-toggle {
+
+        width:
+            28px;
+
+        height:
+            28px;
+
+        margin-left:
+            10px;
+
+        font-size:
+            1.15rem;
     }
 
-    body.page-site-search .cv-section .card {
-        padding: 17px;
+
+    /* GRID */
+
+    body.page-site-search
+    .cv-section .grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            14px;
     }
 
-    body.page-site-search .cv-section .card-title {
-        font-size: 1rem !important;
+
+    /* CARDS */
+
+    body.page-site-search
+    .cv-section .card {
+
+        padding:
+            17px;
     }
 
-    body.page-site-search .cv-section .card p,
-    body.page-site-search .cv-section .card li {
-        line-height: 1.55;
+
+    body.page-site-search
+    .cv-section .card-title {
+
+        font-size:
+            1rem !important;
     }
+
+
+    body.page-site-search
+    .cv-section .card p,
+    body.page-site-search
+    .cv-section .card li {
+
+        line-height:
+            1.55;
+    }
+
+
+    /* ORGANISATIONS */
 
     body.page-site-search .orgs-columns {
-        grid-template-columns: 1fr;
-        gap: 0;
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            0;
     }
 
+
+    /* AWARDS */
+
     body.page-site-search .awards-columns {
-        grid-template-columns: 1fr;
-        gap: 18px;
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            18px;
     }
+
 
     body.page-site-search
     .cv-section[data-category="skills"] .card,
     body.page-site-search
     .cv-section[data-category="certifications"] .card {
-        min-height: auto;
+
+        min-height:
+            auto;
     }
 }
 
@@ -673,484 +1505,41 @@ body.dark-mode.page-site-search .cv-section .card-title {
 @media (max-width: 420px) {
 
     body.page-site-search .sticky-bar {
-        gap: 6px;
+        gap:
+            6px;
     }
 
-    body.page-site-search .filter-btn {
-        padding: 6px 9px;
-        font-size: 11.5px;
+
+    body.page-site-search
+    .sticky-bar .filter-btn {
+
+        padding:
+            6px 9px;
+
+        font-size:
+            11.5px;
     }
 
-    body.page-site-search .cv-section .category-header {
-        font-size: 1.1rem;
+
+    body.page-site-search
+    .cv-section .category-header {
+
+        font-size:
+            1.1rem;
     }
 
-    body.page-site-search .cv-section .card {
-        padding: 15px;
-        border-radius: 9px;
-    }
-}
 
-/* ============================================================
-   CV HERO
-   ============================================================ */
+    body.page-site-search
+    .cv-section .card {
 
-body.page-site-search .cv-hero {
-    max-width: 1180px;
-    margin: 8px auto 22px;
-    padding: 0 16px;
-    box-sizing: border-box;
-}
+        padding:
+            15px;
 
-body.page-site-search .cv-hero-content {
-    position: relative;
-    overflow: hidden;
-
-    padding: 32px 34px 30px;
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #001f3f 0%,
-            #07345d 62%,
-            #0a4f82 100%
-        );
-
-    color: #fff;
-
-    box-shadow:
-        0 6px 18px rgba(0,0,0,0.12);
-}
-
-
-/* subtle decorative accent */
-
-body.page-site-search .cv-hero-content::after {
-    content: "";
-    position: absolute;
-
-    width: 220px;
-    height: 220px;
-
-    right: -80px;
-    top: -100px;
-
-    border-radius: 50%;
-
-    border: 30px solid rgba(122,192,249,0.12);
-}
-
-
-/* eyebrow */
-
-body.page-site-search .cv-hero-eyebrow {
-    margin-bottom: 8px;
-
-    color: #7ac0f9;
-
-    font-size: 0.76rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-}
-
-
-/* name */
-
-body.page-site-search .cv-hero h1 {
-    position: relative;
-    z-index: 1;
-
-    margin: 0 0 5px;
-
-    color: #fff;
-
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.1;
-    font-weight: 800;
-}
-
-
-/* role */
-
-body.page-site-search .cv-hero-role {
-    position: relative;
-    z-index: 1;
-
-    margin: 0 0 16px;
-
-    color: #cfe8fb;
-
-    font-size: 1.05rem;
-    font-weight: 600;
-}
-
-body.page-site-search .cv-hero-role span {
-    margin: 0 8px;
-    color: #7ac0f9;
-}
-
-
-/* intro */
-
-body.page-site-search .cv-hero-intro {
-    position: relative;
-    z-index: 1;
-
-    max-width: 850px;
-
-    margin: 0;
-
-    color: rgba(255,255,255,0.88);
-
-    font-size: 0.98rem;
-    line-height: 1.6;
-}
-
-
-/* highlight row */
-
-body.page-site-search .cv-hero-highlights {
-    position: relative;
-    z-index: 1;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 12px;
-
-    margin-top: 24px;
-}
-
-
-/* highlight */
-
-body.page-site-search .cv-hero-highlight {
-    padding: 13px 15px;
-
-    background: rgba(255,255,255,0.08);
-
-    border: 1px solid rgba(122,192,249,0.22);
-
-    border-radius: 9px;
-
-    backdrop-filter: blur(4px);
-}
-
-body.page-site-search .cv-hero-highlight strong {
-    display: block;
-
-    margin-bottom: 3px;
-
-    color: #7ac0f9;
-
-    font-size: 1.05rem;
-    font-weight: 800;
-}
-
-body.page-site-search .cv-hero-highlight span {
-    display: block;
-
-    color: rgba(255,255,255,0.82);
-
-    font-size: 0.76rem;
-}
-
-
-/* ============================================================
-   MOBILE HERO
-   ============================================================ */
-
-@media (max-width: 700px) {
-
-    body.page-site-search .cv-hero {
-        margin: 4px auto 18px;
-        padding: 0 12px;
-    }
-
-    body.page-site-search .cv-hero-content {
-        padding: 24px 20px 20px;
-        border-radius: 12px;
-    }
-
-    body.page-site-search .cv-hero h1 {
-        font-size: 2rem;
-    }
-
-    body.page-site-search .cv-hero-role {
-        font-size: 0.9rem;
-        line-height: 1.5;
-    }
-
-    body.page-site-search .cv-hero-role span {
-        margin: 0 4px;
-    }
-
-    body.page-site-search .cv-hero-intro {
-        font-size: 0.9rem;
-        line-height: 1.55;
-    }
-
-    body.page-site-search .cv-hero-highlights {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        margin-top: 18px;
-    }
-
-    body.page-site-search .cv-hero-highlight {
-        padding: 11px 12px;
+        border-radius:
+            9px;
     }
 }
 
-
-/* ============================================================
-   DARK MODE HERO
-   ============================================================ */
-
-body.dark-mode.page-site-search .cv-hero-content {
-    background:
-        linear-gradient(
-            135deg,
-            #071827 0%,
-            #0b263d 65%,
-            #0d3552 100%
-        );
-
-    box-shadow:
-        0 6px 18px rgba(0,0,0,0.3);
-}
-
-/* ============================================================
-   CV FILTER / CONTROL BAR
-   ============================================================ */
-
-body.page-site-search .sticky-bar {
-    width: 100%;
-    box-sizing: border-box;
-
-    display: flex;
-    flex-wrap: wrap;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 12px 16px 20px;
-
-    border: none !important;
-}
-
-
-/* filter buttons */
-
-body.page-site-search .sticky-bar .filter-btn {
-    min-height: 36px;
-
-    padding: 7px 15px;
-
-    background: #001f3f;
-    color: #fff;
-
-    border: 1px solid #001f3f;
-    border-radius: 7px;
-
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* hover */
-
-body.page-site-search .sticky-bar .filter-btn:hover {
-    background: #fff;
-    color: #001f3f;
-
-    border-color: #7ac0f9;
-
-    transform: translateY(-1px);
-
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-
-/* selected */
-
-body.page-site-search .sticky-bar .filter-btn.active-filter {
-    background: #fff;
-    color: #001f3f;
-
-    border-color: #7ac0f9;
-
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-}
-
-
-/* Expand / Collapse */
-
-body.page-site-search .sticky-bar .special-btn {
-    font-weight: 700;
-}
-
-
-/* mobile */
-
-@media (max-width: 700px) {
-
-    body.page-site-search .sticky-bar {
-        gap: 7px;
-        padding: 9px 10px 16px;
-    }
-
-    body.page-site-search .sticky-bar .filter-btn {
-        min-height: 34px;
-        padding: 7px 11px;
-        font-size: 12px;
-    }
-}
-/* ============================================================
-   CV SECTION HEADERS — PORTFOLIO MATCH
-   ============================================================ */
-
-body.page-site-search .cv-section .category-header {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    width: 100%;
-    box-sizing: border-box;
-
-    padding: 15px 2px 13px;
-
-    margin: 22px 0 14px;
-
-    background: transparent !important;
-
-    border: none !important;
-
-    /*
-       Portfolio-style blue / navy treatment
-    */
-    border-bottom: 2px solid #001f3f !important;
-
-    color: #7ac0f9 !important;
-
-    font-size: 1.45rem;
-    font-weight: 700;
-    line-height: 1.25;
-
-    cursor: pointer;
-}
-
-
-/* subtle blue top accent when hovering */
-
-body.page-site-search .cv-section .category-header:hover {
-    color: #5daeea !important;
-}
-
-
-/* ============================================================
-   BLUE / NAVY HEADER ACCENT
-   ============================================================ */
-
-body.page-site-search .cv-section .category-header::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -2px;
-
-    width: 54px;
-    height: 2px;
-
-    background: #7ac0f9;
-
-    transition: width 0.25s ease;
-}
-
-body.page-site-search .cv-section .category-header:hover::before {
-    width: 100px;
-}     
-
-/* ============================================================
-   ACCORDION CIRCLE CONTROL
-   ============================================================ */
-
-body.page-site-search .cv-section .category-toggle {
-    flex: 0 0 auto;
-
-    width: 30px;
-    height: 30px;
-
-    margin-left: 16px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #7ac0f9;
-    color: #001f3f;
-
-    font-size: 1.25rem;
-    font-weight: 800;
-
-    line-height: 1;
-
-    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* hover */
-
-body.page-site-search .cv-section .category-header:hover .category-toggle {
-    background: #001f3f;
-    color: #fff;
-
-    transform: scale(1.06);
-
-    box-shadow: 0 3px 7px rgba(0,0,0,0.16);
-}
-
-
-/* mobile */
-
-@media (max-width: 700px) {
-
-    body.page-site-search .cv-section .category-toggle {
-        width: 28px;
-        height: 28px;
-
-        margin-left: 10px;
-
-        font-size: 1.15rem;
-    }
-}
-     
 </style>
 </head>
 
@@ -1281,89 +1670,6 @@ fetch("header.html")
 
 </div>
 
-<style>
-.cv-download-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin: 20px 0 10px;
-}
-
-/* Icon button styling */
-.cv-icon-btn {
-    background-color: #001f3f;
-    color: white;
-    width: 48px;
-    height: 48px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 26px;
-    text-decoration: none;
-    border: 1px solid #001f3f;
-    transition: all 0.2s ease;
-    position: relative; /* required for tooltip */
-}
-
-/* Hover */
-.cv-icon-btn:hover {
-    background-color: white;
-    color: #001f3f;
-    border-color: #7ac0f9;
-}
-
-/* Tooltip (same as downloads page) */
-.cv-icon-btn[data-tip]:hover::after {
-    content: attr(data-tip);
-    position: absolute;
-    bottom: -38px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #001f3f;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 13px;
-    white-space: nowrap;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    z-index: 20;
-}
-
-.cv-icon-btn[data-tip]:hover::before {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 6px;
-    border-style: solid;
-    border-color: #001f3f transparent transparent transparent;
-    z-index: 21;
-}
-
-/* Dark mode */
-body.dark-mode .cv-icon-btn {
-    background-color: var(--bg-alt);
-    color: var(--text-main);
-    border-color: #7ac0f9;
-}
-
-body.dark-mode .cv-icon-btn:hover {
-    background-color: #7ac0f9;
-    color: #001f3f;
-}
-
-body.dark-mode .cv-icon-btn[data-tip]:hover::after {
-    background: #7ac0f9;
-    color: #001f3f;
-}
-
-body.dark-mode .cv-icon-btn[data-tip]:hover::before {
-    border-color: #7ac0f9 transparent transparent transparent;
-}
-</style>
 
 
 

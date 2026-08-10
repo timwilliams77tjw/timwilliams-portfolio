@@ -753,6 +753,217 @@ body.dark-mode.page-portfolio .fab:hover {
     }
 }
 
+
+/* ============================================================
+   PORTFOLIO — PASS 2
+   Editorial hierarchy + card refinement
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   PORTFOLIO INTRODUCTION
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-intro {
+    max-width: 900px;
+    margin: 26px auto 8px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+body.page-portfolio .portfolio-intro-kicker {
+    margin-bottom: 9px;
+
+    color: #0a66c2;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+body.page-portfolio .portfolio-intro h1 {
+    margin: 0 0 12px;
+
+    color: #001f3f;
+
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+body.page-portfolio .portfolio-intro p {
+    max-width: 760px;
+    margin: 0 auto;
+
+    color: #52606d;
+
+    font-size: 1.02rem;
+    line-height: 1.65;
+}
+
+
+/* ------------------------------------------------------------
+   SECTION HEADERS — MORE EDITORIAL
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .category-header {
+    position: relative;
+
+    padding: 17px 6px 13px !important;
+
+    font-size: 1.4rem !important;
+    letter-spacing: -0.015em;
+}
+
+body.page-portfolio .portfolio-section .category-header::before {
+    content: "";
+
+    width: 4px;
+    height: 20px;
+
+    margin-right: 11px;
+
+    background: #0a66c2;
+    border-radius: 3px;
+
+    display: inline-block;
+
+    vertical-align: middle;
+}
+
+
+/* Keep the heading text and toggle correctly aligned */
+
+body.page-portfolio .portfolio-section .category-header {
+    justify-content: flex-start;
+}
+
+body.page-portfolio .portfolio-section .category-toggle {
+    margin-left: auto;
+}
+
+
+/* ------------------------------------------------------------
+   CARD TOP AREA
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .card {
+    display: flex;
+    flex-direction: column;
+}
+
+body.page-portfolio .portfolio-section .card-title {
+    position: relative;
+
+    padding-bottom: 9px;
+    margin-bottom: 11px !important;
+}
+
+body.page-portfolio .portfolio-section .card-title::after {
+    content: "";
+
+    display: block;
+
+    width: 34px;
+    height: 2px;
+
+    margin-top: 8px;
+
+    background: #7ac0f9;
+    border-radius: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   LOGO AREA
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .card > .logo-img:first-child {
+    margin-top: -2px;
+}
+
+
+/* ------------------------------------------------------------
+   CARD BODY
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .card p:last-child {
+    margin-top: auto;
+}
+
+
+/* ------------------------------------------------------------
+   LIST CARDS
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .card ul {
+    margin-top: 2px;
+}
+
+body.page-portfolio .portfolio-section .card li::marker {
+    color: #0a66c2;
+}
+
+
+/* ------------------------------------------------------------
+   EXECUTIVE SUMMARY — SLIGHTLY MORE PROMINENT
+   ------------------------------------------------------------ */
+
+body.page-portfolio
+.portfolio-section[data-category="summary"]
+.card {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f8fbfe 100%
+        ) !important;
+
+    border-color: #d7e4ef;
+
+    padding: 26px !important;
+}
+
+body.page-portfolio
+.portfolio-section[data-category="summary"]
+.card p {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    body.page-portfolio .portfolio-intro {
+        margin-top: 20px;
+        padding: 0 16px;
+    }
+
+    body.page-portfolio .portfolio-intro h1 {
+        font-size: 2rem;
+    }
+
+    body.page-portfolio .portfolio-intro p {
+        font-size: 0.96rem;
+    }
+
+    body.page-portfolio .portfolio-section .category-header {
+        padding: 14px 2px 11px !important;
+        font-size: 1.16rem !important;
+    }
+
+    body.page-portfolio .portfolio-section .category-header::before {
+        width: 3px;
+        height: 17px;
+        margin-right: 9px;
+    }
+}
+
+   
 </style>
 </head>
 
@@ -802,8 +1013,27 @@ fetch("header.html")
 <script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
 <script src="analytics-tracker.js" defer></script>
 
+<!-- =========================================================
+     PORTFOLIO INTRO
+     ========================================================= -->
 
+<section class="portfolio-intro">
 
+    <div class="portfolio-intro-kicker">
+        PROFESSIONAL PORTFOLIO
+    </div>
+
+    <h1>
+        Transformation delivered across complex environments.
+    </h1>
+
+    <p>
+        A selection of large-scale technology, infrastructure, cyber,
+        cloud and PMO programmes delivered across regulated and
+        multi-vendor environments.
+    </p>
+
+</section>
 <!-- PAGE SEARCH -->
 <div id="pageSearchBar" class="page-search-bar">
     <div class="page-search-bar-inner">

@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Certifications – Tim Williams</title>
+
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="header-standard-v4.css">
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+
+<style>
+
+/* =========================================================
+   TWC CERTIFICATIONS PAGE
+   ========================================================= */
+
+:root {
+    --cert-navy: #001f3f;
+    --cert-blue: #7ac0f9;
+    --cert-blue-dark: #0a66c2;
+    --cert-bg: var(--bg, #f7f9fb);
+    --cert-card: var(--card-bg, #ffffff);
+    --cert-text: var(--text-main, #1f2937);
+    --cert-sub: var(--text-sub, #667085);
+    --cert-border: #e5e7eb;
+    --cert-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+/* PAGE */
+
+body.page-certifications {
+    background: var(--cert-bg);
+    color: var(--cert-text);
+}
+
+.cert-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.cert-hero {
+    margin-bottom: 1.75rem;
+}
+
+.cert-hero h1 {
+    margin: 0 0 0.55rem;
+    font-size: clamp(2rem, 4vw, 2.65rem);
+    line-height: 1.15;
+    color: var(--cert-text);
+}
+
+.cert-hero p {
+    max-width: 780px;
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--cert-sub);
+}
+
+/* =========================================================
+   SEARCH & FILTER AREA
+   ========================================================= */
+
+.cert-discovery {
+    background: var(--cert-card);
+    border: 1px solid var(--cert-border);
+    border-radius: 14px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--cert-shadow);
+}
+
+.cert-search {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 17px;
+    border: 1px solid #cfd5dc;
+    border-radius: 50px;
+    background: var(--cert-card);
+    color: var(--cert-text);
+    font-size: 15px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.cert-search::placeholder {
+    color: #7b8490;
+}
+
+.cert-search:focus {
+    border-color: var(--cert-blue-dark);
+    box-shadow: 0 0 0 3px rgba(10,102,194,0.12);
+}
+
+/* FILTERS */
+
+.cert-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.cert-filter {
+    appearance: none;
+    border: 1px solid var(--cert-navy);
+    background: var(--cert-navy);
+    color: #ffffff;
+    border-radius: 50px;
+    padding: 8px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .15s ease;
+}
+
+.cert-filter:hover {
+    background: #07335d;
+    transform: translateY(-1px);
+}
+
+.cert-filter.active {
+    background: #ffffff;
+    color: var(--cert-navy);
+    border-color: var(--cert-blue);
+}
+
+/* ACTION BUTTONS */
+
+.cert-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--cert-border);
+}
+
+.cert-action {
+    appearance: none;
+    border: 1px solid #cbd5df;
+    background: transparent;
+    color: var(--cert-navy);
+    border-radius: 50px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.cert-action:hover {
+    border-color: var(--cert-blue-dark);
+    background: #f3f8fc;
+}
+
+/* RESULT MESSAGE */
+
+.cert-results-info {
+    margin: 0 0 1.25rem;
+    font-size: 0.9rem;
+    color: var(--cert-sub);
+}
+
+.cert-no-results {
+    display: none;
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--cert-sub);
+    background: var(--cert-card);
+    border: 1px solid var(--cert-border);
+    border-radius: 12px;
+}
+
+/* =========================================================
+   CATEGORY SECTIONS
+   ========================================================= */
+
+.cert-section {
+    margin-bottom: 1rem;
+    background: var(--cert-card);
+    border: 1px solid var(--cert-border);
+    border-radius: 14px;
+    box-shadow: var(--cert-shadow);
+    overflow: hidden;
+}
+
+.cert-category-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.15rem;
+    border: 0;
+    background: transparent;
+    color: var(--cert-text);
+    text-align: left;
+    cursor: pointer;
+}
+
+.cert-category-header:hover {
+    background: rgba(122,192,249,0.06);
+}
+
+.cert-category-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.cert-category-title h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.35;
+    color: var(--cert-text);
+}
+
+.cert-category-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 27px;
+    height: 24px;
+    padding: 0 7px;
+    border-radius: 20px;
+    background: #eef5fa;
+    color: var(--cert-navy);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.cert-category-toggle {
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f2f4f7;
+    color: var(--cert-navy);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.cert-section.open .cert-category-toggle {
+    background: var(--cert-navy);
+    color: #ffffff;
+}
+
+/* =========================================================
+   CATEGORY CONTENT
+   ========================================================= */
+
+.cert-category-content {
+    display: none;
+    padding: 0 1.15rem 1.15rem;
+}
+
+.cert-section.open .cert-category-content {
+    display: block;
+}
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 12px;
+}
+
+/* =========================================================
+   CERTIFICATION CARDS
+   ========================================================= */
+
+.cert-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 125px;
+    padding: 1rem;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.cert-card:hover {
+    transform: translateY(-2px);
+    border-color: #c8d9e7;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+}
+
+.cert-card-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    color: var(--cert-text);
+    font-size: 0.96rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.cert-card-icon {
+    flex: 0 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.3;
+}
+
+.cert-card-issuer {
+    margin: 8px 0 0;
+    color: var(--cert-sub);
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+.cert-card-link {
+    display: inline-block;
+    margin-top: auto;
+    padding-top: 10px;
+    color: var(--cert-blue-dark);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.cert-card-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+body.dark-mode {
+    --cert-bg: #0a0a0a;
+    --cert-card: #171717;
+    --cert-text: #ffffff;
+    --cert-sub: #cccccc;
+    --cert-border: #303030;
+}
+
+body.dark-mode .cert-discovery,
+body.dark-mode .cert-section,
+body.dark-mode .cert-no-results {
+    border-color: #303030;
+}
+
+body.dark-mode .cert-search {
+    border-color: #444;
+}
+
+body.dark-mode .cert-filter.active {
+    background: #171717;
+    color: #ffffff;
+}
+
+body.dark-mode .cert-action {
+    color: #ffffff;
+    border-color: #555;
+}
+
+body.dark-mode .cert-action:hover {
+    background: #222;
+}
+
+body.dark-mode .cert-category-count {
+    background: #25384a;
+    color: #ffffff;
+}
+
+body.dark-mode .cert-category-toggle {
+    background: #292929;
+    color: #ffffff;
+}
+
+body.dark-mode .cert-card {
+    background: #202020;
+    border-color: #353535;
+}
+
+body.dark-mode .cert-card:hover {
+    border-color: #4a4a4a;
+}
+
+body.dark-mode .cert-card-link {
+    color: #7ac0f9;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .cert-page {
+        padding: 1.25rem 1rem 3rem;
+    }
+
+    .cert-hero {
+        margin-bottom: 1.25rem;
+    }
+
+    .cert-hero h1 {
+        font-size: 1.9rem;
+    }
+
+    .cert-hero p {
+        font-size: 0.98rem;
+    }
+
+    .cert-discovery {
+        padding: 0.85rem;
+        border-radius: 12px;
+    }
+
+    .cert-filters {
+        gap: 7px;
+    }
+
+    .cert-filter {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .cert-actions {
+        flex-wrap: wrap;
+    }
+
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cert-category-header {
+        padding: 0.9rem;
+    }
+
+    .cert-category-title h2 {
+        font-size: 1rem;
+    }
+
+    .cert-category-content {
+        padding: 0 0.9rem 0.9rem;
+    }
+
+    .cert-card {
+        min-height: 115px;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.cert-filter:focus-visible,
+.cert-action:focus-visible,
+.cert-category-header:focus-visible,
+.cert-search:focus-visible,
+.cert-card-link:focus-visible {
+    outline: 3px solid rgba(122,192,249,0.55);
+    outline-offset: 2px;
+}
+
+</style>
+</head>
+
+
+<body class="header-with-logo page-site-search page-certifications">
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+    .then(response => response.text())
+    .then(html => {
+        document.getElementById("header-placeholder").innerHTML = html;
+
+        const headerScript = document.createElement("script");
+        headerScript.src = "header-standard-v4.js";
+
+        headerScript.onload = () => {
+            if (typeof initHeader === "function") {
+                initHeader();
+            }
+
+            if (typeof initHeaderEnhancements === "function") {
+                initHeaderEnhancements();
+            }
+
+            const searchScript = document.createElement("script");
+            searchScript.src = "site-search.js";
+
+            searchScript.onload = () => {
+                if (typeof initSiteSearch === "function") {
+                    initSiteSearch();
+                }
+            };
+
+            document.body.appendChild(searchScript);
+        };
+
+        document.body.appendChild(headerScript);
+    });
+</script>
+
+<script defer
+        data-domain="twc-ltd.uk"
+        src="https://plausible.io/js/script.js"></script>
+
+<script src="analytics-tracker.js" defer></script>
+
+
+<!-- =========================================================
+     PAGE
+     ========================================================= -->
+
+<main class="cert-page">
+
+    <!-- HERO -->
+
+    <section class="cert-hero">
+
+        <h1>Certifications & Professional Credentials</h1>
+
+        <p>
+            A portfolio of professional qualifications, specialist training,
+            technology certifications, memberships and professional development
+            spanning programme delivery, leadership, AI, cloud, security and
+            modern technology environments.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         SEARCH & DISCOVERY
+         ===================================================== -->
+
+    <section class="cert-discovery">
+
+        <input
+            id="certSearch"
+            class="cert-search"
+            type="search"
+            placeholder="Search certifications, qualifications, skills or issuers…"
+            aria-label="Search certifications"
+            autocomplete="off"
+        >
+
+        <div class="cert-filters" role="group" aria-label="Certification filters">
+
+            <button
+                type="button"
+                class="cert-filter active"
+                data-filter="all">
+                All
+            </button>
+
+            <button
+                type="button"
+                class="cert-filter"
+                data-filter="Professional Certifications">
+                Professional
+            </button>
+
+            <button
+                type="button"
+                class="cert-filter"
+                data-filter="Leadership & Management">
+                Leadership
+            </button>
+
+            <button
+                type="button"
+                class="cert-filter"
+                data-filter="Agile & Scrum">
+                Agile
+            </button>
+
+            <button
+                type="button"
+                class="cert-filter"
+                data-filter="AI & Copilot">
+                AI
+            </button>
+
+            <button
+                type="button"
+                class="cert-filter"
+                data-filter="Microsoft Skills & Cloud">
+                Microsoft
+            </button>
+
+            <button
+                type="button"
+                class="cert-filter"
+                data-filter="Security & Governance">
+                Security
+            </button>
+
+            <button
+                type="button"
+                class="cert-filter"
+                data-filter="Volunteering">
+                Volunteering
+            </button>
+
+            <button
+                type="button"
+                class="cert-filter"
+                data-filter="Memberships">
+                Memberships
+            </button>
+
+            <button
+                type="button"
+                class="cert-filter"
+                data-filter="Background Checks">
+                Checks
+            </button>
+
+        </div>
+
+        <div class="cert-actions">
+
+            <button
+                type="button"
+                id="expandAllBtn"
+                class="cert-action">
+                Expand All
+            </button>
+
+            <button
+                type="button"
+                id="collapseAllBtn"
+                class="cert-action">
+                Collapse All
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <div
+        id="certResultsInfo"
+        class="cert-results-info"
+        aria-live="polite">
+    </div>
+
+
+    <div
+        id="certNoResults"
+        class="cert-no-results">
+        No matching certifications found.
+    </div>
+
+
+    <!-- =====================================================
+         CERTIFICATION CONTENT
+         ===================================================== -->
+
+    <div id="certContainer"></div>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<div id="footer"></div>
+
+<script>
+fetch("/footer.html")
+    .then(response => response.text())
+    .then(html => {
+        document.getElementById("footer").innerHTML = html;
+
+        if (typeof initFooter === "function") {
+            initFooter();
+        }
+    });
+</script>
+
+
+<!-- =========================================================
+     FLOATING BUTTONS
+     ========================================================= -->
+
+<div
+    id="fab"
+    class="fab"
+    aria-label="Back to top"
+    onclick="window.scrollTo({top:0,behavior:'smooth'});">
+    ⬆️
+</div>
+
+<a
+    id="bookingFab"
+    class="fab fab-booking"
+    href="calendar.html"
+    aria-label="Make a booking">
+    📅
+</a>
+
+
+<!-- =========================================================
+     CERTIFICATION DATA
+     ========================================================= -->
+
+<script id="cert-data" type="application/json">
+{
+"Professional Certifications": [
+    { "icon": "🎓", "title": "APM Project Management Qualification", "issuer": "APMP", "url": "" },
+    { "icon": "🎓", "title": "Certified Risk Manager (CRM)", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "Contract and Commercial Management Practitioner (ACCM)", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "P3O Practitioner", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "PRINCE2® 2017 Practitioner", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🎓", "title": "Program Management for IT Professionals", "issuer": "SHRM", "url": "" },
+    { "icon": "🎓", "title": "Programme Management for IT Professionals", "issuer": "CompTIA", "url": "" },
+    { "icon": "🎓", "title": "Program Management Professional (PgMP)", "issuer": "Project Management Institute", "url": "" },
+    { "icon": "🎓", "title": "Agile Project Management Foundation", "issuer": "PMI", "url": "" },
+    { "icon": "🎓", "title": "Atlassian Agile Project Management Professional Certificate", "issuer": "Atlassian", "url": "" },
+    { "icon": "🎓", "title": "Six Sigma Yellow Belt", "issuer": "NASBA", "url": "" },
+    { "icon": "🎓", "title": "Six Sigma Foundations: Applying Design for Six Sigma", "issuer": "NASBA", "url": "" },
+    { "icon": "🎓", "title": "Six Sigma Green Belt (CSSGB)", "issuer": "NASBA", "url": "" },
+    { "icon": "🎓", "title": "Change Management in Project Management", "issuer": "PMI", "url": "" },
+    { "icon": "🎓", "title": "Project Management Foundations: Integration", "issuer": "PMI", "url": "" },
+    { "icon": "🎓", "title": "Microsoft Project Step by Step: Planning for Successful Project Management", "issuer": "Microsoft", "url": "" },
+    { "icon": "🎓", "title": "Planning for Successful Project Management", "issuer": "PMI", "url": "" },
+    { "icon": "🎓", "title": "Project Management with Microsoft Copilot", "issuer": "Microsoft", "url": "" }
+],
+"Leadership & Management": [
+    { "icon": "🧭", "title": "High-Stakes Presentation Skills for Leaders and Managers", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/095cce33db1a44ba0a7eeee2f8efabc9dd4604fa71bb642b9f9da9e700462e05" },
+    { "icon": "🧭", "title": "Lead a Successful PMO", "issuer": "Project Management Institute", "url": "" },
+    { "icon": "🧭", "title": "Leading Projects", "issuer": "Project Management Institute", "url": "" },
+    { "icon": "🧭", "title": "Presenting to Senior Executives", "issuer": "LinkedIn", "url": "https://www.linkedin.com/learning/certificates/cef27bc151962281f9e5716b535b9c54c745b06f6c20bab1c47b04354c2b3790" },
+    { "icon": "🧭", "title": "How to Support Yourself and Others with Mental Health", "issuer": "ROC", "url": "" },
+    { "icon": "🧭", "title": "Modern Slavery Awareness", "issuer": "ROC", "url": "" },
+    { "icon": "🧭", "title": "Succeeding as a First-Time Tech Manager", "issuer": "PMI", "url": "" },
+    { "icon": "🧭", "title": "Succeeding as a Tech Manager", "issuer": "PMI", "url": "" },
+    { "icon": "🧭", "title": "ServiceNow IT Leadership Professional Certificate", "issuer": "ServiceNow", "url": "" },
+    { "icon": "🧭", "title": "Project Leadership in the Age of AI", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🧭", "title": "Stakeholder Management for Leaders and Managers", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🧭", "title": "Stakeholder Management and Communication for Senior Leaders and Executives", "issuer": "LinkedIn", "url": "" }
+],
+"Agile & Scrum": [
+    { "icon": "🌀", "title": "Agile Business Analysis", "issuer": "International Institute of Business Analysis (IIBA)", "url": "" },
+    { "icon": "🌀", "title": "Agile Project Management with Jira Cloud", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🌀", "title": "Agile Foundations", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🌀", "title": "Jira Cloud: Projects, Boards, and Issues", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🌀", "title": "Jira Cloud: Lean and Agile Processes", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🌀", "title": "Jira Cloud: Advanced Topics", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🌀", "title": "Mistakes to Avoid in Agile Project Management", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🌀", "title": "Scrum: The Basics", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🌀", "title": "Disciplined Agile in Project Management", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🌀", "title": "Kickoff: Agile Project Management", "issuer": "PMI", "url": "" }
+],
+"AI & Copilot": [
+    { "icon": "🤖", "title": "AI for Project Management", "issuer": "Project Management Institute", "url": "" },
+    { "icon": "🤖", "title": "Introduction to AI Concepts", "issuer": "Microsoft", "url": "" },
+    { "icon": "🤖", "title": "Introduction to Machine Learning Concepts", "issuer": "Microsoft", "url": "" },
+    { "icon": "🤖", "title": "Generative AI Overview for Project Managers", "issuer": "Microsoft", "url": "" },
+    { "icon": "🤖", "title": "Practical Application of Generative AI for Project Managers", "issuer": "Microsoft", "url": "" },
+    { "icon": "🤖", "title": "Introduction to Generative AI and Agents", "issuer": "Microsoft", "url": "" },
+    { "icon": "🤖", "title": "Scale AI in Your Organisation", "issuer": "Microsoft", "url": "" },
+    { "icon": "🤖", "title": "Drive Business Value with Microsoft Copilot Solutions", "issuer": "Microsoft", "url": "" },
+    { "icon": "🤖", "title": "Drive Business Value with AI Using Microsoft Foundry Tools", "issuer": "Microsoft", "url": "" }
+],
+"Microsoft Skills & Cloud": [
+    { "icon": "☁️", "title": "Advanced Excel", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Citrix Certified Administrator (CCA)", "issuer": "QA Ltd", "url": "" },
+    { "icon": "☁️", "title": "PointSec Administration", "issuer": "Pointsec Mobile Technologies", "url": "" },
+    { "icon": "☁️", "title": "VmWare ESXi Administration", "issuer": "VMware", "url": "" },
+    { "icon": "☁️", "title": "IT Infrastructure", "issuer": "CompTIA", "url": "" },
+    { "icon": "☁️", "title": "Microsoft Certified Technology Specialist (MCTS)", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Microsoft Certified IT Professional (MCITP)", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Microsoft Certified Professional (MCP)", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Hyper-V in Windows Server 2008", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "MCITP: Virtualisation Administrator (Server 2008 R2)", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "MCTS: Windows Server 2008 R2 Desktop Virtualisation", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "MCTS: Exchange Server 2007 Configuration (Charter Member)", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "MCTS: Windows Server 2008 Active Directory Configuration", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "System Center Virtual Machine Manager 2008", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Terminal Services in Windows Server 2008", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "MCTS: Windows Server Virtualisation Configuration", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Introduction to IT Architecture", "issuer": "LinkedIn", "url": "" },
+    { "icon": "☁️", "title": "Creating Your IT Strategy", "issuer": "LinkedIn", "url": "" },
+    { "icon": "☁️", "title": "Introduction to Cloud Infrastructure", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Microsoft Applied Skills: Get Started with Azure Management Tasks", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Build an Agent with Copilot Studio", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Power Automate Solutions", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Enhance Teaching & Learning with Microsoft 365 Copilot Chat", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Microsoft Azure AI Essentials (Professional Certificate)", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Power BI Essential Training (2024)", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Copilot in Power BI", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Getting Started with Power BI", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Use Power Automate to Increase Productivity", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Digital Transformation Foundations", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Customer Experience (CX) Foundations", "issuer": "Microsoft", "url": "" },
+    { "icon": "☁️", "title": "Cloud Adoption Framework", "issuer": "Microsoft", "url": "" }
+],
+"Security & Governance": [
+    { "icon": "🔐", "title": "Data Protection", "issuer": "Access LMS", "url": "" },
+    { "icon": "🔐", "title": "ISO Awareness", "issuer": "Roc Technologies", "url": "" },
+    { "icon": "🔐", "title": "ITIL", "issuer": "QA Ltd", "url": "" },
+    { "icon": "🔐", "title": "Applying ITIL® 3 Foundation Concepts", "issuer": "LinkedIn", "url": "" },
+    { "icon": "🔐", "title": "Security Frameworks Fundamentals", "issuer": "Microsoft", "url": "" },
+    { "icon": "🔐", "title": "NIST Cybersecurity Framework (CSF) Foundation", "issuer": "Alison", "url": "" }
+],
+"Volunteering": [
+    { "icon": "❤️", "title": "APM Volunteer", "issuer": "APMP", "url": "https://www.credly.com/badges/7f93d000-c0e5-46a9-9273-89bec8150b56/linked_in_profile" },
+    { "icon": "❤️", "title": "Volunteer Contribution to the Project Management Profession", "issuer": "PMI", "url": "" },
+    { "icon": "❤️", "title": "PMI Volunteer", "issuer": "PMI", "url": "" },
+    { "icon": "❤️", "title": "STEM Volunteer", "issuer": "STEM Learning", "url": "" },
+    { "icon": "❤️", "title": "National Interview Week Volunteer", "issuer": "Inployable", "url": "" },
+    { "icon": "❤️", "title": "Career Coach & Mentor Volunteer", "issuer": "Inspiring the Future", "url": "" }
+],
+"Memberships": [
+    { "icon": "🏛️", "title": "Associated Professional Member (APM)", "issuer": "Association for Project Management", "url": "" },
+    { "icon": "🏛️", "title": "BCS Professional Member", "issuer": "BCS", "url": "" },
+    { "icon": "🏛️", "title": "PMI Professional Member", "issuer": "PMI", "url": "" },
+    { "icon": "🏛️", "title": "House of PMO Member", "issuer": "House of PMO", "url": "" }
+],
+"Background Checks": [
+    { "icon": "🛂", "title": "Enhanced DBS", "issuer": "Disclosure and Barring Service (DBS)", "url": "" },
+    { "icon": "🛂", "title": "Enhanced SC Clearance", "issuer": "Home Office", "url": "" }
+]
+}
+</script>
+
+
+<!-- =========================================================
+     CERTIFICATION ENGINE
+     ========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dataElement = document.getElementById("cert-data");
+    const container = document.getElementById("certContainer");
+    const searchInput = document.getElementById("certSearch");
+    const noResults = document.getElementById("certNoResults");
+    const resultsInfo = document.getElementById("certResultsInfo");
+
+    const filterButtons = document.querySelectorAll(".cert-filter");
+    const expandAllBtn = document.getElementById("expandAllBtn");
+    const collapseAllBtn = document.getElementById("collapseAllBtn");
+
+    if (!dataElement || !container) return;
+
+    let certData = {};
+
+    try {
+        certData = JSON.parse(dataElement.textContent.trim());
+    } catch (error) {
+        console.error("Unable to parse certification data:", error);
+        return;
+    }
+
+
+    /* =====================================================
+       CATEGORY ORDER
+       ===================================================== */
+
+    const categoryOrder = [
+        "Professional Certifications",
+        "Leadership & Management",
+        "Agile & Scrum",
+        "AI & Copilot",
+        "Microsoft Skills & Cloud",
+        "Security & Governance",
+        "Volunteering",
+        "Memberships",
+        "Background Checks"
+    ];
+
+
+    /* =====================================================
+       CATEGORY ICONS
+       ===================================================== */
+
+    const categoryIcons = {
+        "Professional Certifications": "🎓",
+        "Leadership & Management": "🧭",
+        "Agile & Scrum": "🌀",
+        "AI & Copilot": "🤖",
+        "Microsoft Skills & Cloud": "☁️",
+        "Security & Governance": "🔐",
+        "Volunteering": "❤️",
+        "Memberships": "🏛️",
+        "Background Checks": "🛂"
+    };
+
+
+    /* =====================================================
+       STATE
+       ===================================================== */
+
+    let activeFilter = "all";
+    let searchTerm = "";
+
+
+    /* =====================================================
+       RENDER
+       ===================================================== */
+
+    function renderCategories() {
+
+        container.innerHTML = "";
+
+        categoryOrder.forEach(categoryName => {
+
+            const items = certData[categoryName];
+
+            if (!items || !items.length) {
+                return;
+            }
+
+
+            const section = document.createElement("section");
+
+            section.className = "cert-section";
+            section.dataset.category = categoryName;
+
+
+            /* CATEGORY HEADER */
+
+            const header = document.createElement("button");
+
+            header.type = "button";
+            header.className = "cert-category-header";
+            header.setAttribute("aria-expanded", "false");
+
+
+            const titleWrapper = document.createElement("span");
+
+            titleWrapper.className = "cert-category-title";
+
+
+            const icon = document.createElement("span");
+
+            icon.textContent = categoryIcons[categoryName] || "📁";
+
+
+            const title = document.createElement("h2");
+
+            title.textContent = categoryName;
+
+
+            const count = document.createElement("span");
+
+            count.className = "cert-category-count";
+            count.textContent = items.length;
+
+
+            titleWrapper.appendChild(icon);
+            titleWrapper.appendChild(title);
+            titleWrapper.appendChild(count);
+
+
+            const toggle = document.createElement("span");
+
+            toggle.className = "cert-category-toggle";
+            toggle.textContent = "+";
+            toggle.setAttribute("aria-hidden", "true");
+
+
+            header.appendChild(titleWrapper);
+            header.appendChild(toggle);
+
+
+            /* CATEGORY CONTENT */
+
+            const content = document.createElement("div");
+
+            content.className = "cert-category-content";
+
+
+            const grid = document.createElement("div");
+
+            grid.className = "cert-grid";
+
+
+            items.forEach(item => {
+
+                const card = document.createElement("article");
+
+                card.className = "cert-card";
+
+
+                const cardTitle = document.createElement("h3");
+
+                cardTitle.className = "cert-card-title";
+
+
+                const cardIcon = document.createElement("span");
+
+                cardIcon.className = "cert-card-icon";
+                cardIcon.textContent = item.icon || "🎓";
+
+
+                const cardTitleText = document.createElement("span");
+
+                cardTitleText.textContent = item.title;
+
+
+                cardTitle.appendChild(cardIcon);
+                cardTitle.appendChild(cardTitleText);
+
+
+                card.appendChild(cardTitle);
+
+
+                if (item.issuer) {
+
+                    const issuer = document.createElement("p");
+
+                    issuer.className = "cert-card-issuer";
+
+                    issuer.textContent = "Issuer: " + item.issuer;
+
+                    card.appendChild(issuer);
+                }
+
+
+                if (item.url) {
+
+                    const link = document.createElement("a");
+
+                    link.className = "cert-card-link";
+
+                    link.href = item.url;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+
+                    link.textContent = "View credential →";
+
+                    card.appendChild(link);
+                }
+
+
+                const wrapper = document.createElement("div");
+
+                wrapper.className = "cert-search-item";
+
+                wrapper.appendChild(card);
+
+                grid.appendChild(wrapper);
+            });
+
+
+            content.appendChild(grid);
+
+            section.appendChild(header);
+            section.appendChild(content);
+
+            container.appendChild(section);
+
+
+            /* ACCORDION */
+
+            header.addEventListener("click", function () {
+
+                const isOpen = section.classList.contains("open");
+
+                if (isOpen) {
+
+                    closeSection(section);
+
+                } else {
+
+                    openSection(section);
+
+                }
+
+            });
+
+        });
+
+        applyFilters();
+    }
+
+
+    /* =====================================================
+       ACCORDION
+       ===================================================== */
+
+    function openSection(section) {
+
+        section.classList.add("open");
+
+        const header = section.querySelector(".cert-category-header");
+        const toggle = section.querySelector(".cert-category-toggle");
+
+        if (header) {
+            header.setAttribute("aria-expanded", "true");
+        }
+
+        if (toggle) {
+            toggle.textContent = "−";
+        }
+    }
+
+
+    function closeSection(section) {
+
+        section.classList.remove("open");
+
+        const header = section.querySelector(".cert-category-header");
+        const toggle = section.querySelector(".cert-category-toggle");
+
+        if (header) {
+            header.setAttribute("aria-expanded", "false");
+        }
+
+        if (toggle) {
+            toggle.textContent = "+";
+        }
+    }
+
+
+    function openAll() {
+
+        document
+            .querySelectorAll(".cert-section")
+            .forEach(section => openSection(section));
+
+    }
+
+
+    function closeAll() {
+
+        document
+            .querySelectorAll(".cert-section")
+            .forEach(section => closeSection(section));
+
+    }
+
+
+    /* =====================================================
+       FILTER + SEARCH ENGINE
+       ===================================================== */
+
+    function applyFilters() {
+
+        const sections = document.querySelectorAll(".cert-section");
+
+        let visibleSections = 0;
+        let visibleCards = 0;
+
+
+        sections.forEach(section => {
+
+            const category = section.dataset.category;
+
+            const categoryMatches =
+                activeFilter === "all" ||
+                activeFilter === category;
+
+
+            const items = section.querySelectorAll(".cert-search-item");
+
+            let sectionMatches = 0;
+
+
+            items.forEach(item => {
+
+                const text = item.innerText.toLowerCase();
+
+                const searchMatches =
+                    !searchTerm ||
+                    text.includes(searchTerm);
+
+
+                const visible =
+                    categoryMatches &&
+                    searchMatches;
+
+
+                item.style.display =
+                    visible ? "" : "none";
+
+
+                if (visible) {
+                    sectionMatches++;
+                    visibleCards++;
+                }
+
+            });
+
+
+            const shouldShow =
+                categoryMatches &&
+                sectionMatches > 0;
+
+
+            section.style.display =
+                shouldShow ? "" : "none";
+
+
+            if (shouldShow) {
+                visibleSections++;
+            }
+
+        });
+
+
+        /* RESULTS */
+
+        if (searchTerm) {
+
+            resultsInfo.textContent =
+                visibleCards === 1
+                    ? "1 certification found"
+                    : visibleCards + " certifications found";
+
+        } else if (activeFilter !== "all") {
+
+            resultsInfo.textContent =
+                visibleCards === 1
+                    ? "1 certification in " + activeFilter
+                    : visibleCards + " certifications in " + activeFilter;
+
+        } else {
+
+            resultsInfo.textContent =
+                visibleCards + " certifications across " +
+                visibleSections +
+                " categories";
+
+        }
+
+
+        noResults.style.display =
+            visibleCards === 0 ? "block" : "none";
+
+
+        /*
+         * When searching, automatically open sections
+         * containing matches.
+         */
+
+        if (searchTerm) {
+
+            sections.forEach(section => {
+
+                if (section.style.display !== "none") {
+                    openSection(section);
+                }
+
+            });
+
+        }
+
+    }
+
+
+    /* =====================================================
+       FILTER BUTTONS
+       ===================================================== */
+
+    filterButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            activeFilter =
+                this.dataset.filter || "all";
+
+
+            filterButtons.forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+
+            this.classList.add("active");
+
+
+            applyFilters();
+
+
+            /*
+             * When selecting a specific category,
+             * open it automatically.
+             */
+
+            if (activeFilter !== "all") {
+
+                document
+                    .querySelectorAll(".cert-section")
+                    .forEach(section => {
+
+                        if (
+                            section.dataset.category ===
+                            activeFilter &&
+                            section.style.display !== "none"
+                        ) {
+                            openSection(section);
+                        } else {
+                            closeSection(section);
+                        }
+
+                    });
+
+            }
+
+        });
+
+    });
+
+
+    /* =====================================================
+       SEARCH
+       ===================================================== */
+
+    if (searchInput) {
+
+        searchInput.addEventListener("input", function () {
+
+            searchTerm =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+            applyFilters();
+
+        });
+
+    }
+
+
+    /* =====================================================
+       EXPAND ALL
+       ===================================================== */
+
+    if (expandAllBtn) {
+
+        expandAllBtn.addEventListener("click", function () {
+
+            openAll();
+
+        });
+
+    }
+
+
+    /* =====================================================
+       COLLAPSE ALL
+       ===================================================== */
+
+    if (collapseAllBtn) {
+
+        collapseAllBtn.addEventListener("click", function () {
+
+            closeAll();
+
+        });
+
+    }
+
+
+    /* =====================================================
+       INITIALISE
+       ===================================================== */
+
+    renderCategories();
+
+});
+
+</script>
+
+
+<!-- =========================================================
+     GLOBAL SCRIPTS
+     ========================================================= -->
+
+<script src="global.js"></script>
+
+</body>
+</html>

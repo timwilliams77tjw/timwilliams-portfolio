@@ -1378,6 +1378,347 @@ body.dark #noResultsMessage {
         padding-right: 10px;
     }
 }
+
+
+/* ============================================================
+   PORTFOLIO ACCORDION HEADERS — TWC MODERN STYLE
+   Complete replacement
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   BASE HEADER
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .category-header {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    margin: 34px 0 14px !important;
+    padding: 14px 4px 13px !important;
+
+    background: transparent !important;
+
+    color: #001f3f !important;
+
+    border: none !important;
+    border-bottom: 1px solid #dbe3eb !important;
+
+    font-size: 1.28rem !important;
+    line-height: 1.3;
+
+    font-weight: 750 !important;
+    letter-spacing: -0.015em;
+
+    text-align: left !important;
+
+    cursor: pointer !important;
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   SMALL BLUE ACCENT
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .category-header::before {
+    content: "";
+
+    width: 4px;
+    height: 22px;
+
+    margin-right: 12px;
+
+    flex: 0 0 4px;
+
+    background: #0a66c2;
+
+    border-radius: 4px;
+
+    opacity: 0.85;
+
+    transition:
+        height 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   HEADER TEXT
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .category-header {
+    gap: 0;
+}
+
+
+/* ------------------------------------------------------------
+   HOVER
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .category-header:hover {
+    color: #0a66c2 !important;
+
+    border-bottom-color: #b9cfe2 !important;
+}
+
+body.page-portfolio .portfolio-section .category-header:hover::before {
+    height: 27px;
+    opacity: 1;
+}
+
+
+/* ------------------------------------------------------------
+   OPEN SECTION
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section.open .category-header {
+    color: #0a66c2 !important;
+
+    border-bottom-color: #0a66c2 !important;
+}
+
+body.page-portfolio .portfolio-section.open .category-header::before {
+    height: 27px;
+    opacity: 1;
+}
+
+
+/* ------------------------------------------------------------
+   ACCORDION +/- CONTROL
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .category-toggle {
+    flex: 0 0 auto;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 18px;
+
+    background: #f1f6fa;
+
+    color: #0a66c2;
+
+    border: 1px solid #d7e5f0;
+    border-radius: 50%;
+
+    font-size: 1.15rem !important;
+    line-height: 1;
+
+    font-weight: 600 !important;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* ------------------------------------------------------------
+   TOGGLE HOVER
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .category-header:hover
+.category-toggle {
+    background: #0a66c2;
+
+    color: #ffffff;
+
+    border-color: #0a66c2;
+}
+
+
+/* ------------------------------------------------------------
+   OPEN TOGGLE
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section.open .category-toggle {
+    background: #0a66c2;
+
+    color: #ffffff;
+
+    border-color: #0a66c2;
+}
+
+
+/* ------------------------------------------------------------
+   FIRST SECTION SPACING
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section:first-child
+.category-header {
+    margin-top: 18px !important;
+}
+
+
+/* ------------------------------------------------------------
+   CARD LIST SPACING
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .card-list {
+    padding-top: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+
+    body.page-portfolio .portfolio-section .category-header {
+        margin: 27px 0 12px !important;
+
+        padding: 12px 2px 11px !important;
+
+        font-size: 1.08rem !important;
+
+        line-height: 1.35;
+    }
+
+    body.page-portfolio .portfolio-section .category-header::before {
+        width: 3px;
+        height: 20px;
+
+        margin-right: 10px;
+
+        flex-basis: 3px;
+    }
+
+    body.page-portfolio .portfolio-section .category-header:hover::before,
+    body.page-portfolio .portfolio-section.open
+    .category-header::before {
+        height: 24px;
+    }
+
+    body.page-portfolio .portfolio-section .category-toggle {
+        width: 28px;
+        height: 28px;
+
+        margin-left: 12px;
+
+        font-size: 1.05rem !important;
+    }
+
+    body.page-portfolio .portfolio-section:first-child
+    .category-header {
+        margin-top: 14px !important;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   SMALL IPHONE
+   ------------------------------------------------------------ */
+
+@media (max-width: 390px) {
+
+    body.page-portfolio .portfolio-section .category-header {
+        font-size: 1rem !important;
+
+        padding-left: 1px !important;
+        padding-right: 1px !important;
+    }
+
+    body.page-portfolio .portfolio-section .category-header::before {
+        margin-right: 8px;
+    }
+
+    body.page-portfolio .portfolio-section .category-toggle {
+        width: 26px;
+        height: 26px;
+
+        margin-left: 9px;
+
+        font-size: 1rem !important;
+    }
+
+}
+
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+body.dark-mode.page-portfolio .portfolio-section .category-header,
+body.dark.page-portfolio .portfolio-section .category-header {
+    color: #f1f5f9 !important;
+
+    border-bottom-color: #263449 !important;
+}
+
+body.dark-mode.page-portfolio .portfolio-section
+.category-header:hover,
+body.dark.page-portfolio .portfolio-section
+.category-header:hover {
+    color: #8bc5f3 !important;
+
+    border-bottom-color: #38536d !important;
+}
+
+body.dark-mode.page-portfolio .portfolio-section.open
+.category-header,
+body.dark.page-portfolio .portfolio-section.open
+.category-header {
+    color: #8bc5f3 !important;
+
+    border-bottom-color: #5da9e9 !important;
+}
+
+
+/* Dark-mode accent */
+
+body.dark-mode.page-portfolio .portfolio-section
+.category-header::before,
+body.dark.page-portfolio .portfolio-section
+.category-header::before {
+    background: #5da9e9;
+}
+
+
+/* Dark-mode toggle */
+
+body.dark-mode.page-portfolio .portfolio-section
+.category-toggle,
+body.dark.page-portfolio .portfolio-section
+.category-toggle {
+    background: #172b40;
+
+    color: #8bc5f3;
+
+    border-color: #294968;
+}
+
+body.dark-mode.page-portfolio .portfolio-section
+.category-header:hover .category-toggle,
+body.dark.page-portfolio .portfolio-section
+.category-header:hover .category-toggle,
+body.dark-mode.page-portfolio .portfolio-section.open
+.category-toggle,
+body.dark.page-portfolio .portfolio-section.open
+.category-toggle {
+    background: #5da9e9;
+
+    color: #071b2d;
+
+    border-color: #5da9e9;
+}
    
    
 </style>

@@ -1,155 +1,582 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>STAR Achievements — Tim Williams Consulting</title>
-
+<title>STAR Achievements – Tim Williams Consulting</title>
+<!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">
 <link rel="stylesheet" href="global-restore.css">
 <link rel="stylesheet" href="header-standard-v4.css">
-
+<!-- PAGE CSS -->
 <style>
+/* =========================================================
+   TWC STAR ACHIEVEMENTS
+   ========================================================= */
 body.page-generic {
     background: var(--bg);
     color: var(--text-main);
-    transition: background .3s ease, color .3s ease;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
 }
-
+/* =========================================================
+   PAGE CONTAINER
+   ========================================================= */
 .page-container {
-    max-width: 960px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem 4rem;
 }
-
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero-section {
+    margin-bottom: 2.5rem;
+}
 .hero-section h1 {
-    font-size: 2.2rem;
-    margin-bottom: .5rem;
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    line-height: 1.15;
+    margin: 0 0 0.75rem;
+    color: var(--text-main);
+    font-weight: 750;
 }
-
 .hero-section p {
-    font-size: 1.1rem;
+    margin: 0;
+    max-width: 780px;
+    font-size: 1.08rem;
+    line-height: 1.65;
     color: var(--text-sub);
-    max-width: 720px;
 }
-
-.card {
+/* =========================================================
+   INTRODUCTION STRIP
+   ========================================================= */
+.star-intro {
     background: var(--card-bg);
-    padding: 1.25rem;
-    border-radius: 8px;
+    border-left: 5px solid #7ac0f9;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
     box-shadow: var(--shadow);
-    margin-bottom: 1.5rem;
 }
-
-.card h2 {
-    margin-top: 0;
-}
-
-.card p, .card ul {
+.star-intro p {
+    margin: 0;
     color: var(--text-sub);
+    line-height: 1.65;
 }
-
-.section-image {
-    display: block;
-    margin: 0 auto 1rem;
-    max-width: 50%;
-    border-radius: 8px;
+/* =========================================================
+   ACHIEVEMENTS GRID
+   ========================================================= */
+.star-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+/* =========================================================
+   ACHIEVEMENT CARD
+   ========================================================= */
+.star-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    overflow: hidden;
     box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 31, 63, 0.08);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+.star-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+}
+/* =========================================================
+   IMAGE
+   ========================================================= */
+.star-image-wrap {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    background: #eef3f7;
+}
+.star-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+.star-card:hover .star-image {
+    transform: scale(1.025);
+}
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+.star-content {
+    padding: 1.35rem 1.4rem 1.5rem;
+}
+.star-content h2 {
+    margin: 0 0 1.15rem;
+    font-size: 1.25rem;
+    line-height: 1.35;
+    color: var(--text-main);
+}
+/* =========================================================
+   STAR ITEMS
+   ========================================================= */
+.star-item {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 0.85rem;
+    padding: 0.8rem 0;
+    border-top: 1px solid rgba(0, 31, 63, 0.09);
+}
+.star-item:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+.star-label {
+    font-size: 0.76rem;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #001f3f;
+    padding-top: 2px;
+}
+.star-text {
+    margin: 0;
+    color: var(--text-sub);
+    font-size: 0.94rem;
+    line-height: 1.6;
+}
+/* =========================================================
+   RESULT HIGHLIGHT
+   ========================================================= */
+.star-item.result {
+    margin-top: 0.35rem;
+    padding: 0.9rem;
+    border: 1px solid rgba(122, 192, 249, 0.55);
+    border-radius: 9px;
+    background: rgba(122, 192, 249, 0.08);
+}
+.star-item.result .star-label {
+    color: #001f3f;
+}
+.star-item.result .star-text {
+    color: var(--text-main);
+    font-weight: 600;
+}
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+.star-summary {
+    margin-top: 2.5rem;
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border-top: 4px solid #001f3f;
+}
+.star-summary h2 {
+    margin: 0 0 0.75rem;
+    color: var(--text-main);
+    font-size: 1.4rem;
+}
+.star-summary p {
+    margin: 0;
+    color: var(--text-sub);
+    line-height: 1.65;
+}
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+body.dark-mode .star-card,
+body.dark-mode .star-intro,
+body.dark-mode .star-summary {
+    background: var(--card-bg);
+    color: var(--text-main);
+}
+body.dark-mode .star-image-wrap {
+    background: #1a1a1a;
+}
+body.dark-mode .star-label {
+    color: #7ac0f9;
+}
+body.dark-mode .star-item {
+    border-color: rgba(255, 255, 255, 0.10);
+}
+body.dark-mode .star-item.result {
+    background: rgba(122, 192, 249, 0.10);
+    border-color: rgba(122, 192, 249, 0.35);
+}
+body.dark-mode .star-item.result .star-label {
+    color: #7ac0f9;
+}
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 760px) {
+    .page-container {
+        padding: 1.75rem 1rem 3rem;
+    }
+    .hero-section {
+        margin-bottom: 2rem;
+    }
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    .hero-section p {
+        font-size: 1rem;
+    }
+    .star-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    .star-image-wrap {
+        height: 180px;
+    }
+    .star-content {
+        padding: 1.2rem;
+    }
+    .star-item {
+        grid-template-columns: 78px minmax(0, 1fr);
+        gap: 0.7rem;
+    }
+    .star-label {
+        font-size: 0.7rem;
+    }
+    .star-text {
+        font-size: 0.92rem;
+    }
+}
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+@media (max-width: 430px) {
+    .page-container {
+        padding-left: 0.85rem;
+        padding-right: 0.85rem;
+    }
+    .star-intro,
+    .star-summary {
+        padding: 1.15rem;
+    }
+    .star-image-wrap {
+        height: 160px;
+    }
+    .star-item {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+    .star-label {
+        padding-top: 0;
+    }
 }
 </style>
 </head>
-
 <body class="header-with-logo page-generic">
-
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
 <div id="header-placeholder"></div>
-
 <script>
 fetch("header.html")
 .then(r => r.text())
 .then(h => {
     document.getElementById("header-placeholder").innerHTML = h;
-
     const siteSearch = document.createElement("script");
     siteSearch.src = "site-search.js";
-    siteSearch.onload = () => { if (typeof initSiteSearch === "function") initSiteSearch(); };
+    siteSearch.onload = () => {
+        if (typeof initSiteSearch === "function") {
+            initSiteSearch();
+        }
+    };
     document.body.appendChild(siteSearch);
-
     const headerJS = document.createElement("script");
     headerJS.src = "header-standard-v4.js";
-    headerJS.onload = () => { initHeader(); initHeaderEnhancements(); };
+    headerJS.onload = () => {
+        if (typeof initHeader === "function") {
+            initHeader();
+        }
+        if (typeof initHeaderEnhancements === "function") {
+            initHeaderEnhancements();
+        }
+    };
     document.body.appendChild(headerJS);
 });
 </script>
-
+<script
+    defer
+    data-domain="twc-ltd.uk"
+    src="https://plausible.io/js/script.js">
+</script>
+<script src="analytics-tracker.js" defer></script>
+<!-- =========================================================
+     MAIN CONTENT
+     ========================================================= -->
 <main class="page-container">
-
+<!-- HERO -->
 <section class="hero-section">
     <h1>STAR Achievements</h1>
-    <p>Executive‑grade STAR achievements demonstrating delivery impact across cyber security, cloud, workplace, and enterprise transformation.</p>
+    <p>
+        Executive-grade STAR achievements demonstrating delivery impact
+        across cyber security, cloud, workplace, infrastructure and
+        enterprise transformation.
+    </p>
 </section>
-
-<div class="card">
-    <h2>NHS England — Cyber Security Programme</h2>
-    <img src="cyber.jpg" alt="Cyber Security Programme" class="section-image">
-
-    <p><strong>Situation:</strong> National organisation requiring uplift to CAF‑aligned cyber posture.</p>
-    <p><strong>Task:</strong> Lead discovery, design, and delivery of a multi‑stream cyber programme.</p>
-    <p><strong>Action:</strong> Delivered MFA, IPAM, SSO, IAM, privileged access, SIEM, cloud identity, endpoint management, and secure backup.</p>
-    <p><strong>Result:</strong> Strengthened security posture and enabled compliant, scalable cyber operations.</p>
-</div>
-
-<div class="card">
-    <h2>Dounreay Nuclear & Luton Airport — PMO & Infrastructure Transformation</h2>
-    <img src="pmo.jpg" alt="PMO Governance" class="section-image">
-
-    <p><strong>Situation:</strong> High‑risk infrastructure and security portfolio requiring governance uplift.</p>
-    <p><strong>Task:</strong> Oversee PMO operations and lead transformation delivery.</p>
-    <p><strong>Action:</strong> Delivered MFA uplift, network refresh, ServiceNow MSP rollout, storage and server modernisation.</p>
-    <p><strong>Result:</strong> Improved predictability and accelerated secure infrastructure adoption.</p>
-</div>
-
-<div class="card">
-    <h2>DWP & MoD — Service Transition Leadership</h2>
-    <img src="transition.jpg" alt="Service Transition" class="section-image">
-
-    <p><strong>Situation:</strong> Major programmes required structured transition into BAU.</p>
-    <p><strong>Task:</strong> Ensure operational readiness and stable service adoption.</p>
-    <p><strong>Action:</strong> Delivered service designs, knowledge transfer, ITSM integration.</p>
-    <p><strong>Result:</strong> Reduced early‑life incidents and ensured smooth BAU transition.</p>
-</div>
-
-<div class="card">
-    <h2>HSBC, Tesco & United Utilities — Global Workplace Transformation</h2>
-    <img src="workplace.jpg" alt="Workplace Transformation" class="section-image">
-
-    <p><strong>Situation:</strong> Global clients required large‑scale workplace and infrastructure modernisation.</p>
-    <p><strong>Task:</strong> Lead end‑to‑end delivery across multiple regions.</p>
-    <p><strong>Action:</strong> Delivered Windows 10/11, cloud identity, Teams Rooms, network refreshes, storage upgrades.</p>
-    <p><strong>Result:</strong> Predictable, secure, cloud‑aligned workplace transformation.</p>
-</div>
-
-<div class="card">
-    <h2>AdminRe/SwissRe — Project Management</h2>
-    <img src="infrastructure.jpg" alt="Infrastructure Modernisation" class="section-image">
-
-    <p><strong>Situation:</strong> Financial services clients required secure, modern infrastructure.</p>
-    <p><strong>Task:</strong> Deliver infrastructure, migration, and software development projects.</p>
-    <p><strong>Action:</strong> Implemented identity, messaging, monitoring, virtualisation, endpoint security.</p>
-    <p><strong>Result:</strong> Improved performance and strengthened security posture.</p>
-</div>
-
+<!-- INTRODUCTION -->
+<section class="star-intro">
+    <p>
+        These examples demonstrate how I approach complex transformation
+        challenges using a structured <strong>Situation → Task → Action → Result</strong>
+        approach — combining strategic leadership, delivery discipline,
+        technical understanding and measurable business outcomes.
+    </p>
+</section>
+<!-- =====================================================
+     ACHIEVEMENTS
+     ===================================================== -->
+<section class="star-grid">
+    <!-- NHS ENGLAND -->
+    <article class="star-card">
+        <div class="star-image-wrap">
+            <img
+                src="cyber.jpg"
+                alt="Cyber Security Programme"
+                class="star-image">
+        </div>
+        <div class="star-content">
+            <h2>NHS England — Cyber Security Programme</h2>
+            <div class="star-item">
+                <div class="star-label">Situation</div>
+                <p class="star-text">
+                    National organisation requiring uplift to CAF-aligned
+                    cyber security posture.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Task</div>
+                <p class="star-text">
+                    Lead discovery, design and delivery of a multi-stream
+                    cyber security transformation programme.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Action</div>
+                <p class="star-text">
+                    Delivered MFA, IPAM, SSO, IAM, privileged access,
+                    SIEM, cloud identity, endpoint management and
+                    secure backup capabilities.
+                </p>
+            </div>
+            <div class="star-item result">
+                <div class="star-label">Result</div>
+                <p class="star-text">
+                    Strengthened security posture and established
+                    scalable, compliant cyber operations.
+                </p>
+            </div>
+        </div>
+    </article>
+    <!-- DOUNREAY / LUTON -->
+    <article class="star-card">
+        <div class="star-image-wrap">
+            <img
+                src="pmo.jpg"
+                alt="PMO Governance and Infrastructure Transformation"
+                class="star-image">
+        </div>
+        <div class="star-content">
+            <h2>Dounreay Nuclear &amp; Luton Airport — PMO &amp; Infrastructure Transformation</h2>
+            <div class="star-item">
+                <div class="star-label">Situation</div>
+                <p class="star-text">
+                    High-risk infrastructure and security portfolio
+                    requiring governance and delivery uplift.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Task</div>
+                <p class="star-text">
+                    Oversee PMO operations while leading transformation
+                    and infrastructure delivery.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Action</div>
+                <p class="star-text">
+                    Delivered MFA uplift, network refresh, ServiceNow
+                    MSP rollout, storage modernisation and server
+                    transformation.
+                </p>
+            </div>
+            <div class="star-item result">
+                <div class="star-label">Result</div>
+                <p class="star-text">
+                    Improved delivery predictability and accelerated
+                    secure infrastructure adoption.
+                </p>
+            </div>
+        </div>
+    </article>
+    <!-- DWP / MOD -->
+    <article class="star-card">
+        <div class="star-image-wrap">
+            <img
+                src="transition.jpg"
+                alt="Service Transition Leadership"
+                class="star-image">
+        </div>
+        <div class="star-content">
+            <h2>DWP &amp; MoD — Service Transition Leadership</h2>
+            <div class="star-item">
+                <div class="star-label">Situation</div>
+                <p class="star-text">
+                    Major transformation programmes required structured
+                    transition into stable BAU operations.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Task</div>
+                <p class="star-text">
+                    Ensure operational readiness, knowledge transfer
+                    and controlled service adoption.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Action</div>
+                <p class="star-text">
+                    Delivered service designs, knowledge transfer,
+                    operational readiness and ITSM integration.
+                </p>
+            </div>
+            <div class="star-item result">
+                <div class="star-label">Result</div>
+                <p class="star-text">
+                    Reduced early-life incidents and enabled smoother,
+                    more controlled BAU transition.
+                </p>
+            </div>
+        </div>
+    </article>
+    <!-- HSBC / TESCO / UNITED UTILITIES -->
+    <article class="star-card">
+        <div class="star-image-wrap">
+            <img
+                src="workplace.jpg"
+                alt="Global Workplace Transformation"
+                class="star-image">
+        </div>
+        <div class="star-content">
+            <h2>HSBC, Tesco &amp; United Utilities — Global Workplace Transformation</h2>
+            <div class="star-item">
+                <div class="star-label">Situation</div>
+                <p class="star-text">
+                    Global organisations required large-scale workplace
+                    and infrastructure modernisation.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Task</div>
+                <p class="star-text">
+                    Lead end-to-end transformation delivery across
+                    multiple regions and technology domains.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Action</div>
+                <p class="star-text">
+                    Delivered Windows 10/11 migrations, cloud identity,
+                    Teams Rooms, network refreshes and storage upgrades.
+                </p>
+            </div>
+            <div class="star-item result">
+                <div class="star-label">Result</div>
+                <p class="star-text">
+                    Delivered predictable, secure and cloud-aligned
+                    workplace transformation at enterprise scale.
+                </p>
+            </div>
+        </div>
+    </article>
+    <!-- ADMINRE / SWISSRE -->
+    <article class="star-card">
+        <div class="star-image-wrap">
+            <img
+                src="infrastructure.jpg"
+                alt="Infrastructure Modernisation"
+                class="star-image">
+        </div>
+        <div class="star-content">
+            <h2>AdminRe / SwissRe — Project Management</h2>
+            <div class="star-item">
+                <div class="star-label">Situation</div>
+                <p class="star-text">
+                    Financial services organisations required secure,
+                    resilient and modern infrastructure capabilities.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Task</div>
+                <p class="star-text">
+                    Deliver infrastructure, migration and software
+                    development projects within demanding environments.
+                </p>
+            </div>
+            <div class="star-item">
+                <div class="star-label">Action</div>
+                <p class="star-text">
+                    Implemented identity, messaging, monitoring,
+                    virtualisation and endpoint security solutions.
+                </p>
+            </div>
+            <div class="star-item result">
+                <div class="star-label">Result</div>
+                <p class="star-text">
+                    Improved infrastructure performance while
+                    strengthening security and operational resilience.
+                </p>
+            </div>
+        </div>
+    </article>
+</section>
+<!-- =====================================================
+     OVERALL VALUE
+     ===================================================== -->
+<section class="star-summary">
+    <h2>What These Achievements Demonstrate</h2>
+    <p>
+        Across different sectors, technologies and operating environments,
+        the consistent theme is the ability to take complex transformation
+        challenges, establish clarity and control, mobilise the right
+        people and capabilities, and convert strategy into measurable
+        delivery outcomes.
+    </p>
+</section>
 </main>
+<!-- =========================================================
+     FLOATING BUTTONS
+     ========================================================= -->
+<div
+    class="fab"
+    onclick="window.scrollTo({top:0,behavior:'smooth'});"
+    aria-label="Back to top">
+    ⬆️
+</div>
 
-<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
-<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
-
+📅
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
 <div id="footer"></div>
 <script>
 fetch("footer.html")
 .then(r => r.text())
-.then(h => document.getElementById("footer").innerHTML = h);
+.then(h => {
+    document.getElementById("footer").innerHTML = h;
+    if (typeof initFooter === "function") {
+        initFooter();
+    }
+});
 </script>
-
 </body>
 </html>

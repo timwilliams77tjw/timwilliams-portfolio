@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio – Tim Williams</title>
+
+<!-- GLOBAL HEADER CSS -->
+<link rel="stylesheet" href="header-standard-v4.css">
+
+<!-- GLOBAL PAGE CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+
+<style>
+/* ============================================================
+   TWC PORTFOLIO — MODERN VISUAL SYSTEM
+   Portfolio-only styling
+   Does not alter global header, footer or page JavaScript
+   ============================================================ */
+
+
+/* ============================================================
+   1. PAGE SEARCH
+   ============================================================ */
+
+body.page-portfolio .page-search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 24px 20px 10px;
+    box-sizing: border-box;
+}
+
+body.page-portfolio .page-search-bar-inner {
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+}
+
+body.page-portfolio .page-search-bar-inner input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 16px;
+    border: 1px solid #b8c4d0;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #001f3f;
+    font-size: 15px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+body.page-portfolio .page-search-bar-inner input::placeholder {
+    color: #8a96a3;
+}
+
+body.page-portfolio .page-search-bar-inner input:focus {
+    border-color: #7ac0f9;
+    box-shadow: 0 0 0 3px rgba(122, 192, 249, 0.16);
+}
+
+
+/* ============================================================
+   2. PORTFOLIO PDF ACTIONS
+   ============================================================ */
+
+body.page-portfolio .portfolio-download-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0 24px;
+}
+
+body.page-portfolio .portfolio-icon-btn {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    background: #001f3f;
+    color: #ffffff;
+
+    border: 1px solid #001f3f;
+    border-radius: 9px;
+
+    font-size: 23px;
+    line-height: 1;
+    text-decoration: none;
+
+    box-shadow: 0 3px 8px rgba(0, 31, 63, 0.14);
+
+    position: relative;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+body.page-portfolio .portfolio-icon-btn:hover {
+    background: #ffffff;
+    color: #001f3f;
+    border-color: #7ac0f9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 31, 63, 0.16);
+}
+
+
+/* Download tooltip */
+
+body.page-portfolio .portfolio-icon-btn[data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: -42px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: #001f3f;
+    color: #ffffff;
+
+    padding: 7px 10px;
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+
+    z-index: 100;
+}
+
+body.page-portfolio .portfolio-icon-btn[data-tip]:hover::before {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-width: 6px;
+    border-style: solid;
+    border-color: #001f3f transparent transparent transparent;
+
+    z-index: 101;
+}
+
+
+/* ============================================================
+   3. FILTER / CONTROL BAR
+   ============================================================ */
+
+body.page-portfolio .sticky-bar {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 20px 22px;
+
+    background: transparent;
+}
+
+body.page-portfolio .filter-btn {
+    appearance: none;
+    -webkit-appearance: none;
+
+    background: #001f3f;
+    color: #ffffff;
+
+    border: 1px solid #001f3f;
+    border-radius: 7px;
+
+    padding: 8px 15px;
+
+    min-height: 36px;
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+body.page-portfolio .filter-btn:hover {
+    background: #ffffff;
+    color: #001f3f;
+    border-color: #7ac0f9;
+    transform: translateY(-1px);
+}
+
+body.page-portfolio .filter-btn.active-filter {
+    background: #ffffff;
+    color: #001f3f;
+    border-color: #7ac0f9;
+    box-shadow: 0 2px 6px rgba(0, 31, 63, 0.10);
+}
+
+
+/* Expand / Collapse controls */
+
+body.page-portfolio .filter-btn.special-btn {
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   4. MAIN PORTFOLIO CONTAINER
+   ============================================================ */
+
+body.page-portfolio .container {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+
+/* ============================================================
+   5. PORTFOLIO SECTION
+   ============================================================ */
+
+body.page-portfolio .portfolio-section {
+    margin: 0 0 28px;
+}
+
+
+/* ============================================================
+   6. SECTION HEADER
+   ============================================================ */
+
+body.page-portfolio .portfolio-section .category-header {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0 0 16px;
+    padding: 15px 4px 12px;
+
+    background: transparent !important;
+    color: #001f3f !important;
+
+    border: none !important;
+    border-bottom: 2px solid #001f3f !important;
+
+    font-size: 1.45rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+body.page-portfolio .portfolio-section .category-header:hover {
+    color: #1769aa !important;
+    border-bottom-color: #7ac0f9 !important;
+}
+
+
+/* Section toggle */
+
+body.page-portfolio .portfolio-section .category-toggle {
+    flex: 0 0 auto;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 16px;
+
+    color: #0a66c2 !important;
+
+    font-size: 1.65rem !important;
+    font-weight: 500 !important;
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* ============================================================
+   7. ACCORDION CONTENT
+   ============================================================ */
+
+body.page-portfolio .portfolio-section .card-list {
+    display: none !important;
+}
+
+body.page-portfolio .portfolio-section.open .card-list {
+    display: block !important;
+}
+
+
+/* ============================================================
+   8. CARD GRID
+   ============================================================ */
+
+body.page-portfolio .portfolio-section .grid {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 18px;
+
+    align-items: stretch;
+}
+
+
+/* ============================================================
+   9. PORTFOLIO CARDS
+   ============================================================ */
+
+body.page-portfolio .portfolio-section .card {
+    height: 100%;
+    box-sizing: border-box;
+
+    background: #ffffff !important;
+
+    border: 1px solid #e5e9ee;
+    border-radius: 11px !important;
+
+    padding: 22px !important;
+    margin: 0 !important;
+
+    box-shadow: 0 3px 10px rgba(0, 31, 63, 0.06) !important;
+
+    text-align: left !important;
+
+    opacity: 0;
+    transform: translateY(10px);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+body.page-portfolio .portfolio-section .card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.page-portfolio .portfolio-section .card:hover {
+    border-color: #c9d8e5;
+    box-shadow: 0 6px 16px rgba(0, 31, 63, 0.09) !important;
+    transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   10. CARD TYPOGRAPHY
+   ============================================================ */
+
+body.page-portfolio .portfolio-section .card-title {
+    margin: 0 0 10px !important;
+
+    color: #001f3f !important;
+
+    font-size: 1.12rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3;
+}
+
+body.page-portfolio .portfolio-section .card p {
+    margin: 0 0 12px;
+
+    color: #3f4b57;
+
+    font-size: 0.96rem;
+    line-height: 1.55;
+}
+
+body.page-portfolio .portfolio-section .card p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Lists */
+
+body.page-portfolio .portfolio-section .card ul {
+    margin: 0;
+    padding-left: 20px;
+
+    color: #3f4b57;
+
+    font-size: 0.96rem;
+    line-height: 1.6;
+}
+
+body.page-portfolio .portfolio-section .card li {
+    margin-bottom: 6px;
+}
+
+body.page-portfolio .portfolio-section .card li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Universal card alignment */
+
+body.page-portfolio .card,
+body.page-portfolio .card p,
+body.page-portfolio .card ul,
+body.page-portfolio .card li,
+body.page-portfolio .card-title {
+    text-align: left !important;
+}
+
+
+/* ============================================================
+   11. LOGOS
+   ============================================================ */
+
+body.page-portfolio .logo-img {
+    width: 88px;
+    height: 48px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    margin: 0 12px 12px 0;
+
+    display: inline-block;
+    vertical-align: middle;
+
+    opacity: 0.88;
+}
+
+body.page-portfolio .logo-img + .logo-img {
+    margin-left: 2px;
+}
+
+
+/* ============================================================
+   12. SEARCH RESULTS
+   ============================================================ */
+
+body.page-portfolio #noResultsMessage {
+    max-width: 760px;
+    margin: 4px auto 18px !important;
+
+    padding: 12px 16px;
+
+    box-sizing: border-box;
+
+    background: #f4f7fa;
+    border: 1px solid #e0e6ec;
+    border-radius: 8px;
+
+    color: #52606d;
+
+    text-align: center;
+}
+
+
+/* ============================================================
+   13. FLOATING ACTION BUTTONS
+   ============================================================ */
+
+body.page-portfolio .fab {
+    position: fixed;
+
+    right: 24px;
+    bottom: 24px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+    color: #001f3f;
+
+    border: 2px solid #001f3f;
+    border-radius: 50%;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 10px rgba(0, 31, 63, 0.18);
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+    z-index: 999;
+}
+
+body.page-portfolio .fab:hover {
+    background: #001f3f;
+    color: #ffffff;
+    border-color: #001f3f;
+    transform: translateY(-2px);
+}
+
+body.page-portfolio .fab-booking {
+    bottom: 82px;
+}
+
+
+/* ============================================================
+   14. DARK MODE
+   ============================================================ */
+
+body.dark-mode.page-portfolio .page-search-bar-inner input {
+    background: var(--bg-alt);
+    color: var(--text-main);
+    border-color: #506070;
+}
+
+body.dark-mode.page-portfolio .page-search-bar-inner input::placeholder {
+    color: #9aa7b4;
+}
+
+body.dark-mode.page-portfolio .portfolio-section .category-header {
+    color: #7ac0f9 !important;
+    border-bottom-color: #7ac0f9 !important;
+}
+
+body.dark-mode.page-portfolio .portfolio-section .category-header:hover {
+    color: #ffffff !important;
+}
+
+body.dark-mode.page-portfolio .portfolio-section .card {
+    background: var(--bg-alt) !important;
+    border-color: #344454;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;
+}
+
+body.dark-mode.page-portfolio .portfolio-section .card-title {
+    color: #7ac0f9 !important;
+}
+
+body.dark-mode.page-portfolio .portfolio-section .card p,
+body.dark-mode.page-portfolio .portfolio-section .card ul {
+    color: var(--text-main);
+}
+
+body.dark-mode.page-portfolio .portfolio-icon-btn {
+    background: var(--bg-alt);
+    color: var(--text-main);
+    border-color: #7ac0f9;
+}
+
+body.dark-mode.page-portfolio .portfolio-icon-btn:hover {
+    background: #7ac0f9;
+    color: #001f3f;
+}
+
+body.dark-mode.page-portfolio .filter-btn {
+    background: var(--bg-alt);
+    color: var(--text-main);
+    border-color: #506070;
+}
+
+body.dark-mode.page-portfolio .filter-btn:hover,
+body.dark-mode.page-portfolio .filter-btn.active-filter {
+    background: #7ac0f9;
+    color: #001f3f;
+    border-color: #7ac0f9;
+}
+
+body.dark-mode.page-portfolio #noResultsMessage {
+    background: var(--bg-alt);
+    border-color: #344454;
+    color: var(--text-main);
+}
+
+body.dark-mode.page-portfolio .fab {
+    background: var(--bg-alt);
+    color: var(--text-main);
+    border-color: #7ac0f9;
+}
+
+body.dark-mode.page-portfolio .fab:hover {
+    background: #7ac0f9;
+    color: #001f3f;
+}
+
+
+/* ============================================================
+   15. TABLET / iPAD
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    body.page-portfolio .container {
+        width: min(100% - 32px, 900px);
+    }
+
+    body.page-portfolio .sticky-bar {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 7px;
+    }
+
+    body.page-portfolio .filter-btn {
+        padding: 8px 13px;
+    }
+
+    body.page-portfolio .portfolio-section .grid {
+        grid-template-columns:
+            repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+
+/* ============================================================
+   16. MOBILE / iPHONE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    body.page-portfolio .page-search-bar {
+        padding: 18px 14px 8px;
+    }
+
+    body.page-portfolio .page-search-bar-inner {
+        max-width: none;
+    }
+
+    body.page-portfolio .page-search-bar-inner input {
+        font-size: 16px;
+        padding: 12px 14px;
+    }
+
+    body.page-portfolio .portfolio-download-wrapper {
+        margin: 14px 0 18px;
+    }
+
+    body.page-portfolio .sticky-bar {
+        padding: 10px 12px 18px;
+        gap: 7px;
+    }
+
+    body.page-portfolio .filter-btn {
+        padding: 8px 11px;
+        font-size: 13px;
+        min-height: 35px;
+    }
+
+    body.page-portfolio .container {
+        width: calc(100% - 24px);
+    }
+
+    body.page-portfolio .portfolio-section {
+        margin-bottom: 22px;
+    }
+
+    body.page-portfolio .portfolio-section .category-header {
+        padding: 13px 2px 11px;
+
+        font-size: 1.18rem !important;
+    }
+
+    body.page-portfolio .portfolio-section .category-toggle {
+        width: 28px;
+        height: 28px;
+
+        font-size: 1.5rem !important;
+    }
+
+    body.page-portfolio .portfolio-section .grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    body.page-portfolio .portfolio-section .card {
+        padding: 18px !important;
+        border-radius: 10px !important;
+    }
+
+    body.page-portfolio .portfolio-section .card-title {
+        font-size: 1.05rem !important;
+    }
+
+    body.page-portfolio .portfolio-section .card p,
+    body.page-portfolio .portfolio-section .card ul {
+        font-size: 0.94rem;
+    }
+
+    body.page-portfolio .logo-img {
+        width: 78px;
+        height: 42px;
+        margin-right: 8px;
+        margin-bottom: 9px;
+    }
+
+    body.page-portfolio .fab {
+        right: 16px;
+        bottom: 18px;
+    }
+
+    body.page-portfolio .fab-booking {
+        bottom: 76px;
+    }
+}
+
+
+/* ============================================================
+   17. VERY SMALL iPHONE
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    body.page-portfolio .filter-btn {
+        padding: 7px 9px;
+        font-size: 12px;
+    }
+
+    body.page-portfolio .portfolio-section .category-header {
+        font-size: 1.1rem !important;
+    }
+
+    body.page-portfolio .portfolio-section .card {
+        padding: 16px !important;
+    }
+}
+
+
+/* ============================================================
+   PORTFOLIO — PASS 2
+   Editorial hierarchy + card refinement
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   PORTFOLIO INTRODUCTION
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-intro {
+    max-width: 900px;
+    margin: 26px auto 8px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+body.page-portfolio .portfolio-intro-kicker {
+    margin-bottom: 9px;
+
+    color: #0a66c2;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+body.page-portfolio .portfolio-intro h1 {
+    margin: 0 0 12px;
+
+    color: #001f3f;
+
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+body.page-portfolio .portfolio-intro p {
+    max-width: 760px;
+    margin: 0 auto;
+
+    color: #52606d;
+
+    font-size: 1.02rem;
+    line-height: 1.65;
+}
+
+
+/* ------------------------------------------------------------
+   SECTION HEADERS — MORE EDITORIAL
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .category-header {
+    position: relative;
+
+    padding: 17px 6px 13px !important;
+
+    font-size: 1.4rem !important;
+    letter-spacing: -0.015em;
+}
+
+body.page-portfolio .portfolio-section .category-header::before {
+    content: "";
+
+    width: 4px;
+    height: 20px;
+
+    margin-right: 11px;
+
+    background: #0a66c2;
+    border-radius: 3px;
+
+    display: inline-block;
+
+    vertical-align: middle;
+}
+
+
+/* Keep the heading text and toggle correctly aligned */
+
+body.page-portfolio .portfolio-section .category-header {
+    justify-content: flex-start;
+}
+
+body.page-portfolio .portfolio-section .category-toggle {
+    margin-left: auto;
+}
+
+
+/* ------------------------------------------------------------
+   CARD TOP AREA
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .card {
+    display: flex;
+    flex-direction: column;
+}
+
+body.page-portfolio .portfolio-section .card-title {
+    position: relative;
+
+    padding-bottom: 9px;
+    margin-bottom: 11px !important;
+}
+
+body.page-portfolio .portfolio-section .card-title::after {
+    content: "";
+
+    display: block;
+
+    width: 34px;
+    height: 2px;
+
+    margin-top: 8px;
+
+    background: #7ac0f9;
+    border-radius: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   LOGO AREA
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .card > .logo-img:first-child {
+    margin-top: -2px;
+}
+
+
+/* ------------------------------------------------------------
+   CARD BODY
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .card p:last-child {
+    margin-top: auto;
+}
+
+
+/* ------------------------------------------------------------
+   LIST CARDS
+   ------------------------------------------------------------ */
+
+body.page-portfolio .portfolio-section .card ul {
+    margin-top: 2px;
+}
+
+body.page-portfolio .portfolio-section .card li::marker {
+    color: #0a66c2;
+}
+
+
+/* ------------------------------------------------------------
+   EXECUTIVE SUMMARY — SLIGHTLY MORE PROMINENT
+   ------------------------------------------------------------ */
+
+body.page-portfolio
+.portfolio-section[data-category="summary"]
+.card {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f8fbfe 100%
+        ) !important;
+
+    border-color: #d7e4ef;
+
+    padding: 26px !important;
+}
+
+body.page-portfolio
+.portfolio-section[data-category="summary"]
+.card p {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    body.page-portfolio .portfolio-intro {
+        margin-top: 20px;
+        padding: 0 16px;
+    }
+
+    body.page-portfolio .portfolio-intro h1 {
+        font-size: 2rem;
+    }
+
+    body.page-portfolio .portfolio-intro p {
+        font-size: 0.96rem;
+    }
+
+    body.page-portfolio .portfolio-section .category-header {
+        padding: 14px 2px 11px !important;
+        font-size: 1.16rem !important;
+    }
+
+    body.page-portfolio .portfolio-section .category-header::before {
+        width: 3px;
+        height: 17px;
+        margin-right: 9px;
+    }
+}
+
+   
+</style>
+</head>
+
+<body class="header-with-logo page-site-search page-has-page-search page-portfolio">
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header-placeholder").innerHTML = h;
+
+        // Load global.js first
+        const globalScript = document.createElement("script");
+        globalScript.src = "global.js";
+
+        globalScript.onload = () => {
+            // Then load header-standard-v4.js
+            const headerScript = document.createElement("script");
+            headerScript.src = "header-standard-v4.js";
+
+            headerScript.onload = () => {
+                requestAnimationFrame(() => {
+                    if (typeof initHeader === "function") initHeader();
+                    if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+
+                    // Then load site-search.js once
+                    const searchScript = document.createElement("script");
+                    searchScript.src = "site-search.js";
+
+                    searchScript.onload = () => {
+                        if (typeof initSiteSearch === "function") initSiteSearch();
+                    };
+
+                    document.body.appendChild(searchScript);
+                });
+            };
+
+            document.body.appendChild(headerScript);
+        };
+
+        document.body.appendChild(globalScript);
+    });
+</script>
+<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+<script src="analytics-tracker.js" defer></script>
+
+<!-- =========================================================
+     PORTFOLIO INTRO
+     ========================================================= -->
+
+<section class="portfolio-intro">
+
+    <div class="portfolio-intro-kicker">
+        PROFESSIONAL PORTFOLIO
+    </div>
+
+    <h1>
+        Transformation delivered across complex environments.
+    </h1>
+
+    <p>
+        A selection of large-scale technology, infrastructure, cyber,
+        cloud and PMO programmes delivered across regulated and
+        multi-vendor environments.
+    </p>
+
+</section>
+<!-- PAGE SEARCH -->
+<div id="pageSearchBar" class="page-search-bar">
+    <div class="page-search-bar-inner">
+        <input id="pageSearchInput" type="text" placeholder="Search portfolio…">
+    </div>
+</div>
+
+<div id="noResultsMessage" style="display:none; margin-top:12px; opacity:0.75;">
+    No matching results found.
+</div>
+
+<!-- ========================= -->
+<!-- PORTFOLIO ICON BUTTONS -->
+<!-- ========================= -->
+
+<div class="portfolio-download-wrapper">
+
+    <!-- View Portfolio -->
+    <a href="portfolio_presentation.pdf"
+       target="_blank"
+       class="portfolio-icon-btn"
+       aria-label="View Portfolio PDF">
+        📄
+    </a>
+
+    <!-- Download Portfolio -->
+    <a href="portfolio_presentation.download"
+       download="portfolio_presentation.pdf"
+       class="portfolio-icon-btn"
+       data-tip="Safari users: rename .download to .zip"
+       aria-label="Download Portfolio PDF">
+        ⬇️
+    </a>
+
+</div>
+
+<style>
+/* Wrapper */
+.portfolio-download-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 18px; /* S2 balanced */
+    margin: 14px 0 26px; /* S2 balanced */
+}
+
+/* Icon buttons */
+.portfolio-icon-btn {
+    background-color: #001f3f;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    text-decoration: none;
+    border: 1px solid #001f3f;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Hover */
+.portfolio-icon-btn:hover {
+    background-color: white;
+    color: #001f3f;
+    border-color: #7ac0f9;
+}
+
+/* Tooltip */
+.portfolio-icon-btn[data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #001f3f;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 20;
+}
+
+.portfolio-icon-btn[data-tip]:hover::before {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #001f3f transparent transparent transparent;
+    z-index: 21;
+}
+
+/* Dark mode */
+body.dark-mode .portfolio-icon-btn {
+    background-color: var(--bg-alt);
+    color: var(--text-main);
+    border-color: #7ac0f9;
+}
+
+body.dark-mode .portfolio-icon-btn:hover {
+    background-color: #7ac0f9;
+    color: #001f3f;
+}
+
+body.dark-mode .portfolio-icon-btn[data-tip]:hover::after {
+    background: #7ac0f9;
+    color: #001f3f;
+}
+
+body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
+    border-color: #7ac0f9 transparent transparent transparent;
+}
+</style>
+
+<!-- FILTER BAR -->
+<div class="sticky-bar">
+    <button id="expandAllBtn" class="filter-btn special-btn">Expand All</button>
+    <button id="collapseAllBtn" class="filter-btn special-btn">Collapse All</button>
+
+    <button class="filter-btn" data-filter="summary">Summary</button>
+    <button class="filter-btn" data-filter="leadership">Leadership</button>
+    <button class="filter-btn" data-filter="rolefit">Role Fit</button>
+    <button class="filter-btn" data-filter="euc">EUC</button>
+    <button class="filter-btn" data-filter="cyber">Cyber</button>
+    <button class="filter-btn" data-filter="pmo">PMO</button>
+    <button class="filter-btn" data-filter="service">Service</button>
+    <button class="filter-btn" data-filter="cloud">Cloud</button>
+    <button class="filter-btn" data-filter="legacy">Legacy</button>
+    <button class="filter-btn" data-filter="presales">Pre‑Sales</button>
+    <button class="filter-btn" data-filter="whatibring">What I Bring</button>
+</div>
+
+<div class="container">
+
+<!-- SUMMARY -->
+<div class="category-section portfolio-section" data-category="summary">
+    <div class="category-header">
+        Executive Summary (1)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+            <div class="searchable-item">
+                <div class="card">
+                    <p>
+                        I deliver large-scale IT, infrastructure, and cyber programmes with a focus on execution certainty,
+                        operational readiness, and governance. My work spans national EUC transformations, identity and access
+                        uplift, PMO leadership, and service transition across complex, regulated, and multi-vendor environments.
+                    </p>
+
+                    <p>
+                        My track record shows repeatability across financial services, utilities, government, healthcare,
+                        aviation, and education. I stabilise programmes, drive adoption, and ensure services are secure,
+                        resilient, and ready for BAU.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- LEADERSHIP -->
+<div class="category-section portfolio-section" data-category="leadership">
+    <div class="category-header">
+        Leadership Model (4)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="atl.png" class="logo-img" alt="Atlassian">
+                    <img src="pmi.png" class="logo-img" alt="PMI">
+                    <img src="prince.png" class="logo-img" alt="Prince2">
+                    <div class="card-title">Governance & Delivery Control</div>
+                    <p>I establish clear frameworks, reporting rhythms, and decision pathways that bring stability to programmes under pressure.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="apm.png" class="logo-img" alt="APM">
+                    <div class="card-title">Stakeholder Alignment & Communication</div>
+                    <p>I build confidence across technical, operational, and executive stakeholders by translating complexity into clear narratives.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="itil.png" class="logo-img" alt="ITIL">
+                    <img src="snow.png" class="logo-img" alt="ServiceNow">
+                    <div class="card-title">Operational Readiness & Service Sustainability</div>
+                    <p>I embed service transition early ensuring documentation, support models and operational processes are ready before go-live.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="six.png" class="logo-img" alt="Six Sigma">
+                    <img src="comp.png" class="logo-img" alt="CompTia">
+                    <div class="card-title">Outcome-Based Delivery</div>
+                    <p>I drive programmes toward measurable results including adoption, stability, risk reduction and operational improvement.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ROLE FIT -->
+<div class="category-section portfolio-section" data-category="rolefit">
+    <div class="category-header">
+        Role Fit (3)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">Roles I Fit</div>
+                    <ul>
+                        <li>Senior Project Manager</li>
+                        <li>Programme Manager</li>
+                        <li>PMO Manager / PMO Lead</li>
+                        <li>Service Transition Lead</li>
+                        <li>Delivery Assurance Lead</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">What Organisations Gain</div>
+                    <ul>
+                        <li>Predictable controlled delivery</li>
+                        <li>Strong governance and reporting discipline</li>
+                        <li>Confident stakeholder alignment</li>
+                        <li>Stable service landings</li>
+                        <li>Measurable operational outcomes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <div class="card-title">Where I Add Most Value</div>
+                    <ul>
+                        <li>Complex multi-vendor environments</li>
+                        <li>Regulated sectors</li>
+                        <li>Programme stabilisation or recovery</li>
+                        <li>Large transformations</li>
+                        <li>Services transitioning to BAU</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- EUC -->
+<div class="category-section portfolio-section" data-category="euc">
+    <div class="category-header">
+        Global Infrastructure & EUC Transformations (3)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="hsbc.png" class="logo-img" alt="HSBC">
+                    <img src="tesco.png" class="logo-img" alt="Tesco">
+                    <div class="card-title">National-Scale EUC Transformations</div>
+                    <p>Tesco 126k device refresh and HSBC 46k user modernisation programmes.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="uu.png" class="logo-img" alt="United Utilities">
+                    <div class="card-title">Modern Workplace Deployments</div>
+                    <p>Cloud managed EUC lifecycle deployments across 32k+ devices.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="nu.png" class="logo-img" alt="Newcastle University">
+                    <div class="card-title">Sector Specific Modernisation</div>
+                    <p>Teams Rooms and print modernisation across academic environments.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- CYBER -->
+<div class="category-section portfolio-section" data-category="cyber">
+    <div class="category-header">
+        Cybersecurity & Identity Uplift (2)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="nhs.png" class="logo-img" alt="NHS England">
+                    <div class="card-title">NHS England</div>
+                    <p>CAF uplift strengthening access controls and governance frameworks.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="luton.png" class="logo-img" alt="Luton Airport">
+                    <div class="card-title">Luton Airport</div>
+                    <p>MFA PAM and SSO uplift in regulated aviation environment.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- PMO -->
+<div class="category-section portfolio-section" data-category="pmo">
+    <div class="category-header">
+        PMO Leadership & Governance (2)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="cc.png" class="logo-img" alt="Computacenter">
+                    <img src="es.png" class="logo-img" alt="Eversheds">
+                    <div class="card-title">PMO Build & Leadership</div>
+                    <p>Built and led PMO functions for Computacenter Belgium and Eversheds, improving reporting
+                        discipline and delivery assurance.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="nfu.png" class="logo-img" alt="NFU Mutual">
+                    <img src="fco.png" class="logo-img" alt="FCO">
+                    <img src="dn.png" class="logo-img" alt="Dounreay Nuclear">
+                    <div class="card-title">Regulated & Government PMO</div>
+                    <p>Delivered structured reporting, risk control, and portfolio alignment across high-governance
+                        environments including FCO, NFUM, and Dounreay Nuclear/NRS.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- SERVICE TRANSITION -->
+<div class="category-section portfolio-section" data-category="service">
+    <div class="category-header">
+        Service Transition & BAU Integration (1)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="sf.png" class="logo-img" alt="Salesforce">
+                    <img src="sync.png" class="logo-img" alt="Synchrony">
+                    <p>Transitioned global services for Synchrony (25,000 users), integrated Salesforce into BAU, and
+                        stabilised major programmes through structured readiness and support alignment.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- CLOUD -->
+<div class="category-section portfolio-section" data-category="cloud">
+    <div class="category-header">
+        Cloud, Platforms & Application Services (2)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="mitie.png" class="logo-img" alt="Mitie">
+                    <div class="card-title">AWS & SaaS Integration</div>
+                    <p>Delivered AWS migration and SaaS integration for Telefonica.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="tele.png" class="logo-img" alt="Telefonica">
+                    <img src="ho.png" class="logo-img" alt="Home Office">
+                    <div class="card-title">ServiceNow & Hosted Platforms</div>
+                    <p>Led ServiceNow development and supported secure hosted infrastructure for Mitie and the Home
+                        Office.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- LEGACY -->
+<div class="category-section portfolio-section" data-category="legacy">
+    <div class="category-header">
+        Legacy, Migration & Infrastructure Modernisation (2)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="san.png" class="logo-img" alt="Santander">
+                    <img src="met.png" class="logo-img" alt="MET">
+                    <img src="uni.png" class="logo-img" alt="Unipart">
+                    <div class="card-title">Identity, Messaging & Virtualisation</div>
+                    <p>Delivered modernisation programmes for Santander, MET Office, and Unipart.</p>
+                </div>
+            </div>
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="admin.png" class="logo-img" alt="AdminRe">
+                    <img src="gov.png" class="logo-img" alt="Gov">
+                    <div class="card-title">Large-Scale Migration</div>
+                    <p>Delivered multi-stream migration and infrastructure modernisation for AdminRe and DWP.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- PRE-SALES -->
+<div class="category-section portfolio-section" data-category="presales">
+    <div class="category-header">
+        Pre-Sales & Commercial Leadership (1)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <img src="hub.png" class="logo-img" alt="Hubspot">
+                    <p>Supported tendering, solution design, and commercial modelling across major bids, ensuring
+                        proposals were deliverable, costed, and aligned with operational reality.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- WHAT I BRING -->
+<div class="category-section portfolio-section" data-category="whatibring">
+    <div class="category-header">
+        What I Bring (1)
+        <span class="category-toggle">+</span>
+    </div>
+
+    <div class="card-list">
+        <div class="grid">
+
+            <div class="searchable-item">
+                <div class="card">
+                    <ul>
+                        <li>Execution certainty through structure, clarity, and governance</li>
+                        <li>Cross-sector repeatability across regulated environments</li>
+                        <li>Operational readiness and sustainable service landings</li>
+                        <li>Stakeholder confidence through clear communication</li>
+                        <li>Long-term service value through stability and adoption</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div> <!-- end container -->
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(f => {
+    document.getElementById("footer").innerHTML = f;
+    if (typeof initFooter === "function") initFooter();
+  });
+</script>
+
+<!-- FAB BUTTONS -->
+<div class="fab" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<style>
+/* FAB Buttons */
+.fab {
+    position: fixed;
+    bottom: 24px; /* S2 balanced */
+    right: 24px;  /* S2 balanced */
+    width: 48px;
+    height: 48px;
+    background: #001f3f;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 999;
+}
+
+.fab:hover {
+    background: #7ac0f9;
+    color: #001f3f;
+    transform: translateY(-2px);
+}
+
+.fab-booking {
+    bottom: 84px; /* S2 balanced vertical spacing between FABs */
+}
+</style>
+
+<!-- ============================================================
+     PORTFOLIO‑ONLY INLINE JS (POLISHED + BUG‑FIXED)
+     ============================================================ -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* -----------------------------------------------------------
+       ELEMENT REFERENCES
+       ----------------------------------------------------------- */
+    const sections = document.querySelectorAll(".portfolio-section");
+    const expandAllBtn = document.getElementById("expandAllBtn");
+    const collapseAllBtn = document.getElementById("collapseAllBtn");
+    const filterButtons = document.querySelectorAll(".filter-btn[data-filter]");
+    const searchInput = document.getElementById("pageSearchInput");
+    const noResultsMessage = document.getElementById("noResultsMessage");
+    const searchableItems = document.querySelectorAll(".searchable-item");
+
+    /* -----------------------------------------------------------
+       ACCORDION BEHAVIOUR
+       ----------------------------------------------------------- */
+    const closeAll = () => {
+        sections.forEach(section => section.classList.remove("open"));
+    };
+
+    const openSection = (section) => {
+        section.classList.add("open");
+    };
+
+    document.querySelectorAll(".portfolio-section .category-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const section = header.closest(".portfolio-section");
+            const isOpen = section.classList.contains("open");
+
+            closeAll();
+            if (!isOpen) openSection(section);
+        });
+    });
+
+expandAllBtn.addEventListener("click", () => {
+    // Clear active filter
+    filterButtons.forEach(b => b.classList.remove("active-filter"));
+
+    // Show all sections
+    sections.forEach(section => {
+        section.style.display = "";
+        section.classList.add("open");
+    });
+});
+
+collapseAllBtn.addEventListener("click", () => {
+    // Clear active filter
+    filterButtons.forEach(b => b.classList.remove("active-filter"));
+
+    // Show all sections
+    sections.forEach(section => {
+        section.style.display = "";
+    });
+
+    closeAll();
+});
+
+
+    /* -----------------------------------------------------------
+       FILTERING — FIXED + POLISHED
+       ----------------------------------------------------------- */
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const filter = btn.getAttribute("data-filter");
+
+            // Update active button
+            filterButtons.forEach(b => b.classList.remove("active-filter"));
+            btn.classList.add("active-filter");
+
+            // Show/hide sections
+            sections.forEach(section => {
+                if (filter === "all" || section.dataset.category === filter) {
+                    section.style.display = "";
+                    section.classList.add("open");   // <-- FIX: keep content visible
+                } else {
+                    section.style.display = "none";
+                }
+            });
+        });
+    });
+
+    /* -----------------------------------------------------------
+       PAGE SEARCH — FIXED + AUTO‑OPEN SECTIONS
+       ----------------------------------------------------------- */
+    const performSearch = () => {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        // Auto-open all sections during search
+        sections.forEach(section => section.classList.add("open"));
+
+        searchableItems.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            const match = text.includes(query);
+
+            item.style.display = match ? "" : "none";
+            if (match) visibleCount++;
+        });
+
+        noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
+    };
+
+    searchInput.addEventListener("input", performSearch);
+
+    /* -----------------------------------------------------------
+       CARD FADE‑IN ANIMATION — FIXED TIMING
+       ----------------------------------------------------------- */
+    const cards = document.querySelectorAll(".portfolio-section .card");
+
+    requestAnimationFrame(() => {
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add("card-visible");
+            }, 80 * index);
+        });
+    });
+
+});
+</script>
+
+<!-- GLOBAL SCRIPTS -->
+
+<script src="page-search.js" defer></script>
+
+</body>
+</html>

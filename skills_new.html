@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Core Skills — Tim Williams Consulting</title>
+
+<!-- GLOBAL HEADER -->
+<link rel="stylesheet" href="header-standard-v4.css">
+
+<!-- PAGE CSS -->
+<link rel="stylesheet" href="skills.css">
+
+<!-- GLOBAL RESTORE -->
+<link rel="stylesheet" href="global-restore.css">
+<style>
+/* =========================================================
+   TWC — CORE SKILLS PAGE
+   Complete page stylesheet
+   ========================================================= */
+/* =========================================================
+   PAGE FOUNDATION
+   ========================================================= */
+body.page-skills {
+    background: var(--bg);
+    color: var(--text-main);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+/* =========================================================
+   HERO
+   ========================================================= */
+.skills-hero {
+    width: 100%;
+    padding: 3.25rem 1.5rem 2.25rem;
+}
+.skills-hero-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+.skills-hero-content {
+    max-width: 820px;
+}
+.skills-eyebrow {
+    display: inline-block;
+    margin-bottom: 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0a66c2;
+}
+.skills-hero h1 {
+    margin: 0 0 0.65rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    font-weight: 750;
+    color: var(--text-main);
+}
+.skills-hero p {
+    max-width: 760px;
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: var(--text-sub);
+}
+/* =========================================================
+   MAIN SECTION
+   ========================================================= */
+.skills-section {
+    width: 100%;
+    padding: 0 1.5rem 4rem;
+}
+.skills-grid {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+/* =========================================================
+   SKILL CARD
+   ========================================================= */
+.skill-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--card-bg, #ffffff);
+    border: 1px solid rgba(0, 31, 63, 0.08);
+    border-radius: 14px;
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.06);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+.skill-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.09);
+    border-color: rgba(10, 102, 194, 0.18);
+}
+/* =========================================================
+   CARD IMAGE
+   ========================================================= */
+.skill-card-image {
+    position: relative;
+    width: 100%;
+    height: 185px;
+    overflow: hidden;
+    background: #eef3f7;
+}
+.skill-card-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 31, 63, 0.02),
+            rgba(0, 31, 63, 0.16)
+        );
+    pointer-events: none;
+}
+.skill-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+        transform 0.4s ease;
+}
+.skill-card:hover .skill-card-image img {
+    transform: scale(1.035);
+}
+/* =========================================================
+   CARD BODY
+   ========================================================= */
+.skill-card-body {
+    position: relative;
+    flex: 1;
+    padding: 1.35rem 1.4rem 1.5rem;
+}
+.skill-number {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.7rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #0a66c2;
+}
+.skill-card h2 {
+    margin: 0 0 0.55rem;
+    font-size: 1.28rem;
+    line-height: 1.25;
+    font-weight: 700;
+    color: var(--text-main);
+}
+.skill-intro {
+    margin: 0 0 1rem;
+    font-size: 0.91rem;
+    line-height: 1.55;
+    color: var(--text-sub);
+}
+/* =========================================================
+   SKILL LIST
+   ========================================================= */
+.skill-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.skill-list li {
+    position: relative;
+    margin: 0;
+    padding-left: 1rem;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: var(--text-main);
+}
+.skill-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.58em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #0a66c2;
+}
+/* =========================================================
+   SINGLE-COLUMN CARD
+   ========================================================= */
+.skill-card:nth-child(7) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 0.75rem);
+}
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+body.dark-mode.page-skills {
+    background: var(--bg);
+    color: var(--text-main);
+}
+body.dark-mode.page-skills .skill-card {
+    background: var(--card-bg, #1e293b);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.2);
+}
+body.dark-mode.page-skills .skill-card:hover {
+    border-color: rgba(122, 192, 249, 0.25);
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.28);
+}
+body.dark-mode.page-skills .skill-card-image {
+    background: #17202b;
+}
+body.dark-mode.page-skills .skill-card-image::after {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.04),
+            rgba(0, 0, 0, 0.25)
+        );
+}
+/* =========================================================
+   TABLET / iPAD
+   ========================================================= */
+@media (max-width: 900px) {
+    .skills-hero {
+        padding: 2.75rem 1.25rem 2rem;
+    }
+    .skills-section {
+        padding: 0 1.25rem 3.5rem;
+    }
+    .skills-grid {
+        gap: 1.25rem;
+    }
+    .skill-card-image {
+        height: 165px;
+    }
+    .skill-card-body {
+        padding: 1.2rem 1.25rem 1.35rem;
+    }
+    .skill-card h2 {
+        font-size: 1.18rem;
+    }
+    .skill-intro {
+        font-size: 0.88rem;
+    }
+    .skill-list {
+        gap: 0.4rem 0.75rem;
+    }
+    .skill-list li {
+        font-size: 0.84rem;
+    }
+}
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 680px) {
+    .skills-hero {
+        padding: 2.2rem 1rem 1.6rem;
+    }
+    .skills-hero-inner {
+        width: 100%;
+    }
+    .skills-eyebrow {
+        font-size: 0.68rem;
+    }
+    .skills-hero h1 {
+        font-size: 2rem;
+    }
+    .skills-hero p {
+        font-size: 0.98rem;
+        line-height: 1.55;
+    }
+    .skills-section {
+        padding: 0 1rem 3rem;
+    }
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .skill-card {
+        width: 100%;
+    }
+    .skill-card:nth-child(7) {
+        grid-column: auto;
+        max-width: none;
+    }
+    .skill-card-image {
+        height: 180px;
+    }
+    .skill-card-body {
+        padding: 1.15rem 1.15rem 1.3rem;
+    }
+    .skill-card h2 {
+        font-size: 1.18rem;
+    }
+    .skill-intro {
+        font-size: 0.88rem;
+    }
+    .skill-list {
+        grid-template-columns: 1fr;
+        gap: 0.42rem;
+    }
+    .skill-list li {
+        font-size: 0.86rem;
+    }
+}
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+@media (max-width: 420px) {
+    .skills-hero {
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+    }
+    .skills-section {
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+    }
+    .skills-hero h1 {
+        font-size: 1.85rem;
+    }
+    .skill-card-image {
+        height: 160px;
+    }
+}
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+    .skill-card,
+    .skill-card-image img {
+        transition: none;
+    }
+    .skill-card:hover {
+        transform: none;
+    }
+    .skill-card:hover .skill-card-image img {
+        transform: none;
+    }
+}
+</style>
+</head>
+
+<body class="header-with-logo page-skills">
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+    .then(response => response.text())
+    .then(html => {
+
+        document.getElementById("header-placeholder").innerHTML = html;
+
+        const headerScript = document.createElement("script");
+        headerScript.src = "header-standard-v4.js";
+
+        headerScript.onload = () => {
+
+            if (typeof initHeader === "function") {
+                initHeader();
+            }
+
+            if (typeof initHeaderEnhancements === "function") {
+                initHeaderEnhancements();
+            }
+
+            const searchScript = document.createElement("script");
+            searchScript.src = "site-search.js";
+
+            searchScript.onload = () => {
+                if (typeof initSiteSearch === "function") {
+                    initSiteSearch();
+                }
+            };
+
+            document.body.appendChild(searchScript);
+        };
+
+        document.body.appendChild(headerScript);
+    })
+    .catch(error => {
+        console.error("Unable to load header:", error);
+    });
+</script>
+
+
+<!-- =========================================================
+     MAIN CONTENT
+     ========================================================= -->
+
+<main class="skills-page">
+
+    <!-- HERO -->
+    <section class="skills-hero">
+
+        <div class="skills-hero-inner">
+
+            <div class="skills-hero-content">
+
+                <span class="skills-eyebrow">
+                    CORE CAPABILITY
+                </span>
+
+                <h1>Core Skills</h1>
+
+                <p>
+                    Executive-grade capability across cyber security,
+                    cloud, workplace, infrastructure, PMO, service
+                    management, and commercial delivery.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SKILLS GRID
+         ===================================================== -->
+
+    <section class="skills-section">
+
+        <div class="skills-grid">
+
+
+            <!-- =================================================
+                 CYBER SECURITY
+                 ================================================= -->
+
+            <article class="skill-card">
+
+                <div class="skill-card-image">
+                    <img
+                        src="cyber1.jpg"
+                        alt="Cyber Security and Identity"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="skill-card-body">
+
+                    <span class="skill-number">01</span>
+
+                    <h2>Cyber Security &amp; Identity</h2>
+
+                    <p class="skill-intro">
+                        Security, identity and access capabilities
+                        supporting secure enterprise transformation.
+                    </p>
+
+                    <ul class="skill-list">
+                        <li>Identity Management</li>
+                        <li>Access Management</li>
+                        <li>Multi-Factor Authentication (MFA)</li>
+                        <li>Privileged Access</li>
+                        <li>Security Information &amp; Event Management (SIEM)</li>
+                        <li>Secure Backup</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 CLOUD & WORKPLACE
+                 ================================================= -->
+
+            <article class="skill-card">
+
+                <div class="skill-card-image">
+                    <img
+                        src="cloud1.jpg"
+                        alt="Cloud and Workplace"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="skill-card-body">
+
+                    <span class="skill-number">02</span>
+
+                    <h2>Cloud &amp; Workplace</h2>
+
+                    <p class="skill-intro">
+                        Cloud adoption and modern workplace technologies
+                        enabling scalable and secure digital environments.
+                    </p>
+
+                    <ul class="skill-list">
+                        <li>Azure</li>
+                        <li>AWS</li>
+                        <li>Intune</li>
+                        <li>Entra</li>
+                        <li>Autopilot</li>
+                        <li>Cloud Migrations</li>
+                        <li>Teams Rooms</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 INFRASTRUCTURE
+                 ================================================= -->
+
+            <article class="skill-card">
+
+                <div class="skill-card-image">
+                    <img
+                        src="infrastructure1.jpg"
+                        alt="Infrastructure and Digital Workplace"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="skill-card-body">
+
+                    <span class="skill-number">03</span>
+
+                    <h2>Infrastructure &amp; Digital Workplace</h2>
+
+                    <p class="skill-intro">
+                        Enterprise infrastructure modernisation and
+                        large-scale workplace transformation.
+                    </p>
+
+                    <ul class="skill-list">
+                        <li>Large-Scale Windows Deployments</li>
+                        <li>Network Refresh</li>
+                        <li>Server &amp; Storage Modernisation</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 PMO
+                 ================================================= -->
+
+            <article class="skill-card">
+
+                <div class="skill-card-image">
+                    <img
+                        src="pmo1.jpg"
+                        alt="Project and PMO Leadership"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="skill-card-body">
+
+                    <span class="skill-number">04</span>
+
+                    <h2>Project &amp; PMO Leadership</h2>
+
+                    <p class="skill-intro">
+                        Governance, leadership and delivery controls
+                        supporting complex transformation portfolios.
+                    </p>
+
+                    <ul class="skill-list">
+                        <li>Governance</li>
+                        <li>RAID Management</li>
+                        <li>Reporting</li>
+                        <li>Financial Control</li>
+                        <li>Matrix Leadership</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 DELIVERY METHODS
+                 ================================================= -->
+
+            <article class="skill-card">
+
+                <div class="skill-card-image">
+                    <img
+                        src="methods1.jpg"
+                        alt="Delivery Methods and Tools"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="skill-card-body">
+
+                    <span class="skill-number">05</span>
+
+                    <h2>Delivery Methods &amp; Tools</h2>
+
+                    <p class="skill-intro">
+                        Flexible delivery approaches and tooling
+                        across traditional, agile and hybrid environments.
+                    </p>
+
+                    <ul class="skill-list">
+                        <li>Agile</li>
+                        <li>Waterfall</li>
+                        <li>Hybrid</li>
+                        <li>Integrated Project Planning</li>
+                        <li>MoSCoW</li>
+                        <li>Scrum</li>
+                        <li>Kanban</li>
+                        <li>MS Project</li>
+                        <li>Planner</li>
+                        <li>Jira</li>
+                        <li>Atlassian</li>
+                        <li>ServiceNow SPM</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 SERVICE MANAGEMENT
+                 ================================================= -->
+
+            <article class="skill-card">
+
+                <div class="skill-card-image">
+                    <img
+                        src="service1.jpg"
+                        alt="Service Management"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="skill-card-body">
+
+                    <span class="skill-number">06</span>
+
+                    <h2>Service Management</h2>
+
+                    <p class="skill-intro">
+                        IT service management, service design and
+                        transition capabilities for enterprise environments.
+                    </p>
+
+                    <ul class="skill-list">
+                        <li>ITIL</li>
+                        <li>ITSM</li>
+                        <li>ServiceNow</li>
+                        <li>ISO Frameworks</li>
+                        <li>Service Design &amp; Transition</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 COMMERCIAL
+                 ================================================= -->
+
+            <article class="skill-card">
+
+                <div class="skill-card-image">
+                    <img
+                        src="commercial1.jpg"
+                        alt="Commercial and Pre-Sales"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="skill-card-body">
+
+                    <span class="skill-number">07</span>
+
+                    <h2>Commercial &amp; Pre-Sales</h2>
+
+                    <p class="skill-intro">
+                        Commercial shaping, procurement and pre-sales
+                        support across technology transformation engagements.
+                    </p>
+
+                    <ul class="skill-list">
+                        <li>Statements of Work (SOWs)</li>
+                        <li>Cost Models</li>
+                        <li>Procurement</li>
+                        <li>Tender Responses</li>
+                        <li>Contract Shaping</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     BACK TO TOP / BOOKING
+     ========================================================= -->
+
+<div
+    class="fab"
+    id="fab"
+    aria-label="Back to top"
+    title="Back to top"
+    onclick="window.scrollTo({ top: 0, behavior: 'smooth' });"
+>
+    ⬆️
+</div>
+
+<a
+    id="bookingFab"
+    class="fab fab-booking"
+    href="calendar.html"
+    aria-label="Make a booking"
+    title="Make a booking"
+>
+    📅
+</a>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<div id="footer"></div>
+
+<script>
+fetch("footer.html")
+    .then(response => response.text())
+    .then(html => {
+
+        document.getElementById("footer").innerHTML = html;
+
+        if (typeof initFooter === "function") {
+            initFooter();
+        }
+
+    })
+    .catch(error => {
+        console.error("Unable to load footer:", error);
+    });
+</script>
+
+
+<!-- GLOBAL SCRIPT -->
+<script src="global.js"></script>
+
+</body>
+</html>

@@ -133,13 +133,14 @@ body {
     border-color: rgba(10, 102, 194, 0.25);
 }
 
+/* =========================================================
+   ENGAGEMENT SERVICE IMAGES
+   ========================================================= */
+
 .engagement-icon-visual {
-    width: 82px;
-    height: 82px;
+    width: 100%;
+    height: 190px;
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
     border-radius: 14px;
     background: #f1f5f9;
@@ -148,8 +149,16 @@ body {
 .engagement-icon-visual img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
     display: block;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.4s ease;
+}
+
+/* Subtle premium image movement on hover */
+
+.engagement-icon-card:hover .engagement-icon-visual img {
+    transform: scale(1.04);
 }
 
 .engagement-icon-card h3 {
@@ -441,11 +450,11 @@ body.dark-mode .cta-section p {
         padding: 22px;
     }
 
-    .engagement-icon-visual {
-        width: 70px;
-        height: 70px;
-        margin-bottom: 16px;
-    }
+   .engagement-icon-visual {
+    width: 100%;
+    height: 170px;
+    margin-bottom: 18px;
+}
 
     .engagement-hero {
         margin-bottom: 36px;
@@ -534,6 +543,9 @@ body.dark-mode .cta-section p {
     .cta-btn {
         width: 100%;
     }
+.engagement-icon-visual {
+    height: 155px;
+}   
 }
 
 /* =========================================================
@@ -609,69 +621,75 @@ fetch("header.html")
   </section>
 
 
-  <!-- =======================================================
-       CORE SERVICES
-       ======================================================= -->
+ <!-- =======================================================
+     CORE SERVICES
+     ======================================================= -->
 
-  <section class="engagement-icons">
+<section class="engagement-icons">
+
+    <!-- PROGRAMME LEADERSHIP -->
 
     <article class="engagement-icon-card">
 
-      <div class="engagement-icon-visual">
-        <img
-          src="icon-programme.png"
-          loading="lazy"
-          alt="Programme Leadership">
-      </div>
+        <div class="engagement-icon-visual">
+            <img
+                src="engagement-programme.jpg"
+                loading="lazy"
+                alt="Programme Leadership">
+        </div>
 
-      <h3>Programme Leadership</h3>
+        <h3>Programme Leadership</h3>
 
-      <p>
-        Structured, governed and outcome-driven leadership
-        for complex transformation programmes.
-      </p>
+        <p>
+            Structured, governed and outcome-driven leadership
+            for complex transformation programmes.
+        </p>
 
     </article>
 
 
+    <!-- CYBER UPLIFT -->
+
     <article class="engagement-icon-card">
 
-      <div class="engagement-icon-visual">
-        <img
-          src="icon-cyber.png"
-          loading="lazy"
-          alt="Cyber Uplift">
-      </div>
+        <div class="engagement-icon-visual">
+            <img
+                src="engagement-cyber.jpg"
+                loading="lazy"
+                alt="Cyber Uplift">
+        </div>
 
-      <h3>Cyber Uplift</h3>
+        <h3>Cyber Uplift</h3>
 
-      <p>
-        Practical security transformation across controls,
-        identity, access, monitoring and operational readiness.
-      </p>
+        <p>
+            Practical security transformation across controls,
+            identity, access, monitoring and operational readiness.
+        </p>
 
     </article>
 
 
+    <!-- CLOUD & WORKPLACE TRANSFORMATION -->
+
     <article class="engagement-icon-card">
 
-      <div class="engagement-icon-visual">
-        <img
-          src="icon-cloud.png"
-          loading="lazy"
-          alt="Cloud and Workplace Transformation">
-      </div>
+        <div class="engagement-icon-visual">
+            <img
+                src="engagement-cloud-workplace.jpg"
+                loading="lazy"
+                alt="Cloud and Workplace Transformation">
+        </div>
 
-      <h3>Cloud &amp; Workplace Transformation</h3>
+        <h3>Cloud &amp; Workplace Transformation</h3>
 
-      <p>
-        Predictable cloud, infrastructure and modern workplace
-        transformation across complex enterprise environments.
-      </p>
+        <p>
+            Predictable cloud, infrastructure and modern workplace
+            transformation across complex enterprise environments.
+        </p>
 
     </article>
 
-  </section>
+</section>
 
 
   <!-- =======================================================

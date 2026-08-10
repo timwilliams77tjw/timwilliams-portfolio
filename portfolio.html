@@ -1719,7 +1719,136 @@ body.dark.page-portfolio .portfolio-section.open
 
     border-color: #5da9e9;
 }
-   
+
+/* ============================================================
+   PORTFOLIO TEXT-ONLY CARD VISUAL MARKERS
+   ============================================================ */
+
+body.page-portfolio .portfolio-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 10px;
+}
+
+body.page-portfolio .portfolio-card-heading .card-title {
+    margin-bottom: 0 !important;
+}
+
+
+/* Number marker */
+
+body.page-portfolio .portfolio-card-number {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 9px;
+
+    background: #eaf3fb;
+
+    color: #0a66c2;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+}
+
+
+/* What I Bring list */
+
+body.page-portfolio .portfolio-value-list {
+    list-style: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+body.page-portfolio .portfolio-value-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #344054;
+    line-height: 1.5;
+}
+
+
+/* Small numbered marker */
+
+body.page-portfolio .portfolio-value-number {
+    flex: 0 0 auto;
+
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 1px;
+
+    border-radius: 7px;
+
+    background: #f1f6fa;
+
+    color: #0a66c2;
+
+    font-size: 0.66rem;
+    font-weight: 800;
+}
+
+
+/* Dark mode */
+
+body.dark-mode.page-portfolio .portfolio-card-number,
+body.dark.page-portfolio .portfolio-card-number {
+    background: #172b40;
+    color: #8bc5f3;
+}
+
+body.dark-mode.page-portfolio .portfolio-value-list li,
+body.dark.page-portfolio .portfolio-value-list li {
+    color: #cbd5e1;
+}
+
+body.dark-mode.page-portfolio .portfolio-value-number,
+body.dark.page-portfolio .portfolio-value-number {
+    background: #172b40;
+    color: #8bc5f3;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+    body.page-portfolio .portfolio-card-number {
+        width: 32px;
+        height: 32px;
+    }
+
+    body.page-portfolio .portfolio-card-heading {
+        gap: 10px;
+    }
+
+    body.page-portfolio .portfolio-value-list {
+        gap: 12px;
+    }
+}   
    
 </style>
 </head>
@@ -2027,7 +2156,10 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
 
             <div class="searchable-item">
                 <div class="card">
-                    <div class="card-title">Roles I Fit</div>
+<div class="portfolio-card-heading">
+    <span class="portfolio-card-number">01</span>
+    <div class="card-title">Roles I Fit</div>
+</div>
                     <ul>
                         <li>Senior Project Manager</li>
                         <li>Programme Manager</li>
@@ -2040,7 +2172,10 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
 
             <div class="searchable-item">
                 <div class="card">
-                    <div class="card-title">What Organisations Gain</div>
+<div class="portfolio-card-heading">
+    <span class="portfolio-card-number">02</span>
+    <div class="card-title">What Organisations Gain</div>
+</div>
                     <ul>
                         <li>Predictable controlled delivery</li>
                         <li>Strong governance and reporting discipline</li>
@@ -2053,8 +2188,10 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
 
             <div class="searchable-item">
                 <div class="card">
-                    <div class="card-title">Where I Add Most Value</div>
-                    <ul>
+<div class="portfolio-card-heading">
+    <span class="portfolio-card-number">03</span>
+    <div class="card-title">Where I Add Most Value</div>
+</div>                    <ul>
                         <li>Complex multi-vendor environments</li>
                         <li>Regulated sectors</li>
                         <li>Programme stabilisation or recovery</li>
@@ -2294,13 +2431,34 @@ body.dark-mode .portfolio-icon-btn[data-tip]:hover::before {
 
             <div class="searchable-item">
                 <div class="card">
-                    <ul>
-                        <li>Execution certainty through structure, clarity, and governance</li>
-                        <li>Cross-sector repeatability across regulated environments</li>
-                        <li>Operational readiness and sustainable service landings</li>
-                        <li>Stakeholder confidence through clear communication</li>
-                        <li>Long-term service value through stability and adoption</li>
-                    </ul>
+                  <ul class="portfolio-value-list">
+
+    <li>
+        <span class="portfolio-value-number">01</span>
+        <span>Execution certainty through structure, clarity, and governance</span>
+    </li>
+
+    <li>
+        <span class="portfolio-value-number">02</span>
+        <span>Cross-sector repeatability across regulated environments</span>
+    </li>
+
+    <li>
+        <span class="portfolio-value-number">03</span>
+        <span>Operational readiness and sustainable service landings</span>
+    </li>
+
+    <li>
+        <span class="portfolio-value-number">04</span>
+        <span>Stakeholder confidence through clear communication</span>
+    </li>
+
+    <li>
+        <span class="portfolio-value-number">05</span>
+        <span>Long-term service value through stability and adoption</span>
+    </li>
+
+</ul>
                 </div>
             </div>
 

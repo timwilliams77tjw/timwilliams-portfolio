@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>STAR Achievements — Tim Williams Consulting</title>
+
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
+
+<style>
+body.page-generic {
+    background: var(--bg);
+    color: var(--text-main);
+    transition: background .3s ease, color .3s ease;
+}
+
+.page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.hero-section h1 {
+    font-size: 2.2rem;
+    margin-bottom: .5rem;
+}
+
+.hero-section p {
+    font-size: 1.1rem;
+    color: var(--text-sub);
+    max-width: 720px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.card p, .card ul {
+    color: var(--text-sub);
+}
+
+.section-image {
+    display: block;
+    margin: 0 auto 1rem;
+    max-width: 50%;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+</style>
+</head>
+
+<body class="header-with-logo page-generic">
+
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+.then(r => r.text())
+.then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+
+    const siteSearch = document.createElement("script");
+    siteSearch.src = "site-search.js";
+    siteSearch.onload = () => { if (typeof initSiteSearch === "function") initSiteSearch(); };
+    document.body.appendChild(siteSearch);
+
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => { initHeader(); initHeaderEnhancements(); };
+    document.body.appendChild(headerJS);
+});
+</script>
+
+<main class="page-container">
+
+<section class="hero-section">
+    <h1>STAR Achievements</h1>
+    <p>Executive‑grade STAR achievements demonstrating delivery impact across cyber security, cloud, workplace, and enterprise transformation.</p>
+</section>
+
+<div class="card">
+    <h2>NHS England — Cyber Security Programme</h2>
+    <img src="cyber.jpg" alt="Cyber Security Programme" class="section-image">
+
+    <p><strong>Situation:</strong> National organisation requiring uplift to CAF‑aligned cyber posture.</p>
+    <p><strong>Task:</strong> Lead discovery, design, and delivery of a multi‑stream cyber programme.</p>
+    <p><strong>Action:</strong> Delivered MFA, IPAM, SSO, IAM, privileged access, SIEM, cloud identity, endpoint management, and secure backup.</p>
+    <p><strong>Result:</strong> Strengthened security posture and enabled compliant, scalable cyber operations.</p>
+</div>
+
+<div class="card">
+    <h2>Dounreay Nuclear & Luton Airport — PMO & Infrastructure Transformation</h2>
+    <img src="pmo.jpg" alt="PMO Governance" class="section-image">
+
+    <p><strong>Situation:</strong> High‑risk infrastructure and security portfolio requiring governance uplift.</p>
+    <p><strong>Task:</strong> Oversee PMO operations and lead transformation delivery.</p>
+    <p><strong>Action:</strong> Delivered MFA uplift, network refresh, ServiceNow MSP rollout, storage and server modernisation.</p>
+    <p><strong>Result:</strong> Improved predictability and accelerated secure infrastructure adoption.</p>
+</div>
+
+<div class="card">
+    <h2>DWP & MoD — Service Transition Leadership</h2>
+    <img src="transition.jpg" alt="Service Transition" class="section-image">
+
+    <p><strong>Situation:</strong> Major programmes required structured transition into BAU.</p>
+    <p><strong>Task:</strong> Ensure operational readiness and stable service adoption.</p>
+    <p><strong>Action:</strong> Delivered service designs, knowledge transfer, ITSM integration.</p>
+    <p><strong>Result:</strong> Reduced early‑life incidents and ensured smooth BAU transition.</p>
+</div>
+
+<div class="card">
+    <h2>HSBC, Tesco & United Utilities — Global Workplace Transformation</h2>
+    <img src="workplace.jpg" alt="Workplace Transformation" class="section-image">
+
+    <p><strong>Situation:</strong> Global clients required large‑scale workplace and infrastructure modernisation.</p>
+    <p><strong>Task:</strong> Lead end‑to‑end delivery across multiple regions.</p>
+    <p><strong>Action:</strong> Delivered Windows 10/11, cloud identity, Teams Rooms, network refreshes, storage upgrades.</p>
+    <p><strong>Result:</strong> Predictable, secure, cloud‑aligned workplace transformation.</p>
+</div>
+
+<div class="card">
+    <h2>AdminRe/SwissRe — Project Management</h2>
+    <img src="infrastructure.jpg" alt="Infrastructure Modernisation" class="section-image">
+
+    <p><strong>Situation:</strong> Financial services clients required secure, modern infrastructure.</p>
+    <p><strong>Task:</strong> Deliver infrastructure, migration, and software development projects.</p>
+    <p><strong>Action:</strong> Implemented identity, messaging, monitoring, virtualisation, endpoint security.</p>
+    <p><strong>Result:</strong> Improved performance and strengthened security posture.</p>
+</div>
+
+</main>
+
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+.then(r => r.text())
+.then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+</body>
+</html>

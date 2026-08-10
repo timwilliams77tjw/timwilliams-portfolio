@@ -14,176 +14,684 @@
 <link rel="stylesheet" href="certifications.css">
 <link rel="stylesheet" href="global-restore.css">
 
-<!-- PAGE-SPECIFIC CV CSS -->
+<!-- ============================================================
+     CV PAGE-SPECIFIC CSS — TWC EXECUTIVE STYLE
+     ============================================================ -->
 <style>
 
-/* Accent blue headers */
-.category-header {
-    font-size: 1.6rem;
-    font-weight: 700;
-    padding: 14px 0;
-    margin: 20px 0 10px;
-    border-bottom: 2px solid #001f3f;
-    color: #7ac0f9;
-    cursor: pointer;
-}
-.category-toggle {
-    font-weight: 900;
-    font-size: 1.8rem;
-    margin-left: 10px;
+/* ============================================================
+   CV PAGE FOUNDATION
+   ============================================================ */
+
+body.page-site-search {
+    --cv-navy: #001f3f;
+    --cv-blue: #7ac0f9;
+    --cv-border: #dbe4ec;
+    --cv-card: #ffffff;
+    --cv-muted: #667085;
+    --cv-shadow: 0 3px 10px rgba(0,0,0,0.07);
 }
 
-/* CV Search Bar */
-.page-search-bar {
+
+/* ============================================================
+   PAGE SEARCH
+   ============================================================ */
+
+body.page-site-search .page-search-bar {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 10px 0;
-}
-.page-search-bar-inner {
-    max-width: 600px;
-    width: 100%;
-    display: flex;
-    gap: 10px;
-}
-.page-search-bar-inner input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #001f3f;
-    border-radius: 6px;
+    padding: 20px 0 12px;
 }
 
-/* Filter Bar */
-.sticky-bar {
+body.page-site-search .page-search-bar-inner {
+    width: min(100%, 620px);
+    display: flex;
+}
+
+body.page-site-search .page-search-bar-inner input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border: 1px solid var(--cv-border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--text-main, #1f2937);
+    font-size: 15px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+body.page-site-search .page-search-bar-inner input:focus {
+    border-color: var(--cv-blue);
+    box-shadow: 0 0 0 3px rgba(122,192,249,0.15);
+}
+
+
+/* ============================================================
+   NO RESULTS
+   ============================================================ */
+
+body.page-site-search #noResultsMessage {
+    width: min(100% - 32px, 620px);
+    margin: 4px auto 12px !important;
+    text-align: center;
+    color: var(--cv-muted);
+}
+
+
+/* ============================================================
+   CV PDF ACTION BUTTONS
+   ============================================================ */
+
+body.page-site-search .cv-download-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin: 12px 0 22px;
+}
+
+body.page-site-search .cv-icon-btn {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cv-navy);
+    color: #fff;
+
+    border: 1px solid var(--cv-navy);
+    border-radius: 8px;
+
+    font-size: 24px;
+    text-decoration: none;
+
+    position: relative;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+body.page-site-search .cv-icon-btn:hover {
+    background: #fff;
+    color: var(--cv-navy);
+    border-color: var(--cv-blue);
+    transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   DOWNLOAD TOOLTIP
+   ============================================================ */
+
+body.page-site-search .cv-icon-btn[data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: -40px;
+    transform: translateX(-50%);
+
+    padding: 6px 10px;
+
+    background: var(--cv-navy);
+    color: #fff;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+    line-height: 1.3;
+    white-space: nowrap;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+
+    z-index: 50;
+}
+
+body.page-site-search .cv-icon-btn[data-tip]:hover::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+
+    border-width: 6px;
+    border-style: solid;
+    border-color:
+        var(--cv-navy)
+        transparent
+        transparent
+        transparent;
+
+    z-index: 51;
+}
+
+
+/* ============================================================
+   FILTER / CONTROL BAR
+   ============================================================ */
+
+body.page-site-search .sticky-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
     justify-content: center;
-    padding: 12px 0;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 14px 16px 20px;
+
     border-bottom: none !important;
 }
-.filter-btn {
-    background-color: #001f3f;
-    color: white;
-    border: 1px solid #001f3f;
-    border-radius: 6px;
-    padding: 6px 14px;
-    font-size: 14px;
+
+body.page-site-search .filter-btn {
+    padding: 7px 15px;
+
+    background: var(--cv-navy);
+    color: #fff;
+
+    border: 1px solid var(--cv-navy);
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
     cursor: pointer;
-    transition: all 0.2s;
-}
-.filter-btn.active-filter {
-    background-color: white;
-    color: #001f3f;
-    border: 1px solid #7ac0f9;
-}
-.special-btn {
-    background-color: #001f3f;
-    color: white;
-    border: 1px solid #001f3f;
-}
-.special-btn.active-filter {
-    background: white;
-    color: #001f3f;
-    border: 1px solid #7ac0f9;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
-/* Card Styling */
-.card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity .3s ease, transform .3s ease;
+body.page-site-search .filter-btn:hover {
+    background: #fff;
+    color: var(--cv-navy);
+    border-color: var(--cv-blue);
+    transform: translateY(-1px);
 }
-.card.card-visible {
+
+body.page-site-search .filter-btn.active-filter {
+    background: #fff;
+    color: var(--cv-navy);
+    border-color: var(--cv-blue);
+}
+
+body.page-site-search .special-btn {
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   MAIN CV CONTAINER
+   ============================================================ */
+
+body.page-site-search .page-content {
+    width: 100%;
+}
+
+body.page-site-search .page-content > .container {
+    max-width: 1180px;
+}
+
+
+/* ============================================================
+   ACCORDION SECTIONS
+   ============================================================ */
+
+body.page-site-search .cv-section {
+    margin: 0 0 22px;
+}
+
+
+/* ============================================================
+   ACCORDION HEADERS
+   ============================================================ */
+
+body.page-site-search .cv-section .category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 15px 4px 13px;
+
+    margin: 22px 0 14px;
+
+    background: transparent !important;
+
+    border: none !important;
+    border-bottom: 2px solid var(--cv-navy) !important;
+
+    color: var(--cv-blue) !important;
+
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.25;
+
+    cursor: pointer;
+}
+
+body.page-site-search .cv-section .category-header:hover {
+    color: #5daeea !important;
+}
+
+
+/* ============================================================
+   ACCORDION TOGGLE
+   ============================================================ */
+
+body.page-site-search .cv-section .category-toggle {
+    flex: 0 0 auto;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-left: 16px;
+
+    color: var(--cv-navy);
+
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+body.page-site-search .cv-section .category-header:hover .category-toggle {
+    color: var(--cv-blue);
+}
+
+
+/* ============================================================
+   CARD LIST
+   ============================================================ */
+
+body.page-site-search .cv-section .card-list {
+    padding-top: 2px;
+}
+
+
+/* ============================================================
+   CARD GRID
+   ============================================================ */
+
+body.page-site-search .cv-section .grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 18px;
+}
+
+
+/* ============================================================
+   STANDARD CV CARD
+   ============================================================ */
+
+body.page-site-search .cv-section .card {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    background: var(--cv-card) !important;
+
+    border: 1px solid var(--cv-border);
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    margin-bottom: 0;
+
+    box-shadow: var(--cv-shadow);
+
+    opacity: 0;
+    transform: translateY(8px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+body.page-site-search .cv-section .card:hover {
+    border-color: #c8d6e2;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.09);
+}
+
+body.page-site-search .cv-section .card.card-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
 
-/* Card Title (unified across all pages) */
-.card-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #7ac0f9;
+/* ============================================================
+   CARD TITLES
+   ============================================================ */
+
+body.page-site-search .cv-section .card-title {
+    margin: 0 0 9px;
+
+    color: var(--cv-blue) !important;
+
+    font-size: 1.08rem !important;
+    font-weight: 700 !important;
+    line-height: 1.35;
 }
 
 
-/* Grid Layout */
-.grid {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+/* ============================================================
+   BODY CONTENT
+   ============================================================ */
+
+body.page-site-search .cv-section .card p {
+    margin: 0 0 14px;
+
+    line-height: 1.6;
 }
 
-/* Accordion default state */
-.card-list {
-    display: none;
+body.page-site-search .cv-section .card p:last-child {
+    margin-bottom: 0;
 }
 
-/* Dark Mode */
-body.dark-mode .card {
-    background: var(--bg);
-    color: var(--text-main);
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+body.page-site-search .cv-section .card ul {
+    margin: 0;
+    padding-left: 20px;
 }
-body.dark-mode .category-header {
-    color: #7ac0f9;
+
+body.page-site-search .cv-section .card li {
+    margin-bottom: 7px;
+    line-height: 1.5;
 }
-/* UNIVERSAL LEFT ALIGNMENT FOR ALL CARD CONTENT */
-.card,
-.card p,
-.card ul,
-.card li,
-.card-title {
+
+body.page-site-search .cv-section .card li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ============================================================
+   UNIVERSAL LEFT ALIGNMENT
+   ============================================================ */
+
+body.page-site-search .cv-section .card,
+body.page-site-search .cv-section .card p,
+body.page-site-search .cv-section .card ul,
+body.page-site-search .cv-section .card li,
+body.page-site-search .cv-section .card-title {
     text-align: left !important;
 }
-/* UNIFY CV CARD TITLES WITH PORTFOLIO BLUE */
-.card-title {
-    color: #7ac0f9 !important;
+
+
+/* ============================================================
+   EXECUTIVE SUMMARY — ORGANISATIONS
+   ============================================================ */
+
+body.page-site-search .orgs-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 32px;
 }
-.card-title {
-    font-weight: 700 !important;
-    font-size: 1.2rem !important;
+
+body.page-site-search .orgs-columns ul {
+    margin: 0;
 }
-/* FORCE BLUE CARD TITLES ACROSS CV + PORTFOLIO */
-body.page-portfolio .card-title,
-body.page-site-search .card-title,
-.cv-section .card-title,
-.portfolio-section .card-title,
-.card-title {
-    color: #7ac0f9 !important;
+
+
+/* ============================================================
+   STAR ACHIEVEMENTS
+   ============================================================ */
+
+body.page-site-search
+.cv-section[data-category="achievements"] .card-title {
+    margin-top: 0;
 }
-/* OVERRIDE CV PAGE TITLES */
-.cv-section .card-title {
-    color: #7ac0f9 !important;
+
+body.page-site-search
+.cv-section[data-category="achievements"] .card-title:not(:first-child) {
+    margin-top: 16px;
 }
-/* FINAL OVERRIDE — CV PAGE ONLY */
-body.page-site-search .card-title {
+
+
+/* STAR RESULT — SLIGHT EMPHASIS */
+
+body.page-site-search
+.cv-section[data-category="achievements"] .card-title:nth-of-type(4) {
+    color: var(--cv-navy) !important;
+}
+
+
+/* ============================================================
+   WORK EXPERIENCE
+   ============================================================ */
+
+body.page-site-search
+.cv-section[data-category="experience"] .searchable-item {
+    width: 100%;
+}
+
+body.page-site-search
+.cv-section[data-category="experience"] .card-title {
+    font-size: 1.12rem !important;
+    line-height: 1.45;
+}
+
+
+/* ============================================================
+   SKILLS / CERTIFICATIONS CARDS
+   ============================================================ */
+
+body.page-site-search
+.cv-section[data-category="skills"] .card,
+body.page-site-search
+.cv-section[data-category="certifications"] .card {
+    min-height: 125px;
+}
+
+
+/* ============================================================
+   AWARDS LAYOUT
+   ============================================================ */
+
+body.page-site-search .awards-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+}
+
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+body.dark-mode.page-site-search {
+    --cv-card: var(--bg-alt, #18212b);
+    --cv-border: rgba(255,255,255,0.12);
+    --cv-shadow: 0 3px 12px rgba(0,0,0,0.22);
+}
+
+body.dark-mode.page-site-search .page-search-bar-inner input {
+    background: var(--bg-alt, #18212b);
+    color: var(--text-main, #f3f4f6);
+    border-color: rgba(255,255,255,0.18);
+}
+
+body.dark-mode.page-site-search .filter-btn {
+    background: var(--bg-alt, #18212b);
+    color: var(--text-main, #f3f4f6);
+    border-color: rgba(255,255,255,0.16);
+}
+
+body.dark-mode.page-site-search .filter-btn:hover,
+body.dark-mode.page-site-search .filter-btn.active-filter {
+    background: #7ac0f9;
+    color: #001f3f;
+    border-color: #7ac0f9;
+}
+
+body.dark-mode.page-site-search .cv-section .category-header {
+    border-bottom-color: rgba(122,192,249,0.5) !important;
     color: #7ac0f9 !important;
 }
 
-body.dark-mode.page-site-search .card-title {
+body.dark-mode.page-site-search .cv-section .category-toggle {
+    color: #7ac0f9;
+}
+
+body.dark-mode.page-site-search .cv-section .card {
+    background: var(--cv-card) !important;
+    border-color: var(--cv-border);
+    box-shadow: var(--cv-shadow);
+}
+
+body.dark-mode.page-site-search .cv-section .card:hover {
+    border-color: rgba(122,192,249,0.35);
+}
+
+body.dark-mode.page-site-search .cv-section .card-title {
     color: #7ac0f9 !important;
 }
-/* Force CV section headers to use portfolio blue */
-body.page-site-search .category-header {
-    color: #7ac0f9 !important;
-    border-bottom: 2px solid #001f3f !important;
-}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    body.page-site-search .page-search-bar {
+        padding: 16px 12px 10px;
+        box-sizing: border-box;
+    }
+
+    body.page-site-search .page-search-bar-inner {
+        width: 100%;
+    }
+
+    body.page-site-search .sticky-bar {
+        gap: 7px;
+        padding: 10px 10px 16px;
+    }
+
+    body.page-site-search .filter-btn {
+        padding: 7px 11px;
+        font-size: 12px;
+    }
+
+    body.page-site-search .cv-download-wrapper {
+        margin: 10px 0 18px;
+    }
+
+    body.page-site-search .cv-icon-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+    }
+
+    body.page-site-search .cv-section {
+        margin-bottom: 18px;
+    }
+
     body.page-site-search .cv-section .category-header {
-    color: #7ac0f9 !important;
-}
-   html body.page-site-search main .category-section .category-header {
-    color: #7ac0f9 !important;
-}
- 
-</style>
+        padding: 13px 2px 11px;
+        margin: 18px 0 12px;
 
+        font-size: 1.2rem;
+    }
+
+    body.page-site-search .cv-section .category-toggle {
+        width: 26px;
+        height: 26px;
+        font-size: 1.3rem;
+        margin-left: 10px;
+    }
+
+    body.page-site-search .cv-section .grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    body.page-site-search .cv-section .card {
+        padding: 17px;
+    }
+
+    body.page-site-search .cv-section .card-title {
+        font-size: 1rem !important;
+    }
+
+    body.page-site-search .cv-section .card p,
+    body.page-site-search .cv-section .card li {
+        line-height: 1.55;
+    }
+
+    body.page-site-search .orgs-columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    body.page-site-search .awards-columns {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    body.page-site-search
+    .cv-section[data-category="skills"] .card,
+    body.page-site-search
+    .cv-section[data-category="certifications"] .card {
+        min-height: auto;
+    }
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media (max-width: 420px) {
+
+    body.page-site-search .sticky-bar {
+        gap: 6px;
+    }
+
+    body.page-site-search .filter-btn {
+        padding: 6px 9px;
+        font-size: 11.5px;
+    }
+
+    body.page-site-search .cv-section .category-header {
+        font-size: 1.1rem;
+    }
+
+    body.page-site-search .cv-section .card {
+        padding: 15px;
+        border-radius: 9px;
+    }
+}
+
+</style>
 </head>
 
 <body class="header-with-logo page-site-search page-has-page-search">
@@ -368,7 +876,7 @@ body.dark-mode .cv-icon-btn[data-tip]:hover::before {
 <!-- ========================= -->
 
 <div class="category-section cv-section" data-category="summary">
- <div class="category-header" style="color:#7ac0f9; border-bottom:2px solid #001f3f;">
+<div class="category-header">
     Executive Summary (1)
     <span class="category-toggle">+</span>
 </div>
@@ -426,7 +934,7 @@ body.dark-mode .cv-icon-btn[data-tip]:hover::before {
 <!-- ========================= -->
 
 <div class="category-section cv-section" data-category="achievements">
- <div class="category-header" style="color:#7ac0f9; border-bottom:2px solid #001f3f;">
+<div class="category-header">
     STAR Achievements (5)
     <span class="category-toggle">+</span>
   </div>
@@ -548,7 +1056,7 @@ body.dark-mode .cv-icon-btn[data-tip]:hover::before {
 <!-- ========================= -->
 
 <div class="category-section cv-section" data-category="experience">
- <div class="category-header" style="color:#7ac0f9; border-bottom:2px solid #001f3f;">
+<div class="category-header">
     Work Experience (5)
     <span class="category-toggle">+</span>
   </div>
@@ -651,7 +1159,7 @@ body.dark-mode .cv-icon-btn[data-tip]:hover::before {
 <!-- ========================= -->
 
 <div class="category-section cv-section" data-category="skills">
- <div class="category-header" style="color:#7ac0f9; border-bottom:2px solid #001f3f;">
+<div class="category-header">
     Core Skills (7)
     <span class="category-toggle">+</span>
   </div>
@@ -733,7 +1241,7 @@ body.dark-mode .cv-icon-btn[data-tip]:hover::before {
 <!-- ========================= -->
 
 <div class="category-section cv-section" data-category="certifications">
- <div class="category-header" style="color:#7ac0f9; border-bottom:2px solid #001f3f;">
+<div class="category-header">
     Certifications (5)
     <span class="category-toggle">+</span>
   </div>
@@ -797,7 +1305,7 @@ body.dark-mode .cv-icon-btn[data-tip]:hover::before {
 <!-- ========================= -->
 
 <div class="category-section cv-section" data-category="awards">
- <div class="category-header" style="color:#7ac0f9; border-bottom:2px solid #001f3f;">
+<div class="category-header">
     Achievements & Awards (2)
     <span class="category-toggle">+</span>
   </div>
@@ -943,24 +1451,5 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="page-search.js" defer></script>
 
 
-<!-- ========================= -->
-<!-- CLOSE OUT PAGE -->
-<!-- ========================= -->
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".category-header").forEach(h => {
-        h.style.color = "#7ac0f9";
-        h.style.borderBottom = "2px solid #001f3f";
-    });
-});
-</script>
-    <script>
-window.addEventListener("load", () => {
-    document.querySelectorAll(".category-header").forEach(h => {
-        h.style.setProperty("color", "#7ac0f9", "important");
-    });
-});
-</script>
 </body>
 </html>

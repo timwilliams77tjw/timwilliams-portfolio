@@ -2298,18 +2298,78 @@ fetch("footer.html")
   .then(h => document.getElementById("footer").innerHTML = h);
 </script>
 
-<!-- LOCAL SEARCH -->
 <script>
-const searchInput = document.getElementById("insights-search");
-if (searchInput) {
-  searchInput.addEventListener("input", () => {
-    const term = searchInput.value.toLowerCase();
-    document.querySelectorAll(".insight-card").forEach(card => {
-      const text = card.innerText.toLowerCase();
-      card.style.display = text.includes(term) ? "" : "none";
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchInput = document.getElementById("insights-search");
+    const filterButtons = document.querySelectorAll(".insight-filter");
+    const insightCards = document.querySelectorAll(".insight-card");
+
+    let activeFilter = "all";
+
+    function filterInsights() {
+
+        const searchTerm = searchInput
+            ? searchInput.value.trim().toLowerCase()
+            : "";
+
+        insightCards.forEach(card => {
+
+            const cardText = card.innerText.toLowerCase();
+            const topics = (card.dataset.topic || "").toLowerCase();
+
+            const matchesSearch =
+                !searchTerm ||
+                cardText.includes(searchTerm) ||
+                topics.includes(searchTerm);
+
+            let matchesFilter = true;
+
+            if (activeFilter !== "all") {
+
+                const filterTerms = activeFilter
+                    .split(" ")
+                    .map(term => term.trim())
+                    .filter(Boolean);
+
+                matchesFilter = filterTerms.some(term =>
+                    topics.includes(term)
+                );
+            }
+
+            card.style.display =
+                matchesSearch && matchesFilter
+                    ? ""
+                    : "none";
+        });
+    }
+
+    /* SEARCH */
+    if (searchInput) {
+        searchInput.addEventListener("input", filterInsights);
+    }
+
+    /* FILTER BUTTONS */
+    filterButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            filterButtons.forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+            this.classList.add("active");
+
+            activeFilter = this.textContent
+                .trim()
+                .toLowerCase();
+
+            filterInsights();
+        });
+
     });
-  });
-}
+
+});
 </script>
 
 <!-- READ MORE -->

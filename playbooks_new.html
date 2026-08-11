@@ -73,44 +73,72 @@ body.page-site-search {
 }
 
 /* =========================================================
-   HERO
+   HERO — TWC STANDARD HERO
+   Matches CV / Interactive CV / Offerings
    ========================================================= */
 
 .playbooks-hero {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 58px 24px 42px;
-  text-align: center;
+  padding: 38px 24px 30px;
+  text-align: left;
+}
+
+.playbooks-hero-inner {
+  position: relative;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 34px 38px 36px 40px;
+
+  background: var(--pb-card);
+
+  border: 1px solid var(--pb-border);
+  border-left: 5px solid var(--pb-accent);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 6px 20px rgba(15, 23, 42, 0.07);
 }
 
 .playbooks-kicker {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+
   gap: 8px;
-  margin-bottom: 16px;
+
+  margin: 0 0 12px;
 
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.13em;
+
   color: var(--pb-accent);
 }
 
 .playbooks-kicker::before {
   content: "";
-  width: 24px;
+
+  width: 22px;
   height: 2px;
+
   background: var(--pb-accent);
+
   border-radius: 2px;
 }
 
 .playbooks-hero h1 {
-  margin: 0 auto 18px;
-  max-width: 850px;
+  margin: 0 0 14px;
 
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  max-width: 900px;
+
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.12;
+
+  letter-spacing: -0.03em;
+
   color: var(--pb-text);
 }
 
@@ -119,14 +147,15 @@ body.page-site-search {
 }
 
 .playbooks-hero-lead {
-  max-width: 760px;
-  margin: 0 auto;
+  max-width: 820px;
 
-  font-size: 1.12rem;
-  line-height: 1.7;
+  margin: 0;
+
+  font-size: 1.05rem;
+  line-height: 1.65;
+
   color: var(--pb-text-secondary);
 }
-
 /* =========================================================
    PLAYBOOK TYPE PILLS
    ========================================================= */
@@ -900,7 +929,7 @@ body.page-site-search {
 @media (max-width: 390px) {
 
   .playbooks-hero h1 {
-    font-size: 1.95rem;
+    font-size: 1.85rem;
   }
 
   .playbooks-type {
@@ -995,6 +1024,28 @@ PLAYBOOK HIGHLIGHTS
     grid-template-columns: 1fr;
     gap: 15px;
   }
+
+.playbooks-hero {
+  padding: 24px 15px 24px;
+}
+
+.playbooks-hero-inner {
+  padding: 26px 22px 28px 24px;
+
+  border-left-width: 4px;
+
+  border-radius: 12px;
+}
+
+.playbooks-hero h1 {
+  font-size: 2.05rem;
+  line-height: 1.15;
+}
+
+.playbooks-hero-lead {
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
 }
    
 </style>
@@ -1039,25 +1090,25 @@ fetch("header.html")
 <main class="playbooks-page">
 
 
-<!-- =========================================================
-     HERO
-     ========================================================= -->
-
 <section class="playbooks-hero">
 
-  <div class="playbooks-kicker">
-    TRANSFORMATION DELIVERY
+  <div class="playbooks-hero-inner">
+
+    <div class="playbooks-kicker">
+      TRANSFORMATION DELIVERY
+    </div>
+
+    <h1>
+      Transformation
+      <span>Playbooks.</span>
+    </h1>
+
+    <p class="playbooks-hero-lead">
+      Practical, repeatable frameworks for turning complex technology
+      transformation into controlled, secure and measurable delivery.
+    </p>
+
   </div>
-
-  <h1>
-    Transformation
-    <span>Playbooks.</span>
-  </h1>
-
-  <p class="playbooks-hero-lead">
-    Practical, repeatable frameworks for turning complex technology
-    transformation into controlled, secure and measurable delivery.
-  </p>
 
 </section>
 
@@ -1703,22 +1754,48 @@ fetch("footer.html")
 <!-- LOCAL SEARCH + ANALYTICS -->
 <script>
 (function() {
-  // Local search
-  const searchInput = document.getElementById("searchInput");
-  const cards = document.querySelectorAll("#modelsContainer .cardB");
+// Local search
+const searchInput = document.getElementById("searchInput");
+const cards = document.querySelectorAll("#modelsContainer .playbook-card");
+const noResults = document.getElementById("noResults");
 
-  if (searchInput) {
-    searchInput.addEventListener("input", function () {
-      const q = this.value.toLowerCase().trim();
-      cards.forEach(card => {
-        const keywords = (card.dataset.keywords || "").toLowerCase();
-        const text = card.innerText.toLowerCase();
-        const match = !q || keywords.includes(q) || text.includes(q);
-        card.style.display = match ? "block" : "none";
-      });
+if (searchInput) {
+
+  searchInput.addEventListener("input", function () {
+
+    const q = this.value.toLowerCase().trim();
+
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+
+      const keywords =
+        (card.dataset.keywords || "").toLowerCase();
+
+      const text =
+        (card.innerText || "").toLowerCase();
+
+      const match =
+        !q ||
+        keywords.includes(q) ||
+        text.includes(q);
+
+      card.style.display = match ? "" : "none";
+
+      if (match) {
+        visibleCount++;
+      }
+
     });
-  }
 
+    if (noResults) {
+      noResults.style.display =
+        visibleCount === 0 ? "block" : "none";
+    }
+
+  });
+
+}
   // Lightweight analytics
   function track(eventName, data) {
     console.log("TW-Playbooks-Analytics:", eventName, data || {});

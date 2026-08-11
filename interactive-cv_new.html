@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     SECTION 1 — HEAD + CLEANED CSS + FADE EDGES + SCROLL FIXES
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Interactive CV | Tim Williams</title>
+
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* PAGE-SPECIFIC ONLY — NO HEADER OVERRIDES */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* Scroll progress bar */
+#scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: #7ac0f9;
+    z-index: 9999;
+    transition: width 0.1s linear;
+}
+body.dark #scrollProgress {
+    background: #4da3ff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+body.dark .card {
+    background: var(--bg);
+    color: var(--text-main);
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* STATS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.stat {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+body.dark .stat {
+    background: var(--bg);
+}
+
+/* ============================================================
+   LOGO CAROUSEL — ORGANISATIONS (scrollLeft engine compatible)
+   ============================================================ */
+.logo-carousel-wrapper {
+    width: 100%;
+    margin-bottom: 40px;
+    position: relative;
+
+    /* Enable manual scroll */
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    /* Hide scrollbars */
+    scrollbar-width: none;
+}
+.logo-carousel-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Fade edges */
+.logo-carousel-wrapper::before,
+.logo-carousel-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+.logo-carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+}
+.logo-carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+}
+
+/* IMPORTANT: allow scrollLeft to work */
+.logo-carousel {
+    width: max-content;
+    overflow: visible;
+    position: relative;
+}
+
+.logo-track {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Prevent giant logos */
+.logo {
+    max-width: 140px;
+}
+.logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ============================================================
+   GLOBAL PROGRAMME DELIVERY — SCROLL STRIP
+   ============================================================ */
+.delivery-carousel-wrapper {
+    width: 100%;
+    margin-bottom: 40px;
+    position: relative;
+
+    /* Enable manual scroll */
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    /* Hide scrollbars */
+    scrollbar-width: none;
+}
+.delivery-carousel-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Fade edges */
+.delivery-carousel-wrapper::before,
+.delivery-carousel-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+.delivery-carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+}
+.delivery-carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+}
+
+/* IMPORTANT: allow scrollLeft to work */
+.delivery-carousel {
+    width: max-content;
+    overflow: visible;
+    position: relative;
+}
+
+.delivery-track {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Delivery pills */
+.delivery-pill {
+    background: white;
+    padding: 16px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    white-space: nowrap;
+    border: 2px solid #000;
+}
+body.dark .delivery-pill {
+    background: var(--bg);
+    color: var(--text-main);
+    border-color: var(--text-main);
+}
+
+/* TIMELINE */
+.timeline-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.timeline {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    scroll-behavior: smooth;
+}
+.timeline-node {
+    min-width: 260px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+body.dark .timeline-node {
+    background: var(--bg);
+}
+.timeline-node.active .timeline-details {
+    display: block;
+}
+.timeline-details {
+    display: none;
+    margin-top: 10px;
+}
+
+/* CTA BUTTONS */
+.cta-btn {
+    display: inline-block;
+    padding: 12px 26px;
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+.cta-btn:hover {
+    background: #7ac0f9;
+    border-color: #001f3f;
+    color: #ffffff;
+}
+.delivery-pill {
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.25);
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.25s ease;
+}
+
+body.dark .delivery-pill {
+    background: rgba(0,0,0,0.35);
+    border-color: rgba(255,255,255,0.2);
+    color: var(--text-main);
+}
+    .timeline-node {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.08);
+    transition: all 0.25s ease;
+}
+
+.timeline-node:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+ .timeline-arrow {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #7ac0f9;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.timeline-arrow:hover {
+    background: #7ac0f9;
+    border-color: #4da3ff;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+body.dark .timeline-arrow {
+    background: #1a1a1a;
+    border-color: #4da3ff;
+    color: #ffffff;
+}
+   /* UNIVERSAL TIMELINE ARROW STYLE */
+.timeline-left,
+.timeline-right,
+.timeline-arrow,
+.arrow-left,
+.arrow-right {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #7ac0f9;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #001f3f;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    z-index: 20;
+}
+
+.timeline-left:hover,
+.timeline-right:hover,
+.timeline-arrow:hover,
+.arrow-left:hover,
+.arrow-right:hover {
+    background: #7ac0f9;
+    border-color: #4da3ff;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+  .timeline-left,
+.timeline-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.timeline-left { left: -20px; }
+.timeline-right { right: -20px; }
+
+     /* FINAL — Applies to your actual buttons */
+.arrow-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #7ac0f9;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #001f3f;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    z-index: 20;
+}
+
+.arrow-btn:hover {
+    background: #7ac0f9;
+    border-color: #4da3ff;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+body.dark .arrow-btn {
+    background: #1a1a1a;
+    border-color: #4da3ff;
+    color: #ffffff;
+}
+
+/* Positioning */
+.timeline-wrapper {
+    position: relative;
+}
+
+.arrow-btn:first-of-type {
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.arrow-btn:last-of-type {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+   /* PROGRAMME DELIVERY IMPACT — MATCH TIMELINE CARD STYLE */
+.stat {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.08);
+    text-align: center;
+    transition: all 0.25s ease;
+}
+
+.stat:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+body.dark .stat {
+    background: var(--bg);
+    color: var(--text-main);
+    border-color: rgba(255,255,255,0.15);
+}
+ .profile-photo {
+    width: 100%;
+    max-width: 260px;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.08);
+    object-fit: cover;
+}
+ .profile-list li {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.08);
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.profile-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.14);
+}
+     /* EXECUTIVE PROFILE — MINI CARDS MATCHING DELIVERY IMPACT */
+.profile-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.profile-list li {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.08);
+    font-size: 17px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.profile-list li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+body.dark .profile-list li {
+    background: var(--bg);
+    color: var(--text-main);
+    border-color: rgba(255,255,255,0.15);
+}
+    /* EXECUTIVE PROFILE — CENTER PROFILE PHOTO */
+.profile-photo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-photo {
+    max-width: 260px;
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.08);
+    object-fit: cover;
+}
+ /* PROGRAMME CASE STUDIES — PREMIUM CARDS */
+.project {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.08);
+    transition: all 0.25s ease;
+}
+
+.project:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+body.dark .project {
+    background: var(--bg);
+    color: var(--text-main);
+    border-color: rgba(255,255,255,0.15);
+}
+    /* CERTIFICATIONS — PREMIUM MICRO CARDS */
+.certifications {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.cert-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.08);
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.25s ease;
+}
+
+.cert-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+body.dark .cert-card {
+    background: var(--bg);
+    color: var(--text-main);
+    border-color: rgba(255,255,255,0.15);
+}
+ /* RECRUITER RESOURCES — PREMIUM CARD */
+.recruiter-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.08);
+    text-align: center;
+    transition: all 0.25s ease;
+}
+
+.recruiter-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+body.dark .recruiter-card {
+    background: var(--bg);
+    color: var(--text-main);
+    border-color: rgba(255,255,255,0.15);
+}
+
+/* ============================================================
+   INTERACTIVE CV — HERO INTRO
+   MATCHES HOME PAGE HERO STYLING
+   ============================================================ */
+
+.interactive-cv-hero {
+    position: relative;
+    margin: 0 auto 40px;
+    padding: 42px 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(10, 102, 194, 0.16);
+    border-left: 6px solid #0a66c2;
+
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(122, 192, 249, 0.20),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f7fbff 48%,
+            #eaf5ff 100%
+        );
+
+    box-shadow:
+        0 10px 30px rgba(0, 31, 63, 0.08);
+
+    overflow: hidden;
+}
+
+/* Subtle background glow */
+.interactive-cv-hero::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -100px;
+    top: -120px;
+
+    background: rgba(122, 192, 249, 0.12);
+    border-radius: 50%;
+
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+/* Keep hero content above decorative glow */
+.interactive-cv-hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero heading */
+.interactive-cv-hero .section-title {
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+/* Existing profile cards remain visually consistent */
+.interactive-cv-hero .card {
+    background: rgba(255, 255, 255, 0.92);
+}
+
+/* Dark mode */
+body.dark .interactive-cv-hero {
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(77, 163, 255, 0.16),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #111827 0%,
+            #172235 55%,
+            #142b42 100%
+        );
+
+    border-color: rgba(77, 163, 255, 0.25);
+    border-left-color: #4da3ff;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+body.dark .interactive-cv-hero .card {
+    background: rgba(17, 24, 39, 0.88);
+}
+
+/* ============================================================
+   RESPONSIVE HERO
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    .interactive-cv-hero {
+        padding: 30px 22px;
+        margin-bottom: 30px;
+        border-radius: 20px;
+    }
+
+    .interactive-cv-hero .section-title {
+        margin-bottom: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .interactive-cv-hero {
+        padding: 24px 16px;
+        border-radius: 18px;
+        border-left-width: 5px;
+    }
+}
+
+</style>
+</head>
+
+
+
+<!-- ============================================================
+     SECTION 2 — FULL BODY CONTENT
+     ============================================================ -->
+<body class="header-with-logo">
+
+<div id="scrollProgress"></div>
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+    .then(r => r.text())
+    .then(h => {
+        document.getElementById("header-placeholder").innerHTML = h;
+
+        const searchScript = document.createElement("script");
+        searchScript.src = "site-search.js";
+        searchScript.onload = () => {
+            if (typeof initSiteSearch === "function") initSiteSearch();
+        };
+        document.body.appendChild(searchScript);
+
+        const headerJS = document.createElement("script");
+        headerJS.src = "header-standard-v4.js";
+        headerJS.onload = () => {
+            initHeader();
+            initHeaderEnhancements();
+        };
+        document.body.appendChild(headerJS);
+    });
+</script>
+
+<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+<script src="analytics-tracker.js" defer></script>
+
+<!-- PAGE CONTENT -->
+<main class="container">
+
+    <!-- INTERACTIVE CV HERO -->
+    <section class="interactive-cv-hero">
+
+        <h2 class="section-title">Executive Profile</h2>
+
+        <div class="grid">
+        <div class="card">
+        <ul class="profile-list">
+    <li>25+ Years IT Programme Delivery</li>
+    <li>Enhanced SC Security Clearance</li>
+    <li>£100M+ Programme Delivery</li>
+    <li>Global Enterprise Delivery</li>
+    <li>Government & Enterprise Clients</li>
+</ul>
+
+
+        </div>
+<div class="card profile-photo-card">
+    <img src="profile1.jpg" alt="Tim Williams" class="profile-photo">
+</div>
+
+        <div class="card">
+            <h3>Core Skills</h3>
+            <canvas id="skillsRadar"></canvas>
+        </div>
+    </div>
+</section>
+    <div class="card">
+        <h2 class="section-title">Programme Delivery Impact</h2>
+
+        <div class="stats">
+            <div class="stat"><h2>126k</h2><p>Devices Deployed</p></div>
+            <div class="stat"><h2>46k</h2><p>Windows 11 Upgrades</p></div>
+            <div class="stat"><h2>32k</h2><p>Endpoint Migrations</p></div>
+            <div class="stat"><h2>£18M</h2><p>Cyber Security Programme</p></div>
+        </div>
+    </div>
+
+    <!-- ORGANISATIONS CAROUSEL -->
+    <div class="card">
+        <h2 class="section-title">Organisations Delivered For</h2>
+
+        <div class="logo-carousel-wrapper">
+            <div class="logo-carousel">
+                <div class="logo-track">
+
+                    <div class="logo"><img src="nhs.png" alt="NHS England"></div>
+                    <div class="logo"><img src="hsbc.png" alt="HSBC"></div>
+                    <div class="logo"><img src="dn.png" alt="Dounreay Nuclear"></div>
+                    <div class="logo"><img src="fco.png" alt="Foreign Commonwealth"></div>
+                    <div class="logo"><img src="nu.png" alt="Newcastle University"></div>
+                    <div class="logo"><img src="tesco.png" alt="Tesco"></div>
+                    <div class="logo"><img src="mod.png" alt="MoD"></div>
+                    <div class="logo"><img src="tele.png" alt="Telefonica"></div>
+                    <div class="logo"><img src="met.png" alt="Met Police"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GLOBAL PROGRAMME DELIVERY — AUTO SCROLL -->
+    <div class="card">
+        <h2 class="section-title">Global Programme Delivery</h2>
+
+        <div class="delivery-carousel-wrapper">
+            <div class="delivery-carousel">
+                <div class="delivery-track">
+
+                    <div class="delivery-pill">UK</div>
+                    <div class="delivery-pill">Europe</div>
+                    <div class="delivery-pill">USA</div>
+                    <div class="delivery-pill">APAC</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CAREER TIMELINE -->
+    <div class="card">
+        <h2 class="section-title">Career Timeline</h2>
+
+        <div class="timeline-wrapper">
+            <button class="arrow-btn" onclick="scrollTimeline(-300)">⟵</button>
+
+            <div class="timeline" id="timeline">
+
+                <div class="timeline-node">
+                    <h3>NHS England</h3><p>11/25 - 02/26</p>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Senior Project Manager</li>
+                            <li>Cyber security transformation programme</li>
+                            <li>MFA, IAM, CyberArk, Splunk</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-node">
+                    <h3>Version One</h3><p>12/24 - 07/25</p>
+                    <div class="timeline-details">
+                        <ul><li>Service Transition Manager</li></ul>
+                    </div>
+                </div>
+
+                <div class="timeline-node">
+                    <h3>ROC Technologies</h3><p>07/25 - 10/25</p>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Dounreay Nuclear PMO Manager</li>
+                            <li>Senior Project Manager</li>
+                            <li>Luton Airport MFA</li>
+                            <li>Line Management</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-node">
+                    <h3>Computacenter</h3><p>07/13 - 09/24</p>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Senior Project Manager</li>
+                            <li>PMO Manager</li>
+                            <li>Pre-Sales Manager</li>
+                            <li>ServiceNow Development</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-node">
+                    <h3>TrustMarque</h3><p>01/06 - 06/13</p>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Project Manager</li>
+                            <li>PMO and IT Delivery</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="arrow-btn" onclick="scrollTimeline(300)">⟶</button>
+        </div>
+    </div>
+
+    <!-- PROGRAMME CASE STUDIES -->
+    <div class="card">
+        <h2 class="section-title">Programme Case Studies</h2>
+
+        <div class="grid">
+
+            <div class="project">
+                <h3>NHS Cyber Security Programme</h3>
+                <p><strong>Challenge:</strong> Improve national cyber resilience.</p>
+                <p><strong>Approach:</strong> Delivered enterprise IAM, MFA, CyberArk, Splunk integration.</p>
+                <p><strong>Outcome:</strong> Strengthened cyber security posture.</p>
+            </div>
+
+            <div class="project">
+                <h3>Tesco Windows Transformation</h3>
+                <p><strong>Challenge:</strong> Upgrade enterprise estate.</p>
+                <p><strong>Approach:</strong> Global device rollout programme.</p>
+                <p><strong>Outcome:</strong> 126k devices deployed.</p>
+            </div>
+
+            <div class="project">
+                <h3>MoD Device Management Programme</h3>
+                <p><strong>Challenge:</strong> Secure enterprise devices.</p>
+                <p><strong>Approach:</strong> Delivered Intune and mobile management solution.</p>
+                <p><strong>Outcome:</strong> Secure mobile platform.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="card">
+        <h2 class="section-title">Certifications & Awards</h2>
+
+        <div class="certifications">
+            <div class="cert-card">Prince2 Practitioner</div>
+            <div class="cert-card">ITIL Expert</div>
+            <div class="cert-card">Cyber Security Certification</div>
+            <div class="cert-card">Award for Digital Transformation Excellence</div>
+        </div>
+    </div>
+
+    <!-- RECRUITER RESOURCES -->
+    <div class="card recruiter-card">
+    <h2 class="section-title">Recruiter Resources</h2>
+    <p><strong>Download capability profile and CV.</strong></p>
+    <a href="Tim_Williams_CV.pdf" class="cta-btn" target="_blank">Download CV</a>
+</div>
+
+
+</main>
+
+<!-- FLOATING BUTTONS -->
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a id="bookingFab" class="fab fab-booking" href="calendar.html">📅</a>
+
+<!-- GLOBAL FOOTER -->
+<div id="footer-container"></div>
+
+<script>
+fetch("footer.html")
+    .then(r => r.text())
+    .then(html => document.getElementById("footer-container").innerHTML = html);
+</script>
+
+
+
+<!-- PAGE SCRIPTS -->
+<script>
+
+/* ============================================================
+   PREMIUM SMOOTH MODE — APPLE-STYLE INFINITE MARQUEE
+   Transform-based auto-scroll + magnetic drag (medium resistance)
+   ============================================================ */
+
+function initSmoothMarquee(wrapperSelector, trackSelector, speed = 0.65) {
+    const wrapper = document.querySelector(wrapperSelector);
+    const track = document.querySelector(trackSelector);
+
+    if (!wrapper || !track) return;
+
+    /* Duplicate content for seamless infinite loop */
+    track.innerHTML += track.innerHTML;
+
+    let pos = 0;                 // current translateX position
+    let autoSpeed = speed;       // auto-scroll speed
+    let isDragging = false;
+    let startX = 0;
+    let lastX = 0;
+    let velocity = 0;
+    let dragResistance = 0.12;   // medium magnetic resistance
+
+    /* Disable native scroll completely */
+    wrapper.style.overflow = "hidden";
+
+    /* Auto-scroll loop */
+    function animate() {
+        if (!isDragging) {
+            pos -= autoSpeed;
+        } else {
+            pos += velocity;
+            velocity *= (1 - dragResistance);
+        }
+
+        const width = track.scrollWidth / 2;
+
+        /* Loop seamlessly */
+        if (pos <= -width) pos += width;
+        if (pos >= 0) pos -= width;
+
+        track.style.transform = `translateX(${pos}px)`;
+        requestAnimationFrame(animate);
+    }
+
+    /* Drag start */
+    function onDragStart(e) {
+        isDragging = true;
+        startX = e.clientX || e.touches?.[0].clientX;
+        lastX = startX;
+        velocity = 0;
+    }
+
+    /* Drag move */
+    function onDragMove(e) {
+        if (!isDragging) return;
+
+        const x = e.clientX || e.touches?.[0].clientX;
+        const delta = x - lastX;
+
+        pos += delta * 1.2;   // drag sensitivity
+        velocity = delta;     // used for magnetic easing
+
+        lastX = x;
+    }
+
+    /* Drag end */
+    function onDragEnd() {
+        isDragging = false;
+    }
+
+    /* Event listeners */
+    wrapper.addEventListener("mousedown", onDragStart);
+    wrapper.addEventListener("mousemove", onDragMove);
+    wrapper.addEventListener("mouseup", onDragEnd);
+    wrapper.addEventListener("mouseleave", onDragEnd);
+
+    wrapper.addEventListener("touchstart", onDragStart, { passive: true });
+    wrapper.addEventListener("touchmove", onDragMove, { passive: true });
+    wrapper.addEventListener("touchend", onDragEnd);
+
+    requestAnimationFrame(animate);
+}
+
+/* Updated faster speeds */
+initSmoothMarquee(".logo-carousel-wrapper", ".logo-track", 0.65);
+initSmoothMarquee(".delivery-carousel-wrapper", ".delivery-track", 0.80);
+
+
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+
+window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById("scrollProgress").style.width = progress + "%";
+});
+
+
+
+/* ============================================================
+   TIMELINE SCROLL BUTTONS
+   ============================================================ */
+
+function scrollTimeline(amount) {
+    document.getElementById("timeline").scrollBy({
+        left: amount,
+        behavior: "smooth"
+    });
+}
+
+
+
+/* ============================================================
+   TIMELINE EXPAND / COLLAPSE
+   ============================================================ */
+
+document.querySelectorAll(".timeline-node").forEach(node => {
+    node.onclick = () => node.classList.toggle("active");
+});
+
+
+
+/* ============================================================
+   RADAR CHART
+   ============================================================ */
+
+new Chart(document.getElementById("skillsRadar"), {
+    type: "radar",
+    data: {
+        labels: [
+            "Cyber Security",
+            "Cloud",
+            "Infrastructure",
+            "Programme Leadership",
+            "Service Management",
+            "Pre-Sales"
+        ],
+        datasets: [{
+            label: "Expertise",
+            data: [95, 90, 92, 96, 88, 85],
+            backgroundColor: "rgba(122,192,249,0.2)",
+            borderColor: "#7ac0f9",
+            pointBackgroundColor: "#001f3f"
+        }]
+    },
+    options: {
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 100,
+                grid: { color: "rgba(0,0,0,0.1)" },
+                angleLines: { color: "rgba(0,0,0,0.1)" },
+                pointLabels: { color: "var(--text-main)" }
+            }
+        },
+        plugins: {
+            legend: { display: false }
+        }
+    }
+});
+
+</script>
+
+</body>
+</html>

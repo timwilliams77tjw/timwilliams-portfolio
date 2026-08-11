@@ -66,111 +66,658 @@ body.page-certifications {
     padding: 42px 0 76px;
 }
 
+/* ============================================================
+   TWC DOWNLOADS HERO
+   MATCHES THE CV HERO VISUAL STYLE
+   ============================================================ */
 
-/* =========================================================
-   HERO
-   ========================================================= */
+body.page-downloads .downloads-hero {
 
-.downloads-hero {
     position: relative;
 
-    margin-bottom: 46px;
-    padding: 48px 52px;
+    width: min(1100px, calc(100% - 40px));
+
+    max-width: 1100px;
+
+    margin:
+        42px auto 0;
+
+    padding:
+        76px 70px 58px;
+
+    box-sizing: border-box;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(10,102,194,0.13),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f7faff 100%
+        );
+
+    border:
+        1px solid rgba(10,31,68,0.08);
+
+    border-radius:
+        24px;
+
+    box-shadow:
+        0 8px 24px rgba(15,35,60,0.08);
+
+    overflow:
+        hidden;
+
+    color:
+        #102a43;
+}
+
+
+/* ============================================================
+   LEFT BLUE ACCENT
+   ============================================================ */
+
+body.page-downloads .downloads-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 6px;
+    height: 100%;
+
+    background:
+        #0a66c2;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   CIRCULAR DETAIL
+   ============================================================ */
+
+body.page-downloads .downloads-hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    right: -180px;
+    top: -180px;
+
+    border:
+        1px solid rgba(10,102,194,0.10);
+
+    border-radius:
+        50%;
+
+    pointer-events:
+        none;
+}
+
+
+/* ============================================================
+   HERO CONTENT
+   ============================================================ */
+
+body.page-downloads .downloads-hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width:
+        900px;
+}
+
+
+/* ============================================================
+   EYEBROW
+   ============================================================ */
+
+body.page-downloads .downloads-hero-eyebrow {
+
+    position: relative;
+
+    margin:
+        0 0 20px;
+
+    color:
+        #0a66c2;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.16em;
+
+    line-height:
+        1.4;
+}
+
+
+/* ============================================================
+   HERO H1
+   ============================================================ */
+
+body.page-downloads .downloads-hero h1 {
+
+    position: relative;
+
+    margin:
+        0;
+
+    max-width:
+        900px;
+
+    color:
+        #0a1f44;
+
+    font-size:
+        clamp(36px, 5vw, 58px);
+
+    line-height:
+        1.08;
+
+    letter-spacing:
+        -0.035em;
+
+    font-weight:
+        800;
+}
+
+
+/* ============================================================
+   HERO SUBTITLE / ROLE
+   ============================================================ */
+
+body.page-downloads .downloads-hero-role {
+
+    position: relative;
+
+    margin:
+        16px 0 0;
+
+    color:
+        #0a66c2;
+
+    font-size:
+        19px;
+
+    line-height:
+        1.5;
+
+    font-weight:
+        700;
+}
+
+
+/* ============================================================
+   HERO INTRO
+   ============================================================ */
+
+body.page-downloads .downloads-hero-intro {
+
+    position: relative;
+
+    max-width:
+        730px;
+
+    margin:
+        24px 0 0;
+
+    color:
+        #5f6b78;
+
+    font-size:
+        19px;
+
+    line-height:
+        1.65;
+
+    font-weight:
+        400;
+}
+
+
+/* ============================================================
+   HERO SUPPORTING CARDS
+   Use this if the Downloads hero contains cards/metrics.
+   ============================================================ */
+
+body.page-downloads .downloads-hero-highlights {
+
+    position: relative;
+
+    z-index: 2;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
+
+    gap:
+        12px;
+
+    width:
+        100%;
+
+    max-width:
+        900px;
+
+    margin:
+        30px 0 0;
+}
+
+
+/* ============================================================
+   SUPPORTING CARD
+   ============================================================ */
+
+body.page-downloads .downloads-hero-highlight {
+
+    position: relative;
+
+    min-width:
+        0;
+
+    padding:
+        15px 16px;
+
+    background:
+        rgba(255,255,255,0.82);
+
+    border:
+        1px solid #dfe6ee;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        0 4px 12px rgba(15,35,60,0.055);
+
+    backdrop-filter:
+        blur(4px);
+
+    -webkit-backdrop-filter:
+        blur(4px);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease,
+        background .22s ease;
+}
+
+
+body.page-downloads .downloads-hero-highlight:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #ffffff;
+
+    border-color:
+        #cbd6e2;
+
+    box-shadow:
+        0 8px 18px rgba(15,35,60,0.10);
+}
+
+
+/* ============================================================
+   SUPPORTING CARD VALUE
+   ============================================================ */
+
+body.page-downloads .downloads-hero-highlight strong {
+
+    display:
+        block;
+
+    margin:
+        0 0 4px;
+
+    color:
+        #0a1f44;
+
+    font-size:
+        1.08rem;
+
+    line-height:
+        1.2;
+
+    font-weight:
+        800;
+}
+
+
+/* ============================================================
+   SUPPORTING CARD LABEL
+   ============================================================ */
+
+body.page-downloads .downloads-hero-highlight span {
+
+    display:
+        block;
+
+    color:
+        #5f6b78;
+
+    font-size:
+        .72rem;
+
+    line-height:
+        1.35;
+
+    font-weight:
+        650;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    body.page-downloads .downloads-hero {
+
+        padding:
+            58px 45px 45px;
+    }
+
+
+    body.page-downloads .downloads-hero-highlights {
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+    }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 767px) {
+
+    body.page-downloads .downloads-hero {
+
+        width:
+            calc(100% - 24px);
+
+        max-width:
+            100%;
+
+        margin:
+            20px auto 0;
+
+        padding:
+            42px 24px 30px;
+
+        border-radius:
+            18px;
+
+        box-sizing:
+            border-box;
+    }
+
+
+    body.page-downloads .downloads-hero::before {
+
+        width:
+            4px;
+    }
+
+
+    body.page-downloads .downloads-hero-content {
+
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        box-sizing:
+            border-box;
+    }
+
+
+    body.page-downloads .downloads-hero-eyebrow {
+
+        margin-bottom:
+            16px;
+
+        font-size:
+            9px;
+
+        line-height:
+            1.7;
+    }
+
+
+    body.page-downloads .downloads-hero h1 {
+
+        font-size:
+            34px;
+
+        line-height:
+            1.08;
+    }
+
+
+    body.page-downloads .downloads-hero-role {
+
+        font-size:
+            15px;
+
+        line-height:
+            1.6;
+
+        margin-top:
+            14px;
+    }
+
+
+    body.page-downloads .downloads-hero-intro {
+
+        max-width:
+            100%;
+
+        margin-top:
+            20px;
+
+        font-size:
+            15px;
+
+        line-height:
+            1.6;
+    }
+
+
+    body.page-downloads .downloads-hero-highlights {
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+        gap:
+            10px;
+
+        margin-top:
+            24px;
+
+        max-width:
+            100%;
+    }
+
+
+    body.page-downloads .downloads-hero-highlight {
+
+        padding:
+            13px 12px;
+
+        border-radius:
+            10px;
+    }
+
+
+    body.page-downloads .downloads-hero-highlight strong {
+
+        font-size:
+            1rem;
+    }
+
+
+    body.page-downloads .downloads-hero-highlight span {
+
+        font-size:
+            .68rem;
+    }
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media (max-width: 420px) {
+
+    body.page-downloads .downloads-hero {
+
+        padding:
+            38px 20px 26px;
+    }
+
+
+    body.page-downloads .downloads-hero h1 {
+
+        font-size:
+            31px;
+    }
+
+
+    body.page-downloads .downloads-hero-role {
+
+        font-size:
+            14px;
+    }
+
+
+    body.page-downloads .downloads-hero-intro {
+
+        font-size:
+            14px;
+    }
+
+
+    body.page-downloads .downloads-hero-highlights {
+
+        gap:
+            8px;
+    }
+
+
+    body.page-downloads .downloads-hero-highlight {
+
+        padding:
+            12px 10px;
+    }
+}
+
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+body.dark-mode.page-downloads .downloads-hero {
 
     background:
         linear-gradient(
             135deg,
-            #081f35 0%,
-            #0a3152 52%,
-            #0a66c2 100%
+            rgba(0,31,63,.98),
+            rgba(0,48,82,.96)
         );
 
-    border-radius: 20px;
+    border-color:
+        rgba(122,192,249,.25);
 
-    overflow: hidden;
-
-    box-shadow:
-        0 14px 34px rgba(10, 37, 64, 0.14);
+    color:
+        #fff;
 }
 
-.downloads-hero::before {
-    content: "";
 
-    position: absolute;
-
-    width: 300px;
-    height: 300px;
-
-    right: -110px;
-    top: -130px;
-
-    border-radius: 50%;
+body.dark-mode.page-downloads .downloads-hero::before {
 
     background:
-        rgba(255, 255, 255, 0.055);
+        #7ac0f9;
 }
 
-.downloads-hero::after {
-    content: "";
 
-    position: absolute;
+body.dark-mode.page-downloads .downloads-hero-eyebrow {
 
-    width: 210px;
-    height: 210px;
+    color:
+        #7ac0f9;
+}
 
-    right: 90px;
-    bottom: -150px;
 
-    border-radius: 50%;
+body.dark-mode.page-downloads .downloads-hero h1 {
+
+    color:
+        #fff;
+}
+
+
+body.dark-mode.page-downloads .downloads-hero-role {
+
+    color:
+        #dbe9f5;
+}
+
+
+body.dark-mode.page-downloads .downloads-hero-intro {
+
+    color:
+        #c0d0dd;
+}
+
+
+body.dark-mode.page-downloads .downloads-hero-highlight {
 
     background:
-        rgba(255, 255, 255, 0.035);
+        rgba(255,255,255,.055);
+
+    border-color:
+        rgba(122,192,249,.20);
 }
 
-.downloads-hero-content {
-    position: relative;
-    z-index: 2;
 
-    max-width: 800px;
+body.dark-mode.page-downloads .downloads-hero-highlight strong {
+
+    color:
+        #e3bd55;
 }
 
-.downloads-kicker {
-    margin-bottom: 12px;
 
-    color: #9fd2ff;
+body.dark-mode.page-downloads .downloads-hero-highlight span {
 
-    font-size: 0.72rem;
-    font-weight: 800;
-
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    color:
+        #c5d4df;
 }
-
-.downloads-hero h1 {
-    margin: 0 0 16px;
-
-    color: #ffffff;
-
-    font-size:
-        clamp(2.25rem, 5vw, 3.45rem);
-
-    line-height: 1.06;
-    font-weight: 750;
-
-    letter-spacing: -0.025em;
-}
-
-.downloads-hero p {
-    max-width: 740px;
-
-    margin: 0;
-
-    color: #e6f0f7;
-
-    font-size: 1.04rem;
-    line-height: 1.68;
-}
-
 
 /* =========================================================
    SECTIONS

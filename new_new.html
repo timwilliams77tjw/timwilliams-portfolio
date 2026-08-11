@@ -20,21 +20,28 @@
 <style>
 /* =========================================================
    TWC LTD — OFFERINGS PAGE
-   Complete replacement page CSS
+   VISUAL SYSTEM — CV / INTERACTIVE CV / ABOUT STYLE
    ========================================================= */
 
 :root {
     --offerings-bg: #f5f7fa;
     --offerings-card: #ffffff;
-    --offerings-text: #111827;
-    --offerings-subtext: #4b5563;
-    --offerings-heading: #0a2540;
+    --offerings-text: #10243e;
+    --offerings-subtext: #526174;
+    --offerings-heading: #10243e;
+
     --offerings-accent: #0a66c2;
     --offerings-accent-light: #eaf4ff;
-    --offerings-border: #e1e7ee;
-    --offerings-shadow: 0 4px 16px rgba(15, 23, 42, 0.07);
-    --offerings-shadow-hover: 0 10px 26px rgba(15, 23, 42, 0.11);
-    --offerings-radius: 14px;
+
+    --offerings-border: #dce3eb;
+
+    --offerings-shadow:
+        0 4px 14px rgba(15, 23, 42, 0.06);
+
+    --offerings-shadow-hover:
+        0 10px 26px rgba(15, 23, 42, 0.11);
+
+    --offerings-radius: 12px;
 }
 
 
@@ -43,114 +50,120 @@
    ========================================================= */
 
 body.page-site-search {
+    margin: 0;
     background: var(--offerings-bg);
+    color: var(--offerings-text);
 }
 
 .page-certifications {
     width: 100%;
+    min-height: 100vh;
+
     background: var(--offerings-bg);
     color: var(--offerings-text);
+
     transition:
         background 0.3s ease,
         color 0.3s ease;
 }
 
 .page-certifications .container {
+    width: 100%;
     max-width: 1120px;
+
     margin: 0 auto;
-    padding: 30px 24px 70px;
+
+    padding: 34px 24px 70px;
+
+    box-sizing: border-box;
 }
 
 
 /* =========================================================
-   PAGE TITLE
+   PAGE HERO / TITLE
    ========================================================= */
 
 .page-certifications .container > h1 {
-    margin: 12px auto 26px;
-    max-width: 1000px;
 
-    text-align: center;
-
-    font-size: clamp(1.8rem, 4vw, 2.7rem);
-    line-height: 1.2;
-    font-weight: 700;
-
-    color: var(--offerings-heading);
-}
-
-
-/* =========================================================
-   SECTION HEADINGS
-   ========================================================= */
-
-.page-certifications h2 {
     position: relative;
 
-    margin: 52px 0 18px;
+    margin: 0 0 30px;
 
-    padding-bottom: 10px;
+    padding: 25px 28px 25px 30px;
 
-    font-size: clamp(1.45rem, 3vw, 1.85rem);
-    line-height: 1.25;
+    text-align: left;
+
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+    line-height: 1.18;
     font-weight: 700;
 
     color: var(--offerings-heading);
 
-    border-bottom: 1px solid var(--offerings-border);
-}
+    background: #ffffff;
 
-.page-certifications h2::after {
-    content: "";
+    border: 1px solid var(--offerings-border);
+    border-left: 5px solid var(--offerings-accent);
 
-    position: absolute;
-    left: 0;
-    bottom: -1px;
+    border-radius: 10px;
 
-    width: 58px;
-    height: 3px;
-
-    background: var(--offerings-accent);
-    border-radius: 3px;
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, 0.045);
 }
 
 
 /* =========================================================
    HERO IMAGE ROTATOR
+   =========================================================
+   The existing six-image rotator is deliberately retained.
+   Only its visual presentation is changed.
    ========================================================= */
 
 .hero-rotator {
+
     position: relative;
 
     width: 100%;
     height: 300px;
 
-    margin: 24px 0 42px;
+    margin: 0 0 42px;
 
     overflow: hidden;
 
-    border-radius: 16px;
+    border-radius: 12px;
 
-    background: #dfe7ef;
+    background: #ffffff;
+
+    border: 1px solid var(--offerings-border);
+    border-left: 5px solid var(--offerings-accent);
 
     box-shadow:
-        0 8px 24px rgba(15, 23, 42, 0.10);
+        0 4px 14px rgba(15, 23, 42, 0.06);
 
     isolation: isolate;
 }
 
+
+/*
+   Very subtle overlay.
+
+   This deliberately avoids the previous heavy blue
+   treatment so the actual imagery remains visible.
+*/
+
 .hero-rotator::after {
+
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     background:
         linear-gradient(
             90deg,
-            rgba(10, 37, 64, 0.16),
-            transparent 45%,
-            rgba(10, 37, 64, 0.08)
+            rgba(255,255,255,0.04),
+            transparent 42%,
+            rgba(10,102,194,0.03)
         );
 
     pointer-events: none;
@@ -158,7 +171,13 @@ body.page-site-search {
     z-index: 2;
 }
 
+
+/* =========================================================
+   ROTATING IMAGES
+   ========================================================= */
+
 .rotator-img {
+
     position: absolute;
 
     inset: 0;
@@ -171,18 +190,76 @@ body.page-site-search {
 
     opacity: 0;
 
+    transform: scale(1.015);
+
     transition:
         opacity 1.2s ease-in-out,
         transform 6s ease;
-
-    transform: scale(1.015);
 
     z-index: 1;
 }
 
 .rotator-img.active {
+
     opacity: 1;
+
     transform: scale(1.03);
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+   ========================================================= */
+
+.page-certifications h2 {
+
+    position: relative;
+
+    margin: 52px 0 18px;
+
+    padding: 0 0 11px 0;
+
+    font-size: clamp(1.45rem, 3vw, 1.85rem);
+    line-height: 1.25;
+    font-weight: 700;
+
+    color: var(--offerings-heading);
+
+    border-bottom: 1px solid var(--offerings-border);
+}
+
+.page-certifications h2::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -1px;
+
+    width: 58px;
+    height: 3px;
+
+    background: var(--offerings-accent);
+
+    border-radius: 3px;
+}
+
+
+/* =========================================================
+   INTRODUCTORY TEXT
+   ========================================================= */
+
+.page-certifications .container > p {
+
+    color: var(--offerings-subtext);
+
+    font-size: 0.98rem;
+    line-height: 1.7;
+
+    margin: 0 0 20px;
+
+    max-width: 900px;
 }
 
 
@@ -191,6 +268,7 @@ body.page-site-search {
    ========================================================= */
 
 .page-certifications .card {
+
     position: relative;
 
     width: 100%;
@@ -198,11 +276,13 @@ body.page-site-search {
     box-sizing: border-box;
 
     margin-bottom: 22px;
-    padding: 25px 27px;
+
+    padding: 24px 26px;
 
     background: var(--offerings-card);
 
     border: 1px solid var(--offerings-border);
+
     border-radius: var(--offerings-radius);
 
     box-shadow: var(--offerings-shadow);
@@ -210,17 +290,18 @@ body.page-site-search {
     color: var(--offerings-text);
 
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
 }
 
 .page-certifications .card:hover {
+
     transform: translateY(-2px);
 
     box-shadow: var(--offerings-shadow-hover);
 
-    border-color: #cdd9e6;
+    border-color: #cbd9e7;
 }
 
 
@@ -229,9 +310,10 @@ body.page-site-search {
    ========================================================= */
 
 .page-certifications .card h3 {
+
     margin: 0 0 10px;
 
-    font-size: 1.15rem;
+    font-size: 1.12rem;
     line-height: 1.35;
     font-weight: 700;
 
@@ -239,9 +321,14 @@ body.page-site-search {
 }
 
 .page-certifications .card p {
+
+    display: block;
+
+    width: 100%;
+
     margin: 0 0 12px;
 
-    font-size: 0.98rem;
+    font-size: 0.96rem;
     line-height: 1.65;
 
     color: var(--offerings-subtext);
@@ -251,15 +338,23 @@ body.page-site-search {
     margin-bottom: 0;
 }
 
+
+/* =========================================================
+   CARD LISTS
+   ========================================================= */
+
 .page-certifications .card ul {
+
     margin: 0;
+
     padding-left: 22px;
 }
 
 .page-certifications .card li {
+
     margin-bottom: 10px;
 
-    font-size: 0.98rem;
+    font-size: 0.96rem;
     line-height: 1.6;
 
     color: var(--offerings-subtext);
@@ -276,12 +371,13 @@ body.page-site-search {
 
 .page-certifications .grid,
 .page-certifications .card-list {
+
     display: grid;
 
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    gap: 22px;
+    gap: 20px;
 
     align-items: stretch;
 
@@ -290,27 +386,34 @@ body.page-site-search {
 
 .page-certifications .grid > .card,
 .page-certifications .card-list > .card {
+
     height: 100%;
+
     margin-bottom: 0;
 
     display: flex;
+
     flex-direction: column;
+
     box-sizing: border-box;
 }
 
 
 /* =========================================================
-   CONSULTING EXPERTISE CARDS
+   EXPERTISE CARD BLUE ACCENT
    ========================================================= */
 
 .page-certifications .grid .card h3 {
+
     display: flex;
+
     align-items: flex-start;
 
     gap: 9px;
 }
 
 .page-certifications .grid .card h3::before {
+
     content: "";
 
     display: block;
@@ -328,11 +431,13 @@ body.page-site-search {
 
 
 /* =========================================================
-   CONSULTING SERVICE CARDS
+   CONSULTING SERVICE CTA
    ========================================================= */
 
 .page-certifications .grid .card .cta-btn {
+
     margin-top: auto;
+
     align-self: flex-start;
 }
 
@@ -342,6 +447,7 @@ body.page-site-search {
    ========================================================= */
 
 .cta-btn {
+
     display: inline-flex;
 
     align-items: center;
@@ -351,40 +457,51 @@ body.page-site-search {
 
     box-sizing: border-box;
 
-    margin-top: 12px;
+    margin-top: 14px;
+
     padding: 10px 22px;
 
     background: #ffffff;
 
-    color: #000000;
+    color: var(--offerings-accent);
 
-    border: 2px solid #000000;
-    border-radius: 50px;
+    border: 1px solid var(--offerings-accent);
 
-    font-size: 0.92rem;
-    font-weight: 600;
+    border-radius: 8px;
+
+    font-size: 0.9rem;
+    font-weight: 700;
 
     line-height: 1;
 
     text-decoration: none;
 
     transition:
-        background 0.25s ease,
-        border-color 0.25s ease,
-        color 0.25s ease,
-        transform 0.2s ease;
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .cta-btn:hover {
-    background: #7ac0f9;
-    border-color: #001f3f;
+
+    background: var(--offerings-accent);
+
+    border-color: var(--offerings-accent);
+
     color: #ffffff;
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(10,102,194,0.18);
 }
 
 .cta-btn:focus-visible {
-    outline: 3px solid rgba(10, 102, 194, 0.25);
+
+    outline: 3px solid rgba(10,102,194,0.22);
+
     outline-offset: 3px;
 }
 
@@ -394,12 +511,14 @@ body.page-site-search {
    ========================================================= */
 
 .page-certifications .badge {
+
     display: inline-flex;
 
     align-items: center;
     justify-content: center;
 
     margin: 5px 6px 5px 0;
+
     padding: 8px 13px;
 
     background: var(--offerings-accent-light);
@@ -407,6 +526,7 @@ body.page-site-search {
     color: var(--offerings-heading);
 
     border: 1px solid #cfe3f8;
+
     border-radius: 999px;
 
     font-size: 0.84rem;
@@ -417,16 +537,14 @@ body.page-site-search {
 
 
 /* =========================================================
-   CONTACT CARD
+   LINKS
    ========================================================= */
 
-.page-certifications .card p {
-    display: block;
-    width: 100%;
-}
-
 .page-certifications .card a {
+
     color: var(--offerings-accent);
+
+    text-decoration: none;
 }
 
 .page-certifications .card a:hover {
@@ -434,15 +552,17 @@ body.page-site-search {
 }
 
 .page-certifications .card img[src*="linkedin"] {
+
     object-fit: contain;
 }
 
 
 /* =========================================================
-   QUICK LINK LIST
+   QUICK NAVIGATION
    ========================================================= */
 
 .link-list {
+
     display: grid;
 
     grid-template-columns:
@@ -454,6 +574,7 @@ body.page-site-search {
 }
 
 .minimal-link {
+
     display: flex;
 
     align-items: center;
@@ -472,9 +593,11 @@ body.page-site-search {
     color: var(--offerings-text);
 
     border: 1px solid var(--offerings-border);
+
     border-radius: 10px;
 
-    box-shadow: 0 2px 7px rgba(15, 23, 42, 0.04);
+    box-shadow:
+        0 2px 7px rgba(15,23,42,0.04);
 
     font-size: 0.92rem;
     font-weight: 600;
@@ -489,17 +612,21 @@ body.page-site-search {
 }
 
 .minimal-link:hover {
+
     transform: translateY(-2px);
 
     background: var(--offerings-accent-light);
 
     border-color: #b9d5ee;
 
-    box-shadow: 0 5px 12px rgba(15, 23, 42, 0.07);
+    box-shadow:
+        0 5px 12px rgba(15,23,42,0.07);
 }
 
 .minimal-link .icon {
+
     font-size: 19px;
+
     line-height: 1;
 }
 
@@ -524,38 +651,75 @@ body.page-site-search {
 
 /* =========================================================
    DARK MODE
-   Supports both body.dark and body.dark-mode
    ========================================================= */
 
 body.dark,
 body.dark-mode {
-    --offerings-bg: #0f172a;
-    --offerings-card: #111827;
-    --offerings-text: #e5e7eb;
-    --offerings-subtext: #b4bdca;
-    --offerings-heading: #f3f4f6;
+
+    --offerings-bg: #0d1117;
+    --offerings-card: #161d26;
+
+    --offerings-text: #e6edf3;
+    --offerings-subtext: #c7d0da;
+
+    --offerings-heading: #ffffff;
+
     --offerings-accent: #38bdf8;
     --offerings-accent-light: #172b3d;
-    --offerings-border: #263445;
-    --offerings-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
-    --offerings-shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.38);
+
+    --offerings-border: rgba(255,255,255,0.12);
+
+    --offerings-shadow:
+        0 5px 18px rgba(0,0,0,0.28);
+
+    --offerings-shadow-hover:
+        0 10px 28px rgba(0,0,0,0.38);
 }
 
 body.dark .page-certifications,
 body.dark-mode .page-certifications {
+
     background: var(--offerings-bg);
+
     color: var(--offerings-text);
 }
 
+
+/* DARK HERO */
+
+body.dark .page-certifications .container > h1,
+body.dark-mode .page-certifications .container > h1 {
+
+    background: #111820;
+
+    border-color: rgba(255,255,255,0.12);
+
+    border-left-color: var(--offerings-accent);
+
+    color: #ffffff;
+}
+
+
+/* DARK ROTATOR */
+
 body.dark .hero-rotator,
 body.dark-mode .hero-rotator {
-    background: #172033;
+
+    background: #111820;
+
+    border-color: rgba(255,255,255,0.12);
+
+    border-left-color: var(--offerings-accent);
 }
+
+
+/* DARK CARDS */
 
 body.dark .page-certifications .card,
 body.dark-mode .page-certifications .card,
 body.dark .minimal-link,
 body.dark-mode .minimal-link {
+
     background: var(--offerings-card);
 
     border-color: var(--offerings-border);
@@ -563,33 +727,55 @@ body.dark-mode .minimal-link {
 
 body.dark .page-certifications .card:hover,
 body.dark-mode .page-certifications .card:hover {
-    border-color: #38516b;
+
+    border-color: rgba(56,189,248,0.45);
 }
+
+
+/* DARK BADGES */
 
 body.dark .page-certifications .badge,
 body.dark-mode .page-certifications .badge {
+
     background: var(--offerings-accent-light);
+
     color: #dcefff;
+
     border-color: #31516d;
 }
 
+
+/* DARK CTA */
+
 body.dark .cta-btn,
 body.dark-mode .cta-btn {
-    background: #111827;
-    color: #ffffff;
-    border-color: #ffffff;
+
+    background: transparent;
+
+    color: var(--offerings-accent);
+
+    border-color: var(--offerings-accent);
 }
 
 body.dark .cta-btn:hover,
 body.dark-mode .cta-btn:hover {
-    background: #38bdf8;
-    border-color: #38bdf8;
+
+    background: var(--offerings-accent);
+
+    border-color: var(--offerings-accent);
+
     color: #07111d;
 }
 
+
+/* DARK QUICK LINKS */
+
 body.dark .minimal-link:hover,
 body.dark-mode .minimal-link:hover {
+
     background: var(--offerings-accent-light);
+
+    border-color: #31516d;
 }
 
 
@@ -600,21 +786,25 @@ body.dark-mode .minimal-link:hover {
 @media screen and (max-width: 850px) {
 
     .page-certifications .container {
+
         padding-left: 20px;
         padding-right: 20px;
     }
 
     .page-certifications .grid,
     .page-certifications .card-list {
+
         grid-template-columns: 1fr;
     }
 
     .link-list {
+
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
     }
 
     .hero-rotator {
+
         height: 260px;
     }
 }
@@ -627,76 +817,138 @@ body.dark-mode .minimal-link:hover {
 @media screen and (max-width: 600px) {
 
     .page-certifications .container {
-        padding: 20px 15px 55px;
+
+        padding:
+            22px
+            15px
+            55px;
     }
+
+
+    /* PAGE TITLE */
 
     .page-certifications .container > h1 {
-        margin-top: 8px;
-        margin-bottom: 20px;
+
+        margin-bottom: 24px;
+
+        padding:
+            20px
+            18px
+            20px
+            21px;
 
         font-size: 1.65rem;
+
         line-height: 1.25;
+
+        border-left-width: 4px;
+
+        border-radius: 9px;
     }
+
+
+    /* ROTATOR */
 
     .hero-rotator {
+
         height: 205px;
 
-        margin: 18px 0 32px;
+        margin:
+            0
+            0
+            32px;
 
-        border-radius: 12px;
+        border-left-width: 4px;
+
+        border-radius: 10px;
     }
 
+
+    /* SECTION HEADINGS */
+
     .page-certifications h2 {
+
         margin-top: 38px;
+
         margin-bottom: 15px;
 
         font-size: 1.4rem;
     }
 
-    .page-certifications .card {
-        padding: 21px 19px;
 
-        border-radius: 12px;
+    /* CARDS */
+
+    .page-certifications .card {
+
+        padding:
+            21px
+            19px;
+
+        border-radius: 10px;
     }
 
     .page-certifications .card h3 {
+
         font-size: 1.08rem;
     }
 
     .page-certifications .card p,
     .page-certifications .card li {
+
         font-size: 0.94rem;
+
         line-height: 1.6;
     }
 
+
+    /* GRIDS */
+
     .page-certifications .grid,
     .page-certifications .card-list {
+
         gap: 16px;
     }
 
+
+    /* QUICK LINKS */
+
     .link-list {
+
         grid-template-columns: 1fr;
+
         gap: 10px;
 
         margin-top: 30px;
     }
 
     .minimal-link {
+
         justify-content: flex-start;
 
         padding-left: 16px;
     }
 
+
+    /* CTA */
+
     .cta-btn {
+
         min-height: 42px;
-        padding: 10px 19px;
+
+        padding:
+            10px
+            19px;
 
         font-size: 0.9rem;
     }
 
+
+    /* EXISTING MOBILE LEFT ALIGNMENT */
+
     .page-certifications .card,
     .page-certifications .card *,
     .page-certifications h2 {
+
         text-align: left;
     }
 }
@@ -709,42 +961,69 @@ body.dark-mode .minimal-link:hover {
 @media screen and (max-width: 480px) {
 
     .page-certifications .container {
+
         padding-left: 13px;
         padding-right: 13px;
     }
 
-    .hero-rotator {
-        height: 180px;
-        border-radius: 10px;
-    }
 
     .page-certifications .container > h1 {
+
         font-size: 1.48rem;
+
+        padding:
+            18px
+            16px
+            18px
+            18px;
     }
 
+
+    .hero-rotator {
+
+        height: 180px;
+
+        border-radius: 9px;
+    }
+
+
     .page-certifications h2 {
+
         font-size: 1.3rem;
     }
 
+
     .page-certifications .card {
-        padding: 19px 17px;
+
+        padding:
+            19px
+            17px;
     }
+
 
     .page-certifications .card p,
     .page-certifications .card li {
+
         font-size: 0.92rem;
     }
 
+
     .page-certifications .badge {
+
         font-size: 0.78rem;
-        padding: 7px 10px;
+
+        padding:
+            7px
+            10px;
     }
 
+
     .hero-rotator::after {
+
         background:
             linear-gradient(
                 90deg,
-                rgba(10, 37, 64, 0.10),
+                rgba(255,255,255,0.03),
                 transparent 60%
             );
     }
@@ -758,17 +1037,20 @@ body.dark-mode .minimal-link:hover {
 @media (prefers-reduced-motion: reduce) {
 
     .rotator-img {
+
         transition: none;
+
         transform: none;
     }
 
     .page-certifications .card,
     .minimal-link,
     .cta-btn {
+
         transition: none;
     }
 }
-     
+
 </style>
 
     

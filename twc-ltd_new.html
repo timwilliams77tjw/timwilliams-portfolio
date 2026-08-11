@@ -67,167 +67,160 @@ body.twc-about-page {
     margin: 0 auto;
 }
 
-
 /* =========================================================
-   HERO — MATCH HOME / INDEX HERO
+   HERO — MATCH CV / INTERACTIVE CV HERO
    ========================================================= */
 
 .twc-about-hero {
     position: relative;
+    width: 100%;
     overflow: hidden;
 
-    /* Same overall hero treatment as Home */
-    background:
-        linear-gradient(
-            135deg,
-            #071d36 0%,
-            #0a2b4d 55%,
-            #0a66c2 100%
-        );
+    /* No large coloured background */
+    background: transparent;
 
-    color: #ffffff;
-    padding: 72px 40px 76px;
-}
+    color: var(--twc-text);
 
-/* Soft atmospheric overlay */
-.twc-about-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+    padding: 72px 28px 76px;
 
-    background:
-        radial-gradient(
-            circle at 82% 25%,
-            rgba(122,192,249,0.20),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 15% 85%,
-            rgba(10,102,194,0.18),
-            transparent 32%
-        );
-
-    pointer-events: none;
-}
-
-/* Subtle edge/highlight treatment */
-.twc-about-hero::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(122,192,249,0.55),
-            transparent
-        );
-
-    pointer-events: none;
+    box-sizing: border-box;
 }
 
 .twc-hero-inner {
     position: relative;
     z-index: 2;
 
+    width: 100%;
     max-width: 1180px;
+
     margin: 0 auto;
 
     display: grid;
+
     grid-template-columns:
         minmax(0, 1.1fr)
         minmax(320px, 0.9fr);
 
     gap: 50px;
+
     align-items: center;
 }
 
-/* Eyebrow */
+
+/* =========================================================
+   HERO EYEBROW
+   ========================================================= */
 
 .twc-eyebrow {
-    color: #7ac0f9;
+    color: #0a66c2;
+
     font-size: 0.78rem;
     font-weight: 700;
+
     letter-spacing: 0.14em;
+
     margin-bottom: 16px;
 }
 
-/* Main heading */
+
+/* =========================================================
+   HERO HEADING
+   ========================================================= */
 
 .twc-about-hero h1 {
     margin: 0 0 22px;
 
     font-size: clamp(2.25rem, 5vw, 4rem);
+
     line-height: 1.08;
+
     letter-spacing: -0.035em;
 
-    color: #ffffff;
+    color: var(--twc-text);
 }
 
 .twc-about-hero h1 span {
-    color: #7ac0f9;
+    color: #0a66c2;
 }
 
-/* Hero introduction */
+
+/* =========================================================
+   HERO INTRO
+   ========================================================= */
 
 .twc-hero-lead {
     max-width: 680px;
+
     margin: 0 0 28px;
 
     font-size: 1.12rem;
+
     line-height: 1.7;
 
-    color: #eef4f9;
+    color: var(--twc-muted);
 }
 
-/* Pills */
+
+/* =========================================================
+   HERO PILLS
+   ========================================================= */
 
 .twc-hero-pills {
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 10px;
+
     margin-bottom: 28px;
 }
 
 .twc-hero-pill {
-    border: 1px solid rgba(122,192,249,0.65);
+    border: 1px solid rgba(10,102,194,0.45);
 
-    color: #ffffff;
+    background: rgba(10,102,194,0.05);
+
+    color: #0a66c2;
 
     padding: 8px 14px;
+
     border-radius: 999px;
 
     font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
 
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(4px);
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
 }
 
-/* Hero buttons */
+
+/* =========================================================
+   HERO BUTTONS
+   ========================================================= */
 
 .twc-hero-actions {
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 12px;
 }
 
 .twc-btn {
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
     min-height: 46px;
+
     padding: 0 22px;
 
     border-radius: 8px;
 
     text-decoration: none;
+
     font-weight: 700;
 
     transition:
@@ -241,41 +234,51 @@ body.twc-about-page {
     transform: translateY(-2px);
 }
 
+
 /* Primary */
 
 .twc-btn-primary {
-    background: #7ac0f9;
-    color: #001f3f;
+    background: #0a66c2;
+
+    color: #ffffff;
+
+    border: 1px solid #0a66c2;
 
     box-shadow:
-        0 6px 16px rgba(0,0,0,0.18);
+        0 6px 16px rgba(10,102,194,0.20);
 }
 
 .twc-btn-primary:hover {
-    background: #ffffff;
-    color: #001f3f;
+    background: #084f96;
+
+    border-color: #084f96;
 }
+
 
 /* Secondary */
 
 .twc-btn-secondary {
-    color: #ffffff;
+    background: transparent;
 
-    border: 1px solid rgba(255,255,255,0.60);
+    color: #0a66c2;
 
-    background: rgba(255,255,255,0.04);
+    border: 1px solid #0a66c2;
 }
 
 .twc-btn-secondary:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: #7ac0f9;
+    background: rgba(10,102,194,0.06);
 }
 
-/* Hero image */
+
+/* =========================================================
+   HERO VISUAL
+   ========================================================= */
 
 .twc-hero-visual {
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     position: relative;
@@ -283,6 +286,7 @@ body.twc-about-page {
 
 .twc-hero-visual img {
     width: 100%;
+
     max-width: 540px;
 
     display: block;
@@ -290,9 +294,9 @@ body.twc-about-page {
     border-radius: 14px;
 
     box-shadow:
-        0 14px 36px rgba(0,0,0,0.25);
+        0 8px 24px rgba(7,29,54,0.12);
 
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(7,29,54,0.08);
 }
 
 /* =========================================================

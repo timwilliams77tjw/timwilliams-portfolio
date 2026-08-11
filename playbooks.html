@@ -1269,22 +1269,27 @@ SMALL IPHONE
 
 }
 /* =========================================================
-   IPAD HERO IMAGE FIX
-   Prevent hero image cropping on tablet/iPad widths
+   IPAD HERO IMAGE — FORCE FULL IMAGE
    ========================================================= */
 
 @media (min-width: 641px) and (max-width: 1100px) {
 
     .playbooks-hero-inner {
-        overflow: visible;
+        overflow: visible !important;
     }
 
     .playbooks-hero-image {
-        width: 100%;
-        height: auto;
-        max-height: none;
-        object-fit: contain;
-        display: block;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .playbooks-hero-image img {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        object-fit: contain !important;
     }
 
 }

@@ -69,74 +69,122 @@ body.twc-about-page {
 
 
 /* =========================================================
-   HERO
+   HERO — MATCH HOME / INDEX HERO
    ========================================================= */
 
 .twc-about-hero {
     position: relative;
     overflow: hidden;
+
+    /* Same overall hero treatment as Home */
     background:
         linear-gradient(
-            115deg,
-            var(--twc-navy) 0%,
-            var(--twc-navy-2) 100%
+            135deg,
+            #071d36 0%,
+            #0a2b4d 55%,
+            #0a66c2 100%
         );
+
     color: #ffffff;
     padding: 72px 40px 76px;
 }
 
-.twc-about-hero::after {
+/* Soft atmospheric overlay */
+.twc-about-hero::before {
     content: "";
     position: absolute;
     inset: 0;
+
     background:
         radial-gradient(
-            circle at 80% 30%,
-            rgba(201,149,50,0.12),
+            circle at 82% 25%,
+            rgba(122,192,249,0.20),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(10,102,194,0.18),
             transparent 32%
         );
+
+    pointer-events: none;
+}
+
+/* Subtle edge/highlight treatment */
+.twc-about-hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(122,192,249,0.55),
+            transparent
+        );
+
     pointer-events: none;
 }
 
 .twc-hero-inner {
     position: relative;
     z-index: 2;
+
     max-width: 1180px;
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(320px, 0.9fr);
+
     gap: 50px;
     align-items: center;
 }
 
+/* Eyebrow */
+
 .twc-eyebrow {
-    color: var(--twc-gold-light);
+    color: #7ac0f9;
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     margin-bottom: 16px;
 }
 
+/* Main heading */
+
 .twc-about-hero h1 {
     margin: 0 0 22px;
+
     font-size: clamp(2.25rem, 5vw, 4rem);
     line-height: 1.08;
     letter-spacing: -0.035em;
+
     color: #ffffff;
 }
 
 .twc-about-hero h1 span {
-    color: var(--twc-gold-light);
+    color: #7ac0f9;
 }
+
+/* Hero introduction */
 
 .twc-hero-lead {
     max-width: 680px;
     margin: 0 0 28px;
+
     font-size: 1.12rem;
     line-height: 1.7;
+
     color: #eef4f9;
 }
+
+/* Pills */
 
 .twc-hero-pills {
     display: flex;
@@ -146,14 +194,22 @@ body.twc-about-page {
 }
 
 .twc-hero-pill {
-    border: 1px solid rgba(227,184,92,0.65);
+    border: 1px solid rgba(122,192,249,0.65);
+
     color: #ffffff;
+
     padding: 8px 14px;
     border-radius: 999px;
+
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.04em;
+
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(4px);
 }
+
+/* Hero buttons */
 
 .twc-hero-actions {
     display: flex;
@@ -165,48 +221,79 @@ body.twc-about-page {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     min-height: 46px;
     padding: 0 22px;
+
     border-radius: 8px;
+
     text-decoration: none;
     font-weight: 700;
+
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .twc-btn:hover {
     transform: translateY(-2px);
 }
 
+/* Primary */
+
 .twc-btn-primary {
-    background: var(--twc-gold);
-    color: #071d36;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    background: #7ac0f9;
+    color: #001f3f;
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,0.18);
 }
+
+.twc-btn-primary:hover {
+    background: #ffffff;
+    color: #001f3f;
+}
+
+/* Secondary */
 
 .twc-btn-secondary {
     color: #ffffff;
-    border: 1px solid rgba(255,255,255,0.55);
-    background: transparent;
+
+    border: 1px solid rgba(255,255,255,0.60);
+
+    background: rgba(255,255,255,0.04);
 }
 
+.twc-btn-secondary:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: #7ac0f9;
+}
 
-/* Hero visual */
+/* Hero image */
 
 .twc-hero-visual {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: relative;
 }
 
 .twc-hero-visual img {
     width: 100%;
     max-width: 540px;
-    display: block;
-}
 
+    display: block;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 14px 36px rgba(0,0,0,0.25);
+
+    border: 1px solid rgba(255,255,255,0.12);
+}
 
 /* =========================================================
    METRICS
@@ -860,6 +947,8 @@ fetch("header.html")
 
 <!-- =========================================================
      ABOUT HERO
+     SAME HERO TREATMENT AS HOME / INDEX
+     CONTENT UNCHANGED
      ========================================================= -->
 
 <section class="twc-about-hero">
@@ -914,7 +1003,6 @@ fetch("header.html")
             </div>
 
         </div>
-
 
         <div class="twc-hero-visual">
 

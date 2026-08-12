@@ -13923,7 +13923,74 @@ hr.evidence-section-divider {
 
 .supporting-cpd-toggle[aria-expanded="true"] > i {
     transform: rotate(180deg) !important;
-}  
+} 
+
+/* ============================================================
+   APM HERO — Unified Index Hero Styling
+   ============================================================ */
+
+.apm-hero-card {
+    position: relative;
+    background: #ffffff;
+    border-left: 6px solid #0a66c2;
+    border-radius: 24px;
+    padding: 48px 42px;
+    margin: 42px auto 32px;
+    max-width: 1200px;
+    box-shadow: 0 12px 32px rgba(0,31,63,.08);
+}
+
+/* Title */
+.apm-hero-title h1 {
+    margin: 0 0 24px;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #0a1f44;
+    letter-spacing: -0.03em;
+}
+
+/* Grid layout */
+.apm-hero-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr 220px;
+    gap: 32px;
+    align-items: center;
+}
+
+/* Left image */
+.apm-hero-grid .hero-left img {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Centre text */
+.apm-hero-grid .hero-centre p {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: #344054;
+}
+
+/* Right progress ring */
+.apm-hero-grid .hero-right {
+    text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .apm-hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .apm-hero-grid .hero-left img {
+        max-width: 200px;
+        margin: 0 auto 20px;
+    }
+}
+
+  
 </style>
 
 
@@ -13960,43 +14027,48 @@ hr.evidence-section-divider {
 <!-- PAGE CONTENT -->
 <main class="page-container">
 
-<!-- HERO TITLE -->
-<section class="hero-title">
-  <h1>Professional Development &amp; Competence</h1>
-</section>
+<section class="apm-hero-card">
 
-<!-- HERO GRID -->
-<section class="hero-grid">
-
-  <!-- LEFT: LOGO -->
-  <div class="hero-left">
-    <img src="apm-cpd-thumbnail.jpg" alt="APM CPD & Competence Framework Thumbnail">
+  <!-- HERO TITLE -->
+  <div class="apm-hero-title">
+    <h1>Professional Development &amp; Competence</h1>
   </div>
 
-  <!-- CENTRE: INTRO TEXT -->
-  <div class="hero-centre">
-    <p>
-      A consolidated view of ongoing CPD activity and alignment to the APM Competence Framework (3rd edition),
-      demonstrating sustained professional growth and reflective practice.
-    </p>
-  </div>
+  <!-- HERO GRID -->
+  <div class="apm-hero-grid">
 
-  <!-- RIGHT: PROGRESS RING -->
-  <div class="hero-right">
-    <div class="cpd-progress-container">
-      <svg class="cpd-progress-ring" width="160" height="160">
-        <circle class="cpd-ring-bg" cx="80" cy="80" r="70" />
-        <circle class="cpd-ring-fill" cx="80" cy="80" r="70" />
-      </svg>
+    <!-- LEFT: LOGO -->
+    <div class="hero-left">
+      <img src="apm-cpd-thumbnail.jpg" alt="APM CPD & Competence Framework Thumbnail">
+    </div>
 
-      <div class="cpd-progress-text">
-        <h3 id="cpd-wheel-completed">Completed hours</h3>
-        <p id="cpd-wheel-remaining">Hours needed before 30 Sep 2026</p>
+    <!-- CENTRE: INTRO TEXT -->
+    <div class="hero-centre">
+      <p>
+        A consolidated view of ongoing CPD activity and alignment to the APM Competence Framework (3rd edition),
+        demonstrating sustained professional growth and reflective practice.
+      </p>
+    </div>
+
+    <!-- RIGHT: PROGRESS RING -->
+    <div class="hero-right">
+      <div class="cpd-progress-container">
+        <svg class="cpd-progress-ring" width="160" height="160">
+          <circle class="cpd-ring-bg" cx="80" cy="80" r="70" />
+          <circle class="cpd-ring-fill" cx="80" cy="80" r="70" />
+        </svg>
+
+        <div class="cpd-progress-text">
+          <h3 id="cpd-wheel-completed">Completed hours</h3>
+          <p id="cpd-wheel-remaining">Hours needed before 30 Sep 2026</p>
+        </div>
       </div>
     </div>
+
   </div>
 
 </section>
+
 
 
 <!-- OVERVIEW -->

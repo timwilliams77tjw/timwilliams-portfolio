@@ -1268,18 +1268,20 @@ SMALL IPHONE
 }
 
 }
-
 /* =========================================================
-   PLAYBOOKS HERO — IPAD / TABLET
+   IPAD LANDSCAPE — PLAYBOOK HERO IMAGE FIX
    ========================================================= */
 
-@media (min-width: 641px) and (max-width: 1100px) {
+@media (min-width: 1101px) and (max-width: 1400px) {
 
     .playbooks-hero-inner {
         display: grid !important;
-        grid-template-columns: 44% 56% !important;
-        align-items: stretch !important;
+        grid-template-columns: 45% 55% !important;
+
         overflow: hidden !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
     }
 
     .playbooks-hero-content {
@@ -1288,20 +1290,27 @@ SMALL IPHONE
 
     .playbooks-hero-image {
         position: relative !important;
-        min-width: 0 !important;
+
         width: 100% !important;
         height: auto !important;
-        min-height: 100% !important;
+        min-height: 0 !important;
+        max-height: none !important;
+
         overflow: hidden !important;
     }
 
     .playbooks-hero-image img {
         display: block !important;
+
         width: 100% !important;
-        height: 100% !important;
-        min-height: 100% !important;
+        height: auto !important;
+
+        min-width: 100% !important;
+        min-height: 0 !important;
         max-width: none !important;
-        object-fit: cover !important;
+        max-height: none !important;
+
+        object-fit: contain !important;
         object-position: center center !important;
     }
 }

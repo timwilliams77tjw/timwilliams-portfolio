@@ -1269,52 +1269,40 @@ SMALL IPHONE
 
 }
 
-/* ============================================================
-   PLAYBOOKS HERO — iPAD IMAGE FIX
-   Keep two-column layout and show the complete image
-   ============================================================ */
+/* =========================================================
+   PLAYBOOKS HERO — IPAD / TABLET
+   ========================================================= */
 
 @media (min-width: 641px) and (max-width: 1100px) {
 
-    /* Keep the hero as a two-column layout */
     .playbooks-hero-inner {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
-
-        min-height: 0 !important;
-        height: auto !important;
-
-        overflow: hidden;
-        align-items: stretch;
+        display: grid !important;
+        grid-template-columns: 44% 56% !important;
+        align-items: stretch !important;
+        overflow: hidden !important;
     }
 
-    /* Let the image column determine its own height */
+    .playbooks-hero-content {
+        min-width: 0 !important;
+    }
+
     .playbooks-hero-image {
-        min-height: 0 !important;
-        height: auto !important;
-
-        overflow: hidden;
-        position: relative;
-
-        display: flex;
-        align-items: stretch;
-    }
-
-    /* IMPORTANT:
-       Don't use height:100% or object-fit:cover on iPad.
-       Those are what cause the image to be cropped. */
-    .playbooks-hero-image img {
-        display: block;
-
+        position: relative !important;
+        min-width: 0 !important;
         width: 100% !important;
         height: auto !important;
+        min-height: 100% !important;
+        overflow: hidden !important;
+    }
 
-        max-width: 100%;
-        max-height: none !important;
-
-        object-fit: contain !important;
-
-        align-self: flex-start;
+    .playbooks-hero-image img {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 100% !important;
+        max-width: none !important;
+        object-fit: cover !important;
+        object-position: center center !important;
     }
 }
     

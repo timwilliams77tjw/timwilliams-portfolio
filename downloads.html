@@ -57,13 +57,12 @@ body.page-certifications {
 }
 
 .page-container {
-    width: min(
-        var(--downloads-max-width),
-        calc(100% - 40px)
-    );
+    width: 100%;
+    max-width: 1180px;
+    box-sizing: border-box;
 
     margin: 0 auto;
-    padding: 42px 0 76px;
+    padding: 42px 20px 76px;
 }
 
 /* ============================================================
@@ -1559,12 +1558,13 @@ body.dark-mode .downloads-cta {
 @media (max-width: 640px) {
 
     .page-container {
-        width:
-            calc(100% - 24px);
-
-        padding:
-            24px 0 55px;
+        width: calc(100% - 24px);
+        max-width: calc(100% - 24px);
+        box-sizing: border-box;
+        padding: 24px 0 55px;
     }
+
+
 
     .downloads-hero {
         margin-bottom: 36px;
@@ -1625,17 +1625,16 @@ body.dark-mode .downloads-cta {
             15px;
     }
 
-    .download-card,
-    .download-featured-grid .download-card {
-        min-height:
-            auto;
-
-        padding:
-            17px;
-
-        border-radius:
-            14px;
-    }
+   .download-card,
+.download-featured-grid .download-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: auto;
+    padding: 17px;
+    box-sizing: border-box;
+    border-radius: 14px;
+}
 
     .download-card-media {
         height:
@@ -1890,6 +1889,55 @@ body.dark-mode .downloads-cta {
         box-sizing: border-box;
     }
 
+}    
+
+/* =========================================================
+   DOWNLOADS — IPAD HERO WIDTH
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+    .page-container {
+        width: 100%;
+        max-width: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .downloads-hero {
+        width: 100%;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+    }
+
+    /* Keep the rest of the page comfortably contained */
+    .downloads-section,
+    .video-section,
+    .downloads-cta {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}    
+
+/* =========================================================
+   DOWNLOAD CARDS — MOBILE WIDTH SAFETY
+   ========================================================= */
+
+.download-card,
+.download-card-content,
+.download-card-footer {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.download-type {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }    
     </style>
 </head>

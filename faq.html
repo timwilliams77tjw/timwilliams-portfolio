@@ -41,7 +41,7 @@ body.page-site-search {
 .page-container {
     width: min(1120px, calc(100% - 40px));
     margin: 0 auto;
-    padding: 42px 0 70px;
+    padding: 0 0 70px;
 }
 
 
@@ -220,7 +220,7 @@ body.page-site-search {
 
     background: var(--card-bg, #ffffff);
 
-    border: 1px solid rgba(0, 31, 63, 0.08);
+border: 1px solid rgba(0, 31, 63, 0.08) !important;
     border-radius: 16px;
 
     box-shadow:
@@ -287,6 +287,18 @@ body.page-site-search {
     box-shadow:
         0 12px 28px rgba(0, 31, 63, 0.11);
 }
+
+     /* =========================================================
+   FAQ CARD — PREVENT GLOBAL BLUE BORDER OVERRIDE
+   ========================================================= */
+
+.faq-card,
+.faq-card:hover,
+.faq-card:focus,
+.faq-card:active {
+    border: 1px solid rgba(0, 31, 63, 0.08) !important;
+    outline: none;
+} 
 
 .faq-card h3 {
     margin: 0 0 10px;
@@ -715,8 +727,8 @@ body.dark .cta-btn:hover {
 .hero-section {
     position: relative;
     text-align: center;
-    margin-top: 42px;
-    margin-bottom: 0;
+    margin-top: 18px;
+    margin-bottom: 28px;
     padding: 76px 70px 58px;
 
     /* Replace dark gradient with index hero gradients */

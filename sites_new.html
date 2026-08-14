@@ -1,0 +1,4008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Digital Presence | Tim Williams Consulting Ltd</title>
+
+<meta name="description"
+      content="Digital presence hub for Tim Williams Consulting Ltd. Professional profiles, certifications, volunteering, business services and online platforms.">
+
+<meta name="author"
+      content="Tim Williams">
+
+<meta name="robots"
+      content="index, follow">
+
+
+<!-- =====================================================
+     GLOBAL CSS
+     ===================================================== -->
+
+<link rel="stylesheet"
+      href="certifications.css">
+
+<link rel="stylesheet"
+      href="global-restore.css">
+
+<link rel="stylesheet"
+      href="header-standard-v4.css">
+
+
+<!-- =====================================================
+     PAGE CSS
+     ===================================================== -->
+
+<link rel="stylesheet"
+      href="sites.css">
+
+
+<!-- =====================================================
+     ICONS
+     ===================================================== -->
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<style> 
+
+/* =========================================================
+   TWC LTD — DIGITAL PRESENCE
+   Complete page stylesheet
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE FOUNDATION
+   ========================================================= */
+
+body.page-digital-presence {
+    background:
+        radial-gradient(
+            circle at 8% 0%,
+            rgba(10,102,194,.055),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 92% 8%,
+            rgba(122,192,249,.065),
+            transparent 30%
+        ),
+        var(--bg, #f5f7fa);
+
+    color: var(--text-main, #172033);
+    transition:
+        background .3s ease,
+        color .3s ease;
+}
+
+.digital-page {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 42px 0 80px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.digital-hero {
+    position: relative;
+    overflow: hidden;
+
+    margin-top: 42px;
+    margin-bottom: 34px;
+
+    padding: 70px 70px 58px;
+
+    background:
+        radial-gradient(
+            circle at 86% 18%,
+            rgba(10,102,194,.13),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f7faff 100%
+        );
+
+    border: 1px solid rgba(10,31,68,.08);
+    border-radius: 24px;
+
+    box-shadow:
+        0 8px 24px rgba(15,35,60,.08);
+
+    color: #102a43;
+}
+
+
+/* Left accent */
+
+.digital-hero::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 6px;
+    height: 100%;
+
+    background: #0a66c2;
+}
+
+
+/* Decorative circle */
+
+.digital-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    right: -180px;
+    top: -180px;
+
+    border: 1px solid rgba(10,102,194,.10);
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+.digital-hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 820px;
+}
+
+
+/* Eyebrow */
+
+.digital-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 17px;
+    padding: 7px 13px;
+
+    border: 1px solid rgba(10,102,194,.25);
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.60);
+
+    color: #0a66c2;
+
+    font-size: .76rem;
+    font-weight: 750;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+
+.digital-eyebrow i {
+    font-size: .78rem;
+}
+
+
+/* Hero heading */
+
+.digital-hero h1 {
+    margin: 0;
+
+    max-width: 900px;
+
+    color: #0a1f44;
+
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.08;
+
+    letter-spacing: -.035em;
+    font-weight: 800;
+}
+
+
+/* Hero description */
+
+.digital-hero p {
+    max-width: 730px;
+
+    margin: 24px 0 0;
+
+    color: #5f6b78;
+
+    font-size: 19px;
+    line-height: 1.65;
+}
+
+
+/* Hero metadata */
+
+.digital-hero-meta {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-top: 27px;
+}
+
+
+.hero-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 9px 14px;
+
+    border: 1px solid rgba(10,102,194,.18);
+    border-radius: 999px;
+
+    background: rgba(10,102,194,.08);
+
+    color: #0a1f44;
+
+    font-size: .78rem;
+    font-weight: 650;
+}
+
+
+.hero-stat i {
+    color: #0a66c2;
+}
+
+
+/* =========================================================
+   CATEGORY QUICK NAVIGATION
+   ========================================================= */
+
+.digital-category-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+
+    margin-bottom: 30px;
+}
+
+
+.digital-category-link {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    min-height: 72px;
+
+    padding: 13px 15px;
+
+    border: 1px solid rgba(15,23,42,.08);
+    border-radius: 16px;
+
+    background: #fff;
+
+    color: #172033;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 5px 18px rgba(15,23,42,.055);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+}
+
+
+.digital-category-link:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(10,102,194,.25);
+
+    box-shadow:
+        0 12px 28px rgba(15,23,42,.10);
+}
+
+
+.digital-category-icon {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 1rem;
+}
+
+
+.digital-category-link strong {
+    display: block;
+
+    font-size: .86rem;
+    line-height: 1.25;
+}
+
+
+.digital-category-link > span:last-child > span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #667085;
+
+    font-size: .71rem;
+    line-height: 1.35;
+}
+
+
+/* Category colours */
+
+.digital-category-link.cat1 .digital-category-icon {
+    background: #e6f2ff;
+    color: #0050a8;
+}
+
+.digital-category-link.cat2 .digital-category-icon {
+    background: #f1e8ff;
+    color: #6a32c9;
+}
+
+.digital-category-link.cat3 .digital-category-icon {
+    background: #e8fbea;
+    color: #1f8a3b;
+}
+
+.digital-category-link.cat4 .digital-category-icon {
+    background: #fff3e6;
+    color: #d46a00;
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.digital-toolbar {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 28px;
+    padding: 14px;
+
+    border: 1px solid rgba(15,23,42,.08);
+    border-radius: 17px;
+
+    background: #fff;
+
+    box-shadow:
+        0 5px 18px rgba(15,23,42,.05);
+}
+
+
+.digital-search {
+    position: relative;
+    flex: 1;
+}
+
+
+.digital-search i {
+    position: absolute;
+
+    left: 16px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #667085;
+
+    pointer-events: none;
+}
+
+
+#siteSearchInput {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 13px 16px 13px 44px;
+
+    border: 1px solid #d8dee8;
+    border-radius: 12px;
+
+    background: #fff;
+
+    color: #172033;
+
+    font-size: .92rem;
+
+    outline: none;
+
+    transition:
+        border .2s ease,
+        box-shadow .2s ease;
+}
+
+
+#siteSearchInput:focus {
+    border-color: #0a66c2;
+
+    box-shadow:
+        0 0 0 4px rgba(10,102,194,.10);
+}
+
+
+.copy-all-btn {
+    flex: 0 0 auto;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 43px;
+
+    padding: 11px 17px;
+
+    border: 0;
+    border-radius: 11px;
+
+    background: #001f3f;
+
+    color: #fff;
+
+    font-size: .80rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+
+.copy-all-btn:hover {
+    background: #0a66c2;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   CATEGORY SECTIONS
+   ========================================================= */
+
+.digital-category {
+    margin-bottom: 25px;
+
+    scroll-margin-top: 105px;
+}
+
+
+.digital-category-header {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    padding: 16px 19px;
+
+    border: 1px solid rgba(15,23,42,.08);
+    border-radius: 17px;
+
+    background: #fff;
+
+    color: #172033;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 16px rgba(15,23,42,.05);
+
+    text-align: left;
+
+    transition:
+        border-radius .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+.digital-category-header:hover {
+    border-color: rgba(10,102,194,.20);
+
+    box-shadow:
+        0 8px 22px rgba(15,23,42,.075);
+}
+
+
+.digital-category.open .digital-category-header {
+    border-radius: 17px 17px 12px 12px;
+}
+
+
+/* Category title */
+
+.digital-category-title {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+}
+
+
+.digital-category-title-icon {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: .98rem;
+}
+
+
+.digital-category-title h2 {
+    margin: 0;
+
+    font-size: 1.03rem;
+    line-height: 1.25;
+
+    font-weight: 750;
+}
+
+
+.digital-category-title p {
+    margin: 3px 0 0;
+
+    color: #667085;
+
+    font-size: .73rem;
+}
+
+
+/* Category colours */
+
+.digital-category.cat1 .digital-category-title-icon {
+    background: #e6f2ff;
+    color: #0050a8;
+}
+
+.digital-category.cat2 .digital-category-title-icon {
+    background: #f1e8ff;
+    color: #6a32c9;
+}
+
+.digital-category.cat3 .digital-category-title-icon {
+    background: #e8fbea;
+    color: #1f8a3b;
+}
+
+.digital-category.cat4 .digital-category-title-icon {
+    background: #fff3e6;
+    color: #d46a00;
+}
+
+
+/* Toggle */
+
+.digital-category-toggle {
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f1f4f8;
+
+    color: #001f3f;
+
+    font-size: .82rem;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease;
+}
+
+
+.digital-category.open .digital-category-toggle {
+    transform: rotate(180deg);
+
+    background: #001f3f;
+    color: #fff;
+}
+
+
+/* =========================================================
+   ACCORDION
+   ========================================================= */
+
+.digital-category-content {
+    display: grid;
+
+    grid-template-rows: 0fr;
+
+    transition:
+        grid-template-rows .42s ease;
+}
+
+
+.digital-category.open .digital-category-content {
+    grid-template-rows: 1fr;
+}
+
+
+.digital-category-inner {
+    min-height: 0;
+
+    overflow: hidden;
+
+    padding: 0 3px;
+}
+
+
+.digital-category.open .digital-category-inner {
+    padding-top: 18px;
+}
+
+
+/* =========================================================
+   WEBSITE GRID
+   ========================================================= */
+
+.website-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 17px;
+}
+
+
+/* =========================================================
+   WEBSITE CARD
+   ========================================================= */
+
+.website-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 215px;
+
+    padding: 20px;
+
+    border: 1px solid #e3e8ef;
+    border-radius: 17px;
+
+    background: #fff;
+
+    box-shadow:
+        0 5px 18px rgba(15,23,42,.055);
+
+    overflow: hidden;
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+}
+
+
+.website-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: 4px;
+
+    background: #0a66c2;
+}
+
+
+.website-card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(10,102,194,.23);
+
+    box-shadow:
+        0 13px 30px rgba(15,23,42,.095);
+}
+
+
+/* Category accent */
+
+.cat1 .website-card::before {
+    background: #0a66c2;
+}
+
+.cat2 .website-card::before {
+    background: #7b45d6;
+}
+
+.cat3 .website-card::before {
+    background: #269447;
+}
+
+.cat4 .website-card::before {
+    background: #d46a00;
+}
+
+
+/* =========================================================
+   WEBSITE CARD HEADER
+   ========================================================= */
+
+.website-card-header {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 14px;
+}
+
+
+/* Individual platform icon */
+
+.website-card-icon {
+    width: 46px;
+    height: 46px;
+
+    flex: 0 0 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #f4f7fa;
+
+    color: #001f3f;
+
+    border: 1px solid #e8edf2;
+
+    overflow: hidden;
+}
+
+
+.website-card-icon img {
+    display: block;
+
+    width: 25px;
+    height: 25px;
+
+    max-width: 70%;
+    max-height: 70%;
+
+    object-fit: contain;
+}
+
+
+.website-card-icon i {
+    font-size: 1.05rem;
+}
+
+
+/* Platform-specific subtle icon backgrounds */
+
+.website-card[data-platform="linkedin"] .website-card-icon {
+    background: #eaf4ff;
+}
+
+.website-card[data-platform="pmi"] .website-card-icon {
+    background: #fff3e8;
+}
+
+.website-card[data-platform="apm"] .website-card-icon {
+    background: #eef7ff;
+}
+
+.website-card[data-platform="credly"] .website-card-icon {
+    background: #f3edff;
+}
+
+.website-card[data-platform="microsoft"] .website-card-icon {
+    background: #eef7ff;
+}
+
+.website-card[data-platform="community"] .website-card-icon {
+    background: #eef9f0;
+}
+
+.website-card[data-platform="business"] .website-card-icon {
+    background: #fff5e9;
+}
+
+
+/* Heading */
+
+.website-card h3 {
+    margin: 0 0 3px;
+
+    color: #172033;
+
+    font-size: .94rem;
+    line-height: 1.35;
+
+    font-weight: 750;
+}
+
+
+.website-card-label {
+    color: #667085;
+
+    font-size: .68rem;
+    font-weight: 600;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   CARD LINK
+   ========================================================= */
+
+.website-card-link {
+    display: block;
+
+    min-height: 40px;
+
+    color: #0a66c2;
+
+    font-size: .79rem;
+    font-weight: 650;
+    line-height: 1.5;
+
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+}
+
+
+.website-card-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   CARD ACTIONS
+   ========================================================= */
+
+.website-card-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: auto;
+    padding-top: 17px;
+}
+
+
+.visit-btn,
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 36px;
+
+    padding: 8px 11px;
+
+    border-radius: 9px;
+
+    font-size: .72rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+
+.visit-btn {
+    flex: 1;
+
+    border: 1px solid #d5dce5;
+
+    background: #f8fafc;
+
+    color: #001f3f;
+}
+
+
+.visit-btn:hover {
+    border-color: #0a66c2;
+
+    background: #eaf4ff;
+
+    color: #0050a8;
+}
+
+
+.copy-btn {
+    border: 0;
+
+    background: #001f3f;
+
+    color: #fff;
+}
+
+
+.copy-btn:hover {
+    background: #0a66c2;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BADGES / CERTIFICATION IMAGES
+   ========================================================= */
+
+.site-badge-area {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 8px;
+
+    min-height: 62px;
+
+    margin: 3px 0 3px;
+}
+
+
+.site-badge-area img {
+    width: 62px;
+    height: 62px;
+
+    object-fit: contain;
+
+    border-radius: 9px;
+
+    background: #f7f9fb;
+}
+
+
+.credly-grid {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    min-height: 60px;
+
+    margin: 4px 0 1px;
+}
+
+
+.credly-grid a {
+    display: block;
+}
+
+
+.credly-grid img {
+    width: 56px;
+    height: 56px;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+
+    background: #f7f9fb;
+
+    transition: transform .2s ease;
+}
+
+
+.credly-grid img:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   EMPTY SEARCH STATE
+   ========================================================= */
+
+.search-empty {
+    display: none;
+
+    padding: 34px 20px;
+
+    margin-bottom: 24px;
+
+    text-align: center;
+
+    border: 1px dashed #ccd4df;
+    border-radius: 16px;
+
+    color: #667085;
+
+    background: #fff;
+}
+
+
+.search-empty i {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 1.7rem;
+}
+
+
+.search-empty strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #172033;
+}
+
+
+/* =========================================================
+   FLOATING CATEGORY INDEX
+   ========================================================= */
+
+#categoryIndex {
+    position: fixed;
+
+    right: 22px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 190px;
+
+    padding: 9px;
+
+    border: 1px solid rgba(15,23,42,.08);
+    border-radius: 16px;
+
+    background: rgba(255,255,255,.94);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.13);
+
+    z-index: 999;
+}
+
+
+#categoryIndex ul {
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+#categoryIndex li {
+    margin: 2px 0;
+}
+
+
+#categoryIndex button,
+#categoryIndex a {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 10px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #172033;
+
+    font-size: .70rem;
+    font-weight: 650;
+
+    text-align: left;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+#categoryIndex button:hover,
+#categoryIndex a:hover {
+    background: #f1f5f9;
+}
+
+
+.index-dot {
+    width: 8px;
+    height: 8px;
+
+    flex: 0 0 8px;
+
+    border-radius: 50%;
+}
+
+
+.index-dot.cat1 {
+    background: #0a66c2;
+}
+
+.index-dot.cat2 {
+    background: #7b45d6;
+}
+
+.index-dot.cat3 {
+    background: #269447;
+}
+
+.index-dot.cat4 {
+    background: #d46a00;
+}
+
+
+/* =========================================================
+   FLOATING BUTTONS
+   ========================================================= */
+
+.fab {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #001f3f;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 20px rgba(0,31,63,.22);
+
+    z-index: 998;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+
+.fab:hover {
+    transform: translateY(-3px);
+
+    background: #0a66c2;
+}
+
+
+.fab-booking {
+    bottom: 80px;
+
+    background: #0a66c2;
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+#copy-toast {
+    position: fixed;
+
+    left: 50%;
+    bottom: 30px;
+
+    transform:
+        translate(-50%, 15px);
+
+    padding: 11px 18px;
+
+    border-radius: 999px;
+
+    background: #001f3f;
+
+    color: #fff;
+
+    font-size: .78rem;
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.18);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+
+    z-index: 10000;
+}
+
+
+#copy-toast.show {
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+body.dark.page-digital-presence {
+    background: #0d1117;
+    color: #edf2f7;
+}
+
+
+body.dark .digital-category-link,
+body.dark .digital-toolbar,
+body.dark .digital-category-header,
+body.dark .website-card,
+body.dark .search-empty,
+body.dark #categoryIndex {
+    background: #151b23;
+
+    border-color: #273241;
+
+    color: #edf2f7;
+}
+
+
+body.dark .digital-category-link strong,
+body.dark .website-card h3,
+body.dark .digital-category-title h2 {
+    color: #edf2f7;
+}
+
+
+body.dark .digital-category-link > span:last-child > span,
+body.dark .digital-category-title p,
+body.dark .website-card-label {
+    color: #9aa7b7;
+}
+
+
+body.dark #siteSearchInput {
+    background: #10161d;
+
+    border-color: #334155;
+
+    color: #edf2f7;
+}
+
+
+body.dark .website-card-icon {
+    background: #1b2430;
+
+    border-color: #2d3948;
+}
+
+
+body.dark .visit-btn {
+    background: #1c2632;
+
+    border-color: #334155;
+
+    color: #edf2f7;
+}
+
+
+body.dark .digital-category-toggle {
+    background: #263241;
+    color: #fff;
+}
+
+
+body.dark .digital-category.open .digital-category-toggle {
+    background: #0a66c2;
+}
+
+
+body.dark .search-empty strong {
+    color: #edf2f7;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .digital-page {
+        width: min(100% - 32px, 960px);
+    }
+
+
+    .website-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    #categoryIndex {
+        right: 12px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .digital-page {
+        width: calc(100% - 24px);
+
+        padding:
+            24px 0 60px;
+    }
+
+
+    .digital-hero {
+        margin-top: 24px;
+
+        margin-bottom: 22px;
+
+        padding:
+            42px 24px 30px;
+
+        border-radius: 19px;
+    }
+
+
+    .digital-hero h1 {
+        font-size: 2rem;
+    }
+
+
+    .digital-hero p {
+        margin-top: 17px;
+
+        font-size: .94rem;
+
+        line-height: 1.6;
+    }
+
+
+    .digital-hero-meta {
+        gap: 7px;
+
+        margin-top: 20px;
+    }
+
+
+    .hero-stat {
+        padding: 8px 11px;
+
+        font-size: .69rem;
+    }
+
+
+    .digital-category-nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 9px;
+
+        margin-bottom: 21px;
+    }
+
+
+    .digital-category-link {
+        min-height: 62px;
+
+        padding: 10px;
+
+        gap: 9px;
+
+        border-radius: 13px;
+    }
+
+
+    .digital-category-icon {
+        width: 35px;
+        height: 35px;
+
+        flex-basis: 35px;
+    }
+
+
+    .digital-category-link strong {
+        font-size: .73rem;
+    }
+
+
+    .digital-category-link > span:last-child > span {
+        display: none;
+    }
+
+
+    .digital-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 9px;
+
+        padding: 11px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .copy-all-btn {
+        width: 100%;
+    }
+
+
+    .website-grid {
+        grid-template-columns: 1fr;
+
+        gap: 13px;
+    }
+
+
+    .website-card {
+        min-height: 0;
+
+        padding: 18px;
+
+        border-radius: 15px;
+    }
+
+
+    .digital-category-header {
+        padding: 14px;
+
+        border-radius: 14px;
+    }
+
+
+    .digital-category-title-icon {
+        width: 38px;
+        height: 38px;
+
+        flex-basis: 38px;
+    }
+
+
+    .digital-category-title h2 {
+        font-size: .88rem;
+    }
+
+
+    .digital-category-title p {
+        display: none;
+    }
+
+
+    #categoryIndex {
+        display: none !important;
+    }
+
+
+    .fab {
+        right: 14px;
+    }
+}
+
+
+/* =========================================================
+   SMALL IPHONE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .digital-page {
+        width: calc(100% - 18px);
+    }
+
+
+    .digital-hero {
+        padding:
+            34px 20px 27px;
+    }
+
+
+    .digital-hero h1 {
+        font-size: 1.85rem;
+    }
+
+
+    .digital-category-link {
+        min-height: 58px;
+    }
+
+
+    .digital-category-link strong {
+        font-size: .68rem;
+    }
+
+
+    .website-card-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+
+    .visit-btn,
+    .copy-btn {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+
+<body class="header-with-logo page-digital-presence">
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+
+<div id="header-placeholder"></div>
+
+
+<script>
+
+fetch("header.html")
+
+.then(response => response.text())
+
+.then(html => {
+
+    document
+        .getElementById("header-placeholder")
+        .innerHTML = html;
+
+
+    const searchScript =
+        document.createElement("script");
+
+    searchScript.src = "site-search.js";
+
+
+    searchScript.onload = () => {
+
+        if (typeof initSiteSearch === "function") {
+            initSiteSearch();
+        }
+
+    };
+
+
+    document.body.appendChild(searchScript);
+
+
+    const headerJS =
+        document.createElement("script");
+
+    headerJS.src = "header-standard-v4.js";
+
+
+    headerJS.onload = () => {
+
+        if (typeof initHeader === "function") {
+            initHeader();
+        }
+
+
+        if (typeof initHeaderEnhancements === "function") {
+            initHeaderEnhancements();
+        }
+
+    };
+
+
+    document.body.appendChild(headerJS);
+
+});
+
+</script>
+
+
+<script defer
+        data-domain="twc-ltd.uk"
+        src="https://plausible.io/js/script.js"></script>
+
+
+<script src="analytics-tracker.js"
+        defer></script>
+
+
+<!-- =====================================================
+     MAIN PAGE
+     ===================================================== -->
+
+<main class="digital-page">
+
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<section class="digital-hero">
+
+    <div class="digital-hero-content">
+
+
+        <div class="digital-eyebrow">
+
+            <i class="fa-solid fa-globe"></i>
+
+            Digital Professional Presence
+
+        </div>
+
+
+        <h1>
+            Digital Presence
+        </h1>
+
+
+        <p>
+            A central hub for my professional profiles,
+            certifications, professional communities,
+            volunteering activity and business platforms.
+        </p>
+
+
+        <div class="digital-hero-meta">
+
+
+            <span class="hero-stat">
+
+                <i class="fa-solid fa-user-tie"></i>
+
+                Professional Profiles
+
+            </span>
+
+
+            <span class="hero-stat">
+
+                <i class="fa-solid fa-certificate"></i>
+
+                Certifications
+
+            </span>
+
+
+            <span class="hero-stat">
+
+                <i class="fa-solid fa-people-group"></i>
+
+                Community
+
+            </span>
+
+
+            <span class="hero-stat">
+
+                <i class="fa-solid fa-briefcase"></i>
+
+                Business
+
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORY QUICK NAVIGATION
+     ===================================================== -->
+
+<nav class="digital-category-nav"
+     aria-label="Digital presence categories">
+
+
+    <a href="#cat1"
+       class="digital-category-link cat1"
+       data-scroll-category="cat1">
+
+        <span class="digital-category-icon">
+
+            <i class="fa-solid fa-user-tie"></i>
+
+        </span>
+
+
+        <span>
+
+            <strong>
+                Professional Profiles
+            </strong>
+
+            <span>
+                Professional networks & memberships
+            </span>
+
+        </span>
+
+    </a>
+
+
+    <a href="#cat2"
+       class="digital-category-link cat2"
+       data-scroll-category="cat2">
+
+        <span class="digital-category-icon">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+        </span>
+
+
+        <span>
+
+            <strong>
+                Certifications & Learning
+            </strong>
+
+            <span>
+                Credentials & learning records
+            </span>
+
+        </span>
+
+    </a>
+
+
+    <a href="#cat3"
+       class="digital-category-link cat3"
+       data-scroll-category="cat3">
+
+        <span class="digital-category-icon">
+
+            <i class="fa-solid fa-people-group"></i>
+
+        </span>
+
+
+        <span>
+
+            <strong>
+                Community
+            </strong>
+
+            <span>
+                Volunteering & professional contribution
+            </span>
+
+        </span>
+
+    </a>
+
+
+    <a href="#cat4"
+       class="digital-category-link cat4"
+       data-scroll-category="cat4">
+
+        <span class="digital-category-icon">
+
+            <i class="fa-solid fa-briefcase"></i>
+
+        </span>
+
+
+        <span>
+
+            <strong>
+                Business & Services
+            </strong>
+
+            <span>
+                TWC platforms & services
+            </span>
+
+        </span>
+
+    </a>
+
+
+</nav>
+
+
+<!-- =====================================================
+     SEARCH / TOOLBAR
+     ===================================================== -->
+
+<section class="digital-toolbar">
+
+
+    <div class="digital-search">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+
+        <input
+            id="siteSearchInput"
+            type="search"
+            placeholder="Search digital presence…"
+            autocomplete="off"
+            aria-label="Search digital presence">
+
+    </div>
+
+
+    <button id="copyAllLinks"
+            class="copy-all-btn"
+            type="button">
+
+        <i class="fa-regular fa-copy"></i>
+
+        Copy All Links
+
+    </button>
+
+
+</section>
+
+
+<div id="searchEmpty"
+     class="search-empty">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <strong>
+        No matching platforms found
+    </strong>
+
+    <div>
+        Try another search term.
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CATEGORY 1 — PROFESSIONAL PROFILES
+     ===================================================== -->
+
+<section class="digital-category cat1"
+         id="cat1"
+         data-category="cat1">
+
+
+    <button class="digital-category-header"
+            type="button"
+            aria-expanded="false">
+
+
+        <span class="digital-category-title">
+
+
+            <span class="digital-category-title-icon">
+
+                <i class="fa-solid fa-user-tie"></i>
+
+            </span>
+
+
+            <span>
+
+                <h2>
+                    Professional Profiles
+                </h2>
+
+                <p>
+                    Professional networks, memberships and public profiles
+                </p>
+
+            </span>
+
+
+        </span>
+
+
+        <span class="digital-category-toggle">
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </span>
+
+
+    </button>
+
+
+    <div class="digital-category-content">
+
+        <div class="digital-category-inner">
+
+            <div class="website-grid">
+
+
+                <!-- LINKEDIN -->
+
+                <article class="website-card"
+                         data-platform="linkedin">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/linkedin.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                LinkedIn Profile
+                            </h3>
+
+                            <span class="website-card-label">
+                                Professional profile
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://linkedin.com/in/timwilliams77"
+                       target="_blank"
+                       rel="noopener">
+
+                        linkedin.com/in/timwilliams77
+
+                    </a>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://linkedin.com/in/timwilliams77"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://linkedin.com/in/timwilliams77">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- PMI -->
+
+                <article class="website-card"
+                         data-platform="pmi">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/pmi.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                PMI Community Profile
+                            </h3>
+
+                            <span class="website-card-label">
+                                Professional community
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://community.pmi.org/profile/Timwilliams77"
+                       target="_blank"
+                       rel="noopener">
+
+                        community.pmi.org/profile/Timwilliams77
+
+                    </a>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://community.pmi.org/profile/Timwilliams77"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://community.pmi.org/profile/Timwilliams77">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- APM -->
+
+                <article class="website-card"
+                         data-platform="apm">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/apm.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                APM Dashboard
+                            </h3>
+
+                            <span class="website-card-label">
+                                APM membership
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://www.apm.org.uk/myapm/my-dashboard/"
+                       target="_blank"
+                       rel="noopener">
+
+                        apm.org.uk/myapm/my-dashboard
+
+                    </a>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://www.apm.org.uk/myapm/my-dashboard/"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://www.apm.org.uk/myapm/my-dashboard/">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORY 2 — CERTIFICATIONS
+     ===================================================== -->
+
+<section class="digital-category cat2"
+         id="cat2"
+         data-category="cat2">
+
+
+    <button class="digital-category-header"
+            type="button"
+            aria-expanded="false">
+
+
+        <span class="digital-category-title">
+
+            <span class="digital-category-title-icon">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+            </span>
+
+
+            <span>
+
+                <h2>
+                    Certifications & Learning
+                </h2>
+
+                <p>
+                    Professional credentials, certifications and learning
+                </p>
+
+            </span>
+
+        </span>
+
+
+        <span class="digital-category-toggle">
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </span>
+
+
+    </button>
+
+
+    <div class="digital-category-content">
+
+        <div class="digital-category-inner">
+
+            <div class="website-grid">
+
+
+                <!-- CREDLY -->
+
+                <article class="website-card"
+                         data-platform="credly">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/credly.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Credly Certifications
+                            </h3>
+
+                            <span class="website-card-label">
+                                Digital credentials
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://www.credly.com/users/tim-williams.e51205ae"
+                       target="_blank"
+                       rel="noopener">
+
+                        View full Credly profile
+
+                    </a>
+
+
+                    <div id="credly-badges"
+                         class="credly-grid">
+
+                        <span style="font-size:.72rem;color:#667085;">
+                            Loading badges…
+                        </span>
+
+                    </div>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://www.credly.com/users/tim-williams.e51205ae"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://www.credly.com/users/tim-williams.e51205ae">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- MICROSOFT -->
+
+                <article class="website-card"
+                         data-platform="microsoft">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/microsoft.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Microsoft Learn
+                            </h3>
+
+                            <span class="website-card-label">
+                                Learning transcript
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j"
+                       target="_blank"
+                       rel="noopener">
+
+                        Microsoft Learn Transcript
+
+                    </a>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORY 3 — COMMUNITY
+     ===================================================== -->
+
+<section class="digital-category cat3"
+         id="cat3"
+         data-category="cat3">
+
+
+    <button class="digital-category-header"
+            type="button"
+            aria-expanded="false">
+
+
+        <span class="digital-category-title">
+
+            <span class="digital-category-title-icon">
+
+                <i class="fa-solid fa-people-group"></i>
+
+            </span>
+
+
+            <span>
+
+                <h2>
+                    Volunteering & Community
+                </h2>
+
+                <p>
+                    Professional contribution, mentoring and volunteering
+                </p>
+
+            </span>
+
+        </span>
+
+
+        <span class="digital-category-toggle">
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </span>
+
+
+    </button>
+
+
+    <div class="digital-category-content">
+
+        <div class="digital-category-inner">
+
+            <div class="website-grid">
+
+
+                <!-- APM VOLUNTEER -->
+
+                <article class="website-card"
+                         data-platform="community">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/apm.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                APM Volunteer
+                            </h3>
+
+                            <span class="website-card-label">
+                                Professional volunteering
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://www.apm.org.uk"
+                       target="_blank"
+                       rel="noopener">
+
+                        apm.org.uk
+
+                    </a>
+
+
+                    <div class="site-badge-area">
+
+                        <img src="apm.png"
+                             alt="APM Volunteer Badge">
+
+                    </div>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://www.apm.org.uk"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://www.apm.org.uk">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- NATIONAL INTERVIEW WEEK -->
+
+                <article class="website-card"
+                         data-platform="community">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/interview.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                National Interview Week
+                            </h3>
+
+                            <span class="website-card-label">
+                                Interview mentoring
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://imployable.me"
+                       target="_blank"
+                       rel="noopener">
+
+                        imployable.me
+
+                    </a>
+
+
+                    <div class="site-badge-area">
+
+                        <img src="interview.png"
+                             alt="National Interview Week Badge">
+
+                    </div>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://imployable.me"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://imployable.me">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- INSPIRING THE FUTURE -->
+
+                <article class="website-card"
+                         data-platform="community">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/inspiring-the-future.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Inspiring the Future
+                            </h3>
+
+                            <span class="website-card-label">
+                                Gold Volunteer
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://www.inspiringthefuture.org"
+                       target="_blank"
+                       rel="noopener">
+
+                        inspiringthefuture.org
+
+                    </a>
+
+
+                    <div class="site-badge-area">
+
+                        <img src="inspiring.jpg"
+                             alt="Inspiring the Future Gold Badge">
+
+                    </div>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://www.inspiringthefuture.org"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://www.inspiringthefuture.org">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- STEM -->
+
+                <article class="website-card"
+                         data-platform="community">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/stem.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                STEM Ambassador
+                            </h3>
+
+                            <span class="website-card-label">
+                                STEM volunteering
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://www.stem.org.uk/stem-ambassadors"
+                       target="_blank"
+                       rel="noopener">
+
+                        stem.org.uk/stem-ambassadors
+
+                    </a>
+
+
+                    <div class="site-badge-area">
+
+                        <img src="stem.png"
+                             alt="STEM Ambassador Badge">
+
+                    </div>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://www.stem.org.uk/stem-ambassadors"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://www.stem.org.uk/stem-ambassadors">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- PMI VOLUNTEER -->
+
+                <article class="website-card"
+                         data-platform="pmi">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/pmi.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                PMI Volunteer
+                            </h3>
+
+                            <span class="website-card-label">
+                                Professional volunteering
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://www.pmi.org"
+                       target="_blank"
+                       rel="noopener">
+
+                        pmi.org
+
+                    </a>
+
+
+                    <div class="site-badge-area">
+
+                        <img src="pmi-vol.jpg"
+                             alt="PMI Volunteer Certificate">
+
+                    </div>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://www.pmi.org"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://www.pmi.org">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORY 4 — BUSINESS
+     ===================================================== -->
+
+<section class="digital-category cat4"
+         id="cat4"
+         data-category="cat4">
+
+
+    <button class="digital-category-header"
+            type="button"
+            aria-expanded="false">
+
+
+        <span class="digital-category-title">
+
+            <span class="digital-category-title-icon">
+
+                <i class="fa-solid fa-briefcase"></i>
+
+            </span>
+
+
+            <span>
+
+                <h2>
+                    Business & Services
+                </h2>
+
+                <p>
+                    TWC Ltd, portfolio and business platforms
+                </p>
+
+            </span>
+
+        </span>
+
+
+        <span class="digital-category-toggle">
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </span>
+
+
+    </button>
+
+
+    <div class="digital-category-content">
+
+        <div class="digital-category-inner">
+
+            <div class="website-grid">
+
+
+                <!-- TWC LINKEDIN -->
+
+                <article class="website-card"
+                         data-platform="linkedin">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/linkedin.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Tim Williams Consulting
+                            </h3>
+
+                            <span class="website-card-label">
+                                Company LinkedIn
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://www.linkedin.com/company/tim-williams-consulting/"
+                       target="_blank"
+                       rel="noopener">
+
+                        linkedin.com/company/tim-williams-consulting
+
+                    </a>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://www.linkedin.com/company/tim-williams-consulting/"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://www.linkedin.com/company/tim-williams-consulting/">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- GETHANDOVER -->
+
+                <article class="website-card"
+                         data-platform="business">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/gethandover.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                GetHandover
+                            </h3>
+
+                            <span class="website-card-label">
+                                Business platform
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://gethandover.uk"
+                       target="_blank"
+                       rel="noopener">
+
+                        gethandover.uk
+
+                    </a>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://gethandover.uk"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://gethandover.uk">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- CANVA -->
+
+                <article class="website-card"
+                         data-platform="business">
+
+
+                    <div class="website-card-header">
+
+                        <div class="website-card-icon">
+
+                            <img src="icons/canva.svg"
+                                 alt=""
+                                 aria-hidden="true">
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                TWC Portfolio
+                            </h3>
+
+                            <span class="website-card-label">
+                                Canva portfolio
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a class="website-card-link"
+                       href="https://twc-ltd.my.canva.site"
+                       target="_blank"
+                       rel="noopener">
+
+                        twc-ltd.my.canva.site
+
+                    </a>
+
+
+                    <div class="website-card-actions">
+
+                        <a class="visit-btn"
+                           href="https://twc-ltd.my.canva.site"
+                           target="_blank"
+                           rel="noopener">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Visit
+
+                        </a>
+
+
+                        <button class="copy-btn"
+                                type="button"
+                                data-link="https://twc-ltd.my.canva.site">
+
+                            <i class="fa-regular fa-copy"></i>
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FLOATING CATEGORY INDEX
+     ===================================================== -->
+
+<nav id="categoryIndex"
+     aria-label="Digital presence section navigation">
+
+
+    <ul>
+
+
+        <li>
+
+            <button type="button"
+                    data-target="cat1">
+
+                <span class="index-dot cat1"></span>
+
+                Professional Profiles
+
+            </button>
+
+        </li>
+
+
+        <li>
+
+            <button type="button"
+                    data-target="cat2">
+
+                <span class="index-dot cat2"></span>
+
+                Certifications
+
+            </button>
+
+        </li>
+
+
+        <li>
+
+            <button type="button"
+                    data-target="cat3">
+
+                <span class="index-dot cat3"></span>
+
+                Community
+
+            </button>
+
+        </li>
+
+
+        <li>
+
+            <button type="button"
+                    data-target="cat4">
+
+                <span class="index-dot cat4"></span>
+
+                Business & Services
+
+            </button>
+
+        </li>
+
+
+        <li>
+
+            <a href="survey.html">
+
+                <span class="index-dot"
+                      style="background:#001f3f;"></span>
+
+                Website Feedback
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+</nav>
+
+
+<!-- =====================================================
+     FLOATING BUTTONS
+     ===================================================== -->
+
+<button class="fab"
+        type="button"
+        aria-label="Back to top"
+        onclick="window.scrollTo({top:0,behavior:'smooth'});">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+<a class="fab fab-booking"
+   href="calendar.html"
+   aria-label="Book a meeting">
+
+    <i class="fa-regular fa-calendar"></i>
+
+</a>
+
+
+<!-- =====================================================
+     COPY TOAST
+     ===================================================== -->
+
+<div id="copy-toast"></div>
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<div id="footer"></div>
+
+
+<script>
+
+fetch("footer.html")
+
+.then(response => response.text())
+
+.then(html => {
+
+    document
+        .getElementById("footer")
+        .innerHTML = html;
+
+});
+
+</script>
+
+
+<!-- =====================================================
+     DIGITAL PRESENCE JAVASCRIPT
+     ===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    /* =================================================
+       ACCORDION
+       ================================================= */
+
+    const categories =
+        document.querySelectorAll(".digital-category");
+
+
+    categories.forEach(category => {
+
+        const header =
+            category.querySelector(
+                ".digital-category-header"
+            );
+
+
+        if (!header) return;
+
+
+        header.addEventListener("click", () => {
+
+            const isOpen =
+                category.classList.contains("open");
+
+
+            categories.forEach(other => {
+
+                other.classList.remove("open");
+
+
+                const otherHeader =
+                    other.querySelector(
+                        ".digital-category-header"
+                    );
+
+
+                if (otherHeader) {
+
+                    otherHeader.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            });
+
+
+            if (!isOpen) {
+
+                category.classList.add("open");
+
+
+                header.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+            }
+
+        });
+
+    });
+
+
+    /* =================================================
+       QUICK CATEGORY NAVIGATION
+       ================================================= */
+
+    document
+        .querySelectorAll("[data-scroll-category]")
+        .forEach(link => {
+
+
+            link.addEventListener("click", event => {
+
+                event.preventDefault();
+
+
+                const target =
+                    document.getElementById(
+                        link.dataset.scrollCategory
+                    );
+
+
+                if (!target) return;
+
+
+                if (!target.classList.contains("open")) {
+
+                    const header =
+                        target.querySelector(
+                            ".digital-category-header"
+                        );
+
+
+                    if (header) {
+                        header.click();
+                    }
+
+                }
+
+
+                setTimeout(() => {
+
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }, 150);
+
+            });
+
+        });
+
+
+    /* =================================================
+       FLOATING INDEX
+       ================================================= */
+
+    document
+        .querySelectorAll(
+            "#categoryIndex [data-target]"
+        )
+        .forEach(button => {
+
+
+            button.addEventListener("click", () => {
+
+
+                const target =
+                    document.getElementById(
+                        button.dataset.target
+                    );
+
+
+                if (!target) return;
+
+
+                if (!target.classList.contains("open")) {
+
+                    const header =
+                        target.querySelector(
+                            ".digital-category-header"
+                        );
+
+
+                    if (header) {
+                        header.click();
+                    }
+
+                }
+
+
+                setTimeout(() => {
+
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }, 150);
+
+            });
+
+        });
+
+
+    /* =================================================
+       SEARCH
+       ================================================= */
+
+    const searchInput =
+        document.getElementById(
+            "siteSearchInput"
+        );
+
+
+    const searchEmpty =
+        document.getElementById(
+            "searchEmpty"
+        );
+
+
+    if (searchInput) {
+
+
+        searchInput.addEventListener(
+            "input",
+            () => {
+
+
+                const term =
+                    searchInput.value
+                        .trim()
+                        .toLowerCase();
+
+
+                let visibleCards = 0;
+
+
+                document
+                    .querySelectorAll(".website-card")
+                    .forEach(card => {
+
+
+                        const text =
+                            card.innerText
+                                .toLowerCase();
+
+
+                        const match =
+                            !term ||
+                            text.includes(term);
+
+
+                        card.style.display =
+                            match ? "" : "none";
+
+
+                        if (match) {
+                            visibleCards++;
+                        }
+
+                    });
+
+
+                document
+                    .querySelectorAll(".digital-category")
+                    .forEach(category => {
+
+
+                        const visible =
+                            [
+                                ...category.querySelectorAll(
+                                    ".website-card"
+                                )
+                            ]
+                            .filter(card =>
+                                card.style.display !== "none"
+                            )
+                            .length;
+
+
+                        if (term && visible > 0) {
+
+                            category.classList.add("open");
+
+                            const header =
+                                category.querySelector(
+                                    ".digital-category-header"
+                                );
+
+
+                            if (header) {
+
+                                header.setAttribute(
+                                    "aria-expanded",
+                                    "true"
+                                );
+
+                            }
+
+                        }
+
+
+                        else if (term && visible === 0) {
+
+                            category.classList.remove("open");
+
+                            const header =
+                                category.querySelector(
+                                    ".digital-category-header"
+                                );
+
+
+                            if (header) {
+
+                                header.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                            }
+
+                        }
+
+                    });
+
+
+                if (searchEmpty) {
+
+                    searchEmpty.style.display =
+                        term && visibleCards === 0
+                            ? "block"
+                            : "none";
+
+                }
+
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       COPY INDIVIDUAL LINK
+       ================================================= */
+
+    document.addEventListener(
+        "click",
+        async event => {
+
+
+            const button =
+                event.target.closest(
+                    ".copy-btn"
+                );
+
+
+            if (!button) return;
+
+
+            const link =
+                button.getAttribute(
+                    "data-link"
+                );
+
+
+            if (!link) return;
+
+
+            try {
+
+                await navigator.clipboard
+                    .writeText(link);
+
+
+                showToast("Link copied");
+
+
+                if (
+                    typeof trackEvent ===
+                    "function"
+                ) {
+
+                    trackEvent(
+                        "copy_link",
+                        link
+                    );
+
+                }
+
+
+            } catch {
+
+                showToast(
+                    "Unable to copy link"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =================================================
+       COPY ALL LINKS
+       ================================================= */
+
+    const copyAll =
+        document.getElementById(
+            "copyAllLinks"
+        );
+
+
+    if (copyAll) {
+
+
+        copyAll.addEventListener(
+            "click",
+            async () => {
+
+
+                const links =
+                    [
+                        ...document.querySelectorAll(
+                            ".website-card a.website-card-link"
+                        )
+                    ]
+                    .map(link => link.href)
+                    .join("\n");
+
+
+                try {
+
+                    await navigator.clipboard
+                        .writeText(links);
+
+
+                    showToast(
+                        "All links copied"
+                    );
+
+
+                    if (
+                        typeof trackEvent ===
+                        "function"
+                    ) {
+
+                        trackEvent(
+                            "copy_all_links",
+                            links
+                        );
+
+                    }
+
+
+                } catch {
+
+                    showToast(
+                        "Unable to copy links"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       OUTBOUND TRACKING
+       ================================================= */
+
+    document
+        .querySelectorAll(
+            ".website-card a"
+        )
+        .forEach(link => {
+
+
+            link.addEventListener(
+                "click",
+                () => {
+
+
+                    if (
+                        typeof trackEvent ===
+                        "function"
+                    ) {
+
+                        trackEvent(
+                            "outbound_click",
+                            link.href
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+});
+
+
+/* =====================================================
+   TOAST
+   ===================================================== */
+
+function showToast(message) {
+
+
+    const toast =
+        document.getElementById(
+            "copy-toast"
+        );
+
+
+    if (!toast) return;
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        window.copyToastTimer
+    );
+
+
+    window.copyToastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        }, 1700);
+
+}
+
+
+/* =====================================================
+   LOCAL ANALYTICS
+   ===================================================== */
+
+function trackEvent(
+    action,
+    value
+) {
+
+
+    const event = {
+
+        timestamp:
+            new Date().toISOString(),
+
+        action:
+            action,
+
+        value:
+            value
+
+    };
+
+
+    let existing = [];
+
+
+    try {
+
+        existing =
+            JSON.parse(
+                localStorage.getItem(
+                    "analytics"
+                ) || "[]"
+            );
+
+    } catch {
+
+        existing = [];
+
+    }
+
+
+    existing.push(event);
+
+
+    localStorage.setItem(
+        "analytics",
+        JSON.stringify(existing)
+    );
+
+}
+
+
+/* =====================================================
+   CREDLY BADGES
+   ===================================================== */
+
+async function loadCredly() {
+
+
+    const element =
+        document.getElementById(
+            "credly-badges"
+        );
+
+
+    if (!element) return;
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "https://credlyapi.timwilliams07.workers.dev/"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Credly request failed"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !Array.isArray(data) ||
+            data.length === 0
+        ) {
+
+            element.innerHTML =
+                '<span style="font-size:.72rem;color:#667085;">No badges currently available.</span>';
+
+            return;
+
+        }
+
+
+        element.innerHTML =
+            data.map(badge => `
+
+                <a href="${badge.url}"
+                   target="_blank"
+                   rel="noopener"
+                   title="${badge.name || "Credly badge"}">
+
+                    <img
+                        src="${badge.image}"
+                        alt="${badge.name || "Credly badge"}">
+
+                </a>
+
+            `).join("");
+
+
+    } catch (error) {
+
+
+        element.innerHTML =
+            '<span style="font-size:.72rem;color:#667085;">Badges currently unavailable.</span>';
+
+    }
+
+}
+
+
+loadCredly();
+
+</script>
+
+
+</body>
+
+</html>

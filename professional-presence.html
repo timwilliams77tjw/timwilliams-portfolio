@@ -833,6 +833,277 @@ body.dark.page-presence .open-link {
         border-radius: 18px;
     }
 }
+
+
+/* =========================================================
+   PROFESSIONAL PRESENCE CARD ICONS
+   SVG ASSET VERSION
+   ========================================================= */
+
+.presence-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+
+/* =========================================================
+   ICON CONTAINER
+   ========================================================= */
+
+.presence-card-icon {
+    width: 52px;
+    height: 52px;
+
+    flex: 0 0 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    border: 1px solid rgba(10, 31, 68, 0.06);
+
+    box-shadow:
+        0 3px 10px rgba(15, 35, 60, 0.06);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+
+/* =========================================================
+   SVG IMAGE
+   ========================================================= */
+
+.presence-card-icon img {
+    width: 31px;
+    height: 31px;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   ICON HOVER
+   ========================================================= */
+
+.presence-card:hover .presence-card-icon {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 16px rgba(15, 35, 60, 0.11);
+}
+
+
+/* =========================================================
+   LINKEDIN
+   ========================================================= */
+
+.icon-linkedin {
+    background: #e6f3ff;
+}
+
+.icon-linkedin img {
+    width: 34px;
+    height: 34px;
+}
+
+
+/* =========================================================
+   TIM WILLIAMS CONSULTING
+   ========================================================= */
+
+.icon-company {
+    background: #edf2f7;
+}
+
+.icon-company img {
+    width: 31px;
+    height: 31px;
+}
+
+
+/* =========================================================
+   PMI
+   ========================================================= */
+
+.icon-pmi {
+    background: #eaf7ef;
+}
+
+.icon-pmi img {
+    width: 34px;
+    height: 34px;
+}
+
+
+/* =========================================================
+   APM
+   ========================================================= */
+
+.icon-apm {
+    background: #fff3dc;
+}
+
+.icon-apm img {
+    width: 36px;
+    height: 36px;
+}
+
+
+/* =========================================================
+   CREDLY
+   ========================================================= */
+
+.icon-credly {
+    background: #f2ebff;
+}
+
+.icon-credly img {
+    width: 32px;
+    height: 32px;
+}
+
+
+/* =========================================================
+   MICROSOFT
+   ========================================================= */
+
+.icon-microsoft {
+    background: #eaf2ff;
+}
+
+.icon-microsoft img {
+    width: 32px;
+    height: 32px;
+}
+
+
+/* =========================================================
+   PROFESSIONAL PORTFOLIO
+   ========================================================= */
+
+.icon-portfolio {
+    background: #eaf7ef;
+}
+
+.icon-portfolio img {
+    width: 32px;
+    height: 32px;
+}
+
+
+/* =========================================================
+   DIGITAL PRESENCE
+   ========================================================= */
+
+.icon-digital {
+    background: #e8f7f4;
+}
+
+.icon-digital img {
+    width: 32px;
+    height: 32px;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+body.dark.page-presence .presence-card-icon {
+    border-color: rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.16);
+}
+
+body.dark.page-presence .icon-linkedin {
+    background: rgba(10,102,194,0.18);
+}
+
+body.dark.page-presence .icon-company {
+    background: rgba(148,163,184,0.14);
+}
+
+body.dark.page-presence .icon-pmi {
+    background: rgba(20,120,63,0.16);
+}
+
+body.dark.page-presence .icon-apm {
+    background: rgba(168,109,0,0.17);
+}
+
+body.dark.page-presence .icon-credly {
+    background: rgba(107,53,201,0.18);
+}
+
+body.dark.page-presence .icon-microsoft {
+    background: rgba(37,99,199,0.18);
+}
+
+body.dark.page-presence .icon-portfolio {
+    background: rgba(20,120,63,0.16);
+}
+
+body.dark.page-presence .icon-digital {
+    background: rgba(8,127,107,0.17);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .presence-card-icon {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+        border-radius: 13px;
+    }
+
+    .presence-card-icon img {
+        width: 29px;
+        height: 29px;
+    }
+
+    .icon-linkedin img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .icon-pmi img,
+    .icon-apm img {
+        width: 31px;
+        height: 31px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .presence-card-icon {
+        transition: none;
+    }
+
+    .presence-card:hover .presence-card-icon {
+        transform: none;
+    }
+}      
    
 </style>
 </head>
@@ -986,14 +1257,19 @@ fetch("header.html")
     <div class="presence-grid">
 
 
-        <!-- LINKEDIN -->
+        <!-- =================================================
+             1. LINKEDIN
+        ================================================== -->
 
         <article class="presence-card">
 
             <div class="presence-card-top">
 
                 <div class="presence-card-icon icon-linkedin">
-                    <i class="fa-brands fa-linkedin-in"></i>
+                    <img
+                        src="icons/linkedin.svg"
+                        alt="LinkedIn"
+                        aria-hidden="true">
                 </div>
 
                 <span class="presence-status">
@@ -1037,15 +1313,19 @@ fetch("header.html")
         </article>
 
 
-
-        <!-- COMPANY LINKEDIN -->
+        <!-- =================================================
+             2. TIM WILLIAMS CONSULTING
+        ================================================== -->
 
         <article class="presence-card">
 
             <div class="presence-card-top">
 
                 <div class="presence-card-icon icon-company">
-                    <i class="fa-brands fa-linkedin"></i>
+                    <img
+                        src="icons/company.svg"
+                        alt="Tim Williams Consulting"
+                        aria-hidden="true">
                 </div>
 
                 <span class="presence-status">
@@ -1089,15 +1369,19 @@ fetch("header.html")
         </article>
 
 
-
-        <!-- PMI -->
+        <!-- =================================================
+             3. PMI
+        ================================================== -->
 
         <article class="presence-card">
 
             <div class="presence-card-top">
 
                 <div class="presence-card-icon icon-pmi">
-                    <i class="fa-solid fa-people-group"></i>
+                    <img
+                        src="icons/pmi.svg"
+                        alt="PMI"
+                        aria-hidden="true">
                 </div>
 
                 <span class="presence-status">
@@ -1141,15 +1425,19 @@ fetch("header.html")
         </article>
 
 
-
-        <!-- APM -->
+        <!-- =================================================
+             4. APM
+        ================================================== -->
 
         <article class="presence-card">
 
             <div class="presence-card-top">
 
                 <div class="presence-card-icon icon-apm">
-                    <i class="fa-solid fa-user-shield"></i>
+                    <img
+                        src="icons/apm.svg"
+                        alt="APM"
+                        aria-hidden="true">
                 </div>
 
                 <span class="presence-status">
@@ -1197,7 +1485,6 @@ fetch("header.html")
 </section>
 
 
-
 <!-- =====================================================
      CERTIFICATIONS & LEARNING
 ===================================================== -->
@@ -1229,14 +1516,19 @@ fetch("header.html")
     <div class="presence-grid">
 
 
-        <!-- CREDLY -->
+        <!-- =================================================
+             5. CREDLY
+        ================================================== -->
 
         <article class="presence-card">
 
             <div class="presence-card-top">
 
                 <div class="presence-card-icon icon-credly">
-                    <i class="fa-solid fa-certificate"></i>
+                    <img
+                        src="icons/credly.svg"
+                        alt="Credly"
+                        aria-hidden="true">
                 </div>
 
                 <span class="presence-status">
@@ -1280,15 +1572,19 @@ fetch("header.html")
         </article>
 
 
-
-        <!-- MICROSOFT -->
+        <!-- =================================================
+             6. MICROSOFT
+        ================================================== -->
 
         <article class="presence-card">
 
             <div class="presence-card-top">
 
                 <div class="presence-card-icon icon-microsoft">
-                    <i class="fa-brands fa-microsoft"></i>
+                    <img
+                        src="icons/microsoft.svg"
+                        alt="Microsoft"
+                        aria-hidden="true">
                 </div>
 
                 <span class="presence-status">
@@ -1336,9 +1632,8 @@ fetch("header.html")
 </section>
 
 
-
 <!-- =====================================================
-     PROFESSIONAL DEVELOPMENT SUMMARY
+     PROFESSIONAL DEVELOPMENT
 ===================================================== -->
 
 <section class="presence-section">
@@ -1365,33 +1660,53 @@ fetch("header.html")
     </div>
 
 
-    <div class="identity-grid">
+    <div class="presence-grid">
 
-        <article class="identity-card">
 
-            <div class="identity-icon">
-                <i class="fa-solid fa-layer-group"></i>
+        <!-- =================================================
+             7. PROFESSIONAL PORTFOLIO
+        ================================================== -->
+
+        <article class="presence-card">
+
+            <div class="presence-card-top">
+
+                <div class="presence-card-icon icon-portfolio">
+                    <img
+                        src="icons/portfolio.svg"
+                        alt="Professional Portfolio"
+                        aria-hidden="true">
+                </div>
+
+                <span class="presence-status">
+                    Professional Portfolio
+                </span>
+
             </div>
 
-            <div class="identity-content">
+            <h3>Experience, capability &amp; evidence</h3>
 
-                <p class="identity-label">
-                    Professional Portfolio
-                </p>
+            <p class="presence-card-description">
+                Explore my wider professional portfolio, including
+                programme experience, capabilities, achievements,
+                professional development and supporting evidence.
+            </p>
 
-                <h2>Experience, capability &amp; evidence</h2>
-
-                <p>
-                    Explore my wider professional portfolio, including
-                    programme experience, capabilities, achievements,
-                    professional development and supporting evidence.
-                </p>
+            <div class="presence-card-footer">
 
                 <a
-                    class="identity-link"
+                    class="presence-card-link"
                     href="cv.html">
 
                     Explore professional portfolio
+
+                </a>
+
+                <a
+                    class="open-link"
+                    href="cv.html">
+
+                    Open
                     <i class="fa-solid fa-arrow-right"></i>
 
                 </a>
@@ -1401,34 +1716,60 @@ fetch("header.html")
         </article>
 
 
-        <article class="verification-card">
+        <!-- =================================================
+             8. DIGITAL PRESENCE
+        ================================================== -->
 
-            <div class="verification-icon">
-                <i class="fa-solid fa-chart-line"></i>
+        <article class="presence-card">
+
+            <div class="presence-card-top">
+
+                <div class="presence-card-icon icon-digital">
+                    <img
+                        src="icons/digital.svg"
+                        alt="Digital Presence"
+                        aria-hidden="true">
+                </div>
+
+                <span class="presence-status">
+                    Digital Presence
+                </span>
+
             </div>
 
             <h3>Digital Presence</h3>
 
-            <p>
+            <p class="presence-card-description">
                 View the wider collection of professional, business,
                 volunteering and community platforms.
             </p>
 
-            <a
-                class="identity-link"
-                href="sites.html">
+            <div class="presence-card-footer">
 
-                View digital presence
-                <i class="fa-solid fa-arrow-right"></i>
+                <a
+                    class="presence-card-link"
+                    href="sites.html">
 
-            </a>
+                    View digital presence
+
+                </a>
+
+                <a
+                    class="open-link"
+                    href="sites.html">
+
+                    Open
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
 
         </article>
 
     </div>
 
 </section>
-
 
 
 <!-- =====================================================

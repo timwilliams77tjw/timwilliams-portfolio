@@ -1648,20 +1648,19 @@ body.dark .search-empty strong {
 .digital-hero {
     width: 100%;
     max-width: 100%;
-    margin: 0 auto 2.5rem;
+    margin: 0 auto 2rem;
     padding: 0;
     background: #ffffff;
     border: 1px solid #e3e8ee;
-    border-left: 7px solid #0a66c2;
-    border-radius: 22px;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    border-left: 6px solid #0a66c2;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
     overflow: hidden;
-
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(480px, 1fr);
-
-    min-height: 520px;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    min-height: auto; /* critical: let content define height */
 }
+
 
 
 /* =========================================================
@@ -1669,11 +1668,16 @@ body.dark .search-empty strong {
    ========================================================= */
 
 .digital-hero-content {
-    padding: 72px 60px 68px;
+    padding: 40px 32px 36px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-width: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
 
     /* IMPORTANT:
        prevents a nested card appearance */
@@ -1901,7 +1905,25 @@ body.dark .search-empty strong {
         object-fit: contain;
     }
 }
+.digital-hero-visual {
+    position: relative;
+    min-width: 0;
+    min-height: 100%;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #062451;
+}
 
+.digital-hero-visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center center;
+}
       
 </style>
 </head>

@@ -1676,7 +1676,7 @@ body.dark .search-empty strong {
     background: transparent;
     border: 0;
     box-shadow: none;
-}
+
 
 
     /* IMPORTANT:
@@ -1797,8 +1797,47 @@ body.dark .search-empty strong {
     object-fit: cover;
     object-position: center center;
 }
+/* =========================================================
+   DIGITAL HERO — VISUAL
+   ========================================================= */
+
+.digital-hero-visual {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    background: #062451;
+
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
+/* =========================================================
+   HERO IMAGE — SHOW COMPLETE IMAGE
+   ========================================================= */
+
+.digital-hero-visual img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    margin: 0;
+}
 /* =========================================================
    TABLET / IPAD
    ========================================================= */
@@ -1939,7 +1978,59 @@ body.dark .search-empty strong {
     object-fit: cover;   /* or contain if you prefer no cropping */
     object-position: center;
 }
-      
+ /* =========================================================
+   MOBILE HERO
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .digital-hero {
+        display: flex;
+        flex-direction: column;
+
+        min-height: auto;
+
+        border-left-width: 5px;
+        border-radius: 16px;
+    }
+
+
+    .digital-hero-content {
+        padding: 38px 25px 32px;
+    }
+
+
+    .digital-hero h1 {
+        font-size: 2.25rem;
+    }
+
+
+    .digital-hero-visual {
+        width: 100%;
+        min-height: 0;
+        height: auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+    }
+
+
+    .digital-hero-visual img {
+        display: block;
+
+        width: 100%;
+        height: auto;
+
+        max-width: 100%;
+        max-height: none;
+
+        object-fit: contain;
+    }
+
+}     
       
 </style>
 </head>

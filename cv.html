@@ -2056,7 +2056,290 @@ body.dark-mode.page-site-search
             9px;
     }
 }
+/* ============================================================
+CV HERO — SPLIT LAYOUT (TEXT LEFT, VISUAL RIGHT)
+Matches Professional Presence visual language, CV‑specific content
+============================================================ */
 
+body.page-site-search .cv-hero {
+  position: relative;
+  width: min(1100px, calc(100% - 40px));
+  max-width: 1100px;
+  margin: 42px auto 0;
+  padding: 32px 32px 30px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(10,102,194,0.13), transparent 32%),
+    linear-gradient(135deg, #ffffff 0%, #f7faff 100%);
+  border: 1px solid rgba(10,31,68,0.08);
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(15,35,60,0.08);
+  overflow: hidden;
+  color: #102a43;
+}
+
+body.page-site-search .cv-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+  gap: 32px;
+  align-items: center;
+}
+
+/* LEFT TEXT BLOCK REUSES EXISTING TYPOGRAPHY */
+
+body.page-site-search .cv-hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+body.page-site-search .cv-hero-eyebrow {
+  margin: 0 0 16px;
+  color: #0a66c2;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+body.page-site-search .cv-hero h1 {
+  margin: 0;
+  color: #0a1f44;
+  font-size: clamp(32px, 4.6vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+}
+
+body.page-site-search .cv-hero-role {
+  margin: 14px 0 0;
+  color: #0a66c2;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+body.page-site-search .cv-hero-role span {
+  margin: 0 6px;
+  color: #9aa7b5;
+}
+
+body.page-site-search .cv-hero-intro {
+  max-width: 640px;
+  margin: 20px 0 0;
+  color: #5f6b78;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+/* HIGHLIGHTS — REUSE EXISTING CARD STYLE */
+
+body.page-site-search .cv-hero-highlights {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* ============================================================
+RIGHT VISUAL — CV DEVICE / SCREEN
+============================================================ */
+
+body.page-site-search .cv-hero-visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.page-site-search .cv-hero-device {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 18px 18px 26px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #0b2344, #12345f);
+  box-shadow:
+    0 18px 40px rgba(0, 31, 63, 0.35),
+    0 0 0 1px rgba(122,192,249,0.18);
+}
+
+body.page-site-search .cv-hero-screen {
+  position: relative;
+  background: #f7f9fc;
+  border-radius: 12px;
+  padding: 14px 14px 12px;
+  box-shadow: inset 0 0 0 1px rgba(10,31,68,0.06);
+}
+
+/* Optional: if you use a real screenshot image instead of the faux layout */
+/*
+body.page-site-search .cv-hero-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+*/
+
+body.page-site-search .cv-hero-screen-header {
+  margin-bottom: 10px;
+}
+
+body.page-site-search .cv-screen-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0a1f44;
+}
+
+body.page-site-search .cv-screen-subtitle {
+  display: block;
+  font-size: 11.5px;
+  color: #667085;
+}
+
+body.page-site-search .cv-hero-screen-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 10px;
+}
+
+body.page-site-search .cv-screen-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+body.page-site-search .cv-screen-block {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 9px;
+  box-shadow: 0 2px 6px rgba(15,35,60,0.06);
+}
+
+body.page-site-search .cv-screen-block-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #0a1f44;
+  margin-bottom: 4px;
+}
+
+body.page-site-search .cv-screen-block-lines span {
+  display: block;
+  font-size: 10.5px;
+  color: #667085;
+  line-height: 1.4;
+}
+
+/* Tags / chips */
+
+body.page-site-search .cv-screen-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+body.page-site-search .cv-screen-tags span {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #eaf5fd;
+  color: #0a66c2;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* Metrics with gold values */
+
+body.page-site-search .cv-screen-metrics {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+body.page-site-search .cv-screen-metric {
+  flex: 0 0 auto;
+  min-width: 70px;
+}
+
+body.page-site-search .cv-metric-value {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--cv-gold);
+}
+
+body.page-site-search .cv-metric-label {
+  display: block;
+  font-size: 10px;
+  color: #667085;
+}
+
+/* Device base / shadow */
+
+body.page-site-search .cv-hero-device-base {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  width: 72%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.35);
+  filter: blur(6px);
+}
+
+/* ============================================================
+RESPONSIVE TWEAKS
+============================================================ */
+
+@media (max-width: 900px) {
+  body.page-site-search .cv-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  body.page-site-search .cv-hero {
+    padding: 26px 22px 24px;
+  }
+
+  body.page-site-search .cv-hero-visual {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  body.page-site-search .cv-hero {
+    width: calc(100% - 24px);
+    margin: 12px auto 18px;
+    padding: 20px 16px 18px;
+    border-radius: 18px;
+  }
+
+  body.page-site-search .cv-hero-inner {
+    gap: 18px;
+  }
+
+  body.page-site-search .cv-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  body.page-site-search .cv-hero-role {
+    font-size: 0.9rem;
+  }
+
+  body.page-site-search .cv-hero-intro {
+    font-size: 0.9rem;
+  }
+
+  body.page-site-search .cv-hero-device {
+    max-width: 360px;
+  }
+}
+
+   
 </style>
 </head>
 
@@ -2109,59 +2392,115 @@ fetch("header.html")
 <div id="noResultsMessage" style="display:none; margin-top:10px; opacity:0.7;">
   No matching results found.
 </div>
-<!-- ============================================================
-     CV HERO / INTRO
-     ============================================================ -->
-
 <section class="cv-hero">
+  <div class="cv-hero-inner">
+    <!-- LEFT: TEXT BLOCK -->
+    <div class="cv-hero-text">
+      <div class="cv-hero-eyebrow">
+        EXECUTIVE CV
+      </div>
 
-    <div class="cv-hero-content">
+      <h1>Tim Williams</h1>
 
-        <div class="cv-hero-eyebrow">
-            EXECUTIVE CV
+      <p class="cv-hero-role">
+        Senior IT Programme / PMO Manager
+        <span>•</span>
+        IT Transformation Leader
+      </p>
+
+      <p class="cv-hero-intro">
+        Executive CV and delivery record for complex infrastructure, cyber, cloud, workplace and service
+        transformation across regulated and multi‑supplier environments.
+      </p>
+
+      <div class="cv-hero-highlights">
+        <div class="cv-hero-highlight">
+          <strong>30+</strong>
+          <span>Years Experience</span>
         </div>
-
-        <h1>Tim Williams</h1>
-
-        <p class="cv-hero-role">
-            Senior IT Programme / PMO Manager
-            <span>•</span>
-            IT Transformation Leader
-        </p>
-
-        <p class="cv-hero-intro">
-            Senior programme and project leader delivering complex
-            infrastructure, cyber, cloud, workplace and service
-            transformation across regulated and multi-supplier environments.
-        </p>
-
-        <div class="cv-hero-highlights">
-
-            <div class="cv-hero-highlight">
-                <strong>30+</strong>
-                <span>Years Experience</span>
-            </div>
-
-            <div class="cv-hero-highlight">
-                <strong>Enterprise</strong>
-                <span>Transformation</span>
-            </div>
-
-            <div class="cv-hero-highlight">
-                <strong>Cyber</strong>
-                <span>Cloud & Infrastructure</span>
-            </div>
-
-            <div class="cv-hero-highlight">
-                <strong>PMO</strong>
-                <span>Programme Leadership</span>
-            </div>
-
+        <div class="cv-hero-highlight">
+          <strong>Enterprise</strong>
+          <span>Transformation</span>
         </div>
-
+        <div class="cv-hero-highlight">
+          <strong>Cyber</strong>
+          <span>Cloud & Infrastructure</span>
+        </div>
+        <div class="cv-hero-highlight">
+          <strong>PMO</strong>
+          <span>Programme Leadership</span>
+        </div>
+      </div>
     </div>
 
+    <!-- RIGHT: HERO IMAGE / VISUAL -->
+    <div class="cv-hero-visual" aria-hidden="true">
+      <div class="cv-hero-device">
+        <div class="cv-hero-screen">
+          <!-- Optional: static image of your CV page -->
+          <img src="icons/cv-hero-screen.png" alt="" loading="lazy">
+          <div class="cv-hero-screen-header">
+            <span class="cv-screen-title">Tim Williams — Executive CV</span>
+            <span class="cv-screen-subtitle">Senior IT Programme / PMO Manager</span>
+          </div>
+          <div class="cv-hero-screen-body">
+            <div class="cv-screen-column">
+              <div class="cv-screen-block cv-screen-block-summary">
+                <div class="cv-screen-block-title">Summary</div>
+                <div class="cv-screen-block-lines">
+                  <span>Enterprise‑scale transformation</span>
+                  <span>Cyber, cloud, workplace</span>
+                  <span>Regulated, multi‑supplier estates</span>
+                </div>
+              </div>
+
+              <div class="cv-screen-block cv-screen-block-experience">
+                <div class="cv-screen-block-title">Experience</div>
+                <div class="cv-screen-block-lines">
+                  <span>NHS England — Cyber Programme</span>
+                  <span>Roc Technologies — PMO & Infra</span>
+                  <span>Computacenter — Global Workplace</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cv-screen-column cv-screen-column-right">
+              <div class="cv-screen-block cv-screen-block-skills">
+                <div class="cv-screen-block-title">Core Skills</div>
+                <div class="cv-screen-tags">
+                  <span>Cyber Security</span>
+                  <span>Cloud & Workplace</span>
+                  <span>PMO Leadership</span>
+                  <span>Service Transition</span>
+                </div>
+              </div>
+
+              <div class="cv-screen-block cv-screen-block-metrics">
+                <div class="cv-screen-block-title">Delivery Scale</div>
+                <div class="cv-screen-metrics">
+                  <div class="cv-screen-metric">
+                    <span class="cv-metric-value">126k</span>
+                    <span class="cv-metric-label">Devices</span>
+                  </div>
+                  <div class="cv-screen-metric">
+                    <span class="cv-metric-value">46k</span>
+                    <span class="cv-metric-label">Users</span>
+                  </div>
+                  <div class="cv-screen-metric">
+                    <span class="cv-metric-value">£MM</span>
+                    <span class="cv-metric-label">Programmes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- .cv-hero-screen-body -->
+        </div> <!-- .cv-hero-screen -->
+        <div class="cv-hero-device-base"></div>
+      </div> <!-- .cv-hero-device -->
+    </div> <!-- .cv-hero-visual -->
+  </div> <!-- .cv-hero-inner -->
 </section>
+
      <!-- ========================= -->
 <!-- CV ICON BUTTONS WITH TOOLTIP -->
 <!-- ========================= -->

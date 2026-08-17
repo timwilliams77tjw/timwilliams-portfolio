@@ -132,11 +132,8 @@ body.page-site-search #noResultsMessage {
 
     color: var(--cv-muted);
 }
-
 /* ============================================================
-   TWC CV HERO
-   HOMEPAGE HERO VISUAL SYSTEM
-   CONTENT UNCHANGED
+   TWC CV — EXECUTIVE HERO
    ============================================================ */
 
 body.page-site-search .cv-hero {
@@ -147,45 +144,36 @@ body.page-site-search .cv-hero {
 
     max-width: 1100px;
 
-    margin:
-        42px auto 0;
+    min-height: 500px;
 
-    padding:
-        76px 70px 58px;
+    margin: 42px auto 0;
 
     box-sizing: border-box;
 
+    overflow: hidden;
+
     background:
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(10,102,194,0.13),
-            transparent 32%
-        ),
         linear-gradient(
-            135deg,
+            110deg,
             #ffffff 0%,
-            #f7faff 100%
+            #f8fbff 58%,
+            #eef6fd 100%
         );
 
     border:
-        1px solid rgba(10,31,68,0.08);
+        1px solid rgba(10,31,68,.10);
 
-    border-radius:
-        24px;
+    border-radius: 18px;
 
     box-shadow:
-        0 8px 24px rgba(15,35,60,0.08);
+        0 10px 30px rgba(15,35,60,.10);
 
-    overflow:
-        hidden;
-
-    color:
-        #102a43;
+    color: #102a43;
 }
 
 
 /* ============================================================
-   HOMEPAGE HERO — LEFT BLUE ACCENT
+   LEFT BLUE EDGE
    ============================================================ */
 
 body.page-site-search .cv-hero::before {
@@ -196,19 +184,19 @@ body.page-site-search .cv-hero::before {
 
     left: 0;
     top: 0;
+    bottom: 0;
 
     width: 6px;
-    height: 100%;
 
     background:
         #0a66c2;
 
-    pointer-events: none;
+    z-index: 10;
 }
 
 
 /* ============================================================
-   HOMEPAGE HERO — CIRCULAR DETAIL
+   BACKGROUND TECH DETAIL
    ============================================================ */
 
 body.page-site-search .cv-hero::after {
@@ -217,25 +205,29 @@ body.page-site-search .cv-hero::after {
 
     position: absolute;
 
-    width: 360px;
-    height: 360px;
+    width: 420px;
+    height: 420px;
 
-    right: -180px;
-    top: -180px;
+    right: -155px;
+    top: -145px;
 
     border:
-        1px solid rgba(10,102,194,0.10);
+        1px solid rgba(10,102,194,.12);
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
-    pointer-events:
-        none;
+    box-shadow:
+        0 0 0 34px rgba(10,102,194,.025),
+        0 0 0 68px rgba(10,102,194,.018);
+
+    pointer-events: none;
+
+    z-index: 0;
 }
 
 
 /* ============================================================
-   HERO CONTENT
+   HERO CONTENT GRID
    ============================================================ */
 
 body.page-site-search .cv-hero-content {
@@ -244,33 +236,60 @@ body.page-site-search .cv-hero-content {
 
     z-index: 2;
 
-    max-width: 900px;
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(360px, 43%);
+
+    width: 100%;
+
+    min-height: 500px;
+}
+
+
+/* ============================================================
+   HERO COPY
+   ============================================================ */
+
+body.page-site-search .cv-hero-copy {
+
+    position: relative;
+
+    z-index: 5;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding:
+        62px 20px 54px 76px;
+
+    box-sizing: border-box;
 }
 
 
 /* ============================================================
    EYEBROW
-   HOMEPAGE HERO TYPOGRAPHY
    ============================================================ */
 
 body.page-site-search .cv-hero-eyebrow {
 
-    position: relative;
-
-    margin:
-        0 0 20px;
+    margin: 0;
 
     color:
         #0a66c2;
 
     font-size:
-        12px;
+        13px;
 
     font-weight:
         800;
 
     letter-spacing:
-        0.16em;
+        .22em;
 
     line-height:
         1.4;
@@ -278,31 +297,46 @@ body.page-site-search .cv-hero-eyebrow {
 
 
 /* ============================================================
-   NAME
-   HOMEPAGE HERO H1
+   EYEBROW BLUE LINE
+   ============================================================ */
+
+body.page-site-search .cv-hero-eyebrow-line {
+
+    width: 52px;
+
+    height: 3px;
+
+    margin:
+        13px 0 27px;
+
+    background:
+        #0a66c2;
+
+    border-radius:
+        3px;
+}
+
+
+/* ============================================================
+   HERO NAME
    ============================================================ */
 
 body.page-site-search .cv-hero h1 {
 
-    position: relative;
-
     margin:
         0;
-
-    max-width:
-        900px;
 
     color:
         #0a1f44;
 
     font-size:
-        clamp(36px, 5vw, 58px);
+        clamp(46px, 5.2vw, 66px);
 
     line-height:
-        1.08;
+        1;
 
     letter-spacing:
-        -0.035em;
+        -.045em;
 
     font-weight:
         800;
@@ -310,62 +344,81 @@ body.page-site-search .cv-hero h1 {
 
 
 /* ============================================================
-   ROLE
+   HERO ROLE
    ============================================================ */
 
 body.page-site-search .cv-hero-role {
 
-    position: relative;
-
     margin:
-        16px 0 0;
+        20px 0 0;
+
+    max-width:
+        650px;
 
     color:
-        #0a66c2;
+        #1769c2;
 
     font-size:
-        19px;
+        20px;
 
     line-height:
-        1.5;
+        1.45;
 
     font-weight:
         700;
 }
 
 
-/* EXISTING BULLET */
+/* ROLE BULLET
+   ============================================================ */
 
 body.page-site-search .cv-hero-role span {
 
     margin:
-        0 7px;
+        0 8px;
 
     color:
-        #9aa7b5;
+        #8d9aaa;
 }
 
 
 /* ============================================================
-   INTRO
-   HOMEPAGE HERO LEAD TYPOGRAPHY
+   HERO DIVIDER
+   ============================================================ */
+
+body.page-site-search .cv-hero-divider {
+
+    width:
+        96px;
+
+    height:
+        1px;
+
+    margin:
+        24px 0 20px;
+
+    background:
+        #cbd8e4;
+}
+
+
+/* ============================================================
+   HERO INTRO
    ============================================================ */
 
 body.page-site-search .cv-hero-intro {
 
-    position: relative;
-
     max-width:
-        730px;
+        650px;
 
     margin:
-        24px 0 0;
+        0;
 
     color:
-        #5f6b78;
+        #455568;
 
     font-size:
-        19px;
+        17px;
 
     line-height:
         1.65;
@@ -376,15 +429,10 @@ body.page-site-search .cv-hero-intro {
 
 
 /* ============================================================
-   EXISTING CV HIGHLIGHTS
-   KEEP CONTENT — RESTYLE AS HOMEPAGE-STYLE SUPPORTING CARDS
+   HERO HIGHLIGHTS
    ============================================================ */
 
 body.page-site-search .cv-hero-highlights {
-
-    position: relative;
-
-    z-index: 2;
 
     display:
         grid;
@@ -393,16 +441,16 @@ body.page-site-search .cv-hero-highlights {
         repeat(4, minmax(0,1fr));
 
     gap:
-        12px;
+        10px;
 
     width:
         100%;
 
     max-width:
-        900px;
+        760px;
 
     margin:
-        30px 0 0;
+        32px 0 0;
 }
 
 
@@ -412,37 +460,49 @@ body.page-site-search .cv-hero-highlights {
 
 body.page-site-search .cv-hero-highlight {
 
-    position: relative;
-
     min-width:
         0;
 
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    min-height:
+        74px;
+
     padding:
-        15px 16px;
+        10px 11px;
+
+    box-sizing:
+        border-box;
 
     background:
-        rgba(255,255,255,0.82);
+        rgba(255,255,255,.88);
 
     border:
-        1px solid #dfe6ee;
+        1px solid #d9e4ee;
 
     border-radius:
-        12px;
+        9px;
 
     box-shadow:
-        0 4px 12px rgba(15,35,60,0.055);
+        0 4px 12px rgba(15,35,60,.055);
 
     backdrop-filter:
-        blur(4px);
+        blur(5px);
 
     -webkit-backdrop-filter:
-        blur(4px);
+        blur(5px);
 
     transition:
-        transform .22s ease,
-        box-shadow .22s ease,
-        border-color .22s ease,
-        background .22s ease;
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
 }
 
 
@@ -455,20 +515,62 @@ body.page-site-search .cv-hero-highlight:hover {
     transform:
         translateY(-2px);
 
-    background:
-        #ffffff;
-
     border-color:
-        #cbd6e2;
+        #b9cfe2;
 
     box-shadow:
-        0 8px 18px rgba(15,35,60,0.10);
+        0 7px 17px rgba(15,35,60,.10);
+}
+
+
+/* ============================================================
+   HIGHLIGHT ICON
+   ============================================================ */
+
+body.page-site-search .cv-highlight-icon {
+
+    flex:
+        0 0 34px;
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    color:
+        #0a66c2;
+
+    font-size:
+        26px;
+
+    line-height:
+        1;
+}
+
+
+/* ============================================================
+   HIGHLIGHT CONTENT
+   ============================================================ */
+
+body.page-site-search .cv-highlight-content {
+
+    min-width:
+        0;
 }
 
 
 /* ============================================================
    HIGHLIGHT VALUE
-   HOMEPAGE NAVY
    ============================================================ */
 
 body.page-site-search .cv-hero-highlight strong {
@@ -477,19 +579,22 @@ body.page-site-search .cv-hero-highlight strong {
         block;
 
     margin:
-        0 0 4px;
+        0 0 3px;
 
     color:
         #0a1f44;
 
     font-size:
-        1.08rem;
+        1.02rem;
 
     line-height:
-        1.2;
+        1.15;
 
     font-weight:
         800;
+
+    white-space:
+        nowrap;
 }
 
 
@@ -503,144 +608,455 @@ body.page-site-search .cv-hero-highlight span {
         block;
 
     color:
-        #5f6b78;
+        #536273;
 
     font-size:
-        .72rem;
+        .68rem;
 
     line-height:
-        1.35;
+        1.3;
 
     font-weight:
-        650;
+        600;
 }
 
 
 /* ============================================================
-   TABLET — MATCH HOMEPAGE HERO
+   PORTRAIT AREA
+   ============================================================ */
+
+body.page-site-search .cv-hero-portrait {
+
+    position:
+        relative;
+
+    min-height:
+        500px;
+
+    overflow:
+        hidden;
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        center;
+}
+
+
+/* ============================================================
+   PORTRAIT CIRCLE
+   ============================================================ */
+
+body.page-site-search .cv-portrait-circle {
+
+    position:
+        absolute;
+
+    width:
+        430px;
+
+    height:
+        430px;
+
+    right:
+        -20px;
+
+    bottom:
+        -165px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(10,102,194,.085);
+
+    z-index:
+        0;
+}
+
+
+/* ============================================================
+   PORTRAIT RINGS
+   ============================================================ */
+
+body.page-site-search .cv-portrait-ring {
+
+    position:
+        absolute;
+
+    border:
+        1px solid rgba(10,102,194,.14);
+
+    border-radius:
+        50%;
+
+    pointer-events:
+        none;
+
+    z-index:
+        1;
+}
+
+
+body.page-site-search .cv-portrait-ring-one {
+
+    width:
+        430px;
+
+    height:
+        430px;
+
+    right:
+        -30px;
+
+    top:
+        30px;
+}
+
+
+body.page-site-search .cv-portrait-ring-two {
+
+    width:
+        520px;
+
+    height:
+        520px;
+
+    right:
+        -75px;
+
+    top:
+        -15px;
+
+    opacity:
+        .55;
+}
+
+
+/* ============================================================
+   PORTRAIT DOT PATTERN
+   ============================================================ */
+
+body.page-site-search .cv-portrait-dots {
+
+    position:
+        absolute;
+
+    right:
+        34px;
+
+    top:
+        38px;
+
+    width:
+        120px;
+
+    height:
+        90px;
+
+    opacity:
+        .55;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(10,102,194,.32) 1.7px,
+            transparent 1.7px
+        );
+
+    background-size:
+        18px 18px;
+
+    z-index:
+        2;
+}
+
+
+/* ============================================================
+   PROFILE IMAGE
+   ============================================================ */
+
+body.page-site-search .cv-profile-image {
+
+    position:
+        relative;
+
+    z-index:
+        5;
+
+    display:
+        block;
+
+    width:
+        min(100%, 500px);
+
+    height:
+        520px;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center top;
+
+    align-self:
+        flex-end;
+
+    margin-right:
+        -18px;
+
+    filter:
+        saturate(.92) contrast(1.02);
+
+    -webkit-mask-image:
+        linear-gradient(
+            to bottom,
+            #000 88%,
+            transparent 100%
+        );
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            #000 88%,
+            transparent 100%
+        );
+}
+
+
+/* ============================================================
+   TABLET / IPAD
    ============================================================ */
 
 @media (max-width: 900px) {
 
     body.page-site-search .cv-hero {
 
-        padding:
-            58px 45px 45px;
+        width:
+            calc(100% - 28px);
+
+        margin-top:
+            30px;
     }
 
+    body.page-site-search .cv-hero-content {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(280px, 39%);
+
+        min-height:
+            450px;
+    }
+
+    body.page-site-search .cv-hero-copy {
+
+        padding:
+            48px 18px 42px 48px;
+    }
+
+    body.page-site-search .cv-hero h1 {
+
+        font-size:
+            clamp(42px, 6vw, 58px);
+    }
+
+    body.page-site-search .cv-hero-role {
+
+        font-size:
+            17px;
+    }
+
+    body.page-site-search .cv-hero-intro {
+
+        font-size:
+            15px;
+    }
 
     body.page-site-search .cv-hero-highlights {
 
         grid-template-columns:
             repeat(2, minmax(0,1fr));
+
+        max-width:
+            470px;
+    }
+
+    body.page-site-search .cv-hero-portrait {
+
+        min-height:
+            450px;
+    }
+
+    body.page-site-search .cv-profile-image {
+
+        width:
+            420px;
+
+        height:
+            460px;
+
+        margin-right:
+            -35px;
+    }
+
+    body.page-site-search .cv-portrait-circle {
+
+        width:
+            350px;
+
+        height:
+            350px;
+
+        right:
+            -100px;
+
+        bottom:
+            -100px;
+    }
+
+    body.page-site-search .cv-portrait-ring-one {
+
+        width:
+            350px;
+
+        height:
+            350px;
+
+        right:
+            -100px;
+    }
+
+    body.page-site-search .cv-portrait-ring-two {
+
+        width:
+            430px;
+
+        height:
+            430px;
+
+        right:
+            -135px;
     }
 }
 
 
 /* ============================================================
-   MOBILE — MATCH HOMEPAGE HERO
+   MOBILE
    ============================================================ */
 
-@media (max-width: 767px) {
+@media (max-width: 700px) {
 
     body.page-site-search .cv-hero {
 
         width:
             calc(100% - 24px);
 
-        max-width:
-            100%;
-
         margin:
-            20px auto 0;
-
-        padding:
-            42px 24px 30px;
+            18px auto 0;
 
         border-radius:
-            18px;
-
-        box-sizing:
-            border-box;
-    }
-
-
-    body.page-site-search .cv-hero::before {
-
-        width:
-            4px;
+            15px;
     }
 
 
     body.page-site-search .cv-hero-content {
 
-        width:
-            100%;
+        display:
+            flex;
 
-        max-width:
-            100%;
+        flex-direction:
+            column;
 
-        box-sizing:
-            border-box;
+        min-height:
+            0;
+    }
+
+
+    body.page-site-search .cv-hero-copy {
+
+        order:
+            1;
+
+        padding:
+            34px 22px 24px;
     }
 
 
     body.page-site-search .cv-hero-eyebrow {
 
-        margin-bottom:
-            16px;
-
         font-size:
-            9px;
+            10px;
 
-        line-height:
-            1.7;
+        letter-spacing:
+            .18em;
+    }
+
+
+    body.page-site-search .cv-hero-eyebrow-line {
+
+        width:
+            42px;
+
+        height:
+            2px;
+
+        margin:
+            10px 0 20px;
     }
 
 
     body.page-site-search .cv-hero h1 {
 
         font-size:
-            34px;
+            36px;
 
         line-height:
-            1.08;
+            1.05;
     }
 
 
     body.page-site-search .cv-hero-role {
 
+        margin-top:
+            14px;
+
         font-size:
             15px;
 
         line-height:
-            1.6;
-
-        margin-top:
-            14px;
+            1.55;
     }
 
 
     body.page-site-search .cv-hero-role span {
 
         margin:
-            0 3px;
+            0 4px;
+    }
+
+
+    body.page-site-search .cv-hero-divider {
+
+        width:
+            70px;
+
+        margin:
+            18px 0 15px;
     }
 
 
     body.page-site-search .cv-hero-intro {
 
-        max-width:
-            100%;
-
-        margin-top:
-            20px;
-
         font-size:
-            15px;
+            14px;
 
         line-height:
-            1.6;
+            1.58;
     }
 
 
@@ -650,37 +1066,154 @@ body.page-site-search .cv-hero-highlight span {
             repeat(2, minmax(0,1fr));
 
         gap:
-            10px;
+            8px;
 
         margin-top:
-            24px;
-
-        max-width:
-            100%;
+            22px;
     }
 
 
     body.page-site-search .cv-hero-highlight {
 
+        min-height:
+            66px;
+
         padding:
-            13px 12px;
+            9px 9px;
+
+        gap:
+            6px;
 
         border-radius:
-            10px;
+            8px;
+    }
+
+
+    body.page-site-search .cv-highlight-icon {
+
+        flex:
+            0 0 27px;
+
+        width:
+            27px;
+
+        height:
+            27px;
+
+        font-size:
+            21px;
     }
 
 
     body.page-site-search .cv-hero-highlight strong {
 
         font-size:
-            1rem;
+            .88rem;
     }
 
 
     body.page-site-search .cv-hero-highlight span {
 
         font-size:
-            .68rem;
+            .62rem;
+    }
+
+
+    /* PORTRAIT */
+
+    body.page-site-search .cv-hero-portrait {
+
+        order:
+            2;
+
+        min-height:
+            340px;
+
+        height:
+            340px;
+
+        align-items:
+            flex-end;
+    }
+
+
+    body.page-site-search .cv-profile-image {
+
+        width:
+            100%;
+
+        height:
+            380px;
+
+        margin:
+            0;
+
+        object-position:
+            center top;
+    }
+
+
+    body.page-site-search .cv-portrait-circle {
+
+        width:
+            310px;
+
+        height:
+            310px;
+
+        right:
+            50%;
+
+        transform:
+            translateX(50%);
+
+        bottom:
+            -125px;
+    }
+
+
+    body.page-site-search .cv-portrait-ring-one {
+
+        width:
+            310px;
+
+        height:
+            310px;
+
+        right:
+            50%;
+
+        transform:
+            translateX(50%);
+
+        top:
+            30px;
+    }
+
+
+    body.page-site-search .cv-portrait-ring-two {
+
+        display:
+            none;
+    }
+
+
+    body.page-site-search .cv-portrait-dots {
+
+        right:
+            18px;
+
+        top:
+            20px;
+
+        width:
+            85px;
+
+        height:
+            65px;
+
+        background-size:
+            14px 14px;
     }
 }
 
@@ -691,17 +1224,17 @@ body.page-site-search .cv-hero-highlight span {
 
 @media (max-width: 420px) {
 
-    body.page-site-search .cv-hero {
+    body.page-site-search .cv-hero-copy {
 
         padding:
-            38px 20px 26px;
+            30px 18px 20px;
     }
 
 
     body.page-site-search .cv-hero h1 {
 
         font-size:
-            31px;
+            32px;
     }
 
 
@@ -715,21 +1248,52 @@ body.page-site-search .cv-hero-highlight span {
     body.page-site-search .cv-hero-intro {
 
         font-size:
-            14px;
-    }
-
-
-    body.page-site-search .cv-hero-highlights {
-
-        gap:
-            8px;
+            13.5px;
     }
 
 
     body.page-site-search .cv-hero-highlight {
 
         padding:
-            12px 10px;
+            8px;
+    }
+
+
+    body.page-site-search .cv-highlight-icon {
+
+        display:
+            none;
+    }
+
+
+    body.page-site-search .cv-hero-highlight strong {
+
+        font-size:
+            .84rem;
+    }
+
+
+    body.page-site-search .cv-hero-highlight span {
+
+        font-size:
+            .59rem;
+    }
+
+
+    body.page-site-search .cv-hero-portrait {
+
+        height:
+            315px;
+
+        min-height:
+            315px;
+    }
+
+
+    body.page-site-search .cv-profile-image {
+
+        height:
+            350px;
     }
 }
 
@@ -2056,290 +2620,7 @@ body.dark-mode.page-site-search
             9px;
     }
 }
-/* ============================================================
-CV HERO — SPLIT LAYOUT (TEXT LEFT, VISUAL RIGHT)
-Matches Professional Presence visual language, CV‑specific content
-============================================================ */
 
-body.page-site-search .cv-hero {
-  position: relative;
-  width: min(1100px, calc(100% - 40px));
-  max-width: 1100px;
-  margin: 42px auto 0;
-  padding: 32px 32px 30px;
-  box-sizing: border-box;
-  background:
-    radial-gradient(circle at 85% 20%, rgba(10,102,194,0.13), transparent 32%),
-    linear-gradient(135deg, #ffffff 0%, #f7faff 100%);
-  border: 1px solid rgba(10,31,68,0.08);
-  border-radius: 24px;
-  box-shadow: 0 8px 24px rgba(15,35,60,0.08);
-  overflow: hidden;
-  color: #102a43;
-}
-
-body.page-site-search .cv-hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-  gap: 32px;
-  align-items: center;
-}
-
-/* LEFT TEXT BLOCK REUSES EXISTING TYPOGRAPHY */
-
-body.page-site-search .cv-hero-text {
-  position: relative;
-  z-index: 2;
-}
-
-body.page-site-search .cv-hero-eyebrow {
-  margin: 0 0 16px;
-  color: #0a66c2;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-body.page-site-search .cv-hero h1 {
-  margin: 0;
-  color: #0a1f44;
-  font-size: clamp(32px, 4.6vw, 52px);
-  line-height: 1.08;
-  letter-spacing: -0.035em;
-  font-weight: 800;
-}
-
-body.page-site-search .cv-hero-role {
-  margin: 14px 0 0;
-  color: #0a66c2;
-  font-size: 18px;
-  line-height: 1.5;
-  font-weight: 700;
-}
-
-body.page-site-search .cv-hero-role span {
-  margin: 0 6px;
-  color: #9aa7b5;
-}
-
-body.page-site-search .cv-hero-intro {
-  max-width: 640px;
-  margin: 20px 0 0;
-  color: #5f6b78;
-  font-size: 17px;
-  line-height: 1.65;
-}
-
-/* HIGHLIGHTS — REUSE EXISTING CARD STYLE */
-
-body.page-site-search .cv-hero-highlights {
-  margin-top: 22px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-/* ============================================================
-RIGHT VISUAL — CV DEVICE / SCREEN
-============================================================ */
-
-body.page-site-search .cv-hero-visual {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-body.page-site-search .cv-hero-device {
-  position: relative;
-  width: 100%;
-  max-width: 420px;
-  padding: 18px 18px 26px;
-  border-radius: 18px;
-  background: linear-gradient(145deg, #0b2344, #12345f);
-  box-shadow:
-    0 18px 40px rgba(0, 31, 63, 0.35),
-    0 0 0 1px rgba(122,192,249,0.18);
-}
-
-body.page-site-search .cv-hero-screen {
-  position: relative;
-  background: #f7f9fc;
-  border-radius: 12px;
-  padding: 14px 14px 12px;
-  box-shadow: inset 0 0 0 1px rgba(10,31,68,0.06);
-}
-
-/* Optional: if you use a real screenshot image instead of the faux layout */
-/*
-body.page-site-search .cv-hero-screen img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-*/
-
-body.page-site-search .cv-hero-screen-header {
-  margin-bottom: 10px;
-}
-
-body.page-site-search .cv-screen-title {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: #0a1f44;
-}
-
-body.page-site-search .cv-screen-subtitle {
-  display: block;
-  font-size: 11.5px;
-  color: #667085;
-}
-
-body.page-site-search .cv-hero-screen-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 10px;
-}
-
-body.page-site-search .cv-screen-column {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-body.page-site-search .cv-screen-block {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 8px 9px;
-  box-shadow: 0 2px 6px rgba(15,35,60,0.06);
-}
-
-body.page-site-search .cv-screen-block-title {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: #0a1f44;
-  margin-bottom: 4px;
-}
-
-body.page-site-search .cv-screen-block-lines span {
-  display: block;
-  font-size: 10.5px;
-  color: #667085;
-  line-height: 1.4;
-}
-
-/* Tags / chips */
-
-body.page-site-search .cv-screen-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-body.page-site-search .cv-screen-tags span {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 7px;
-  border-radius: 999px;
-  background: #eaf5fd;
-  color: #0a66c2;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-/* Metrics with gold values */
-
-body.page-site-search .cv-screen-metrics {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-body.page-site-search .cv-screen-metric {
-  flex: 0 0 auto;
-  min-width: 70px;
-}
-
-body.page-site-search .cv-metric-value {
-  display: block;
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--cv-gold);
-}
-
-body.page-site-search .cv-metric-label {
-  display: block;
-  font-size: 10px;
-  color: #667085;
-}
-
-/* Device base / shadow */
-
-body.page-site-search .cv-hero-device-base {
-  position: absolute;
-  left: 50%;
-  bottom: 10px;
-  transform: translateX(-50%);
-  width: 72%;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.35);
-  filter: blur(6px);
-}
-
-/* ============================================================
-RESPONSIVE TWEAKS
-============================================================ */
-
-@media (max-width: 900px) {
-  body.page-site-search .cv-hero-inner {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-  }
-
-  body.page-site-search .cv-hero {
-    padding: 26px 22px 24px;
-  }
-
-  body.page-site-search .cv-hero-visual {
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 700px) {
-  body.page-site-search .cv-hero {
-    width: calc(100% - 24px);
-    margin: 12px auto 18px;
-    padding: 20px 16px 18px;
-    border-radius: 18px;
-  }
-
-  body.page-site-search .cv-hero-inner {
-    gap: 18px;
-  }
-
-  body.page-site-search .cv-hero h1 {
-    font-size: 1.8rem;
-  }
-
-  body.page-site-search .cv-hero-role {
-    font-size: 0.9rem;
-  }
-
-  body.page-site-search .cv-hero-intro {
-    font-size: 0.9rem;
-  }
-
-  body.page-site-search .cv-hero-device {
-    max-width: 360px;
-  }
-}
-
-   
 </style>
 </head>
 
@@ -2392,115 +2673,125 @@ fetch("header.html")
 <div id="noResultsMessage" style="display:none; margin-top:10px; opacity:0.7;">
   No matching results found.
 </div>
+<!-- ============================================================
+     CV HERO — EXECUTIVE PROFILE
+     ============================================================ -->
+
 <section class="cv-hero">
-  <div class="cv-hero-inner">
-    <!-- LEFT: TEXT BLOCK -->
-    <div class="cv-hero-text">
-      <div class="cv-hero-eyebrow">
-        EXECUTIVE CV
-      </div>
 
-      <h1>Tim Williams</h1>
+    <div class="cv-hero-content">
 
-      <p class="cv-hero-role">
-        Senior IT Programme / PMO Manager
-        <span>•</span>
-        IT Transformation Leader
-      </p>
+        <!-- LEFT CONTENT -->
+        <div class="cv-hero-copy">
 
-      <p class="cv-hero-intro">
-        Executive CV and delivery record for complex infrastructure, cyber, cloud, workplace and service
-        transformation across regulated and multi‑supplier environments.
-      </p>
+            <div class="cv-hero-eyebrow">
+                EXECUTIVE CV
+            </div>
 
-      <div class="cv-hero-highlights">
-        <div class="cv-hero-highlight">
-          <strong>30+</strong>
-          <span>Years Experience</span>
+            <div class="cv-hero-eyebrow-line"></div>
+
+            <h1>Tim Williams</h1>
+
+            <p class="cv-hero-role">
+                Senior IT Programme / PMO Manager
+                <span>•</span>
+                IT Transformation Leader
+            </p>
+
+            <div class="cv-hero-divider"></div>
+
+            <p class="cv-hero-intro">
+                Senior programme and project leader delivering complex
+                infrastructure, cyber, cloud, workplace and service
+                transformation across regulated and multi-supplier environments.
+            </p>
+
+            <!-- HERO HIGHLIGHTS -->
+
+            <div class="cv-hero-highlights">
+
+                <div class="cv-hero-highlight">
+
+                    <div class="cv-highlight-icon">
+                        <span>◎</span>
+                    </div>
+
+                    <div class="cv-highlight-content">
+                        <strong>30+</strong>
+                        <span>Years Experience</span>
+                    </div>
+
+                </div>
+
+
+                <div class="cv-hero-highlight">
+
+                    <div class="cv-highlight-icon">
+                        <span>▦</span>
+                    </div>
+
+                    <div class="cv-highlight-content">
+                        <strong>Enterprise</strong>
+                        <span>Transformation</span>
+                    </div>
+
+                </div>
+
+
+                <div class="cv-hero-highlight">
+
+                    <div class="cv-highlight-icon">
+                        <span>♧</span>
+                    </div>
+
+                    <div class="cv-highlight-content">
+                        <strong>Cyber</strong>
+                        <span>Cloud &amp; Infrastructure</span>
+                    </div>
+
+                </div>
+
+
+                <div class="cv-hero-highlight">
+
+                    <div class="cv-highlight-icon">
+                        <span>♙</span>
+                    </div>
+
+                    <div class="cv-highlight-content">
+                        <strong>PMO</strong>
+                        <span>Programme Leadership</span>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="cv-hero-highlight">
-          <strong>Enterprise</strong>
-          <span>Transformation</span>
+
+
+        <!-- RIGHT PORTRAIT -->
+
+        <div class="cv-hero-portrait">
+
+            <div class="cv-portrait-circle"></div>
+
+            <div class="cv-portrait-ring cv-portrait-ring-one"></div>
+            <div class="cv-portrait-ring cv-portrait-ring-two"></div>
+
+            <div class="cv-portrait-dots"></div>
+
+            <img
+                src="tim-williams-cv-photo.jpg"
+                alt="Tim Williams"
+                class="cv-profile-image"
+            >
+
         </div>
-        <div class="cv-hero-highlight">
-          <strong>Cyber</strong>
-          <span>Cloud & Infrastructure</span>
-        </div>
-        <div class="cv-hero-highlight">
-          <strong>PMO</strong>
-          <span>Programme Leadership</span>
-        </div>
-      </div>
+
     </div>
 
-    <!-- RIGHT: HERO IMAGE / VISUAL -->
-    <div class="cv-hero-visual" aria-hidden="true">
-      <div class="cv-hero-device">
-        <div class="cv-hero-screen">
-          <!-- Optional: static image of your CV page -->
-          <img src="icons/cv-hero-screen.png" alt="" loading="lazy">
-          <div class="cv-hero-screen-header">
-            <span class="cv-screen-title">Tim Williams — Executive CV</span>
-            <span class="cv-screen-subtitle">Senior IT Programme / PMO Manager</span>
-          </div>
-          <div class="cv-hero-screen-body">
-            <div class="cv-screen-column">
-              <div class="cv-screen-block cv-screen-block-summary">
-                <div class="cv-screen-block-title">Summary</div>
-                <div class="cv-screen-block-lines">
-                  <span>Enterprise‑scale transformation</span>
-                  <span>Cyber, cloud, workplace</span>
-                  <span>Regulated, multi‑supplier estates</span>
-                </div>
-              </div>
-
-              <div class="cv-screen-block cv-screen-block-experience">
-                <div class="cv-screen-block-title">Experience</div>
-                <div class="cv-screen-block-lines">
-                  <span>NHS England — Cyber Programme</span>
-                  <span>Roc Technologies — PMO & Infra</span>
-                  <span>Computacenter — Global Workplace</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="cv-screen-column cv-screen-column-right">
-              <div class="cv-screen-block cv-screen-block-skills">
-                <div class="cv-screen-block-title">Core Skills</div>
-                <div class="cv-screen-tags">
-                  <span>Cyber Security</span>
-                  <span>Cloud & Workplace</span>
-                  <span>PMO Leadership</span>
-                  <span>Service Transition</span>
-                </div>
-              </div>
-
-              <div class="cv-screen-block cv-screen-block-metrics">
-                <div class="cv-screen-block-title">Delivery Scale</div>
-                <div class="cv-screen-metrics">
-                  <div class="cv-screen-metric">
-                    <span class="cv-metric-value">126k</span>
-                    <span class="cv-metric-label">Devices</span>
-                  </div>
-                  <div class="cv-screen-metric">
-                    <span class="cv-metric-value">46k</span>
-                    <span class="cv-metric-label">Users</span>
-                  </div>
-                  <div class="cv-screen-metric">
-                    <span class="cv-metric-value">£MM</span>
-                    <span class="cv-metric-label">Programmes</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- .cv-hero-screen-body -->
-        </div> <!-- .cv-hero-screen -->
-        <div class="cv-hero-device-base"></div>
-      </div> <!-- .cv-hero-device -->
-    </div> <!-- .cv-hero-visual -->
-  </div> <!-- .cv-hero-inner -->
 </section>
-
      <!-- ========================= -->
 <!-- CV ICON BUTTONS WITH TOOLTIP -->
 <!-- ========================= -->

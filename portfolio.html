@@ -1963,6 +1963,165 @@ body.dark.page-portfolio .portfolio-value-number {
 .portfolio-hero-inner {
     max-width: 820px;
 }
+/* ============================
+   PORTFOLIO HERO — BRAND FOCUS
+=============================== */
+
+.brand-hero {
+  background: linear-gradient(135deg, #ffffff 0%, #f4f8fc 100%);
+  padding: 60px 24px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1120px;
+  width: 100%;
+  gap: 40px;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 620px;
+}
+
+.hero-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #001f3f;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.hero-title span {
+  color: #0a66c2;
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.hero-lead {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #344054;
+  margin-bottom: 22px;
+}
+
+.hero-capabilities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.hero-capabilities span {
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 0.92rem;
+  font-weight: 650;
+  color: #001f3f;
+  box-shadow: 0 3px 10px rgba(0, 31, 63, 0.06);
+}
+
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.hero-btn {
+  background: #ffffff;
+  border: 1px solid #0a66c2;
+  color: #0a66c2;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.hero-btn:hover {
+  background: #0a66c2;
+  color: #ffffff;
+}
+
+.hero-illustration img {
+  width: 360px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 31, 63, 0.12);
+}
+
+/* MOBILE */
+@media (max-width: 760px) {
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-illustration img {
+    width: 260px;
+    margin-top: 20px;
+  }
+  .hero-capabilities {
+    grid-template-columns: 1fr;
+  }
+}
+/* ============================
+   PORTFOLIO HERO IMAGE LAYOUT
+=============================== */
+
+.portfolio-hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.portfolio-hero-text {
+  flex: 1;
+}
+
+.portfolio-hero-image img {
+  width: 340px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 31, 63, 0.12);
+}
+
+/* iPad (horizontal) */
+@media (max-width: 900px) {
+  .portfolio-hero-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .portfolio-hero-image img {
+    width: 280px;
+  }
+}
+
+/* Mobile (vertical) */
+@media (max-width: 600px) {
+  .portfolio-hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .portfolio-hero-image {
+    margin-top: 20px;
+  }
+
+  .portfolio-hero-image img {
+    width: 240px;
+    margin: 0 auto;
+  }
+}
 
    
 </style>
@@ -2015,27 +2174,38 @@ fetch("header.html")
 <script src="analytics-tracker.js" defer></script>
 
 <section class="portfolio-hero">
-    <div class="portfolio-hero-inner">
-        <div class="portfolio-intro-kicker">
-            <i class="fa-solid fa-briefcase"></i>
-            Portfolio
-        </div>
+  <div class="portfolio-hero-inner">
 
-        <h1>Professional Portfolio</h1>
+    <!-- LEFT: EXISTING HERO CONTENT -->
+    <div class="portfolio-hero-text">
+      <div class="portfolio-intro-kicker">
+        <i class="fa-solid fa-briefcase"></i>
+        Portfolio
+      </div>
 
-        <p>
-            A curated collection of programme leadership, cyber uplift,
-            cloud transformation, workplace modernisation and delivery achievements.
-        </p>
+      <h1>Professional Portfolio</h1>
 
-        <div class="twc-hero-meta">
-            <span class="hero-stat"><i class="fa-solid fa-diagram-project"></i> Programmes</span>
-            <span class="hero-stat"><i class="fa-solid fa-shield-halved"></i> Cyber</span>
-            <span class="hero-stat"><i class="fa-solid fa-cloud"></i> Cloud</span>
-            <span class="hero-stat"><i class="fa-solid fa-briefcase"></i> Delivery</span>
-        </div>
+      <p>
+        A curated collection of programme leadership, cyber uplift,
+        cloud transformation, workplace modernisation and delivery achievements.
+      </p>
+
+      <div class="twc-hero-meta">
+        <span class="hero-stat"><i class="fa-solid fa-diagram-project"></i> Programmes</span>
+        <span class="hero-stat"><i class="fa-solid fa-shield-halved"></i> Cyber</span>
+        <span class="hero-stat"><i class="fa-solid fa-cloud"></i> Cloud</span>
+        <span class="hero-stat"><i class="fa-solid fa-briefcase"></i> Delivery</span>
+      </div>
     </div>
+
+    <!-- RIGHT: NEW ILLUSTRATION -->
+    <div class="portfolio-hero-image">
+      <img src="portfolio-hero-illustration.png" alt="Conceptual transformation illustration">
+    </div>
+
+  </div>
 </section>
+
 
 <!-- PAGE SEARCH -->
 <div id="pageSearchBar" class="page-search-bar">

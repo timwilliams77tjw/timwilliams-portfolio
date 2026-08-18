@@ -604,7 +604,64 @@ body.dark-mode .cert-card-link {
 body.dark-mode .cert-hero-image img {
     box-shadow: 0 10px 30px rgba(0,0,0,0.55);
 }
+/* ============================
+   CERTIFICATIONS HERO LAYOUT FIX
+=============================== */
 
+.cert-hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  text-align: left; /* Always left-aligned text */
+}
+
+.cert-hero-text {
+  flex: 1;
+  text-align: left; /* Explicitly enforce left alignment */
+}
+
+.cert-hero-image img {
+  width: 360px;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* iPad and desktop (horizontal layout) */
+@media (min-width: 601px) {
+  .cert-hero-inner {
+    flex-direction: row; /* Text left, image right */
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cert-hero-text {
+    flex: 1 1 60%;
+  }
+
+  .cert-hero-image {
+    flex: 0 0 auto;
+  }
+}
+
+/* Mobile (vertical layout) */
+@media (max-width: 600px) {
+  .cert-hero-inner {
+    flex-direction: column; /* Stack vertically */
+    align-items: flex-start; /* Keep text left-aligned */
+  }
+
+  .cert-hero-image {
+    margin-top: 20px;
+    align-self: center; /* Center image only */
+  }
+
+  .cert-hero-image img {
+    width: 240px;
+  }
+}
    
 </style>
 </head>

@@ -856,7 +856,7 @@ body.page-site-search .cv-profile-image {
     body.page-site-search .cv-hero-copy {
 
         padding:
-            48px 18px 42px 48px;
+            48px 16px 42px 38px;
     }
 
     body.page-site-search .cv-hero h1 {
@@ -2903,6 +2903,169 @@ body.dark-mode.page-site-search
             .58rem;
     }
 }
+
+/* ============================================================
+   CV HERO — IPAD METRIC FIX
+   ============================================================ */
+
+@media (min-width: 701px) and (max-width: 900px) {
+
+    /* Give the left side of the hero more room */
+    body.page-site-search .cv-hero-content {
+
+        grid-template-columns:
+            minmax(0, 61%)
+            minmax(0, 39%);
+    }
+
+
+    /* Metric grid */
+    body.page-site-search .cv-hero-highlights {
+
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            10px;
+
+        width:
+            100%;
+
+        max-width:
+            none;
+
+        margin-top:
+            28px;
+    }
+
+
+    /* Individual metric */
+    body.page-site-search .cv-hero-highlight {
+
+        display:
+            flex;
+
+        flex-direction:
+            row;
+
+        align-items:
+            center;
+
+        gap:
+            8px;
+
+        min-width:
+            0;
+
+        min-height:
+            72px;
+
+        padding:
+            9px 10px;
+
+        box-sizing:
+            border-box;
+
+        overflow:
+            hidden;
+    }
+
+
+    /* Icon */
+    body.page-site-search .cv-highlight-icon {
+
+        flex:
+            0 0 30px;
+
+        width:
+            30px;
+
+        height:
+            30px;
+
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
+        font-size:
+            21px;
+
+        line-height:
+            1;
+    }
+
+
+    /* Text container */
+    body.page-site-search .cv-highlight-content {
+
+        flex:
+            1 1 auto;
+
+        min-width:
+            0;
+
+        overflow:
+            hidden;
+    }
+
+
+    /* Metric value */
+    body.page-site-search .cv-hero-highlight strong {
+
+        display:
+            block;
+
+        margin:
+            0 0 3px;
+
+        font-size:
+            .90rem;
+
+        line-height:
+            1.15;
+
+        white-space:
+            normal;
+
+        overflow-wrap:
+            break-word;
+
+        word-break:
+            normal;
+    }
+
+
+    /* Metric description */
+    body.page-site-search .cv-hero-highlight span {
+
+        display:
+            block;
+
+        font-size:
+            .63rem;
+
+        line-height:
+            1.25;
+
+        white-space:
+            normal;
+
+        overflow-wrap:
+            break-word;
+
+        word-break:
+            normal;
+    }
+}
+   
 
 </style>
 </head>

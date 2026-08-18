@@ -553,10 +553,14 @@ body.dark-mode .cert-card-link {
 }
 
 /* =========================================================
-   CERTIFICATIONS HERO — FINAL RESPONSIVE LAYOUT
+   CERTIFICATIONS HERO — FINAL LAYOUT
    ========================================================= */
 
-/* Base: desktop / iPad horizontal */
+/* =========================================================
+   DESKTOP + IPAD
+   Text block on left, image on right
+   ========================================================= */
+
 .cert-hero {
     display: flex;
     flex-direction: row;
@@ -567,23 +571,24 @@ body.dark-mode .cert-card-link {
     text-align: left;
 }
 
-/* Text remains on the left */
-.cert-hero h1,
-.cert-hero p {
+/* LEFT SIDE = TITLE + PARAGRAPH */
+.cert-hero-text {
+    flex: 1 1 auto;
+    min-width: 0;
     text-align: left;
 }
 
-.cert-hero h1 {
-    flex: 1 1 auto;
-    min-width: 0;
+.cert-hero-text h1 {
+    margin: 0;
+    text-align: left;
 }
 
-.cert-hero p {
-    flex: 1 1 auto;
-    min-width: 0;
+.cert-hero-text p {
+    margin-top: 24px;
+    text-align: left;
 }
 
-/* Image stays on the right */
+/* RIGHT SIDE = IMAGE */
 .cert-hero-image {
     flex: 0 0 auto;
     margin-left: auto;
@@ -595,12 +600,12 @@ body.dark-mode .cert-card-link {
     max-width: 100%;
     height: auto;
     border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }
 
 
 /* =========================================================
-   IPAD / TABLET
+   IPAD
    ========================================================= */
 
 @media (min-width: 601px) and (max-width: 900px) {
@@ -609,14 +614,18 @@ body.dark-mode .cert-card-link {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        flex-wrap: nowrap;
         gap: 28px;
-        text-align: left;
+        flex-wrap: nowrap;
     }
 
     .cert-hero-text {
         flex: 1 1 auto;
         min-width: 0;
+        text-align: left;
+    }
+
+    .cert-hero-text h1,
+    .cert-hero-text p {
         text-align: left;
     }
 
@@ -627,19 +636,14 @@ body.dark-mode .cert-card-link {
 
     .cert-hero-image img {
         width: 280px;
-        max-width: 100%;
         margin: 0;
-    }
-
-    .cert-hero h1,
-    .cert-hero p {
-        text-align: left;
     }
 }
 
 
 /* =========================================================
-   MOBILE — VERTICAL STACK
+   MOBILE
+   Title → paragraph → image
    ========================================================= */
 
 @media (max-width: 600px) {
@@ -648,29 +652,31 @@ body.dark-mode .cert-card-link {
         flex-direction: column;
         align-items: stretch;
         justify-content: flex-start;
-        flex-wrap: nowrap;
         gap: 20px;
+        flex-wrap: nowrap;
         text-align: left;
     }
 
-    /* Text remains LEFT aligned */
-    .cert-hero h1,
-    .cert-hero p {
+    .cert-hero-text {
+        width: 100%;
         text-align: left;
     }
 
-    .cert-hero h1 {
+    .cert-hero-text h1,
+    .cert-hero-text p {
+        text-align: left;
+    }
+
+    .cert-hero-text h1 {
         width: 100%;
     }
 
-    .cert-hero p {
+    .cert-hero-text p {
         width: 100%;
         margin-top: 24px;
     }
 
-    /* Image remains BELOW the text */
     .cert-hero-image {
-        flex: 0 0 auto;
         width: 100%;
         margin: 0;
         display: flex;
@@ -691,7 +697,7 @@ body.dark-mode .cert-card-link {
    ========================================================= */
 
 body.dark-mode .cert-hero-image img {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.55);
 }
    
 </style>
@@ -753,9 +759,9 @@ fetch("header.html")
 
 <main class="cert-page">
 
-    <!-- HERO -->
+  <section class="cert-hero">
 
-    <section class="cert-hero">
+    <div class="cert-hero-text">
 
         <h1>Certifications & Professional Credentials</h1>
 
@@ -766,11 +772,13 @@ fetch("header.html")
             modern technology environments.
         </p>
 
-<div class="cert-hero-image">
-    <img src="certifications-hero-dark.png" alt="Certifications hero illustration">
-</div>
-       
-    </section>
+    </div>
+
+    <div class="cert-hero-image">
+        <img src="certifications-hero-dark.png" alt="Certifications hero illustration">
+    </div>
+
+</section>
 
 
     <!-- =====================================================

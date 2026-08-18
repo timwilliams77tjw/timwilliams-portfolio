@@ -920,6 +920,111 @@ body.dark .cta-btn:hover {
     }
 }
 
+/* =========================================================
+   FAQ PAGE — FINAL HERO / LAYOUT OVERRIDES
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   PAGE FOUNDATION
+   --------------------------------------------------------- */
+
+main.page-container {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+
+    padding: 0 0 70px !important;
+}
+
+
+/* ---------------------------------------------------------
+   FULL-WIDTH HERO
+   --------------------------------------------------------- */
+
+main.page-container .hero-section {
+    width: 100% !important;
+    max-width: none !important;
+
+    box-sizing: border-box;
+
+    margin-top: 0 !important;
+    margin-bottom: 28px;
+
+    border-radius: 0 0 24px 24px;
+}
+
+
+/* ---------------------------------------------------------
+   HERO LEFT ACCENT — KEEP
+   --------------------------------------------------------- */
+
+main.page-container .hero-section::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 6px;
+    height: 100%;
+
+    background: #0a66c2;
+
+    z-index: 3;
+}
+
+
+/* ---------------------------------------------------------
+   CONSTRAIN EVERYTHING BELOW HERO
+   --------------------------------------------------------- */
+
+main.page-container .search-bar-local,
+main.page-container #faq-list,
+main.page-container .cta-section {
+
+    width: min(1120px, calc(100% - 40px));
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ---------------------------------------------------------
+   FAQ CARDS — REMOVE LEFT BLUE BORDER
+   --------------------------------------------------------- */
+
+main.page-container .faq-card::after {
+    display: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+    main.page-container {
+        padding-bottom: 55px !important;
+    }
+
+    main.page-container .hero-section {
+        margin-top: 0 !important;
+        margin-bottom: 20px;
+
+        border-radius: 0 0 18px 18px;
+    }
+
+    main.page-container .search-bar-local,
+    main.page-container #faq-list,
+    main.page-container .cta-section {
+        width: calc(100% - 24px);
+    }
+}      
+
 </style>
 </head>
 

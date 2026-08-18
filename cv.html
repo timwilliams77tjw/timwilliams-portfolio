@@ -2637,7 +2637,29 @@ body.dark-mode.page-site-search
             9px;
     }
 }
+/* FIX: Prevent metric text overlap on iPad */
+@media (max-width: 900px) {
 
+    .cv-highlight-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 20px;
+    }
+
+    .cv-hero-highlight strong {
+        font-size: .95rem;
+        white-space: normal; /* allow wrapping */
+    }
+
+    .cv-hero-highlight span {
+        font-size: .64rem;
+        white-space: normal;
+    }
+
+    .cv-hero-highlight {
+        align-items: flex-start;
+    }
+}
 </style>
 </head>
 

@@ -552,6 +552,60 @@ body.dark-mode .cert-card-link {
     }
 }
 
+/* ============================
+   CERTIFICATIONS HERO IMAGE
+=============================== */
+
+.cert-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.cert-hero-image img {
+    width: 360px;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+/* iPad (horizontal) */
+@media (max-width: 900px) {
+    .cert-hero {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .cert-hero-image img {
+        width: 280px;
+    }
+}
+
+/* Mobile (vertical) */
+@media (max-width: 600px) {
+    .cert-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cert-hero-image {
+        margin-top: 20px;
+    }
+
+    .cert-hero-image img {
+        width: 240px;
+        margin: 0 auto;
+    }
+}
+
+/* Dark mode refinement */
+body.dark-mode .cert-hero-image img {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+}
+
+   
 </style>
 </head>
 
@@ -624,6 +678,10 @@ fetch("header.html")
             modern technology environments.
         </p>
 
+<div class="cert-hero-image">
+    <img src="certifications-hero-dark.png" alt="Certifications hero illustration">
+</div>
+       
     </section>
 
 

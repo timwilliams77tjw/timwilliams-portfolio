@@ -552,115 +552,146 @@ body.dark-mode .cert-card-link {
     }
 }
 
-/* ============================
-   CERTIFICATIONS HERO IMAGE
-=============================== */
+/* =========================================================
+   CERTIFICATIONS HERO — FINAL RESPONSIVE LAYOUT
+   ========================================================= */
 
+/* Base: desktop / iPad horizontal */
 .cert-hero {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     gap: 40px;
+    flex-wrap: nowrap;
+    text-align: left;
+}
+
+/* Text remains on the left */
+.cert-hero h1,
+.cert-hero p {
+    text-align: left;
+}
+
+.cert-hero h1 {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.cert-hero p {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Image stays on the right */
+.cert-hero-image {
+    flex: 0 0 auto;
+    margin-left: auto;
 }
 
 .cert-hero-image img {
+    display: block;
     width: 360px;
+    max-width: 100%;
     height: auto;
     border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-/* iPad (horizontal) */
-@media (max-width: 900px) {
+
+/* =========================================================
+   IPAD / TABLET
+   ========================================================= */
+
+@media (min-width: 601px) and (max-width: 900px) {
+
     .cert-hero {
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 28px;
+        text-align: left;
+    }
+
+    .cert-hero-text {
+        flex: 1 1 auto;
+        min-width: 0;
+        text-align: left;
+    }
+
+    .cert-hero-image {
+        flex: 0 0 280px;
+        margin-left: auto;
     }
 
     .cert-hero-image img {
         width: 280px;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .cert-hero h1,
+    .cert-hero p {
+        text-align: left;
     }
 }
 
-/* Mobile (vertical) */
+
+/* =========================================================
+   MOBILE — VERTICAL STACK
+   ========================================================= */
+
 @media (max-width: 600px) {
+
     .cert-hero {
         flex-direction: column;
-        text-align: center;
+        align-items: stretch;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 20px;
+        text-align: left;
     }
 
+    /* Text remains LEFT aligned */
+    .cert-hero h1,
+    .cert-hero p {
+        text-align: left;
+    }
+
+    .cert-hero h1 {
+        width: 100%;
+    }
+
+    .cert-hero p {
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    /* Image remains BELOW the text */
     .cert-hero-image {
-        margin-top: 20px;
+        flex: 0 0 auto;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .cert-hero-image img {
         width: 240px;
+        max-width: 100%;
         margin: 0 auto;
     }
 }
 
-/* Dark mode refinement */
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
 body.dark-mode .cert-hero-image img {
-    box-shadow: 0 10px 30px rgba(0,0,0,0.55);
-}
-/* ============================
-   CERTIFICATIONS HERO LAYOUT FIX
-=============================== */
-
-.cert-hero-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 40px;
-  text-align: left; /* Always left-aligned text */
-}
-
-.cert-hero-text {
-  flex: 1;
-  text-align: left; /* Explicitly enforce left alignment */
-}
-
-.cert-hero-image img {
-  width: 360px;
-  height: auto;
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-}
-
-/* iPad and desktop (horizontal layout) */
-@media (min-width: 601px) {
-  .cert-hero-inner {
-    flex-direction: row; /* Text left, image right */
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .cert-hero-text {
-    flex: 1 1 60%;
-  }
-
-  .cert-hero-image {
-    flex: 0 0 auto;
-  }
-}
-
-/* Mobile (vertical layout) */
-@media (max-width: 600px) {
-  .cert-hero-inner {
-    flex-direction: column; /* Stack vertically */
-    align-items: flex-start; /* Keep text left-aligned */
-  }
-
-  .cert-hero-image {
-    margin-top: 20px;
-    align-self: center; /* Center image only */
-  }
-
-  .cert-hero-image img {
-    width: 240px;
-  }
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
 }
    
 </style>

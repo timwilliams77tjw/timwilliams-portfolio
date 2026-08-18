@@ -34,46 +34,220 @@ body.page-certifications {
   color: var(--text-main);
   transition: background 0.3s ease, color 0.3s ease;
 }
+/* =========================================================
+   LINKEDIN HERO
+   Same hero treatment used across TWC pages
+   ========================================================= */
+
 .linkedin-header {
-  max-width: 900px;
-  margin: 40px auto 20px;
-  padding: 30px;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+
+  margin: 0 0 30px;
+  padding: 32px 40px;
+
   background: var(--card-bg);
-  border-radius: 12px;
+  color: var(--text-main);
+
+  border-radius: 0 12px 12px 0;
+  border-left: 6px solid var(--accent);
+
   box-shadow: var(--shadow);
-  display: flex;
-  gap: 25px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 40px;
   align-items: center;
+
   opacity: 0;
   transform: translateY(10px);
   animation: fadeInUp 0.6s ease forwards;
 }
-.linkedin-header img {
-  width: 120px;
-  height: 120px;
-  border-radius: 12px;
-  object-fit: cover;
+
+
+/* HERO TEXT */
+
+.linkedin-hero-content {
+  min-width: 0;
+  text-align: left;
 }
+
 .linkedin-header h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--text-main);
 }
+
 .linkedin-header .headline {
-  font-size: 17px;
-  margin-top: 6px;
-  color: var(--text-sub);
-}
-.linkedin-header .tagline {
-  font-size: 15px;
   margin-top: 10px;
+
+  font-size: 18px;
+  line-height: 1.45;
+  font-weight: 600;
+
   color: var(--text-sub);
 }
-.linkedin-header .followers {
+
+.linkedin-header .tagline {
   margin-top: 12px;
+
+  font-size: 16px;
+  line-height: 1.55;
+
+  color: var(--text-sub);
+}
+
+.linkedin-header .followers {
+  margin-top: 14px;
+
+  font-size: 15px;
+  line-height: 1.4;
   font-weight: 600;
+
   color: var(--accent);
 }
-.qr-box { margin-top: 15px; }
+
+
+/* =========================================================
+   QR CODE — HERO IMAGE
+   ========================================================= */
+
+.linkedin-hero-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.linkedin-hero-image img {
+  display: block;
+
+  width: 160px;
+  height: 160px;
+
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+
+  object-fit: contain;
+
+  border-radius: 12px;
+}
+
+
+/* =========================================================
+   iPAD / TABLET
+   Keeps title/text on left and QR on right
+   ========================================================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .linkedin-header {
+    padding: 30px 32px;
+    grid-template-columns: minmax(0, 1fr) 170px;
+    gap: 30px;
+
+    border-radius: 0 12px 12px 0;
+  }
+
+  .linkedin-header h1 {
+    font-size: 30px;
+  }
+
+  .linkedin-header .headline {
+    font-size: 17px;
+  }
+
+  .linkedin-header .tagline {
+    font-size: 15px;
+  }
+
+  .linkedin-hero-image img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   Hero title → hero text → QR image
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .linkedin-header {
+    width: 100%;
+
+    margin: 0 0 25px;
+    padding: 26px 22px 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+    justify-content: flex-start;
+
+    gap: 0;
+
+    border-left-width: 5px;
+    border-radius: 0 10px 10px 0;
+
+    text-align: left;
+  }
+
+  .linkedin-hero-content {
+    width: 100%;
+    text-align: left;
+  }
+
+  .linkedin-header h1 {
+    font-size: 27px;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .linkedin-header .headline {
+    margin-top: 9px;
+
+    font-size: 16px;
+    line-height: 1.45;
+
+    text-align: left;
+  }
+
+  .linkedin-header .tagline {
+    margin-top: 10px;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    text-align: left;
+  }
+
+  .linkedin-header .followers {
+    margin-top: 12px;
+
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .linkedin-hero-image {
+    width: 100%;
+
+    margin-top: 20px;
+
+    justify-content: flex-start;
+  }
+
+  .linkedin-hero-image img {
+    width: 140px;
+    height: 140px;
+  }
+}
 .search-bar {
   max-width: 900px;
   margin: 0 auto 30px;
@@ -185,19 +359,45 @@ fetch("header.html")
 <script src="analytics-tracker.js" defer></script>
 
 
-<!-- LINKEDIN HEADER -->
-<div class="linkedin-header">
-  <div>
-    <h1>Tim Williams</h1>
-    <div class="headline">Programme Delivery Leader | Cyber Uplift | Cloud Adoption | Modern Workplace Transformation</div>
-    <div class="tagline">Driving secure, stable and adoption‑ready transformation across regulated, multi‑vendor environments.</div>
-    <div class="followers">1,876 followers</div>
-    <div class="qr-box">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.linkedin.com/in/timwilliams77" alt="QR Code">
-    </div>
-  </div>
-</div>
+<!-- =========================================================
+     LINKEDIN HERO
+     ========================================================= -->
 
+<section class="linkedin-header">
+
+  <!-- HERO TEXT -->
+  <div class="linkedin-hero-content">
+
+    <h1>Tim Williams</h1>
+
+    <div class="headline">
+      Programme Delivery Leader | Cyber Uplift | Cloud Adoption |
+      Modern Workplace Transformation
+    </div>
+
+    <div class="tagline">
+      Driving secure, stable and adoption-ready transformation across
+      regulated, multi-vendor environments.
+    </div>
+
+    <div class="followers">
+      1,876 followers
+    </div>
+
+  </div>
+
+
+  <!-- HERO IMAGE — LINKEDIN QR CODE -->
+  <div class="linkedin-hero-image">
+
+    <img
+      src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://www.linkedin.com/in/timwilliams77"
+      alt="Scan to view Tim Williams on LinkedIn"
+    >
+
+  </div>
+
+</section>
 <!-- SEARCH BAR -->
 <div class="search-bar">
   <input type="text" id="searchInput" placeholder="Search posts and articles...">

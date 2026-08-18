@@ -2215,6 +2215,66 @@ body.dark.page-portfolio .portfolio-value-number {
         border-radius: 14px;
     }
 }
+
+/* ============================================================
+   PORTFOLIO MOBILE ALIGNMENT FIX
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    /* --------------------------------------------------------
+       1. HERO — LEFT ALIGN ALL TEXT
+       -------------------------------------------------------- */
+
+    .portfolio-hero-inner {
+        text-align: left;
+    }
+
+    .portfolio-hero-text {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .portfolio-hero-text .portfolio-intro-kicker {
+        justify-content: flex-start;
+    }
+
+    .portfolio-hero-text h1 {
+        text-align: left;
+    }
+
+    .portfolio-hero-text p {
+        text-align: left;
+    }
+
+    .portfolio-hero-text .twc-hero-meta {
+        justify-content: flex-start;
+    }
+
+
+    /* --------------------------------------------------------
+       2. ACCORDION HEADERS — CENTRE ALL TITLES
+       -------------------------------------------------------- */
+
+    body.page-portfolio .portfolio-section .category-header {
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    /*
+       Keep the blue accent and title together as one centred
+       group, while keeping the +/- control at the right.
+    */
+
+    body.page-portfolio .portfolio-section .category-header::before {
+        flex: 0 0 3px;
+    }
+
+    body.page-portfolio .portfolio-section .category-toggle {
+        margin-left: 12px !important;
+        flex: 0 0 auto;
+    }
+}   
    
 </style>
 </head>

@@ -39,6 +39,125 @@
       margin: 40px auto;
       padding: 0 1.5rem;
     }
+
+/* =========================================================
+   CALENDAR HERO
+   Same hero treatment used across TWC pages
+   ========================================================= */
+
+.calendar-hero {
+  width: 100%;
+  box-sizing: border-box;
+
+  margin: 0 0 30px;
+  padding: 32px 40px;
+
+  background: var(--card-bg);
+  color: var(--text-main);
+
+  border-radius: 0 12px 12px 0;
+  border-left: 6px solid var(--accent);
+
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+
+/* HERO TITLE */
+
+.calendar-hero h1 {
+  margin: 0;
+  padding: 0;
+
+  text-align: left;
+
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 700;
+
+  color: var(--text-main);
+}
+
+
+/* HERO TEXT */
+
+.calendar-hero .hero-overview {
+  margin: 12px 0 0;
+
+  text-align: left;
+
+  font-size: 17px;
+  line-height: 1.55;
+
+  color: var(--text-sub);
+}
+
+
+/* =========================================================
+   iPAD / TABLET
+   ========================================================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .calendar-hero {
+    padding: 30px 32px;
+  }
+
+  .calendar-hero h1 {
+    font-size: 30px;
+  }
+
+  .calendar-hero .hero-overview {
+    font-size: 16px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .calendar-hero {
+    margin: 0 0 25px;
+    padding: 26px 22px 28px;
+
+    border-left-width: 5px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .calendar-hero h1 {
+    font-size: 27px;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .calendar-hero .hero-overview {
+    margin-top: 10px;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    text-align: left;
+  }
+}
+
+
+/* =========================================================
+   HERO ANIMATION
+   ========================================================= */
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+    
   </style>
 </head>
 
@@ -80,7 +199,21 @@ fetch("header.html")
 <!-- MAIN CONTENT -->
 <div class="container">
 
-  <h2 style="text-align:center; margin-bottom: 20px;">Book a Meeting with Tim Williams</h2>
+<!-- =========================================================
+     CALENDAR HERO
+     ========================================================= -->
+
+<section class="calendar-hero">
+
+  <h1>Book a Meeting with Tim Williams</h1>
+
+  <div class="hero-overview">
+    Have a programme, transformation or delivery challenge to discuss?
+    Book a conversation to explore how I can help with programme leadership,
+    cyber security uplift, cloud adoption or modern workplace transformation.
+  </div>
+
+</section>
 
   <div class="calendly-inline-widget"
        data-url="https://calendly.com/timwilliams07/30min?background_color=0a2540&text_color=ffffff"

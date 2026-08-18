@@ -2252,29 +2252,82 @@ body.dark.page-portfolio .portfolio-value-number {
     }
 
 
-    /* --------------------------------------------------------
-       2. ACCORDION HEADERS — CENTRE ALL TITLES
-       -------------------------------------------------------- */
+    /* ============================================================
+   MOBILE ACCORDION HEADERS
+   LEFT ACCENT | CENTRED TITLE | RIGHT TOGGLE
+   ============================================================ */
+
+@media (max-width: 600px) {
 
     body.page-portfolio .portfolio-section .category-header {
+        position: relative;
+
+        display: flex !important;
+        align-items: center !important;
         justify-content: center !important;
+
+        width: 100%;
+        box-sizing: border-box;
+
         text-align: center !important;
     }
 
-    /*
-       Keep the blue accent and title together as one centred
-       group, while keeping the +/- control at the right.
-    */
+    /* --------------------------------------------------------
+       BLUE LEFT ACCENT
+       -------------------------------------------------------- */
 
     body.page-portfolio .portfolio-section .category-header::before {
-        flex: 0 0 3px;
+        position: absolute;
+
+        left: 0;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        width: 3px;
+        height: 20px;
+
+        margin: 0 !important;
+
+        flex: none;
+
+        background: #0a66c2;
+        border-radius: 4px;
     }
 
-    body.page-portfolio .portfolio-section .category-toggle {
-        margin-left: 12px !important;
-        flex: 0 0 auto;
+    /* --------------------------------------------------------
+       TITLE
+       -------------------------------------------------------- */
+
+    body.page-portfolio .portfolio-section .category-header {
+        padding-left: 36px !important;
+        padding-right: 36px !important;
     }
-}   
+
+    /* --------------------------------------------------------
+       RIGHT + / FULL BLUE CIRCLE
+       -------------------------------------------------------- */
+
+    body.page-portfolio .portfolio-section .category-toggle {
+        position: absolute;
+
+        right: 0;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        width: 28px;
+        height: 28px;
+
+        margin: 0 !important;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex: none;
+    }
+}
    
 </style>
 </head>

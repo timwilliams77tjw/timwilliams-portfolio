@@ -1949,14 +1949,25 @@ body.dark.page-portfolio .portfolio-value-number {
     border: 1px solid rgba(255,255,255,0.25);
 }
 
-/* PORTFOLIO HERO — MATCH INDEX HERO */
+/* ============================================================
+   PORTFOLIO HERO — FULL WIDTH CONTENT
+   ============================================================ */
+
 .portfolio-hero {
     background: #ffffff;
+
     border-left: 6px solid #0a66c2;
     border-radius: 24px;
+
     padding: 48px 42px;
+
     margin: 42px auto 32px;
-    max-width: 1100px;
+
+    width: min(1120px, calc(100% - 32px));
+    max-width: none;
+
+    box-sizing: border-box;
+
     box-shadow: 0 12px 32px rgba(0,31,63,.08);
 }
 
@@ -2071,58 +2082,139 @@ body.dark.page-portfolio .portfolio-value-number {
     grid-template-columns: 1fr;
   }
 }
-/* ============================
-   PORTFOLIO HERO IMAGE LAYOUT
-=============================== */
+/* ============================================================
+   PORTFOLIO HERO — 1/3 TEXT + 2/3 IMAGE
+   ============================================================ */
 
 .portfolio-hero-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+
+    display: grid;
+
+    /*
+       Desktop layout:
+
+       ┌──────────────┬───────────────────────────────┐
+       │              │                               │
+       │   TEXT       │            IMAGE              │
+       │   1 column   │          2 columns            │
+       │              │                               │
+       └──────────────┴───────────────────────────────┘
+    */
+
+    grid-template-columns: 1fr 2fr;
+
+    align-items: stretch;
+
+    gap: 32px;
 }
 
+
+/* ------------------------------------------------------------
+   HERO TEXT — COLUMN 1
+   ------------------------------------------------------------ */
+
 .portfolio-hero-text {
-  flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 10px 0;
+}
+
+
+/* ------------------------------------------------------------
+   HERO IMAGE — COLUMNS 2 + 3
+   ------------------------------------------------------------ */
+
+.portfolio-hero-image {
+    min-width: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
 }
 
 .portfolio-hero-image img {
-  width: 340px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 31, 63, 0.12);
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    min-height: 320px;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 6px 18px rgba(0, 31, 63, 0.12);
 }
 
-/* iPad (horizontal) */
-@media (max-width: 900px) {
-  .portfolio-hero-inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
 
-  .portfolio-hero-image img {
-    width: 280px;
-  }
+/* ============================================================
+   iPAD / TABLET LANDSCAPE
+   ============================================================ */
+
+@media (max-width: 900px) and (min-width: 601px) {
+
+    .portfolio-hero-inner {
+        grid-template-columns: 1fr 2fr;
+        gap: 24px;
+    }
+
+    .portfolio-hero-image img {
+        min-height: 280px;
+    }
 }
 
-/* Mobile (vertical) */
+
+/* ============================================================
+   MOBILE — STACK VERTICALLY
+   ============================================================ */
+
 @media (max-width: 600px) {
-  .portfolio-hero-inner {
-    flex-direction: column;
-    text-align: center;
-  }
 
-  .portfolio-hero-image {
-    margin-top: 20px;
-  }
+    .portfolio-hero-inner {
+        display: grid;
 
-  .portfolio-hero-image img {
-    width: 240px;
-    margin: 0 auto;
-  }
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+
+        text-align: center;
+    }
+
+    .portfolio-hero-text {
+        padding: 0;
+    }
+
+    .portfolio-hero-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .portfolio-hero-image img {
+        width: 100%;
+        height: auto;
+
+        min-height: 0;
+
+        max-height: none;
+
+        object-fit: cover;
+
+        border-radius: 14px;
+    }
 }
-
    
 </style>
 </head>

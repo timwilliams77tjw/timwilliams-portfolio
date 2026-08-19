@@ -3019,106 +3019,212 @@ body.dark-mode.page-site-search
 }
 
 /* ============================================================
-   CV — SAFE MOBILE CARD WIDTH FIX
-   Does NOT alter accordion behaviour
-   Does NOT alter card visibility
+   CV ACCORDION STATE
    ============================================================ */
 
-@media (max-width: 700px) {
-
-    body.page-site-search .cv-section {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-
-    body.page-site-search .cv-section .card-list {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-
-    /* Work Experience */
-    body.page-site-search
-    .cv-section[data-category="experience"]
-    .searchable-item {
-
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
-    }
-
-    body.page-site-search
-    .cv-section[data-category="experience"]
-    .card {
-
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
-    }
-
-    /* Skills + Certifications */
-    body.page-site-search
-    .cv-section[data-category="skills"] .grid,
-
-    body.page-site-search
-    .cv-section[data-category="certifications"] .grid {
-
-        width: 100%;
-        max-width: 100%;
-        grid-template-columns: 1fr;
-        box-sizing: border-box;
-    }
-
-    body.page-site-search
-    .cv-section[data-category="skills"] .searchable-item,
-
-    body.page-site-search
-    .cv-section[data-category="certifications"] .searchable-item {
-
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
-    }
-
-    body.page-site-search
-    .cv-section[data-category="skills"] .card,
-
-    body.page-site-search
-    .cv-section[data-category="certifications"] .card {
-
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
-    }
-
-    /* Awards */
-    body.page-site-search
-    .cv-section[data-category="awards"] .searchable-item,
-
-    body.page-site-search
-    .cv-section[data-category="awards"] .card {
-
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
-    }
-
-    /* Prevent text from creating horizontal overflow */
-    body.page-site-search
-    .cv-section .card-title,
-
-    body.page-site-search
-    .cv-section .card li {
-
-        overflow-wrap: anywhere;
-    }
+.cv-section .card-list {
+    display: none;
 }
+
+.cv-section.is-open .card-list {
+    display: block;
+}
+
+   /* ============================================================
+   CV CARD LAYOUT — FINAL MOBILE FIX
+   ============================================================ */
+
+/* Keep CV category containers full width */
+.cv-section,
+.cv-section .card-list {
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+}
+
+/* ============================================================
+   WORK EXPERIENCE
+   ============================================================ */
+
+.cv-section[data-category="experience"] .card-list {
+    display: block !important;
+}
+
+.cv-section[data-category="experience"] .searchable-item {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.cv-section[data-category="experience"] .card {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
+/* ============================================================
+   CORE SKILLS + CERTIFICATIONS
+   ============================================================ */
+
+.cv-section[data-category="skills"] .grid,
+.cv-section[data-category="certifications"] .grid {
+    display: grid !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.cv-section[data-category="skills"] .searchable-item,
+.cv-section[data-category="certifications"] .searchable-item {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+}
+
+.cv-section[data-category="skills"] .card,
+.cv-section[data-category="certifications"] .card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+}
+
+
+/* ============================================================
+   ACHIEVEMENTS
+   ============================================================ */
+
+.cv-section[data-category="awards"] .searchable-item,
+.cv-section[data-category="awards"] .card {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .cv-section[data-category="skills"] .grid,
+    .cv-section[data-category="certifications"] .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    /* Force every CV card to use the available screen width */
+    .cv-section .card-list {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Single-column cards */
+    .cv-section[data-category="skills"] .grid,
+    .cv-section[data-category="certifications"] .grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        width: 100% !important;
+        gap: 16px !important;
+    }
+
+    /* Critical: prevent flex/grid children from becoming narrow */
+    .cv-section .searchable-item,
+    .cv-section .card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Stop long text forcing the card into an awkward layout */
+    .cv-section .card * {
+        max-width: 100% !important;
+        min-width: 0 !important;
+        overflow-wrap: anywhere !important;
+        word-break: normal !important;
+    }
+
+    /* Titles */
+    .cv-section .card-title {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Lists */
+    .cv-section .card ul {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding-left: 20px !important;
+    }
+
+    .cv-section .card li {
+        width: auto !important;
+        max-width: none !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    /* Awards columns must stack */
+    .cv-section[data-category="awards"] .awards-columns {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .cv-section[data-category="awards"] .awards-columns > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 20px !important;
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media (max-width: 400px) {
+
+    .cv-section .card {
+        padding: 16px !important;
+    }
+
+    .cv-section .card-title {
+        font-size: 1rem !important;
+        line-height: 1.35 !important;
+    }
+
+    .cv-section .card li {
+        font-size: 0.9rem !important;
+        line-height: 1.55 !important;
+    }
+
+}   
 </style>
 </head>
 

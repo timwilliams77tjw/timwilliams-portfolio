@@ -14042,6 +14042,97 @@ hr.evidence-section-divider {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* =========================================================
+   ORIGINAL ECOSYSTEM STYLE + GREEN GRADIENT HOVER
+   ========================================================= */
+
+/* Base layout */
+.bcs-ecosystem {
+    padding: 2rem 0;
+}
+
+.bcs-ecosystem-heading {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.bcs-ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Original card style */
+.bcs-ecosystem-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem 1.4rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    transition: all 0.25s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Icon container */
+.bcs-ecosystem-icon i {
+    font-size: 1.6rem;
+    color: #4a8cff; /* keep original coloured icons */
+    transition: color 0.25s ease-out, transform 0.25s ease-out;
+}
+
+/* Hover gradient overlay */
+.bcs-ecosystem-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(34, 197, 94, 0.18),
+        rgba(74, 140, 255, 0.18)
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease-out;
+    z-index: 0;
+}
+
+/* Hover behaviour */
+.bcs-ecosystem-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    border-color: rgba(34, 197, 94, 0.45);
+}
+
+.bcs-ecosystem-card:hover::before {
+    opacity: 1;
+}
+
+/* Icon hover effect */
+.bcs-ecosystem-card:hover .bcs-ecosystem-icon i {
+    color: #22c55e; /* green accent on hover */
+    transform: translateY(-2px);
+}
+
+/* Ensure content stays above gradient */
+.bcs-ecosystem-content,
+.bcs-ecosystem-icon {
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .bcs-ecosystem-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .bcs-ecosystem-grid {
+        grid-template-columns: 1fr;
+    }
+}
+  
 </style>
 
 

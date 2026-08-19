@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14304,6 +14304,539 @@ hr.evidence-section-divider {
     }
 
 }  
+
+.cpd-visual-card {
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.15);
+  padding: 0;
+  overflow: hidden;
+}
+
+.cpd-visual-toggle {
+  width: 100%;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.cpd-visual-content {
+  display: none;
+  padding: 20px;
+}
+
+.cpd-visual-card.open .cpd-visual-content {
+  display: block;
+}
+
+.cpd-visual-card.open .chevron {
+  transform: rotate(180deg);
+}
+
+.cpd-visual-content img {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cpd-visual-card {
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.15);
+  padding: 0;
+  overflow: hidden;
+}
+
+.cpd-visual-toggle {
+  width: 100%;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.cpd-visual-content {
+  display: none;
+  padding: 20px;
+}
+
+.cpd-visual-card.open .cpd-visual-content {
+  display: block;
+}
+
+.cpd-visual-card.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Fade-in animation */
+.cpd-visual-content img {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FINAL FIX — Restore CPD Pillar Colours */
+section.cpd-pillars-section .pillar-card.completed {
+  background: linear-gradient(135deg,#16a34a,#22c55e) !important;
+}
+
+section.cpd-pillars-section .pillar-card.remaining {
+  background: linear-gradient(135deg,#dc2626,#ef4444) !important;
+}
+
+section.cpd-pillars-section .pillar-card.projected {
+  background: linear-gradient(135deg,#2563eb,#60a5fa) !important;
+}
+
+section.cpd-pillars-section .pillar-fill {
+  opacity:1 !important;
+}
+/* FINAL OVERRIDE — Prevent JS or late CSS from wiping gradients */
+.pillar-card.completed,
+.pillar-card.remaining,
+.pillar-card.projected {
+    background: unset !important;
+    background-image: unset !important;
+}
+
+.pillar-card.completed {
+    background-image: linear-gradient(135deg,#16a34a,#22c55e) !important;
+}
+
+.pillar-card.remaining {
+    background-image: linear-gradient(135deg,#dc2626,#ef4444) !important;
+}
+
+.pillar-card.projected {
+    background-image: linear-gradient(135deg,#2563eb,#60a5fa) !important;
+}
+
+.pillar-fill {
+    opacity: 1 !important;
+}
+
+.pillar-fill {
+    height: 12px !important;
+    opacity: 1 !important;
+    transition: width 1.2s ease !important;
+}
+
+/* ============================================================
+   FINAL BCS SIX-CARD LAYOUT
+   Clean readable mobile/tablet layout
+============================================================ */
+
+section.bcs-development-section
+.bcs-ecosystem-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+
+    width: 100%;
+}
+
+
+/* ------------------------------------------------------------
+   CARD
+------------------------------------------------------------ */
+
+section.bcs-development-section
+.bcs-ecosystem-card {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 14px;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 18px;
+
+    box-sizing: border-box;
+
+    background: #f7f9fc;
+
+    border: 1px solid #e3e9f1;
+
+    border-radius: 14px;
+}
+
+
+/* ------------------------------------------------------------
+   ICON
+------------------------------------------------------------ */
+
+section.bcs-development-section
+.bcs-ecosystem-icon {
+
+    flex: 0 0 42px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    border-radius: 12px;
+
+    font-size: 1.05rem;
+}
+
+
+/* ------------------------------------------------------------
+   TEXT CONTAINER
+------------------------------------------------------------ */
+
+section.bcs-development-section
+.bcs-ecosystem-content {
+
+    flex: 1 1 auto;
+
+    min-width: 0;
+
+    width: auto;
+}
+
+
+/* ------------------------------------------------------------
+   CARD TITLE
+------------------------------------------------------------ */
+
+section.bcs-development-section
+.bcs-ecosystem-content h4 {
+
+    margin: 0 0 6px;
+
+    font-size: 0.95rem;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    color: #1a202c;
+}
+
+
+/* ------------------------------------------------------------
+   CARD TEXT
+------------------------------------------------------------ */
+
+section.bcs-development-section
+.bcs-ecosystem-content p {
+
+    margin: 0;
+
+    font-size: 0.86rem;
+
+    line-height: 1.5;
+
+    color: #4a5568;
+
+    overflow-wrap: break-word;
+
+    word-break: normal;
+
+    white-space: normal;
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 900px) {
+
+    section.bcs-development-section
+    .bcs-ecosystem-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    section.bcs-development-section
+    .bcs-ecosystem-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    section.bcs-development-section
+    .bcs-ecosystem-card {
+
+        width: 100%;
+
+        padding: 16px;
+
+        gap: 14px;
+
+        align-items: flex-start;
+    }
+
+
+    section.bcs-development-section
+    .bcs-ecosystem-icon {
+
+        flex: 0 0 42px;
+
+        width: 42px;
+        height: 42px;
+    }
+
+
+    section.bcs-development-section
+    .bcs-ecosystem-content h4 {
+
+        font-size: 0.98rem;
+
+        line-height: 1.35;
+    }
+
+
+    section.bcs-development-section
+    .bcs-ecosystem-content p {
+
+        font-size: 0.88rem;
+
+        line-height: 1.55;
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL IPHONE
+============================================================ */
+
+@media (max-width: 400px) {
+
+    section.bcs-development-section
+    .bcs-ecosystem-card {
+
+        padding: 14px;
+
+        gap: 12px;
+    }
+
+
+    section.bcs-development-section
+    .bcs-ecosystem-icon {
+
+        flex: 0 0 38px;
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 0.95rem;
+    }
+
+
+    section.bcs-development-section
+    .bcs-ecosystem-content h4 {
+
+        font-size: 0.94rem;
+    }
+
+
+    section.bcs-development-section
+    .bcs-ecosystem-content p {
+
+        font-size: 0.84rem;
+
+        line-height: 1.5;
+    }
+
+}
+/* ============================================================
+   FINAL CPD PILLAR DESIGN
+   RESTORE ORIGINAL WHITE CARD STYLE
+   Black icon + black metric + black title
+   Coloured bar at bottom
+============================================================ */
+
+section.cpd-pillars-section .pillar-card {
+    background: #ffffff !important;
+    background-image: none !important;
+
+    color: #111111 !important;
+
+    border: 1px solid #d9e2ec !important;
+    border-radius: 20px;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.06);
+
+    overflow: hidden;
+    position: relative;
+
+    box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------
+   ICON
+------------------------------------------------------------ */
+
+section.cpd-pillars-section .pillar-icon {
+    background: transparent !important;
+    color: #111111 !important;
+
+    width: 56px;
+    height: 56px;
+
+    margin-bottom: 14px;
+}
+
+section.cpd-pillars-section .pillar-icon i {
+    color: #111111 !important;
+}
+
+
+/* ------------------------------------------------------------
+   VALUE
+------------------------------------------------------------ */
+
+section.cpd-pillars-section .pillar-value {
+    color: #111111 !important;
+
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+
+
+/* ------------------------------------------------------------
+   TITLE
+------------------------------------------------------------ */
+
+section.cpd-pillars-section .pillar-title {
+    color: #111111 !important;
+
+    margin-bottom: 18px;
+}
+
+
+/* ------------------------------------------------------------
+   PROGRESS TRACK
+------------------------------------------------------------ */
+
+section.cpd-pillars-section .pillar-progress {
+    width: 100%;
+    height: 8px;
+
+    margin-top: auto;
+
+    background: #e5e7eb !important;
+
+    border-radius: 999px;
+
+    overflow: hidden;
+}
+
+
+/* ------------------------------------------------------------
+   PROGRESS FILL
+------------------------------------------------------------ */
+
+section.cpd-pillars-section .pillar-fill {
+    display: block;
+
+    height: 100%;
+
+    width: 0%;
+
+    border-radius: 999px;
+
+    opacity: 1 !important;
+
+    transition:
+        width 1.2s ease;
+
+    background-image: none !important;
+}
+
+
+/* ------------------------------------------------------------
+   COMPLETED — GREEN
+------------------------------------------------------------ */
+
+section.cpd-pillars-section
+.pillar-card.pillar-completed
+.pillar-fill {
+    background: #007b5f !important;
+}
+
+
+/* ------------------------------------------------------------
+   REMAINING — GOLD
+------------------------------------------------------------ */
+
+section.cpd-pillars-section
+.pillar-card.pillar-remaining
+.pillar-fill {
+    background: #b8860b !important;
+}
+
+
+/* ------------------------------------------------------------
+   PROJECTED — BLUE
+------------------------------------------------------------ */
+
+section.cpd-pillars-section
+.pillar-card.pillar-projected
+.pillar-fill {
+    background: #0a66c2 !important;
+}
+
+
+/* ------------------------------------------------------------
+   REMOVE THE OLD "CPD" CORNER BADGE
+------------------------------------------------------------ */
+
+section.cpd-pillars-section
+.pillar-card::after {
+    display: none !important;
+}   
 </style>
 
 
@@ -20382,182 +20915,123 @@ function generateInsights() {
 }
 
 
-/* ============================================================
-   PROGRESS PILLARS
-============================================================ */
+/* ==========================================================
+   CPD PROGRESS PILLARS
+   FIXED — reads count-up targets rather than temporary 0 values
+========================================================== */
 
 function generateProgressPillars() {
 
     const completedEl =
-        document.getElementById(
-            "metric-total-hours"
-        );
-
+        document.getElementById("metric-total-hours");
 
     const remainingEl =
-        document.getElementById(
-            "metric-hours-remaining"
-        );
-
+        document.getElementById("metric-hours-remaining");
 
     const projectedEl =
-        document.getElementById(
-            "metric-projected-hours"
-        );
+        document.getElementById("metric-projected-hours");
 
-
-    if (
-        !completedEl ||
-        !remainingEl ||
-        !projectedEl
-    ) {
-
-        console.warn(
-            "[CPD] Progress pillar elements not found."
-        );
-
+    if (!completedEl || !remainingEl || !projectedEl) {
+        console.warn("[CPD] Progress pillar elements not found.");
         return;
-
     }
 
-
+    /*
+     * IMPORTANT:
+     * The CPD count-up animation temporarily displays 0.
+     * The real values are stored in data-target.
+     */
     const completed =
-        parseFloat(
-            completedEl.textContent
-        ) || 0;
-
+        parseFloat(completedEl.dataset.target) || 0;
 
     const remaining =
-        parseFloat(
-            remainingEl.textContent
-        ) || 0;
-
+        parseFloat(remainingEl.dataset.target) || 0;
 
     const projected =
-        parseFloat(
-            projectedEl.textContent
-        ) || 0;
-
+        parseFloat(projectedEl.dataset.target) || 0;
 
     const max =
         Math.max(
-            projected,
             completed,
             remaining,
+            projected,
             1
         );
-
 
     function setPillar(
         fillId,
         labelId,
-        value,
-        className
+        value
     ) {
 
         const fill =
-            document.getElementById(
-                fillId
-            );
-
+            document.getElementById(fillId);
 
         const label =
-            document.getElementById(
-                labelId
-            );
+            document.getElementById(labelId);
 
-
-        if (
-            !fill ||
-            !label
-        ) {
+        if (!fill || !label) {
             return;
         }
 
-
-        const card =
-            fill.closest(
-                ".pillar-card"
-            );
-
-
-        if (!card) {
-            return;
-        }
-
-
-        card.classList.remove(
-            "pillar-completed",
-            "pillar-remaining",
-            "pillar-projected"
-        );
-
-
-        card.classList.add(
-            className
-        );
-
+        /*
+         * DO NOT change the pillar-card class.
+         *
+         * The HTML already contains:
+         * pillar-completed
+         * pillar-remaining
+         * pillar-projected
+         *
+         * Keeping those classes intact allows the
+         * CSS colour rules to work consistently.
+         */
 
         label.textContent =
             value.toFixed(1);
 
-
         const percent =
             Math.min(
-                (
-                    value /
-                    max
-                ) *
-                100,
+                (value / max) * 100,
                 100
             );
 
+        /*
+         * Start at zero and animate the coloured bar.
+         */
+        fill.style.width = "0%";
 
-        requestAnimationFrame(
-            () => {
+        requestAnimationFrame(() => {
+
+            requestAnimationFrame(() => {
 
                 fill.style.width =
-                    percent +
-                    "%";
+                    percent + "%";
 
-            }
-        );
+            });
 
+        });
     }
 
-
-    setTimeout(
-        () => {
-
-            setPillar(
-                "pillar-completed",
-                "pillar-completed-label",
-                completed,
-                "pillar-completed"
-            );
-
-
-            setPillar(
-                "pillar-remaining",
-                "pillar-remaining-label",
-                remaining,
-                "pillar-remaining"
-            );
-
-
-            setPillar(
-                "pillar-projected",
-                "pillar-projected-label",
-                projected,
-                "pillar-projected"
-            );
-
-        },
-        100
+    setPillar(
+        "pillar-completed",
+        "pillar-completed-label",
+        completed
     );
 
-}
+    setPillar(
+        "pillar-remaining",
+        "pillar-remaining-label",
+        remaining
+    );
 
+    setPillar(
+        "pillar-projected",
+        "pillar-projected-label",
+        projected
+    );
+
+    debug("Progress pillars generated");
+}
 
 /* ============================================================
    DUAL RADAR
@@ -23318,6 +23792,18 @@ document.addEventListener(
 
     }
 );
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggles = document.querySelectorAll('.cpd-visual-toggle');
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const card = toggle.closest('.cpd-visual-card');
+      card.classList.toggle('open');
+    });
+  });
+});
+
+  
 </script>
 
 
@@ -24523,6 +25009,19 @@ document.addEventListener(
 
     <div class="bcs-ecosystem-heading">
         <h3>Professional Development Ecosystem</h3>
+
+<div class="cpd-visual-card">
+  <button class="cpd-visual-toggle">
+    <span>BCS CPD Visual Summary</span>
+    <span class="chevron">▼</span>
+  </button>
+
+  <div class="cpd-visual-content">
+    <img src="infographic.png" alt="BCS CPD Ecosystem Visual">
+  </div>
+</div>
+
+      
         <p>
             Examples of professional development activity recorded
             through my BCS CPD record.
@@ -24533,88 +25032,102 @@ document.addEventListener(
     <div class="bcs-ecosystem-grid">
 
         <!-- LEARNING -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Learning</h4>
-                <p>
-                    Google PM, MS Teams, PMO, SAFe Agile, Six Sigma, ITIL,  
-                    PMI Agile, NIST Cyber, Integrated PMO Course
-                </p>
-            </div>
-        </article>
+       <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-graduation-cap"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Learning</h4>
+        <p>
+            Managing Projects with MS Teams, Google PM Skills, Copilot Studio Training Day,
+            Integrated PMO Course, PMI CPMAI, Generative AI (PMI), Prompt Engineering,
+            PMI Essentials M.O.R.E., Six Sigma, ITIL, PMI Agile Practitioner,
+            NIST Cyber Framework, APM Practitioner, Prince2 Practitioner
+        </p>
+    </div>
+</article>
+
 
         <!-- AI -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-robot"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>AI</h4>
-                <p>
-                    PMI CPMAI, Generative AI (PMI), Prompt Engineering,  
-                    Copilot Studio, Talking to AI
-                </p>
-            </div>
-        </article>
+       <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>AI</h4>
+        <p>
+            PMI CPMAI, Generative AI Overview (PMI), Prompt Engineering for PMs,
+            Copilot Studio, Talking to AI, AI in Project Management (APM),
+            AI & Sustainability webinar
+        </p>
+    </div>
+</article>
+
 
         <!-- MENTORING -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-user-group"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Mentoring</h4>
-                <p>
-                    Halesowen College lecture, student mock interviews,  
-                    Year 10 World of Work, Brandhall careers fair
-                </p>
-            </div>
-        </article>
+   <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-user-group"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Mentoring</h4>
+        <p>
+            Halesowen College lecture, Richard Rose mock interviews,
+            Year 10 World of Work, Brandhall careers fair,
+            STEM mentoring, Inspiring the Future mentoring,
+            APM mentoring activities
+        </p>
+    </div>
+</article>
+
 
         <!-- COMMUNITY -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-globe"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Community</h4>
-                <p>
-                    APM & PMI contribution, SIG groups, volunteering events,  
-                    APM South Wales & West AI session
-                </p>
-            </div>
-        </article>
+  <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-globe"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Community</h4>
+        <p>
+            APM & PMI community contribution, SIG groups, volunteering events,
+            APM South Wales & West AI session, PMI membership,
+            House of PMO membership, BCS membership, APM membership
+        </p>
+    </div>
+</article>
+
 
         <!-- PUBLISHING -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-pen-nib"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Publishing</h4>
-                <p>
-                    Programme management tools article,  
-                    Gantt vs Jira article (LinkedIn & portfolio)
-                </p>
-            </div>
-        </article>
+ <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-pen-nib"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Publishing</h4>
+        <p>
+            Article: Top 10 Tools for Programme Managers (2026),
+            Gantt vs Jira article (LinkedIn & portfolio)
+        </p>
+    </div>
+</article>
+
 
         <!-- VOLUNTEERING -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-handshake"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Volunteering</h4>
-                <p>
-                    APM volunteer status, Inspiring the Future Gold status,  
-                    PMI membership, community events
-                </p>
-            </div>
-        </article>
+    <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-handshake"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Volunteering</h4>
+        <p>
+            APM volunteer status, Inspiring the Future Gold status,
+            STEM volunteer, Richard Rose mock interviews,
+            Year 10 World of Work, Brandhall careers fair,
+            PMI community volunteering
+        </p>
+    </div>
+</article>
+
 
     </div>
 

@@ -2893,7 +2893,143 @@ body.dark-mode.page-site-search
         word-break: normal;
     }
 }
- 
+
+/* ============================================================
+   CV CATEGORY / CARD LAYOUT — FINAL FIX
+   ============================================================ */
+
+/* Category sections */
+.cv-section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Card-list is the actual expandable content */
+.cv-section .card-list {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Normal single-column sections */
+.cv-section[data-category="experience"] .card-list,
+.cv-section[data-category="awards"] .card-list {
+    display: block;
+}
+
+/* Skills + certifications use the internal grid */
+.cv-section .card-list > .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    box-sizing: border-box;
+}
+
+/* Every searchable item must be allowed to shrink */
+.cv-section .searchable-item {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Every card fills its grid cell */
+.cv-section .card {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+/* Long titles/text must wrap rather than force the card wider */
+.cv-section .card-title,
+.cv-section .card li {
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+/* Awards two-column content */
+.cv-section .awards-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 767px) {
+
+    .cv-section .card-list {
+        width: 100%;
+    }
+
+    /* Skills and Certifications become ONE full-width column */
+    .cv-section .card-list > .grid {
+        grid-template-columns: minmax(0, 1fr);
+        width: 100%;
+        gap: 0.85rem;
+    }
+
+    .cv-section .searchable-item,
+    .cv-section .card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Awards also stack */
+    .cv-section .awards-columns {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    /* Don't let padding/borders create overflow */
+    .cv-section,
+    .cv-section .card-list,
+    .cv-section .grid,
+    .cv-section .searchable-item,
+    .cv-section .card {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media (max-width: 420px) {
+
+    .cv-section .card {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .cv-section .card-title {
+        font-size: 1rem;
+        line-height: 1.35;
+    }
+
+    .cv-section .card li {
+        font-size: 0.92rem;
+        line-height: 1.55;
+    }
+}
+
+/* ============================================================
+   CV ACCORDION STATE
+   ============================================================ */
+
+.cv-section .card-list {
+    display: none;
+}
+
+.cv-section.is-open .card-list {
+    display: block;
+}
+   
 </style>
 </head>
 
@@ -3598,91 +3734,188 @@ fetch("footer.html")
 
 
 
-<!-- ========================= -->
-<!-- GLOBAL SCRIPTS (Accordion, Filters, Search, Animations) -->
-<!-- ========================= -->
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  const filterButtons = document.querySelectorAll(".filter-btn");
-  const sections = document.querySelectorAll(".cv-section");
+    const filterButtons =
+        document.querySelectorAll(".filter-btn");
 
-  const closeAll = () => {
-    sections.forEach(s => {
-      const list = s.querySelector(".card-list");
-      const t = s.querySelector(".category-toggle");
-      if (list) list.style.display = "none";
-      if (t) t.textContent = "+";
+    const sections =
+        document.querySelectorAll(".cv-section");
+
+    const closeAll = () => {
+
+        sections.forEach(section => {
+
+            section.classList.remove("is-open");
+
+            const toggle =
+                section.querySelector(".category-toggle");
+
+            if (toggle) {
+                toggle.textContent = "+";
+            }
+
+        });
+
+    };
+
+
+    const openSection = section => {
+
+        if (!section) return;
+
+        section.classList.add("is-open");
+
+        const toggle =
+            section.querySelector(".category-toggle");
+
+        if (toggle) {
+            toggle.textContent = "−";
+        }
+
+    };
+
+
+    /* ========================================================
+       FILTERS
+    ======================================================== */
+
+    filterButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            filterButtons.forEach(btn =>
+                btn.classList.remove("active-filter")
+            );
+
+            button.classList.add("active-filter");
+
+            const filter =
+                button.dataset.filter;
+
+            closeAll();
+
+            sections.forEach(section => {
+
+                section.style.display =
+                    section.dataset.category === filter
+                        ? ""
+                        : "none";
+
+            });
+
+            const target =
+                document.querySelector(
+                    `.cv-section[data-category="${filter}"]`
+                );
+
+            openSection(target);
+
+        });
+
     });
-  };
 
-  const openSection = s => {
-    const list = s.querySelector(".card-list");
-    const t = s.querySelector(".category-toggle");
-    if (list) list.style.display = "block";
-    if (t) t.textContent = "−";
-  };
 
-  /* FILTERS */
-  filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      filterButtons.forEach(b => b.classList.remove("active-filter"));
-      btn.classList.add("active-filter");
+    /* ========================================================
+       ACCORDIONS
+    ======================================================== */
 
-      const filter = btn.dataset.filter;
+    document
+        .querySelectorAll(".cv-section .category-header")
+        .forEach(header => {
 
-      sections.forEach(s => {
-        s.style.display = s.dataset.category === filter ? "block" : "none";
-      });
+            header.addEventListener("click", () => {
 
-      closeAll();
-      const target = document.querySelector(`[data-category="${filter}"]`);
-      if (target) openSection(target);
-    });
-  });
+                const section =
+                    header.closest(".cv-section");
 
-  /* ACCORDIONS */
-  document.querySelectorAll(".category-header").forEach(header => {
-    header.addEventListener("click", () => {
-      const section = header.parentElement;
-      const list = section.querySelector(".card-list");
-      const toggle = section.querySelector(".category-toggle");
-      const isOpen = list.style.display === "block";
+                if (!section) return;
 
-      closeAll();
-      if (!isOpen) {
-        list.style.display = "block";
-        toggle.textContent = "−";
-      }
-    });
-  });
+                const isOpen =
+                    section.classList.contains("is-open");
 
-  /* EXPAND ALL */
-  document.getElementById("expandAllBtn").addEventListener("click", () => {
-    filterButtons.forEach(b => b.classList.remove("active-filter"));
-    sections.forEach(s => {
-      s.style.display = "block";
-      openSection(s);
-    });
-  });
+                closeAll();
 
-  /* COLLAPSE ALL */
-  document.getElementById("collapseAllBtn").addEventListener("click", () => {
-    filterButtons.forEach(b => b.classList.remove("active-filter"));
-    closeAll();
-  });
+                if (!isOpen) {
+                    openSection(section);
+                }
 
-  /* CARD ANIMATIONS */
-  const cards = document.querySelectorAll(".card");
-  cards.forEach((card, index) => {
-    setTimeout(() => {
-      card.classList.add("card-visible");
-    }, 80 * index);
-  });
+            });
+
+        });
+
+
+    /* ========================================================
+       EXPAND ALL
+    ======================================================== */
+
+    const expandAll =
+        document.getElementById("expandAllBtn");
+
+    if (expandAll) {
+
+        expandAll.addEventListener("click", () => {
+
+            filterButtons.forEach(btn =>
+                btn.classList.remove("active-filter")
+            );
+
+            sections.forEach(section => {
+
+                section.style.display = "";
+                openSection(section);
+
+            });
+
+        });
+
+    }
+
+
+    /* ========================================================
+       COLLAPSE ALL
+    ======================================================== */
+
+    const collapseAll =
+        document.getElementById("collapseAllBtn");
+
+    if (collapseAll) {
+
+        collapseAll.addEventListener("click", () => {
+
+            filterButtons.forEach(btn =>
+                btn.classList.remove("active-filter")
+            );
+
+            sections.forEach(section => {
+                section.style.display = "";
+            });
+
+            closeAll();
+
+        });
+
+    }
+
+
+    /* ========================================================
+       CARD ANIMATION
+    ======================================================== */
+
+    document
+        .querySelectorAll(".cv-section .card")
+        .forEach((card, index) => {
+
+            setTimeout(() => {
+                card.classList.add("card-visible");
+            }, 80 * index);
+
+        });
 
 });
 </script>
+
 
 <script src="global.js"></script>
 <script src="site-search.js" defer></script>

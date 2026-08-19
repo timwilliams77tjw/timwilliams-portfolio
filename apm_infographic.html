@@ -14435,7 +14435,11 @@ section.cpd-pillars-section .pillar-fill {
     opacity: 1 !important;
 }
 
-
+.pillar-fill {
+    height: 12px !important;
+    opacity: 1 !important;
+    transition: width 1.2s ease !important;
+}
    
 </style>
 
@@ -20619,16 +20623,14 @@ function generateProgressPillars() {
         }
 
 
-        card.classList.remove(
-            "pillar-completed",
-            "pillar-remaining",
-            "pillar-projected"
-        );
+   card.classList.remove(
+    "completed",
+    "remaining",
+    "projected"
+);
 
+card.classList.add(className.replace("pillar-", ""));
 
-        card.classList.add(
-            className
-        );
 
 
         label.textContent =
@@ -24691,88 +24693,102 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="bcs-ecosystem-grid">
 
         <!-- LEARNING -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Learning</h4>
-                <p>
-                    Google PM, MS Teams, PMO, SAFe Agile, Six Sigma, ITIL,  
-                    PMI Agile, NIST Cyber, Integrated PMO Course
-                </p>
-            </div>
-        </article>
+       <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-graduation-cap"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Learning</h4>
+        <p>
+            Managing Projects with MS Teams, Google PM Skills, Copilot Studio Training Day,
+            Integrated PMO Course, PMI CPMAI, Generative AI (PMI), Prompt Engineering,
+            PMI Essentials M.O.R.E., Six Sigma, ITIL, PMI Agile Practitioner,
+            NIST Cyber Framework, APM Practitioner, Prince2 Practitioner
+        </p>
+    </div>
+</article>
+
 
         <!-- AI -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-robot"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>AI</h4>
-                <p>
-                    PMI CPMAI, Generative AI (PMI), Prompt Engineering,  
-                    Copilot Studio, Talking to AI
-                </p>
-            </div>
-        </article>
+       <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>AI</h4>
+        <p>
+            PMI CPMAI, Generative AI Overview (PMI), Prompt Engineering for PMs,
+            Copilot Studio, Talking to AI, AI in Project Management (APM),
+            AI & Sustainability webinar
+        </p>
+    </div>
+</article>
+
 
         <!-- MENTORING -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-user-group"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Mentoring</h4>
-                <p>
-                    Halesowen College lecture, student mock interviews,  
-                    Year 10 World of Work, Brandhall careers fair
-                </p>
-            </div>
-        </article>
+   <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-user-group"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Mentoring</h4>
+        <p>
+            Halesowen College lecture, Richard Rose mock interviews,
+            Year 10 World of Work, Brandhall careers fair,
+            STEM mentoring, Inspiring the Future mentoring,
+            APM mentoring activities
+        </p>
+    </div>
+</article>
+
 
         <!-- COMMUNITY -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-globe"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Community</h4>
-                <p>
-                    APM & PMI contribution, SIG groups, volunteering events,  
-                    APM South Wales & West AI session
-                </p>
-            </div>
-        </article>
+  <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-globe"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Community</h4>
+        <p>
+            APM & PMI community contribution, SIG groups, volunteering events,
+            APM South Wales & West AI session, PMI membership,
+            House of PMO membership, BCS membership, APM membership
+        </p>
+    </div>
+</article>
+
 
         <!-- PUBLISHING -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-pen-nib"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Publishing</h4>
-                <p>
-                    Programme management tools article,  
-                    Gantt vs Jira article (LinkedIn & portfolio)
-                </p>
-            </div>
-        </article>
+ <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-pen-nib"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Publishing</h4>
+        <p>
+            Article: Top 10 Tools for Programme Managers (2026),
+            Gantt vs Jira article (LinkedIn & portfolio)
+        </p>
+    </div>
+</article>
+
 
         <!-- VOLUNTEERING -->
-        <article class="bcs-ecosystem-card">
-            <div class="bcs-ecosystem-icon">
-                <i class="fa-solid fa-handshake"></i>
-            </div>
-            <div class="bcs-ecosystem-content">
-                <h4>Volunteering</h4>
-                <p>
-                    APM volunteer status, Inspiring the Future Gold status,  
-                    PMI membership, community events
-                </p>
-            </div>
-        </article>
+    <article class="bcs-ecosystem-card">
+    <div class="bcs-ecosystem-icon">
+        <i class="fa-solid fa-handshake"></i>
+    </div>
+    <div class="bcs-ecosystem-content">
+        <h4>Volunteering</h4>
+        <p>
+            APM volunteer status, Inspiring the Future Gold status,
+            STEM volunteer, Richard Rose mock interviews,
+            Year 10 World of Work, Brandhall careers fair,
+            PMI community volunteering
+        </p>
+    </div>
+</article>
+
 
     </div>
 

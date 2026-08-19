@@ -14024,256 +14024,215 @@ hr.evidence-section-divider {
 .apm-hero-card {
     overflow: hidden;
 }
-/* =========================================================
-   PROFESSIONAL DEVELOPMENT ECOSYSTEM — CORE STYLES
-   ========================================================= */
 
-:root {
-  --ecosystem-bg: #050816;
-  --ecosystem-card-bg: #0b1220;
-  --ecosystem-text: #e5e7eb;
-  --ecosystem-muted: #9ca3af;
-  --ecosystem-accent-blue: #4a8cff;
-  --ecosystem-accent-purple: #8b5cf6;
-  --ecosystem-accent-teal: #22c55e;
-  --ecosystem-border: rgba(148, 163, 184, 0.35);
-  --ecosystem-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
-  --ecosystem-radius-lg: 18px;
-  --ecosystem-radius-md: 12px;
-  --ecosystem-transition-fast: 180ms ease-out;
-  --ecosystem-transition-med: 260ms ease-out;
+
+/* ==========================================================
+   CPD METRIC TEXT REVEAL
+========================================================== */
+
+#metric-top-category {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
 }
 
-/* SECTION WRAPPER */
-
-.ecosystem-section.gradient-tech {
-  position: relative;
-  padding: 4rem 1.5rem 3.5rem;
-  background: radial-gradient(circle at top,
-              rgba(74, 140, 255, 0.25),
-              transparent 55%),
-              radial-gradient(circle at bottom,
-              rgba(34, 197, 94, 0.18),
-              transparent 60%),
-              var(--ecosystem-bg);
-  color: var(--ecosystem-text);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  overflow: hidden;
-}
-
-/* HEADING */
-
-.ecosystem-heading {
-  max-width: 720px;
-  margin: 0 auto 2.5rem;
-  text-align: center;
-}
-
-.ecosystem-heading h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  margin-bottom: 0.75rem;
-}
-
-.ecosystem-heading p {
-  font-size: 0.98rem;
-  color: var(--ecosystem-muted);
-}
-
-/* GRID LAYOUT */
-
-.ecosystem-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.75rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* CARD BASE */
-
-.ecosystem-card {
-  position: relative;
-  padding: 1.5rem 1.4rem;
-  border-radius: var(--ecosystem-radius-lg);
-  background: linear-gradient(135deg,
-              rgba(74, 140, 255, 0.12),
-              rgba(139, 92, 246, 0.18));
-  border: 1px solid var(--ecosystem-border);
-  box-shadow: var(--ecosystem-shadow);
-  backdrop-filter: blur(16px);
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  isolation: isolate;
-  overflow: hidden;
-  transition:
-    transform var(--ecosystem-transition-med),
-    box-shadow var(--ecosystem-transition-med),
-    border-color var(--ecosystem-transition-fast),
-    background var(--ecosystem-transition-med);
-}
-
-/* ICON */
-
-.ecosystem-card i {
-  font-size: 1.6rem;
-  color: var(--ecosystem-accent-blue);
-  margin-bottom: 0.4rem;
-  transition: color var(--ecosystem-transition-fast),
-              transform var(--ecosystem-transition-fast);
-}
-
-/* TITLE & TEXT */
-
-.ecosystem-card h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.ecosystem-card p {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--ecosystem-muted);
-}
-
-/* GRADIENT VARIANTS PER PILLAR */
-
-.ecosystem-card:nth-of-type(1) { /* Learning */
-  background: linear-gradient(135deg,
-              rgba(74, 140, 255, 0.18),
-              rgba(139, 92, 246, 0.22));
-}
-
-.ecosystem-card:nth-of-type(2) { /* AI */
-  background: linear-gradient(135deg,
-              rgba(139, 92, 246, 0.22),
-              rgba(74, 140, 255, 0.18));
-}
-
-.ecosystem-card:nth-of-type(3) { /* Mentoring */
-  background: linear-gradient(135deg,
-              rgba(74, 140, 255, 0.18),
-              rgba(34, 197, 94, 0.22));
-}
-
-.ecosystem-card:nth-of-type(4) { /* Community */
-  background: linear-gradient(135deg,
-              rgba(139, 92, 246, 0.22),
-              rgba(74, 140, 255, 0.18));
-}
-
-.ecosystem-card:nth-of-type(5) { /* Publishing */
-  background: linear-gradient(135deg,
-              rgba(74, 140, 255, 0.18),
-              rgba(139, 92, 246, 0.22));
-}
-
-.ecosystem-card:nth-of-type(6) { /* Volunteering */
-  background: linear-gradient(135deg,
-              rgba(34, 197, 94, 0.22),
-              rgba(74, 140, 255, 0.18));
-}
-
-/* HOVER & ANIMATION EFFECTS */
-
-.ecosystem-card::before {
-  content: "";
-  position: absolute;
-  inset: -40%;
-  background:
-    radial-gradient(circle at top,
-      rgba(74, 140, 255, 0.18),
-      transparent 60%),
-    radial-gradient(circle at bottom,
-      rgba(34, 197, 94, 0.16),
-      transparent 60%);
-  opacity: 0;
-  transition: opacity var(--ecosystem-transition-med);
-  z-index: -1;
-}
-
-.ecosystem-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.9);
-  border-color: rgba(148, 163, 184, 0.65);
-}
-
-.ecosystem-card:hover::before {
-  opacity: 1;
-}
-
-.ecosystem-card:hover i {
-  color: var(--ecosystem-accent-teal);
-  transform: translateY(-2px);
-}
-
-/* Subtle icon pulse on load */
-
-@keyframes ecosystem-icon-pulse {
-  0%   { transform: scale(0.9); opacity: 0; }
-  40%  { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.ecosystem-card i {
-  animation: ecosystem-icon-pulse 520ms ease-out both;
-}
-
-/* FOOTER */
-
-.ecosystem-footer {
-  max-width: 720px;
-  margin: 2.5rem auto 0;
-  text-align: center;
-}
-
-.ecosystem-footer p {
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ecosystem-muted);
+#metric-top-category.cpd-metric-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* =========================================================
-   RESPONSIVE BREAKPOINTS
+   ORIGINAL ECOSYSTEM STYLE + GREEN GRADIENT HOVER
    ========================================================= */
 
-@media (max-width: 1024px) {
-  .ecosystem-section.gradient-tech {
-    padding: 3.5rem 1.25rem 3rem;
-  }
+/* Base layout */
+.bcs-ecosystem {
+    padding: 2rem 0;
+}
 
-  .ecosystem-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.bcs-ecosystem-heading {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.bcs-ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-  }
 }
 
-@media (max-width: 768px) {
-  .ecosystem-heading h2 {
-    font-size: 1.7rem;
-  }
-
-  .ecosystem-grid {
-    grid-template-columns: 1fr;
-    max-width: 640px;
-  }
-
-  .ecosystem-card {
-    padding: 1.4rem 1.3rem;
-  }
+/* Original card style */
+.bcs-ecosystem-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem 1.4rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    transition: all 0.25s ease-out;
+    position: relative;
+    overflow: hidden;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .ecosystem-card,
-  .ecosystem-card i {
-    transition: none;
-    animation: none;
-  }
+/* Icon container */
+.bcs-ecosystem-icon i {
+    font-size: 1.6rem;
+    color: #4a8cff; /* keep original coloured icons */
+    transition: color 0.25s ease-out, transform 0.25s ease-out;
 }
+
+/* Hover gradient overlay */
+.bcs-ecosystem-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(34, 197, 94, 0.18),
+        rgba(74, 140, 255, 0.18)
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease-out;
+    z-index: 0;
+}
+
+/* Hover behaviour */
+.bcs-ecosystem-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    border-color: rgba(34, 197, 94, 0.45);
+}
+
+.bcs-ecosystem-card:hover::before {
+    opacity: 1;
+}
+
+/* Icon hover effect */
+.bcs-ecosystem-card:hover .bcs-ecosystem-icon i {
+    color: #22c55e; /* green accent on hover */
+    transform: translateY(-2px);
+}
+
+/* Ensure content stays above gradient */
+.bcs-ecosystem-content,
+.bcs-ecosystem-icon {
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .bcs-ecosystem-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .bcs-ecosystem-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   ORIGINAL ECOSYSTEM STYLE + NEON HOVER EFFECT
+   ========================================================= */
+
+/* Base layout */
+.bcs-ecosystem {
+    padding: 2rem 0;
+}
+
+.bcs-ecosystem-heading {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.bcs-ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Original card style */
+.bcs-ecosystem-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem 1.4rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    transition: all 0.25s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Icon container */
+.bcs-ecosystem-icon i {
+    font-size: 1.6rem;
+    color: #4a8cff; /* keep original coloured icons */
+    transition: color 0.25s ease-out, transform 0.25s ease-out;
+}
+
+/* Neon glow overlay */
+.bcs-ecosystem-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center,
+        rgba(0, 255, 180, 0.22),
+        rgba(0, 255, 120, 0.18),
+        transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease-out;
+    z-index: 0;
+}
+
+/* Neon border pulse */
+@keyframes neon-border {
+    0%   { border-color: rgba(0,255,180,0.35); }
+    50%  { border-color: rgba(0,255,255,0.75); }
+    100% { border-color: rgba(0,255,180,0.35); }
+}
+
+/* Hover behaviour */
+.bcs-ecosystem-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 22px rgba(0,255,200,0.45),
+                0 0 45px rgba(0,255,180,0.35);
+    animation: neon-border 1.6s infinite ease-in-out;
+}
+
+.bcs-ecosystem-card:hover::before {
+    opacity: 1;
+}
+
+/* Icon neon effect */
+.bcs-ecosystem-card:hover .bcs-ecosystem-icon i {
+    color: #00ffcc; /* neon mint */
+    text-shadow: 0 0 12px rgba(0,255,200,0.85),
+                 0 0 22px rgba(0,255,180,0.65);
+    transform: translateY(-2px);
+}
+
+/* Ensure content stays above glow */
+.bcs-ecosystem-content,
+.bcs-ecosystem-icon {
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .bcs-ecosystem-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .bcs-ecosystem-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
   
 </style>
 
@@ -15498,6 +15457,9 @@ console.log("generateDualRadar requested");
 generateDevelopmentRoadmap();
 console.log("generateDevelopmentRoadmap finished");
       populateEvidenceCPDRelationships();
+
+    initialiseCPDMetricAnimations();
+
 
 populateCPDEvidenceRelationships();
 
@@ -19259,7 +19221,232 @@ function generateDonutChart() {
 
 }
 
+/* ==========================================================
+   CPD METRIC COUNT-UP ANIMATION
+========================================================== */
 
+function animateCPDMetric(
+    element,
+    target,
+    decimals = 1,
+    duration = 1200
+) {
+
+    if (!element) {
+        return;
+    }
+
+    const startTime = performance.now();
+
+    function update(currentTime) {
+
+        const elapsed =
+            currentTime - startTime;
+
+        const progress =
+            Math.min(
+                elapsed / duration,
+                1
+            );
+
+        /*
+         * Ease-out animation
+         * Starts quickly and gently slows down.
+         */
+        const eased =
+            1 -
+            Math.pow(
+                1 - progress,
+                3
+            );
+
+        const currentValue =
+            target * eased;
+
+        element.textContent =
+            currentValue.toFixed(
+                decimals
+            );
+
+        if (progress < 1) {
+
+            requestAnimationFrame(
+                update
+            );
+
+        }
+
+        else {
+
+            element.textContent =
+                target.toFixed(
+                    decimals
+                );
+
+        }
+
+    }
+
+    requestAnimationFrame(
+        update
+    );
+}
+
+/* ==========================================================
+   CPD METRICS — SCROLL TRIGGER
+========================================================== */
+
+function initialiseCPDMetricAnimations() {
+
+    const section =
+        document.querySelector(
+            ".cpd-metrics-section"
+        );
+
+    if (!section) {
+        return;
+    }
+
+    const metricElements = {
+
+        totalHours:
+            document.getElementById(
+                "metric-total-hours"
+            ),
+
+        hoursRemaining:
+            document.getElementById(
+                "metric-hours-remaining"
+            ),
+
+        activities:
+            document.getElementById(
+                "metric-activities"
+            ),
+
+        hoursMonth:
+            document.getElementById(
+                "metric-hours-month"
+            ),
+
+        projectedHours:
+            document.getElementById(
+                "metric-projected-hours"
+            )
+
+    };
+
+
+    let animated = false;
+
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            !entry.isIntersecting ||
+                            animated
+                        ) {
+                            return;
+                        }
+
+                        animated = true;
+
+
+                        animateCPDMetric(
+                            metricElements.totalHours,
+                            parseFloat(
+                                metricElements.totalHours
+                                    .dataset
+                                    .target
+                            ) || 0,
+                            1
+                        );
+
+
+                        animateCPDMetric(
+                            metricElements.hoursRemaining,
+                            parseFloat(
+                                metricElements.hoursRemaining
+                                    .dataset
+                                    .target
+                            ) || 0,
+                            1
+                        );
+
+
+                        animateCPDMetric(
+                            metricElements.activities,
+                            parseFloat(
+                                metricElements.activities
+                                    .dataset
+                                    .target
+                            ) || 0,
+                            0
+                        );
+
+
+                        animateCPDMetric(
+                            metricElements.hoursMonth,
+                            parseFloat(
+                                metricElements.hoursMonth
+                                    .dataset
+                                    .target
+                            ) || 0,
+                            1
+                        );
+
+
+                        animateCPDMetric(
+                            metricElements.projectedHours,
+                            parseFloat(
+                                metricElements.projectedHours
+                                    .dataset
+                                    .target
+                            ) || 0,
+                            1
+                        );
+
+
+                        /*
+                         * Top Category is text,
+                         * so reveal it normally.
+                         */
+                        const topCategory =
+                            document.getElementById(
+                                "metric-top-category"
+                            );
+
+                        if (topCategory) {
+
+                            topCategory.classList.add(
+                                "cpd-metric-visible"
+                            );
+
+                        }
+
+
+                        observer.disconnect();
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.25
+            }
+        );
+
+
+    observer.observe(
+        section
+    );
+
+}
 /* ==========================================================
    METRICS
 ========================================================== */
@@ -19449,26 +19636,55 @@ function calculateMetrics() {
     }
 
 
-    const setText =
-        (
-            id,
-            value
-        ) => {
+   const setText =
+    (
+        id,
+        value
+    ) => {
 
-            const el =
-                document.getElementById(
-                    id
-                );
+        const el =
+            document.getElementById(
+                id
+            );
 
 
-            if (el) {
+        if (!el) {
+            return;
+        }
 
-                el.textContent =
-                    value;
 
-            }
+        /*
+         * Store numerical values for
+         * the scroll count-up animation.
+         */
+        if (
+            typeof value === "number"
+        ) {
 
-        };
+            el.dataset.target =
+                value;
+
+            /*
+             * Keep the metric at zero until
+             * the section enters the viewport.
+             */
+            el.textContent =
+                "0";
+
+        }
+
+        else {
+
+            /*
+             * Text metrics such as Top Category
+             * display normally.
+             */
+            el.textContent =
+                value;
+
+        }
+
+    };
 
 
     const projectedTotal =
@@ -19477,33 +19693,29 @@ function calculateMetrics() {
 
 
     setText(
-        "metric-total-hours",
-        completedHours.toFixed(1)
-    );
+    "metric-total-hours",
+    completedHours
+);
 
+setText(
+    "metric-hours-remaining",
+    hoursRemaining
+);
 
-    setText(
-        "metric-hours-remaining",
-        hoursRemaining.toFixed(1)
-    );
+setText(
+    "metric-projected-hours",
+    projectedTotal
+);
 
+setText(
+    "metric-activities",
+    activityCount
+);
 
-    setText(
-        "metric-projected-hours",
-        projectedTotal.toFixed(1)
-    );
-
-
-    setText(
-        "metric-activities",
-        activityCount
-    );
-
-
-    setText(
-        "metric-hours-month",
-        avgHoursPerMonth.toFixed(1)
-    );
+setText(
+    "metric-hours-month",
+    avgHoursPerMonth
+);
 
 
     setText(
@@ -23024,6 +23236,18 @@ function findTarget(stage) {
 
 })();
 
+/* ==========================================================
+   INITIALISE CPD METRIC ANIMATIONS
+========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        initialiseCPDMetricAnimations();
+
+    }
+);
 </script>
 
 
@@ -24221,67 +24445,113 @@ function findTarget(stage) {
     </div>
 
 
-   <!-- ========================================================
-     PROFESSIONAL DEVELOPMENT ECOSYSTEM — WEB SECTION
+    <!-- ========================================================
+     PROFESSIONAL DEVELOPMENT ECOSYSTEM
      ======================================================== -->
 
-<section id="ecosystem" class="ecosystem-section gradient-tech">
-  <div class="ecosystem-heading">
-    <h2>Professional Development Ecosystem</h2>
-    <p>My areas of continuous development through BCS CPD.</p>
-  </div>
+<div class="bcs-ecosystem">
 
-  <div class="ecosystem-grid">
+    <div class="bcs-ecosystem-heading">
+        <h3>Professional Development Ecosystem</h3>
+        <p>
+            Examples of professional development activity recorded
+            through my BCS CPD record.
+        </p>
+    </div>
 
-    <!-- LEARNING -->
-    <article class="ecosystem-card">
-      <i class="fa-solid fa-graduation-cap"></i>
-      <h3>Learning</h3>
-      <p>SAFe &amp; PMI Agile, Six Sigma &amp; ITIL, NIST Cyber, Integrated PMO.</p>
-    </article>
+    <!-- ECOSYSTEM GRID -->
+    <div class="bcs-ecosystem-grid">
 
-    <!-- AI -->
-    <article class="ecosystem-card">
-      <i class="fa-solid fa-robot"></i>
-      <h3>AI</h3>
-      <p>PMI CPMAI, Generative AI, Prompt Engineering, Copilot Studio.</p>
-    </article>
+        <!-- LEARNING -->
+        <article class="bcs-ecosystem-card">
+            <div class="bcs-ecosystem-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="bcs-ecosystem-content">
+                <h4>Learning</h4>
+                <p>
+                    Google PM, MS Teams, PMO, SAFe Agile, Six Sigma, ITIL,  
+                    PMI Agile, NIST Cyber, Integrated PMO Course
+                </p>
+            </div>
+        </article>
 
-    <!-- MENTORING -->
-    <article class="ecosystem-card">
-      <i class="fa-solid fa-user-group"></i>
-      <h3>Mentoring</h3>
-      <p>College Lectures, Mock Interviews, Careers Fairs, Student Engagement.</p>
-    </article>
+        <!-- AI -->
+        <article class="bcs-ecosystem-card">
+            <div class="bcs-ecosystem-icon">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+            <div class="bcs-ecosystem-content">
+                <h4>AI</h4>
+                <p>
+                    PMI CPMAI, Generative AI (PMI), Prompt Engineering,  
+                    Copilot Studio, Talking to AI
+                </p>
+            </div>
+        </article>
 
-    <!-- COMMUNITY -->
-    <article class="ecosystem-card">
-      <i class="fa-solid fa-globe"></i>
-      <h3>Community</h3>
-      <p>APM &amp; PMI Events, SIG Groups, AI Sessions, Professional Forums.</p>
-    </article>
+        <!-- MENTORING -->
+        <article class="bcs-ecosystem-card">
+            <div class="bcs-ecosystem-icon">
+                <i class="fa-solid fa-user-group"></i>
+            </div>
+            <div class="bcs-ecosystem-content">
+                <h4>Mentoring</h4>
+                <p>
+                    Halesowen College lecture, student mock interviews,  
+                    Year 10 World of Work, Brandhall careers fair
+                </p>
+            </div>
+        </article>
 
-    <!-- PUBLISHING -->
-    <article class="ecosystem-card">
-      <i class="fa-solid fa-pen-nib"></i>
-      <h3>Publishing</h3>
-      <p>PM Tools Articles, Gantt vs Jira Posts, LinkedIn Insights.</p>
-    </article>
+        <!-- COMMUNITY -->
+        <article class="bcs-ecosystem-card">
+            <div class="bcs-ecosystem-icon">
+                <i class="fa-solid fa-globe"></i>
+            </div>
+            <div class="bcs-ecosystem-content">
+                <h4>Community</h4>
+                <p>
+                    APM & PMI contribution, SIG groups, volunteering events,  
+                    APM South Wales & West AI session
+                </p>
+            </div>
+        </article>
 
-    <!-- VOLUNTEERING -->
-    <article class="ecosystem-card">
-      <i class="fa-solid fa-handshake"></i>
-      <h3>Volunteering</h3>
-      <p>APM &amp; PMI Volunteer, Inspiring the Future Gold, Community Outreach.</p>
-    </article>
+        <!-- PUBLISHING -->
+        <article class="bcs-ecosystem-card">
+            <div class="bcs-ecosystem-icon">
+                <i class="fa-solid fa-pen-nib"></i>
+            </div>
+            <div class="bcs-ecosystem-content">
+                <h4>Publishing</h4>
+                <p>
+                    Programme management tools article,  
+                    Gantt vs Jira article (LinkedIn & portfolio)
+                </p>
+            </div>
+        </article>
 
-  </div>
+        <!-- VOLUNTEERING -->
+        <article class="bcs-ecosystem-card">
+            <div class="bcs-ecosystem-icon">
+                <i class="fa-solid fa-handshake"></i>
+            </div>
+            <div class="bcs-ecosystem-content">
+                <h4>Volunteering</h4>
+                <p>
+                    APM volunteer status, Inspiring the Future Gold status,  
+                    PMI membership, community events
+                </p>
+            </div>
+        </article>
 
-  <footer class="ecosystem-footer">
-    <p>Continuous Growth &amp; Development</p>
-  </footer>
+    </div>
+
+</div>
+
+
 </section>
-
   
 </section>
 

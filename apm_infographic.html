@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14336,6 +14336,64 @@ hr.evidence-section-divider {
 .cpd-visual-card.open .chevron {
   transform: rotate(180deg);
 }
+
+.cpd-visual-content img {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cpd-visual-card {
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.15);
+  padding: 0;
+  overflow: hidden;
+}
+
+.cpd-visual-toggle {
+  width: 100%;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.cpd-visual-content {
+  display: none;
+  padding: 20px;
+}
+
+.cpd-visual-card.open .cpd-visual-content {
+  display: block;
+}
+
+.cpd-visual-card.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Fade-in animation */
+.cpd-visual-content img {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
   
 </style>
 
@@ -24572,6 +24630,7 @@ document.querySelector('.cpd-visual-toggle').addEventListener('click', () => {
     <img src="infographic.png" alt="BCS CPD Ecosystem Visual">
   </div>
 </div>
+
       
         <p>
             Examples of professional development activity recorded

@@ -23410,9 +23410,16 @@ document.addEventListener(
     }
 );
 
-document.querySelector('.cpd-visual-toggle').addEventListener('click', () => {
-  document.querySelector('.cpd-visual-card').classList.toggle('open');
+document.addEventListener('DOMContentLoaded', () => {
+  const toggles = document.querySelectorAll('.cpd-visual-toggle');
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const card = toggle.closest('.cpd-visual-card');
+      card.classList.toggle('open');
+    });
+  });
 });
+
   
 </script>
 

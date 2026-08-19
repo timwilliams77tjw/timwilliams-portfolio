@@ -748,6 +748,21 @@ body.dark .interactive-cv-hero .card {
     }
 }     
 
+  /* ============================================================
+   METRIC COUNT-UP ANIMATION
+   ============================================================ */
+
+.metric-value {
+    display: inline-block;
+    min-width: 1ch;
+    font-variant-numeric: tabular-nums;
+    transition: opacity 0.2s ease;
+}
+
+.metric-value.counting {
+    opacity: 0.85;
+}
+
 </style>
 </head>
 
@@ -829,10 +844,25 @@ fetch("header.html")
         <h2 class="section-title">Programme Delivery Impact</h2>
 
         <div class="stats">
-            <div class="stat"><h2>126k</h2><p>Devices Deployed</p></div>
-            <div class="stat"><h2>46k</h2><p>Windows 11 Upgrades</p></div>
-            <div class="stat"><h2>32k</h2><p>Endpoint Migrations</p></div>
-            <div class="stat"><h2>£18M</h2><p>Cyber Security Programme</p></div>
+            <div class="stat">
+    <h2 class="metric-value" data-target="126000" data-suffix="k">0k</h2>
+    <p>Devices Deployed</p>
+</div>
+
+<div class="stat">
+    <h2 class="metric-value" data-target="46000" data-suffix="k">0k</h2>
+    <p>Windows 11 Upgrades</p>
+</div>
+
+<div class="stat">
+    <h2 class="metric-value" data-target="32000" data-suffix="k">0k</h2>
+    <p>Endpoint Migrations</p>
+</div>
+
+<div class="stat">
+    <h2 class="metric-value" data-target="18000000" data-prefix="£" data-suffix="M">£0M</h2>
+    <p>Cyber Security Programme</p>
+</div>
         </div>
     </div>
 
@@ -1178,6 +1208,124 @@ new Chart(document.getElementById("skillsRadar"), {
     }
 });
 
+/* ============================================================
+   SCROLL-TRIGGERED METRIC COUNT-UP
+   Reusable across all metric sections/pages
+   ============================================================ */
+
+function initMetricCountUp() {
+
+    const metrics = document.querySelectorAll(".metric-value");
+
+    if (!metrics.length) return;
+
+    const animateMetric = (metric) => {
+
+        /* Prevent the same metric animating twice */
+        if (metric.dataset.animated === "true") return;
+
+        metric.dataset.animated = "true";
+        metric.classList.add("counting");
+
+        const target = Number(metric.dataset.target);
+        const prefix = metric.dataset.prefix || "";
+        const suffix = metric.dataset.suffix || "";
+
+        const duration = 1800;
+        const startTime = performance.now();
+
+        function formatValue(value) {
+
+            if (suffix === "k") {
+                return prefix + Math.round(value / 1000) + suffix;
+            }
+
+            if (suffix === "M") {
+                return prefix + (value / 1000000).toFixed(0) + suffix;
+            }
+
+            return prefix + Math.round(value) + suffix;
+        }
+
+        function update(currentTime) {
+
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            /* Smooth ease-out */
+            const easedProgress =
+                1 - Math.pow(1 - progress, 3);
+
+            const currentValue = target * easedProgress;
+
+            metric.textContent = formatValue(currentValue);
+
+            if (progress < 1) {
+
+                requestAnimationFrame(update);
+
+            } else {
+
+                /* Guarantee exact final value */
+                metric.textContent = formatValue(target);
+
+                metric.classList.remove("counting");
+            }
+        }
+
+        requestAnimationFrame(update);
+    };
+
+
+    /* ========================================================
+       INTERSECTION OBSERVER
+       Starts animation when metrics enter viewport
+       ======================================================== */
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    const metric = entry.target;
+
+                    animateMetric(metric);
+
+                    /* Stop observing once triggered */
+                    observer.unobserve(metric);
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.35
+        }
+    );
+
+
+    metrics.forEach(metric => {
+        observer.observe(metric);
+    });
+}
+
+
+/* Initialise after DOM is ready */
+if (document.readyState === "loading") {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initMetricCountUp
+    );
+
+} else {
+
+    initMetricCountUp();
+
+}
+  
 </script>
 
 </body>

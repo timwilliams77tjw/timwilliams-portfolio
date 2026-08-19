@@ -17,6 +17,46 @@
 <link rel="stylesheet" href="global-restore.css">
 <style>
 /* =========================================================
+   GLOBAL BOX SIZING / OVERFLOW / TYPOGRAPHY
+   ========================================================= */
+
+html {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body.page-skills {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+
+    /* Use the site's inherited/global font */
+    font-family: inherit;
+}
+
+body.page-skills,
+body.page-skills main,
+body.page-skills section,
+body.page-skills article,
+body.page-skills div,
+body.page-skills h1,
+body.page-skills h2,
+body.page-skills p,
+body.page-skills li,
+body.page-skills span {
+    font-family: inherit;
+}
+   
+/* =========================================================
    TWC — CORE SKILLS PAGE
    Complete page stylesheet
    ========================================================= */
@@ -34,8 +74,32 @@ body.page-skills {
    HERO
    ========================================================= */
 .skills-hero {
+    position: relative;
     width: 100%;
-    padding: 3.25rem 1.5rem 2.25rem;
+    max-width: 100%;
+    margin: 42px 0 0;
+    padding: 76px 70px 58px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(10,102,194,0.13),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f7faff 100%
+        );
+
+    border: 1px solid rgba(10,31,68,0.08);
+    border-radius: 24px;
+
+    box-shadow:
+        0 8px 24px rgba(15,35,60,0.08);
+
+    overflow: hidden;
+    color: #102a43;
 }
 .skills-hero-inner {
     max-width: 1180px;
@@ -237,31 +301,53 @@ body.dark-mode.page-skills .skill-card-image::after {
 /* =========================================================
    TABLET / iPAD
    ========================================================= */
+
 @media (max-width: 900px) {
+
     .skills-hero {
-        padding: 2.75rem 1.25rem 2rem;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 32px;
+        padding: 56px 32px 46px;
     }
+
+    .skills-hero-inner {
+        width: 100%;
+        max-width: 1180px;
+    }
+
     .skills-section {
+        width: 100%;
+        max-width: 100%;
         padding: 0 1.25rem 3.5rem;
     }
+
     .skills-grid {
+        width: 100%;
+        max-width: 100%;
         gap: 1.25rem;
     }
+
     .skill-card-image {
         height: 165px;
     }
+
     .skill-card-body {
         padding: 1.2rem 1.25rem 1.35rem;
     }
+
     .skill-card h2 {
         font-size: 1.18rem;
     }
+
     .skill-intro {
         font-size: 0.88rem;
     }
+
     .skill-list {
         gap: 0.4rem 0.75rem;
     }
+
     .skill-list li {
         font-size: 0.84rem;
     }
@@ -269,53 +355,89 @@ body.dark-mode.page-skills .skill-card-image::after {
 /* =========================================================
    MOBILE
    ========================================================= */
+
 @media (max-width: 680px) {
+
     .skills-hero {
-        padding: 2.2rem 1rem 1.6rem;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 24px;
+        padding: 42px 20px 34px;
+        border-radius: 20px;
     }
+
     .skills-hero-inner {
         width: 100%;
+        max-width: 100%;
+        margin: 0;
     }
+
+    .skills-hero-content {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .skills-eyebrow {
         font-size: 0.68rem;
     }
+
     .skills-hero h1 {
+        max-width: 100%;
         font-size: 2rem;
+        line-height: 1.08;
     }
+
     .skills-hero p {
+        width: 100%;
+        max-width: 100%;
         font-size: 0.98rem;
         line-height: 1.55;
     }
+
     .skills-section {
+        width: 100%;
+        max-width: 100%;
         padding: 0 1rem 3rem;
     }
+
     .skills-grid {
+        width: 100%;
+        max-width: 100%;
         grid-template-columns: 1fr;
         gap: 1rem;
     }
+
     .skill-card {
         width: 100%;
+        max-width: 100%;
     }
+
     .skill-card:nth-child(7) {
         grid-column: auto;
         max-width: none;
     }
+
     .skill-card-image {
         height: 180px;
     }
+
     .skill-card-body {
         padding: 1.15rem 1.15rem 1.3rem;
     }
+
     .skill-card h2 {
         font-size: 1.18rem;
     }
+
     .skill-intro {
         font-size: 0.88rem;
     }
+
     .skill-list {
         grid-template-columns: 1fr;
         gap: 0.42rem;
     }
+
     .skill-list li {
         font-size: 0.86rem;
     }
@@ -324,10 +446,25 @@ body.dark-mode.page-skills .skill-card-image::after {
    SMALL MOBILE
    ========================================================= */
 @media (max-width: 420px) {
+
     .skills-hero {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .skills-section {
         padding-left: 0.9rem;
         padding-right: 0.9rem;
     }
+
+    .skills-hero h1 {
+        font-size: 1.85rem;
+    }
+
+    .skill-card-image {
+        height: 160px;
+    }
+}
     .skills-section {
         padding-left: 0.9rem;
         padding-right: 0.9rem;
@@ -355,43 +492,6 @@ body.dark-mode.page-skills .skill-card-image::after {
     }
 }
 
-/* =========================================================
-   SITE TYPOGRAPHY
-   ========================================================= */
-
-body.page-generic,
-body.page-generic main,
-body.page-generic .page-container {
-    font-family: "Segoe UI", Arial, sans-serif;
-}
-
-body.page-generic .hero-section h1 {
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-body.page-generic .hero-section p {
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    line-height: 1.6;
-}
-
-body.page-generic .card,
-body.page-generic .card h2,
-body.page-generic .card li {
-    font-family: "Segoe UI", Arial, sans-serif;
-}
-
-body.page-generic .card h2 {
-    font-weight: 700;
-}
-
-body.page-generic .card li {
-    font-weight: 400;
-}   
 
 /* =========================================================
    APPLY INDEX HERO STYLE TO SKILLS PAGE

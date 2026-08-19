@@ -1884,6 +1884,42 @@ body.dark .home-resource-links small {
     border: none !important;
     box-shadow: none !important;
 }
+
+/* =========================================================
+   EXECUTIVE METRICS — SCROLL COUNT-UP
+   ========================================================= */
+
+.home-metric strong {
+  display: inline-block;
+  min-width: 1ch;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Initial state before the metric enters the viewport */
+.home-metric.countup-ready strong {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+/* Visible/counting state */
+.home-metric.countup-visible strong {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+
+  .home-metric.countup-ready strong {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+}
     
   </style>
 
@@ -2751,17 +2787,224 @@ body.dark .home-resource-links small {
   </a>
 </div>
 
-<!-- Fade-in animation -->
+<!-- =========================================================
+     FADE-IN + EXECUTIVE METRICS COUNT-UP
+     ========================================================= -->
 <script defer>
-  document.addEventListener("DOMContentLoaded", () => {
-    const elements = document.querySelectorAll(".fade-in");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    }, { threshold: 0.2 });
-    elements.forEach(el => observer.observe(el));
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ---------------------------------------------------------
+     EXISTING FADE-IN ANIMATION
+     --------------------------------------------------------- */
+
+  const elements = document.querySelectorAll(".fade-in");
+
+  const fadeObserver = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        fadeObserver.unobserve(entry.target);
+      }
+
+    });
+
+  }, {
+    threshold: 0.2
   });
+
+  elements.forEach(el => fadeObserver.observe(el));
+
+
+  /* ---------------------------------------------------------
+     EXECUTIVE METRICS COUNT-UP
+     --------------------------------------------------------- */
+
+  const metrics = document.querySelectorAll(".home-metric");
+
+  if (!metrics.length) return;
+
+
+  /*
+     Convert the displayed metric into:
+
+       prefix
+       numeric value
+       suffix
+
+     Examples:
+
+       30+  → 30 + 
+       £40M → £40 M
+       126K → 126 K
+       42   → 42
+  */
+
+  const parseMetric = (text) => {
+
+    const value = text.trim();
+
+    const match = value.match(/^([^0-9]*)([\d,.]+)(.*)$/);
+
+    if (!match) {
+      return {
+        prefix: "",
+        number: 0,
+        suffix: value
+      };
+    }
+
+    return {
+      prefix: match[1],
+      number: parseFloat(match[2].replace(/,/g, "")),
+      suffix: match[3]
+    };
+
+  };
+
+
+  /*
+     Prepare each metric.
+  */
+
+  metrics.forEach(metric => {
+
+    const strong = metric.querySelector("strong");
+
+    if (!strong) return;
+
+    const original = strong.textContent.trim();
+
+    const parsed = parseMetric(original);
+
+    strong.dataset.prefix = parsed.prefix;
+    strong.dataset.number = parsed.number;
+    strong.dataset.suffix = parsed.suffix;
+
+    strong.textContent =
+      parsed.prefix +
+      "0" +
+      parsed.suffix;
+
+    metric.classList.add("countup-ready");
+
+  });
+
+
+  /*
+     Animate one metric.
+  */
+
+  const animateMetric = (metric) => {
+
+    const strong = metric.querySelector("strong");
+
+    if (!strong) return;
+
+    const target = parseFloat(strong.dataset.number);
+
+    const prefix = strong.dataset.prefix || "";
+    const suffix = strong.dataset.suffix || "";
+
+    const duration = 1600;
+    const startTime = performance.now();
+
+
+    metric.classList.add("countup-visible");
+
+
+    const update = (currentTime) => {
+
+      const elapsed = currentTime - startTime;
+
+      const progress = Math.min(elapsed / duration, 1);
+
+      /*
+         Ease-out curve:
+         starts quickly and smoothly slows down
+         as the final value is reached.
+      */
+      const eased =
+        1 - Math.pow(1 - progress, 3);
+
+      const currentValue =
+        Math.round(target * eased);
+
+      strong.textContent =
+        prefix +
+        currentValue.toLocaleString("en-GB") +
+        suffix;
+
+
+      if (progress < 1) {
+
+        requestAnimationFrame(update);
+
+      } else {
+
+        /*
+           Guarantee the exact final value.
+        */
+        strong.textContent =
+          prefix +
+          target.toLocaleString("en-GB") +
+          suffix;
+
+      }
+
+    };
+
+
+    requestAnimationFrame(update);
+
+  };
+
+
+  /*
+     Trigger the count-up when the metrics section
+     enters the viewport.
+  */
+
+  const metricsObserver = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+
+        metrics.forEach((metric, index) => {
+
+          /*
+             Slight stagger between the four metrics.
+          */
+          setTimeout(() => {
+            animateMetric(metric);
+          }, index * 120);
+
+        });
+
+        /*
+           Only run once.
+        */
+        metricsObserver.unobserve(entry.target);
+
+      }
+
+    });
+
+  }, {
+    threshold: 0.35
+  });
+
+
+  const metricsSection =
+    document.querySelector(".home-metrics");
+
+  if (metricsSection) {
+    metricsObserver.observe(metricsSection);
+  }
+
+});
 </script>
 
 </body>

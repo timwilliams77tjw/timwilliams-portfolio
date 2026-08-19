@@ -915,6 +915,28 @@ body.dark-mode.twc-about-page .twc-leadership-content p {
     border-left: 6px solid #0a66c2;
     box-sizing: border-box;
 }    
+
+
+    
+/* =========================================================
+   EXECUTIVE METRICS — COUNT-UP ANIMATION
+   ========================================================= */
+
+.twc-metric-number {
+    font-variant-numeric: tabular-nums;
+    min-width: 3ch;
+}
+
+.twc-metric-number.is-counting {
+    opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .twc-metric-number {
+        opacity: 1;
+    }
+}
+
 </style>
 
 </head>
@@ -1030,34 +1052,45 @@ fetch("header.html")
 </section>
 
 
-<!-- =========================================================
-     EXECUTIVE METRICS
-     ========================================================= -->
-
-<section class="twc-metrics">
+<section class="twc-metrics" id="twc-executive-metrics">
 
     <div class="twc-metric">
-        <strong>30+</strong>
+        <strong class="twc-metric-number"
+                data-target="30"
+                data-suffix="+">
+            0
+        </strong>
         <span>Years Experience</span>
     </div>
 
     <div class="twc-metric">
-        <strong>£40M+</strong>
+        <strong class="twc-metric-number"
+                data-target="40"
+                data-prefix="£"
+                data-suffix="M+">
+            £0M+
+        </strong>
         <span>Cyber Transformation</span>
     </div>
 
     <div class="twc-metric">
-        <strong>126K+</strong>
+        <strong class="twc-metric-number"
+                data-target="126"
+                data-suffix="K+">
+            0K+
+        </strong>
         <span>Devices Transformed</span>
     </div>
 
     <div class="twc-metric">
-        <strong>42</strong>
+        <strong class="twc-metric-number"
+                data-target="42">
+            0
+        </strong>
         <span>Countries Supported</span>
     </div>
 
 </section>
-
 
 <!-- =========================================================
      THE TWC STORY
@@ -1652,5 +1685,112 @@ fetch("footer.html")
   }
 }
 </style>
+    <script>
+    
+/* =========================================================
+   TWC EXECUTIVE METRICS — SCROLL COUNT-UP
+   ========================================================= */
+
+(function () {
+
+    const metrics = document.querySelectorAll(".twc-metric-number");
+
+    if (!metrics.length) return;
+
+    const reduceMotion =
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function animateMetric(metric) {
+
+        if (metric.dataset.animated === "true") return;
+
+        metric.dataset.animated = "true";
+
+        const target = Number(metric.dataset.target);
+        const prefix = metric.dataset.prefix || "";
+        const suffix = metric.dataset.suffix || "";
+
+        if (reduceMotion) {
+            metric.textContent =
+                prefix + target.toLocaleString("en-GB") + suffix;
+            return;
+        }
+
+        metric.classList.add("is-counting");
+
+        const duration = 1600;
+        const startTime = performance.now();
+
+        function update(currentTime) {
+
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            /* Smooth ease-out */
+            const eased =
+                1 - Math.pow(1 - progress, 3);
+
+            const current =
+                Math.floor(target * eased);
+
+            metric.textContent =
+                prefix +
+                current.toLocaleString("en-GB") +
+                suffix;
+
+            if (progress < 1) {
+
+                requestAnimationFrame(update);
+
+            } else {
+
+                metric.textContent =
+                    prefix +
+                    target.toLocaleString("en-GB") +
+                    suffix;
+
+                metric.classList.remove("is-counting");
+            }
+        }
+
+        requestAnimationFrame(update);
+    }
+
+
+    const metricsSection =
+        document.querySelector("#twc-executive-metrics");
+
+    if (!metricsSection) return;
+
+
+    /* Trigger when the metrics section enters the viewport */
+
+    const observer =
+        new IntersectionObserver(
+            function (entries, observer) {
+
+                entries.forEach(function (entry) {
+
+                    if (!entry.isIntersecting) return;
+
+                    metrics.forEach(function (metric) {
+                        animateMetric(metric);
+                    });
+
+                    observer.unobserve(entry.target);
+                });
+
+            },
+            {
+                threshold: 0.35
+            }
+        );
+
+
+    observer.observe(metricsSection);
+
+})();
+</script>
+    
 </body>
 </html>

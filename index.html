@@ -1861,7 +1861,190 @@ body.dark .home-resource-links small {
   }
 
 }
-    
+/* =========================================================
+   HOMEPAGE — RESPONSIVE CARD / IMAGE FIXES
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. REMOVE THE EXTRA NESTED CARD APPEARANCE
+   --------------------------------------------------------- */
+
+/*
+   The What I Do, Proven Delivery and Why Organisations
+   articles contain an additional .card wrapper.
+
+   Keep the outer homepage card as the visual card and
+   neutralise the inner legacy .card wrapper.
+*/
+
+.home-page .home-capability > .card,
+.home-page .home-case > .card,
+.home-page .home-value > .card {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+/* Prevent the old .card hover effect from creating
+   a second floating card inside the homepage cards. */
+
+.home-page .home-capability > .card:hover,
+.home-page .home-case > .card:hover,
+.home-page .home-value > .card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   2. WHAT I DO — KEEP ONE CLEAN WHITE CARD
+   --------------------------------------------------------- */
+
+.home-page .home-capability {
+    background: #ffffff !important;
+    border: 1px solid var(--home-border) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 14px rgba(15,35,60,0.05) !important;
+    box-sizing: border-box !important;
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   3. WHY ORGANISATIONS — KEEP ONE CLEAN WHITE CARD
+   --------------------------------------------------------- */
+
+.home-page .home-value {
+    background: #ffffff !important;
+    border: 1px solid var(--home-border) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 14px rgba(15,35,60,0.05) !important;
+    box-sizing: border-box !important;
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   4. PROVEN DELIVERY — CLEAN CARD STRUCTURE
+   --------------------------------------------------------- */
+
+.home-page .home-case {
+    background: #ffffff !important;
+    border: 1px solid var(--home-border) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 14px rgba(15,35,60,0.05) !important;
+    box-sizing: border-box !important;
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   5. PROVEN DELIVERY — SHOW THE COMPLETE IMAGE
+   --------------------------------------------------------- */
+
+/*
+   The current page has no proper responsive rule for the
+   .card-visual images inside the Proven cards.
+
+   Width: 100% + height: auto means the entire source image
+   remains visible instead of being cropped.
+*/
+
+.home-page .home-case .card-visual {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+    background: #f3f7fb !important;
+}
+
+.home-page .home-case .card-visual img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+
+
+/* ---------------------------------------------------------
+   6. PROVEN DELIVERY — CONSISTENT CONTENT PADDING
+   --------------------------------------------------------- */
+
+.home-page .home-case .home-case-content {
+    padding: 24px !important;
+    box-sizing: border-box !important;
+}
+
+
+/* ---------------------------------------------------------
+   7. IPAD LANDSCAPE — THREE EQUAL-WIDTH CARDS
+   --------------------------------------------------------- */
+
+/*
+   On iPad landscape the existing:
+   
+       1.4fr 0.8fr 0.8fr
+
+   deliberately makes Cyber wider.
+
+   For tablet/iPad landscape, make all three cards equal.
+*/
+
+@media (min-width: 901px) and (max-width: 1100px) {
+
+    .home-page .home-case-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 16px !important;
+    }
+
+    .home-page .home-case-featured {
+        grid-column: auto !important;
+        display: block !important;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   8. MOBILE — ALL PROVEN CARDS SAME WIDTH
+   --------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+    .home-page .home-case-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    .home-page .home-case {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .home-page .home-case .card-visual {
+        width: 100% !important;
+    }
+
+    .home-page .home-case .card-visual img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+    }
+
+}
+
+
   </style>
 
   <script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>

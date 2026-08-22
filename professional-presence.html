@@ -33,87 +33,6 @@ body.page-presence {
 }
 
 /* =========================================================
-   HERO
-   ========================================================= */
-
-.presence-hero {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 32px;
-    padding: 42px 44px;
-    border-radius: 22px;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(10, 66, 110, 0.98),
-            rgba(0, 31, 63, 0.98)
-        );
-    color: #ffffff;
-    box-shadow: 0 12px 32px rgba(0, 31, 63, 0.16);
-}
-
-.presence-hero::before {
-    content: "";
-    position: absolute;
-    width: 260px;
-    height: 260px;
-    right: -80px;
-    top: -110px;
-    border-radius: 50%;
-    background: rgba(122, 192, 249, 0.16);
-}
-
-.presence-hero::after {
-    content: "";
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    right: 90px;
-    bottom: -120px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-}
-
-.presence-hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 780px;
-}
-
-.presence-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 14px;
-    padding: 7px 13px;
-    border: 1px solid rgba(255,255,255,0.22);
-    border-radius: 999px;
-    background: rgba(255,255,255,0.09);
-    color: #dcefff;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.7px;
-    text-transform: uppercase;
-}
-
-.presence-hero h1 {
-    margin: 0 0 14px;
-    color: #ffffff;
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.08;
-    font-weight: 800;
-    letter-spacing: -0.8px;
-}
-
-.presence-hero p {
-    margin: 0;
-    max-width: 720px;
-    color: rgba(255,255,255,0.86);
-    font-size: 1.08rem;
-    line-height: 1.65;
-}
-
-/* =========================================================
    INTRO / IDENTITY AREA
    ========================================================= */
 
@@ -756,83 +675,6 @@ body.dark.page-presence .open-link {
     }
 }
 
-/* =========================================================
-   APPLY INDEX HERO STYLE TO PROFESSIONAL PRESENCE PAGE
-   ========================================================= */
-
-.presence-hero {
-    position: relative;
-    margin-top: 42px;
-    margin-bottom: 0;
-    padding: 76px 70px 58px;
-
-    /* Replace dark gradient with index hero gradients */
-    background:
-        radial-gradient(circle at 85% 20%, rgba(10,102,194,0.13), transparent 32%),
-        linear-gradient(135deg, #ffffff 0%, #f7faff 100%);
-
-    border: 1px solid rgba(10,31,68,0.08);
-    border-radius: 24px;
-    box-shadow: 0 8px 24px rgba(15, 35, 60, 0.08);
-    overflow: hidden;
-    color: var(--home-text);
-}
-
-/* Left blue accent bar */
-.presence-hero::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 6px;
-    height: 100%;
-    background: #0a66c2;
-}
-
-/* Circular outline on top-right */
-.presence-hero::after {
-    content: "";
-    position: absolute;
-    width: 360px;
-    height: 360px;
-    right: -180px;
-    top: -180px;
-    border: 1px solid rgba(10,102,194,0.10);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-/* Typography alignment with index hero */
-.presence-hero h1 {
-    margin: 0;
-    max-width: 900px;
-    color: #0a1f44;
-    font-size: clamp(36px, 5vw, 58px);
-    line-height: 1.08;
-    letter-spacing: -0.035em;
-    font-weight: 800;
-}
-
-.presence-hero p {
-    max-width: 730px;
-    margin-top: 24px;
-    font-size: 19px;
-    line-height: 1.65;
-    color: #5f6b78;
-}
-
-/* Kicker badge alignment */
-.presence-kicker {
-    background: rgba(255,255,255,0.55);
-    color: #0a66c2;
-    border-color: rgba(10,102,194,0.25);
-}
-@media (max-width: 767px) {
-    .presence-hero {
-        padding: 42px 24px 30px;
-        border-radius: 18px;
-    }
-}
 
 
 /* =========================================================
@@ -1104,7 +946,485 @@ body.dark.page-presence .icon-digital {
         transform: none;
     }
 }      
-   
+
+/* =========================================================
+   PROFESSIONAL PRESENCE HERO
+   MATCH DIGITAL PRESENCE HERO LAYOUT
+   ========================================================= */
+
+.presence-hero {
+    position: relative;
+
+    width: 100%;
+    max-width: 100%;
+
+    margin: 42px auto 0;
+    padding: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(0, 0.8fr);
+
+    min-height: auto;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 86% 18%,
+            rgba(10,102,194,.13),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f7faff 100%
+        );
+
+    border: 1px solid rgba(10,31,68,.08);
+    border-left: 6px solid #0a66c2;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 8px 24px rgba(15,35,60,.08);
+
+    color: #102a43;
+}
+
+
+/* =========================================================
+   REMOVE OLD DARK-HERO DECORATION
+   ========================================================= */
+
+.presence-hero::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 6px;
+    height: 100%;
+
+    background: #0a66c2;
+
+    z-index: 3;
+}
+
+
+.presence-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    right: -180px;
+    top: -180px;
+
+    border: 1px solid rgba(10,102,194,.10);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   LEFT — HERO TEXT
+   ========================================================= */
+
+.presence-hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    min-width: 0;
+
+    padding: 40px 32px 36px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    background: transparent;
+
+    border: 0;
+
+    box-shadow: none;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   KICKER
+   ========================================================= */
+
+.presence-kicker {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    width: fit-content;
+
+    margin-bottom: 20px;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(10,102,194,.25);
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.60);
+
+    color: #0a66c2;
+
+    font-size: .78rem;
+
+    font-weight: 700;
+
+    letter-spacing: .04em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.presence-hero h1 {
+    margin: 0 0 22px;
+
+    max-width: 900px;
+
+    color: #0a1f44;
+
+    font-size: clamp(2.5rem, 4vw, 4rem);
+
+    line-height: 1.05;
+
+    font-weight: 700;
+
+    letter-spacing: -.035em;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.presence-hero p {
+    max-width: 620px;
+
+    margin: 0 0 28px;
+
+    color: #20262d;
+
+    font-size: 1.08rem;
+
+    line-height: 1.65;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   RIGHT — HERO IMAGE
+   ========================================================= */
+
+.presence-hero-visual {
+    position: relative;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    background: #062451;
+
+    border: 0;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+   ========================================================= */
+
+.presence-hero-image {
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    max-width: 100%;
+
+    max-height: none;
+
+    object-fit: contain;
+
+    object-position: center center;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   TABLET / IPAD
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .presence-hero {
+        grid-template-columns:
+            minmax(0, .95fr)
+            minmax(0, 1.05fr);
+
+        min-height: auto;
+    }
+
+
+    .presence-hero-content {
+        padding: 42px 32px;
+
+        align-items: flex-start;
+    }
+
+
+    .presence-hero h1 {
+        font-size: 2.8rem;
+
+        text-align: left;
+    }
+
+
+    .presence-hero p {
+        text-align: left;
+    }
+
+
+    .presence-hero-visual {
+        height: auto;
+
+        min-height: 0;
+
+        align-self: stretch;
+    }
+
+
+    .presence-hero-image {
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        max-height: none;
+
+        object-fit: contain;
+    }
+}
+
+
+/* =========================================================
+   SMALLER IPAD / TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .presence-hero {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+
+        min-height: auto;
+    }
+
+
+    .presence-hero-content {
+        padding: 42px 28px;
+    }
+
+
+    .presence-hero h1 {
+        font-size: 2.35rem;
+
+        text-align: left;
+    }
+
+
+    .presence-hero p {
+        font-size: 1rem;
+
+        text-align: left;
+    }
+
+
+    .presence-hero-visual {
+        height: auto;
+
+        min-height: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        overflow: hidden;
+    }
+
+
+    .presence-hero-image {
+        display: block;
+
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        max-height: none;
+
+        object-fit: contain;
+
+        object-position: center center;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .presence-hero {
+        display: flex;
+
+        flex-direction: column;
+
+        min-height: auto;
+
+        margin-top: 24px;
+
+        border-left-width: 5px;
+
+        border-radius: 18px;
+    }
+
+
+    .presence-hero-content {
+        padding: 38px 25px 32px;
+
+        align-items: flex-start;
+
+        text-align: left;
+    }
+
+
+    .presence-hero h1 {
+        font-size: 2.25rem;
+
+        text-align: left;
+    }
+
+
+    .presence-hero p {
+        font-size: .94rem;
+
+        line-height: 1.6;
+
+        text-align: left;
+    }
+
+
+    .presence-hero-visual {
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+
+        display: block;
+
+        overflow: hidden;
+
+        line-height: 0;
+
+        padding: 0;
+
+        margin: 0;
+    }
+
+
+    .presence-hero-image {
+        display: block;
+
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        max-height: none;
+
+        margin: 0;
+
+        padding: 0;
+
+        object-fit: contain;
+    }
+}
+
+
+/* =========================================================
+   SMALL IPHONE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .presence-hero-content {
+        padding: 34px 20px 27px;
+    }
+
+
+    .presence-hero h1 {
+        font-size: 1.85rem;
+    }
+}
+
+
+      
 </style>
 </head>
 

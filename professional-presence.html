@@ -1323,146 +1323,75 @@ body.dark.page-presence .icon-digital {
 
 
 /* =========================================================
-   MOBILE
+   PROFESSIONAL PRESENCE — MOBILE HERO IMAGE
+   FORCE IMAGE TO RENDER
    ========================================================= */
 
-@media (max-width: 700px) {
+@media screen and (max-width: 700px) {
 
     .presence-hero {
-        display: flex;
-
-        flex-direction: column;
-
-        min-height: auto;
-
-        margin-top: 24px;
-
-        border-left-width: 5px;
-
-        border-radius: 18px;
-    }
-
-
-    .presence-hero-content {
-        padding: 38px 25px 32px;
-
-        align-items: flex-start;
-
-        text-align: left;
-    }
-
-
-    .presence-hero h1 {
-        font-size: 2.25rem;
-
-        text-align: left;
-    }
-
-
-    .presence-hero p {
-        font-size: .94rem;
-
-        line-height: 1.6;
-
-        text-align: left;
-    }
-
-
-    .presence-hero-visual {
-        width: 100%;
-
-        height: auto;
-
-        min-height: 0;
-
-        display: block;
-
-        overflow: hidden;
-
-        line-height: 0;
-
-        padding: 0;
-
-        margin: 0;
-    }
-
-
-    .presence-hero-image {
-        display: block;
-
-        width: 100%;
-
-        height: auto;
-
-        max-width: 100%;
-
-        max-height: none;
-
-        margin: 0;
-
-        padding: 0;
-
-        object-fit: contain;
-    }
-}
-
-
-/* =========================================================
-   SMALL IPHONE
-   ========================================================= */
-
-@media (max-width: 390px) {
-
-    .presence-hero-content {
-        padding: 34px 20px 27px;
-    }
-
-
-    .presence-hero h1 {
-        font-size: 1.85rem;
-    }
-}
-
-/* =========================================================
-   PROFESSIONAL PRESENCE HERO — MOBILE IMAGE FIX
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-    .presence-hero-visual {
-        display: block !important;
+        display: flex !important;
+        flex-direction: column !important;
 
         width: 100% !important;
-
         height: auto !important;
         min-height: 0 !important;
 
         overflow: hidden !important;
-
-        padding: 0 !important;
-        margin: 0 !important;
-
-        background: #062451 !important;
-
-        line-height: 0 !important;
     }
 
-    .presence-hero-image {
+
+    /* IMAGE CONTAINER */
+
+    .presence-hero .presence-hero-visual {
+        position: relative !important;
+
         display: block !important;
 
         width: 100% !important;
         height: auto !important;
 
-        max-width: 100% !important;
+        min-height: 200px !important;
+
+        flex: 0 0 auto !important;
+
+        overflow: hidden !important;
+
+        background: #062451 !important;
+
+        padding: 0 !important;
+        margin: 0 !important;
+
+        line-height: 0 !important;
+    }
+
+
+    /* IMAGE */
+
+    .presence-hero .presence-hero-visual .presence-hero-image {
+        display: block !important;
+
+        position: relative !important;
+
+        width: 100% !important;
+        height: auto !important;
+
+        min-width: 100% !important;
+        max-width: none !important;
+
+        min-height: 0 !important;
         max-height: none !important;
+
+        object-fit: contain !important;
+        object-position: center center !important;
 
         margin: 0 !important;
         padding: 0 !important;
 
-        object-fit: contain !important;
-        object-position: center center !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
-}      
+}
 </style>
 </head>
 

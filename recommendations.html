@@ -22,35 +22,44 @@ body.page-certifications {
 .sticky-follow {
   background: var(--accent);
 }
-
 /* =========================================================
-   RECOMMENDATIONS HERO
+   TWC LTD — RECOMMENDATIONS HERO
+   MATCHES DIGITAL PRESENCE HERO
    ========================================================= */
 
 .recommendations-hero {
-  width: 100%;
-  max-width: none;
-  box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
 
-  margin: 0 0 30px;
-  padding: 32px 40px;
+    margin: 0 auto 2rem;
+    padding: 0;
 
-  background: var(--card-bg);
-  color: var(--text-main);
+    background: #ffffff;
+    color: #111827;
 
-  border-radius: 0 12px 12px 0;
-  border-left: 6px solid var(--accent);
+    border: 1px solid #e3e8ee;
+    border-left: 6px solid #0a66c2;
 
-  box-shadow: var(--shadow);
+    border-radius: 20px;
 
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 180px;
-  gap: 40px;
-  align-items: center;
+    box-shadow:
+        0 8px 24px rgba(15, 23, 42, 0.08);
 
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.6s ease forwards;
+    overflow: hidden;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(0, 0.8fr);
+
+    min-height: auto;
+
+    opacity: 0;
+    transform: translateY(10px);
+
+    animation:
+        fadeInUp 0.6s ease forwards;
 }
 
 
@@ -59,169 +68,335 @@ body.page-certifications {
    ========================================================= */
 
 .recommendations-hero-content {
-  min-width: 0;
-  text-align: left;
-}
+    min-width: 0;
 
-.recommendations-hero h1 {
-  margin: 0;
+    padding: 40px 32px 36px;
 
-  font-size: 32px;
-  line-height: 1.15;
-  font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-  color: var(--text-main);
-}
+    background: transparent;
 
-.recommendations-hero .hero-overview {
-  margin-top: 12px;
+    border: 0;
+    box-shadow: none;
 
-  font-size: 17px;
-  line-height: 1.55;
-
-  color: var(--text-sub);
-}
-
-.recommendations-hero .hero-supporting {
-  margin-top: 12px;
-
-  font-size: 15px;
-  line-height: 1.55;
-
-  color: var(--text-sub);
+    text-align: left;
 }
 
 
 /* =========================================================
-   HERO IMAGE
+   HERO TITLE
+   ========================================================= */
+
+.recommendations-hero h1 {
+    margin: 0 0 22px;
+
+    max-width: 900px;
+
+    font-size: clamp(2.5rem, 4vw, 4rem);
+
+    line-height: 1.05;
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+   ========================================================= */
+
+.recommendations-hero .hero-overview,
+.recommendations-hero .hero-supporting {
+    max-width: 620px;
+
+    margin: 0 0 22px;
+
+    font-size: 1.08rem;
+
+    line-height: 1.65;
+
+    color: #20262d;
+}
+
+
+/* Remove unnecessary bottom gap from final paragraph */
+
+.recommendations-hero .hero-supporting {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   HERO IMAGE / VISUAL
    ========================================================= */
 
 .recommendations-hero-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
 
-  min-width: 0;
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    background: #062451;
+
+    border: 0;
+    border-radius: 0;
+
+    box-shadow: none;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
 }
 
+
+/*
+   IMPORTANT
+
+   The image is deliberately NOT given:
+       height: 100%;
+       object-fit: cover;
+
+   This keeps the complete image visible and prevents
+   cropping on iPad and mobile.
+*/
+
 .recommendations-hero-image img {
-  display: block;
+    display: block;
 
-  width: 160px;
-  height: 160px;
+    width: 100%;
+    height: auto;
 
-  max-width: 100%;
-  aspect-ratio: 1 / 1;
+    max-width: 100%;
+    max-height: none;
 
-  object-fit: contain;
+    object-fit: contain;
+    object-position: center center;
 
-  border-radius: 12px;
+    margin: 0;
+    padding: 0;
 }
 
 
 /* =========================================================
-   iPAD / TABLET
+   TABLET / IPAD
    ========================================================= */
 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (max-width: 1100px) {
 
-  .recommendations-hero {
-    padding: 30px 32px;
+    .recommendations-hero {
+        grid-template-columns:
+            minmax(0, 0.95fr)
+            minmax(0, 1.05fr);
 
-    grid-template-columns: minmax(0, 1fr) 170px;
-    gap: 30px;
+        min-height: auto;
+    }
 
-    border-radius: 0 12px 12px 0;
-  }
 
-  .recommendations-hero h1 {
-    font-size: 30px;
-  }
+    .recommendations-hero-content {
+        padding: 42px 32px;
+    }
 
-  .recommendations-hero .hero-overview {
-    font-size: 16px;
-  }
 
-  .recommendations-hero .hero-supporting {
-    font-size: 15px;
-  }
+    .recommendations-hero h1 {
+        font-size: 2.8rem;
+    }
 
-  .recommendations-hero-image img {
-    width: 150px;
-    height: 150px;
-  }
+
+    .recommendations-hero-image {
+        height: auto;
+
+        min-height: 0;
+
+        align-self: stretch;
+    }
+
+
+    .recommendations-hero-image img {
+        width: 100%;
+        height: auto;
+
+        max-width: 100%;
+        max-height: none;
+
+        object-fit: contain;
+    }
+}
+
+
+/* =========================================================
+   SMALLER IPAD / TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .recommendations-hero {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+
+        min-height: auto;
+    }
+
+
+    .recommendations-hero-content {
+        padding: 42px 28px;
+    }
+
+
+    .recommendations-hero h1 {
+        font-size: 2.35rem;
+    }
+
+
+    .recommendations-hero .hero-overview,
+    .recommendations-hero .hero-supporting {
+        font-size: 1rem;
+    }
+
+
+    /*
+       CRITICAL IPAD BEHAVIOUR
+
+       Image height is determined by its natural
+       aspect ratio rather than being forced to
+       match the text column.
+    */
+
+    .recommendations-hero-image {
+        height: auto;
+
+        min-height: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+    }
+
+
+    .recommendations-hero-image img {
+        display: block;
+
+        width: 100%;
+        height: auto;
+
+        max-width: 100%;
+        max-height: none;
+
+        object-fit: contain;
+        object-position: center center;
+    }
 }
 
 
 /* =========================================================
    MOBILE
-   Hero title → hero text → hero image
    ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
 
-  .recommendations-hero {
-    width: 100%;
+    .recommendations-hero {
+        display: flex;
+        flex-direction: column;
 
-    margin: 0 0 25px;
-    padding: 26px 22px 28px;
+        min-height: auto;
 
-    display: flex;
-    flex-direction: column;
+        border-left-width: 5px;
 
-    align-items: stretch;
-    justify-content: flex-start;
+        border-radius: 16px;
+    }
 
-    gap: 0;
 
-    border-left-width: 5px;
-    border-radius: 0 10px 10px 0;
-  }
+    .recommendations-hero-content {
+        padding: 38px 25px 32px;
+    }
 
-  .recommendations-hero-content {
-    width: 100%;
-    text-align: left;
-  }
 
-  .recommendations-hero h1 {
-    font-size: 27px;
-    line-height: 1.2;
-    text-align: left;
-  }
+    .recommendations-hero h1 {
+        font-size: 2.25rem;
+    }
 
-  .recommendations-hero .hero-overview {
-    margin-top: 10px;
 
-    font-size: 15px;
-    line-height: 1.5;
+    .recommendations-hero .hero-overview,
+    .recommendations-hero .hero-supporting {
+        font-size: 0.94rem;
 
-    text-align: left;
-  }
+        line-height: 1.6;
+    }
 
-  .recommendations-hero .hero-supporting {
-    margin-top: 10px;
 
-    font-size: 14px;
-    line-height: 1.5;
+    .recommendations-hero-image {
+        width: 100%;
 
-    text-align: left;
-  }
+        height: auto;
 
-  .recommendations-hero-image {
-    width: 100%;
+        min-height: 0;
 
-    margin-top: 20px;
+        display: block;
 
-    justify-content: flex-start;
-  }
+        line-height: 0;
 
-  .recommendations-hero-image img {
-    width: 140px;
-    height: 140px;
-  }
+        padding: 0;
+        margin: 0;
+
+        overflow: hidden;
+    }
+
+
+    .recommendations-hero-image img {
+        display: block;
+
+        width: 100%;
+        height: auto;
+
+        max-width: 100%;
+        max-height: none;
+
+        margin: 0;
+        padding: 0;
+
+        object-fit: contain;
+        object-position: center center;
+    }
 }
 
 
+/* =========================================================
+   SMALL IPHONE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .recommendations-hero-content {
+        padding: 34px 20px 27px;
+    }
+
+
+    .recommendations-hero h1 {
+        font-size: 1.85rem;
+    }
+}
+
+
+/* =========================================================
+   HERO ANIMATION
+   ========================================================= */
+
+@keyframes fadeInUp {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* =========================================================
    HERO ANIMATION
    ========================================================= */
@@ -232,171 +407,6 @@ body.page-certifications {
     transform: translateY(0);
   }
 }  
-/* =========================================================
-   RECOMMENDATIONS HERO — MATCH DIGITAL HERO LAYOUT
-   ========================================================= */
-
-.recommendations-hero {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto 2rem;
-    padding: 0;
-    background: #ffffff;
-    border: 1px solid #e3e8ee;
-    border-left: 6px solid #0a66c2; /* same accent */
-    border-radius: 20px;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-    overflow: hidden;
-
-    display: grid;
-    grid-template-columns:
-        minmax(0, 1.2fr)
-        minmax(0, 0.8fr); /* identical proportions */
-    min-height: auto;
-}
-
-/* =========================================================
-   LEFT SIDE — TEXT CONTENT
-   ========================================================= */
-
-.recommendations-hero-content {
-    min-width: 0;
-    padding: 40px 32px 36px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.recommendations-hero h1 {
-    margin: 0 0 22px;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    line-height: 1.05;
-    font-weight: 700;
-    color: #111827;
-}
-
-.hero-overview,
-.hero-supporting {
-    max-width: 620px;
-    margin-bottom: 22px;
-    font-size: 1.08rem;
-    line-height: 1.65;
-    color: #20262d;
-}
-
-/* =========================================================
-   RIGHT SIDE — HERO IMAGE (OFFICE SCENE)
-   ========================================================= */
-
-.recommendations-hero-image {
-    position: relative;
-    min-width: 0;
-    min-height: 0;
-    overflow: hidden;
-    background: #062451; /* subtle background like digital hero */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/*
-IMPORTANT:
-Keep the image proportional.
-Do NOT use height:100% or object-fit:cover.
-Those settings crop the image on iPad.
-*/
-.recommendations-hero-image img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    max-height: none;
-    object-fit: contain;
-    object-position: center center;
-    margin: 0;
-}
-
-/* =========================================================
-   TABLET / IPAD
-   ========================================================= */
-
-@media (max-width: 1100px) {
-    .recommendations-hero {
-        grid-template-columns:
-            minmax(0, 0.95fr)
-            minmax(0, 1.05fr);
-    }
-
-    .recommendations-hero-content {
-        padding: 42px 32px;
-    }
-
-    .recommendations-hero h1 {
-        font-size: 2.8rem;
-    }
-}
-
-/* =========================================================
-   SMALLER TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-    .recommendations-hero {
-        grid-template-columns:
-            minmax(0, 1fr)
-            minmax(0, 1fr);
-    }
-
-    .recommendations-hero-content {
-        padding: 42px 28px;
-    }
-
-    .recommendations-hero h1 {
-        font-size: 2.35rem;
-    }
-
-    .hero-overview,
-    .hero-supporting {
-        font-size: 1rem;
-    }
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-    .recommendations-hero {
-        display: flex;
-        flex-direction: column;
-        border-left-width: 5px;
-        border-radius: 16px;
-    }
-
-    .recommendations-hero-content {
-        padding: 38px 25px 32px;
-    }
-
-    .recommendations-hero h1 {
-        font-size: 2.25rem;
-    }
-
-    .recommendations-hero-image {
-        width: 100%;
-        height: auto;
-        line-height: 0;
-        padding: 0;
-        margin: 0;
-    }
-
-    .recommendations-hero-image img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        margin: 0;
-        padding: 0;
-    }
-}
 
   
 </style>

@@ -27226,8 +27226,12 @@ High adoption across clinical teams — Achieved strong uptake through structure
 <div id="footer" class="apm-footer-wrapper"></div>
 <script>
 fetch("footer.html")
-.then(r => r.text())
-.then(h => document.getElementById("footer").innerHTML = h);
+  .then(r => r.text())
+  .then(h => {
+      h = h.replace('class="footer"', 'class="footer footer-apm"');
+      document.getElementById("footer").innerHTML = h;
+  });
+
 </script>
 
 

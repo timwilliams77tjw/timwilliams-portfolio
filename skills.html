@@ -17,6 +17,19 @@
 <link rel="stylesheet" href="skills.css">
 
 <style>
+    /* Prevent Skills page CSS from affecting the global header */
+body.page-skills * {
+    box-sizing: inherit;
+}
+
+body.page-skills header,
+body.page-skills .twc-header,
+body.page-skills .twc-nav,
+body.page-skills .twc-nav-menu,
+body.page-skills .twc-nav-menu * {
+    all: unset;
+    display: revert;
+}
 :root {
     --twc-navy: #071d36;
     --twc-navy-2: #0a2b4d;

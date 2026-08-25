@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership Philosophy</title>
+
+<style>
+/* leadership.css */
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #f7f7f7;
+    color: #333;
+}
+
+.hero {
+    background: linear-gradient(135deg, #1a73e8, #003c8f);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.intro, .pillars, .leadership-stories {
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.pillar-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.pillar-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.accordion-item {
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 15px;
+    background: #003c8f;
+    color: white;
+    border: none;
+    text-align: left;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.accordion-content {
+    padding: 15px;
+    display: none;
+    background: #fafafa;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #003c8f;
+    color: white;
+    margin-top: 40px;
+}
+</style>
+
+
+</head>
+
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Leadership Philosophy</h1>
+            <p>How I lead teams, shape delivery, and create environments where people thrive.</p>
+        </div>
+    </header>
+
+    <section class="intro">
+        <h2>My Leadership Approach</h2>
+        <p>
+            Leadership is not about authority — it’s about clarity, momentum, and creating the conditions 
+            for people to succeed. My philosophy blends strategic direction, psychological safety, and 
+            disciplined delivery to ensure teams feel empowered, aligned, and supported.
+        </p>
+    </section>
+
+    <section class="pillars">
+        <h2>Core Leadership Pillars</h2>
+        <div class="pillar-grid">
+
+            <div class="pillar-card">
+                <img src="images/clarity.jpg" alt="Clarity">
+                <h3>Clarity of Purpose</h3>
+                <p>
+                    People perform at their best when they understand the mission, the constraints, and 
+                    the definition of success. I ensure every team has a clear north star.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <img src="images/empowerment.jpg" alt="Empowerment">
+                <h3>Empowerment & Trust</h3>
+                <p>
+                    I build environments where individuals feel trusted to make decisions, innovate, and 
+                    challenge assumptions without fear.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <img src="images/accountability.jpg" alt="Accountability">
+                <h3>Accountability with Support</h3>
+                <p>
+                    Accountability is not pressure — it’s ownership. I pair clear expectations with 
+                    coaching, guidance, and support.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <img src="images/communication.jpg" alt="Communication">
+                <h3>Transparent Communication</h3>
+                <p>
+                    I communicate early, often, and honestly. Transparency builds trust, reduces risk, 
+                    and accelerates delivery.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="leadership-stories">
+        <h2>Leadership in Action</h2>
+        <div class="accordion">
+
+            <div class="accordion-item">
+                <button class="accordion-header">Leading Through Ambiguity</button>
+                <div class="accordion-content">
+                    <p>
+                        Complex programmes often begin with incomplete information. I stabilise teams by 
+                        defining what we know, what we don’t, and what we need next — creating momentum 
+                        even in uncertainty.
+                    </p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">Building High‑Trust Teams</button>
+                <div class="accordion-content">
+                    <p>
+                        Trust is earned through consistency, fairness, and listening. I invest time in 
+                        understanding people’s strengths, motivations, and concerns, enabling them to 
+                        perform at their peak.
+                    </p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">Driving Delivery Excellence</button>
+                <div class="accordion-content">
+                    <p>
+                        Delivery excellence is a mindset. I embed governance, cadence, and quality 
+                        standards that ensure predictable outcomes without slowing innovation.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 Tim Williams — Leadership Philosophy</p>
+    </footer>
+
+    <script>
+// leadership.js
+
+document.querySelectorAll(".accordion-header").forEach(header => {
+    header.addEventListener("click", () => {
+        const content = header.nextElementSibling;
+        const isOpen = content.style.display === "block";
+
+        document.querySelectorAll(".accordion-content").forEach(c => c.style.display = "none");
+
+        content.style.display = isOpen ? "none" : "block";
+    });
+});
+</script>
+</body>
+</html>

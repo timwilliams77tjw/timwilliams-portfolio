@@ -185,112 +185,122 @@ function initLeadershipModel() {
     });
 
 }
+/* =====================================================
+   LEADERSHIP UNDER PRESSURE
+   Smooth Accordion
+   ===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const scenarioHeaders = document.querySelectorAll(".scenario-header");
+
+    scenarioHeaders.forEach(header => {
+
+        const content = header.nextElementSibling;
+
+        if (!content) return;
+
+        /* Initial state */
+        content.style.overflow = "hidden";
+        content.style.maxHeight = "0px";
+        content.style.opacity = "0";
+        content.style.transition =
+            "max-height 0.35s ease, opacity 0.25s ease";
+
+        header.addEventListener("click", () => {
+
+            const isOpen =
+                header.getAttribute("aria-expanded") === "true";
 
 
-/* =========================================================
-   2. LEADERSHIP UNDER PRESSURE
-========================================================= */
+            /* =================================================
+               CLOSE ALL OTHER SCENARIOS
+               ================================================= */
 
-function initScenarioAccordion() {
+            scenarioHeaders.forEach(otherHeader => {
 
-    const headers =
-        document.querySelectorAll(
-            ".scenario-header"
-        );
+                if (otherHeader === header) return;
 
-    if (!headers.length) {
-        return;
-    }
+                const otherContent = otherHeader.nextElementSibling;
 
+                otherHeader.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
 
-    headers.forEach(header => {
+                otherHeader.classList.remove("active");
 
-        header.addEventListener(
-            "click",
-            () => {
-
-                const scenario =
-                    header.closest(
-                        ".leadership-scenario"
-                    );
-
-                const content =
-                    scenario.querySelector(
-                        ".scenario-content"
-                    );
-
-                const plus =
-                    header.querySelector(
-                        ".scenario-plus"
-                    );
-
-                const isOpen =
-                    header.getAttribute(
-                        "aria-expanded"
-                    ) === "true";
-
-
-                // Close all
-                document
-                    .querySelectorAll(
-                        ".scenario-header"
-                    )
-                    .forEach(otherHeader => {
-
-                        otherHeader.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                        const otherScenario =
-                            otherHeader.closest(
-                                ".leadership-scenario"
-                            );
-
-                        const otherContent =
-                            otherScenario.querySelector(
-                                ".scenario-content"
-                            );
-
-                        const otherPlus =
-                            otherHeader.querySelector(
-                                ".scenario-plus"
-                            );
-
-                        otherContent.style.display =
-                            "none";
-
-                        if (otherPlus) {
-                            otherPlus.textContent =
-                                "+";
-                        }
-
-                    });
-
-
-                // Open selected
-                if (!isOpen) {
-
-                    header.setAttribute(
-                        "aria-expanded",
-                        "true"
-                    );
-
-                    content.style.display =
-                        "block";
-
-                    if (plus) {
-                        plus.textContent = "−";
-                    }
-
+                if (otherContent) {
+                    otherContent.style.maxHeight = "0px";
+                    otherContent.style.opacity = "0";
                 }
+            });
 
+
+            /* =================================================
+               OPEN / CLOSE SELECTED SCENARIO
+               ================================================= */
+
+            if (isOpen) {
+
+                /* CLOSE */
+
+                header.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                header.classList.remove("active");
+
+                content.style.maxHeight = "0px";
+                content.style.opacity = "0";
+
+            } else {
+
+                /* OPEN */
+
+                header.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+                header.classList.add("active");
+
+                content.style.maxHeight =
+                    content.scrollHeight + "px";
+
+                content.style.opacity = "1";
             }
-        );
+
+        });
 
     });
 
-}
+
+    /* =====================================================
+       KEEP OPEN PANEL CORRECTLY SIZED ON RESIZE
+       Useful for iPad / iPhone orientation changes
+       ===================================================== */
+
+    window.addEventListener("resize", () => {
+
+        const openHeader =
+            document.querySelector(
+                '.scenario-header[aria-expanded="true"]'
+            );
+
+        if (!openHeader) return;
+
+        const openContent =
+            openHeader.nextElementSibling;
+
+        if (!openContent) return;
+
+        openContent.style.maxHeight =
+            openContent.scrollHeight + "px";
+    });
+
+});
 
 
 /* =========================================================

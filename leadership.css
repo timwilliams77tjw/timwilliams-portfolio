@@ -2112,3 +2112,430 @@
     background: #f7faff !important;
     color: #062451 !important;
 }
+/* =====================================================
+   LEADERSHIP UNDER PRESSURE
+   LIGHT BLUE SECTION THEME
+   ===================================================== */
+
+/*
+   The whole section gets the light-blue background.
+   This keeps the section visually distinct from the
+   normal white sections without making the text hard
+   to read.
+*/
+
+.leadership-pressure-section {
+    background: #eef6ff !important;
+    border-top: 1px solid rgba(10,102,194,.08);
+    border-bottom: 1px solid rgba(10,102,194,.08);
+}
+
+
+/*
+   Inner section styling
+*/
+
+.leadership-pressure-section .leadership-section-dark {
+    background: #eef6ff !important;
+    color: #062451 !important;
+}
+
+
+/*
+   Section heading
+*/
+
+.leadership-pressure-section .leadership-section-heading h2 {
+    color: #062451 !important;
+}
+
+.leadership-pressure-section .leadership-section-heading p {
+    color: #4a6078 !important;
+}
+
+
+/*
+   Blue heading marker
+*/
+
+.leadership-pressure-section .leadership-section-marker {
+    background: #0a66c2 !important;
+}
+
+
+/* =====================================================
+   SCENARIO ACCORDION CARDS
+   ===================================================== */
+
+.leadership-pressure-section .leadership-scenario {
+    position: relative;
+
+    background: #ffffff !important;
+
+    border: 1px solid rgba(10,102,194,.13);
+    border-radius: 16px;
+
+    box-shadow: 0 4px 14px rgba(15,35,60,.055);
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+/*
+   BLUE LEFT BORDER
+   Matches Leadership In Action styling.
+*/
+
+.leadership-pressure-section .leadership-scenario::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 5px;
+
+    background: #0a66c2;
+
+    z-index: 2;
+}
+
+
+/*
+   Hover
+*/
+
+.leadership-pressure-section .leadership-scenario:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(10,102,194,.22);
+
+    box-shadow:
+        0 10px 24px rgba(10,102,194,.10);
+}
+
+
+/* =====================================================
+   SCENARIO HEADER
+   ===================================================== */
+
+.leadership-pressure-section .scenario-header {
+    position: relative;
+
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 12px 1fr 30px;
+    align-items: center;
+    gap: 15px;
+
+    padding: 19px 22px 19px 27px;
+
+    background: #ffffff !important;
+    color: #172b4d !important;
+
+    border: none;
+
+    text-align: left;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        background-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/*
+   Header hover
+*/
+
+.leadership-pressure-section .scenario-header:hover {
+    background: #f7faff !important;
+}
+
+
+/*
+   Header keyboard focus
+*/
+
+.leadership-pressure-section .scenario-header:focus-visible {
+    outline: 3px solid rgba(10,102,194,.30);
+    outline-offset: -3px;
+}
+
+
+/* =====================================================
+   SCENARIO TEXT
+   ===================================================== */
+
+.leadership-pressure-section .scenario-header strong {
+    color: #062451 !important;
+}
+
+.leadership-pressure-section .scenario-header small {
+    color: #5b7088 !important;
+}
+
+
+/* =====================================================
+   STATUS DOT
+   ===================================================== */
+
+.leadership-pressure-section .scenario-status {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+}
+
+
+/* Keep existing status colours */
+
+.leadership-pressure-section .status-red {
+    background: #e85d5d;
+}
+
+.leadership-pressure-section .status-orange {
+    background: #f1a34a;
+}
+
+.leadership-pressure-section .status-yellow {
+    background: #e6c94c;
+}
+
+.leadership-pressure-section .status-blue {
+    background: #4d9ce8;
+}
+
+
+/* =====================================================
+   PLUS / MINUS
+   ===================================================== */
+
+.leadership-pressure-section .scenario-plus {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    color: #0a66c2 !important;
+
+    font-size: 1.5rem;
+    line-height: 1;
+
+    transition:
+        transform .3s ease,
+        color .2s ease;
+}
+
+
+/*
+   Rotate the plus when open.
+*/
+
+.leadership-pressure-section .scenario-header.active
+.scenario-plus {
+    transform: rotate(180deg);
+}
+
+
+/* =====================================================
+   EXPANDED CONTENT
+   ===================================================== */
+
+.leadership-pressure-section .scenario-content {
+    overflow: hidden;
+
+    max-height: 0;
+    opacity: 0;
+
+    padding: 0 22px 22px 49px;
+
+    background: #f8fbff !important;
+
+    color: #334e68 !important;
+
+    border-top: 1px solid rgba(10,102,194,.10);
+
+    transition:
+        max-height .35s ease,
+        opacity .25s ease;
+}
+
+
+.leadership-pressure-section .scenario-content p {
+    color: #334e68 !important;
+}
+
+
+/* =====================================================
+   PROCESS FLOW TAGS
+   ===================================================== */
+
+.leadership-pressure-section .scenario-flow {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 18px;
+}
+
+.leadership-pressure-section .scenario-flow span {
+    padding: 6px 10px;
+
+    background: #eaf3fc !important;
+
+    border: 1px solid rgba(10,102,194,.15);
+
+    border-radius: 999px;
+
+    color: #075da8 !important;
+
+    font-size: .7rem;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   IF YOU WORK WITH ME / EXPECTATIONS
+   ===================================================== */
+
+/*
+   Restore the section itself to the same light-blue
+   visual treatment.
+*/
+
+.leadership-expectations {
+    background: #eef6ff !important;
+
+    border-top: 1px solid rgba(10,102,194,.08);
+    border-bottom: 1px solid rgba(10,102,194,.08);
+}
+
+
+/*
+   Heading
+*/
+
+.leadership-expectations
+.leadership-section-heading h2 {
+    color: #062451 !important;
+}
+
+.leadership-expectations
+.leadership-section-heading p {
+    color: #4a6078 !important;
+}
+
+.leadership-expectations
+.leadership-section-marker {
+    background: #0a66c2 !important;
+}
+
+
+/* =====================================================
+   EXPECTATION GRID
+   ===================================================== */
+
+.leadership-expectations .expectations-grid {
+    background: transparent;
+
+    border: none;
+
+    border-radius: 0;
+
+    overflow: visible;
+
+    gap: 16px;
+}
+
+
+/*
+   Individual expectation cards
+*/
+
+.leadership-expectations .expectation {
+    position: relative;
+
+    background: #ffffff !important;
+
+    border: 1px solid rgba(10,102,194,.13);
+
+    border-radius: 16px;
+
+    box-shadow: 0 4px 14px rgba(15,35,60,.055);
+
+    padding: 25px;
+
+    overflow: hidden;
+}
+
+
+/*
+   Blue left border — matching Leadership In Action.
+*/
+
+.leadership-expectations .expectation::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 5px;
+
+    background: #0a66c2;
+}
+
+
+/*
+   Expectation card text
+*/
+
+.leadership-expectations .expectation > span {
+    color: rgba(10,102,194,.55) !important;
+}
+
+.leadership-expectations .expectation h3 {
+    color: #062451 !important;
+}
+
+.leadership-expectations .expectation p {
+    color: #4a6078 !important;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+    .leadership-pressure-section .scenario-header {
+        padding-left: 24px;
+    }
+
+    .leadership-pressure-section .scenario-content {
+        padding-left: 43px;
+    }
+
+    .leadership-expectations .expectation {
+        padding: 22px;
+    }
+
+}

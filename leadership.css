@@ -1895,3 +1895,208 @@
         max-height 0.35s ease,
         opacity 0.25s ease;
 }
+/* =====================================================
+   LEADERSHIP ACCORDIONS
+   LIGHT THEME + SMOOTH OPEN/CLOSE
+   ===================================================== */
+
+/* -----------------------------------------------------
+   LEADERSHIP UNDER PRESSURE
+----------------------------------------------------- */
+
+.leadership-pressure-section {
+    background: #eaf3fc !important;
+}
+
+.leadership-pressure-section .leadership-section-dark {
+    background: #eaf3fc !important;
+    color: #062451 !important;
+    border: none;
+    box-shadow: none;
+}
+
+.leadership-pressure-section .leadership-section-heading h2 {
+    color: #062451 !important;
+}
+
+.leadership-pressure-section .leadership-section-heading p {
+    color: #40566f !important;
+}
+
+
+/* Scenario cards */
+
+.leadership-pressure-section .leadership-scenario {
+    background: #ffffff !important;
+    border: 1px solid rgba(10,102,194,.14);
+    box-shadow: 0 5px 16px rgba(15,35,60,.06);
+}
+
+
+/* Scenario header */
+
+.leadership-pressure-section .scenario-header {
+    background: #ffffff !important;
+    color: #172b4d !important;
+}
+
+.leadership-pressure-section .scenario-header:hover {
+    background: #f7fbff !important;
+}
+
+.leadership-pressure-section .scenario-header strong {
+    color: #062451 !important;
+}
+
+.leadership-pressure-section .scenario-header small {
+    color: #5b7088 !important;
+}
+
+
+/* Plus */
+
+.leadership-pressure-section .scenario-plus {
+    color: #0a66c2 !important;
+}
+
+
+/* -----------------------------------------------------
+   IMPORTANT:
+   Do NOT use display:none here.
+   JavaScript controls max-height.
+----------------------------------------------------- */
+
+.leadership-pressure-section .scenario-content {
+    display: block !important;
+
+    max-height: 0;
+    opacity: 0;
+
+    overflow: hidden;
+
+    padding: 0 22px 0 49px;
+
+    background: #f8fbff !important;
+    color: #334e68 !important;
+
+    border-top: 0 solid rgba(10,102,194,.10);
+
+    transition:
+        max-height .35s ease,
+        opacity .25s ease,
+        padding .35s ease,
+        border-top-width .35s ease;
+}
+
+.leadership-pressure-section .scenario-content p {
+    color: #334e68 !important;
+}
+
+
+/* Open scenario */
+
+.leadership-pressure-section .leadership-scenario.is-open .scenario-content {
+    opacity: 1;
+
+    padding-bottom: 22px;
+
+    border-top-width: 1px;
+}
+
+
+/* Flow pills */
+
+.leadership-pressure-section .scenario-flow span {
+    background: #eaf3fc !important;
+    color: #075da8 !important;
+    border: 1px solid rgba(10,102,194,.15);
+}
+
+
+/* Plus rotation */
+
+.leadership-pressure-section .scenario-plus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    line-height: 1;
+
+    transition:
+        transform .3s ease,
+        color .2s ease;
+}
+
+.leadership-pressure-section
+.leadership-scenario.is-open
+.scenario-plus {
+    transform: rotate(180deg);
+}
+
+
+/* -----------------------------------------------------
+   IF YOU WORK WITH ME — ACCORDION
+----------------------------------------------------- */
+
+.leadership-accordion-content {
+    display: block !important;
+
+    max-height: 0;
+    opacity: 0;
+
+    overflow: hidden;
+
+    padding: 0 24px 0 29px;
+
+    transition:
+        max-height .35s ease,
+        opacity .25s ease,
+        padding .35s ease;
+}
+
+.leadership-accordion-item.is-open
+.leadership-accordion-content {
+    opacity: 1;
+    padding-bottom: 26px;
+}
+
+
+/* Accordion header */
+
+.leadership-accordion-header {
+    background: #ffffff !important;
+    color: var(--lead-text);
+}
+
+.leadership-accordion-header:hover {
+    background: #f7fbff !important;
+}
+
+
+/* Accordion icon */
+
+.leadership-accordion-header .accordion-icon {
+    color: #0a66c2 !important;
+
+    transition:
+        transform .3s ease,
+        color .2s ease;
+}
+
+.leadership-accordion-item.is-open
+.leadership-accordion-header
+.accordion-icon {
+    transform: rotate(180deg);
+}
+
+
+/* Keyboard accessibility */
+
+.scenario-header:focus-visible,
+.leadership-accordion-header:focus-visible {
+    outline: 3px solid rgba(10,102,194,.30);
+    outline-offset: -3px;
+}

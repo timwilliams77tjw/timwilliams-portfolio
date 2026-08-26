@@ -847,201 +847,140 @@
 }
 
 
-/* =====================================================
-   LEADERSHIP UNDER PRESSURE — LIGHT THEME
-===================================================== */
+/* =========================================================
+   PRESSURE SECTION
+========================================================= */
 
 .leadership-pressure-section {
-    background:
-        linear-gradient(
-            135deg,
-            #f4f8fd 0%,
-            #eaf3fc 100%
-        );
-
-    width: 100%;
+    background: var(--lead-dark);
 }
 
-
-.leadership-pressure-section .leadership-section-dark {
-    background: transparent !important;
-    color: #172b4d !important;
-
-    border: none;
-    border-left: 5px solid #0a66c2;
-
-    box-shadow: none;
+.leadership-section-dark {
+    color: #ffffff;
 }
 
-
-/* Section heading */
-
-.leadership-pressure-section h2 {
-    color: #062451 !important;
+.leadership-section-dark .leadership-section-heading p {
+    color: rgba(255,255,255,.72);
 }
 
-.leadership-pressure-section
-.leadership-section-heading p {
-    color: #4a6078 !important;
+.leadership-scenarios {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-
-/* Marker */
-
-.leadership-pressure-section
-.leadership-section-marker {
-    background: #0a66c2 !important;
-}
-
-
-/* =====================================================
-   SCENARIO CARDS
-===================================================== */
-
-.leadership-pressure-section
 .leadership-scenario {
-    background: #ffffff !important;
+    background: rgba(255,255,255,.055);
 
-    border: 1px solid rgba(10, 102, 194, 0.12);
-
-    box-shadow:
-        0 4px 14px rgba(15, 35, 60, 0.06);
-
-    color: #172b4d;
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-
-/* Scenario buttons */
-
-.leadership-pressure-section
-.scenario-header {
-    background: #ffffff !important;
-    color: #172b4d !important;
-
-    transition:
-        background-color .2s ease,
-        box-shadow .2s ease;
-}
-
-
-.leadership-pressure-section
-.scenario-header:hover {
-    background: #f7faff !important;
-}
-
-
-/* Main scenario title */
-
-.leadership-pressure-section
-.scenario-header strong {
-    color: #062451 !important;
-}
-
-
-/* Supporting text */
-
-.leadership-pressure-section
-.scenario-header small {
-    color: #5b7088 !important;
-}
-
-
-/* Plus / minus */
-
-.leadership-pressure-section
-.scenario-plus {
-    color: #0a66c2 !important;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 28px;
-    height: 28px;
-
-    font-size: 1.5rem;
-    line-height: 1;
-
-    transition:
-        transform .3s ease,
-        color .2s ease;
-}
-
-
-/* Rotate plus when open */
-
-.leadership-pressure-section
-.scenario-header.active
-.scenario-plus {
-    transform: rotate(180deg);
-}
-
-
-/* =====================================================
-   SMOOTH SCENARIO CONTENT
-===================================================== */
-
-.leadership-pressure-section
-.scenario-content {
-    display: block !important;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 15px;
 
     overflow: hidden;
-
-    max-height: 0;
-    opacity: 0;
-
-    padding-top: 0;
-    padding-bottom: 0;
-
-    color: #334e68 !important;
-
-    background: #f8fbff !important;
-
-    border-top: 1px solid transparent;
-
-    transition:
-        max-height .35s ease,
-        opacity .25s ease,
-        padding-top .35s ease,
-        padding-bottom .35s ease,
-        border-color .25s ease;
 }
 
+.scenario-header {
+    width: 100%;
 
-.leadership-pressure-section
+    display: grid;
+    grid-template-columns: 12px 1fr 30px;
+    align-items: center;
+    gap: 15px;
+
+    padding: 19px 22px;
+
+    background: transparent;
+    color: #ffffff;
+
+    border: none;
+
+    text-align: left;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.scenario-header:hover {
+    background: rgba(255,255,255,.04);
+}
+
+.scenario-header strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1rem;
+}
+
+.scenario-header small {
+    display: block;
+
+    color: rgba(255,255,255,.62);
+
+    font-size: .75rem;
+}
+
+.scenario-status {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+}
+
+.status-red {
+    background: #e85d5d;
+}
+
+.status-orange {
+    background: #f1a34a;
+}
+
+.status-yellow {
+    background: #e6c94c;
+}
+
+.status-blue {
+    background: #4d9ce8;
+}
+
+.scenario-plus {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,.65);
+}
+
+.scenario-content {
+    display: none;
+
+    padding: 0 22px 22px 49px;
+
+    color: rgba(255,255,255,.76);
+}
+
 .scenario-content p {
-    color: #334e68 !important;
+    margin: 0;
+
+    max-width: 850px;
+    line-height: 1.7;
 }
 
+.scenario-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
 
-/* =====================================================
-   PROCESS FLOW
-===================================================== */
+    margin-top: 18px;
+}
 
-.leadership-pressure-section
 .scenario-flow span {
-    background: #eaf3fc !important;
+    padding: 6px 10px;
 
-    color: #075da8 !important;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.10);
 
-    border: 1px solid rgba(10, 102, 194, 0.15);
-}
+    border-radius: 999px;
 
+    color: #ffffff;
 
-/* =====================================================
-   CARD HOVER
-===================================================== */
-
-.leadership-pressure-section
-.leadership-scenario:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 24px rgba(10, 102, 194, 0.12);
+    font-size: .7rem;
+    font-weight: 700;
 }
 
 
@@ -1341,10 +1280,13 @@
 }
 
 .leadership-accordion-content {
-    display: none;
-
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
     padding: 0 24px 26px 29px;
+    transition: max-height .35s ease, opacity .25s ease;
 }
+
 
 .action-content-grid {
     display: grid;
@@ -1382,74 +1324,59 @@
 }
 
 
-/* =====================================================
-   IF YOU WORK WITH ME — LIGHT BLUE THEME
-===================================================== */
+/* =========================================================
+   EXPECTATIONS
+========================================================= */
+
+
+
+.leadership-heading-light {
+    color: #ffffff;
+}
+
+.leadership-heading-light p {
+    color: rgba(255,255,255,.72);
+}
+
+.expectations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+
+    background: rgba(255,255,255,.12);
+
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+
+    overflow: hidden;
+}
+
+
+
+.expectation > span {
+    color: rgba(255,255,255,.35);
+
+    font-size: .72rem;
+    font-weight: 800;
+}
 
 .leadership-expectations {
-    background:
-        linear-gradient(
-            135deg,
-            #f4f8fd 0%,
-            #eaf3fc 100%
-        );
+    background: #f7faff !important;
 }
 
-
-.leadership-expectations
-.leadership-section {
-    color: #172b4d;
+.expectation {
+    background: #ffffff !important;
 }
 
-
-.leadership-expectations
-.leadership-heading-light h2 {
+.expectation h3 {
     color: #062451 !important;
 }
 
-
-.leadership-expectations
-.leadership-heading-light p {
+.expectation p {
     color: #4a6078 !important;
 }
 
 
-.leadership-expectations
-.leadership-section-marker {
-    background: #0a66c2 !important;
-}
-
-
-.leadership-expectations
-.expectations-grid {
-    background: rgba(10,102,194,.10);
-
-    border: 1px solid rgba(10,102,194,.12);
-}
-
-
-.leadership-expectations
-.expectation {
-    background: #ffffff;
-}
-
-
-.leadership-expectations
-.expectation > span {
-    color: rgba(10,102,194,.45);
-}
-
-
-.leadership-expectations
-.expectation h3 {
-    color: #062451;
-}
-
-
-.leadership-expectations
-.expectation p {
-    color: #4a6078;
-}
 
 /* =========================================================
    STATEMENT
@@ -1802,20 +1729,15 @@
    LEADERSHIP UNDER PRESSURE — LIGHT THEME
    ===================================================== */
 
+/* Leadership Under Pressure — Light Theme (Fixed) */
 .leadership-section-dark {
-    background: linear-gradient(
-        135deg,
-        #f4f8fd 0%,
-        #eaf3fc 100%
-    ) !important;
-
-    color: #172b4d !important;
-
-    border: 1px solid rgba(10, 102, 194, 0.14);
+    background: #f7faff !important; /* clean light-blue */
+    color: #062451 !important;      /* deep navy text */
+    border: 1px solid rgba(10,102,194,0.12);
     border-left: 5px solid #0a66c2;
-
-    box-shadow: 0 8px 24px rgba(15, 35, 60, 0.08);
+    box-shadow: 0 8px 24px rgba(15,35,60,0.06);
 }
+
 
 
 /* Section heading */
@@ -1972,4 +1894,862 @@
     transition:
         max-height 0.35s ease,
         opacity 0.25s ease;
+}
+/* =====================================================
+   LEADERSHIP ACCORDIONS
+   LIGHT THEME + SMOOTH OPEN/CLOSE
+   ===================================================== */
+
+/* -----------------------------------------------------
+   LEADERSHIP UNDER PRESSURE
+----------------------------------------------------- */
+
+.leadership-pressure-section {
+    background: #eaf3fc !important;
+}
+
+.leadership-pressure-section .leadership-section-dark {
+    background: #eaf3fc !important;
+    color: #062451 !important;
+    border: none;
+    box-shadow: none;
+}
+
+.leadership-pressure-section .leadership-section-heading h2 {
+    color: #062451 !important;
+}
+
+.leadership-pressure-section .leadership-section-heading p {
+    color: #40566f !important;
+}
+
+
+/* Scenario cards */
+
+.leadership-pressure-section .leadership-scenario {
+    background: #ffffff !important;
+    border: 1px solid rgba(10,102,194,.14);
+    box-shadow: 0 5px 16px rgba(15,35,60,.06);
+}
+
+
+/* Scenario header */
+
+.leadership-pressure-section .scenario-header {
+    background: #ffffff !important;
+    color: #172b4d !important;
+}
+
+.leadership-pressure-section .scenario-header:hover {
+    background: #f7fbff !important;
+}
+
+.leadership-pressure-section .scenario-header strong {
+    color: #062451 !important;
+}
+
+.leadership-pressure-section .scenario-header small {
+    color: #5b7088 !important;
+}
+
+
+/* Plus */
+
+.leadership-pressure-section .scenario-plus {
+    color: #0a66c2 !important;
+}
+
+
+/* -----------------------------------------------------
+   IMPORTANT:
+   Do NOT use display:none here.
+   JavaScript controls max-height.
+----------------------------------------------------- */
+
+.leadership-pressure-section .scenario-content {
+    display: block !important;
+
+    max-height: 0;
+    opacity: 0;
+
+    overflow: hidden;
+
+    padding: 0 22px 0 49px;
+
+    background: #f8fbff !important;
+    color: #334e68 !important;
+
+    border-top: 0 solid rgba(10,102,194,.10);
+
+    transition:
+        max-height .35s ease,
+        opacity .25s ease,
+        padding .35s ease,
+        border-top-width .35s ease;
+}
+
+.leadership-pressure-section .scenario-content p {
+    color: #334e68 !important;
+}
+
+
+/* Open scenario */
+
+.leadership-pressure-section .leadership-scenario.is-open .scenario-content {
+    opacity: 1;
+
+    padding-bottom: 22px;
+
+    border-top-width: 1px;
+}
+
+
+/* Flow pills */
+
+.leadership-pressure-section .scenario-flow span {
+    background: #eaf3fc !important;
+    color: #075da8 !important;
+    border: 1px solid rgba(10,102,194,.15);
+}
+
+
+/* Plus rotation */
+
+.leadership-pressure-section .scenario-plus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    line-height: 1;
+
+    transition:
+        transform .3s ease,
+        color .2s ease;
+}
+
+.leadership-pressure-section
+.leadership-scenario.is-open
+.scenario-plus {
+    transform: rotate(180deg);
+}
+
+
+/* -----------------------------------------------------
+   IF YOU WORK WITH ME — ACCORDION
+----------------------------------------------------- */
+
+.leadership-accordion-content {
+    display: block !important;
+
+    max-height: 0;
+    opacity: 0;
+
+    overflow: hidden;
+
+    padding: 0 24px 0 29px;
+
+    transition:
+        max-height .35s ease,
+        opacity .25s ease,
+        padding .35s ease;
+}
+
+.leadership-accordion-item.is-open
+.leadership-accordion-content {
+    opacity: 1;
+    padding-bottom: 26px;
+}
+
+
+/* Accordion header */
+
+.leadership-accordion-header {
+    background: #ffffff !important;
+    color: var(--lead-text);
+}
+
+.leadership-accordion-header:hover {
+    background: #f7fbff !important;
+}
+
+
+/* Accordion icon */
+
+.leadership-accordion-header .accordion-icon {
+    color: #0a66c2 !important;
+
+    transition:
+        transform .3s ease,
+        color .2s ease;
+}
+
+.leadership-accordion-item.is-open
+.leadership-accordion-header
+.accordion-icon {
+    transform: rotate(180deg);
+}
+
+
+/* Keyboard accessibility */
+
+.scenario-header:focus-visible,
+.leadership-accordion-header:focus-visible {
+    outline: 3px solid rgba(10,102,194,.30);
+    outline-offset: -3px;
+}
+/* =====================================================
+   FINAL LEADERSHIP LIGHT SECTION OVERRIDE
+===================================================== */
+
+.leadership-pressure-section {
+    background: #f7faff !important;
+}
+
+.leadership-section-dark {
+    background: #f7faff !important;
+    color: #062451 !important;
+}
+/* =====================================================
+   LEADERSHIP UNDER PRESSURE
+   LIGHT BLUE SECTION THEME
+   ===================================================== */
+
+/*
+   The whole section gets the light-blue background.
+   This keeps the section visually distinct from the
+   normal white sections without making the text hard
+   to read.
+*/
+
+.leadership-pressure-section {
+    background: #eef6ff !important;
+    border-top: 1px solid rgba(10,102,194,.08);
+    border-bottom: 1px solid rgba(10,102,194,.08);
+}
+
+
+/*
+   Inner section styling
+*/
+
+.leadership-pressure-section .leadership-section-dark {
+    background: #eef6ff !important;
+    color: #062451 !important;
+}
+
+
+/*
+   Section heading
+*/
+
+.leadership-pressure-section .leadership-section-heading h2 {
+    color: #062451 !important;
+}
+
+.leadership-pressure-section .leadership-section-heading p {
+    color: #4a6078 !important;
+}
+
+
+/*
+   Blue heading marker
+*/
+
+.leadership-pressure-section .leadership-section-marker {
+    background: #0a66c2 !important;
+}
+
+
+/* =====================================================
+   SCENARIO ACCORDION CARDS
+   ===================================================== */
+
+.leadership-pressure-section .leadership-scenario {
+    position: relative;
+
+    background: #ffffff !important;
+
+    border: 1px solid rgba(10,102,194,.13);
+    border-radius: 16px;
+
+    box-shadow: 0 4px 14px rgba(15,35,60,.055);
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+/*
+   BLUE LEFT BORDER
+   Matches Leadership In Action styling.
+*/
+
+.leadership-pressure-section .leadership-scenario::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 5px;
+
+    background: #0a66c2;
+
+    z-index: 2;
+}
+
+
+/*
+   Hover
+*/
+
+.leadership-pressure-section .leadership-scenario:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(10,102,194,.22);
+
+    box-shadow:
+        0 10px 24px rgba(10,102,194,.10);
+}
+
+
+/* =====================================================
+   SCENARIO HEADER
+   ===================================================== */
+
+.leadership-pressure-section .scenario-header {
+    position: relative;
+
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 12px 1fr 30px;
+    align-items: center;
+    gap: 15px;
+
+    padding: 19px 22px 19px 27px;
+
+    background: #ffffff !important;
+    color: #172b4d !important;
+
+    border: none;
+
+    text-align: left;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        background-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/*
+   Header hover
+*/
+
+.leadership-pressure-section .scenario-header:hover {
+    background: #f7faff !important;
+}
+
+
+/*
+   Header keyboard focus
+*/
+
+.leadership-pressure-section .scenario-header:focus-visible {
+    outline: 3px solid rgba(10,102,194,.30);
+    outline-offset: -3px;
+}
+
+
+/* =====================================================
+   SCENARIO TEXT
+   ===================================================== */
+
+.leadership-pressure-section .scenario-header strong {
+    color: #062451 !important;
+}
+
+.leadership-pressure-section .scenario-header small {
+    color: #5b7088 !important;
+}
+
+
+/* =====================================================
+   STATUS DOT
+   ===================================================== */
+
+.leadership-pressure-section .scenario-status {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+}
+
+
+/* Keep existing status colours */
+
+.leadership-pressure-section .status-red {
+    background: #e85d5d;
+}
+
+.leadership-pressure-section .status-orange {
+    background: #f1a34a;
+}
+
+.leadership-pressure-section .status-yellow {
+    background: #e6c94c;
+}
+
+.leadership-pressure-section .status-blue {
+    background: #4d9ce8;
+}
+
+
+/* =====================================================
+   PLUS / MINUS
+   ===================================================== */
+
+.leadership-pressure-section .scenario-plus {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    color: #0a66c2 !important;
+
+    font-size: 1.5rem;
+    line-height: 1;
+
+    transition:
+        transform .3s ease,
+        color .2s ease;
+}
+
+
+/*
+   Rotate the plus when open.
+*/
+
+.leadership-pressure-section .scenario-header.active
+.scenario-plus {
+    transform: rotate(180deg);
+}
+
+
+/* =====================================================
+   EXPANDED CONTENT
+   ===================================================== */
+
+.leadership-pressure-section .scenario-content {
+    overflow: hidden;
+
+    max-height: 0;
+    opacity: 0;
+
+    padding: 0 22px 22px 49px;
+
+    background: #f8fbff !important;
+
+    color: #334e68 !important;
+
+    border-top: 1px solid rgba(10,102,194,.10);
+
+    transition:
+        max-height .35s ease,
+        opacity .25s ease;
+}
+
+
+.leadership-pressure-section .scenario-content p {
+    color: #334e68 !important;
+}
+
+
+/* =====================================================
+   PROCESS FLOW TAGS
+   ===================================================== */
+
+.leadership-pressure-section .scenario-flow {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 18px;
+}
+
+.leadership-pressure-section .scenario-flow span {
+    padding: 6px 10px;
+
+    background: #eaf3fc !important;
+
+    border: 1px solid rgba(10,102,194,.15);
+
+    border-radius: 999px;
+
+    color: #075da8 !important;
+
+    font-size: .7rem;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   IF YOU WORK WITH ME / EXPECTATIONS
+   ===================================================== */
+
+/*
+   Restore the section itself to the same light-blue
+   visual treatment.
+*/
+
+.leadership-expectations {
+    background: #eef6ff !important;
+
+    border-top: 1px solid rgba(10,102,194,.08);
+    border-bottom: 1px solid rgba(10,102,194,.08);
+}
+
+
+/*
+   Heading
+*/
+
+.leadership-expectations
+.leadership-section-heading h2 {
+    color: #062451 !important;
+}
+
+.leadership-expectations
+.leadership-section-heading p {
+    color: #4a6078 !important;
+}
+
+.leadership-expectations
+.leadership-section-marker {
+    background: #0a66c2 !important;
+}
+
+
+/* =====================================================
+   EXPECTATION GRID
+   ===================================================== */
+
+.leadership-expectations .expectations-grid {
+    background: transparent;
+
+    border: none;
+
+    border-radius: 0;
+
+    overflow: visible;
+
+    gap: 16px;
+}
+
+
+/*
+   Individual expectation cards
+*/
+
+.leadership-expectations .expectation {
+    position: relative;
+
+    background: #ffffff !important;
+
+    border: 1px solid rgba(10,102,194,.13);
+
+    border-radius: 16px;
+
+    box-shadow: 0 4px 14px rgba(15,35,60,.055);
+
+    padding: 25px;
+
+    overflow: hidden;
+}
+
+
+/*
+   Blue left border — matching Leadership In Action.
+*/
+
+.leadership-expectations .expectation::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 5px;
+
+    background: #0a66c2;
+}
+
+
+/*
+   Expectation card text
+*/
+
+.leadership-expectations .expectation > span {
+    color: rgba(10,102,194,.55) !important;
+}
+
+.leadership-expectations .expectation h3 {
+    color: #062451 !important;
+}
+
+.leadership-expectations .expectation p {
+    color: #4a6078 !important;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+    .leadership-pressure-section .scenario-header {
+        padding-left: 24px;
+    }
+
+    .leadership-pressure-section .scenario-content {
+        padding-left: 43px;
+    }
+
+    .leadership-expectations .expectation {
+        padding: 22px;
+    }
+
+}
+
+:root {
+  --tw-bg: #ffffff;
+  --tw-surface: #f5f7fb;
+  --tw-border: #dde3f0;
+  --tw-primary: #1f4fbf;
+  --tw-primary-soft: rgba(31, 79, 191, 0.08);
+  --tw-text-main: #111827;
+  --tw-text-muted: #6b7280;
+  --tw-radius-lg: 18px;
+  --tw-radius-md: 12px;
+  --tw-shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+  --tw-transition-fast: 180ms ease-out;
+}
+
+/* Section wrapper */
+.tw-section.tw-teams {
+  padding: 4rem 1.5rem 3.5rem;
+  background: var(--tw-bg);
+}
+
+/* Header */
+.tw-section-header {
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.tw-section-header h2 {
+  font-size: clamp(1.9rem, 2.2vw, 2.3rem);
+  line-height: 1.2;
+  color: var(--tw-text-main);
+  margin: 0.35rem 0 0;
+}
+
+.tw-kicker {
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tw-primary);
+}
+
+/* Grid layout */
+.tw-teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* Cards */
+.tw-teams-card {
+  position: relative;
+  padding: 1.6rem 1.5rem 1.5rem;
+  border-radius: var(--tw-radius-lg);
+  background: var(--tw-surface);
+  border: 1px solid var(--tw-border);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transform: translateY(0);
+  transition:
+    transform var(--tw-transition-fast),
+    box-shadow var(--tw-transition-fast),
+    border-color var(--tw-transition-fast),
+    background-color var(--tw-transition-fast);
+  overflow: hidden;
+}
+
+.tw-teams-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, var(--tw-primary-soft), transparent 55%);
+  opacity: 0;
+  transition: opacity var(--tw-transition-fast);
+}
+
+.tw-teams-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--tw-shadow-soft);
+  border-color: rgba(31, 79, 191, 0.35);
+  background-color: #ffffff;
+}
+
+.tw-teams-card:hover::before {
+  opacity: 1;
+}
+
+/* Card header */
+.tw-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.tw-card-index {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tw-text-muted);
+}
+
+.tw-card-title-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* Icon (CSS-only, animated) */
+.tw-card-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 79, 191, 0.25);
+  background: linear-gradient(135deg, #e5edff, #f9fafb);
+  position: relative;
+  overflow: hidden;
+}
+
+.tw-card-icon::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: inherit;
+  background: var(--tw-primary);
+  opacity: 0.18;
+  transform: scale(0.7);
+  transition:
+    opacity var(--tw-transition-fast),
+    transform var(--tw-transition-fast);
+}
+
+.tw-teams-card:hover .tw-card-icon::after {
+  opacity: 0.35;
+  transform: scale(1);
+}
+
+.tw-card-title-wrap h3 {
+  font-size: 1.05rem;
+  margin: 0;
+  color: var(--tw-text-main);
+}
+
+/* Lead text */
+.tw-card-lead {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--tw-text-muted);
+  margin: 0 0 0.9rem;
+}
+
+/* Bullet list */
+.tw-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tw-card-list li {
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--tw-text-main);
+  margin-bottom: 0.35rem;
+}
+
+.tw-card-list li::before {
+  content: "";
+  position: absolute;
+  left: 0.35rem;
+  top: 0.55rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--tw-primary);
+  opacity: 0.7;
+}
+
+/* Pressure band */
+.tw-pressure-band {
+  max-width: 1080px;
+  margin: 2.5rem auto 0;
+  border-radius: var(--tw-radius-md);
+  background: linear-gradient(120deg, #0f172a, #1f2937);
+  color: #e5e7eb;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  align-items: center;
+}
+
+.tw-pressure-content h3 {
+  font-size: 1rem;
+  margin: 0 0 0.25rem;
+}
+
+.tw-pressure-content p {
+  font-size: 0.92rem;
+  margin: 0;
+  color: #cbd5f5;
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .tw-section.tw-teams {
+    padding: 3rem 1.25rem 3rem;
+  }
+
+  .tw-pressure-band {
+    padding: 1.2rem 1.3rem;
+  }
 }

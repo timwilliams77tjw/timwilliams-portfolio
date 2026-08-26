@@ -2539,3 +2539,917 @@
     }
 
 }
+/* =========================================================
+   LEADERSHIP PAGE
+   REDESIGNED SECTIONS
+   1. HOW I WORK WITH TEAMS
+   2. IF YOU WORK WITH ME
+   3. EXPLORE MY EXPERIENCE
+========================================================= */
+
+
+/* =========================================================
+   SHARED SECTION STYLING
+========================================================= */
+
+.leadership-behaviour-grid,
+.expectations-grid,
+.leadership-next-grid {
+    position: relative;
+}
+
+
+/* =========================================================
+   1. HOW I WORK WITH TEAMS
+========================================================= */
+
+.leadership-behaviour-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+
+/* Individual cards */
+
+.leadership-behaviour-card {
+    position: relative;
+
+    min-width: 0;
+    padding: 30px 28px 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #f8fbff 100%
+        );
+
+    border: 1px solid rgba(10,102,194,.13);
+    border-radius: 18px;
+
+    box-shadow:
+        0 6px 20px rgba(15,35,60,.055);
+
+    overflow: hidden;
+
+    transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
+}
+
+
+/* Blue accent bar */
+
+.leadership-behaviour-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 5px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0a66c2,
+            #4d9ce8
+        );
+
+    transform: scaleY(.25);
+    transform-origin: top;
+
+    transition:
+        transform .3s ease;
+}
+
+
+/* Subtle bottom glow */
+
+.leadership-behaviour-card::after {
+    content: "";
+
+    position: absolute;
+
+    right: -45px;
+    bottom: -55px;
+
+    width: 150px;
+    height: 150px;
+
+    background: rgba(10,102,194,.055);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    transition:
+        transform .35s ease,
+        opacity .35s ease;
+}
+
+
+/* Hover */
+
+.leadership-behaviour-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(10,102,194,.28);
+
+    box-shadow:
+        0 16px 35px rgba(10,102,194,.11);
+}
+
+.leadership-behaviour-card:hover::before {
+    transform: scaleY(1);
+}
+
+.leadership-behaviour-card:hover::after {
+    transform: scale(1.25);
+}
+
+
+/* Number / icon */
+
+.leadership-behaviour-card .behaviour-icon {
+    position: relative;
+    z-index: 2;
+
+    display: inline-flex;
+
+    width: 48px;
+    height: 48px;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf3fc,
+            #f5f9ff
+        );
+
+    border: 1px solid rgba(10,102,194,.12);
+    border-radius: 14px;
+
+    color: #0a66c2;
+
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .04em;
+
+    box-shadow:
+        0 5px 14px rgba(10,102,194,.08);
+
+    transition:
+        transform .28s ease,
+        background .28s ease,
+        color .28s ease;
+}
+
+.leadership-behaviour-card:hover .behaviour-icon {
+    transform: translateY(-2px) scale(1.05);
+
+    background: #0a66c2;
+    color: #ffffff;
+}
+
+
+/* Card heading */
+
+.leadership-behaviour-card h3 {
+    position: relative;
+    z-index: 2;
+
+    margin: 0 0 10px;
+
+    color: #062451;
+
+    font-size: 1.3rem;
+    line-height: 1.25;
+}
+
+
+/* Card paragraph */
+
+.leadership-behaviour-card p {
+    position: relative;
+    z-index: 2;
+
+    margin: 0 0 20px;
+
+    color: #4a6078;
+
+    font-size: .92rem;
+    line-height: 1.7;
+}
+
+
+/* Behaviour list */
+
+.leadership-behaviour-card ul {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+    padding: 17px 0 0;
+
+    list-style: none;
+
+    border-top: 1px solid rgba(10,102,194,.10);
+}
+
+.leadership-behaviour-card li {
+    position: relative;
+
+    margin: 0 0 10px;
+    padding-left: 24px;
+
+    color: #334e68;
+
+    font-size: .82rem;
+    line-height: 1.45;
+}
+
+.leadership-behaviour-card li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Tick */
+
+.leadership-behaviour-card li::before {
+    content: "✓";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    display: flex;
+
+    width: 16px;
+    height: 16px;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf3fc;
+    border-radius: 50%;
+
+    color: #0a66c2;
+
+    font-size: .62rem;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   2. IF YOU WORK WITH ME
+========================================================= */
+
+.leadership-expectations {
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(10,102,194,.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(10,102,194,.08),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #eef6ff 0%,
+            #f7faff 55%,
+            #edf5fd 100%
+        );
+
+    border-top: 1px solid rgba(10,102,194,.10);
+    border-bottom: 1px solid rgba(10,102,194,.10);
+
+    overflow: hidden;
+}
+
+
+/* Decorative background element */
+
+.leadership-expectations::before {
+    content: "";
+
+    position: absolute;
+
+    top: -150px;
+    right: -120px;
+
+    width: 360px;
+    height: 360px;
+
+    border: 1px solid rgba(10,102,194,.10);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 45px rgba(10,102,194,.025),
+        0 0 0 90px rgba(10,102,194,.018);
+
+    pointer-events: none;
+}
+
+
+/* Keep content above decoration */
+
+.leadership-expectations .leadership-section {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* Heading */
+
+.leadership-expectations .leadership-section-heading {
+    margin-bottom: 35px;
+}
+
+
+/* Override previous light-heading treatment */
+
+.leadership-expectations .leadership-heading-light {
+    color: #062451;
+}
+
+.leadership-expectations .leadership-heading-light h2 {
+    color: #062451;
+}
+
+.leadership-expectations .leadership-heading-light p {
+    color: #4a6078;
+}
+
+
+/* Marker */
+
+.leadership-expectations .leadership-section-marker {
+    background: #0a66c2;
+}
+
+
+/* Expectations grid */
+
+.expectations-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+
+    background: transparent;
+
+    border: none;
+    border-radius: 0;
+
+    overflow: visible;
+}
+
+
+/* Expectation cards */
+
+.expectation {
+    position: relative;
+
+    min-height: 185px;
+
+    padding: 25px 24px 23px;
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+        rgba(255,255,255,.88) !important;
+
+    border: 1px solid rgba(10,102,194,.12);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 18px rgba(15,35,60,.055);
+
+    overflow: hidden;
+
+    transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
+}
+
+
+/* Left blue line */
+
+.expectation::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 4px;
+
+    background: #0a66c2;
+
+    transform: scaleY(.2);
+    transform-origin: top;
+
+    transition:
+        transform .3s ease;
+}
+
+
+/* Number */
+
+.expectation > span {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+
+    width: 32px;
+    height: 32px;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    background: #eaf3fc;
+
+    border-radius: 9px;
+
+    color: #0a66c2 !important;
+
+    font-size: .68rem;
+    font-weight: 900;
+}
+
+
+/* Heading */
+
+.expectation h3 {
+    position: relative;
+    z-index: 2;
+
+    margin: 0 0 8px;
+
+    color: #062451 !important;
+
+    font-size: 1.08rem;
+    line-height: 1.25;
+}
+
+
+/* Description */
+
+.expectation p {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    color: #4a6078 !important;
+
+    font-size: .84rem;
+    line-height: 1.6;
+}
+
+
+/* Hover */
+
+.expectation:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(10,102,194,.25);
+
+    box-shadow:
+        0 14px 30px rgba(10,102,194,.10);
+}
+
+.expectation:hover::before {
+    transform: scaleY(1);
+}
+
+.expectation:hover > span {
+    background: #0a66c2;
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   3. EXPLORE MY EXPERIENCE
+========================================================= */
+
+.leadership-next {
+    position: relative;
+
+    padding-top: 75px;
+    padding-bottom: 90px;
+}
+
+
+/* Heading */
+
+.leadership-next .leadership-section-heading {
+    margin-bottom: 35px;
+}
+
+
+/* Grid */
+
+.leadership-next-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* Cards */
+
+.leadership-next-card {
+    position: relative;
+
+    min-width: 0;
+    min-height: 260px;
+
+    padding: 27px 25px 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #f7faff 100%
+        );
+
+    border: 1px solid rgba(10,102,194,.13);
+    border-radius: 18px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 5px 18px rgba(15,35,60,.055);
+
+    overflow: hidden;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+
+/* Top blue line */
+
+.leadership-next-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0a66c2,
+            #4d9ce8
+        );
+
+    transform: scaleX(.25);
+    transform-origin: left;
+
+    transition:
+        transform .35s ease;
+}
+
+
+/* Decorative circle */
+
+.leadership-next-card::after {
+    content: "";
+
+    position: absolute;
+
+    right: -55px;
+    bottom: -65px;
+
+    width: 165px;
+    height: 165px;
+
+    border: 1px solid rgba(10,102,194,.09);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    transition:
+        transform .35s ease;
+}
+
+
+/* Card number */
+
+.leadership-next-card > span {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+
+    width: 36px;
+    height: 36px;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf3fc;
+
+    border-radius: 10px;
+
+    color: #0a66c2;
+
+    font-size: .7rem;
+    font-weight: 900;
+}
+
+
+/* Card title */
+
+.leadership-next-card h3 {
+    position: relative;
+    z-index: 2;
+
+    margin: 20px 0 8px;
+
+    color: #062451;
+
+    font-size: 1.18rem;
+    line-height: 1.25;
+}
+
+
+/* Card description */
+
+.leadership-next-card p {
+    position: relative;
+    z-index: 2;
+
+    flex: 1;
+
+    margin: 0 0 20px;
+
+    color: #4a6078;
+
+    font-size: .83rem;
+    line-height: 1.65;
+}
+
+
+/* Link */
+
+.leadership-next-card strong {
+    position: relative;
+    z-index: 2;
+
+    display: inline-flex;
+    align-items: center;
+
+    color: #0a66c2;
+
+    font-size: .78rem;
+    font-weight: 800;
+
+    transition:
+        transform .25s ease;
+}
+
+
+/* Hover */
+
+.leadership-next-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(10,102,194,.28);
+
+    box-shadow:
+        0 16px 34px rgba(10,102,194,.11);
+}
+
+.leadership-next-card:hover::before {
+    transform: scaleX(1);
+}
+
+.leadership-next-card:hover::after {
+    transform: scale(1.25);
+}
+
+.leadership-next-card:hover strong {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   TABLET / IPAD
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .leadership-behaviour-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 15px;
+    }
+
+    .expectations-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .leadership-next-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   IPAD PORTRAIT / SMALL TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .leadership-behaviour-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .leadership-behaviour-card {
+        padding: 26px 25px;
+    }
+
+    .expectations-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .expectation {
+        min-height: 170px;
+    }
+
+    .leadership-next-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    /* ---------------------------------------------
+       HOW I WORK WITH TEAMS
+    --------------------------------------------- */
+
+    .leadership-behaviour-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .leadership-behaviour-card {
+        padding: 24px 21px 22px;
+
+        border-radius: 16px;
+    }
+
+    .leadership-behaviour-card .behaviour-icon {
+        width: 44px;
+        height: 44px;
+
+        margin-bottom: 17px;
+    }
+
+    .leadership-behaviour-card h3 {
+        font-size: 1.18rem;
+    }
+
+    .leadership-behaviour-card p {
+        font-size: .88rem;
+    }
+
+
+    /* ---------------------------------------------
+       IF YOU WORK WITH ME
+    --------------------------------------------- */
+
+    .leadership-expectations::before {
+        width: 250px;
+        height: 250px;
+
+        top: -100px;
+        right: -100px;
+    }
+
+    .expectations-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .expectation {
+        min-height: auto;
+
+        padding: 22px 20px;
+
+        border-radius: 15px;
+    }
+
+    .expectation > span {
+        width: 30px;
+        height: 30px;
+
+        margin-bottom: 14px;
+    }
+
+
+    /* ---------------------------------------------
+       EXPLORE MY EXPERIENCE
+    --------------------------------------------- */
+
+    .leadership-next {
+        padding-top: 55px;
+        padding-bottom: 70px;
+    }
+
+    .leadership-next-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .leadership-next-card {
+        min-height: 220px;
+
+        padding: 23px 21px;
+
+        border-radius: 16px;
+    }
+
+    .leadership-next-card h3 {
+        margin-top: 17px;
+
+        font-size: 1.12rem;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .leadership-behaviour-card,
+    .leadership-behaviour-card::before,
+    .leadership-behaviour-card::after,
+    .leadership-behaviour-card .behaviour-icon,
+    .expectation,
+    .expectation::before,
+    .leadership-next-card,
+    .leadership-next-card::before,
+    .leadership-next-card::after,
+    .leadership-next-card strong {
+        transition: none !important;
+    }
+
+}

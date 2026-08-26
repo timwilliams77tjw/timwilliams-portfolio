@@ -361,9 +361,22 @@ fetch("header.html")
         </div>
     </section>
 
-    <footer class="footer">
-        <p>© 2026 Tim Williams — Leadership Philosophy</p>
-    </footer>
+
+<!-- FAB BUTTONS -->
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a href="calendar.html" id="bookingFab" class="fab fab-booking">📅</a>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => {
+    const footerEl = document.getElementById("footer");
+    if (footerEl) footerEl.innerHTML = h;
+  });
+</script>
+
 
     <script>
 // leadership.js

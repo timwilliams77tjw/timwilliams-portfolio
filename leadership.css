@@ -1280,10 +1280,13 @@
 }
 
 .leadership-accordion-content {
-    display: none;
-
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
     padding: 0 24px 26px 29px;
+    transition: max-height .35s ease, opacity .25s ease;
 }
+
 
 .action-content-grid {
     display: grid;
@@ -1325,9 +1328,7 @@
    EXPECTATIONS
 ========================================================= */
 
-.leadership-expectations {
-    background: var(--lead-dark);
-}
+
 
 .leadership-heading-light {
     color: #ffffff;
@@ -1350,11 +1351,7 @@
     overflow: hidden;
 }
 
-.expectation {
-    padding: 27px;
 
-    background: rgba(255,255,255,.035);
-}
 
 .expectation > span {
     color: rgba(255,255,255,.35);
@@ -1363,22 +1360,22 @@
     font-weight: 800;
 }
 
+.leadership-expectations {
+    background: #f7faff !important;
+}
+
+.expectation {
+    background: #ffffff !important;
+}
+
 .expectation h3 {
-    margin: 10px 0 7px;
-
-    color: #ffffff;
-
-    font-size: 1.1rem;
+    color: #062451 !important;
 }
 
 .expectation p {
-    margin: 0;
-
-    color: rgba(255,255,255,.68);
-
-    font-size: .85rem;
-    line-height: 1.6;
+    color: #4a6078 !important;
 }
+
 
 
 /* =========================================================
@@ -1732,20 +1729,15 @@
    LEADERSHIP UNDER PRESSURE — LIGHT THEME
    ===================================================== */
 
+/* Leadership Under Pressure — Light Theme (Fixed) */
 .leadership-section-dark {
-    background: linear-gradient(
-        135deg,
-        #f4f8fd 0%,
-        #eaf3fc 100%
-    ) !important;
-
-    color: #172b4d !important;
-
-    border: 1px solid rgba(10, 102, 194, 0.14);
+    background: #f7faff !important; /* clean light-blue */
+    color: #062451 !important;      /* deep navy text */
+    border: 1px solid rgba(10,102,194,0.12);
     border-left: 5px solid #0a66c2;
-
-    box-shadow: 0 8px 24px rgba(15, 35, 60, 0.08);
+    box-shadow: 0 8px 24px rgba(15,35,60,0.06);
 }
+
 
 
 /* Section heading */

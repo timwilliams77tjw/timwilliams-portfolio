@@ -24145,18 +24145,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-document.querySelectorAll('.evidence-toggle').forEach(toggle => {
-    toggle.addEventListener('click', () => {
+document.addEventListener('DOMContentLoaded', () => {
+    const evidenceToggles = document.querySelectorAll('.evidence-toggle');
 
-        const expanded = toggle.getAttribute('aria-expanded') === 'true';
-        const collapsible = toggle.nextElementSibling;
+    evidenceToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const expanded = toggle.getAttribute('aria-expanded') === 'true';
+            const collapsible = toggle.nextElementSibling;
 
-        toggle.setAttribute('aria-expanded', !expanded);
-        collapsible.style.display = expanded ? 'none' : 'block';
+            if (!collapsible) return; // safety guard
 
-        toggle.querySelector('.toggle-text').textContent = expanded ? 'Show' : 'Hide';
+            toggle.setAttribute('aria-expanded', (!expanded).toString());
+            collapsible.style.display = expanded ? 'none' : 'block';
+
+            const label = toggle.querySelector('.toggle-text');
+            if (label) {
+                label.textContent = expanded ? 'Show' : 'Hide';
+            }
+        });
     });
 });
+
 
   
 </script>

@@ -15143,6 +15143,34 @@ section.bcs-development-section
     display: block !important;
   }
 }
+/* Collapsed by default */
+.evidence-collapsible {
+    display: none;
+    margin-top: 1rem;
+}
+
+/* Toggle button */
+.evidence-toggle {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Rotate icon when expanded */
+.evidence-toggle[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+}
+
+.toggle-icon {
+    transition: transform 0.2s ease;
+}
 
    
 </style>
@@ -24117,6 +24145,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+document.querySelectorAll('.evidence-toggle').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        const collapsible = toggle.nextElementSibling;
+
+        toggle.setAttribute('aria-expanded', !expanded);
+        collapsible.style.display = expanded ? 'none' : 'block';
+
+        toggle.querySelector('.toggle-text').textContent = expanded ? 'Show' : 'Hide';
+    });
+});
 
   
 </script>
@@ -25603,7 +25643,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3>
                         Cyber Security Uplift
                     </h3>
-
+<button class="evidence-toggle" aria-expanded="false">
+    <span class="toggle-text">Show</span>
+    <i class="fa-solid fa-chevron-down toggle-icon"></i>
+</button>
+<div class="evidence-collapsible">
 
                     <p class="professional-evidence-summary">
                         Led a major cyber security uplift programme, coordinating
@@ -25942,7 +25986,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <!-- Dynamic CPD activities inserted by JavaScript -->
 
                     </div>
-
+                </div>
 
                 </div>
 
@@ -25967,7 +26011,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3>
                         NHS Digital Transformation
                     </h3>
-
+<button class="evidence-toggle" aria-expanded="false">
+    <span class="toggle-text">Show</span>
+    <i class="fa-solid fa-chevron-down toggle-icon"></i>
+</button>
+<div class="evidence-collapsible">
 
                     <p class="professional-evidence-summary">
                         Led large-scale digital transformation initiatives within
@@ -26152,7 +26200,7 @@ High adoption across clinical teams — Achieved strong uptake through structure
                         <!-- Dynamic CPD activities inserted by JavaScript -->
 
                     </div>
-
+                </div>
 
                 </div>
 
@@ -26182,7 +26230,11 @@ High adoption across clinical teams — Achieved strong uptake through structure
                     <h3>
                         126K Device Migration
                     </h3>
-
+<button class="evidence-toggle" aria-expanded="false">
+    <span class="toggle-text">Show</span>
+    <i class="fa-solid fa-chevron-down toggle-icon"></i>
+</button>
+<div class="evidence-collapsible">
 
                     <p class="professional-evidence-summary">
                         Led a large-scale Windows device migration programme,
@@ -26383,7 +26435,7 @@ High adoption across clinical teams — Achieved strong uptake through structure
                         <!-- Dynamic CPD activities inserted by JavaScript -->
 
                     </div>
-
+                </div>
 
                 </div>
 
@@ -26409,7 +26461,11 @@ High adoption across clinical teams — Achieved strong uptake through structure
                         Cloud Transformation
                     </h3>
 
-
+<button class="evidence-toggle" aria-expanded="false">
+    <span class="toggle-text">Show</span>
+    <i class="fa-solid fa-chevron-down toggle-icon"></i>
+</button>
+<div class="evidence-collapsible">
                     <p class="professional-evidence-summary">
                         Led cloud transformation and modernisation initiatives
                         across complex technology environments, supporting
@@ -26609,7 +26665,7 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
                     </div>
 
-
+                </div>
                 </div>
 
             </article>
@@ -26632,6 +26688,11 @@ High adoption across clinical teams — Achieved strong uptake through structure
         <h3>
             PMO Turnaround
         </h3>
+        <button class="evidence-toggle" aria-expanded="false">
+    <span class="toggle-text">Show</span>
+    <i class="fa-solid fa-chevron-down toggle-icon"></i>
+</button>
+<div class="evidence-collapsible">
 <p class="professional-evidence-summary">“I fix failing delivery environments.”</p>
         <p class="professional-evidence-summary">
             Led PMO transformation and turnaround activity, improving
@@ -26834,7 +26895,7 @@ High adoption across clinical teams — Achieved strong uptake through structure
             <!-- Dynamic CPD activities inserted by JavaScript -->
 
         </div>
-
+    </div>
     </div>
 
 </article>
@@ -26858,6 +26919,11 @@ High adoption across clinical teams — Achieved strong uptake through structure
         <h3>
             Programme Governance
         </h3>
+        <button class="evidence-toggle" aria-expanded="false">
+    <span class="toggle-text">Show</span>
+    <i class="fa-solid fa-chevron-down toggle-icon"></i>
+</button>
+<div class="evidence-collapsible">
 <p class="professional-evidence-summary">"I create the control system that makes complex delivery predictable.”</p>
         <p class="professional-evidence-summary">
             Established and led programme governance frameworks,
@@ -27037,7 +27103,7 @@ High adoption across clinical teams — Achieved strong uptake through structure
             <!-- Dynamic CPD activities inserted by JavaScript -->
 
         </div>
-
+</div>
     </div>
 
 </article>

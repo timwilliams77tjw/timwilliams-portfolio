@@ -15171,46 +15171,6 @@ section.bcs-development-section
 .toggle-icon {
     transition: transform 0.2s ease;
 }
-/* Wrapper spacing */
-.cpd-visual-wrapper {
-    margin-top: 1.5rem;
-    padding: 1rem 0;
-    border-top: 1px solid #e0e0e0;
-}
-
-/* Toggle button */
-.cpd-visual-toggle {
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-/* Chevron rotation */
-.cpd-visual-toggle[aria-expanded="true"] .chevron {
-    transform: rotate(180deg);
-}
-
-.chevron {
-    transition: transform 0.2s ease;
-}
-
-/* Collapsible content */
-.cpd-visual-content {
-    display: none;
-    margin-top: 1rem;
-}
-
-.cpd-visual-content img {
-    width: 100%;
-    border-radius: 6px;
-}
 
    
 </style>
@@ -24177,17 +24137,14 @@ document.addEventListener(
 );
 
 document.addEventListener('DOMContentLoaded', () => {
-    const visualToggle = document.querySelector('.cpd-visual-toggle');
-    const visualContent = document.querySelector('.cpd-visual-content');
-
-    visualToggle.addEventListener('click', () => {
-        const expanded = visualToggle.getAttribute('aria-expanded') === 'true';
-
-        visualToggle.setAttribute('aria-expanded', (!expanded).toString());
-        visualContent.style.display = expanded ? 'none' : 'block';
+  const toggles = document.querySelectorAll('.cpd-visual-toggle');
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const card = toggle.closest('.cpd-visual-card');
+      card.classList.toggle('open');
     });
+  });
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     const evidenceToggles = document.querySelectorAll('.evidence-toggle');
 
@@ -25416,28 +25373,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <div class="bcs-ecosystem-heading">
         <h3>Professional Development Ecosystem</h3>
-        <p>
-            Examples of professional development activity recorded
-            through my BCS CPD record.
-        </p>
-    </div>
 
-    <!-- NEW: Clean standalone CPD visual summary block -->
-    <div class="cpd-visual-wrapper">
+<div class="cpd-visual-card">
+  <button class="cpd-visual-toggle">
+    <span>BCS CPD Visual Summary</span>
+    <span class="chevron">▼</span>
+  </button>
 
-        <button class="cpd-visual-toggle" aria-expanded="false">
-            <span class="toggle-text">BCS CPD Visual Summary</span>
-            <i class="fa-solid fa-chevron-down chevron"></i>
-        </button>
-
-        <div class="cpd-visual-content">
-            <img src="infographic.png" alt="BCS CPD Ecosystem Visual">
-        </div>
-
-    </div>
-
+  <div class="cpd-visual-content">
+    <img src="infographic.png" alt="BCS CPD Ecosystem Visual">
+  </div>
 </div>
-
 
       
         <p>

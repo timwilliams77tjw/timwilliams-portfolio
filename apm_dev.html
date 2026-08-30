@@ -24231,6 +24231,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cardsWrapper = document.getElementById("development-cards-wrapper");
+    const roadmapItems = document.getElementById("development-roadmap-items");
+
+    // Move all generated cards into the wrapper
+    const observer = new MutationObserver(() => {
+        while (roadmapItems.firstChild) {
+            cardsWrapper.appendChild(roadmapItems.firstChild);
+        }
+    });
+
+    observer.observe(roadmapItems, { childList: true });
+
+});
 
   
 </script>

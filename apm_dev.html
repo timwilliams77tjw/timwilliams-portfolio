@@ -15513,6 +15513,193 @@ section.bcs-development-section
     }
 
 }
+/* =========================================================
+   DEVELOPMENT ROADMAP
+   COLLAPSIBLE DEVELOPMENT AREAS
+========================================================= */
+
+
+/*
+   CLOSED STATE
+
+   !important is intentional here because your existing
+   roadmap CSS may already define height/max-height.
+*/
+
+#development-roadmap #development-roadmap-items {
+
+    max-height: 0 !important;
+
+    overflow: hidden !important;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    margin-top: 0;
+
+    transition:
+        max-height 0.55s ease,
+        opacity 0.35s ease,
+        margin-top 0.4s ease,
+        visibility 0s linear 0.55s;
+
+}
+
+
+/* =========================================================
+   OPEN STATE
+========================================================= */
+
+#development-roadmap
+#development-roadmap-items.development-areas-visible {
+
+    max-height: 5000px !important;
+
+    opacity: 1;
+
+    visibility: visible;
+
+    margin-top: 34px;
+
+    transition:
+        max-height 0.55s ease,
+        opacity 0.35s ease,
+        margin-top 0.4s ease,
+        visibility 0s linear 0s;
+
+}
+
+
+/* =========================================================
+   CLICKABLE TIMELINE
+========================================================= */
+
+#development-roadmap
+.development-roadmap-period {
+
+    cursor: pointer;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+/* =========================================================
+   TIMELINE HOVER
+========================================================= */
+
+#development-roadmap
+.development-roadmap-period:hover {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   ACTIVE TIMELINE
+========================================================= */
+
+#development-roadmap
+.development-roadmap-period.is-active {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   CLICKABLE SUMMARY BOXES
+========================================================= */
+
+#development-roadmap
+.development-roadmap-summary-item {
+
+    cursor: pointer;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+/* =========================================================
+   SUMMARY HOVER
+========================================================= */
+
+#development-roadmap
+.development-roadmap-summary-item:hover {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   ACTIVE SUMMARY
+========================================================= */
+
+#development-roadmap
+.development-roadmap-summary-item.is-active {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   KEYBOARD FOCUS
+========================================================= */
+
+#development-roadmap
+.development-roadmap-period:focus-visible,
+
+#development-roadmap
+.development-roadmap-summary-item:focus-visible {
+
+    outline:
+        3px solid rgba(10, 102, 194, 0.35);
+
+    outline-offset: 4px;
+
+    border-radius: 8px;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    #development-roadmap
+    #development-roadmap-items.development-areas-visible {
+
+        margin-top: 24px;
+
+    }
+
+}
+
+
+
 
 </style>
 
@@ -24436,56 +24623,40 @@ function findTarget(stage) {
             strategicCount.textContent = "1";
         }
 
+/* ============================================================
+   DEVELOPMENT ROADMAP
+   SHOW / HIDE DEVELOPMENT AREAS
+   VERSION 3
+   ============================================================ */
+
+(function initialiseDevelopmentRoadmapToggle() {
+
+    function setupDevelopmentRoadmapToggle() {
+
+        const roadmap =
+            document.getElementById(
+                "development-roadmap"
+            );
+
+        const roadmapItems =
+            document.getElementById(
+                "development-roadmap-items"
+            );
+
+        if (!roadmap || !roadmapItems) {
+            return;
+        }
+
 
         /* ========================================================
-           DEVELOPMENT AREA SHOW / HIDE
-           
-           IMPORTANT:
-           This is deliberately initialised here, AFTER the
-           roadmap has been created.
+           GET ALL CLICKABLE CONTROLS
         ======================================================== */
 
-        initialiseDevelopmentRoadmapToggle(
-            roadmap,
-            container
-        );
-
-    }
-
-
-    /* ============================================================
-       SHOW / HIDE DEVELOPMENT AREAS
-    ============================================================ */
-
-    function initialiseDevelopmentRoadmapToggle(
-        roadmap,
-        container
-    ) {
-
-        /*
-           The controls already exist in the HTML:
-
-           .development-roadmap-period
-           .development-roadmap-summary-item
-
-           No additional HTML classes are required.
-        */
-
-        const timelineControls =
+        const controls =
             roadmap.querySelectorAll(
-                ".development-roadmap-period"
-            );
-
-        const summaryControls =
-            roadmap.querySelectorAll(
+                ".development-roadmap-period, " +
                 ".development-roadmap-summary-item"
             );
-
-
-        const controls = [
-            ...timelineControls,
-            ...summaryControls
-        ];
 
 
         if (!controls.length) {
@@ -24494,261 +24665,172 @@ function findTarget(stage) {
 
 
         /* ========================================================
-           INITIAL STATE
+           SET INITIAL STATE
         ======================================================== */
 
-        container.classList.remove(
-            "is-visible"
+        roadmapItems.classList.remove(
+            "development-areas-visible"
         );
 
-        container.style.maxHeight = "0px";
-        container.style.opacity = "0";
-        container.style.visibility = "hidden";
-
-
-        /* ========================================================
-           UPDATE CONTROL STATES
-        ======================================================== */
-
-        function updateControls(isOpen) {
-
-            controls.forEach(function(control) {
-
-                control.classList.toggle(
-                    "is-active",
-                    isOpen
-                );
-
-                control.setAttribute(
-                    "aria-expanded",
-                    isOpen
-                        ? "true"
-                        : "false"
-                );
-
-            });
-
-        }
-
-
-        /* ========================================================
-           OPEN
-        ======================================================== */
-
-        function openDevelopmentAreas() {
-
-            container.classList.add(
-                "is-visible"
-            );
-
-            container.style.visibility =
-                "visible";
-
-            container.style.opacity =
-                "1";
-
-
-            /*
-               Measure the actual content height.
-
-               This works with your existing 2-column card
-               layout and avoids the grid animation problem
-               from the previous version.
-            */
-
-            container.style.maxHeight =
-                container.scrollHeight + "px";
-
-
-            updateControls(true);
-
-        }
-
-
-        /* ========================================================
-           CLOSE
-        ======================================================== */
-
-        function closeDevelopmentAreas() {
-
-            container.style.maxHeight =
-                "0px";
-
-            container.style.opacity =
-                "0";
-
-
-            container.classList.remove(
-                "is-visible"
-            );
-
-
-            /*
-               Wait for the height transition to finish
-               before making the container invisible.
-            */
-
-            window.setTimeout(
-                function() {
-
-                    if (
-                        !container.classList.contains(
-                            "is-visible"
-                        )
-                    ) {
-
-                        container.style.visibility =
-                            "hidden";
-
-                    }
-
-                },
-                500
-            );
-
-
-            updateControls(false);
-
-        }
-
-
-        /* ========================================================
-           TOGGLE
-        ======================================================== */
-
-        function toggleDevelopmentAreas() {
-
-            const isOpen =
-                container.classList.contains(
-                    "is-visible"
-                );
-
-            if (isOpen) {
-
-                closeDevelopmentAreas();
-
-            } else {
-
-                openDevelopmentAreas();
-
-            }
-
-        }
-
-
-        /* ========================================================
-           ADD CLICK EVENTS
-        ======================================================== */
-
         controls.forEach(function(control) {
-
-            /*
-               Prevent duplicate listeners if the roadmap
-               gets rebuilt by another script.
-            */
-
-            if (
-                control.dataset.roadmapToggleBound ===
-                "true"
-            ) {
-                return;
-            }
-
-
-            control.dataset.roadmapToggleBound =
-                "true";
-
-
-            control.setAttribute(
-                "role",
-                "button"
-            );
-
-            control.setAttribute(
-                "tabindex",
-                "0"
-            );
 
             control.setAttribute(
                 "aria-expanded",
                 "false"
             );
 
-
-            control.addEventListener(
-                "click",
-                function(event) {
-
-                    event.preventDefault();
-
-                    toggleDevelopmentAreas();
-
-                }
-            );
-
-
-            /* =================================================
-               KEYBOARD ACCESS
-            ================================================= */
-
-            control.addEventListener(
-                "keydown",
-                function(event) {
-
-                    if (
-                        event.key === "Enter" ||
-                        event.key === " "
-                    ) {
-
-                        event.preventDefault();
-
-                        toggleDevelopmentAreas();
-
-                    }
-
-                }
+            control.classList.remove(
+                "is-active"
             );
 
         });
 
 
         /* ========================================================
-           RESPONSIVE HEIGHT
-           
-           If the screen changes orientation or width while
-           the cards are open, recalculate their height.
+           SINGLE EVENT LISTENER
+
+           Using event delegation means this continues to work
+           even if other APM JavaScript rebuilds roadmap content.
         ======================================================== */
 
-        window.addEventListener(
-            "resize",
-            function() {
+        if (
+            roadmap.dataset.developmentToggleBound ===
+            "true"
+        ) {
+            return;
+        }
+
+
+        roadmap.dataset.developmentToggleBound =
+            "true";
+
+
+        roadmap.addEventListener(
+            "click",
+            function(event) {
+
+                const control =
+                    event.target.closest(
+                        ".development-roadmap-period, " +
+                        ".development-roadmap-summary-item"
+                    );
+
+
+                if (!control) {
+                    return;
+                }
+
+
+                /*
+                   Make sure the click belongs to THIS roadmap.
+                */
 
                 if (
-                    container.classList.contains(
-                        "is-visible"
-                    )
+                    !roadmap.contains(control)
                 ) {
+                    return;
+                }
 
-                    container.style.maxHeight =
-                        container.scrollHeight + "px";
+
+                event.preventDefault();
+
+
+                const isOpen =
+                    roadmapItems.classList.contains(
+                        "development-areas-visible"
+                    );
+
+
+                /* =================================================
+                   TOGGLE
+                ================================================= */
+
+                if (isOpen) {
+
+                    roadmapItems.classList.remove(
+                        "development-areas-visible"
+                    );
+
+                } else {
+
+                    roadmapItems.classList.add(
+                        "development-areas-visible"
+                    );
 
                 }
+
+
+                const newState =
+                    !isOpen;
+
+
+                /* =================================================
+                   UPDATE ALL CONTROLS
+                ================================================= */
+
+                controls.forEach(
+                    function(item) {
+
+                        item.setAttribute(
+                            "aria-expanded",
+                            newState
+                                ? "true"
+                                : "false"
+                        );
+
+                        item.classList.toggle(
+                            "is-active",
+                            newState
+                        );
+
+                    }
+                );
 
             }
         );
 
 
         /* ========================================================
-           INITIALISE CLOSED
+           KEYBOARD ACCESSIBILITY
         ======================================================== */
 
-        updateControls(false);
+        roadmap.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key !== "Enter" &&
+                    event.key !== " "
+                ) {
+                    return;
+                }
+
+
+                const control =
+                    event.target.closest(
+                        ".development-roadmap-period, " +
+                        ".development-roadmap-summary-item"
+                    );
+
+
+                if (!control) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                control.click();
+
+            }
+        );
 
     }
 
 
     /* ============================================================
-       INITIALISE
+       DOM READY
     ============================================================ */
 
     if (
@@ -24758,12 +24840,12 @@ function findTarget(stage) {
 
         document.addEventListener(
             "DOMContentLoaded",
-            buildDevelopmentRoadmap
+            setupDevelopmentRoadmapToggle
         );
 
     } else {
 
-        buildDevelopmentRoadmap();
+        setupDevelopmentRoadmapToggle();
 
     }
 
@@ -27933,7 +28015,6 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
     </div>
 
-</div>
 
 
 

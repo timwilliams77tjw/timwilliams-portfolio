@@ -24341,9 +24341,10 @@ function findTarget(stage) {
 
     }
 
-})();/* ============================================================
+})();
+/* ============================================================
    DEVELOPMENT ROADMAP
-   VERSION 2
+   VERSION 3
    ============================================================ */
 
 (function initialiseDevelopmentRoadmap() {
@@ -24381,9 +24382,6 @@ function findTarget(stage) {
 
         /* ========================================================
            ROADMAP CONFIGURATION
-
-           This controls sequencing only.
-           Competency/rating data will be connected later.
         ======================================================== */
 
         const roadmapConfig = [
@@ -24424,7 +24422,7 @@ function findTarget(stage) {
 
 
         /* ========================================================
-           CLEAR EXISTING ITEMS
+           CLEAR EXISTING ROADMAP ITEMS
         ======================================================== */
 
         container.innerHTML = "";
@@ -24444,6 +24442,10 @@ function findTarget(stage) {
             }
 
 
+            /* ----------------------------------------------------
+               GET SOURCE TITLE
+            ---------------------------------------------------- */
+
             const titleElement =
                 source.querySelector("h3");
 
@@ -24452,6 +24454,10 @@ function findTarget(stage) {
                     ? titleElement.textContent.trim()
                     : "Development priority";
 
+
+            /* ----------------------------------------------------
+               CREATE CARD
+            ---------------------------------------------------- */
 
             const item =
                 document.createElement("article");
@@ -24505,12 +24511,23 @@ function findTarget(stage) {
             priority.className =
                 `development-roadmap-priority ${config.priority}`;
 
-            priority.textContent =
-                config.priority === "high"
-                    ? "High priority"
-                    : config.priority === "strategic"
-                        ? "Strategic"
-                        : "Active";
+
+            if (config.priority === "high") {
+
+                priority.textContent =
+                    "High priority";
+
+            } else if (config.priority === "strategic") {
+
+                priority.textContent =
+                    "Strategic";
+
+            } else {
+
+                priority.textContent =
+                    "Active";
+
+            }
 
 
             /* ----------------------------------------------------
@@ -24524,13 +24541,17 @@ function findTarget(stage) {
                 "development-roadmap-rating";
 
             rating.innerHTML = `
-                <strong>Development gap</strong>
+                <strong>
+                    Development gap
+                </strong>
 
                 <span class="development-roadmap-arrow">
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
 
-                <span>Target capability</span>
+                <span>
+                    Target capability
+                </span>
             `;
 
 
@@ -24572,19 +24593,30 @@ function findTarget(stage) {
 
             timing.innerHTML = `
                 <i class="fa-regular fa-clock"></i>
-                <span>${config.timing}</span>
+                <span>
+                    ${config.timing}
+                </span>
             `;
 
 
             /* ----------------------------------------------------
-               ASSEMBLE
+               ASSEMBLE CARD
             ---------------------------------------------------- */
 
             item.appendChild(header);
+
             item.appendChild(priority);
+
             item.appendChild(rating);
+
             item.appendChild(progress);
+
             item.appendChild(timing);
+
+
+            /* ----------------------------------------------------
+               ADD CARD TO ROADMAP
+            ---------------------------------------------------- */
 
             container.appendChild(item);
 
@@ -24592,7 +24624,7 @@ function findTarget(stage) {
 
 
         /* ========================================================
-           ROADMAP SUMMARY
+           ROADMAP SUMMARY COUNTS
         ======================================================== */
 
         const highCount =
@@ -24612,17 +24644,332 @@ function findTarget(stage) {
 
 
         if (highCount) {
+
             highCount.textContent = "1";
+
         }
+
 
         if (activeCount) {
+
             activeCount.textContent = "2";
+
         }
+
 
         if (strategicCount) {
+
             strategicCount.textContent = "1";
+
         }
 
+
+        /* ========================================================
+           DEVELOPMENT AREA SHOW / HIDE
+           
+           IMPORTANT:
+           This is initialised AFTER the four roadmap cards
+           have been created.
+        ======================================================== */
+
+        initialiseDevelopmentRoadmapToggle(
+            roadmap,
+            container
+        );
+
+    }
+
+
+    /* ============================================================
+       SHOW / HIDE DEVELOPMENT AREAS
+    ============================================================ */
+
+    function initialiseDevelopmentRoadmapToggle(
+        roadmap,
+        container
+    ) {
+
+        /*
+           Find the timeline periods and summary boxes.
+        */
+
+        const controls =
+            roadmap.querySelectorAll(
+                ".development-roadmap-period, " +
+                ".development-roadmap-summary-item"
+            );
+
+
+        if (!controls.length) {
+            return;
+        }
+
+
+        /* ========================================================
+           REMOVE ANY PREVIOUS TOGGLE STATE
+        ======================================================== */
+
+        container.classList.remove(
+            "development-areas-visible"
+        );
+
+
+        /*
+           These inline values ensure the cards start hidden,
+           regardless of any existing roadmap CSS.
+        */
+
+        container.style.maxHeight =
+            "0px";
+
+        container.style.overflow =
+            "hidden";
+
+        container.style.opacity =
+            "0";
+
+        container.style.visibility =
+            "hidden";
+
+
+        /* ========================================================
+           MAKE CONTROLS ACCESSIBLE
+        ======================================================== */
+
+        controls.forEach(function(control) {
+
+            control.setAttribute(
+                "role",
+                "button"
+            );
+
+            control.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+            control.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        });
+
+
+        /* ========================================================
+           OPEN DEVELOPMENT AREAS
+        ======================================================== */
+
+        function openDevelopmentAreas() {
+
+            container.classList.add(
+                "development-areas-visible"
+            );
+
+
+            container.style.visibility =
+                "visible";
+
+            container.style.opacity =
+                "1";
+
+
+            /*
+               Allow the browser to calculate the natural
+               height of the generated cards.
+            */
+
+            container.style.maxHeight =
+                container.scrollHeight + "px";
+
+
+            controls.forEach(function(control) {
+
+                control.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+                control.classList.add(
+                    "is-active"
+                );
+
+            });
+
+        }
+
+
+        /* ========================================================
+           CLOSE DEVELOPMENT AREAS
+        ======================================================== */
+
+        function closeDevelopmentAreas() {
+
+            container.style.maxHeight =
+                "0px";
+
+            container.style.opacity =
+                "0";
+
+
+            container.classList.remove(
+                "development-areas-visible"
+            );
+
+
+            controls.forEach(function(control) {
+
+                control.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                control.classList.remove(
+                    "is-active"
+                );
+
+            });
+
+
+            /*
+               Hide completely after the animation.
+            */
+
+            window.setTimeout(
+                function() {
+
+                    if (
+                        !container.classList.contains(
+                            "development-areas-visible"
+                        )
+                    ) {
+
+                        container.style.visibility =
+                            "hidden";
+
+                    }
+
+                },
+                550
+            );
+
+        }
+
+
+        /* ========================================================
+           MAIN TOGGLE
+        ======================================================== */
+
+        function toggleDevelopmentAreas() {
+
+            const isOpen =
+                container.classList.contains(
+                    "development-areas-visible"
+                );
+
+
+            if (isOpen) {
+
+                closeDevelopmentAreas();
+
+            } else {
+
+                openDevelopmentAreas();
+
+            }
+
+        }
+
+
+        /* ========================================================
+           CLICK EVENTS
+        ======================================================== */
+
+        controls.forEach(function(control) {
+
+            control.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    toggleDevelopmentAreas();
+
+                }
+            );
+
+
+            /* ====================================================
+               KEYBOARD EVENTS
+            ==================================================== */
+
+            control.addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        toggleDevelopmentAreas();
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        /* ========================================================
+           HANDLE WINDOW RESIZE
+        ======================================================== */
+
+        window.addEventListener(
+            "resize",
+            function() {
+
+                if (
+                    container.classList.contains(
+                        "development-areas-visible"
+                    )
+                ) {
+
+                    container.style.maxHeight =
+                        container.scrollHeight + "px";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ============================================================
+       INITIALISE ROADMAP
+    ============================================================ */
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            buildDevelopmentRoadmap
+        );
+
+    } else {
+
+        buildDevelopmentRoadmap();
+
+    }
+
+})();
 /* ============================================================
    DEVELOPMENT ROADMAP
    SHOW / HIDE DEVELOPMENT AREAS

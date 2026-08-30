@@ -15206,14 +15206,145 @@ section.bcs-development-section
     align-items: center;
     font-size: 0.9rem;
 }
-.development-cards-wrapper {
-    display: none;
-    transition: all 0.3s ease;
+/* =========================================================
+   DEVELOPMENT ROADMAP
+   SHOW / HIDE DEVELOPMENT AREAS
+========================================================= */
+
+/*
+   The development cards are initially collapsed.
+   The roadmap timeline and summary remain visible.
+*/
+
+#development-roadmap-items {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    visibility: hidden;
+    margin-top: 0;
+    transition:
+        grid-template-rows 0.45s ease,
+        opacity 0.3s ease,
+        margin-top 0.45s ease,
+        visibility 0s linear 0.45s;
 }
-.development-cards-wrapper.visible {
-    display: block;
+
+/*
+   Required wrapper behaviour for the grid animation.
+   The existing cards remain untouched.
+*/
+
+#development-roadmap-items > * {
+    min-height: 0;
+    overflow: hidden;
 }
-   
+
+
+/* ---------------------------------------------------------
+   OPEN STATE
+--------------------------------------------------------- */
+
+#development-roadmap-items.is-visible {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+    margin-top: 34px;
+    transition:
+        grid-template-rows 0.45s ease,
+        opacity 0.3s ease,
+        margin-top 0.45s ease,
+        visibility 0s linear 0s;
+}
+
+
+/* ---------------------------------------------------------
+   CLICKABLE TIMELINE PERIODS
+--------------------------------------------------------- */
+
+.development-roadmap-toggle {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/*
+   Subtle interaction feedback.
+*/
+
+.development-roadmap-period {
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.development-roadmap-period:hover {
+    transform: translateY(-2px);
+}
+
+
+/*
+   Active timeline state.
+*/
+
+.development-roadmap-period.is-active
+.development-roadmap-label {
+    font-weight: 800;
+}
+
+
+/* ---------------------------------------------------------
+   CLICKABLE SUMMARY CARDS
+--------------------------------------------------------- */
+
+.development-roadmap-summary-item {
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.development-roadmap-summary-item:hover {
+    transform: translateY(-2px);
+}
+
+
+/*
+   Active summary card.
+*/
+
+.development-roadmap-summary-item.is-active {
+    transform: translateY(-2px);
+}
+
+
+/* ---------------------------------------------------------
+   KEYBOARD ACCESSIBILITY
+--------------------------------------------------------- */
+
+.development-roadmap-toggle:focus-visible {
+    outline: 3px solid rgba(10, 102, 194, 0.35);
+    outline-offset: 4px;
+    border-radius: 8px;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 700px) {
+
+    #development-roadmap-items.is-visible {
+        margin-top: 24px;
+    }
+
+    .development-roadmap-toggle {
+        touch-action: manipulation;
+    }
+
+}   
 </style>
 
 
@@ -24207,68 +24338,128 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+/* =========================================================
+   DEVELOPMENT ROADMAP
+   SHOW / HIDE DEVELOPMENT AREAS
+========================================================= */
 
-    const cardsWrapper = document.getElementById("development-cards-wrapper");
+(function initDevelopmentRoadmapToggle() {
 
-    // Timeline periods
-    const timelinePeriods = document.querySelectorAll(".development-roadmap-period");
+    const roadmapItems = document.getElementById(
+        "development-roadmap-items"
+    );
 
-    // Summary boxes
-    const summaryBoxes = document.querySelectorAll(".development-roadmap-summary-item");
+    if (!roadmapItems) return;
 
-  function toggleCards() {
-    cardsWrapper.classList.toggle("visible");
-}
+    const toggles = document.querySelectorAll(
+        ".development-roadmap-toggle"
+    );
+
+    if (!toggles.length) return;
 
 
-    timelinePeriods.forEach(period => {
-        period.addEventListener("click", toggleCards);
-    });
+    /* -----------------------------------------------------
+       UPDATE ALL TOGGLE STATES
+    ----------------------------------------------------- */
 
-    summaryBoxes.forEach(box => {
-        box.addEventListener("click", toggleCards);
-    });
+    function updateToggleState(isOpen) {
 
-});
-document.addEventListener("DOMContentLoaded", function () {
+        toggles.forEach(toggle => {
 
-    const cardsWrapper = document.getElementById("development-cards-wrapper");
-    const roadmapItems = document.getElementById("development-roadmap-items");
+            toggle.classList.toggle(
+                "is-active",
+                isOpen
+            );
 
-    // Move all generated cards into the wrapper
-    const observer = new MutationObserver(() => {
-        while (roadmapItems.firstChild) {
-            cardsWrapper.appendChild(roadmapItems.firstChild);
-        }
-    });
+            toggle.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
 
-    observer.observe(roadmapItems, { childList: true });
-
-});
-document.addEventListener("DOMContentLoaded", function () {
-
-    const cardsWrapper = document.getElementById("development-cards-wrapper");
-
-    // Detect ANY development cards, wherever they appear
-    const observer = new MutationObserver(() => {
-
-        const cards = document.querySelectorAll(".development-card");
-
-        cards.forEach(card => {
-            // Only move cards that are NOT already inside the wrapper
-            if (!cardsWrapper.contains(card)) {
-                cardsWrapper.appendChild(card);
-            }
         });
 
+    }
+
+
+    /* -----------------------------------------------------
+       SHOW / HIDE DEVELOPMENT CARDS
+    ----------------------------------------------------- */
+
+    function toggleDevelopmentAreas() {
+
+        const isOpen =
+            roadmapItems.classList.contains("is-visible");
+
+        if (isOpen) {
+
+            roadmapItems.classList.remove(
+                "is-visible"
+            );
+
+            updateToggleState(false);
+
+        } else {
+
+            roadmapItems.classList.add(
+                "is-visible"
+            );
+
+            updateToggleState(true);
+
+        }
+
+    }
+
+
+    /* -----------------------------------------------------
+       MOUSE / TOUCH
+    ----------------------------------------------------- */
+
+    toggles.forEach(toggle => {
+
+        toggle.addEventListener(
+            "click",
+            toggleDevelopmentAreas
+        );
+
+
+        /* -------------------------------------------------
+           KEYBOARD ACCESSIBILITY
+        ------------------------------------------------- */
+
+        toggle.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    toggleDevelopmentAreas();
+
+                }
+
+            }
+        );
+
     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
 
-});
+    /* -----------------------------------------------------
+       INITIAL STATE
+       Cards remain hidden when page loads.
+    ----------------------------------------------------- */
 
-  
+    roadmapItems.classList.remove(
+        "is-visible"
+    );
+
+    updateToggleState(false);
+
+})();  
 </script>
 
 
@@ -27302,28 +27493,48 @@ High adoption across clinical teams — Achieved strong uptake through structure
 
         <div class="development-roadmap-track">
 
-            <div class="development-roadmap-period">
+<div
+    class="development-roadmap-period development-roadmap-toggle"
+    role="button"
+    tabindex="0"
+    aria-expanded="false"
+>
                 <span class="development-roadmap-dot"></span>
                 <span class="development-roadmap-label">
                     Now
                 </span>
             </div>
 
-            <div class="development-roadmap-period">
+<div
+    class="development-roadmap-period development-roadmap-toggle"
+    role="button"
+    tabindex="0"
+    aria-expanded="false"
+>
                 <span class="development-roadmap-dot"></span>
                 <span class="development-roadmap-label">
                     3 Months
                 </span>
             </div>
 
-            <div class="development-roadmap-period">
+<div
+    class="development-roadmap-period development-roadmap-toggle"
+    role="button"
+    tabindex="0"
+    aria-expanded="false"
+>
                 <span class="development-roadmap-dot"></span>
                 <span class="development-roadmap-label">
                     6 Months
                 </span>
             </div>
 
-            <div class="development-roadmap-period">
+<div
+    class="development-roadmap-period development-roadmap-toggle"
+    role="button"
+    tabindex="0"
+    aria-expanded="false"
+>
                 <span class="development-roadmap-dot"></span>
                 <span class="development-roadmap-label">
                     12 Months
@@ -27339,10 +27550,7 @@ High adoption across clinical teams — Achieved strong uptake through structure
              JavaScript will populate these from the
              competency / current / target data.
         =================================================== -->
-<!-- DEVELOPMENT CARDS WRAPPER (correct location) -->
-<div class="development-cards-wrapper" id="development-cards-wrapper">
 
-    
         <div
             class="development-roadmap-items"
             id="development-roadmap-items"
@@ -27351,31 +27559,71 @@ High adoption across clinical teams — Achieved strong uptake through structure
             <!-- Dynamic roadmap items inserted here -->
 
         </div>
-</div>
-</div>
 
-
-   <!-- DEVELOPMENT ROADMAP SUMMARY -->
-<div class="development-roadmap-summary" id="development-roadmap-summary">
-
-    <div class="development-roadmap-summary-item">
-        <strong id="development-roadmap-high-count">—</strong>
-        <span>High priority</span>
     </div>
 
-    <div class="development-roadmap-summary-item">
-        <strong id="development-roadmap-active-count">—</strong>
-        <span>Active development</span>
+
+    <!-- ====================================================
+         ROADMAP SUMMARY
+    ===================================================== -->
+
+    <div
+        class="development-roadmap-summary"
+        id="development-roadmap-summary"
+    >
+
+<div
+    class="development-roadmap-summary-item development-roadmap-toggle"
+    role="button"
+    tabindex="0"
+    aria-expanded="false"
+>
+
+            <strong id="development-roadmap-high-count">
+                —
+            </strong>
+
+            <span>
+                High priority
+            </span>
+
+        </div>
+
+<div
+    class="development-roadmap-summary-item development-roadmap-toggle"
+    role="button"
+    tabindex="0"
+    aria-expanded="false"
+>
+
+            <strong id="development-roadmap-active-count">
+                —
+            </strong>
+
+            <span>
+                Active development
+            </span>
+
+        </div>
+
+<div
+    class="development-roadmap-summary-item development-roadmap-toggle"
+    role="button"
+    tabindex="0"
+    aria-expanded="false"
+>
+
+            <strong id="development-roadmap-strategic-count">
+                —
+            </strong>
+
+            <span>
+                Strategic development
+            </span>
+
+        </div>
+
     </div>
-
-    <div class="development-roadmap-summary-item">
-        <strong id="development-roadmap-strategic-count">—</strong>
-        <span>Strategic development</span>
-    </div>
-
-</div>
-
-
 
 </div>
 

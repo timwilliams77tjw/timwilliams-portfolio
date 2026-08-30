@@ -783,7 +783,22 @@ body.dark-mode .cta-btn {
 .featured-secondary article {
     height: 100%;
 }
-   
+   /* Remove container constraints for this section only */
+.insights-section.featured-articles {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 0;
+}
+
+/* Make the grid itself full width */
+.featured-grid {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
    
 </style>
 </head>
@@ -923,7 +938,8 @@ article here is written from hands‑on experience — not theory.
          FEATURED INSIGHTS
          ======================================================== -->
 
-    <section class="insights-section">
+<section class="insights-section featured-articles">
+
 
         <div class="insights-section-heading">
 

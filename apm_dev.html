@@ -24246,6 +24246,27 @@ document.addEventListener("DOMContentLoaded", function () {
     observer.observe(roadmapItems, { childList: true });
 
 });
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cardsWrapper = document.getElementById("development-cards-wrapper");
+
+    // Detect ANY development cards, wherever they appear
+    const observer = new MutationObserver(() => {
+
+        const cards = document.querySelectorAll(".development-card");
+
+        cards.forEach(card => {
+            // Only move cards that are NOT already inside the wrapper
+            if (!cardsWrapper.contains(card)) {
+                cardsWrapper.appendChild(card);
+            }
+        });
+
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+});
 
   
 </script>

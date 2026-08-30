@@ -15345,6 +15345,175 @@ section.bcs-development-section
     }
 
 }   
+/* =========================================================
+   DEVELOPMENT ROADMAP
+   COLLAPSIBLE DEVELOPMENT AREAS
+========================================================= */
+
+#development-roadmap-items {
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    margin-top: 0;
+
+    transition:
+        max-height 0.5s ease,
+        opacity 0.35s ease,
+        margin-top 0.4s ease,
+        visibility 0s linear 0.5s;
+
+}
+
+
+/* =========================================================
+   OPEN STATE
+========================================================= */
+
+#development-roadmap-items.is-visible {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    margin-top: 34px;
+
+    transition:
+        max-height 0.5s ease,
+        opacity 0.35s ease,
+        margin-top 0.4s ease,
+        visibility 0s linear 0s;
+
+}
+
+
+/* =========================================================
+   TIMELINE INTERACTION
+========================================================= */
+
+#development-roadmap
+.development-roadmap-period {
+
+    cursor: pointer;
+
+    user-select: none;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+#development-roadmap
+.development-roadmap-period:hover {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   ACTIVE TIMELINE
+========================================================= */
+
+#development-roadmap
+.development-roadmap-period.is-active {
+
+    transform: translateY(-2px);
+
+}
+
+
+#development-roadmap
+.development-roadmap-period.is-active
+.development-roadmap-label {
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   SUMMARY BOXES
+========================================================= */
+
+#development-roadmap
+.development-roadmap-summary-item {
+
+    cursor: pointer;
+
+    user-select: none;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+#development-roadmap
+.development-roadmap-summary-item:hover {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   ACTIVE SUMMARY BOX
+========================================================= */
+
+#development-roadmap
+.development-roadmap-summary-item.is-active {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   KEYBOARD FOCUS
+========================================================= */
+
+#development-roadmap
+.development-roadmap-period:focus-visible,
+
+#development-roadmap
+.development-roadmap-summary-item:focus-visible {
+
+    outline: 3px solid rgba(10, 102, 194, 0.3);
+
+    outline-offset: 4px;
+
+    border-radius: 8px;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    #development-roadmap-items.is-visible {
+
+        margin-top: 24px;
+
+    }
+
+}
+
 </style>
 
 
@@ -23985,11 +24154,9 @@ function findTarget(stage) {
 
     }
 
-})();
-
-/* ============================================================
+})();/* ============================================================
    DEVELOPMENT ROADMAP
-   VERSION 1
+   VERSION 2
    ============================================================ */
 
 (function initialiseDevelopmentRoadmap() {
@@ -24027,7 +24194,7 @@ function findTarget(stage) {
 
         /* ========================================================
            ROADMAP CONFIGURATION
-           
+
            This controls sequencing only.
            Competency/rating data will be connected later.
         ======================================================== */
@@ -24161,9 +24328,6 @@ function findTarget(stage) {
 
             /* ----------------------------------------------------
                CURRENT → TARGET
-               
-               Temporary representation until the existing
-               competence rating data is connected.
             ---------------------------------------------------- */
 
             const rating =
@@ -24174,9 +24338,11 @@ function findTarget(stage) {
 
             rating.innerHTML = `
                 <strong>Development gap</strong>
+
                 <span class="development-roadmap-arrow">
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
+
                 <span>Target capability</span>
             `;
 
@@ -24270,12 +24436,320 @@ function findTarget(stage) {
             strategicCount.textContent = "1";
         }
 
+
+        /* ========================================================
+           DEVELOPMENT AREA SHOW / HIDE
+           
+           IMPORTANT:
+           This is deliberately initialised here, AFTER the
+           roadmap has been created.
+        ======================================================== */
+
+        initialiseDevelopmentRoadmapToggle(
+            roadmap,
+            container
+        );
+
     }
 
 
-    /* ========================================================
+    /* ============================================================
+       SHOW / HIDE DEVELOPMENT AREAS
+    ============================================================ */
+
+    function initialiseDevelopmentRoadmapToggle(
+        roadmap,
+        container
+    ) {
+
+        /*
+           The controls already exist in the HTML:
+
+           .development-roadmap-period
+           .development-roadmap-summary-item
+
+           No additional HTML classes are required.
+        */
+
+        const timelineControls =
+            roadmap.querySelectorAll(
+                ".development-roadmap-period"
+            );
+
+        const summaryControls =
+            roadmap.querySelectorAll(
+                ".development-roadmap-summary-item"
+            );
+
+
+        const controls = [
+            ...timelineControls,
+            ...summaryControls
+        ];
+
+
+        if (!controls.length) {
+            return;
+        }
+
+
+        /* ========================================================
+           INITIAL STATE
+        ======================================================== */
+
+        container.classList.remove(
+            "is-visible"
+        );
+
+        container.style.maxHeight = "0px";
+        container.style.opacity = "0";
+        container.style.visibility = "hidden";
+
+
+        /* ========================================================
+           UPDATE CONTROL STATES
+        ======================================================== */
+
+        function updateControls(isOpen) {
+
+            controls.forEach(function(control) {
+
+                control.classList.toggle(
+                    "is-active",
+                    isOpen
+                );
+
+                control.setAttribute(
+                    "aria-expanded",
+                    isOpen
+                        ? "true"
+                        : "false"
+                );
+
+            });
+
+        }
+
+
+        /* ========================================================
+           OPEN
+        ======================================================== */
+
+        function openDevelopmentAreas() {
+
+            container.classList.add(
+                "is-visible"
+            );
+
+            container.style.visibility =
+                "visible";
+
+            container.style.opacity =
+                "1";
+
+
+            /*
+               Measure the actual content height.
+
+               This works with your existing 2-column card
+               layout and avoids the grid animation problem
+               from the previous version.
+            */
+
+            container.style.maxHeight =
+                container.scrollHeight + "px";
+
+
+            updateControls(true);
+
+        }
+
+
+        /* ========================================================
+           CLOSE
+        ======================================================== */
+
+        function closeDevelopmentAreas() {
+
+            container.style.maxHeight =
+                "0px";
+
+            container.style.opacity =
+                "0";
+
+
+            container.classList.remove(
+                "is-visible"
+            );
+
+
+            /*
+               Wait for the height transition to finish
+               before making the container invisible.
+            */
+
+            window.setTimeout(
+                function() {
+
+                    if (
+                        !container.classList.contains(
+                            "is-visible"
+                        )
+                    ) {
+
+                        container.style.visibility =
+                            "hidden";
+
+                    }
+
+                },
+                500
+            );
+
+
+            updateControls(false);
+
+        }
+
+
+        /* ========================================================
+           TOGGLE
+        ======================================================== */
+
+        function toggleDevelopmentAreas() {
+
+            const isOpen =
+                container.classList.contains(
+                    "is-visible"
+                );
+
+            if (isOpen) {
+
+                closeDevelopmentAreas();
+
+            } else {
+
+                openDevelopmentAreas();
+
+            }
+
+        }
+
+
+        /* ========================================================
+           ADD CLICK EVENTS
+        ======================================================== */
+
+        controls.forEach(function(control) {
+
+            /*
+               Prevent duplicate listeners if the roadmap
+               gets rebuilt by another script.
+            */
+
+            if (
+                control.dataset.roadmapToggleBound ===
+                "true"
+            ) {
+                return;
+            }
+
+
+            control.dataset.roadmapToggleBound =
+                "true";
+
+
+            control.setAttribute(
+                "role",
+                "button"
+            );
+
+            control.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+            control.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            control.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    toggleDevelopmentAreas();
+
+                }
+            );
+
+
+            /* =================================================
+               KEYBOARD ACCESS
+            ================================================= */
+
+            control.addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        toggleDevelopmentAreas();
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        /* ========================================================
+           RESPONSIVE HEIGHT
+           
+           If the screen changes orientation or width while
+           the cards are open, recalculate their height.
+        ======================================================== */
+
+        window.addEventListener(
+            "resize",
+            function() {
+
+                if (
+                    container.classList.contains(
+                        "is-visible"
+                    )
+                ) {
+
+                    container.style.maxHeight =
+                        container.scrollHeight + "px";
+
+                }
+
+            }
+        );
+
+
+        /* ========================================================
+           INITIALISE CLOSED
+        ======================================================== */
+
+        updateControls(false);
+
+    }
+
+
+    /* ============================================================
        INITIALISE
-    ======================================================== */
+    ============================================================ */
 
     if (
         document.readyState ===
@@ -24294,172 +24768,6 @@ function findTarget(stage) {
     }
 
 })();
-
-/* ==========================================================
-   INITIALISE CPD METRIC ANIMATIONS
-========================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        initialiseCPDMetricAnimations();
-
-    }
-);
-
-document.addEventListener('DOMContentLoaded', () => {
-  const toggles = document.querySelectorAll('.cpd-visual-toggle');
-  toggles.forEach(toggle => {
-    toggle.addEventListener('click', () => {
-      const card = toggle.closest('.cpd-visual-card');
-      card.classList.toggle('open');
-    });
-  });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const evidenceToggles = document.querySelectorAll('.evidence-toggle');
-
-    evidenceToggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const expanded = toggle.getAttribute('aria-expanded') === 'true';
-            const collapsible = toggle.nextElementSibling;
-
-            if (!collapsible) return; // safety guard
-
-            toggle.setAttribute('aria-expanded', (!expanded).toString());
-            collapsible.style.display = expanded ? 'none' : 'block';
-
-            const label = toggle.querySelector('.toggle-text');
-            if (label) {
-                label.textContent = expanded ? 'Show' : 'Hide';
-            }
-        });
-    });
-});
-
-/* =========================================================
-   DEVELOPMENT ROADMAP
-   SHOW / HIDE DEVELOPMENT AREAS
-========================================================= */
-
-(function initDevelopmentRoadmapToggle() {
-
-    const roadmapItems = document.getElementById(
-        "development-roadmap-items"
-    );
-
-    if (!roadmapItems) return;
-
-    const toggles = document.querySelectorAll(
-        ".development-roadmap-toggle"
-    );
-
-    if (!toggles.length) return;
-
-
-    /* -----------------------------------------------------
-       UPDATE ALL TOGGLE STATES
-    ----------------------------------------------------- */
-
-    function updateToggleState(isOpen) {
-
-        toggles.forEach(toggle => {
-
-            toggle.classList.toggle(
-                "is-active",
-                isOpen
-            );
-
-            toggle.setAttribute(
-                "aria-expanded",
-                String(isOpen)
-            );
-
-        });
-
-    }
-
-
-    /* -----------------------------------------------------
-       SHOW / HIDE DEVELOPMENT CARDS
-    ----------------------------------------------------- */
-
-    function toggleDevelopmentAreas() {
-
-        const isOpen =
-            roadmapItems.classList.contains("is-visible");
-
-        if (isOpen) {
-
-            roadmapItems.classList.remove(
-                "is-visible"
-            );
-
-            updateToggleState(false);
-
-        } else {
-
-            roadmapItems.classList.add(
-                "is-visible"
-            );
-
-            updateToggleState(true);
-
-        }
-
-    }
-
-
-    /* -----------------------------------------------------
-       MOUSE / TOUCH
-    ----------------------------------------------------- */
-
-    toggles.forEach(toggle => {
-
-        toggle.addEventListener(
-            "click",
-            toggleDevelopmentAreas
-        );
-
-
-        /* -------------------------------------------------
-           KEYBOARD ACCESSIBILITY
-        ------------------------------------------------- */
-
-        toggle.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Enter" ||
-                    event.key === " "
-                ) {
-
-                    event.preventDefault();
-
-                    toggleDevelopmentAreas();
-
-                }
-
-            }
-        );
-
-    });
-
-
-    /* -----------------------------------------------------
-       INITIAL STATE
-       Cards remain hidden when page loads.
-    ----------------------------------------------------- */
-
-    roadmapItems.classList.remove(
-        "is-visible"
-    );
-
-    updateToggleState(false);
-
-})();  
 </script>
 
 

@@ -1968,7 +1968,28 @@ body.dark-mode .downloads-cta {
     padding-left: 8px;
     white-space: nowrap;
 }
-  
+  .global-download-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #eaf3fb;
+    border: 1px solid #dfe6ee;
+    padding: 14px 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(15,35,60,0.055);
+    margin-top: 20px;
+}
+
+.global-download-bar strong {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #0a1f44;
+}
+
+.global-download-bar span {
+    font-size: 0.85rem;
+    color: #5f6b78;
+}
     </style>
 </head>
 
@@ -2882,38 +2903,24 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================================================
        GLOBAL TOTAL DOWNLOADS — HERO METRIC
     ========================================================= */
-    function injectGlobalMetric() {
-        const heroGrid = document.querySelector(".downloads-hero-highlights");
+   function injectGlobalMetric() {
+    const hero = document.querySelector(".downloads-hero-content");
 
-        // If hero grid doesn't exist, create it
-        if (!heroGrid) {
-            const hero = document.querySelector(".downloads-hero-content");
-            const grid = document.createElement("div");
-            grid.className = "downloads-hero-highlights";
-            hero.appendChild(grid);
-        }
+    const bar = document.createElement("div");
+    bar.className = "global-download-bar";
 
-        const grid = document.querySelector(".downloads-hero-highlights");
+    const strong = document.createElement("strong");
+    strong.id = "global-download-total";
+    strong.textContent = globalTotal;
 
-        // Create metric card
-        const card = document.createElement("div");
-        card.className = "downloads-hero-highlight";
+    const label = document.createElement("span");
+    label.textContent = "Total Downloads";
 
-        const strong = document.createElement("strong");
-        strong.id = "global-download-total";
-        strong.textContent = globalTotal;
+    bar.appendChild(strong);
+    bar.appendChild(label);
 
-        const label = document.createElement("span");
-        label.textContent = "Total Downloads";
-
-        card.appendChild(strong);
-        card.appendChild(label);
-
-        grid.appendChild(card);
-    }
-
-    injectGlobalMetric();
-
+    hero.appendChild(bar);
+}
 
     /* =========================================================
        UPDATE GLOBAL TOTAL WHEN ANY ITEM IS DOWNLOADED

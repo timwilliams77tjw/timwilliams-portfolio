@@ -1961,7 +1961,14 @@ body.dark-mode .downloads-cta {
     white-space: nowrap;
     transition: opacity 0.25s ease;
 }
-    
+  .download-counter {
+    font-size: 0.75rem;
+    color: var(--downloads-muted);
+    margin-left: auto;
+    padding-left: 8px;
+    white-space: nowrap;
+}
+  
     </style>
 </head>
 
@@ -2816,11 +2823,13 @@ document.addEventListener('DOMContentLoaded', function () {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Smooth animated counter
-    function animateCount(element, start, end, duration = 400) {
+    /* =========================================================
+       ANIMATED COUNTING
+    ========================================================= */
+    function animateCount(element, start, end, duration = 500) {
         const range = end - start;
         if (range === 0) {
-            element.textContent = end + " downloads";
+            element.textContent = end;
             return;
         }
 
@@ -2829,7 +2838,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const timer = setInterval(() => {
             current += (end > start ? 1 : -1);
-            element.textContent = current + " downloads";
+            element.textContent = current;
 
             if (current === end) {
                 clearInterval(timer);
@@ -2837,37 +2846,92 @@ document.addEventListener("DOMContentLoaded", () => {
         }, stepTime);
     }
 
-    // Select all download links
+
+    /* =========================================================
+       PER‑ITEM DOWNLOAD COUNTERS
+    ========================================================= */
     const downloadLinks = document.querySelectorAll(
         ".download-card-footer a[href], .video-thumbnail a[href]"
     );
 
+    let globalTotal = 0;
+
     downloadLinks.forEach(link => {
         const url = link.getAttribute("href");
-
-        // Unique key for localStorage
         const key = "download_count_" + url;
 
-        // Load existing count
         let count = parseInt(localStorage.getItem(key) || "0", 10);
+        globalTotal += count;
 
-        // Create counter element
         const counter = document.createElement("span");
         counter.className = "download-counter";
         counter.textContent = count + " downloads";
-
-        // Insert counter into footer
         link.parentElement.appendChild(counter);
 
-        // Increment + animate on click
         link.addEventListener("click", () => {
             const oldCount = count;
             count++;
             localStorage.setItem(key, count);
 
             animateCount(counter, oldCount, count);
+            updateGlobalTotal();
         });
     });
+
+
+    /* =========================================================
+       GLOBAL TOTAL DOWNLOADS — HERO METRIC
+    ========================================================= */
+    function injectGlobalMetric() {
+        const heroGrid = document.querySelector(".downloads-hero-highlights");
+
+        // If hero grid doesn't exist, create it
+        if (!heroGrid) {
+            const hero = document.querySelector(".downloads-hero-content");
+            const grid = document.createElement("div");
+            grid.className = "downloads-hero-highlights";
+            hero.appendChild(grid);
+        }
+
+        const grid = document.querySelector(".downloads-hero-highlights");
+
+        // Create metric card
+        const card = document.createElement("div");
+        card.className = "downloads-hero-highlight";
+
+        const strong = document.createElement("strong");
+        strong.id = "global-download-total";
+        strong.textContent = globalTotal;
+
+        const label = document.createElement("span");
+        label.textContent = "Total Downloads";
+
+        card.appendChild(strong);
+        card.appendChild(label);
+
+        grid.appendChild(card);
+    }
+
+    injectGlobalMetric();
+
+
+    /* =========================================================
+       UPDATE GLOBAL TOTAL WHEN ANY ITEM IS DOWNLOADED
+    ========================================================= */
+    function updateGlobalTotal() {
+        let newTotal = 0;
+
+        downloadLinks.forEach(link => {
+            const url = link.getAttribute("href");
+            const key = "download_count_" + url;
+            newTotal += parseInt(localStorage.getItem(key) || "0", 10);
+        });
+
+        const totalEl = document.getElementById("global-download-total");
+        const oldTotal = parseInt(totalEl.textContent, 10);
+
+        animateCount(totalEl, oldTotal, newTotal);
+    }
 
 });
 </script>

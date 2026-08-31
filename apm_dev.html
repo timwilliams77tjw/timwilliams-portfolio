@@ -24344,7 +24344,7 @@ function findTarget(stage) {
 })();
 /* ============================================================
    DEVELOPMENT ROADMAP
-   SINGLE CLEAN VERSION
+   CLEAN VERSION
    ============================================================ */
 
 (function initialiseDevelopmentRoadmap() {
@@ -24422,15 +24422,11 @@ function findTarget(stage) {
 
 
         /* ========================================================
-           CLEAR EXISTING ITEMS
+           CREATE ROADMAP ITEMS
         ======================================================== */
 
         container.innerHTML = "";
 
-
-        /* ========================================================
-           CREATE DEVELOPMENT CARDS
-        ======================================================== */
 
         roadmapConfig.forEach(function(config) {
 
@@ -24443,7 +24439,7 @@ function findTarget(stage) {
 
 
             /* ----------------------------------------------------
-               TITLE
+               GET TITLE
             ---------------------------------------------------- */
 
             const titleElement =
@@ -24456,7 +24452,7 @@ function findTarget(stage) {
 
 
             /* ----------------------------------------------------
-               CARD
+               CREATE CARD
             ---------------------------------------------------- */
 
             const item =
@@ -24543,17 +24539,13 @@ function findTarget(stage) {
                 "development-roadmap-rating";
 
             rating.innerHTML = `
-                <strong>
-                    Development gap
-                </strong>
+                <strong>Development gap</strong>
 
                 <span class="development-roadmap-arrow">
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
 
-                <span>
-                    Target capability
-                </span>
+                <span>Target capability</span>
             `;
 
 
@@ -24595,10 +24587,7 @@ function findTarget(stage) {
 
             timing.innerHTML = `
                 <i class="fa-regular fa-clock"></i>
-
-                <span>
-                    ${config.timing}
-                </span>
+                <span>${config.timing}</span>
             `;
 
 
@@ -24607,19 +24596,10 @@ function findTarget(stage) {
             ---------------------------------------------------- */
 
             item.appendChild(header);
-
             item.appendChild(priority);
-
             item.appendChild(rating);
-
             item.appendChild(progress);
-
             item.appendChild(timing);
-
-
-            /* ----------------------------------------------------
-               ADD TO CONTAINER
-            ---------------------------------------------------- */
 
             container.appendChild(item);
 
@@ -24647,31 +24627,20 @@ function findTarget(stage) {
 
 
         if (highCount) {
-
             highCount.textContent = "1";
-
         }
-
 
         if (activeCount) {
-
             activeCount.textContent = "2";
-
         }
 
-
         if (strategicCount) {
-
             strategicCount.textContent = "1";
-
         }
 
 
         /* ========================================================
            INITIALISE TOGGLE
-           
-           IMPORTANT:
-           This happens AFTER the cards have been generated.
         ======================================================== */
 
         initialiseDevelopmentRoadmapToggle(
@@ -24683,7 +24652,17 @@ function findTarget(stage) {
 
 
     /* ============================================================
-       DEVELOPMENT AREA TOGGLE
+       SHOW / HIDE ROADMAP CARDS
+       
+       Uses the native HTML "hidden" attribute.
+       
+       This deliberately avoids:
+       - max-height
+       - opacity
+       - visibility
+       - CSS transitions
+       
+       This prevents conflicts with the rest of the APM page.
     ============================================================ */
 
     function initialiseDevelopmentRoadmapToggle(
@@ -24693,8 +24672,7 @@ function findTarget(stage) {
 
         const controls =
             roadmap.querySelectorAll(
-                ".development-roadmap-period, " +
-                ".development-roadmap-summary-item"
+                ".development-roadmap-toggle"
             );
 
 
@@ -24704,45 +24682,24 @@ function findTarget(stage) {
 
 
         /* ========================================================
-           START CLOSED
+           INITIAL STATE
         ======================================================== */
 
-        container.style.setProperty(
-            "display",
-            "none",
-            "important"
-        );
+        container.hidden = true;
 
 
-        /* ========================================================
-           UPDATE CONTROL STATES
-        ======================================================== */
+        controls.forEach(function(control) {
 
-        function updateControls(isOpen) {
-
-            controls.forEach(
-                function(control) {
-
-                    control.setAttribute(
-                        "aria-expanded",
-                        isOpen
-                            ? "true"
-                            : "false"
-                    );
-
-
-                    control.classList.toggle(
-                        "is-active",
-                        isOpen
-                    );
-
-                }
+            control.setAttribute(
+                "aria-expanded",
+                "false"
             );
 
-        }
+            control.classList.remove(
+                "is-active"
+            );
 
-
-        updateControls(false);
+        });
 
 
         /* ========================================================
@@ -24751,67 +24708,94 @@ function findTarget(stage) {
 
         function toggleDevelopmentAreas() {
 
-            const currentlyHidden =
-                window.getComputedStyle(
-                    container
-                ).display === "none";
+            const isOpen =
+                !container.hidden;
 
 
-            if (currentlyHidden) {
+            /* ----------------------------------------------------
+               CLOSE
+            ---------------------------------------------------- */
 
-                /*
-                   OPEN
-                */
+            if (isOpen) {
 
-                container.style.removeProperty(
-                    "display"
-                );
-
-
-                updateControls(true);
-
-
-            } else {
-
-                /*
-                   CLOSE
-                */
-
-                container.style.setProperty(
-                    "display",
-                    "none",
-                    "important"
-                );
-
-
-                updateControls(false);
+                container.hidden =
+                    true;
 
             }
+
+
+            /* ----------------------------------------------------
+               OPEN
+            ---------------------------------------------------- */
+
+            else {
+
+                container.hidden =
+                    false;
+
+            }
+
+
+            const newState =
+                !container.hidden;
+
+
+            /* ----------------------------------------------------
+               UPDATE ALL CONTROLS
+            ---------------------------------------------------- */
+
+            controls.forEach(function(control) {
+
+                control.setAttribute(
+                    "aria-expanded",
+                    newState
+                        ? "true"
+                        : "false"
+                );
+
+
+                control.classList.toggle(
+                    "is-active",
+                    newState
+                );
+
+            });
 
         }
 
 
         /* ========================================================
-           CLICK EVENTS
+           CLICK
         ======================================================== */
 
-        controls.forEach(
-            function(control) {
+        controls.forEach(function(control) {
 
-                control.setAttribute(
-                    "role",
-                    "button"
-                );
+            control.addEventListener(
+                "click",
+                function(event) {
 
-                control.setAttribute(
-                    "tabindex",
-                    "0"
-                );
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    toggleDevelopmentAreas();
+
+                }
+            );
 
 
-                control.addEventListener(
-                    "click",
-                    function(event) {
+            /* ====================================================
+               KEYBOARD
+            ==================================================== */
+
+            control.addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
 
                         event.preventDefault();
 
@@ -24820,41 +24804,17 @@ function findTarget(stage) {
                         toggleDevelopmentAreas();
 
                     }
-                );
 
+                }
+            );
 
-                /* =================================================
-                   KEYBOARD
-                ================================================= */
-
-                control.addEventListener(
-                    "keydown",
-                    function(event) {
-
-                        if (
-                            event.key === "Enter" ||
-                            event.key === " "
-                        ) {
-
-                            event.preventDefault();
-
-                            event.stopPropagation();
-
-                            toggleDevelopmentAreas();
-
-                        }
-
-                    }
-                );
-
-            }
-        );
+        });
 
     }
 
 
     /* ============================================================
-       INITIALISE
+       START
     ============================================================ */
 
     if (
@@ -27965,10 +27925,11 @@ High adoption across clinical teams — Achieved strong uptake through structure
              competency / current / target data.
         =================================================== -->
 
-        <div
-            class="development-roadmap-items"
-            id="development-roadmap-items"
-        >
+      <div
+    class="development-roadmap-items"
+    id="development-roadmap-items"
+    hidden
+>
 
             <!-- Dynamic roadmap items inserted here -->
 

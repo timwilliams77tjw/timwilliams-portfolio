@@ -1953,7 +1953,14 @@ body.dark-mode .downloads-cta {
     padding-left: 8px;
     white-space: nowrap;
 }
-
+.download-counter {
+    font-size: 0.75rem;
+    color: var(--downloads-muted);
+    margin-left: auto;
+    padding-left: 8px;
+    white-space: nowrap;
+    transition: opacity 0.25s ease;
+}
     
     </style>
 </head>
@@ -2809,6 +2816,27 @@ document.addEventListener('DOMContentLoaded', function () {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Smooth animated counter
+    function animateCount(element, start, end, duration = 400) {
+        const range = end - start;
+        if (range === 0) {
+            element.textContent = end + " downloads";
+            return;
+        }
+
+        const stepTime = Math.max(20, Math.floor(duration / Math.abs(range)));
+        let current = start;
+
+        const timer = setInterval(() => {
+            current += (end > start ? 1 : -1);
+            element.textContent = current + " downloads";
+
+            if (current === end) {
+                clearInterval(timer);
+            }
+        }, stepTime);
+    }
+
     // Select all download links
     const downloadLinks = document.querySelectorAll(
         ".download-card-footer a[href], .video-thumbnail a[href]"
@@ -2817,13 +2845,13 @@ document.addEventListener("DOMContentLoaded", () => {
     downloadLinks.forEach(link => {
         const url = link.getAttribute("href");
 
-        // Create a unique key for localStorage
+        // Unique key for localStorage
         const key = "download_count_" + url;
 
-        // Load existing count or default to 0
+        // Load existing count
         let count = parseInt(localStorage.getItem(key) || "0", 10);
 
-        // Create counter badge
+        // Create counter element
         const counter = document.createElement("span");
         counter.className = "download-counter";
         counter.textContent = count + " downloads";
@@ -2831,11 +2859,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Insert counter into footer
         link.parentElement.appendChild(counter);
 
-        // Increment on click
+        // Increment + animate on click
         link.addEventListener("click", () => {
+            const oldCount = count;
             count++;
             localStorage.setItem(key, count);
-            counter.textContent = count + " downloads";
+
+            animateCount(counter, oldCount, count);
         });
     });
 

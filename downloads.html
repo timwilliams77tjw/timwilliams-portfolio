@@ -1946,7 +1946,13 @@ body.dark-mode .downloads-cta {
     box-sizing: border-box;
   }
 }
-
+.download-counter {
+    font-size: 0.75rem;
+    color: var(--downloads-muted);
+    margin-left: auto;
+    padding-left: 8px;
+    white-space: nowrap;
+}
 
     
     </style>
@@ -2800,6 +2806,40 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
+    // Select all download links
+    const downloadLinks = document.querySelectorAll(
+        ".download-card-footer a[href], .video-thumbnail a[href]"
+    );
+
+    downloadLinks.forEach(link => {
+        const url = link.getAttribute("href");
+
+        // Create a unique key for localStorage
+        const key = "download_count_" + url;
+
+        // Load existing count or default to 0
+        let count = parseInt(localStorage.getItem(key) || "0", 10);
+
+        // Create counter badge
+        const counter = document.createElement("span");
+        counter.className = "download-counter";
+        counter.textContent = count + " downloads";
+
+        // Insert counter into footer
+        link.parentElement.appendChild(counter);
+
+        // Increment on click
+        link.addEventListener("click", () => {
+            count++;
+            localStorage.setItem(key, count);
+            counter.textContent = count + " downloads";
+        });
+    });
+
+});
+</script>
 </body>
 </html>

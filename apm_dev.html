@@ -24341,13 +24341,15 @@ function findTarget(stage) {
 
     }
 
-})();/* ============================================================
+})();
+
+/* ============================================================
    DEVELOPMENT ROADMAP TOGGLE
    ============================================================ */
 
-(function initialiseDevelopmentRoadmapToggle() {
+(function () {
 
-    function setupDevelopmentRoadmapToggle() {
+    function initialiseDevelopmentRoadmapToggle() {
 
         const roadmap =
             document.getElementById(
@@ -24358,24 +24360,6 @@ function findTarget(stage) {
             return;
         }
 
-
-        /* ========================================================
-           ROADMAP CONTENT
-        ======================================================== */
-
-        const container =
-            document.getElementById(
-                "development-roadmap-items"
-            );
-
-        if (!container) {
-            return;
-        }
-
-
-        /* ========================================================
-           SINGLE TOGGLE BUTTON
-        ======================================================== */
 
         const toggle =
             roadmap.querySelector(
@@ -24390,35 +24374,39 @@ function findTarget(stage) {
         }
 
 
-        /* ========================================================
-           PREVENT DUPLICATE INITIALISATION
-        ======================================================== */
+        /*
+         * Prevent duplicate event listeners.
+         */
 
         if (
-            roadmap.dataset.toggleInitialised ===
+            toggle.dataset.initialised ===
             "true"
         ) {
             return;
         }
 
-        roadmap.dataset.toggleInitialised =
+
+        toggle.dataset.initialised =
             "true";
 
 
         /* ========================================================
-           INITIAL STATE
+           FIND ROADMAP CONTENT
+           
+           This is deliberately done when the button is clicked,
+           rather than only when the script first loads.
+           
+           This allows the existing roadmap-generation script
+           to create the cards first.
         ======================================================== */
 
-        container.hidden = true;
+        function getRoadmapContent() {
 
-        toggle.setAttribute(
-            "aria-expanded",
-            "false"
-        );
+            return document.getElementById(
+                "development-roadmap-items"
+            );
 
-        toggle.classList.remove(
-            "is-active"
-        );
+        }
 
 
         /* ========================================================
@@ -24427,15 +24415,34 @@ function findTarget(stage) {
 
         toggle.addEventListener(
             "click",
-            function(event) {
+            function (event) {
 
                 event.preventDefault();
+                event.stopPropagation();
+
+
+                const container =
+                    getRoadmapContent();
+
+
+                if (!container) {
+
+                    console.warn(
+                        "[CPD] Development roadmap items not found."
+                    );
+
+                    return;
+
+                }
+
 
                 const opening =
                     container.hidden;
 
+
                 container.hidden =
                     !opening;
+
 
                 toggle.setAttribute(
                     "aria-expanded",
@@ -24444,20 +24451,22 @@ function findTarget(stage) {
                         : "false"
                 );
 
+
                 toggle.classList.toggle(
                     "is-active",
                     opening
                 );
 
 
-                /* ----------------------------------------------
-                   TEXT
-                ---------------------------------------------- */
+                /* ==================================================
+                   UPDATE TEXT
+                ================================================== */
 
                 const label =
                     toggle.querySelector(
                         ".development-roadmap-toggle-label"
                     );
+
 
                 if (label) {
 
@@ -24469,14 +24478,15 @@ function findTarget(stage) {
                 }
 
 
-                /* ----------------------------------------------
-                   CHEVRON
-                ---------------------------------------------- */
+                /* ==================================================
+                   UPDATE CHEVRON
+                ================================================== */
 
                 const chevron =
                     toggle.querySelector(
                         "i"
                     );
+
 
                 if (chevron) {
 
@@ -24497,7 +24507,7 @@ function findTarget(stage) {
 
 
         console.log(
-            "[CPD] Development roadmap toggle initialised."
+            "[CPD] Development roadmap toggle ready."
         );
 
     }
@@ -24514,12 +24524,12 @@ function findTarget(stage) {
 
         document.addEventListener(
             "DOMContentLoaded",
-            setupDevelopmentRoadmapToggle
+            initialiseDevelopmentRoadmapToggle
         );
 
     } else {
 
-        setupDevelopmentRoadmapToggle();
+        initialiseDevelopmentRoadmapToggle();
 
     }
 

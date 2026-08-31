@@ -88,6 +88,22 @@ body.dark-mode {
     --text-sub: #cccccc;
     --card-bg: #1a1a1a;
 }
+
+.pdf-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.download-count {
+    background: #fff;
+    color: var(--accent);
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+    
 </style>
         <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">
@@ -144,7 +160,17 @@ fetch("header.html")
 <section class="hero-section">
     <h1>Cloud Transformation in Regulated Environments</h1>
     <p>How regulated organisations can adopt cloud securely, predictably, and without disrupting critical services — while meeting compliance, audit, and operational requirements.</p>
+
+    <a href="Cloud_Transformation_in_Regulated_Environments.pdf"
+       class="btn pdf-download-btn"
+       target="_blank"
+       rel="noopener"
+       onclick="incrementCloudDownloadCount()">
+        📄 Download Full Article (PDF)
+        <span id="cloudDownloadCount" class="download-count">0</span>
+    </a>
 </section>
+
 
 <article class="featured-article">
     <h3>Cloud Adoption Requires More Than Technology</h3>
@@ -224,6 +250,20 @@ function toggleInsightFull(btn) {
     btn.textContent = isOpen ? "Read more" : "Show less";
 }
 </script>
+<script>
+function incrementCloudDownloadCount() {
+    const key = "cloud_pdf_downloads";
+    let count = localStorage.getItem(key);
+    count = count ? parseInt(count) + 1 : 1;
+    localStorage.setItem(key, count);
+    document.getElementById("cloudDownloadCount").textContent = count;
+}
 
+document.addEventListener("DOMContentLoaded", () => {
+    const key = "cloud_pdf_downloads";
+    const count = localStorage.getItem(key) || 0;
+    document.getElementById("cloudDownloadCount").textContent = count;
+});
+</script>
 </body>
 </html>

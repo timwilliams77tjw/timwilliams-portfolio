@@ -24344,7 +24344,7 @@ function findTarget(stage) {
 })();
 /* ============================================================
    DEVELOPMENT ROADMAP
-   VERSION 3
+   SINGLE CLEAN VERSION
    ============================================================ */
 
 (function initialiseDevelopmentRoadmap() {
@@ -24422,14 +24422,14 @@ function findTarget(stage) {
 
 
         /* ========================================================
-           CLEAR EXISTING ROADMAP ITEMS
+           CLEAR EXISTING ITEMS
         ======================================================== */
 
         container.innerHTML = "";
 
 
         /* ========================================================
-           CREATE ROADMAP ITEMS
+           CREATE DEVELOPMENT CARDS
         ======================================================== */
 
         roadmapConfig.forEach(function(config) {
@@ -24443,7 +24443,7 @@ function findTarget(stage) {
 
 
             /* ----------------------------------------------------
-               GET SOURCE TITLE
+               TITLE
             ---------------------------------------------------- */
 
             const titleElement =
@@ -24456,7 +24456,7 @@ function findTarget(stage) {
 
 
             /* ----------------------------------------------------
-               CREATE CARD
+               CARD
             ---------------------------------------------------- */
 
             const item =
@@ -24517,7 +24517,9 @@ function findTarget(stage) {
                 priority.textContent =
                     "High priority";
 
-            } else if (config.priority === "strategic") {
+            } else if (
+                config.priority === "strategic"
+            ) {
 
                 priority.textContent =
                     "Strategic";
@@ -24531,7 +24533,7 @@ function findTarget(stage) {
 
 
             /* ----------------------------------------------------
-               CURRENT → TARGET
+               RATING
             ---------------------------------------------------- */
 
             const rating =
@@ -24593,6 +24595,7 @@ function findTarget(stage) {
 
             timing.innerHTML = `
                 <i class="fa-regular fa-clock"></i>
+
                 <span>
                     ${config.timing}
                 </span>
@@ -24600,7 +24603,7 @@ function findTarget(stage) {
 
 
             /* ----------------------------------------------------
-               ASSEMBLE CARD
+               ASSEMBLE
             ---------------------------------------------------- */
 
             item.appendChild(header);
@@ -24615,7 +24618,7 @@ function findTarget(stage) {
 
 
             /* ----------------------------------------------------
-               ADD CARD TO ROADMAP
+               ADD TO CONTAINER
             ---------------------------------------------------- */
 
             container.appendChild(item);
@@ -24624,7 +24627,7 @@ function findTarget(stage) {
 
 
         /* ========================================================
-           ROADMAP SUMMARY COUNTS
+           SUMMARY COUNTS
         ======================================================== */
 
         const highCount =
@@ -24665,11 +24668,10 @@ function findTarget(stage) {
 
 
         /* ========================================================
-           DEVELOPMENT AREA SHOW / HIDE
+           INITIALISE TOGGLE
            
            IMPORTANT:
-           This is initialised AFTER the four roadmap cards
-           have been created.
+           This happens AFTER the cards have been generated.
         ======================================================== */
 
         initialiseDevelopmentRoadmapToggle(
@@ -24681,17 +24683,13 @@ function findTarget(stage) {
 
 
     /* ============================================================
-       SHOW / HIDE DEVELOPMENT AREAS
+       DEVELOPMENT AREA TOGGLE
     ============================================================ */
 
     function initialiseDevelopmentRoadmapToggle(
         roadmap,
         container
     ) {
-
-        /*
-           Find the timeline periods and summary boxes.
-        */
 
         const controls =
             roadmap.querySelectorAll(
@@ -24706,175 +24704,87 @@ function findTarget(stage) {
 
 
         /* ========================================================
-           REMOVE ANY PREVIOUS TOGGLE STATE
+           START CLOSED
         ======================================================== */
 
-        container.classList.remove(
-            "development-areas-visible"
+        container.style.setProperty(
+            "display",
+            "none",
+            "important"
         );
 
 
-        /*
-           These inline values ensure the cards start hidden,
-           regardless of any existing roadmap CSS.
-        */
-
-        container.style.maxHeight =
-            "0px";
-
-        container.style.overflow =
-            "hidden";
-
-        container.style.opacity =
-            "0";
-
-        container.style.visibility =
-            "hidden";
-
-
         /* ========================================================
-           MAKE CONTROLS ACCESSIBLE
+           UPDATE CONTROL STATES
         ======================================================== */
 
-        controls.forEach(function(control) {
+        function updateControls(isOpen) {
 
-            control.setAttribute(
-                "role",
-                "button"
-            );
+            controls.forEach(
+                function(control) {
 
-            control.setAttribute(
-                "tabindex",
-                "0"
-            );
-
-            control.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-        });
+                    control.setAttribute(
+                        "aria-expanded",
+                        isOpen
+                            ? "true"
+                            : "false"
+                    );
 
 
-        /* ========================================================
-           OPEN DEVELOPMENT AREAS
-        ======================================================== */
+                    control.classList.toggle(
+                        "is-active",
+                        isOpen
+                    );
 
-        function openDevelopmentAreas() {
-
-            container.classList.add(
-                "development-areas-visible"
-            );
-
-
-            container.style.visibility =
-                "visible";
-
-            container.style.opacity =
-                "1";
-
-
-            /*
-               Allow the browser to calculate the natural
-               height of the generated cards.
-            */
-
-            container.style.maxHeight =
-                container.scrollHeight + "px";
-
-
-            controls.forEach(function(control) {
-
-                control.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
-                control.classList.add(
-                    "is-active"
-                );
-
-            });
-
-        }
-
-
-        /* ========================================================
-           CLOSE DEVELOPMENT AREAS
-        ======================================================== */
-
-        function closeDevelopmentAreas() {
-
-            container.style.maxHeight =
-                "0px";
-
-            container.style.opacity =
-                "0";
-
-
-            container.classList.remove(
-                "development-areas-visible"
-            );
-
-
-            controls.forEach(function(control) {
-
-                control.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-                control.classList.remove(
-                    "is-active"
-                );
-
-            });
-
-
-            /*
-               Hide completely after the animation.
-            */
-
-            window.setTimeout(
-                function() {
-
-                    if (
-                        !container.classList.contains(
-                            "development-areas-visible"
-                        )
-                    ) {
-
-                        container.style.visibility =
-                            "hidden";
-
-                    }
-
-                },
-                550
+                }
             );
 
         }
 
 
+        updateControls(false);
+
+
         /* ========================================================
-           MAIN TOGGLE
+           TOGGLE
         ======================================================== */
 
         function toggleDevelopmentAreas() {
 
-            const isOpen =
-                container.classList.contains(
-                    "development-areas-visible"
+            const currentlyHidden =
+                window.getComputedStyle(
+                    container
+                ).display === "none";
+
+
+            if (currentlyHidden) {
+
+                /*
+                   OPEN
+                */
+
+                container.style.removeProperty(
+                    "display"
                 );
 
 
-            if (isOpen) {
+                updateControls(true);
 
-                closeDevelopmentAreas();
 
             } else {
 
-                openDevelopmentAreas();
+                /*
+                   CLOSE
+                */
+
+                container.style.setProperty(
+                    "display",
+                    "none",
+                    "important"
+                );
+
+
+                updateControls(false);
 
             }
 
@@ -24885,63 +24795,57 @@ function findTarget(stage) {
            CLICK EVENTS
         ======================================================== */
 
-        controls.forEach(function(control) {
+        controls.forEach(
+            function(control) {
 
-            control.addEventListener(
-                "click",
-                function(event) {
+                control.setAttribute(
+                    "role",
+                    "button"
+                );
 
-                    event.preventDefault();
-
-                    toggleDevelopmentAreas();
-
-                }
-            );
+                control.setAttribute(
+                    "tabindex",
+                    "0"
+                );
 
 
-            /* ====================================================
-               KEYBOARD EVENTS
-            ==================================================== */
-
-            control.addEventListener(
-                "keydown",
-                function(event) {
-
-                    if (
-                        event.key === "Enter" ||
-                        event.key === " "
-                    ) {
+                control.addEventListener(
+                    "click",
+                    function(event) {
 
                         event.preventDefault();
+
+                        event.stopPropagation();
 
                         toggleDevelopmentAreas();
 
                     }
-
-                }
-            );
-
-        });
+                );
 
 
-        /* ========================================================
-           HANDLE WINDOW RESIZE
-        ======================================================== */
+                /* =================================================
+                   KEYBOARD
+                ================================================= */
 
-        window.addEventListener(
-            "resize",
-            function() {
+                control.addEventListener(
+                    "keydown",
+                    function(event) {
 
-                if (
-                    container.classList.contains(
-                        "development-areas-visible"
-                    )
-                ) {
+                        if (
+                            event.key === "Enter" ||
+                            event.key === " "
+                        ) {
 
-                    container.style.maxHeight =
-                        container.scrollHeight + "px";
+                            event.preventDefault();
 
-                }
+                            event.stopPropagation();
+
+                            toggleDevelopmentAreas();
+
+                        }
+
+                    }
+                );
 
             }
         );
@@ -24950,7 +24854,7 @@ function findTarget(stage) {
 
 
     /* ============================================================
-       INITIALISE ROADMAP
+       INITIALISE
     ============================================================ */
 
     if (
@@ -24966,233 +24870,6 @@ function findTarget(stage) {
     } else {
 
         buildDevelopmentRoadmap();
-
-    }
-
-})();
-/* ============================================================
-   DEVELOPMENT ROADMAP
-   SHOW / HIDE DEVELOPMENT AREAS
-   VERSION 3
-   ============================================================ */
-
-(function initialiseDevelopmentRoadmapToggle() {
-
-    function setupDevelopmentRoadmapToggle() {
-
-        const roadmap =
-            document.getElementById(
-                "development-roadmap"
-            );
-
-        const roadmapItems =
-            document.getElementById(
-                "development-roadmap-items"
-            );
-
-        if (!roadmap || !roadmapItems) {
-            return;
-        }
-
-
-        /* ========================================================
-           GET ALL CLICKABLE CONTROLS
-        ======================================================== */
-
-        const controls =
-            roadmap.querySelectorAll(
-                ".development-roadmap-period, " +
-                ".development-roadmap-summary-item"
-            );
-
-
-        if (!controls.length) {
-            return;
-        }
-
-
-        /* ========================================================
-           SET INITIAL STATE
-        ======================================================== */
-
-        roadmapItems.classList.remove(
-            "development-areas-visible"
-        );
-
-        controls.forEach(function(control) {
-
-            control.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            control.classList.remove(
-                "is-active"
-            );
-
-        });
-
-
-        /* ========================================================
-           SINGLE EVENT LISTENER
-
-           Using event delegation means this continues to work
-           even if other APM JavaScript rebuilds roadmap content.
-        ======================================================== */
-
-        if (
-            roadmap.dataset.developmentToggleBound ===
-            "true"
-        ) {
-            return;
-        }
-
-
-        roadmap.dataset.developmentToggleBound =
-            "true";
-
-
-        roadmap.addEventListener(
-            "click",
-            function(event) {
-
-                const control =
-                    event.target.closest(
-                        ".development-roadmap-period, " +
-                        ".development-roadmap-summary-item"
-                    );
-
-
-                if (!control) {
-                    return;
-                }
-
-
-                /*
-                   Make sure the click belongs to THIS roadmap.
-                */
-
-                if (
-                    !roadmap.contains(control)
-                ) {
-                    return;
-                }
-
-
-                event.preventDefault();
-
-
-                const isOpen =
-                    roadmapItems.classList.contains(
-                        "development-areas-visible"
-                    );
-
-
-                /* =================================================
-                   TOGGLE
-                ================================================= */
-
-                if (isOpen) {
-
-                    roadmapItems.classList.remove(
-                        "development-areas-visible"
-                    );
-
-                } else {
-
-                    roadmapItems.classList.add(
-                        "development-areas-visible"
-                    );
-
-                }
-
-
-                const newState =
-                    !isOpen;
-
-
-                /* =================================================
-                   UPDATE ALL CONTROLS
-                ================================================= */
-
-                controls.forEach(
-                    function(item) {
-
-                        item.setAttribute(
-                            "aria-expanded",
-                            newState
-                                ? "true"
-                                : "false"
-                        );
-
-                        item.classList.toggle(
-                            "is-active",
-                            newState
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* ========================================================
-           KEYBOARD ACCESSIBILITY
-        ======================================================== */
-
-        roadmap.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key !== "Enter" &&
-                    event.key !== " "
-                ) {
-                    return;
-                }
-
-
-                const control =
-                    event.target.closest(
-                        ".development-roadmap-period, " +
-                        ".development-roadmap-summary-item"
-                    );
-
-
-                if (!control) {
-                    return;
-                }
-
-
-                event.preventDefault();
-
-
-                control.click();
-
-            }
-        );
-
-    }
-
-
-    /* ============================================================
-       DOM READY
-    ============================================================ */
-
-    if (
-        document.readyState ===
-        "loading"
-    ) {
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            setupDevelopmentRoadmapToggle
-        );
-
-    } else {
-
-        setupDevelopmentRoadmapToggle();
 
     }
 

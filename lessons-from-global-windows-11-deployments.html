@@ -89,6 +89,20 @@ body.dark-mode {
     --text-sub: #cccccc;
     --card-bg: #1a1a1a;
 }
+    .pdf-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.download-count {
+    background: #fff;
+    color: var(--accent);
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
 </style>
         <!-- GLOBAL CSS -->
 <link rel="stylesheet" href="certifications.css">
@@ -147,9 +161,15 @@ fetch("header.html")
     <h1>Lessons from Global Windows 11 Deployments</h1>
     <p>What large organisations have learned from deploying Windows 11 at scale — and how to avoid disruption, accelerate adoption, and improve user experience.</p>
 
-    <a href="global_windows_11_deployment.pdf" class="btn" target="_blank" rel="noopener">
-        📄 Download Full Article (PDF)
-    </a>
+    <a href="global_windows_11_deployment.pdf" 
+   class="btn pdf-download-btn" 
+   target="_blank" 
+   rel="noopener"
+   onclick="incrementDownloadCount()">
+    📄 Download Full Article (PDF)
+    <span id="downloadCount" class="download-count">0</span>
+</a>
+
 </section>
 
 <article class="featured-article">
@@ -233,6 +253,23 @@ function toggleInsightFull(btn) {
     btn.textContent = isOpen ? "Read more" : "Show less";
 }
 </script>
+<script>
+function incrementDownloadCount() {
+    const key = "win11_pdf_downloads";
+    let count = localStorage.getItem(key);
 
+    count = count ? parseInt(count) + 1 : 1;
+    localStorage.setItem(key, count);
+
+    document.getElementById("downloadCount").textContent = count;
+}
+
+// Initialise counter on page load
+document.addEventListener("DOMContentLoaded", () => {
+    const key = "win11_pdf_downloads";
+    const count = localStorage.getItem(key) || 0;
+    document.getElementById("downloadCount").textContent = count;
+});
+</script>
 </body>
 </html>

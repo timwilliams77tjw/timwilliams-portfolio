@@ -4030,3 +4030,580 @@
     }
 
 }
+/* ============================================================
+   PROGRAMME LEADERSHIP CONTEXTS
+   Four-card leadership context grid
+============================================================ */
+
+/* ------------------------------------------------------------
+   SECTION
+------------------------------------------------------------ */
+
+.leadership-contexts-section {
+    width: 100%;
+    margin: 0;
+}
+
+
+/* ------------------------------------------------------------
+   GRID
+------------------------------------------------------------ */
+
+.leadership-contexts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+
+/* ------------------------------------------------------------
+   CARD
+------------------------------------------------------------ */
+
+.leadership-context-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 430px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe5eb;
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 14px rgba(15, 23, 42, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* ------------------------------------------------------------
+   CARD HOVER
+------------------------------------------------------------ */
+
+.leadership-context-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #c9d6e2;
+
+    box-shadow:
+        0 12px 28px rgba(15, 23, 42, 0.11);
+}
+
+
+/* ------------------------------------------------------------
+   VISUAL AREA
+------------------------------------------------------------ */
+
+.context-card-visual {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 145px;
+    min-height: 145px;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid #e3e8ed;
+
+    background: #f3f6f9;
+}
+
+
+/*
+   Subtle decorative background pattern.
+   This creates visual interest even before real imagery
+   is added.
+*/
+
+.context-card-visual::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.65) 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            315deg,
+            rgba(255,255,255,0.45) 25%,
+            transparent 25%
+        );
+
+    background-size: 42px 42px;
+
+    opacity: 0.55;
+
+    pointer-events: none;
+}
+
+
+/* ------------------------------------------------------------
+   VISUAL ICON
+------------------------------------------------------------ */
+
+.context-visual-icon {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 76px;
+    height: 76px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.92);
+
+    border: 1px solid rgba(0,0,0,0.08);
+
+    box-shadow:
+        0 5px 15px rgba(15,23,42,0.10);
+
+    font-size: 2rem;
+    line-height: 1;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.leadership-context-card:hover .context-visual-icon {
+    transform: scale(1.06);
+
+    box-shadow:
+        0 8px 20px rgba(15,23,42,0.14);
+}
+
+
+/* ------------------------------------------------------------
+   VISUAL LABEL
+------------------------------------------------------------ */
+
+.context-visual-label {
+    position: absolute;
+
+    left: 1.25rem;
+    bottom: 1rem;
+
+    z-index: 2;
+
+    font-size: 0.68rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    color: #4b5563;
+
+    text-transform: uppercase;
+}
+
+
+/* ------------------------------------------------------------
+   CONTEXT-SPECIFIC VISUAL AREAS
+------------------------------------------------------------ */
+
+/* Government & Defence */
+
+.context-visual-defence {
+    background:
+        radial-gradient(
+            circle at 75% 25%,
+            rgba(0, 82, 147, 0.13),
+            transparent 42%
+        ),
+        #eef4f9;
+}
+
+.context-visual-defence .context-visual-icon {
+    color: #174a73;
+}
+
+
+/* Cyber Security */
+
+.context-visual-cyber {
+    background:
+        radial-gradient(
+            circle at 25% 30%,
+            rgba(0, 123, 95, 0.13),
+            transparent 42%
+        ),
+        #eef7f5;
+}
+
+.context-visual-cyber .context-visual-icon {
+    color: #006b58;
+}
+
+
+/* Cloud Transformation */
+
+.context-visual-cloud {
+    background:
+        radial-gradient(
+            circle at 75% 30%,
+            rgba(86, 76, 153, 0.13),
+            transparent 42%
+        ),
+        #f2f1f8;
+}
+
+.context-visual-cloud .context-visual-icon {
+    color: #51468c;
+}
+
+
+/* Healthcare */
+
+.context-visual-healthcare {
+    background:
+        radial-gradient(
+            circle at 25% 30%,
+            rgba(166, 61, 74, 0.12),
+            transparent 42%
+        ),
+        #faf1f2;
+}
+
+.context-visual-healthcare .context-visual-icon {
+    color: #9b3d49;
+}
+
+
+/* ------------------------------------------------------------
+   CARD CONTENT
+------------------------------------------------------------ */
+
+.context-card-content {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: 1.5rem 1.5rem 1rem;
+}
+
+
+/* ------------------------------------------------------------
+   KICKER
+------------------------------------------------------------ */
+
+.context-card-kicker {
+    display: inline-block;
+
+    margin-bottom: 0.65rem;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+
+    letter-spacing: 0.11em;
+
+    color: #4b5563;
+
+    text-transform: uppercase;
+}
+
+
+/* ------------------------------------------------------------
+   CARD TITLE
+------------------------------------------------------------ */
+
+.context-card-content h3 {
+    margin: 0 0 0.75rem;
+
+    font-size: 1.35rem;
+    line-height: 1.25;
+
+    font-weight: 750;
+
+    color: #171717;
+}
+
+
+/* ------------------------------------------------------------
+   CARD DESCRIPTION
+------------------------------------------------------------ */
+
+.context-card-content p {
+    margin: 0;
+
+    max-width: 620px;
+
+    font-size: 1rem;
+    line-height: 1.65;
+
+    color: #424b55;
+}
+
+
+/* ------------------------------------------------------------
+   CARD FOOTER
+------------------------------------------------------------ */
+
+.context-card-footer {
+    display: flex;
+    align-items: center;
+
+    padding: 0 1.5rem 1.5rem;
+}
+
+
+/* ------------------------------------------------------------
+   VIEW ROLE LINK
+------------------------------------------------------------ */
+
+.context-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+
+    padding: 0.65rem 1rem;
+
+    border: 1.5px solid #171717;
+    border-radius: 999px;
+
+    background: transparent;
+
+    color: #171717;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.context-card-link span {
+    display: inline-block;
+
+    font-size: 1.05rem;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.context-card-link:hover {
+    background: #171717;
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+.context-card-link:hover span {
+    transform: translateX(3px);
+}
+
+
+/* ------------------------------------------------------------
+   KEYBOARD ACCESSIBILITY
+------------------------------------------------------------ */
+
+.context-card-link:focus-visible {
+    outline: 3px solid rgba(0, 120, 255, 0.35);
+    outline-offset: 4px;
+}
+
+
+/* ------------------------------------------------------------
+   TABLET
+------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+
+    .leadership-contexts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 1.15rem;
+    }
+
+
+    .leadership-context-card {
+        min-height: 410px;
+    }
+
+
+    .context-card-visual {
+        height: 130px;
+        min-height: 130px;
+    }
+
+
+    .context-visual-icon {
+        width: 68px;
+        height: 68px;
+
+        font-size: 1.8rem;
+    }
+
+
+    .context-card-content {
+        padding: 1.3rem 1.3rem 1rem;
+    }
+
+
+    .context-card-content h3 {
+        font-size: 1.2rem;
+    }
+
+
+    .context-card-footer {
+        padding:
+            0 1.3rem 1.3rem;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------ */
+
+@media (max-width: 700px) {
+
+    .leadership-contexts-grid {
+        grid-template-columns: 1fr;
+
+        gap: 1.25rem;
+
+        margin-top: 1.5rem;
+    }
+
+
+    .leadership-context-card {
+        min-height: 0;
+    }
+
+
+    .context-card-visual {
+        height: 125px;
+        min-height: 125px;
+    }
+
+
+    .context-visual-icon {
+        width: 66px;
+        height: 66px;
+
+        font-size: 1.75rem;
+    }
+
+
+    .context-visual-label {
+        left: 1rem;
+        bottom: 0.8rem;
+
+        font-size: 0.62rem;
+    }
+
+
+    .context-card-content {
+        padding: 1.25rem 1.2rem 1rem;
+    }
+
+
+    .context-card-kicker {
+        font-size: 0.67rem;
+    }
+
+
+    .context-card-content h3 {
+        font-size: 1.2rem;
+        line-height: 1.3;
+    }
+
+
+    .context-card-content p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+
+    .context-card-footer {
+        padding:
+            0 1.2rem 1.25rem;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   SMALL MOBILE
+------------------------------------------------------------ */
+
+@media (max-width: 420px) {
+
+    .leadership-contexts-grid {
+        gap: 1rem;
+    }
+
+
+    .context-card-visual {
+        height: 115px;
+        min-height: 115px;
+    }
+
+
+    .context-visual-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 1.6rem;
+    }
+
+
+    .context-card-content h3 {
+        font-size: 1.12rem;
+    }
+
+
+    .context-card-content p {
+        font-size: 0.92rem;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   REDUCED MOTION
+------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .leadership-context-card,
+    .context-visual-icon,
+    .context-card-link,
+    .context-card-link span {
+        transition: none;
+    }
+
+}

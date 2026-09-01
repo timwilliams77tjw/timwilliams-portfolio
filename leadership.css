@@ -4102,100 +4102,6 @@
 }
 
 
-/* ------------------------------------------------------------
-   VISUAL AREA
------------------------------------------------------------- */
-
-.context-card-visual {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: 145px;
-    min-height: 145px;
-
-    overflow: hidden;
-
-    border-bottom: 1px solid #e3e8ed;
-
-    background: #f3f6f9;
-}
-
-
-/*
-   Subtle decorative background pattern.
-   This creates visual interest even before real imagery
-   is added.
-*/
-
-.context-card-visual::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background-image:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.65) 25%,
-            transparent 25%
-        ),
-        linear-gradient(
-            315deg,
-            rgba(255,255,255,0.45) 25%,
-            transparent 25%
-        );
-
-    background-size: 42px 42px;
-
-    opacity: 0.55;
-
-    pointer-events: none;
-}
-
-
-/* ------------------------------------------------------------
-   VISUAL ICON
------------------------------------------------------------- */
-
-.context-visual-icon {
-    position: relative;
-    z-index: 2;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 76px;
-    height: 76px;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,0.92);
-
-    border: 1px solid rgba(0,0,0,0.08);
-
-    box-shadow:
-        0 5px 15px rgba(15,23,42,0.10);
-
-    font-size: 2rem;
-    line-height: 1;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-
-.leadership-context-card:hover .context-visual-icon {
-    transform: scale(1.06);
-
-    box-shadow:
-        0 8px 20px rgba(15,23,42,0.14);
-}
-
 
 /* ------------------------------------------------------------
    VISUAL LABEL
@@ -4219,77 +4125,6 @@
     text-transform: uppercase;
 }
 
-
-/* ------------------------------------------------------------
-   CONTEXT-SPECIFIC VISUAL AREAS
------------------------------------------------------------- */
-
-/* Government & Defence */
-
-.context-visual-defence {
-    background:
-        radial-gradient(
-            circle at 75% 25%,
-            rgba(0, 82, 147, 0.13),
-            transparent 42%
-        ),
-        #eef4f9;
-}
-
-.context-visual-defence .context-visual-icon {
-    color: #174a73;
-}
-
-
-/* Cyber Security */
-
-.context-visual-cyber {
-    background:
-        radial-gradient(
-            circle at 25% 30%,
-            rgba(0, 123, 95, 0.13),
-            transparent 42%
-        ),
-        #eef7f5;
-}
-
-.context-visual-cyber .context-visual-icon {
-    color: #006b58;
-}
-
-
-/* Cloud Transformation */
-
-.context-visual-cloud {
-    background:
-        radial-gradient(
-            circle at 75% 30%,
-            rgba(86, 76, 153, 0.13),
-            transparent 42%
-        ),
-        #f2f1f8;
-}
-
-.context-visual-cloud .context-visual-icon {
-    color: #51468c;
-}
-
-
-/* Healthcare */
-
-.context-visual-healthcare {
-    background:
-        radial-gradient(
-            circle at 25% 30%,
-            rgba(166, 61, 74, 0.12),
-            transparent 42%
-        ),
-        #faf1f2;
-}
-
-.context-visual-healthcare .context-visual-icon {
-    color: #9b3d49;
-}
 
 
 /* ------------------------------------------------------------
@@ -4732,6 +4567,167 @@
     color: #a8c4ff;
 }
 
+/* Badge icon sizing */
+.context-visual-icon img {
+    width: 40px;   /* adjust to taste */
+    height: 40px;
+    display: block;
+}
+.context-card-visual {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Badge icon: keep it small */
+.context-visual-icon img {
+    width: 40px;      /* or whatever size you want */
+    height: 40px;
+    display: block;
+}
+
+/* Optional: position badge */
+.context-visual-icon {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+/* ============================================================
+   PROGRAMME LEADERSHIP CONTEXTS — GRID & CARD BASE
+============================================================ */
+
+.leadership-contexts-section {
+    width: 100%;
+    margin: 0;
+}
+
+.leadership-contexts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.leadership-context-card {
+    display: flex;
+    flex-direction: column;
+    background: #0d0f12;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.leadership-context-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(0,0,0,0.45);
+}
+
+/* ============================================================
+   VISUAL HEADER AREA (TOP IMAGE)
+============================================================ */
+
+.context-card-visual {
+    position: relative;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.4rem;
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+}
+
+.context-card-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.0) 0%,
+        rgba(0,0,0,0.55) 70%
+    );
+}
+
+/* ============================================================
+   ICON + LABEL (SMALL BADGE)
+============================================================ */
+
+.context-visual-icon {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+}
+
+.context-visual-icon img {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+.context-visual-label {
+    position: relative;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+/* ============================================================
+   CARD CONTENT
+============================================================ */
+
+.context-card-content {
+    padding: 1.8rem;
+    color: #fff;
+}
+
+.context-card-kicker {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: #7aa7ff;
+    margin-bottom: 0.6rem;
+}
+
+.context-card-content h3 {
+    font-size: 1.35rem;
+    margin: 0 0 0.6rem 0;
+}
+
+.context-card-content p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    opacity: 0.9;
+}
+
+/* ============================================================
+   FOOTER LINK
+============================================================ */
+
+.context-card-footer {
+    padding: 1.6rem 1.8rem;
+    margin-top: auto;
+}
+
+.context-card-link {
+    color: #7aa7ff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.25s ease;
+}
+
+.context-card-link:hover {
+    color: #a8c4ff;
+}
+
 /* ============================================================
    BACKGROUND IMAGES FOR EACH CONTEXT
 ============================================================ */
@@ -4750,42 +4746,52 @@
 
 .context-visual-healthcare {
     background-image: url('healthcare-main.jpg');
-}.context-visual-healthcare {
-    background-image: url('healthcare-main.jpg');
-}
-.context-visual-cyber {
-    background-image: url('cyber-main.jpg');
-}
-.context-visual-cloud {
-    background-image: url('cloud-main.jpg');
-}
-.context-visual-defence {
-    background-image: url('defence-main.jpg');
-    background-size: cover;
-    background-position: center;
 }
 
-.context-visual-cyber {
-    background-image: url('cyber-main.jpg');
-    background-size: cover;
-    background-position: center;
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+============================================================ */
+
+@media (max-width: 900px) {
+    .context-card-visual {
+        height: 150px;
+    }
+    .context-card-content {
+        padding: 1.5rem;
+    }
 }
 
-.context-visual-cloud {
-    background-image: url('cloud-main.jpg');
-    background-size: cover;
-    background-position: center;
+@media (max-width: 700px) {
+    .leadership-contexts-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .context-card-visual {
+        height: 135px;
+    }
+    .context-visual-icon img {
+        width: 36px;
+        height: 36px;
+    }
 }
 
-.context-visual-healthcare {
-    background-image: url('healthcare-main.jpg');
-    background-size: cover;
-    background-position: center;
+@media (max-width: 420px) {
+    .context-card-visual {
+        height: 120px;
+    }
+    .context-visual-icon img {
+        width: 32px;
+        height: 32px;
+    }
 }
 
-/* Badge icon sizing */
-.context-visual-icon img {
-    width: 40px;   /* adjust to taste */
-    height: 40px;
-    display: block;
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .leadership-context-card,
+    .context-card-link {
+        transition: none;
+    }
 }

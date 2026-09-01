@@ -144,9 +144,20 @@ fetch("header.html")
 <main class="page-container">
 
 <section class="hero-section">
-    <h1>Delivering Cyber Security Transformation in Large Organisations</h1>
-    <p>Why cyber uplift fails — and how large organisations can deliver transformation that is measurable, sustainable, and aligned to real operational needs.</p>
+  <h1>Delivering Cyber Security Transformation in Large Organisations</h1>
+  <p>Why cyber uplift fails — and how large organisations can deliver transformation that is measurable, sustainable, and aligned to real operational needs.</p>
+
+  <a href="Delivering_Cyber_Transformation_Programs.pdf"
+     class="btn pdf-download-btn"
+     target="_blank"
+     rel="noopener"
+     onclick="incrementDownloadCountCyber()">
+    📄 Download Full Article (PDF)
+    <span id="downloadCountCyber" class="download-count">0</span>
+  </a>
 </section>
+
+
 
 <article class="featured-article">
     <h3>The Reality: Cyber Transformation Fails More Often Than It Succeeds</h3>
@@ -226,6 +237,21 @@ function toggleInsightFull(btn) {
     btn.textContent = isOpen ? "Read more" : "Show less";
 }
 </script>
+<script>
+function incrementDownloadCountCyber() {
+  const key = "cyber_pdf_downloads";
+  let count = localStorage.getItem(key);
+  count = count ? parseInt(count) + 1 : 1;
+  localStorage.setItem(key, count);
+  document.getElementById("downloadCountCyber").textContent = count;
+  if (window.plausible) plausible("CyberTransformationPDFDownload");
+}
 
+document.addEventListener("DOMContentLoaded", () => {
+  const key = "cyber_pdf_downloads";
+  const count = localStorage.getItem(key) || 0;
+  document.getElementById("downloadCountCyber").textContent = count;
+});
+</script>
 </body>
 </html>

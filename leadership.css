@@ -4810,3 +4810,141 @@
 .context-visual-healthcare {
     background-image: url('healthcare-main.jpg');
 }
+/* ============================================================
+   LEADERSHIP CONTEXT CARD — MAIN VISUAL IMAGES
+============================================================ */
+
+.leadership-context-card .context-card-visual {
+    position: relative;
+    width: 100%;
+    height: 230px;
+
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   INDIVIDUAL CONTEXT IMAGES
+============================================================ */
+
+.leadership-context-card .context-visual-defence {
+    background-image: url("defence-main.jpg") !important;
+}
+
+.leadership-context-card .context-visual-cyber {
+    background-image: url("cyber-main.jpg") !important;
+}
+
+.leadership-context-card .context-visual-cloud {
+    background-image: url("cloud-main.jpg") !important;
+}
+
+.leadership-context-card .context-visual-healthcare {
+    background-image: url("healthcare-main.jpg") !important;
+}
+
+
+/* ============================================================
+   DARK IMAGE OVERLAY
+   Keeps the white label readable without hiding the image
+============================================================ */
+
+.leadership-context-card .context-card-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0.18) 45%,
+        rgba(0, 0, 0, 0.62) 100%
+    );
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   ICON / BADGE
+============================================================ */
+
+.leadership-context-card .context-visual-icon {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 14px;
+
+    padding: 10px;
+
+    z-index: 2;
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+
+
+.leadership-context-card .context-visual-icon img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* ============================================================
+   IMAGE LABEL
+============================================================ */
+
+.leadership-context-card .context-visual-label {
+    position: absolute;
+
+    left: 20px;
+    bottom: 18px;
+
+    z-index: 2;
+
+    color: #ffffff;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.7),
+        0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ============================================================
+   HOVER
+============================================================ */
+
+.leadership-context-card .context-card-visual {
+    transition:
+        background-size 0.5s ease,
+        transform 0.35s ease;
+}
+
+.leadership-context-card:hover .context-card-visual {
+    background-size: 108% !important;
+}

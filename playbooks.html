@@ -1364,7 +1364,70 @@ SMALL IPHONE
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
+.playbook-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
 
+.highlight-card {
+  position: relative;
+  padding: 32px 28px;
+  background: var(--pb-card);
+  border-radius: var(--pb-radius);
+  border: 1px solid var(--pb-border);
+  box-shadow: var(--pb-shadow);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Oversized background number */
+.highlight-card::before {
+  content: attr(data-num);
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  font-size: 3.8rem;
+  font-weight: 800;
+  opacity: 0.06;
+  color: var(--pb-accent);
+  pointer-events: none;
+}
+
+/* Accent bar */
+.highlight-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: var(--pb-accent);
+  opacity: 0.35;
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.highlight-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--pb-shadow-hover);
+}
+
+.highlight-card:hover::after {
+  width: 8px;
+  opacity: 0.6;
+}
+
+.highlight-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.18rem;
+  color: var(--pb-text);
+}
+
+.highlight-card p {
+  margin: 0;
+  color: var(--pb-text-secondary);
+  line-height: 1.6;
+}
     
 </style>
 </head>
@@ -1721,84 +1784,47 @@ fetch("header.html")
      PLAYBOOK HIGHLIGHTS
      ========================================================= -->
 <section class="playbook-highlights">
-<div class="playbook-highlights-header">
-    <div class="playbooks-section-kicker">
-        TRANSFORMATION HIGHLIGHTS
-    </div>
-    <h2>
-        Proven patterns that deliver clarity, pace and
-        measurable improvement.
-    </h2>
-    <p>
-        Each playbook is grounded in real-world delivery experience
-        across complex, multi-vendor programmes. These highlights
-        capture the outcomes consistently achieved through structured
-        transformation leadership.
-    </p>
-</div>
-<div class="playbook-highlights-grid">
-    <article class="highlight-card">
-        <div class="highlight-icon">01</div>
-        <h3>
-            Rapid Mobilisation
-        </h3>
-        <p>
-            Clear structure, priorities and decision-making
-            established within days, not weeks.
-        </p>
+  <div class="playbook-highlights-header">
+    <div class="playbooks-section-kicker">TRANSFORMATION HIGHLIGHTS</div>
+    <h2>Proven patterns that deliver clarity, pace and measurable improvement.</h2>
+    <p>Each playbook is grounded in real-world delivery experience across complex, multi-vendor programmes. These highlights capture the outcomes consistently achieved through structured transformation leadership.</p>
+  </div>
+
+  <div class="playbook-highlights-grid">
+
+    <article class="highlight-card" data-num="01">
+      <h3>Rapid Mobilisation</h3>
+      <p>Clear structure, priorities and decision-making established within days, not weeks.</p>
     </article>
-    <article class="highlight-card">
-        <div class="highlight-icon">02</div>
-        <h3>
-            Strengthened Controls
-        </h3>
-        <p>
-            Lightweight governance that increases visibility
-            without slowing delivery momentum.
-        </p>
+
+    <article class="highlight-card" data-num="02">
+      <h3>Strengthened Controls</h3>
+      <p>Lightweight governance that increases visibility without slowing delivery momentum.</p>
     </article>
-    <article class="highlight-card">
-        <div class="highlight-icon">03</div>
-        <h3>
-            Outcome-Based Delivery
-        </h3>
-        <p>
-            Measurable success criteria aligned to readiness,
-            improvement and organisational value.
-        </p>
+
+    <article class="highlight-card" data-num="03">
+      <h3>Outcome-Based Delivery</h3>
+      <p>Measurable success criteria aligned to readiness, improvement and organisational value.</p>
     </article>
-    <article class="highlight-card">
-        <div class="highlight-icon">04</div>
-        <h3>
-            Aligned Stakeholders
-        </h3>
-        <p>
-            Technical, operational and business teams brought
-            into a single delivery rhythm.
-        </p>
+
+    <article class="highlight-card" data-num="04">
+      <h3>Aligned Stakeholders</h3>
+      <p>Technical, operational and business teams brought into a single delivery rhythm.</p>
     </article>
-    <article class="highlight-card">
-        <div class="highlight-icon">05</div>
-        <h3>
-            Accelerated Adoption
-        </h3>
-        <p>
-            Communication, training and readiness built into
-            the delivery approach from day one.
-        </p>
+
+    <article class="highlight-card" data-num="05">
+      <h3>Accelerated Adoption</h3>
+      <p>Communication, training and readiness built into the delivery approach from day one.</p>
     </article>
-    <article class="highlight-card">
-        <div class="highlight-icon">06</div>
-        <h3>
-            Delivery Assurance
-        </h3>
-        <p>
-            Practical assurance points that identify risks early
-            and maintain programme confidence.
-        </p>
+
+    <article class="highlight-card" data-num="06">
+      <h3>Delivery Assurance</h3>
+      <p>Practical assurance points that identify risks early and maintain programme confidence.</p>
     </article>
-</div>
+
+  </div>
 </section>
+
 <!-- =========================================================
      THE PLAYBOOK APPROACH
      ========================================================= -->

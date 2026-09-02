@@ -3579,9 +3579,8 @@
     }
 }
 /* ============================================================
-   PROGRAMME LEADERSHIP CONTEXT CARDS
-   FINAL OVERRIDE
-   Paste this at the VERY BOTTOM of leadership.css
+   PROGRAMME LEADERSHIP CONTEXTS
+   FINAL CSS — USE WITH CURRENT HTML
    ============================================================ */
 
 
@@ -3589,7 +3588,6 @@
    SECTION
    ------------------------------------------------------------ */
 
-.leadership-page .leadership-contexts-section,
 .leadership-contexts-section {
     width: min(1200px, calc(100% - 32px));
     margin: 0 auto;
@@ -3602,7 +3600,6 @@
    GRID
    ------------------------------------------------------------ */
 
-.leadership-page .leadership-contexts-grid,
 .leadership-contexts-grid {
     display: grid !important;
 
@@ -3612,9 +3609,7 @@
     gap: 24px;
 
     width: 100%;
-
     margin: 35px 0 0;
-
     padding: 0;
 }
 
@@ -3623,8 +3618,7 @@
    CARD
    ------------------------------------------------------------ */
 
-.leadership-page .leadership-context-card,
-.leadership-context-card {
+.leadership-contexts-grid .leadership-context-card {
     position: relative;
 
     display: flex !important;
@@ -3632,22 +3626,20 @@
 
     width: 100%;
     min-width: 0;
-
     min-height: 0 !important;
-    height: 100%;
 
     margin: 0 !important;
     padding: 0 !important;
 
-    background: #0d0f12 !important;
+    background: #ffffff !important;
 
-    border: 1px solid rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(10, 102, 194, 0.13) !important;
     border-radius: 18px !important;
 
     overflow: hidden !important;
 
     box-shadow:
-        0 10px 28px rgba(0,0,0,0.22) !important;
+        0 8px 24px rgba(15, 35, 60, 0.08) !important;
 
     box-sizing: border-box;
 
@@ -3657,23 +3649,29 @@
         border-color 0.25s ease;
 }
 
-.leadership-page .leadership-context-card:hover,
+
+.leadership-contexts-grid
 .leadership-context-card:hover {
     transform: translateY(-5px);
 
-    border-color: rgba(10,102,194,0.28) !important;
+    border-color:
+        rgba(10, 102, 194, 0.25) !important;
 
     box-shadow:
-        0 18px 38px rgba(0,0,0,0.30) !important;
+        0 16px 34px rgba(15, 35, 60, 0.13) !important;
 }
 
 
 /* ------------------------------------------------------------
-   TOP IMAGE AREA
+   IMAGE / VISUAL AREA
+   IMPORTANT:
+   NO background-image is specified here.
+   The current HTML inline style supplies each image.
    ------------------------------------------------------------ */
 
-.leadership-page .leadership-context-card .context-card-visual,
-.leadership-context-card .context-card-visual {
+.leadership-contexts-grid
+.leadership-context-card
+.context-card-visual {
     position: relative;
 
     display: block !important;
@@ -3688,95 +3686,25 @@
 
     overflow: hidden !important;
 
-    background-color: #16202b !important;
-
-    background-position: center !important;
+    background-position: center center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
 
     box-sizing: border-box;
-}
 
-
-/* ------------------------------------------------------------
-   ACTUAL BACKGROUND IMAGES
-   IMPORTANT:
-   The !important prevents the site's generic card CSS
-   from replacing these background images.
-   ------------------------------------------------------------ */
-
-.leadership-page .context-visual-defence,
-.context-visual-defence {
-    background-image:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.05) 0%,
-            rgba(0,0,0,0.12) 45%,
-            rgba(0,0,0,0.68) 100%
-        ),
-        url("defence-main.jpg") !important;
-}
-
-
-.leadership-page .context-visual-cyber,
-.context-visual-cyber {
-    background-image:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.05) 0%,
-            rgba(0,0,0,0.12) 45%,
-            rgba(0,0,0,0.68) 100%
-        ),
-        url("cyber-main.jpg") !important;
-}
-
-
-.leadership-page .context-visual-cloud,
-.context-visual-cloud {
-    background-image:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.05) 0%,
-            rgba(0,0,0,0.12) 45%,
-            rgba(0,0,0,0.68) 100%
-        ),
-        url("cloud-main.jpg") !important;
-}
-
-
-.leadership-page .context-visual-healthcare,
-.context-visual-healthcare {
-    background-image:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.05) 0%,
-            rgba(0,0,0,0.12) 45%,
-            rgba(0,0,0,0.68) 100%
-        ),
-        url("healthcare-main.jpg") !important;
-}
-
-
-/* ------------------------------------------------------------
-   IMAGE HOVER
-   ------------------------------------------------------------ */
-
-.leadership-context-card .context-card-visual {
     transition:
         background-size 0.45s ease,
         background-position 0.45s ease;
 }
 
-.leadership-context-card:hover .context-card-visual {
-    background-size: 108% !important;
-}
-
 
 /* ------------------------------------------------------------
-   IMAGE DARKENING OVERLAY
+   IMAGE DARKENING
    ------------------------------------------------------------ */
 
-.leadership-context-card .context-card-visual::after {
+.leadership-contexts-grid
+.leadership-context-card
+.context-card-visual::after {
     content: "";
 
     position: absolute;
@@ -3786,9 +3714,9 @@
     background:
         linear-gradient(
             to bottom,
-            rgba(0,0,0,0.02) 0%,
-            rgba(0,0,0,0.08) 45%,
-            rgba(0,0,0,0.58) 100%
+            rgba(0, 0, 0, 0.02) 0%,
+            rgba(0, 0, 0, 0.08) 42%,
+            rgba(0, 0, 0, 0.62) 100%
         );
 
     pointer-events: none;
@@ -3798,11 +3726,23 @@
 
 
 /* ------------------------------------------------------------
+   IMAGE HOVER
+   ------------------------------------------------------------ */
+
+.leadership-contexts-grid
+.leadership-context-card:hover
+.context-card-visual {
+    background-size: 108% !important;
+}
+
+
+/* ------------------------------------------------------------
    ICON BADGE
    ------------------------------------------------------------ */
 
-.leadership-page .leadership-context-card .context-visual-icon,
-.leadership-context-card .context-visual-icon {
+.leadership-contexts-grid
+.leadership-context-card
+.context-visual-icon {
     position: absolute;
 
     top: 18px;
@@ -3814,23 +3754,28 @@
     height: 58px !important;
 
     display: flex !important;
+
     align-items: center;
     justify-content: center;
 
     margin: 0 !important;
     padding: 10px !important;
 
-    background: rgba(255,255,255,0.94) !important;
+    background:
+        rgba(255, 255, 255, 0.94) !important;
 
     border-radius: 14px !important;
 
     box-shadow:
-        0 8px 22px rgba(0,0,0,0.24) !important;
+        0 8px 22px rgba(0, 0, 0, 0.22) !important;
 
     box-sizing: border-box;
 }
 
-.leadership-context-card .context-visual-icon img {
+
+.leadership-contexts-grid
+.leadership-context-card
+.context-visual-icon img {
     display: block !important;
 
     width: 100% !important;
@@ -3850,8 +3795,9 @@
    IMAGE LABEL
    ------------------------------------------------------------ */
 
-.leadership-page .leadership-context-card .context-visual-label,
-.leadership-context-card .context-visual-label {
+.leadership-contexts-grid
+.leadership-context-card
+.context-visual-label {
     position: absolute;
 
     left: 20px;
@@ -3868,24 +3814,25 @@
     font-size: 0.72rem !important;
     font-weight: 800 !important;
 
-    letter-spacing: 0.12em;
-
     line-height: 1.2;
+
+    letter-spacing: 0.12em;
 
     text-transform: uppercase;
 
     text-shadow:
-        0 1px 3px rgba(0,0,0,0.75),
-        0 2px 8px rgba(0,0,0,0.55);
+        0 1px 3px rgba(0, 0, 0, 0.75),
+        0 2px 8px rgba(0, 0, 0, 0.55);
 }
 
 
 /* ------------------------------------------------------------
-   CONTENT AREA
+   CONTENT
    ------------------------------------------------------------ */
 
-.leadership-page .leadership-context-card .context-card-content,
-.leadership-context-card .context-card-content {
+.leadership-contexts-grid
+.leadership-context-card
+.context-card-content {
     display: flex !important;
     flex-direction: column !important;
 
@@ -3895,11 +3842,11 @@
 
     margin: 0 !important;
 
-    padding: 25px 26px 20px !important;
+    padding: 25px 26px 18px !important;
 
-    background: #0d0f12 !important;
+    background: #ffffff !important;
 
-    color: #ffffff !important;
+    color: #111111 !important;
 
     box-sizing: border-box;
 }
@@ -3909,19 +3856,21 @@
    KICKER
    ------------------------------------------------------------ */
 
-.leadership-context-card .context-card-kicker {
+.leadership-contexts-grid
+.leadership-context-card
+.context-card-kicker {
     display: block;
 
     margin: 0 0 8px !important;
 
-    color: #7aa7ff !important;
+    color: #0a66c2 !important;
 
     font-size: 0.72rem !important;
     font-weight: 800 !important;
 
-    letter-spacing: 0.10em;
-
     line-height: 1.3;
+
+    letter-spacing: 0.10em;
 
     text-transform: uppercase;
 }
@@ -3931,10 +3880,12 @@
    TITLE
    ------------------------------------------------------------ */
 
-.leadership-context-card .context-card-content h3 {
+.leadership-contexts-grid
+.leadership-context-card
+.context-card-content h3 {
     margin: 0 0 10px !important;
 
-    color: #ffffff !important;
+    color: #111111 !important;
 
     font-size: 1.35rem !important;
     font-weight: 750 !important;
@@ -3949,10 +3900,12 @@
    DESCRIPTION
    ------------------------------------------------------------ */
 
-.leadership-context-card .context-card-content p {
+.leadership-contexts-grid
+.leadership-context-card
+.context-card-content p {
     margin: 0 !important;
 
-    color: rgba(255,255,255,0.82) !important;
+    color: #424b55 !important;
 
     font-size: 0.94rem !important;
 
@@ -3964,9 +3917,11 @@
    FOOTER
    ------------------------------------------------------------ */
 
-.leadership-page .leadership-context-card .context-card-footer,
-.leadership-context-card .context-card-footer {
+.leadership-contexts-grid
+.leadership-context-card
+.context-card-footer {
     display: flex !important;
+
     align-items: center;
 
     width: 100%;
@@ -3974,11 +3929,11 @@
     margin: 0 !important;
 
     padding:
-        4px
+        5px
         26px
         25px !important;
 
-    background: #0d0f12 !important;
+    background: #ffffff !important;
 
     box-sizing: border-box;
 }
@@ -3988,14 +3943,16 @@
    VIEW ROLE BUTTON
    ------------------------------------------------------------ */
 
-.leadership-page .leadership-context-card .cta-btn,
-.leadership-context-card .cta-btn {
+.leadership-contexts-grid
+.leadership-context-card
+.cta-btn {
     display: inline-flex !important;
 
     align-items: center;
     justify-content: center;
 
     width: auto !important;
+
     min-height: 42px;
 
     margin: 0 !important;
@@ -4019,7 +3976,7 @@
     text-decoration: none !important;
 
     box-shadow:
-        0 5px 14px rgba(10,102,194,0.20) !important;
+        0 5px 14px rgba(10, 102, 194, 0.20) !important;
 
     transition:
         background 0.2s ease,
@@ -4028,19 +3985,24 @@
         box-shadow 0.2s ease;
 }
 
-.leadership-page .leadership-context-card .cta-btn::after,
-.leadership-context-card .cta-btn::after {
+
+.leadership-contexts-grid
+.leadership-context-card
+.cta-btn::after {
     content: "→";
 
     margin-left: 9px;
 
     font-size: 1rem;
 
-    transition: transform 0.2s ease;
+    transition:
+        transform 0.2s ease;
 }
 
-.leadership-page .leadership-context-card .cta-btn:hover,
-.leadership-context-card .cta-btn:hover {
+
+.leadership-contexts-grid
+.leadership-context-card
+.cta-btn:hover {
     background: #0757a8 !important;
 
     border-color: #0757a8 !important;
@@ -4048,11 +4010,13 @@
     transform: translateY(-2px);
 
     box-shadow:
-        0 8px 18px rgba(10,102,194,0.28) !important;
+        0 8px 18px rgba(10, 102, 194, 0.28) !important;
 }
 
-.leadership-page .leadership-context-card .cta-btn:hover::after,
-.leadership-context-card .cta-btn:hover::after {
+
+.leadership-contexts-grid
+.leadership-context-card
+.cta-btn:hover::after {
     transform: translateX(3px);
 }
 
@@ -4064,22 +4028,25 @@
 @media (max-width: 850px) {
 
     .leadership-contexts-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
         gap: 18px;
     }
 
-    .leadership-context-card .context-card-visual {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-visual {
         height: 190px !important;
         min-height: 190px !important;
     }
 
-    .leadership-context-card .context-card-content {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-content {
         padding: 22px 21px 18px !important;
     }
 
-    .leadership-context-card .context-card-footer {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-footer {
         padding:
             3px
             21px
@@ -4094,14 +4061,12 @@
 
 @media (max-width: 700px) {
 
-    .leadership-page .leadership-contexts-section,
     .leadership-contexts-section {
         width: calc(100% - 24px);
 
         padding: 50px 0;
     }
 
-    .leadership-page .leadership-contexts-grid,
     .leadership-contexts-grid {
         grid-template-columns: 1fr;
 
@@ -4110,16 +4075,16 @@
         margin-top: 28px;
     }
 
-    .leadership-context-card {
-        width: 100%;
-    }
-
-    .leadership-context-card .context-card-visual {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-visual {
         height: 180px !important;
         min-height: 180px !important;
     }
 
-    .leadership-context-card .context-visual-icon {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-visual-icon {
         top: 15px;
         left: 15px;
 
@@ -4127,43 +4092,43 @@
         height: 54px !important;
     }
 
-    .leadership-context-card .context-visual-label {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-visual-label {
         left: 17px;
         bottom: 16px;
 
         font-size: 0.66rem !important;
     }
 
-    .leadership-context-card .context-card-content {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-content {
         padding:
             22px
             20px
             17px !important;
     }
 
-    .leadership-context-card .context-card-content h3 {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-content h3 {
         font-size: 1.2rem !important;
     }
 
-    .leadership-context-card .context-card-content p {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-content p {
         font-size: 0.92rem !important;
     }
 
-    .leadership-context-card .context-card-footer {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-footer {
         padding:
             3px
             20px
             21px !important;
-    }
-
-    .leadership-context-card .cta-btn {
-        min-height: 40px;
-
-        padding:
-            0
-            16px !important;
-
-        font-size: 0.78rem !important;
     }
 }
 
@@ -4174,30 +4139,40 @@
 
 @media (max-width: 430px) {
 
-    .leadership-context-card .context-card-visual {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-visual {
         height: 165px !important;
         min-height: 165px !important;
     }
 
-    .leadership-context-card .context-card-content {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-content {
         padding:
             20px
             18px
             16px !important;
     }
 
-    .leadership-context-card .context-card-footer {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-footer {
         padding:
             2px
             18px
             19px !important;
     }
 
-    .leadership-context-card .context-card-content h3 {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-content h3 {
         font-size: 1.12rem !important;
     }
 
-    .leadership-context-card .context-card-content p {
+    .leadership-contexts-grid
+    .leadership-context-card
+    .context-card-content p {
         font-size: 0.88rem !important;
     }
 }

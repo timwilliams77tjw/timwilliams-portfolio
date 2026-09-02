@@ -1428,6 +1428,162 @@ SMALL IPHONE
   color: var(--pb-text-secondary);
   line-height: 1.6;
 }
+/* Horizontal flow container */
+.approach-flow {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 50px;
+  padding-bottom: 40px;
+}
+
+/* Horizontal line */
+.approach-line {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--pb-border-strong);
+  opacity: 0.35;
+  z-index: 1;
+}
+
+/* Each node */
+.approach-node {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Circular number marker */
+.approach-node::before {
+  content: attr(data-num);
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--pb-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--pb-shadow);
+}
+
+/* Titles */
+.approach-node h3 {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  color: var(--pb-text);
+}
+
+/* Descriptions */
+.approach-node p {
+  margin: 0;
+  color: var(--pb-text-secondary);
+  line-height: 1.55;
+}
+
+/* Hover micro-interaction */
+.approach-node:hover::before {
+  background: var(--pb-accent-strong);
+  transform: translateX(-50%) scale(1.08);
+  transition: 0.25s ease;
+}
+
+/* Responsive stacking */
+@media (max-width: 900px) {
+  .approach-flow {
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .approach-line {
+    display: none;
+  }
+
+  .approach-node {
+    max-width: 100%;
+    text-align: left;
+    padding-left: 60px;
+  }
+
+  .approach-node::before {
+    left: 0;
+    transform: none;
+  }
+}
+/* Container */
+.playbook-proof-list {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-top: 50px;
+  padding: 40px 0;
+  border-top: 1px solid var(--pb-border);
+}
+
+/* Each item */
+.proof-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--pb-border);
+}
+
+/* Left column label */
+.proof-label {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--pb-text);
+  opacity: 0.25;
+  line-height: 1.2;
+}
+
+/* Right column content */
+.proof-content h3 {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+  color: var(--pb-text);
+}
+
+.proof-content p {
+  margin: 0;
+  color: var(--pb-text-secondary);
+  line-height: 1.6;
+}
+
+/* Hover micro-interaction */
+.proof-item:hover .proof-label {
+  opacity: 0.45;
+  transition: opacity 0.25s ease;
+}
+
+/* Responsive stacking */
+@media (max-width: 900px) {
+  .proof-item {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-bottom: 30px;
+  }
+
+  .proof-label {
+    font-size: 1.1rem;
+    opacity: 0.35;
+  }
+}
     
 </style>
 </head>
@@ -1829,141 +1985,102 @@ fetch("header.html")
      THE PLAYBOOK APPROACH
      ========================================================= -->
 <section class="playbook-approach">
-<div class="playbook-approach-shell">
+  <div class="playbook-approach-shell">
+
     <div class="playbook-approach-header">
-        <div class="playbooks-section-kicker">
-            THE PLAYBOOK APPROACH
-        </div>
-        <h2>
-            Repeatable delivery patterns built for pace and clarity.
-        </h2>
-        <p>
-            The playbooks combine delivery governance, technical
-            understanding and change readiness to create a practical
-            framework that teams can apply to real transformation
-            programmes.
-        </p>
+      <div class="playbooks-section-kicker">THE PLAYBOOK APPROACH</div>
+      <h2>Repeatable delivery patterns built for pace and clarity.</h2>
+      <p>
+        The playbooks combine delivery governance, technical understanding and change readiness
+        to create a practical framework that teams can apply to real transformation programmes.
+      </p>
     </div>
-    <div class="playbook-approach-grid">
-        <article class="approach-card">
-            <div class="approach-icon">01</div>
-            <div>
-                <h3>Structured delivery patterns</h3>
-                <p>
-                    Repeatable methods that reduce ambiguity and
-                    accelerate decision-making.
-                </p>
-            </div>
-        </article>
-        <article class="approach-card">
-            <div class="approach-icon">02</div>
-            <div>
-                <h3>Clear governance checkpoints</h3>
-                <p>
-                    Lightweight controls that maintain alignment
-                    without unnecessarily slowing delivery.
-                </p>
-            </div>
-        </article>
-        <article class="approach-card">
-            <div class="approach-icon">03</div>
-            <div>
-                <h3>Adoption-ready change</h3>
-                <p>
-                    Communication, training and readiness
-                    considerations are built into the delivery
-                    approach.
-                </p>
-            </div>
-        </article>
-        <article class="approach-card">
-            <div class="approach-icon">04</div>
-            <div>
-                <h3>Technical and business alignment</h3>
-                <p>
-                    Architecture, operations, people and user
-                    experience are considered together.
-                </p>
-            </div>
-        </article>
-        <article class="approach-card">
-            <div class="approach-icon">05</div>
-            <div>
-                <h3>Measurable success criteria</h3>
-                <p>
-                    Outcome-based measures demonstrate progress,
-                    improvement and value.
-                </p>
-            </div>
-        </article>
-        <article class="approach-card">
-            <div class="approach-icon">06</div>
-            <div>
-                <h3>Delivery assurance</h3>
-                <p>
-                    Practical assurance points help identify risks
-                    early and maintain confidence throughout delivery.
-                </p>
-            </div>
-        </article>
+
+    <div class="approach-flow">
+      <div class="approach-line"></div>
+
+      <article class="approach-node" data-num="01">
+        <h3>Structured delivery patterns</h3>
+        <p>Repeatable methods that reduce ambiguity and accelerate decision-making.</p>
+      </article>
+
+      <article class="approach-node" data-num="02">
+        <h3>Clear governance checkpoints</h3>
+        <p>Lightweight controls that maintain alignment without unnecessarily slowing delivery.</p>
+      </article>
+
+      <article class="approach-node" data-num="03">
+        <h3>Adoption-ready change</h3>
+        <p>Communication, training and readiness considerations are built into the delivery approach.</p>
+      </article>
+
+      <article class="approach-node" data-num="04">
+        <h3>Technical and business alignment</h3>
+        <p>Architecture, operations, people and user experience are considered together.</p>
+      </article>
+
+      <article class="approach-node" data-num="05">
+        <h3>Measurable success criteria</h3>
+        <p>Outcome-based measures demonstrate progress, improvement and value.</p>
+      </article>
+
+      <article class="approach-node" data-num="06">
+        <h3>Delivery assurance</h3>
+        <p>Practical assurance points help identify risks early and maintain confidence throughout delivery.</p>
+      </article>
     </div>
-</div>
+
+  </div>
 </section>
+
 <!-- =========================================================
      REAL-WORLD DELIVERY
      ========================================================= -->
 <section class="playbook-proof">
-<div class="playbook-proof-header">
-    <div class="playbooks-section-kicker">
-        REAL-WORLD DELIVERY
-    </div>
-    <h2>
-        Built for real-world transformation.
-    </h2>
+  <div class="playbook-proof-header">
+    <div class="playbooks-section-kicker">REAL-WORLD DELIVERY</div>
+    <h2>Built for real-world transformation.</h2>
     <p>
-        The approach is grounded in the realities of complex,
-        multi-vendor programmes rather than theoretical frameworks.
+      The approach is grounded in the realities of complex, multi-vendor programmes
+      rather than theoretical frameworks.
     </p>
-</div>
-<div class="playbook-proof-grid">
-    <article class="playbook-proof-card">
-        <span class="playbook-proof-number">
-            01 — PACE
-        </span>
-        <h3>
-            Designed for mobilisation
-        </h3>
+  </div>
+
+  <div class="playbook-proof-list">
+
+    <article class="proof-item">
+      <div class="proof-label">01 — PACE</div>
+      <div class="proof-content">
+        <h3>Designed for mobilisation</h3>
         <p>
-            Establishing structure, priorities and decision-making
-            quickly when transformation needs momentum.
+          Establishing structure, priorities and decision-making quickly when transformation needs momentum.
         </p>
+      </div>
     </article>
-    <article class="playbook-proof-card">
-        <span class="playbook-proof-number">
-            02 — CONTROL
-        </span>
-        <h3>
-            Governance without bureaucracy
-        </h3>
+
+    <article class="proof-item">
+      <div class="proof-label">02 — CONTROL</div>
+      <div class="proof-content">
+        <h3>Governance without bureaucracy</h3>
         <p>
-            Creating the visibility and controls leaders need
-            without introducing unnecessary process overhead.
+          Creating the visibility and controls leaders need without introducing unnecessary process overhead.
         </p>
+      </div>
     </article>
-    <article class="playbook-proof-card">
-        <span class="playbook-proof-number">
-            03 — OUTCOMES
-        </span>
-        <h3>
-            Focused on measurable results
-        </h3>
+
+    <article class="proof-item">
+      <div class="proof-label">03 — OUTCOMES</div>
+      <div class="proof-content">
+        <h3>Focused on measurable results</h3>
         <p>
-            Connecting delivery activity to outcomes, operational
-            readiness and tangible organisational improvement.
+          Connecting delivery activity to outcomes, operational readiness and tangible organisational improvement.
         </p>
+      </div>
     </article>
-</div>
+
+  </div>
 </section>
+
 <!-- =========================================================
      FINAL CTA
      ========================================================= -->

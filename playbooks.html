@@ -1584,7 +1584,37 @@ SMALL IPHONE
     opacity: 0.35;
   }
 }
-    
+ @media (max-width: 640px) {
+
+  /* Fix oversized number on mobile */
+  .highlight-card::before {
+    font-size: 2.4rem;      /* smaller number */
+    top: -18px;             /* move further up */
+    right: 10px;            /* slight right shift */
+    opacity: 0.08;          /* softer */
+  }
+
+  /* Reduce accent bar dominance */
+  .highlight-card::after {
+    width: 3px;
+    opacity: 0.25;
+  }
+
+  /* Add breathing room so number doesn't overlap heading */
+  .highlight-card {
+    padding-top: 42px;      /* increased top padding */
+  }
+
+  /* Slightly reduce heading size for mobile */
+  .highlight-card h3 {
+    font-size: 1.05rem;
+  }
+}
+   @media (max-width: 390px) {
+  .highlight-card::before {
+    display: none;
+  }
+}
 </style>
 </head>
 <body class="header-with-logo page-site-search">

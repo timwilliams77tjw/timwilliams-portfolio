@@ -1615,6 +1615,52 @@ SMALL IPHONE
     display: none;
   }
 }
+/* FINAL MOBILE OVERRIDES FOR TRANSFORMATION HIGHLIGHTS */
+@media (max-width: 640px) {
+
+  /* Force single-column grid on mobile */
+  .playbook-highlights-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Soften and shrink the oversized number */
+  .highlight-card::before {
+    font-size: 2.4rem !important;
+    top: -18px !important;
+    right: 10px !important;
+    opacity: 0.08 !important;
+  }
+
+  /* Reduce accent bar dominance */
+  .highlight-card::after {
+    width: 3px !important;
+    opacity: 0.25 !important;
+  }
+
+  /* Add breathing room above the heading */
+  .highlight-card {
+    padding-top: 42px !important;
+    padding-bottom: 26px !important;
+  }
+
+  /* Slightly reduce heading size for mobile */
+  .highlight-card h3 {
+    font-size: 1.05rem !important;
+  }
+}
+
+/* OPTIONAL: ultra-small screens – hide decorative number entirely */
+@media (max-width: 390px) {
+  .highlight-card::before {
+    display: none !important;
+  }
+
+  .highlight-card {
+    padding-top: 26px !important;
+  }
+}
+    
 </style>
 </head>
 <body class="header-with-logo page-site-search">
@@ -1972,7 +2018,7 @@ fetch("header.html")
 <section class="playbook-highlights">
   <div class="playbook-highlights-header">
     <div class="playbooks-section-kicker">TRANSFORMATION HIGHLIGHTS</div>
-    <h2>TEST - Proven patterns that deliver clarity, pace and measurable improvement.</h2>
+    <h2>Proven patterns that deliver clarity, pace and measurable improvement.</h2>
     <p>Each playbook is grounded in real-world delivery experience across complex, multi-vendor programmes. These highlights capture the outcomes consistently achieved through structured transformation leadership.</p>
   </div>
 

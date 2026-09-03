@@ -519,121 +519,108 @@ fetch("header.html")
     }
 }
 
-</style>
-    <!-- =====================================================
-     FOUR PRINCIPLES
+</style><!-- =====================================================
+     FOUR PRINCIPLES — UPGRADED
 ===================================================== -->
 
-<section class="leadership-section">
+<section class="leadership-section enhanced-principles">
 
     <div class="leadership-section-heading">
-
         <span class="leadership-section-marker"></span>
 
         <div>
             <h2>The Four Principles I Lead By</h2>
-
-            <p>
-                Effective leadership is about creating the conditions
-                for people to do their best work.
-            </p>
+            <p>Effective leadership is about creating the conditions for people to do their best work.</p>
         </div>
-
     </div>
-
 
     <div class="leadership-principles-grid">
 
-
-        <article class="leadership-principle-card">
-
+        <!-- CLARITY -->
+        <article class="leadership-principle-card principle-clarity" data-expand="false">
             <div class="principle-card-number">01</div>
-
             <div class="principle-card-icon">◎</div>
 
             <h3>Clarity</h3>
-
             <h4>Make complexity understandable.</h4>
 
-            <p>
-                People working with me always know the direction, the
-                priorities and what good looks like. There is no ambiguity
-                about why we’re doing something or how decisions are made.
-                Teams feel confident because expectations are visible,
-                trade-offs are explained, and the path forward is never
-                left to interpretation.
+            <p class="principle-summary">
+                People working with me always know the direction, the priorities and what good looks like.
             </p>
 
+            <p class="principle-detail">
+                There is no ambiguity about why we’re doing something or how decisions are made.
+                Teams feel confident because expectations are visible, trade-offs are explained,
+                and the path forward is never left to interpretation.
+            </p>
+
+            <button class="principle-expand-btn">More</button>
         </article>
 
-
-        <article class="leadership-principle-card">
-
+        <!-- TRUST -->
+        <article class="leadership-principle-card principle-trust" data-expand="false">
             <div class="principle-card-number">02</div>
-
             <div class="principle-card-icon">◈</div>
 
             <h3>Trust &amp; Empowerment</h3>
-
             <h4>Give capable people room to lead.</h4>
 
-            <p>
-                People feel trusted — not supervised. They have the autonomy
-                to make decisions, shape solutions and challenge thinking
-                without fear of over-control. My role is to remove obstacles,
-                not create them. This builds confidence, initiative and a
-                culture where people step forward rather than wait to be told.
+            <p class="principle-summary">
+                People feel trusted — not supervised. They have autonomy to make decisions and shape solutions.
             </p>
 
+            <p class="principle-detail">
+                My role is to remove obstacles, not create them. This builds confidence, initiative and a culture
+                where people step forward rather than wait to be told.
+            </p>
+
+            <button class="principle-expand-btn">More</button>
         </article>
 
-
-        <article class="leadership-principle-card">
-
+        <!-- ACCOUNTABILITY -->
+        <article class="leadership-principle-card principle-accountability" data-expand="false">
             <div class="principle-card-number">03</div>
-
             <div class="principle-card-icon">✓</div>
 
             <h3>Accountability</h3>
-
             <h4>Own the outcome.</h4>
 
-            <p>
-                People feel supported, not blamed. Accountability means
-                clarity of ownership, shared problem-solving and early
-                conversations when something needs attention. Teams know
-                I will stand with them, not above them — and that commitments
-                matter. This creates reliability, momentum and a delivery
-                culture where issues don’t hide.
+            <p class="principle-summary">
+                People feel supported, not blamed. Accountability means clarity of ownership and shared problem‑solving.
             </p>
 
+            <p class="principle-detail">
+                Teams know I will stand with them — not above them — and that commitments matter.
+                This creates reliability, momentum and a delivery culture where issues don’t hide.
+            </p>
+
+            <button class="principle-expand-btn">More</button>
         </article>
 
-
-        <article class="leadership-principle-card">
-
+        <!-- COMMUNICATION -->
+        <article class="leadership-principle-card principle-communication" data-expand="false">
             <div class="principle-card-number">04</div>
-
             <div class="principle-card-icon">↗</div>
 
             <h3>Communication</h3>
-
             <h4>Keep people informed and engaged.</h4>
 
-            <p>
-                People never feel left in the dark. They understand the
-                context, the risks, the options and the implications behind
-                decisions. I communicate early, honestly and at the right
-                altitude for the audience. This builds trust, reduces noise
-                and ensures everyone feels part of the journey rather than
-                a passenger on it.
+            <p class="principle-summary">
+                People never feel left in the dark. They understand context, risks and implications.
             </p>
 
+            <p class="principle-detail">
+                I communicate early, honestly and at the right altitude. This builds trust, reduces noise
+                and ensures everyone feels part of the journey rather than a passenger on it.
+            </p>
+
+            <button class="principle-expand-btn">More</button>
         </article>
 
     </div>
 
 </section>
+
 
 
 
@@ -2057,6 +2044,38 @@ fetch("footer.html")
 
 <!-- PAGE JS -->
 <script src="leadership.js"></script>
+<script>
+    /* =====================================================
+   SCROLL FADE-IN
+===================================================== */
 
+const cards = document.querySelectorAll('.leadership-principle-card');
+
+const revealOnScroll = () => {
+    cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 80) {
+            card.classList.add('visible');
+        }
+    });
+};
+
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
+
+/* =====================================================
+   EXPANDABLE CARDS
+===================================================== */
+
+document.querySelectorAll('.principle-expand-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+        const card = e.target.closest('.leadership-principle-card');
+        const expanded = card.getAttribute('data-expand') === 'true';
+
+        card.setAttribute('data-expand', expanded ? 'false' : 'true');
+        e.target.textContent = expanded ? 'More' : 'Less';
+    });
+});
+</script>
 </body>
 </html>

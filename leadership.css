@@ -4307,3 +4307,85 @@
 .leadership-context-card .context-card-content {
     padding-top: 42px !important;
 }
+/* =====================================================
+   PRINCIPLE COLOURS
+===================================================== */
+
+.principle-clarity { --accent: #3bb7e6; }
+.principle-trust { --accent: #2bbf8e; }
+.principle-accountability { --accent: #e6a93b; }
+.principle-communication { --accent: #7a6be6; }
+
+/* =====================================================
+   CARD BASE
+===================================================== */
+
+.leadership-principle-card {
+    border-top: 4px solid var(--accent);
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0; /* for scroll animation */
+    transform: translateY(20px);
+}
+
+/* Fade-in on scroll */
+.leadership-principle-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover gradient */
+.leadership-principle-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    background: linear-gradient(
+        135deg,
+        rgba(var(--accent-rgb), 0.08),
+        rgba(var(--accent-rgb), 0.02)
+    );
+}
+
+/* Icon animation */
+.principle-card-icon {
+    font-size: 2rem;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+}
+
+.leadership-principle-card:hover .principle-card-icon {
+    transform: scale(1.15);
+}
+
+/* =====================================================
+   EXPANDABLE CONTENT
+===================================================== */
+
+.principle-detail {
+    display: none;
+    margin-top: 1rem;
+}
+
+.leadership-principle-card[data-expand="true"] .principle-detail {
+    display: block;
+}
+
+.principle-expand-btn {
+    margin-top: 1rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.principle-expand-btn:hover {
+    background: #000;
+}

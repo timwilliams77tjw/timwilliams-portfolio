@@ -4389,3 +4389,17 @@
 .principle-expand-btn:hover {
     background: #000;
 }
+/* Hide detail text by default */
+.leadership-principle-card .principle-detail {
+    display: none !important;
+    opacity: 0;
+    max-height: 0;
+    transition: all 0.3s ease;
+}
+
+/* Show detail text only when expanded */
+.leadership-principle-card[data-expand="true"] .principle-detail {
+    display: block !important;
+    opacity: 1;
+    max-height: 500px;
+}

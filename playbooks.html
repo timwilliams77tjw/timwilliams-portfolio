@@ -1773,7 +1773,63 @@ SMALL IPHONE
     height: 50px;
   }
 }
+/* =========================================================
+   REAL-WORLD DELIVERY — ANIMATIONS
+   ========================================================= */
 
+/* Fade + rise-in animation */
+@keyframes pillarFadeRise {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icon hover lift */
+@keyframes iconLift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+/* Gradient shimmer pulse */
+@keyframes gradientPulse {
+  0% { filter: brightness(100%); }
+  50% { filter: brightness(115%); }
+  100% { filter: brightness(100%); }
+}
+
+/* Apply fade-in to each pillar */
+.pillar {
+  opacity: 0;
+  animation: pillarFadeRise 0.8s ease forwards;
+}
+
+/* Stagger the pillars */
+.pillar:nth-child(1) { animation-delay: 0.1s; }
+.pillar:nth-child(2) { animation-delay: 0.25s; }
+.pillar:nth-child(3) { animation-delay: 0.4s; }
+
+/* Icon hover micro-interaction */
+.pillar-icon:hover .icon-shape {
+  animation: iconLift 0.25s ease forwards;
+}
+
+/* Icon idle shimmer (very subtle) */
+.icon-shape {
+  animation: gradientPulse 4s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* Label hover reveal */
+.pillar:hover .pillar-label {
+  opacity: 0.65;
+  transform: translateX(3px);
+  transition: all 0.25s ease;
+}
     
 </style>
 </head>

@@ -1660,6 +1660,120 @@ SMALL IPHONE
     padding-top: 26px !important;
   }
 }
+/* =========================================================
+   REAL-WORLD DELIVERY — PREMIUM UPGRADE
+   ========================================================= */
+
+.enhanced-proof {
+  padding: 60px 0;
+  border-top: 1px solid var(--pb-border);
+}
+
+/* Header */
+.playbook-proof-header {
+  max-width: 780px;
+}
+
+.playbook-proof-header h2 {
+  font-size: 2rem;
+  margin: 10px 0 15px;
+}
+
+.playbook-proof-header p {
+  color: var(--pb-text-secondary);
+  line-height: 1.7;
+}
+
+/* Pillars container */
+.proof-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-top: 60px;
+}
+
+/* Each pillar */
+.pillar {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 40px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid var(--pb-border);
+  align-items: start;
+}
+
+/* Icon container */
+.pillar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-shape {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  display: block;
+  opacity: 0.9;
+}
+
+/* Icon variants */
+.icon-pace {
+  background: linear-gradient(135deg, #4A7BFF, #6FA3FF);
+}
+
+.icon-control {
+  background: linear-gradient(135deg, #7D7D7D, #A5A5A5);
+}
+
+.icon-outcomes {
+  background: linear-gradient(135deg, #4CAF50, #7EDC7A);
+}
+
+/* Pillar body */
+.pillar-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  opacity: 0.35;
+  margin-bottom: 10px;
+}
+
+.pillar-body h3 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  color: var(--pb-text);
+}
+
+.pillar-body p {
+  margin: 0;
+  color: var(--pb-text-secondary);
+  line-height: 1.7;
+}
+
+/* Hover micro-interaction */
+.pillar:hover .pillar-label {
+  opacity: 0.55;
+  transition: opacity 0.25s ease;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .pillar {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+
+  .pillar-icon {
+    justify-content: flex-start;
+  }
+
+  .icon-shape {
+    width: 50px;
+    height: 50px;
+  }
+}
+
     
 </style>
 </head>
@@ -2107,12 +2221,10 @@ fetch("header.html")
     </div>
 
   </div>
-</section>
-
-<!-- =========================================================
-     REAL-WORLD DELIVERY
+</section><!-- =========================================================
+     REAL-WORLD DELIVERY (UPGRADED)
      ========================================================= -->
-<section class="playbook-proof">
+<section class="playbook-proof enhanced-proof">
   <div class="playbook-proof-header">
     <div class="playbooks-section-kicker">REAL-WORLD DELIVERY</div>
     <h2>Built for real-world transformation.</h2>
@@ -2122,11 +2234,14 @@ fetch("header.html")
     </p>
   </div>
 
-  <div class="playbook-proof-list">
+  <div class="proof-pillars">
 
-    <article class="proof-item">
-      <div class="proof-label">01 — PACE</div>
-      <div class="proof-content">
+    <article class="pillar">
+      <div class="pillar-icon">
+        <span class="icon-shape icon-pace"></span>
+      </div>
+      <div class="pillar-body">
+        <div class="pillar-label">01 — PACE</div>
         <h3>Designed for mobilisation</h3>
         <p>
           Establishing structure, priorities and decision-making quickly when transformation needs momentum.
@@ -2134,9 +2249,12 @@ fetch("header.html")
       </div>
     </article>
 
-    <article class="proof-item">
-      <div class="proof-label">02 — CONTROL</div>
-      <div class="proof-content">
+    <article class="pillar">
+      <div class="pillar-icon">
+        <span class="icon-shape icon-control"></span>
+      </div>
+      <div class="pillar-body">
+        <div class="pillar-label">02 — CONTROL</div>
         <h3>Governance without bureaucracy</h3>
         <p>
           Creating the visibility and controls leaders need without introducing unnecessary process overhead.
@@ -2144,9 +2262,12 @@ fetch("header.html")
       </div>
     </article>
 
-    <article class="proof-item">
-      <div class="proof-label">03 — OUTCOMES</div>
-      <div class="proof-content">
+    <article class="pillar">
+      <div class="pillar-icon">
+        <span class="icon-shape icon-outcomes"></span>
+      </div>
+      <div class="pillar-body">
+        <div class="pillar-label">03 — OUTCOMES</div>
         <h3>Focused on measurable results</h3>
         <p>
           Connecting delivery activity to outcomes, operational readiness and tangible organisational improvement.

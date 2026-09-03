@@ -4176,3 +4176,87 @@
         font-size: 0.88rem !important;
     }
 }
+/* PROGRAMME LEADERSHIP — Larger main image */
+.leadership-contexts-grid .context-card-visual {
+    height: 260px !important;
+    min-height: 260px !important;
+}
+@media (max-width: 700px) {
+    .leadership-contexts-grid .context-card-visual {
+        height: 180px !important;
+        min-height: 180px !important;
+    }
+}
+/* Larger badge icon */
+.context-visual-icon img {
+    width: 56px !important;
+    height: 56px !important;
+}
+.context-visual-icon {
+    top: 14px !important;
+    left: 14px !important;
+}
+.context-visual-icon {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    padding: 6px;
+}
+.context-visual-icon {
+    padding: 8px !important;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+}
+/* Increase badge icon size */
+.context-visual-icon img {
+    width: 64px !important;
+    height: 64px !important;
+    object-fit: contain !important;
+}
+/* FORCE BADGE ICON TO SCALE */
+.leadership-contexts-grid .context-card-visual .context-visual-icon {
+    width: 80px !important;
+    height: 80px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.leadership-contexts-grid .context-card-visual .context-visual-icon img {
+    width: 80px !important;
+    height: 80px !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+}
+/* Image wrapper must allow overlap */
+.context-card-visual {
+    position: relative;
+    overflow: visible; /* IMPORTANT: prevents clipping */
+    height: 260px; /* matches your existing visual height */
+}
+
+/* Badge overlay container */
+.context-badge-overlay {
+    position: absolute;
+    left: 22px;          /* left aligned */
+    bottom: -35px;       /* medium overlap */
+    z-index: 10;
+}
+
+/* Badge image — same size as your original top-left version */
+.context-badge {
+    width: 64px;
+    height: 64px;
+    padding: 8px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    object-fit: contain;
+}
+
+/* Add spacing so text doesn't collide with badge */
+.context-card-content {
+    padding-top: 48px;
+}

@@ -1001,6 +1001,119 @@ body.dark-mode.twc-about-page .twc-leadership-content p {
     color: #444;
     line-height: 1.55;
 }
+/* =========================================================
+   WHAT TWC DOES — FULL VISUAL UPLIFT (MERGED CSS BLOCK)
+   ========================================================= */
+
+/* --- SECTION BACKGROUND --- */
+.twc-services {
+    padding: 90px 0;
+    background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
+}
+
+/* --- SECTION HEADING --- */
+.twc-section-heading h2 {
+    font-size: 2.2rem;
+    line-height: 1.3;
+    max-width: 720px;
+}
+
+.twc-section-heading p {
+    max-width: 680px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* --- GRID LAYOUT --- */
+.twc-service-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 36px;
+}
+
+/* --- CARD BASE --- */
+.twc-service-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px;
+    border: 1px solid #e3e3e3;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    transform: translateY(0);
+    transition: transform .25s ease, box-shadow .25s ease;
+    opacity: 0;
+    animation: twcFadeUp .8s ease forwards;
+}
+
+/* Hover / Touch */
+.twc-service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+/* --- ICON SUPPORT --- */
+.twc-service-card-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 20px;
+    opacity: 0.85;
+}
+
+/* --- NUMBER --- */
+.twc-service-number {
+    font-size: 2.6rem;
+    font-weight: 200;
+    color: #b0b0b0;
+    margin-bottom: 20px;
+}
+
+/* --- TITLE --- */
+.twc-service-card h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    line-height: 1.35;
+}
+
+/* --- DESCRIPTION --- */
+.twc-service-card p {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* --- OPTIONAL CATEGORY TAG --- */
+.twc-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    background: #efefef;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    color: #555;
+    font-weight: 500;
+}
+
+/* --- SCROLL ANIMATION --- */
+@keyframes twcFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.twc-service-card:nth-child(1) { animation-delay: .05s; }
+.twc-service-card:nth-child(2) { animation-delay: .15s; }
+.twc-service-card:nth-child(3) { animation-delay: .25s; }
+.twc-service-card:nth-child(4) { animation-delay: .35s; }
+.twc-service-card:nth-child(5) { animation-delay: .45s; }
+.twc-service-card:nth-child(6) { animation-delay: .55s; }
+
+    
 </style>
 
 </head>

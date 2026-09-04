@@ -2600,15 +2600,11 @@ body.dark .home-resource-links small {
 
     </div>
 
-  </section>
-
-<section class="home-apm-section" id="cpd">
+  </section><section class="home-apm-section" id="cpd">
     <div class="home-section">
 
-        <div class="home-apm-content" style="
-            position:relative;
-            overflow:hidden;
-        ">
+        <!-- CPD HERO BLOCK -->
+        <div class="home-apm-content" style="position:relative; overflow:hidden;">
 
             <!-- Accent Bar -->
             <div style="
@@ -2716,50 +2712,95 @@ body.dark .home-resource-links small {
             </div>
         </div>
 
-        <!-- Progress Meter -->
+        <!-- CPD PROGRESS + KPI RADAR -->
         <div style="
             margin-top:32px;
-            background:#ffffff;
-            border-radius:12px;
-            padding:20px;
-            box-shadow:0 8px 24px rgba(15,35,60,0.08);
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            gap:24px;
         ">
-            <strong style="font-size:13px; color:#0A1F44;">CPD Progress</strong>
+
+            <!-- CPD Progress -->
             <div style="
-                margin-top:12px;
-                width:100%;
-                height:12px;
-                background:#dfe6ee;
-                border-radius:999px;
-                overflow:hidden;
+                background:#ffffff;
+                border-radius:14px;
+                padding:26px;
+                box-shadow:0 8px 24px rgba(15,35,60,0.08);
             ">
+                <strong style="font-size:14px; color:#0A1F44;">CPD Progress</strong>
+
+                <p style="margin-top:10px; font-size:13px; color:#5f6b78; line-height:1.6;">
+                    You’ve completed <strong>72%</strong> of your annual CPD target.  
+                    This reflects logged development across leadership, delivery, governance, cyber and cloud disciplines — 
+                    mapped directly to the APM Competence Framework.
+                </p>
+
+                <!-- Progress Meter -->
                 <div style="
-                    width:72%;
-                    height:100%;
-                    background:#0a66c2;
-                "></div>
+                    margin-top:16px;
+                    width:100%;
+                    height:14px;
+                    background:#dfe6ee;
+                    border-radius:999px;
+                    overflow:hidden;
+                ">
+                    <div style="
+                        width:72%;
+                        height:100%;
+                        background:#0a66c2;
+                    "></div>
+                </div>
+
+                <!-- Category Breakdown -->
+                <div style="margin-top:18px; font-size:12px; color:#5f6b78;">
+                    <div style="margin-bottom:6px;"><strong>Leadership:</strong> 18 hrs</div>
+                    <div style="margin-bottom:6px;"><strong>Delivery:</strong> 22 hrs</div>
+                    <div style="margin-bottom:6px;"><strong>Governance:</strong> 14 hrs</div>
+                    <div style="margin-bottom:6px;"><strong>Cyber:</strong> 10 hrs</div>
+                    <div><strong>Cloud:</strong> 8 hrs</div>
+                </div>
             </div>
-            <small style="display:block; margin-top:6px; color:#5f6b78;">72% of annual CPD target completed</small>
-        </div>
 
-        <!-- Mini Radar Chart -->
-        <div style="
-            margin-top:32px;
-            background:#ffffff;
-            border-radius:12px;
-            padding:24px;
-            box-shadow:0 8px 24px rgba(15,35,60,0.08);
-        ">
-            <strong style="font-size:13px; color:#0A1F44;">Competency Radar</strong>
+            <!-- KPI Radar -->
+            <div style="
+                background:#ffffff;
+                border-radius:14px;
+                padding:26px;
+                box-shadow:0 8px 24px rgba(15,35,60,0.08);
+                text-align:center;
+            ">
+                <strong style="font-size:14px; color:#0A1F44;">Competency Radar (KPIs)</strong>
 
-            <svg width="240" height="240" viewBox="0 0 240 240" style="margin-top:16px;">
-                <polygon points="120,40 200,120 120,200 40,120" fill="#eaf4ff" stroke="#0a66c2" stroke-width="2"/>
-                <polygon points="120,70 170,120 120,170 70,120" fill="#7ac0f9" opacity="0.7"/>
-            </svg>
+                <p style="margin-top:10px; font-size:13px; color:#5f6b78; line-height:1.6;">
+                    Current vs target competency levels across core APM domains.
+                </p>
 
-            <div style="margin-top:10px; font-size:12px; color:#5f6b78;">
-                Leadership • Delivery • Governance • Cyber • Cloud
+                <!-- Radar Chart -->
+                <svg width="240" height="240" viewBox="0 0 240 240" style="margin-top:16px;">
+                    <!-- Outer target polygon -->
+                    <polygon points="120,40 200,120 120,200 40,120" 
+                             fill="#eaf4ff" stroke="#0a66c2" stroke-width="2"/>
+
+                    <!-- Inner current polygon (KPIs applied) -->
+                    <polygon points="
+                        120,72   <!-- Leadership 80% -->
+                        176,120  <!-- Delivery 70% -->
+                        120,168  <!-- Governance 65% -->
+                        64,120   <!-- Cyber 55% -->
+                    " 
+                    fill="#7ac0f9" opacity="0.75"/>
+                </svg>
+
+                <!-- KPI Legend -->
+                <div style="margin-top:14px; font-size:12px; color:#5f6b78; line-height:1.6;">
+                    <div><strong>Leadership:</strong> 80%</div>
+                    <div><strong>Delivery:</strong> 70%</div>
+                    <div><strong>Governance:</strong> 65%</div>
+                    <div><strong>Cyber:</strong> 55%</div>
+                    <div><strong>Cloud:</strong> 60%</div>
+                </div>
             </div>
+
         </div>
 
         <!-- CTA Row -->
@@ -2770,6 +2811,7 @@ body.dark .home-resource-links small {
 
     </div>
 </section>
+
 
 
 

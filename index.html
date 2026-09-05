@@ -2767,7 +2767,9 @@ body.dark .home-resource-links small {
             <div><strong>Cyber:</strong> 10 hrs</div>
             <div><strong>Cloud:</strong> 8 hrs</div>
         </div>
-    </div><!-- Dynamic KPI Radar (Hover Labels) -->
+    </div>
+  
+<!-- Dynamic KPI Radar (Enhanced Version) -->
 <div style="
     background:#ffffff;
     border-radius:14px;
@@ -2784,6 +2786,23 @@ body.dark .home-resource-links small {
 
     <svg width="260" height="260" viewBox="0 0 260 260" style="margin-top:16px; max-width:100%; overflow:visible;">
 
+        <!-- Gradient definition -->
+        <defs>
+            <linearGradient id="kpiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#7ac0f9" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#0a66c2" stop-opacity="0.75"/>
+            </linearGradient>
+        </defs>
+
+        <!-- Animated radial lines -->
+        <g id="radialLines" stroke="#d0d8e4" stroke-width="1" opacity="0.6">
+            <line x1="130" y1="130" x2="130" y2="30"></line>
+            <line x1="130" y1="130" x2="215" y2="95"></line>
+            <line x1="130" y1="130" x2="185" y2="205"></line>
+            <line x1="130" y1="130" x2="75" y2="205"></line>
+            <line x1="130" y1="130" x2="45" y2="95"></line>
+        </g>
+
         <!-- Outer target pentagon -->
         <polygon 
             points="130,30 215,95 185,205 75,205 45,95"
@@ -2792,35 +2811,35 @@ body.dark .home-resource-links small {
             stroke-width="2"
         ></polygon>
 
-        <!-- Animated KPI polygon -->
+        <!-- KPI polygon with gradient fill -->
         <polygon 
             id="kpiPolygon"
             points="130,60 195,110 170,195 130,205 65,110"
-            fill="#7ac0f9"
-            opacity="0.75"
+            fill="url(#kpiGradient)"
+            opacity="0.9"
             style="filter: drop-shadow(0px 0px 6px rgba(10,102,194,0.35)); 
                    transition: all 1.2s ease;"
         ></polygon>
 
-        <!-- Hover dots with labels -->
+        <!-- KPI dots (pulse on hover) -->
         <g class="kpi-dot" data-label="Leadership: 80%" transform="translate(130,60)">
-            <circle r="6" fill="#0a66c2"></circle>
+            <circle r="6" fill="#0a66c2" class="pulse"></circle>
         </g>
 
         <g class="kpi-dot" data-label="Delivery: 70%" transform="translate(195,110)">
-            <circle r="6" fill="#0a66c2"></circle>
+            <circle r="6" fill="#0a66c2" class="pulse"></circle>
         </g>
 
         <g class="kpi-dot" data-label="Governance: 65%" transform="translate(170,195)">
-            <circle r="6" fill="#0a66c2"></circle>
+            <circle r="6" fill="#0a66c2" class="pulse"></circle>
         </g>
 
         <g class="kpi-dot" data-label="Cyber: 55%" transform="translate(130,205)">
-            <circle r="6" fill="#0a66c2"></circle>
+            <circle r="6" fill="#0a66c2" class="pulse"></circle>
         </g>
 
         <g class="kpi-dot" data-label="Cloud: 60%" transform="translate(65,110)">
-            <circle r="6" fill="#0a66c2"></circle>
+            <circle r="6" fill="#0a66c2" class="pulse"></circle>
         </g>
 
     </svg>
@@ -2841,17 +2860,28 @@ body.dark .home-resource-links small {
 
 </div>
 </section>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+
+    /* Polygon animation */
     const poly = document.getElementById("kpiPolygon");
     poly.style.opacity = "0";
     poly.style.transform = "scale(0.6)";
     setTimeout(() => {
-        poly.style.opacity = "0.75";
+        poly.style.opacity = "0.9";
         poly.style.transform = "scale(1)";
     }, 150);
 
+    /* Radial line animation */
+    const lines = document.querySelectorAll("#radialLines line");
+    lines.forEach((line, i) => {
+        line.style.strokeDasharray = "200";
+        line.style.strokeDashoffset = "200";
+        line.style.transition = "stroke-dashoffset 0.9s ease " + (i * 0.1) + "s";
+        setTimeout(() => line.style.strokeDashoffset = "0", 50);
+    });
+
+    /* Hover label logic */
     const label = document.getElementById("hoverLabel");
     const dots = document.querySelectorAll(".kpi-dot");
 
@@ -2871,7 +2901,7 @@ document.addEventListener("DOMContentLoaded", () => {
             label.style.opacity = "0";
         });
 
-        // Mobile tap support
+        /* Mobile tap */
         dot.addEventListener("click", (e) => {
             const text = dot.getAttribute("data-label");
             label.textContent = text;
@@ -2881,14 +2911,21 @@ document.addEventListener("DOMContentLoaded", () => {
             label.style.top = rect.top + window.scrollY - 10 + "px";
 
             label.style.opacity = "1";
-
             setTimeout(() => label.style.opacity = "0", 1500);
         });
     });
 });
 </script>
 
-
+<style>
+/* Pulse animation */
+.pulse {
+    transition: transform 0.25s ease;
+}
+.pulse:hover {
+    transform: scale(1.35);
+}
+</style>
 
 
 

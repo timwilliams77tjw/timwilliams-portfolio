@@ -2768,14 +2768,14 @@ body.dark .home-resource-links small {
             <div><strong>Cloud:</strong> 8 hrs</div>
         </div>
     </div>
-
-<!-- KPI Radar (5‑Axis Accurate Version) -->
+<!-- Dynamic KPI Radar -->
 <div style="
     background:#ffffff;
     border-radius:14px;
     padding:26px;
     box-shadow:0 8px 24px rgba(15,35,60,0.08);
     text-align:center;
+    position:relative;
 ">
     <strong style="font-size:14px; color:#0A1F44;">Competency Radar (KPIs)</strong>
 
@@ -2783,27 +2783,53 @@ body.dark .home-resource-links small {
         Current vs target competency levels across core APM domains.
     </p>
 
-    <svg width="260" height="260" viewBox="0 0 260 260" style="margin-top:16px; max-width:100%;">
+    <svg width="260" height="260" viewBox="0 0 260 260" style="margin-top:16px; max-width:100%; overflow:visible;">
 
- <polygon 
-    points="130,30 215,95 185,205 75,205 45,95"
-    fill="#eaf4ff"
-    stroke="#0a66c2"
-    stroke-width="2"
-></polygon>
+        <!-- Outer target pentagon -->
+        <polygon 
+            points="130,30 215,95 185,205 75,205 45,95"
+            fill="#eaf4ff"
+            stroke="#0a66c2"
+            stroke-width="2"
+        ></polygon>
 
+        <!-- Animated KPI polygon -->
+        <polygon 
+            id="kpiPolygon"
+            points="130,60 195,110 170,195 130,205 65,110"
+            fill="#7ac0f9"
+            opacity="0.75"
+            style="filter: drop-shadow(0px 0px 6px rgba(10,102,194,0.35)); 
+                   transition: all 1.2s ease;"
+        ></polygon>
 
-<polygon 
-    points="130,60 195,110 170,195 130,205 65,110"
-    fill="#7ac0f9"
-    opacity="0.75"
-    style="fill:#7ac0f9 !important;"
-></polygon>
+        <!-- Axis labels -->
+        <text x="130" y="18" text-anchor="middle" fill="#0A1F44" font-size="11" font-weight="700">Leadership</text>
+        <text x="235" y="95" text-anchor="middle" fill="#0A1F44" font-size="11" font-weight="700">Delivery</text>
+        <text x="200" y="225" text-anchor="middle" fill="#0A1F44" font-size="11" font-weight="700">Governance</text>
+        <text x="130" y="240" text-anchor="middle" fill="#0A1F44" font-size="11" font-weight="700">Cyber</text>
+        <text x="60" y="225" text-anchor="middle" fill="#0A1F44" font-size="11" font-weight="700">Cloud</text>
 
-
+        <!-- Hover tooltips -->
+        <circle cx="130" cy="60" r="6" fill="#0a66c2">
+            <title>Leadership: 80%</title>
+        </circle>
+        <circle cx="195" cy="110" r="6" fill="#0a66c2">
+            <title>Delivery: 70%</title>
+        </circle>
+        <circle cx="170" cy="195" r="6" fill="#0a66c2">
+            <title>Governance: 65%</title>
+        </circle>
+        <circle cx="130" cy="205" r="6" fill="#0a66c2">
+            <title>Cyber: 55%</title>
+        </circle>
+        <circle cx="65" cy="110" r="6" fill="#0a66c2">
+            <title>Cloud: 60%</title>
+        </circle>
 
     </svg>
 
+    <!-- KPI Legend -->
     <div style="margin-top:14px; font-size:12px; color:#5f6b78; line-height:1.6;">
         <div><strong>Leadership:</strong> 80%</div>
         <div><strong>Delivery:</strong> 70%</div>
@@ -2814,11 +2840,25 @@ body.dark .home-resource-links small {
 </div>
 
 
-
-
-
     </div>
 </section>
+  <!-- Animation Script -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const poly = document.getElementById("kpiPolygon");
+    poly.style.opacity = "0";
+    poly.style.transform = "scale(0.6)";
+    setTimeout(() => {
+        poly.style.opacity = "0.75";
+        poly.style.transform = "scale(1)";
+    }, 150);
+});
+</script>
+
+
+
+
+
 
 
 

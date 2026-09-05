@@ -2768,8 +2768,7 @@ body.dark .home-resource-links small {
             <div><strong>Cloud:</strong> 8 hrs</div>
         </div>
     </div>
-  
-<!-- Dynamic KPI Radar (Enhanced Version) -->
+ <!-- Dynamic KPI Radar (Enhanced + Fixed Hover Labels + Legend Restored) -->
 <div style="
     background:#ffffff;
     border-radius:14px;
@@ -2786,7 +2785,7 @@ body.dark .home-resource-links small {
 
     <svg width="260" height="260" viewBox="0 0 260 260" style="margin-top:16px; max-width:100%; overflow:visible;">
 
-        <!-- Gradient definition -->
+        <!-- Gradient -->
         <defs>
             <linearGradient id="kpiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#7ac0f9" stop-opacity="0.95"/>
@@ -2794,7 +2793,7 @@ body.dark .home-resource-links small {
             </linearGradient>
         </defs>
 
-        <!-- Animated radial lines -->
+        <!-- Radial lines -->
         <g id="radialLines" stroke="#d0d8e4" stroke-width="1" opacity="0.6">
             <line x1="130" y1="130" x2="130" y2="30"></line>
             <line x1="130" y1="130" x2="215" y2="95"></line>
@@ -2803,7 +2802,7 @@ body.dark .home-resource-links small {
             <line x1="130" y1="130" x2="45" y2="95"></line>
         </g>
 
-        <!-- Outer target pentagon -->
+        <!-- Outer pentagon -->
         <polygon 
             points="130,30 215,95 185,205 75,205 45,95"
             fill="#eaf4ff"
@@ -2811,7 +2810,7 @@ body.dark .home-resource-links small {
             stroke-width="2"
         ></polygon>
 
-        <!-- KPI polygon with gradient fill -->
+        <!-- KPI polygon -->
         <polygon 
             id="kpiPolygon"
             points="130,60 195,110 170,195 130,205 65,110"
@@ -2821,7 +2820,7 @@ body.dark .home-resource-links small {
                    transition: all 1.2s ease;"
         ></polygon>
 
-        <!-- KPI dots (pulse on hover) -->
+        <!-- KPI dots -->
         <g class="kpi-dot" data-label="Leadership: 80%" transform="translate(130,60)">
             <circle r="6" fill="#0a66c2" class="pulse"></circle>
         </g>
@@ -2844,7 +2843,7 @@ body.dark .home-resource-links small {
 
     </svg>
 
-    <!-- Floating hover label -->
+    <!-- Hover label -->
     <div id="hoverLabel" style="
         position:absolute;
         padding:6px 10px;
@@ -2858,6 +2857,14 @@ body.dark .home-resource-links small {
         transition:opacity 0.2s ease;
     "></div>
 
+    <!-- Legend restored -->
+    <div style="margin-top:14px; font-size:12px; color:#5f6b78; line-height:1.6;">
+        <div><strong>Leadership:</strong> 80%</div>
+        <div><strong>Delivery:</strong> 70%</div>
+        <div><strong>Governance:</strong> 65%</div>
+        <div><strong>Cyber:</strong> 55%</div>
+        <div><strong>Cloud:</strong> 60%</div>
+    </div>
 </div>
 </section>
 <script>
@@ -2886,11 +2893,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const dots = document.querySelectorAll(".kpi-dot");
 
     dots.forEach(dot => {
-        dot.addEventListener("mouseenter", (e) => {
+        dot.addEventListener("mouseenter", () => {
             const text = dot.getAttribute("data-label");
             label.textContent = text;
 
-            const rect = e.target.getBoundingClientRect();
+            const rect = dot.getBoundingClientRect();
             label.style.left = rect.left + window.scrollX + 12 + "px";
             label.style.top = rect.top + window.scrollY - 10 + "px";
 
@@ -2902,11 +2909,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         /* Mobile tap */
-        dot.addEventListener("click", (e) => {
+        dot.addEventListener("click", () => {
             const text = dot.getAttribute("data-label");
             label.textContent = text;
 
-            const rect = e.target.getBoundingClientRect();
+            const rect = dot.getBoundingClientRect();
             label.style.left = rect.left + window.scrollX + 12 + "px";
             label.style.top = rect.top + window.scrollY - 10 + "px";
 
@@ -2926,7 +2933,6 @@ document.addEventListener("DOMContentLoaded", () => {
     transform: scale(1.35);
 }
 </style>
-
 
 
 

@@ -2711,187 +2711,235 @@ body.dark .home-resource-links small {
                 </div>
 
             </div>
-        </div><!-- Unified CPD Performance Section -->
+        </div>
+      <!-- Unified CPD Performance Section (Two‑Tone + Animated Radar + Hover Labels) -->
 <div style="
     margin-top:32px;
-    background:#ffffff;
-    border-radius:14px;
-    padding:26px;
-    box-shadow:0 8px 24px rgba(15,35,60,0.08);
+    border-radius:18px;
+    overflow:hidden;
+    background:linear-gradient(135deg, #f7faff 0%, #e9f1ff 100%);
+    padding:0;
 ">
 
-    <strong style="font-size:16px; color:#0A1F44;">CPD Performance Overview</strong>
-
-    <!-- Two-column layout (mobile collapses) -->
+    <!-- Inner white content layer -->
     <div style="
-        margin-top:24px;
-        display:grid;
-        grid-template-columns: 1fr 1fr;
-        gap:32px;
+        background:#ffffff;
+        border-radius:18px;
+        margin:0;
+        padding:32px;
+        box-shadow:0 8px 24px rgba(15,35,60,0.08);
     ">
 
-        <!-- LEFT: CPD Progress -->
-        <div>
+        <strong style="font-size:16px; color:#0A1F44;">CPD Performance Overview</strong>
 
-            <!-- Visual Summary Row -->
-            <div style="display:flex; align-items:center; gap:16px;">
-                <svg width="48" height="48" viewBox="0 0 64 64">
-                    <circle cx="32" cy="32" r="28" fill="#0a66c2" opacity="0.15"/>
-                    <circle cx="32" cy="32" r="22" stroke="#0a66c2" stroke-width="6" 
-                            stroke-dasharray="138" stroke-dashoffset="38" fill="none"/>
-                </svg>
-                <div style="font-size:28px; font-weight:800; color:#0A1F44;">72%</div>
-            </div>
+        <div style="
+            margin-top:24px;
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            gap:32px;
+        ">
 
-            <p style="margin-top:12px; font-size:13px; color:#5f6b78; line-height:1.6;">
-                Annual CPD progress mapped to APM competencies.
-            </p>
+            <!-- LEFT: CPD Progress -->
+            <div>
 
-            <!-- Progress Meter -->
-            <div style="
-                margin-top:16px;
-                width:100%;
-                height:14px;
-                background:#dfe6ee;
-                border-radius:999px;
-                overflow:hidden;
-            ">
+                <div style="display:flex; align-items:center; gap:16px;">
+                    <svg width="48" height="48" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="28" fill="#0a66c2" opacity="0.15"/>
+                        <circle cx="32" cy="32" r="22" stroke="#0a66c2" stroke-width="6" 
+                                stroke-dasharray="138" stroke-dashoffset="38" fill="none"/>
+                    </svg>
+                    <div style="font-size:28px; font-weight:800; color:#0A1F44;">72%</div>
+                </div>
+
+                <p style="margin-top:12px; font-size:13px; color:#5f6b78; line-height:1.6;">
+                    Annual CPD progress mapped to APM competencies.
+                </p>
+
                 <div style="
-                    width:72%;
-                    height:100%;
+                    margin-top:16px;
+                    width:100%;
+                    height:14px;
+                    background:#dfe6ee;
+                    border-radius:999px;
+                    overflow:hidden;
+                ">
+                    <div style="
+                        width:72%;
+                        height:100%;
+                        background:#0a66c2;
+                    "></div>
+                </div>
+
+                <div style="
+                    margin-top:18px;
+                    font-size:12px;
+                    color:#5f6b78;
+                    display:grid;
+                    grid-template-columns:1fr 1fr;
+                    gap:6px;
+                ">
+                    <div><strong>Leadership:</strong> 18 hrs</div>
+                    <div><strong>Delivery:</strong> 22 hrs</div>
+                    <div><strong>Governance:</strong> 14 hrs</div>
+                    <div><strong>Cyber:</strong> 10 hrs</div>
+                    <div><strong>Cloud:</strong> 8 hrs</div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: KPI Radar -->
+            <div style="text-align:center; position:relative;">
+
+                <!-- Hover label -->
+                <div id="hoverLabel" style="
+                    position:absolute;
+                    padding:6px 10px;
                     background:#0a66c2;
+                    color:#ffffff;
+                    font-size:11px;
+                    font-weight:700;
+                    border-radius:6px;
+                    pointer-events:none;
+                    opacity:0;
+                    transition:opacity 0.2s ease;
                 "></div>
-            </div>
 
-            <!-- Category Breakdown -->
-            <div style="
-                margin-top:18px;
-                font-size:12px;
-                color:#5f6b78;
-                display:grid;
-                grid-template-columns:1fr 1fr;
-                gap:6px;
-            ">
-                <div><strong>Leadership:</strong> 18 hrs</div>
-                <div><strong>Delivery:</strong> 22 hrs</div>
-                <div><strong>Governance:</strong> 14 hrs</div>
-                <div><strong>Cyber:</strong> 10 hrs</div>
-                <div><strong>Cloud:</strong> 8 hrs</div>
-            </div>
+                <svg id="animatedRadar" width="220" height="220" viewBox="0 0 260 260" style="max-width:100%;">
 
-        </div>
+                    <defs>
+                        <linearGradient id="kpiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#7ac0f9" stop-opacity="0.95"/>
+                            <stop offset="100%" stop-color="#0a66c2" stop-opacity="0.75"/>
+                        </linearGradient>
+                    </defs>
 
-        <!-- RIGHT: KPI Radar -->
-        <div style="text-align:center;">
+                    <!-- Radial lines -->
+                    <g id="radialLines" stroke="#d0d8e4" stroke-width="1" opacity="0">
+                        <line x1="130" y1="130" x2="130" y2="30"></line>
+                        <line x1="130" y1="130" x2="215" y2="95"></line>
+                        <line x1="130" y1="130" x2="185" y2="205"></line>
+                        <line x1="130" y1="130" x2="75" y2="205"></line>
+                        <line x1="130" y1="130" x2="45" y2="95"></line>
+                    </g>
 
-            <svg width="220" height="220" viewBox="0 0 260 260" style="max-width:100%;">
+                    <!-- Outer pentagon -->
+                    <polygon 
+                        id="outerPent"
+                        points="130,30 215,95 185,205 75,205 45,95"
+                        fill="#eaf4ff"
+                        stroke="#0a66c2"
+                        stroke-width="2"
+                        opacity="0"
+                    ></polygon>
 
-                <!-- Gradient -->
-                <defs>
-                    <linearGradient id="kpiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#7ac0f9" stop-opacity="0.95"/>
-                        <stop offset="100%" stop-color="#0a66c2" stop-opacity="0.75"/>
-                    </linearGradient>
-                </defs>
+                    <!-- KPI polygon -->
+                    <polygon 
+                        id="kpiPolygon"
+                        points="130,130 130,130 130,130 130,130 130,130"
+                        fill="url(#kpiGradient)"
+                        opacity="0"
+                        style="filter: drop-shadow(0px 0px 6px rgba(10,102,194,0.35));"
+                    ></polygon>
 
-                <!-- Radial lines -->
-                <g stroke="#d0d8e4" stroke-width="1" opacity="0.6">
-                    <line x1="130" y1="130" x2="130" y2="30"></line>
-                    <line x1="130" y1="130" x2="215" y2="95"></line>
-                    <line x1="130" y1="130" x2="185" y2="205"></line>
-                    <line x1="130" y1="130" x2="75" y2="205"></line>
-                    <line x1="130" y1="130" x2="45" y2="95"></line>
-                </g>
+                    <!-- KPI dots with hover labels -->
+                    <g class="kpi-dot" data-label="Leadership: 80%" transform="translate(130,60)" opacity="0">
+                        <circle r="6" fill="#0a66c2"></circle>
+                    </g>
+                    <g class="kpi-dot" data-label="Delivery: 70%" transform="translate(195,110)" opacity="0">
+                        <circle r="6" fill="#0a66c2"></circle>
+                    </g>
+                    <g class="kpi-dot" data-label="Governance: 65%" transform="translate(170,195)" opacity="0">
+                        <circle r="6" fill="#0a66c2"></circle>
+                    </g>
+                    <g class="kpi-dot" data-label="Cyber: 55%" transform="translate(130,205)" opacity="0">
+                        <circle r="6" fill="#0a66c2"></circle>
+                    </g>
+                    <g class="kpi-dot" data-label="Cloud: 60%" transform="translate(65,110)" opacity="0">
+                        <circle r="6" fill="#0a66c2"></circle>
+                    </g>
 
-                <!-- Outer pentagon -->
-                <polygon 
-                    points="130,30 215,95 185,205 75,205 45,95"
-                    fill="#eaf4ff"
-                    stroke="#0a66c2"
-                    stroke-width="2"
-                ></polygon>
+                </svg>
 
-                <!-- KPI polygon -->
-                <polygon 
-                    points="130,60 195,110 170,195 130,205 65,110"
-                    fill="url(#kpiGradient)"
-                    opacity="0.9"
-                    style="filter: drop-shadow(0px 0px 6px rgba(10,102,194,0.35));"
-                ></polygon>
+                <div style="margin-top:10px; font-size:12px; color:#5f6b78; line-height:1.5;">
+                    <div><strong>Leadership:</strong> 80%</div>
+                    <div><strong>Delivery:</strong> 70%</div>
+                    <div><strong>Governance:</strong> 65%</div>
+                    <div><strong>Cyber:</strong> 55%</div>
+                    <div><strong>Cloud:</strong> 60%</div>
+                </div>
 
-            </svg>
-
-            <!-- Legend -->
-            <div style="margin-top:10px; font-size:12px; color:#5f6b78; line-height:1.5;">
-                <div><strong>Leadership:</strong> 80%</div>
-                <div><strong>Delivery:</strong> 70%</div>
-                <div><strong>Governance:</strong> 65%</div>
-                <div><strong>Cyber:</strong> 55%</div>
-                <div><strong>Cloud:</strong> 60%</div>
             </div>
 
         </div>
 
     </div>
-
 </div>
 
-</section>
+<!-- Radar Animation + Hover Labels Script -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* Polygon animation */
-    const poly = document.getElementById("kpiPolygon");
-    poly.style.opacity = "0";
-    poly.style.transform = "scale(0.6)";
+    const polygon = document.getElementById("kpiPolygon");
+    const outerPent = document.getElementById("outerPent");
+    const radialLines = document.getElementById("radialLines");
+    const dots = document.querySelectorAll(".kpi-dot");
+    const hoverLabel = document.getElementById("hoverLabel");
+
+    const finalPoints = "130,60 195,110 170,195 130,205 65,110";
+
+    /* --- Animation on load --- */
     setTimeout(() => {
-        poly.style.opacity = "0.9";
-        poly.style.transform = "scale(1)";
-    }, 150);
+        radialLines.style.transition = "opacity 0.8s ease";
+        radialLines.style.opacity = 1;
 
-    /* Radial line animation */
-    const lines = document.querySelectorAll("#radialLines line");
-    lines.forEach((line, i) => {
-        line.style.strokeDasharray = "200";
-        line.style.strokeDashoffset = "200";
-        line.style.transition = "stroke-dashoffset 0.9s ease " + (i * 0.1) + "s";
-        setTimeout(() => line.style.strokeDashoffset = "0", 50);
+        outerPent.style.transition = "opacity 0.8s ease";
+        outerPent.style.opacity = 1;
+
+        polygon.style.transition = "all 1.2s ease";
+        polygon.setAttribute("points", finalPoints);
+        polygon.style.opacity = 1;
+
+        dots.forEach((d, i) => {
+            d.style.transition = "opacity 0.6s ease " + (0.3 + i * 0.1) + "s";
+            d.style.opacity = 1;
+        });
+
+    }, 200);
+
+    /* --- Hover labels --- */
+    dots.forEach(dot => {
+        dot.addEventListener("mouseenter", (e) => {
+            const text = dot.getAttribute("data-label");
+            hoverLabel.textContent = text;
+
+            const rect = e.target.getBoundingClientRect();
+            hoverLabel.style.left = rect.left + window.scrollX + 12 + "px";
+            hoverLabel.style.top = rect.top + window.scrollY - 10 + "px";
+
+            hoverLabel.style.opacity = 1;
+        });
+
+        dot.addEventListener("mouseleave", () => {
+            hoverLabel.style.opacity = 0;
+        });
+
+        dot.addEventListener("click", (e) => {
+            const text = dot.getAttribute("data-label");
+            hoverLabel.textContent = text;
+
+            const rect = e.target.getBoundingClientRect();
+            hoverLabel.style.left = rect.left + window.scrollX + 12 + "px";
+            hoverLabel.style.top = rect.top + window.scrollY - 10 + "px";
+
+            hoverLabel.style.opacity = 1;
+
+            setTimeout(() => hoverLabel.style.opacity = 0, 1500);
+        });
     });
-
-  const label = document.getElementById("hoverLabel");
-const dots = document.querySelectorAll(".kpi-dot");
-
-dots.forEach(dot => {
-    dot.addEventListener("mouseenter", (e) => {
-        const text = dot.getAttribute("data-label");
-        label.textContent = text;
-
-        const rect = dot.getBoundingClientRect();
-        label.style.left = rect.left + window.scrollX + 14 + "px";
-        label.style.top = rect.top + window.scrollY - 6 + "px";
-
-        label.style.opacity = "1";
-    });
-
-    dot.addEventListener("mouseleave", () => {
-        label.style.opacity = "0";
-    });
-
-    dot.addEventListener("click", (e) => {
-        const text = dot.getAttribute("data-label");
-        label.textContent = text;
-
-        const rect = dot.getBoundingClientRect();
-        label.style.left = rect.left + window.scrollX + 14 + "px";
-        label.style.top = rect.top + window.scrollY - 6 + "px";
-
-        label.style.opacity = "1";
-        setTimeout(() => label.style.opacity = "0", 1500);
-    });
-});
 
 });
 </script>
+
 
 <style>
 /* Pulse animation */
@@ -2901,8 +2949,29 @@ dots.forEach(dot => {
 .pulse:hover {
     transform: scale(1.35);
 }
-</style>
 
+
+/* Pulse animation for radar dots */
+.kpi-dot circle {
+    animation: radarPulse 1.8s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes radarPulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0px 0px 0px rgba(10,102,194,0.0));
+    }
+    50% {
+        transform: scale(1.35);
+        filter: drop-shadow(0px 0px 6px rgba(10,102,194,0.45));
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0px 0px 0px rgba(10,102,194,0.0));
+    }
+}
+</style>
 
 
 

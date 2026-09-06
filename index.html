@@ -2711,10 +2711,10 @@ body.dark .home-resource-links small {
                 </div>
 
             </div>
-        </div>
-      <!-- Unified CPD Performance Section (Two‑Tone + Animated Radar + Hover Labels) -->
+        </div><!-- Unified CPD Performance Section (Fully Fixed) -->
 <div style="
     margin-top:32px;
+    margin-bottom:48px; /* NEW: separates from next section */
     border-radius:18px;
     overflow:hidden;
     background:linear-gradient(135deg, #f7faff 0%, #e9f1ff 100%);
@@ -2727,7 +2727,8 @@ body.dark .home-resource-links small {
         border-radius:18px;
         margin:0;
         padding:32px;
-        box-shadow:0 8px 24px rgba(15,35,60,0.08);
+        box-shadow:0 12px 32px rgba(15,35,60,0.12); /* NEW: stronger card shadow */
+        border:1px solid #e3e9f3; /* NEW: subtle border to prevent merging */
     ">
 
         <strong style="font-size:16px; color:#0A1F44;">CPD Performance Overview</strong>
@@ -2743,11 +2744,19 @@ body.dark .home-resource-links small {
             <div>
 
                 <div style="display:flex; align-items:center; gap:16px;">
-                    <svg width="48" height="48" viewBox="0 0 64 64">
+
+                    <!-- Animated CPD Ring -->
+                    <svg id="cpdRing" width="48" height="48" viewBox="0 0 64 64">
                         <circle cx="32" cy="32" r="28" fill="#0a66c2" opacity="0.15"/>
-                        <circle cx="32" cy="32" r="22" stroke="#0a66c2" stroke-width="6" 
-                                stroke-dasharray="138" stroke-dashoffset="38" fill="none"/>
+                        <circle id="cpdStroke" cx="32" cy="32" r="22"
+                                stroke="#0a66c2" stroke-width="6"
+                                stroke-dasharray="138"
+                                stroke-dashoffset="138"  <!-- NEW: start fully empty -->
+                                fill="none"
+                                style="transition: stroke-dashoffset 1.4s ease;">
+                        </circle>
                     </svg>
+
                     <div style="font-size:28px; font-weight:800; color:#0A1F44;">72%</div>
                 </div>
 
@@ -2802,6 +2811,7 @@ body.dark .home-resource-links small {
                     pointer-events:none;
                     opacity:0;
                     transition:opacity 0.2s ease;
+                    z-index:10; /* NEW */
                 "></div>
 
                 <svg id="animatedRadar" width="220" height="220" viewBox="0 0 260 260" style="max-width:100%;">
@@ -2841,21 +2851,21 @@ body.dark .home-resource-links small {
                         style="filter: drop-shadow(0px 0px 6px rgba(10,102,194,0.35));"
                     ></polygon>
 
-                    <!-- KPI dots with hover labels -->
-                    <g class="kpi-dot" data-label="Leadership: 80%" transform="translate(130,60)" opacity="0">
-                        <circle r="6" fill="#0a66c2"></circle>
+                    <!-- KPI dots (FIXED: opacity moved to circle, not group) -->
+                    <g class="kpi-dot" data-label="Leadership: 80%" transform="translate(130,60)">
+                        <circle r="6" fill="#0a66c2" opacity="0"></circle>
                     </g>
-                    <g class="kpi-dot" data-label="Delivery: 70%" transform="translate(195,110)" opacity="0">
-                        <circle r="6" fill="#0a66c2"></circle>
+                    <g class="kpi-dot" data-label="Delivery: 70%" transform="translate(195,110)">
+                        <circle r="6" fill="#0a66c2" opacity="0"></circle>
                     </g>
-                    <g class="kpi-dot" data-label="Governance: 65%" transform="translate(170,195)" opacity="0">
-                        <circle r="6" fill="#0a66c2"></circle>
+                    <g class="kpi-dot" data-label="Governance: 65%" transform="translate(170,195)">
+                        <circle r="6" fill="#0a66c2" opacity="0"></circle>
                     </g>
-                    <g class="kpi-dot" data-label="Cyber: 55%" transform="translate(130,205)" opacity="0">
-                        <circle r="6" fill="#0a66c2"></circle>
+                    <g class="kpi-dot" data-label="Cyber: 55%" transform="translate(130,205)">
+                        <circle r="6" fill="#0a66c2" opacity="0"></circle>
                     </g>
-                    <g class="kpi-dot" data-label="Cloud: 60%" transform="translate(65,110)" opacity="0">
-                        <circle r="6" fill="#0a66c2"></circle>
+                    <g class="kpi-dot" data-label="Cloud: 60%" transform="translate(65,110)">
+                        <circle r="6" fill="#0a66c2" opacity="0"></circle>
                     </g>
 
                 </svg>
@@ -2874,20 +2884,23 @@ body.dark .home-resource-links small {
 
     </div>
 </div>
-    </section>
-<!-- Radar Animation + Hover Labels Script -->
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
+    /* --- Animate CPD Ring --- */
+    const cpdStroke = document.getElementById("cpdStroke");
+    cpdStroke.style.strokeDashoffset = 38; /* 72% */
+
+    /* --- Radar Animation --- */
     const polygon = document.getElementById("kpiPolygon");
     const outerPent = document.getElementById("outerPent");
     const radialLines = document.getElementById("radialLines");
-    const dots = document.querySelectorAll(".kpi-dot");
+    const dots = document.querySelectorAll(".kpi-dot circle");
     const hoverLabel = document.getElementById("hoverLabel");
 
     const finalPoints = "130,60 195,110 170,195 130,205 65,110";
 
-    /* --- Animation on load --- */
     setTimeout(() => {
         radialLines.style.transition = "opacity 0.8s ease";
         radialLines.style.opacity = 1;
@@ -2899,17 +2912,17 @@ document.addEventListener("DOMContentLoaded", () => {
         polygon.setAttribute("points", finalPoints);
         polygon.style.opacity = 1;
 
-        dots.forEach((d, i) => {
-            d.style.transition = "opacity 0.6s ease " + (0.3 + i * 0.1) + "s";
-            d.style.opacity = 1;
+        dots.forEach((dot, i) => {
+            dot.style.transition = "opacity 0.6s ease " + (0.3 + i * 0.1) + "s";
+            dot.style.opacity = 1;
         });
 
     }, 200);
 
-    /* --- Hover labels --- */
+    /* --- Hover labels (FIXED for Safari) --- */
     dots.forEach(dot => {
         dot.addEventListener("mouseenter", (e) => {
-            const text = dot.getAttribute("data-label");
+            const text = dot.parentNode.getAttribute("data-label");
             hoverLabel.textContent = text;
 
             const rect = e.target.getBoundingClientRect();
@@ -2922,35 +2935,12 @@ document.addEventListener("DOMContentLoaded", () => {
         dot.addEventListener("mouseleave", () => {
             hoverLabel.style.opacity = 0;
         });
-
-        dot.addEventListener("click", (e) => {
-            const text = dot.getAttribute("data-label");
-            hoverLabel.textContent = text;
-
-            const rect = e.target.getBoundingClientRect();
-            hoverLabel.style.left = rect.left + window.scrollX + 12 + "px";
-            hoverLabel.style.top = rect.top + window.scrollY - 10 + "px";
-
-            hoverLabel.style.opacity = 1;
-
-            setTimeout(() => hoverLabel.style.opacity = 0, 1500);
-        });
     });
 
 });
 </script>
 
-
 <style>
-/* Pulse animation */
-.pulse {
-    transition: transform 0.25s ease;
-}
-.pulse:hover {
-    transform: scale(1.35);
-}
-
-
 /* Pulse animation for radar dots */
 .kpi-dot circle {
     animation: radarPulse 1.8s ease-in-out infinite;
@@ -2972,8 +2962,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 }
 </style>
-
-
 
 
 

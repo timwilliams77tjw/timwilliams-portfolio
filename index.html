@@ -2711,149 +2711,131 @@ body.dark .home-resource-links small {
                 </div>
 
             </div>
-        </div>
-<!-- CPD Progress + KPI Radar (Mobile‑Safe Enhanced Version) -->
+        </div><!-- Unified CPD Performance Section -->
 <div style="
     margin-top:32px;
-    display:grid;
-    grid-template-columns: 1fr;
-    gap:24px;
-">
-
-    <!-- CPD Progress -->
-    <div style="
-        background:#ffffff;
-        border-radius:14px;
-        padding:26px;
-        box-shadow:0 8px 24px rgba(15,35,60,0.08);
-    ">
-        <strong style="font-size:14px; color:#0A1F44;">CPD Progress</strong>
-
-        <!-- Visual Summary Row -->
-        <div style="display:flex; align-items:center; gap:16px; margin-top:14px;">
-            <svg width="48" height="48" viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="28" fill="#0a66c2" opacity="0.15"/>
-                <circle cx="32" cy="32" r="22" stroke="#0a66c2" stroke-width="6" 
-                        stroke-dasharray="138" stroke-dashoffset="38" fill="none"/>
-            </svg>
-            <div style="font-size:28px; font-weight:800; color:#0A1F44;">72%</div>
-        </div>
-
-        <p style="margin-top:10px; font-size:13px; color:#5f6b78; line-height:1.6;">
-            Annual CPD target progress, mapped to APM competencies across leadership, delivery, governance, cyber and cloud.
-        </p>
-
-        <!-- Progress Meter -->
-        <div style="
-            margin-top:16px;
-            width:100%;
-            height:14px;
-            background:#dfe6ee;
-            border-radius:999px;
-            overflow:hidden;
-        ">
-            <div style="
-                width:72%;
-                height:100%;
-                background:#0a66c2;
-            "></div>
-        </div>
-
-        <!-- Category Breakdown (Compact) -->
-        <div style="margin-top:18px; font-size:12px; color:#5f6b78; display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-            <div><strong>Leadership:</strong> 18 hrs</div>
-            <div><strong>Delivery:</strong> 22 hrs</div>
-            <div><strong>Governance:</strong> 14 hrs</div>
-            <div><strong>Cyber:</strong> 10 hrs</div>
-            <div><strong>Cloud:</strong> 8 hrs</div>
-        </div>
-    </div>
- <!-- Dynamic KPI Radar (Enhanced + Fixed Hover Labels + Legend Restored) -->
-<div style="
     background:#ffffff;
     border-radius:14px;
     padding:26px;
     box-shadow:0 8px 24px rgba(15,35,60,0.08);
-    text-align:center;
-    position:relative;
 ">
-    <strong style="font-size:14px; color:#0A1F44;">Competency Radar (KPIs)</strong>
 
-    <p style="margin-top:10px; font-size:13px; color:#5f6b78; line-height:1.6;">
-        Current vs target competency levels across core APM domains.
-    </p>
+    <strong style="font-size:16px; color:#0A1F44;">CPD Performance Overview</strong>
 
-    <svg width="260" height="260" viewBox="0 0 260 260" style="margin-top:16px; max-width:100%; overflow:visible;">
+    <!-- Two-column layout (mobile collapses) -->
+    <div style="
+        margin-top:24px;
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:32px;
+    ">
 
-        <!-- Gradient -->
-        <defs>
-            <linearGradient id="kpiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7ac0f9" stop-opacity="0.95"/>
-                <stop offset="100%" stop-color="#0a66c2" stop-opacity="0.75"/>
-            </linearGradient>
-        </defs>
+        <!-- LEFT: CPD Progress -->
+        <div>
 
-        <!-- Radial lines -->
-        <g id="radialLines" stroke="#d0d8e4" stroke-width="1" opacity="0.6">
-            <line x1="130" y1="130" x2="130" y2="30"></line>
-            <line x1="130" y1="130" x2="215" y2="95"></line>
-            <line x1="130" y1="130" x2="185" y2="205"></line>
-            <line x1="130" y1="130" x2="75" y2="205"></line>
-            <line x1="130" y1="130" x2="45" y2="95"></line>
-        </g>
+            <!-- Visual Summary Row -->
+            <div style="display:flex; align-items:center; gap:16px;">
+                <svg width="48" height="48" viewBox="0 0 64 64">
+                    <circle cx="32" cy="32" r="28" fill="#0a66c2" opacity="0.15"/>
+                    <circle cx="32" cy="32" r="22" stroke="#0a66c2" stroke-width="6" 
+                            stroke-dasharray="138" stroke-dashoffset="38" fill="none"/>
+                </svg>
+                <div style="font-size:28px; font-weight:800; color:#0A1F44;">72%</div>
+            </div>
 
-        <!-- Outer pentagon -->
-        <polygon 
-            points="130,30 215,95 185,205 75,205 45,95"
-            fill="#eaf4ff"
-            stroke="#0a66c2"
-            stroke-width="2"
-        ></polygon>
+            <p style="margin-top:12px; font-size:13px; color:#5f6b78; line-height:1.6;">
+                Annual CPD progress mapped to APM competencies.
+            </p>
 
-        <!-- KPI polygon -->
-        <polygon 
-            id="kpiPolygon"
-            points="130,60 195,110 170,195 130,205 65,110"
-            fill="url(#kpiGradient)"
-            opacity="0.9"
-            style="filter: drop-shadow(0px 0px 6px rgba(10,102,194,0.35)); 
-                   transition: all 1.2s ease;"
-        ></polygon>
+            <!-- Progress Meter -->
+            <div style="
+                margin-top:16px;
+                width:100%;
+                height:14px;
+                background:#dfe6ee;
+                border-radius:999px;
+                overflow:hidden;
+            ">
+                <div style="
+                    width:72%;
+                    height:100%;
+                    background:#0a66c2;
+                "></div>
+            </div>
 
-        <!-- KPI dots -->
-        <g class="kpi-dot" data-label="Leadership: 80%" transform="translate(130,60)">
-            <circle r="6" fill="#0a66c2" class="pulse"></circle>
-        </g>
+            <!-- Category Breakdown -->
+            <div style="
+                margin-top:18px;
+                font-size:12px;
+                color:#5f6b78;
+                display:grid;
+                grid-template-columns:1fr 1fr;
+                gap:6px;
+            ">
+                <div><strong>Leadership:</strong> 18 hrs</div>
+                <div><strong>Delivery:</strong> 22 hrs</div>
+                <div><strong>Governance:</strong> 14 hrs</div>
+                <div><strong>Cyber:</strong> 10 hrs</div>
+                <div><strong>Cloud:</strong> 8 hrs</div>
+            </div>
 
-        <g class="kpi-dot" data-label="Delivery: 70%" transform="translate(195,110)">
-            <circle r="6" fill="#0a66c2" class="pulse"></circle>
-        </g>
+        </div>
 
-        <g class="kpi-dot" data-label="Governance: 65%" transform="translate(170,195)">
-            <circle r="6" fill="#0a66c2" class="pulse"></circle>
-        </g>
+        <!-- RIGHT: KPI Radar -->
+        <div style="text-align:center;">
 
-        <g class="kpi-dot" data-label="Cyber: 55%" transform="translate(130,205)">
-            <circle r="6" fill="#0a66c2" class="pulse"></circle>
-        </g>
+            <svg width="220" height="220" viewBox="0 0 260 260" style="max-width:100%;">
 
-        <g class="kpi-dot" data-label="Cloud: 60%" transform="translate(65,110)">
-            <circle r="6" fill="#0a66c2" class="pulse"></circle>
-        </g>
+                <!-- Gradient -->
+                <defs>
+                    <linearGradient id="kpiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#7ac0f9" stop-opacity="0.95"/>
+                        <stop offset="100%" stop-color="#0a66c2" stop-opacity="0.75"/>
+                    </linearGradient>
+                </defs>
 
-    </svg>
+                <!-- Radial lines -->
+                <g stroke="#d0d8e4" stroke-width="1" opacity="0.6">
+                    <line x1="130" y1="130" x2="130" y2="30"></line>
+                    <line x1="130" y1="130" x2="215" y2="95"></line>
+                    <line x1="130" y1="130" x2="185" y2="205"></line>
+                    <line x1="130" y1="130" x2="75" y2="205"></line>
+                    <line x1="130" y1="130" x2="45" y2="95"></line>
+                </g>
 
+                <!-- Outer pentagon -->
+                <polygon 
+                    points="130,30 215,95 185,205 75,205 45,95"
+                    fill="#eaf4ff"
+                    stroke="#0a66c2"
+                    stroke-width="2"
+                ></polygon>
 
+                <!-- KPI polygon -->
+                <polygon 
+                    points="130,60 195,110 170,195 130,205 65,110"
+                    fill="url(#kpiGradient)"
+                    opacity="0.9"
+                    style="filter: drop-shadow(0px 0px 6px rgba(10,102,194,0.35));"
+                ></polygon>
 
-    <!-- Legend restored -->
-    <div style="margin-top:14px; font-size:12px; color:#5f6b78; line-height:1.6;">
-        <div><strong>Leadership:</strong> 80%</div>
-        <div><strong>Delivery:</strong> 70%</div>
-        <div><strong>Governance:</strong> 65%</div>
-        <div><strong>Cyber:</strong> 55%</div>
-        <div><strong>Cloud:</strong> 60%</div>
+            </svg>
+
+            <!-- Legend -->
+            <div style="margin-top:10px; font-size:12px; color:#5f6b78; line-height:1.5;">
+                <div><strong>Leadership:</strong> 80%</div>
+                <div><strong>Delivery:</strong> 70%</div>
+                <div><strong>Governance:</strong> 65%</div>
+                <div><strong>Cyber:</strong> 55%</div>
+                <div><strong>Cloud:</strong> 60%</div>
+            </div>
+
+        </div>
+
     </div>
+
 </div>
+
 </section>
 <script>
 document.addEventListener("DOMContentLoaded", () => {

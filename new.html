@@ -2511,6 +2511,56 @@ Matches Insights hero card styling
         width: 4px;
     }
 }
+/* =========================================================
+OFFERINGS HERO — CARD CONVERSION (MATCHES INSIGHTS HERO)
+========================================================= */
+
+.hero-card {
+    position: relative;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid rgba(10,102,194,0.12);
+    box-shadow: var(--off-shadow);
+    padding: 2.5rem 2.5rem 2.35rem;
+    overflow: hidden;
+}
+
+/* Left blue border strip */
+.hero-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: #0a66c2;
+    border-radius: 18px 0 0 18px;
+}
+
+/* Ensure your existing grid sits inside the card */
+.hero-card.offerings-hero {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 52px;
+    align-items: center;
+}
+@media (max-width: 980px) {
+    .hero-card.offerings-hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+}
+
+@media (max-width: 620px) {
+    .hero-card {
+        padding: 1.8rem 1.3rem 1.7rem;
+        border-radius: 14px;
+    }
+
+    .hero-card::before {
+        width: 4px;
+    }
+}
 
      
 </style>
@@ -2558,7 +2608,8 @@ fetch("header.html")
 <!-- =====================================================
      HERO
 ===================================================== -->
-<section class="offerings-hero" aria-labelledby="offerings-title">
+<section class="offerings-hero hero-card" aria-labelledby="offerings-title">
+
 
   <div class="hero-copy">
     <span class="eyebrow">TWC LTD · TRANSFORMATION LEADERSHIP</span>

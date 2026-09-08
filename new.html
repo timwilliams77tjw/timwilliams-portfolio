@@ -2562,70 +2562,8 @@ OFFERINGS HERO — CARD CONVERSION (MATCHES INSIGHTS HERO)
         width: 4px;
     }
 }
-/* iPad / mid-size screens */
-@media (max-width: 1180px) {
-    .case-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-@media (max-width: 1366px) {
-    .case-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 20px !important;
-    }
-}
-/* =========================================================
-   FINAL OVERRIDE — CASE STUDIES GRID
-   Ensures correct layout on iPad + iPhone
-   ========================================================= */
 
-/* iPhone (full-width single column) */
-@media (max-width: 620px) {
-    .case-grid {
-        grid-template-columns: 1fr !important;
-    }
-}
 
-/* iPad + mid-size screens (two columns) */
-@media (min-width: 621px) and (max-width: 1180px) {
-    .case-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-}
-
-/* Large screens (desktop) */
-@media (min-width: 1181px) {
-    .case-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-    }
-}
-/* =========================================================
-   FINAL OVERRIDE — CASE STUDIES GRID (iPad + iPhone FIX)
-   ========================================================= */
-
-/* iPhone (single column) */
-@media (max-width: 620px) {
-    .case-grid {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-/* iPad + mid-size screens (two columns) */
-@media (min-width: 621px) and (max-width: 1366px) {
-    .case-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-}
-
-/* Desktop (three columns) */
-@media (min-width: 1367px) {
-    .case-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-    }
-}
-/* =========================================================
-   OFFERINGS PAGE — REQUESTED UPDATES ONLY
-   ========================================================= */
 
 
 /* =========================================================
@@ -2646,18 +2584,21 @@ OFFERINGS HERO — CARD CONVERSION (MATCHES INSIGHTS HERO)
     background: #0f4f8a !important;
     background-color: #0f4f8a !important;
 }
-
 /* =========================================================
    PROGRAMME CASE STUDIES
-   iPAD — DISPLAY LAYOUT ONLY
+   iPAD / iPHONE DISPLAY LAYOUT ONLY
    ========================================================= */
 
-@media screen and (min-width: 621px) and (max-width: 1366px) {
+/* iPad and desktop — three cards across */
+.case-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
+/* iPhone — one card per row */
+@media screen and (max-width: 620px) {
     .case-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-columns: 1fr;
     }
-
 }
 </style>
 

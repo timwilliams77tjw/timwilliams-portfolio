@@ -2574,7 +2574,31 @@ OFFERINGS HERO — CARD CONVERSION (MATCHES INSIGHTS HERO)
         gap: 20px !important;
     }
 }
+/* =========================================================
+   FINAL OVERRIDE — CASE STUDIES GRID
+   Ensures correct layout on iPad + iPhone
+   ========================================================= */
 
+/* iPhone (full-width single column) */
+@media (max-width: 620px) {
+    .case-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* iPad + mid-size screens (two columns) */
+@media (min-width: 621px) and (max-width: 1180px) {
+    .case-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Large screens (desktop) */
+@media (min-width: 1181px) {
+    .case-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
      
 </style>
 

@@ -2458,6 +2458,60 @@ body.dark-mode .offerings-page .contact-cta.reveal-section {
     background: #0f4f8a !important;
     background-color: #0f4f8a !important;
 }
+
+/* =========================================================
+OFFERINGS HERO — CARD CONVERSION
+Matches Insights hero card styling
+========================================================= */
+
+.card-hero {
+    position: relative;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid rgba(10,102,194,0.12);
+    box-shadow: var(--off-shadow);
+    padding: 2.5rem 2.5rem 2.35rem;
+    overflow: hidden;
+}
+
+/* Left blue border strip */
+.card-hero::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: #0a66c2;
+    border-radius: 18px 0 0 18px;
+}
+
+/* Ensure inner grid respects card padding */
+.offerings-hero-inner {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 52px;
+    align-items: center;
+}
+
+@media (max-width: 980px) {
+    .offerings-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+}
+
+@media (max-width: 620px) {
+    .card-hero {
+        padding: 1.8rem 1.3rem 1.7rem;
+        border-radius: 14px;
+    }
+
+    .card-hero::before {
+        width: 4px;
+    }
+}
+
      
 </style>
 

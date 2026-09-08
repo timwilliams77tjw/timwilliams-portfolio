@@ -363,6 +363,47 @@ transform: translateY(0);
         height: auto;
     }
 }
+/* =========================================================
+ENGAGEMENT HERO — CARD CONVERSION (MATCHES OFFERINGS + INSIGHTS)
+========================================================= */
+
+.hero-card {
+    position: relative;
+    border-radius: 18px;
+    background: var(--eng-surface);
+    border: 1px solid rgba(10,102,194,0.12);
+    box-shadow: var(--eng-shadow);
+    padding: 2.5rem 2.5rem 2.35rem;
+    overflow: hidden;
+}
+
+/* Left blue border strip */
+.hero-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: var(--twc-blue);
+    border-radius: 18px 0 0 18px;
+}
+
+/* Ensure spacing inside the hero matches Insights */
+.hero-card.engagement-hero {
+    max-width: 900px;
+    margin: 0 auto 46px;
+}
+@media (max-width: 650px) {
+    .hero-card {
+        padding: 1.8rem 1.3rem 1.7rem;
+        border-radius: 14px;
+    }
+
+    .hero-card::before {
+        width: 4px;
+    }
+}
 
     
 </style>
@@ -400,7 +441,8 @@ document.body.appendChild(headerJS);
 
 <main class="engagement-section">
 
-<section class="engagement-hero">
+<section class="engagement-hero hero-card">
+
 <div class="engagement-kicker">ENGAGEMENT MODELS</div>
 <h1>Senior leadership for <span>complex transformation.</span></h1>
 <p>

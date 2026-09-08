@@ -2623,7 +2623,23 @@ OFFERINGS HERO — CARD CONVERSION (MATCHES INSIGHTS HERO)
         grid-template-columns: repeat(3, 1fr) !important;
     }
 }
+/* =========================================================
+   FINAL OVERRIDE — iPad FIX (touch-device detection)
+   ========================================================= */
 
+/* iPhone (single column) */
+@media (max-width: 620px) {
+    .case-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* iPad and all touch tablets (two columns) */
+@media (hover: none) and (pointer: coarse) {
+    .case-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
 
 
      

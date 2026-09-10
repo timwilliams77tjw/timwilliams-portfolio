@@ -17658,141 +17658,66 @@ function populateCompetencyRelationships() {
                Evidence relationships.
             */
 
-            document.querySelectorAll(".professional-evidence-card, .professional-evidence-item")
+document
+    .querySelectorAll(".professional-evidence-card, .professional-evidence-item")
+    .forEach(evidenceCard => {
 
-                .forEach(
-                    evidenceCard => {
+        const competenceLinks =
+            evidenceCard.querySelectorAll('a[href^="#competence-"]');
 
-                        const competenceLinks =
-                            evidenceCard.querySelectorAll(
-                                'a[href^="#competence-"]'
-                            );
+        let matches = false;
 
+        competenceLinks.forEach(link => {
+            if (link.getAttribute("href").trim() === "#" + competenceId.trim()) {
+                matches = true;
+            }
+        });
 
-                        let matches =
-                            false;
+        if (!matches) {
+            return;
+        }
 
+        let evidenceId = evidenceCard.id;
 
-                        competenceLinks.forEach(
-                            link => {
+        if (!evidenceId) {
+            const heading = evidenceCard.querySelector("h3, h4");
+            if (!heading) return;
 
-                                if (
-                                    link.getAttribute(
-                                        "href"
-                                    ) ===
-                                    "#" +
-                                    competenceId
-                                ) {
+            evidenceId =
+                "evidence-" +
+                heading.textContent
+                    .toLowerCase()
+                    .trim()
+                    .replace(/[^a-z0-9]+/g, "-")
+                    .replace(/^-+|-+$/g, "");
 
-                                    matches =
-                                        true;
+            evidenceCard.id = evidenceId;
+        }
 
-                                }
+        const heading = evidenceCard.querySelector("h3, h4");
+        if (!heading) return;
 
-                            }
-                        );
+        const evidenceName = heading.textContent.trim();
+        if (!evidenceName) return;
 
+        // Prevent duplicates
+        if (evidenceList.querySelector(`[href="#${evidenceId}"]`)) {
+            return;
+        }
 
-                        if (!matches) {
-                            return;
-                        }
+        const link = document.createElement("a");
+        link.className = "competency-evidence-link";
+        link.href = "#" + evidenceId;
+        link.dataset.evidenceTarget = "#" + evidenceId;
 
+        link.innerHTML = `
+            <span>${evidenceName}</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        `;
 
-                        let evidenceId =
-                            evidenceCard.id;
+        evidenceList.appendChild(link);
+    });
 
-
-                        if (!evidenceId) {
-
-                            const heading =
-                                evidenceCard.querySelector(
-                                    "h3, h4"
-                                );
-
-
-                            if (!heading) {
-                                return;
-                            }
-
-
-                            evidenceId =
-                                "evidence-" +
-                                heading.textContent
-                                    .toLowerCase()
-                                    .trim()
-                                    .replace(
-                                        /[^a-z0-9]+/g,
-                                        "-"
-                                    )
-                                    .replace(
-                                        /^-+|-+$/g,
-                                        "");
-
-
-                            evidenceCard.id =
-                                evidenceId;
-
-                        }
-
-
-                        const heading =
-                            evidenceCard.querySelector(
-                                "h3, h4"
-                            );
-
-
-                        if (!heading) {
-                            return;
-                        }
-
-
-                        const evidenceName =
-                            heading.textContent
-                                .trim();
-
-
-                        if (!evidenceName) {
-                            return;
-                        }
-
-
-                        const link =
-                            document.createElement(
-                                "a"
-                            );
-
-
-                        link.className =
-                            "competency-evidence-link";
-
-
-                        link.href =
-                            "#" +
-                            evidenceId;
-
-
-                        link.dataset.evidenceTarget =
-                            "#" +
-                            evidenceId;
-
-
-                        link.innerHTML = `
-
-                            <span>
-                                ${evidenceName}
-                            </span>
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        `;
-
-
-                        evidenceList.appendChild(
-                            link
-                        );
-
-                    }
-                );
 
 
             /*

@@ -4,7 +4,179 @@
 
 /* Expander */ .case-toggle { display:flex; justify-content:space-between; width:100%; margin-top:18px; padding:11px 0 0; border-top:1px dashed #d7e0e8; background:transparent; color:var(--off-blue); font-weight:800; font-size:.78rem; cursor:pointer; } .case-toggle span { font-size:1rem; transition:transform .2s ease; } .case-detail { display:grid; grid-template-rows:0fr; opacity:0; transition:grid-template-rows .3s ease, opacity .3s ease, margin-top .3s ease; } .case-detail > div { overflow:hidden; display:grid; gap:3px; padding:0; } .case-study-card.expanded .case-detail { grid-template-rows:1fr; opacity:1; margin-top:12px; } .case-study-card.expanded .case-toggle span { transform:rotate(45deg); } .case-detail b { font-size:.68rem; color:var(--off-navy); text-transform:uppercase; letter-spacing:.08em; } .case-detail span { color:var(--off-muted); font-size:.78rem; }
 
-/* Responsive */ @media(max-width:980px){ .case-studies-grid{ grid-template-columns:1fr 1fr; } } @media(max-width:620px){ .case-studies-grid{ grid-template-columns:1fr; } } </style> </head> <body class="page-offerings"> <div class="offerings-page">
+/* Responsive */ @media(max-width:980px){ .case-studies-grid{ grid-template-columns:1fr 1fr; } } @media(max-width:620px){ .case-studies-grid{ grid-template-columns:1fr; } } </style> 
+
+
+  
+</head>
+ 
+<body class="header-with-logo page-site-search">
+ 
+ 
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+ 
+<script>
+fetch("header.html")
+ .then(r => r.text())
+ .then(h => {
+   document.getElementById("header-placeholder").innerHTML = h;
+ 
+   // Load site search (homepage uses site-search)
+   const searchScript = document.createElement("script");
+   searchScript.src = "site-search.js";
+   searchScript.onload = () => {
+     if (typeof initSiteSearch === "function") initSiteSearch();
+   };
+   document.body.appendChild(searchScript);
+ 
+   // Load header JS AFTER header is injected
+   const headerJS = document.createElement("script");
+   headerJS.src = "header-standard-v4.js";
+   headerJS.onload = () => {
+     initHeader();
+     initHeaderEnhancements();
+   };
+   document.body.appendChild(headerJS);
+ });
+</script>
+<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+<script src="analytics-tracker.js" defer></script>
+ 
+ 
+ 
+<main class="offerings-page">
+ 
+<!-- =====================================================
+    HERO
+===================================================== -->
+<section class="offerings-hero hero-card" aria-labelledby="offerings-title">
+ 
+ 
+ <div class="hero-copy">
+   <span class="eyebrow">TWC LTD · TRANSFORMATION LEADERSHIP</span>
+ 
+   <h1 id="offerings-title">
+     Transformation leadership<br>
+     <span>that delivers.</span>
+   </h1>
+ 
+   <p class="hero-lead">
+     Senior IT Programme Management across cyber security, cloud,
+     digital workplace and enterprise transformation.
+   </p>
+ 
+   <p class="hero-support">
+     SC Cleared programme leadership for complex, high-risk and
+     business-critical transformation environments.
+   </p>
+ 
+   <div class="hero-actions">
+     <a href="#services" class="primary-btn">
+       Explore Consulting Services
+       <span aria-hidden="true">→</span>
+     </a>
+     <a href="cv.html" class="secondary-btn">View CV</a>
+   </div>
+ 
+   <div class="hero-trust">
+     <span><b>20+</b> years</span>
+     <span><b>£40M</b> cyber uplift</span>
+     <span><b>126K</b> devices</span>
+     <span><b>42</b> countries</span>
+   </div>
+ </div>
+ 
+ <div class="hero-visual">
+   <div class="hero-image-frame">
+ 
+     <img src="img-cyber.jpg"
+          class="hero-slide active"
+          alt="Cyber security transformation">
+ 
+     <img src="img-cloud.jpg"
+          class="hero-slide"
+          alt="Cloud transformation">
+ 
+     <img src="img-workplace.jpg"
+          class="hero-slide"
+          alt="Digital workplace transformation">
+ 
+     <img src="img-governance.jpg"
+          class="hero-slide"
+          alt="Programme governance">
+ 
+     <img src="img-transition.jpg"
+          class="hero-slide"
+          alt="Service transition">
+ 
+     <img src="img-presales.jpg"
+          class="hero-slide"
+          alt="Technology architecture and pre-sales">
+ 
+     <div class="hero-overlay">
+ 
+       <span class="hero-status">
+         <i></i>
+         Enterprise transformation
+       </span>
+ 
+       <strong>
+         From strategy to operational readiness.
+       </strong>
+ 
+     </div>
+ 
+     <div class="hero-dots" aria-label="Hero image controls">
+ 
+       <button
+         class="hero-dot active"
+         type="button"
+         data-slide="0"
+         aria-label="Show cyber security image">
+       </button>
+ 
+       <button
+         class="hero-dot"
+         type="button"
+         data-slide="1"
+         aria-label="Show cloud image">
+       </button>
+ 
+       <button
+         class="hero-dot"
+         type="button"
+         data-slide="2"
+         aria-label="Show workplace image">
+       </button>
+ 
+       <button
+         class="hero-dot"
+         type="button"
+         data-slide="3"
+         aria-label="Show governance image">
+       </button>
+ 
+       <button
+         class="hero-dot"
+         type="button"
+         data-slide="4"
+         aria-label="Show transition image">
+       </button>
+ 
+       <button
+         class="hero-dot"
+         type="button"
+         data-slide="5"
+         aria-label="Show pre-sales image">
+       </button>
+ 
+     </div>
+ 
+   </div>
+ </div>
+ 
+</section>
 
 <section class="case-studies-section reveal-section"> <div class="section-heading"> <span class="section-kicker">CASE STUDIES</span> <h2>Programme Delivery Case Studies</h2> <p>Real-world examples of cyber security, cloud transformation and enterprise infrastructure programmes delivered across NHS, Defence and global organisations.</p> </div>
 
@@ -22,4 +194,673 @@
 
 </div> </section>
 
-</div> <script> // Toggle functionality const toggles=document.querySelectorAll('.case-toggle'); toggles.forEach(t=>{t.addEventListener('click',()=>{const card=t.closest('.case-study-card');card.classList.toggle('expanded');});}); </script> </body> </html>
+</div> <script> // Toggle functionality const toggles=document.querySelectorAll('.case-toggle'); toggles.forEach(t=>{t.addEventListener('click',()=>{const card=t.closest('.case-study-card');card.classList.toggle('expanded');});}); </script>
+
+<!-- FLOATING BUTTONS -->
+<a href="calendar.html" class="fab fab-booking">📅</a>
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+ 
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+ .then(r => r.text())
+ .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+ 
+ 
+<script>
+let index = 0;
+const images = document.querySelectorAll('.rotator-img');
+ 
+function rotateImages() {
+ images[index].classList.remove('active');
+ index = (index + 1) % images.length;
+ images[index].classList.add('active');
+}
+ 
+setInterval(rotateImages, 3500);
+</script>
+<script>
+/* =========================================================
+  TWC LTD — OFFERINGS PAGE INTERACTIONS
+  ========================================================= */
+ 
+document.addEventListener("DOMContentLoaded", () => {
+ 
+ 
+ /* =======================================================
+    HERO IMAGE ROTATOR
+    ======================================================= */
+ 
+ const slides = [
+   ...document.querySelectorAll(".hero-slide")
+ ];
+ 
+ const dots = [
+   ...document.querySelectorAll(".hero-dot")
+ ];
+ 
+ if (slides.length) {
+ 
+   let current = 0;
+   let timer;
+ 
+ 
+   function showSlide(index) {
+ 
+     current = index;
+ 
+     slides.forEach((slide, i) => {
+ 
+       slide.classList.toggle(
+         "active",
+         i === current
+       );
+ 
+     });
+ 
+ 
+     dots.forEach((dot, i) => {
+ 
+       dot.classList.toggle(
+         "active",
+         i === current
+       );
+ 
+     });
+ 
+   }
+ 
+ 
+   function startRotator() {
+ 
+     clearInterval(timer);
+ 
+     timer = setInterval(() => {
+ 
+       showSlide(
+         (current + 1) % slides.length
+       );
+ 
+     }, 4200);
+ 
+   }
+ 
+ 
+   dots.forEach(dot => {
+ 
+     dot.addEventListener("click", () => {
+ 
+       showSlide(
+         Number(dot.dataset.slide)
+       );
+ 
+       startRotator();
+ 
+     });
+ 
+   });
+ 
+ 
+   startRotator();
+ 
+ }
+ 
+ 
+ /* =======================================================
+    SCROLL REVEAL
+    ======================================================= */
+ 
+ const revealItems =
+   document.querySelectorAll(".reveal-section");
+ 
+ 
+ if ("IntersectionObserver" in window) {
+ 
+   const revealObserver =
+     new IntersectionObserver(
+       (entries, observer) => {
+ 
+         entries.forEach(entry => {
+ 
+           if (entry.isIntersecting) {
+ 
+             entry.target.classList.add(
+               "is-visible"
+             );
+ 
+             observer.unobserve(
+               entry.target
+             );
+ 
+           }
+ 
+         });
+ 
+       },
+       {
+         threshold: 0.12
+       }
+     );
+ 
+ 
+   revealItems.forEach(item => {
+ 
+     revealObserver.observe(item);
+ 
+   });
+ 
+ } else {
+ 
+   revealItems.forEach(item => {
+ 
+     item.classList.add(
+       "is-visible"
+     );
+ 
+   });
+ 
+ }
+ 
+ 
+ /* =======================================================
+    COUNT-UP METRICS
+    ======================================================= */
+ 
+ const metricValues =
+   document.querySelectorAll(
+     ".metric-value"
+   );
+ 
+ 
+ function animateMetric(el) {
+ 
+   const target =
+     Number(el.dataset.count || 0);
+ 
+   const prefix =
+     el.dataset.prefix || "";
+ 
+   const suffix =
+     el.dataset.suffix || "";
+ 
+   const duration = 1350;
+ 
+   const start =
+     performance.now();
+ 
+ 
+   function frame(now) {
+ 
+     const progress =
+       Math.min(
+         (now - start) / duration,
+         1
+       );
+ 
+     const eased =
+       1 - Math.pow(
+         1 - progress,
+         3
+       );
+ 
+     const value =
+       Math.round(
+         target * eased
+       );
+ 
+ 
+     el.textContent =
+       `${prefix}${value}${suffix}`;
+ 
+ 
+     if (progress < 1) {
+ 
+       requestAnimationFrame(
+         frame
+       );
+ 
+     }
+ 
+   }
+ 
+ 
+   requestAnimationFrame(
+     frame
+   );
+ 
+ }
+ 
+ 
+ if (
+   "IntersectionObserver" in window &&
+   metricValues.length
+ ) {
+ 
+   let metricsStarted = false;
+ 
+ 
+   const metricObserver =
+     new IntersectionObserver(
+       entries => {
+ 
+         if (
+           entries.some(
+             entry =>
+               entry.isIntersecting
+           ) &&
+           !metricsStarted
+         ) {
+ 
+           metricsStarted = true;
+ 
+ 
+           metricValues.forEach(
+             (metric, index) => {
+ 
+               setTimeout(
+                 () =>
+                   animateMetric(
+                     metric
+                   ),
+                 index * 100
+               );
+ 
+             }
+           );
+ 
+ 
+           metricObserver.disconnect();
+ 
+         }
+ 
+       },
+       {
+         threshold: 0.35
+       }
+     );
+ 
+ 
+   const metricSection =
+     document.querySelector(
+       ".scale-section"
+     );
+ 
+ 
+   if (metricSection) {
+ 
+     metricObserver.observe(
+       metricSection
+     );
+ 
+   }
+ 
+ } else {
+ 
+   metricValues.forEach(
+     metric => {
+ 
+       metric.textContent =
+         `${metric.dataset.prefix || ""}` +
+         `${metric.dataset.count || 0}` +
+         `${metric.dataset.suffix || ""}`;
+ 
+     }
+   );
+ 
+ }
+ 
+ 
+ /* =======================================================
+    DELIVERY LIFECYCLE TABS
+    ======================================================= */
+ 
+ const deliverySteps = [
+   ...document.querySelectorAll(
+     ".delivery-step"
+   )
+ ];
+ 
+ const deliveryPanel =
+   document.querySelector(
+     ".delivery-panel"
+   );
+ 
+ 
+ const deliveryContent = [
+ 
+   {
+     number: "01",
+ 
+     title:
+       "Assess the environment",
+ 
+     text:
+       "Establish the current estate, maturity, delivery position, dependencies and risk profile before committing to a transformation path.",
+ 
+     tags: [
+       "Current State",
+       "Risk",
+       "Maturity",
+       "Dependencies"
+     ]
+   },
+ 
+ 
+   {
+     number: "02",
+ 
+     title:
+       "Build the transformation plan",
+ 
+     text:
+       "Translate strategic objectives into a practical roadmap with scope, milestones, resources, governance, investment and measurable outcomes.",
+ 
+     tags: [
+       "Roadmap",
+       "Scope",
+       "Investment",
+       "Outcomes"
+     ]
+   },
+ 
+ 
+   {
+     number: "03",
+ 
+     title:
+       "Mobilise and transform",
+ 
+     text:
+       "Create delivery momentum through clear workstreams, accountable leadership, dependency management and disciplined programme execution.",
+ 
+     tags: [
+       "Mobilisation",
+       "Delivery",
+       "Workstreams",
+       "Dependencies"
+     ]
+   },
+ 
+ 
+   {
+     number: "04",
+ 
+     title:
+       "Govern delivery",
+ 
+     text:
+       "Maintain executive control through transparent reporting, RAID management, financial oversight, assurance and evidence-based decisions.",
+ 
+     tags: [
+       "RAID",
+       "Financials",
+       "Assurance",
+       "Reporting"
+     ]
+   },
+ 
+ 
+   {
+     number: "05",
+ 
+     title:
+       "Transition into BAU",
+ 
+     text:
+       "Make operational readiness part of delivery rather than an afterthought, aligning support, documentation, ownership, service acceptance and adoption.",
+ 
+     tags: [
+       "Readiness",
+       "Support",
+       "Documentation",
+       "Acceptance"
+     ]
+   },
+ 
+ 
+   {
+     number: "06",
+ 
+     title:
+       "Optimise the outcome",
+ 
+     text:
+       "Measure the benefits achieved, stabilise the operating model and identify the next improvements that sustain transformation value.",
+ 
+     tags: [
+       "Benefits",
+       "Stability",
+       "Optimisation",
+       "Continuous Improvement"
+     ]
+   }
+ 
+ ];
+ 
+ 
+ function renderDelivery(index) {
+ 
+   if (
+     !deliveryPanel ||
+     !deliveryContent[index]
+   ) {
+     return;
+   }
+ 
+ 
+   const item =
+     deliveryContent[index];
+ 
+ 
+   deliveryPanel.innerHTML = `
+ 
+     <span class="panel-number">
+       ${item.number}
+     </span>
+ 
+     <h3>
+       ${item.title}
+     </h3>
+ 
+     <p>
+       ${item.text}
+     </p>
+ 
+     <div class="panel-tags">
+ 
+       ${item.tags
+         .map(
+           tag =>
+             `<span>${tag}</span>`
+         )
+         .join("")}
+ 
+     </div>
+ 
+   `;
+ 
+ 
+   deliveryPanel.style.animation =
+     "none";
+ 
+   void deliveryPanel.offsetWidth;
+ 
+   deliveryPanel.style.animation =
+     "";
+ 
+ }
+ 
+ 
+ deliverySteps.forEach(
+   step => {
+ 
+     step.addEventListener(
+       "click",
+       () => {
+ 
+         const index =
+           Number(
+             step.dataset.step
+           );
+ 
+ 
+         deliverySteps.forEach(
+           (item, i) => {
+ 
+             const active =
+               i === index;
+ 
+             item.classList.toggle(
+               "active",
+               active
+             );
+ 
+             item.setAttribute(
+               "aria-selected",
+               active
+                 ? "true"
+                 : "false"
+             );
+ 
+           }
+         );
+ 
+ 
+         renderDelivery(index);
+ 
+       }
+     );
+ 
+   }
+ );
+ 
+ 
+ /* =======================================================
+    CASE STUDY EXPANDERS
+    ======================================================= */
+ 
+ document
+   .querySelectorAll(".case-toggle")
+   .forEach(button => {
+ 
+     button.addEventListener(
+       "click",
+       () => {
+ 
+         const card =
+           button.closest(
+             ".case-card"
+           );
+ 
+ 
+         if (!card) {
+           return;
+         }
+ 
+ 
+         const expanded =
+           card.classList.toggle(
+             "expanded"
+           );
+ 
+ 
+         button.setAttribute(
+           "aria-expanded",
+           expanded
+             ? "true"
+             : "false"
+         );
+ 
+ 
+         button.querySelector(
+           "span"
+         ).textContent =
+           expanded
+             ? "−"
+             : "+";
+ 
+ 
+         button.firstChild.textContent =
+           expanded
+             ? "Hide detail "
+             : "View outcome ";
+ 
+       }
+     );
+ 
+   });
+ 
+ 
+ /* =======================================================
+    BACK TO TOP
+    ======================================================= */
+ 
+ const topButton =
+   document.querySelector(
+     ".offerings-top"
+   );
+ 
+ 
+ if (topButton) {
+ 
+   topButton.addEventListener(
+     "click",
+     () => {
+ 
+       window.scrollTo({
+         top: 0,
+         behavior: "smooth"
+       });
+ 
+     }
+   );
+ 
+ }
+ 
+ 
+ /* =======================================================
+    SMOOTH INTERNAL LINKS
+    ======================================================= */
+ 
+ document
+   .querySelectorAll(
+     'a[href^="#"]'
+   )
+   .forEach(link => {
+ 
+     link.addEventListener(
+       "click",
+       event => {
+ 
+         const target =
+           document.querySelector(
+             link.getAttribute(
+               "href"
+             )
+           );
+ 
+ 
+         if (!target) {
+           return;
+         }
+ 
+ 
+         event.preventDefault();
+ 
+ 
+         target.scrollIntoView({
+           behavior: "smooth",
+           block: "start"
+         });
+ 
+       }
+     );
+ 
+   });
+ 
+});
+</script>
+</body>
+</html>  

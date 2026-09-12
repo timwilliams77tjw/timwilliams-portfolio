@@ -12,7 +12,11 @@
     height:160px;
     background:#f2f6fa;
 }
-
+.case-study-card.expanded .case-detail {
+  grid-template-rows:1fr;
+  opacity:1;
+  margin-top:12px;
+}
 </style> 
 
 
@@ -174,7 +178,8 @@ fetch("header.html")
 
 </div> </section>
 
-</div> <script> // Toggle functionality const toggles=document.querySelectorAll('.case-toggle'); toggles.forEach(t=>{t.addEventListener('click',()=>{const card=t.closest('.case-study-card');card.classList.toggle('expanded');});}); </script>
+</div> 
+
 
 <!-- FLOATING BUTTONS -->
 <a href="calendar.html" class="fab fab-booking">📅</a>
@@ -716,61 +721,7 @@ document.addEventListener("DOMContentLoaded", () => {
    }
  );
  
- 
- /* =======================================================
-    CASE STUDY EXPANDERS
-    ======================================================= */
- 
- document
-   .querySelectorAll(".case-toggle")
-   .forEach(button => {
- 
-     button.addEventListener(
-       "click",
-       () => {
- 
-         const card =
-           button.closest(
-             ".case-card"
-           );
- 
- 
-         if (!card) {
-           return;
-         }
- 
- 
-         const expanded =
-           card.classList.toggle(
-             "expanded"
-           );
- 
- 
-         button.setAttribute(
-           "aria-expanded",
-           expanded
-             ? "true"
-             : "false"
-         );
- 
- 
-         button.querySelector(
-           "span"
-         ).textContent =
-           expanded
-             ? "−"
-             : "+";
- 
- 
-         button.firstChild.textContent =
-           expanded
-             ? "Hide detail "
-             : "View outcome ";
- 
-       }
-     );
- 
-   });
+
  
  
  /* =======================================================
@@ -842,5 +793,26 @@ document.addEventListener("DOMContentLoaded", () => {
  
 });
 </script>
+  <script>
+/* =======================================================
+   CASE STUDY EXPANDERS
+======================================================= */
+document
+  .querySelectorAll(".case-toggle")
+  .forEach(button => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".case-study-card");
+      if (!card) return;
+
+      const expanded = card.classList.toggle("expanded");
+
+      // Optional accessibility + icon update
+      button.setAttribute("aria-expanded", expanded ? "true" : "false");
+      const icon = button.querySelector("span");
+      if (icon) icon.textContent = expanded ? "−" : "+";
+    });
+  });
+    
+  </script>
 </body>
 </html>  

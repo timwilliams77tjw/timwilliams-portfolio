@@ -24139,7 +24139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
  
- function updateCPDStatusSummary() {
+function updateCPDStatusSummary() {
     const cards = document.querySelectorAll('.cpd-card');
 
     let completed = 0;
@@ -24161,17 +24161,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update stacked bar widths
     document.getElementById('status-completed').style.width =
-        `${(completed / total) * 100}%`;
+        total ? `${(completed / total) * 100}%` : '0%';
 
     document.getElementById('status-inprogress').style.width =
-        `${(inprogress / total) * 100}%`;
+        total ? `${(inprogress / total) * 100}%` : '0%';
 
     document.getElementById('status-planned').style.width =
-        `${(planned / total) * 100}%`;
+        total ? `${(planned / total) * 100}%` : '0%';
 }
 
-document.addEventListener('DOMContentLoaded', updateCPDStatusSummary);
- 
 </script>
 
 

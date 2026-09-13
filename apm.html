@@ -24079,7 +24079,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
  
- 
+ function updateCPDStatusSummary() {
+    const cards = document.querySelectorAll('.cpd-card');
+
+    let completed = 0;
+    let inprogress = 0;
+    let planned = 0;
+
+    cards.forEach(card => {
+        if (card.classList.contains('completed')) completed++;
+        if (card.classList.contains('inprogress')) inprogress++;
+        if (card.classList.contains('planned')) planned++;
+    });
+
+    const total = completed + inprogress + planned;
+
+    // Update counts
+    document.getElementById('status-completed-count').textContent = completed;
+    document.getElementById('status-inprogress-count').textContent = inprogress;
+    document.getElementById('status-planned-count').textContent = planned;
+
+    // Update stacked bar widths
+    document.getElementById('status-completed').style.width =
+        `${(completed / total) * 100}%`;
+
+    document.getElementById('status-inprogress').style.width =
+        `${(inprogress / total) * 100}%`;
+
+    document.getElementById('status-planned').style.width =
+        `${(planned / total) * 100}%`;
+}
+
+document.addEventListener('DOMContentLoaded', updateCPDStatusSummary);
  
 </script>
 

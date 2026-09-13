@@ -15206,7 +15206,67 @@ section.bcs-development-section
     align-items: center;
     font-size: 0.9rem;
 }
+/* STATUS SUMMARY BAR */
+.cpd-status-bar {
+    display:flex;
+    width:100%;
+    height:32px;
+    border-radius:10px;
+    overflow:hidden;
+    margin:1.5rem 0 2rem;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+}
 
+.status-segment {
+    height:100%;
+    transition:width 1s ease;
+}
+
+.status-segment.completed {
+    background:#16a34a;
+}
+
+.status-segment.inprogress {
+    background:#2563eb;
+}
+
+.status-segment.planned {
+    background:#d97706;
+}
+
+/* STATUS CARDS */
+.cpd-status-cards {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1.2rem;
+}
+
+.status-card {
+    background:#fff;
+    padding:1.4rem 1.2rem;
+    border-radius:16px;
+    box-shadow:var(--apm-shadow);
+    border-left:6px solid;
+}
+
+.status-card.completed { border-left-color:#16a34a; }
+.status-card.inprogress { border-left-color:#2563eb; }
+.status-card.planned { border-left-color:#d97706; }
+
+.status-card h4 {
+    margin:0 0 .4rem;
+    font-size:.9rem;
+    font-weight:700;
+    color:#555;
+    text-transform:uppercase;
+}
+
+.status-card p {
+    margin:0;
+    font-size:1.8rem;
+    font-weight:800;
+    color:#0a2540;
+}
    
 </style>
 

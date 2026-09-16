@@ -23941,120 +23941,192 @@ function findTarget(stage) {
     }
  
 })();
- /* ============================================================
+ 
+/* ============================================================
    DEVELOPMENT ROADMAP
-   VERSION 2 — WITH BI‑DIRECTIONAL COMPETENCY LINKING
+   VERSION 1
    ============================================================ */
-
+ 
 (function initialiseDevelopmentRoadmap() {
-
-    /* ========================================================
-       DEVELOPMENT PLAN → COMPETENCY MAPPING
-       (Your 4 development priorities)
-    ======================================================== */
-
-    const developmentPlans = {
-        "leadership-mentoring": {
-            title: "Leadership & Mentoring",
-            competencies: ["leadership", "team-management", "capability-development"]
-        },
-        "stakeholder-engagement": {
-            title: "Stakeholder Engagement & Communication",
-            competencies: ["stakeholder-engagement-and-communication", "conflict-resolution"]
-        },
-        "capability-uplift": {
-            title: "Capability Uplift",
-            competencies: ["capability-development", "assurance", "transition"]
-        },
-        "ethics-professionalism": {
-            title: "Ethics, Compliance & Professionalism",
-            competencies: ["ethics-compliance-and-professionalism", "diversity-inclusion"]
-        }
-    };
-
-
-    /* ========================================================
-       MAIN BUILDER
-    ======================================================== */
-
+ 
     function buildDevelopmentRoadmap() {
-
-        const roadmap = document.getElementById("development-roadmap");
-        const container = document.getElementById("development-roadmap-items");
-
-        if (!roadmap || !container) return;
-
-        const sourceCards = document.querySelectorAll(".development-priority-card");
-        if (!sourceCards.length) return;
-
-
+ 
+        const roadmap =
+            document.getElementById(
+                "development-roadmap"
+            );
+ 
+        const container =
+            document.getElementById(
+                "development-roadmap-items"
+            );
+ 
+        if (!roadmap || !container) {
+            return;
+        }
+ 
+ 
+        /* ========================================================
+           SOURCE DEVELOPMENT PRIORITIES
+        ======================================================== */
+ 
+        const sourceCards =
+            document.querySelectorAll(
+                ".development-priority-card"
+            );
+ 
+        if (!sourceCards.length) {
+            return;
+        }
+ 
+ 
         /* ========================================================
            ROADMAP CONFIGURATION
+          
+           This controls sequencing only.
+           Competency/rating data will be connected later.
         ======================================================== */
-
+ 
         const roadmapConfig = [
-            { index: 2, id: "leadership-mentoring", priority: "high",     timing: "Now → 3 months", progress: 25, icon: "fa-robot" },
-            { index: 0, id: "stakeholder-engagement", priority: "medium", timing: "3 → 6 months",   progress: 15, icon: "fa-people-arrows" },
-            { index: 1, id: "capability-uplift",      priority: "medium", timing: "Ongoing",        progress: 20, icon: "fa-handshake" },
-            { index: 3, id: "ethics-professionalism", priority: "strategic", timing: "6 → 12 months", progress: 10, icon: "fa-leaf" }
+ 
+            {
+                index: 2,
+                priority: "high",
+                timing: "Now → 3 months",
+                progress: 25,
+                icon: "fa-robot"
+            },
+ 
+            {
+                index: 0,
+                priority: "medium",
+                timing: "3 → 6 months",
+                progress: 15,
+                icon: "fa-people-arrows"
+            },
+ 
+            {
+                index: 1,
+                priority: "medium",
+                timing: "Ongoing",
+                progress: 20,
+                icon: "fa-handshake"
+            },
+ 
+            {
+                index: 3,
+                priority: "strategic",
+                timing: "6 → 12 months",
+                progress: 10,
+                icon: "fa-leaf"
+            }
+ 
         ];
-
+ 
+ 
+        /* ========================================================
+           CLEAR EXISTING ITEMS
+        ======================================================== */
+ 
         container.innerHTML = "";
-
-
+ 
+ 
         /* ========================================================
            CREATE ROADMAP ITEMS
         ======================================================== */
-
+ 
         roadmapConfig.forEach(function(config) {
-
-            const source = sourceCards[config.index];
-            if (!source) return;
-
-            const titleElement = source.querySelector("h3");
-            const title = titleElement ? titleElement.textContent.trim() : "Development priority";
-
-            const item = document.createElement("article");
-            item.className = "development-roadmap-item";
-            item.id = `development-${config.id}`;   // ← IMPORTANT: gives each item a stable ID
-
-
+ 
+            const source =
+                sourceCards[config.index];
+ 
+            if (!source) {
+                return;
+            }
+ 
+ 
+            const titleElement =
+                source.querySelector("h3");
+ 
+            const title =
+                titleElement
+                    ? titleElement.textContent.trim()
+                    : "Development priority";
+ 
+ 
+            const item =
+                document.createElement("article");
+ 
+            item.className =
+                "development-roadmap-item";
+ 
+ 
             /* ----------------------------------------------------
                HEADER
             ---------------------------------------------------- */
-
-            const header = document.createElement("div");
-            header.className = "development-roadmap-item-header";
-
-            const icon = document.createElement("div");
-            icon.className = "development-roadmap-item-icon";
-            icon.innerHTML = `<i class="fa-solid ${config.icon}"></i>`;
-
-            const heading = document.createElement("h4");
-            heading.className = "development-roadmap-item-title";
-            heading.textContent = title;
-
+ 
+            const header =
+                document.createElement("div");
+ 
+            header.className =
+                "development-roadmap-item-header";
+ 
+ 
+            const icon =
+                document.createElement("div");
+ 
+            icon.className =
+                "development-roadmap-item-icon";
+ 
+            icon.innerHTML =
+                `<i class="fa-solid ${config.icon}"></i>`;
+ 
+ 
+            const heading =
+                document.createElement("h4");
+ 
+            heading.className =
+                "development-roadmap-item-title";
+ 
+            heading.textContent =
+                title;
+ 
+ 
             header.appendChild(icon);
             header.appendChild(heading);
-
-
+ 
+ 
             /* ----------------------------------------------------
                PRIORITY
             ---------------------------------------------------- */
-
-            const priority = document.createElement("span");
-            priority.className = `development-roadmap-priority ${config.priority}`;
+ 
+            const priority =
+                document.createElement("span");
+ 
+            priority.className =
+                `development-roadmap-priority ${config.priority}`;
+ 
             priority.textContent =
-                config.priority === "high" ? "High priority" :
-                config.priority === "strategic" ? "Strategic" : "Active";
-
-
+                config.priority === "high"
+                    ? "High priority"
+                    : config.priority === "strategic"
+                        ? "Strategic"
+                        : "Active";
+ 
+ 
             /* ----------------------------------------------------
-               CURRENT → TARGET (placeholder)
+               CURRENT → TARGET
+              
+               Temporary representation until the existing
+               competence rating data is connected.
             ---------------------------------------------------- */
-
-            const rating = document.createElement("div");
-            rating.className = "development-roadmap-rating";
+ 
+            const rating =
+                document.createElement("div");
+ 
+            rating.className =
+                "development-roadmap-rating";
+ 
             rating.innerHTML = `
                 <strong>Development gap</strong>
                 <span class="development-roadmap-arrow">
@@ -24062,140 +24134,122 @@ function findTarget(stage) {
                 </span>
                 <span>Target capability</span>
             `;
-
-
+ 
+ 
             /* ----------------------------------------------------
-               PROGRESS BAR
+               PROGRESS
             ---------------------------------------------------- */
-
-            const progress = document.createElement("div");
-            progress.className = "development-roadmap-progress";
-
-            const progressBar = document.createElement("div");
-            progressBar.className = "development-roadmap-progress-bar";
-            progressBar.style.width = `${config.progress}%`;
-
-            progress.appendChild(progressBar);
-
-
+ 
+            const progress =
+                document.createElement("div");
+ 
+            progress.className =
+                "development-roadmap-progress";
+ 
+ 
+            const progressBar =
+                document.createElement("div");
+ 
+            progressBar.className =
+                "development-roadmap-progress-bar";
+ 
+            progressBar.style.width =
+                `${config.progress}%`;
+ 
+ 
+            progress.appendChild(
+                progressBar
+            );
+ 
+ 
             /* ----------------------------------------------------
                TIMING
             ---------------------------------------------------- */
-
-            const timing = document.createElement("div");
-            timing.className = "development-roadmap-timing";
+ 
+            const timing =
+                document.createElement("div");
+ 
+            timing.className =
+                "development-roadmap-timing";
+ 
             timing.innerHTML = `
                 <i class="fa-regular fa-clock"></i>
                 <span>${config.timing}</span>
             `;
-
-
+ 
+ 
             /* ----------------------------------------------------
-               INSERT DEVELOPMENT → COMPETENCY LINKS
+               ASSEMBLE
             ---------------------------------------------------- */
-
-            const plan = developmentPlans[config.id];
-
-            if (plan) {
-                const compContainer = document.createElement("div");
-                compContainer.className = "dev-competence-links";
-
-                const compTitle = document.createElement("h4");
-                compTitle.textContent = "Competencies in this development plan:";
-                compContainer.appendChild(compTitle);
-
-                plan.competencies.forEach(comp => {
-                    const link = document.createElement("a");
-                    link.href = `#competence-${comp}`;
-                    link.textContent = comp.replace(/-/g, " ");
-                    link.className = "dev-to-competence-link";
-                    compContainer.appendChild(link);
-                });
-
-                item.appendChild(compContainer);
-            }
-
-
-            /* ----------------------------------------------------
-               ASSEMBLE ITEM
-            ---------------------------------------------------- */
-
+ 
             item.appendChild(header);
             item.appendChild(priority);
             item.appendChild(rating);
             item.appendChild(progress);
             item.appendChild(timing);
-
+ 
             container.appendChild(item);
+ 
         });
-
-
+ 
+ 
         /* ========================================================
            ROADMAP SUMMARY
         ======================================================== */
-
-        const highCount = document.getElementById("development-roadmap-high-count");
-        const activeCount = document.getElementById("development-roadmap-active-count");
-        const strategicCount = document.getElementById("development-roadmap-strategic-count");
-
-        if (highCount) highCount.textContent = "1";
-        if (activeCount) activeCount.textContent = "2";
-        if (strategicCount) strategicCount.textContent = "1";
-
-
-        /* ========================================================
-           COMPETENCY → DEVELOPMENT LINKS
-        ======================================================== */
-
-        const competenceToDevelopment = {};
-
-        Object.entries(developmentPlans).forEach(([devId, dev]) => {
-            dev.competencies.forEach(comp => {
-                if (!competenceToDevelopment[comp]) competenceToDevelopment[comp] = [];
-                competenceToDevelopment[comp].push({
-                    id: `development-${devId}`,
-                    title: dev.title
-                });
-            });
-        });
-
-        Object.entries(competenceToDevelopment).forEach(([comp, devList]) => {
-            const compCard = document.querySelector(`#competence-${comp}`);
-            if (!compCard) return;
-
-            const container = document.createElement("div");
-            container.className = "competence-development-links";
-
-            const title = document.createElement("h4");
-            title.textContent = "Development plans including this competency:";
-            container.appendChild(title);
-
-            devList.forEach(dev => {
-                const link = document.createElement("a");
-                link.href = `#${dev.id}`;
-                link.textContent = dev.title;
-                link.className = "competence-to-development-link";
-                container.appendChild(link);
-            });
-
-            compCard.appendChild(container);
-        });
-
+ 
+        const highCount =
+            document.getElementById(
+                "development-roadmap-high-count"
+            );
+ 
+        const activeCount =
+            document.getElementById(
+                "development-roadmap-active-count"
+            );
+ 
+        const strategicCount =
+            document.getElementById(
+                "development-roadmap-strategic-count"
+            );
+ 
+ 
+        if (highCount) {
+            highCount.textContent = "1";
+        }
+ 
+        if (activeCount) {
+            activeCount.textContent = "2";
+        }
+ 
+        if (strategicCount) {
+            strategicCount.textContent = "1";
+        }
+ 
     }
-
-
+ 
+ 
     /* ========================================================
        INITIALISE
     ======================================================== */
-
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", buildDevelopmentRoadmap);
+ 
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+ 
+        document.addEventListener(
+            "DOMContentLoaded",
+            buildDevelopmentRoadmap
+        );
+ 
     } else {
+ 
         buildDevelopmentRoadmap();
+ 
     }
-
+ 
 })();
-
+ 
 /* ==========================================================
    INITIALISE CPD METRIC ANIMATIONS
 ========================================================== */

@@ -22416,25 +22416,12 @@ function generateDevelopmentRoadmap() {
         });
     });
  
-    Object.entries(competenceToDevelopment).forEach(([comp, devList]) => {
-        const compCard = document.querySelector(`#competence-${comp}`);
-        if (!compCard) return;
- 
-        const container = document.createElement("div");
-        container.className = "competence-development-links";
- 
-        const title = document.createElement("h4");
-        title.textContent = "Development plans including this competency:";
-        container.appendChild(title);
- 
-        devList.forEach(dev => {
-            const link = document.createElement("a");
-            link.href = `#${dev.id}`;
-            link.textContent = dev.title;
-            link.className = "competence-to-development-link";
-            container.appendChild(link);
+    area.title
+            });
         });
+    });
  
+
         compCard.appendChild(container);
     });
 }

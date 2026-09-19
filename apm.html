@@ -22160,18 +22160,17 @@ function drawRadar(
         }
     );
  
-}
- /* ============================================================
+}/* ============================================================
    DEVELOPMENT ROADMAP
    DATA-DRIVEN FROM PERSONAL COMPETENCE RATINGS
 ============================================================ */
- 
+
 function generateDevelopmentRoadmap() {
- 
+
     /* --------------------------------------------------------
        RATING SCALE
     -------------------------------------------------------- */
- 
+
     const ratingMap = {
         "Aware": 1,
         "Practised": 2,
@@ -22179,7 +22178,7 @@ function generateDevelopmentRoadmap() {
         "Proficient": 4,
         "Expert": 5
     };
- 
+
     const ratingNames = {
         1: "Aware",
         2: "Practised",
@@ -22187,11 +22186,11 @@ function generateDevelopmentRoadmap() {
         4: "Proficient",
         5: "Expert"
     };
- 
+
     /* --------------------------------------------------------
        DEVELOPMENT PRIORITY → COMPETENCY RELATIONSHIPS
     -------------------------------------------------------- */
- 
+
     const developmentAreas = [
         {
             key: "ai-digital-transformation",
@@ -22241,112 +22240,110 @@ function generateDevelopmentRoadmap() {
             ]
         }
     ];
- 
+
     /* --------------------------------------------------------
        READ CURRENT COMPETENCY RATINGS
     -------------------------------------------------------- */
- 
+
     const competencyData = {};
- 
-    document
-        .querySelectorAll(".accordion-item[id^='competence-']")
-        .forEach(card => {
- 
-            const id = card.id.replace("competence-", "");
-            const badge = card.querySelector(".accordion-header .rating-badge");
-            const title = card.querySelector(".accordion-header span");
- 
-            if (!badge) return;
- 
-            const rating = badge.textContent.trim();
-            const value = ratingMap[rating];
-            if (!value) return;
- 
-            let label = id;
- 
-            if (title) {
-                label = [...title.childNodes]
-                    .filter(node => node.nodeType === Node.TEXT_NODE)
-                    .map(node => node.textContent.trim())
-                    .join(" ")
-                    .trim();
-            }
- 
-            competencyData[id] = {
-                id,
-                label,
-                rating,
-                value,
-                target: Math.min(value + 1, 5),
-                gap: Math.max(0, Math.min(value + 1, 5) - value)
-            };
-        });
- 
+
+    document.querySelectorAll(".accordion-item[id^='competence-']").forEach(card => {
+
+        const id = card.id.replace("competence-", "");
+        const badge = card.querySelector(".accordion-header .rating-badge");
+        const title = card.querySelector(".accordion-header span");
+
+        if (!badge) return;
+
+        const rating = badge.textContent.trim();
+        const value = ratingMap[rating];
+        if (!value) return;
+
+        let label = id;
+
+        if (title) {
+            label = [...title.childNodes]
+                .filter(node => node.nodeType === Node.TEXT_NODE)
+                .map(node => node.textContent.trim())
+                .join(" ")
+                .trim();
+        }
+
+        competencyData[id] = {
+            id,
+            label,
+            rating,
+            value,
+            target: Math.min(value + 1, 5),
+            gap: Math.max(0, Math.min(value + 1, 5) - value)
+        };
+    });
+
     /* --------------------------------------------------------
        CALCULATE DEVELOPMENT AREA DATA
     -------------------------------------------------------- */
- 
+
     developmentAreas.forEach(area => {
         area.items = area.competencies
             .map(id => competencyData[id])
             .filter(Boolean);
- 
+
         if (!area.items.length) {
             area.currentAverage = 0;
             area.targetAverage = 0;
             area.gap = 0;
             return;
         }
- 
+
         const totalCurrent = area.items.reduce((t, i) => t + i.value, 0);
         const totalTarget = area.items.reduce((t, i) => t + i.target, 0);
- 
+
         area.currentAverage = totalCurrent / area.items.length;
         area.targetAverage = totalTarget / area.items.length;
         area.gap = area.targetAverage - area.currentAverage;
     });
- 
+
     /* --------------------------------------------------------
        SORT DEVELOPMENT AREAS
     -------------------------------------------------------- */
- 
+
     developmentAreas.sort((a, b) => b.gap - a.gap);
- 
+
     /* --------------------------------------------------------
        FIND ROADMAP CONTAINER
     -------------------------------------------------------- */
- 
+
     const roadmap = document.querySelector(".development-roadmap");
     if (!roadmap) return;
- 
+
     let container = roadmap.querySelector(".development-roadmap-data");
     if (!container) {
         container = document.createElement("div");
         container.className = "development-roadmap-data";
         roadmap.appendChild(container);
     }
- 
+
     container.innerHTML = "";
- 
+
     /* --------------------------------------------------------
        CREATE ROADMAP ITEMS
     -------------------------------------------------------- */
- 
+
     developmentAreas.forEach(area => {
- 
+
         const card = document.createElement("article");
         card.className = `development-roadmap-item development-roadmap-${area.key}`;
         card.dataset.priority = area.priority.toLowerCase();
-        card.id = `development-${area.key}`;   /* ← IMPORTANT */
- 
+        card.id = `development-${area.key}`;
+
         /* HEADER */
         const header = document.createElement("div");
         header.className = "development-roadmap-item-header";
- 
+
         const icon = document.createElement("div");
         icon.className = "development-roadmap-icon";
         icon.innerHTML = `<i class="${area.icon}"></i>`;
- 
+
         const title = document.createElement("div");
         title.className = "development-roadmap-item-title";
         title.innerHTML = `
@@ -22355,38 +22352,38 @@ function generateDevelopmentRoadmap() {
                 ${area.priority.toUpperCase()}
             </span>
         `;
- 
+
         header.appendChild(icon);
         header.appendChild(title);
         card.appendChild(header);
- 
+
         /* CURRENT → TARGET */
         const levels = document.createElement("div");
         levels.className = "development-roadmap-levels";
- 
+
         const current = document.createElement("div");
         current.className = "development-roadmap-level current";
         current.innerHTML = `
             <span class="roadmap-level-label">Current</span>
             <strong>${area.currentAverage.toFixed(1)}</strong>
         `;
- 
+
         const arrow = document.createElement("div");
         arrow.className = "development-roadmap-level-arrow";
         arrow.innerHTML = `<i class="fa-solid fa-arrow-right"></i>`;
- 
+
         const target = document.createElement("div");
         target.className = "development-roadmap-level target";
         target.innerHTML = `
             <span class="roadmap-level-label">Next target</span>
             <strong>${area.targetAverage.toFixed(1)}</strong>
         `;
- 
+
         levels.appendChild(current);
         levels.appendChild(arrow);
         levels.appendChild(target);
         card.appendChild(levels);
- 
+
         /* GAP */
         const gap = document.createElement("div");
         gap.className = "development-roadmap-gap";
@@ -22395,11 +22392,11 @@ function generateDevelopmentRoadmap() {
             <strong>${area.gap.toFixed(1)} level${area.gap === 1 ? "" : "s"}</strong>
         `;
         card.appendChild(gap);
- 
+
         /* COMPETENCY DETAIL */
         const details = document.createElement("div");
         details.className = "development-roadmap-competencies";
- 
+
         area.items.forEach(item => {
             const row = document.createElement("div");
             row.className = "development-roadmap-competency";
@@ -22413,20 +22410,17 @@ function generateDevelopmentRoadmap() {
             `;
             details.appendChild(row);
         });
- 
+
         card.appendChild(details);
- 
-        /* --------------------------------------------------------
-           INSERT DEVELOPMENT → COMPETENCY LINKS
-        -------------------------------------------------------- */
- 
+
+        /* DEVELOPMENT → COMPETENCY LINKS */
         const compLinks = document.createElement("div");
         compLinks.className = "dev-competence-links";
- 
+
         const compTitle = document.createElement("h4");
         compTitle.textContent = "Competencies in this development plan:";
         compLinks.appendChild(compTitle);
- 
+
         area.competencies.forEach(comp => {
             const link = document.createElement("a");
             link.href = `#competence-${comp}`;
@@ -22434,18 +22428,18 @@ function generateDevelopmentRoadmap() {
             link.className = "dev-to-competence-link";
             compLinks.appendChild(link);
         });
- 
+
         card.appendChild(compLinks);
- 
+
         container.appendChild(card);
     });
- 
+
     /* --------------------------------------------------------
-       COMPETENCY → DEVELOPMENT LINKS
+       COMPETENCY → DEVELOPMENT LINKS (INSIDE ACCORDION)
     -------------------------------------------------------- */
- 
+
     const competenceToDevelopment = {};
- 
+
     developmentAreas.forEach(area => {
         area.competencies.forEach(comp => {
             if (!competenceToDevelopment[comp]) competenceToDevelopment[comp] = [];
@@ -22455,18 +22449,21 @@ function generateDevelopmentRoadmap() {
             });
         });
     });
- 
+
     Object.entries(competenceToDevelopment).forEach(([comp, devList]) => {
         const compCard = document.querySelector(`#competence-${comp}`);
         if (!compCard) return;
- 
+
+        const accordionInner = compCard.querySelector(".accordion-content .accordion-inner");
+        if (!accordionInner) return;
+
         const container = document.createElement("div");
         container.className = "competence-development-links";
- 
+
         const title = document.createElement("h4");
         title.textContent = "Development plans including this competency:";
         container.appendChild(title);
- 
+
         devList.forEach(dev => {
             const link = document.createElement("a");
             link.href = `#${dev.id}`;
@@ -22474,10 +22471,28 @@ function generateDevelopmentRoadmap() {
             link.className = "competence-to-development-link";
             container.appendChild(link);
         });
- 
-        compCard.appendChild(container);
+
+        accordionInner.appendChild(container);
     });
+
+    /* --------------------------------------------------------
+       UPDATE SUMMARY COUNTERS (RUN LAST)
+    -------------------------------------------------------- */
+
+    const highCount = developmentAreas.filter(area => area.priority === "High").length;
+    const activeCount = developmentAreas.filter(area => area.priority === "Active").length;
+    const strategicCount = developmentAreas.filter(area => area.priority === "Strategic").length;
+
+    const highElement = document.getElementById("development-roadmap-high-count");
+    const activeElement = document.getElementById("development-roadmap-active-count");
+    const strategicElement = document.getElementById("development-roadmap-strategic-count");
+
+    if (highElement) highElement.textContent = highCount;
+    if (activeElement) activeElement.textContent = activeCount;
+    if (strategicElement) strategicElement.textContent = strategicCount;
+
 }
+
 
 /* ============================================================
    WAIT FOR COMPETENCY ACCORDION

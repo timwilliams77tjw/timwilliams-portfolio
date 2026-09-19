@@ -22160,7 +22160,9 @@ function drawRadar(
         }
     );
  
-}/* ============================================================
+}
+   
+   /* ============================================================
    DEVELOPMENT ROADMAP
    DATA-DRIVEN FROM PERSONAL COMPETENCE RATINGS
 ============================================================ */
@@ -22436,6 +22438,7 @@ function generateDevelopmentRoadmap() {
 
     /* --------------------------------------------------------
        COMPETENCY → DEVELOPMENT LINKS (INSIDE ACCORDION)
+       WITH FALLBACK TO .accordion-content
     -------------------------------------------------------- */
 
     const competenceToDevelopment = {};
@@ -22454,8 +22457,12 @@ function generateDevelopmentRoadmap() {
         const compCard = document.querySelector(`#competence-${comp}`);
         if (!compCard) return;
 
-        const accordionInner = compCard.querySelector(".accordion-content .accordion-inner");
-        if (!accordionInner) return;
+        // Prefer .accordion-inner, fall back to .accordion-content
+        let accordionTarget =
+            compCard.querySelector(".accordion-content .accordion-inner") ||
+            compCard.querySelector(".accordion-content");
+
+        if (!accordionTarget) return;
 
         const container = document.createElement("div");
         container.className = "competence-development-links";
@@ -22472,7 +22479,7 @@ function generateDevelopmentRoadmap() {
             container.appendChild(link);
         });
 
-        accordionInner.appendChild(container);
+        accordionTarget.appendChild(container);
     });
 
     /* --------------------------------------------------------

@@ -2600,6 +2600,96 @@ OFFERINGS HERO — CARD CONVERSION (MATCHES INSIGHTS HERO)
         grid-template-columns: 1fr;
     }
 }
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Card container */
+.case-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  position: relative;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+/* Top row */
+.case-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+  color: #444;
+}
+
+/* Title */
+.case-card h3 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+/* Outcome preview */
+.case-outcome {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f7f7f7;
+  border-radius: 10px;
+}
+
+.case-outcome b {
+  display: block;
+  margin-bottom: .4rem;
+}
+
+/* Toggle button */
+.case-toggle {
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+/* Hidden detail panel */
+.case-detail {
+  display: none;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.case-card.open .case-detail {
+  display: block;
+}
+
+/* Inner detail rows */
+.case-detail div {
+  margin-bottom: 1rem;
+}
+
+.case-detail b {
+  display: block;
+  margin-bottom: .3rem;
+  font-weight: 600;
+}
+
+     
 </style>
 
     

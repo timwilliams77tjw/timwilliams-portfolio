@@ -24001,59 +24001,53 @@ function updateCPDStatusSummary() {
     document.getElementById('status-planned').style.width =
         total ? `${(planned / total) * 100}%` : '0%';
 }
+document.addEventListener("DOMContentLoaded", function() {
 
-/* ============================================================
-   FILTER LOGIC WITH NUMERICAL COUNTS
-   ============================================================ */
+    function updateFilterCounts() {
+        const categories = ["cyber", "pmo", "cloud", "transform", "migration"];
 
-function updateFilterCounts() {
-    const categories = [
-        "cyber",
-        "cloud",
-        "pmo",
-        "transform",
-        "migration"
-    ];
+        categories.forEach(cat => {
+            const count = document.querySelectorAll(`.professional-evidence-item.apm-${cat}`).length;
+            const btn = document.querySelector(`.filter-btn[data-filter="${cat}"]`);
+            if (btn) {
+                btn.querySelector(".filter-count").textContent = `(${count})`;
+            }
+        });
 
-    categories.forEach(cat => {
-        const count = document.querySelectorAll(`.professional-evidence-item.apm-${cat}`).length;
-        const btn = document.querySelector(`.filter-btn[data-filter="${cat}"]`);
-        if (btn) {
-            btn.querySelector(".filter-count").textContent = `(${count})`;
-        }
-    });
-}
+        // Count ALL
+        const allCount = document.querySelectorAll(".professional-evidence-item").length;
+        const allBtn = document.querySelector(`.filter-btn[data-filter="all"]`);
+        allBtn.querySelector(".filter-count").textContent = `(${allCount})`;
+    }
 
-function applyEvidenceFilter(type) {
-    const cards = document.querySelectorAll(".professional-evidence-item");
+    function applyEvidenceFilter(type) {
+        const cards = document.querySelectorAll(".professional-evidence-item");
 
-    cards.forEach(card => {
-        if (type === "all") {
-            card.style.display = "";
-        } else {
-            card.style.display = card.classList.contains(`apm-${type}`) ? "" : "none";
-        }
-    });
+        cards.forEach(card => {
+            if (type === "all") {
+                card.style.display = "";
+            } else {
+                card.style.display = card.classList.contains(`apm-${type}`) ? "" : "none";
+            }
+        });
 
-    // Update active state
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.classList.remove("active-filter");
+        });
+
+        document.querySelector(`.filter-btn[data-filter="${type}"]`).classList.add("active-filter");
+    }
+
     document.querySelectorAll(".filter-btn").forEach(btn => {
-        btn.classList.remove("active-filter");
+        btn.addEventListener("click", () => {
+            const type = btn.dataset.filter;
+            applyEvidenceFilter(type);
+        });
     });
-    document.querySelector(`.filter-btn[data-filter="${type}"]`).classList.add("active-filter");
-}
 
-// Attach filter button events
-document.querySelectorAll(".filter-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        const type = btn.dataset.filter;
-        applyEvidenceFilter(type);
-    });
+    updateFilterCounts();
 });
 
-// Initialise counts on page load
-updateFilterCounts();
-
-   
 </script>
 
 

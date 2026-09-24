@@ -24117,12 +24117,28 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector(`.filter-btn[data-filter="${type}"]`).classList.add("active-filter");
     }
 
-    document.querySelectorAll(".filter-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const type = btn.dataset.filter;
-            applyEvidenceFilter(type);
-        });
-    });
+document.querySelectorAll(".case-toggle").forEach(button => {
+
+  // Mobile Safari fix
+  button.addEventListener("touchstart", () => {
+    button.click();
+  });
+
+  button.addEventListener("click", () => {
+
+    const card = button.closest(".case-card");
+    if (!card) return;
+
+    const expanded = card.classList.toggle("expanded");
+
+    button.setAttribute("aria-expanded", expanded ? "true" : "false");
+
+    button.querySelector("span").textContent = expanded ? "−" : "+";
+    button.firstChild.textContent = expanded ? "Hide detail " : "View outcome ";
+  });
+
+});
+
 
     updateFilterCounts();
 });

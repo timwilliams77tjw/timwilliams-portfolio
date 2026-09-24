@@ -24082,6 +24082,9 @@ function updateCPDStatusSummary() {
 }
 document.addEventListener("DOMContentLoaded", function() {
 
+    // -----------------------------
+    // UPDATE FILTER COUNTS
+    // -----------------------------
     function updateFilterCounts() {
         const categories = ["cyber", "pmo", "cloud", "transform", "migration"];
 
@@ -24096,9 +24099,15 @@ document.addEventListener("DOMContentLoaded", function() {
         // Count ALL
         const allCount = document.querySelectorAll(".professional-evidence-item").length;
         const allBtn = document.querySelector(`.filter-btn[data-filter="all"]`);
-        allBtn.querySelector(".filter-count").textContent = `(${allCount})`;
+        if (allBtn) {
+            allBtn.querySelector(".filter-count").textContent = `(${allCount})`;
+        }
     }
 
+
+    // -----------------------------
+    // APPLY FILTER
+    // -----------------------------
     function applyEvidenceFilter(type) {
         const cards = document.querySelectorAll(".professional-evidence-item");
 
@@ -24114,25 +24123,35 @@ document.addEventListener("DOMContentLoaded", function() {
             btn.classList.remove("active-filter");
         });
 
-        document.querySelector(`.filter-btn[data-filter="${type}"]`).classList.add("active-filter");
+        const activeBtn = document.querySelector(`.filter-btn[data-filter="${type}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add("active-filter");
+        }
     }
 
-document.querySelectorAll(".filter-btn").forEach(btn => {
 
-    // Mobile Safari fix
-    btn.addEventListener("touchstart", () => {
-        btn.click();
+    // -----------------------------
+    // FILTER BUTTON EVENT LISTENERS
+    // -----------------------------
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+
+        // Mobile Safari fix
+        btn.addEventListener("touchstart", () => {
+            btn.click();
+        });
+
+        btn.addEventListener("click", () => {
+            const type = btn.dataset.filter;
+            applyEvidenceFilter(type);
+        });
     });
 
-    btn.addEventListener("click", () => {
-        const type = btn.dataset.filter;
-        applyEvidenceFilter(type);
-    });
-});
 
-
+    // Initialise counts
     updateFilterCounts();
+
 });
+
 
 </script>
 

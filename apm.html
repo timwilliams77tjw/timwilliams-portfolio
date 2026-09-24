@@ -15513,7 +15513,29 @@ section.bcs-development-section
 .evidence-filters {
     margin-bottom: 1.5rem;   /* Adjust to taste */
 }
-   
+ @media (max-width: 768px) {
+
+    .evidence-filters .apm-card {
+        position: static !important;
+        overflow: visible !important;
+        z-index: auto !important;
+    }
+
+    .evidence-filters {
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    /* If your mobile menu overlay is blocking taps */
+    .mobile-menu {
+        pointer-events: none !important;
+    }
+    .mobile-menu.open {
+        pointer-events: auto !important;
+    }
+}
+  
 </style>
 
 

@@ -2727,6 +2727,15 @@ section.cases-section .case-detail {
 section.cases-section .case-card.open .case-detail {
   display: block;
 }
+.case-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.case-detail.open {
+  max-height: 2000px; /* large enough for all content */
+}
      
 </style>
 
@@ -5977,56 +5986,27 @@ document.addEventListener("DOMContentLoaded", () => {
      CASE STUDY EXPANDERS
      ======================================================= */
 
-  document
-    .querySelectorAll(".case-toggle")
-    .forEach(button => {
+document.querySelectorAll(".case-toggle").forEach(button => {
 
-      button.addEventListener(
-        "click",
-        () => {
+  // Mobile Safari fix
+  button.addEventListener("touchstart", () => {
+    button.click();
+  });
 
-          const card =
-            button.closest(
-              ".case-card"
-            );
+  button.addEventListener("click", () => {
 
+    const card = button.closest(".case-card");
+    if (!card) return;
 
-          if (!card) {
-            return;
-          }
+    const expanded = card.classList.toggle("expanded");
 
+    button.setAttribute("aria-expanded", expanded ? "true" : "false");
 
-          const expanded =
-            card.classList.toggle(
-              "expanded"
-            );
+    button.querySelector("span").textContent = expanded ? "−" : "+";
+    button.firstChild.textContent = expanded ? "Hide detail " : "View outcome ";
+  });
 
-
-          button.setAttribute(
-            "aria-expanded",
-            expanded
-              ? "true"
-              : "false"
-          );
-
-
-          button.querySelector(
-            "span"
-          ).textContent =
-            expanded
-              ? "−"
-              : "+";
-
-
-          button.firstChild.textContent =
-            expanded
-              ? "Hide detail "
-              : "View outcome ";
-
-        }
-      );
-
-    });
+});
 
 
   /* =======================================================

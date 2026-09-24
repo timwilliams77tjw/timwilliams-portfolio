@@ -24173,21 +24173,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    // -----------------------------
-    // FILTER BUTTON EVENT LISTENERS
-    // -----------------------------
-    document.querySelectorAll(".filter-btn").forEach(btn => {
+  
+  // FILTER BUTTON EVENT LISTENERS
+document.querySelectorAll(".filter-btn").forEach(btn => {
 
-        // Mobile Safari fix
-        btn.addEventListener("touchstart", () => {
-            btn.click();
-        });
+    btn.addEventListener("click", function (event) {
 
-        btn.addEventListener("click", () => {
-            const type = btn.dataset.filter;
-            applyEvidenceFilter(type);
-        });
+        event.preventDefault();
+
+        const type = this.dataset.filter;
+
+        applyEvidenceFilter(type);
+
     });
+
+});
 
 
     // Initialise counts

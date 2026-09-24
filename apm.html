@@ -24118,13 +24118,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     document.querySelectorAll(".filter-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const type = btn.dataset.filter;
-            applyEvidenceFilter(type);
-        });
+
+    // Mobile Safari fix
+    btn.addEventListener("touchstart", () => {
+        btn.click();
     });
 
-    updateFilterCounts();
+    btn.addEventListener("click", () => {
+        const type = btn.dataset.filter;
+        applyEvidenceFilter(type);
+    });
 });
 
 </script>

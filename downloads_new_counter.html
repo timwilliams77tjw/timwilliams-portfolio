@@ -3043,32 +3043,31 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+<script>document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================================================
-       TWC LTD — GLOBAL DOWNLOAD COUNTERS
+       TWC LTD — DOWNLOAD COUNTERS
        GitHub Pages + Supabase
        ========================================================= */
 
     const SUPABASE_URL =
         "https://tusbswqwfpmdyvvalyyc.supabase.co";
 
-    const SUPABASE_PUBLISHABLE_KEY =
+    const SUPABASE_KEY =
         "sb_publishable_Ibx8GHb4Ukkouf4F8qOllQ_NzipdHKP";
 
 
     /* =========================================================
-       INITIALISE SUPABASE
-       ========================================================= */
+       CHECK SUPABASE LIBRARY
+    ========================================================= */
 
     if (
-        typeof window.supabase === "undefined" ||
+        !window.supabase ||
         typeof window.supabase.createClient !== "function"
     ) {
 
         console.error(
-            "TWC Downloads: Supabase library failed to load."
+            "TWC Downloads: Supabase library is not loaded."
         );
 
         return;
@@ -3078,13 +3077,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const supabase =
         window.supabase.createClient(
             SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY
+            SUPABASE_KEY
         );
 
 
     /* =========================================================
        DOWNLOAD LINKS
-       ========================================================= */
+    ========================================================= */
 
     const downloadLinks =
         document.querySelectorAll(
@@ -3092,46 +3091,41 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    if (!downloadLinks.length) {
-
-        console.warn(
-            "TWC Downloads: No download links were found."
-        );
-
-        return;
-    }
+    console.log(
+        "TWC Downloads: links found:",
+        downloadLinks.length
+    );
 
 
     /* =========================================================
-       INTERNAL STATE
-       ========================================================= */
+       GLOBAL STATE
+    ========================================================= */
 
-    const countersByUrl = new Map();
+    const counters = new Map();
 
     let globalTotal = 0;
 
-    let totalElement = null;
+    let globalElement = null;
 
 
     /* =========================================================
-       ANIMATED COUNTING
-       ========================================================= */
+       ANIMATE NUMBER
+    ========================================================= */
 
     function animateCount(
         element,
         start,
         end,
-        duration = 500
+        duration
     ) {
 
         if (!element) return;
 
         start = Number(start) || 0;
         end = Number(end) || 0;
+        duration = duration || 500;
 
-        const range = end - start;
-
-        if (range === 0) {
+        if (start === end) {
 
             element.textContent =
                 end.toLocaleString("en-GB");
@@ -3139,24 +3133,29 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        const difference =
+            Math.abs(end - start);
+
         const stepTime =
             Math.max(
                 20,
                 Math.floor(
-                    duration / Math.abs(range)
+                    duration / difference
                 )
             );
 
         let current = start;
 
         const timer =
-            setInterval(() => {
+            setInterval(function () {
 
                 current +=
                     end > start ? 1 : -1;
 
                 element.textContent =
-                    current.toLocaleString("en-GB");
+                    current.toLocaleString(
+                        "en-GB"
+                    );
 
                 if (current === end) {
 
@@ -3170,31 +3169,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       GLOBAL HERO METRIC
-       ========================================================= */
+       CREATE GLOBAL TOTAL
+    ========================================================= */
 
-    function injectGlobalMetric() {
-
-        const hero =
-            document.querySelector(
-                ".downloads-hero-content"
-            );
-
-        if (!hero) {
-
-            console.warn(
-                "TWC Downloads: .downloads-hero-content not found."
-            );
-
-            return;
-        }
-
+    function createGlobalTotal() {
 
         /*
-        Use an existing metric if the page already contains one.
+        First check whether your page already contains
+        the global counter.
         */
 
-        const existing =
+        let existing =
             document.getElementById(
                 "global-download-total"
             );
@@ -3202,7 +3187,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (existing) {
 
-            totalElement = existing;
+            globalElement = existing;
+
+            return;
+        }
+
+
+        const hero =
+            document.querySelector(
+                ".downloads-hero-content"
+            );
+
+
+        if (!hero) {
+
+            console.warn(
+                "TWC Downloads: .downloads-hero-content not found."
+            );
 
             return;
         }
@@ -3233,41 +3234,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         bar.appendChild(strong);
+
         bar.appendChild(label);
 
         hero.appendChild(bar);
 
-        totalElement = strong;
+
+        globalElement =
+            strong;
 
     }
 
 
     /* =========================================================
-       CREATE PER-ITEM COUNTERS
-       ========================================================= */
+       CREATE ITEM COUNTERS
+    ========================================================= */
 
-    downloadLinks.forEach(link => {
+    downloadLinks.forEach(function (link) {
 
         const url =
             link.getAttribute("href");
+
 
         if (!url) return;
 
 
         /*
-        Multiple links pointing to the same file share
-        the same counter.
+        Create state for this URL.
         */
 
-        if (!countersByUrl.has(url)) {
+        if (!counters.has(url)) {
 
-            countersByUrl.set(url, {
+            counters.set(url, {
 
                 count: 0,
 
                 elements: [],
 
-                busy: false
+                processing: false
 
             });
 
@@ -3275,11 +3279,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         const item =
-            countersByUrl.get(url);
+            counters.get(url);
 
 
         /*
-        Find an existing counter first.
+        Look for an existing counter.
         */
 
         let counter =
@@ -3289,7 +3293,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /*
-        Create the counter if it doesn't already exist.
+        If it doesn't exist, create it.
         */
 
         if (!counter) {
@@ -3303,6 +3307,7 @@ document.addEventListener("DOMContentLoaded", () => {
             counter.textContent =
                 "0 downloads";
 
+
             link.parentElement.appendChild(
                 counter
             );
@@ -3310,28 +3315,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
+        /*
+        Register this counter.
+        */
+
         item.elements.push(counter);
 
 
         /* =====================================================
-           DOWNLOAD CLICK
-           ===================================================== */
+           CLICK HANDLER
+        ===================================================== */
 
         link.addEventListener(
             "click",
-            async event => {
+            async function (event) {
 
                 /*
-                Only process normal left clicks.
+                Allow modified clicks to behave normally.
                 */
 
                 if (
-                    event.defaultPrevented ||
-                    event.button !== 0 ||
                     event.ctrlKey ||
                     event.metaKey ||
                     event.shiftKey ||
-                    event.altKey
+                    event.altKey ||
+                    event.button !== 0
                 ) {
 
                     return;
@@ -3339,10 +3347,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 /*
-                Stop accidental double-click increments.
+                Prevent duplicate rapid clicks.
                 */
 
-                if (item.busy) {
+                if (item.processing) {
 
                     event.preventDefault();
 
@@ -3355,83 +3363,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 /*
-                Temporarily stop normal navigation.
+                Stop navigation temporarily while we
+                register the download.
                 */
 
                 event.preventDefault();
 
-                item.busy = true;
+                item.processing = true;
 
 
                 try {
 
                     console.log(
-                        "TWC Downloads: registering download:",
+                        "TWC Downloads: recording:",
                         url
                     );
 
 
-                    /* =========================================
-                       CALL SUPABASE RPC FUNCTION
-                    ========================================= */
-
-                    const {
-                        data,
-                        error
-                    } =
+                    const result =
                         await supabase.rpc(
                             "increment_download",
                             {
-                                p_download_url:
-                                    url
+                                p_download_url: url
                             }
                         );
 
 
-                    /* =========================================
-                       CHECK FOR SUPABASE ERROR
-                    ========================================= */
-
-                    if (error) {
+                    if (result.error) {
 
                         console.error(
                             "TWC Downloads: Supabase error:",
-                            error
+                            result.error
                         );
 
-                        throw error;
+                        throw result.error;
                     }
 
 
                     console.log(
-                        "TWC Downloads: Supabase response:",
-                        data
+                        "TWC Downloads: RPC result:",
+                        result.data
                     );
 
 
-                    /*
-                    PostgreSQL table-returning functions return
-                    an array.
-                    */
-
-                    const row =
-                        Array.isArray(data)
-                            ? data[0]
-                            : data;
+                    let row =
+                        Array.isArray(result.data)
+                            ? result.data[0]
+                            : result.data;
 
 
                     if (!row) {
 
                         throw new Error(
-                            "Supabase returned no counter data."
+                            "No counter data returned."
                         );
 
                     }
 
-
-                    /* =========================================
-                       UPDATED ITEM COUNT
-                    ========================================= */
 
                     const oldCount =
                         item.count;
@@ -3443,88 +3431,74 @@ document.addEventListener("DOMContentLoaded", () => {
                         ) || 0;
 
 
-                    item.count =
-                        newCount;
-
-
-                    item.elements.forEach(
-                        counterElement => {
-
-                            animateCount(
-                                counterElement,
-                                oldCount,
-                                newCount
-                            );
-
-
-                            setTimeout(() => {
-
-                                counterElement.textContent =
-                                    newCount.toLocaleString(
-                                        "en-GB"
-                                    ) +
-                                    " downloads";
-
-                            }, 520);
-
-                        }
-                    );
-
-
-                    /* =========================================
-                       UPDATED GLOBAL TOTAL
-                    ========================================= */
-
-                    const newGlobalTotal =
+                    const newTotal =
                         Number(
                             row.global_total
                         ) || 0;
 
 
+                    item.count =
+                        newCount;
+
+
+                    /*
+                    Update item counters.
+                    */
+
+                    item.elements.forEach(
+                        function (element) {
+
+                            animateCount(
+                                element,
+                                oldCount,
+                                newCount,
+                                500
+                            );
+
+                            setTimeout(
+                                function () {
+
+                                    element.textContent =
+                                        newCount.toLocaleString(
+                                            "en-GB"
+                                        ) +
+                                        " downloads";
+
+                                },
+                                550
+                            );
+
+                        }
+                    );
+
+
+                    /*
+                    Update global total.
+                    */
+
                     updateGlobalTotal(
-                        newGlobalTotal
-                    );
-
-
-                    console.log(
-                        "TWC Downloads: item count =",
-                        newCount
-                    );
-
-
-                    console.log(
-                        "TWC Downloads: global total =",
-                        newGlobalTotal
+                        newTotal
                     );
 
 
                 } catch (error) {
-
-                    /*
-                    IMPORTANT:
-                    The download itself must still work if
-                    Supabase is temporarily unavailable.
-                    */
 
                     console.error(
                         "TWC Downloads: counter failed:",
                         error
                     );
 
-                } finally {
-
-                    item.busy = false;
-
-
-                    /*
-                    Continue to the original download/open
-                    destination.
-                    */
-
-                    window.location.href =
-                        destination;
-
                 }
+
+
+                /*
+                Always continue to the actual file.
+                */
+
+                item.processing = false;
+
+                window.location.href =
+                    destination;
 
             }
         );
@@ -3533,8 +3507,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       UPDATE GLOBAL TOTAL
-       ========================================================= */
+       GLOBAL TOTAL UPDATE
+    ========================================================= */
 
     function updateGlobalTotal(
         newTotal
@@ -3552,35 +3526,33 @@ document.addEventListener("DOMContentLoaded", () => {
             newTotal;
 
 
-        if (!totalElement) return;
+        if (!globalElement) return;
 
 
         animateCount(
-            totalElement,
+            globalElement,
             oldTotal,
-            newTotal
+            newTotal,
+            500
         );
 
     }
 
 
     /* =========================================================
-       LOAD EXISTING SERVER COUNTS
-       ========================================================= */
+       LOAD EXISTING COUNTS
+    ========================================================= */
 
-    async function loadGlobalCounts() {
+    async function loadCounts() {
 
         try {
 
             console.log(
-                "TWC Downloads: loading server counts..."
+                "TWC Downloads: loading counts..."
             );
 
 
-            const {
-                data,
-                error
-            } =
+            const result =
                 await supabase
                     .from("download_counters")
                     .select(
@@ -3588,34 +3560,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-            if (error) {
+            if (result.error) {
 
                 console.error(
-                    "TWC Downloads: unable to load counts:",
-                    error
+                    "TWC Downloads: count loading error:",
+                    result.error
                 );
 
                 return;
             }
 
 
-            console.log(
-                "TWC Downloads: server counts:",
-                data
-            );
+            const rows =
+                result.data || [];
 
 
-            let calculatedTotal = 0;
+            let total = 0;
 
 
-            /*
-            Apply the counts returned by Supabase.
-            */
-
-            data.forEach(row => {
+            rows.forEach(function (row) {
 
                 const url =
                     row.download_url;
+
 
                 const count =
                     Number(
@@ -3623,12 +3590,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     ) || 0;
 
 
-                calculatedTotal +=
-                    count;
+                total += count;
 
 
                 const item =
-                    countersByUrl.get(url);
+                    counters.get(url);
 
 
                 if (!item) return;
@@ -3639,9 +3605,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 item.elements.forEach(
-                    counterElement => {
+                    function (element) {
 
-                        counterElement.textContent =
+                        element.textContent =
                             count.toLocaleString(
                                 "en-GB"
                             ) +
@@ -3654,24 +3620,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             /*
-            Update global total.
+            Set global total.
             */
 
-            updateGlobalTotal(
-                calculatedTotal
-            );
+            globalTotal =
+                total;
+
+
+            if (globalElement) {
+
+                globalElement.textContent =
+                    total.toLocaleString(
+                        "en-GB"
+                    );
+
+            }
 
 
             console.log(
-                "TWC Downloads: global total loaded =",
-                calculatedTotal
+                "TWC Downloads: global total:",
+                total
             );
 
 
         } catch (error) {
 
             console.error(
-                "TWC Downloads: loading error:",
+                "TWC Downloads: load error:",
                 error
             );
 
@@ -3681,15 +3656,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       INITIALISE
-       ========================================================= */
+       START
+    ========================================================= */
 
-    injectGlobalMetric();
+    createGlobalTotal();
 
-    loadGlobalCounts();
+    loadCounts();
 
 });
-
 </script>
 </body>
 </html>

@@ -15772,6 +15772,80 @@ article.professional-evidence-item:hover {
   color: var(--accent-color);
   opacity: 0.9;
 }
+
+.cpd-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  margin: 2rem 0;
+  border: 1px solid var(--border-light);
+}
+
+.cpd-card h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.cpd-card-intro {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.cpd-card-list {
+  margin: 1rem 0;
+  padding-left: 1.2rem;
+}
+
+.cpd-card-list li {
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
+}
+.cpd-feature-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+}
+
+.cpd-feature {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cpd-icon-img {
+  width: 48px;
+  height: 48px;
+  stroke-width: 2;
+  margin-bottom: 0.8rem;
+  color: var(--accent-color);
+}
+
+.cpd-feature strong {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.cpd-feature p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 180px;
+}
+.cpd-lifecycle-wheel {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
    
 </style>
 
@@ -15867,18 +15941,13 @@ article.professional-evidence-item:hover {
   </p>
 
 </section>
-<section class="cpd-app-section">
+<section class="cpd-card">
   <h2>Base44 CPD Application</h2>
-
-  <p class="cpd-app-intro">
-    The Base44 CPD App is a fully featured companion to this APM page, providing
-    all core functionality in a streamlined, mobile‑ready interface. It includes
-    your metrics dashboard, CPD activity log, competency assessments, evidence
-    management, bidirectional linking, AI‑powered suggestions, and bulk import
-    tools.
+  <p class="cpd-card-intro">
+    The Base44 CPD App is a fully featured companion to this APM page...
   </p>
 
-  <ul class="cpd-app-features">
+  <ul class="cpd-card-list">
     <li>Live CPD log with timeline and filtering</li>
     <li>Full competency assessment aligned to APM Framework</li>
     <li>Metrics dashboard with dynamic visualisations</li>
@@ -15886,35 +15955,23 @@ article.professional-evidence-item:hover {
     <li>AI suggestions for linking CPD → competencies → evidence</li>
     <li>Bulk import tools for CPD entries and evidence</li>
   </ul>
-
-  <a href="https://apm-insight-pro.base44.app" 
-     class="cta-btn cpd-app-btn" 
-     target="_blank">
-     Open CPD App
-  </a>
 </section>
 
-<section class="cpd-app-why">
-  <h3>Why Use the CPD App</h3>
-
-  <p class="cpd-why-intro">
-    The Base44 CPD App provides a fully integrated, dynamic environment for managing
-    professional development. While this APM page offers a structured overview, the
-    app delivers a live, interactive workspace designed for continuous use, deeper
-    insight, and faster updates.
+<section class="cpd-card">
+  <h2>Why Use the CPD App</h2>
+  <p class="cpd-card-intro">
+    The Base44 CPD App provides a fully integrated, dynamic environment...
   </p>
 
-  <ul class="cpd-why-list">
-    <li><strong>Real-time CPD logging</strong> — Add, edit, and review entries instantly with timeline views and smart filtering.</li>
-    <li><strong>Dynamic metrics dashboard</strong> — Visualisations update automatically as you add CPD, evidence, or assessments.</li>
-    <li><strong>Full competency assessment</strong> — Complete assessments aligned to the APM Competence Framework.</li>
-    <li><strong>Evidence management</strong> — Store documents, notes, and proof of competence with structured metadata.</li>
-    <li><strong>Bidirectional linking</strong> — Link CPD, competencies, and evidence in both directions.</li>
-    <li><strong>AI-powered suggestions</strong> — Automatic recommendations for linking CPD to competencies and evidence.</li>
-    <li><strong>Bulk import tools</strong> — Upload multiple CPD entries or evidence items quickly.</li>
-    <li><strong>Mobile-ready interface</strong> — Optimised for iPad and phone use.</li>
+  <ul class="cpd-card-list">
+    <li>Real-time CPD logging...</li>
+    <li>Dynamic metrics dashboard...</li>
+    <li>Full competency assessment...</li>
+    <li>Evidence management...</li>
+    <li>Bidirectional linking...</li>
   </ul>
 </section>
+
 
    <section class="cpd-feature-strip">
 
@@ -15986,95 +16043,65 @@ article.professional-evidence-item:hover {
 </section>
    
 <!-- ============================================================
-     CPD LIFECYCLE NAVIGATION WHEEL
+     CPD LIFECYCLE OVERVIEW (NEW CARD VERSION)
 ============================================================ -->
-<section class="cpd-lifecycle-section">
+<section class="cpd-card cpd-lifecycle-card">
 
-    <div class="cpd-lifecycle-wheel">
+  <h2>CPD Lifecycle Overview</h2>
 
-     <svg
-    id="cpdLifecycleWheel"
-    class="cpd-lifecycle-svg"
-    viewBox="0 0 700 700"
-    role="img"
-    aria-label="CPD Lifecycle Navigation"
->
+  <p class="cpd-card-intro">
+    The CPD Lifecycle brings together all elements of professional development
+    into a single, integrated model. It shows how competencies, evidence,
+    CPD activity, metrics, and development planning connect to form a continuous
+    improvement cycle aligned to the 
+    <strong>[APM Competence Framework](ca://s?q=Explain_APM_Competence_Framework)</strong>.
+  </p>
 
-    <defs>
+  <div class="cpd-lifecycle-wheel-container">
+    <svg
+      id="cpdLifecycleWheel"
+      class="cpd-lifecycle-svg"
+      viewBox="0 0 700 700"
+      role="img"
+      aria-label="CPD Lifecycle Navigation"
+    >
 
+      <defs>
         <filter id="wheelShadow"
-                x="-30%"
-                y="-30%"
-                width="160%"
-                height="160%">
-            <feDropShadow
-                dx="0"
-                dy="5"
-                stdDeviation="7"
-                flood-opacity="0.15"
-            />
+                x="-30%" y="-30%"
+                width="160%" height="160%">
+          <feDropShadow dx="0" dy="5" stdDeviation="7" flood-opacity="0.15" />
         </filter>
 
-        <marker
-            id="cycleArrow"
-            markerWidth="14"
-            markerHeight="14"
-            refX="10"
-            refY="7"
-            orient="auto"
-            markerUnits="userSpaceOnUse"
-        >
-            <path
-                d="M0 0 L14 7 L0 14 Z"
-                fill="#ffffff"
-            />
+        <marker id="cycleArrow"
+                markerWidth="14" markerHeight="14"
+                refX="10" refY="7"
+                orient="auto"
+                markerUnits="userSpaceOnUse">
+          <path d="M0 0 L14 7 L0 14 Z" fill="#ffffff" />
         </marker>
+      </defs>
 
-    </defs>
+      <!-- Segments generated by JavaScript -->
 
+      <!-- Centre of wheel -->
+      <circle cx="350" cy="350" r="181" class="lifecycle-centre-shadow" />
+      <circle cx="350" cy="350" r="174" class="lifecycle-centre" />
 
-    <!-- Segments are generated by JavaScript -->
+      <text x="350" y="340" class="lifecycle-centre-title">CPD</text>
+      <text x="350" y="377" class="lifecycle-centre-title">Lifecycle</text>
 
+    </svg>
+  </div>
 
-    <!-- Centre of wheel -->
-
-    <circle
-        cx="350"
-        cy="350"
-        r="181"
-        class="lifecycle-centre-shadow"
-    />
-
-    <circle
-        cx="350"
-        cy="350"
-        r="174"
-        class="lifecycle-centre"
-    />
-
-    <text
-        x="350"
-        y="340"
-        class="lifecycle-centre-title"
-    >
-        CPD
-    </text>
-
-    <text
-        x="350"
-        y="377"
-        class="lifecycle-centre-title"
-    >
-        Lifecycle
-    </text>
-
-</svg>
-      
-
-
-    </div>
+  <ul class="cpd-card-list">
+    <li>Shows relationships between CPD, competencies, evidence, and metrics</li>
+    <li>Supports planning through roadmap and development priorities</li>
+    <li>Provides a visual anchor for navigating all CPD components</li>
+  </ul>
 
 </section>
+
 
 
  

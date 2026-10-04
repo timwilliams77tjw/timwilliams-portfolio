@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CPD App – Product Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="certifications.css">
+  <link rel="stylesheet" href="global-restore.css">
+  <link rel="stylesheet" href="header-standard-v4.css">
+
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --card-bg: #ffffff;
+      --text-main: #111;
+      --text-sub: #444;
+      --accent: #0a66c2;
+      --shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    body.dark-mode {
+      --bg: #0f172a;
+      --card-bg: #111827;
+      --text-main: #e5e7eb;
+      --text-sub: #9ca3af;
+      --accent: #38bdf8;
+      --shadow: 0 4px 18px rgba(0,0,0,0.6);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    /* HERO */
+    .contact-hero {
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0 0 30px;
+      padding: 32px 40px;
+      background: var(--card-bg);
+      color: var(--text-main);
+      border-radius: 0 12px 12px 0;
+      border-left: 6px solid var(--accent);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-main);
+    }
+
+    .page-subtitle {
+      margin-top: 12px;
+      font-size: 17px;
+      color: var(--text-sub);
+    }
+
+    /* CONTENT WRAPPER */
+    .contact-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .content-card {
+      background: var(--card-bg);
+      padding: 24px 28px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      animation: fadeInUp 0.5s ease forwards;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 24px;
+      color: var(--text-main);
+    }
+
+    h3 {
+      margin-top: 20px;
+      font-size: 19px;
+      color: var(--text-main);
+    }
+
+    ul {
+      margin-left: 20px;
+      color: var(--text-sub);
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="header-with-logo">
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+
+    const searchScript = document.createElement("script");
+    searchScript.src = "site-search.js";
+    searchScript.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(searchScript);
+
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+  });
+</script>
+
+<!-- HERO -->
+<div class="contact-hero">
+  <h1 class="page-title">CPD App – Digital Competency & Evidence Platform</h1>
+  <p class="page-subtitle">Track, evidence and manage your professional development in one integrated system.</p>
+</div>
+
+<!-- CONTENT -->
+<div class="contact-section">
+
+  <div class="content-card">
+    <h2>Overview</h2>
+    <p>The CPD App bridges the gap between traditional CPD systems and modern competency management...</p>
+  </div>
+
+  <div class="content-card">
+    <h2>The Gap</h2>
+    <ul>
+      <li>APM & BCS only provide competency frameworks and static CPD logs.</li>
+      <li>No evidence linking CPD to competency.</li>
+      <li>No development planning or gap analysis.</li>
+      <li>No linkage between CPD and competency.</li>
+    </ul>
+  </div>
+
+  <div class="content-card">
+    <h2>The Market</h2>
+    <ul>
+      <li>Personal individuals</li>
+      <li>CPD providers (APM, BCS)</li>
+      <li>Education sector</li>
+      <li>Employers</li>
+    </ul>
+  </div>
+
+  <div class="content-card">
+    <h2>Current Features</h2>
+    <ul>
+      <li>Lifecycle framework</li>
+      <li>AI CPD log</li>
+      <li>Competency ratings</li>
+      <li>Dashboard & KPIs</li>
+      <li>Awards & badges</li>
+      <li>Gap analysis</li>
+      <li>Evidence vault</li>
+      <li>Development plan</li>
+      <li>Career simulator</li>
+      <li>To‑do list</li>
+      <li>Full reporting suite</li>
+      <li>Profile page</li>
+      <li>Link to CV App</li>
+    </ul>
+  </div>
+
+  <div class="content-card">
+    <h2>Development Roadmap</h2>
+    <ul>
+      <li>Corporate & personal packages</li>
+      <li>LinkedIn integration</li>
+      <li>Badge level on profile</li>
+      <li>Social sharing</li>
+      <li>Light/dark mode</li>
+      <li>Calendar scanning (Gmail/Outlook)</li>
+    </ul>
+  </div>
+
+  <div class="content-card">
+    <h2>External Links</h2>
+    <p><a href="https://apm-insight-pro.base44.app" target="_blank">Live CPD App</a></p>
+    <p><a href="https://www.crowdfunder.co.uk/p/qr/mWNoJJAn" target="_blank">Crowdfunder Campaign</a></p>
+    <p><a href="https://www.fiverr.com/s/jyj9Ndv" target="_blank">Fiverr Promotion</a></p>
+  </div>
+
+</div>
+
+<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+
+</body>
+</html>

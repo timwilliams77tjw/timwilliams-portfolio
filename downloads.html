@@ -1990,6 +1990,25 @@ body.dark-mode .downloads-cta {
     font-size: 0.85rem;
     color: #5f6b78;
 }
+/* Prevent cutoff on iPad Safari */
+.download-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    width: 100%;
+    overflow: visible;
+    -webkit-flex-wrap: wrap; /* Safari/iPad fix */
+}
+
+/* Ensure buttons shrink properly on iPad */
+.download-btn {
+    flex: 1 1 auto;
+    min-width: 0;            /* CRITICAL for iPad Safari */
+    text-align: center;
+    white-space: nowrap;     /* Optional: keeps text tidy */
+}
+
+    
     </style>
 </head>
 

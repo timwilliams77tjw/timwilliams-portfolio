@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Professional Endorsements & Skills Validation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="certifications.css">
+  <link rel="stylesheet" href="global-restore.css">
+  <link rel="stylesheet" href="header-standard-v4.css">
+
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --card-bg: #ffffff;
+      --text-main: #111;
+      --text-sub: #444;
+      --accent: #0a66c2;
+      --shadow: 0 4px 14px rgba(0,0,0,0.08);
+      --heat-low: #e5f2ff;
+      --heat-med: #7fb3ff;
+      --heat-high: #0a66c2;
+    }
+
+    body.dark-mode {
+      --bg: #0f172a;
+      --card-bg: #111827;
+      --text-main: #e5e7eb;
+      --text-sub: #9ca3af;
+      --accent: #38bdf8;
+      --shadow: 0 4px 18px rgba(0,0,0,0.6);
+      --heat-low: #1f2937;
+      --heat-med: #0f766e;
+      --heat-high: #14b8a6;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    .contact-hero {
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0 0 30px;
+      padding: 32px 40px;
+      background: var(--card-bg);
+      color: var(--text-main);
+      border-radius: 0 12px 12px 0;
+      border-left: 6px solid var(--accent);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-main);
+    }
+
+    .page-subtitle {
+      margin-top: 12px;
+      font-size: 17px;
+      color: var(--text-sub);
+    }
+
+    .contact-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .content-card {
+      background: var(--card-bg);
+      padding: 24px 28px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      animation: fadeInUp 0.5s ease forwards;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 24px;
+      color: var(--text-main);
+    }
+
+    h3 {
+      margin-top: 20px;
+      font-size: 19px;
+      color: var(--text-main);
+    }
+
+    p {
+      color: var(--text-sub);
+    }
+
+    ul {
+      margin-left: 20px;
+      color: var(--text-sub);
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-image-wrapper {
+      max-width: 1100px;
+      margin: 0 auto 24px;
+      padding: 0 20px;
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .endorsement-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .endorsement-logos img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(0.1);
+    }
+
+    .metrics-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .metric-card {
+      flex: 1 1 160px;
+      min-width: 160px;
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-sub);
+    }
+
+    .metric-value {
+      font-size: 22px;
+      font-weight: 700;
+      margin-top: 4px;
+      color: var(--text-main);
+    }
+
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .spotlight-card {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .spotlight-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .spotlight-role {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .spotlight-skills {
+      font-size: 14px;
+      color: var(--text-sub);
+    }
+
+    .heatmap-wrapper {
+      margin-top: 12px;
+      overflow-x: auto;
+    }
+
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: 140px repeat(6, 80px);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .heatmap-header,
+    .heatmap-cell,
+    .heatmap-skill {
+      padding: 8px 10px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .heatmap-header {
+      background: var(--bg);
+      font-weight: 600;
+    }
+
+    .heatmap-skill {
+      text-align: left;
+      background: var(--bg);
+      font-weight: 600;
+    }
+
+    .heatmap-cell.level-0 {
+      background: var(--card-bg);
+      color: var(--text-sub);
+    }
+
+    .heatmap-cell.level-1 {
+      background: var(--heat-low);
+      color: var(--text-main);
+    }
+
+    .heatmap-cell.level-2 {
+      background: var(--heat-med);
+      color: #fff;
+    }
+
+    .heatmap-cell.level-3 {
+      background: var(--heat-high);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .heatmap-legend {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--text-sub);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .legend-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .legend-low { background: var(--heat-low); }
+    .legend-med { background: var(--heat-med); }
+    .legend-high { background: var(--heat-high); }
+
+    .timeline-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .timeline-table th,
+    .timeline-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      text-align: left;
+    }
+
+    .timeline-table th {
+      background: var(--bg);
+      font-weight: 600;
+    }
+
+    .fab {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      z-index: 50;
+    }
+
+    .fab-booking {
+      bottom: 76px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body class="header-with-logo">
+
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+
+    const searchScript = document.createElement("script");
+    searchScript.src = "site-search.js";
+    searchScript.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(searchScript);
+
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      if (typeof initHeader === "function") initHeader();
+      if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+  });
+</script>
+
+<div class="hero-image-wrapper">
+  <img src="endorsements_hero.jpg" alt="Professional endorsements and skills validation">
+</div>
+
+<div class="contact-hero">
+  <h1 class="page-title">Professional Endorsements & Skills Validation</h1>
+  <p class="page-subtitle">
+    Independent endorsements from industry peers across Project Delivery, IT Service Management, Stakeholder Management and PMO.
+  </p>
+  <div class="endorsement-logos">
+    <img src="linkedin_logo.png" alt="LinkedIn logo">
+    <img src="apm_logo.png" alt="Association for Project Management logo">
+    <img src="pmi_logo.png" alt="Project Management Institute logo">
+  </div>
+</div>
+
+<div class="contact-section">
+
+  <div class="content-card">
+    <h2>Overview</h2>
+    <p>
+      This page consolidates LinkedIn endorsements received over a ten‑year period, providing a transparent view of the
+      skills that colleagues, leaders and stakeholders have recognised in my work. It is designed as a credibility layer
+      to support my CV, CPD App and project portfolio.
+    </p>
+    <p>
+      Endorsements span core disciplines including Project Delivery, IT Service Management, Stakeholder Management,
+      PMO Development, PRINCE2, ITIL and IT Management, reflecting both breadth and depth across the modern IT and
+      project landscape.
+    </p>
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-label">Endorsed skills</div>
+        <div class="metric-value">15+</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Years covered</div>
+        <div class="metric-value">2016–2026</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Unique endorsers</div>
+        <div class="metric-value">7</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Core domains</div>
+        <div class="metric-value">IT & PM</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h2>Skills snapshot</h2>
+    <h3>Core delivery & governance</h3>
+    <ul>
+      <li>Project Delivery, Project Management, PMO Management, PMO Development</li>
+      <li>Risk Management, Line Management, Resource Management</li>
+      <li>Bid Pricing and pre‑sales support</li>
+    </ul>
+    <h3>IT service & management</h3>
+    <ul>
+      <li>IT Service Management and IT Management</li>
+      <li>ITIL and IT Service frameworks</li>
+      <li>Information Technology leadership and operations</li>
+    </ul>
+    <h3>Methods & stakeholder engagement</h3>
+    <ul>
+      <li>PRINCE2 / PRINCE Practitioner</li>
+      <li>Stakeholder Management and Customer Relationship Management (CRM)</li>
+    </ul>
+  </div>
+
+  <div class="content-card">
+    <h2>Endorser spotlight</h2>
+    <p>
+      A selection of professionals who have endorsed my skills and worked with me across programmes, services and
+      transformation initiatives.
+    </p>
+    <div class="spotlight-grid">
+      <div class="spotlight-card">
+        <div class="spotlight-name">Des Banks</div>
+        <div class="spotlight-role">Senior leader – IT & PMO</div>
+        <div class="spotlight-skills">
+          Endorsed: Project Delivery, PMO Development, PRINCE2, IT Service Management, Risk Management,
+          Line Management, Bid Pricing, CRM, Resource Management.
+        </div>
+        <p><a href="https://www.linkedin.com/in/des-banks-0254893" target="_blank">View LinkedIn profile</a></p>
+      </div>
+      <div class="spotlight-card">
+        <div class="spotlight-name">Andrew Davies</div>
+        <div class="spotlight-role">IT & Project Management</div>
+        <div class="spotlight-skills">
+          Endorsed: Project Delivery, Stakeholder Management, IT Service Management, IT Management, PRINCE2, ITIL.
+        </div>
+        <p><a href="https://www.linkedin.com/in/andrewljdavies" target="_blank">View LinkedIn profile</a></p>
+      </div>
+      <div class="spotlight-card">
+        <div class="spotlight-name">David Gregson</div>
+        <div class="spotlight-role">IT Service & Stakeholder Management</div>
+        <div class="spotlight-skills">
+          Endorsed: Project Delivery, IT Service Management, IT Management, Stakeholder Management, ITIL.
+        </div>
+        <p><a href="https://www.linkedin.com/in/davidjamesgregson" target="_blank">View LinkedIn profile</a></p>
+      </div>
+      <div class="spotlight-card">
+        <div class="spotlight-name">Lewis Williams</div>
+        <div class="spotlight-role">IT & Project Delivery</div>
+        <div class="spotlight-skills">
+          Endorsed: Project Delivery, IT Service Management, Stakeholder Management, CRM.
+        </div>
+        <p><a href="https://www.linkedin.com/in/lewiswilliams7" target="_blank">View LinkedIn profile</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h2>Endorsement heat map</h2>
+    <p>
+      The heat map below shows endorsement intensity by skill and year. Darker cells indicate higher endorsement
+      activity, highlighting where peers have most frequently recognised my contribution.
+    </p>
+    <div class="heatmap-wrapper">
+      <div class="heatmap-grid">
+        <div class="heatmap-header">Skill / Year</div>
+        <div class="heatmap-header">2016</div>
+        <div class="heatmap-header">2017</div>
+        <div class="heatmap-header">2024</div>
+        <div class="heatmap-header">2025</div>
+        <div class="heatmap-header">2026</div>
+        <div class="heatmap-header">Total</div>
+
+        <div class="heatmap-skill">Project Delivery</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-1">●</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-3">●●●</div>
+        <div class="heatmap-cell level-3">●●●</div>
+        <div class="heatmap-cell level-3">High</div>
+
+        <div class="heatmap-skill">IT Service Management</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-0">–</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-3">●●●</div>
+        <div class="heatmap-cell level-3">●●●</div>
+        <div class="heatmap-cell level-3">High</div>
+
+        <div class="heatmap-skill">Stakeholder Management</div>
+        <div class="heatmap-cell level-1">●</div>
+        <div class="heatmap-cell level-0">–</div>
+        <div class="heatmap-cell level-1">●</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-2">Medium</div>
+
+        <div class="heatmap-skill">PRINCE2 / PRINCE Practitioner</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-0">–</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-1">●</div>
+        <div class="heatmap-cell level-2">Medium</div>
+
+        <div class="heatmap-skill">ITIL</div>
+        <div class="heatmap-cell level-2">●●</div>
+        <div class="heatmap-cell level-0">–</div>
+        <div class="heatmap-cell level-0">–</div>
+        <div class="heatmap-cell level-1">●</div>
+        <div class="heatmap-cell level-0">–</div>
+        <div class="heatmap-cell level-1">Focused</div>
+
+        <div class="heatmap-skill">PMO / Line / Risk</div>
+        <div class="heatmap-cell level-0">–</div>
+        <div class="heatmap-cell level-0">–</div>
+        <div class="heatmap-cell level-1">●</div>
+        <div class="heatmap-cell level-3">●●●</div>
+        <div class="heatmap-cell level-1">●</div>
+        <div class="heatmap-cell level-2">Medium</div>
+      </div>
+      <div class="heatmap-legend">
+        <span><span class="legend-swatch legend-low"></span>Low endorsement activity</span>
+        <span><span class="legend-swatch legend-med"></span>Medium endorsement activity</span>
+        <span><span class="legend-swatch legend-high"></span>High endorsement activity</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h2>Endorsement timeline</h2>
+    <p>
+      Selected endorsements from LinkedIn, presented chronologically. Full details are available on my LinkedIn profile.
+    </p>
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Skill</th>
+          <th>Endorser</th>
+          <th>LinkedIn</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2026‑02‑06</td>
+          <td>Stakeholder Management</td>
+          <td>Mitch Wayne</td>
+          <td><a href="https://www.linkedin.com/in/mitch-wayne" target="_blank">Profile</a></td>
+        </tr>
+        <tr>
+          <td>2026‑02‑06</td>
+          <td>IT Service Management</td>
+          <td>Mitch Wayne</td>
+          <td><a href="https://www.linkedin.com/in/mitch-wayne" target="_blank">Profile</a></td>
+        </tr>
+        <tr>
+          <td>2026‑02‑06</td>
+          <td>Project Delivery</td>
+          <td>Mitch Wayne</td>
+          <td><a href="https://www.linkedin.com/in/mitch-wayne" target="_blank">Profile</a></td>
+        </tr>
+        <tr>
+          <td>2025‑11‑21</td>
+          <td>IT Service Management</td>
+          <td>Gary Judge</td>
+          <td><a href="https://www.linkedin.com/in/gary-p-judge" target="_blank">Profile</a></td>
+        </tr>
+        <tr>
+          <td>2025‑11‑20</td>
+          <td>Information Technology</td>
+          <td>Des Banks</td>
+          <td><a href="https://www.linkedin.com/in/des-banks-0254893" target="_blank">Profile</a></td>
+        </tr>
+        <tr>
+          <td>2024‑09‑15</td>
+          <td>Project Delivery</td>
+          <td>Des Banks</td>
+          <td><a href="https://www.linkedin.com/in/des-banks-0254893" target="_blank">Profile</a></td>
+        </tr>
+        <tr>
+          <td>2017‑11‑01</td>
+          <td>Project Delivery</td>
+          <td>Gavin Stone</td>
+          <td><a href="https://www.linkedin.com/in/gavstone" target="_blank">Profile</a></td>
+        </tr>
+        <tr>
+          <td>2016‑12‑16</td>
+          <td>ITIL</td>
+          <td>Andrew Davies</td>
+          <td><a href="https://www.linkedin.com/in/andrewljdavies" target="_blank">Profile</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+
+</body>
+</html>

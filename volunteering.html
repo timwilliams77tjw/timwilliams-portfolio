@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Volunteering, Mentoring & Community Impact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="certifications.css">
+  <link rel="stylesheet" href="global-restore.css">
+  <link rel="stylesheet" href="header-standard-v4.css">
+
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --card-bg: #ffffff;
+      --text-main: #111;
+      --text-sub: #444;
+      --accent: #0a66c2;
+      --shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    body.dark-mode {
+      --bg: #0f172a;
+      --card-bg: #111827;
+      --text-main: #e5e7eb;
+      --text-sub: #9ca3af;
+      --accent: #38bdf8;
+      --shadow: 0 4px 18px rgba(0,0,0,0.6);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    .contact-hero {
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0 0 30px;
+      padding: 32px 40px;
+      background: var(--card-bg);
+      color: var(--text-main);
+      border-radius: 0 12px 12px 0;
+      border-left: 6px solid var(--accent);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-main);
+    }
+
+    .page-subtitle {
+      margin-top: 12px;
+      font-size: 17px;
+      color: var(--text-sub);
+    }
+
+    .contact-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .content-card {
+      background: var(--card-bg);
+      padding: 24px 28px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      animation: fadeInUp 0.5s ease forwards;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 24px;
+      color: var(--text-main);
+    }
+
+    h3 {
+      margin-top: 20px;
+      font-size: 19px;
+      color: var(--text-main);
+    }
+
+    p {
+      color: var(--text-sub);
+    }
+
+    ul {
+      margin-left: 20px;
+      color: var(--text-sub);
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-image-wrapper {
+      max-width: 1100px;
+      margin: 0 auto 24px;
+      padding: 0 20px;
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .volunteer-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .volunteer-logos img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(0.1);
+    }
+
+    .metrics-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .metric-card {
+      flex: 1 1 160px;
+      min-width: 160px;
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-sub);
+    }
+
+    .metric-value {
+      font-size: 22px;
+      font-weight: 700;
+      margin-top: 4px;
+      color: var(--text-main);
+    }
+
+    .org-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .org-card {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .org-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .org-role {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .highlight-card {
+      border-left: 4px solid var(--accent);
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-top: 12px;
+    }
+
+    .timeline-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .timeline-table th,
+    .timeline-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      text-align: left;
+    }
+
+    .timeline-table th {
+      background: var(--bg);
+      font-weight: 600;
+    }
+
+    .cta-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .cta-main {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      background: var(--accent);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-button.secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      box-shadow: none;
+    }
+
+    .fab {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      z-index: 50;
+    }
+
+    .fab-booking {
+      bottom: 76px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body class="header-with-logo">
+
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+
+    const searchScript = document.createElement("script");
+    searchScript.src = "site-search.js";
+    searchScript.onload = () => {
+      if (typeof initSiteSearch === "function") initSiteSearch();
+    };
+    document.body.appendChild(searchScript);
+
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      if (typeof initHeader === "function") initHeader();
+      if (typeof initHeaderEnhancements === "function") initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+  });
+</script>
+
+<div class="hero-image-wrapper">
+  <img src="volunteering_hero.jpg" alt="Volunteering, mentoring and community impact">
+</div>
+
+<div class="contact-hero">
+  <h1 class="page-title">Volunteering, Mentoring & Community Impact</h1>
+  <p class="page-subtitle">
+    Supporting schools, colleges and professional bodies through mentoring, guest speaking and career coaching.
+  </p>
+  <div class="volunteer-logos">
+    <img src="apm_logo.png" alt="Association for Project Management logo">
+    <img src="stem_learning_logo.png" alt="STEM Learning logo">
+    <img src="inspiring_the_future_logo.png" alt="Inspiring the Future logo">
+    <img src="pmi_logo.png" alt="Project Management Institute logo">
+  </div>
+</div>
+
+<div class="contact-section">
+
+  <div class="content-card">
+    <h2>Overview</h2>
+    <p>
+      Volunteering is a core part of how I contribute to the project profession and the wider community. I work with
+      schools, colleges and professional bodies to help students and early‑career professionals understand the
+      opportunities within project management, technology and STEM.
+    </p>
+    <p>
+      Activities include guest speaking, mentoring, mock interviews, careers fairs and content development for
+      organisations such as the Association for Project Management (APM), STEM Learning, Inspiring the Future and
+      the Project Management Institute (PMI).
+    </p>
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-label">Organisations supported</div>
+        <div class="metric-value">10+</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Years active</div>
+        <div class="metric-value">2016–2026</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Volunteer roles</div>
+        <div class="metric-value">15+</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Students reached*</div>
+        <div class="metric-value">500+</div>
+      </div>
+    </div>
+    <p style="font-size: 12px; margin-top: 6px; color: var(--text-sub);">
+      *Estimated based on careers fairs, mock interviews and school events across multiple institutions.
+    </p>
+  </div>
+
+  <div class="content-card">
+    <h2>Organisations & roles</h2>
+    <p>
+      A selection of the organisations I support and the roles I undertake within each.
+    </p>
+    <div class="org-grid">
+      <div class="org-card">
+        <div class="org-name">Association for Project Management (APM)</div>
+        <div class="org-role">Mentor, Guest Speaker, Learning Content Reviewer, Research Advisory Group, Career Coach</div>
+        <p>
+          Supporting the development of project professionals through mentoring, speaking on topics such as AI in
+          project management, reviewing learning content and contributing to research and development forums.
+        </p>
+      </div>
+      <div class="org-card">
+        <div class="org-name">STEM Learning</div>
+        <div class="org-role">Career Coach, Student Ambassador, Mock Interview Volunteer</div>
+        <p>
+          Working with Year 11 students on virtual mock interviews, careers guidance and promoting core computing
+          education, skills and career pathways into technology and project roles.
+        </p>
+      </div>
+      <div class="org-card">
+        <div class="org-name">Inspiring the Future</div>
+        <div class="org-role">Career & mentor volunteer, Silver & Gold volunteer, Student Volunteer</div>
+        <p>
+          Providing career support, advice and mentoring to students, helping them understand the world of work and
+          the opportunities within IT and project management.
+        </p>
+      </div>
+      <div class="org-card">
+        <div class="org-name">Project Management Institute (PMI)</div>
+        <div class="org-role">Volunteer</div>
+        <p>
+          Contributing time and experience to support PMI initiatives and the wider project management community.
+        </p>
+      </div>
+      <div class="org-card">
+        <div class="org-name">Schools & colleges</div>
+        <div class="org-role">Career Coach, Mock Interviewer, Guest Speaker</div>
+        <p>
+          Participating in careers fairs, National Interview Week, mock interviews and “World of Work” events for
+          Year 10 and Year 11 students, helping them build confidence and understand professional expectations.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h2>Featured story</h2>
+    <div class="highlight-card">
+      <p>
+        “Honoured to be recognised as a volunteer with Inspiring the Future. Supporting and inspiring the next
+        generation is something I care deeply about, and it’s a privilege to contribute my time and experience to
+        such an impactful initiative. This badge is a reminder of the difference we can make when we show up, share
+        our stories, and help young people see what’s possible. Looking forward to continuing this work and helping
+        shape future talent across the project profession.”
+      </p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h2>Volunteering timeline</h2>
+    <p>
+      Selected volunteering activities, showing the progression from early employee representation through to
+      structured mentoring and national initiatives.
+    </p>
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Started</th>
+          <th>Organisation</th>
+          <th>Role</th>
+          <th>Cause</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2016‑03</td>
+          <td>Computacenter</td>
+          <td>UK Employee Forum Representative</td>
+          <td>Employee engagement</td>
+        </tr>
+        <tr>
+          <td>2023‑02</td>
+          <td>Student Mentor</td>
+          <td>Mentor</td>
+          <td>Education</td>
+        </tr>
+        <tr>
+          <td>2024‑01</td>
+          <td>APMP / APM</td>
+          <td>Guest Speaker</td>
+          <td>Science & Technology</td>
+        </tr>
+        <tr>
+          <td>2025‑01</td>
+          <td>APM</td>
+          <td>Research Advisory Group, Mentor, Learning Content Reviewer</td>
+          <td>Education</td>
+        </tr>
+        <tr>
+          <td>2025‑01</td>
+          <td>Project Management Institute</td>
+          <td>Volunteer</td>
+          <td>Education</td>
+        </tr>
+        <tr>
+          <td>2026‑01</td>
+          <td>STEM Learning</td>
+          <td>Career Coach, Student Ambassador, Year 11 Virtual Mock Interviews</td>
+          <td>Education</td>
+        </tr>
+        <tr>
+          <td>2026‑01</td>
+          <td>Inspiring the Future</td>
+          <td>Career & mentor volunteer, Silver & Gold volunteer, Student Volunteer</td>
+          <td>Education</td>
+        </tr>
+        <tr>
+          <td>2026‑03</td>
+          <td>National Interview Week</td>
+          <td>Mock Interviews</td>
+          <td>Education</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="content-card">
+    <h2>Get involved / invite me to your event</h2>
+    <div class="cta-panel">
+      <div class="cta-main">
+        If you’d like me to support your school, college or organisation, I’d be happy to discuss opportunities.
+      </div>
+      <p>
+        Typical activities include mock interviews, careers talks, guest lectures on project management and technology,
+        and mentoring for students considering a career in projects or IT.
+      </p>
+      <div class="cta-actions">
+        <a href="contact.html" class="cta-button">Contact me about volunteering</a>
+        <a href="calendar.html" class="cta-button secondary">Book a call via calendar</a>
+        <a href="https://www.linkedin.com/in/tim-williams" target="_blank" class="cta-button secondary">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'});">⬆️</div>
+<a href="calendar.html" id="bookingFab" class="fab fab-booking" aria-label="Make a booking">📅</a>
+
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+<script defer data-domain="twc-ltd.uk" src="https://plausible.io/js/script.js"></script>
+
+</body>
+</html>

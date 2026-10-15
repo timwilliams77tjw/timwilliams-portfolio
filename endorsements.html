@@ -322,6 +322,30 @@
       bottom: 76px;
       text-decoration: none;
     }
+body.dark-mode .contact-hero .page-title,
+body.dark-mode .contact-hero .page-subtitle {
+  color: #fff;
+}
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: 140px repeat(6, 80px);
+  width: max-content;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.heatmap-wrapper {
+  margin-top: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.timeline-table { min-width: 560px; }
+
+    
   </style>
 </head>
 
@@ -543,6 +567,7 @@ fetch("header.html")
     <p>
       Selected endorsements from LinkedIn, presented chronologically. Full details are available on my LinkedIn profile.
     </p>
+    <div class="table-scroll">
     <table class="timeline-table">
       <thead>
         <tr>
@@ -603,6 +628,7 @@ fetch("header.html")
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
 
 </div>

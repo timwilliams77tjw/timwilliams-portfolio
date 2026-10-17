@@ -91,20 +91,27 @@
       color: var(--text-main);
     }
 
-    p {
-      color: var(--text-sub);
-    }
+ /* Restrict paragraph colours to this page's content */
+.contact-hero p,
+.content-card p {
+  color: var(--text-sub);
+}
 
     ul {
       margin-left: 20px;
       color: var(--text-sub);
     }
 
-    a {
-      color: var(--accent);
-      font-weight: 600;
-      text-decoration: none;
-    }
+   /* Style links in the volunteering content only */
+.contact-section a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-section a:hover {
+  text-decoration: underline;
+}
 
     a:hover {
       text-decoration: underline;
@@ -293,9 +300,19 @@
 }
 .timeline-table { min-width: 640px; }
 
+/* Light mode: dark text on the light hero card */
+.contact-hero .page-title {
+  color: var(--text-main);
+}
+
+.contact-hero .page-subtitle {
+  color: var(--text-sub);
+}
+
+/* Dark mode: light text on the dark hero card */
 body.dark-mode .contact-hero .page-title,
 body.dark-mode .contact-hero .page-subtitle {
-  color: #fff;
+  color: #ffffff;
 }
     
   </style>

@@ -10330,6 +10330,713 @@ html[data-theme="dark"] .b44-app, html[data-theme="dark"] .b44-card {
   .b44-btn { width:100%; justify-content:center; }
 }
 @media (prefers-reduced-motion:reduce) { .b44-btn { transition:none; } }
+
+/* ============================================================
+   BASE44 CPD APP — PREMIUM VISUAL DESIGN
+   Scoped to .b44-app to protect other website pages
+============================================================ */
+
+.b44-app {
+  --b44-navy: #102746;
+  --b44-blue: #0878df;
+  --b44-ink: #172b45;
+  --b44-muted: #607086;
+  --b44-border: #e2eaf3;
+  width: 100%;
+  margin: 30px auto;
+  overflow: hidden;
+  color: var(--b44-ink);
+  background: #fff;
+  border: 1px solid var(--b44-border);
+  border-radius: 22px;
+  box-shadow: 0 12px 38px rgba(16, 39, 70, .07);
+  font-family: inherit;
+}
+
+.b44-app *,
+.b44-app *::before,
+.b44-app *::after {
+  box-sizing: border-box;
+}
+
+/* HERO */
+
+.b44-app .b44-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(240px, .75fr);
+  align-items: center;
+  gap: 30px;
+  padding: 54px 48px;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(circle at 85% 15%,
+      rgba(56, 189, 248, .28), transparent 32%),
+    linear-gradient(125deg, #102746 0%, #124d83 58%, #0878df 100%);
+}
+
+.b44-app .b44-hero::before {
+  position: absolute;
+  top: -115px;
+  right: -80px;
+  width: 330px;
+  height: 330px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.b44-app .b44-hero::after {
+  position: absolute;
+  right: 12%;
+  bottom: -180px;
+  width: 350px;
+  height: 350px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.b44-app .b44-hero-content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.b44-app .b44-eyebrow,
+.b44-app .b44-section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+}
+
+.b44-app .b44-eyebrow {
+  padding: 9px 13px;
+  color: #d9f1ff;
+  background: rgba(255,255,255,.11);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 30px;
+}
+
+.b44-app .b44-hero h2 {
+  margin: 23px 0 15px;
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3.15rem);
+  font-weight: 850;
+  line-height: 1.1;
+  letter-spacing: -1.4px;
+}
+
+.b44-app .b44-intro {
+  max-width: 650px;
+  margin: 0 0 22px;
+  color: #e5f1ff;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.b44-app .b44-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 17px;
+  margin: 0 0 27px;
+}
+
+.b44-app .b44-hero-tags span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.b44-app .b44-hero-tags i {
+  color: #7de3ff;
+}
+
+.b44-app .b44-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 49px;
+  padding: 13px 22px;
+  color: #fff;
+  background: #0878df;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 11px;
+  box-shadow: 0 7px 20px rgba(0,0,0,.15);
+  font-size: .95rem;
+  font-weight: 750;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease,
+              background .25s ease;
+}
+
+.b44-app .b44-hero .b44-btn {
+  color: #123458;
+  background: #fff;
+  border-color: #fff;
+}
+
+.b44-app .b44-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0,0,0,.2);
+}
+
+.b44-app .b44-hero .b44-btn:hover {
+  background: #e8f5ff;
+}
+
+/* DECORATIVE HERO ILLUSTRATION */
+
+.b44-app .b44-hero-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 285px;
+  isolation: isolate;
+}
+
+.b44-app .b44-visual-orbit {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgba(255,255,255,.19);
+  border-radius: 50%;
+}
+
+.b44-app .b44-orbit-one {
+  width: 255px;
+  height: 255px;
+}
+
+.b44-app .b44-orbit-two {
+  width: 195px;
+  height: 195px;
+  border-style: dashed;
+}
+
+.b44-app .b44-visual-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: min(245px, 100%);
+  min-height: 205px;
+  padding: 25px 18px;
+  text-align: center;
+  background: linear-gradient(145deg,
+    rgba(255,255,255,.22), rgba(255,255,255,.08));
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 25px;
+  box-shadow: 0 22px 55px rgba(0,0,0,.15);
+  backdrop-filter: blur(10px);
+}
+
+.b44-app .b44-visual-main > i {
+  color: #9de8ff;
+  font-size: 2.8rem;
+}
+
+.b44-app .b44-visual-main > span {
+  color: #d4edff;
+  font-size: .63rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.b44-app .b44-visual-main > strong {
+  max-width: 180px;
+  color: #fff;
+  font-size: 1.13rem;
+  line-height: 1.4;
+}
+
+.b44-app .b44-visual-bars {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 7px;
+  height: 25px;
+}
+
+.b44-app .b44-visual-bars span {
+  width: 11px;
+  height: 45%;
+  background: #9de8ff;
+  border-radius: 4px;
+}
+
+.b44-app .b44-visual-bars span:nth-child(2),
+.b44-app .b44-visual-bars span:nth-child(5) {
+  height: 75%;
+}
+
+.b44-app .b44-visual-bars span:nth-child(3),
+.b44-app .b44-visual-bars span:nth-child(6) {
+  height: 100%;
+}
+
+.b44-app .b44-visual-bars span:nth-child(4) {
+  height: 60%;
+}
+
+.b44-app .b44-float-icon {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 51px;
+  height: 51px;
+  color: #fff;
+  background: #fff;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.17);
+  font-size: 1.25rem;
+  animation: b44-float 4s ease-in-out infinite;
+}
+
+.b44-app .b44-float-one {
+  top: 18px;
+  right: 4px;
+  color: #7c3aed;
+}
+
+.b44-app .b44-float-two {
+  bottom: 15px;
+  left: 2px;
+  color: #078b85;
+  animation-delay: -.9s;
+}
+
+.b44-app .b44-float-three {
+  right: 0;
+  bottom: 35px;
+  color: #df7a19;
+  animation-delay: -1.8s;
+}
+
+@keyframes b44-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+/* SECTION INTRO */
+
+.b44-app .b44-section-heading {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 25px 25px;
+  text-align: center;
+}
+
+.b44-app .b44-section-kicker {
+  color: #0878df;
+}
+
+.b44-app .b44-section-heading h3,
+.b44-app .b44-why-heading h3 {
+  margin: 12px 0;
+  color: #172b45;
+  font-size: clamp(1.45rem, 2.7vw, 2rem);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -.5px;
+}
+
+.b44-app .b44-section-heading p,
+.b44-app .b44-why-heading > p {
+  margin: 0;
+  color: #607086;
+  font-size: .98rem;
+  line-height: 1.75;
+}
+
+/* FEATURE CARDS */
+
+.b44-app .b44-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding: 10px 30px 45px;
+}
+
+.b44-app .b44-feature {
+  --feature: #0878df;
+  --feature-bg: #eaf4ff;
+  position: relative;
+  min-width: 0;
+  padding: 25px 24px 23px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #fff, #fbfdff);
+  border: 1px solid #e4ebf4;
+  border-radius: 17px;
+  box-shadow: 0 5px 16px rgba(16,39,70,.035);
+  transition: transform .25s ease, box-shadow .25s ease,
+              border-color .25s ease;
+}
+
+.b44-app .b44-feature::after {
+  position: absolute;
+  right: -28px;
+  bottom: -35px;
+  width: 100px;
+  height: 100px;
+  background: var(--feature-bg);
+  border-radius: 50%;
+  content: "";
+  opacity: .65;
+  transition: transform .3s ease;
+  pointer-events: none;
+}
+
+.b44-app .b44-feature:hover {
+  z-index: 1;
+  transform: translateY(-5px);
+  border-color: var(--feature);
+  box-shadow: 0 15px 32px rgba(16,39,70,.10);
+}
+
+.b44-app .b44-feature:hover::after {
+  transform: scale(1.35);
+}
+
+.b44-app .b44-feature-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 21px;
+}
+
+.b44-app .b44-ico {
+  display: grid;
+  place-items: center;
+  width: 57px;
+  height: 57px;
+  color: var(--feature);
+  background: var(--feature-bg);
+  border: 1px solid rgba(16,39,70,.04);
+  border-radius: 16px;
+  font-size: 1.45rem;
+  transition: transform .25s ease;
+}
+
+.b44-app .b44-feature:hover .b44-ico {
+  transform: rotate(-5deg) scale(1.06);
+}
+
+.b44-app .b44-feature-number {
+  color: #9ba9bb;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.b44-app .b44-feature h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 10px;
+  color: #172b45;
+  font-size: 1.13rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.b44-app .b44-feature p {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 23px;
+  color: #607086;
+  font-size: .93rem;
+  line-height: 1.75;
+}
+
+.b44-app .b44-feature-label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  color: var(--feature);
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: 1.1px;
+}
+
+.b44-app .b44-blue {
+  --feature: #0878df;
+  --feature-bg: #eaf4ff;
+}
+
+.b44-app .b44-purple {
+  --feature: #8052d6;
+  --feature-bg: #f2edff;
+}
+
+.b44-app .b44-teal {
+  --feature: #078b85;
+  --feature-bg: #e4f8f5;
+}
+
+.b44-app .b44-orange {
+  --feature: #d87918;
+  --feature-bg: #fff2e4;
+}
+
+.b44-app .b44-pink {
+  --feature: #d64d8a;
+  --feature-bg: #ffedf5;
+}
+
+.b44-app .b44-green {
+  --feature: #24854a;
+  --feature-bg: #e9f8ee;
+}
+
+/* BENEFITS */
+
+.b44-app .b44-why {
+  padding: 45px 35px 35px;
+  background: linear-gradient(180deg, #f5f9fe, #fff);
+  border-top: 1px solid #e2eaf3;
+}
+
+.b44-app .b44-why-heading {
+  max-width: 720px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+.b44-app .b44-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1050px;
+  margin: 0 auto 35px;
+}
+
+.b44-app .b44-benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  min-width: 0;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e5edf6;
+  border-radius: 14px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.b44-app .b44-benefit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 22px rgba(16,39,70,.07);
+}
+
+.b44-app .b44-benefit-icon {
+  display: grid;
+  flex: 0 0 43px;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  color: #0878df;
+  background: #eaf4ff;
+  border-radius: 12px;
+  font-size: 1.05rem;
+}
+
+.b44-app .b44-benefit h4 {
+  margin: 1px 0 7px;
+  color: #172b45;
+  font-size: .98rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.b44-app .b44-benefit p {
+  margin: 0;
+  color: #607086;
+  font-size: .9rem;
+  line-height: 1.7;
+}
+
+/* FINAL CALL TO ACTION */
+
+.b44-app .b44-bottom-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 28px 30px;
+  color: #fff;
+  background: linear-gradient(110deg, #102746, #155b96);
+  border-radius: 17px;
+}
+
+.b44-app .b44-bottom-cta > div {
+  min-width: 0;
+}
+
+.b44-app .b44-bottom-cta h3 {
+  margin: 0 0 7px;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.b44-app .b44-bottom-cta p {
+  margin: 0;
+  color: #d7e8fa;
+  font-size: .92rem;
+  line-height: 1.6;
+}
+
+.b44-app .b44-btn-light {
+  flex-shrink: 0;
+  color: #123458;
+  background: #fff;
+  border-color: #fff;
+}
+
+/* RESPONSIVE LAYOUT */
+
+@media (max-width: 900px) {
+  .b44-app .b44-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(190px, .7fr);
+    gap: 15px;
+    padding: 40px 30px;
+  }
+
+  .b44-app .b44-hero-visual {
+    transform: scale(.88);
+  }
+
+  .b44-app .b44-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-right: 22px;
+    padding-left: 22px;
+    gap: 16px;
+  }
+
+  .b44-app .b44-why {
+    padding: 35px 22px 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .b44-app {
+    margin: 20px auto;
+    border-radius: 16px;
+  }
+
+  .b44-app .b44-hero {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 32px 22px;
+  }
+
+  .b44-app .b44-hero h2 {
+    margin-top: 19px;
+    font-size: 2.15rem;
+  }
+
+  .b44-app .b44-intro {
+    font-size: .97rem;
+    line-height: 1.75;
+  }
+
+  .b44-app .b44-hero-visual {
+    min-height: 230px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 350px;
+    transform: none;
+  }
+
+  .b44-app .b44-orbit-one {
+    width: 215px;
+    height: 215px;
+  }
+
+  .b44-app .b44-orbit-two {
+    width: 165px;
+    height: 165px;
+  }
+
+  .b44-app .b44-visual-main {
+    width: 205px;
+    min-height: 175px;
+  }
+
+  .b44-app .b44-section-heading {
+    padding: 35px 20px 20px;
+  }
+
+  .b44-app .b44-section-heading h3,
+  .b44-app .b44-why-heading h3 {
+    font-size: 1.45rem;
+  }
+
+  .b44-app .b44-features {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding: 8px 17px 30px;
+  }
+
+  .b44-app .b44-feature {
+    padding: 22px;
+  }
+
+  .b44-app .b44-feature p {
+    margin-bottom: 17px;
+  }
+
+  .b44-app .b44-why {
+    padding: 30px 17px 18px;
+  }
+
+  .b44-app .b44-benefits {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .b44-app .b44-benefit {
+    padding: 17px;
+  }
+
+  .b44-app .b44-bottom-cta {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 23px 20px;
+  }
+
+  .b44-app .b44-bottom-cta .b44-btn {
+    width: 100%;
+  }
+}
+
+/* ACCESSIBILITY: REDUCE MOTION WHEN REQUESTED */
+
+@media (prefers-reduced-motion: reduce) {
+  .b44-app *,
+  .b44-app *::before,
+  .b44-app *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+
 </style>
 </head>
 <body class="header-with-logo page-prof-dev">
@@ -10408,59 +11115,213 @@ html[data-theme="dark"] .b44-app, html[data-theme="dark"] .b44-card {
   </p>
 </section>
 <!-- ============================================================
-     BASE44 CPD APP
+     BASE44 CPD APP — ENHANCED VISUAL DESIGN
 ============================================================ -->
 <section class="b44-app">
-  <div class="b44-head">
-    <div>
+  <!-- HERO -->
+  <div class="b44-hero">
+    <div class="b44-hero-content">
+      <span class="b44-eyebrow">
+        <i class="fa-solid fa-graduation-cap"></i>
+        PROFESSIONAL DEVELOPMENT
+      </span>
       <h2>Base44 CPD App</h2>
-      <p>A live companion to this page. Log CPD, assess your competence against the APM Framework and link evidence, all in one place.</p>
+      <p class="b44-intro">
+        Take control of your professional growth. Record CPD, assess
+        your competence against the APM Framework, and connect your
+        learning to supporting evidence — all in one place.
+      </p>
+      <div class="b44-hero-tags">
+        <span><i class="fa-solid fa-bolt"></i> Live tracking</span>
+        <span><i class="fa-solid fa-chart-pie"></i> Progress insights</span>
+        <span><i class="fa-solid fa-link"></i> Connected evidence</span>
+      </div>
+      <a class="b44-btn"
+         href="https://apm-insight-pro.base44.app"
+         target="_blank"
+         rel="noopener noreferrer">
+        Open CPD App
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
     </div>
-    <a class="b44-btn" href="https://apm-insight-pro.base44.app" target="_blank" rel="noopener">
-      Open CPD App <i class="fa-solid fa-arrow-up-right-from-square"></i>
-    </a>
+    <div class="b44-hero-visual" aria-hidden="true">
+      <div class="b44-visual-orbit b44-orbit-one"></div>
+      <div class="b44-visual-orbit b44-orbit-two"></div>
+      <div class="b44-visual-main">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>YOUR DEVELOPMENT</span>
+        <strong>One connected workspace</strong>
+        <div class="b44-visual-bars">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="b44-float-icon b44-float-one">
+        <i class="fa-solid fa-chart-line"></i>
+      </div>
+      <div class="b44-float-icon b44-float-two">
+        <i class="fa-solid fa-clipboard-check"></i>
+      </div>
+      <div class="b44-float-icon b44-float-three">
+        <i class="fa-solid fa-folder-open"></i>
+      </div>
+    </div>
   </div>
+  <!-- SECTION HEADING -->
+  <div class="b44-section-heading">
+    <span class="b44-section-kicker">EXPLORE THE PLATFORM</span>
+    <h3>Everything you need to develop professionally</h3>
+    <p>Six integrated capabilities to help you capture learning,
+       measure progress and build a stronger evidence portfolio.</p>
+  </div>
+  <!-- FEATURE CARDS -->
   <div class="b44-features">
-    <div class="b44-feature">
-      <span class="b44-ico"><i class="fa-solid fa-list-check"></i></span>
+    <article class="b44-feature b44-blue">
+      <div class="b44-feature-top">
+        <span class="b44-ico">
+          <i class="fa-solid fa-list-check"></i>
+        </span>
+        <span class="b44-feature-number">01</span>
+      </div>
       <h3>Live CPD log</h3>
-      <p>Add entries in real time and review them on a timeline with smart filters.</p>
-    </div>
-    <div class="b44-feature">
-      <span class="b44-ico"><i class="fa-solid fa-chart-line"></i></span>
+      <p>Add entries in real time and review your development on a
+         timeline with smart filters.</p>
+      <span class="b44-feature-label">CAPTURE LEARNING</span>
+    </article>
+    <article class="b44-feature b44-purple">
+      <div class="b44-feature-top">
+        <span class="b44-ico">
+          <i class="fa-solid fa-chart-line"></i>
+        </span>
+        <span class="b44-feature-number">02</span>
+      </div>
       <h3>Metrics dashboard</h3>
-      <p>Hours, categories and progress shown as live visualisations.</p>
-    </div>
-    <div class="b44-feature">
-      <span class="b44-ico"><i class="fa-solid fa-clipboard-check"></i></span>
+      <p>Visualise CPD hours, activity categories and progress
+         through clear, live dashboard insights.</p>
+      <span class="b44-feature-label">MEASURE PROGRESS</span>
+    </article>
+    <article class="b44-feature b44-teal">
+      <div class="b44-feature-top">
+        <span class="b44-ico">
+          <i class="fa-solid fa-clipboard-check"></i>
+        </span>
+        <span class="b44-feature-number">03</span>
+      </div>
       <h3>Competency assessment</h3>
-      <p>Self-assess against the APM Competence Framework and see your gaps.</p>
-    </div>
-    <div class="b44-feature">
-      <span class="b44-ico"><i class="fa-solid fa-folder-open"></i></span>
+      <p>Self-assess against the APM Competence Framework and
+         identify areas for further development.</p>
+      <span class="b44-feature-label">ASSESS CAPABILITY</span>
+    </article>
+    <article class="b44-feature b44-orange">
+      <div class="b44-feature-top">
+        <span class="b44-ico">
+          <i class="fa-solid fa-folder-open"></i>
+        </span>
+        <span class="b44-feature-number">04</span>
+      </div>
       <h3>Evidence repository</h3>
-      <p>Keep evidence in one structured place, linked both ways to CPD and competencies.</p>
-    </div>
-    <div class="b44-feature">
-      <span class="b44-ico"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+      <p>Organise supporting evidence in one structured location,
+         linked to your CPD activities and competencies.</p>
+      <span class="b44-feature-label">BUILD YOUR EVIDENCE</span>
+    </article>
+    <article class="b44-feature b44-pink">
+      <div class="b44-feature-top">
+        <span class="b44-ico">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </span>
+        <span class="b44-feature-number">05</span>
+      </div>
       <h3>AI link suggestions</h3>
-      <p>Get suggested links from CPD to competencies to evidence.</p>
-    </div>
-    <div class="b44-feature">
-      <span class="b44-ico"><i class="fa-solid fa-file-import"></i></span>
+      <p>Get AI-assisted suggestions for connecting CPD activities
+         with relevant competencies and evidence.</p>
+      <span class="b44-feature-label">CONNECT THE DOTS</span>
+    </article>
+    <article class="b44-feature b44-green">
+      <div class="b44-feature-top">
+        <span class="b44-ico">
+          <i class="fa-solid fa-file-import"></i>
+        </span>
+        <span class="b44-feature-number">06</span>
+      </div>
       <h3>Bulk import</h3>
-      <p>Upload CPD entries and evidence in one go instead of one at a time.</p>
-    </div>
+      <p>Import CPD entries and evidence together to make
+         maintaining your development records easier.</p>
+      <span class="b44-feature-label">SAVE TIME</span>
+    </article>
   </div>
+  <!-- BENEFITS -->
   <div class="b44-why">
-    <h3>Why use the app</h3>
-    <ul>
-      <li><i class="fa-solid fa-circle-check"></i><span><strong>Log as you learn.</strong> Record CPD in real time so nothing is lost before reporting.</span></li>
-      <li><i class="fa-solid fa-circle-check"></i><span><strong>See progress at a glance.</strong> The dashboard updates as you add hours and activities.</span></li>
-      <li><i class="fa-solid fa-circle-check"></i><span><strong>Assess competence properly.</strong> A full assessment mapped to the APM Framework, with gaps highlighted.</span></li>
-      <li><i class="fa-solid fa-circle-check"></i><span><strong>Manage evidence centrally.</strong> Store and organise supporting evidence with its metadata.</span></li>
-      <li><i class="fa-solid fa-circle-check"></i><span><strong>Follow the links.</strong> Jump from a CPD entry to its competency and evidence, and back again.</span></li>
-    </ul>
+    <div class="b44-why-heading">
+      <span class="b44-section-kicker">THE BENEFITS</span>
+      <h3>Turn professional learning into measurable progress</h3>
+      <p>Keep your development organised, connected and ready to
+         support your professional portfolio.</p>
+    </div>
+    <div class="b44-benefits">
+      <div class="b44-benefit">
+        <span class="b44-benefit-icon">
+          <i class="fa-solid fa-bolt"></i>
+        </span>
+        <div>
+          <h4>Log as you learn</h4>
+          <p>Record CPD as it happens, helping you maintain a
+             consistent and accurate development record.</p>
+        </div>
+      </div>
+      <div class="b44-benefit">
+        <span class="b44-benefit-icon">
+          <i class="fa-solid fa-chart-simple"></i>
+        </span>
+        <div>
+          <h4>See progress at a glance</h4>
+          <p>Review your hours, activities and development trends
+             through your dashboard.</p>
+        </div>
+      </div>
+      <div class="b44-benefit">
+        <span class="b44-benefit-icon">
+          <i class="fa-solid fa-bullseye"></i>
+        </span>
+        <div>
+          <h4>Identify competency gaps</h4>
+          <p>Use your APM Framework assessment to highlight areas
+             where further development may be valuable.</p>
+        </div>
+      </div>
+      <div class="b44-benefit">
+        <span class="b44-benefit-icon">
+          <i class="fa-solid fa-box-archive"></i>
+        </span>
+        <div>
+          <h4>Keep evidence organised</h4>
+          <p>Maintain supporting evidence and its metadata in a
+             central, structured repository.</p>
+        </div>
+      </div>
+      <div class="b44-benefit">
+        <span class="b44-benefit-icon">
+          <i class="fa-solid fa-diagram-project"></i>
+        </span>
+        <div>
+          <h4>Connect learning and evidence</h4>
+          <p>Navigate between CPD entries, competencies and their
+             associated evidence.</p>
+        </div>
+      </div>
+    </div>
+    <div class="b44-bottom-cta">
+      <div>
+        <h3>Ready to take your CPD further?</h3>
+        <p>Bring your learning, competencies and evidence together.</p>
+      </div>
+      <a class="b44-btn b44-btn-light"
+         href="https://apm-insight-pro.base44.app"
+         target="_blank"
+         rel="noopener noreferrer">
+        Explore the CPD App
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
   </div>
 </section>
 <!-- ============================================================

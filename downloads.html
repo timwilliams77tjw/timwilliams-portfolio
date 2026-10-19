@@ -2015,6 +2015,125 @@ body.dark-mode .downloads-cta {
     white-space: nowrap;     /* Optional: keeps text tidy */
 }
 
+/* =========================================================
+   DOWNLOADS PAGE — COMPACT BLUE PILL BUTTONS
+   Overrides earlier button sizing rules
+   ========================================================= */
+
+body.page-downloads .download-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    padding-top: 14px;
+    overflow: visible;
+}
+
+/* Compact blue buttons */
+body.page-downloads .download-card-footer .download-btn,
+body.page-downloads .download-card-footer .download-btn-secondary {
+    display: inline-flex;
+    flex: 0 1 auto;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 34px;
+
+    padding: 8px 15px;
+    box-sizing: border-box;
+
+    background: #0a66c2;
+    color: #ffffff;
+    border: 1px solid #0a66c2;
+    border-radius: 999px;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Hover and keyboard focus */
+body.page-downloads .download-card-footer .download-btn:hover,
+body.page-downloads .download-card-footer .download-btn-secondary:hover {
+    background: #084f96;
+    border-color: #084f96;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 9px rgba(10, 102, 194, 0.2);
+}
+
+body.page-downloads .download-card-footer .download-btn:focus-visible,
+body.page-downloads .download-card-footer .download-btn-secondary:focus-visible {
+    outline: 3px solid rgba(10, 102, 194, 0.35);
+    outline-offset: 3px;
+}
+
+/* Keep download counters beside buttons where space allows */
+body.page-downloads .download-card-footer .download-counter {
+    flex: 0 0 auto;
+    margin-left: 0;
+    padding-left: 0;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+/* Tablet and iPad */
+@media (min-width: 641px) {
+    body.page-downloads .download-card-footer {
+        align-items: center;
+    }
+}
+
+/* Mobile: compact buttons, never stretch to full card width */
+@media (max-width: 640px) {
+    body.page-downloads .download-card-footer {
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 9px;
+    }
+
+    body.page-downloads .download-card-footer .download-btn,
+    body.page-downloads .download-card-footer .download-btn-secondary {
+        width: auto;
+        max-width: 100%;
+        min-height: 34px;
+        padding: 8px 13px;
+    }
+
+    body.page-downloads .download-card-footer .download-counter {
+        align-self: center;
+    }
+}
+
+/* Preserve readable buttons in dark mode */
+body.dark-mode.page-downloads .download-card-footer .download-btn,
+body.dark-mode.page-downloads .download-card-footer .download-btn-secondary {
+    background: #58aaf0;
+    border-color: #58aaf0;
+    color: #071827;
+}
+
+body.dark-mode.page-downloads .download-card-footer .download-btn:hover,
+body.dark-mode.page-downloads .download-card-footer .download-btn-secondary:hover {
+    background: #7bc0fa;
+    border-color: #7bc0fa;
+    color: #071827;
+}
     
     </style>
 </head>

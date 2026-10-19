@@ -1791,6 +1791,377 @@ body.dark-mode.twc-about-page .twc-leadership-content p {
     }
 
 
+/* =========================================================
+   TWC HOMEPAGE — SELECTED PROGRAMME CASE STUDIES
+   Scoped styles to avoid affecting existing page components
+   ========================================================= */
+
+.twc-case-studies {
+    --case-navy: #071d36;
+    --case-blue: #0a66c2;
+    --case-muted: #526174;
+    --case-border: #dce5ef;
+
+    padding: 76px 28px;
+    background: #ffffff;
+    border-top: 1px solid #e3eaf2;
+    border-bottom: 1px solid #e3eaf2;
+}
+
+.twc-case-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.twc-case-heading {
+    max-width: 760px;
+    margin-bottom: 36px;
+}
+
+.twc-case-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+    color: var(--case-blue);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.twc-case-kicker::before {
+    content: "";
+    width: 28px;
+    height: 3px;
+    border-radius: 3px;
+    background: #c99532;
+}
+
+.twc-case-heading h2 {
+    margin: 0 0 14px;
+    color: var(--case-navy);
+    font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+    line-height: 1.16;
+    letter-spacing: -0.025em;
+}
+
+.twc-case-heading p {
+    margin: 0;
+    color: var(--case-muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.twc-case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+}
+
+.twc-case-card {
+    --case-accent: #0a66c2;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 26px 24px 24px;
+    overflow: hidden;
+
+    background: #ffffff;
+    border: 1px solid var(--case-border);
+    border-top: 4px solid var(--case-accent);
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(7, 29, 54, 0.055);
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.twc-case-card:nth-child(2) {
+    --case-accent: #0b8f7a;
+}
+
+.twc-case-card:nth-child(3) {
+    --case-accent: #7250c8;
+}
+
+.twc-case-card:nth-child(4) {
+    --case-accent: #29496e;
+}
+
+.twc-case-card:nth-child(5) {
+    --case-accent: #bd8420;
+}
+
+.twc-case-card:nth-child(6) {
+    --case-accent: #526174;
+}
+
+.twc-case-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--case-accent);
+    box-shadow: 0 14px 30px rgba(7, 29, 54, 0.12);
+}
+
+.twc-case-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.twc-case-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--case-accent) 10%, white);
+    color: var(--case-accent);
+}
+
+.twc-case-icon svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+.twc-case-category {
+    display: inline-block;
+    max-width: 65%;
+    padding: 6px 9px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #34465b;
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: 0.035em;
+    text-align: right;
+}
+
+.twc-case-card h3 {
+    margin: 0 0 11px;
+    color: var(--case-navy);
+    font-size: 1.22rem;
+    line-height: 1.35;
+}
+
+.twc-case-card > p {
+    margin: 0 0 20px;
+    color: var(--case-muted);
+    font-size: 0.91rem;
+    line-height: 1.7;
+}
+
+.twc-case-scale {
+    margin-top: auto;
+    padding: 15px 14px;
+    border-radius: 9px;
+    background: #f4f7fb;
+    border-left: 3px solid var(--case-accent);
+}
+
+.twc-case-scale-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #5b6c80;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.twc-case-scale strong {
+    display: block;
+    color: var(--case-navy);
+    font-size: 1.02rem;
+    line-height: 1.45;
+}
+
+.twc-case-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e8edf3;
+
+    color: var(--case-blue);
+    font-size: 0.88rem;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.twc-case-link span:last-child {
+    font-size: 1.15rem;
+    transition: transform 0.2s ease;
+}
+
+.twc-case-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.twc-case-link:hover span:last-child {
+    transform: translateX(4px);
+}
+
+.twc-case-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
+}
+
+.twc-case-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 22px;
+    border: 1px solid var(--case-blue);
+    border-radius: 8px;
+    background: var(--case-blue);
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 750;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.twc-case-btn:hover {
+    background: #084f96;
+    transform: translateY(-2px);
+}
+
+.twc-case-btn-secondary {
+    background: #ffffff;
+    color: var(--case-blue);
+}
+
+.twc-case-btn-secondary:hover {
+    background: #edf5ff;
+    color: #084f96;
+}
+
+/* Dark mode */
+body.dark-mode .twc-case-studies {
+    background: #0d1117;
+    border-color: #283442;
+}
+
+body.dark-mode .twc-case-heading h2,
+body.dark-mode .twc-case-card h3,
+body.dark-mode .twc-case-scale strong {
+    color: #f0f6fc;
+}
+
+body.dark-mode .twc-case-heading p,
+body.dark-mode .twc-case-card > p {
+    color: #c7d0da;
+}
+
+body.dark-mode .twc-case-card {
+    background: #161d26;
+    border-right-color: #303b49;
+    border-bottom-color: #303b49;
+}
+
+body.dark-mode .twc-case-category {
+    background: #253244;
+    color: #e0eaf5;
+}
+
+body.dark-mode .twc-case-scale {
+    background: #202b39;
+}
+
+body.dark-mode .twc-case-scale-label {
+    color: #c0ccda;
+}
+
+body.dark-mode .twc-case-link {
+    border-color: #303b49;
+}
+
+body.dark-mode .twc-case-btn-secondary {
+    background: transparent;
+    color: #8bc5ff;
+    border-color: #8bc5ff;
+}
+
+body.dark-mode .twc-case-btn-secondary:hover {
+    background: #172c43;
+}
+
+/* Responsive layouts */
+@media (max-width: 950px) {
+    .twc-case-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .twc-case-studies {
+        padding: 60px 22px;
+    }
+}
+
+@media (max-width: 600px) {
+    .twc-case-studies {
+        padding: 46px 18px;
+    }
+
+    .twc-case-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .twc-case-card {
+        padding: 23px 20px 20px;
+    }
+
+    .twc-case-heading {
+        margin-bottom: 26px;
+    }
+
+    .twc-case-actions {
+        flex-direction: column;
+    }
+
+    .twc-case-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .twc-case-card,
+    .twc-case-link span:last-child,
+    .twc-case-btn {
+        transition: none;
+    }
+
+    .twc-case-card:hover,
+    .twc-case-btn:hover {
+        transform: none;
+    }
+}
+
 
 </style>
 
@@ -2196,6 +2567,504 @@ TWC Consulting delivers senior programme leadership across cyber security, cloud
 </section>
 
 
+
+<!-- =========================================================
+
+     SELECTED PROGRAMME CASE STUDIES
+
+========================================================= -->
+
+<section class="twc-case-studies" id="selected-case-studies">
+
+    <div class="twc-case-inner">
+
+        <div class="twc-case-heading">
+
+            <div class="twc-case-kicker">
+
+                DELIVERY EXPERIENCE
+
+            </div>
+
+            <h2>Selected Programme Case Studies</h2>
+
+            <p>
+
+                Complex technology programmes require more than technical
+
+                expertise. They need clear leadership, effective governance
+
+                and disciplined execution. Explore selected examples of
+
+                enterprise transformation, cyber security and programme
+
+                management experience.
+
+            </p>
+
+        </div>
+
+        <div class="twc-case-grid">
+
+            <!-- CASE STUDY 1: NHS ENGLAND -->
+
+            <article class="twc-case-card">
+
+                <div class="twc-case-top">
+
+                    <div class="twc-case-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none"
+
+                             stroke="currentColor" stroke-width="1.8"
+
+                             stroke-linecap="round" stroke-linejoin="round">
+
+                            <path d="M12 3 20 6v5c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6z"/>
+
+                            <path d="M12 8v8M8 12h8"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="twc-case-category">
+
+                        CYBER SECURITY
+
+                    </span>
+
+                </div>
+
+                <h3>NHS England Cyber Transformation</h3>
+
+                <p>
+
+                    Cyber security programme leadership focused on
+
+                    strengthening security governance, improving control
+
+                    maturity and coordinating delivery across complex
+
+                    technology and stakeholder environments.
+
+                </p>
+
+                <div class="twc-case-scale">
+
+                    <span class="twc-case-scale-label">
+
+                        Programme focus
+
+                    </span>
+
+                    <strong>CAF-aligned cyber security uplift</strong>
+
+                </div>
+
+                <a class="twc-case-link"
+
+                   href="portfolio.html"
+
+                   aria-label="Explore NHS England cyber transformation in the portfolio">
+
+                    <span>Explore project experience</span>
+
+                    <span aria-hidden="true">→</span>
+
+                </a>
+
+            </article>
+
+            <!-- CASE STUDY 2: TESCO -->
+
+            <article class="twc-case-card">
+
+                <div class="twc-case-top">
+
+                    <div class="twc-case-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none"
+
+                             stroke="currentColor" stroke-width="1.8"
+
+                             stroke-linecap="round" stroke-linejoin="round">
+
+                            <rect x="3" y="4" width="18" height="13" rx="2"/>
+
+                            <path d="M8 21h8M12 17v4M7 9h4M7 12h7"/>
+
+                            <circle cx="17" cy="10" r="1"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="twc-case-category">
+
+                        DIGITAL WORKPLACE
+
+                    </span>
+
+                </div>
+
+                <h3>Global Device Transformation</h3>
+
+                <p>
+
+                    Large-scale digital workplace delivery involving
+
+                    endpoint migration, deployment coordination and
+
+                    programme control across a geographically distributed
+
+                    enterprise environment.
+
+                </p>
+
+                <div class="twc-case-scale">
+
+                    <span class="twc-case-scale-label">
+
+                        Reported programme scale
+
+                    </span>
+
+                    <strong>126,000 devices across 42 countries</strong>
+
+                </div>
+
+                <a class="twc-case-link"
+
+                   href="portfolio.html"
+
+                   aria-label="Explore global device transformation in the portfolio">
+
+                    <span>Explore project experience</span>
+
+                    <span aria-hidden="true">→</span>
+
+                </a>
+
+            </article>
+
+            <!-- CASE STUDY 3: HSBC -->
+
+            <article class="twc-case-card">
+
+                <div class="twc-case-top">
+
+                    <div class="twc-case-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none"
+
+                             stroke="currentColor" stroke-width="1.8"
+
+                             stroke-linecap="round" stroke-linejoin="round">
+
+                            <circle cx="12" cy="12" r="9"/>
+
+                            <circle cx="12" cy="12" r="3"/>
+
+                            <path d="M12 3v6M21 12h-6M12 21v-6M3 12h6"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="twc-case-category">
+
+                        ENTERPRISE TRANSFORMATION
+
+                    </span>
+
+                </div>
+
+                <h3>HSBC Enterprise Workplace Programme</h3>
+
+                <p>
+
+                    Enterprise workplace delivery across a complex
+
+                    international estate, requiring structured planning,
+
+                    stakeholder coordination, deployment governance
+
+                    and control across multiple locations.
+
+                </p>
+
+                <div class="twc-case-scale">
+
+                    <span class="twc-case-scale-label">
+
+                        Reported programme scale
+
+                    </span>
+
+                    <strong>46,000 users across 750 sites</strong>
+
+                </div>
+
+                <a class="twc-case-link"
+
+                   href="portfolio.html"
+
+                   aria-label="Explore HSBC enterprise workplace experience in the portfolio">
+
+                    <span>Explore project experience</span>
+
+                    <span aria-hidden="true">→</span>
+
+                </a>
+
+            </article>
+
+            <!-- CASE STUDY 4: DOUNREAY -->
+
+            <article class="twc-case-card">
+
+                <div class="twc-case-top">
+
+                    <div class="twc-case-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none"
+
+                             stroke="currentColor" stroke-width="1.8"
+
+                             stroke-linecap="round" stroke-linejoin="round">
+
+                            <rect x="3" y="4" width="18" height="16" rx="2"/>
+
+                            <path d="M8 8h8M8 12h8M8 16h4"/>
+
+                            <circle cx="17" cy="16" r="1"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="twc-case-category">
+
+                        PMO & GOVERNANCE
+
+                    </span>
+
+                </div>
+
+                <h3>Dounreay Nuclear PMO</h3>
+
+                <p>
+
+                    PMO leadership and governance supporting a complex
+
+                    nuclear-sector IT portfolio, with emphasis on
+
+                    portfolio oversight, reporting, delivery controls,
+
+                    risk management and assurance.
+
+                </p>
+
+                <div class="twc-case-scale">
+
+                    <span class="twc-case-scale-label">
+
+                        Reported portfolio scale
+
+                    </span>
+
+                    <strong>£122 million IT portfolio</strong>
+
+                </div>
+
+                <a class="twc-case-link"
+
+                   href="portfolio.html"
+
+                   aria-label="Explore PMO and governance experience in the portfolio">
+
+                    <span>Explore project experience</span>
+
+                    <span aria-hidden="true">→</span>
+
+                </a>
+
+            </article>
+
+            <!-- CASE STUDY 5: NFU MUTUAL -->
+
+            <article class="twc-case-card">
+
+                <div class="twc-case-top">
+
+                    <div class="twc-case-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none"
+
+                             stroke="currentColor" stroke-width="1.8"
+
+                             stroke-linecap="round" stroke-linejoin="round">
+
+                            <rect x="3" y="4" width="18" height="13" rx="2"/>
+
+                            <path d="M8 21h8M12 17v4M8 10l2.5 2.5L16 7"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="twc-case-category">
+
+                        ENDPOINT MODERNISATION
+
+                    </span>
+
+                </div>
+
+                <h3>NFU Mutual Windows 10 Transformation</h3>
+
+                <p>
+
+                    Enterprise endpoint modernisation involving
+
+                    migration planning, deployment coordination,
+
+                    stakeholder management and delivery governance
+
+                    across a large user estate.
+
+                </p>
+
+                <div class="twc-case-scale">
+
+                    <span class="twc-case-scale-label">
+
+                        Reported programme scale
+
+                    </span>
+
+                    <strong>32,000 endpoints</strong>
+
+                </div>
+
+                <a class="twc-case-link"
+
+                   href="portfolio.html"
+
+                   aria-label="Explore endpoint modernisation experience in the portfolio">
+
+                    <span>Explore project experience</span>
+
+                    <span aria-hidden="true">→</span>
+
+                </a>
+
+            </article>
+
+            <!-- CASE STUDY 6: LINKLATERS -->
+
+            <article class="twc-case-card">
+
+                <div class="twc-case-top">
+
+                    <div class="twc-case-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none"
+
+                             stroke="currentColor" stroke-width="1.8"
+
+                             stroke-linecap="round" stroke-linejoin="round">
+
+                            <path d="M12 3 4 7v2h16V7z"/>
+
+                            <path d="M6 9v8M10 9v8M14 9v8M18 9v8M4 20h16M3 17h18"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="twc-case-category">
+
+                        REGULATED ENTERPRISE
+
+                    </span>
+
+                </div>
+
+                <h3>Linklaters Enterprise Technology Delivery</h3>
+
+                <p>
+
+                    Technology programme delivery in a demanding
+
+                    professional-services environment, requiring
+
+                    structured coordination, stakeholder engagement,
+
+                    deployment planning and operational readiness.
+
+                </p>
+
+                <div class="twc-case-scale">
+
+                    <span class="twc-case-scale-label">
+
+                        Reported user estate
+
+                    </span>
+
+                    <strong>15,000 users</strong>
+
+                </div>
+
+                <a class="twc-case-link"
+
+                   href="portfolio.html"
+
+                   aria-label="Explore enterprise technology delivery in the portfolio">
+
+                    <span>Explore project experience</span>
+
+                    <span aria-hidden="true">→</span>
+
+                </a>
+
+            </article>
+
+        </div>
+
+        <!-- SECTION CALLS TO ACTION -->
+
+        <div class="twc-case-actions">
+
+            <a href="portfolio.html"
+
+               class="twc-case-btn">
+
+                View Full Project Portfolio
+
+                <span aria-hidden="true">&nbsp;→</span>
+
+            </a>
+
+            <a href="contact.html"
+
+               class="twc-case-btn twc-case-btn-secondary">
+
+                Discuss Your Programme
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- END SELECTED PROGRAMME CASE STUDIES -->
+
+     
 <!-- =========================================================
      WHY TWC EXISTS
      ========================================================= -->

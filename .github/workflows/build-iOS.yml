@@ -1,4 +1,4 @@
-name: Setup and Build iOS App
+name: Build APM Insight Web & Mobile Package
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
@@ -18,60 +18,38 @@ jobs:
       with:
         node-version: 22
 
-    - name: Initialize Package.json (if missing)
+    - name: Prepare Deployment Distribution Directory
       run: |
-        if [ ! -f package.json ]; then
-          npm init -y
-        fi
+        mkdir -p dist
+        cp -r cpdapp/* dist/
 
-    - name: Install Capacitor CLI & iOS Dependencies
-      run: npm install @capacitor/core @capacitor/cli @capacitor/ios
-
-    - name: Clean Previous Builds
+    - name: Generate PWA Web Manifest (iOS Standalone Mode)
       run: |
-        rm -rf www ios capacitor.config.json
-
-    - name: Create Capacitor Config
-      run: |
-        cat <<EOF > capacitor.config.json
+        cat <<EOF > dist/manifest.json
         {
-          "appId": "com.twcltd.apminsight",
-          "appName": "APM Insight",
-          "webDir": "www",
-          "bundledWebRuntime": false
+          "name": "APM Insight",
+          "short_name": "APM Insight",
+          "start_url": "./index.html",
+          "display": "standalone",
+          "background_color": "#0f172a",
+          "theme_color": "#10b981",
+          "icons": [
+            {
+              "src": "https://twc-ltd.uk/cpdapp/icon.png",
+              "sizes": "512x512",
+              "type": "image/png"
+            }
+          ]
         }
         EOF
 
-    - name: Copy cpdapp Assets to www
+    - name: Compress Distribution Bundle
       run: |
-        mkdir -p www
-        cp -r cpdapp/* www/
+        cd dist
+        zip -r ../apm-insight-mobile-app.zip .
 
-    - name: Add & Sync iOS Project
-      run: |
-        npx cap add ios
-        npx cap sync ios
-
-    - name: Build iOS App Target
-      working-directory: ios/App
-      run: |
-        xcodebuild -project App.xcodeproj \
-                   -scheme App \
-                   -sdk iphonesimulator \
-                   -configuration Debug \
-                   CODE_SIGN_IDENTITY="" \
-                   CODE_SIGNING_REQUIRED=NO \
-                   CODE_SIGNING_ALLOWED=NO \
-                   clean build
-
-    - name: Package iOS App into ZIP
-      run: |
-        mkdir -p output
-        cd ios/App/build/Debug-iphonesimulator
-        zip -r ../../../../output/APM-Insight-iOS.zip App.app
-
-    - name: Upload iOS App Bundle Artifact
+    - name: Upload Downloadable Package Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: APM-Insight-iOS-Simulator-App
-        path: output/APM-Insight-iOS.zip
+        name: APM-Insight-App-Bundle
+        path: apm-insight-mobile-app.zip

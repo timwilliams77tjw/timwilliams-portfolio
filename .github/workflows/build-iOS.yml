@@ -1,0 +1,44 @@
+name: Setup and Build iOS App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Initialize Package.json (if missing)
+      run: |
+        if [ ! -f package.json ]; then
+          npm init -y
+        fi
+
+    - name: Install Capacitor Core & CLI
+      run: npm install @capacitor/core @capacitor/cli @capacitor/ios
+
+    - name: Initialize Capacitor Config (if missing)
+      run: |
+        if [ ! -f capacitor.config.json ]; then
+          npx cap init "APM Insight" "com.twcltd.apminsight" --web-dir "."
+        fi
+
+    - name: Add iOS Platform
+      run: |
+        npx cap add ios
+
+    - name: Build and Sync iOS Project
+      run: |
+        npx cap sync ios
+        cd ios/App
+        xcodebuild -workspace App.xcworkspace -scheme App -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build

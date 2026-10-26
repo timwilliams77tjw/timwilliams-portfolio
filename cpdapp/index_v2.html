@@ -8,7 +8,7 @@
 :root{--bg:#f8fafc;--card:#ffffff;--fg:#1e293b;--mut:#64748b;--line:#e2e8f0;--ac:#10b981;--acl:#ecfdf5;--warn:#fffbebf0;--warn-txt:#b45309;--p-bg:#f1f5f9}
 html.dark{--bg:#0f172a;--card:#1e293b;--fg:#f8fafc;--mut:#94a3b8;--line:#334155;--ac:#10b981;--acl:#064e3b;--warn:#451a03;--warn-txt:#fde68a;--p-bg:#1e293b}
 *{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:var(--bg);color:var(--fg)}
-.app{display:flex;min-height:100vh}aside{width:260px;flex:none;background:var(--card);border-right:1px solid var(--line);padding:20px;position:sticky;top:0;height:100vh;overflow:y-auto}
+.app{display:flex;min-height:100vh}aside{width:260px;flex:none;background:var(--card);border-right:1px solid var(--line);padding:20px;position:sticky;top:0;height:100vh;overflow-y:auto}
 main{flex:1;min-width:0;padding:32px 40px;max-width:1160px}h1{font-size:26px;font-weight:700;line-height:1.2;margin:8px 0 16px}h2{margin:0 0 6px;font-size:20px}h3{margin:0 0 8px;font-size:16px}.mut{color:var(--mut)}small{color:var(--mut)}
 .me{display:flex;gap:12px;align-items:center;margin-bottom:20px}.av{width:44px;height:44px;border-radius:50%;object-fit:cover;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
 nav a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;color:var(--mut);text-decoration:none;margin:3px 0;font-size:14px;font-weight:500}nav a.cur{background:var(--acl);color:var(--ac);font-weight:600}nav h4{margin:18px 12px 6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
@@ -47,7 +47,7 @@ input,select,textarea{font:inherit;font-size:14px;color:var(--fg);background:var
   <main id="main"></main>
 </div>
 <script>
-const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]);
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const P=[
   ["Setting up for success","Establishing the foundations for a successful project.",["Knowledge management","Information management","Benefits management","Business case","Project organisation","Life cycles","Governance"]],
   ["Preparing for change","Defining and preparing the work to deliver the outcomes.",["Issue management","Resource management","Procurement","Quality management","Schedule management","Scope management","Transition management","Assurance"]],

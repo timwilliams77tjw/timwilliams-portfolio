@@ -18,16 +18,16 @@ jobs:
       with:
         node-version: 22
 
-    - name: Initialize Package.json
+    - name: Initialize Root Package.json
       run: |
         if [ ! -f package.json ]; then
           npm init -y
         fi
 
-    - name: Install Capacitor CLI & Core
+    - name: Install Capacitor Core & CLI
       run: npm install @capacitor/core @capacitor/cli @capacitor/ios
 
-    - name: Generate Capacitor Configuration
+    - name: Create Capacitor Configuration
       run: |
         cat <<EOF > capacitor.config.json
         {
@@ -38,20 +38,23 @@ jobs:
         }
         EOF
 
-    - name: Copy cpdapp Assets to www
+    - name: Prepare Web Assets from cpdapp
       run: |
         mkdir -p www
         cp -r cpdapp/* www/
 
-    - name: Add iOS Platform
-      run: npx cap add ios || true
+    - name: Remove Existing iOS Directory if cached
+      run: rm -rf ios
 
-    - name: Sync Web Assets
+    - name: Add iOS Platform
+      run: npx cap add ios
+
+    - name: Sync Assets
       run: npx cap sync ios
 
-    - name: Build iOS App Project (Xcode Simulator Target)
+    - name: Build Xcode Project
+      working-directory: ios/App
       run: |
-        cd ios/App
         xcodebuild -workspace App.xcworkspace \
                    -scheme App \
                    -sdk iphonesimulator \
@@ -59,4 +62,10 @@ jobs:
                    CODE_SIGN_IDENTITY="" \
                    CODE_SIGNING_REQUIRED=NO \
                    CODE_SIGNING_ALLOWED=NO \
-                   clean build
+                   build
+
+    - name: Upload iOS App Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: iOS-App-Build
+        path: ios/App/build/Release-iphonesimulator/App.app

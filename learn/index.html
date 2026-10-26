@@ -48,7 +48,7 @@ function render(){
   [['progress','Courses in progress'],['available','Courses available'],['completed','Courses completed']].forEach(([k,t])=>{const l=by(k);
     h+=`<h2>${t}</h2>`+(l.length?`<div class="grid">${l.map(x=>card(x[0],x[1])).join('')}</div>`:`<p class="none">${k==='completed'?'Nothing completed yet.':k==='progress'?'No courses in progress.':'You have started every available course.'}</p>`)});
   const bd=by('completed');if(bd.length)h+='<h2>Your badges</h2><div class="grid">'+bd.map(x=>`<div class="bd"><img src="${x[0].badge}" alt=""><div><b>${esc(x[0].title)}</b><br><a href="${x[0].url}#cert">Download badge and certificate</a></div></div>`).join('')+'</div>';
-  h+='<footer><p>More: <a href="https://cpdapp.twc-ltd.uk" target="_blank" rel="noopener">CPD application</a>. Your progress is saved in this browser on this device only.</p></footer>';
+  h+='<footer><p>More: <a href="https://twc-ltd.uk/cpdapp" target="_blank" rel="noopener">CPD application</a>. Your progress is saved in this browser on this device only.</p></footer>';
   $('#m').innerHTML=h;
   const g=id=>document.getElementById(id);
   if(g('ed'))g('ed').onclick=()=>{draft={n:name,t:prof.title,b:prof.bio};editing=true;render()};

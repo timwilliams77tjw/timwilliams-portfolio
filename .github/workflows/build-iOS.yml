@@ -18,16 +18,20 @@ jobs:
       with:
         node-version: 22
 
-    - name: Initialize Root Package.json
+    - name: Initialize Package.json (if missing)
       run: |
         if [ ! -f package.json ]; then
           npm init -y
         fi
 
-    - name: Install Capacitor Core & CLI
+    - name: Install Capacitor CLI & iOS Dependencies
       run: npm install @capacitor/core @capacitor/cli @capacitor/ios
 
-    - name: Create Capacitor Configuration
+    - name: Clean Previous Builds
+      run: |
+        rm -rf www ios capacitor.config.json
+
+    - name: Create Capacitor Config
       run: |
         cat <<EOF > capacitor.config.json
         {
@@ -38,34 +42,36 @@ jobs:
         }
         EOF
 
-    - name: Prepare Web Assets from cpdapp
+    - name: Copy cpdapp Assets to www
       run: |
         mkdir -p www
         cp -r cpdapp/* www/
 
-    - name: Remove Existing iOS Directory if cached
-      run: rm -rf ios
+    - name: Add & Sync iOS Project
+      run: |
+        npx cap add ios
+        npx cap sync ios
 
-    - name: Add iOS Platform
-      run: npx cap add ios
-
-    - name: Sync Assets
-      run: npx cap sync ios
-
-    - name: Build Xcode Project
+    - name: Build iOS App Target
       working-directory: ios/App
       run: |
-        xcodebuild -workspace App.xcworkspace \
+        xcodebuild -project App.xcodeproj \
                    -scheme App \
                    -sdk iphonesimulator \
                    -configuration Debug \
                    CODE_SIGN_IDENTITY="" \
                    CODE_SIGNING_REQUIRED=NO \
                    CODE_SIGNING_ALLOWED=NO \
-                   build
+                   clean build
 
-    - name: Upload iOS App Build Artifact
+    - name: Package iOS App into ZIP
+      run: |
+        mkdir -p output
+        cd ios/App/build/Debug-iphonesimulator
+        zip -r ../../../../output/APM-Insight-iOS.zip App.app
+
+    - name: Upload iOS App Bundle Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: iOS-App-Build
-        path: ios/App/build/Release-iphonesimulator/App.app
+        name: APM-Insight-iOS-Simulator-App
+        path: output/APM-Insight-iOS.zip

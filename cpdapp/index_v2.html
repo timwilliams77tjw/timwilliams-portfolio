@@ -2,468 +2,1529 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>APM Insight</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>APM Insight - Professional Development Platform</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            50: '#ecfdf5',
+            100: '#d1fae5',
+            500: '#10b981',
+            600: '#059669',
+            700: '#047857',
+          }
+        }
+      }
+    }
+  }
+</script>
 <style>
-:root{--bg:#f8fafc;--card:#ffffff;--fg:#1e293b;--mut:#64748b;--line:#e2e8f0;--ac:#10b981;--acl:#ecfdf5;--warn:#fffbebf0;--warn-txt:#b45309;--p-bg:#f1f5f9}
-html.dark{--bg:#0f172a;--card:#1e293b;--fg:#f8fafc;--mut:#94a3b8;--line:#334155;--ac:#10b981;--acl:#064e3b;--warn:#451a03;--warn-txt:#fde68a;--p-bg:#1e293b}
-*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:var(--bg);color:var(--fg)}
-.app{display:flex;min-height:100vh}aside{width:260px;flex:none;background:var(--card);border-right:1px solid var(--line);padding:20px;position:sticky;top:0;height:100vh;overflow-y:auto}
-main{flex:1;min-width:0;padding:32px 40px;max-width:1160px}h1{font-size:26px;font-weight:700;line-height:1.2;margin:8px 0 16px}h2{margin:0 0 6px;font-size:20px}h3{margin:0 0 8px;font-size:16px}.mut{color:var(--mut)}small{color:var(--mut)}
-.me{display:flex;gap:12px;align-items:center;margin-bottom:20px}.av{width:44px;height:44px;border-radius:50%;object-fit:cover;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
-nav a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;color:var(--mut);text-decoration:none;margin:3px 0;font-size:14px;font-weight:500}nav a.cur{background:var(--acl);color:var(--ac);font-weight:600}nav h4{margin:18px 12px 6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 20px;box-shadow:0 1px 3px rgba(0,0,0,0.02)}.grid{display:grid;gap:16px;margin-bottom:20px}.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.tile small{text-transform:uppercase;letter-spacing:0.5px;font-size:11px;font-weight:600;color:var(--mut)}.tile b{display:block;font-size:28px;margin:4px 0 2px}.tag{background:var(--acl);color:var(--ac);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:0.5px}
-button,.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}button.alt,.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
-button.sec,.btn.sec{background:var(--acl);color:var(--ac);border:0}
-input,select,textarea{font:inherit;font-size:14px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;width:100%}label{display:block;margin:10px 0 4px;font-weight:600;font-size:13px}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;position:relative}.bar i{display:block;height:100%;background:var(--ac)}
-.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;background:var(--acl);color:var(--ac);font-size:12px;font-weight:600}.pill.purple{background:#f3e8ff;color:#7e22ce}.pill.warn{background:#fef3c7;color:#b45309}.pill.red{background:#fee2e2;color:#dc2626}.pill.gray{background:#f1f5f9;color:#475569}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tabs button{background:var(--card);color:var(--fg);border:1px solid var(--line)}.tabs button.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--acl)}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.chip{padding:4px 10px;font-size:13px;background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:20px}.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
-.badge-level{background:#fef3c7;color:#d97706;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;float:right}
-.comp-card{border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px;background:var(--card)}
-.comp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.comp-cat{font-size:11px;text-transform:uppercase;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:6px;color:var(--mut)}
-.comp-cat span.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
-.level-trans{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:13px}
-.meta-info{display:flex;gap:16px;font-size:12px;color:var(--mut);margin:8px 0}
-.task-accordion{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;font-size:13px;color:var(--ac);font-weight:600;cursor:pointer}
-.task-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;position:relative}
-.task-card.off-track{background:#fffbeb;border-color:#fef08a}
-.task-card-header{display:flex;justify-content:space-between;align-items:flex-start}
-.task-title{font-weight:600;font-size:15px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.task-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}
-.task-slider{display:flex;align-items:center;gap:12px;margin-top:12px}
-.task-slider input[type=range]{flex:1;height:6px}
-#mb{display:none}.hero h1{max-width:720px}
-@media(max-width:899px){#mb{display:block;position:fixed;top:12px;right:12px;z-index:9}aside{display:none;position:fixed;z-index:8;width:100%;max-width:280px}aside.open{display:block}main{padding:60px 16px 30px}.row{grid-template-columns:1fr}}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  body { font-family: 'Inter', sans-serif; }
+  /* Custom scrollbar for clean dashboard view */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  .dark ::-webkit-scrollbar-thumb { background: #475569; }
 </style>
 </head>
-<body>
-<button id="mb" data-a="menu">Menu</button>
-<div class="app">
-  <aside id="side"></aside>
-  <main id="main"></main>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200">
+
+<div id="app" class="flex flex-col md:flex-row min-h-screen">
+  <!-- Mobile Header -->
+  <header class="md:hidden flex items-center justify-between p-4 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-30">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center">AP</div>
+      <span class="font-bold text-lg text-slate-900 dark:text-white">APM Insight</span>
+    </div>
+    <button id="mobile-menu-btn" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </header>
+
+  <!-- Navigation Sidebar -->
+  <aside id="sidebar" class="hidden md:flex flex-col w-full md:w-64 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 p-4 sticky top-0 h-screen overflow-y-auto z-20 flex-shrink-0">
+    <!-- User Profile Header Summary -->
+    <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl mb-4 border border-slate-100 dark:border-slate-700">
+      <div id="side-avatar" class="w-11 h-11 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center text-lg flex-shrink-0 shadow-sm overflow-hidden">
+        TW
+      </div>
+      <div class="min-w-0 flex-1">
+        <h2 id="side-user-name" class="font-bold text-sm text-slate-900 dark:text-white truncate">Tim Williams</h2>
+        <p id="side-user-title" class="text-xs text-slate-500 dark:text-slate-400 truncate">IT Project Manager</p>
+      </div>
+    </div>
+
+    <!-- Dark/Light Theme Switcher -->
+    <div class="flex items-center justify-between px-3 py-2 mb-4 bg-slate-100 dark:bg-slate-700/60 rounded-lg text-xs font-medium">
+      <span class="text-slate-600 dark:text-slate-300">Theme</span>
+      <button id="theme-toggle" class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text">Dark</span>
+      </button>
+    </div>
+
+    <!-- Navigation Menu Links -->
+    <nav class="space-y-1 flex-1 text-sm font-medium">
+      <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400 dark:text-slate-500 px-3 py-1">Main Menu</div>
+      
+      <a href="#dashboard" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="dashboard">
+        <span class="text-lg">📊</span> Dashboard
+      </a>
+      <a href="#log" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="log">
+        <span class="text-lg">📝</span> CPD Log
+      </a>
+      <a href="#matrix" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="matrix">
+        <span class="text-lg">▦</span> Competence Matrix
+      </a>
+      <a href="#gaps" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="gaps">
+        <span class="text-lg">🎯</span> Gap Analysis
+      </a>
+      <a href="#evidence" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="evidence">
+        <span class="text-lg">📂</span> Evidence Vault
+      </a>
+      <a href="#plan" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="plan">
+        <span class="text-lg">🌱</span> Development Plan
+      </a>
+      <a href="#simulator" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="simulator">
+        <span class="text-lg">🚀</span> Career Simulator
+      </a>
+      <a href="#todo" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="todo">
+        <span class="text-lg">☑</span> To-Do / Action Tracker
+      </a>
+      <a href="#reports" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="reports">
+        <span class="text-lg">📄</span> Reports & Export
+      </a>
+      <a href="#profile" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-slate-700/60 transition-colors" data-page="profile">
+        <span class="text-lg">👤</span> User Profile
+      </a>
+
+      <div class="pt-4 text-[11px] uppercase tracking-wider font-semibold text-slate-400 dark:text-slate-500 px-3 py-1">External Resources</div>
+      <a href="https://www.apm.org.uk" target="_blank" rel="noopener" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+        <span class="text-lg">💼</span> CV App
+      </a>
+      <a href="https://www.apm.org.uk/qualifications-accreditation/" target="_blank" rel="noopener" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+        <span class="text-lg">📖</span> PMO Course
+      </a>
+    </nav>
+    <div class="pt-4 border-t border-slate-200 dark:border-slate-700 text-xs text-slate-400 text-center">
+      APM Competence Framework v2.0
+    </div>
+  </aside>
+
+  <!-- Main View Router Container -->
+  <main id="main-content" class="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full min-w-0">
+    <!-- Dynamic page template injection area -->
+  </main>
 </div>
+
+<!-- Dynamic Modal Backdrop Container -->
+<div id="modal-backdrop" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+  <div id="modal-container" class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 max-w-xl w-full max-h-[90vh] overflow-y-auto p-6">
+    <!-- Dynamic Modal Content -->
+  </div>
+</div>
+
+<!-- Action Notification Toast -->
+<div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-4 py-3 rounded-xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 font-medium text-sm flex items-center gap-2">
+  <span id="toast-message">Notification</span>
+</div>
+
 <script>
-const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const P=[
-  ["Setting up for success","Establishing the foundations for a successful project.",["Knowledge management","Information management","Benefits management","Business case","Project organisation","Life cycles","Governance"]],
-  ["Preparing for change","Defining and preparing the work to deliver the outcomes.",["Issue management","Resource management","Procurement","Quality management","Schedule management","Scope management","Transition management","Assurance"]],
-  ["People and behaviours","Leading, engaging and developing the people who deliver.",["Coaching and mentoring","Negotiation","Conflict management","Team management","Communication","Stakeholder engagement","Leadership"]],
-  ["Planning and managing deployment","Delivering the project outputs through controlled deployment.",["Delivery management","Project closure","Project start-up","Project control","Change control","Budgeting and cost control","Risk management"]]
-];
-const COL=['#10b981','#38bdf8','#fbbf24','#a78bfa'];
-const COMP=P.flatMap((p,i)=>p[2].map((n,j)=>({id:i+'.'+j,name:n,p:i}))),cn=id=>(COMP.find(c=>c.id===id)||{}).name||id;
-const LEVELS=["Aware","Practiced","Competent","Proficient","Expert"];
-const DESC=["Knows the competence and why it matters.","Applied the competence with guidance.","Applies the competence effectively and independently.","Deep understanding; mentors others.","Recognised authority; drives best practice."];
-const AREAS=["Ethics, compliance & professionalism","Leadership","Stakeholder engagement & communication","Setting up for success","Capability development","Solutions development","Other"];
-const LV=[0,100,250,500,900,1400,2000,2800,3800,5200,7000],LN=["Newcomer","Starter","Learner","Practitioner","Skilled","Advanced","Specialist","Expert","Leader","Champion","Master"];
-const ST={todo:'Not started',on:'In progress — on track',off:'In progress — off track',done:'Completed'};
-const ROLES=["Project Coordinator / Support","Project Manager","Senior Project Manager","Programme Manager","PMO Lead / Portfolio Manager"];
+/**
+ * APM Insight Core Application Logic & State Engine
+ */
 
-const DEFAULT_TASKS=[
-  {id:'t1',title:'Execute a full-cycle project leadership transformation',desc:'Take the lead on a major change management program to demonstrate proficiency in leading teams through ambiguity.',comp:'2.6',priority:'High',status:'on',dueDate:'2026-11-20',progress:85,hz:6},
-  {id:'t2',title:'Design a strategic cost control dashboard',desc:'Create a real-time financial reporting system that enables proactive budget adjustments, shifting your expertise from proficient to expert.',comp:'3.5',priority:'High',status:'on',dueDate:'2026-10-31',progress:55,hz:6},
-  {id:'t3',title:'Refine the business case development process',desc:'Draft a comprehensive business case template with rigorous ROI analysis to shift your competence from competent to proficient.',comp:'0.3',priority:'Medium',status:'on',dueDate:'2026-09-15',progress:45,hz:3},
-  {id:'t4',title:'Standardize procurement workflows for IT infrastructure',desc:'Develop a formal procurement checklist and vendor selection process to move your competence from practiced to competent.',comp:'1.2',priority:'Medium',status:'todo',dueDate:'2026-12-01',progress:0,hz:3},
-  {id:'t5',title:'Define an enterprise-grade project closure methodology',desc:'Standardize the post-project review process and lessons-learned documentation to elevate your practice from proficient to expert.',comp:'3.1',priority:'Medium',status:'off',dueDate:'2026-11-15',progress:40,hz:6},
-  {id:'t6',title:'Author a high-level benefits realization roadmap',desc:'Map project outputs to strategic business benefits and track their realization to move your competence from practiced to competent.',comp:'0.2',priority:'High',status:'on',dueDate:'2026-10-10',progress:50,hz:3},
-  {id:'t7',title:'Design a portfolio-wide quality management plan',desc:'Develop and embed a new quality assurance strategy across multiple projects to achieve expert status in Quality management.',comp:'1.3',priority:'High',status:'todo',dueDate:'2027-01-15',progress:0,hz:12},
-  {id:'t8',title:'Conduct a mock procurement exercise',desc:'Review a past procurement process to identify two process improvements, directly addressing your gap in Procurement.',comp:'1.2',priority:'High',status:'on',dueDate:'2026-09-30',progress:10,hz:3}
+// 1. Framework Definitions (29 Competences across 4 Pillars)
+const APM_PILLARS = [
+  { id: 0, name: "Setting up for success", color: "#10b981", bg: "bg-emerald-500", text: "text-emerald-500", light: "bg-emerald-50 text-emerald-700", desc: "Establishing the foundations for a successful project." },
+  { id: 1, name: "Preparing for change", color: "#38bdf8", bg: "bg-sky-400", text: "text-sky-500", light: "bg-sky-50 text-sky-700", desc: "Defining and preparing the work to deliver the outcomes." },
+  { id: 2, name: "People and behaviours", color: "#fbbf24", bg: "bg-amber-400", text: "text-amber-500", light: "bg-amber-50 text-amber-700", desc: "Leading, engaging and developing the people who deliver." },
+  { id: 3, name: "Planning and managing deployment", color: "#a78bfa", bg: "bg-purple-400", text: "text-purple-500", light: "bg-purple-50 text-purple-700", desc: "Delivering project outputs through controlled deployment." }
 ];
 
-const ALIAS={risk:'3.6',budget:'3.5',cost:'3.5',agile:'3.0',scrum:'3.0',deliver:'3.0',stakeholder:'2.5',leader:'2.6',team:'2.3',mentor:'2.0',coach:'2.0',negotiat:'2.1',conflict:'2.2',communicat:'2.4',present:'2.4',procure:'1.2',quality:'1.3',schedule:'1.4',scope:'1.5',issue:'1.0',resource:'1.1',transition:'1.6',assur:'1.7',audit:'1.7',governance:'0.6',benefit:'0.2','business case':'0.3',knowledge:'0.0',information:'0.1','life cycle':'0.5',lifecycle:'0.5',closure:'3.1','start-up':'3.2',startup:'3.2','change control':'3.4',control:'3.3'};
-const KEY='apm-insight-v1',today=new Date().toISOString().slice(0,10);
+const APM_COMPETENCES = [
+  // Pillar 0
+  { id: '0.0', pillar: 0, name: 'Knowledge management' },
+  { id: '0.1', pillar: 0, name: 'Information management' },
+  { id: '0.2', pillar: 0, name: 'Benefits management' },
+  { id: '0.3', pillar: 0, name: 'Business case' },
+  { id: '0.4', pillar: 0, name: 'Project organisation' },
+  { id: '0.5', pillar: 0, name: 'Life cycles' },
+  { id: '0.6', pillar: 0, name: 'Governance' },
+  // Pillar 1
+  { id: '1.0', pillar: 1, name: 'Issue management' },
+  { id: '1.1', pillar: 1, name: 'Resource management' },
+  { id: '1.2', pillar: 1, name: 'Procurement' },
+  { id: '1.3', pillar: 1, name: 'Quality management' },
+  { id: '1.4', pillar: 1, name: 'Schedule management' },
+  { id: '1.5', pillar: 1, name: 'Scope management' },
+  { id: '1.6', pillar: 1, name: 'Transition management' },
+  { id: '1.7', pillar: 1, name: 'Assurance' },
+  // Pillar 2
+  { id: '2.0', pillar: 2, name: 'Coaching and mentoring' },
+  { id: '2.1', pillar: 2, name: 'Negotiation' },
+  { id: '2.2', pillar: 2, name: 'Conflict management' },
+  { id: '2.3', pillar: 2, name: 'Team management' },
+  { id: '2.4', pillar: 2, name: 'Communication' },
+  { id: '2.5', pillar: 2, name: 'Stakeholder engagement' },
+  { id: '2.6', pillar: 2, name: 'Leadership' },
+  // Pillar 3
+  { id: '3.0', pillar: 3, name: 'Delivery management' },
+  { id: '3.1', pillar: 3, name: 'Project closure' },
+  { id: '3.2', pillar: 3, name: 'Project start-up' },
+  { id: '3.3', pillar: 3, name: 'Project control' },
+  { id: '3.4', pillar: 3, name: 'Change control' },
+  { id: '3.5', pillar: 3, name: 'Budgeting and cost control' },
+  { id: '3.6', pillar: 3, name: 'Risk management' }
+];
 
-let S={
-  profile:{name:'Tim Williams',title:'IT PROJECT MANAGER',site:'',bio:'',photo:'',links:[]},
-  log:[],
-  rat:{
-    '0.0':{cur:3,tgt:4},'0.1':{cur:3,tgt:4},'0.2':{cur:2,tgt:3},'0.3':{cur:3,tgt:4},'0.6':{cur:4,tgt:5},
-    '1.1':{cur:4,tgt:5},'1.2':{cur:2,tgt:3},'1.3':{cur:4,tgt:5},'1.6':{cur:3,tgt:4},
-    '2.0':{cur:4,tgt:5},'2.6':{cur:3,tgt:4},
-    '3.1':{cur:4,tgt:5},'3.3':{cur:4,tgt:5},'3.4':{cur:5,tgt:5},'3.5':{cur:4,tgt:5},'3.6':{cur:4,tgt:5}
+const RATING_LEVELS = [
+  { level: 0, name: "Not Assessed", desc: "No assessment recorded yet." },
+  { level: 1, name: "Aware", desc: "Knows the competence and why it matters." },
+  { level: 2, name: "Practiced", desc: "Applied the competence with guidance." },
+  { level: 3, name: "Competent", desc: "Applies the competence effectively and independently." },
+  { level: 4, name: "Proficient", desc: "Deep understanding; mentors others." },
+  { level: 5, name: "Expert", desc: "Recognised authority; drives best practice." }
+];
+
+const APM_AREAS = [
+  "Ethics, compliance & professionalism",
+  "Leadership",
+  "Stakeholder engagement & communication",
+  "Setting up for success",
+  "Capability development",
+  "Solutions development",
+  "Other"
+];
+
+const LEVEL_NAMES = ["Newcomer", "Starter", "Learner", "Practitioner", "Skilled", "Advanced", "Specialist", "Expert", "Leader", "Champion", "Master"];
+const LEVEL_XP_THRESHOLDS = [0, 100, 250, 500, 900, 1400, 2000, 2800, 3800, 5200, 7000];
+const ROLES = ["Project Support / Assistant", "Project Coordinator", "Project Manager", "Senior Project Manager", "Programme Manager", "PMO Lead / Portfolio Manager"];
+
+// Default Seed State
+const DEFAULT_STATE = {
+  profile: {
+    name: 'Tim Williams',
+    title: 'IT Project Manager',
+    bio: 'Experienced IT PM driving digital transformation across enterprise solutions.',
+    photo: '',
+    socials: [
+      { name: 'LinkedIn', url: 'https://linkedin.com' },
+      { name: 'APM Portal', url: 'https://apm.org.uk' }
+    ]
   },
-  tasks:DEFAULT_TASKS,
-  mapped:0,
-  dark:null,
-  simCur:'Programme Manager',
-  simTgt:'PMO Lead / Portfolio Manager',
-  todoFilter:'all'
+  log: [
+    { id: 'cpd1', date: '2026-10-15', title: 'Agile & Waterfall Hybrid Delivery Masterclass', area: 'Solutions development', hours: 4.5, reflection: 'Learned frameworks for embedding gate controls inside sprint increments.', links: ['3.0', '1.4'] },
+    { id: 'cpd2', date: '2026-10-02', title: 'APM Governance Workshop & Peer Review', area: 'Setting up for success', hours: 3.0, reflection: 'Reviewed steering committee structures and escalation paths.', links: ['0.6', '0.4'] },
+    { id: 'cpd3', date: '2026-09-20', title: 'Stakeholder Influence & Negotiation Session', area: 'Stakeholder engagement & communication', hours: 2.5, reflection: 'Practiced active listening techniques and value alignment.', links: ['2.5', '2.1'] }
+  ],
+  ratings: {
+    '0.0': { cur: 3, tgt: 4, notes: 'Maintained project wiki' },
+    '0.1': { cur: 3, tgt: 4, notes: '' },
+    '0.2': { cur: 2, tgt: 3, notes: 'Need more experience on direct ROI realization' },
+    '0.3': { cur: 3, tgt: 4, notes: '' },
+    '0.6': { cur: 4, tgt: 5, notes: 'Led multiple project board reviews' },
+    '1.1': { cur: 4, tgt: 5, notes: '' },
+    '1.2': { cur: 2, tgt: 3, notes: 'Working with vendor management team' },
+    '1.3': { cur: 4, tgt: 5, notes: '' },
+    '1.6': { cur: 3, tgt: 4, notes: '' },
+    '2.0': { cur: 4, tgt: 5, notes: 'Mentoring junior PMs' },
+    '2.5': { cur: 4, tgt: 5, notes: '' },
+    '2.6': { cur: 3, tgt: 4, notes: '' },
+    '3.1': { cur: 4, tgt: 5, notes: '' },
+    '3.3': { cur: 4, tgt: 5, notes: '' },
+    '3.4': { cur: 5, tgt: 5, notes: 'Mastered change control logs' },
+    '3.5': { cur: 4, tgt: 5, notes: '' },
+    '3.6': { cur: 4, tgt: 5, notes: '' }
+  },
+  tasks: [
+    { id: 't1', title: 'Execute project leadership transformation', desc: 'Take lead on change program to show leadership in ambiguity.', comp: '2.6', priority: 'High', status: 'on', dueDate: '2026-11-20', progress: 85, horizon: 6 },
+    { id: 't2', title: 'Design strategic cost control dashboard', desc: 'Build real-time financial reporting for budget control.', comp: '3.5', priority: 'High', status: 'on', dueDate: '2026-10-31', progress: 55, horizon: 6 },
+    { id: 't3', title: 'Refine business case development process', desc: 'Draft comprehensive template with ROI analysis.', comp: '0.3', priority: 'Medium', status: 'on', dueDate: '2026-09-15', progress: 45, horizon: 3 },
+    { id: 't4', title: 'Standardize procurement workflows', desc: 'Develop formal checklist and vendor selection process.', comp: '1.2', priority: 'Medium', status: 'todo', dueDate: '2026-12-01', progress: 0, horizon: 6 },
+    { id: 't5', title: 'Define enterprise project closure methodology', desc: 'Standardize post-project review process and lessons learned.', comp: '3.1', priority: 'Medium', status: 'off', dueDate: '2026-11-15', progress: 40, horizon: 12 }
+  ],
+  evidence: [
+    { id: 'ev1', title: 'Q3 Steering Committee Presentation.pdf', comp: '0.6', date: '2026-09-30', fileUrl: '#', notes: 'Approved project charter and board minutes.' },
+    { id: 'ev2', title: 'Vendor Procurement Evaluation Matrix.xlsx', comp: '1.2', date: '2026-08-14', fileUrl: '#', notes: 'Weighted scoring model for IT RFP.' }
+  ],
+  simCur: 'Project Manager',
+  simTgt: 'Senior Project Manager',
+  matrixPillarFilter: 0,
+  todoFilter: 'all',
+  darkMode: false
 };
 
-try{
-  const stored=JSON.parse(localStorage.getItem(KEY)||'{}');
-  if(stored.profile) Object.assign(S.profile, stored.profile);
-  if(stored.log) S.log=stored.log;
-  if(stored.rat) S.rat=stored.rat;
-  if(stored.tasks && stored.tasks.length) S.tasks=stored.tasks;
-  if(stored.simCur) S.simCur=stored.simCur;
-  if(stored.simTgt) S.simTgt=stored.simTgt;
-}catch(e){}
+// 2. Application State Management
+let State = JSON.parse(JSON.stringify(DEFAULT_STATE));
 
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){alert('Could not save data.')}};
-const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6),cur=id=>(S.rat[id]||{}).cur||0,tgt=id=>(S.rat[id]||{}).tgt||0,wk=d=>Math.floor((Date.parse(d)-Date.UTC(1970,0,5))/6048e5);
-let pil=0,logOpen=false,taskOpen=false,sel=new Set();
-
-function suggest(t){
-  t=t.toLowerCase();const r=new Set();
-  Object.entries(ALIAS).forEach(([k,id])=>{if(t.includes(k))r.add(id)});
-  COMP.forEach(c=>{if(t.includes(c.name.toLowerCase()))r.add(c.id)});
-  return[...r];
+function loadSavedState() {
+  try {
+    const saved = localStorage.getItem('apm_insight_state_v2');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      State = Object.assign({}, DEFAULT_STATE, parsed);
+    }
+  } catch (e) {
+    console.error("Failed loading saved state", e);
+  }
 }
 
-function stats(){
-  const hours=S.log.reduce((a,e)=>a+(+e.hours||0),0),as=COMP.filter(c=>cur(c.id)>0).length,done=S.tasks.filter(t=>t.status==='done').length,xp=Math.round(hours*10+S.log.length*5+as*20+done*40);
-  let lv=0;LV.forEach((v,i)=>{if(xp>=v)lv=i});
-  const ws=new Set(S.log.map(e=>wk(e.date))),cw=wk(today);let w=ws.has(cw)?cw:cw-1,streak=0;while(ws.has(w)){streak++;w--}
-  const ge=n=>COMP.filter(c=>cur(c.id)>=n).length,pavg=P.map((p,i)=>{const l=COMP.filter(c=>c.p===i);return l.reduce((a,c)=>a+cur(c.id),0)/l.length});
-  return{hours,as,done,xp,lv,streak,ge,pavg,n:S.log.length};
+function saveState() {
+  try {
+    localStorage.setItem('apm_insight_state_v2', JSON.stringify(State));
+  } catch (e) {
+    console.error("Failed saving state", e);
+  }
 }
 
-const BG=[["First Step","Log your first CPD activity",s=>s.n>=1],["Ten Hours","Reach 10 CPD hours",s=>s.hours>=10],["Fifty Hours","Reach 50 CPD hours",s=>s.hours>=50],["Century","Reach 100 CPD hours",s=>s.hours>=100],["Streak Starter","Log CPD 2 weeks in a row",s=>s.streak>=2],["On Fire","Log CPD 4 weeks in a row",s=>s.streak>=4],["Assessor","Assess all 29 competences",s=>s.as>=29],["Competent","10 competences at Competent+",s=>s.ge(3)>=10],["Proficient","5 competences at Proficient+",s=>s.ge(4)>=5],["Expert","1 competence at Expert level",s=>s.ge(5)>=1],["Well-Rounded","Practiced+ average in all 4 pillars",s=>s.pavg.every(v=>v>=2)],["Task Master","Complete 5 development tasks",s=>s.done>=5]];
-const T=(l,v,s)=>`<div class="card tile"><small>${l}</small><b>${v}</b><span class="mut">${s}</span></div>`;
-const opts=(v,none)=>(none?`<option value="0">Not assessed</option>`:'')+LEVELS.map((l,i)=>`<option value="${i+1}" ${v===i+1?'selected':''}>${l}</option>`).join('');
-const fmt=d=>{const x=new Date(d);return isNaN(x)?d:x.toLocaleDateString('en-GB')};
+// 3. Helper Functions
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
 
-// --- VIEWS ---
-function dash(){
-  const s=stats(),nx=LV[s.lv+1],pct=nx?Math.round(100*(s.xp-LV[s.lv])/(nx-LV[s.lv])):100,top={};
-  S.log.forEach(e=>top[e.area]=(top[e.area]||0)+1);
-  const tops=Object.entries(top).sort((a,b)=>b[1]-a[1]).slice(0,4),mx=tops.length?tops[0][1]:1,rec=[...S.log].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4),earned=BG.filter(b=>b[2](s)).length;
-  return`<div class="card hero"><span class="tag">APM COMPETENCE FRAMEWORK</span><h1>Your professional development, mapped to APM.</h1><p class="mut">Log CPD activities, self-assess against the 29 competences, and manage your career transition.</p><a class="btn" href="#log">Log an activity</a> <a class="btn alt" href="#matrix">Assess competences</a></div>
-<div class="grid g4">${T('Total CPD hours',s.hours.toFixed(1),s.n+' activities logged')}${T('Competences assessed',s.as+'/29',s.as?'Rated against 5-point scale':'Start in matrix')}${T('Linked entries',S.log.filter(e=>(e.links||[]).length).length,'CPD entries linked')}${T('Tasks completed',s.done,S.tasks.length+' development tasks')}</div>
-<div class="card"><h3>Your career progress</h3><p class="mut">Earn XP from CPD hours, activities, assessments and completed tasks.</p><div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap"><div class="ring" style="width:80px;height:80px;border-radius:50%;border:6px solid var(--ac);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:24px;font-weight:700">${s.lv+1}<small style="font-size:10px">LVL</small></div><div style="flex:1;min-width:200px"><b style="color:var(--ac);font-size:18px">${LN[s.lv]}</b><br>${s.xp} XP earned<div class="bar" style="margin:6px 0"><i style="width:${pct}%"></i></div><small>${nx?(nx-s.xp)+' XP to next level':'Max level reached'}</small></div></div></div>
-<div class="grid g2"><div class="card"><h3>Competence progress by pillar</h3>${P.map((p,i)=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><span>${p[0]}</span><small>${s.pavg[i].toFixed(1)} / 5.0 avg</small></div><div class="bar"><i style="width:${s.pavg[i]*20}%;background:${COL[i]}"></i></div></div>`).join('')}</div>
-<div class="card"><h3>Recent activity</h3>${rec.length?rec.map(e=>`<p><b>${esc(e.title)}</b> <span class="pill">${e.hours}h</span><br><small>${fmt(e.date)} · ${esc(e.area)}</small></p>`).join(''):'<p class="mut">No activity logged yet.</p>'}</div></div>`;
+function showToast(msg) {
+  const t = $('#toast');
+  $('#toast-message').textContent = msg;
+  t.classList.remove('translate-y-20', 'opacity-0');
+  setTimeout(() => {
+    t.classList.add('translate-y-20', 'opacity-0');
+  }, 2500);
 }
 
-function logPg(){
-  const l=[...S.log].sort((a,b)=>b.date.localeCompare(a.date)),hrs=l.reduce((a,e)=>a+(+e.hours||0),0);
-  const f=logOpen?`<div class="card"><h3>Log an activity</h3><div class="row"><label>Date<input type="date" id="ld" value="${today}"></label><label>Hours<input type="number" id="lh" min="0" step="0.1" value="1"></label></div><label>Title<input id="lt" placeholder="e.g. Agile Scrum Master course"></label><label>APM area<select id="la">${AREAS.map(a=>`<option>${esc(a)}</option>`).join('')}</select></label><label>Reflection<textarea id="lr"></textarea></label><b>Suggested competences</b><div id="sg" class="chips"></div><button data-a="savelog">Save activity</button> <button class="alt" data-a="logclose">Cancel</button></div>`:'';
-  return`<h1>CPD Log</h1><p class="mut">Track continuing professional development activities and reflections.</p>${logOpen?'':'<button data-a="logopen">+ Log activity</button>'}<div class="grid g4" style="margin-top:14px">${T('Total hours',hrs.toFixed(1),l.length+' entries')}${T('Linked competences',new Set(l.flatMap(e=>e.links||[])).size,l.filter(e=>(e.links||[]).length).length+' entries linked')}</div>${f}
-<div class="card" style="overflow-x:auto"><table><tr><th>Date</th><th>Activity</th><th>APM area</th><th>Hours</th><th></th></tr>${l.map(e=>`<tr><td>${fmt(e.date)}</td><td><b>${esc(e.title)}</b>${e.reflection?`<br><small>${esc(e.reflection)}</small>`:''}</td><td>${esc(e.area)}</td><td>${e.hours}</td><td><button class="alt" data-a="dellog" data-id="${e.id}">Delete</button></td></tr>`).join('')||'<tr><td colspan="5" class="mut">No activities yet.</td></tr>'}</table></div>`;
-}
+function computeStats() {
+  const hours = State.log.reduce((sum, item) => sum + (parseFloat(item.hours) || 0), 0);
+  const assessedCount = Object.keys(State.ratings).filter(k => (State.ratings[k].cur || 0) > 0).length;
+  const linkedEntries = State.log.filter(item => item.links && item.links.length > 0).length;
+  const completedTasks = State.tasks.filter(t => t.status === 'done').length;
 
-function matrix(){
-  const p=P[pil],ids=COMP.filter(c=>c.p===pil),avg=stats().pavg[pil];
-  return`<h1>APM Competence Assessment Matrix</h1><p class="mut">Self-assess against the 29 competences using the 5-point scale.</p><div class="tabs">${P.map((q,i)=>`<button class="${i===pil?'on':''}" data-a="pil" data-i="${i}"><span style="color:${COL[i]}">●</span> ${q[0]}</button>`).join('')}</div>
-<div class="card"><h2><span style="color:${COL[pil]}">●</span> ${p[0]}</h2><p class="mut">${p[1]}</p><small>PILLAR AVERAGE</small><br><b style="font-size:28px">${avg.toFixed(1)}</b> / 5.0</div>
-<div class="grid g2">${ids.map(c=>{const r=S.rat[c.id]||{};return`<div class="card"><h3>${esc(c.name)}</h3><small>Now: ${r.cur?LEVELS[r.cur-1]:'Not assessed'} · Target: ${r.tgt?LEVELS[r.tgt-1]:'Not set'}</small><div class="row"><label>Self-rating<select data-r="${c.id}" data-k="cur">${opts(r.cur||0,1)}</select></label><label>Target<select data-r="${c.id}" data-k="tgt">${opts(r.tgt||0,1)}</select></label></div></div>`}).join('')}</div>`;
-}
+  // Calculate XP
+  const xp = Math.round(hours * 10 + State.log.length * 5 + assessedCount * 25 + completedTasks * 40);
+  let levelIdx = 0;
+  LEVEL_XP_THRESHOLDS.forEach((th, i) => { if (xp >= th) levelIdx = i; });
+  
+  const currentThreshold = LEVEL_XP_THRESHOLDS[levelIdx];
+  const nextThreshold = LEVEL_XP_THRESHOLDS[levelIdx + 1] || currentThreshold * 1.5;
+  const levelProgress = Math.min(100, Math.round(((xp - currentThreshold) / (nextThreshold - currentThreshold)) * 100));
 
-function gapsPg(){
-  const rated=COMP.filter(c=>cur(c.id)>0&&tgt(c.id)>0),gp=rated.filter(c=>tgt(c.id)>cur(c.id));
-  return`<h1>Skills Gap Analysis</h1><p class="mut">Compares current ratings against target ratings.</p><div class="grid g4">${T('Competences assessed',COMP.filter(c=>cur(c.id)>0).length,rated.length-gp.length+' at target')}${T('Skills gaps',gp.length,'Below target rating')}</div>
-<div class="card"><h3>Prioritised development gaps</h3>${gp.map(c=>`<p><b>${esc(c.name)}</b> <span class="pill">${LEVELS[cur(c.id)-1]}</span> → <span class="pill">${LEVELS[tgt(c.id)-1]}</span> <span class="pill warn">+${tgt(c.id)-cur(c.id)}</span></p>`).join('')||'<p class="mut">No gaps identified yet.</p>'}<a class="btn" href="#plan">Plan development actions</a></div>`;
-}
+  // Pillar average calculation
+  const pillarAvgs = APM_PILLARS.map(p => {
+    const comps = APM_COMPETENCES.filter(c => c.pillar === p.id);
+    const sum = comps.reduce((acc, c) => acc + (State.ratings[c.id]?.cur || 0), 0);
+    return (sum / comps.length).toFixed(1);
+  });
 
-// --- NEW PAGES MATCHING SCREENSHOTS ---
-
-function planPg(){
-  const horizons=[{h:6,title:'6 months'},{h:12,title:'12 months'}];
-  const atTargetComps=COMP.filter(c=>cur(c.id)>0 && cur(c.id)>=tgt(c.id));
-
-  const renderCompCard=(c)=>{
-    const r=S.rat[c.id]||{cur:3,tgt:4};
-    const cLvl=r.cur?LEVELS[r.cur-1]:'Practiced';
-    const tLvl=r.tgt?LEVELS[r.tgt-1]:'Competent';
-    const pillar=P[c.p];
-    const cTasks=S.tasks.filter(t=>t.comp===c.id);
-
-    return `<div class="comp-card">
-      <div class="comp-header">
-        <div class="comp-cat"><span class="dot" style="background:${COL[c.p]}"></span> ${pillar[0]}</div>
-        <span class="badge-level">+1 level</span>
-      </div>
-      <h3 style="margin:4px 0 8px">${esc(c.name)}</h3>
-      <div class="level-trans">
-        <span class="pill ${cLvl==='Proficient'?'purple':'gray'}">${cLvl}</span>
-        <span style="color:var(--mut)">↝</span>
-        <span class="pill ${tLvl==='Expert'?'warn':tLvl==='Proficient'?'purple':'gray'}">${tLvl}</span>
-      </div>
-      <div class="meta-info">
-        <span>📖 0 CPD</span>
-        <span>📄 ${Math.floor(Math.random()*6)} evidence</span>
-      </div>
-      <div style="font-size:12px;color:var(--mut);margin-top:4px">
-        Develop from <b>${cLvl}</b> to <b>${tLvl}</b> — leverage your existing CPD and evidence.
-      </div>
-      <div class="task-accordion">${cTasks.length||1} task${cTasks.length===1?'':'s'} ∨</div>
-    </div>`;
+  return {
+    hours,
+    assessedCount,
+    linkedEntries,
+    completedTasks,
+    xp,
+    levelIdx,
+    levelName: LEVEL_NAMES[levelIdx],
+    levelProgress,
+    nextThreshold,
+    pillarAvgs
   };
-
-  return `<h1>Development Plan</h1>
-    <p class="mut">A timed roadmap closing the gap between your current and target ratings, with trackable tasks.</p>
-    ${horizons.map(hz=>{
-      const hzTasks=S.tasks.filter(t=>+t.hz===hz.h);
-      const compsInHz=COMP.filter(c=>hzTasks.some(t=>t.comp===c.id));
-      return `
-        <div style="display:flex;align-items:center;gap:12px;margin:24px 0 14px">
-          <div style="width:32px;height:32px;border-radius:50%;background:var(--acl);color:var(--ac);display:flex;align-items:center;justify-content:center;font-weight:700">${hz.h}</div>
-          <div>
-            <h3 style="margin:0">${hz.title}</h3>
-            <small>${compsInHz.length||4} competencies · ${hzTasks.length||4} tasks</small>
-          </div>
-        </div>
-        <div>${(compsInHz.length?compsInHz:COMP.slice(hz.h===6?0:4,hz.h===6?4:8)).map(renderCompCard).join('')}</div>
-      `;
-    }).join('')}
-    <div class="card" style="margin-top:30px">
-      <h3 style="display:flex;align-items:center;gap:8px"><span>✔</span> At target (${atTargetComps.length||7})</h3>
-      <div class="chips">
-        ${(atTargetComps.length?atTargetComps:COMP.slice(0,7)).map(c=>`<span class="pill sec">${esc(c.name)}</span>`).join('')}
-      </div>
-    </div>`;
 }
 
-function simulatorPg(){
-  return `<div class="card" style="background:linear-gradient(to right, #ecfdf5, #ffffff);border-color:#a7f3d0">
-    <span class="tag">✦ CAREER SIMULATOR</span>
-    <h1 style="font-size:30px;margin:12px 0">Simulate your path from ${S.simCur} to ${S.simTgt}.</h1>
-    <p class="mut" style="max-width:700px">Pick your current role and the role you're aiming for. The simulator maps your APM competency assessments against what the target role demands and builds a realistic development plan with milestones, CPD focus and first steps.</p>
-  </div>
-  <div class="card">
-    <h3 style="display:flex;align-items:center;gap:8px">🌱 Choose your transition</h3>
-    <div class="row" style="margin-top:16px;align-items:center">
-      <div>
-        <label>Current role</label>
-        <select id="simCur">${ROLES.map(r=>`<option ${S.simCur===r?'selected':''}>${r}</option>`).join('')}</select>
-      </div>
-      <div style="text-align:center;font-size:20px;color:var(--mut);padding-top:20px">→</div>
-      <div>
-        <label>Target role</label>
-        <select id="simTgt">${ROLES.map(r=>`<option ${S.simTgt===r?'selected':''}>${r}</option>`).join('')}</select>
-      </div>
+// 4. Modal Engine
+function openModal(title, htmlContent) {
+  const mb = $('#modal-backdrop');
+  const mc = $('#modal-container');
+  mc.innerHTML = `
+    <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-700 mb-4">
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white">${title}</h3>
+      <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl font-semibold">&times;</button>
     </div>
-  </div>`;
+    <div>${htmlContent}</div>
+  `;
+  mb.classList.remove('hidden');
 }
 
-function todoPg(){
-  const openCount=S.tasks.filter(t=>t.status!=='done').length;
-  const overdueCount=S.tasks.filter(t=>t.status==='off').length;
-  const doneCount=S.tasks.filter(t=>t.status==='done').length;
-
-  const f=S.todoFilter;
-  let filtered=S.tasks;
-  if(f==='overdue') filtered=S.tasks.filter(t=>t.status==='off');
-  if(f==='high') filtered=S.tasks.filter(t=>t.priority==='High');
-  if(f==='off') filtered=S.tasks.filter(t=>t.status==='off');
-
-  return `
-  <div class="grid g3">
-    ${T('Open tasks',openCount,'Active development tasks')}
-    ${T('Overdue',overdueCount,'Action required')}
-    ${T('Completed',doneCount,'Tasks finished')}
-  </div>
-
-  <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
-    <button data-a="taskopen">+ Add task</button>
-    <div class="chips">
-      <button class="chip ${f==='all'?'on':''}" data-a="setfilter" data-f="all">All outstanding ${openCount}</button>
-      <button class="chip ${f==='overdue'?'on':''}" data-a="setfilter" data-f="overdue">Overdue</button>
-      <button class="chip ${f==='high'?'on':''}" data-a="setfilter" data-f="high">High priority 5</button>
-      <button class="chip ${f==='off'?'on':''}" data-a="setfilter" data-f="off">Off track 1</button>
-    </div>
-  </div>
-
-  ${taskOpen?`<div class="card">
-    <h3>Add a new development task</h3>
-    <label>Task Title<input id="tt" placeholder="e.g. Conduct a mock procurement exercise"></label>
-    <div class="row">
-      <label>Competence<select id="tc">${COMP.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></label>
-      <label>Priority<select id="tp"><option>High</option><option selected>Medium</option><option>Low</option></select></label>
-    </div>
-    <button data-a="savetask">Save task</button>
-    <button class="alt" data-a="taskclose">Cancel</button>
-  </div>`:''}
-
-  <div>
-    ${filtered.map(t=>{
-      const compName=cn(t.comp);
-      return `
-      <div class="task-card ${t.status==='off'?'off-track':''}">
-        <div class="task-card-header">
-          <div class="task-title">
-            <span style="color:${t.status==='off'?'#d97706':'#0284c7'}">●</span> ${esc(t.title)}
-          </div>
-          <div style="display:flex;gap:6px">
-            <button class="alt" style="padding:2px 6px;font-size:12px" data-a="edittask">✏️</button>
-            <button class="alt" style="padding:2px 6px;font-size:12px" data-a="deltask" data-id="${t.id}">🗑️</button>
-          </div>
-        </div>
-        ${t.desc?`<p style="font-size:13px;color:var(--mut);margin:6px 0">${esc(t.desc)}</p>`:''}
-        <div class="task-meta">
-          <select data-ts="${t.id}" style="width:auto;padding:3px 8px;font-size:12px;background:var(--card)">
-            ${Object.entries(ST).map(([k,v])=>`<option value="${k}" ${t.status===k?'selected':''}>${v}</option>`).join('')}
-          </select>
-          <span class="pill ${t.priority==='High'?'red':'gray'}">${t.priority||'Medium'}</span>
-          ${t.dueDate?`<span style="font-size:12px;color:var(--mut)">📅 ${t.dueDate}</span>`:''}
-          <span class="pill sec">↔ ${esc(compName)}</span>
-        </div>
-        <div style="font-size:12px;display:flex;justify-content:space-between;color:var(--mut);margin-top:10px">
-          <span>Progress</span>
-          <b>${t.progress||0}%</b>
-        </div>
-        <div class="task-slider">
-          <div class="bar" style="flex:1"><i style="width:${t.progress||0}%;background:${t.status==='off'?'#f59e0b':'var(--ac)'}"></i></div>
-        </div>
-      </div>`;
-    }).join('')}
-  </div>`;
+function closeModal() {
+  $('#modal-backdrop').classList.add('hidden');
 }
 
-function reportsPg(){
-  const cards=[
-    {title:'CPD Log',desc:'All logged CPD activities with hours, APM area and linked competences.',icon:'🕒'},
-    {title:'Competencies',desc:'Per-pillar averages, progress bars and current vs target ratings.',icon:'📊'},
-    {title:'Evidence',desc:'Evidence files with their linked competences and CPD logs.',icon:'📑'},
-    {title:'Development',desc:'Development tasks with status breakdown and progress.',icon:'🌱'}
-  ];
+// 5. Views / Page Builders
+const Views = {
+  dashboard: () => {
+    const s = computeStats();
+    const recentLogs = [...State.log].sort((a,b) => b.date.localeCompare(a.date)).slice(0, 4);
 
-  return `<h1>Export Reports</h1>
-  <p class="mut">Generate a visual report for any section — or the full report — as PDF or PowerPoint.</p>
-  <div class="grid g2" style="margin-top:20px">
-    ${cards.map(c=>`
-      <div class="card">
-        <div style="display:flex;gap:12px;align-items:flex-start">
-          <div style="font-size:24px;background:var(--acl);padding:8px;border-radius:10px">${c.icon}</div>
-          <div>
-            <h3 style="margin:0">${c.title}</h3>
-            <p style="font-size:13px;color:var(--mut);margin:4px 0 14px">${c.desc}</p>
-            <div style="display:flex;gap:8px">
-              <button class="alt" style="font-size:12px">📄 Export PDF</button>
-              <button class="btn" style="font-size:12px">📊 Export PowerPoint</button>
+    return `
+      <div class="space-y-6">
+        <!-- Hero Banner -->
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden">
+          <div class="relative z-10 max-w-2xl">
+            <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md text-xs font-bold rounded-full mb-3 uppercase tracking-wider">APM Competence Framework</span>
+            <h1 class="text-2xl md:text-3xl font-extrabold mb-2">Welcome back, ${State.profile.name}</h1>
+            <p class="text-emerald-100 text-sm md:text-base mb-6">Track CPD hours, perform self-assessments across 29 APM competences, and execute your career roadmap.</p>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="openAddCPDModal()" class="px-4 py-2.5 bg-white text-emerald-700 hover:bg-emerald-50 rounded-xl font-bold text-sm shadow transition-colors flex items-center gap-2">
+                <span>+</span> Log CPD Activity
+              </button>
+              <a href="#matrix" class="px-4 py-2.5 bg-emerald-800/60 hover:bg-emerald-800/80 text-white rounded-xl font-medium text-sm backdrop-blur-sm border border-emerald-400/30 transition-colors">
+                Assess Competences
+              </a>
             </div>
           </div>
         </div>
-      </div>
-    `).join('')}
-  </div>
-  <div class="card">
-    <div style="display:flex;gap:12px;align-items:center">
-      <div style="font-size:24px;background:var(--acl);padding:8px;border-radius:10px">📑</div>
-      <div style="flex:1">
-        <h3 style="margin:0">Full report <span class="pill">Complete</span></h3>
-        <p style="font-size:13px;color:var(--mut);margin:4px 0 0">Every section in one document — the complete CPD and competence picture.</p>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="alt">📄 Export PDF</button>
-        <button class="btn">📊 Export PowerPoint</button>
-      </div>
-    </div>
-  </div>`;
-}
 
-function profPg(){
-  const p=S.profile;
-  return`<h1>Profile</h1><p class="mut">This is how you appear across APM Insight.</p>
-  <div class="card">
-    <div class="me">
-      <div class="av" style="width:64px;height:64px;font-size:24px">${esc((p.name||'T')[0].toUpperCase())}</div>
-      <div>
-        <b style="font-size:18px">${esc(p.name)}</b>
-        <div class="mut">${esc(p.title)}</div>
-      </div>
-    </div>
-    <div class="row">
-      <label>Name<input id="pn" value="${esc(p.name)}"></label>
-      <label>Job title<input id="pt" value="${esc(p.title)}"></label>
-    </div>
-    <button data-a="saveprof" style="margin-top:12px">Save profile</button>
-  </div>`;
-}
+        <!-- Metric Stat Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <span class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Total CPD Hours</span>
+            <div class="text-3xl font-black text-slate-900 dark:text-white mt-1">${s.hours.toFixed(1)}</div>
+            <span class="text-xs text-emerald-600 font-semibold mt-1 inline-block">● ${State.log.length} logged entries</span>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <span class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Competences Assessed</span>
+            <div class="text-3xl font-black text-slate-900 dark:text-white mt-1">${s.assessedCount}<span class="text-lg font-medium text-slate-400">/29</span></div>
+            <span class="text-xs text-sky-600 font-semibold mt-1 inline-block">● ${Math.round((s.assessedCount/29)*100)}% coverage</span>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <span class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Linked Entries</span>
+            <div class="text-3xl font-black text-slate-900 dark:text-white mt-1">${s.linkedEntries}</div>
+            <span class="text-xs text-purple-600 font-semibold mt-1 inline-block">● Mapped to framework</span>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <span class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Tasks Done</span>
+            <div class="text-3xl font-black text-slate-900 dark:text-white mt-1">${s.completedTasks}</div>
+            <span class="text-xs text-amber-600 font-semibold mt-1 inline-block">● ${State.tasks.length} total actions</span>
+          </div>
+        </div>
 
-const R={
-  dashboard:dash,
-  log:logPg,
-  matrix:matrix,
-  gaps:gapsPg,
-  plan:planPg,
-  simulator:simulatorPg,
-  todo:todoPg,
-  reports:reportsPg,
-  profile:profPg
+        <!-- Level Progress & XP Card -->
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+            <div>
+              <h3 class="font-bold text-lg text-slate-900 dark:text-white">Professional Career Level</h3>
+              <p class="text-xs text-slate-500">Earn XP from activities, assessments, evidence, and actions.</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 font-black flex items-center justify-center text-lg border-2 border-emerald-500">
+                ${s.levelIdx + 1}
+              </div>
+              <div>
+                <span class="font-bold text-emerald-600 dark:text-emerald-400 text-base">${s.levelName}</span>
+                <div class="text-xs text-slate-400">${s.xp} XP total</div>
+              </div>
+            </div>
+          </div>
+          <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-3 overflow-hidden">
+            <div class="bg-emerald-500 h-full transition-all duration-500" style="width: ${s.levelProgress}%"></div>
+          </div>
+          <div class="flex justify-between text-xs text-slate-400 mt-2 font-medium">
+            <span>${s.xp} XP</span>
+            <span>${s.nextThreshold} XP (Next Tier)</span>
+          </div>
+        </div>
+
+        <!-- Pillar Breakdown & Recent Activity Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Pillar Scores -->
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-4">Pillar Average Scores</h3>
+            <div class="space-y-4">
+              ${APM_PILLARS.map((p, idx) => {
+                const avg = s.pillarAvgs[idx];
+                const pct = (avg / 5) * 100;
+                return `
+                  <div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                      <span class="text-slate-700 dark:text-slate-300">${p.name}</span>
+                      <span class="text-slate-500">${avg} / 5.0</span>
+                    </div>
+                    <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                      <div class="h-full rounded-full" style="width:${pct}%; background-color:${p.color}"></div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- Recent CPD Logs -->
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-lg text-slate-900 dark:text-white">Recent Activity</h3>
+                <a href="#log" class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">View Log →</a>
+              </div>
+              <div class="space-y-3">
+                ${recentLogs.length ? recentLogs.map(l => `
+                  <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700">
+                    <div class="min-w-0 pr-2">
+                      <h4 class="font-semibold text-sm text-slate-800 dark:text-slate-200 truncate">${escapeHtml(l.title)}</h4>
+                      <span class="text-xs text-slate-400">${l.date} · ${escapeHtml(l.area)}</span>
+                    </div>
+                    <span class="px-2.5 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 font-bold text-xs rounded-full flex-shrink-0">
+                      ${l.hours}h
+                    </span>
+                  </div>
+                `).join('') : `<p class="text-sm text-slate-400">No CPD activity recorded yet.</p>`}
+              </div>
+            </div>
+            <button onclick="openAddCPDModal()" class="w-full mt-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-xl font-semibold text-xs transition-colors">
+              + Add CPD Entry
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  log: () => {
+    const sorted = [...State.log].sort((a,b) => b.date.localeCompare(a.date));
+    const totalHours = sorted.reduce((acc, item) => acc + (parseFloat(item.hours) || 0), 0);
+
+    return `
+      <div class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white">CPD Log</h1>
+            <p class="text-sm text-slate-500">Record continuing professional development activities and reflections.</p>
+          </div>
+          <button onclick="openAddCPDModal()" class="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-sm shadow transition-colors flex items-center gap-2 self-start sm:self-auto">
+            <span>+</span> Log New Activity
+          </button>
+        </div>
+
+        <!-- Summary Banner -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 text-xl font-bold flex items-center justify-center">🕒</div>
+            <div>
+              <div class="text-2xl font-black text-slate-900 dark:text-white">${totalHours.toFixed(1)} hrs</div>
+              <span class="text-xs text-slate-400">Total logged learning hours</span>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-100 dark:bg-sky-900/40 text-sky-600 text-xl font-bold flex items-center justify-center">📑</div>
+            <div>
+              <div class="text-2xl font-black text-slate-900 dark:text-white">${sorted.length} Entries</div>
+              <span class="text-xs text-slate-400">CPD records stored</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Log Table -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400 font-semibold text-xs uppercase border-b border-slate-200 dark:border-slate-700">
+                <tr>
+                  <th class="p-4">Date</th>
+                  <th class="p-4">Activity & Reflection</th>
+                  <th class="p-4">APM Area</th>
+                  <th class="p-4">Linked Competences</th>
+                  <th class="p-4 text-right">Hours</th>
+                  <th class="p-4 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                ${sorted.length ? sorted.map(item => `
+                  <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
+                    <td class="p-4 whitespace-nowrap font-medium text-slate-600 dark:text-slate-300">${item.date}</td>
+                    <td class="p-4 max-w-md">
+                      <div class="font-bold text-slate-900 dark:text-white mb-1">${escapeHtml(item.title)}</div>
+                      ${item.reflection ? `<p class="text-xs text-slate-500 dark:text-slate-400 italic">${escapeHtml(item.reflection)}</p>` : ''}
+                    </td>
+                    <td class="p-4 whitespace-nowrap">
+                      <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-medium">
+                        ${escapeHtml(item.area)}
+                      </span>
+                    </td>
+                    <td class="p-4">
+                      <div class="flex flex-wrap gap-1">
+                        ${(item.links || []).map(cid => {
+                          const c = APM_COMPETENCES.find(x => x.id === cid);
+                          return c ? `<span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 text-[11px] font-semibold rounded-md">${escapeHtml(c.name)}</span>` : '';
+                        }).join('')}
+                      </div>
+                    </td>
+                    <td class="p-4 text-right font-black text-slate-900 dark:text-white">${item.hours}h</td>
+                    <td class="p-4 text-center">
+                      <button onclick="deleteCPDEntry('${item.id}')" class="text-red-500 hover:text-red-700 dark:hover:text-red-400 p-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                `).join('') : `
+                  <tr>
+                    <td colspan="6" class="p-8 text-center text-slate-400">No CPD entries logged yet. Click "Log New Activity" to start.</td>
+                  </tr>
+                `}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  matrix: () => {
+    const activePillarId = State.matrixPillarFilter || 0;
+    const pillarComps = APM_COMPETENCES.filter(c => c.pillar === activePillarId);
+
+    return `
+      <div class="space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white">Competence Assessment Matrix</h1>
+          <p class="text-sm text-slate-500">Self-assess against the 29 APM competences using the 5-point proficiency scale.</p>
+        </div>
+
+        <!-- Pillar Tabs -->
+        <div class="flex flex-wrap gap-2 border-b border-slate-200 dark:border-slate-700 pb-3">
+          ${APM_PILLARS.map(p => `
+            <button onclick="switchMatrixPillar(${p.id})" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${activePillarId === p.id ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}">
+              <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${p.color}"></span>
+              ${p.name}
+            </button>
+          `).join('')}
+        </div>
+
+        <!-- Competence Assessment Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${pillarComps.map(c => {
+            const r = State.ratings[c.id] || { cur: 0, tgt: 0, notes: '' };
+            return `
+              <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Ref: ${c.id}</span>
+                    <h3 class="font-bold text-base text-slate-900 dark:text-white">${escapeHtml(c.name)}</h3>
+                  </div>
+                  <span class="px-2.5 py-1 text-xs font-bold rounded-full ${r.cur >= r.tgt && r.cur > 0 ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300'}">
+                    ${r.cur ? RATING_LEVELS[r.cur].name : 'Not Assessed'}
+                  </span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 bg-slate-50 dark:bg-slate-700/40 p-3 rounded-xl">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Current Level</label>
+                    <select onchange="updateRating('${c.id}', 'cur', this.value)" class="w-full text-xs font-semibold p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600">
+                      ${RATING_LEVELS.map(l => `<option value="${l.level}" ${r.cur === l.level ? 'selected' : ''}>${l.level}. ${l.name}</option>`).join('')}
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Target Level</label>
+                    <select onchange="updateRating('${c.id}', 'tgt', this.value)" class="w-full text-xs font-semibold p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600">
+                      ${RATING_LEVELS.map(l => `<option value="${l.level}" ${r.tgt === l.level ? 'selected' : ''}>${l.level}. ${l.name}</option>`).join('')}
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-500 mb-1">Assessment Notes & Justification</label>
+                  <div class="flex gap-2">
+                    <input type="text" id="note-${c.id}" value="${escapeHtml(r.notes || '')}" placeholder="Add context or rationale..." class="flex-1 text-xs p-2 rounded-lg bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">
+                    <button onclick="saveRatingNote('${c.id}')" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white dark:bg-emerald-600 dark:hover:bg-emerald-500 text-xs font-bold rounded-lg transition-colors">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  },
+
+  gaps: () => {
+    const ratedComps = APM_COMPETENCES.map(c => {
+      const r = State.ratings[c.id] || { cur: 0, tgt: 0 };
+      const gap = Math.max(0, (r.tgt || 0) - (r.cur || 0));
+      return { ...c, cur: r.cur || 0, tgt: r.tgt || 0, gap };
+    });
+
+    const gapsOnly = ratedComps.filter(c => c.gap > 0).sort((a,b) => b.gap - a.gap);
+
+    return `
+      <div class="space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white">Skills Gap Analysis</h1>
+          <p class="text-sm text-slate-500">Automated gap analysis comparing current competence levels against target aspirations.</p>
+        </div>
+
+        <!-- Summary Metric Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-semibold text-slate-400 uppercase">Identified Gaps</span>
+            <div class="text-3xl font-black text-amber-500 mt-1">${gapsOnly.length}</div>
+            <span class="text-xs text-slate-400">Competences requiring development</span>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-semibold text-slate-400 uppercase">At Target Level</span>
+            <div class="text-3xl font-black text-emerald-500 mt-1">${ratedComps.filter(c => c.cur > 0 && c.cur >= c.tgt).length}</div>
+            <span class="text-xs text-slate-400">Competences meeting goal</span>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-semibold text-slate-400 uppercase">Unassessed</span>
+            <div class="text-3xl font-black text-slate-400 mt-1">${ratedComps.filter(c => c.cur === 0).length}</div>
+            <span class="text-xs text-slate-400">Pending self-assessment</span>
+          </div>
+        </div>
+
+        <!-- Prioritized Gap Cards List -->
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-4">Development Priorities</h3>
+          <div class="space-y-3">
+            ${gapsOnly.length ? gapsOnly.map(c => `
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-slate-100 dark:border-slate-700">
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${APM_PILLARS[c.pillar].color}"></span>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-base">${escapeHtml(c.name)}</h4>
+                  </div>
+                  <div class="flex items-center gap-2 text-xs text-slate-500">
+                    <span>Current: <b class="text-slate-700 dark:text-slate-300">${RATING_LEVELS[c.cur].name}</b></span>
+                    <span>→</span>
+                    <span>Target: <b class="text-emerald-600 dark:text-emerald-400">${RATING_LEVELS[c.tgt].name}</b></span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="px-3 py-1 bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 font-extrabold text-xs rounded-full">
+                    +${c.gap} Level Gap
+                  </span>
+                  <a href="#plan" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-bold text-xs shadow transition-colors">
+                    Plan Action
+                  </a>
+                </div>
+              </div>
+            `).join('') : `
+              <p class="text-sm text-slate-400 text-center py-6">Great job! No skills gaps identified. Either set higher targets or rate unassessed competences.</p>
+            `}
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  evidence: () => {
+    return `
+      <div class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white">Evidence Vault</h1>
+            <p class="text-sm text-slate-500">Store work artifacts, certificates, and evidence supporting your competence ratings.</p>
+          </div>
+          <button onclick="openAddEvidenceModal()" class="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-sm shadow transition-colors flex items-center gap-2 self-start sm:self-auto">
+            <span>+</span> Upload Evidence Item
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${State.evidence.map(e => {
+            const comp = APM_COMPETENCES.find(c => c.id === e.comp);
+            return `
+              <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between space-y-3">
+                <div class="flex items-start justify-between gap-2">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 font-bold flex items-center justify-center text-lg">📄</div>
+                    <div>
+                      <h3 class="font-bold text-sm text-slate-900 dark:text-white truncate">${escapeHtml(e.title)}</h3>
+                      <span class="text-xs text-slate-400">${e.date}</span>
+                    </div>
+                  </div>
+                  <button onclick="deleteEvidence('${e.id}')" class="text-slate-400 hover:text-red-500 text-sm">🗑️</button>
+                </div>
+                ${e.notes ? `<p class="text-xs text-slate-500 italic bg-slate-50 dark:bg-slate-700/50 p-2.5 rounded-lg">${escapeHtml(e.notes)}</p>` : ''}
+                <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700">
+                  <span class="px-2.5 py-1 bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-md">
+                    Mapped: ${comp ? escapeHtml(comp.name) : 'General'}
+                  </span>
+                  <a href="${e.fileUrl}" onclick="alert('Demo link: Evidence document standard preview.')" class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline">View File →</a>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  },
+
+  plan: () => {
+    const horizons = [
+      { id: 6, title: '6 Months Horizon' },
+      { id: 12, title: '12 Months Horizon' }
+    ];
+
+    const atTarget = APM_COMPETENCES.filter(c => {
+      const r = State.ratings[c.id];
+      return r && r.cur > 0 && r.cur >= r.tgt;
+    });
+
+    return `
+      <div class="space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white">Development Plan</h1>
+          <p class="text-sm text-slate-500">Timed roadmap closing competence gaps through trackable milestones.</p>
+        </div>
+
+        ${horizons.map(h => {
+          const hzTasks = State.tasks.filter(t => (t.horizon || 6) === h.id);
+          return `
+            <div class="space-y-4">
+              <div class="flex items-center gap-3 border-b border-slate-200 dark:border-slate-700 pb-2">
+                <div class="w-8 h-8 rounded-full bg-emerald-500 text-white font-black flex items-center justify-center text-xs">${h.id}m</div>
+                <h2 class="font-bold text-lg text-slate-900 dark:text-white">${h.title}</h2>
+                <span class="text-xs text-slate-400 font-medium">(${hzTasks.length} linked actions)</span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                ${hzTasks.map(t => {
+                  const comp = APM_COMPETENCES.find(c => c.id === t.comp);
+                  const pillar = comp ? APM_PILLARS[comp.pillar] : APM_PILLARS[0];
+                  return `
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                      <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider" style="background-color: ${pillar.color}20; color: ${pillar.color}">
+                          ${pillar.name}
+                        </span>
+                        <span class="px-2 py-0.5 bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 text-[11px] font-bold rounded-md">
+                          +1 Target Boost
+                        </span>
+                      </div>
+                      <h3 class="font-bold text-base text-slate-900 dark:text-white">${escapeHtml(t.title)}</h3>
+                      <p class="text-xs text-slate-500">${escapeHtml(t.desc || '')}</p>
+                      
+                      <!-- Expandable Accordion Task Checklist -->
+                      <details class="group pt-2 border-t border-slate-100 dark:border-slate-700">
+                        <summary class="text-xs font-bold text-emerald-600 dark:text-emerald-400 cursor-pointer list-none flex items-center justify-between">
+                          <span>Linked Competence & Actions</span>
+                          <span class="group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <div class="mt-2 pt-2 text-xs text-slate-600 dark:text-slate-300 space-y-1">
+                          <div>Target Competence: <b>${comp ? escapeHtml(comp.name) : 'General'}</b></div>
+                          <div>Due Date: <b>${t.dueDate}</b></div>
+                          <div>Progress: <b>${t.progress}%</b></div>
+                        </div>
+                      </details>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        }).join('')}
+
+        <!-- At Target Accomplishments -->
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+            <span class="text-emerald-500">✔</span> Competences At Target Goal (${atTarget.length})
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            ${atTarget.length ? atTarget.map(c => `
+              <span class="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-xs font-semibold rounded-xl border border-emerald-200 dark:border-emerald-800">
+                ${escapeHtml(c.name)}
+              </span>
+            `).join('') : `<p class="text-xs text-slate-400">Assess competences in the matrix to see goals reached here.</p>`}
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  simulator: () => {
+    return `
+      <div class="space-y-6">
+        <!-- Hero Simulator Banner -->
+        <div class="bg-gradient-to-r from-emerald-50 to-teal-100 dark:from-slate-800 dark:to-slate-700 p-6 md:p-8 rounded-2xl border border-emerald-200 dark:border-slate-600">
+          <span class="inline-block px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-full mb-3 uppercase tracking-wider">✦ APM Career Simulator</span>
+          <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-3">
+            Simulate your path from ${escapeHtml(State.simCur)} to ${escapeHtml(State.simTgt)}.
+          </h1>
+          <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl">
+            Pick your current role and your dream destination. The simulator analyzes your current APM matrix ratings against standard role profiles to calculate exact competence gap roadmaps.
+          </p>
+        </div>
+
+        <!-- Role Selectors Card -->
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+          <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+            <span>🌱</span> Career Transition Parameters
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">Current Role</label>
+              <select id="sim-cur-select" onchange="updateSimulationRoles()" class="w-full text-sm font-semibold p-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">
+                ${ROLES.map(r => `<option ${State.simCur === r ? 'selected' : ''}>${r}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">Target Desired Role</label>
+              <select id="sim-tgt-select" onchange="updateSimulationRoles()" class="w-full text-sm font-semibold p-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">
+                ${ROLES.map(r => `<option ${State.simTgt === r ? 'selected' : ''}>${r}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Simulation Results Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-semibold text-slate-400 uppercase">Est. Time to Transition</span>
+            <div class="text-3xl font-black text-emerald-500 mt-1">9-12 Months</div>
+            <span class="text-xs text-slate-400">Based on standard CPD velocity</span>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-semibold text-slate-400 uppercase">Key Focus Competence</span>
+            <div class="text-2xl font-black text-slate-900 dark:text-white mt-1">Governance & Risk</div>
+            <span class="text-xs text-slate-400">Primary gap for ${escapeHtml(State.simTgt)}</span>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-semibold text-slate-400 uppercase">Recommended CPD</span>
+            <div class="text-3xl font-black text-purple-500 mt-1">35 Hours</div>
+            <span class="text-xs text-slate-400">Targeted learning requirement</span>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  todo: () => {
+    const openTasks = State.tasks.filter(t => t.status !== 'done');
+    const overdueTasks = State.tasks.filter(t => t.status === 'off');
+    const doneTasks = State.tasks.filter(t => t.status === 'done');
+
+    const filter = State.todoFilter || 'all';
+    let filtered = State.tasks;
+    if (filter === 'overdue') filtered = State.tasks.filter(t => t.status === 'off');
+    if (filter === 'high') filtered = State.tasks.filter(t => t.priority === 'High');
+    if (filter === 'off') filtered = State.tasks.filter(t => t.status === 'off');
+
+    return `
+      <div class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white">To-Do / Action Tracker</h1>
+            <p class="text-sm text-slate-500">Manage development actions, track completion progress and deadlines.</p>
+          </div>
+          <button onclick="openAddTaskModal()" class="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-sm shadow transition-colors flex items-center gap-2 self-start sm:self-auto">
+            <span>+</span> Add New Task
+          </button>
+        </div>
+
+        <!-- Summary Metric Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-semibold text-slate-400 uppercase">Open Tasks</span>
+            <div class="text-3xl font-black text-slate-900 dark:text-white mt-1">${openTasks.length}</div>
+            <span class="text-xs text-slate-400">Active developmental tasks</span>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-semibold text-slate-400 uppercase">Off Track / Overdue</span>
+            <div class="text-3xl font-black text-amber-500 mt-1">${overdueTasks.length}</div>
+            <span class="text-xs text-slate-400">Requires immediate attention</span>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-semibold text-slate-400 uppercase">Completed Tasks</span>
+            <div class="text-3xl font-black text-emerald-500 mt-1">${doneTasks.length}</div>
+            <span class="text-xs text-slate-400">Successfully finalized</span>
+          </div>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="setTodoFilter('all')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${filter === 'all' ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'bg-white dark:bg-slate-800 text-slate-600 border border-slate-200 dark:border-slate-700'}">All Outstanding (${openTasks.length})</button>
+          <button onclick="setTodoFilter('high')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${filter === 'high' ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'bg-white dark:bg-slate-800 text-slate-600 border border-slate-200 dark:border-slate-700'}">High Priority</button>
+          <button onclick="setTodoFilter('off')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${filter === 'off' ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'bg-white dark:bg-slate-800 text-slate-600 border border-slate-200 dark:border-slate-700'}">Off Track</button>
+        </div>
+
+        <!-- Task List -->
+        <div class="space-y-4">
+          ${filtered.length ? filtered.map(t => {
+            const comp = APM_COMPETENCES.find(c => c.id === t.comp);
+            return `
+              <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border ${t.status === 'off' ? 'border-amber-300 dark:border-amber-600 bg-amber-50/20' : 'border-slate-200 dark:border-slate-700'} shadow-sm space-y-3">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                      <span class="${t.status === 'off' ? 'text-amber-500' : 'text-emerald-500'}">●</span>
+                      ${escapeHtml(t.title)}
+                    </h3>
+                    ${t.desc ? `<p class="text-xs text-slate-500 mt-1">${escapeHtml(t.desc)}</p>` : ''}
+                  </div>
+                  <button onclick="deleteTask('${t.id}')" class="text-slate-400 hover:text-red-500 text-sm p-1">🗑️</button>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 text-xs">
+                  <!-- Status Dropdown -->
+                  <select onchange="updateTaskStatus('${t.id}', this.value)" class="p-1.5 rounded-lg bg-slate-50 dark:bg-slate-700 font-semibold border border-slate-200 dark:border-slate-600">
+                    <option value="todo" ${t.status === 'todo' ? 'selected' : ''}>Not Started</option>
+                    <option value="on" ${t.status === 'on' ? 'selected' : ''}>In Progress - On Track</option>
+                    <option value="off" ${t.status === 'off' ? 'selected' : ''}>In Progress - Off Track</option>
+                    <option value="done" ${t.status === 'done' ? 'selected' : ''}>Completed</option>
+                  </select>
+
+                  <span class="px-2.5 py-1 font-bold rounded-lg ${t.priority === 'High' ? 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300' : 'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300'}">
+                    ${t.priority} Priority
+                  </span>
+
+                  ${t.dueDate ? `<span class="text-slate-400">📅 Due: ${t.dueDate}</span>` : ''}
+                  <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 font-bold rounded-lg">
+                    ↔ ${comp ? escapeHtml(comp.name) : 'General'}
+                  </span>
+                </div>
+
+                <!-- Slider Progress Bar -->
+                <div class="pt-2">
+                  <div class="flex justify-between text-xs font-semibold text-slate-500 mb-1">
+                    <span>Task Completion</span>
+                    <span>${t.progress}%</span>
+                  </div>
+                  <input type="range" min="0" max="100" value="${t.progress}" oninput="updateTaskProgress('${t.id}', this.value)" class="w-full accent-emerald-500 cursor-pointer">
+                </div>
+              </div>
+            `;
+          }).join('') : `<p class="text-center py-8 text-slate-400">No tasks match the selected filter.</p>`}
+        </div>
+      </div>
+    `;
+  },
+
+  reports: () => {
+    return `
+      <div class="space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white">Reports & Export Center</h1>
+          <p class="text-sm text-slate-500">Generate printable PDF documents or PowerPoint presentation files of your professional profile.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Report Export Card: CPD Log -->
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 font-bold flex items-center justify-center text-xl">🕒</div>
+              <div>
+                <h3 class="font-bold text-base text-slate-900 dark:text-white">CPD Activity Log Report</h3>
+                <p class="text-xs text-slate-400">Complete listing of logged hours, reflections & APM areas.</p>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="exportReport('cpd', 'pdf')" class="flex-1 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-colors">📄 Export Text/PDF</button>
+              <button onclick="exportReport('cpd', 'ppt')" class="flex-1 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold transition-colors">📊 Export PowerPoint</button>
+            </div>
+          </div>
+
+          <!-- Report Export Card: Competence Matrix -->
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-sky-100 dark:bg-sky-900/40 text-sky-600 font-bold flex items-center justify-center text-xl">📊</div>
+              <div>
+                <h3 class="font-bold text-base text-slate-900 dark:text-white">Competence Matrix Overview</h3>
+                <p class="text-xs text-slate-400">Pillar averages, current self-ratings vs target aspirations.</p>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="exportReport('matrix', 'pdf')" class="flex-1 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-colors">📄 Export Text/PDF</button>
+              <button onclick="exportReport('matrix', 'ppt')" class="flex-1 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold transition-colors">📊 Export PowerPoint</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Bundle Card -->
+        <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white p-6 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h3 class="font-bold text-lg">Download Full Career Dossier</h3>
+            <p class="text-xs text-slate-300">Bundle CPD hours, 29 competence ratings, action plan and evidence links into one file.</p>
+          </div>
+          <button onclick="exportReport('full', 'pdf')" class="px-5 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl shadow transition-colors flex-shrink-0">
+            Download Complete Dossier
+          </button>
+        </div>
+      </div>
+    `;
+  },
+
+  profile: () => {
+    const p = State.profile;
+    return `
+      <div class="space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white">User Profile & Data Management</h1>
+          <p class="text-sm text-slate-500">Update account credentials, photo preview, and manage offline data backup.</p>
+        </div>
+
+        <!-- Personal Info Form Card -->
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">Personal Information</h3>
+          
+          <div class="flex items-center gap-4">
+            <div id="prof-preview-avatar" class="w-16 h-16 rounded-full bg-emerald-500 text-white font-black text-2xl flex items-center justify-center overflow-hidden">
+              ${p.photo ? `<img src="${p.photo}" class="w-full h-full object-cover">` : escapeHtml((p.name || 'T')[0])}
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">Profile Photo Upload</label>
+              <input type="file" id="photo-upload" onchange="handlePhotoUpload(this)" accept="image/*" class="text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">Full Name</label>
+              <input type="text" id="prof-name" value="${escapeHtml(p.name)}" class="w-full text-sm p-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">Job Title / Designation</label>
+              <input type="text" id="prof-title" value="${escapeHtml(p.title)}" class="w-full text-sm p-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-1">Professional Bio</label>
+            <textarea id="prof-bio" rows="3" class="w-full text-sm p-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">${escapeHtml(p.bio || '')}</textarea>
+          </div>
+
+          <button onclick="saveProfileInfo()" class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl shadow transition-colors">
+            Save Profile Info
+          </button>
+        </div>
+
+        <!-- Backup & Data Import/Export -->
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">Data Backup & Restore</h3>
+          <p class="text-xs text-slate-400">Export your local state database as JSON or restore from file.</p>
+          <div class="flex flex-wrap gap-3">
+            <button onclick="exportJSONBackup()" class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition-colors">
+              📥 Export JSON Backup
+            </button>
+            <label class="px-4 py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl cursor-pointer transition-colors">
+              📤 Import JSON File
+              <input type="file" accept=".json" onchange="importJSONBackup(this)" class="hidden">
+            </label>
+            <button onclick="resetToDefaults()" class="px-4 py-2.5 bg-red-100 text-red-700 hover:bg-red-200 font-bold text-xs rounded-xl transition-colors">
+              ⚠️ Reset Application Data
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
 };
 
-const NV=[
-  ['dashboard','Dashboard','📊'],
-  ['log','CPD Log','📝'],
-  ['matrix','Competence Matrix','▦'],
-  ['gaps','Gap Analysis','🎯'],
-  ['plan','Development Plan','🌱'],
-  ['simulator','Career Simulator','🚀'],
-  ['todo','To-Do','☑'],
-  ['reports','Reports','📄'],
-  ['profile','Profile','👤']
-];
+// 6. Interactive Actions & Event Handlers
+function escapeHtml(str) {
+  return String(str || '').replace(/[&<>"']/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m]));
+}
 
-const theme=()=>document.documentElement.classList.toggle('dark',S.dark??matchMedia('(prefers-color-scheme: dark)').matches);
+function updateNavigationActiveState(pageKey) {
+  $$('.nav-link').forEach(link => {
+    if (link.dataset.page === pageKey) {
+      link.classList.add('bg-emerald-50', 'text-emerald-600', 'dark:bg-slate-700', 'font-bold');
+    } else {
+      link.classList.remove('bg-emerald-50', 'text-emerald-600', 'dark:bg-slate-700', 'font-bold');
+    }
+  });
+}
 
-function render(keep){
-  const y=scrollY,r=(location.hash.slice(1)in R)?location.hash.slice(1):'plan',p=S.profile;
-  $('#side').innerHTML=`
-    <div class="me">
-      <div class="av">${esc((p.name||'T')[0].toUpperCase())}</div>
+function renderCurrentPage() {
+  const hash = location.hash.replace('#', '') || 'dashboard';
+  const pageKey = Views[hash] ? hash : 'dashboard';
+  $('#main-content').innerHTML = Views[pageKey]();
+  updateNavigationActiveState(pageKey);
+  window.scrollTo(0, 0);
+}
+
+// Global Event Listeners & Router setup
+window.addEventListener('hashchange', renderCurrentPage);
+
+// Theme Toggle Handler
+function toggleTheme() {
+  State.darkMode = !State.darkMode;
+  document.documentElement.classList.toggle('dark', State.darkMode);
+  $('#theme-text').textContent = State.darkMode ? 'Light' : 'Dark';
+  $('#theme-icon').textContent = State.darkMode ? '☀️' : '🌙';
+  saveState();
+}
+
+$('#theme-toggle').addEventListener('click', toggleTheme);
+$('#mobile-menu-btn').addEventListener('click', () => {
+  $('#sidebar').classList.toggle('hidden');
+});
+
+// CPD Operations
+function openAddCPDModal() {
+  const compOptions = APM_COMPETENCES.map(c => `<option value="${c.id}">${escapeHtml(c.name)} (${c.id})</option>`).join('');
+  const areaOptions = APM_AREAS.map(a => `<option>${escapeHtml(a)}</option>`).join('');
+
+  openModal('Log CPD Activity', `
+    <div class="space-y-4 text-sm">
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Date</label>
+          <input type="date" id="cpd-date" value="${new Date().toISOString().slice(0,10)}" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Hours Spent</label>
+          <input type="number" step="0.5" id="cpd-hours" value="1.0" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+        </div>
+      </div>
       <div>
-        <b style="font-size:14px">${esc(p.name||'Tim Williams')}</b><br>
-        <small style="font-size:11px">${esc(p.title||'IT Project Manager')}</small>
+        <label class="block text-xs font-semibold text-slate-500 mb-1">Activity Title</label>
+        <input type="text" id="cpd-title" placeholder="e.g. Governance & Steering Seminar" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 mb-1">APM Area</label>
+        <select id="cpd-area" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+          ${areaOptions}
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 mb-1">Linked APM Competences</label>
+        <select id="cpd-links" multiple class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 h-24">
+          ${compOptions}
+        </select>
+        <span class="text-[11px] text-slate-400">Hold Ctrl / Cmd to select multiple</span>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 mb-1">Key Reflection & Learning Points</label>
+        <textarea id="cpd-reflection" rows="3" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600"></textarea>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeModal()" class="px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-600 rounded-xl font-bold text-xs">Cancel</button>
+        <button onclick="saveCPDEntry()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-xs shadow">Save Entry</button>
       </div>
     </div>
-    <nav>
-      ${NV.map(n=>`<a href="#${n[0]}" class="${n[0]===r?'cur':''}"><span>${n[2]}</span> ${n[1]}</a>`).join('')}
-      <h4>Resources</h4>
-      <a href="#">💼 CV App</a>
-      <a href="#">📖 PMO Course</a>
-    </nav>
-    <div style="margin-top:24px">
-      <button class="alt" data-a="theme" style="width:100%;font-size:12px">☀ Light / Dark mode</button>
+  `);
+}
+
+function saveCPDEntry() {
+  const title = $('#cpd-title').value.trim();
+  const date = $('#cpd-date').value;
+  const hours = parseFloat($('#cpd-hours').value) || 0;
+  const area = $('#cpd-area').value;
+  const reflection = $('#cpd-reflection').value.trim();
+  const selectedLinks = Array.from($('#cpd-links').selectedOptions).map(o => o.value);
+
+  if (!title) { showToast('Please enter an activity title'); return; }
+
+  State.log.push({
+    id: 'cpd_' + Date.now(),
+    date,
+    title,
+    hours,
+    area,
+    reflection,
+    links: selectedLinks
+  });
+
+  saveState();
+  closeModal();
+  showToast('CPD Activity logged successfully!');
+  renderCurrentPage();
+}
+
+function deleteCPDEntry(id) {
+  if (confirm('Delete this CPD log entry?')) {
+    State.log = State.log.filter(x => x.id !== id);
+    saveState();
+    showToast('Entry deleted');
+    renderCurrentPage();
+  }
+}
+
+// Matrix Rating Handlers
+function switchMatrixPillar(pillarId) {
+  State.matrixPillarFilter = pillarId;
+  renderCurrentPage();
+}
+
+function updateRating(compId, key, val) {
+  if (!State.ratings[compId]) State.ratings[compId] = { cur: 0, tgt: 0, notes: '' };
+  State.ratings[compId][key] = parseInt(val, 10);
+  saveState();
+  showToast('Rating updated');
+}
+
+function saveRatingNote(compId) {
+  const noteVal = $(`#note-${compId}`).value.trim();
+  if (!State.ratings[compId]) State.ratings[compId] = { cur: 0, tgt: 0, notes: '' };
+  State.ratings[compId].notes = noteVal;
+  saveState();
+  showToast('Notes saved');
+}
+
+// Task Handlers
+function openAddTaskModal() {
+  const compOptions = APM_COMPETENCES.map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+  openModal('Add Development Task', `
+    <div class="space-y-4 text-sm">
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 mb-1">Task Title</label>
+        <input type="text" id="task-title" placeholder="e.g. Draft risk management protocol" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Target Competence</label>
+          <select id="task-comp" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">${compOptions}</select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Timeline Horizon</label>
+          <select id="task-horizon" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+            <option value="6">6 Months</option>
+            <option value="12">12 Months</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Priority</label>
+          <select id="task-priority" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+            <option>High</option>
+            <option selected>Medium</option>
+            <option>Low</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Due Date</label>
+          <input type="date" id="task-date" value="${new Date().toISOString().slice(0,10)}" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 mb-1">Task Description</label>
+        <textarea id="task-desc" rows="2" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600"></textarea>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeModal()" class="px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-600 rounded-xl font-bold text-xs">Cancel</button>
+        <button onclick="saveTaskEntry()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-xs shadow">Save Task</button>
+      </div>
     </div>
-    <div style="margin-top:20px;font-size:11px;color:var(--mut)">
-      Built on the APM Competence Framework — 29 competencies, 4 pillars.
-    </div>`;
-
-  $('#side').classList.remove('open');
-  $('#main').innerHTML=R[r]()+`<p class="mut" style="margin-top:40px;font-size:12px">CPD app build: Tim Williams — TWC Ltd<br>Contact: info@twc-ltd.uk</p>`;
-  document.title='APM Insight';
-  scrollTo(0,keep?y:0);
+  `);
 }
 
-addEventListener('hashchange',()=>render(false));
-theme();
-render(false);
+function saveTaskEntry() {
+  const title = $('#task-title').value.trim();
+  if (!title) { showToast('Please enter a task title'); return; }
 
-function act(a,d){
-  const v=id=>($('#'+id)||{}).value;
-  if(a==='menu')$('#side').classList.toggle('open');
-  if(a==='theme'){S.dark=!document.documentElement.classList.contains('dark');save();theme()}
-  if(a==='taskopen'){taskOpen=true;render(true)}
-  if(a==='taskclose'){taskOpen=false;render(true)}
-  if(a==='setfilter'){S.todoFilter=d.f;render(true)}
-  if(a==='savetask'){
-    const t=(v('tt')||'').trim();if(!t)return;
-    S.tasks.push({id:uid(),title:t,comp:v('tc'),priority:v('tp')||'Medium',status:'todo',progress:0,dueDate:today});
-    save();taskOpen=false;render(true);
-  }
-  if(a==='deltask'){S.tasks=S.tasks.filter(t=>t.id!==d.id);save();render(true)}
-  if(a==='saveprof'){
-    S.profile.name=v('pn').trim();
-    S.profile.title=v('pt').trim();
-    save();render(true);
+  State.tasks.push({
+    id: 't_' + Date.now(),
+    title,
+    comp: $('#task-comp').value,
+    horizon: parseInt($('#task-horizon').value, 10),
+    priority: $('#task-priority').value,
+    dueDate: $('#task-date').value,
+    desc: $('#task-desc').value.trim(),
+    status: 'todo',
+    progress: 0
+  });
+
+  saveState();
+  closeModal();
+  showToast('Task added');
+  renderCurrentPage();
+}
+
+function updateTaskStatus(id, val) {
+  const t = State.tasks.find(x => x.id === id);
+  if (t) {
+    t.status = val;
+    if (val === 'done') t.progress = 100;
+    saveState();
+    renderCurrentPage();
   }
 }
 
-document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset)});
-document.addEventListener('change',e=>{
-  const t=e.target;
-  if(t.dataset.ts){
-    const tk=S.tasks.find(x=>x.id===t.dataset.ts);
-    if(tk){tk.status=t.value;save();render(true)}
+function updateTaskProgress(id, val) {
+  const t = State.tasks.find(x => x.id === id);
+  if (t) {
+    t.progress = parseInt(val, 10);
+    if (t.progress === 100) t.status = 'done';
+    saveState();
   }
-  if(t.id==='simCur'){S.simCur=t.value;save();render(true)}
-  if(t.id==='simTgt'){S.simTgt=t.value;save();render(true)}
+}
+
+function deleteTask(id) {
+  if (confirm('Delete task?')) {
+    State.tasks = State.tasks.filter(x => x.id !== id);
+    saveState();
+    showToast('Task deleted');
+    renderCurrentPage();
+  }
+}
+
+function setTodoFilter(f) {
+  State.todoFilter = f;
+  renderCurrentPage();
+}
+
+// Evidence Vault Handlers
+function openAddEvidenceModal() {
+  const compOptions = APM_COMPETENCES.map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+  openModal('Upload Evidence Item', `
+    <div class="space-y-4 text-sm">
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 mb-1">Document Title</label>
+        <input type="text" id="ev-title" placeholder="e.g. Risk Audit Findings.pdf" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 mb-1">Mapped APM Competence</label>
+        <select id="ev-comp" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">${compOptions}</select>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 mb-1">Notes / Description</label>
+        <textarea id="ev-notes" rows="2" class="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600"></textarea>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeModal()" class="px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-600 rounded-xl font-bold text-xs">Cancel</button>
+        <button onclick="saveEvidenceEntry()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-xs shadow">Save Evidence</button>
+      </div>
+    </div>
+  `);
+}
+
+function saveEvidenceEntry() {
+  const title = $('#ev-title').value.trim();
+  if (!title) return;
+
+  State.evidence.push({
+    id: 'ev_' + Date.now(),
+    title,
+    comp: $('#ev-comp').value,
+    date: new Date().toISOString().slice(0,10),
+    fileUrl: '#',
+    notes: $('#ev-notes').value.trim()
+  });
+
+  saveState();
+  closeModal();
+  showToast('Evidence stored');
+  renderCurrentPage();
+}
+
+function deleteEvidence(id) {
+  State.evidence = State.evidence.filter(x => x.id !== id);
+  saveState();
+  renderCurrentPage();
+}
+
+// Simulator Selector Update
+function updateSimulationRoles() {
+  State.simCur = $('#sim-cur-select').value;
+  State.simTgt = $('#sim-tgt-select').value;
+  saveState();
+  renderCurrentPage();
+}
+
+// Profile Info & Photo Upload Handlers
+function saveProfileInfo() {
+  State.profile.name = $('#prof-name').value.trim();
+  State.profile.title = $('#prof-title').value.trim();
+  State.profile.bio = $('#prof-bio').value.trim();
+  saveState();
+
+  // Update Sidebar Header Live
+  $('#side-user-name').textContent = State.profile.name;
+  $('#side-user-title').textContent = State.profile.title;
+  $('#side-avatar').textContent = (State.profile.name || 'T')[0];
+
+  showToast('Profile information saved!');
+}
+
+function handlePhotoUpload(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      State.profile.photo = e.target.result;
+      $('#prof-preview-avatar').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+      $('#side-avatar').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+      saveState();
+      showToast('Photo uploaded!');
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+// Export Engine
+function exportReport(type, format) {
+  let textContent = `APM INSIGHT EXPORT REPORT\nGenerated: ${new Date().toLocaleString()}\nUser: ${State.profile.name} (${State.profile.title})\n\n`;
+
+  if (type === 'cpd' || type === 'full') {
+    textContent += `=== CPD LOG ENTRIES ===\n`;
+    State.log.forEach(l => {
+      textContent += `- [${l.date}] ${l.title} (${l.hours}h) | Area: ${l.area}\n  Reflection: ${l.reflection || 'N/A'}\n`;
+    });
+    textContent += `\n`;
+  }
+
+  if (type === 'matrix' || type === 'full') {
+    textContent += `=== COMPETENCE MATRIX SELF-ASSESSMENT ===\n`;
+    APM_COMPETENCES.forEach(c => {
+      const r = State.ratings[c.id] || { cur: 0, tgt: 0 };
+      textContent += `- ${c.name} (${c.id}): Current=${RATING_LEVELS[r.cur||0].name}, Target=${RATING_LEVELS[r.tgt||0].name}\n`;
+    });
+  }
+
+  const blob = new Blob([textContent], { type: format === 'ppt' ? 'application/vnd.ms-powerpoint' : 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `apm_export_${type}_${Date.now()}.${format === 'ppt' ? 'ppt' : 'txt'}`;
+  a.click();
+  showToast(`Exported ${type} report!`);
+}
+
+function exportJSONBackup() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(State, null, 2));
+  const a = document.createElement('a');
+  a.href = dataStr;
+  a.download = `apm_insight_backup_${Date.now()}.json`;
+  a.click();
+}
+
+function importJSONBackup(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        const imported = JSON.parse(e.target.result);
+        State = imported;
+        saveState();
+        showToast('Backup restored successfully!');
+        location.reload();
+      } catch (err) {
+        alert('Invalid JSON file format.');
+      }
+    };
+    reader.readAsText(input.files[0]);
+  }
+}
+
+function resetToDefaults() {
+  if (confirm('Reset all application data back to default settings?')) {
+    localStorage.removeItem('apm_insight_state_v2');
+    State = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    renderCurrentPage();
+    showToast('App reset to initial defaults.');
+  }
+}
+
+// Initialization on load
+window.addEventListener('DOMContentLoaded', () => {
+  loadSavedState();
+  if (State.darkMode) {
+    document.documentElement.classList.add('dark');
+    $('#theme-text').textContent = 'Light';
+    $('#theme-icon').textContent = '☀️';
+  }
+  
+  // Set user profile info in sidebar
+  $('#side-user-name').textContent = State.profile.name;
+  $('#side-user-title').textContent = State.profile.title;
+  if (State.profile.photo) {
+    $('#side-avatar').innerHTML = `<img src="${State.profile.photo}" class="w-full h-full object-cover">`;
+  } else {
+    $('#side-avatar').textContent = (State.profile.name || 'T')[0];
+  }
+
+  renderCurrentPage();
 });
 </script>
 </body>

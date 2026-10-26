@@ -16,35 +16,47 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 22
 
-    - name: Initialize Root Package.json
+    - name: Initialize Package.json
       run: |
         if [ ! -f package.json ]; then
           npm init -y
         fi
 
-    - name: Install Capacitor Packages
+    - name: Install Capacitor CLI & Core
       run: npm install @capacitor/core @capacitor/cli @capacitor/ios
 
-    - name: Create Capacitor Configuration
+    - name: Generate Capacitor Configuration
       run: |
         cat <<EOF > capacitor.config.json
         {
           "appId": "com.twcltd.apminsight",
           "appName": "APM Insight",
-          "webDir": "cpdapp",
+          "webDir": "www",
           "bundledWebRuntime": false
         }
         EOF
 
-    - name: Add iOS Platform
-      run: npx cap add ios
+    - name: Copy cpdapp Assets to www
+      run: |
+        mkdir -p www
+        cp -r cpdapp/* www/
 
-    - name: Sync Web Assets to iOS Project
+    - name: Add iOS Platform
+      run: npx cap add ios || true
+
+    - name: Sync Web Assets
       run: npx cap sync ios
 
-    - name: Build iOS App Binary (Xcode)
+    - name: Build iOS App Project (Xcode Simulator Target)
       run: |
         cd ios/App
-        xcodebuild -workspace App.xcworkspace -scheme App -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build
+        xcodebuild -workspace App.xcworkspace \
+                   -scheme App \
+                   -sdk iphonesimulator \
+                   -configuration Debug \
+                   CODE_SIGN_IDENTITY="" \
+                   CODE_SIGNING_REQUIRED=NO \
+                   CODE_SIGNING_ALLOWED=NO \
+                   clean build

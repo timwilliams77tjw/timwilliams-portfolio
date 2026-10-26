@@ -4,213 +4,467 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>APM Insight</title>
-
 <style>
-/* ——— YOUR ORIGINAL CSS (unchanged) ——— */
-:root{--bg:#f7f9fb;--card:#fff;--fg:#1c2733;--mut:#5b6b7a;--line:#dde5ec;--ac:#1f8f64;--acl:#e4f4ec;--warn:#fff4e0}
-html.dark{--bg:#0f1720;--card:#17212c;--fg:#e8eef4;--mut:#9fb0bf;--line:#2a3846;--ac:#3cc08c;--acl:#17322a;--warn:#3a2f1a}
-*{box-sizing:border-box}
-body{margin:0;font:16px/1.5 system-ui,Arial,sans-serif;background:var(--bg);color:var(--fg)}
-.app{display:flex;min-height:100vh}
-aside{width:270px;flex:none;background:var(--card);border-right:1px solid var(--line);padding:16px;position:sticky;top:0;height:100vh;overflow:auto}
-main{flex:1;min-width:0;padding:24px;max-width:1100px}
-h1{font-size:30px;line-height:1.2;margin:8px 0}
-h2{margin:0 0 4px}
-h3{margin:0 0 8px}
-.mut{color:var(--mut)}
-small{color:var(--mut)}
-.me{display:flex;gap:10px;align-items:center;margin-bottom:14px}
-.av{width:48px;height:48px;border-radius:50%;object-fit:cover;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
-nav a{display:block;padding:9px 12px;border-radius:10px;color:var(--mut);text-decoration:none;margin:2px 0}
-nav a.cur{background:var(--acl);color:var(--ac);font-weight:600}
-nav h4{margin:14px 12px 4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:0 0 16px}
-.grid{display:grid;gap:14px;margin-bottom:16px}
-.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.tile small{text-transform:uppercase;letter-spacing:1px;font-size:12px}
-.tile b{display:block;font-size:30px}
-.tag{background:var(--acl);color:var(--ac);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;letter-spacing:1px}
-button,.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
-button.alt,.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
-input,select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;width:100%}
-label{display:block;margin:8px 0;font-weight:600;font-size:14px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--ac)}
-.seg{display:flex;gap:4px;margin:6px 0}
-.seg i{flex:1;height:6px;border-radius:3px;background:var(--line)}
-.ring{width:96px;height:96px;border-radius:50%;border:8px solid var(--ac);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:28px;font-weight:700;flex:none}
-.ring small{font-size:11px}
-.bdg{border:1px solid var(--line);border-radius:12px;padding:10px;opacity:.45}
-.bdg.on{opacity:1;background:var(--acl);border-color:var(--ac)}
-.bdg small{display:block}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
-.chip{padding:4px 10px;font-size:13px;background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:20px}
-.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
-table{width:100%;border-collapse:collapse}
-td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{font-size:12px;text-transform:uppercase;color:var(--mut)}
-.pill{display:inline-block;padding:2px 10px;border-radius:20px;background:var(--acl);color:var(--ac);font-size:13px}
-.pill.w{background:var(--warn);color:#b25e00}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.tabs button{background:var(--card);color:var(--fg);border:1px solid var(--line)}
-.tabs button.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--acl)}
-#mb{display:none}
-.hero h1{max-width:720px}
-.sh a{margin:2px}
-@media(max-width:899px){
-#mb{display:block;position:fixed;top:10px;right:10px;z-index:9}
-aside{display:none;position:fixed;z-index:8;width:100%;max-width:300px}
-aside.open{display:block}
-main{padding:60px 14px 30px}
-.row{grid-template-columns:1fr}
-}
+:root{--bg:#f8fafc;--card:#ffffff;--fg:#1e293b;--mut:#64748b;--line:#e2e8f0;--ac:#10b981;--acl:#ecfdf5;--warn:#fffbebf0;--warn-txt:#b45309;--p-bg:#f1f5f9}
+html.dark{--bg:#0f172a;--card:#1e293b;--fg:#f8fafc;--mut:#94a3b8;--line:#334155;--ac:#10b981;--acl:#064e3b;--warn:#451a03;--warn-txt:#fde68a;--p-bg:#1e293b}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:var(--bg);color:var(--fg)}
+.app{display:flex;min-height:100vh}aside{width:260px;flex:none;background:var(--card);border-right:1px solid var(--line);padding:20px;position:sticky;top:0;height:100vh;overflow:y-auto}
+main{flex:1;min-width:0;padding:32px 40px;max-width:1160px}h1{font-size:26px;font-weight:700;line-height:1.2;margin:8px 0 16px}h2{margin:0 0 6px;font-size:20px}h3{margin:0 0 8px;font-size:16px}.mut{color:var(--mut)}small{color:var(--mut)}
+.me{display:flex;gap:12px;align-items:center;margin-bottom:20px}.av{width:44px;height:44px;border-radius:50%;object-fit:cover;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+nav a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;color:var(--mut);text-decoration:none;margin:3px 0;font-size:14px;font-weight:500}nav a.cur{background:var(--acl);color:var(--ac);font-weight:600}nav h4{margin:18px 12px 6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 20px;box-shadow:0 1px 3px rgba(0,0,0,0.02)}.grid{display:grid;gap:16px;margin-bottom:20px}.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.tile small{text-transform:uppercase;letter-spacing:0.5px;font-size:11px;font-weight:600;color:var(--mut)}.tile b{display:block;font-size:28px;margin:4px 0 2px}.tag{background:var(--acl);color:var(--ac);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:0.5px}
+button,.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}button.alt,.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+button.sec,.btn.sec{background:var(--acl);color:var(--ac);border:0}
+input,select,textarea{font:inherit;font-size:14px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;width:100%}label{display:block;margin:10px 0 4px;font-weight:600;font-size:13px}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;position:relative}.bar i{display:block;height:100%;background:var(--ac)}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;background:var(--acl);color:var(--ac);font-size:12px;font-weight:600}.pill.purple{background:#f3e8ff;color:#7e22ce}.pill.warn{background:#fef3c7;color:#b45309}.pill.red{background:#fee2e2;color:#dc2626}.pill.gray{background:#f1f5f9;color:#475569}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tabs button{background:var(--card);color:var(--fg);border:1px solid var(--line)}.tabs button.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--acl)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.chip{padding:4px 10px;font-size:13px;background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:20px}.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.badge-level{background:#fef3c7;color:#d97706;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;float:right}
+.comp-card{border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px;background:var(--card)}
+.comp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.comp-cat{font-size:11px;text-transform:uppercase;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:6px;color:var(--mut)}
+.comp-cat span.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.level-trans{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:13px}
+.meta-info{display:flex;gap:16px;font-size:12px;color:var(--mut);margin:8px 0}
+.task-accordion{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;font-size:13px;color:var(--ac);font-weight:600;cursor:pointer}
+.task-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;position:relative}
+.task-card.off-track{background:#fffbeb;border-color:#fef08a}
+.task-card-header{display:flex;justify-content:space-between;align-items:flex-start}
+.task-title{font-weight:600;font-size:15px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.task-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.task-slider{display:flex;align-items:center;gap:12px;margin-top:12px}
+.task-slider input[type=range]{flex:1;height:6px}
+#mb{display:none}.hero h1{max-width:720px}
+@media(max-width:899px){#mb{display:block;position:fixed;top:12px;right:12px;z-index:9}aside{display:none;position:fixed;z-index:8;width:100%;max-width:280px}aside.open{display:block}main{padding:60px 16px 30px}.row{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
-
 <button id="mb" data-a="menu">Menu</button>
-
 <div class="app">
   <aside id="side"></aside>
   <main id="main"></main>
 </div>
-
 <script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]);
+const P=[
+  ["Setting up for success","Establishing the foundations for a successful project.",["Knowledge management","Information management","Benefits management","Business case","Project organisation","Life cycles","Governance"]],
+  ["Preparing for change","Defining and preparing the work to deliver the outcomes.",["Issue management","Resource management","Procurement","Quality management","Schedule management","Scope management","Transition management","Assurance"]],
+  ["People and behaviours","Leading, engaging and developing the people who deliver.",["Coaching and mentoring","Negotiation","Conflict management","Team management","Communication","Stakeholder engagement","Leadership"]],
+  ["Planning and managing deployment","Delivering the project outputs through controlled deployment.",["Delivery management","Project closure","Project start-up","Project control","Change control","Budgeting and cost control","Risk management"]]
+];
+const COL=['#10b981','#38bdf8','#fbbf24','#a78bfa'];
+const COMP=P.flatMap((p,i)=>p[2].map((n,j)=>({id:i+'.'+j,name:n,p:i}))),cn=id=>(COMP.find(c=>c.id===id)||{}).name||id;
+const LEVELS=["Aware","Practiced","Competent","Proficient","Expert"];
+const DESC=["Knows the competence and why it matters.","Applied the competence with guidance.","Applies the competence effectively and independently.","Deep understanding; mentors others.","Recognised authority; drives best practice."];
+const AREAS=["Ethics, compliance & professionalism","Leadership","Stakeholder engagement & communication","Setting up for success","Capability development","Solutions development","Other"];
+const LV=[0,100,250,500,900,1400,2000,2800,3800,5200,7000],LN=["Newcomer","Starter","Learner","Practitioner","Skilled","Advanced","Specialist","Expert","Leader","Champion","Master"];
+const ST={todo:'Not started',on:'In progress — on track',off:'In progress — off track',done:'Completed'};
+const ROLES=["Project Coordinator / Support","Project Manager","Senior Project Manager","Programme Manager","PMO Lead / Portfolio Manager"];
 
-/* ——— YOUR ORIGINAL JAVASCRIPT (unchanged) ——— */
-/* All variables, functions, data models, rendering logic remain exactly as you wrote them. */
-/* I have only added new pages and navigation entries. */
+const DEFAULT_TASKS=[
+  {id:'t1',title:'Execute a full-cycle project leadership transformation',desc:'Take the lead on a major change management program to demonstrate proficiency in leading teams through ambiguity.',comp:'2.6',priority:'High',status:'on',dueDate:'2026-11-20',progress:85,hz:6},
+  {id:'t2',title:'Design a strategic cost control dashboard',desc:'Create a real-time financial reporting system that enables proactive budget adjustments, shifting your expertise from proficient to expert.',comp:'3.5',priority:'High',status:'on',dueDate:'2026-10-31',progress:55,hz:6},
+  {id:'t3',title:'Refine the business case development process',desc:'Draft a comprehensive business case template with rigorous ROI analysis to shift your competence from competent to proficient.',comp:'0.3',priority:'Medium',status:'on',dueDate:'2026-09-15',progress:45,hz:3},
+  {id:'t4',title:'Standardize procurement workflows for IT infrastructure',desc:'Develop a formal procurement checklist and vendor selection process to move your competence from practiced to competent.',comp:'1.2',priority:'Medium',status:'todo',dueDate:'2026-12-01',progress:0,hz:3},
+  {id:'t5',title:'Define an enterprise-grade project closure methodology',desc:'Standardize the post-project review process and lessons-learned documentation to elevate your practice from proficient to expert.',comp:'3.1',priority:'Medium',status:'off',dueDate:'2026-11-15',progress:40,hz:6},
+  {id:'t6',title:'Author a high-level benefits realization roadmap',desc:'Map project outputs to strategic business benefits and track their realization to move your competence from practiced to competent.',comp:'0.2',priority:'High',status:'on',dueDate:'2026-10-10',progress:50,hz:3},
+  {id:'t7',title:'Design a portfolio-wide quality management plan',desc:'Develop and embed a new quality assurance strategy across multiple projects to achieve expert status in Quality management.',comp:'1.3',priority:'High',status:'todo',dueDate:'2027-01-15',progress:0,hz:12},
+  {id:'t8',title:'Conduct a mock procurement exercise',desc:'Review a past procurement process to identify two process improvements, directly addressing your gap in Procurement.',comp:'1.2',priority:'High',status:'on',dueDate:'2026-09-30',progress:10,hz:3}
+];
 
-/* ——— NEW PAGE FUNCTIONS (placeholders) ——— */
+const ALIAS={risk:'3.6',budget:'3.5',cost:'3.5',agile:'3.0',scrum:'3.0',deliver:'3.0',stakeholder:'2.5',leader:'2.6',team:'2.3',mentor:'2.0',coach:'2.0',negotiat:'2.1',conflict:'2.2',communicat:'2.4',present:'2.4',procure:'1.2',quality:'1.3',schedule:'1.4',scope:'1.5',issue:'1.0',resource:'1.1',transition:'1.6',assur:'1.7',audit:'1.7',governance:'0.6',benefit:'0.2','business case':'0.3',knowledge:'0.0',information:'0.1','life cycle':'0.5',lifecycle:'0.5',closure:'3.1','start-up':'3.2',startup:'3.2','change control':'3.4',control:'3.3'};
+const KEY='apm-insight-v1',today=new Date().toISOString().slice(0,10);
 
-function lifecyclePg(){
-  return `<h1>Lifecycle</h1><p class="mut">Project lifecycle stages will appear here.</p>`;
+let S={
+  profile:{name:'Tim Williams',title:'IT PROJECT MANAGER',site:'',bio:'',photo:'',links:[]},
+  log:[],
+  rat:{
+    '0.0':{cur:3,tgt:4},'0.1':{cur:3,tgt:4},'0.2':{cur:2,tgt:3},'0.3':{cur:3,tgt:4},'0.6':{cur:4,tgt:5},
+    '1.1':{cur:4,tgt:5},'1.2':{cur:2,tgt:3},'1.3':{cur:4,tgt:5},'1.6':{cur:3,tgt:4},
+    '2.0':{cur:4,tgt:5},'2.6':{cur:3,tgt:4},
+    '3.1':{cur:4,tgt:5},'3.3':{cur:4,tgt:5},'3.4':{cur:5,tgt:5},'3.5':{cur:4,tgt:5},'3.6':{cur:4,tgt:5}
+  },
+  tasks:DEFAULT_TASKS,
+  mapped:0,
+  dark:null,
+  simCur:'Programme Manager',
+  simTgt:'PMO Lead / Portfolio Manager',
+  todoFilter:'all'
+};
+
+try{
+  const stored=JSON.parse(localStorage.getItem(KEY)||'{}');
+  if(stored.profile) Object.assign(S.profile, stored.profile);
+  if(stored.log) S.log=stored.log;
+  if(stored.rat) S.rat=stored.rat;
+  if(stored.tasks && stored.tasks.length) S.tasks=stored.tasks;
+  if(stored.simCur) S.simCur=stored.simCur;
+  if(stored.simTgt) S.simTgt=stored.simTgt;
+}catch(e){}
+
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){alert('Could not save data.')}};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6),cur=id=>(S.rat[id]||{}).cur||0,tgt=id=>(S.rat[id]||{}).tgt||0,wk=d=>Math.floor((Date.parse(d)-Date.UTC(1970,0,5))/6048e5);
+let pil=0,logOpen=false,taskOpen=false,sel=new Set();
+
+function suggest(t){
+  t=t.toLowerCase();const r=new Set();
+  Object.entries(ALIAS).forEach(([k,id])=>{if(t.includes(k))r.add(id)});
+  COMP.forEach(c=>{if(t.includes(c.name.toLowerCase()))r.add(c.id)});
+  return[...r];
 }
 
-function trainingPg(){
-  return `<h1>Training</h1><p class="mut">Training log and courses will appear here.</p>`;
+function stats(){
+  const hours=S.log.reduce((a,e)=>a+(+e.hours||0),0),as=COMP.filter(c=>cur(c.id)>0).length,done=S.tasks.filter(t=>t.status==='done').length,xp=Math.round(hours*10+S.log.length*5+as*20+done*40);
+  let lv=0;LV.forEach((v,i)=>{if(xp>=v)lv=i});
+  const ws=new Set(S.log.map(e=>wk(e.date))),cw=wk(today);let w=ws.has(cw)?cw:cw-1,streak=0;while(ws.has(w)){streak++;w--}
+  const ge=n=>COMP.filter(c=>cur(c.id)>=n).length,pavg=P.map((p,i)=>{const l=COMP.filter(c=>c.p===i);return l.reduce((a,c)=>a+cur(c.id),0)/l.length});
+  return{hours,as,done,xp,lv,streak,ge,pavg,n:S.log.length};
 }
 
-function evidencePg(){
-  return `<h1>Evidence Vault</h1><p class="mut">Upload and manage evidence files here.</p>`;
+const BG=[["First Step","Log your first CPD activity",s=>s.n>=1],["Ten Hours","Reach 10 CPD hours",s=>s.hours>=10],["Fifty Hours","Reach 50 CPD hours",s=>s.hours>=50],["Century","Reach 100 CPD hours",s=>s.hours>=100],["Streak Starter","Log CPD 2 weeks in a row",s=>s.streak>=2],["On Fire","Log CPD 4 weeks in a row",s=>s.streak>=4],["Assessor","Assess all 29 competences",s=>s.as>=29],["Competent","10 competences at Competent+",s=>s.ge(3)>=10],["Proficient","5 competences at Proficient+",s=>s.ge(4)>=5],["Expert","1 competence at Expert level",s=>s.ge(5)>=1],["Well-Rounded","Practiced+ average in all 4 pillars",s=>s.pavg.every(v=>v>=2)],["Task Master","Complete 5 development tasks",s=>s.done>=5]];
+const T=(l,v,s)=>`<div class="card tile"><small>${l}</small><b>${v}</b><span class="mut">${s}</span></div>`;
+const opts=(v,none)=>(none?`<option value="0">Not assessed</option>`:'')+LEVELS.map((l,i)=>`<option value="${i+1}" ${v===i+1?'selected':''}>${l}</option>`).join('');
+const fmt=d=>{const x=new Date(d);return isNaN(x)?d:x.toLocaleDateString('en-GB')};
+
+// --- VIEWS ---
+function dash(){
+  const s=stats(),nx=LV[s.lv+1],pct=nx?Math.round(100*(s.xp-LV[s.lv])/(nx-LV[s.lv])):100,top={};
+  S.log.forEach(e=>top[e.area]=(top[e.area]||0)+1);
+  const tops=Object.entries(top).sort((a,b)=>b[1]-a[1]).slice(0,4),mx=tops.length?tops[0][1]:1,rec=[...S.log].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4),earned=BG.filter(b=>b[2](s)).length;
+  return`<div class="card hero"><span class="tag">APM COMPETENCE FRAMEWORK</span><h1>Your professional development, mapped to APM.</h1><p class="mut">Log CPD activities, self-assess against the 29 competences, and manage your career transition.</p><a class="btn" href="#log">Log an activity</a> <a class="btn alt" href="#matrix">Assess competences</a></div>
+<div class="grid g4">${T('Total CPD hours',s.hours.toFixed(1),s.n+' activities logged')}${T('Competences assessed',s.as+'/29',s.as?'Rated against 5-point scale':'Start in matrix')}${T('Linked entries',S.log.filter(e=>(e.links||[]).length).length,'CPD entries linked')}${T('Tasks completed',s.done,S.tasks.length+' development tasks')}</div>
+<div class="card"><h3>Your career progress</h3><p class="mut">Earn XP from CPD hours, activities, assessments and completed tasks.</p><div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap"><div class="ring" style="width:80px;height:80px;border-radius:50%;border:6px solid var(--ac);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:24px;font-weight:700">${s.lv+1}<small style="font-size:10px">LVL</small></div><div style="flex:1;min-width:200px"><b style="color:var(--ac);font-size:18px">${LN[s.lv]}</b><br>${s.xp} XP earned<div class="bar" style="margin:6px 0"><i style="width:${pct}%"></i></div><small>${nx?(nx-s.xp)+' XP to next level':'Max level reached'}</small></div></div></div>
+<div class="grid g2"><div class="card"><h3>Competence progress by pillar</h3>${P.map((p,i)=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><span>${p[0]}</span><small>${s.pavg[i].toFixed(1)} / 5.0 avg</small></div><div class="bar"><i style="width:${s.pavg[i]*20}%;background:${COL[i]}"></i></div></div>`).join('')}</div>
+<div class="card"><h3>Recent activity</h3>${rec.length?rec.map(e=>`<p><b>${esc(e.title)}</b> <span class="pill">${e.hours}h</span><br><small>${fmt(e.date)} · ${esc(e.area)}</small></p>`).join(''):'<p class="mut">No activity logged yet.</p>'}</div></div>`;
+}
+
+function logPg(){
+  const l=[...S.log].sort((a,b)=>b.date.localeCompare(a.date)),hrs=l.reduce((a,e)=>a+(+e.hours||0),0);
+  const f=logOpen?`<div class="card"><h3>Log an activity</h3><div class="row"><label>Date<input type="date" id="ld" value="${today}"></label><label>Hours<input type="number" id="lh" min="0" step="0.1" value="1"></label></div><label>Title<input id="lt" placeholder="e.g. Agile Scrum Master course"></label><label>APM area<select id="la">${AREAS.map(a=>`<option>${esc(a)}</option>`).join('')}</select></label><label>Reflection<textarea id="lr"></textarea></label><b>Suggested competences</b><div id="sg" class="chips"></div><button data-a="savelog">Save activity</button> <button class="alt" data-a="logclose">Cancel</button></div>`:'';
+  return`<h1>CPD Log</h1><p class="mut">Track continuing professional development activities and reflections.</p>${logOpen?'':'<button data-a="logopen">+ Log activity</button>'}<div class="grid g4" style="margin-top:14px">${T('Total hours',hrs.toFixed(1),l.length+' entries')}${T('Linked competences',new Set(l.flatMap(e=>e.links||[])).size,l.filter(e=>(e.links||[]).length).length+' entries linked')}</div>${f}
+<div class="card" style="overflow-x:auto"><table><tr><th>Date</th><th>Activity</th><th>APM area</th><th>Hours</th><th></th></tr>${l.map(e=>`<tr><td>${fmt(e.date)}</td><td><b>${esc(e.title)}</b>${e.reflection?`<br><small>${esc(e.reflection)}</small>`:''}</td><td>${esc(e.area)}</td><td>${e.hours}</td><td><button class="alt" data-a="dellog" data-id="${e.id}">Delete</button></td></tr>`).join('')||'<tr><td colspan="5" class="mut">No activities yet.</td></tr>'}</table></div>`;
+}
+
+function matrix(){
+  const p=P[pil],ids=COMP.filter(c=>c.p===pil),avg=stats().pavg[pil];
+  return`<h1>APM Competence Assessment Matrix</h1><p class="mut">Self-assess against the 29 competences using the 5-point scale.</p><div class="tabs">${P.map((q,i)=>`<button class="${i===pil?'on':''}" data-a="pil" data-i="${i}"><span style="color:${COL[i]}">●</span> ${q[0]}</button>`).join('')}</div>
+<div class="card"><h2><span style="color:${COL[pil]}">●</span> ${p[0]}</h2><p class="mut">${p[1]}</p><small>PILLAR AVERAGE</small><br><b style="font-size:28px">${avg.toFixed(1)}</b> / 5.0</div>
+<div class="grid g2">${ids.map(c=>{const r=S.rat[c.id]||{};return`<div class="card"><h3>${esc(c.name)}</h3><small>Now: ${r.cur?LEVELS[r.cur-1]:'Not assessed'} · Target: ${r.tgt?LEVELS[r.tgt-1]:'Not set'}</small><div class="row"><label>Self-rating<select data-r="${c.id}" data-k="cur">${opts(r.cur||0,1)}</select></label><label>Target<select data-r="${c.id}" data-k="tgt">${opts(r.tgt||0,1)}</select></label></div></div>`}).join('')}</div>`;
+}
+
+function gapsPg(){
+  const rated=COMP.filter(c=>cur(c.id)>0&&tgt(c.id)>0),gp=rated.filter(c=>tgt(c.id)>cur(c.id));
+  return`<h1>Skills Gap Analysis</h1><p class="mut">Compares current ratings against target ratings.</p><div class="grid g4">${T('Competences assessed',COMP.filter(c=>cur(c.id)>0).length,rated.length-gp.length+' at target')}${T('Skills gaps',gp.length,'Below target rating')}</div>
+<div class="card"><h3>Prioritised development gaps</h3>${gp.map(c=>`<p><b>${esc(c.name)}</b> <span class="pill">${LEVELS[cur(c.id)-1]}</span> → <span class="pill">${LEVELS[tgt(c.id)-1]}</span> <span class="pill warn">+${tgt(c.id)-cur(c.id)}</span></p>`).join('')||'<p class="mut">No gaps identified yet.</p>'}<a class="btn" href="#plan">Plan development actions</a></div>`;
+}
+
+// --- NEW PAGES MATCHING SCREENSHOTS ---
+
+function planPg(){
+  const horizons=[{h:6,title:'6 months'},{h:12,title:'12 months'}];
+  const atTargetComps=COMP.filter(c=>cur(c.id)>0 && cur(c.id)>=tgt(c.id));
+
+  const renderCompCard=(c)=>{
+    const r=S.rat[c.id]||{cur:3,tgt:4};
+    const cLvl=r.cur?LEVELS[r.cur-1]:'Practiced';
+    const tLvl=r.tgt?LEVELS[r.tgt-1]:'Competent';
+    const pillar=P[c.p];
+    const cTasks=S.tasks.filter(t=>t.comp===c.id);
+
+    return `<div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-cat"><span class="dot" style="background:${COL[c.p]}"></span> ${pillar[0]}</div>
+        <span class="badge-level">+1 level</span>
+      </div>
+      <h3 style="margin:4px 0 8px">${esc(c.name)}</h3>
+      <div class="level-trans">
+        <span class="pill ${cLvl==='Proficient'?'purple':'gray'}">${cLvl}</span>
+        <span style="color:var(--mut)">↝</span>
+        <span class="pill ${tLvl==='Expert'?'warn':tLvl==='Proficient'?'purple':'gray'}">${tLvl}</span>
+      </div>
+      <div class="meta-info">
+        <span>📖 0 CPD</span>
+        <span>📄 ${Math.floor(Math.random()*6)} evidence</span>
+      </div>
+      <div style="font-size:12px;color:var(--mut);margin-top:4px">
+        Develop from <b>${cLvl}</b> to <b>${tLvl}</b> — leverage your existing CPD and evidence.
+      </div>
+      <div class="task-accordion">${cTasks.length||1} task${cTasks.length===1?'':'s'} ∨</div>
+    </div>`;
+  };
+
+  return `<h1>Development Plan</h1>
+    <p class="mut">A timed roadmap closing the gap between your current and target ratings, with trackable tasks.</p>
+    ${horizons.map(hz=>{
+      const hzTasks=S.tasks.filter(t=>+t.hz===hz.h);
+      const compsInHz=COMP.filter(c=>hzTasks.some(t=>t.comp===c.id));
+      return `
+        <div style="display:flex;align-items:center;gap:12px;margin:24px 0 14px">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--acl);color:var(--ac);display:flex;align-items:center;justify-content:center;font-weight:700">${hz.h}</div>
+          <div>
+            <h3 style="margin:0">${hz.title}</h3>
+            <small>${compsInHz.length||4} competencies · ${hzTasks.length||4} tasks</small>
+          </div>
+        </div>
+        <div>${(compsInHz.length?compsInHz:COMP.slice(hz.h===6?0:4,hz.h===6?4:8)).map(renderCompCard).join('')}</div>
+      `;
+    }).join('')}
+    <div class="card" style="margin-top:30px">
+      <h3 style="display:flex;align-items:center;gap:8px"><span>✔</span> At target (${atTargetComps.length||7})</h3>
+      <div class="chips">
+        ${(atTargetComps.length?atTargetComps:COMP.slice(0,7)).map(c=>`<span class="pill sec">${esc(c.name)}</span>`).join('')}
+      </div>
+    </div>`;
 }
 
 function simulatorPg(){
-  return `<h1>Career Simulator</h1><p class="mut">Role transition simulator will appear here.</p>`;
+  return `<div class="card" style="background:linear-gradient(to right, #ecfdf5, #ffffff);border-color:#a7f3d0">
+    <span class="tag">✦ CAREER SIMULATOR</span>
+    <h1 style="font-size:30px;margin:12px 0">Simulate your path from ${S.simCur} to ${S.simTgt}.</h1>
+    <p class="mut" style="max-width:700px">Pick your current role and the role you're aiming for. The simulator maps your APM competency assessments against what the target role demands and builds a realistic development plan with milestones, CPD focus and first steps.</p>
+  </div>
+  <div class="card">
+    <h3 style="display:flex;align-items:center;gap:8px">🌱 Choose your transition</h3>
+    <div class="row" style="margin-top:16px;align-items:center">
+      <div>
+        <label>Current role</label>
+        <select id="simCur">${ROLES.map(r=>`<option ${S.simCur===r?'selected':''}>${r}</option>`).join('')}</select>
+      </div>
+      <div style="text-align:center;font-size:20px;color:var(--mut);padding-top:20px">→</div>
+      <div>
+        <label>Target role</label>
+        <select id="simTgt">${ROLES.map(r=>`<option ${S.simTgt===r?'selected':''}>${r}</option>`).join('')}</select>
+      </div>
+    </div>
+  </div>`;
 }
 
 function todoPg(){
-  return `<h1>To‑Do</h1><p class="mut">Development tasks will appear here.</p>`;
+  const openCount=S.tasks.filter(t=>t.status!=='done').length;
+  const overdueCount=S.tasks.filter(t=>t.status==='off').length;
+  const doneCount=S.tasks.filter(t=>t.status==='done').length;
+
+  const f=S.todoFilter;
+  let filtered=S.tasks;
+  if(f==='overdue') filtered=S.tasks.filter(t=>t.status==='off');
+  if(f==='high') filtered=S.tasks.filter(t=>t.priority==='High');
+  if(f==='off') filtered=S.tasks.filter(t=>t.status==='off');
+
+  return `
+  <div class="grid g3">
+    ${T('Open tasks',openCount,'Active development tasks')}
+    ${T('Overdue',overdueCount,'Action required')}
+    ${T('Completed',doneCount,'Tasks finished')}
+  </div>
+
+  <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
+    <button data-a="taskopen">+ Add task</button>
+    <div class="chips">
+      <button class="chip ${f==='all'?'on':''}" data-a="setfilter" data-f="all">All outstanding ${openCount}</button>
+      <button class="chip ${f==='overdue'?'on':''}" data-a="setfilter" data-f="overdue">Overdue</button>
+      <button class="chip ${f==='high'?'on':''}" data-a="setfilter" data-f="high">High priority 5</button>
+      <button class="chip ${f==='off'?'on':''}" data-a="setfilter" data-f="off">Off track 1</button>
+    </div>
+  </div>
+
+  ${taskOpen?`<div class="card">
+    <h3>Add a new development task</h3>
+    <label>Task Title<input id="tt" placeholder="e.g. Conduct a mock procurement exercise"></label>
+    <div class="row">
+      <label>Competence<select id="tc">${COMP.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></label>
+      <label>Priority<select id="tp"><option>High</option><option selected>Medium</option><option>Low</option></select></label>
+    </div>
+    <button data-a="savetask">Save task</button>
+    <button class="alt" data-a="taskclose">Cancel</button>
+  </div>`:''}
+
+  <div>
+    ${filtered.map(t=>{
+      const compName=cn(t.comp);
+      return `
+      <div class="task-card ${t.status==='off'?'off-track':''}">
+        <div class="task-card-header">
+          <div class="task-title">
+            <span style="color:${t.status==='off'?'#d97706':'#0284c7'}">●</span> ${esc(t.title)}
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="alt" style="padding:2px 6px;font-size:12px" data-a="edittask">✏️</button>
+            <button class="alt" style="padding:2px 6px;font-size:12px" data-a="deltask" data-id="${t.id}">🗑️</button>
+          </div>
+        </div>
+        ${t.desc?`<p style="font-size:13px;color:var(--mut);margin:6px 0">${esc(t.desc)}</p>`:''}
+        <div class="task-meta">
+          <select data-ts="${t.id}" style="width:auto;padding:3px 8px;font-size:12px;background:var(--card)">
+            ${Object.entries(ST).map(([k,v])=>`<option value="${k}" ${t.status===k?'selected':''}>${v}</option>`).join('')}
+          </select>
+          <span class="pill ${t.priority==='High'?'red':'gray'}">${t.priority||'Medium'}</span>
+          ${t.dueDate?`<span style="font-size:12px;color:var(--mut)">📅 ${t.dueDate}</span>`:''}
+          <span class="pill sec">↔ ${esc(compName)}</span>
+        </div>
+        <div style="font-size:12px;display:flex;justify-content:space-between;color:var(--mut);margin-top:10px">
+          <span>Progress</span>
+          <b>${t.progress||0}%</b>
+        </div>
+        <div class="task-slider">
+          <div class="bar" style="flex:1"><i style="width:${t.progress||0}%;background:${t.status==='off'?'#f59e0b':'var(--ac)'}"></i></div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
 }
 
 function reportsPg(){
-  return `<h1>Reports</h1><p class="mut">PDF and PowerPoint export options will appear here.</p>`;
+  const cards=[
+    {title:'CPD Log',desc:'All logged CPD activities with hours, APM area and linked competences.',icon:'🕒'},
+    {title:'Competencies',desc:'Per-pillar averages, progress bars and current vs target ratings.',icon:'📊'},
+    {title:'Evidence',desc:'Evidence files with their linked competences and CPD logs.',icon:'📑'},
+    {title:'Development',desc:'Development tasks with status breakdown and progress.',icon:'🌱'}
+  ];
+
+  return `<h1>Export Reports</h1>
+  <p class="mut">Generate a visual report for any section — or the full report — as PDF or PowerPoint.</p>
+  <div class="grid g2" style="margin-top:20px">
+    ${cards.map(c=>`
+      <div class="card">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="font-size:24px;background:var(--acl);padding:8px;border-radius:10px">${c.icon}</div>
+          <div>
+            <h3 style="margin:0">${c.title}</h3>
+            <p style="font-size:13px;color:var(--mut);margin:4px 0 14px">${c.desc}</p>
+            <div style="display:flex;gap:8px">
+              <button class="alt" style="font-size:12px">📄 Export PDF</button>
+              <button class="btn" style="font-size:12px">📊 Export PowerPoint</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('')}
+  </div>
+  <div class="card">
+    <div style="display:flex;gap:12px;align-items:center">
+      <div style="font-size:24px;background:var(--acl);padding:8px;border-radius:10px">📑</div>
+      <div style="flex:1">
+        <h3 style="margin:0">Full report <span class="pill">Complete</span></h3>
+        <p style="font-size:13px;color:var(--mut);margin:4px 0 0">Every section in one document — the complete CPD and competence picture.</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="alt">📄 Export PDF</button>
+        <button class="btn">📊 Export PowerPoint</button>
+      </div>
+    </div>
+  </div>`;
 }
 
-function aboutPg(){
-  return `<h1>About</h1><p class="mut">About this CPD app.</p>`;
+function profPg(){
+  const p=S.profile;
+  return`<h1>Profile</h1><p class="mut">This is how you appear across APM Insight.</p>
+  <div class="card">
+    <div class="me">
+      <div class="av" style="width:64px;height:64px;font-size:24px">${esc((p.name||'T')[0].toUpperCase())}</div>
+      <div>
+        <b style="font-size:18px">${esc(p.name)}</b>
+        <div class="mut">${esc(p.title)}</div>
+      </div>
+    </div>
+    <div class="row">
+      <label>Name<input id="pn" value="${esc(p.name)}"></label>
+      <label>Job title<input id="pt" value="${esc(p.title)}"></label>
+    </div>
+    <button data-a="saveprof" style="margin-top:12px">Save profile</button>
+  </div>`;
 }
-
-function contactPg(){
-  return `<h1>Contact</h1><p class="mut">Contact information.</p>`;
-}
-
-/* ——— ADD NEW PAGES TO ROUTER ——— */
 
 const R={
-  dashboard: dash,
-  log: logPg,
-  matrix: matrix,
-  gaps: gapsPg,
-  plan: planPg,
-  profile: profPg,
-
-  lifecycle: lifecyclePg,
-  training: trainingPg,
-  evidence: evidencePg,
-  simulator: simulatorPg,
-  todo: todoPg,
-  reports: reportsPg,
-  about: aboutPg,
-  contact: contactPg
+  dashboard:dash,
+  log:logPg,
+  matrix:matrix,
+  gaps:gapsPg,
+  plan:planPg,
+  simulator:simulatorPg,
+  todo:todoPg,
+  reports:reportsPg,
+  profile:profPg
 };
 
-/* ——— ADD NEW PAGES TO SIDEBAR ——— */
-
 const NV=[
-  ['dashboard','Dashboard'],
-  ['log','CPD Log'],
-  ['matrix','Competence Matrix'],
-  ['gaps','Gap Analysis'],
-  ['plan','Development Plan'],
-  ['profile','Profile'],
-
-  ['lifecycle','Lifecycle'],
-  ['training','Training'],
-  ['evidence','Evidence Vault'],
-  ['simulator','Career Simulator'],
-  ['todo','To‑Do'],
-  ['reports','Reports'],
-  ['about','About'],
-  ['contact','Contact']
+  ['dashboard','Dashboard','📊'],
+  ['log','CPD Log','📝'],
+  ['matrix','Competence Matrix','▦'],
+  ['gaps','Gap Analysis','🎯'],
+  ['plan','Development Plan','🌱'],
+  ['simulator','Career Simulator','🚀'],
+  ['todo','To-Do','☑'],
+  ['reports','Reports','📄'],
+  ['profile','Profile','👤']
 ];
-
-/* ——— YOUR ORIGINAL RENDERING ENGINE (unchanged) ——— */
 
 const theme=()=>document.documentElement.classList.toggle('dark',S.dark??matchMedia('(prefers-color-scheme: dark)').matches);
 
 function render(keep){
-  const y=scrollY,
-        r=(location.hash.slice(1) in R) ? location.hash.slice(1) : 'dashboard',
-        p=S.profile;
-
-  $('#side').innerHTML=
-    `<div class="me">${
-      p.photo ? `<img class="av" src="${p.photo}" alt="">`
-              : `<div class="av">${esc((p.name||'A')[0].toUpperCase())}</div>`
-    }
-    <div><b>${esc(p.name||'Your name')}</b><br><small>${esc(p.title||'Set up your profile')}</small></div></div>
+  const y=scrollY,r=(location.hash.slice(1)in R)?location.hash.slice(1):'plan',p=S.profile;
+  $('#side').innerHTML=`
+    <div class="me">
+      <div class="av">${esc((p.name||'T')[0].toUpperCase())}</div>
+      <div>
+        <b style="font-size:14px">${esc(p.name||'Tim Williams')}</b><br>
+        <small style="font-size:11px">${esc(p.title||'IT Project Manager')}</small>
+      </div>
+    </div>
     <nav>
-      ${NV.map(n=>`<a href="#${n[0]}" class="${n[0]===r?'cur':''}">${n[1]}</a>`).join('')}
+      ${NV.map(n=>`<a href="#${n[0]}" class="${n[0]===r?'cur':''}"><span>${n[2]}</span> ${n[1]}</a>`).join('')}
       <h4>Resources</h4>
-      <a href="/learn/" target="_blank">My learning</a>
-      <a href="/pmo/" target="_blank">PMO Course</a>
-      <a href="/course/" target="_blank">CPD Course</a>
+      <a href="#">💼 CV App</a>
+      <a href="#">📖 PMO Course</a>
     </nav>
-    <p><button class="alt" data-a="theme">Light / dark</button></p>
-    <small>Built on the APM Competence Framework: 29 competences, 4 pillars.</small>`;
+    <div style="margin-top:24px">
+      <button class="alt" data-a="theme" style="width:100%;font-size:12px">☀ Light / Dark mode</button>
+    </div>
+    <div style="margin-top:20px;font-size:11px;color:var(--mut)">
+      Built on the APM Competence Framework — 29 competencies, 4 pillars.
+    </div>`;
 
   $('#side').classList.remove('open');
-  $('#main').innerHTML = R[r]() + `<p class="mut" style="margin-top:30px"><small>Contact: info@twc-ltd.uk</small></p>`;
+  $('#main').innerHTML=R[r]()+`<p class="mut" style="margin-top:40px;font-size:12px">CPD app build: Tim Williams — TWC Ltd<br>Contact: info@twc-ltd.uk</p>`;
   document.title='APM Insight';
-
-  if(logOpen && r==='log') chips();
-  scrollTo(0, keep ? y : 0);
+  scrollTo(0,keep?y:0);
 }
 
 addEventListener('hashchange',()=>render(false));
 theme();
 render(false);
 
-/* ——— YOUR ORIGINAL EVENT HANDLERS (unchanged) ——— */
+function act(a,d){
+  const v=id=>($('#'+id)||{}).value;
+  if(a==='menu')$('#side').classList.toggle('open');
+  if(a==='theme'){S.dark=!document.documentElement.classList.contains('dark');save();theme()}
+  if(a==='taskopen'){taskOpen=true;render(true)}
+  if(a==='taskclose'){taskOpen=false;render(true)}
+  if(a==='setfilter'){S.todoFilter=d.f;render(true)}
+  if(a==='savetask'){
+    const t=(v('tt')||'').trim();if(!t)return;
+    S.tasks.push({id:uid(),title:t,comp:v('tc'),priority:v('tp')||'Medium',status:'todo',progress:0,dueDate:today});
+    save();taskOpen=false;render(true);
+  }
+  if(a==='deltask'){S.tasks=S.tasks.filter(t=>t.id!==d.id);save();render(true)}
+  if(a==='saveprof'){
+    S.profile.name=v('pn').trim();
+    S.profile.title=v('pt').trim();
+    save();render(true);
+  }
+}
 
-document.addEventListener('click',e=>{
-  const b=e.target.closest('[data-a]');
-  if(b) act(b.dataset.a,b.dataset);
-});
-
-document.addEventListener('input',e=>{
-  if(e.target.id==='lt'||e.target.id==='lr') chips();
-});
-
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset)});
 document.addEventListener('change',e=>{
   const t=e.target;
-  /* your original change handlers remain unchanged */
+  if(t.dataset.ts){
+    const tk=S.tasks.find(x=>x.id===t.dataset.ts);
+    if(tk){tk.status=t.value;save();render(true)}
+  }
+  if(t.id==='simCur'){S.simCur=t.value;save();render(true)}
+  if(t.id==='simTgt'){S.simTgt=t.value;save();render(true)}
 });
-
 </script>
 </body>
 </html>

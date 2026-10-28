@@ -439,4 +439,21 @@ document.addEventListener('change',e=>{const t=e.target;
  if(t.id==='pcv'&&t.files[0]){const f=t.files[0];if(f.size>2097152){alert('That CV is over 2 MB. Please save a smaller PDF and try again.');t.value='';return}const r=new FileReader();r.onload=()=>{S.profile.cv={name:f.name,size:f.size,data:r.result,date:new Date().toISOString().slice(0,10)};try{save()}catch(e){delete S.profile.cv;alert('Not enough space to store this CV on this device.')}render(true)};r.readAsDataURL(f)}
  if(t.id==='pf'&&t.files[0]){const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const z=Math.min(im.width,im.height),c=document.createElement('canvas');c.width=c.height=256;c.getContext('2d').drawImage(im,(im.width-z)/2,(im.height-z)/2,z,z,0,0,256,256);S.profile.photo=c.toDataURL('image/jpeg',.85);save();render(true)};im.src=r.result};r.readAsDataURL(t.files[0])}
  if(t.id==='imp'&&t.files[0]){const r=new FileReader();r.onload=()=>{try{S=Object.assign(S,JSON.parse(r.result));save();render(false)}catch(x){alert('That file is not a valid backup.')}};r.readAsText(t.files[0])}});
-</script></body></html>
+</script>
+
+
+ <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6ae21f523446cf346fe176ce/1k61kkmhd';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script--> 
+
+</body></html>

@@ -22,6 +22,159 @@ table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px so
 #mb{display:none}.hero{display:flex;gap:20px;flex-wrap:wrap;align-items:center}.hero>div{flex:1;min-width:260px}.hi{width:260px;max-width:100%;border-radius:12px}.hero h1{max-width:720px}.sh a{margin:2px}nav button.grp{width:100%;border:0;text-align:left;touch-action:manipulation;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:8px 12px;margin:10px 0 2px;border-radius:8px;background:var(--bg);color:var(--fg);font-size:13px}.tabs button.c-all{border-color:#f5c542;background:#fff8dc;color:#7a5a00}.tabs button.c-todo{border-color:#f08c2e;background:#fff0e0;color:#a04a00}.tabs button.c-on{border-color:#3b82f6;background:#e6f0ff;color:#1d4ed8}.tabs button.c-done{border-color:#2e9e5b;background:#e3f6ea;color:#1b6e3c}.tabs button.c-all.on{background:#f5c542;color:#3a2c00}.tabs button.c-todo.on{background:#f08c2e;color:#fff}.tabs button.c-on.on{background:#3b82f6;color:#fff}.tabs button.c-done.on{background:#2e9e5b;color:#fff}select.st-todo{border-color:#f08c2e;background:#fff0e0;color:#a04a00}select.st-on{border-color:#3b82f6;background:#e6f0ff;color:#1d4ed8}select.st-done{border-color:#2e9e5b;background:#e3f6ea;color:#1b6e3c}button.pill{border:2px solid transparent;cursor:pointer;font:inherit;font-size:13px;font-weight:600}.rag-todo{background:#fff3c4!important;color:#7a5a00!important}.rag-on{background:#dbeafe!important;color:#1d4ed8!important}.rag-off{background:#fee2e2!important;color:#b91c1c!important}.rag-done{background:#dcfce7!important;color:#166534!important}button.pill.sel{border-color:currentColor}.bd2{display:flex;gap:10px;align-items:center;background:var(--acl);border:1px solid var(--ac);border-radius:14px;padding:10px 14px}details{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:8px 0;background:var(--card)}summary{cursor:pointer;font-weight:600}input[type=range]{padding:0}@media print{aside,#mb,.noprint{display:none!important}main{padding:0}body{background:#fff}}
 @media(max-width:899px){#mb{display:block;position:fixed;top:10px;right:10px;z-index:9}aside{display:none;position:fixed;z-index:8;width:100%;max-width:300px}aside.open{display:block}main{padding:60px 14px 30px}.row{grid-template-columns:1fr}}
 </style></head><body>
+<!-- TWC global menu (menu only, no hero) -->
+<style>
+:root{--hs-h:calc(54px + env(safe-area-inset-top,0px))}
+#hsProg{position:fixed;top:0;left:0;height:3px;width:0;background:#e0a030;z-index:200}
+.hs-bar{position:sticky;top:0;z-index:100;height:var(--hs-h);padding:env(safe-area-inset-top,0px) 12px 0;background:#12295f;display:flex;align-items:center;justify-content:flex-end;gap:8px;font:16px/1 system-ui,Arial,sans-serif}
+.hs-bar .hs-btn{width:42px;height:42px;padding:0;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:20px;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px)}
+.hs-bar .hs-btn:hover{background:rgba(0,0,0,.7)}
+.hs-bar .hs-btn:focus-visible{outline:2px solid #e0a030;outline-offset:2px}
+.hs-panel{position:fixed;left:10px;right:10px;top:calc(var(--hs-h) + 6px);z-index:105;max-height:calc(100vh - var(--hs-h) - 20px);max-height:calc(100dvh - var(--hs-h) - 20px);overflow:auto;display:none;background:rgba(12,16,24,.96);backdrop-filter:blur(14px);color:#fff;border-radius:18px;padding:6px 22px 30px;box-shadow:0 12px 40px rgba(0,0,0,.5);font:16px/1.4 system-ui,Arial,sans-serif;overscroll-behavior:contain}
+.hs-panel.on{display:block}
+.hs-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0 32px}
+.hs-panel .hs-menu-column{padding:6px 0 14px}
+.hs-panel h4{margin:22px 0 8px;font-size:20px;line-height:1.25;color:#fff;border:0;padding:0}
+.hs-panel h5{margin:14px 0 4px;font-size:15px;color:#e0a030}
+.hs-panel a{display:block;color:#fff;text-decoration:none;padding:7px 0;font-size:16px;opacity:.92}
+.hs-panel a:hover,.hs-panel a:focus-visible{text-decoration:underline;opacity:1}
+.hs-panel .hs-subitem{padding-left:12px;font-size:15px}
+.hs-panel #hsRecentlyViewed a{font-size:15px}
+.hs-panel .hs-none{opacity:.6;font-size:15px}
+@media print{.hs-bar,.hs-panel,#hsProg{display:none!important}}
+
+
+.hs-panel h4{padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.3)}
+.hs-panel .hs-menu-column>a,.hs-panel .hs-menu-column>#hsRecentlyViewed a{margin-left:4px;padding-left:12px;border-left:2px solid rgba(255,255,255,.22);font-weight:400}
+.hs-panel h5{padding-bottom:3px;border-bottom:1px dashed rgba(224,160,48,.5)}
+aside{top:var(--hs-h);height:calc(100vh - var(--hs-h))}
+@media(max-width:899px){#mb{top:calc(var(--hs-h) + 10px)}}
+</style>
+<div id="hsProg"></div>
+<div class="hs-bar" role="toolbar" aria-label="Site menu">
+<button id="hsHam" class="hs-btn" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="hsPanel">☰</button>
+</div>
+<div id="hsPanel" class="hs-panel" aria-label="Site navigation"><div class="hs-cols">
+<div class="hs-menu-column">
+                    <h4>🏠 Home</h4>
+                    <a href="https://twc-ltd.uk/index.html">Home</a>
+                </div>
+                <div class="hs-menu-column">
+                    <h4>👤 About Me</h4>
+                    <a href="https://twc-ltd.uk/twc-ltd.html">About Me</a>
+                    <a href="https://twc-ltd.uk/recommendations.html">Recommendations</a>
+                    <a href="https://twc-ltd.uk/leadership.html">Leadership Approach</a>
+                </div>
+                <div class="hs-menu-column">
+                    <h4>🌐 Professional Presence Hub</h4>
+                    <a href="https://twc-ltd.uk/professional-presence.html">Professional Presence</a>
+                    <a href="https://twc-ltd.uk/sites.html">Digital Presence</a>
+                    <a href="https://twc-ltd.uk/cv.html">CV</a>
+                    <a href="https://twc-ltd.uk/interactive-cv.html">Interactive CV</a>
+                    <a href="https://tim-tech-path.base44.app">CV Application Platform</a>
+                    <a href="https://twc-ltd.uk/portfolio.html">Portfolio</a>
+                    <a href="https://twc-ltd.uk/linkedin.html">LinkedIn Posts</a>
+                    <a href="https://twc-ltd.uk/endorsements.html">Professional Endorsements</a>
+                    <a href="https://twc-ltd.uk/volunteering.html">Volunteering & Community Impact</a>
+                </div>
+<div class="hs-menu-column">
+    <h4>🎓 Professional Development</h4>
+    <a href="https://twc-ltd.uk/apm.html">Professional Development & Competence Framework</a>
+    <a href="https://twc-ltd.uk/cpdapp" target="_blank">CPD Professional Development Platform</a>
+    <a href="https://twc-ltd.uk/how_to_use_navigate_cpd_app.html" target="_blank">"How to..." CPD Platform Video</a>
+<h5 class="hs-subheading">📘 Learning Hub</h5>
+<a class="hs-subitem" href="https://twc-ltd.uk/learn">
+    Learning Platform (LMS)
+</a>
+<a class="hs-subitem" href="https://www.open.edu/openlearncreate/course/view.php?id=21249">
+    OpenLearn — CPD for Modern Careers
+</a>
+<a class="hs-subitem" href="https://twc-ltd.uk/course">
+    Standalone — CPD for Modern Careers
+</a>
+<a class="hs-subitem" href="https://twc-ltd.moodlecloud.com/course/view.php?id=11">
+    Moodle — CPD for Modern Careers
+</a>
+<a class="hs-subitem" href="https://www.open.edu/openlearncreate/course/view.php?id=21191">
+    OpenLearn — Leading & Maturing a Modern PMO
+</a>
+<a class="hs-subitem" href="https://twc-ltd.uk/pmo">
+    Standalone — Leading & Maturing a Modern PMO
+</a>
+<a class="hs-subitem" href="https://twc-ltd.moodlecloud.com/course/view.php?id=10">
+    Moodle — Leading & Maturing a Modern PMO
+</a>    
+</div>
+                <div class="hs-menu-column">
+                    <h4>🧰 Services</h4>
+                    <a href="https://twc-ltd.uk/new.html">Offerings</a>
+                    <a href="https://twc-ltd.uk/products_cpd_app.html">CPD App Product Page</a>
+                    <a href="https://twc-ltd.uk/engagement.html">Engagement Models</a>
+                    <a href="https://twc-ltd.uk/case_studies.html">Case Studies</a>
+                </div>
+                <div class="hs-menu-column">
+                    <h4>💡 Insights</h4>
+                    <a href="https://twc-ltd.uk/insights.html">Insights</a>
+                    <a href="https://twc-ltd.uk/wheel.html">PMO Wheel</a>
+                    <a href="https://twc-ltd.uk/playbooks.html">Playbooks</a>
+                    <a href="https://twc-ltd.uk/faq.html">FAQ</a>
+                </div>
+                <div class="hs-menu-column">
+                    <h4>📚 Resources</h4>
+                    <a href="https://twc-ltd.uk/certifications.html">Certifications</a>
+                    <a href="https://twc-ltd.uk/downloads.html">Downloads</a>
+                    <a href="https://twc-ltd.uk/star.html">STAR Achievements</a>
+                    <a href="https://twc-ltd.uk/skills.html">Skills</a>
+                    <a href="https://twc-ltd.uk/blog_cpd_app_case_study.html">CPD App Blog</a>
+                </div>
+                <div class="hs-menu-column">
+                    <h4>🔗 External Links</h4>
+                    <a href="https://www.credly.com/users/tim-williams.e51205ae/badges#credly" target="_blank">Credly Badges</a>
+                    <a href="https://navigatr.app/profile/21517/tim-williams" target="_blank">Navigatr Badges</a>
+                    <a href="https://www.open.edu/openlearn/profiles/zr906705/achievements" target="_blank">Open University Training Profile</a>
+                    <a href="https://www.apm.org.uk/myapm/my-dashboard/" target="_blank">APM Dashboard</a>
+                    <a href="https://community.pmi.org/profile/Timwilliams77" target="_blank">PMI Dashboard</a>
+                    <a href="https://www.linkedin.com/in/timwilliams77" target="_blank">Personal LinkedIn</a>
+                    <a href="https://www.linkedin.com/company/tim-williams-consulting/" target="_blank">Company LinkedIn</a>
+                    <a href="https://learn.microsoft.com/en-us/users/timwilliams-6478/transcript/vjwzyfj6nmjyj0j" target="_blank">Microsoft Learn Transcript</a>
+                    <a href="https://twc-ltd.my.canva.site" target="_blank">My Services</a>
+                    <a href="https://gethandover.uk" target="_blank">PM Tool Suite</a>
+                </div>
+                <div class="hs-menu-column legal-column">
+                    <h4>⚖️ Legal</h4>
+                    <a href="https://twc-ltd.uk/legal.html">Legal Hub</a>
+                    <a href="https://twc-ltd.uk/privacy.html">Privacy Policy</a>
+                    <a href="https://twc-ltd.uk/cookies.html">Cookie Policy</a>
+                    <a href="https://twc-ltd.uk/terms.html">Terms of Use</a>
+                    <a href="https://twc-ltd.uk/data-protection.html">Data Protection</a>
+                </div>
+                <div class="hs-menu-column recently-viewed-column">
+                    <h4>🕘 Recently Viewed</h4>
+                    <div id="hsRecentlyViewed"></div>
+                </div>
+                <div class="hs-menu-column">
+                    <h4>✉️ Contact</h4>
+                    <a href="https://twc-ltd.uk/contact.html">Contact</a>
+                    <a href="https://twc-ltd.uk/calendar.html">Calendar</a>
+                </div>
+</div></div>
+<script>
+(function(){
+var d=document,R=d.documentElement,g=function(i){return d.getElementById(i)};
+var panel=g('hsPanel'),ham=g('hsHam');
+var closeAll=function(){panel.classList.remove('on');ham.textContent='\u2630';ham.setAttribute('aria-expanded','false')};
+var recent=function(){var l=[];try{l=JSON.parse(localStorage.getItem('twc-recent')||'[]')}catch(e){}return l};
+var showRecent=function(){var h='';recent().forEach(function(x){var a=d.createElement('a');a.href=x.u;a.textContent=x.t;h+=a.outerHTML});g('hsRecentlyViewed').innerHTML=h||'<span class="hs-none">Nothing yet.</span>'};
+var track=function(){var l=recent(),u=location.href,t=d.title||u;l=l.filter(function(x){return x.u!==u});l.unshift({t:t,u:u});try{localStorage.setItem('twc-recent',JSON.stringify(l.slice(0,5)))}catch(e){}};
+track();addEventListener('hashchange',function(){setTimeout(track,0)});
+ham.onclick=function(e){e.stopPropagation();var on=!panel.classList.contains('on');closeAll();if(on){showRecent();panel.classList.add('on');ham.textContent='\u2715';ham.setAttribute('aria-expanded','true')}};
+d.addEventListener('click',function(e){if(!e.target.closest('.hs-panel,.hs-bar'))closeAll()});
+d.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll()});
+var bar=g('hsProg');addEventListener('scroll',function(){var h=R.scrollHeight-innerHeight;bar.style.width=(h>0?100*scrollY/h:0)+'%'},{passive:true});
+})();
+</script>
+<!-- /TWC global menu -->
+
 <button id="mb" data-a="menu">Menu</button>
 <div class="app"><aside id="side"></aside><main id="main"></main></div>
 <script>

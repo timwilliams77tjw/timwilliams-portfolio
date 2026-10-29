@@ -27,6 +27,13 @@ main.fx>*{animation:up .4s both}main.fx>:nth-child(2){animation-delay:.05s}main.
 .bar i,.stk i{animation:grow .9s ease-out}.card{transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
 .stk{display:flex;gap:2px;height:14px;border-radius:7px;overflow:hidden;background:var(--line);margin:6px 0}.stk i{height:100%}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style><style>html,body{max-width:100%;overflow-x:hidden;overscroll-behavior:none}
+body{width:100%;position:relative}
+.app,main,.main,#main{max-width:100vw;min-width:0;overflow-x:hidden}
+main *,.main *{max-width:100%;box-sizing:border-box}
+main table,.main table{display:block;overflow-x:auto}
+img,svg,canvas,video,iframe{max-width:100%}
+@media (display-mode:standalone){html,body{overscroll-behavior:none;touch-action:pan-y}}
 </style></head><body>
 <!-- TWC global menu (menu only, no hero) -->
 <style>
@@ -388,7 +395,8 @@ function lcPg2(){const n=LC.length,pt=(r,a)=>[120+r*Math.cos(a),120+r*Math.sin(a
 return`<h1>CPD Lifecycle</h1><p class="mut">Tap a segment of the wheel, or an item in the list, to expand the detail for each stage.</p><div class="card" style="text-align:center"><svg viewBox="0 0 240 240" width="280" height="280">${seg}<text x="120" y="118" text-anchor="middle" font-weight="700" fill="currentColor" font-size="16">CPD</text><text x="120" y="137" text-anchor="middle" fill="currentColor" font-size="13">Lifecycle</text></svg></div>${LC.map((x,i)=>`<div class="card" style="margin-bottom:10px;${lcI===i?'border-color:'+LCC[i]:''}"><b data-a="lcs" data-i="${i}" style="cursor:pointer;display:block"><span style="color:${LCC[i]}">●</span> ${i+1}. ${x[0]}</b>${lcI===i?`<p>${x[1]}</p><a class="btn" href="#${x[2]}">${x[3]} →</a>`:''}</div>`).join('')}`}
 const idb=(m,k,v)=>new Promise((res,rej)=>{const q=indexedDB.open('cpdp',1);q.onupgradeneeded=()=>q.result.createObjectStore('f');q.onerror=()=>rej(q.error);q.onsuccess=()=>{const st=q.result.transaction('f',m==='get'?'readonly':'readwrite').objectStore('f'),r=m==='get'?st.get(k):m==='set'?st.put(v,k):st.delete(k);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}});
 const IC={lifecycle:'🔄',dashboard:'📊',training:'🎓',log:'📝',matrix:'▦',gaps:'🎯',evidence:'📂',plan:'🌱',simulator:'🚀',todo:'✅',reports:'📄',profile:'👤',calendar:'📅',metrics:'📏',community:'💬'},NG=[['Learn','📚',['lifecycle','training']],['Track','📈',['dashboard','metrics','log','matrix','gaps','evidence','calendar']],['Community','💬',['community']],['Plan','🌱',['plan','simulator','todo']],['Reports & profile','👤',['reports','profile']],['Resources','🗂️',['res-learn','res-pmo','res-cpd']]],RES={'res-learn':['My learning','/learn/'],'res-pmo':['PMO Course','/pmo/'],'res-cpd':['CPD Course','/course/']};
-function navHtml(r){S.nv=S.nv||{};return NG.map(g=>{const has=g[2].includes(r),open=g[0] in S.nv?S.nv[g[0]]:has;return`<button type="button" class="grp" data-a="grp" data-i="${g[0]}" aria-expanded="${open}"><span>${g[1]} ${g[0]}</span><span class="arr">${open?'▾':'▸'}</span></button><div class="gl" data-g="${g[0]}"${open?'':' hidden'}>${g[2].map(k=>RES[k]?`<a href="${RES[k][1]}" target="_blank" rel="noopener">🔗 ${RES[k][0]}</a>`:`<a href="#${k}" class="${k===r?'cur':''}">${IC[k]} ${(NV.find(n=>n[0]===k)||[0,k])[1]}</a>`).join('')}</div>`}).join('')}
+const menuOpen=Object.create(null);
+function navHtml(r){return NG.map(g=>{const open=menuOpen[g[0]]===true;return`<button type="button" class="grp" data-a="grp" data-i="${g[0]}" aria-expanded="${open}"><span>${g[1]} ${g[0]}</span><span class="arr">${open?'▾':'▸'}</span></button><div class="gl" data-g="${g[0]}"${open?'':' hidden'}>${g[2].map(k=>RES[k]?`<a href="${RES[k][1]}" target="_blank" rel="noopener">🔗 ${RES[k][0]}</a>`:`<a href="#${k}" class="${k===r?'cur':''}">${IC[k]} ${(NV.find(n=>n[0]===k)||[0,k])[1]}</a>`).join('')}</div>`}).join('')}
 let greeted=null,calMsg='';
 function greet(){if(greeted===null){greeted=!S.seen;S.seen=1;save()}const n=(S.profile.name||'').trim().split(' ')[0],open=S.tasks.filter(t=>t.status!=='done'),od=open.filter(t=>t.due&&t.due<today),h=S.log.filter(e=>(e.date||'').slice(0,7)===today.slice(0,7)).reduce((a,e)=>a+(+e.hours||0),0);return`<div class="card"><h2 style="margin:0">${n?(greeted?'Welcome':'Welcome back')+', '+esc(n)+'!':'Welcome!'}</h2><p class="mut" style="margin:4px 0 0">${n?'':'Add your name in <a href="#profile">Profile</a> to personalise this page. '}You have ${open.length} open task${open.length===1?'':'s'}${od.length?` (${od.length} overdue)`:''} and have logged ${h.toFixed(1)} CPD hours this month.</p></div>`}
 const SUG=(n,t)=>[["Course","Short course or certification in "+n,'https://www.google.com/search?q='+encodeURIComponent(n+' project management course')],["Mentoring","Find a mentor who is Expert-level in "+n+" and agree a monthly session",""],["Shadowing","Shadow a colleague or lead who practises "+n+" at "+RL[t]+" level",""],["Stretch assignment","Take on a task that needs "+n+" at the next level up",""],["Community","Join a professional community or read a practice guide on "+n,'https://www.google.com/search?q='+encodeURIComponent(n+' project management guide')]];
@@ -422,11 +430,14 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-cm]'
 }catch(x){const m=$('#cmm');if(m)m.textContent=x.message}});
 document.addEventListener('keydown',async e=>{const i=e.target;if(e.key==='Enter'&&i.dataset&&i.dataset.cm==='rep'&&i.value.trim()){try{await cmPost({kind:'post',parent_id:i.dataset.id,body:i.value.trim()});cmLoad()}catch(x){i.placeholder=x.message}}});
 document.addEventListener('change',e=>{if(e.target.id==='mt'){S.target=+e.target.value||30;save();render(true)}});
+function resetAppOpening(){try{if(location.hash&&!/access_token=|error=/.test(location.hash))history.replaceState(null,'',location.pathname+location.search)}catch(e){}NG.forEach(g=>menuOpen[g[0]]=false);}
+resetAppOpening();
+addEventListener('pageshow',e=>{if(e.persisted){resetAppOpening();render(false)}});
 addEventListener('hashchange',()=>render(false));theme();render(false);
 function act(a,d){const v=id=>($('#'+id)||{}).value;
  if(a==='menu')$('#side').classList.toggle('open');
  if(a==='lf'){lf=d.i;render(true)}
- if(a==='grp'){const g=NG.find(x=>x[0]===d.i);if(!g)return;const cr=(location.hash.slice(1)in R)?location.hash.slice(1):'dashboard';S.nv=S.nv||{};const open=d.i in S.nv?S.nv[d.i]:g[2].includes(cr);S.nv[d.i]=!open;save();const bt=[...document.querySelectorAll('#side button.grp')].find(x=>x.dataset.i===d.i),gl=[...document.querySelectorAll('#side .gl')].find(x=>x.dataset.g===d.i);if(gl)gl.hidden=open;if(bt){bt.setAttribute('aria-expanded',String(!open));const ar=bt.querySelector('.arr');if(ar)ar.textContent=open?'▸':'▾'}}
+ if(a==='grp'){const g=NG.find(x=>x[0]===d.i);if(!g)return;const open=menuOpen[d.i]===true;menuOpen[d.i]=!open;const bt=[...document.querySelectorAll('#side button.grp')].find(x=>x.dataset.i===d.i),gl=[...document.querySelectorAll('#side .gl')].find(x=>x.dataset.g===d.i);if(gl)gl.hidden=open;if(bt){bt.setAttribute('aria-expanded',String(!open));const ar=bt.querySelector('.arr');if(ar)ar.textContent=open?'▸':'▾'}}
  if(a==='sugadd'){const c=COMP.find(x=>x.id===d.id),s=SUG(c.name,S.sim.t)[+d.i],ti=s[0]+': '+s[1];if(!S.tasks.some(k=>k.title===ti)){S.tasks.push({id:uid(),title:ti,comp:d.id,hz:6,status:'todo',pri:'medium',pct:0,desc:s[2]?'Search: '+s[2]:''});save()}render(true)}if(a==='pf'){pf=d.i;render(true)}if(a==='lcs'){lcI=lcI===+d.i?-1:+d.i;render(true)}
  if(a==='evfile'){idb('get',d.id).then(b=>{if(b)window.open(URL.createObjectURL(b));else alert('That file is not stored on this device.')})}if(a==='tf'){tf=d.i;render(true)}if(a==='ts'){ts=+d.i;render(true)}
  if(a==='evopen'){evOpen=true;render(true)}if(a==='evclose'){evOpen=false;render(true)}

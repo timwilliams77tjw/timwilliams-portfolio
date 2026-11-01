@@ -224,7 +224,7 @@ var resetMode=false,recoveryPending=/access_token=|error=/.test(location.hash);
 const CPD_RESET_URL = 'https://twc-ltd.uk/cpdapp';
 const CPD_STRIPE_LINK = 'https://buy.stripe.com/4gM5kD31J6Or42c8S89EI00';
 function cpdCheckoutUrl(user) {
-  const url = new URL(CPD_STRIPE_LINK);
+  const url = new URL((typeof PRO_CFG!=='undefined'&&PRO_CFG.link)||CPD_STRIPE_LINK);
   url.searchParams.set('client_reference_id', user.id);
   url.searchParams.set('prefilled_email', user.email);
   return url.href;
@@ -472,7 +472,7 @@ document.addEventListener('change',e=>{if(e.target.id==='mt'){S.target=+e.target
 function resetAppOpening(){try{if(location.hash&&!/access_token=|error=/.test(location.hash))history.replaceState(null,'',location.pathname+location.search)}catch(e){}NG.forEach(g=>menuOpen[g[0]]=false);}
 resetAppOpening();
 addEventListener('pageshow',e=>{if(e.persisted){resetAppOpening();render(false)}});
-const PRO_CFG={link:CPD_STRIPE_LINK,portal:''},PROP=['calendar','simulator'];
+const PRO_CFG={link:'https://buy.stripe.com/bJe00jfOv7SvgOY2tK9EI01',portal:''},PROP=['calendar','simulator'];
 let PRO=false;
 // Shared with the downloadable HTML; membership data must come from an
 // authenticated read of the server-controlled cpd_memberships table.

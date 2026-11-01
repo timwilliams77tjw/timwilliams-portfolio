@@ -472,7 +472,7 @@ document.addEventListener('change',e=>{if(e.target.id==='mt'){S.target=+e.target
 function resetAppOpening(){try{if(location.hash&&!/access_token=|error=/.test(location.hash))history.replaceState(null,'',location.pathname+location.search)}catch(e){}NG.forEach(g=>menuOpen[g[0]]=false);}
 resetAppOpening();
 addEventListener('pageshow',e=>{if(e.persisted){resetAppOpening();render(false)}});
-const PRO_CFG={link:'https://buy.stripe.com/bJe00jfOv7SvgOY2tK9EI01',portal:''},PROP=['calendar','simulator'];
+const PRO_CFG={link:CPD_STRIPE_LINK,portal:''},PROP=['calendar','simulator'];
 let PRO=false;
 // Shared with the downloadable HTML; membership data must come from an
 // authenticated read of the server-controlled cpd_memberships table.
@@ -504,7 +504,7 @@ setTimeout(loadPro,800);addEventListener('focus',loadPro);addEventListener('twc-
 setInterval(()=>{if(document.visibilityState==='visible')loadPro()},45000);
 function upgradePg(r){
  const u=window.twcSB&&twcSB.user(),f={calendar:'Calendar Import',simulator:'Career Simulator'}[r],n=f?f+' is a Pro feature. ':'';
- const checkout=PRO?'':!u?`<p>To upgrade, sign in or create an account using the ☰ menu and the Sync across devices section.</p><button data-a="opensync">Open the menu</button>`:!PRO_CFG.link?'<p class="mut">Pro checkout is not switched on yet. Please contact support for upgrade details.</p>':`<a class="btn" href="${cpdCheckoutUrl(u)}">Upgrade to Pro</a><p class="mut"><small>Secure payment by Stripe. Pro unlocks once your payment has been verified and your account activated. Contact support if access remains locked.</small></p>`;
+ const checkout=PRO?'':!u?`<p>To upgrade, sign in or create an account using the ☰ menu and the Sync across devices section.</p><button data-a="opensync">Open the menu</button>`:!PRO_CFG.link?'<p class="mut">Pro checkout is not switched on yet. Please contact support for upgrade details.</p>':`<a class="btn" href="${cpdCheckoutUrl(u)}" onclick="try{localStorage.setItem('cpd-paying',String(Date.now()))}catch(e){}">Upgrade to Pro</a><p class="mut"><small>Secure payment by Stripe. Pro unlocks once your payment has been verified and your account activated. Contact support if access remains locked.</small></p>`;
  return`<h1>${PRO?'Your CPD Platform plan':'Plans & Upgrade to Pro'}</h1>
  <p class="mut">Choose the access and synchronisation options that suit the way you use the CPD Platform.</p>
  ${r?`<div class="pro-notice"><b>${n}</b><p>You can view this page and explore the role and import preview. The full feature is available with Pro.</p></div>`:''}
@@ -578,4 +578,5 @@ document.addEventListener('change',e=>{const t=e.target;
 
 
 
+<script>(function(){var t=+localStorage.getItem('cpd-paying')||0;if(!t||Date.now()-t>18e5||typeof loadPro!=='function')return;var n=0,i=setInterval(function(){if(PRO||++n>20){clearInterval(i);if(PRO)try{localStorage.removeItem('cpd-paying')}catch(e){}return}loadPro()},4000)})();</script>
 </body></html>

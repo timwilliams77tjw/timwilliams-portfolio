@@ -86,7 +86,7 @@ aside{top:var(--hs-h);height:calc(100vh - var(--hs-h))}
 <p>Sign in to keep your progress, CPD log and profile the same on every device.</p>
 <form id="hsSyncForm"><input id="hsSyncEmail" type="email" autocomplete="username" placeholder="Email" required><input id="hsSyncPw" type="password" autocomplete="current-password" placeholder="Password" required><button type="submit">Sign in</button><button type="button" id="hsSyncUp" class="alt">Create account</button><button type="button" id="hsSyncForgot" class="alt">Forgot password?</button></form>
 </div>
-<div id="hsSyncInBox" hidden><button id="hsSyncNow" type="button">Sync now</button><button id="hsSyncOut" type="button" class="alt">Sign out</button></div>
+<div id="hsSyncInBox" hidden><button id="hsSyncNow" type="button">Sync now</button><button id="hsSyncOut" type="button" class="alt">Sign out</button><button id="hsSyncForgotIn" type="button" class="alt">Reset password</button></div>
 <div id="hsSyncResetBox" hidden><p><b>Choose a new password</b></p><input id="hsSyncNewPw" type="password" autocomplete="new-password" placeholder="New password (6+ characters)"><button id="hsSyncSavePw" type="button">Save new password</button><p id="hsSyncResetMsg" class="bad"></p></div>
 <p id="hsSyncStat">Not signed in.</p>
 </div>
@@ -220,7 +220,15 @@ var $=function(i){return document.getElementById(i)};
 function jget(k,def){try{var v=rawGet.call(LS,k);return v?JSON.parse(v):def}catch(e){return def}}
 function jset(k,o){try{rawSet.call(LS,k,JSON.stringify(o))}catch(e){}}
 var meta=jget('twc-sync-meta',{}),sess=jget('twc-sync-session',null),busy=false,again=false,pushT=null,lastPull=0,msg='',state=sess?'idle':'out',stamp='';
-var resetMode=false;
+var resetMode=false,recoveryPending=/access_token=|error=/.test(location.hash);
+const CPD_RESET_URL = 'https://twc-ltd.uk/cpdapp';
+const CPD_STRIPE_LINK = 'https://buy.stripe.com/4gM5kD31J6Or42c8S89EI00';
+function cpdCheckoutUrl(user) {
+  const url = new URL(CPD_STRIPE_LINK);
+  url.searchParams.set('client_reference_id', user.id);
+  url.searchParams.set('prefilled_email', user.email);
+  return url.href;
+}
 function saveMeta(){jset('twc-sync-meta',meta)}
 var ts=function(x){return typeof x==='number'?x:Date.parse(x)};
 Storage.prototype.setItem=function(k,v){
@@ -242,7 +250,7 @@ function paint(){
  var i=!!sess;$('hsSyncOutBox').hidden=i;$('hsSyncInBox').hidden=!i;$('hsSyncResetBox').hidden=!resetMode;if(resetMode){$('hsSyncOutBox').hidden=true;$('hsSyncInBox').hidden=true}
  var t='Not signed in.';
  if(i){t='Signed in as '+sess.user.email+'. ';
-  if(state==='busy')t+='Syncing\u2026';else if(state==='err')t+=msg;else if(state==='upd')t+=msg;else t+=(stamp?'Synced '+stamp+'.':'Ready.')}
+  if(state==='busy')t+='Syncing\u2026';else if(state==='err')t+=msg;else if(state==='upd'||msg)t+=msg;else t+=(stamp?'Synced '+stamp+'.':'Ready.')}
  else if(msg)t=msg;
  var e=$('hsSyncStat');e.textContent=t;e.className=state==='err'||(!i&&msg)?'bad':''}
 function now(){var d=new Date();return d.toTimeString().slice(0,5)}
@@ -258,7 +266,7 @@ async function apiErr(r){var j={};try{j=await r.json()}catch(e){}var m=j.message
  if(r.status===404||/user_data/.test(m)&&/(not find|does not exist|schema cache)/i.test(m))m='The user_data table is not set up yet. Run the SQL step in Supabase.';
  return new Error(m)}
 async function pull(){
- if(!sess||busy)return;busy=true;lastPull=Date.now();setState('busy');
+ if(!sess||busy||resetMode||recoveryPending)return;busy=true;lastPull=Date.now();setState('busy');
  try{
   var r=await req('/rest/v1/user_data?select=key,value,updated_at');if(!r.ok)throw await apiErr(r);
   var rows=await r.json(),changed=false,seen={};
@@ -293,8 +301,8 @@ async function signIn(email,pw){
  var r=await fetch(SB+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:AK,'Content-Type':'application/json'},body:JSON.stringify({email:email,password:pw})});
  var j=await r.json().catch(function(){return{}});
  if(!r.ok)throw new Error(r.status===400?'Wrong email or password.':(j.error_description||j.msg||'Sign-in failed'));
- sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:j.expires_at||Math.floor(Date.now()/1000)+j.expires_in,user:{id:j.user.id,email:j.user.email}};jset('twc-sync-session',sess)}
-function signOut(m){sess=null;meta={};try{LS.removeItem('twc-sync-session');LS.removeItem('twc-sync-meta')}catch(e){}stamp='';setState('out',m||'');}
+ sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:j.expires_at||Math.floor(Date.now()/1000)+j.expires_in,user:{id:j.user.id,email:j.user.email}};jset('twc-sync-session',sess);window.dispatchEvent(new Event('twc-auth-change'))}
+function signOut(m){sess=null;resetMode=false;window.dispatchEvent(new Event('twc-auth-change'));meta={};try{LS.removeItem('twc-sync-session');LS.removeItem('twc-sync-meta')}catch(e){}stamp='';setState('out',m||'');}
 $('hsSyncForm').onsubmit=async function(e){e.preventDefault();var b=e.target.querySelector('button');b.disabled=true;setState('busy','');$('hsSyncStat').textContent='Signing in\u2026';
  try{await signIn($('hsSyncEmail').value.trim(),$('hsSyncPw').value);$('hsSyncPw').value='';msg='';await pull()}catch(x){sess=null;setState('out',x.message)}b.disabled=false};
 $('hsSyncNow').onclick=function(){pull()};
@@ -304,14 +312,36 @@ document.addEventListener('visibilitychange',function(){if(document.visibilitySt
 addEventListener('focus',tick);addEventListener('online',function(){pull()});addEventListener('pagehide',function(){if(sess)push(true)});
 setInterval(tick,45000);
 $('hsSyncUp').onclick=async function(){var em=$('hsSyncEmail').value.trim(),pw=$('hsSyncPw').value;if(!em||pw.length<6){setState('out','Enter your email and a password of 6+ characters.');return}try{var r=await fetch(SB+'/auth/v1/signup?redirect_to='+encodeURIComponent(location.origin+location.pathname),{method:'POST',headers:{apikey:AK,'Content-Type':'application/json'},body:JSON.stringify({email:em,password:pw})});var j=await r.json().catch(function(){return{}});if(!r.ok)throw new Error(j.msg||j.error_description||'Could not create account');if(j.access_token){await signIn(em,pw);msg='';await pull()}else setState('out','Account created. Check your email to confirm it, then sign in.')}catch(x){setState('out',x.message)}};
-$('hsSyncForgot').onclick=async function(){var em=$('hsSyncEmail').value.trim();if(!em){setState('out','Enter your email above, then tap Forgot password.');return}try{var r=await fetch(SB+'/auth/v1/recover?redirect_to='+encodeURIComponent(location.origin+location.pathname),{method:'POST',headers:{apikey:AK,'Content-Type':'application/json'},body:JSON.stringify({email:em})});if(r.status===429)throw new Error('Please wait a minute before asking for another reset email.');if(!r.ok)throw new Error('Could not send the reset email. Please try again.');setState('out','If that email has an account, a reset link is on its way. Open it on this device.')}catch(x){setState('out',x.message)}};
-$('hsSyncSavePw').onclick=async function(){var pw=$('hsSyncNewPw').value,m=$('hsSyncResetMsg');if(pw.length<6){m.textContent='Use at least 6 characters.';return}try{var r=await req('/auth/v1/user',{method:'PUT',body:JSON.stringify({password:pw})}),j=await r.json().catch(function(){return{}});if(!r.ok)throw new Error(j.msg||j.error_description||'Could not update the password.');resetMode=false;$('hsSyncNewPw').value='';m.textContent='';setState('ok','');await pull()}catch(x){m.textContent=x.message}};
+async function sendResetEmail(button){
+ var em=sess&&sess.user?sess.user.email:$('hsSyncEmail').value.trim();
+ if(!em){setState('out','Enter your email above, then tap Forgot password.');return}
+ button.disabled=true;
+ try{var r=await fetch(SB+'/auth/v1/recover?redirect_to='+encodeURIComponent(CPD_RESET_URL),{method:'POST',headers:{apikey:AK,'Content-Type':'application/json'},body:JSON.stringify({email:em})});
+ if(r.status===429)throw new Error('Please wait before asking for another reset email.');
+ if(!r.ok)throw new Error('Could not send the reset email. Please try again.');
+ setState(sess?'upd':'out','If that email has an account, a reset link is on its way. Open the newest email link to choose a new password.');
+ }catch(x){setState(sess?'err':'out',x.message)}finally{button.disabled=false}
+}
+$('hsSyncForgot').onclick=function(){sendResetEmail(this)};
+$('hsSyncForgotIn').onclick=function(){sendResetEmail(this)};
+$('hsSyncSavePw').onclick=async function(){
+ var pw=$('hsSyncNewPw').value,m=$('hsSyncResetMsg'),button=this;
+ if(!resetMode||!sess){m.textContent='Open a new password reset email link first.';return}
+ if(pw.length<6){m.textContent='Use at least 6 characters.';return}
+ button.disabled=true;
+ try{var r=await req('/auth/v1/user',{method:'PUT',body:JSON.stringify({password:pw})}),j=await r.json().catch(function(){return{}});
+ if(!r.ok)throw new Error(j.msg||j.error_description||'Could not update the password.');
+ resetMode=false;$('hsSyncNewPw').value='';m.textContent='';setState('upd','Your password has been updated.');
+ window.dispatchEvent(new Event('twc-auth-change'));await pull();setState('upd','Your password has been updated.');
+ }catch(x){m.textContent=x.message}finally{button.disabled=false}
+};
+window.cpdCheckoutUrl=cpdCheckoutUrl;
 window.twcSB={req:req,user:function(){return sess&&sess.user}};
 (function(){var h=location.hash;if(!/access_token=|error=/.test(h))return;var q=new URLSearchParams(h.slice(1)),tk=q.get('access_token');try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
  var openMenu=function(){setTimeout(function(){var b=$('hsHam');if(b&&!$('hsPanel').classList.contains('on'))b.click()},400)};
- if(tk){fetch(SB+'/auth/v1/user',{headers:{apikey:AK,Authorization:'Bearer '+tk}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(u){sess={access_token:tk,refresh_token:q.get('refresh_token'),expires_at:+q.get('expires_at')||Math.floor(Date.now()/1000)+(+q.get('expires_in')||3600),user:{id:u.id,email:u.email}};jset('twc-sync-session',sess);setState('idle');if(q.get('type')==='recovery'){resetMode=true;paint()}else pull();openMenu()}).catch(function(){setState('out','Could not complete sign-in from that link. Please sign in with your email and password.');openMenu()})}
- else{setState('out','That confirmation link has expired or was already used. If you have already confirmed, sign in with your email and password.');openMenu()}})();
-paint();if(sess){setState('idle');pull()}
+ if(tk){fetch(SB+'/auth/v1/user',{headers:{apikey:AK,Authorization:'Bearer '+tk}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(u){sess={access_token:tk,refresh_token:q.get('refresh_token'),expires_at:+q.get('expires_at')||Math.floor(Date.now()/1000)+(+q.get('expires_in')||3600),user:{id:u.id,email:u.email}};jset('twc-sync-session',sess);recoveryPending=false;if(q.get('type')==='recovery'){resetMode=true;setState('upd','Choose your new password below.')}else{setState('idle');window.dispatchEvent(new Event('twc-auth-change'));pull()}openMenu()}).catch(function(){recoveryPending=false;resetMode=false;sess=null;setState('out','This email link could not be verified. Request a new reset email and open its newest link.');openMenu()})}
+ else{recoveryPending=false;setState(sess?'err':'out','This email link has expired, was already used, or could not be accepted. Request a fresh reset email.');openMenu()}})();
+paint();if(sess&&!recoveryPending){setState('idle');pull()}
 })();
 </script>
 <!-- /TWC global menu -->
@@ -370,7 +400,7 @@ function planPg(){const T0=S.tasks,gaps=COMP.filter(c=>cur(c.id)>0&&tgt(c.id)>cu
 ${planChart()}${taskOpen?'':`<button class="alt" data-a="taskopen">+ Add task</button> <button data-a="suggest">Suggest tasks (${gaps.length} gaps)</button>`}${form}
 ${[3,6,12].map(h=>{const l=T0.filter(t=>+t.hz===h&&(pf==='all'||t.status===pf));return l.length?`<h3 style="margin-top:18px">${h} months</h3>`+l.map(t=>`<div class="card"><small>${esc(P[+t.comp.split('.')[0]][0])}</small><br><b>${esc(t.title)}</b><br><span class="pill">${esc(cn(t.comp))}</span> ${cur(t.comp)&&tgt(t.comp)?`<small>${LEVELS[cur(t.comp)-1]} → ${LEVELS[tgt(t.comp)-1]}</small>`:''}<div style="display:flex;gap:8px;margin-top:8px"><select data-ts="${t.id}">${Object.entries(ST).map(([k,v])=>`<option value="${k}" ${t.status===k?'selected':''}>${v}</option>`).join('')}</select><button class="alt" data-a="deltask" data-id="${t.id}">Delete</button></div></div>`).join(''):''}).join('')}`}
 function profPg(){const p=S.profile,u=encodeURIComponent(location.href.split('#')[0]);
- return`<h1>Profile</h1><p class="mut">This is how you appear across CPD Platform.</p>${curBadge()}<div class="card"><div class="me">${p.photo?`<img class="av" style="width:96px;height:96px" src="${p.photo}" alt="">`:`<div class="av" style="width:96px;height:96px;font-size:36px">${esc((p.name||'?')[0].toUpperCase())}</div>`}<div><label>Photo<input type="file" id="pf" accept="image/*"></label>${p.photo?'<button class="alt" data-a="rmphoto">Remove photo</button>':''}</div></div>
+ return`<h1>Profile</h1><p class="mut">This is how you appear across CPD Platform.</p>${curBadge()}<div class="pro-notice"><h3>CPD membership</h3><p>${hasProAccess()?'Pro active':proLoading?'Checking membership…':proIssue||'Standard membership — Pro is not active for this account.'}</p><button data-a="checkpro">Check membership</button> <a href="#upgrade">Plans &amp; upgrade</a></div><div class="card"><div class="me">${p.photo?`<img class="av" style="width:96px;height:96px" src="${p.photo}" alt="">`:`<div class="av" style="width:96px;height:96px;font-size:36px">${esc((p.name||'?')[0].toUpperCase())}</div>`}<div><label>Photo<input type="file" id="pf" accept="image/*"></label>${p.photo?'<button class="alt" data-a="rmphoto">Remove photo</button>':''}</div></div>
 <div class="row"><label>Name<input id="pn" value="${esc(p.name)}"></label><label>Job title<input id="pt" value="${esc(p.title)}"></label></div><label>Personal website<input id="ps" value="${esc(p.site)}" placeholder="https://"></label><label>About me<textarea id="pb" placeholder="A short bio: your role, experience, and development goals.">${esc(p.bio)}</textarea></label>
 <h3>CV</h3>${p.cv?`<p>📄 <a href="${p.cv.data}" download="${esc(p.cv.name)}">${esc(p.cv.name)}</a> <small class="mut">(${(p.cv.size/1024).toFixed(0)} KB, added ${esc(p.cv.date)})</small></p><button class="alt" data-a="cvrm">Remove CV</button>`:''}<label>${p.cv?'Replace CV':'Upload CV'} (PDF or Word, up to 2 MB)<input type="file" id="pcv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label><h3>Social links</h3>${p.links.map((l,i)=>`<div class="row"><input value="${esc(l.type)}" disabled><div style="display:flex;gap:6px"><input data-li="${i}" value="${esc(l.url)}"><button class="alt" data-a="dellink" data-i="${i}">Remove</button></div></div>`).join('')}<div class="row"><select id="lty"><option>LinkedIn</option><option>X</option><option>GitHub</option><option>Facebook</option><option>Website</option></select><input id="lur" placeholder="https://"></div><button class="alt" data-a="addlink" style="margin:8px 0">+ Add link</button><br><button data-a="saveprof">Save profile</button></div>
 <div class="card"><h3>Share your app</h3><div class="sh"><a class="btn alt" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=${u}">LinkedIn</a><a class="btn alt" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=${u}">X</a><a class="btn alt" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=${u}">Facebook</a><a class="btn alt" href="mailto:?subject=CPD%20Platform&body=${u}">Email</a></div></div>
@@ -385,10 +415,10 @@ function evPg(){const e=S.ev,mb=e.reduce((a,x)=>a+(+x.size||0),0)/1048576,lg=[..
 const RL=["Project Coordinator / Support","Project Manager","Senior Project Manager","Programme Manager","PMO Lead / Portfolio Manager"],RQ=[[2,2,2,2],[3,3,3,3],[4,3,4,4],[4,4,4,4],[5,4,4,4]];
 // Pro controls remain locked until a trusted membership service is connected.
 // Never unlock from profile data, browser storage, or an upgrade-button click.
-function hasProAccess(){return PRO===true}
+function hasProAccess(){const u=window.twcSB&&twcSB.user();return !!u&&u.id===proAccount&&Date.now()-proLastChecked<120000&&PRO===true}
 function proNotice(feature){return `<section class="pro-notice" aria-label="Pro membership"><b>🔒 ${feature} · Pro only</b><p>This functionality is available with CPD Pro for <strong>£10 per month</strong>.</p><a class="btn" href="#upgrade">Upgrade to Pro — £10/month</a></section>`}
 function simPg(){const f=S.sim.f,t=S.sim.t,rq=c=>RQ[t][c.p],gp=COMP.filter(c=>cur(c.id)<rq(c)).sort((a,b)=>(rq(b)-cur(b.id))-(rq(a)-cur(a.id))||a.p-b.p),rd=Math.round(100*COMP.reduce((a,c)=>a+Math.min(cur(c.id),rq(c))/rq(c),0)/COMP.length),op=i=>RL.map((r,j)=>`<option value="${j}" ${j===i?'selected':''}>${r}</option>`).join('');
- return`<h1>Career Simulator</h1><p class="mut">Compare your current ratings with a target role's requirements.</p>${hasProAccess()?'':proNotice('Career Simulator')}<div class="card"><div class="row"><label>Current role<select data-sim="f">${op(f)}</select></label><label>Target role<select data-sim="t">${op(t)}</select></label></div><small>Role requirements are indicative levels per pillar, not official APM figures.</small></div><div class="grid g4">${T('Readiness',rd+'%','for '+RL[t])}${T('At or above role level',29-gp.length,'of 29 competences')}${T('Gaps to close',gp.length,'below the role requirement')}</div><div class="card"><h3>Path to ${RL[t]}</h3>${gp.slice(0,8).map(c=>`<p><b>${esc(c.name)}</b> <small>${P[c.p][0]}</small><br><span class="pill">${cur(c.id)?LEVELS[cur(c.id)-1]:'Not assessed'}</span> → <span class="pill">${LEVELS[rq(c)-1]}</span> ${S.tasks.some(t=>t.comp===c.id)?'<span class="pill">In plan ✓</span>':`<button class="alt" ${hasProAccess()?'':'disabled'} data-a="simadd" data-id="${c.id}">Add to plan</button>`}</p>`).join('')||'<p>You meet every requirement for this role.</p>'}<a class="btn alt" href="#plan">View development plan (${S.tasks.length} tasks)</a> <button class="noprint" data-a="print">Print / save as PDF</button></div>${simSug(gp,t)}`}
+ return`<h1>Career Simulator</h1><p class="mut">Compare your current ratings with a target role's requirements.</p>${hasProAccess()?'':proNotice('Career Simulator')}<div class="card"><div class="row"><label>Current role<select data-sim="f" ${hasProAccess()?'':'disabled'}>${op(f)}</select></label><label>Target role<select data-sim="t" ${hasProAccess()?'':'disabled'}>${op(t)}</select></label></div><small>Role requirements are indicative levels per pillar, not official APM figures.</small></div><div class="grid g4">${T('Readiness',rd+'%','for '+RL[t])}${T('At or above role level',29-gp.length,'of 29 competences')}${T('Gaps to close',gp.length,'below the role requirement')}</div><div class="card"><h3>Path to ${RL[t]}</h3>${gp.slice(0,8).map(c=>`<p><b>${esc(c.name)}</b> <small>${P[c.p][0]}</small><br><span class="pill">${cur(c.id)?LEVELS[cur(c.id)-1]:'Not assessed'}</span> → <span class="pill">${LEVELS[rq(c)-1]}</span> ${S.tasks.some(t=>t.comp===c.id)?'<span class="pill">In plan ✓</span>':`<button class="alt" ${hasProAccess()?'':'disabled'} data-a="simadd" data-id="${c.id}">Add to plan</button>`}</p>`).join('')||'<p>You meet every requirement for this role.</p>'}<a class="btn alt" href="#plan">View development plan (${S.tasks.length} tasks)</a> <button class="noprint" data-a="print">Print / save as PDF</button></div>${simSug(gp,t)}`}
 function todoPg(){const T0=S.tasks,od=t=>t.due&&t.due<today&&t.status!=='done',open=T0.filter(t=>t.status!=='done'),fl={all:open,over:T0.filter(od),high:open.filter(t=>t.pri==='high'),off:open.filter(t=>t.status==='off')}[tf]||open;
  return`<h1>To-Do</h1><p class="mut">Your near-term development tasks.</p><div class="grid g4">${T('Open tasks',open.length,'')}${T('Overdue',T0.filter(od).length,'')}${T('Completed',T0.length-open.length,'')}</div><button class="alt" data-a="gotask">+ Add task</button><div class="tabs" style="margin-top:12px">${[['all','All outstanding',open.length],['over','Overdue',T0.filter(od).length],['high','High priority',open.filter(t=>t.pri==='high').length],['off','Off track',open.filter(t=>t.status==='off').length]].map(x=>`<button class="${tf===x[0]?'on':''}" data-a="tf" data-i="${x[0]}">${x[1]} ${x[2]}</button>`).join('')}</div>${fl.map(t=>`<div class="card"><b>${esc(t.title)}</b>${t.desc?`<p class="mut">${esc(t.desc)}</p>`:''}<div class="chips"><span class="pill ${t.pri==='high'?'w':''}">${esc(t.pri||'medium')}</span>${t.due?`<span class="pill">${t.due}</span>`:''}<span class="pill">${esc(cn(t.comp))}</span></div><div class="row"><select data-ts="${t.id}">${Object.entries(ST).map(([k,v])=>`<option value="${k}" ${t.status===k?'selected':''}>${v}</option>`).join('')}</select><input type="range" data-tp="${t.id}" min="0" max="100" step="5" value="${t.pct||0}"></div><small>Progress ${t.pct||0}%</small><div class="chips">${S.ev.filter(x=>(x.tasks||[]).includes(t.id)).map(x=>`<span class="pill">📎 ${esc(x.name.slice(0,40))}</span>`).join('')}</div><select data-ta="${t.id}"><option value="">+ Attach evidence…</option>${S.ev.map(x=>`<option value="${x.id}">${esc(x.name.slice(0,50))}</option>`).join('')}</select></div>`).join('')||'<p class="mut">Nothing here.</p>'}`}
 function repPg(){const ck=(k,l)=>`<label style="display:inline-block;margin-right:14px"><input type="checkbox" style="width:auto" data-rs="${k}" ${rs[k]?'checked':''}> ${l}</label>`,p=S.profile,l=[...S.log].sort((a,b)=>b.date.localeCompare(a.date)),SL={todo:'Not started',on:'In progress',done:'Complete'};
@@ -413,7 +443,7 @@ function simSug(gp,t){return`<div class="card"><h3>Suggested courses and activit
 function parseICS(tx){tx=tx.replace(/\r?\n[ \t]/g,'');const ev=[];tx.split('BEGIN:VEVENT').slice(1).forEach(b=>{b=b.split('END:VEVENT')[0];const g=k=>{const m=b.match(new RegExp('^'+k+'[^:\\n]*:(.*)$','mi'));return m?m[1].trim():''},u=s=>s.replace(/\\n/gi,' ').replace(/\\([,;\\])/g,'$1');ev.push({uid:g('UID'),title:u(g('SUMMARY')),desc:u(g('DESCRIPTION')),cat:g('CATEGORIES'),s:g('DTSTART'),e:g('DTEND')})});return ev}
 const icd=s=>{const m=(s||'').match(/^(\d{4})(\d\d)(\d\d)(?:T(\d\d)(\d\d)(\d\d)(Z?))?/);if(!m)return null;return m[4]?(m[7]?new Date(Date.UTC(+m[1],m[2]-1,+m[3],+m[4],+m[5],+m[6])):new Date(+m[1],m[2]-1,+m[3],+m[4],+m[5],+m[6])):new Date(+m[1],m[2]-1,+m[3])};
 function importICS(tx){if(!hasProAccess())return;const kw=(($('#ck')||{}).value||'CPD').trim().toLowerCase(),tt=$('#ct')&&$('#ct').checked,now=Date.now();S.cal=S.cal||{};let add=0,skip=0,tot=0;parseICS(tx).forEach(e=>{const cats=e.cat.toLowerCase().split(',').map(s=>s.trim());if(!(cats.includes(kw)||(tt&&e.title.toLowerCase().includes(kw))))return;tot++;const id=e.uid||e.title+e.s;if(S.cal[id]){skip++;return}const a=icd(e.s),b=icd(e.e);if(!a)return;let hrs=b?(b-a)/36e5:1;if(e.s.length===8)hrs=7.5;hrs=Math.max(.25,Math.round(hrs*4)/4);const date=a.getFullYear()+'-'+String(a.getMonth()+1).padStart(2,'0')+'-'+String(a.getDate()).padStart(2,'0');S.log.push({id:uid(),date,title:e.title||'Calendar event',area:'Capability development',status:(b||a).getTime()<now?'done':'todo',hours:hrs,reflection:e.desc.slice(0,400),links:suggest(e.title+' '+e.desc).slice(0,3),src:'calendar'});S.cal[id]=1;add++});save();calMsg=`Found ${tot} CPD event(s): ${add} imported, ${skip} already imported.`;render(true)}
-function calPg(){return`<h1>Calendar Import</h1><p class="mut">Create CPD log entries from calendar events you have categorised as CPD.</p>${hasProAccess()?'':proNotice('Calendar Import')}<div class="card"><h3>1. Tag events</h3><p>In Outlook, Google Calendar or Apple Calendar, give each CPD event the category <b>CPD</b> (Outlook: right-click the event, Categorise).</p><h3>2. Export and import</h3><p>Export your calendar as an .ics file (Outlook: File, Save Calendar; Google: Settings, Import &amp; export; Apple: File, Export) and choose it below. Events already imported are skipped, so you can re-import at any time.</p><div class="row"><label>Category to look for<input id="ck" value="CPD"></label><label>Calendar file (.ics)<input type="file" id="cf" accept=".ics,text/calendar"></label></div><label style="font-weight:400"><input type="checkbox" id="ct" style="width:auto" checked> Also match events with that word in the title</label>${calMsg?`<p style="background:var(--acl);padding:10px;border-radius:8px">${esc(calMsg)}</p>`:''}<p class="mut"><small>Past events are logged as Complete and future events as Not started. All-day events count as 7.5 hours. Repeating events import their first occurrence only.</small></p></div><div class="card"><h3>Fully automatic sync</h3><p>A web page cannot watch your calendar by itself. That needs a small server, or a Power Automate or Google Apps Script flow, with your permission. This import gives the same result in two taps and keeps your data on your device.</p></div>`}
+function calPg(){return`<h1>Calendar Import</h1><p class="mut">Create CPD log entries from calendar events you have categorised as CPD.</p>${hasProAccess()?'':proNotice('Calendar Import')}<div class="card"><h3>1. Tag events</h3><p>In Outlook, Google Calendar or Apple Calendar, give each CPD event the category <b>CPD</b> (Outlook: right-click the event, Categorise).</p><h3>2. Export and import</h3><p>Export your calendar as an .ics file (Outlook: File, Save Calendar; Google: Settings, Import &amp; export; Apple: File, Export) and choose it below. Events already imported are skipped, so you can re-import at any time.</p><div class="row"><label>Category to look for<input id="ck" value="CPD"></label><label>Calendar file (.ics)<input type="file" id="cf" accept=".ics,text/calendar" ${hasProAccess()?'':'disabled'}></label></div><label style="font-weight:400"><input type="checkbox" id="ct" style="width:auto" checked> Also match events with that word in the title</label>${calMsg?`<p style="background:var(--acl);padding:10px;border-radius:8px">${esc(calMsg)}</p>`:''}<p class="mut"><small>Past events are logged as Complete and future events as Not started. All-day events count as 7.5 hours. Repeating events import their first occurrence only.</small></p></div><div class="card"><h3>Fully automatic sync</h3><p>A web page cannot watch your calendar by itself. That needs a small server, or a Power Automate or Google Apps Script flow, with your permission. This import gives the same result in two taps and keeps your data on your device.</p></div>`}
 const R={lifecycle:lcPg2,dashboard:dash,training:trPg,log:logPg,matrix:matrix,gaps:gapsPg,evidence:evPg,plan:planPg,simulator:simPg,todo:todoPg,reports:repPg,profile:profPg,about:aboutPg,contact:contactPg,calendar:calPg,metrics:metPg,community:communityPg},NV=[['lifecycle','Lifecycle'],['dashboard','Dashboard'],['training','Training'],['log','CPD Log'],['matrix','Competence Matrix'],['gaps','Gap Analysis'],['evidence','Evidence Vault'],['plan','Development Plan'],['simulator','Career Simulator'],['todo','To-Do'],['reports','Reports'],['profile','Profile'],['calendar','Calendar Import'],['metrics','Metrics'],['community','Community']];
 
 const theme=()=>document.documentElement.classList.toggle('dark',S.dark??matchMedia('(prefers-color-scheme: dark)').matches);
@@ -442,13 +472,39 @@ document.addEventListener('change',e=>{if(e.target.id==='mt'){S.target=+e.target
 function resetAppOpening(){try{if(location.hash&&!/access_token=|error=/.test(location.hash))history.replaceState(null,'',location.pathname+location.search)}catch(e){}NG.forEach(g=>menuOpen[g[0]]=false);}
 resetAppOpening();
 addEventListener('pageshow',e=>{if(e.persisted){resetAppOpening();render(false)}});
-const PRO_CFG={link:'',portal:''},PROP=['calendar','simulator'];
+const PRO_CFG={link:'https://buy.stripe.com/bJe00jfOv7SvgOY2tK9EI01',portal:''},PROP=['calendar','simulator'];
 let PRO=false;
-async function loadPro(){const u=window.twcSB&&twcSB.user();if(!u){if(PRO){PRO=false;render(true)}return}try{const r=await twcSB.req('/rest/v1/entitlements?select=plan,status&limit=1');if(!r.ok)return;const a=await r.json(),p=!!(a[0]&&a[0].plan==='pro'&&['active','trialing'].includes(a[0].status));if(p!==PRO){PRO=p;render(true)}}catch(e){}}
-setTimeout(loadPro,800);addEventListener('focus',()=>setTimeout(loadPro,300));
+// Shared with the downloadable HTML; membership data must come from an
+// authenticated read of the server-controlled cpd_memberships table.
+function membershipAllowsPro(row, now = Date.now()) {
+  if (!row) return false;
+  if (row.owner_override === true) return true;
+  if (row.status !== 'active' && row.status !== 'trialing') return false;
+  const until = Date.parse(row.current_period_end || '');
+  return Number.isFinite(until) && until > now;
+}
+let proOwner=null,proAccount=null,proLastChecked=0,proSequence=0,proLoading=false,proIssue='';
+async function loadPro(){
+ const user=window.twcSB&&twcSB.user(),sequence=++proSequence;
+ if(!user){PRO=false;proOwner=null;proAccount=null;proLastChecked=0;render(true);return}
+ proLoading=true;
+ try{
+ const [ownerReply,paidReply]=await Promise.all([
+ twcSB.req('/rest/v1/cpd_memberships?select=owner_override,status,current_period_end&user_id=eq.'+encodeURIComponent(user.id)+'&limit=1'),
+ twcSB.req('/rest/v1/entitlements?select=plan,status&user_id=eq.'+encodeURIComponent(user.id)+'&limit=1')]);
+ const owners=ownerReply.ok?await ownerReply.json():[],paid=paidReply.ok?await paidReply.json():[];
+ if(sequence!==proSequence||!twcSB.user()||twcSB.user().id!==user.id)return;
+ proOwner=Array.isArray(owners)?owners[0]:null;proAccount=user.id;proLastChecked=Date.now();
+ PRO=membershipAllowsPro(proOwner)||!!(paidReply.ok&&Array.isArray(paid)&&paid[0]&&paid[0].plan==='pro'&&['active','trialing'].includes(paid[0].status));
+ proIssue=ownerReply.ok||paidReply.ok?'':'Membership could not be checked. Contact support.';
+ }catch(e){if(sequence!==proSequence)return;PRO=false;proIssue='Membership could not be checked. Please try again.'}
+ finally{if(sequence===proSequence){proLoading=false;render(true)}}
+}
+setTimeout(loadPro,800);addEventListener('focus',loadPro);addEventListener('twc-auth-change',loadPro);
+setInterval(()=>{if(document.visibilityState==='visible')loadPro()},45000);
 function upgradePg(r){
  const u=window.twcSB&&twcSB.user(),f={calendar:'Calendar Import',simulator:'Career Simulator'}[r],n=f?f+' is a Pro feature. ':'';
- const checkout=PRO?'':!u?`<p>To upgrade, sign in or create an account using the ☰ menu and the Sync across devices section.</p><button data-a="opensync">Open the menu</button>`:!PRO_CFG.link?'<p class="mut">Pro checkout is not switched on yet. Please contact support for upgrade details.</p>':`<a class="btn" href="${PRO_CFG.link}?client_reference_id=${encodeURIComponent(u.id)}&prefilled_email=${encodeURIComponent(u.email)}">Upgrade to Pro</a><p class="mut"><small>Secure payment by Stripe. After paying you return here and Pro switches on within a minute.</small></p>`;
+ const checkout=PRO?'':!u?`<p>To upgrade, sign in or create an account using the ☰ menu and the Sync across devices section.</p><button data-a="opensync">Open the menu</button>`:!PRO_CFG.link?'<p class="mut">Pro checkout is not switched on yet. Please contact support for upgrade details.</p>':`<a class="btn" href="${cpdCheckoutUrl(u)}">Upgrade to Pro</a><p class="mut"><small>Secure payment by Stripe. Pro unlocks once your payment has been verified and your account activated. Contact support if access remains locked.</small></p>`;
  return`<h1>${PRO?'Your CPD Platform plan':'Plans & Upgrade to Pro'}</h1>
  <p class="mut">Choose the access and synchronisation options that suit the way you use the CPD Platform.</p>
  ${r?`<div class="pro-notice"><b>${n}</b><p>You can view this page and explore the role and import preview. The full feature is available with Pro.</p></div>`:''}
@@ -468,9 +524,9 @@ function upgradePg(r){
  <div class="card"><h3>Which plan should I choose?</h3><p>Choose <b>Standard without an account</b> for single-device use. Choose <b>Standard with an account</b> if you want your data synchronised across your devices. Choose <b>Pro</b> if you also want to import calendar events into your CPD log and use the Career Simulator.</p></div>`;
 }
 R.upgrade=()=>upgradePg('');
-R.upgraded=()=>{if(PRO)return upgradePg('');let n=0;const t=setInterval(()=>{loadPro();if(PRO||++n>15)clearInterval(t)},4000);return'<h1>Thank you!</h1><div class="card"><p>Payment received. Switching Pro on…</p></div>'};
+R.upgraded=()=>upgradePg('');
 addEventListener('hashchange',()=>render(false));theme();render(false);
-function act(a,d){if((a==='simadd'||a==='sugadd')&&!hasProAccess())return;const v=id=>($('#'+id)||{}).value;
+function act(a,d){if(a==='checkpro'){loadPro();return;}if((a==='simadd'||a==='sugadd')&&!hasProAccess())return;const v=id=>($('#'+id)||{}).value;
  if(a==='menu')$('#side').classList.toggle('open');
  if(a==='lf'){lf=d.i;render(true)}
  if(a==='grp'){const g=NG.find(x=>x[0]===d.i);if(!g)return;const open=menuOpen[d.i]===true;menuOpen[d.i]=!open;const bt=[...document.querySelectorAll('#side button.grp')].find(x=>x.dataset.i===d.i),gl=[...document.querySelectorAll('#side .gl')].find(x=>x.dataset.g===d.i);if(gl)gl.hidden=open;if(bt){bt.setAttribute('aria-expanded',String(!open));const ar=bt.querySelector('.arr');if(ar)ar.textContent=open?'▸':'▾'}}
@@ -509,7 +565,7 @@ document.addEventListener('change',e=>{const t=e.target;
  if(t.dataset.tp){const k=S.tasks.find(x=>x.id===t.dataset.tp);k.pct=+t.value;if(k.pct===100)k.status='done';else if(k.pct>0&&k.status==='todo')k.status='on';save();render(true)}
  if(t.dataset.ls){S.log.find(x=>x.id===t.dataset.ls).status=t.value;save();render(true)}
  if(t.id==='cf'&&t.files[0]){const r=new FileReader();r.onload=()=>{if(hasProAccess()){importICS(r.result)}else{const events=parseICS(r.result),kw=(($('#ck')||{}).value||'CPD').trim().toLowerCase(),tt=$('#ct')&&$('#ct').checked,matches=events.filter(e=>e.cat.toLowerCase().split(',').map(x=>x.trim()).includes(kw)||(tt&&e.title.toLowerCase().includes(kw)));calMsg='Preview only: '+events.length+' calendar event(s) found; '+matches.length+' match your CPD filter. Upgrade to Pro to import them into your CPD log.';render(true)}};r.readAsText(t.files[0])}
- if(t.dataset.sim){S.sim[t.dataset.sim]=+t.value;if(hasProAccess())save();render(true)}
+ if(t.dataset.sim){if(!hasProAccess()){render(true);return;}S.sim[t.dataset.sim]=+t.value;if(hasProAccess())save();render(true)}
  if(t.dataset.ea&&t.value){const x=S.ev.find(y=>y.id===t.dataset.ea),[k,id]=t.value.split(':');if(k==='t')x.tasks=[...new Set([...(x.tasks||[]),id])];else x.links=[...new Set([...(x.links||[]),id])];save();render(true)}
  if(t.dataset.ta&&t.value){const x=S.ev.find(y=>y.id===t.value);x.tasks=[...new Set([...(x.tasks||[]),t.dataset.ta])];save();render(true)}
  if(t.dataset.rs){rs[t.dataset.rs]=t.checked?1:0;render(true)}
@@ -520,18 +576,6 @@ document.addEventListener('change',e=>{const t=e.target;
 </script>
 
 
- <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6ae21f523446cf346fe176ce/1k61kkmhd';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script--> 
+
 
 </body></html>

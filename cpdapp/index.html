@@ -35,6 +35,13 @@ main *,.main *{max-width:100%;box-sizing:border-box}
 main table,.main table{display:block;overflow-x:auto}
 img,svg,canvas,video,iframe{max-width:100%}
 @media (display-mode:standalone){html,body{overscroll-behavior:none;touch-action:pan-y}}
+</style><style>
+/* Keep the document as the vertical scroll container in browsers and installed apps. */
+html,body{height:auto!important;min-height:100%;overflow-x:hidden;overflow-y:auto!important;overscroll-behavior-y:auto}
+body{min-height:100vh;touch-action:pan-y}
+.app{height:auto!important;min-height:100vh;align-items:stretch}
+main,#main{height:auto!important;min-height:0;overflow-y:visible!important;overscroll-behavior-y:auto}
+@media(display-mode:standalone){html,body{height:auto!important;overflow-y:auto!important;touch-action:pan-y}}
 </style></head><body>
 <!-- TWC global menu (menu only, no hero) -->
 <style>
@@ -296,7 +303,13 @@ async function push(keep){
   saveMeta();stamp=now();setState('ok')
  }catch(e){setState('err',navigator.onLine?e.message:'Offline. Will sync when you are back online.')}}
 function schedulePush(){if(!sess)return;if(pushT)clearTimeout(pushT);pushT=setTimeout(function(){pushT=null;if(busy){again=true}else pull()},1500)}
-function reloadSoon(){var a=document.activeElement;if(a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)&&a.id.indexOf('hsSync')!==0){setState('upd','Updated from another device. Reloading when you finish typing.');setTimeout(reloadSoon,3000);return}location.reload()}
+function reloadSoon(){
+ var a=document.activeElement,editing=a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)&&a.id.indexOf('hsSync')!==0;
+ var dirty=document.querySelector('#main [data-cpd-dirty="1"]');
+ if(editing||dirty){setState('upd','New data is available from another device. Your current entry is being protected; save or cancel it before the app refreshes.');setTimeout(reloadSoon,5000);return}
+ location.reload()
+} 
+
 async function signIn(email,pw){
  var r=await fetch(SB+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:AK,'Content-Type':'application/json'},body:JSON.stringify({email:email,password:pw})});
  var j=await r.json().catch(function(){return{}});
@@ -449,7 +462,7 @@ const R={lifecycle:lcPg2,dashboard:dash,training:trPg,log:logPg,matrix:matrix,ga
 const theme=()=>document.documentElement.classList.toggle('dark',S.dark??matchMedia('(prefers-color-scheme: dark)').matches);
 function render(keep){const y=scrollY,r=(location.hash.slice(1)in R)?location.hash.slice(1):'dashboard',p=S.profile;
  $('#side').innerHTML=`<h2 style="margin:0 0 12px;color:var(--ac)">CPD Platform</h2><div class="me">${p.photo?`<img class="av" src="${p.photo}" alt="">`:`<div class="av">${esc((p.name||'A')[0].toUpperCase())}</div>`}<div><b>${esc(p.name||'Your name')}</b>${PRO?' <span class="tag">PRO</span>':''}<br><small>${esc(p.title||'Set up your profile')}</small></div></div><nav>${navHtml(r)}${PRO?'':'<a href="#upgrade">⭐ Upgrade to Pro</a>'}</nav><p><button class="alt" data-a="theme">Light / dark</button></p><small>Built on the APM Competence Framework: 29 competences, 4 pillars.</small><p><a href="#about">About</a> · <a href="#contact">Contact</a></p>`;
- $('#side').classList.remove('open');$('#main').innerHTML=R[r]()+`<footer class="mut" style="margin-top:30px;padding-top:12px;border-top:1px solid var(--line)"><small>Need help? Contact support: <a href="mailto:info@twc-ltd.uk?subject=CPD%20Platform%20support">info@twc-ltd.uk</a></small></footer>`;document.title='CPD Platform';anim(keep);if(logOpen&&r==='log')chips();scrollTo(0,keep?y:0)}
+ $('#side').classList.remove('open');$('#main').innerHTML=R[r]()+`<footer class="mut" style="margin-top:30px;padding-top:12px;border-top:1px solid var(--line)"><small>Need help? Contact support: <a href="mailto:info@twc-ltd.uk?subject=CPD%20Platform%20support">info@twc-ltd.uk</a> · <a href="https://www.twc-ltd.uk/contact.html" target="_blank" rel="noopener">Web chat / contact form</a></small></footer>`;document.title='CPD Platform';anim(keep);if(logOpen&&r==='log')chips();scrollTo(0,keep?y:0)}
 function anim(k){const m=$('#main');if(m){m.classList.remove('fx');if(!k){void m.offsetWidth;m.classList.add('fx')}}if(k||matchMedia('(prefers-reduced-motion:reduce)').matches)return;document.querySelectorAll('.tile b').forEach(b=>{const x=/^(\d+(?:\.\d+)?)(.*)$/.exec(b.textContent.trim());if(!x)return;const to=+x[1],d=(x[1].split('.')[1]||'').length,t0=performance.now();(function f(t){const q=Math.min(1,(t-t0)/700);b.textContent=(to*(1-Math.pow(1-q,3))).toFixed(d)+x[2];if(q<1)requestAnimationFrame(f)})(t0)})}
 function planChart(){const T0=S.tasks,C={todo:'#64748b',on:'#38bdf8',off:'#fbbf24',done:'#1f8f64'},n=T0.length||1,seg=l=>`<div class="stk">${Object.keys(ST).map(k=>{const c=l.filter(t=>t.status===k).length;return c?`<i style="width:${100*c/l.length}%;background:${C[k]}" title="${ST[k]}: ${c}"></i>`:''}).join('')}</div>`,at=COMP.filter(c=>tgt(c.id)>0&&cur(c.id)>=tgt(c.id)).length;
 return`<div class="card"><h3>Plan overview</h3>${seg(T0)}<div class="grid g4" style="margin-top:12px">${Object.entries(ST).map(([k,v])=>{const c=T0.filter(t=>t.status===k).length;return`<div class="tile"><small><span style="color:${C[k]}">●</span> ${v}</small><b>${c}</b><span class="mut">${Math.round(100*c/n)}% of total</span></div>`}).join('')}</div><h3 style="margin-top:14px">By horizon</h3>${[3,6,12].map(h=>{const l=T0.filter(t=>+t.hz===h);return`<div style="margin:8px 0"><small>${h} months · ${l.length} tasks</small>${seg(l)}</div>`}).join('')}<small>Plan coverage: ${at} of ${COMP.length} competences at target</small><div class="bar"><i style="width:${100*at/COMP.length}%"></i></div></div>`}
@@ -485,8 +498,8 @@ function membershipAllowsPro(row, now = Date.now()) {
 }
 let proOwner=null,proAccount=null,proLastChecked=0,proSequence=0,proLoading=false,proIssue='';
 async function loadPro(){
- const user=window.twcSB&&twcSB.user(),sequence=++proSequence;
- if(!user){PRO=false;proOwner=null;proAccount=null;proLastChecked=0;render(true);return}
+ const user=window.twcSB&&twcSB.user(),sequence=++proSequence,previousPro=PRO,previousIssue=proIssue;
+ if(!user){PRO=false;proOwner=null;proAccount=null;proLastChecked=0;if(previousPro)render(true);return}
  proLoading=true;
  try{
  const [ownerReply,paidReply]=await Promise.all([
@@ -498,7 +511,11 @@ async function loadPro(){
  PRO=membershipAllowsPro(proOwner)||!!(paidReply.ok&&Array.isArray(paid)&&paid[0]&&paid[0].plan==='pro'&&['active','trialing'].includes(paid[0].status));
  proIssue=ownerReply.ok||paidReply.ok?'':'Membership could not be checked. Contact support.';
  }catch(e){if(sequence!==proSequence)return;PRO=false;proIssue='Membership could not be checked. Please try again.'}
- finally{if(sequence===proSequence){proLoading=false;render(true)}}
+ finally{if(sequence===proSequence){
+  proLoading=false;
+  // A routine membership poll must not rebuild the page or clear an open entry.
+  if((PRO!==previousPro||proIssue!==previousIssue)&&!document.querySelector('#main [data-cpd-dirty="1"]'))render(true);
+ }}
 }
 setTimeout(loadPro,800);addEventListener('focus',loadPro);addEventListener('twc-auth-change',loadPro);
 setInterval(()=>{if(document.visibilityState==='visible')loadPro()},45000);
@@ -558,7 +575,8 @@ function act(a,d){if(a==='checkpro'){loadPro();return;}if((a==='simadd'||a==='su
  if(a==='saveprof'){Object.assign(S.profile,{name:v('pn').trim(),title:v('pt').trim(),site:v('ps').trim(),bio:v('pb').trim()});document.querySelectorAll('[data-li]').forEach(i=>S.profile.links[+i.dataset.li].url=i.value);save();render(true)}
  if(a==='export'){const x=document.createElement('a');x.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));x.download='apm-insight-backup.json';x.click()}}
 document.addEventListener('click',e=>{if(!(e.target instanceof Element))return;const link=e.target.closest('#side a[href^="#"]');if(link){if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;const hash=link.getAttribute('href'),route=hash&&hash.slice(1);if(route&&route in R){e.preventDefault();if(location.hash===hash)render(false);else location.hash=hash;return}}const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset)});
-document.addEventListener('input',e=>{if(e.target.id==='lt'||e.target.id==='lr')chips()});
+document.addEventListener('input',e=>{if(e.target instanceof Element&&e.target.closest('#main'))e.target.dataset.cpdDirty='1';if(e.target.id==='lt'||e.target.id==='lr')chips()});
+document.addEventListener('change',e=>{if(e.target instanceof Element&&e.target.closest('#main'))e.target.dataset.cpdDirty='1'});
 document.addEventListener('change',e=>{const t=e.target;
  if(t.dataset.r){S.rat[t.dataset.r]=Object.assign(S.rat[t.dataset.r]||{},{[t.dataset.k]:+t.value});save();render(true)}
  if(t.dataset.ts){const k=S.tasks.find(x=>x.id===t.dataset.ts);k.status=t.value;if(t.value==='done')k.pct=100;if(t.value==='todo')k.pct=0;save();render(true)}

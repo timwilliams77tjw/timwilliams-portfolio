@@ -105,7 +105,7 @@ aside{top:var(--hs-h);height:calc(100vh - var(--hs-h))}
 </div>
 <div id="hsSyncInBox" hidden><button id="hsSyncNow" type="button">Sync now</button><button id="hsSyncOut" type="button" class="alt">Sign out</button><button id="hsSyncForgotIn" type="button" class="alt">Reset password</button></div>
 <div id="hsSyncResetBox" hidden><p><b>Choose a new password</b></p><input id="hsSyncNewPw" type="password" autocomplete="new-password" placeholder="New password (6+ characters)"><button id="hsSyncSavePw" type="button">Save new password</button><p id="hsSyncResetMsg" class="bad"></p></div>
-<p id="hsSyncStat">Not signed in.</p>
+<p id="hsSyncStat">Not signed in.</p><button id="hsSyncRecovery" type="button" class="alt" hidden>Download local recovery copy</button>
 </div>
 
 <div class="hs-menu-column">
@@ -237,7 +237,7 @@ var LS=window.localStorage,rawSet=Storage.prototype.setItem,rawGet=Storage.proto
 var $=function(i){return document.getElementById(i)};
 function jget(k,def){try{var v=rawGet.call(LS,k);return v?JSON.parse(v):def}catch(e){return def}}
 function jset(k,o){try{rawSet.call(LS,k,JSON.stringify(o))}catch(e){}}
-var meta=jget('twc-sync-meta',{}),sess=jget('twc-sync-session',null),busy=false,again=false,pushT=null,lastPull=0,msg='',state=sess?'idle':'out',stamp='';
+var meta=jget('twc-sync-meta',{}),recoveryNotice=jget('twc-sync-recovery-notice',null),sess=jget('twc-sync-session',null),busy=false,again=false,pushT=null,lastPull=0,msg='',state=sess?'idle':'out',stamp='';
 var resetMode=false,recoveryPending=/access_token=|error=/.test(location.hash);
 const CPD_RESET_URL = 'https://twc-ltd.uk/cpdapp';
 const CPD_STRIPE_LINK = 'https://buy.stripe.com/4gM5kD31J6Or42c8S89EI00';
@@ -248,6 +248,10 @@ function cpdCheckoutUrl(user) {
   return url.href;
 }
 function saveMeta(){jset('twc-sync-meta',meta)}
+ function recoveryOpen(){return new Promise(function(resolve,reject){var q=indexedDB.open('cpdp',1);q.onupgradeneeded=function(){if(!q.result.objectStoreNames.contains('f'))q.result.createObjectStore('f')};q.onerror=function(){reject(q.error||new Error('Could not open recovery storage'))};q.onsuccess=function(){resolve(q.result)}})}
+ async function stashRecovery(k,value,remoteAt){try{var db=await recoveryOpen(),uid=sess&&sess.user&&sess.user.id;if(!uid){db.close();return false}return await new Promise(function(resolve){var tx=db.transaction('f','readwrite'),id='sync-conflict:'+uid+':'+k;tx.objectStore('f').put({user_id:uid,key:k,saved_at:new Date().toISOString(),remote_updated_at:remoteAt,value:value},id);tx.oncomplete=function(){db.close();recoveryNotice={user_id:uid,key:k,saved_at:new Date().toISOString()};jset('twc-sync-recovery-notice',recoveryNotice);resolve(true)};tx.onerror=tx.onabort=function(){db.close();resolve(false)}})}catch(e){return false}}
+ async function downloadRecovery(){if(!sess||!sess.user)return;try{var db=await recoveryOpen(),uid=sess.user.id,rows=await new Promise(function(resolve,reject){var tx=db.transaction('f','readonly'),st=tx.objectStore('f'),kr=st.getAllKeys();kr.onerror=function(){reject(kr.error)};kr.onsuccess=function(){var keys=kr.result.filter(function(k){return typeof k==='string'&&k.indexOf('sync-conflict:'+uid+':')===0}),out=[],left=keys.length;if(!left){resolve(out);return}keys.forEach(function(k){var r=st.get(k);r.onsuccess=function(){if(r.result)out.push(r.result);if(--left===0)resolve(out)};r.onerror=function(){if(--left===0)resolve(out)}})}});db.close();if(!rows.length)throw new Error('No recovery copy is available on this device.');var main=rows.find(function(x){return x.key==='apm-insight-v1'}),payload=main?main.value:{saved_at:new Date().toISOString(),user_id:uid,recovery_copies:rows},blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=main?'apm-insight-recovery.json':'cpd-sync-recovery.json';document.body.appendChild(link);link.click();link.remove();setTimeout(function(){URL.revokeObjectURL(link.href)},5000)}catch(e){alert(e.message||'Could not download the recovery copy.')}}
+ if($('hsSyncRecovery'))$('hsSyncRecovery').onclick=downloadRecovery;
 var ts=function(x){return typeof x==='number'?x:Date.parse(x)};
 Storage.prototype.setItem=function(k,v){
  if(this===LS&&KEYS.indexOf(k)>-1){var old=rawGet.call(this,k);rawSet.call(this,k,v);if(old!==String(v)){var m=meta[k]=meta[k]||{};m.d=1;m.v=(m.v||0)+1;saveMeta();schedulePush()}return}
@@ -270,7 +274,7 @@ function paint(){
  if(i){t='Signed in as '+sess.user.email+'. ';
   if(state==='busy')t+='Syncing\u2026';else if(state==='err')t+=msg;else if(state==='upd'||msg)t+=msg;else t+=(stamp?'Synced '+stamp+'.':'Ready.')}
  else if(msg)t=msg;
- var e=$('hsSyncStat');e.textContent=t;e.className=state==='err'||(!i&&msg)?'bad':''}
+ var e=$('hsSyncStat');e.textContent=t;e.className=state==='err'||(!i&&msg)?'bad':'';var rb=$('hsSyncRecovery');if(rb)rb.hidden=!(i&&recoveryNotice&&recoveryNotice.user_id===sess.user.id)}
 function now(){var d=new Date();return d.toTimeString().slice(0,5)}
 async function token(){
  if(!sess)throw new Error('Not signed in');
@@ -284,20 +288,31 @@ async function apiErr(r){var j={};try{j=await r.json()}catch(e){}var m=j.message
  if(r.status===404||/user_data/.test(m)&&/(not find|does not exist|schema cache)/i.test(m))m='The user_data table is not set up yet. Run the SQL step in Supabase.';
  return new Error(m)}
 async function pull(){
- if(!sess||busy||resetMode||recoveryPending)return;busy=true;lastPull=Date.now();setState('busy');
+ if(!sess||busy||resetMode||recoveryPending)return;busy=true;lastPull=Date.now();var syncConflictSaved=false;setState('busy');
  try{
   var r=await req('/rest/v1/user_data?select=key,value,updated_at');if(!r.ok)throw await apiErr(r);
   var rows=await r.json(),changed=false,seen={};
-  rows.forEach(function(row){
-   if(KEYS.indexOf(row.key)<0)return;seen[row.key]=1;
-   var m=meta[row.key]=meta[row.key]||{},rt=ts(row.updated_at);if(m.s===rt)return;
-   var lv=parseLocal(row.key),out;
-   if(lv!==undefined&&canon(strip(row.key,lv))===canon(row.value)){m.s=rt;m.h=canon(row.value);m.d=0;return}
-   if(m.d||(m.s===undefined&&lv!==undefined)){out=merge(strip(row.key,lv),row.value);m.d=1;m.v=(m.v||0)+1}else{out=row.value;m.h=canon(row.value)}
+  var conflictBlocked=false;
+  for(var ri=0;ri<rows.length;ri++){
+   var row=rows[ri];if(KEYS.indexOf(row.key)<0)continue;seen[row.key]=1;
+   var m=meta[row.key]=meta[row.key]||{},rt=ts(row.updated_at);if(m.s===rt){delete m.conflict;continue}
+   var lv=parseLocal(row.key),local=strip(row.key,lv),remoteHash=canon(row.value),localHash=lv===undefined?undefined:canon(local),out;
+   if(lv!==undefined&&localHash===remoteHash){m.s=rt;m.h=remoteHash;m.d=0;delete m.conflict;continue}
+   var localDirty=!!m.d||(m.s===undefined&&lv!==undefined);
+   if(localDirty&&lv!==undefined){
+    var remoteChanged=m.h===undefined||remoteHash!==m.h;
+    if(remoteChanged){
+     if(!await stashRecovery(row.key,local,row.updated_at)){m.conflict=1;conflictBlocked=true;continue}
+     out=merge(row.value,local);syncConflictSaved=true;msg='A sync conflict was found. The latest shared version was kept; a local recovery copy was saved on this device.';
+    }else out=merge(local,row.value);
+    m.d=1;m.v=(m.v||0)+1;
+   }else{out=row.value;m.h=remoteHash;delete m.conflict}
    if(out&&typeof out==='object'&&out.__raw===undefined&&lv&&typeof lv==='object'){(LOCAL_ONLY[row.key]||[]).forEach(function(f){if(f in lv)out[f]=lv[f];else delete out[f]})}
-   rawSet.call(LS,row.key,toRaw(out));m.s=rt;changed=true});
+   delete m.conflict;rawSet.call(LS,row.key,toRaw(out));m.s=rt;changed=true
+  }
   KEYS.forEach(function(k){if(!seen[k]&&rawGet.call(LS,k)!=null){var m=meta[k]=meta[k]||{};if(m.s===undefined){m.d=1;m.v=(m.v||0)+1}}});
-  saveMeta();busy=false;
+  if(conflictBlocked||KEYS.some(function(k){return meta[k]&&meta[k].conflict})){saveMeta();busy=false;setState('err','A sync conflict needs attention. Your local data was kept and not uploaded because a recovery copy could not be saved. Export a backup before retrying sync.');return}
+  if(!syncConflictSaved)msg='';saveMeta();busy=false;
   var dirty=KEYS.some(function(k){return meta[k]&&meta[k].d});
   if(dirty)await push();else{stamp=now();setState('ok')}
   if(changed)reloadSoon();else if(again){again=false;pull()}

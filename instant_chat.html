@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- GLOBAL FAVICON -->
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon-v3.png">
+<link rel="manifest" href="/manifest-v2.json">
+
+<title>Instant Chat | Tim Williams</title>
+
+<!-- Ads -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3491465767772431"
+crossorigin="anonymous"></script>
+
+<script async custom-element="amp-auto-ads"
+src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+
+<!-- GLOBAL CSS -->
+<link rel="stylesheet" href="certifications.css">
+<link rel="stylesheet" href="global-restore.css">
+<link rel="stylesheet" href="header-standard-v4.css">
+
+<style>
+:root {
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-main: #111;
+  --text-sub: #444;
+  --accent: #0a66c2;
+  --shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+body.dark-mode {
+  --bg: #0f172a;
+  --card-bg: #111827;
+  --text-main: #e5e7eb;
+  --text-sub: #9ca3af;
+  --accent: #38bdf8;
+  --shadow: 0 4px 18px rgba(0,0,0,0.6);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.chat-hero {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 30px;
+  padding: 32px 40px;
+  background: var(--card-bg);
+  color: var(--text-main);
+  border-radius: 0 12px 12px 0;
+  border-left: 6px solid var(--accent);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.chat-hero .page-title {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.chat-hero .page-subtitle {
+  margin-top: 12px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-sub);
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.chat-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.chat-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.chat-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.chat-card h2 {
+  margin-bottom: 15px;
+  color: var(--text-main);
+}
+
+.chat-card p {
+  color: var(--text-sub);
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.chat-features {
+  text-align: left;
+  max-width: 500px;
+  margin: 25px auto;
+}
+
+.chat-features li {
+  margin-bottom: 10px;
+  color: var(--text-sub);
+}
+
+.chat-button {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .chat-hero {
+    margin: 0 0 25px;
+    padding: 26px 22px 28px;
+    border-left-width: 5px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .chat-hero .page-title {
+    font-size: 27px;
+  }
+
+  .chat-hero .page-subtitle {
+    font-size: 15px;
+  }
+
+  .chat-card {
+    padding: 25px;
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+
+</head>
+
+<body class="header-with-logo">
+
+<amp-auto-ads
+type="adsense"
+data-ad-client="ca-pub-3491465767772431">
+</amp-auto-ads>
+
+<!-- HEADER -->
+
+<div id="header-placeholder"></div>
+
+<script>
+fetch("header.html")
+  .then(r => r.text())
+  .then(h => {
+    document.getElementById("header-placeholder").innerHTML = h;
+
+    const searchScript = document.createElement("script");
+    searchScript.src = "site-search.js";
+    searchScript.onload = () => {
+      if (typeof initSiteSearch === "function") {
+        initSiteSearch();
+      }
+    };
+    document.body.appendChild(searchScript);
+
+    const headerJS = document.createElement("script");
+    headerJS.src = "header-standard-v4.js";
+    headerJS.onload = () => {
+      initHeader();
+      initHeaderEnhancements();
+    };
+    document.body.appendChild(headerJS);
+  });
+</script>
+
+<script defer data-domain="twc-ltd.uk"
+src="https://plausible.io/js/script.js"></script>
+
+<script src="analytics-tracker.js" defer></script>
+
+<!-- ===========================
+     PAGE CONTENT
+=========================== -->
+
+<div class="chat-section">
+
+  <section class="chat-hero">
+
+    <h1 class="page-title">Instant Chat</h1>
+
+    <div class="page-subtitle">
+      Need a quick answer? Start a live conversation using the chat widget in
+      the bottom-right corner of this page. Whether you're looking for advice,
+      programme leadership support, PMO expertise, cloud transformation
+      guidance, cyber security insight or training information, I'm happy to help.
+    </div>
+
+  </section>
+
+  <div class="chat-card">
+
+    <img src="contact-secure.png" alt="Live Chat">
+
+    <h2>Chat Directly With Me</h2>
+
+    <p>
+      The live chat widget is available in the bottom-right corner of this page.
+      Send a message and start a conversation instantly.
+    </p>
+
+    <div class="chat-features">
+      <ul>
+        <li>✅ Programme & Project Management Support</li>
+        <li>✅ PMO Maturity & Transformation Advice</li>
+        <li>✅ Cyber Security & Identity Management Queries</li>
+        <li>✅ Cloud & Modern Workplace Consultancy</li>
+        <li>✅ Training, Coaching & Mentoring Questions</li>
+        <li>✅ General Business Enquiries</li>
+      </ul>
+    </div>
+
+    <p>
+      If I'm unavailable, simply leave a message and I'll respond as soon as possible.
+    </p>
+
+    <a href="#" class="chat-button" onclick="return false;">
+      Chat Widget Available Below ↘
+    </a>
+
+  </div>
+
+</div>
+
+<!-- FLOATING BUTTONS -->
+
+<div class="fab"
+onclick="window.scrollTo({top:0,behavior:'smooth'});">
+⬆️
+</div>
+
+<a href="calendar.html"
+id="bookingFab"
+class="fab fab-booking"
+aria-label="Make a booking">
+📅
+</a>
+
+<!-- FOOTER -->
+
+<div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("footer").innerHTML = h);
+</script>
+
+<!-- Start of Tawk.to Script -->
+
+<script type="text/javascript">
+var Tawk_API = Tawk_API || {},
+    Tawk_LoadStart = new Date();
+
+(function() {
+  var s1 = document.createElement("script"),
+      s0 = document.getElementsByTagName("script")[0];
+
+  s1.async = true;
+  s1.src = "https://embed.tawk.to/6ae21f523446cf346fe176ce/1k61kkmhd";
+  s1.charset = "UTF-8";
+  s1.setAttribute("crossorigin", "*");
+
+  s0.parentNode.insertBefore(s1, s0);
+})();
+</script>
+
+<!-- End of Tawk.to Script -->
+
+</body>
+</html>

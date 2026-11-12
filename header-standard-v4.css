@@ -1944,3 +1944,133 @@ body.dark #scrollProgress {
     margin-left: 24px; /* double the subheading indent for clarity */
     display: block;
 }
+
+/* ============================================================
+   TWC GLOBAL MENU — matches CPD app header menu
+   PASTE AT THE VERY END of your global header stylesheet.
+   Uses #hsMenuOverlay #hsMenuPanel + !important to beat the
+   earlier "Premium menu", "Final patch" and "Tiled layout" rules.
+   Open/close (.open on .hs-menu-overlay) is left untouched.
+   ============================================================ */
+
+/* Overlay: no dimming / gradient, like the CPD app */
+#hsMenuOverlay{
+  --hs-menu-top:64px;   /* gap from top of screen to the panel — adjust to suit your top bar */
+  background:transparent !important;
+  -webkit-backdrop-filter:none !important;
+  backdrop-filter:none !important;
+}
+
+/* Panel: floating dark glass card */
+#hsMenuOverlay #hsMenuPanel{
+  position:fixed !important;
+  left:10px !important; right:10px !important;
+  top:calc(var(--hs-menu-top) + env(safe-area-inset-top,0px)) !important;
+  bottom:auto !important;
+  width:auto !important;
+  max-width:none !important;
+  max-height:calc(100vh - var(--hs-menu-top) - 20px) !important;
+  max-height:calc(100dvh - var(--hs-menu-top) - 20px) !important;
+  margin:0 !important;
+  overflow:auto !important;
+  overscroll-behavior:contain;
+  box-sizing:border-box;
+  padding:6px 22px 30px !important;
+  background:rgba(12,16,24,.96) !important;
+  -webkit-backdrop-filter:blur(14px) !important;
+  backdrop-filter:blur(14px) !important;
+  color:#fff;
+  border:0 !important;
+  border-radius:18px !important;
+  box-shadow:0 12px 40px rgba(0,0,0,.5) !important;
+  font:16px/1.4 system-ui,Arial,sans-serif;
+}
+
+/* Column grid (replaces the flex layout) */
+#hsMenuOverlay #hsMenuPanel .hs-menu-columns{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr)) !important;
+  flex-direction:initial !important;
+  gap:0 32px !important;
+  width:auto !important; margin:0 !important; padding:0 !important;
+}
+
+/* Columns: no dividers, no fade/slide-in, natural order */
+#hsMenuOverlay #hsMenuPanel .hs-menu-column,
+#hsMenuOverlay.open #hsMenuPanel .hs-menu-column{
+  order:0 !important;
+  flex:none !important;
+  width:auto !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding:6px 0 14px !important;
+  border:0 !important;
+  background:none !important;
+  box-shadow:none !important;
+  opacity:1 !important;
+  transform:none !important;
+  transition:none !important;
+}
+
+/* Section headings: white, 20px, thin underline */
+#hsMenuOverlay #hsMenuPanel .hs-menu-column h4{
+  display:block !important;
+  margin:22px 0 8px !important;
+  padding:0 0 6px !important;
+  font-size:20px !important;
+  line-height:1.25 !important;
+  font-weight:700 !important;
+  color:#fff !important;
+  border:0 !important;
+  border-bottom:1px solid rgba(255,255,255,.3) !important;
+  text-transform:none; letter-spacing:normal;
+}
+
+/* Sub-headings: gold with dashed underline */
+#hsMenuOverlay #hsMenuPanel .hs-menu-column h5,
+#hsMenuOverlay #hsMenuPanel .hs-menu-column .hs-subheading{
+  margin:14px 0 4px !important;
+  padding:0 0 3px !important;
+  font-size:15px !important;
+  font-weight:700 !important;
+  line-height:1.4 !important;
+  opacity:1 !important;
+  color:#e0a030 !important;
+  border:0 !important;
+  border-bottom:1px dashed rgba(224,160,48,.5) !important;
+  text-transform:none; letter-spacing:normal;
+}
+
+/* Links (also kills the blue animated underline) */
+#hsMenuOverlay #hsMenuPanel .hs-menu-column a{
+  display:block !important;
+  margin:0 0 0 4px !important;
+  padding:7px 0 7px 12px !important;
+  font-size:16px !important;
+  line-height:1.4 !important;
+  font-weight:400 !important;
+  color:#fff !important;
+  text-decoration:none !important;
+  opacity:.92;
+  border-left:2px solid rgba(255,255,255,.22);
+}
+#hsMenuOverlay #hsMenuPanel .hs-menu-column a::after{ display:none !important; }
+#hsMenuOverlay #hsMenuPanel .hs-menu-column a:hover,
+#hsMenuOverlay #hsMenuPanel .hs-menu-column a:focus-visible{
+  text-decoration:underline !important; opacity:1;
+}
+#hsMenuOverlay #hsMenuPanel .hs-menu-column a.hs-subitem{
+  margin-left:4px !important;       /* same indent as other links (site had 24px) */
+  font-size:15px !important;
+}
+#hsMenuOverlay #hsMenuPanel #hsRecentlyViewed a{ font-size:15px !important; }
+#hsMenuOverlay #hsMenuPanel .hs-none{ opacity:.6; font-size:15px; }
+
+/* Mobile-only Search / Dark Mode buttons */
+#hsMenuOverlay #hsMenuPanel .hs-menu-item{
+  display:block !important; width:100%; text-align:left;
+  margin:0 0 0 4px !important; padding:7px 0 7px 12px !important;
+  font:inherit; font-size:16px !important; color:#fff !important;
+  background:none; border:0; border-left:2px solid rgba(255,255,255,.22);
+  border-radius:0; cursor:pointer;
+}

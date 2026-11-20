@@ -334,8 +334,12 @@ aside{top:var(--hs-h);height:calc(100vh - var(--hs-h))}
 
 
                 <!-- APPS -->
-                <div class="hs-menu-column">
-                    <h4>📱 Platforms</h4>
+<div class="hs-menu-column hs-section">
+
+    <div class="hs-section-header">
+        <h4>📱 Platforms</h4>
+        <span class="arrow">▼</span>
+    </div>
                     <a href="https://www.twc-ltd.uk/cpdapp">Professional Development Platform</a>
                     <a href="https://www.twc-ltd.uk/cvapp">CV Builder</a>
                 </div>
@@ -1122,7 +1126,7 @@ document.addEventListener('change',e=>{const t=e.target;
 
 
 
-<a id="twcFloatingChat" href="https://www.twc-ltd.uk/instant_chat.html" target="_blank" rel="noopener noreferrer" aria-label="Open instant web chat" title="Instant web chat"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 5C13.5 5 5 12.4 5 21.5c0 5.1 2.7 9.7 7 12.7L10 42l9.3-4.2c1.5.4 3.1.7 4.7.7 10.5 0 19-7.4 19-16.5S34.5 5 24 5z"/><circle cx="17" cy="22" r="2.3" fill="#08a85a"/><circle cx="24" cy="22" r="2.3" fill="#08a85a"/><circle cx="31" cy="22" r="2.3" fill="#08a85a"/></svg><span class="chat-badge" aria-hidden="true"></span></a>
+<a id="twcFloatingChat" href="https://www.twc-ltd.uk/instant_chat.html" target="_blank" rel="noopener noreferrer" aria-label="Open instant web chat" title="Live Chat"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 5C13.5 5 5 12.4 5 21.5c0 5.1 2.7 9.7 7 12.7L10 42l9.3-4.2c1.5.4 3.1.7 4.7.7 10.5 0 19-7.4 19-16.5S34.5 5 24 5z"/><circle cx="17" cy="22" r="2.3" fill="#08a85a"/><circle cx="24" cy="22" r="2.3" fill="#08a85a"/><circle cx="31" cy="22" r="2.3" fill="#08a85a"/></svg><span class="chat-badge" aria-hidden="true"></span></a>
 
 (function(){
 
@@ -1143,8 +1147,13 @@ document.addEventListener('change',e=>{const t=e.target;
 
         header.addEventListener('click',()=>{
 
-            section.classList.toggle('collapsed');
+sections.forEach(s=>{
+    if(s !== section){
+        s.classList.add('collapsed');
+    }
+});
 
+section.classList.toggle('collapsed');
             localStorage.setItem(
                 key,
                 section.classList.contains('collapsed')

@@ -1131,43 +1131,67 @@ document.addEventListener('change',e=>{const t=e.target;
 
 <a id="twcFloatingChat" href="https://www.twc-ltd.uk/instant_chat.html" target="_blank" rel="noopener noreferrer" aria-label="Open instant web chat" title="Live Chat"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 5C13.5 5 5 12.4 5 21.5c0 5.1 2.7 9.7 7 12.7L10 42l9.3-4.2c1.5.4 3.1.7 4.7.7 10.5 0 19-7.4 19-16.5S34.5 5 24 5z"/><circle cx="17" cy="22" r="2.3" fill="#08a85a"/><circle cx="24" cy="22" r="2.3" fill="#08a85a"/><circle cx="31" cy="22" r="2.3" fill="#08a85a"/></svg><span class="chat-badge" aria-hidden="true"></span></a>
 
+<script>
 (function(){
+  const columns = [...document.querySelectorAll('#hsPanel .hs-menu-column')];
+  const sections = [];
+  columns.forEach((column) => {
+    const heading = column.querySelector('h4');
+    if (!heading) return;
+    const title = heading.textContent.trim();
+    if (/^(🏠\s*)?Home\b/i.test(title) || /^(✉️?\s*)?Contact\b/i.test(title)) return;
 
-    const sections =
-        document.querySelectorAll('.hs-section');
-
-    sections.forEach((section,index)=>{
-
-        const header =
-            section.querySelector('.hs-section-header');
-
-        const key =
-            'twc-nav-section-' + index;
-
-        if(localStorage.getItem(key) === 'closed'){
-            section.classList.add('collapsed');
-        }
-
-        header.addEventListener('click',()=>{
-
-sections.forEach(s=>{
-    if(s !== section){
-        s.classList.add('collapsed');
+    column.classList.add('hs-section');
+    let header = column.querySelector(':scope > .hs-section-header');
+    let content = column.querySelector(':scope > .hs-section-content');
+    if (!header) {
+      header = document.createElement('div');
+      header.className = 'hs-section-header';
+      column.insertBefore(header, heading);
+      header.appendChild(heading);
+      content = document.createElement('div');
+      content.className = 'hs-section-content';
+      while (header.nextSibling) content.appendChild(header.nextSibling);
+      column.appendChild(content);
     }
-});
+    if (!header.querySelector('.arrow')) {
+      const arrow = document.createElement('span');
+      arrow.className = 'arrow';
+      arrow.textContent = '▼';
+      header.appendChild(arrow);
+    }
+    header.setAttribute('role', 'button');
+    header.setAttribute('tabindex', '0');
+    header.setAttribute('aria-expanded', 'true');
+    const key = 'twc-nav-section-' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    try { if (localStorage.getItem(key) === 'closed') column.classList.add('collapsed'); } catch (_) {}
+    header.setAttribute('aria-expanded', String(!column.classList.contains('collapsed')));
+    sections.push({column, header, key});
+  });
 
-section.classList.toggle('collapsed');
-            localStorage.setItem(
-                key,
-                section.classList.contains('collapsed')
-                    ? 'closed'
-                    : 'open'
-            );
-
-        });
-
+  function toggle(item) {
+    const opening = item.column.classList.contains('collapsed');
+    if (opening) sections.forEach(other => {
+      if (other !== item) {
+        other.column.classList.add('collapsed');
+        other.header.setAttribute('aria-expanded', 'false');
+        try { localStorage.setItem(other.key, 'closed'); } catch (_) {}
+      }
     });
-
+    item.column.classList.toggle('collapsed', !opening);
+    item.header.setAttribute('aria-expanded', String(opening));
+    try { localStorage.setItem(item.key, opening ? 'open' : 'closed'); } catch (_) {}
+  }
+  sections.forEach(item => {
+    item.header.addEventListener('click', () => toggle(item));
+    item.header.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggle(item);
+      }
+    });
+  });
 })();
+</script>
 </script>
 </body></html>

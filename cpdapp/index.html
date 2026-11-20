@@ -1139,7 +1139,7 @@ document.addEventListener('change',e=>{const t=e.target;
     const heading = column.querySelector('h4');
     if (!heading) return;
     const title = heading.textContent.trim();
-    if (/^(🏠\s*)?Home\b/i.test(title) || /^(✉️?\s*)?Contact\b/i.test(title)) return;
+    if (/^(🏠\s*)?Home\b/i.test(title)) return;
 
     column.classList.add('hs-section');
     let header = column.querySelector(':scope > .hs-section-header');
@@ -1164,8 +1164,9 @@ document.addEventListener('change',e=>{const t=e.target;
     header.setAttribute('tabindex', '0');
     header.setAttribute('aria-expanded', 'true');
     const key = 'twc-nav-section-' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    try { if (localStorage.getItem(key) === 'closed') column.classList.add('collapsed'); } catch (_) {}
-    header.setAttribute('aria-expanded', String(!column.classList.contains('collapsed')));
+    column.classList.add('collapsed');
+    header.setAttribute('aria-expanded', 'false');
+    try { localStorage.setItem(key, 'closed'); } catch (_) {}
     sections.push({column, header, key});
   });
 

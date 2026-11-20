@@ -180,6 +180,42 @@ aside{top:var(--hs-h);height:calc(100vh - var(--hs-h))}
 
 }
 
+/* Collapsible menu sections */
+
+.hs-section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+    padding:10px 0;
+    user-select:none;
+}
+
+.hs-section-header:hover{
+    opacity:.9;
+}
+
+.hs-section-header .arrow{
+    font-size:14px;
+    transition:transform .25s ease;
+}
+
+.hs-section.collapsed .arrow{
+    transform:rotate(-90deg);
+}
+
+.hs-section-content{
+    overflow:hidden;
+    transition:max-height .3s ease;
+    max-height:1500px;
+}
+
+.hs-section.collapsed .hs-section-content{
+    max-height:0;
+    margin:0;
+    padding:0;
+}
+
 </style>
 <div id="hsProg"></div>
 <div class="hs-bar" role="toolbar" aria-label="Site menu">
@@ -241,26 +277,61 @@ aside{top:var(--hs-h);height:calc(100vh - var(--hs-h))}
                     <a href="https://twc-ltd.uk/leadership.html">Leadership Approach</a>
                 </div>
              <!-- PROFESSIONAL PRESENCE -->
-                <div class="hs-menu-column">
-                    <h4>🌐 Professional Brand</h4>
+                
+<div class="hs-menu-column hs-section">
 
-                    <a href="professional-presence.html">Professional Presence</a>
-                    <a href="sites.html">Digital Presence</a>
+    <div class="hs-section-header">
+        <h4>🌐 Professional Brand</h4>
+        <span class="arrow">▼</span>
+    </div>
 
-                    <h5 class="hs-subheading">📄 CV & Career</h5>
-                    <a class="hs-subitem" href="cv.html">CV</a>
-                    <a class="hs-subitem" href="interactive-cv.html">Interactive CV</a>
-                    <a class="hs-subitem" href="https://www.twc-ltd.uk/cvapp/?view=1#home">Public CV</a>
+    <div class="hs-section-content">
 
-                    <h5 class="hs-subheading">🏆 Professional Achievement</h5>
-                    <a class="hs-subitem" href="https://www.twc-ltd.uk/cpdapp/?share=2H5X80CXnwy_wBm9yrMS9iDPgXUCW16dJ3aorB0fg-s">Professional Development Profile</a>
-                    <a class="hs-subitem" href="portfolio.html">Project Portfolio</a>
-                    <a class="hs-subitem" href="linkedin.html">LinkedIn Posts</a>
+        <h5>Professional Presence</h5>
 
-                    <!-- ⭐ NEW LINKS ADDED BELOW ⭐ -->
-                    <a class="hs-subitem" href="endorsements.html">Professional Endorsements</a>
-                    <a class="hs-subitem" href="volunteering.html">Volunteering & Community Impact</a>
-                </div>
+        <a href="/professional-presence.html">
+            Professional Presence
+        </a>
+
+        <a href="/sites.html">
+            Digital Presence
+        </a>
+
+        <h5>📄 CV & Career</h5>
+
+        <a href="/cv.html">CV</a>
+        <a href="/interactive-cv.html">Interactive CV</a>
+        <a href="/cvapp">Public CV</a>
+
+        <h5>🏆 Professional Achievement</h5>
+
+        <a href="/cpdapp/?share=xxxxx">
+            Professional Development Profile
+        </a>
+
+        <a href="/portfolio.html">
+            Project Portfolio
+        </a>
+
+        <a href="/linkedin.html">
+            LinkedIn Posts
+        </a>
+
+        <a href="/endorsements.html">
+            Professional Endorsements
+        </a>
+
+        <a href="/volunteering.html">
+            Community Impact
+        </a>
+
+    </div>
+
+</div>
+
+
+
+
 
                 <!-- APPS -->
                 <div class="hs-menu-column">
@@ -1051,4 +1122,41 @@ document.addEventListener('change',e=>{const t=e.target;
 
 
 
-<a id="twcFloatingChat" href="https://www.twc-ltd.uk/instant_chat.html" target="_blank" rel="noopener noreferrer" aria-label="Open instant web chat" title="Instant web chat"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 5C13.5 5 5 12.4 5 21.5c0 5.1 2.7 9.7 7 12.7L10 42l9.3-4.2c1.5.4 3.1.7 4.7.7 10.5 0 19-7.4 19-16.5S34.5 5 24 5z"/><circle cx="17" cy="22" r="2.3" fill="#08a85a"/><circle cx="24" cy="22" r="2.3" fill="#08a85a"/><circle cx="31" cy="22" r="2.3" fill="#08a85a"/></svg><span class="chat-badge" aria-hidden="true"></span></a></body></html>
+<a id="twcFloatingChat" href="https://www.twc-ltd.uk/instant_chat.html" target="_blank" rel="noopener noreferrer" aria-label="Open instant web chat" title="Instant web chat"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 5C13.5 5 5 12.4 5 21.5c0 5.1 2.7 9.7 7 12.7L10 42l9.3-4.2c1.5.4 3.1.7 4.7.7 10.5 0 19-7.4 19-16.5S34.5 5 24 5z"/><circle cx="17" cy="22" r="2.3" fill="#08a85a"/><circle cx="24" cy="22" r="2.3" fill="#08a85a"/><circle cx="31" cy="22" r="2.3" fill="#08a85a"/></svg><span class="chat-badge" aria-hidden="true"></span></a>
+
+(function(){
+
+    const sections =
+        document.querySelectorAll('.hs-section');
+
+    sections.forEach((section,index)=>{
+
+        const header =
+            section.querySelector('.hs-section-header');
+
+        const key =
+            'twc-nav-section-' + index;
+
+        if(localStorage.getItem(key) === 'closed'){
+            section.classList.add('collapsed');
+        }
+
+        header.addEventListener('click',()=>{
+
+            section.classList.toggle('collapsed');
+
+            localStorage.setItem(
+                key,
+                section.classList.contains('collapsed')
+                    ? 'closed'
+                    : 'open'
+            );
+
+        });
+
+    });
+
+})();
+
+
+</body></html>

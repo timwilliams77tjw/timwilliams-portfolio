@@ -180,42 +180,34 @@ aside{top:var(--hs-h);height:calc(100vh - var(--hs-h))}
 
 }
 
-/* Collapsible menu sections */
-
-.hs-section-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    cursor:pointer;
-    padding:10px 0;
-    user-select:none;
+/* ===== Vertical hover menu ===== */
+.hs-panel{left:auto;right:10px;width:min(300px,calc(100vw - 20px));padding:6px 0;overflow:visible;max-height:none}
+.hs-panel .hs-cols{display:block;max-height:calc(100vh - var(--hs-h) - 28px);max-height:calc(100dvh - var(--hs-h) - 28px);overflow-y:auto;overscroll-behavior:contain}
+.hs-panel .hs-menu-column{padding:0;position:static}
+.hs-panel a.hs-home{display:block;padding:12px 18px;font-size:16px;font-weight:700;opacity:1;border-left:3px solid transparent}
+.hs-panel a.hs-home:hover{background:rgba(255,255,255,.07);border-left-color:#e0a030;text-decoration:none}
+.hs-section-header{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 18px;cursor:pointer;user-select:none;border-left:3px solid transparent}
+.hs-panel .hs-section-header h4{margin:0;padding:0;border:0;font-size:16px;line-height:1.3}
+.hs-section-header:hover,.hs-section:not(.collapsed)>.hs-section-header{background:rgba(255,255,255,.07);border-left-color:#e0a030}
+.hs-section-header:focus-visible{outline:2px solid #e0a030;outline-offset:-2px}
+.hs-section-header .arrow{font-size:0;transition:transform .2s ease}
+.hs-section-header .arrow::after{content:"\25BE";font-size:14px}
+.hs-section.collapsed .hs-section-header .arrow{transform:rotate(-90deg)}
+.hs-section-content{overflow:hidden;max-height:2000px;transition:max-height .25s ease;padding:2px 18px 10px}
+.hs-section.collapsed>.hs-section-content{max-height:0;padding-top:0;padding-bottom:0}
+.hs-section-content a{display:block;padding:6px 0 6px 10px;margin:0;border-left:2px solid rgba(255,255,255,.22);font-size:15px;font-weight:400}
+.hs-section-content a.hs-subitem{padding-left:18px}
+.hs-section-content h5{margin:12px 0 4px;padding-bottom:3px;font-size:14px;color:#e0a030;border-bottom:1px dashed rgba(224,160,48,.5)}
+.hs-section-content h5:first-child{margin-top:4px}
+.hs-section-content .hs-group-title{margin:10px 0 2px 10px}
+.hs-panel .hs-sync{margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.18)}
+/* Desktop: hover opens a side panel so the list never jumps under the cursor */
+@media (hover:hover) and (min-width:760px){
+  .hs-section-content{position:absolute;top:0;right:100%;width:min(330px,calc(100vw - 340px));max-height:calc(100vh - var(--hs-h) - 28px);max-height:calc(100dvh - var(--hs-h) - 28px);overflow-y:auto;padding:14px 18px 16px;background:rgba(12,16,24,.98);border-radius:18px 0 0 18px;box-shadow:-10px 10px 30px rgba(0,0,0,.45);transition:opacity .15s ease}
+  .hs-section.collapsed>.hs-section-content{opacity:0;visibility:hidden;pointer-events:none;padding:14px 18px 16px}
+  .hs-section-header .arrow::after,.hs-section.collapsed .hs-section-header .arrow::after{content:"\25C2"}
+  .hs-section.collapsed .hs-section-header .arrow{transform:none}
 }
-
-.hs-section-header:hover{
-    opacity:.9;
-}
-
-.hs-section-header .arrow{
-    font-size:14px;
-    transition:transform .25s ease;
-}
-
-.hs-section.collapsed .arrow{
-    transform:rotate(-90deg);
-}
-
-.hs-section-content{
-    overflow:hidden;
-    transition:max-height .3s ease;
-    max-height:1500px;
-}
-
-.hs-section.collapsed .hs-section-content{
-    max-height:0;
-    margin:0;
-    padding:0;
-}
-
 </style>
 <div id="hsProg"></div>
 <div class="hs-bar" role="toolbar" aria-label="Site menu">
@@ -266,10 +258,7 @@ aside{top:var(--hs-h);height:calc(100vh - var(--hs-h))}
 <div id="hsPanel" class="hs-panel" aria-label="Site navigation"><div class="hs-cols"><!-- TWC sync col moved to the end -->
 
 
-<div class="hs-menu-column">
-                    <h4>🏠 Home</h4>
-                    <a href="https://twc-ltd.uk/index.html">Home</a>
-                </div>
+<a class="hs-home" href="https://twc-ltd.uk/index.html">🏠 Home</a>
                 <div class="hs-menu-column">
                     <h4>👤 About Me</h4>
                     <a href="https://twc-ltd.uk/twc-ltd.html">About Me</a>
@@ -1133,66 +1122,48 @@ document.addEventListener('change',e=>{const t=e.target;
 
 <script>
 (function(){
-  const columns = [...document.querySelectorAll('#hsPanel .hs-menu-column')];
-  const sections = [];
-  columns.forEach((column) => {
-    const heading = column.querySelector('h4');
-    if (!heading) return;
-    const title = heading.textContent.trim();
-    if (/^(🏠\s*)?Home\b/i.test(title)) return;
-
-    column.classList.add('hs-section');
-    let header = column.querySelector(':scope > .hs-section-header');
-    let content = column.querySelector(':scope > .hs-section-content');
-    if (!header) {
-      header = document.createElement('div');
-      header.className = 'hs-section-header';
-      column.insertBefore(header, heading);
-      header.appendChild(heading);
-      content = document.createElement('div');
-      content.className = 'hs-section-content';
-      while (header.nextSibling) content.appendChild(header.nextSibling);
-      column.appendChild(content);
+  var panel=document.getElementById('hsPanel');if(!panel)return;
+  var hoverMQ=window.matchMedia('(hover:hover) and (min-width:760px)');
+  var items=[];
+  panel.querySelectorAll('.hs-menu-column').forEach(function(col){
+    var h4=col.querySelector('h4');if(!h4)return;
+    var header=col.querySelector(':scope > .hs-section-header'),content=col.querySelector(':scope > .hs-section-content');
+    if(!header){
+      header=document.createElement('div');header.className='hs-section-header';
+      col.insertBefore(header,h4);header.appendChild(h4);
+      content=document.createElement('div');content.className='hs-section-content';
+      while(header.nextSibling)content.appendChild(header.nextSibling);
+      col.appendChild(content);
     }
-    if (!header.querySelector('.arrow')) {
-      const arrow = document.createElement('span');
-      arrow.className = 'arrow';
-      arrow.textContent = '▼';
-      header.appendChild(arrow);
-    }
-    header.setAttribute('role', 'button');
-    header.setAttribute('tabindex', '0');
-    header.setAttribute('aria-expanded', 'true');
-    const key = 'twc-nav-section-' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    column.classList.add('collapsed');
-    header.setAttribute('aria-expanded', 'false');
-    try { localStorage.setItem(key, 'closed'); } catch (_) {}
-    sections.push({column, header, key});
+    if(!header.querySelector('.arrow')){var ar=document.createElement('span');ar.className='arrow';ar.setAttribute('aria-hidden','true');header.appendChild(ar)}
+    col.classList.add('hs-section','collapsed');
+    header.setAttribute('role','button');header.setAttribute('tabindex','0');header.setAttribute('aria-expanded','false');
+    items.push({col:col,header:header,t:null});
   });
-
-  function toggle(item) {
-    const opening = item.column.classList.contains('collapsed');
-    if (opening) sections.forEach(other => {
-      if (other !== item) {
-        other.column.classList.add('collapsed');
-        other.header.setAttribute('aria-expanded', 'false');
-        try { localStorage.setItem(other.key, 'closed'); } catch (_) {}
-      }
+  function setOpen(it,on){it.col.classList.toggle('collapsed',!on);it.header.setAttribute('aria-expanded',String(on))}
+  function open(it){items.forEach(function(o){clearTimeout(o.t);if(o!==it)setOpen(o,false)});setOpen(it,true)}
+  function typing(it){var a=document.activeElement;return a&&it.col.contains(a)&&/^(INPUT|TEXTAREA)$/.test(a.tagName)}
+  items.forEach(function(it){
+    it.col.addEventListener('mouseenter',function(){
+      if(!hoverMQ.matches)return;clearTimeout(it.t);
+      it.t=setTimeout(function(){open(it)},110);
     });
-    item.column.classList.toggle('collapsed', !opening);
-    item.header.setAttribute('aria-expanded', String(opening));
-    try { localStorage.setItem(item.key, opening ? 'open' : 'closed'); } catch (_) {}
-  }
-  sections.forEach(item => {
-    item.header.addEventListener('click', () => toggle(item));
-    item.header.addEventListener('keydown', event => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggle(item);
-      }
+    it.col.addEventListener('mouseleave',function(){
+      if(!hoverMQ.matches)return;clearTimeout(it.t);
+      it.t=setTimeout(function(){if(!typing(it))setOpen(it,false)},280);
+    });
+    it.header.addEventListener('click',function(){
+      if(hoverMQ.matches)open(it);
+      else if(it.col.classList.contains('collapsed'))open(it);else setOpen(it,false);
+    });
+    it.header.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();
+        if(it.col.classList.contains('collapsed'))open(it);else setOpen(it,false)}
     });
   });
+  new MutationObserver(function(){
+    if(!panel.classList.contains('on'))items.forEach(function(it){clearTimeout(it.t);setOpen(it,false)});
+  }).observe(panel,{attributes:true,attributeFilter:['class']});
 })();
-</script>
 </script>
 </body></html>

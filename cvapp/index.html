@@ -61,7 +61,7 @@ mark{background:#ffe38a;color:#000;border-radius:3px}
 @media(max-width:899px){aside{top:calc(var(--hs-h) + 56px)!important;height:calc(100vh - var(--hs-h) - 56px)!important}}
 @media(max-width:620px){.hs-bar{padding-left:11px;padding-right:11px}.hs-brand span{font-size:13px}.hs-brand img{width:52px;height:36px}.hs-panel{left:6px;right:6px;max-height:78vh;padding:5px 15px 22px}.hs-cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}.hs-panel h4{font-size:15px;margin-top:17px}.hs-panel a{font-size:12px;padding:6px 0 6px 8px}.hs-panel .hs-subitem{font-size:11px}}
 @media print{.hs-bar,.hs-panel,#hsProg{display:none!important}}
-</style></head><body>
+</style><style id="cvapp-cpd-flyout-layout">@media (min-width:760px){#hsPanel{left:auto!important;right:10px!important;width:min(300px,calc(100vw - 20px))!important;overflow:visible!important;max-height:none!important;padding:6px 0!important}#hsPanel .hs-cols{display:block!important;max-height:none!important;overflow:visible!important}#hsPanel .hs-menu-column{position:static!important;padding:0!important}#hsPanel .hs-menu-column.hs-section{position:relative!important}#hsPanel .hs-section-header{padding:9px 18px!important}#hsPanel .hs-section-content{position:absolute!important;top:0!important;right:100%!important;left:auto!important;width:min(330px,calc(100vw - 340px))!important;max-height:calc(100vh - var(--hs-h) - 28px)!important;max-height:calc(100dvh - var(--hs-h) - 28px)!important;overflow-y:auto!important;overflow-x:hidden!important;padding:14px 18px 16px!important;background:rgba(12,16,24,.98)!important;border-radius:18px 0 0 18px!important;box-shadow:-10px 10px 30px rgba(0,0,0,.45)!important;transition:opacity .15s ease!important}#hsPanel .hs-section.collapsed>.hs-section-content{opacity:0!important;visibility:hidden!important;pointer-events:none!important;padding:14px 18px 16px!important}#hsPanel .hs-section:not(.collapsed)>.hs-section-content{opacity:1!important;visibility:visible!important;pointer-events:auto!important}}@media(max-width:759px){#hsPanel .hs-cols{display:block!important;max-height:none!important;overflow:visible!important}#hsPanel .hs-menu-column.hs-section{position:static!important}#hsPanel .hs-section-content{position:static!important;left:auto!important;right:auto!important;width:auto!important;max-height:2000px!important}}.top{background:#12295f!important;border-bottom:4px solid #e0a030!important;padding:10px 16px!important;padding-top:calc(10px + env(safe-area-inset-top,0px))!important}</style></head><body>
 <div id="hsProg"></div>
 <div class="hs-bar" role="toolbar" aria-label="TWC global navigation">
   <a class="hs-brand" href="https://twc-ltd.uk/index.html" aria-label="Tim Williams Consulting home">
@@ -106,9 +106,9 @@ mark{background:#ffe38a;color:#000;border-radius:3px}
 <div class="hs-menu-column">
     <h4>🎓 Professional Development</h4>
 
-    <a href="apm.html">Professional Development & Competence Framework</a>
+    <a href="/apm.html">Professional Development & Competence Framework</a>
     
-    <a href="how_to_use_navigate_cpd_app.html" target="_blank">"How to..." CPD Platform Video</a>
+    <a href="/how_to_use_navigate_cpd_app.html" target="_blank">"How to..." CPD Platform Video</a>
 
 <!-- ============================
      LEARNING & DEVELOPMENT
@@ -297,4 +297,50 @@ function cvSyncSchedule(){if(!cvSyncSession||READ_ONLY)return;if(cvSyncTimer)cle
 async function cvResetPassword(signedIn){const email=signedIn&&cvSyncSession?cvSyncSession.user.email:$('#cvSyncEmail').value.trim();if(!email){cvStatus('err','Enter your email address first.');return}try{const redirect='https://twc-ltd.uk/cpdapp',r=await fetch(CV_SB+'/auth/v1/recover?redirect_to='+encodeURIComponent(redirect),{method:'POST',headers:{apikey:CV_AK,'Content-Type':'application/json'},body:JSON.stringify({email})});if(!r.ok)throw Error('Could not send the password reset email. Try again later.');cvStatus('out','If this account exists, a password reset email is on its way.')}catch(e){cvStatus('err',e.message)}}
 function cvSyncStart(){if(READ_ONLY){const p=$('#cvSyncPanel');if(p)p.hidden=true;return}cvReadSession();cvSyncView();$('#cvSyncForm')?.addEventListener('submit',async e=>{e.preventDefault();const email=$('#cvSyncEmail').value.trim(),password=$('#cvSyncPassword').value;try{cvStatus('busy','Signing in...');const r=await fetch(CV_SB+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:CV_AK,'Content-Type':'application/json'},body:JSON.stringify({email,password})}),j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.msg||j.error_description||'Could not sign in. Check your email and password.');cvWriteSession({access_token:j.access_token,refresh_token:j.refresh_token,expires_at:j.expires_at||Math.floor(Date.now()/1000)+j.expires_in,user:{id:j.user.id,email:j.user.email}});$('#cvSyncPassword').value='';cvSyncView();await cvSyncNow()}catch(x){cvStatus('err',x.message);cvSyncView()}});$('#cvSyncCreate')?.addEventListener('click',async()=>{const email=$('#cvSyncEmail').value.trim(),password=$('#cvSyncPassword').value;if(!email||password.length<6){cvStatus('err','Enter your email and a password of at least 6 characters.');return}try{cvStatus('busy','Creating account...');const redirect='https://twc-ltd.uk/cpdapp',r=await fetch(CV_SB+'/auth/v1/signup?redirect_to='+encodeURIComponent(redirect),{method:'POST',headers:{apikey:CV_AK,'Content-Type':'application/json'},body:JSON.stringify({email,password})}),j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.msg||j.error_description||'Could not create account.');if(j.access_token){cvWriteSession({access_token:j.access_token,refresh_token:j.refresh_token,expires_at:j.expires_at||Math.floor(Date.now()/1000)+j.expires_in,user:{id:j.user.id,email:j.user.email}});cvSyncView();await cvSyncNow()}else cvStatus('out','Account created. Confirm your email, then sign in with the same CPD App account.')}catch(x){cvStatus('err',x.message);cvSyncView()}});$('#cvSyncForgot')?.addEventListener('click',()=>cvResetPassword(false));$('#cvSyncReset')?.addEventListener('click',()=>cvResetPassword(true));$('#cvSyncNow')?.addEventListener('click',cvSyncNow);$('#cvSyncSignOut')?.addEventListener('click',async()=>{try{if(cvSyncSession)await cvRequest('/auth/v1/logout?scope=global',{method:'POST'})}catch(e){}cvWriteSession(null);cvStatus('out','Signed out. Your local portfolio data is still on this device.');cvSyncView()});$('#cvSyncBackup')?.addEventListener('click',()=>{const blob=new Blob([JSON.stringify(cvPayload(),null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cv-portfolio-recovery.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)});window.addEventListener('storage',e=>{if(e.key==='twc-sync-session'){cvReadSession();cvSyncView();if(cvSyncSession)cvSyncNow()}});window.addEventListener('online',()=>{if(cvSyncSession)cvSyncNow()});window.addEventListener('focus',()=>{if(cvSyncSession)cvSyncNow()});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&cvSyncSession)cvSyncNow()});setInterval(()=>{if(cvSyncSession&&document.visibilityState==='visible')cvSyncNow()},45000);if(cvSyncSession)cvSyncNow()}
 setTheme();render();cvSyncStart();
-</script></body></html>
+</script><script>
+(function(){
+  var panel=document.getElementById('hsPanel');if(!panel)return;
+  var hoverMQ=window.matchMedia('(hover:hover) and (min-width:760px)');
+  var items=[];
+  panel.querySelectorAll('.hs-menu-column').forEach(function(col){
+    var h4=col.querySelector('h4');if(!h4)return;
+    var header=col.querySelector(':scope > .hs-section-header'),content=col.querySelector(':scope > .hs-section-content');
+    if(!header){
+      header=document.createElement('div');header.className='hs-section-header';
+      col.insertBefore(header,h4);header.appendChild(h4);
+      content=document.createElement('div');content.className='hs-section-content';
+      while(header.nextSibling)content.appendChild(header.nextSibling);
+      col.appendChild(content);
+    }
+    if(!header.querySelector('.arrow')){var ar=document.createElement('span');ar.className='arrow';ar.setAttribute('aria-hidden','true');header.appendChild(ar)}
+    col.classList.add('hs-section','collapsed');
+    header.setAttribute('role','button');header.setAttribute('tabindex','0');header.setAttribute('aria-expanded','false');
+    items.push({col:col,header:header,t:null});
+  });
+  function setOpen(it,on){it.col.classList.toggle('collapsed',!on);it.header.setAttribute('aria-expanded',String(on))}
+  function open(it){items.forEach(function(o){clearTimeout(o.t);if(o!==it)setOpen(o,false)});setOpen(it,true)}
+  function typing(it){var a=document.activeElement;return a&&it.col.contains(a)&&/^(INPUT|TEXTAREA)$/.test(a.tagName)}
+  items.forEach(function(it){
+    it.col.addEventListener('mouseenter',function(){
+      if(!hoverMQ.matches)return;clearTimeout(it.t);
+      it.t=setTimeout(function(){open(it)},110);
+    });
+    it.col.addEventListener('mouseleave',function(){
+      if(!hoverMQ.matches)return;clearTimeout(it.t);
+      it.t=setTimeout(function(){if(!typing(it))setOpen(it,false)},280);
+    });
+    it.header.addEventListener('click',function(){
+      if(hoverMQ.matches)open(it);
+      else if(it.col.classList.contains('collapsed'))open(it);else setOpen(it,false);
+    });
+    it.header.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();
+        if(it.col.classList.contains('collapsed'))open(it);else setOpen(it,false)}
+    });
+  });
+  new MutationObserver(function(){
+    if(!panel.classList.contains('on'))items.forEach(function(it){clearTimeout(it.t);setOpen(it,false)});
+  }).observe(panel,{attributes:true,attributeFilter:['class']});
+})();
+</script>
+</body></html>
